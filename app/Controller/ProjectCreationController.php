@@ -20,7 +20,7 @@ class ProjectCreationController extends BaseController
     public function create(array $values = array(), array $errors = array())
     {
         $is_private = isset($values['is_private']) && $values['is_private'] == 1;
-        $projects_list = array(0 => t('Do not duplicate anything')) + $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
+        $projects_list = array(0 => t('Do not duplicate anything')) + $this->projectUserRoleModel->getActiveProjectsByUser($this->userSession->getId());
 
         $this->response->html($this->helper->layout->app('project_creation/create', array(
             'values' => $values,
@@ -98,7 +98,7 @@ class ProjectCreationController extends BaseController
             'is_private' => $values['is_private'],
         );
 
-        return $this->project->create($project, $this->userSession->getId(), true);
+        return $this->projectModel->create($project, $this->userSession->getId(), true);
     }
 
     /**
@@ -112,13 +112,13 @@ class ProjectCreationController extends BaseController
     {
         $selection = array();
 
-        foreach ($this->projectDuplication->getOptionalSelection() as $item) {
+        foreach ($this->projectDuplicationModel->getOptionalSelection() as $item) {
             if (isset($values[$item]) && $values[$item] == 1) {
                 $selection[] = $item;
             }
         }
 
-        return $this->projectDuplication->duplicate(
+        return $this->projectDuplicationModel->duplicate(
             $values['src_project_id'],
             $selection,
             $this->userSession->getId(),

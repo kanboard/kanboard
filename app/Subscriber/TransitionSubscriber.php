@@ -3,7 +3,7 @@
 namespace Kanboard\Subscriber;
 
 use Kanboard\Event\TaskEvent;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class TransitionSubscriber extends BaseSubscriber implements EventSubscriberInterface
@@ -11,7 +11,7 @@ class TransitionSubscriber extends BaseSubscriber implements EventSubscriberInte
     public static function getSubscribedEvents()
     {
         return array(
-            Task::EVENT_MOVE_COLUMN => 'execute',
+            TaskModel::EVENT_MOVE_COLUMN => 'execute',
         );
     }
 
@@ -22,7 +22,7 @@ class TransitionSubscriber extends BaseSubscriber implements EventSubscriberInte
         $user_id = $this->userSession->getId();
 
         if (! empty($user_id)) {
-            $this->transition->save($user_id, $event->getAll());
+            $this->transitionModel->save($user_id, $event->getAll());
         }
     }
 }

@@ -40,7 +40,7 @@
                     <?= $this->url->link($this->text->e($task['title']), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
                 </td>
                 <td>
-                    <?php if ($task['is_active'] == \Kanboard\Model\Task::STATUS_OPEN): ?>
+                    <?php if ($task['is_active'] == \Kanboard\Model\TaskModel::STATUS_OPEN): ?>
                         <?= t('Open') ?>
                     <?php else: ?>
                         <?= t('Closed') ?>

@@ -31,10 +31,10 @@ class TaskRecurrenceController extends BaseController
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
-            'recurrence_status_list' => $this->task->getRecurrenceStatusList(),
-            'recurrence_trigger_list' => $this->task->getRecurrenceTriggerList(),
-            'recurrence_timeframe_list' => $this->task->getRecurrenceTimeframeList(),
-            'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
+            'recurrence_status_list' => $this->taskModel->getRecurrenceStatusList(),
+            'recurrence_trigger_list' => $this->taskModel->getRecurrenceTriggerList(),
+            'recurrence_timeframe_list' => $this->taskModel->getRecurrenceTimeframeList(),
+            'recurrence_basedate_list' => $this->taskModel->getRecurrenceBasedateList(),
         )));
     }
 
@@ -51,7 +51,7 @@ class TaskRecurrenceController extends BaseController
         list($valid, $errors) = $this->taskValidator->validateEditRecurrence($values);
 
         if ($valid) {
-            if ($this->taskModification->update($values)) {
+            if ($this->taskModificationModel->update($values)) {
                 $this->flash->success(t('Task updated successfully.'));
             } else {
                 $this->flash->failure(t('Unable to update your task.'));

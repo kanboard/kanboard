@@ -46,7 +46,7 @@ class TaskStatusController extends BaseController
         if ($this->request->getStringParam('confirmation') === 'yes') {
             $this->checkCSRFParam();
 
-            if ($this->taskStatus->$method($task['id'])) {
+            if ($this->taskStatusModel->$method($task['id'])) {
                 $this->flash->success($success_message);
             } else {
                 $this->flash->failure($failure_message);

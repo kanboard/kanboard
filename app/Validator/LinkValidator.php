@@ -4,7 +4,7 @@ namespace Kanboard\Validator;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use Kanboard\Model\Link;
+use Kanboard\Model\LinkModel;
 
 /**
  * Link Validator
@@ -25,7 +25,7 @@ class LinkValidator extends Base
     {
         $v = new Validator($values, array(
             new Validators\Required('label', t('Field required')),
-            new Validators\Unique('label', t('This label must be unique'), $this->db->getConnection(), Link::TABLE),
+            new Validators\Unique('label', t('This label must be unique'), $this->db->getConnection(), LinkModel::TABLE),
             new Validators\NotEquals('label', 'opposite_label', t('The labels must be different')),
         ));
 
@@ -48,7 +48,7 @@ class LinkValidator extends Base
             new Validators\Required('id', t('Field required')),
             new Validators\Required('opposite_id', t('Field required')),
             new Validators\Required('label', t('Field required')),
-            new Validators\Unique('label', t('This label must be unique'), $this->db->getConnection(), Link::TABLE),
+            new Validators\Unique('label', t('This label must be unique'), $this->db->getConnection(), LinkModel::TABLE),
         ));
 
         return array(

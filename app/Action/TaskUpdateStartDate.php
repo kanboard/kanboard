@@ -2,7 +2,7 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Set the start date of task
@@ -32,7 +32,7 @@ class TaskUpdateStartDate extends Base
     public function getCompatibleEvents()
     {
         return array(
-            Task::EVENT_MOVE_COLUMN,
+            TaskModel::EVENT_MOVE_COLUMN,
         );
     }
 
@@ -77,7 +77,7 @@ class TaskUpdateStartDate extends Base
             'date_started' => time(),
         );
 
-        return $this->taskModification->update($values, false);
+        return $this->taskModificationModel->update($values, false);
     }
 
     /**

@@ -4,7 +4,7 @@ namespace Kanboard\Validator;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use Kanboard\Model\Project;
+use Kanboard\Model\ProjectModel;
 
 /**
  * Project Validator
@@ -34,7 +34,7 @@ class ProjectValidator extends Base
             new Validators\MaxLength('start_date', t('The maximum length is %d characters', 10), 10),
             new Validators\MaxLength('end_date', t('The maximum length is %d characters', 10), 10),
             new Validators\AlphaNumeric('identifier', t('This value must be alphanumeric')) ,
-            new Validators\Unique('identifier', t('The identifier must be unique'), $this->db->getConnection(), Project::TABLE),
+            new Validators\Unique('identifier', t('The identifier must be unique'), $this->db->getConnection(), ProjectModel::TABLE),
         );
     }
 

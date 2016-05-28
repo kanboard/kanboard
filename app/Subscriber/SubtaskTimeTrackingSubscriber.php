@@ -3,7 +3,7 @@
 namespace Kanboard\Subscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Kanboard\Model\Subtask;
+use Kanboard\Model\SubtaskModel;
 use Kanboard\Event\SubtaskEvent;
 
 class SubtaskTimeTrackingSubscriber extends BaseSubscriber implements EventSubscriberInterface
@@ -11,9 +11,9 @@ class SubtaskTimeTrackingSubscriber extends BaseSubscriber implements EventSubsc
     public static function getSubscribedEvents()
     {
         return array(
-            Subtask::EVENT_CREATE => 'updateTaskTime',
-            Subtask::EVENT_DELETE => 'updateTaskTime',
-            Subtask::EVENT_UPDATE => array(
+            SubtaskModel::EVENT_CREATE => 'updateTaskTime',
+            SubtaskModel::EVENT_DELETE => 'updateTaskTime',
+            SubtaskModel::EVENT_UPDATE => array(
                 array('logStartEnd', 10),
                 array('updateTaskTime', 0),
             )
@@ -24,24 +24,24 @@ class SubtaskTimeTrackingSubscriber extends BaseSubscriber implements EventSubsc
     {
         if (isset($event['task_id'])) {
             $this->logger->debug('Subscriber executed: '.__METHOD__);
-            $this->subtaskTimeTracking->updateTaskTimeTracking($event['task_id']);
+            $this->subtaskTimeTrackingModel->updateTaskTimeTracking($event['task_id']);
         }
     }
 
     public function logStartEnd(SubtaskEvent $event)
     {
-        if (isset($event['status']) && $this->config->get('subtask_time_tracking') == 1) {
+        if (isset($event['status']) && $this->configModel->get('subtask_time_tracking') == 1) {
             $this->logger->debug('Subscriber executed: '.__METHOD__);
-            $subtask = $this->subtask->getById($event['id']);
+            $subtask = $this->subtaskModel->getById($event['id']);
 
             if (empty($subtask['user_id'])) {
                 return false;
             }
 
-            if ($subtask['status'] == Subtask::STATUS_INPROGRESS) {
-                return $this->subtaskTimeTracking->logStartTime($subtask['id'], $subtask['user_id']);
+            if ($subtask['status'] == SubtaskModel::STATUS_INPROGRESS) {
+                return $this->subtaskTimeTrackingModel->logStartTime($subtask['id'], $subtask['user_id']);
             } else {
-                return $this->subtaskTimeTracking->logEndTime($subtask['id'], $subtask['user_id']);
+                return $this->subtaskTimeTrackingModel->logEndTime($subtask['id'], $subtask['user_id']);
             }
         }
     }

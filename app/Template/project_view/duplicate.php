@@ -14,11 +14,11 @@
             <?= $this->form->checkbox('projectPermission', t('Permissions'), 1, true) ?>
         <?php endif ?>
 
-        <?= $this->form->checkbox('category', t('Categories'), 1, true) ?>
-        <?= $this->form->checkbox('action', t('Actions'), 1, true) ?>
-        <?= $this->form->checkbox('swimlane', t('Swimlanes'), 1, false) ?>
-        <?= $this->form->checkbox('task', t('Tasks'), 1, false) ?>
-        <?= $this->form->checkbox('projectMetadata', t('Metadata'), 1, false) ?>
+        <?= $this->form->checkbox('categoryModel', t('Categories'), 1, true) ?>
+        <?= $this->form->checkbox('actionModel', t('Actions'), 1, true) ?>
+        <?= $this->form->checkbox('swimlaneModel', t('Swimlanes'), 1, false) ?>
+        <?= $this->form->checkbox('taskModel', t('Tasks'), 1, false) ?>
+        <?= $this->form->checkbox('projectMetadataModel', t('Metadata'), 1, false) ?>
 
         <div class="form-actions">
             <button type="submit" class="btn btn-red"><?= t('Duplicate') ?></button>

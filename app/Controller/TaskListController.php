@@ -3,7 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Filter\TaskProjectFilter;
-use Kanboard\Model\Task as TaskModel;
+use Kanboard\Model\TaskModel;
 
 /**
  * Task List Controller

@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Filter tasks by creator
@@ -54,14 +54,14 @@ class TaskCreatorFilter extends BaseFilter implements FilterInterface
     public function apply()
     {
         if (is_int($this->value) || ctype_digit($this->value)) {
-            $this->query->eq(Task::TABLE.'.creator_id', $this->value);
+            $this->query->eq(TaskModel::TABLE.'.creator_id', $this->value);
         } else {
             switch ($this->value) {
                 case 'me':
-                    $this->query->eq(Task::TABLE.'.creator_id', $this->currentUserId);
+                    $this->query->eq(TaskModel::TABLE.'.creator_id', $this->currentUserId);
                     break;
                 case 'nobody':
-                    $this->query->eq(Task::TABLE.'.creator_id', 0);
+                    $this->query->eq(TaskModel::TABLE.'.creator_id', 0);
                     break;
                 default:
                     $this->query->beginOr();

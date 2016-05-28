@@ -2,16 +2,16 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Group;
-use Kanboard\Model\User;
-use Kanboard\Model\GroupMember;
+use Kanboard\Model\GroupModel;
+use Kanboard\Model\UserModel;
+use Kanboard\Model\GroupMemberModel;
 
 class GroupMemberTest extends Base
 {
     public function testAddRemove()
     {
-        $groupModel = new Group($this->container);
-        $groupMemberModel = new GroupMember($this->container);
+        $groupModel = new GroupModel($this->container);
+        $groupMemberModel = new GroupMemberModel($this->container);
 
         $this->assertEquals(1, $groupModel->create('Test'));
 
@@ -32,9 +32,9 @@ class GroupMemberTest extends Base
 
     public function testMembers()
     {
-        $userModel = new User($this->container);
-        $groupModel = new Group($this->container);
-        $groupMemberModel = new GroupMember($this->container);
+        $userModel = new UserModel($this->container);
+        $groupModel = new GroupModel($this->container);
+        $groupMemberModel = new GroupMemberModel($this->container);
 
         $this->assertEquals(1, $groupModel->create('Group A'));
         $this->assertEquals(2, $groupModel->create('Group B'));

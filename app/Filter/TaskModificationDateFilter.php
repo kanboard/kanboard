@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Filter tasks by modification date
@@ -32,7 +32,7 @@ class TaskModificationDateFilter extends BaseDateFilter implements FilterInterfa
      */
     public function apply()
     {
-        $this->applyDateFilter(Task::TABLE.'.date_modification');
+        $this->applyDateFilter(TaskModel::TABLE.'.date_modification');
         return $this;
     }
 }

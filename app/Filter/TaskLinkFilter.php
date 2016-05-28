@@ -3,9 +3,9 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Link;
-use Kanboard\Model\Task;
-use Kanboard\Model\TaskLink;
+use Kanboard\Model\LinkModel;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\TaskLinkModel;
 use PicoDb\Database;
 use PicoDb\Table;
 
@@ -60,9 +60,9 @@ class TaskLinkFilter extends BaseFilter implements FilterInterface
         $task_ids = $this->getSubQuery()->findAllByColumn('task_id');
 
         if (! empty($task_ids)) {
-            $this->query->in(Task::TABLE.'.id', $task_ids);
+            $this->query->in(TaskModel::TABLE.'.id', $task_ids);
         } else {
-            $this->query->eq(Task::TABLE.'.id', 0); // No match
+            $this->query->eq(TaskModel::TABLE.'.id', 0); // No match
         }
     }
 
@@ -74,12 +74,12 @@ class TaskLinkFilter extends BaseFilter implements FilterInterface
      */
     protected function getSubQuery()
     {
-        return $this->db->table(TaskLink::TABLE)
+        return $this->db->table(TaskLinkModel::TABLE)
             ->columns(
-                TaskLink::TABLE.'.task_id',
-                Link::TABLE.'.label'
+                TaskLinkModel::TABLE.'.task_id',
+                LinkModel::TABLE.'.label'
             )
-            ->join(Link::TABLE, 'id', 'link_id', TaskLink::TABLE)
-            ->ilike(Link::TABLE.'.label', $this->value);
+            ->join(LinkModel::TABLE, 'id', 'link_id', TaskLinkModel::TABLE)
+            ->ilike(LinkModel::TABLE.'.label', $this->value);
     }
 }

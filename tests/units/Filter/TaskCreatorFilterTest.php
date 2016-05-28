@@ -1,10 +1,10 @@
 <?php
 
 use Kanboard\Filter\TaskCreatorFilter;
-use Kanboard\Model\Project;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\User;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\UserModel;
 
 require_once __DIR__.'/../Base.php';
 
@@ -12,9 +12,9 @@ class TaskCreatorFilterTest extends Base
 {
     public function testWithIntegerAssigneeId()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
@@ -37,9 +37,9 @@ class TaskCreatorFilterTest extends Base
 
     public function testWithStringAssigneeId()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
@@ -62,9 +62,9 @@ class TaskCreatorFilterTest extends Base
 
     public function testWithUsername()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
@@ -87,10 +87,10 @@ class TaskCreatorFilterTest extends Base
 
     public function testWithName()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
-        $userModel = new User($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $userModel = new UserModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(2, $userModel->create(array('username' => 'foobar', 'name' => 'Foo Bar')));
@@ -114,9 +114,9 @@ class TaskCreatorFilterTest extends Base
 
     public function testWithNobody()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
@@ -132,9 +132,9 @@ class TaskCreatorFilterTest extends Base
 
     public function testWithCurrentUser()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));

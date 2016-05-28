@@ -2,20 +2,20 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Group;
+use Kanboard\Model\GroupModel;
 
 class GroupTest extends Base
 {
     public function testCreation()
     {
-        $groupModel = new Group($this->container);
+        $groupModel = new GroupModel($this->container);
         $this->assertEquals(1, $groupModel->create('Test'));
         $this->assertFalse($groupModel->create('Test'));
     }
 
     public function testGetById()
     {
-        $groupModel = new Group($this->container);
+        $groupModel = new GroupModel($this->container);
         $this->assertEquals(1, $groupModel->create('Test'));
 
         $group = $groupModel->getById(1);
@@ -27,7 +27,7 @@ class GroupTest extends Base
 
     public function testGetAll()
     {
-        $groupModel = new Group($this->container);
+        $groupModel = new GroupModel($this->container);
         $this->assertEquals(1, $groupModel->create('B'));
         $this->assertEquals(2, $groupModel->create('A', 'uuid'));
 
@@ -41,7 +41,7 @@ class GroupTest extends Base
 
     public function testUpdate()
     {
-        $groupModel = new Group($this->container);
+        $groupModel = new GroupModel($this->container);
         $this->assertEquals(1, $groupModel->create('Test'));
         $this->assertTrue($groupModel->update(array('id' => 1, 'name' => 'My group', 'external_id' => 'test')));
 
@@ -52,7 +52,7 @@ class GroupTest extends Base
 
     public function testRemove()
     {
-        $groupModel = new Group($this->container);
+        $groupModel = new GroupModel($this->container);
         $this->assertEquals(1, $groupModel->create('Test'));
         $this->assertTrue($groupModel->remove(1));
         $this->assertEmpty($groupModel->getById(1));

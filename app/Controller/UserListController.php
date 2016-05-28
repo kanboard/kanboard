@@ -21,7 +21,7 @@ class UserListController extends BaseController
             ->setUrl('UserListController', 'show')
             ->setMax(30)
             ->setOrder('username')
-            ->setQuery($this->user->getQuery())
+            ->setQuery($this->userModel->getQuery())
             ->calculate();
 
         $this->response->html($this->helper->layout->app('user_list/show', array(

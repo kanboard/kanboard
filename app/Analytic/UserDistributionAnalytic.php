@@ -23,8 +23,8 @@ class UserDistributionAnalytic extends Base
     {
         $metrics = array();
         $total = 0;
-        $tasks = $this->taskFinder->getAll($project_id);
-        $users = $this->projectUserRole->getAssignableUsersList($project_id);
+        $tasks = $this->taskFinderModel->getAll($project_id);
+        $users = $this->projectUserRoleModel->getAssignableUsersList($project_id);
 
         foreach ($tasks as $task) {
             $user = isset($users[$task['owner_id']]) ? $users[$task['owner_id']] : $users[0];

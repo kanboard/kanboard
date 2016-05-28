@@ -52,7 +52,7 @@ class PasswordResetController extends BaseController
         $this->checkActivation();
 
         $token = $this->request->getStringParam('token');
-        $user_id = $this->passwordReset->getUserIdByToken($token);
+        $user_id = $this->passwordResetModel->getUserIdByToken($token);
 
         if ($user_id !== false) {
             $this->response->html($this->helper->layout->app('password_reset/change', array(
@@ -78,11 +78,11 @@ class PasswordResetController extends BaseController
         list($valid, $errors) = $this->passwordResetValidator->validateModification($values);
 
         if ($valid) {
-            $user_id = $this->passwordReset->getUserIdByToken($token);
+            $user_id = $this->passwordResetModel->getUserIdByToken($token);
 
             if ($user_id !== false) {
-                $this->user->update(array('id' => $user_id, 'password' => $values['password']));
-                $this->passwordReset->disable($user_id);
+                $this->userModel->update(array('id' => $user_id, 'password' => $values['password']));
+                $this->passwordResetModel->disable($user_id);
             }
 
             return $this->response->redirect($this->helper->url->to('AuthController', 'login'));
@@ -96,10 +96,10 @@ class PasswordResetController extends BaseController
      */
     private function sendEmail($username)
     {
-        $token = $this->passwordReset->create($username);
+        $token = $this->passwordResetModel->create($username);
 
         if ($token !== false) {
-            $user = $this->user->getByUsername($username);
+            $user = $this->userModel->getByUsername($username);
 
             $this->emailClient->send(
                 $user['email'],
@@ -115,7 +115,7 @@ class PasswordResetController extends BaseController
      */
     private function checkActivation()
     {
-        if ($this->config->get('password_reset', 0) == 0) {
+        if ($this->configModel->get('password_reset', 0) == 0) {
             throw AccessForbiddenException::getInstance()->withoutLayout();
         }
     }

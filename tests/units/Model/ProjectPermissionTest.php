@@ -2,26 +2,26 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\ProjectPermission;
-use Kanboard\Model\Project;
-use Kanboard\Model\User;
-use Kanboard\Model\Group;
-use Kanboard\Model\GroupMember;
-use Kanboard\Model\ProjectGroupRole;
-use Kanboard\Model\ProjectUserRole;
+use Kanboard\Model\ProjectPermissionModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\UserModel;
+use Kanboard\Model\GroupModel;
+use Kanboard\Model\GroupMemberModel;
+use Kanboard\Model\ProjectGroupRoleModel;
+use Kanboard\Model\ProjectUserRoleModel;
 use Kanboard\Core\Security\Role;
 
 class ProjectPermissionTest extends Base
 {
     public function testFindByUsernames()
     {
-        $userModel = new User($this->container);
-        $projectModel = new Project($this->container);
-        $groupModel = new Group($this->container);
-        $groupMemberModel = new GroupMember($this->container);
-        $groupRoleModel = new ProjectGroupRole($this->container);
-        $userRoleModel = new ProjectUserRole($this->container);
-        $projectPermissionModel = new ProjectPermission($this->container);
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $groupModel = new GroupModel($this->container);
+        $groupMemberModel = new GroupMemberModel($this->container);
+        $groupRoleModel = new ProjectGroupRoleModel($this->container);
+        $userRoleModel = new ProjectUserRoleModel($this->container);
+        $projectPermissionModel = new ProjectPermissionModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
 
@@ -42,10 +42,10 @@ class ProjectPermissionTest extends Base
 
     public function testGetQueryByRole()
     {
-        $userModel = new User($this->container);
-        $projectModel = new Project($this->container);
-        $userRoleModel = new ProjectUserRole($this->container);
-        $projectPermission = new ProjectPermission($this->container);
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $userRoleModel = new ProjectUserRoleModel($this->container);
+        $projectPermission = new ProjectPermissionModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
         $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2')));
@@ -105,8 +105,8 @@ class ProjectPermissionTest extends Base
 
     public function testEverybodyAllowed()
     {
-        $projectModel = new Project($this->container);
-        $projectPermission = new ProjectPermission($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectPermission = new ProjectPermissionModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
         $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2', 'is_everybody_allowed' => 1)));
@@ -117,13 +117,13 @@ class ProjectPermissionTest extends Base
 
     public function testIsUserAllowed()
     {
-        $userModel = new User($this->container);
-        $projectModel = new Project($this->container);
-        $groupModel = new Group($this->container);
-        $groupRoleModel = new ProjectGroupRole($this->container);
-        $groupMemberModel = new GroupMember($this->container);
-        $userRoleModel = new ProjectUserRole($this->container);
-        $projectPermission = new ProjectPermission($this->container);
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $groupModel = new GroupModel($this->container);
+        $groupRoleModel = new ProjectGroupRoleModel($this->container);
+        $groupMemberModel = new GroupMemberModel($this->container);
+        $userRoleModel = new ProjectUserRoleModel($this->container);
+        $projectPermission = new ProjectPermissionModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
         $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
@@ -154,13 +154,13 @@ class ProjectPermissionTest extends Base
 
     public function testIsAssignable()
     {
-        $userModel = new User($this->container);
-        $projectModel = new Project($this->container);
-        $groupModel = new Group($this->container);
-        $groupRoleModel = new ProjectGroupRole($this->container);
-        $groupMemberModel = new GroupMember($this->container);
-        $userRoleModel = new ProjectUserRole($this->container);
-        $projectPermission = new ProjectPermission($this->container);
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $groupModel = new GroupModel($this->container);
+        $groupRoleModel = new ProjectGroupRoleModel($this->container);
+        $groupMemberModel = new GroupMemberModel($this->container);
+        $userRoleModel = new ProjectUserRoleModel($this->container);
+        $projectPermission = new ProjectPermissionModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
         $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
@@ -191,10 +191,10 @@ class ProjectPermissionTest extends Base
 
     public function testIsAssignableWhenUserIsDisabled()
     {
-        $userModel = new User($this->container);
-        $projectModel = new Project($this->container);
-        $userRoleModel = new ProjectUserRole($this->container);
-        $projectPermission = new ProjectPermission($this->container);
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $userRoleModel = new ProjectUserRoleModel($this->container);
+        $projectPermission = new ProjectPermissionModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
         $this->assertEquals(3, $userModel->create(array('username' => 'user 2', 'is_active' => 0)));
@@ -210,13 +210,13 @@ class ProjectPermissionTest extends Base
 
     public function testIsMember()
     {
-        $userModel = new User($this->container);
-        $projectModel = new Project($this->container);
-        $groupModel = new Group($this->container);
-        $groupRoleModel = new ProjectGroupRole($this->container);
-        $groupMemberModel = new GroupMember($this->container);
-        $userRoleModel = new ProjectUserRole($this->container);
-        $projectPermission = new ProjectPermission($this->container);
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $groupModel = new GroupModel($this->container);
+        $groupRoleModel = new ProjectGroupRoleModel($this->container);
+        $groupMemberModel = new GroupMemberModel($this->container);
+        $userRoleModel = new ProjectUserRoleModel($this->container);
+        $projectPermission = new ProjectPermissionModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
         $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
@@ -247,10 +247,10 @@ class ProjectPermissionTest extends Base
 
     public function testGetActiveProjectIds()
     {
-        $userModel = new User($this->container);
-        $projectModel = new Project($this->container);
-        $userRoleModel = new ProjectUserRole($this->container);
-        $projectPermission = new ProjectPermission($this->container);
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $userRoleModel = new ProjectUserRoleModel($this->container);
+        $projectPermission = new ProjectPermissionModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
         $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
@@ -269,13 +269,13 @@ class ProjectPermissionTest extends Base
 
     public function testDuplicate()
     {
-        $userModel = new User($this->container);
-        $projectModel = new Project($this->container);
-        $groupModel = new Group($this->container);
-        $groupMemberModel = new GroupMember($this->container);
-        $groupRoleModel = new ProjectGroupRole($this->container);
-        $userRoleModel = new ProjectUserRole($this->container);
-        $projectPermission = new ProjectPermission($this->container);
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $groupModel = new GroupModel($this->container);
+        $groupMemberModel = new GroupMemberModel($this->container);
+        $groupRoleModel = new ProjectGroupRoleModel($this->container);
+        $userRoleModel = new ProjectUserRoleModel($this->container);
+        $projectPermission = new ProjectPermissionModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
         $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2')));

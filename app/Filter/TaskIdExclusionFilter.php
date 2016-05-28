@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Exclude task ids
@@ -32,7 +32,7 @@ class TaskIdExclusionFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        $this->query->notin(Task::TABLE.'.id', $this->value);
+        $this->query->notin(TaskModel::TABLE.'.id', $this->value);
         return $this;
     }
 }

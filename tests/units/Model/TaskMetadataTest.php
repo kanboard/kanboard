@@ -2,17 +2,17 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Project;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskMetadata;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskMetadataModel;
 
 class TaskMetadataTest extends Base
 {
     public function testOperations()
     {
-        $p = new Project($this->container);
-        $tm = new TaskMetadata($this->container);
-        $tc = new TaskCreation($this->container);
+        $p = new ProjectModel($this->container);
+        $tm = new TaskMetadataModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'project #1')));
         $this->assertEquals(1, $tc->create(array('title' => 'task #1', 'project_id' => 1)));

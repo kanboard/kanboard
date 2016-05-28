@@ -14,17 +14,17 @@ class SubtaskApi extends Base
 {
     public function getSubtask($subtask_id)
     {
-        return $this->subtask->getById($subtask_id);
+        return $this->subtaskModel->getById($subtask_id);
     }
 
     public function getAllSubtasks($task_id)
     {
-        return $this->subtask->getAll($task_id);
+        return $this->subtaskModel->getAll($task_id);
     }
 
     public function removeSubtask($subtask_id)
     {
-        return $this->subtask->remove($subtask_id);
+        return $this->subtaskModel->remove($subtask_id);
     }
 
     public function createSubtask($task_id, $title, $user_id = 0, $time_estimated = 0, $time_spent = 0, $status = 0)
@@ -39,7 +39,7 @@ class SubtaskApi extends Base
         );
 
         list($valid, ) = $this->subtaskValidator->validateCreation($values);
-        return $valid ? $this->subtask->create($values) : false;
+        return $valid ? $this->subtaskModel->create($values) : false;
     }
 
     public function updateSubtask($id, $task_id, $title = null, $user_id = null, $time_estimated = null, $time_spent = null, $status = null)
@@ -61,6 +61,6 @@ class SubtaskApi extends Base
         }
 
         list($valid, ) = $this->subtaskValidator->validateApiModification($values);
-        return $valid && $this->subtask->update($values);
+        return $valid && $this->subtaskModel->update($values);
     }
 }

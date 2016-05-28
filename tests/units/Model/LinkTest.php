@@ -2,13 +2,13 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Link;
+use Kanboard\Model\LinkModel;
 
 class LinkTest extends Base
 {
     public function testCreateLink()
     {
-        $l = new Link($this->container);
+        $l = new LinkModel($this->container);
 
         $this->assertNotFalse($l->create('Link A'));
         $this->assertFalse($l->create('Link A'));
@@ -38,7 +38,7 @@ class LinkTest extends Base
 
     public function testGetOppositeLinkId()
     {
-        $l = new Link($this->container);
+        $l = new LinkModel($this->container);
 
         $this->assertNotFalse($l->create('Link A'));
         $this->assertNotFalse($l->create('Link B', 'Link C'));
@@ -50,7 +50,7 @@ class LinkTest extends Base
 
     public function testUpdate()
     {
-        $l = new Link($this->container);
+        $l = new LinkModel($this->container);
 
         $this->assertTrue($l->update(array('id' => 2, 'label' => 'test', 'opposite_id' => 0)));
 
@@ -62,7 +62,7 @@ class LinkTest extends Base
 
     public function testRemove()
     {
-        $l = new Link($this->container);
+        $l = new LinkModel($this->container);
 
         $link = $l->getById(3);
         $this->assertNotEmpty($link);
@@ -82,7 +82,7 @@ class LinkTest extends Base
 
     public function testGetMergedList()
     {
-        $l = new Link($this->container);
+        $l = new LinkModel($this->container);
         $links = $l->getMergedList();
 
         $this->assertNotEmpty($links);
@@ -93,7 +93,7 @@ class LinkTest extends Base
 
     public function testGetList()
     {
-        $l = new Link($this->container);
+        $l = new LinkModel($this->container);
         $links = $l->getList();
 
         $this->assertNotEmpty($links);

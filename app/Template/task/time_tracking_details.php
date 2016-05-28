@@ -14,7 +14,7 @@
             <th><?= $subtask_paginator->order(t('Subtask'), 'subtask_title') ?></th>
             <th class="column-20"><?= $subtask_paginator->order(t('Start'), 'start') ?></th>
             <th class="column-20"><?= $subtask_paginator->order(t('End'), 'end') ?></th>
-            <th class="column-10"><?= $subtask_paginator->order(t('Time spent'), \Kanboard\Model\SubtaskTimeTracking::TABLE.'.time_spent') ?></th>
+            <th class="column-10"><?= $subtask_paginator->order(t('Time spent'), \Kanboard\Model\SubtaskTimeTrackingModel::TABLE.'.time_spent') ?></th>
         </tr>
         <?php foreach ($subtask_paginator->getCollection() as $record): ?>
         <tr>

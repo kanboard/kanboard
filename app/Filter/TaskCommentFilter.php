@@ -3,8 +3,8 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Comment;
-use Kanboard\Model\Task;
+use Kanboard\Model\CommentModel;
+use Kanboard\Model\TaskModel;
 
 /**
  * Filter tasks by comment
@@ -33,8 +33,8 @@ class TaskCommentFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        $this->query->ilike(Comment::TABLE.'.comment', '%'.$this->value.'%');
-        $this->query->join(Comment::TABLE, 'task_id', 'id', Task::TABLE);
+        $this->query->ilike(CommentModel::TABLE.'.comment', '%'.$this->value.'%');
+        $this->query->join(CommentModel::TABLE, 'task_id', 'id', TaskModel::TABLE);
 
         return $this;
     }

@@ -69,19 +69,19 @@ class ActionCreationController extends BaseController
             $this->doCreation($project, $values + array('params' => array()));
         }
 
-        $projects_list = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
+        $projects_list = $this->projectUserRoleModel->getActiveProjectsByUser($this->userSession->getId());
         unset($projects_list[$project['id']]);
 
         $this->response->html($this->template->render('action_creation/params', array(
             'values' => $values,
             'action_params' => $action_params,
-            'columns_list' => $this->column->getList($project['id']),
-            'users_list' => $this->projectUserRole->getAssignableUsersList($project['id']),
+            'columns_list' => $this->columnModel->getList($project['id']),
+            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id']),
             'projects_list' => $projects_list,
-            'colors_list' => $this->color->getList(),
-            'categories_list' => $this->category->getList($project['id']),
-            'links_list' => $this->link->getList(0, false),
-            'priorities_list' => $this->project->getPriorities($project),
+            'colors_list' => $this->colorModel->getList(),
+            'categories_list' => $this->categoryModel->getList($project['id']),
+            'links_list' => $this->linkModel->getList(0, false),
+            'priorities_list' => $this->projectModel->getPriorities($project),
             'project' => $project,
             'available_actions' => $this->actionManager->getAvailableActions(),
             'events' => $this->actionManager->getCompatibleEvents($values['action_name']),
@@ -110,7 +110,7 @@ class ActionCreationController extends BaseController
         list($valid, ) = $this->actionValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->action->create($values) !== false) {
+            if ($this->actionModel->create($values) !== false) {
                 $this->flash->success(t('Your automatic action have been created successfully.'));
             } else {
                 $this->flash->failure(t('Unable to create your automatic action.'));

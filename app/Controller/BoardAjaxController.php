@@ -28,7 +28,7 @@ class BoardAjaxController extends BaseController
 
         $values = $this->request->getJson();
 
-        $result =$this->taskPosition->movePosition(
+        $result =$this->taskPositionModel->movePosition(
             $project_id,
             $values['task_id'],
             $values['column_id'],
@@ -55,7 +55,7 @@ class BoardAjaxController extends BaseController
 
         if (! $project_id || ! $this->request->isAjax()) {
             throw new AccessForbiddenException();
-        } elseif (! $this->project->isModifiedSince($project_id, $timestamp)) {
+        } elseif (! $this->projectModel->isModifiedSince($project_id, $timestamp)) {
             $this->response->status(304);
         } else {
             $this->response->html($this->renderBoard($project_id));
@@ -129,9 +129,9 @@ class BoardAjaxController extends BaseController
     protected function renderBoard($project_id)
     {
         return $this->template->render('board/table_container', array(
-            'project' => $this->project->getById($project_id),
-            'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
-            'board_highlight_period' => $this->config->get('board_highlight_period'),
+            'project' => $this->projectModel->getById($project_id),
+            'board_private_refresh_interval' => $this->configModel->get('board_private_refresh_interval'),
+            'board_highlight_period' => $this->configModel->get('board_highlight_period'),
             'swimlanes' => $this->taskLexer
                 ->build($this->userSession->getFilters($project_id))
                 ->format(BoardFormatter::getInstance($this->container)->setProjectId($project_id))

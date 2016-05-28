@@ -2,7 +2,7 @@
 
 namespace Kanboard\Console;
 
-use Kanboard\Model\Project;
+use Kanboard\Model\ProjectModel;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -17,12 +17,12 @@ class ProjectDailyStatsCalculationCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $projects = $this->project->getAllByStatus(Project::ACTIVE);
+        $projects = $this->projectModel->getAllByStatus(ProjectModel::ACTIVE);
 
         foreach ($projects as $project) {
             $output->writeln('Run calculation for '.$project['name']);
-            $this->projectDailyColumnStats->updateTotals($project['id'], date('Y-m-d'));
-            $this->projectDailyStats->updateTotals($project['id'], date('Y-m-d'));
+            $this->projectDailyColumnStatsModel->updateTotals($project['id'], date('Y-m-d'));
+            $this->projectDailyStatsModel->updateTotals($project['id'], date('Y-m-d'));
         }
     }
 }

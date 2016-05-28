@@ -21,7 +21,7 @@ class CategoryController extends BaseController
      */
     private function getCategory()
     {
-        $category = $this->category->getById($this->request->getIntegerParam('category_id'));
+        $category = $this->categoryModel->getById($this->request->getIntegerParam('category_id'));
 
         if (empty($category)) {
             throw new PageNotFoundException();
@@ -43,7 +43,7 @@ class CategoryController extends BaseController
         $project = $this->getProject();
 
         $this->response->html($this->helper->layout->project('category/index', array(
-            'categories' => $this->category->getList($project['id'], false),
+            'categories' => $this->categoryModel->getList($project['id'], false),
             'values' => $values + array('project_id' => $project['id']),
             'errors' => $errors,
             'project' => $project,
@@ -64,7 +64,7 @@ class CategoryController extends BaseController
         list($valid, $errors) = $this->categoryValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->category->create($values)) {
+            if ($this->categoryModel->create($values)) {
                 $this->flash->success(t('Your category have been created successfully.'));
                 return $this->response->redirect($this->helper->url->to('CategoryController', 'index', array('project_id' => $project['id'])));
             } else {
@@ -109,7 +109,7 @@ class CategoryController extends BaseController
         list($valid, $errors) = $this->categoryValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->category->update($values)) {
+            if ($this->categoryModel->update($values)) {
                 $this->flash->success(t('Your category have been updated successfully.'));
                 return $this->response->redirect($this->helper->url->to('CategoryController', 'index', array('project_id' => $project['id'])));
             } else {
@@ -148,7 +148,7 @@ class CategoryController extends BaseController
         $project = $this->getProject();
         $category = $this->getCategory();
 
-        if ($this->category->remove($category['id'])) {
+        if ($this->categoryModel->remove($category['id'])) {
             $this->flash->success(t('Category removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this category.'));

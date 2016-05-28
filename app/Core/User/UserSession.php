@@ -22,7 +22,7 @@ class UserSession extends Base
     public function refresh($user_id)
     {
         if ($this->getId() == $user_id) {
-            $this->initialize($this->user->getById($user_id));
+            $this->initialize($this->userModel->getById($user_id));
         }
     }
 

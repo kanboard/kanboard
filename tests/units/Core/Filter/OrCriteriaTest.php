@@ -3,10 +3,10 @@
 use Kanboard\Core\Filter\OrCriteria;
 use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Filter\TaskTitleFilter;
-use Kanboard\Model\Project;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\User;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\UserModel;
 
 require_once __DIR__.'/../../Base.php';
 
@@ -14,10 +14,10 @@ class OrCriteriaTest extends Base
 {
     public function testWithSameFilter()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
-        $userModel = new User($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $userModel = new UserModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(2, $userModel->create(array('username' => 'foobar', 'name' => 'Foo Bar')));
@@ -36,10 +36,10 @@ class OrCriteriaTest extends Base
 
     public function testWithDifferentFilter()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
-        $userModel = new User($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $userModel = new UserModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(2, $userModel->create(array('username' => 'foobar', 'name' => 'Foo Bar')));

@@ -2,20 +2,20 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\TaskLink;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Project;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\TaskLinkModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ProjectModel;
 
 class TaskLinkTest extends Base
 {
     // Check postgres issue: "Cardinality violation: 7 ERROR:  more than one row returned by a subquery used as an expression"
     public function testGetTaskWithMultipleMilestoneLink()
     {
-        $tf = new TaskFinder($this->container);
-        $tl = new TaskLink($this->container);
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $tl = new TaskLinkModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'A')));
@@ -31,9 +31,9 @@ class TaskLinkTest extends Base
 
     public function testCreateTaskLinkWithNoOpposite()
     {
-        $tl = new TaskLink($this->container);
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
+        $tl = new TaskLinkModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'A')));
@@ -73,9 +73,9 @@ class TaskLinkTest extends Base
 
     public function testCreateTaskLinkWithOpposite()
     {
-        $tl = new TaskLink($this->container);
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
+        $tl = new TaskLinkModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'A')));
@@ -115,9 +115,9 @@ class TaskLinkTest extends Base
 
     public function testGroupByLabel()
     {
-        $tl = new TaskLink($this->container);
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
+        $tl = new TaskLinkModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
 
@@ -139,9 +139,9 @@ class TaskLinkTest extends Base
 
     public function testUpdate()
     {
-        $tl = new TaskLink($this->container);
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
+        $tl = new TaskLinkModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(2, $p->create(array('name' => 'test2')));
@@ -172,9 +172,9 @@ class TaskLinkTest extends Base
 
     public function testRemove()
     {
-        $tl = new TaskLink($this->container);
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
+        $tl = new TaskLinkModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'A')));

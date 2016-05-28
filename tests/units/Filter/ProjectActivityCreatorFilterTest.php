@@ -1,11 +1,11 @@
 <?php
 
 use Kanboard\Filter\ProjectActivityCreatorFilter;
-use Kanboard\Model\Project;
-use Kanboard\Model\ProjectActivity;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\Task;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectActivityModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\TaskModel;
 
 require_once __DIR__.'/../Base.php';
 
@@ -13,14 +13,14 @@ class ProjectActivityCreatorFilterTest extends Base
 {
     public function testWithUsername()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
-        $projectActivityModel = new ProjectActivity($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectActivityModel = new ProjectActivityModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
         $this->assertEquals(1, $taskCreation->create(array('title' => 'Test', 'project_id' => 1)));
-        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, Task::EVENT_CREATE, array('task' => $taskFinder->getById(1))));
+        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, TaskModel::EVENT_CREATE, array('task' => $taskFinder->getById(1))));
 
         $query = $projectActivityModel->getQuery();
         $filter = new ProjectActivityCreatorFilter('admin');
@@ -32,14 +32,14 @@ class ProjectActivityCreatorFilterTest extends Base
 
     public function testWithAnotherUsername()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
-        $projectActivityModel = new ProjectActivity($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectActivityModel = new ProjectActivityModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
         $this->assertEquals(1, $taskCreation->create(array('title' => 'Test', 'project_id' => 1)));
-        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, Task::EVENT_CREATE, array('task' => $taskFinder->getById(1))));
+        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, TaskModel::EVENT_CREATE, array('task' => $taskFinder->getById(1))));
 
         $query = $projectActivityModel->getQuery();
         $filter = new ProjectActivityCreatorFilter('John Doe');
@@ -51,14 +51,14 @@ class ProjectActivityCreatorFilterTest extends Base
 
     public function testWithCurrentUser()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
-        $projectActivityModel = new ProjectActivity($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectActivityModel = new ProjectActivityModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
         $this->assertEquals(1, $taskCreation->create(array('title' => 'Test', 'project_id' => 1)));
-        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, Task::EVENT_CREATE, array('task' => $taskFinder->getById(1))));
+        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, TaskModel::EVENT_CREATE, array('task' => $taskFinder->getById(1))));
 
         $query = $projectActivityModel->getQuery();
         $filter = new ProjectActivityCreatorFilter('me');
@@ -71,14 +71,14 @@ class ProjectActivityCreatorFilterTest extends Base
 
     public function testWithAnotherCurrentUser()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
-        $projectActivityModel = new ProjectActivity($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectActivityModel = new ProjectActivityModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
         $this->assertEquals(1, $taskCreation->create(array('title' => 'Test', 'project_id' => 1)));
-        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, Task::EVENT_CREATE, array('task' => $taskFinder->getById(1))));
+        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, TaskModel::EVENT_CREATE, array('task' => $taskFinder->getById(1))));
 
         $query = $projectActivityModel->getQuery();
         $filter = new ProjectActivityCreatorFilter('me');

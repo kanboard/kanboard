@@ -18,7 +18,7 @@ class ActionController extends BaseController
     public function index()
     {
         $project = $this->getProject();
-        $actions = $this->action->getAllByProject($project['id']);
+        $actions = $this->actionModel->getAllByProject($project['id']);
 
         $this->response->html($this->helper->layout->project('action/index', array(
             'values' => array('project_id' => $project['id']),
@@ -27,12 +27,12 @@ class ActionController extends BaseController
             'available_actions' => $this->actionManager->getAvailableActions(),
             'available_events' => $this->eventManager->getAll(),
             'available_params' => $this->actionManager->getAvailableParameters($actions),
-            'columns_list' => $this->column->getList($project['id']),
-            'users_list' => $this->projectUserRole->getAssignableUsersList($project['id']),
-            'projects_list' => $this->projectUserRole->getProjectsByUser($this->userSession->getId()),
-            'colors_list' => $this->color->getList(),
-            'categories_list' => $this->category->getList($project['id']),
-            'links_list' => $this->link->getList(0, false),
+            'columns_list' => $this->columnModel->getList($project['id']),
+            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id']),
+            'projects_list' => $this->projectUserRoleModel->getProjectsByUser($this->userSession->getId()),
+            'colors_list' => $this->colorModel->getList(),
+            'categories_list' => $this->categoryModel->getList($project['id']),
+            'links_list' => $this->linkModel->getList(0, false),
             'title' => t('Automatic actions')
         )));
     }
@@ -47,7 +47,7 @@ class ActionController extends BaseController
         $project = $this->getProject();
 
         $this->response->html($this->helper->layout->project('action/remove', array(
-            'action' => $this->action->getById($this->request->getIntegerParam('action_id')),
+            'action' => $this->actionModel->getById($this->request->getIntegerParam('action_id')),
             'available_events' => $this->eventManager->getAll(),
             'available_actions' => $this->actionManager->getAvailableActions(),
             'project' => $project,
@@ -64,9 +64,9 @@ class ActionController extends BaseController
     {
         $this->checkCSRFParam();
         $project = $this->getProject();
-        $action = $this->action->getById($this->request->getIntegerParam('action_id'));
+        $action = $this->actionModel->getById($this->request->getIntegerParam('action_id'));
 
-        if (! empty($action) && $this->action->remove($action['id'])) {
+        if (! empty($action) && $this->actionModel->remove($action['id'])) {
             $this->flash->success(t('Action removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this action.'));

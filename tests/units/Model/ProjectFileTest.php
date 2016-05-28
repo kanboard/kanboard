@@ -2,15 +2,15 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\ProjectFile;
-use Kanboard\Model\Project;
+use Kanboard\Model\ProjectFileModel;
+use Kanboard\Model\ProjectModel;
 
 class ProjectFileTest extends Base
 {
     public function testCreation()
     {
-        $projectModel = new Project($this->container);
-        $fileModel = new ProjectFile($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $fileModel = new ProjectFileModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $fileModel->create(1, 'test', '/tmp/foo', 10));
@@ -34,8 +34,8 @@ class ProjectFileTest extends Base
 
     public function testCreationWithFileNameTooLong()
     {
-        $projectModel = new Project($this->container);
-        $fileModel = new ProjectFile($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $fileModel = new ProjectFileModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
 
@@ -54,8 +54,8 @@ class ProjectFileTest extends Base
     {
         $this->container['sessionStorage']->user = array('id' => 1);
 
-        $projectModel = new Project($this->container);
-        $fileModel = new ProjectFile($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $fileModel = new ProjectFileModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $fileModel->create(1, 'test', '/tmp/foo', 10));
@@ -67,8 +67,8 @@ class ProjectFileTest extends Base
 
     public function testGetAll()
     {
-        $projectModel = new Project($this->container);
-        $fileModel = new ProjectFile($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $fileModel = new ProjectFileModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
 
@@ -100,13 +100,13 @@ class ProjectFileTest extends Base
 
     public function testGetThumbnailPath()
     {
-        $fileModel = new ProjectFile($this->container);
+        $fileModel = new ProjectFileModel($this->container);
         $this->assertEquals('thumbnails'.DIRECTORY_SEPARATOR.'test', $fileModel->getThumbnailPath('test'));
     }
 
     public function testGeneratePath()
     {
-        $fileModel = new ProjectFile($this->container);
+        $fileModel = new ProjectFileModel($this->container);
 
         $this->assertStringStartsWith('projects'.DIRECTORY_SEPARATOR.'34'.DIRECTORY_SEPARATOR, $fileModel->generatePath(34, 'test.png'));
         $this->assertNotEquals($fileModel->generatePath(34, 'test1.png'), $fileModel->generatePath(34, 'test2.png'));
@@ -115,12 +115,12 @@ class ProjectFileTest extends Base
     public function testUploadFiles()
     {
         $fileModel = $this
-            ->getMockBuilder('\Kanboard\Model\ProjectFile')
+            ->getMockBuilder('\Kanboard\Model\ProjectFileModel')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('generateThumbnailFromFile'))
             ->getMock();
 
-        $projectModel = new Project($this->container);
+        $projectModel = new ProjectModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
 
@@ -181,7 +181,7 @@ class ProjectFileTest extends Base
 
     public function testUploadFilesWithEmptyFiles()
     {
-        $fileModel = new ProjectFile($this->container);
+        $fileModel = new ProjectFileModel($this->container);
         $this->assertFalse($fileModel->uploadFiles(1, array()));
     }
 
@@ -206,7 +206,7 @@ class ProjectFileTest extends Base
             ),
         );
 
-        $fileModel = new ProjectFile($this->container);
+        $fileModel = new ProjectFileModel($this->container);
         $this->assertFalse($fileModel->uploadFiles(1, $files));
     }
 
@@ -237,19 +237,19 @@ class ProjectFileTest extends Base
             ->with($this->equalTo('/tmp/phpYzdqkD'), $this->anything())
             ->will($this->throwException(new \Kanboard\Core\ObjectStorage\ObjectStorageException('test')));
 
-        $fileModel = new ProjectFile($this->container);
+        $fileModel = new ProjectFileModel($this->container);
         $this->assertFalse($fileModel->uploadFiles(1, $files));
     }
 
     public function testUploadFileContent()
     {
         $fileModel = $this
-            ->getMockBuilder('\Kanboard\Model\ProjectFile')
+            ->getMockBuilder('\Kanboard\Model\ProjectFileModel')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('generateThumbnailFromFile'))
             ->getMock();
 
-        $projectModel = new Project($this->container);
+        $projectModel = new ProjectModel($this->container);
         $data = 'test';
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
@@ -276,12 +276,12 @@ class ProjectFileTest extends Base
     public function testUploadImageContent()
     {
         $fileModel = $this
-            ->getMockBuilder('\Kanboard\Model\ProjectFile')
+            ->getMockBuilder('\Kanboard\Model\ProjectFileModel')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('generateThumbnailFromData'))
             ->getMock();
 
-        $projectModel = new Project($this->container);
+        $projectModel = new ProjectModel($this->container);
         $data = 'test';
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));

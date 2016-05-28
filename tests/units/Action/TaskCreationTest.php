@@ -3,16 +3,16 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Event\GenericEvent;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\Project;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\ProjectModel;
 use Kanboard\Action\TaskCreation as TaskCreationAction;
 
 class TaskCreationActionTest extends Base
 {
     public function testSuccess()
     {
-        $projectModel = new Project($this->container);
-        $taskFinderModel = new TaskFinder($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
 
@@ -33,7 +33,7 @@ class TaskCreationActionTest extends Base
 
     public function testWithNoTitle()
     {
-        $projectModel = new Project($this->container);
+        $projectModel = new ProjectModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
 

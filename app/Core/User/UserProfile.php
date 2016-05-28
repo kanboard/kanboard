@@ -25,12 +25,12 @@ class UserProfile extends Base
      */
     public function assign($userId, UserProviderInterface $user)
     {
-        $profile = $this->user->getById($userId);
+        $profile = $this->userModel->getById($userId);
 
         $values = UserProperty::filterProperties($profile, UserProperty::getProperties($user));
         $values['id'] = $userId;
 
-        if ($this->user->update($values)) {
+        if ($this->userModel->update($values)) {
             $profile = array_merge($profile, $values);
             $this->userSession->initialize($profile);
             return true;
@@ -49,7 +49,7 @@ class UserProfile extends Base
     public function initialize(UserProviderInterface $user)
     {
         if ($user->getInternalId()) {
-            $profile = $this->user->getById($user->getInternalId());
+            $profile = $this->userModel->getById($user->getInternalId());
         } elseif ($user->getExternalIdColumn() && $user->getExternalId()) {
             $profile = $this->userSync->synchronize($user);
             $this->groupSync->synchronize($profile['id'], $user->getExternalGroupIds());

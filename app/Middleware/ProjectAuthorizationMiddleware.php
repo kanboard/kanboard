@@ -22,7 +22,7 @@ class ProjectAuthorizationMiddleware extends BaseMiddleware
         $task_id = $this->request->getIntegerParam('task_id');
 
         if ($task_id > 0 && $project_id === 0) {
-            $project_id = $this->taskFinder->getProjectId($task_id);
+            $project_id = $this->taskFinderModel->getProjectId($task_id);
         }
 
         if ($project_id > 0 && ! $this->helper->user->hasProjectAccess($this->router->getController(), $this->router->getAction(), $project_id)) {

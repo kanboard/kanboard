@@ -63,7 +63,7 @@ class TaskOpen extends Base
      */
     public function doAction(array $data)
     {
-        return $this->taskStatus->open($data['task_id']);
+        return $this->taskStatusModel->open($data['task_id']);
     }
 
     /**

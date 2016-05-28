@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Filter tasks by reference
@@ -32,7 +32,7 @@ class TaskReferenceFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        $this->query->eq(Task::TABLE.'.reference', $this->value);
+        $this->query->eq(TaskModel::TABLE.'.reference', $this->value);
         return $this;
     }
 }

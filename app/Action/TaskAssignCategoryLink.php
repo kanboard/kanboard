@@ -2,7 +2,7 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Model\TaskLink;
+use Kanboard\Model\TaskLinkModel;
 
 /**
  * Set a category automatically according to a task link
@@ -33,7 +33,7 @@ class TaskAssignCategoryLink extends Base
     public function getCompatibleEvents()
     {
         return array(
-            TaskLink::EVENT_CREATE_UPDATE,
+            TaskLinkModel::EVENT_CREATE_UPDATE,
         );
     }
 
@@ -79,7 +79,7 @@ class TaskAssignCategoryLink extends Base
             'category_id' => $this->getParam('category_id'),
         );
 
-        return $this->taskModification->update($values);
+        return $this->taskModificationModel->update($values);
     }
 
     /**
@@ -92,7 +92,7 @@ class TaskAssignCategoryLink extends Base
     public function hasRequiredCondition(array $data)
     {
         if ($data['link_id'] == $this->getParam('link_id')) {
-            $task = $this->taskFinder->getById($data['task_id']);
+            $task = $this->taskFinderModel->getById($data['task_id']);
             return empty($task['category_id']);
         }
 

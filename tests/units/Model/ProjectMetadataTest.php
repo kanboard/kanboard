@@ -2,15 +2,15 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Project;
-use Kanboard\Model\ProjectMetadata;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectMetadataModel;
 
 class ProjectMetadataTest extends Base
 {
     public function testOperations()
     {
-        $projectModel = new Project($this->container);
-        $projectMetadataModel = new ProjectMetadata($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectMetadataModel = new ProjectMetadataModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'project #1')));
         $this->assertEquals(2, $projectModel->create(array('name' => 'project #2')));
@@ -39,8 +39,8 @@ class ProjectMetadataTest extends Base
 
     public function testAutomaticRemove()
     {
-        $projectModel = new Project($this->container);
-        $projectMetadataModel = new ProjectMetadata($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectMetadataModel = new ProjectMetadataModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'project #1')));
         $this->assertTrue($projectMetadataModel->save(1, array('key1' => 'value1')));
@@ -52,8 +52,8 @@ class ProjectMetadataTest extends Base
 
     public function testDuplicate()
     {
-        $projectModel = new Project($this->container);
-        $projectMetadataModel = new ProjectMetadata($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectMetadataModel = new ProjectMetadataModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'project #1')));
         $this->assertEquals(2, $projectModel->create(array('name' => 'project #2')));

@@ -3,7 +3,7 @@
 namespace Kanboard\Api;
 
 use Kanboard\Filter\TaskProjectFilter;
-use Kanboard\Model\Task as TaskModel;
+use Kanboard\Model\TaskModel;
 
 /**
  * Task API controller
@@ -22,63 +22,63 @@ class TaskApi extends BaseApi
     public function getTask($task_id)
     {
         $this->checkTaskPermission($task_id);
-        return $this->formatTask($this->taskFinder->getById($task_id));
+        return $this->formatTask($this->taskFinderModel->getById($task_id));
     }
 
     public function getTaskByReference($project_id, $reference)
     {
         $this->checkProjectPermission($project_id);
-        return $this->formatTask($this->taskFinder->getByReference($project_id, $reference));
+        return $this->formatTask($this->taskFinderModel->getByReference($project_id, $reference));
     }
 
     public function getAllTasks($project_id, $status_id = TaskModel::STATUS_OPEN)
     {
         $this->checkProjectPermission($project_id);
-        return $this->formatTasks($this->taskFinder->getAll($project_id, $status_id));
+        return $this->formatTasks($this->taskFinderModel->getAll($project_id, $status_id));
     }
 
     public function getOverdueTasks()
     {
-        return $this->taskFinder->getOverdueTasks();
+        return $this->taskFinderModel->getOverdueTasks();
     }
 
     public function getOverdueTasksByProject($project_id)
     {
         $this->checkProjectPermission($project_id);
-        return $this->taskFinder->getOverdueTasksByProject($project_id);
+        return $this->taskFinderModel->getOverdueTasksByProject($project_id);
     }
 
     public function openTask($task_id)
     {
         $this->checkTaskPermission($task_id);
-        return $this->taskStatus->open($task_id);
+        return $this->taskStatusModel->open($task_id);
     }
 
     public function closeTask($task_id)
     {
         $this->checkTaskPermission($task_id);
-        return $this->taskStatus->close($task_id);
+        return $this->taskStatusModel->close($task_id);
     }
 
     public function removeTask($task_id)
     {
-        return $this->task->remove($task_id);
+        return $this->taskModel->remove($task_id);
     }
 
     public function moveTaskPosition($project_id, $task_id, $column_id, $position, $swimlane_id = 0)
     {
         $this->checkProjectPermission($project_id);
-        return $this->taskPosition->movePosition($project_id, $task_id, $column_id, $position, $swimlane_id);
+        return $this->taskPositionModel->movePosition($project_id, $task_id, $column_id, $position, $swimlane_id);
     }
 
     public function moveTaskToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
     {
-        return $this->taskDuplication->moveToProject($task_id, $project_id, $swimlane_id, $column_id, $category_id, $owner_id);
+        return $this->taskDuplicationModel->moveToProject($task_id, $project_id, $swimlane_id, $column_id, $category_id, $owner_id);
     }
 
     public function duplicateTaskToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
     {
-        return $this->taskDuplication->duplicateToProject($task_id, $project_id, $swimlane_id, $column_id, $category_id, $owner_id);
+        return $this->taskDuplicationModel->duplicateToProject($task_id, $project_id, $swimlane_id, $column_id, $category_id, $owner_id);
     }
 
     public function createTask($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0,
@@ -88,7 +88,7 @@ class TaskApi extends BaseApi
     {
         $this->checkProjectPermission($project_id);
 
-        if ($owner_id !== 0 && ! $this->projectPermission->isAssignable($project_id, $owner_id)) {
+        if ($owner_id !== 0 && ! $this->projectPermissionModel->isAssignable($project_id, $owner_id)) {
             return false;
         }
 
@@ -119,7 +119,7 @@ class TaskApi extends BaseApi
 
         list($valid, ) = $this->taskValidator->validateCreation($values);
 
-        return $valid ? $this->taskCreation->create($values) : false;
+        return $valid ? $this->taskCreationModel->create($values) : false;
     }
 
     public function updateTask($id, $title = null, $color_id = null, $owner_id = null,
@@ -129,13 +129,13 @@ class TaskApi extends BaseApi
     {
         $this->checkTaskPermission($id);
 
-        $project_id = $this->taskFinder->getProjectId($id);
+        $project_id = $this->taskFinderModel->getProjectId($id);
 
         if ($project_id === 0) {
             return false;
         }
 
-        if ($owner_id !== null && $owner_id != 0 && ! $this->projectPermission->isAssignable($project_id, $owner_id)) {
+        if ($owner_id !== null && $owner_id != 0 && ! $this->projectPermissionModel->isAssignable($project_id, $owner_id)) {
             return false;
         }
 
@@ -164,6 +164,6 @@ class TaskApi extends BaseApi
         }
 
         list($valid) = $this->taskValidator->validateApiModification($values);
-        return $valid && $this->taskModification->update($values);
+        return $valid && $this->taskModificationModel->update($values);
     }
 }

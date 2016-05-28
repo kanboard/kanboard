@@ -45,8 +45,8 @@ class AssetHelper extends Base
      */
     public function customCss()
     {
-        if ($this->config->get('application_stylesheet')) {
-            return '<style>'.$this->config->get('application_stylesheet').'</style>';
+        if ($this->configModel->get('application_stylesheet')) {
+            return '<style>'.$this->configModel->get('application_stylesheet').'</style>';
         }
 
         return '';
@@ -60,6 +60,6 @@ class AssetHelper extends Base
      */
     public function colorCss()
     {
-        return '<style>'.$this->color->getCss().'</style>';
+        return '<style>'.$this->colorModel->getCss().'</style>';
     }
 }

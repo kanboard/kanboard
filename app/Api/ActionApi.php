@@ -29,12 +29,12 @@ class ActionApi extends Base
 
     public function removeAction($action_id)
     {
-        return $this->action->remove($action_id);
+        return $this->actionModel->remove($action_id);
     }
 
     public function getActions($project_id)
     {
-        return $this->action->getAllByProject($project_id);
+        return $this->actionModel->getAllByProject($project_id);
     }
 
     public function createAction($project_id, $event_name, $action_name, array $params)
@@ -82,6 +82,6 @@ class ActionApi extends Base
             }
         }
 
-        return $this->action->create($values);
+        return $this->actionModel->create($values);
     }
 }

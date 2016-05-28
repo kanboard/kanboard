@@ -11,24 +11,24 @@ use Symfony\Component\Console\Command\Command;
  * @package  console
  * @author   Frederic Guillot
  *
- * @property \Kanboard\Validator\PasswordResetValidator                 $passwordResetValidator
- * @property \Kanboard\Export\SubtaskExport                             $subtaskExport
- * @property \Kanboard\Export\TaskExport                                $taskExport
- * @property \Kanboard\Export\TransitionExport                          $transitionExport
- * @property \Kanboard\Model\Notification                               $notification
- * @property \Kanboard\Model\Project                                    $project
- * @property \Kanboard\Model\ProjectPermission                          $projectPermission
- * @property \Kanboard\Model\ProjectDailyColumnStats                    $projectDailyColumnStats
- * @property \Kanboard\Model\ProjectDailyStats                          $projectDailyStats
- * @property \Kanboard\Model\Task                                       $task
- * @property \Kanboard\Model\TaskFinder                                 $taskFinder
- * @property \Kanboard\Model\User                                       $user
- * @property \Kanboard\Model\UserNotification                           $userNotification
- * @property \Kanboard\Model\UserNotificationFilter                     $userNotificationFilter
- * @property \Kanboard\Model\ProjectUserRole                            $projectUserRole
- * @property \Kanboard\Core\Plugin\Loader                               $pluginLoader
- * @property \Kanboard\Core\Http\Client                                 $httpClient
- * @property \Symfony\Component\EventDispatcher\EventDispatcher         $dispatcher
+ * @property \Kanboard\Validator\PasswordResetValidator         $passwordResetValidator
+ * @property \Kanboard\Export\SubtaskExport                     $subtaskExport
+ * @property \Kanboard\Export\TaskExport                        $taskExport
+ * @property \Kanboard\Export\TransitionExport                  $transitionExport
+ * @property \Kanboard\Model\NotificationModel                  $notificationModel
+ * @property \Kanboard\Model\ProjectModel                       $projectModel
+ * @property \Kanboard\Model\ProjectPermissionModel             $projectPermissionModel
+ * @property \Kanboard\Model\ProjectDailyColumnStatsModel       $projectDailyColumnStatsModel
+ * @property \Kanboard\Model\ProjectDailyStatsModel             $projectDailyStatsModel
+ * @property \Kanboard\Model\TaskModel                          $taskModel
+ * @property \Kanboard\Model\TaskFinderModel                    $taskFinderModel
+ * @property \Kanboard\Model\UserModel                          $userModel
+ * @property \Kanboard\Model\UserNotificationModel              $userNotificationModel
+ * @property \Kanboard\Model\UserNotificationFilterModel        $userNotificationFilterModel
+ * @property \Kanboard\Model\ProjectUserRoleModel               $projectUserRoleModel
+ * @property \Kanboard\Core\Plugin\Loader                       $pluginLoader
+ * @property \Kanboard\Core\Http\Client                         $httpClient
+ * @property \Symfony\Component\EventDispatcher\EventDispatcher $dispatcher
  */
 abstract class BaseCommand extends Command
 {

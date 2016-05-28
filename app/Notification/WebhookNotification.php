@@ -35,8 +35,8 @@ class WebhookNotification extends Base implements NotificationInterface
      */
     public function notifyProject(array $project, $event_name, array $event_data)
     {
-        $url = $this->config->get('webhook_url');
-        $token = $this->config->get('webhook_token');
+        $url = $this->configModel->get('webhook_url');
+        $token = $this->configModel->get('webhook_token');
 
         if (! empty($url)) {
             if (strpos($url, '?') !== false) {

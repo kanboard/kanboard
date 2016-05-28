@@ -65,11 +65,11 @@ class CommentCreation extends Base
      */
     public function doAction(array $data)
     {
-        return (bool) $this->comment->create(array(
+        return (bool) $this->commentModel->create(array(
             'reference' => isset($data['reference']) ? $data['reference'] : '',
             'comment' => $data['comment'],
             'task_id' => $data['task_id'],
-            'user_id' => isset($data['user_id']) && $this->projectPermission->isAssignable($this->getProjectId(), $data['user_id']) ? $data['user_id'] : 0,
+            'user_id' => isset($data['user_id']) && $this->projectPermissionModel->isAssignable($this->getProjectId(), $data['user_id']) ? $data['user_id'] : 0,
         ));
     }
 

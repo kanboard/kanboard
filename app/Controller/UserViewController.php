@@ -3,7 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\PageNotFoundException;
-use Kanboard\Model\Project as ProjectModel;
+use Kanboard\Model\ProjectModel;
 
 /**
  * Class UserViewController
@@ -21,7 +21,7 @@ class UserViewController extends BaseController
      */
     public function profile()
     {
-        $user = $this->user->getById($this->request->getIntegerParam('user_id'));
+        $user = $this->userModel->getById($this->request->getIntegerParam('user_id'));
 
         if (empty($user)) {
             throw new PageNotFoundException();
@@ -43,8 +43,8 @@ class UserViewController extends BaseController
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user_view/show', array(
             'user'      => $user,
-            'timezones' => $this->timezone->getTimezones(true),
-            'languages' => $this->language->getLanguages(true),
+            'timezones' => $this->timezoneModel->getTimezones(true),
+            'languages' => $this->languageModel->getLanguages(true),
         )));
     }
 
@@ -62,7 +62,7 @@ class UserViewController extends BaseController
             ->setMax(20)
             ->setOrder('start')
             ->setDirection('DESC')
-            ->setQuery($this->subtaskTimeTracking->getUserQuery($user['id']))
+            ->setQuery($this->subtaskTimeTrackingModel->getUserQuery($user['id']))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
 
         $this->response->html($this->helper->layout->user('user_view/timesheet', array(
@@ -80,7 +80,7 @@ class UserViewController extends BaseController
     {
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user_view/password_reset', array(
-            'tokens' => $this->passwordReset->getAll($user['id']),
+            'tokens' => $this->passwordResetModel->getAll($user['id']),
             'user'   => $user,
         )));
     }
@@ -94,7 +94,7 @@ class UserViewController extends BaseController
     {
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user_view/last', array(
-            'last_logins' => $this->lastLogin->getAll($user['id']),
+            'last_logins' => $this->lastLoginModel->getAll($user['id']),
             'user'        => $user,
         )));
     }
@@ -108,7 +108,7 @@ class UserViewController extends BaseController
     {
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user_view/sessions', array(
-            'sessions' => $this->rememberMeSession->getAll($user['id']),
+            'sessions' => $this->rememberMeSessionModel->getAll($user['id']),
             'user'     => $user,
         )));
     }
@@ -122,7 +122,7 @@ class UserViewController extends BaseController
     {
         $this->checkCSRFParam();
         $user = $this->getUser();
-        $this->rememberMeSession->remove($this->request->getIntegerParam('id'));
+        $this->rememberMeSessionModel->remove($this->request->getIntegerParam('id'));
         $this->response->redirect($this->helper->url->to('UserViewController', 'sessions', array('user_id' => $user['id'])));
     }
 
@@ -137,16 +137,16 @@ class UserViewController extends BaseController
 
         if ($this->request->isPost()) {
             $values = $this->request->getValues();
-            $this->userNotification->saveSettings($user['id'], $values);
+            $this->userNotificationModel->saveSettings($user['id'], $values);
             $this->flash->success(t('User updated successfully.'));
             return $this->response->redirect($this->helper->url->to('UserViewController', 'notifications', array('user_id' => $user['id'])));
         }
 
         return $this->response->html($this->helper->layout->user('user_view/notifications', array(
-            'projects'      => $this->projectUserRole->getProjectsByUser($user['id'], array(ProjectModel::ACTIVE)),
-            'notifications' => $this->userNotification->readSettings($user['id']),
-            'types'         => $this->userNotificationType->getTypes(),
-            'filters'       => $this->userNotificationFilter->getFilters(),
+            'projects'      => $this->projectUserRoleModel->getProjectsByUser($user['id'], array(ProjectModel::ACTIVE)),
+            'notifications' => $this->userNotificationModel->readSettings($user['id']),
+            'types'         => $this->userNotificationTypeModel->getTypes(),
+            'filters'       => $this->userNotificationFilterModel->getFilters(),
             'user'          => $user,
         )));
     }
@@ -162,14 +162,14 @@ class UserViewController extends BaseController
 
         if ($this->request->isPost()) {
             $values = $this->request->getValues();
-            $this->userMetadata->save($user['id'], $values);
+            $this->userMetadataModel->save($user['id'], $values);
             $this->flash->success(t('User updated successfully.'));
             $this->response->redirect($this->helper->url->to('UserViewController', 'integrations', array('user_id' => $user['id'])));
         }
 
         $this->response->html($this->helper->layout->user('user_view/integrations', array(
             'user'   => $user,
-            'values' => $this->userMetadata->getAll($user['id']),
+            'values' => $this->userMetadataModel->getAll($user['id']),
         )));
     }
 
@@ -182,7 +182,7 @@ class UserViewController extends BaseController
     {
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user_view/external', array(
-            'last_logins' => $this->lastLogin->getAll($user['id']),
+            'last_logins' => $this->lastLoginModel->getAll($user['id']),
             'user'        => $user,
         )));
     }
@@ -200,7 +200,7 @@ class UserViewController extends BaseController
         if ($switch === 'enable' || $switch === 'disable') {
             $this->checkCSRFParam();
 
-            if ($this->user->{$switch . 'PublicAccess'}($user['id'])) {
+            if ($this->userModel->{$switch . 'PublicAccess'}($user['id'])) {
                 $this->flash->success(t('User updated successfully.'));
             } else {
                 $this->flash->failure(t('Unable to update this user.'));

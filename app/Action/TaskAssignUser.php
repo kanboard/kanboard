@@ -71,7 +71,7 @@ class TaskAssignUser extends Base
             'owner_id' => $data['owner_id'],
         );
 
-        return $this->taskModification->update($values);
+        return $this->taskModificationModel->update($values);
     }
 
     /**
@@ -83,6 +83,6 @@ class TaskAssignUser extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $this->projectPermission->isAssignable($this->getProjectId(), $data['owner_id']);
+        return $this->projectPermissionModel->isAssignable($this->getProjectId(), $data['owner_id']);
     }
 }

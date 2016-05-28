@@ -63,8 +63,8 @@ abstract class Base extends PHPUnit_Framework_TestCase
             ->setMethods(array('send'))
             ->getMock();
 
-        $this->container['userNotificationType'] = $this
-            ->getMockBuilder('\Kanboard\Model\UserNotificationType')
+        $this->container['userNotificationTypeModel'] = $this
+            ->getMockBuilder('\Kanboard\Model\UserNotificationTypeModel')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('getType', 'getSelectedTypes'))
             ->getMock();

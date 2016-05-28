@@ -2,20 +2,20 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Currency;
+use Kanboard\Model\CurrencyModel;
 
 class CurrencyTest extends Base
 {
     public function testGetCurrencies()
     {
-        $currencyModel = new Currency($this->container);
+        $currencyModel = new CurrencyModel($this->container);
         $currencies = $currencyModel->getCurrencies();
         $this->assertArrayHasKey('EUR', $currencies);
     }
 
     public function testGetAll()
     {
-        $currencyModel = new Currency($this->container);
+        $currencyModel = new CurrencyModel($this->container);
         $currencies = $currencyModel->getAll();
         $this->assertCount(0, $currencies);
 
@@ -28,21 +28,21 @@ class CurrencyTest extends Base
 
     public function testCreate()
     {
-        $currencyModel = new Currency($this->container);
+        $currencyModel = new CurrencyModel($this->container);
         $this->assertNotFalse($currencyModel->create('EUR', 1.2));
         $this->assertNotFalse($currencyModel->create('EUR', 1.5));
     }
 
     public function testUpdate()
     {
-        $currencyModel = new Currency($this->container);
+        $currencyModel = new CurrencyModel($this->container);
         $this->assertNotFalse($currencyModel->create('EUR', 1.1));
         $this->assertNotFalse($currencyModel->update('EUR', 2.2));
     }
 
     public function testGetPrice()
     {
-        $currencyModel = new Currency($this->container);
+        $currencyModel = new CurrencyModel($this->container);
 
         $this->assertEquals(123, $currencyModel->getPrice('USD', 123));
 

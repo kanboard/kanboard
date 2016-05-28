@@ -2,19 +2,19 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Project;
-use Kanboard\Model\Transition;
-use Kanboard\Model\Task;
-use Kanboard\Model\TaskFinder;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TransitionModel;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\TaskFinderModel;
 use Kanboard\Analytic\AverageTimeSpentColumnAnalytic;
 
 class AverageTimeSpentColumnAnalyticTest extends Base
 {
     public function testAverageWithNoTransitions()
     {
-        $taskCreationModel = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
         $averageLeadCycleTimeAnalytic = new AverageTimeSpentColumnAnalytic($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
@@ -24,8 +24,8 @@ class AverageTimeSpentColumnAnalyticTest extends Base
 
         $now = time();
 
-        $this->container['db']->table(Task::TABLE)->eq('id', 1)->update(array('date_completed' => $now + 3600));
-        $this->container['db']->table(Task::TABLE)->eq('id', 2)->update(array('date_completed' => $now + 1800));
+        $this->container['db']->table(TaskModel::TABLE)->eq('id', 1)->update(array('date_completed' => $now + 3600));
+        $this->container['db']->table(TaskModel::TABLE)->eq('id', 2)->update(array('date_completed' => $now + 1800));
 
         $stats = $averageLeadCycleTimeAnalytic->build(1);
 
@@ -52,10 +52,10 @@ class AverageTimeSpentColumnAnalyticTest extends Base
 
     public function testAverageWithTransitions()
     {
-        $transitionModel = new Transition($this->container);
-        $taskFinderModel = new TaskFinder($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
+        $transitionModel = new TransitionModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
         $averageLeadCycleTimeAnalytic = new AverageTimeSpentColumnAnalytic($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
@@ -64,8 +64,8 @@ class AverageTimeSpentColumnAnalyticTest extends Base
         $this->assertEquals(2, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
 
         $now = time();
-        $this->container['db']->table(Task::TABLE)->eq('id', 1)->update(array('date_completed' => $now + 3600));
-        $this->container['db']->table(Task::TABLE)->eq('id', 2)->update(array('date_completed' => $now + 1800));
+        $this->container['db']->table(TaskModel::TABLE)->eq('id', 1)->update(array('date_completed' => $now + 3600));
+        $this->container['db']->table(TaskModel::TABLE)->eq('id', 2)->update(array('date_completed' => $now + 1800));
 
         foreach (array(1, 2) as $task_id) {
             $task = $taskFinderModel->getById($task_id);

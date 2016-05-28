@@ -33,7 +33,7 @@ abstract class BaseController extends Base
      */
     protected function checkWebhookToken()
     {
-        if ($this->config->get('webhook_token') !== $this->request->getStringParam('token')) {
+        if ($this->configModel->get('webhook_token') !== $this->request->getStringParam('token')) {
             $this->response->text('Not Authorized', 401);
         }
     }
@@ -49,7 +49,7 @@ abstract class BaseController extends Base
     protected function getTask()
     {
         $project_id = $this->request->getIntegerParam('project_id');
-        $task = $this->taskFinder->getDetails($this->request->getIntegerParam('task_id'));
+        $task = $this->taskFinderModel->getDetails($this->request->getIntegerParam('task_id'));
 
         if (empty($task)) {
             throw new PageNotFoundException();
@@ -78,7 +78,7 @@ abstract class BaseController extends Base
 
         if ($task_id > 0) {
             $model = 'taskFile';
-            $project_id = $this->taskFinder->getProjectId($task_id);
+            $project_id = $this->taskFinderModel->getProjectId($task_id);
 
             if ($project_id !== $this->request->getIntegerParam('project_id')) {
                 throw new AccessForbiddenException();
@@ -106,7 +106,7 @@ abstract class BaseController extends Base
     protected function getProject($project_id = 0)
     {
         $project_id = $this->request->getIntegerParam('project_id', $project_id);
-        $project = $this->project->getByIdWithOwner($project_id);
+        $project = $this->projectModel->getByIdWithOwner($project_id);
 
         if (empty($project)) {
             throw new PageNotFoundException();
@@ -125,7 +125,7 @@ abstract class BaseController extends Base
      */
     protected function getUser()
     {
-        $user = $this->user->getById($this->request->getIntegerParam('user_id', $this->userSession->getId()));
+        $user = $this->userModel->getById($this->request->getIntegerParam('user_id', $this->userSession->getId()));
 
         if (empty($user)) {
             throw new PageNotFoundException();
@@ -147,7 +147,7 @@ abstract class BaseController extends Base
      */
     protected function getSubtask()
     {
-        $subtask = $this->subtask->getById($this->request->getIntegerParam('subtask_id'));
+        $subtask = $this->subtaskModel->getById($this->request->getIntegerParam('subtask_id'));
 
         if (empty($subtask)) {
             throw new PageNotFoundException();

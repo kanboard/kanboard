@@ -4,10 +4,10 @@ namespace Kanboard\Notification;
 
 use Kanboard\Core\Base;
 use Kanboard\Core\Notification\NotificationInterface;
-use Kanboard\Model\Task;
-use Kanboard\Model\TaskFile;
-use Kanboard\Model\Comment;
-use Kanboard\Model\Subtask;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\TaskFileModel;
+use Kanboard\Model\CommentModel;
+use Kanboard\Model\SubtaskModel;
 
 /**
  * Email Notification
@@ -68,7 +68,7 @@ class MailNotification extends Base implements NotificationInterface
     {
         return $this->template->render(
             'notification/'.str_replace('.', '_', $event_name),
-            $event_data + array('application_url' => $this->config->get('application_url'))
+            $event_data + array('application_url' => $this->configModel->get('application_url'))
         );
     }
 
@@ -83,50 +83,50 @@ class MailNotification extends Base implements NotificationInterface
     public function getMailSubject($event_name, array $event_data)
     {
         switch ($event_name) {
-            case TaskFile::EVENT_CREATE:
+            case TaskFileModel::EVENT_CREATE:
                 $subject = $this->getStandardMailSubject(e('New attachment'), $event_data);
                 break;
-            case Comment::EVENT_CREATE:
+            case CommentModel::EVENT_CREATE:
                 $subject = $this->getStandardMailSubject(e('New comment'), $event_data);
                 break;
-            case Comment::EVENT_UPDATE:
+            case CommentModel::EVENT_UPDATE:
                 $subject = $this->getStandardMailSubject(e('Comment updated'), $event_data);
                 break;
-            case Subtask::EVENT_CREATE:
+            case SubtaskModel::EVENT_CREATE:
                 $subject = $this->getStandardMailSubject(e('New subtask'), $event_data);
                 break;
-            case Subtask::EVENT_UPDATE:
+            case SubtaskModel::EVENT_UPDATE:
                 $subject = $this->getStandardMailSubject(e('Subtask updated'), $event_data);
                 break;
-            case Task::EVENT_CREATE:
+            case TaskModel::EVENT_CREATE:
                 $subject = $this->getStandardMailSubject(e('New task'), $event_data);
                 break;
-            case Task::EVENT_UPDATE:
+            case TaskModel::EVENT_UPDATE:
                 $subject = $this->getStandardMailSubject(e('Task updated'), $event_data);
                 break;
-            case Task::EVENT_CLOSE:
+            case TaskModel::EVENT_CLOSE:
                 $subject = $this->getStandardMailSubject(e('Task closed'), $event_data);
                 break;
-            case Task::EVENT_OPEN:
+            case TaskModel::EVENT_OPEN:
                 $subject = $this->getStandardMailSubject(e('Task opened'), $event_data);
                 break;
-            case Task::EVENT_MOVE_COLUMN:
+            case TaskModel::EVENT_MOVE_COLUMN:
                 $subject = $this->getStandardMailSubject(e('Column change'), $event_data);
                 break;
-            case Task::EVENT_MOVE_POSITION:
+            case TaskModel::EVENT_MOVE_POSITION:
                 $subject = $this->getStandardMailSubject(e('Position change'), $event_data);
                 break;
-            case Task::EVENT_MOVE_SWIMLANE:
+            case TaskModel::EVENT_MOVE_SWIMLANE:
                 $subject = $this->getStandardMailSubject(e('Swimlane change'), $event_data);
                 break;
-            case Task::EVENT_ASSIGNEE_CHANGE:
+            case TaskModel::EVENT_ASSIGNEE_CHANGE:
                 $subject = $this->getStandardMailSubject(e('Assignee change'), $event_data);
                 break;
-            case Task::EVENT_USER_MENTION:
-            case Comment::EVENT_USER_MENTION:
+            case TaskModel::EVENT_USER_MENTION:
+            case CommentModel::EVENT_USER_MENTION:
                 $subject = $this->getStandardMailSubject(e('Mentioned'), $event_data);
                 break;
-            case Task::EVENT_OVERDUE:
+            case TaskModel::EVENT_OVERDUE:
                 $subject = e('[%s] Overdue tasks', $event_data['project_name']);
                 break;
             default:

@@ -2,19 +2,19 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\User;
-use Kanboard\Model\Subtask;
-use Kanboard\Model\Comment;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\Project;
+use Kanboard\Model\UserModel;
+use Kanboard\Model\SubtaskModel;
+use Kanboard\Model\CommentModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\ProjectModel;
 use Kanboard\Core\Security\Role;
 
 class UserTest extends Base
 {
     public function testGetByEmail()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertNotFalse($u->create(array('username' => 'user1', 'password' => '123456', 'email' => 'user1@localhost')));
         $this->assertNotFalse($u->create(array('username' => 'user2', 'password' => '123456', 'email' => '')));
 
@@ -24,20 +24,20 @@ class UserTest extends Base
 
     public function testGetByExternalId()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertNotFalse($u->create(array('username' => 'user1', 'password' => '123456', 'gitlab_id' => '1234')));
 
         $this->assertNotEmpty($u->getByExternalId('gitlab_id', '1234'));
         $this->assertEmpty($u->getByExternalId('gitlab_id', ''));
 
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertNotFalse($u->create(array('username' => 'user2', 'password' => '123456', 'github_id' => 'plop')));
         $this->assertNotFalse($u->create(array('username' => 'user3', 'password' => '123456', 'github_id' => '')));
 
         $this->assertNotEmpty($u->getByExternalId('github_id', 'plop'));
         $this->assertEmpty($u->getByExternalId('github_id', ''));
 
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertNotFalse($u->create(array('username' => 'user4', 'password' => '123456', 'google_id' => '1234')));
         $this->assertNotFalse($u->create(array('username' => 'user5', 'password' => '123456', 'google_id' => '')));
 
@@ -47,7 +47,7 @@ class UserTest extends Base
 
     public function testGetByToken()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertNotFalse($u->create(array('username' => 'user1', 'token' => 'random')));
         $this->assertNotFalse($u->create(array('username' => 'user2', 'token' => '')));
 
@@ -57,7 +57,7 @@ class UserTest extends Base
 
     public function testGetByUsername()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertNotFalse($u->create(array('username' => 'user1')));
 
         $this->assertNotEmpty($u->getByUsername('user1'));
@@ -67,7 +67,7 @@ class UserTest extends Base
 
     public function testExists()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertNotFalse($u->create(array('username' => 'user1')));
 
         $this->assertTrue($u->exists(1));
@@ -77,14 +77,14 @@ class UserTest extends Base
 
     public function testCount()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertNotFalse($u->create(array('username' => 'user1')));
         $this->assertEquals(2, $u->count());
     }
 
     public function testGetAll()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertEquals(2, $u->create(array('username' => 'you')));
         $this->assertEquals(3, $u->create(array('username' => 'me', 'name' => 'Me')));
 
@@ -97,7 +97,7 @@ class UserTest extends Base
 
     public function testGetActiveUsersList()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertEquals(2, $u->create(array('username' => 'you')));
         $this->assertEquals(3, $u->create(array('username' => 'me', 'name' => 'Me too')));
         $this->assertEquals(4, $u->create(array('username' => 'foobar', 'is_active' => 0)));
@@ -115,10 +115,10 @@ class UserTest extends Base
         $users = $u->getActiveUsersList(true);
 
         $expected = array(
-            User::EVERYBODY_ID => 'Everybody',
-            1 => 'admin',
-            3 => 'Me too',
-            2 => 'you',
+            UserModel::EVERYBODY_ID => 'Everybody',
+            1                       => 'admin',
+            3                       => 'Me too',
+            2                       => 'you',
         );
 
         $this->assertEquals($expected, $users);
@@ -126,7 +126,7 @@ class UserTest extends Base
 
     public function testGetFullname()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertEquals(2, $u->create(array('username' => 'user1')));
         $this->assertEquals(3, $u->create(array('username' => 'user2', 'name' => 'User #2')));
 
@@ -142,7 +142,7 @@ class UserTest extends Base
 
     public function testIsAdmin()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertEquals(2, $u->create(array('username' => 'user1')));
 
         $this->assertTrue($u->isAdmin(1));
@@ -160,7 +160,7 @@ class UserTest extends Base
 
     public function testPrepare()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
 
         $input = array(
             'username' => 'user1',
@@ -237,7 +237,7 @@ class UserTest extends Base
 
     public function testCreate()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertEquals(2, $u->create(array('username' => 'user #1', 'password' => '123456', 'name' => 'User')));
         $this->assertEquals(3, $u->create(array('username' => 'user #2', 'is_ldap_user' => 1)));
         $this->assertEquals(4, $u->create(array('username' => 'user #3', 'role' => Role::APP_MANAGER)));
@@ -280,7 +280,7 @@ class UserTest extends Base
 
     public function testUpdate()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertEquals(2, $u->create(array('username' => 'toto', 'password' => '123456', 'name' => 'Toto')));
         $this->assertEquals(3, $u->create(array('username' => 'plop', 'gitlab_id' => '123')));
 
@@ -300,12 +300,12 @@ class UserTest extends Base
 
     public function testRemove()
     {
-        $u = new User($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-        $s = new Subtask($this->container);
-        $c = new Comment($this->container);
+        $u = new UserModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SubtaskModel($this->container);
+        $c = new CommentModel($this->container);
 
         $this->assertNotFalse($u->create(array('username' => 'toto', 'password' => '123456', 'name' => 'Toto')));
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
@@ -355,7 +355,7 @@ class UserTest extends Base
 
     public function testEnableDisablePublicAccess()
     {
-        $u = new User($this->container);
+        $u = new UserModel($this->container);
         $this->assertNotFalse($u->create(array('username' => 'toto', 'password' => '123456')));
 
         $user = $u->getById(2);
@@ -380,7 +380,7 @@ class UserTest extends Base
 
     public function testEnableDisable()
     {
-        $userModel = new User($this->container);
+        $userModel = new UserModel($this->container);
         $this->assertEquals(2, $userModel->create(array('username' => 'toto')));
 
         $this->assertTrue($userModel->isActive(2));

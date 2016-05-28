@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Project;
+use Kanboard\Model\ProjectModel;
 
 /**
  * Filter project by type
@@ -33,11 +33,11 @@ class ProjectTypeFilter extends BaseFilter implements FilterInterface
     public function apply()
     {
         if (is_int($this->value) || ctype_digit($this->value)) {
-            $this->query->eq(Project::TABLE.'.is_private', $this->value);
+            $this->query->eq(ProjectModel::TABLE.'.is_private', $this->value);
         } elseif ($this->value === 'private') {
-            $this->query->eq(Project::TABLE.'.is_private', Project::TYPE_PRIVATE);
+            $this->query->eq(ProjectModel::TABLE.'.is_private', ProjectModel::TYPE_PRIVATE);
         } else {
-            $this->query->eq(Project::TABLE.'.is_private', Project::TYPE_TEAM);
+            $this->query->eq(ProjectModel::TABLE.'.is_private', ProjectModel::TYPE_TEAM);
         }
 
         return $this;

@@ -2,15 +2,15 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Project;
-use Kanboard\Model\Column;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ColumnModel;
 
 class ColumnTest extends Base
 {
     public function testGetColumn()
     {
-        $projectModel = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
 
@@ -24,8 +24,8 @@ class ColumnTest extends Base
 
     public function testGetFirstColumnId()
     {
-        $projectModel = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
         $this->assertEquals(1, $columnModel->getFirstColumnId(1));
@@ -33,8 +33,8 @@ class ColumnTest extends Base
 
     public function testGetLastColumnId()
     {
-        $projectModel = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
         $this->assertEquals(4, $columnModel->getLastColumnId(1));
@@ -42,8 +42,8 @@ class ColumnTest extends Base
 
     public function testGetLastColumnPosition()
     {
-        $projectModel = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
         $this->assertEquals(4, $columnModel->getLastColumnPosition(1));
@@ -51,8 +51,8 @@ class ColumnTest extends Base
 
     public function testGetColumnIdByTitle()
     {
-        $projectModel = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
         $this->assertEquals(2, $columnModel->getColumnIdByTitle(1, 'Ready'));
@@ -60,8 +60,8 @@ class ColumnTest extends Base
 
     public function testGetTitleByColumnId()
     {
-        $projectModel = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
         $this->assertEquals('Work in progress', $columnModel->getColumnTitleById(3));
@@ -69,8 +69,8 @@ class ColumnTest extends Base
 
     public function testGetAll()
     {
-        $projectModel = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
 
@@ -96,8 +96,8 @@ class ColumnTest extends Base
 
     public function testGetList()
     {
-        $projectModel = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
 
@@ -119,8 +119,8 @@ class ColumnTest extends Base
 
     public function testAddColumn()
     {
-        $projectModel = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
         $this->assertNotFalse($columnModel->create(1, 'another column'));
@@ -142,8 +142,8 @@ class ColumnTest extends Base
 
     public function testUpdateColumn()
     {
-        $projectModel = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
 
@@ -163,8 +163,8 @@ class ColumnTest extends Base
 
     public function testRemoveColumn()
     {
-        $projectModel = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
         $this->assertTrue($columnModel->remove(3));
@@ -177,8 +177,8 @@ class ColumnTest extends Base
 
     public function testChangePosition()
     {
-        $projectModel = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
 

@@ -38,7 +38,7 @@ class ActivityController extends BaseController
         $this->response->html($this->helper->layout->task('activity/task', array(
             'title' => $task['title'],
             'task' => $task,
-            'project' => $this->project->getById($task['project_id']),
+            'project' => $this->projectModel->getById($task['project_id']),
             'events' => $this->helper->projectActivity->getTaskEvents($task['id']),
         )));
     }

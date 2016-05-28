@@ -2,15 +2,15 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\User;
-use Kanboard\Model\PasswordReset;
+use Kanboard\Model\UserModel;
+use Kanboard\Model\PasswordResetModel;
 
 class PasswordResetTest extends Base
 {
     public function testCreate()
     {
-        $userModel = new User($this->container);
-        $passwordResetModel = new PasswordReset($this->container);
+        $userModel = new UserModel($this->container);
+        $passwordResetModel = new PasswordResetModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user1')));
         $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'email' => 'user1@localhost')));
@@ -22,8 +22,8 @@ class PasswordResetTest extends Base
 
     public function testGetUserIdByToken()
     {
-        $userModel = new User($this->container);
-        $passwordResetModel = new PasswordReset($this->container);
+        $userModel = new UserModel($this->container);
+        $passwordResetModel = new PasswordResetModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user2', 'email' => 'user1@localhost')));
 
@@ -33,8 +33,8 @@ class PasswordResetTest extends Base
 
     public function testGetUserIdByTokenWhenExpired()
     {
-        $userModel = new User($this->container);
-        $passwordResetModel = new PasswordReset($this->container);
+        $userModel = new UserModel($this->container);
+        $passwordResetModel = new PasswordResetModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user2', 'email' => 'user1@localhost')));
 
@@ -44,8 +44,8 @@ class PasswordResetTest extends Base
 
     public function testDisableTokens()
     {
-        $userModel = new User($this->container);
-        $passwordResetModel = new PasswordReset($this->container);
+        $userModel = new UserModel($this->container);
+        $passwordResetModel = new PasswordResetModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user2', 'email' => 'user1@localhost')));
 
@@ -63,8 +63,8 @@ class PasswordResetTest extends Base
 
     public function testGetAll()
     {
-        $userModel = new User($this->container);
-        $passwordResetModel = new PasswordReset($this->container);
+        $userModel = new UserModel($this->container);
+        $passwordResetModel = new PasswordResetModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user2', 'email' => 'user1@localhost')));
         $this->assertNotFalse($passwordResetModel->create('user2'));

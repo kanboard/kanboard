@@ -2,17 +2,17 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskFile;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Project;
+use Kanboard\Model\TaskFileModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ProjectModel;
 
 class TaskFileTest extends Base
 {
     public function testCreation()
     {
-        $projectModel = new Project($this->container);
-        $fileModel = new TaskFile($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $fileModel = new TaskFileModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -38,9 +38,9 @@ class TaskFileTest extends Base
 
     public function testCreationWithFileNameTooLong()
     {
-        $projectModel = new Project($this->container);
-        $fileModel = new TaskFile($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $fileModel = new TaskFileModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -60,9 +60,9 @@ class TaskFileTest extends Base
     {
         $this->container['sessionStorage']->user = array('id' => 1);
 
-        $projectModel = new Project($this->container);
-        $fileModel = new TaskFile($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $fileModel = new TaskFileModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -75,9 +75,9 @@ class TaskFileTest extends Base
 
     public function testGetAll()
     {
-        $projectModel = new Project($this->container);
-        $fileModel = new TaskFile($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $fileModel = new TaskFileModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -110,7 +110,7 @@ class TaskFileTest extends Base
 
     public function testIsImage()
     {
-        $fileModel = new TaskFile($this->container);
+        $fileModel = new TaskFileModel($this->container);
 
         $this->assertTrue($fileModel->isImage('test.png'));
         $this->assertTrue($fileModel->isImage('test.jpeg'));
@@ -125,13 +125,13 @@ class TaskFileTest extends Base
 
     public function testGetThumbnailPath()
     {
-        $fileModel = new TaskFile($this->container);
+        $fileModel = new TaskFileModel($this->container);
         $this->assertEquals('thumbnails'.DIRECTORY_SEPARATOR.'test', $fileModel->getThumbnailPath('test'));
     }
 
     public function testGeneratePath()
     {
-        $fileModel = new TaskFile($this->container);
+        $fileModel = new TaskFileModel($this->container);
 
         $this->assertStringStartsWith('tasks'.DIRECTORY_SEPARATOR.'34'.DIRECTORY_SEPARATOR, $fileModel->generatePath(34, 'test.png'));
         $this->assertNotEquals($fileModel->generatePath(34, 'test1.png'), $fileModel->generatePath(34, 'test2.png'));
@@ -140,13 +140,13 @@ class TaskFileTest extends Base
     public function testUploadFiles()
     {
         $fileModel = $this
-            ->getMockBuilder('\Kanboard\Model\TaskFile')
+            ->getMockBuilder('\Kanboard\Model\TaskFileModel')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('generateThumbnailFromFile'))
             ->getMock();
 
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -208,7 +208,7 @@ class TaskFileTest extends Base
 
     public function testUploadFilesWithEmptyFiles()
     {
-        $fileModel = new TaskFile($this->container);
+        $fileModel = new TaskFileModel($this->container);
         $this->assertFalse($fileModel->uploadFiles(1, array()));
     }
 
@@ -233,7 +233,7 @@ class TaskFileTest extends Base
             ),
         );
 
-        $fileModel = new TaskFile($this->container);
+        $fileModel = new TaskFileModel($this->container);
         $this->assertFalse($fileModel->uploadFiles(1, $files));
     }
 
@@ -264,20 +264,20 @@ class TaskFileTest extends Base
             ->with($this->equalTo('/tmp/phpYzdqkD'), $this->anything())
             ->will($this->throwException(new \Kanboard\Core\ObjectStorage\ObjectStorageException('test')));
 
-        $fileModel = new TaskFile($this->container);
+        $fileModel = new TaskFileModel($this->container);
         $this->assertFalse($fileModel->uploadFiles(1, $files));
     }
 
     public function testUploadFileContent()
     {
         $fileModel = $this
-            ->getMockBuilder('\Kanboard\Model\TaskFile')
+            ->getMockBuilder('\Kanboard\Model\TaskFileModel')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('generateThumbnailFromFile'))
             ->getMock();
 
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
         $data = 'test';
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
@@ -305,13 +305,13 @@ class TaskFileTest extends Base
     public function testUploadFileContentWithObjectStorageError()
     {
         $fileModel = $this
-            ->getMockBuilder('\Kanboard\Model\TaskFile')
+            ->getMockBuilder('\Kanboard\Model\TaskFileModel')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('generateThumbnailFromFile'))
             ->getMock();
 
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
         $data = 'test';
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
@@ -329,13 +329,13 @@ class TaskFileTest extends Base
     public function testUploadScreenshot()
     {
         $fileModel = $this
-            ->getMockBuilder('\Kanboard\Model\TaskFile')
+            ->getMockBuilder('\Kanboard\Model\TaskFileModel')
             ->setConstructorArgs(array($this->container))
             ->setMethods(array('generateThumbnailFromData'))
             ->getMock();
 
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
         $data = 'test';
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
@@ -366,9 +366,9 @@ class TaskFileTest extends Base
 
     public function testRemove()
     {
-        $fileModel = new TaskFile($this->container);
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $fileModel = new TaskFileModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -384,9 +384,9 @@ class TaskFileTest extends Base
 
     public function testRemoveWithObjectStorageError()
     {
-        $fileModel = new TaskFile($this->container);
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $fileModel = new TaskFileModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -403,9 +403,9 @@ class TaskFileTest extends Base
 
     public function testRemoveImage()
     {
-        $fileModel = new TaskFile($this->container);
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $fileModel = new TaskFileModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -426,9 +426,9 @@ class TaskFileTest extends Base
 
     public function testRemoveAll()
     {
-        $fileModel = new TaskFile($this->container);
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $fileModel = new TaskFileModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));

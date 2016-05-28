@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Filter tasks by project ids
@@ -33,9 +33,9 @@ class TaskProjectsFilter extends BaseFilter implements FilterInterface
     public function apply()
     {
         if (empty($this->value)) {
-            $this->query->eq(Task::TABLE.'.project_id', 0);
+            $this->query->eq(TaskModel::TABLE.'.project_id', 0);
         } else {
-            $this->query->in(Task::TABLE.'.project_id', $this->value);
+            $this->query->in(TaskModel::TABLE.'.project_id', $this->value);
         }
 
         return $this;

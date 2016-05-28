@@ -27,7 +27,7 @@ class CustomFilterController extends BaseController
             'values' => $values + array('project_id' => $project['id']),
             'errors' => $errors,
             'project' => $project,
-            'custom_filters' => $this->customFilter->getAll($project['id'], $this->userSession->getId()),
+            'custom_filters' => $this->customFilterModel->getAll($project['id'], $this->userSession->getId()),
             'title' => t('Custom filters'),
         )));
     }
@@ -47,7 +47,7 @@ class CustomFilterController extends BaseController
         list($valid, $errors) = $this->customFilterValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->customFilter->create($values)) {
+            if ($this->customFilterModel->create($values)) {
                 $this->flash->success(t('Your custom filter have been created successfully.'));
                 return $this->response->redirect($this->helper->url->to('CustomFilterController', 'index', array('project_id' => $project['id'])));
             } else {
@@ -66,7 +66,7 @@ class CustomFilterController extends BaseController
     public function confirm()
     {
         $project = $this->getProject();
-        $filter = $this->customFilter->getById($this->request->getIntegerParam('filter_id'));
+        $filter = $this->customFilterModel->getById($this->request->getIntegerParam('filter_id'));
 
         $this->response->html($this->helper->layout->project('custom_filter/remove', array(
             'project' => $project,
@@ -84,11 +84,11 @@ class CustomFilterController extends BaseController
     {
         $this->checkCSRFParam();
         $project = $this->getProject();
-        $filter = $this->customFilter->getById($this->request->getIntegerParam('filter_id'));
+        $filter = $this->customFilterModel->getById($this->request->getIntegerParam('filter_id'));
 
         $this->checkPermission($project, $filter);
 
-        if ($this->customFilter->remove($filter['id'])) {
+        if ($this->customFilterModel->remove($filter['id'])) {
             $this->flash->success(t('Custom filter removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this custom filter.'));
@@ -105,7 +105,7 @@ class CustomFilterController extends BaseController
     public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $filter = $this->customFilter->getById($this->request->getIntegerParam('filter_id'));
+        $filter = $this->customFilterModel->getById($this->request->getIntegerParam('filter_id'));
 
         $this->checkPermission($project, $filter);
 
@@ -126,7 +126,7 @@ class CustomFilterController extends BaseController
     public function update()
     {
         $project = $this->getProject();
-        $filter = $this->customFilter->getById($this->request->getIntegerParam('filter_id'));
+        $filter = $this->customFilterModel->getById($this->request->getIntegerParam('filter_id'));
 
         $this->checkPermission($project, $filter);
 
@@ -143,7 +143,7 @@ class CustomFilterController extends BaseController
         list($valid, $errors) = $this->customFilterValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->customFilter->update($values)) {
+            if ($this->customFilterModel->update($values)) {
                 $this->flash->success(t('Your custom filter have been updated successfully.'));
                 return $this->response->redirect($this->helper->url->to('CustomFilterController', 'index', array('project_id' => $project['id'])));
             } else {
@@ -158,7 +158,7 @@ class CustomFilterController extends BaseController
     {
         $user_id = $this->userSession->getId();
 
-        if ($filter['user_id'] != $user_id && ($this->projectUserRole->getUserRole($project['id'], $user_id) === Role::PROJECT_MANAGER || ! $this->userSession->isAdmin())) {
+        if ($filter['user_id'] != $user_id && ($this->projectUserRoleModel->getUserRole($project['id'], $user_id) === Role::PROJECT_MANAGER || ! $this->userSession->isAdmin())) {
             throw new AccessForbiddenException();
         }
     }

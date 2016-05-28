@@ -3,7 +3,7 @@
 namespace Kanboard\Analytic;
 
 use Kanboard\Core\Base;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Average Time Spent by Column
@@ -40,7 +40,7 @@ class AverageTimeSpentColumnAnalytic extends Base
     private function initialize($project_id)
     {
         $stats = array();
-        $columns = $this->column->getList($project_id);
+        $columns = $this->columnModel->getList($project_id);
 
         foreach ($columns as $column_id => $column_title) {
             $stats[$column_id] = array(
@@ -110,7 +110,7 @@ class AverageTimeSpentColumnAnalytic extends Base
      */
     private function getTaskTimeByColumns(array &$task)
     {
-        $columns = $this->transition->getTimeSpentByTask($task['id']);
+        $columns = $this->transitionModel->getTimeSpentByTask($task['id']);
 
         if (! isset($columns[$task['column_id']])) {
             $columns[$task['column_id']] = 0;
@@ -144,7 +144,7 @@ class AverageTimeSpentColumnAnalytic extends Base
     private function getTasks($project_id)
     {
         return $this->db
-            ->table(Task::TABLE)
+            ->table(TaskModel::TABLE)
             ->columns('id', 'date_completed', 'date_moved', 'column_id')
             ->eq('project_id', $project_id)
             ->desc('id')

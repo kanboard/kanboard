@@ -2,42 +2,42 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Task;
-use Kanboard\Model\Project;
-use Kanboard\Model\UserUnreadNotification;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\UserUnreadNotificationModel;
 
 class UserUnreadNotificationTest extends Base
 {
     public function testHasNotification()
     {
-        $wn = new UserUnreadNotification($this->container);
-        $p = new Project($this->container);
-        $tf = new TaskFinder($this->container);
-        $tc = new TaskCreation($this->container);
+        $wn = new UserUnreadNotificationModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
 
         $this->assertFalse($wn->hasNotifications(1));
 
-        $wn->create(1, Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $wn->create(1, TaskModel::EVENT_CREATE, array('task' => $tf->getDetails(1)));
 
         $this->assertTrue($wn->hasNotifications(1));
     }
 
     public function testMarkAllAsRead()
     {
-        $wn = new UserUnreadNotification($this->container);
-        $p = new Project($this->container);
-        $tf = new TaskFinder($this->container);
-        $tc = new TaskCreation($this->container);
+        $wn = new UserUnreadNotificationModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
 
-        $wn->create(1, Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $wn->create(1, TaskModel::EVENT_CREATE, array('task' => $tf->getDetails(1)));
 
         $this->assertTrue($wn->hasNotifications(1));
         $this->assertTrue($wn->markAllAsRead(1));
@@ -48,15 +48,15 @@ class UserUnreadNotificationTest extends Base
 
     public function testMarkAsRead()
     {
-        $wn = new UserUnreadNotification($this->container);
-        $p = new Project($this->container);
-        $tf = new TaskFinder($this->container);
-        $tc = new TaskCreation($this->container);
+        $wn = new UserUnreadNotificationModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
 
-        $wn->create(1, Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $wn->create(1, TaskModel::EVENT_CREATE, array('task' => $tf->getDetails(1)));
 
         $this->assertTrue($wn->hasNotifications(1));
 
@@ -69,16 +69,16 @@ class UserUnreadNotificationTest extends Base
 
     public function testGetAll()
     {
-        $wn = new UserUnreadNotification($this->container);
-        $p = new Project($this->container);
-        $tf = new TaskFinder($this->container);
-        $tc = new TaskCreation($this->container);
+        $wn = new UserUnreadNotificationModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
 
-        $wn->create(1, Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
-        $wn->create(1, Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $wn->create(1, TaskModel::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $wn->create(1, TaskModel::EVENT_CREATE, array('task' => $tf->getDetails(1)));
 
         $this->assertEmpty($wn->getAll(2));
 
@@ -90,16 +90,16 @@ class UserUnreadNotificationTest extends Base
 
     public function testGetOne()
     {
-        $wn = new UserUnreadNotification($this->container);
-        $p = new Project($this->container);
-        $tf = new TaskFinder($this->container);
-        $tc = new TaskCreation($this->container);
+        $wn = new UserUnreadNotificationModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
 
-        $wn->create(1, Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
-        $wn->create(1, Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $wn->create(1, TaskModel::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $wn->create(1, TaskModel::EVENT_CREATE, array('task' => $tf->getDetails(1)));
 
         $this->assertEmpty($wn->getAll(2));
 

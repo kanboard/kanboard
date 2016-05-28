@@ -21,7 +21,7 @@ class TaskLinkApi extends Base
      */
     public function getTaskLinkById($task_link_id)
     {
-        return $this->taskLink->getById($task_link_id);
+        return $this->taskLinkModel->getById($task_link_id);
     }
 
     /**
@@ -33,7 +33,7 @@ class TaskLinkApi extends Base
      */
     public function getAllTaskLinks($task_id)
     {
-        return $this->taskLink->getAll($task_id);
+        return $this->taskLinkModel->getAll($task_id);
     }
 
     /**
@@ -47,7 +47,7 @@ class TaskLinkApi extends Base
      */
     public function createTaskLink($task_id, $opposite_task_id, $link_id)
     {
-        return $this->taskLink->create($task_id, $opposite_task_id, $link_id);
+        return $this->taskLinkModel->create($task_id, $opposite_task_id, $link_id);
     }
 
     /**
@@ -62,7 +62,7 @@ class TaskLinkApi extends Base
      */
     public function updateTaskLink($task_link_id, $task_id, $opposite_task_id, $link_id)
     {
-        return $this->taskLink->update($task_link_id, $task_id, $opposite_task_id, $link_id);
+        return $this->taskLinkModel->update($task_link_id, $task_id, $opposite_task_id, $link_id);
     }
 
     /**
@@ -74,6 +74,6 @@ class TaskLinkApi extends Base
      */
     public function removeTaskLink($task_link_id)
     {
-        return $this->taskLink->remove($task_link_id);
+        return $this->taskLinkModel->remove($task_link_id);
     }
 }

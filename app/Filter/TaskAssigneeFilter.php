@@ -3,8 +3,8 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Task;
-use Kanboard\Model\User;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\UserModel;
 
 /**
  * Filter tasks by assignee
@@ -55,19 +55,19 @@ class TaskAssigneeFilter extends BaseFilter implements FilterInterface
     public function apply()
     {
         if (is_int($this->value) || ctype_digit($this->value)) {
-            $this->query->eq(Task::TABLE.'.owner_id', $this->value);
+            $this->query->eq(TaskModel::TABLE.'.owner_id', $this->value);
         } else {
             switch ($this->value) {
                 case 'me':
-                    $this->query->eq(Task::TABLE.'.owner_id', $this->currentUserId);
+                    $this->query->eq(TaskModel::TABLE.'.owner_id', $this->currentUserId);
                     break;
                 case 'nobody':
-                    $this->query->eq(Task::TABLE.'.owner_id', 0);
+                    $this->query->eq(TaskModel::TABLE.'.owner_id', 0);
                     break;
                 default:
                     $this->query->beginOr();
-                    $this->query->ilike(User::TABLE.'.username', '%'.$this->value.'%');
-                    $this->query->ilike(User::TABLE.'.name', '%'.$this->value.'%');
+                    $this->query->ilike(UserModel::TABLE.'.username', '%'.$this->value.'%');
+                    $this->query->ilike(UserModel::TABLE.'.name', '%'.$this->value.'%');
                     $this->query->closeOr();
             }
         }

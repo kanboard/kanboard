@@ -21,7 +21,7 @@ class LinkApi extends Base
      */
     public function getLinkById($link_id)
     {
-        return $this->link->getById($link_id);
+        return $this->linkModel->getById($link_id);
     }
 
     /**
@@ -33,7 +33,7 @@ class LinkApi extends Base
      */
     public function getLinkByLabel($label)
     {
-        return $this->link->getByLabel($label);
+        return $this->linkModel->getByLabel($label);
     }
 
     /**
@@ -45,7 +45,7 @@ class LinkApi extends Base
      */
     public function getOppositeLinkId($link_id)
     {
-        return $this->link->getOppositeLinkId($link_id);
+        return $this->linkModel->getOppositeLinkId($link_id);
     }
 
     /**
@@ -56,7 +56,7 @@ class LinkApi extends Base
      */
     public function getAllLinks()
     {
-        return $this->link->getAll();
+        return $this->linkModel->getAll();
     }
 
     /**
@@ -75,7 +75,7 @@ class LinkApi extends Base
         );
 
         list($valid, ) = $this->linkValidator->validateCreation($values);
-        return $valid ? $this->link->create($label, $opposite_label) : false;
+        return $valid ? $this->linkModel->create($label, $opposite_label) : false;
     }
 
     /**
@@ -96,7 +96,7 @@ class LinkApi extends Base
         );
 
         list($valid, ) = $this->linkValidator->validateModification($values);
-        return $valid && $this->link->update($values);
+        return $valid && $this->linkModel->update($values);
     }
 
     /**
@@ -108,6 +108,6 @@ class LinkApi extends Base
      */
     public function removeLink($link_id)
     {
-        return $this->link->remove($link_id);
+        return $this->linkModel->remove($link_id);
     }
 }

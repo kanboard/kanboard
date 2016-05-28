@@ -3,9 +3,9 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\GroupMember;
-use Kanboard\Model\ProjectGroupRole;
-use Kanboard\Model\User;
+use Kanboard\Model\GroupMemberModel;
+use Kanboard\Model\ProjectGroupRoleModel;
+use Kanboard\Model\UserModel;
 
 /**
  * Filter ProjectGroupRole users by username
@@ -35,9 +35,9 @@ class ProjectGroupRoleUsernameFilter extends BaseFilter implements FilterInterfa
     public function apply()
     {
         $this->query
-            ->join(GroupMember::TABLE, 'group_id', 'group_id', ProjectGroupRole::TABLE)
-            ->join(User::TABLE, 'id', 'user_id', GroupMember::TABLE)
-            ->ilike(User::TABLE.'.username', $this->value.'%');
+            ->join(GroupMemberModel::TABLE, 'group_id', 'group_id', ProjectGroupRoleModel::TABLE)
+            ->join(UserModel::TABLE, 'id', 'user_id', GroupMemberModel::TABLE)
+            ->ilike(UserModel::TABLE.'.username', $this->value.'%');
 
         return $this;
     }

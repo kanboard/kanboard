@@ -12,31 +12,31 @@ class ColumnApi extends BaseApi
 {
     public function getColumns($project_id)
     {
-        return $this->column->getAll($project_id);
+        return $this->columnModel->getAll($project_id);
     }
 
     public function getColumn($column_id)
     {
-        return $this->column->getById($column_id);
+        return $this->columnModel->getById($column_id);
     }
 
     public function updateColumn($column_id, $title, $task_limit = 0, $description = '')
     {
-        return $this->column->update($column_id, $title, $task_limit, $description);
+        return $this->columnModel->update($column_id, $title, $task_limit, $description);
     }
 
     public function addColumn($project_id, $title, $task_limit = 0, $description = '')
     {
-        return $this->column->create($project_id, $title, $task_limit, $description);
+        return $this->columnModel->create($project_id, $title, $task_limit, $description);
     }
 
     public function removeColumn($column_id)
     {
-        return $this->column->remove($column_id);
+        return $this->columnModel->remove($column_id);
     }
 
     public function changeColumnPosition($project_id, $column_id, $position)
     {
-        return $this->column->changePosition($project_id, $column_id, $position);
+        return $this->columnModel->changePosition($project_id, $column_id, $position);
     }
 }

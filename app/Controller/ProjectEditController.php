@@ -73,7 +73,7 @@ class ProjectEditController extends BaseController
         list($valid, $errors) = $this->projectValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->project->update($values)) {
+            if ($this->projectModel->update($values)) {
                 $this->flash->success(t('Project updated successfully.'));
                 return $this->response->redirect($this->helper->url->to('ProjectEditController', $redirect, array('project_id' => $project['id'])), true);
             } else {
@@ -123,7 +123,7 @@ class ProjectEditController extends BaseController
         $project = $this->getProject();
 
         $this->response->html($this->helper->layout->project($template, array(
-            'owners' => $this->projectUserRole->getAssignableUsersList($project['id'], true),
+            'owners' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], true),
             'values' => empty($values) ? $project : $values,
             'errors' => $errors,
             'project' => $project,

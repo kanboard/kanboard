@@ -2,18 +2,18 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Config;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Project;
+use Kanboard\Model\ConfigModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ProjectModel;
 use Kanboard\Subscriber\NotificationSubscriber;
 
 class WebhookTest extends Base
 {
     public function testTaskCreation()
     {
-        $c = new Config($this->container);
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
+        $c = new ConfigModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
         $this->container['dispatcher']->addSubscriber(new NotificationSubscriber($this->container));
 
         $c->save(array('webhook_url' => 'http://localhost/?task-creation'));

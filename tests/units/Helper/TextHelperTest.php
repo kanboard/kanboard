@@ -3,16 +3,16 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Helper\TextHelper;
-use Kanboard\Model\Project;
-use Kanboard\Model\TaskCreation;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TaskCreationModel;
 
 class TextHelperTest extends Base
 {
     public function testMarkdownTaskLink()
     {
         $helper = new TextHelper($this->container);
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertTrue($projectModel->enablePublicAccess(1));

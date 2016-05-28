@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../../Base.php';
 
-use Kanboard\Model\Group;
+use Kanboard\Model\GroupModel;
 use Kanboard\Core\Group\GroupManager;
 use Kanboard\Group\DatabaseBackendGroupProvider;
 
@@ -10,7 +10,7 @@ class GroupManagerTest extends Base
 {
     public function testFind()
     {
-        $groupModel = new Group($this->container);
+        $groupModel = new GroupModel($this->container);
         $groupManager = new GroupManager;
 
         $this->assertEquals(1, $groupModel->create('Group 1'));

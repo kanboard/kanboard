@@ -16,12 +16,12 @@ class BootstrapSubscriber extends BaseSubscriber implements EventSubscriberInter
     public function execute()
     {
         $this->logger->debug('Subscriber executed: '.__METHOD__);
-        $this->language->loadCurrentLanguage();
-        $this->timezone->setCurrentTimezone();
+        $this->languageModel->loadCurrentLanguage();
+        $this->timezoneModel->setCurrentTimezone();
         $this->actionManager->attachEvents();
 
         if ($this->userSession->isLogged()) {
-            $this->sessionStorage->hasSubtaskInProgress = $this->subtask->hasSubtaskInProgress($this->userSession->getId());
+            $this->sessionStorage->hasSubtaskInProgress = $this->subtaskModel->hasSubtaskInProgress($this->userSession->getId());
         }
     }
 

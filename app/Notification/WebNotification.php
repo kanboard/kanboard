@@ -30,7 +30,7 @@ class WebNotification extends Base implements NotificationInterface
      */
     public function notifyUser(array $user, $event_name, array $event_data)
     {
-        $this->userUnreadNotification->create($user['id'], $event_name, $event_data);
+        $this->userUnreadNotificationModel->create($user['id'], $event_name, $event_data);
     }
 
     /**

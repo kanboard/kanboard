@@ -2,7 +2,7 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Move a task to another column when an assignee is set
@@ -32,8 +32,8 @@ class TaskMoveColumnAssigned extends Base
     public function getCompatibleEvents()
     {
         return array(
-            Task::EVENT_ASSIGNEE_CHANGE,
-            Task::EVENT_UPDATE,
+            TaskModel::EVENT_ASSIGNEE_CHANGE,
+            TaskModel::EVENT_UPDATE,
         );
     }
 
@@ -75,9 +75,9 @@ class TaskMoveColumnAssigned extends Base
      */
     public function doAction(array $data)
     {
-        $original_task = $this->taskFinder->getById($data['task_id']);
+        $original_task = $this->taskFinderModel->getById($data['task_id']);
 
-        return $this->taskPosition->movePosition(
+        return $this->taskPositionModel->movePosition(
             $data['project_id'],
             $data['task_id'],
             $this->getParam('dest_column_id'),

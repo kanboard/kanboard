@@ -2,17 +2,17 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Transition;
-use Kanboard\Model\Project;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TransitionModel;
+use Kanboard\Model\ProjectModel;
 
 class TransitionTest extends Base
 {
     public function testSave()
     {
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $transitionModel = new Transition($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $transitionModel = new TransitionModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -40,9 +40,9 @@ class TransitionTest extends Base
 
     public function testGetTimeSpentByTask()
     {
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $transitionModel = new Transition($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $transitionModel = new TransitionModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -77,9 +77,9 @@ class TransitionTest extends Base
 
     public function testGetAllByProject()
     {
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $transitionModel = new Transition($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $transitionModel = new TransitionModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test1')));

@@ -4,7 +4,7 @@ namespace Kanboard\Controller;
 
 use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Formatter\TaskGanttFormatter;
-use Kanboard\Model\Task as TaskModel;
+use Kanboard\Model\TaskModel;
 
 /**
  * Tasks Gantt Controller
@@ -47,7 +47,7 @@ class TaskGanttController extends BaseController
         $this->getProject();
         $values = $this->request->getJson();
 
-        $result = $this->taskModification->update(array(
+        $result = $this->taskModificationModel->update(array(
             'id' => $values['id'],
             'date_started' => strtotime($values['start']),
             'date_due' => strtotime($values['end']),

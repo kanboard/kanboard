@@ -4,13 +4,12 @@ require_once __DIR__.'/../Base.php';
 
 use Kanboard\Core\User\UserSession;
 use Kanboard\Helper\UserHelper;
-use Kanboard\Model\Project;
-use Kanboard\Model\ProjectUserRole;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\User as UserModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectUserRoleModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
 use Kanboard\Core\Security\Role;
-use Kanboard\Model\User;
+use Kanboard\Model\UserModel;
 
 class UserHelperTest extends Base
 {
@@ -76,7 +75,7 @@ class UserHelperTest extends Base
     public function testHasProjectAccessForAdmins()
     {
         $helper = new UserHelper($this->container);
-        $project = new Project($this->container);
+        $project = new ProjectModel($this->container);
 
         $this->container['sessionStorage']->user = array(
             'id' => 2,
@@ -92,7 +91,7 @@ class UserHelperTest extends Base
     public function testHasProjectAccessForManagers()
     {
         $helper = new UserHelper($this->container);
-        $project = new Project($this->container);
+        $project = new ProjectModel($this->container);
 
         $this->container['sessionStorage']->user = array(
             'id' => 2,
@@ -108,7 +107,7 @@ class UserHelperTest extends Base
     public function testHasProjectAccessForUsers()
     {
         $helper = new UserHelper($this->container);
-        $project = new Project($this->container);
+        $project = new ProjectModel($this->container);
 
         $this->container['sessionStorage']->user = array(
             'id' => 2,
@@ -125,8 +124,8 @@ class UserHelperTest extends Base
     {
         $helper = new UserHelper($this->container);
         $user = new UserModel($this->container);
-        $project = new Project($this->container);
-        $projectUserRole = new ProjectUserRole($this->container);
+        $project = new ProjectModel($this->container);
+        $projectUserRole = new ProjectUserRoleModel($this->container);
 
         $this->container['sessionStorage']->user = array(
             'id' => 2,
@@ -153,8 +152,8 @@ class UserHelperTest extends Base
     {
         $helper = new UserHelper($this->container);
         $user = new UserModel($this->container);
-        $project = new Project($this->container);
-        $projectUserRole = new ProjectUserRole($this->container);
+        $project = new ProjectModel($this->container);
+        $projectUserRole = new ProjectUserRoleModel($this->container);
 
         $this->container['sessionStorage']->user = array(
             'id' => 2,
@@ -181,8 +180,8 @@ class UserHelperTest extends Base
     {
         $helper = new UserHelper($this->container);
         $user = new UserModel($this->container);
-        $project = new Project($this->container);
-        $projectUserRole = new ProjectUserRole($this->container);
+        $project = new ProjectModel($this->container);
+        $projectUserRole = new ProjectUserRoleModel($this->container);
 
         $this->container['sessionStorage']->user = array(
             'id' => 2,
@@ -209,8 +208,8 @@ class UserHelperTest extends Base
     {
         $helper = new UserHelper($this->container);
         $user = new UserModel($this->container);
-        $project = new Project($this->container);
-        $projectUserRole = new ProjectUserRole($this->container);
+        $project = new ProjectModel($this->container);
+        $projectUserRole = new ProjectUserRoleModel($this->container);
 
         $this->container['sessionStorage']->user = array(
             'id' => 2,
@@ -235,11 +234,11 @@ class UserHelperTest extends Base
 
     public function testCanRemoveTask()
     {
-        $taskCreationModel = new TaskCreation($this->container);
-        $taskFinderModel = new TaskFinder($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
         $helper = new UserHelper($this->container);
-        $projectModel = new Project($this->container);
-        $userModel = new User($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $userModel = new UserModel($this->container);
         $userSessionModel = new UserSession($this->container);
 
         $this->assertNotFalse($userModel->create(array('username' => 'toto', 'password' => '123456')));
@@ -278,7 +277,7 @@ class UserHelperTest extends Base
         $this->assertTrue($helper->canRemoveTask($task));
 
         // User #2 can remove his own TaskViewController
-        $user = $userModel->getbyId(2);
+        $user = $userModel->getById(2);
         $this->assertNotEmpty($user);
         $userSessionModel->initialize($user);
 

@@ -60,7 +60,7 @@ abstract class BaseApi extends Base
 
     public function checkProjectPermission($project_id)
     {
-        if ($this->userSession->isLogged() && ! $this->projectPermission->isUserAllowed($project_id, $this->userSession->getId())) {
+        if ($this->userSession->isLogged() && ! $this->projectPermissionModel->isUserAllowed($project_id, $this->userSession->getId())) {
             throw new AccessDeniedException('Permission denied');
         }
     }
@@ -68,7 +68,7 @@ abstract class BaseApi extends Base
     public function checkTaskPermission($task_id)
     {
         if ($this->userSession->isLogged()) {
-            $this->checkProjectPermission($this->taskFinder->getProjectId($task_id));
+            $this->checkProjectPermission($this->taskFinderModel->getProjectId($task_id));
         }
     }
 
@@ -76,7 +76,7 @@ abstract class BaseApi extends Base
     {
         if (! empty($task)) {
             $task['url'] = $this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), '', true);
-            $task['color'] = $this->color->getColorProperties($task['color_id']);
+            $task['color'] = $this->colorModel->getColorProperties($task['color_id']);
         }
 
         return $task;

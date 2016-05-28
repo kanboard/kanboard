@@ -21,7 +21,7 @@ class ProjectViewController extends BaseController
 
         $this->response->html($this->helper->layout->project('project_view/show', array(
             'project' => $project,
-            'stats' => $this->project->getTaskStats($project['id']),
+            'stats' => $this->projectModel->getTaskStats($project['id']),
             'title' => $project['name'],
         )));
     }
@@ -53,7 +53,7 @@ class ProjectViewController extends BaseController
         $this->checkCSRFParam();
         $switch = $this->request->getStringParam('switch');
 
-        if ($this->project->{$switch.'PublicAccess'}($project['id'])) {
+        if ($this->projectModel->{$switch.'PublicAccess'}($project['id'])) {
             $this->flash->success(t('Project updated successfully.'));
         } else {
             $this->flash->failure(t('Unable to update this project.'));
@@ -74,8 +74,8 @@ class ProjectViewController extends BaseController
         $this->response->html($this->helper->layout->project('project_view/integrations', array(
             'project' => $project,
             'title' => t('Integrations'),
-            'webhook_token' => $this->config->get('webhook_token'),
-            'values' => $this->projectMetadata->getAll($project['id']),
+            'webhook_token' => $this->configModel->get('webhook_token'),
+            'values' => $this->projectMetadataModel->getAll($project['id']),
             'errors' => array(),
         )));
     }
@@ -89,7 +89,7 @@ class ProjectViewController extends BaseController
     {
         $project = $this->getProject();
 
-        $this->projectMetadata->save($project['id'], $this->request->getValues());
+        $this->projectMetadataModel->save($project['id'], $this->request->getValues());
         $this->flash->success(t('Project updated successfully.'));
         $this->response->redirect($this->helper->url->to('ProjectViewController', 'integrations', array('project_id' => $project['id'])));
     }
@@ -104,8 +104,8 @@ class ProjectViewController extends BaseController
         $project = $this->getProject();
 
         $this->response->html($this->helper->layout->project('project_view/notifications', array(
-            'notifications' => $this->projectNotification->readSettings($project['id']),
-            'types' => $this->projectNotificationType->getTypes(),
+            'notifications' => $this->projectNotificationModel->readSettings($project['id']),
+            'types' => $this->projectNotificationTypeModel->getTypes(),
             'project' => $project,
             'title' => t('Notifications'),
         )));
@@ -121,7 +121,7 @@ class ProjectViewController extends BaseController
         $project = $this->getProject();
         $values = $this->request->getValues();
 
-        $this->projectNotification->saveSettings($project['id'], $values);
+        $this->projectNotificationModel->saveSettings($project['id'], $values);
         $this->flash->success(t('Project updated successfully.'));
         $this->response->redirect($this->helper->url->to('ProjectViewController', 'notifications', array('project_id' => $project['id'])));
     }
@@ -149,7 +149,7 @@ class ProjectViewController extends BaseController
     public function doDuplication()
     {
         $project = $this->getProject();
-        $project_id = $this->projectDuplication->duplicate($project['id'], array_keys($this->request->getValues()), $this->userSession->getId());
+        $project_id = $this->projectDuplicationModel->duplicate($project['id'], array_keys($this->request->getValues()), $this->userSession->getId());
 
         if ($project_id !== false) {
             $this->flash->success(t('Project cloned successfully.'));

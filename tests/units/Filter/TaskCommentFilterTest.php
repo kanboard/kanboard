@@ -1,10 +1,10 @@
 <?php
 
 use Kanboard\Filter\TaskCommentFilter;
-use Kanboard\Model\Comment;
-use Kanboard\Model\Project;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
+use Kanboard\Model\CommentModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
 
 require_once __DIR__.'/../Base.php';
 
@@ -12,10 +12,10 @@ class TaskCommentFilterTest extends Base
 {
     public function testMatch()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $commentModel = new Comment($this->container);
-        $projectModel = new Project($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $commentModel = new CommentModel($this->container);
+        $projectModel = new ProjectModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
@@ -32,10 +32,10 @@ class TaskCommentFilterTest extends Base
 
     public function testNoMatch()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $commentModel = new Comment($this->container);
-        $projectModel = new Project($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $commentModel = new CommentModel($this->container);
+        $projectModel = new ProjectModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));

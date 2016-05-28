@@ -2,20 +2,20 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Subtask;
-use Kanboard\Model\SubtaskTimeTracking;
-use Kanboard\Model\Project;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\SubtaskModel;
+use Kanboard\Model\SubtaskTimeTrackingModel;
+use Kanboard\Model\ProjectModel;
 
 class SubtaskTimeTrackingTest extends Base
 {
     public function testHasTimer()
     {
-        $tc = new TaskCreation($this->container);
-        $s = new Subtask($this->container);
-        $st = new SubtaskTimeTracking($this->container);
-        $p = new Project($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $s = new SubtaskModel($this->container);
+        $st = new SubtaskTimeTrackingModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
@@ -31,10 +31,10 @@ class SubtaskTimeTrackingTest extends Base
 
     public function testGetTimerStatus()
     {
-        $tc = new TaskCreation($this->container);
-        $s = new Subtask($this->container);
-        $st = new SubtaskTimeTracking($this->container);
-        $p = new Project($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $s = new SubtaskModel($this->container);
+        $st = new SubtaskTimeTrackingModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->container['sessionStorage']->user = array('id' => 1);
 
@@ -81,10 +81,10 @@ class SubtaskTimeTrackingTest extends Base
 
     public function testLogStartTime()
     {
-        $tc = new TaskCreation($this->container);
-        $s = new Subtask($this->container);
-        $st = new SubtaskTimeTracking($this->container);
-        $p = new Project($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $s = new SubtaskModel($this->container);
+        $st = new SubtaskTimeTrackingModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
@@ -103,10 +103,10 @@ class SubtaskTimeTrackingTest extends Base
 
     public function testLogStartEnd()
     {
-        $tc = new TaskCreation($this->container);
-        $s = new Subtask($this->container);
-        $st = new SubtaskTimeTracking($this->container);
-        $p = new Project($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $s = new SubtaskModel($this->container);
+        $st = new SubtaskTimeTrackingModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
@@ -134,10 +134,10 @@ class SubtaskTimeTrackingTest extends Base
 
     public function testCalculateSubtaskTime()
     {
-        $tc = new TaskCreation($this->container);
-        $s = new Subtask($this->container);
-        $st = new SubtaskTimeTracking($this->container);
-        $p = new Project($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $s = new SubtaskModel($this->container);
+        $st = new SubtaskTimeTrackingModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
@@ -152,10 +152,10 @@ class SubtaskTimeTrackingTest extends Base
 
     public function testUpdateSubtaskTimeSpent()
     {
-        $tc = new TaskCreation($this->container);
-        $s = new Subtask($this->container);
-        $st = new SubtaskTimeTracking($this->container);
-        $p = new Project($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $s = new SubtaskModel($this->container);
+        $st = new SubtaskTimeTrackingModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
@@ -166,7 +166,7 @@ class SubtaskTimeTrackingTest extends Base
         $this->assertTrue($st->logStartTime(2, 1));
 
         // Fake start time
-        $this->container['db']->table(SubtaskTimeTracking::TABLE)->update(array('start' => time() - 3600));
+        $this->container['db']->table(SubtaskTimeTrackingModel::TABLE)->update(array('start' => time() - 3600));
 
         $this->assertTrue($st->logEndTime(1, 1));
         $this->assertTrue($st->logEndTime(2, 1));
@@ -188,11 +188,11 @@ class SubtaskTimeTrackingTest extends Base
 
     public function testUpdateTaskTimeTracking()
     {
-        $tf = new TaskFinder($this->container);
-        $tc = new TaskCreation($this->container);
-        $s = new Subtask($this->container);
-        $st = new SubtaskTimeTracking($this->container);
-        $p = new Project($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $s = new SubtaskModel($this->container);
+        $st = new SubtaskTimeTrackingModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
 

@@ -2,26 +2,26 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Task;
-use Kanboard\Model\Column;
-use Kanboard\Model\TaskStatus;
-use Kanboard\Model\TaskPosition;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\Project;
-use Kanboard\Model\Swimlane;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\ColumnModel;
+use Kanboard\Model\TaskStatusModel;
+use Kanboard\Model\TaskPositionModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\SwimlaneModel;
 
 class TaskPositionTest extends Base
 {
     public function testGetTaskProgression()
     {
-        $t = new Task($this->container);
-        $ts = new TaskStatus($this->container);
-        $tp = new TaskPosition($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-        $columnModel = new Column($this->container);
+        $t = new TaskModel($this->container);
+        $ts = new TaskStatusModel($this->container);
+        $tp = new TaskPositionModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
@@ -42,10 +42,10 @@ class TaskPositionTest extends Base
 
     public function testMoveTaskToWrongPosition()
     {
-        $tp = new TaskPosition($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
+        $tp = new TaskPositionModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
 
@@ -69,10 +69,10 @@ class TaskPositionTest extends Base
 
     public function testMoveTaskToGreaterPosition()
     {
-        $tp = new TaskPosition($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
+        $tp = new TaskPositionModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
 
@@ -96,10 +96,10 @@ class TaskPositionTest extends Base
 
     public function testMoveTaskToEmptyColumn()
     {
-        $tp = new TaskPosition($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
+        $tp = new TaskPositionModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
 
@@ -123,10 +123,10 @@ class TaskPositionTest extends Base
 
     public function testMoveTaskToAnotherColumn()
     {
-        $tp = new TaskPosition($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
+        $tp = new TaskPositionModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
 
@@ -186,10 +186,10 @@ class TaskPositionTest extends Base
 
     public function testMoveTaskTop()
     {
-        $tp = new TaskPosition($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
+        $tp = new TaskPositionModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
@@ -224,10 +224,10 @@ class TaskPositionTest extends Base
 
     public function testMoveTaskBottom()
     {
-        $tp = new TaskPosition($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
+        $tp = new TaskPositionModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
@@ -262,10 +262,10 @@ class TaskPositionTest extends Base
 
     public function testMovePosition()
     {
-        $tp = new TaskPosition($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
+        $tp = new TaskPositionModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $counter = 1;
@@ -415,11 +415,11 @@ class TaskPositionTest extends Base
 
     public function testMoveTaskSwimlane()
     {
-        $tp = new TaskPosition($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-        $s = new Swimlane($this->container);
+        $tp = new TaskPositionModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'test 1')));
@@ -522,11 +522,11 @@ class TaskPositionTest extends Base
 
     public function testEvents()
     {
-        $tp = new TaskPosition($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-        $s = new Swimlane($this->container);
+        $tp = new TaskPositionModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'test 1')));
@@ -534,9 +534,9 @@ class TaskPositionTest extends Base
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
         $this->assertEquals(2, $tc->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 2)));
 
-        $this->container['dispatcher']->addListener(Task::EVENT_MOVE_COLUMN, array($this, 'onMoveColumn'));
-        $this->container['dispatcher']->addListener(Task::EVENT_MOVE_POSITION, array($this, 'onMovePosition'));
-        $this->container['dispatcher']->addListener(Task::EVENT_MOVE_SWIMLANE, array($this, 'onMoveSwimlane'));
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_MOVE_COLUMN, array($this, 'onMoveColumn'));
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_MOVE_POSITION, array($this, 'onMovePosition'));
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_MOVE_SWIMLANE, array($this, 'onMoveSwimlane'));
 
         // We move the task 1 to the column 2
         $this->assertTrue($tp->movePosition(1, 1, 2, 1));
@@ -552,7 +552,7 @@ class TaskPositionTest extends Base
         $this->assertEquals(2, $task['position']);
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(Task::EVENT_MOVE_COLUMN.'.TaskPositionTest::onMoveColumn', $called);
+        $this->assertArrayHasKey(TaskModel::EVENT_MOVE_COLUMN.'.TaskPositionTest::onMoveColumn', $called);
         $this->assertEquals(1, count($called));
 
         // We move the task 1 to the position 2
@@ -569,7 +569,7 @@ class TaskPositionTest extends Base
         $this->assertEquals(1, $task['position']);
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(Task::EVENT_MOVE_POSITION.'.TaskPositionTest::onMovePosition', $called);
+        $this->assertArrayHasKey(TaskModel::EVENT_MOVE_POSITION.'.TaskPositionTest::onMovePosition', $called);
         $this->assertEquals(2, count($called));
 
         // Move to another swimlane
@@ -588,7 +588,7 @@ class TaskPositionTest extends Base
         $this->assertEquals(0, $task['swimlane_id']);
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(Task::EVENT_MOVE_SWIMLANE.'.TaskPositionTest::onMoveSwimlane', $called);
+        $this->assertArrayHasKey(TaskModel::EVENT_MOVE_SWIMLANE.'.TaskPositionTest::onMoveSwimlane', $called);
         $this->assertEquals(3, count($called));
     }
 

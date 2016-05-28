@@ -48,9 +48,9 @@ class ProjectHeaderHelper extends Base
         return $this->template->render('project_header/header', array(
             'project' => $project,
             'filters' => $filters,
-            'categories_list' => $this->category->getList($project['id'], false),
-            'users_list' => $this->projectUserRole->getAssignableUsersList($project['id'], false),
-            'custom_filters_list' => $this->customFilter->getAll($project['id'], $this->userSession->getId()),
+            'categories_list' => $this->categoryModel->getList($project['id'], false),
+            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], false),
+            'custom_filters_list' => $this->customFilterModel->getAll($project['id'], $this->userSession->getId()),
             'board_view' => $boardView,
         ));
     }

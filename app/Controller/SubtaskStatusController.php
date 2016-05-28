@@ -20,7 +20,7 @@ class SubtaskStatusController extends BaseController
         $task = $this->getTask();
         $subtask = $this->getSubtask();
 
-        $status = $this->subtask->toggleStatus($subtask['id']);
+        $status = $this->subtaskModel->toggleStatus($subtask['id']);
 
         if ($this->request->getIntegerParam('refresh-table') === 0) {
             $subtask['status'] = $status;
@@ -44,10 +44,10 @@ class SubtaskStatusController extends BaseController
         $timer = $this->request->getStringParam('timer');
 
         if ($timer === 'start') {
-            $this->subtaskTimeTracking->logStartTime($subtask_id, $this->userSession->getId());
+            $this->subtaskTimeTrackingModel->logStartTime($subtask_id, $this->userSession->getId());
         } elseif ($timer === 'stop') {
-            $this->subtaskTimeTracking->logEndTime($subtask_id, $this->userSession->getId());
-            $this->subtaskTimeTracking->updateTaskTimeTracking($task['id']);
+            $this->subtaskTimeTrackingModel->logEndTime($subtask_id, $this->userSession->getId());
+            $this->subtaskTimeTrackingModel->updateTaskTimeTracking($task['id']);
         }
 
         $this->response->html($this->renderTable($task));
@@ -64,7 +64,7 @@ class SubtaskStatusController extends BaseController
     {
         return $this->template->render('subtask/table', array(
             'task' => $task,
-            'subtasks' => $this->subtask->getAll($task['id']),
+            'subtasks' => $this->subtaskModel->getAll($task['id']),
             'editable' => true,
         ));
     }

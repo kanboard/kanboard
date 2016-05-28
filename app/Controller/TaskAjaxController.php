@@ -24,7 +24,7 @@ class TaskAjaxController extends BaseController
     public function autocomplete()
     {
         $search = $this->request->getStringParam('term');
-        $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
+        $project_ids = $this->projectPermissionModel->getActiveProjectIds($this->userSession->getId());
         $exclude_task_id = $this->request->getIntegerParam('exclude_task_id');
 
         if (empty($project_ids)) {

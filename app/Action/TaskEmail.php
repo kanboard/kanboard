@@ -2,7 +2,7 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Email a task to someone
@@ -32,8 +32,8 @@ class TaskEmail extends Base
     public function getCompatibleEvents()
     {
         return array(
-            Task::EVENT_MOVE_COLUMN,
-            Task::EVENT_CLOSE,
+            TaskModel::EVENT_MOVE_COLUMN,
+            TaskModel::EVENT_CLOSE,
         );
     }
 
@@ -75,16 +75,16 @@ class TaskEmail extends Base
      */
     public function doAction(array $data)
     {
-        $user = $this->user->getById($this->getParam('user_id'));
+        $user = $this->userModel->getById($this->getParam('user_id'));
 
         if (! empty($user['email'])) {
-            $task = $this->taskFinder->getDetails($data['task_id']);
+            $task = $this->taskFinderModel->getDetails($data['task_id']);
 
             $this->emailClient->send(
                 $user['email'],
                 $user['name'] ?: $user['username'],
                 $this->getParam('subject'),
-                $this->template->render('notification/task_create', array('task' => $task, 'application_url' => $this->config->get('application_url')))
+                $this->template->render('notification/task_create', array('task' => $task, 'application_url' => $this->configModel->get('application_url')))
             );
 
             return true;

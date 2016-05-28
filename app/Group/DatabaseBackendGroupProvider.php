@@ -23,7 +23,7 @@ class DatabaseBackendGroupProvider extends Base implements GroupBackendProviderI
     public function find($input)
     {
         $result = array();
-        $groups = $this->group->search($input);
+        $groups = $this->groupModel->search($input);
 
         foreach ($groups as $group) {
             $result[] = new DatabaseGroupProvider($group);

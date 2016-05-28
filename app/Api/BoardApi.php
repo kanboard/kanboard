@@ -13,6 +13,6 @@ class BoardApi extends BaseApi
     public function getBoard($project_id)
     {
         $this->checkProjectPermission($project_id);
-        return $this->board->getBoard($project_id);
+        return $this->boardModel->getBoard($project_id);
     }
 }

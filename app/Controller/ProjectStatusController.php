@@ -31,7 +31,7 @@ class ProjectStatusController extends BaseController
         $project = $this->getProject();
         $this->checkCSRFParam();
 
-        if ($this->project->enable($project['id'])) {
+        if ($this->projectModel->enable($project['id'])) {
             $this->flash->success(t('Project activated successfully.'));
         } else {
             $this->flash->failure(t('Unable to activate this project.'));
@@ -61,7 +61,7 @@ class ProjectStatusController extends BaseController
         $project = $this->getProject();
         $this->checkCSRFParam();
 
-        if ($this->project->disable($project['id'])) {
+        if ($this->projectModel->disable($project['id'])) {
             $this->flash->success(t('Project disabled successfully.'));
         } else {
             $this->flash->failure(t('Unable to disable this project.'));
@@ -91,7 +91,7 @@ class ProjectStatusController extends BaseController
         $project = $this->getProject();
         $this->checkCSRFParam();
 
-        if ($this->project->remove($project['id'])) {
+        if ($this->projectModel->remove($project['id'])) {
             $this->flash->success(t('Project removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this project.'));

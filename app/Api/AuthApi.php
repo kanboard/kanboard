@@ -28,7 +28,7 @@ class AuthApi extends BaseApi
 
         if ($this->isUserAuthenticated($username, $password)) {
             $this->checkProcedurePermission(true, $method);
-            $this->userSession->initialize($this->user->getByUsername($username));
+            $this->userSession->initialize($this->userModel->getByUsername($username));
         } elseif ($this->isAppAuthenticated($username, $password)) {
             $this->checkProcedurePermission(false, $method);
         } else {
@@ -48,7 +48,7 @@ class AuthApi extends BaseApi
     private function isUserAuthenticated($username, $password)
     {
         return $username !== 'jsonrpc' &&
-            ! $this->userLocking->isLocked($username) &&
+            ! $this->userLockingModel->isLocked($username) &&
             $this->authenticationManager->passwordAuthentication($username, $password);
     }
 
@@ -77,6 +77,6 @@ class AuthApi extends BaseApi
             return API_AUTHENTICATION_TOKEN;
         }
 
-        return $this->config->get('api_token');
+        return $this->configModel->get('api_token');
     }
 }

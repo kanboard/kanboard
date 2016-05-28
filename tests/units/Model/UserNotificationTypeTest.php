@@ -2,13 +2,13 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\UserNotificationType;
+use Kanboard\Model\UserNotificationTypeModel;
 
 class UserNotificationTypeTest extends Base
 {
     public function testGetTypes()
     {
-        $nt = new UserNotificationType($this->container);
+        $nt = new UserNotificationTypeModel($this->container);
         $this->assertEmpty($nt->getTypes());
 
         $nt->setType('email', 'Email', 'Something');
@@ -18,7 +18,7 @@ class UserNotificationTypeTest extends Base
 
     public function testGetSelectedTypes()
     {
-        $nt = new UserNotificationType($this->container);
+        $nt = new UserNotificationTypeModel($this->container);
 
         // No type defined
         $this->assertEmpty($nt->getSelectedTypes(1));

@@ -21,7 +21,7 @@ class UserHelper extends Base
      */
     public function hasNotifications()
     {
-        return $this->userUnreadNotification->hasNotifications($this->userSession->getId());
+        return $this->userUnreadNotificationModel->hasNotifications($this->userSession->getId());
     }
 
     /**
@@ -50,7 +50,7 @@ class UserHelper extends Base
      */
     public function getFullname(array $user = array())
     {
-        return $this->user->getFullname(empty($user) ? $this->userSession->getAll() : $user);
+        return $this->userModel->getFullname(empty($user) ? $this->userSession->getAll() : $user);
     }
 
     /**
@@ -157,7 +157,7 @@ class UserHelper extends Base
      */
     public function getProjectUserRole($project_id)
     {
-        return $this->memoryCache->proxy($this->projectUserRole, 'getUserRole', $project_id, $this->userSession->getId());
+        return $this->memoryCache->proxy($this->projectUserRoleModel, 'getUserRole', $project_id, $this->userSession->getId());
     }
 
     /**

@@ -32,9 +32,9 @@ class TaskBulkController extends BaseController
             'project' => $project,
             'values' => $values,
             'errors' => $errors,
-            'users_list' => $this->projectUserRole->getAssignableUsersList($project['id'], true, false, true),
-            'colors_list' => $this->color->getList(),
-            'categories_list' => $this->category->getList($project['id']),
+            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], true, false, true),
+            'colors_list' => $this->colorModel->getList(),
+            'categories_list' => $this->categoryModel->getList($project['id']),
         )));
     }
 
@@ -74,7 +74,7 @@ class TaskBulkController extends BaseController
             $title = trim($title);
 
             if (! empty($title)) {
-                $this->taskCreation->create(array(
+                $this->taskCreationModel->create(array(
                     'title' => $title,
                     'column_id' => $values['column_id'],
                     'swimlane_id' => $values['swimlane_id'],

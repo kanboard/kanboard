@@ -21,7 +21,7 @@ class UserSync extends Base
      */
     public function synchronize(UserProviderInterface $user)
     {
-        $profile = $this->user->getByExternalId($user->getExternalIdColumn(), $user->getExternalId());
+        $profile = $this->userModel->getByExternalId($user->getExternalIdColumn(), $user->getExternalId());
         $properties = UserProperty::getProperties($user);
 
         if (! empty($profile)) {
@@ -47,7 +47,7 @@ class UserSync extends Base
 
         if (! empty($values)) {
             $values['id'] = $profile['id'];
-            $result = $this->user->update($values);
+            $result = $this->userModel->update($values);
             return $result ? array_merge($profile, $properties) : $profile;
         }
 
@@ -64,13 +64,13 @@ class UserSync extends Base
      */
     private function createUser(UserProviderInterface $user, array $properties)
     {
-        $userId = $this->user->create($properties);
+        $userId = $this->userModel->create($properties);
 
         if ($userId === false) {
             $this->logger->error('Unable to create user profile: '.$user->getExternalId());
             return array();
         }
 
-        return $this->user->getById($userId);
+        return $this->userModel->getById($userId);
     }
 }

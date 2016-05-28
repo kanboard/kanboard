@@ -3,18 +3,18 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Validator\TaskLinkValidator;
-use Kanboard\Model\TaskLink;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Project;
+use Kanboard\Model\TaskLinkModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ProjectModel;
 
 class TaskLinkValidatorTest extends Base
 {
     public function testValidateCreation()
     {
         $validator = new TaskLinkValidator($this->container);
-        $tl = new TaskLink($this->container);
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
+        $tl = new TaskLinkModel($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'A')));
@@ -46,8 +46,8 @@ class TaskLinkValidatorTest extends Base
     public function testValidateModification()
     {
         $validator = new TaskLinkValidator($this->container);
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'A')));

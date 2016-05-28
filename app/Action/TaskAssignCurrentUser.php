@@ -2,7 +2,7 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Assign a task to the logged user
@@ -32,7 +32,7 @@ class TaskAssignCurrentUser extends Base
     public function getCompatibleEvents()
     {
         return array(
-            Task::EVENT_CREATE,
+            TaskModel::EVENT_CREATE,
         );
     }
 
@@ -78,7 +78,7 @@ class TaskAssignCurrentUser extends Base
             'owner_id' => $this->userSession->getId(),
         );
 
-        return $this->taskModification->update($values);
+        return $this->taskModificationModel->update($values);
     }
 
     /**

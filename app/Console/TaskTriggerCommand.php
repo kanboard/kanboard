@@ -4,7 +4,7 @@ namespace Kanboard\Console;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 use Kanboard\Event\TaskListEvent;
 
 class TaskTriggerCommand extends BaseCommand
@@ -19,7 +19,7 @@ class TaskTriggerCommand extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         foreach ($this->getProjectIds() as $project_id) {
-            $tasks = $this->taskFinder->getAll($project_id);
+            $tasks = $this->taskFinderModel->getAll($project_id);
             $nb_tasks = count($tasks);
 
             if ($nb_tasks > 0) {
@@ -31,7 +31,7 @@ class TaskTriggerCommand extends BaseCommand
 
     private function getProjectIds()
     {
-        $listeners = $this->dispatcher->getListeners(Task::EVENT_DAILY_CRONJOB);
+        $listeners = $this->dispatcher->getListeners(TaskModel::EVENT_DAILY_CRONJOB);
         $project_ids = array();
 
         foreach ($listeners as $listener) {
@@ -46,6 +46,6 @@ class TaskTriggerCommand extends BaseCommand
         $event = new TaskListEvent(array('project_id' => $project_id));
         $event->setTasks($tasks);
 
-        $this->dispatcher->dispatch(Task::EVENT_DAILY_CRONJOB, $event);
+        $this->dispatcher->dispatch(TaskModel::EVENT_DAILY_CRONJOB, $event);
     }
 }

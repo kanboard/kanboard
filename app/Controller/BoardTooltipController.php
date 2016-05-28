@@ -19,7 +19,7 @@ class BoardTooltipController extends BaseController
     {
         $task = $this->getTask();
         $this->response->html($this->template->render('board/tooltip_tasklinks', array(
-            'links' => $this->taskLink->getAllGroupedByLabel($task['id']),
+            'links' => $this->taskLinkModel->getAllGroupedByLabel($task['id']),
             'task' => $task,
         )));
     }
@@ -33,7 +33,7 @@ class BoardTooltipController extends BaseController
     {
         $task = $this->getTask();
         $this->response->html($this->template->render('board/tooltip_external_links', array(
-            'links' => $this->taskExternalLink->getAll($task['id']),
+            'links' => $this->taskExternalLinkModel->getAll($task['id']),
             'task' => $task,
         )));
     }
@@ -47,7 +47,7 @@ class BoardTooltipController extends BaseController
     {
         $task = $this->getTask();
         $this->response->html($this->template->render('board/tooltip_subtasks', array(
-            'subtasks' => $this->subtask->getAll($task['id']),
+            'subtasks' => $this->subtaskModel->getAll($task['id']),
             'task' => $task,
         )));
     }
@@ -62,7 +62,7 @@ class BoardTooltipController extends BaseController
         $task = $this->getTask();
 
         $this->response->html($this->template->render('board/tooltip_files', array(
-            'files' => $this->taskFile->getAll($task['id']),
+            'files' => $this->taskFileModel->getAll($task['id']),
             'task' => $task,
         )));
     }
@@ -78,7 +78,7 @@ class BoardTooltipController extends BaseController
 
         $this->response->html($this->template->render('board/tooltip_comments', array(
             'task' => $task,
-            'comments' => $this->comment->getAll($task['id'], $this->userSession->getCommentSorting())
+            'comments' => $this->commentModel->getAll($task['id'], $this->userSession->getCommentSorting())
         )));
     }
 
@@ -107,9 +107,9 @@ class BoardTooltipController extends BaseController
 
         $this->response->html($this->template->render('task_recurrence/info', array(
             'task' => $task,
-            'recurrence_trigger_list' => $this->task->getRecurrenceTriggerList(),
-            'recurrence_timeframe_list' => $this->task->getRecurrenceTimeframeList(),
-            'recurrence_basedate_list' => $this->task->getRecurrenceBasedateList(),
+            'recurrence_trigger_list' => $this->taskModel->getRecurrenceTriggerList(),
+            'recurrence_timeframe_list' => $this->taskModel->getRecurrenceTimeframeList(),
+            'recurrence_basedate_list' => $this->taskModel->getRecurrenceBasedateList(),
         )));
     }
 
@@ -121,7 +121,7 @@ class BoardTooltipController extends BaseController
     public function swimlane()
     {
         $this->getProject();
-        $swimlane = $this->swimlane->getById($this->request->getIntegerParam('swimlane_id'));
+        $swimlane = $this->swimlaneModel->getById($this->request->getIntegerParam('swimlane_id'));
         $this->response->html($this->template->render('board/tooltip_description', array('task' => $swimlane)));
     }
 }

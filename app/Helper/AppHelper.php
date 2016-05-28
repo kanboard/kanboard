@@ -22,7 +22,7 @@ class AppHelper extends Base
      */
     public function config($param, $default_value = '')
     {
-        return $this->config->get($param, $default_value);
+        return $this->configModel->get($param, $default_value);
     }
 
     /**
@@ -90,7 +90,7 @@ class AppHelper extends Base
      */
     public function jsLang()
     {
-        return $this->language->getJsLanguageCode();
+        return $this->languageModel->getJsLanguageCode();
     }
 
     /**
@@ -101,7 +101,7 @@ class AppHelper extends Base
      */
     public function getTimezone()
     {
-        return $this->timezone->getCurrentTimezone();
+        return $this->timezoneModel->getCurrentTimezone();
     }
 
     /**

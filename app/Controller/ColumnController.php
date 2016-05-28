@@ -20,7 +20,7 @@ class ColumnController extends BaseController
     public function index()
     {
         $project = $this->getProject();
-        $columns = $this->column->getAll($project['id']);
+        $columns = $this->columnModel->getAll($project['id']);
 
         $this->response->html($this->helper->layout->project('column/index', array(
             'columns' => $columns,
@@ -66,7 +66,7 @@ class ColumnController extends BaseController
         list($valid, $errors) = $this->columnValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->column->create($project['id'], $values['title'], $values['task_limit'], $values['description'])) {
+            if ($this->columnModel->create($project['id'], $values['title'], $values['task_limit'], $values['description'])) {
                 $this->flash->success(t('Column created successfully.'));
                 return $this->response->redirect($this->helper->url->to('ColumnController', 'index', array('project_id' => $project['id'])), true);
             } else {
@@ -87,7 +87,7 @@ class ColumnController extends BaseController
     public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $column = $this->column->getById($this->request->getIntegerParam('column_id'));
+        $column = $this->columnModel->getById($this->request->getIntegerParam('column_id'));
 
         $this->response->html($this->helper->layout->project('column/edit', array(
             'errors' => $errors,
@@ -111,7 +111,7 @@ class ColumnController extends BaseController
         list($valid, $errors) = $this->columnValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->column->update($values['id'], $values['title'], $values['task_limit'], $values['description'])) {
+            if ($this->columnModel->update($values['id'], $values['title'], $values['task_limit'], $values['description'])) {
                 $this->flash->success(t('Board updated successfully.'));
                 return $this->response->redirect($this->helper->url->to('ColumnController', 'index', array('project_id' => $project['id'])));
             } else {
@@ -133,7 +133,7 @@ class ColumnController extends BaseController
         $values = $this->request->getJson();
 
         if (! empty($values) && isset($values['column_id']) && isset($values['position'])) {
-            $result = $this->column->changePosition($project['id'], $values['column_id'], $values['position']);
+            $result = $this->columnModel->changePosition($project['id'], $values['column_id'], $values['position']);
             $this->response->json(array('result' => $result));
         } else {
             throw new AccessForbiddenException();
@@ -150,7 +150,7 @@ class ColumnController extends BaseController
         $project = $this->getProject();
 
         $this->response->html($this->helper->layout->project('column/remove', array(
-            'column' => $this->column->getById($this->request->getIntegerParam('column_id')),
+            'column' => $this->columnModel->getById($this->request->getIntegerParam('column_id')),
             'project' => $project,
             'title' => t('Remove a column from a board')
         )));
@@ -167,7 +167,7 @@ class ColumnController extends BaseController
         $this->checkCSRFParam();
         $column_id = $this->request->getIntegerParam('column_id');
 
-        if ($this->column->remove($column_id)) {
+        if ($this->columnModel->remove($column_id)) {
             $this->flash->success(t('Column removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this column.'));

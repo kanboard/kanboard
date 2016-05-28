@@ -3,7 +3,7 @@
 namespace Kanboard\Formatter;
 
 use Kanboard\Core\Filter\FormatterInterface;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Task AutoComplete Formatter
@@ -21,7 +21,7 @@ class TaskAutoCompleteFormatter extends BaseFormatter implements FormatterInterf
      */
     public function format()
     {
-        $tasks = $this->query->columns(Task::TABLE.'.id', Task::TABLE.'.title')->findAll();
+        $tasks = $this->query->columns(TaskModel::TABLE.'.id', TaskModel::TABLE.'.title')->findAll();
 
         foreach ($tasks as &$task) {
             $task['value'] = $task['title'];

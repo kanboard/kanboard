@@ -36,7 +36,7 @@ class GroupCreationController extends BaseController
         list($valid, $errors) = $this->groupValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->group->create($values['name']) !== false) {
+            if ($this->groupModel->create($values['name']) !== false) {
                 $this->flash->success(t('Group created successfully.'));
                 return $this->response->redirect($this->helper->url->to('GroupListController', 'index'), true);
             } else {

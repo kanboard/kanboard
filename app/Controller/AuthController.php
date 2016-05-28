@@ -23,7 +23,7 @@ class AuthController extends BaseController
             $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
         } else {
             $this->response->html($this->helper->layout->app('auth/index', array(
-                'captcha' => ! empty($values['username']) && $this->userLocking->hasCaptcha($values['username']),
+                'captcha' => ! empty($values['username']) && $this->userLockingModel->hasCaptcha($values['username']),
                 'errors' => $errors,
                 'values' => $values,
                 'no_layout' => true,

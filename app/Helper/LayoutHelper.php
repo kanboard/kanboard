@@ -27,7 +27,7 @@ class LayoutHelper extends Base
         }
 
         if (! isset($params['no_layout']) && ! isset($params['board_selector'])) {
-            $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
+            $params['board_selector'] = $this->projectUserRoleModel->getActiveProjectsByUser($this->userSession->getId());
         }
 
         return $this->pageLayout($template, $params);
@@ -110,7 +110,7 @@ class LayoutHelper extends Base
     public function config($template, array $params)
     {
         if (! isset($params['values'])) {
-            $params['values'] = $this->config->getAll();
+            $params['values'] = $this->configModel->getAll();
         }
 
         if (! isset($params['errors'])) {

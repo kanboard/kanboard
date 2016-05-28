@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\ProjectActivity;
+use Kanboard\Model\ProjectActivityModel;
 
 /**
  * Filter activity events by projectIds
@@ -33,9 +33,9 @@ class ProjectActivityProjectIdsFilter extends BaseFilter implements FilterInterf
     public function apply()
     {
         if (empty($this->value)) {
-            $this->query->eq(ProjectActivity::TABLE.'.project_id', 0);
+            $this->query->eq(ProjectActivityModel::TABLE.'.project_id', 0);
         } else {
-            $this->query->in(ProjectActivity::TABLE.'.project_id', $this->value);
+            $this->query->in(ProjectActivityModel::TABLE.'.project_id', $this->value);
         }
 
         return $this;

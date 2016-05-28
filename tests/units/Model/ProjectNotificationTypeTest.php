@@ -2,14 +2,14 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Project;
-use Kanboard\Model\ProjectNotificationType;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectNotificationTypeModel;
 
 class ProjectNotificationTypeTest extends Base
 {
     public function testGetTypes()
     {
-        $nt = new ProjectNotificationType($this->container);
+        $nt = new ProjectNotificationTypeModel($this->container);
         $this->assertEmpty($nt->getTypes());
 
         $nt->setType('foo', 'Foo', 'Something1');
@@ -22,8 +22,8 @@ class ProjectNotificationTypeTest extends Base
 
     public function testGetSelectedTypes()
     {
-        $nt = new ProjectNotificationType($this->container);
-        $p = new Project($this->container);
+        $nt = new ProjectNotificationTypeModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
 

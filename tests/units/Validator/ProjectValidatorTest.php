@@ -3,14 +3,14 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Validator\ProjectValidator;
-use Kanboard\Model\Project;
+use Kanboard\Model\ProjectModel;
 
 class ProjectValidatorTest extends Base
 {
     public function testValidateCreation()
     {
         $validator = new ProjectValidator($this->container);
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1', 'identifier' => 'test1')));
         $this->assertEquals(2, $p->create(array('name' => 'UnitTest2')));
@@ -39,7 +39,7 @@ class ProjectValidatorTest extends Base
     public function testValidateModification()
     {
         $validator = new ProjectValidator($this->container);
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1', 'identifier' => 'test1')));
         $this->assertEquals(2, $p->create(array('name' => 'UnitTest2', 'identifier' => 'TEST2')));

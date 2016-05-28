@@ -5,7 +5,7 @@ namespace Kanboard\Auth;
 use Kanboard\Core\Base;
 use Kanboard\Core\Security\PasswordAuthenticationProviderInterface;
 use Kanboard\Core\Security\SessionCheckProviderInterface;
-use Kanboard\Model\User;
+use Kanboard\Model\UserModel;
 use Kanboard\User\DatabaseUserProvider;
 
 /**
@@ -60,7 +60,7 @@ class DatabaseAuth extends Base implements PasswordAuthenticationProviderInterfa
     public function authenticate()
     {
         $user = $this->db
-            ->table(User::TABLE)
+            ->table(UserModel::TABLE)
             ->columns('id', 'password')
             ->eq('username', $this->username)
             ->eq('disable_login_form', 0)
@@ -84,7 +84,7 @@ class DatabaseAuth extends Base implements PasswordAuthenticationProviderInterfa
      */
     public function isValidSession()
     {
-        return $this->user->isActive($this->userSession->getId());
+        return $this->userModel->isActive($this->userSession->getId());
     }
 
     /**

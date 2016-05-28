@@ -14,7 +14,7 @@ class AppApi extends Base
 {
     public function getTimezone()
     {
-        return $this->timezone->getCurrentTimezone();
+        return $this->timezoneModel->getCurrentTimezone();
     }
 
     public function getVersion()
@@ -24,17 +24,17 @@ class AppApi extends Base
 
     public function getDefaultTaskColor()
     {
-        return $this->color->getDefaultColor();
+        return $this->colorModel->getDefaultColor();
     }
 
     public function getDefaultTaskColors()
     {
-        return $this->color->getDefaultColors();
+        return $this->colorModel->getDefaultColors();
     }
 
     public function getColorList()
     {
-        return $this->color->getList();
+        return $this->colorModel->getList();
     }
 
     public function getApplicationRoles()

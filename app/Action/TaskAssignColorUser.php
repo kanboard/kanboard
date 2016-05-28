@@ -2,7 +2,7 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Assign a color to a specific user
@@ -32,8 +32,8 @@ class TaskAssignColorUser extends Base
     public function getCompatibleEvents()
     {
         return array(
-            Task::EVENT_CREATE,
-            Task::EVENT_ASSIGNEE_CHANGE,
+            TaskModel::EVENT_CREATE,
+            TaskModel::EVENT_ASSIGNEE_CHANGE,
         );
     }
 
@@ -79,7 +79,7 @@ class TaskAssignColorUser extends Base
             'color_id' => $this->getParam('color_id'),
         );
 
-        return $this->taskModification->update($values, false);
+        return $this->taskModificationModel->update($values, false);
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\ProjectActivity;
+use Kanboard\Model\ProjectActivityModel;
 
 /**
  * Filter activity events by creation date
@@ -32,7 +32,7 @@ class ProjectActivityCreationDateFilter extends BaseDateFilter implements Filter
      */
     public function apply()
     {
-        $this->applyDateFilter(ProjectActivity::TABLE.'.date_creation');
+        $this->applyDateFilter(ProjectActivityModel::TABLE.'.date_creation');
         return $this;
     }
 }

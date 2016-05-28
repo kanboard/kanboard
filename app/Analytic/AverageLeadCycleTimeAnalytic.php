@@ -3,7 +3,7 @@
 namespace Kanboard\Analytic;
 
 use Kanboard\Core\Base;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Average Lead and Cycle Time
@@ -106,7 +106,7 @@ class AverageLeadCycleTimeAnalytic extends Base
     private function getTasks($project_id)
     {
         return $this->db
-            ->table(Task::TABLE)
+            ->table(TaskModel::TABLE)
             ->columns('date_completed', 'date_creation', 'date_started')
             ->eq('project_id', $project_id)
             ->desc('id')

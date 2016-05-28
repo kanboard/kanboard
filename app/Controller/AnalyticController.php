@@ -3,7 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Filter\TaskProjectFilter;
-use Kanboard\Model\Task as TaskModel;
+use Kanboard\Model\TaskModel;
 
 /**
  * Project Analytic Controller
@@ -30,8 +30,8 @@ class AnalyticController extends BaseController
             ),
             'project' => $project,
             'average' => $this->averageLeadCycleTimeAnalytic->build($project['id']),
-            'metrics' => $this->projectDailyStats->getRawMetrics($project['id'], $from, $to),
-            'date_format' => $this->config->get('application_date_format'),
+            'metrics' => $this->projectDailyStatsModel->getRawMetrics($project['id'], $from, $to),
+            'date_format' => $this->configModel->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'title' => t('Lead and Cycle time for "%s"', $project['name']),
         )));
@@ -145,7 +145,7 @@ class AnalyticController extends BaseController
         $project = $this->getProject();
         list($from, $to) = $this->getDates();
 
-        $display_graph = $this->projectDailyColumnStats->countDays($project['id'], $from, $to) >= 2;
+        $display_graph = $this->projectDailyColumnStatsModel->countDays($project['id'], $from, $to) >= 2;
 
         $this->response->html($this->helper->layout->analytic($template, array(
             'values' => array(
@@ -153,9 +153,9 @@ class AnalyticController extends BaseController
                 'to' => $to,
             ),
             'display_graph' => $display_graph,
-            'metrics' => $display_graph ? $this->projectDailyColumnStats->getAggregatedMetrics($project['id'], $from, $to, $column) : array(),
+            'metrics' => $display_graph ? $this->projectDailyColumnStatsModel->getAggregatedMetrics($project['id'], $from, $to, $column) : array(),
             'project' => $project,
-            'date_format' => $this->config->get('application_date_format'),
+            'date_format' => $this->configModel->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'title' => t($title, $project['name']),
         )));

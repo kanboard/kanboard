@@ -18,11 +18,11 @@ class TaskPopoverController extends BaseController
     public function changeAssignee()
     {
         $task = $this->getTask();
-        $project = $this->project->getById($task['project_id']);
+        $project = $this->projectModel->getById($task['project_id']);
 
         $this->response->html($this->template->render('task_popover/change_assignee', array(
             'values'     => $task,
-            'users_list' => $this->projectUserRole->getAssignableUsersList($project['id']),
+            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id']),
             'project'    => $project,
         )));
     }
@@ -38,7 +38,7 @@ class TaskPopoverController extends BaseController
 
         list($valid,) = $this->taskValidator->validateAssigneeModification($values);
 
-        if ($valid && $this->taskModification->update($values)) {
+        if ($valid && $this->taskModificationModel->update($values)) {
             $this->flash->success(t('Task updated successfully.'));
         } else {
             $this->flash->failure(t('Unable to update your task.'));
@@ -55,11 +55,11 @@ class TaskPopoverController extends BaseController
     public function changeCategory()
     {
         $task = $this->getTask();
-        $project = $this->project->getById($task['project_id']);
+        $project = $this->projectModel->getById($task['project_id']);
 
         $this->response->html($this->template->render('task_popover/change_category', array(
             'values'          => $task,
-            'categories_list' => $this->category->getList($project['id']),
+            'categories_list' => $this->categoryModel->getList($project['id']),
             'project'         => $project,
         )));
     }
@@ -75,7 +75,7 @@ class TaskPopoverController extends BaseController
 
         list($valid,) = $this->taskValidator->validateCategoryModification($values);
 
-        if ($valid && $this->taskModification->update($values)) {
+        if ($valid && $this->taskModificationModel->update($values)) {
             $this->flash->success(t('Task updated successfully.'));
         } else {
             $this->flash->failure(t('Unable to update your task.'));

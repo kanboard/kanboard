@@ -32,7 +32,7 @@ class AvatarFileController extends BaseController
     {
         $user = $this->getUser();
 
-        if (! $this->avatarFile->uploadImageFile($user['id'], $this->request->getFileInfo('avatar'))) {
+        if (! $this->avatarFileModel->uploadImageFile($user['id'], $this->request->getFileInfo('avatar'))) {
             $this->flash->failure(t('Unable to upload the file.'));
         }
 
@@ -46,7 +46,7 @@ class AvatarFileController extends BaseController
     {
         $this->checkCSRFParam();
         $user = $this->getUser();
-        $this->avatarFile->remove($user['id']);
+        $this->avatarFileModel->remove($user['id']);
         $this->userSession->refresh($user['id']);
         $this->response->redirect($this->helper->url->to('AvatarFileController', 'show', array('user_id' => $user['id'])));
     }
@@ -58,7 +58,7 @@ class AvatarFileController extends BaseController
     {
         $user_id = $this->request->getIntegerParam('user_id');
         $size = $this->request->getStringParam('size', 48);
-        $filename = $this->avatarFile->getFilename($user_id);
+        $filename = $this->avatarFileModel->getFilename($user_id);
         $etag = md5($filename.$size);
 
         $this->response->withCache(365 * 86400, $etag);

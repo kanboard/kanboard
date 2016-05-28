@@ -2,21 +2,21 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Project;
-use Kanboard\Model\Board;
-use Kanboard\Model\Column;
-use Kanboard\Model\Config;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\Swimlane;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\BoardModel;
+use Kanboard\Model\ColumnModel;
+use Kanboard\Model\ConfigModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\SwimlaneModel;
 
 class BoardTest extends Base
 {
     public function testCreation()
     {
-        $p = new Project($this->container);
-        $columnModel = new Column($this->container);
-        $c = new Config($this->container);
+        $p = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
+        $c = new ConfigModel($this->container);
 
         // Default columns
 
@@ -48,8 +48,8 @@ class BoardTest extends Base
 
     public function testGetBoard()
     {
-        $p = new Project($this->container);
-        $b = new Board($this->container);
+        $p = new ProjectModel($this->container);
+        $b = new BoardModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1')));
 
@@ -69,11 +69,11 @@ class BoardTest extends Base
 
     public function testGetBoardWithSwimlane()
     {
-        $b = new Board($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-        $s = new Swimlane($this->container);
+        $b = new BoardModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'test 1')));

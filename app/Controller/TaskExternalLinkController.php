@@ -76,7 +76,7 @@ class TaskExternalLinkController extends BaseController
         $values = $this->request->getValues();
         list($valid, $errors) = $this->externalLinkValidator->validateCreation($values);
 
-        if ($valid && $this->taskExternalLink->create($values)) {
+        if ($valid && $this->taskExternalLinkModel->create($values)) {
             $this->flash->success(t('Link added successfully.'));
             return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
@@ -100,7 +100,7 @@ class TaskExternalLinkController extends BaseController
         $link_id = $this->request->getIntegerParam('link_id');
 
         if ($link_id > 0) {
-            $values = $this->taskExternalLink->getById($link_id);
+            $values = $this->taskExternalLinkModel->getById($link_id);
         }
 
         if (empty($values)) {
@@ -128,7 +128,7 @@ class TaskExternalLinkController extends BaseController
         $values = $this->request->getValues();
         list($valid, $errors) = $this->externalLinkValidator->validateModification($values);
 
-        if ($valid && $this->taskExternalLink->update($values)) {
+        if ($valid && $this->taskExternalLinkModel->update($values)) {
             $this->flash->success(t('Link updated successfully.'));
             return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
@@ -145,7 +145,7 @@ class TaskExternalLinkController extends BaseController
     {
         $task = $this->getTask();
         $link_id = $this->request->getIntegerParam('link_id');
-        $link = $this->taskExternalLink->getById($link_id);
+        $link = $this->taskExternalLinkModel->getById($link_id);
 
         if (empty($link)) {
             throw new PageNotFoundException();
@@ -167,7 +167,7 @@ class TaskExternalLinkController extends BaseController
         $this->checkCSRFParam();
         $task = $this->getTask();
 
-        if ($this->taskExternalLink->remove($this->request->getIntegerParam('link_id'))) {
+        if ($this->taskExternalLinkModel->remove($this->request->getIntegerParam('link_id'))) {
             $this->flash->success(t('Link removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this link.'));

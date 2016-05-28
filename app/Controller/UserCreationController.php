@@ -26,10 +26,10 @@ class UserCreationController extends BaseController
         $template = $isRemote ? 'user_creation/remote' : 'user_creation/local';
 
         $this->response->html($this->template->render($template, array(
-            'timezones' => $this->timezone->getTimezones(true),
-            'languages' => $this->language->getLanguages(true),
+            'timezones' => $this->timezoneModel->getTimezones(true),
+            'languages' => $this->languageModel->getLanguages(true),
             'roles' => $this->role->getApplicationRoles(),
-            'projects' => $this->project->getList(),
+            'projects' => $this->projectModel->getList(),
             'errors' => $errors,
             'values' => $values + array('role' => Role::APP_USER),
         )));
@@ -62,15 +62,15 @@ class UserCreationController extends BaseController
         $project_id = empty($values['project_id']) ? 0 : $values['project_id'];
         unset($values['project_id']);
 
-        $user_id = $this->user->create($values);
+        $user_id = $this->userModel->create($values);
 
         if ($user_id !== false) {
             if ($project_id !== 0) {
-                $this->projectUserRole->addUser($project_id, $user_id, Role::PROJECT_MEMBER);
+                $this->projectUserRoleModel->addUser($project_id, $user_id, Role::PROJECT_MEMBER);
             }
 
             if (! empty($values['notifications_enabled'])) {
-                $this->userNotificationType->saveSelectedTypes($user_id, array(MailNotification::TYPE));
+                $this->userNotificationTypeModel->saveSelectedTypes($user_id, array(MailNotification::TYPE));
             }
 
             $this->flash->success(t('User created successfully.'));

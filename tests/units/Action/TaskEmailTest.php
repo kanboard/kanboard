@@ -3,19 +3,19 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Event\GenericEvent;
-use Kanboard\Model\Task;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Project;
-use Kanboard\Model\User;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\UserModel;
 use Kanboard\Action\TaskEmail;
 
 class TaskEmailTest extends Base
 {
     public function testSuccess()
     {
-        $userModel = new User($this->container);
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -38,12 +38,12 @@ class TaskEmailTest extends Base
                 $this->stringContains('test')
             );
 
-        $this->assertTrue($action->execute($event, Task::EVENT_CLOSE));
+        $this->assertTrue($action->execute($event, TaskModel::EVENT_CLOSE));
     }
 
     public function testWithWrongColumn()
     {
-        $projectModel = new Project($this->container);
+        $projectModel = new ProjectModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
 
@@ -55,6 +55,6 @@ class TaskEmailTest extends Base
         $action->setParam('user_id', 1);
         $action->setParam('subject', 'My email subject');
 
-        $this->assertFalse($action->execute($event, Task::EVENT_CLOSE));
+        $this->assertFalse($action->execute($event, TaskModel::EVENT_CLOSE));
     }
 }

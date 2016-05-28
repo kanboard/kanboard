@@ -8,7 +8,7 @@ use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Filter\TaskStatusFilter;
 use Kanboard\Formatter\TaskICalFormatter;
-use Kanboard\Model\Task as TaskModel;
+use Kanboard\Model\TaskModel;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 
 /**
@@ -27,7 +27,7 @@ class ICalendarController extends BaseController
     public function user()
     {
         $token = $this->request->getStringParam('token');
-        $user = $this->user->getByToken($token);
+        $user = $this->userModel->getByToken($token);
 
         // Token verification
         if (empty($user)) {
@@ -37,7 +37,7 @@ class ICalendarController extends BaseController
         // Common filter
         $queryBuilder = new QueryBuilder();
         $queryBuilder
-            ->withQuery($this->taskFinder->getICalQuery())
+            ->withQuery($this->taskFinderModel->getICalQuery())
             ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
             ->withFilter(new TaskAssigneeFilter($user['id']));
 
@@ -58,7 +58,7 @@ class ICalendarController extends BaseController
     public function project()
     {
         $token = $this->request->getStringParam('token');
-        $project = $this->project->getByToken($token);
+        $project = $this->projectModel->getByToken($token);
 
         // Token verification
         if (empty($project)) {
@@ -68,7 +68,7 @@ class ICalendarController extends BaseController
         // Common filter
         $queryBuilder = new QueryBuilder();
         $queryBuilder
-            ->withQuery($this->taskFinder->getICalQuery())
+            ->withQuery($this->taskFinderModel->getICalQuery())
             ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
             ->withFilter(new TaskProjectFilter($project['id']));
 

@@ -21,7 +21,7 @@ class TaskDuplicationController extends BaseController
 
         if ($this->request->getStringParam('confirmation') === 'yes') {
             $this->checkCSRFParam();
-            $task_id = $this->taskDuplication->duplicate($task['id']);
+            $task_id = $this->taskDuplicationModel->duplicate($task['id']);
 
             if ($task_id > 0) {
                 $this->flash->success(t('Task created successfully.'));
@@ -50,7 +50,7 @@ class TaskDuplicationController extends BaseController
             $values = $this->request->getValues();
             list($valid, ) = $this->taskValidator->validateProjectModification($values);
 
-            if ($valid && $this->taskDuplication->moveToProject($task['id'],
+            if ($valid && $this->taskDuplicationModel->moveToProject($task['id'],
                                                                 $values['project_id'],
                                                                 $values['swimlane_id'],
                                                                 $values['column_id'],
@@ -80,7 +80,7 @@ class TaskDuplicationController extends BaseController
             list($valid, ) = $this->taskValidator->validateProjectModification($values);
 
             if ($valid) {
-                $task_id = $this->taskDuplication->duplicateToProject(
+                $task_id = $this->taskDuplicationModel->duplicateToProject(
                     $task['id'], $values['project_id'], $values['swimlane_id'],
                     $values['column_id'], $values['category_id'], $values['owner_id']
                 );
@@ -107,19 +107,19 @@ class TaskDuplicationController extends BaseController
     private function chooseDestination(array $task, $template)
     {
         $values = array();
-        $projects_list = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
+        $projects_list = $this->projectUserRoleModel->getActiveProjectsByUser($this->userSession->getId());
 
         unset($projects_list[$task['project_id']]);
 
         if (! empty($projects_list)) {
             $dst_project_id = $this->request->getIntegerParam('dst_project_id', key($projects_list));
 
-            $swimlanes_list = $this->swimlane->getList($dst_project_id, false, true);
-            $columns_list = $this->column->getList($dst_project_id);
-            $categories_list = $this->category->getList($dst_project_id);
-            $users_list = $this->projectUserRole->getAssignableUsersList($dst_project_id);
+            $swimlanes_list = $this->swimlaneModel->getList($dst_project_id, false, true);
+            $columns_list = $this->columnModel->getList($dst_project_id);
+            $categories_list = $this->categoryModel->getList($dst_project_id);
+            $users_list = $this->projectUserRoleModel->getAssignableUsersList($dst_project_id);
 
-            $values = $this->taskDuplication->checkDestinationProjectValues($task);
+            $values = $this->taskDuplicationModel->checkDestinationProjectValues($task);
             $values['project_id'] = $dst_project_id;
         } else {
             $swimlanes_list = array();

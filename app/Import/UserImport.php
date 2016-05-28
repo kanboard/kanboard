@@ -2,7 +2,7 @@
 
 namespace Kanboard\Import;
 
-use Kanboard\Model\User;
+use Kanboard\Model\UserModel;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 use Kanboard\Core\Security\Role;
@@ -56,7 +56,7 @@ class UserImport extends Base
         $row = $this->prepare($row);
 
         if ($this->validateCreation($row)) {
-            if ($this->user->create($row)) {
+            if ($this->userModel->create($row)) {
                 $this->logger->debug('UserImport: imported successfully line '.$line_number);
                 $this->counter++;
             } else {
@@ -109,7 +109,7 @@ class UserImport extends Base
     {
         $v = new Validator($values, array(
             new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
-            new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), User::TABLE, 'id'),
+            new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), UserModel::TABLE, 'id'),
             new Validators\MinLength('password', t('The minimum length is %d characters', 6), 6),
             new Validators\Email('email', t('Email address invalid')),
             new Validators\Integer('is_ldap_user', t('This value must be an integer')),

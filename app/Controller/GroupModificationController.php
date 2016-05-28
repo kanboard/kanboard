@@ -20,7 +20,7 @@ class GroupModificationController extends BaseController
     public function show(array $values = array(), array $errors = array())
     {
         if (empty($values)) {
-            $values = $this->group->getById($this->request->getIntegerParam('group_id'));
+            $values = $this->groupModel->getById($this->request->getIntegerParam('group_id'));
         }
 
         $this->response->html($this->template->render('group_modification/show', array(
@@ -40,7 +40,7 @@ class GroupModificationController extends BaseController
         list($valid, $errors) = $this->groupValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->group->update($values) !== false) {
+            if ($this->groupModel->update($values) !== false) {
                 $this->flash->success(t('Group updated successfully.'));
                 return $this->response->redirect($this->helper->url->to('GroupListController', 'index'), true);
             } else {

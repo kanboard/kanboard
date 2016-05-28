@@ -2,7 +2,7 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Set a category automatically according to the color
@@ -32,7 +32,7 @@ class TaskAssignCategoryColor extends Base
     public function getCompatibleEvents()
     {
         return array(
-            Task::EVENT_CREATE_UPDATE,
+            TaskModel::EVENT_CREATE_UPDATE,
         );
     }
 
@@ -78,7 +78,7 @@ class TaskAssignCategoryColor extends Base
             'category_id' => $this->getParam('category_id'),
         );
 
-        return $this->taskModification->update($values);
+        return $this->taskModificationModel->update($values);
     }
 
     /**

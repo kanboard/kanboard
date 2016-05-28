@@ -3,7 +3,7 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Helper\UrlHelper;
-use Kanboard\Model\Config;
+use Kanboard\Model\ConfigModel;
 use Kanboard\Core\Http\Request;
 
 class UrlHelperTest extends Base
@@ -115,7 +115,7 @@ class UrlHelperTest extends Base
         $h = new UrlHelper($this->container);
         $this->assertEquals('http://kb:1234/', $h->base());
 
-        $c = new Config($this->container);
+        $c = new ConfigModel($this->container);
         $c->save(array('application_url' => 'https://mykanboard/'));
         $this->container['memoryCache']->flush();
 

@@ -2,21 +2,21 @@
 
 require_once __DIR__ . '/../Base.php';
 
-use Kanboard\Model\TaskCreation;
+use Kanboard\Model\TaskCreationModel;
 use Kanboard\Export\TaskExport;
-use Kanboard\Model\Project;
-use Kanboard\Model\Category;
-use Kanboard\Model\Swimlane;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\CategoryModel;
+use Kanboard\Model\SwimlaneModel;
 
 class TaskExportTest extends Base
 {
     public function testExport()
     {
-        $tc = new TaskCreation($this->container);
-        $p = new Project($this->container);
-        $c = new Category($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $p = new ProjectModel($this->container);
+        $c = new CategoryModel($this->container);
         $e = new TaskExport($this->container);
-        $s = new Swimlane($this->container);
+        $s = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Export Project')));
 

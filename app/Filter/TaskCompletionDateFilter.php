@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Filter tasks by completion date
@@ -32,7 +32,7 @@ class TaskCompletionDateFilter extends BaseDateFilter implements FilterInterface
      */
     public function apply()
     {
-        $this->applyDateFilter(Task::TABLE.'.date_completed');
+        $this->applyDateFilter(TaskModel::TABLE.'.date_completed');
         return $this;
     }
 }

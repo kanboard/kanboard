@@ -2,23 +2,23 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Swimlane;
-use Kanboard\Model\Subtask;
-use Kanboard\Model\Task;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\TaskStatus;
-use Kanboard\Model\Project;
+use Kanboard\Model\SwimlaneModel;
+use Kanboard\Model\SubtaskModel;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\TaskStatusModel;
+use Kanboard\Model\ProjectModel;
 
 class TaskStatusTest extends Base
 {
     public function testCloseBySwimlaneAndColumn()
     {
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $ts = new TaskStatus($this->container);
-        $p = new Project($this->container);
-        $s = new Swimlane($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $ts = new TaskStatusModel($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $s->create(array('name' => 'test', 'project_id' => 1)));
@@ -56,10 +56,10 @@ class TaskStatusTest extends Base
 
     public function testStatus()
     {
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $ts = new TaskStatus($this->container);
-        $p = new Project($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $ts = new TaskStatusModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
@@ -70,21 +70,21 @@ class TaskStatusTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEquals(Task::STATUS_OPEN, $task['is_active']);
+        $this->assertEquals(TaskModel::STATUS_OPEN, $task['is_active']);
         $this->assertEquals(0, $task['date_completed']);
         $this->assertEquals(time(), $task['date_modification'], '', 1);
 
         // We close the task
 
-        $this->container['dispatcher']->addListener(Task::EVENT_CLOSE, array($this, 'onTaskClose'));
-        $this->container['dispatcher']->addListener(Task::EVENT_OPEN, array($this, 'onTaskOpen'));
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CLOSE, array($this, 'onTaskClose'));
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_OPEN, array($this, 'onTaskOpen'));
 
         $this->assertTrue($ts->close(1));
         $this->assertTrue($ts->isClosed(1));
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEquals(Task::STATUS_CLOSED, $task['is_active']);
+        $this->assertEquals(TaskModel::STATUS_CLOSED, $task['is_active']);
         $this->assertEquals(time(), $task['date_completed'], 'Bad completion timestamp', 1);
         $this->assertEquals(time(), $task['date_modification'], 'Bad modification timestamp', 1);
 
@@ -95,7 +95,7 @@ class TaskStatusTest extends Base
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEquals(Task::STATUS_OPEN, $task['is_active']);
+        $this->assertEquals(TaskModel::STATUS_OPEN, $task['is_active']);
         $this->assertEquals(0, $task['date_completed']);
         $this->assertEquals(time(), $task['date_modification'], '', 1);
 
@@ -120,10 +120,10 @@ class TaskStatusTest extends Base
 
     public function testThatAllSubtasksAreClosed()
     {
-        $ts = new TaskStatus($this->container);
-        $tc = new TaskCreation($this->container);
-        $s = new Subtask($this->container);
-        $p = new Project($this->container);
+        $ts = new TaskStatusModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $s = new SubtaskModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test 1', 'project_id' => 1)));
@@ -137,7 +137,7 @@ class TaskStatusTest extends Base
         $this->assertNotEmpty($subtasks);
 
         foreach ($subtasks as $subtask) {
-            $this->assertEquals(Subtask::STATUS_DONE, $subtask['status']);
+            $this->assertEquals(SubtaskModel::STATUS_DONE, $subtask['status']);
         }
     }
 }

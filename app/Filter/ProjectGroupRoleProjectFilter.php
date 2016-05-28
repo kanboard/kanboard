@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\ProjectGroupRole;
+use Kanboard\Model\ProjectGroupRoleModel;
 
 /**
  * Filter ProjectGroupRole users by project
@@ -32,7 +32,7 @@ class ProjectGroupRoleProjectFilter extends BaseFilter implements FilterInterfac
      */
     public function apply()
     {
-        $this->query->eq(ProjectGroupRole::TABLE.'.project_id', $this->value);
+        $this->query->eq(ProjectGroupRoleModel::TABLE.'.project_id', $this->value);
         return $this;
     }
 }

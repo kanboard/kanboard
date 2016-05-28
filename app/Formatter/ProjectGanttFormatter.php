@@ -21,7 +21,7 @@ class ProjectGanttFormatter extends BaseFormatter implements FormatterInterface
     public function format()
     {
         $projects = $this->query->findAll();
-        $colors = $this->color->getDefaultColors();
+        $colors = $this->colorModel->getDefaultColors();
         $bars = array();
 
         foreach ($projects as $project) {
@@ -48,7 +48,7 @@ class ProjectGanttFormatter extends BaseFormatter implements FormatterInterface
                 'gantt_link' => $this->helper->url->href('TaskGanttController', 'show', array('project_id' => $project['id'])),
                 'color' => $color,
                 'not_defined' => empty($project['start_date']) || empty($project['end_date']),
-                'users' => $this->projectUserRole->getAllUsersGroupedByRole($project['id']),
+                'users' => $this->projectUserRoleModel->getAllUsersGroupedByRole($project['id']),
             );
         }
 

@@ -2,33 +2,33 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Action;
-use Kanboard\Model\Project;
-use Kanboard\Model\Category;
-use Kanboard\Model\ProjectUserRole;
-use Kanboard\Model\ProjectGroupRole;
-use Kanboard\Model\ProjectDuplication;
-use Kanboard\Model\User;
-use Kanboard\Model\Group;
-use Kanboard\Model\GroupMember;
-use Kanboard\Model\Swimlane;
-use Kanboard\Model\Task;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
+use Kanboard\Model\ActionModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\CategoryModel;
+use Kanboard\Model\ProjectUserRoleModel;
+use Kanboard\Model\ProjectGroupRoleModel;
+use Kanboard\Model\ProjectDuplicationModel;
+use Kanboard\Model\UserModel;
+use Kanboard\Model\GroupModel;
+use Kanboard\Model\GroupMemberModel;
+use Kanboard\Model\SwimlaneModel;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
 use Kanboard\Core\Security\Role;
 
 class ProjectDuplicationTest extends Base
 {
     public function testGetSelections()
     {
-        $projectDuplicationModel = new ProjectDuplication($this->container);
+        $projectDuplicationModel = new ProjectDuplicationModel($this->container);
         $this->assertCount(6, $projectDuplicationModel->getOptionalSelection());
         $this->assertCount(7, $projectDuplicationModel->getPossibleSelection());
     }
 
     public function testGetClonedProjectName()
     {
-        $pd = new ProjectDuplication($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
 
         $this->assertEquals('test (Clone)', $pd->getClonedProjectName('test'));
 
@@ -41,8 +41,8 @@ class ProjectDuplicationTest extends Base
 
     public function testClonePublicProject()
     {
-        $p = new Project($this->container);
-        $pd = new ProjectDuplication($this->container);
+        $p = new ProjectModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Public')));
         $this->assertEquals(2, $pd->duplicate(1));
@@ -59,9 +59,9 @@ class ProjectDuplicationTest extends Base
 
     public function testClonePrivateProject()
     {
-        $p = new Project($this->container);
-        $pd = new ProjectDuplication($this->container);
-        $pp = new ProjectUserRole($this->container);
+        $p = new ProjectModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
+        $pp = new ProjectUserRoleModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Private', 'is_private' => 1), 1, true));
         $this->assertEquals(2, $pd->duplicate(1));
@@ -80,8 +80,8 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneSharedProject()
     {
-        $p = new Project($this->container);
-        $pd = new ProjectDuplication($this->container);
+        $p = new ProjectModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Shared')));
         $this->assertTrue($p->update(array('id' => 1, 'is_public' => 1, 'token' => 'test')));
@@ -101,8 +101,8 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneInactiveProject()
     {
-        $p = new Project($this->container);
-        $pd = new ProjectDuplication($this->container);
+        $p = new ProjectModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Inactive')));
         $this->assertTrue($p->update(array('id' => 1, 'is_active' => 0)));
@@ -120,16 +120,16 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneProjectWithOwner()
     {
-        $p = new Project($this->container);
-        $pd = new ProjectDuplication($this->container);
-        $projectUserRoleModel = new ProjectUserRole($this->container);
+        $p = new ProjectModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Owner')));
 
         $project = $p->getById(1);
         $this->assertEquals(0, $project['owner_id']);
 
-        $this->assertEquals(2, $pd->duplicate(1, array('projectPermission'), 1));
+        $this->assertEquals(2, $pd->duplicate(1, array('projectPermissionModel'), 1));
 
         $project = $p->getById(2);
         $this->assertNotEmpty($project);
@@ -141,15 +141,15 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneProjectWithDifferentName()
     {
-        $p = new Project($this->container);
-        $pd = new ProjectDuplication($this->container);
+        $p = new ProjectModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Owner')));
 
         $project = $p->getById(1);
         $this->assertEquals(0, $project['owner_id']);
 
-        $this->assertEquals(2, $pd->duplicate(1, array('projectPermission'), 1, 'Foobar'));
+        $this->assertEquals(2, $pd->duplicate(1, array('projectPermissionModel'), 1, 'Foobar'));
 
         $project = $p->getById(2);
         $this->assertNotEmpty($project);
@@ -159,8 +159,8 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneProjectAndForceItToBePrivate()
     {
-        $p = new Project($this->container);
-        $pd = new ProjectDuplication($this->container);
+        $p = new ProjectModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'Owner')));
 
@@ -168,7 +168,7 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals(0, $project['owner_id']);
         $this->assertEquals(0, $project['is_private']);
 
-        $this->assertEquals(2, $pd->duplicate(1, array('projectPermission'), 1, 'Foobar', true));
+        $this->assertEquals(2, $pd->duplicate(1, array('projectPermissionModel'), 1, 'Foobar', true));
 
         $project = $p->getById(2);
         $this->assertNotEmpty($project);
@@ -179,9 +179,9 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneProjectWithCategories()
     {
-        $p = new Project($this->container);
-        $c = new Category($this->container);
-        $pd = new ProjectDuplication($this->container);
+        $p = new ProjectModel($this->container);
+        $c = new CategoryModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'P1')));
 
@@ -204,10 +204,10 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneProjectWithUsers()
     {
-        $p = new Project($this->container);
-        $pp = new ProjectUserRole($this->container);
-        $u = new User($this->container);
-        $pd = new ProjectDuplication($this->container);
+        $p = new ProjectModel($this->container);
+        $pp = new ProjectUserRoleModel($this->container);
+        $u = new UserModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
 
         $this->assertEquals(2, $u->create(array('username' => 'user1')));
         $this->assertEquals(3, $u->create(array('username' => 'user2')));
@@ -229,10 +229,10 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneProjectWithUsersAndOverrideOwner()
     {
-        $p = new Project($this->container);
-        $pp = new ProjectUserRole($this->container);
-        $u = new User($this->container);
-        $pd = new ProjectDuplication($this->container);
+        $p = new ProjectModel($this->container);
+        $pp = new ProjectUserRoleModel($this->container);
+        $u = new UserModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
 
         $this->assertEquals(2, $u->create(array('username' => 'user1')));
         $this->assertEquals(1, $p->create(array('name' => 'P1'), 2));
@@ -243,7 +243,7 @@ class ProjectDuplicationTest extends Base
         $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MANAGER));
         $this->assertTrue($pp->addUser(1, 1, Role::PROJECT_MEMBER));
 
-        $this->assertEquals(2, $pd->duplicate(1, array('projectPermission'), 1));
+        $this->assertEquals(2, $pd->duplicate(1, array('projectPermissionModel'), 1));
 
         $this->assertCount(2, $pp->getUsers(2));
         $this->assertEquals(Role::PROJECT_MANAGER, $pp->getUserRole(2, 2));
@@ -255,10 +255,10 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneTeamProjectToPrivatProject()
     {
-        $p = new Project($this->container);
-        $pp = new ProjectUserRole($this->container);
-        $u = new User($this->container);
-        $pd = new ProjectDuplication($this->container);
+        $p = new ProjectModel($this->container);
+        $pp = new ProjectUserRoleModel($this->container);
+        $u = new UserModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
 
         $this->assertEquals(2, $u->create(array('username' => 'user1')));
         $this->assertEquals(3, $u->create(array('username' => 'user2')));
@@ -271,7 +271,7 @@ class ProjectDuplicationTest extends Base
         $this->assertTrue($pp->addUser(1, 2, Role::PROJECT_MANAGER));
         $this->assertTrue($pp->addUser(1, 1, Role::PROJECT_MEMBER));
 
-        $this->assertEquals(2, $pd->duplicate(1, array('projectPermission'), 3, 'My private project', true));
+        $this->assertEquals(2, $pd->duplicate(1, array('projectPermissionModel'), 3, 'My private project', true));
 
         $this->assertCount(1, $pp->getUsers(2));
         $this->assertEquals(Role::PROJECT_MANAGER, $pp->getUserRole(2, 3));
@@ -283,13 +283,13 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneProjectWithGroups()
     {
-        $p = new Project($this->container);
-        $pd = new ProjectDuplication($this->container);
-        $userModel = new User($this->container);
-        $groupModel = new Group($this->container);
-        $groupMemberModel = new GroupMember($this->container);
-        $projectGroupRoleModel = new ProjectGroupRole($this->container);
-        $projectUserRoleModel = new ProjectUserRole($this->container);
+        $p = new ProjectModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
+        $userModel = new UserModel($this->container);
+        $groupModel = new GroupModel($this->container);
+        $groupMemberModel = new GroupMemberModel($this->container);
+        $projectGroupRoleModel = new ProjectGroupRoleModel($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'P1')));
 
@@ -319,15 +319,15 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneProjectWithActionTaskAssignCurrentUser()
     {
-        $p = new Project($this->container);
-        $a = new Action($this->container);
-        $pd = new ProjectDuplication($this->container);
+        $p = new ProjectModel($this->container);
+        $a = new ActionModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'P1')));
 
         $this->assertEquals(1, $a->create(array(
             'project_id' => 1,
-            'event_name' => Task::EVENT_MOVE_COLUMN,
+            'event_name' => TaskModel::EVENT_MOVE_COLUMN,
             'action_name' => 'TaskAssignCurrentUser',
             'params' => array('column_id' => 2),
         )));
@@ -344,10 +344,10 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneProjectWithActionTaskAssignColorCategory()
     {
-        $p = new Project($this->container);
-        $a = new Action($this->container);
-        $c = new Category($this->container);
-        $pd = new ProjectDuplication($this->container);
+        $p = new ProjectModel($this->container);
+        $a = new ActionModel($this->container);
+        $c = new CategoryModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'P1')));
 
@@ -357,7 +357,7 @@ class ProjectDuplicationTest extends Base
 
         $this->assertEquals(1, $a->create(array(
             'project_id' => 1,
-            'event_name' => Task::EVENT_CREATE_UPDATE,
+            'event_name' => TaskModel::EVENT_CREATE_UPDATE,
             'action_name' => 'TaskAssignColorCategory',
             'params' => array('color_id' => 'blue', 'category_id' => 2),
         )));
@@ -375,11 +375,11 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneProjectWithSwimlanes()
     {
-        $p = new Project($this->container);
-        $pd = new ProjectDuplication($this->container);
-        $s = new Swimlane($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
+        $s = new SwimlaneModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'P1', 'default_swimlane' => 'New Default')));
 
@@ -394,7 +394,7 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals(3, $tc->create(array('title' => 'T2', 'project_id' => 1, 'swimlane_id' => 2)));
         $this->assertEquals(4, $tc->create(array('title' => 'T3', 'project_id' => 1, 'swimlane_id' => 3)));
 
-        $this->assertEquals(2, $pd->duplicate(1, array('category', 'swimlane')));
+        $this->assertEquals(2, $pd->duplicate(1, array('categoryModel', 'swimlaneModel')));
 
         $swimlanes = $s->getAll(2);
         $this->assertCount(3, $swimlanes);
@@ -414,10 +414,10 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneProjectWithTasks()
     {
-        $p = new Project($this->container);
-        $pd = new ProjectDuplication($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'P1')));
 
@@ -426,7 +426,7 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals(2, $tc->create(array('title' => 'T2', 'project_id' => 1, 'column_id' => 2)));
         $this->assertEquals(3, $tc->create(array('title' => 'T3', 'project_id' => 1, 'column_id' => 3)));
 
-        $this->assertEquals(2, $pd->duplicate(1, array('category', 'action', 'task')));
+        $this->assertEquals(2, $pd->duplicate(1, array('categoryModel', 'actionModel', 'taskModel')));
 
         // Check if Tasks have been duplicated
         $tasks = $tf->getAll(2);
@@ -438,11 +438,11 @@ class ProjectDuplicationTest extends Base
 
     public function testCloneProjectWithSwimlanesAndTasks()
     {
-        $p = new Project($this->container);
-        $pd = new ProjectDuplication($this->container);
-        $s = new Swimlane($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $pd = new ProjectDuplicationModel($this->container);
+        $s = new SwimlaneModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'P1', 'default_swimlane' => 'New Default')));
 
@@ -456,7 +456,7 @@ class ProjectDuplicationTest extends Base
         $this->assertEquals(2, $tc->create(array('title' => 'T2', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 1)));
         $this->assertEquals(3, $tc->create(array('title' => 'T3', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1)));
 
-        $this->assertEquals(2, $pd->duplicate(1, array('projectPermission', 'swimlane', 'task')));
+        $this->assertEquals(2, $pd->duplicate(1, array('projectPermissionModel', 'swimlaneModel', 'taskModel')));
 
         // Check if Swimlanes have been duplicated
         $swimlanes = $s->getAll(2);

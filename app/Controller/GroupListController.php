@@ -21,7 +21,7 @@ class GroupListController extends BaseController
             ->setUrl('GroupListController', 'index')
             ->setMax(30)
             ->setOrder('name')
-            ->setQuery($this->group->getQuery())
+            ->setQuery($this->groupModel->getQuery())
             ->calculate();
 
         $this->response->html($this->helper->layout->app('group/index', array(
@@ -38,13 +38,13 @@ class GroupListController extends BaseController
     public function users()
     {
         $group_id = $this->request->getIntegerParam('group_id');
-        $group = $this->group->getById($group_id);
+        $group = $this->groupModel->getById($group_id);
 
         $paginator = $this->paginator
             ->setUrl('GroupListController', 'users', array('group_id' => $group_id))
             ->setMax(30)
             ->setOrder('username')
-            ->setQuery($this->groupMember->getQuery($group_id))
+            ->setQuery($this->groupMemberModel->getQuery($group_id))
             ->calculate();
 
         $this->response->html($this->helper->layout->app('group/users', array(
@@ -64,14 +64,14 @@ class GroupListController extends BaseController
     public function associate(array $values = array(), array $errors = array())
     {
         $group_id = $this->request->getIntegerParam('group_id');
-        $group = $this->group->getById($group_id);
+        $group = $this->groupModel->getById($group_id);
 
         if (empty($values)) {
             $values['group_id'] = $group_id;
         }
 
         $this->response->html($this->template->render('group/associate', array(
-            'users' => $this->user->prepareList($this->groupMember->getNotMembers($group_id)),
+            'users' => $this->userModel->prepareList($this->groupMemberModel->getNotMembers($group_id)),
             'group' => $group,
             'errors' => $errors,
             'values' => $values,
@@ -88,7 +88,7 @@ class GroupListController extends BaseController
         $values = $this->request->getValues();
 
         if (isset($values['group_id']) && isset($values['user_id'])) {
-            if ($this->groupMember->addUser($values['group_id'], $values['user_id'])) {
+            if ($this->groupMemberModel->addUser($values['group_id'], $values['user_id'])) {
                 $this->flash->success(t('Group member added successfully.'));
                 return $this->response->redirect($this->helper->url->to('GroupListController', 'users', array('group_id' => $values['group_id'])), true);
             } else {
@@ -108,8 +108,8 @@ class GroupListController extends BaseController
     {
         $group_id = $this->request->getIntegerParam('group_id');
         $user_id = $this->request->getIntegerParam('user_id');
-        $group = $this->group->getById($group_id);
-        $user = $this->user->getById($user_id);
+        $group = $this->groupModel->getById($group_id);
+        $user = $this->userModel->getById($user_id);
 
         $this->response->html($this->template->render('group/dissociate', array(
             'group' => $group,
@@ -128,7 +128,7 @@ class GroupListController extends BaseController
         $group_id = $this->request->getIntegerParam('group_id');
         $user_id = $this->request->getIntegerParam('user_id');
 
-        if ($this->groupMember->removeUser($group_id, $user_id)) {
+        if ($this->groupMemberModel->removeUser($group_id, $user_id)) {
             $this->flash->success(t('User removed successfully from this group.'));
         } else {
             $this->flash->failure(t('Unable to remove this user from the group.'));
@@ -145,7 +145,7 @@ class GroupListController extends BaseController
     public function confirm()
     {
         $group_id = $this->request->getIntegerParam('group_id');
-        $group = $this->group->getById($group_id);
+        $group = $this->groupModel->getById($group_id);
 
         $this->response->html($this->template->render('group/remove', array(
             'group' => $group,
@@ -162,7 +162,7 @@ class GroupListController extends BaseController
         $this->checkCSRFParam();
         $group_id = $this->request->getIntegerParam('group_id');
 
-        if ($this->group->remove($group_id)) {
+        if ($this->groupModel->remove($group_id)) {
             $this->flash->success(t('Group removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this group.'));

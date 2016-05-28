@@ -6,7 +6,7 @@ use Kanboard\Filter\ProjectIdsFilter;
 use Kanboard\Filter\ProjectStatusFilter;
 use Kanboard\Filter\ProjectTypeFilter;
 use Kanboard\Formatter\ProjectGanttFormatter;
-use Kanboard\Model\Project;
+use Kanboard\Model\ProjectModel;
 
 /**
  * Projects Gantt Controller
@@ -21,13 +21,13 @@ class ProjectGanttController extends BaseController
      */
     public function show()
     {
-        $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
+        $project_ids = $this->projectPermissionModel->getActiveProjectIds($this->userSession->getId());
         $filter = $this->projectQuery
-            ->withFilter(new ProjectTypeFilter(Project::TYPE_TEAM))
-            ->withFilter(new ProjectStatusFilter(Project::ACTIVE))
+            ->withFilter(new ProjectTypeFilter(ProjectModel::TYPE_TEAM))
+            ->withFilter(new ProjectStatusFilter(ProjectModel::ACTIVE))
             ->withFilter(new ProjectIdsFilter($project_ids));
 
-        $filter->getQuery()->asc(Project::TABLE.'.start_date');
+        $filter->getQuery()->asc(ProjectModel::TABLE.'.start_date');
 
         $this->response->html($this->helper->layout->app('project_gantt/show', array(
             'projects' => $filter->format(new ProjectGanttFormatter($this->container)),
@@ -42,7 +42,7 @@ class ProjectGanttController extends BaseController
     {
         $values = $this->request->getJson();
 
-        $result = $this->project->update(array(
+        $result = $this->projectModel->update(array(
             'id' => $values['id'],
             'start_date' => $this->dateParser->getIsoDate(strtotime($values['start'])),
             'end_date' => $this->dateParser->getIsoDate(strtotime($values['end'])),

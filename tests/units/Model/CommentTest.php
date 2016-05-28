@@ -2,17 +2,17 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Project;
-use Kanboard\Model\Comment;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\CommentModel;
 
 class CommentTest extends Base
 {
     public function testCreate()
     {
-        $c = new Comment($this->container);
-        $tc = new TaskCreation($this->container);
-        $p = new Project($this->container);
+        $c = new CommentModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1)));
@@ -38,9 +38,9 @@ class CommentTest extends Base
 
     public function testGetAll()
     {
-        $c = new Comment($this->container);
-        $tc = new TaskCreation($this->container);
-        $p = new Project($this->container);
+        $c = new CommentModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1)));
@@ -61,9 +61,9 @@ class CommentTest extends Base
 
     public function testUpdate()
     {
-        $c = new Comment($this->container);
-        $tc = new TaskCreation($this->container);
-        $p = new Project($this->container);
+        $c = new CommentModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1)));
@@ -77,9 +77,9 @@ class CommentTest extends Base
 
     public function validateRemove()
     {
-        $c = new Comment($this->container);
-        $tc = new TaskCreation($this->container);
-        $p = new Project($this->container);
+        $c = new CommentModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test1')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1)));

@@ -2,8 +2,8 @@
 
 namespace Kanboard\Controller;
 
-use Kanboard\Model\Project as ProjectModel;
-use Kanboard\Model\Subtask as SubtaskModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\SubtaskModel;
 
 /**
  * Dashboard Controller
@@ -28,7 +28,7 @@ class DashboardController extends BaseController
             ->setUrl('DashboardController', $action, array('pagination' => 'projects', 'user_id' => $user_id))
             ->setMax($max)
             ->setOrder(ProjectModel::TABLE.'.name')
-            ->setQuery($this->project->getQueryColumnStats($this->projectPermission->getActiveProjectIds($user_id)))
+            ->setQuery($this->projectModel->getQueryColumnStats($this->projectPermissionModel->getActiveProjectIds($user_id)))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'projects');
     }
 
@@ -47,7 +47,7 @@ class DashboardController extends BaseController
             ->setUrl('DashboardController', $action, array('pagination' => 'tasks', 'user_id' => $user_id))
             ->setMax($max)
             ->setOrder('tasks.id')
-            ->setQuery($this->taskFinder->getUserQuery($user_id))
+            ->setQuery($this->taskFinderModel->getUserQuery($user_id))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'tasks');
     }
 
@@ -66,7 +66,7 @@ class DashboardController extends BaseController
             ->setUrl('DashboardController', $action, array('pagination' => 'subtasks', 'user_id' => $user_id))
             ->setMax($max)
             ->setOrder('tasks.id')
-            ->setQuery($this->subtask->getUserQuery($user_id, array(SubTaskModel::STATUS_TODO, SubtaskModel::STATUS_INPROGRESS)))
+            ->setQuery($this->subtaskModel->getUserQuery($user_id, array(SubTaskModel::STATUS_TODO, SubtaskModel::STATUS_INPROGRESS)))
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
     }
 
@@ -147,7 +147,7 @@ class DashboardController extends BaseController
 
         $this->response->html($this->helper->layout->dashboard('dashboard/activity', array(
             'title' => t('My activity stream'),
-            'events' => $this->helper->projectActivity->getProjectsEvents($this->projectPermission->getActiveProjectIds($user['id']), 100),
+            'events' => $this->helper->projectActivity->getProjectsEvents($this->projectPermissionModel->getActiveProjectIds($user['id']), 100),
             'user' => $user,
         )));
     }
@@ -176,7 +176,7 @@ class DashboardController extends BaseController
 
         $this->response->html($this->helper->layout->dashboard('dashboard/notifications', array(
             'title' => t('My notifications'),
-            'notifications' => $this->userUnreadNotification->getAll($user['id']),
+            'notifications' => $this->userUnreadNotificationModel->getAll($user['id']),
             'user' => $user,
         )));
     }

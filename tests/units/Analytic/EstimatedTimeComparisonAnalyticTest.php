@@ -2,16 +2,16 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Project;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ProjectModel;
 use Kanboard\Analytic\EstimatedTimeComparisonAnalytic;
 
 class EstimatedTimeComparisonAnalyticTest extends Base
 {
     public function testBuild()
     {
-        $taskCreationModel = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
         $estimatedTimeComparisonAnalytic = new EstimatedTimeComparisonAnalytic($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
@@ -41,8 +41,8 @@ class EstimatedTimeComparisonAnalyticTest extends Base
 
     public function testBuildWithNoClosedTask()
     {
-        $taskCreationModel = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
         $estimatedTimeComparisonAnalytic = new EstimatedTimeComparisonAnalytic($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
@@ -70,8 +70,8 @@ class EstimatedTimeComparisonAnalyticTest extends Base
 
     public function testBuildWithOnlyClosedTask()
     {
-        $taskCreationModel = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
         $estimatedTimeComparisonAnalytic = new EstimatedTimeComparisonAnalytic($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));

@@ -2,8 +2,8 @@
 
 namespace Kanboard\Controller;
 
-use Kanboard\Model\User as UserModel;
-use Kanboard\Model\Task as TaskModel;
+use Kanboard\Model\UserModel;
+use Kanboard\Model\TaskModel;
 use Kanboard\Core\Security\Role;
 
 /**
@@ -19,19 +19,19 @@ class ProjectUserOverviewController extends BaseController
         $user_id = $this->request->getIntegerParam('user_id', UserModel::EVERYBODY_ID);
 
         if ($this->userSession->isAdmin()) {
-            $project_ids = $this->project->getAllIds();
+            $project_ids = $this->projectModel->getAllIds();
         } else {
-            $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
+            $project_ids = $this->projectPermissionModel->getActiveProjectIds($this->userSession->getId());
         }
 
-        return array($user_id, $project_ids, $this->user->getActiveUsersList(true));
+        return array($user_id, $project_ids, $this->userModel->getActiveUsersList(true));
     }
 
     private function role($role, $action, $title, $title_user)
     {
         list($user_id, $project_ids, $users) = $this->common();
 
-        $query = $this->projectPermission->getQueryByRole($project_ids, $role)->callback(array($this->project, 'applyColumnStats'));
+        $query = $this->projectPermissionModel->getQueryByRole($project_ids, $role)->callback(array($this->projectModel, 'applyColumnStats'));
 
         if ($user_id !== UserModel::EVERYBODY_ID && isset($users[$user_id])) {
             $query->eq(UserModel::TABLE.'.id', $user_id);
@@ -57,7 +57,7 @@ class ProjectUserOverviewController extends BaseController
     {
         list($user_id, $project_ids, $users) = $this->common();
 
-        $query = $this->taskFinder->getProjectUserOverviewQuery($project_ids, $is_active);
+        $query = $this->taskFinderModel->getProjectUserOverviewQuery($project_ids, $is_active);
 
         if ($user_id !== UserModel::EVERYBODY_ID && isset($users[$user_id])) {
             $query->eq(TaskModel::TABLE.'.owner_id', $user_id);
@@ -123,7 +123,7 @@ class ProjectUserOverviewController extends BaseController
         $project = $this->getProject();
 
         return $this->response->html($this->template->render('project_user_overview/tooltip_users', array(
-            'users' => $this->projectUserRole->getAllUsersGroupedByRole($project['id']),
+            'users' => $this->projectUserRoleModel->getAllUsersGroupedByRole($project['id']),
             'roles' => $this->role->getProjectRoles(),
         )));
     }

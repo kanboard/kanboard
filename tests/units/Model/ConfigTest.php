@@ -2,13 +2,13 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Config;
+use Kanboard\Model\ConfigModel;
 
 class ConfigTest extends Base
 {
     public function testRegenerateToken()
     {
-        $configModel = new Config($this->container);
+        $configModel = new ConfigModel($this->container);
         $token = $configModel->getOption('api_token');
         $this->assertTrue($configModel->regenerateToken('api_token'));
         $this->assertNotEquals($token, $configModel->getOption('api_token'));
@@ -16,7 +16,7 @@ class ConfigTest extends Base
 
     public function testCRUDOperations()
     {
-        $c = new Config($this->container);
+        $c = new ConfigModel($this->container);
 
         $this->assertTrue($c->save(array('key1' => 'value1')));
         $this->assertTrue($c->save(array('key1' => 'value2')));
@@ -41,7 +41,7 @@ class ConfigTest extends Base
 
     public function testSaveApplicationUrl()
     {
-        $c = new Config($this->container);
+        $c = new ConfigModel($this->container);
 
         $this->assertTrue($c->save(array('application_url' => 'http://localhost/')));
         $this->assertEquals('http://localhost/', $c->getOption('application_url'));
@@ -55,7 +55,7 @@ class ConfigTest extends Base
 
     public function testDefaultValues()
     {
-        $c = new Config($this->container);
+        $c = new ConfigModel($this->container);
 
         $this->assertEquals(172800, $c->getOption('board_highlight_period'));
         $this->assertEquals(60, $c->getOption('board_public_refresh_interval'));
@@ -92,7 +92,7 @@ class ConfigTest extends Base
 
     public function testGetOption()
     {
-        $c = new Config($this->container);
+        $c = new ConfigModel($this->container);
 
         $this->assertEquals('', $c->getOption('board_columns'));
         $this->assertEquals('test', $c->getOption('board_columns', 'test'));
@@ -101,7 +101,7 @@ class ConfigTest extends Base
 
     public function testGetWithCaching()
     {
-        $c = new Config($this->container);
+        $c = new ConfigModel($this->container);
 
         $this->assertEquals('UTC', $c->get('application_timezone'));
         $this->assertTrue($c->save(array('application_timezone' => 'Europe/Paris')));

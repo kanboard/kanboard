@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Project;
+use Kanboard\Model\ProjectModel;
 
 /**
  * Filter project by status
@@ -33,11 +33,11 @@ class ProjectStatusFilter extends BaseFilter implements FilterInterface
     public function apply()
     {
         if (is_int($this->value) || ctype_digit($this->value)) {
-            $this->query->eq(Project::TABLE.'.is_active', $this->value);
+            $this->query->eq(ProjectModel::TABLE.'.is_active', $this->value);
         } elseif ($this->value === 'inactive' || $this->value === 'closed' || $this->value === 'disabled') {
-            $this->query->eq(Project::TABLE.'.is_active', 0);
+            $this->query->eq(ProjectModel::TABLE.'.is_active', 0);
         } else {
-            $this->query->eq(Project::TABLE.'.is_active', 1);
+            $this->query->eq(ProjectModel::TABLE.'.is_active', 1);
         }
 
         return $this;

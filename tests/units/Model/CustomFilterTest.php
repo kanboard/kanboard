@@ -2,16 +2,16 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Project;
-use Kanboard\Model\User;
-use Kanboard\Model\CustomFilter;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\UserModel;
+use Kanboard\Model\CustomFilterModel;
 
 class CustomFilterTest extends Base
 {
     public function testCreation()
     {
-        $p = new Project($this->container);
-        $cf = new CustomFilter($this->container);
+        $p = new ProjectModel($this->container);
+        $cf = new CustomFilterModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(1, $cf->create(array('name' => 'My filter 1', 'filter' => 'status:open color:blue', 'project_id' => 1, 'user_id' => 1)));
@@ -36,8 +36,8 @@ class CustomFilterTest extends Base
 
     public function testModification()
     {
-        $p = new Project($this->container);
-        $cf = new CustomFilter($this->container);
+        $p = new ProjectModel($this->container);
+        $cf = new CustomFilterModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(1, $cf->create(array('name' => 'My filter 1', 'filter' => 'status:open color:blue', 'project_id' => 1, 'user_id' => 1)));
@@ -54,9 +54,9 @@ class CustomFilterTest extends Base
 
     public function testGetAll()
     {
-        $u = new User($this->container);
-        $p = new Project($this->container);
-        $cf = new CustomFilter($this->container);
+        $u = new UserModel($this->container);
+        $p = new ProjectModel($this->container);
+        $cf = new CustomFilterModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest 1')));
         $this->assertEquals(2, $p->create(array('name' => 'UnitTest 2')));
@@ -128,8 +128,8 @@ class CustomFilterTest extends Base
 
     public function testRemove()
     {
-        $p = new Project($this->container);
-        $cf = new CustomFilter($this->container);
+        $p = new ProjectModel($this->container);
+        $cf = new CustomFilterModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(1, $cf->create(array('name' => 'My filter 1', 'filter' => 'status:open color:blue', 'project_id' => 1, 'user_id' => 1)));

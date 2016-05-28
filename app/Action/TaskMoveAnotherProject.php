@@ -2,7 +2,7 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Move a task to another project
@@ -32,8 +32,8 @@ class TaskMoveAnotherProject extends Base
     public function getCompatibleEvents()
     {
         return array(
-            Task::EVENT_MOVE_COLUMN,
-            Task::EVENT_CLOSE,
+            TaskModel::EVENT_MOVE_COLUMN,
+            TaskModel::EVENT_CLOSE,
         );
     }
 
@@ -75,7 +75,7 @@ class TaskMoveAnotherProject extends Base
      */
     public function doAction(array $data)
     {
-        return $this->taskDuplication->moveToProject($data['task_id'], $this->getParam('project_id'));
+        return $this->taskDuplicationModel->moveToProject($data['task_id'], $this->getParam('project_id'));
     }
 
     /**

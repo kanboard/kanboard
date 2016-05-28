@@ -47,7 +47,7 @@
                     <?= $this->dt->date($task['date_due']) ?>
                 </td>
                 <td>
-                    <?php if ($task['is_active'] == \Kanboard\Model\Task::STATUS_OPEN): ?>
+                    <?php if ($task['is_active'] == \Kanboard\Model\TaskModel::STATUS_OPEN): ?>
                         <?= t('Open') ?>
                     <?php else: ?>
                         <?= t('Closed') ?>

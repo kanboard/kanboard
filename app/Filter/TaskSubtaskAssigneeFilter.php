@@ -3,9 +3,9 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Subtask;
-use Kanboard\Model\Task;
-use Kanboard\Model\User;
+use Kanboard\Model\SubtaskModel;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\UserModel;
 use PicoDb\Database;
 use PicoDb\Table;
 
@@ -81,9 +81,9 @@ class TaskSubtaskAssigneeFilter extends BaseFilter implements FilterInterface
         $task_ids = $this->getSubQuery()->findAllByColumn('task_id');
 
         if (! empty($task_ids)) {
-            $this->query->in(Task::TABLE.'.id', $task_ids);
+            $this->query->in(TaskModel::TABLE.'.id', $task_ids);
         } else {
-            $this->query->eq(Task::TABLE.'.id', 0); // No match
+            $this->query->eq(TaskModel::TABLE.'.id', 0); // No match
         }
     }
 
@@ -95,15 +95,15 @@ class TaskSubtaskAssigneeFilter extends BaseFilter implements FilterInterface
      */
     protected function getSubQuery()
     {
-        $subquery = $this->db->table(Subtask::TABLE)
+        $subquery = $this->db->table(SubtaskModel::TABLE)
             ->columns(
-                Subtask::TABLE.'.user_id',
-                Subtask::TABLE.'.task_id',
-                User::TABLE.'.name',
-                User::TABLE.'.username'
+                SubtaskModel::TABLE.'.user_id',
+                SubtaskModel::TABLE.'.task_id',
+                UserModel::TABLE.'.name',
+                UserModel::TABLE.'.username'
             )
-            ->join(User::TABLE, 'id', 'user_id', Subtask::TABLE)
-            ->neq(Subtask::TABLE.'.status', Subtask::STATUS_DONE);
+            ->join(UserModel::TABLE, 'id', 'user_id', SubtaskModel::TABLE)
+            ->neq(SubtaskModel::TABLE.'.status', SubtaskModel::STATUS_DONE);
 
         return $this->applySubQueryFilter($subquery);
     }
@@ -118,19 +118,19 @@ class TaskSubtaskAssigneeFilter extends BaseFilter implements FilterInterface
     protected function applySubQueryFilter(Table $subquery)
     {
         if (is_int($this->value) || ctype_digit($this->value)) {
-            $subquery->eq(Subtask::TABLE.'.user_id', $this->value);
+            $subquery->eq(SubtaskModel::TABLE.'.user_id', $this->value);
         } else {
             switch ($this->value) {
                 case 'me':
-                    $subquery->eq(Subtask::TABLE.'.user_id', $this->currentUserId);
+                    $subquery->eq(SubtaskModel::TABLE.'.user_id', $this->currentUserId);
                     break;
                 case 'nobody':
-                    $subquery->eq(Subtask::TABLE.'.user_id', 0);
+                    $subquery->eq(SubtaskModel::TABLE.'.user_id', 0);
                     break;
                 default:
                     $subquery->beginOr();
-                    $subquery->ilike(User::TABLE.'.username', $this->value.'%');
-                    $subquery->ilike(User::TABLE.'.name', '%'.$this->value.'%');
+                    $subquery->ilike(UserModel::TABLE.'.username', $this->value.'%');
+                    $subquery->ilike(UserModel::TABLE.'.name', '%'.$this->value.'%');
                     $subquery->closeOr();
             }
         }

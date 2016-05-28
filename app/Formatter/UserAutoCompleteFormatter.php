@@ -2,7 +2,7 @@
 
 namespace Kanboard\Formatter;
 
-use Kanboard\Model\User;
+use Kanboard\Model\UserModel;
 use Kanboard\Core\Filter\FormatterInterface;
 
 /**
@@ -21,7 +21,7 @@ class UserAutoCompleteFormatter extends BaseFormatter implements FormatterInterf
      */
     public function format()
     {
-        $users = $this->query->columns(User::TABLE.'.id', User::TABLE.'.username', User::TABLE.'.name')->findAll();
+        $users = $this->query->columns(UserModel::TABLE.'.id', UserModel::TABLE.'.username', UserModel::TABLE.'.name')->findAll();
 
         foreach ($users as &$user) {
             $user['value'] = $user['username'].' (#'.$user['id'].')';

@@ -69,7 +69,7 @@ class TaskImport extends Base
         $row = $this->prepare($row);
 
         if ($this->validateCreation($row)) {
-            if ($this->taskCreation->create($row) > 0) {
+            if ($this->taskCreationModel->create($row) > 0) {
                 $this->logger->debug('TaskImport: imported successfully line '.$line_number);
                 $this->counter++;
             } else {
@@ -100,27 +100,27 @@ class TaskImport extends Base
         $values['time_spent'] = (float) $row['time_spent'];
 
         if (! empty($row['assignee'])) {
-            $values['owner_id'] = $this->user->getIdByUsername($row['assignee']);
+            $values['owner_id'] = $this->userModel->getIdByUsername($row['assignee']);
         }
 
         if (! empty($row['creator'])) {
-            $values['creator_id'] = $this->user->getIdByUsername($row['creator']);
+            $values['creator_id'] = $this->userModel->getIdByUsername($row['creator']);
         }
 
         if (! empty($row['color'])) {
-            $values['color_id'] = $this->color->find($row['color']);
+            $values['color_id'] = $this->colorModel->find($row['color']);
         }
 
         if (! empty($row['column'])) {
-            $values['column_id'] = $this->column->getColumnIdByTitle($this->projectId, $row['column']);
+            $values['column_id'] = $this->columnModel->getColumnIdByTitle($this->projectId, $row['column']);
         }
 
         if (! empty($row['category'])) {
-            $values['category_id'] = $this->category->getIdByName($this->projectId, $row['category']);
+            $values['category_id'] = $this->categoryModel->getIdByName($this->projectId, $row['category']);
         }
 
         if (! empty($row['swimlane'])) {
-            $values['swimlane_id'] = $this->swimlane->getIdByName($this->projectId, $row['swimlane']);
+            $values['swimlane_id'] = $this->swimlaneModel->getIdByName($this->projectId, $row['swimlane']);
         }
 
         if (! empty($row['date_due'])) {

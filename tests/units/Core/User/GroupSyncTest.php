@@ -3,15 +3,15 @@
 require_once __DIR__.'/../../Base.php';
 
 use Kanboard\Core\User\GroupSync;
-use Kanboard\Model\Group;
-use Kanboard\Model\GroupMember;
+use Kanboard\Model\GroupModel;
+use Kanboard\Model\GroupMemberModel;
 
 class GroupSyncTest extends Base
 {
     public function testAddGroups()
     {
-        $group = new Group($this->container);
-        $groupMember = new GroupMember($this->container);
+        $group = new GroupModel($this->container);
+        $groupMember = new GroupMemberModel($this->container);
         $groupSync = new GroupSync($this->container);
 
         $this->assertEquals(1, $group->create('My Group 1', 'externalId1'));
@@ -30,8 +30,8 @@ class GroupSyncTest extends Base
 
     public function testRemoveGroups()
     {
-        $group = new Group($this->container);
-        $groupMember = new GroupMember($this->container);
+        $group = new GroupModel($this->container);
+        $groupMember = new GroupMemberModel($this->container);
         $groupSync = new GroupSync($this->container);
 
         $this->assertEquals(1, $group->create('My Group 1', 'externalId1'));
@@ -50,8 +50,8 @@ class GroupSyncTest extends Base
 
     public function testBoth()
     {
-        $group = new Group($this->container);
-        $groupMember = new GroupMember($this->container);
+        $group = new GroupModel($this->container);
+        $groupMember = new GroupMemberModel($this->container);
         $groupSync = new GroupSync($this->container);
 
         $this->assertEquals(1, $group->create('My Group 1', 'externalId1'));
@@ -74,8 +74,8 @@ class GroupSyncTest extends Base
 
     public function testThatInternalGroupsAreNotTouched()
     {
-        $group = new Group($this->container);
-        $groupMember = new GroupMember($this->container);
+        $group = new GroupModel($this->container);
+        $groupMember = new GroupMemberModel($this->container);
         $groupSync = new GroupSync($this->container);
 
         $this->assertEquals(1, $group->create('My Group 1'));

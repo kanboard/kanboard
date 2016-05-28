@@ -2,10 +2,10 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Project;
-use Kanboard\Model\ProjectUserRole;
-use Kanboard\Model\User;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectUserRoleModel;
+use Kanboard\Model\UserModel;
 use Kanboard\Analytic\UserDistributionAnalytic;
 use Kanboard\Core\Security\Role;
 
@@ -13,9 +13,9 @@ class UserDistributionAnalyticTest extends Base
 {
     public function testBuild()
     {
-        $projectModel = new Project($this->container);
-        $projectUserRoleModel = new ProjectUserRole($this->container);
-        $userModel = new User($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
+        $userModel = new UserModel($this->container);
         $userDistributionModel = new UserDistributionAnalytic($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
@@ -70,7 +70,7 @@ class UserDistributionAnalyticTest extends Base
 
     private function createTasks($user_id, $nb_active, $nb_inactive)
     {
-        $taskCreationModel = new TaskCreation($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         for ($i = 0; $i < $nb_active; $i++) {
             $this->assertNotFalse($taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'owner_id' => $user_id, 'is_active' => 1)));

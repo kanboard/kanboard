@@ -22,7 +22,7 @@ class TaskInternalLinkController extends BaseController
      */
     private function getTaskLink()
     {
-        $link = $this->taskLink->getById($this->request->getIntegerParam('link_id'));
+        $link = $this->taskLinkModel->getById($this->request->getIntegerParam('link_id'));
 
         if (empty($link)) {
             throw new PageNotFoundException();
@@ -48,7 +48,7 @@ class TaskInternalLinkController extends BaseController
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
-            'labels' => $this->link->getList(0, false),
+            'labels' => $this->linkModel->getList(0, false),
         )));
     }
 
@@ -65,7 +65,7 @@ class TaskInternalLinkController extends BaseController
         list($valid, $errors) = $this->taskLinkValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->taskLink->create($values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
+            if ($this->taskLinkModel->create($values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
                 $this->flash->success(t('Link added successfully.'));
                 return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
             }
@@ -92,7 +92,7 @@ class TaskInternalLinkController extends BaseController
         $task_link = $this->getTaskLink();
 
         if (empty($values)) {
-            $opposite_task = $this->taskFinder->getById($task_link['opposite_task_id']);
+            $opposite_task = $this->taskFinderModel->getById($task_link['opposite_task_id']);
             $values = $task_link;
             $values['title'] = '#'.$opposite_task['id'].' - '.$opposite_task['title'];
         }
@@ -102,7 +102,7 @@ class TaskInternalLinkController extends BaseController
             'errors' => $errors,
             'task_link' => $task_link,
             'task' => $task,
-            'labels' => $this->link->getList(0, false)
+            'labels' => $this->linkModel->getList(0, false)
         )));
     }
 
@@ -119,7 +119,7 @@ class TaskInternalLinkController extends BaseController
         list($valid, $errors) = $this->taskLinkValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->taskLink->update($values['id'], $values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
+            if ($this->taskLinkModel->update($values['id'], $values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
                 $this->flash->success(t('Link updated successfully.'));
                 return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])).'#links');
             }
@@ -156,7 +156,7 @@ class TaskInternalLinkController extends BaseController
         $this->checkCSRFParam();
         $task = $this->getTask();
 
-        if ($this->taskLink->remove($this->request->getIntegerParam('link_id'))) {
+        if ($this->taskLinkModel->remove($this->request->getIntegerParam('link_id'))) {
             $this->flash->success(t('Link removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this link.'));

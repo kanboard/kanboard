@@ -21,7 +21,7 @@ class GroupSync extends Base
      */
     public function synchronize($userId, array $externalGroupIds)
     {
-        $userGroups = $this->groupMember->getGroups($userId);
+        $userGroups = $this->groupMemberModel->getGroups($userId);
         $this->addGroups($userId, $userGroups, $externalGroupIds);
         $this->removeGroups($userId, $userGroups, $externalGroupIds);
     }
@@ -40,10 +40,10 @@ class GroupSync extends Base
 
         foreach ($externalGroupIds as $externalGroupId) {
             if (! isset($userGroupIds[$externalGroupId])) {
-                $group = $this->group->getByExternalId($externalGroupId);
+                $group = $this->groupModel->getByExternalId($externalGroupId);
 
                 if (! empty($group)) {
-                    $this->groupMember->addUser($group['id'], $userId);
+                    $this->groupMemberModel->addUser($group['id'], $userId);
                 }
             }
         }
@@ -61,7 +61,7 @@ class GroupSync extends Base
     {
         foreach ($userGroups as $userGroup) {
             if (! empty($userGroup['external_id']) && ! in_array($userGroup['external_id'], $externalGroupIds)) {
-                $this->groupMember->removeUser($userGroup['id'], $userId);
+                $this->groupMemberModel->removeUser($userGroup['id'], $userId);
             }
         }
     }

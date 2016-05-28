@@ -2,15 +2,15 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\User;
-use Kanboard\Model\UserMetadata;
+use Kanboard\Model\UserModel;
+use Kanboard\Model\UserMetadataModel;
 
 class UserMetadataTest extends Base
 {
     public function testOperations()
     {
-        $m = new UserMetadata($this->container);
-        $u = new User($this->container);
+        $m = new UserMetadataModel($this->container);
+        $u = new UserModel($this->container);
 
         $this->assertEquals(2, $u->create(array('username' => 'foobar')));
 

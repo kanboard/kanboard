@@ -23,10 +23,10 @@ class TaskDistributionAnalytic extends Base
     {
         $metrics = array();
         $total = 0;
-        $columns = $this->column->getAll($project_id);
+        $columns = $this->columnModel->getAll($project_id);
 
         foreach ($columns as $column) {
-            $nb_tasks = $this->taskFinder->countByColumnId($project_id, $column['id']);
+            $nb_tasks = $this->taskFinderModel->countByColumnId($project_id, $column['id']);
             $total += $nb_tasks;
 
             $metrics[] = array(

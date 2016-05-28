@@ -60,14 +60,14 @@ class ResetPasswordCommand extends BaseCommand
 
     private function resetPassword(OutputInterface $output, $username, $password)
     {
-        $userId = $this->user->getIdByUsername($username);
+        $userId = $this->userModel->getIdByUsername($username);
 
         if (empty($userId)) {
             $output->writeln('<error>User not found</error>');
             return false;
         }
 
-        if (!$this->user->update(array('id' => $userId, 'password' => $password))) {
+        if (!$this->userModel->update(array('id' => $userId, 'password' => $password))) {
             $output->writeln('<error>Unable to update password</error>');
             return false;
         }

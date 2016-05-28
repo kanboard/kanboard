@@ -2,14 +2,14 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Subtask;
-use Kanboard\Model\Comment;
-use Kanboard\Model\User;
-use Kanboard\Model\TaskFile;
-use Kanboard\Model\Project;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\SubtaskModel;
+use Kanboard\Model\CommentModel;
+use Kanboard\Model\UserModel;
+use Kanboard\Model\TaskFileModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TaskModel;
 use Kanboard\Notification\MailNotification;
 use Kanboard\Subscriber\NotificationSubscriber;
 
@@ -18,12 +18,12 @@ class MailTest extends Base
     public function testGetMailContent()
     {
         $en = new MailNotification($this->container);
-        $p = new Project($this->container);
-        $tf = new TaskFinder($this->container);
-        $tc = new TaskCreation($this->container);
-        $s = new Subtask($this->container);
-        $c = new Comment($this->container);
-        $f = new TaskFile($this->container);
+        $p = new ProjectModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $s = new SubtaskModel($this->container);
+        $c = new CommentModel($this->container);
+        $f = new TaskFileModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
@@ -63,10 +63,10 @@ class MailTest extends Base
     public function testSendWithEmailAddress()
     {
         $en = new MailNotification($this->container);
-        $p = new Project($this->container);
-        $tf = new TaskFinder($this->container);
-        $tc = new TaskCreation($this->container);
-        $u = new User($this->container);
+        $p = new ProjectModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $u = new UserModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
@@ -88,16 +88,16 @@ class MailTest extends Base
                 $this->stringContains('test')
             );
 
-        $en->notifyUser($u->getById(1), Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $en->notifyUser($u->getById(1), TaskModel::EVENT_CREATE, array('task' => $tf->getDetails(1)));
     }
 
     public function testSendWithoutEmailAddress()
     {
         $en = new MailNotification($this->container);
-        $p = new Project($this->container);
-        $tf = new TaskFinder($this->container);
-        $tc = new TaskCreation($this->container);
-        $u = new User($this->container);
+        $p = new ProjectModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $u = new UserModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
@@ -112,6 +112,6 @@ class MailTest extends Base
             ->expects($this->never())
             ->method('send');
 
-        $en->notifyUser($u->getById(1), Task::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $en->notifyUser($u->getById(1), TaskModel::EVENT_CREATE, array('task' => $tf->getDetails(1)));
     }
 }

@@ -2,13 +2,13 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Timezone;
+use Kanboard\Model\TimezoneModel;
 
 class TimezoneTest extends Base
 {
     public function testGetTimezones()
     {
-        $timezoneModel = new Timezone($this->container);
+        $timezoneModel = new TimezoneModel($this->container);
         $this->assertNotEmpty($timezoneModel->getTimezones());
         $this->assertArrayHasKey('Europe/Paris', $timezoneModel->getTimezones());
         $this->assertContains('Europe/Paris', $timezoneModel->getTimezones());
@@ -20,7 +20,7 @@ class TimezoneTest extends Base
 
     public function testGetCurrentTimezone()
     {
-        $timezoneModel = new Timezone($this->container);
+        $timezoneModel = new TimezoneModel($this->container);
         $this->assertEquals('UTC', $timezoneModel->getCurrentTimezone());
 
         $this->container['sessionStorage']->user = array('timezone' => 'Europe/Paris');

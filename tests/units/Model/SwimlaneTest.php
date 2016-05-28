@@ -2,17 +2,17 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Project;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\Swimlane;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\SwimlaneModel;
 
 class SwimlaneTest extends Base
 {
     public function testCreation()
     {
-        $p = new Project($this->container);
-        $s = new Swimlane($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
@@ -32,8 +32,8 @@ class SwimlaneTest extends Base
 
     public function testGetList()
     {
-        $p = new Project($this->container);
-        $s = new Swimlane($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
@@ -47,8 +47,8 @@ class SwimlaneTest extends Base
 
     public function testUpdate()
     {
-        $p = new Project($this->container);
-        $s = new Swimlane($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
@@ -66,8 +66,8 @@ class SwimlaneTest extends Base
 
     public function testUpdateDefaultSwimlane()
     {
-        $p = new Project($this->container);
-        $s = new Swimlane($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertTrue($s->updateDefault(array('id' => 1, 'default_swimlane' => 'foo', 'show_default_swimlane' => 1)));
@@ -87,8 +87,8 @@ class SwimlaneTest extends Base
 
     public function testDisableEnableDefaultSwimlane()
     {
-        $projectModel = new Project($this->container);
-        $swimlaneModel = new Swimlane($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $swimlaneModel = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
 
@@ -103,8 +103,8 @@ class SwimlaneTest extends Base
 
     public function testDisableEnable()
     {
-        $p = new Project($this->container);
-        $s = new Swimlane($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
@@ -143,10 +143,10 @@ class SwimlaneTest extends Base
 
     public function testRemove()
     {
-        $p = new Project($this->container);
-        $s = new Swimlane($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SwimlaneModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
@@ -167,8 +167,8 @@ class SwimlaneTest extends Base
 
     public function testUpdatePositions()
     {
-        $p = new Project($this->container);
-        $s = new Swimlane($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(1, $s->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
@@ -227,8 +227,8 @@ class SwimlaneTest extends Base
 
     public function testDuplicateSwimlane()
     {
-        $p = new Project($this->container);
-        $s = new Swimlane($this->container);
+        $p = new ProjectModel($this->container);
+        $s = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'P1')));
         $this->assertEquals(2, $p->create(array('name' => 'P2')));
@@ -258,8 +258,8 @@ class SwimlaneTest extends Base
 
     public function testChangePosition()
     {
-        $projectModel = new Project($this->container);
-        $swimlaneModel = new Swimlane($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $swimlaneModel = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $swimlaneModel->create(array('project_id' => 1, 'name' => 'Swimlane #1')));
@@ -321,8 +321,8 @@ class SwimlaneTest extends Base
 
     public function testChangePositionWithInactiveSwimlane()
     {
-        $projectModel = new Project($this->container);
-        $swimlaneModel = new Swimlane($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $swimlaneModel = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $swimlaneModel->create(array('project_id' => 1, 'name' => 'Swimlane #1')));

@@ -39,10 +39,10 @@ class NotificationJob extends BaseJob
 
         if (! empty($eventData)) {
             if (! empty($event['mention'])) {
-                $this->userNotification->sendUserNotification($event['mention'], $eventName, $eventData);
+                $this->userNotificationModel->sendUserNotification($event['mention'], $eventName, $eventData);
             } else {
-                $this->userNotification->sendNotifications($eventName, $eventData);
-                $this->projectNotification->sendNotifications($eventData['task']['project_id'], $eventName, $eventData);
+                $this->userNotificationModel->sendNotifications($eventName, $eventData);
+                $this->projectNotificationModel->sendNotifications($eventData['task']['project_id'], $eventName, $eventData);
             }
         }
     }
@@ -64,19 +64,19 @@ class NotificationJob extends BaseJob
 
         switch ($eventObjectName) {
             case 'Kanboard\Event\TaskEvent':
-                $values['task'] = $this->taskFinder->getDetails($event['task_id']);
+                $values['task'] = $this->taskFinderModel->getDetails($event['task_id']);
                 break;
             case 'Kanboard\Event\SubtaskEvent':
-                $values['subtask'] = $this->subtask->getById($event['id'], true);
-                $values['task'] = $this->taskFinder->getDetails($values['subtask']['task_id']);
+                $values['subtask'] = $this->subtaskModel->getById($event['id'], true);
+                $values['task'] = $this->taskFinderModel->getDetails($values['subtask']['task_id']);
                 break;
             case 'Kanboard\Event\FileEvent':
                 $values['file'] = $event;
-                $values['task'] = $this->taskFinder->getDetails($values['file']['task_id']);
+                $values['task'] = $this->taskFinderModel->getDetails($values['file']['task_id']);
                 break;
             case 'Kanboard\Event\CommentEvent':
-                $values['comment'] = $this->comment->getById($event['id']);
-                $values['task'] = $this->taskFinder->getDetails($values['comment']['task_id']);
+                $values['comment'] = $this->commentModel->getById($event['id']);
+                $values['task'] = $this->taskFinderModel->getDetails($values['comment']['task_id']);
                 break;
         }
 

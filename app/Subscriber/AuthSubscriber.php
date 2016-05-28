@@ -45,9 +45,9 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
         $userAgent = $this->request->getUserAgent();
         $ipAddress = $this->request->getIpAddress();
 
-        $this->userLocking->resetFailedLogin($this->userSession->getUsername());
+        $this->userLockingModel->resetFailedLogin($this->userSession->getUsername());
 
-        $this->lastLogin->create(
+        $this->lastLoginModel->create(
             $event->getAuthType(),
             $this->userSession->getId(),
             $ipAddress,
@@ -59,7 +59,7 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
         }
 
         if (isset($this->sessionStorage->hasRememberMe) && $this->sessionStorage->hasRememberMe) {
-            $session = $this->rememberMeSession->create($this->userSession->getId(), $ipAddress, $userAgent);
+            $session = $this->rememberMeSessionModel->create($this->userSession->getId(), $ipAddress, $userAgent);
             $this->rememberMeCookie->write($session['token'], $session['sequence'], $session['expiration']);
         }
     }
@@ -75,10 +75,10 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
         $credentials = $this->rememberMeCookie->read();
 
         if ($credentials !== false) {
-            $session = $this->rememberMeSession->find($credentials['token'], $credentials['sequence']);
+            $session = $this->rememberMeSessionModel->find($credentials['token'], $credentials['sequence']);
 
             if (! empty($session)) {
-                $this->rememberMeSession->remove($session['id']);
+                $this->rememberMeSessionModel->remove($session['id']);
             }
 
             $this->rememberMeCookie->remove();
@@ -97,10 +97,10 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
         $username = $event->getUsername();
 
         if (! empty($username)) {
-            $this->userLocking->incrementFailedLogin($username);
+            $this->userLockingModel->incrementFailedLogin($username);
 
-            if ($this->userLocking->getFailedLogin($username) > BRUTEFORCE_LOCKDOWN) {
-                $this->userLocking->lock($username, BRUTEFORCE_LOCKDOWN_DURATION);
+            if ($this->userLockingModel->getFailedLogin($username) > BRUTEFORCE_LOCKDOWN) {
+                $this->userLockingModel->lock($username, BRUTEFORCE_LOCKDOWN_DURATION);
             }
         }
     }

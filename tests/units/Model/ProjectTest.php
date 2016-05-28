@@ -4,20 +4,20 @@ require_once __DIR__.'/../Base.php';
 
 use Kanboard\Core\Translator;
 use Kanboard\Subscriber\ProjectModificationDateSubscriber;
-use Kanboard\Model\Project;
-use Kanboard\Model\User;
-use Kanboard\Model\Task;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Config;
-use Kanboard\Model\Category;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\UserModel;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ConfigModel;
+use Kanboard\Model\CategoryModel;
 
 class ProjectTest extends Base
 {
     public function testCreationForAllLanguages()
     {
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
-        foreach ($this->container['language']->getLanguages() as $locale => $language) {
+        foreach ($this->container['languageModel']->getLanguages() as $locale => $language) {
             Translator::unload();
             Translator::load($locale);
             $this->assertNotFalse($p->create(array('name' => 'UnitTest '.$locale)), 'Unable to create project with '.$locale.':'.$language);
@@ -28,7 +28,7 @@ class ProjectTest extends Base
 
     public function testCreation()
     {
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
 
@@ -43,7 +43,7 @@ class ProjectTest extends Base
 
     public function testCreationWithDuplicateName()
     {
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(2, $p->create(array('name' => 'UnitTest')));
@@ -51,7 +51,7 @@ class ProjectTest extends Base
 
     public function testCreationWithStartAndDate()
     {
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest', 'start_date' => '2015-01-01', 'end_date' => '2015-12-31')));
 
@@ -63,9 +63,9 @@ class ProjectTest extends Base
 
     public function testCreationWithDefaultCategories()
     {
-        $p = new Project($this->container);
-        $c = new Config($this->container);
-        $cat = new Category($this->container);
+        $p = new ProjectModel($this->container);
+        $c = new ConfigModel($this->container);
+        $cat = new CategoryModel($this->container);
 
         // Multiple categories correctly formatted
 
@@ -124,7 +124,7 @@ class ProjectTest extends Base
 
     public function testUpdateLastModifiedDate()
     {
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
 
         $now = time();
@@ -143,7 +143,7 @@ class ProjectTest extends Base
 
     public function testGetAllIds()
     {
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
 
@@ -154,8 +154,8 @@ class ProjectTest extends Base
 
     public function testIsLastModified()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
 
         $now = time();
 
@@ -168,12 +168,12 @@ class ProjectTest extends Base
         sleep(1);
 
         $listener = new ProjectModificationDateSubscriber($this->container);
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, array($listener, 'execute'));
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, array($listener, 'execute'));
 
         $this->assertEquals(1, $tc->create(array('title' => 'Task #1', 'project_id' => 1)));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(Task::EVENT_CREATE_UPDATE.'.Kanboard\Subscriber\ProjectModificationDateSubscriber::execute', $called);
+        $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.Kanboard\Subscriber\ProjectModificationDateSubscriber::execute', $called);
 
         $project = $p->getById(1);
         $this->assertNotEmpty($project);
@@ -182,7 +182,7 @@ class ProjectTest extends Base
 
     public function testRemove()
     {
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertTrue($p->remove(1));
@@ -191,7 +191,7 @@ class ProjectTest extends Base
 
     public function testEnable()
     {
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertTrue($p->disable(1));
@@ -205,7 +205,7 @@ class ProjectTest extends Base
 
     public function testDisable()
     {
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertTrue($p->disable(1));
@@ -220,7 +220,7 @@ class ProjectTest extends Base
 
     public function testEnablePublicAccess()
     {
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertTrue($p->enablePublicAccess(1));
@@ -235,7 +235,7 @@ class ProjectTest extends Base
 
     public function testDisablePublicAccess()
     {
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertTrue($p->enablePublicAccess(1));
@@ -251,7 +251,7 @@ class ProjectTest extends Base
 
     public function testIdentifier()
     {
-        $p = new Project($this->container);
+        $p = new ProjectModel($this->container);
 
         // Creation
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest1', 'identifier' => 'test1')));
@@ -282,8 +282,8 @@ class ProjectTest extends Base
 
     public function testThatProjectCreatorAreAlsoOwner()
     {
-        $projectModel = new Project($this->container);
-        $userModel = new User($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $userModel = new UserModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'Me')));
         $this->assertEquals(1, $projectModel->create(array('name' => 'My project 1'), 2));
@@ -306,7 +306,7 @@ class ProjectTest extends Base
 
     public function testPriority()
     {
-        $projectModel = new Project($this->container);
+        $projectModel = new ProjectModel($this->container);
         $this->assertEquals(1, $projectModel->create(array('name' => 'My project 2')));
 
         $project = $projectModel->getById(1);

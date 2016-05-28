@@ -5,17 +5,17 @@ require_once __DIR__.'/../../Base.php';
 use Kanboard\Core\Filter\LexerBuilder;
 use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Filter\TaskTitleFilter;
-use Kanboard\Model\Project;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
 
 class LexerBuilderTest extends Base
 {
     public function testBuilderThatReturnResult()
     {
-        $project = new Project($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $taskFinder = new TaskFinder($this->container);
+        $project = new ProjectModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(1, $project->create(array('name' => 'Project')));
@@ -33,9 +33,9 @@ class LexerBuilderTest extends Base
 
     public function testBuilderThatReturnNothing()
     {
-        $project = new Project($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $taskFinder = new TaskFinder($this->container);
+        $project = new ProjectModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(1, $project->create(array('name' => 'Project')));
@@ -52,9 +52,9 @@ class LexerBuilderTest extends Base
 
     public function testBuilderWithEmptyInput()
     {
-        $project = new Project($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $taskFinder = new TaskFinder($this->container);
+        $project = new ProjectModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(1, $project->create(array('name' => 'Project')));
@@ -71,9 +71,9 @@ class LexerBuilderTest extends Base
 
     public function testBuilderWithMultipleMatches()
     {
-        $project = new Project($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $taskFinder = new TaskFinder($this->container);
+        $project = new ProjectModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $this->assertEquals(1, $project->create(array('name' => 'Project')));
@@ -91,7 +91,7 @@ class LexerBuilderTest extends Base
 
     public function testClone()
     {
-        $taskFinder = new TaskFinder($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
         $query = $taskFinder->getExtendedQuery();
 
         $builder = new LexerBuilder();

@@ -3,14 +3,14 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Helper\AssetHelper;
-use Kanboard\Model\Config;
+use Kanboard\Model\ConfigModel;
 
 class AssetHelperTest extends Base
 {
     public function testCustomCss()
     {
         $h = new AssetHelper($this->container);
-        $c = new Config($this->container);
+        $c = new ConfigModel($this->container);
 
         $this->assertEmpty($h->customCss());
 

@@ -23,7 +23,7 @@ class CommentController extends BaseController
      */
     private function getComment()
     {
-        $comment = $this->comment->getById($this->request->getIntegerParam('comment_id'));
+        $comment = $this->commentModel->getById($this->request->getIntegerParam('comment_id'));
 
         if (empty($comment)) {
             throw new PageNotFoundException();
@@ -76,7 +76,7 @@ class CommentController extends BaseController
         list($valid, $errors) = $this->commentValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->comment->create($values)) {
+            if ($this->commentModel->create($values)) {
                 $this->flash->success(t('Comment added successfully.'));
             } else {
                 $this->flash->failure(t('Unable to create your comment.'));
@@ -125,7 +125,7 @@ class CommentController extends BaseController
         list($valid, $errors) = $this->commentValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->comment->update($values)) {
+            if ($this->commentModel->update($values)) {
                 $this->flash->success(t('Comment updated successfully.'));
             } else {
                 $this->flash->failure(t('Unable to update your comment.'));
@@ -165,7 +165,7 @@ class CommentController extends BaseController
         $task = $this->getTask();
         $comment = $this->getComment();
 
-        if ($this->comment->remove($comment['id'])) {
+        if ($this->commentModel->remove($comment['id'])) {
             $this->flash->success(t('Comment removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this comment.'));

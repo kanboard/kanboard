@@ -20,7 +20,7 @@ class DocumentationController extends BaseController
             $page = 'index';
         }
 
-        if ($this->language->getCurrentLanguage() === 'fr_FR') {
+        if ($this->languageModel->getCurrentLanguage() === 'fr_FR') {
             $filename = __DIR__.'/../../doc/fr/' . $page . '.markdown';
         } else {
             $filename = __DIR__ . '/../../doc/' . $page . '.markdown';
@@ -83,7 +83,7 @@ class DocumentationController extends BaseController
      */
     public function replaceImageUrl(array $matches)
     {
-        if ($this->language->getCurrentLanguage() === 'fr_FR') {
+        if ($this->languageModel->getCurrentLanguage() === 'fr_FR') {
             return '('.$this->helper->url->base().'doc/fr/'.$matches[1].')';
         }
 

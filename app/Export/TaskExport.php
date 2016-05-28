@@ -4,7 +4,7 @@ namespace Kanboard\Export;
 
 use Kanboard\Core\Base;
 use Kanboard\Core\DateParser;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 use PDO;
 
 /**
@@ -27,7 +27,7 @@ class TaskExport extends Base
     public function export($project_id, $from, $to)
     {
         $tasks = $this->getTasks($project_id, $from, $to);
-        $swimlanes = $this->swimlane->getList($project_id);
+        $swimlanes = $this->swimlaneModel->getList($project_id);
         $results = array($this->getColumns());
 
         foreach ($tasks as &$task) {
@@ -102,9 +102,9 @@ class TaskExport extends Base
      */
     public function format(array &$task, array &$swimlanes)
     {
-        $colors = $this->color->getList();
+        $colors = $this->colorModel->getList();
 
-        $task['is_active'] = $task['is_active'] == Task::STATUS_OPEN ? e('Open') : e('Closed');
+        $task['is_active'] = $task['is_active'] == TaskModel::STATUS_OPEN ? e('Open') : e('Closed');
         $task['color_id'] = $colors[$task['color_id']];
         $task['score'] = $task['score'] ?: 0;
         $task['swimlane_id'] = isset($swimlanes[$task['swimlane_id']]) ? $swimlanes[$task['swimlane_id']] : '?';

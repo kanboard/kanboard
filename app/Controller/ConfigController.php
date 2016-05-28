@@ -18,7 +18,7 @@ class ConfigController extends BaseController
     public function index()
     {
         $this->response->html($this->helper->layout->config('config/about', array(
-            'db_size' => $this->config->getDatabaseSize(),
+            'db_size' => $this->configModel->getDatabaseSize(),
             'db_version' => $this->db->getDriver()->getDatabaseVersion(),
             'user_agent' => $this->request->getServerVariable('HTTP_USER_AGENT'),
             'title' => t('Settings').' &gt; '.t('About'),
@@ -54,8 +54,8 @@ class ConfigController extends BaseController
                 break;
         }
 
-        if ($this->config->save($values)) {
-            $this->language->loadCurrentLanguage();
+        if ($this->configModel->save($values)) {
+            $this->languageModel->loadCurrentLanguage();
             $this->flash->success(t('Settings saved successfully.'));
         } else {
             $this->flash->failure(t('Unable to save your settings.'));
@@ -72,8 +72,8 @@ class ConfigController extends BaseController
     public function application()
     {
         $this->response->html($this->helper->layout->config('config/application', array(
-            'languages' => $this->language->getLanguages(),
-            'timezones' => $this->timezone->getTimezones(),
+            'languages' => $this->languageModel->getLanguages(),
+            'timezones' => $this->timezoneModel->getTimezones(),
             'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'datetime_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateTimeFormats()),
             'time_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getTimeFormats()),
@@ -89,8 +89,8 @@ class ConfigController extends BaseController
     public function project()
     {
         $this->response->html($this->helper->layout->config('config/project', array(
-            'colors' => $this->color->getList(),
-            'default_columns' => implode(', ', $this->board->getDefaultColumns()),
+            'colors' => $this->colorModel->getList(),
+            'default_columns' => implode(', ', $this->boardModel->getDefaultColumns()),
             'title' => t('Settings').' &gt; '.t('Project settings'),
         )));
     }
@@ -164,7 +164,7 @@ class ConfigController extends BaseController
     {
         $this->checkCSRFParam();
         $this->response->withFileDownload('db.sqlite.gz');
-        $this->response->binary($this->config->downloadDatabase());
+        $this->response->binary($this->configModel->downloadDatabase());
     }
 
     /**
@@ -175,7 +175,7 @@ class ConfigController extends BaseController
     public function optimizeDb()
     {
         $this->checkCSRFParam();
-        $this->config->optimizeDatabase();
+        $this->configModel->optimizeDatabase();
         $this->flash->success(t('Database optimization done.'));
         $this->response->redirect($this->helper->url->to('ConfigController', 'index'));
     }
@@ -190,7 +190,7 @@ class ConfigController extends BaseController
         $type = $this->request->getStringParam('type');
 
         $this->checkCSRFParam();
-        $this->config->regenerateToken($type.'_token');
+        $this->configModel->regenerateToken($type.'_token');
 
         $this->flash->success(t('Token regenerated.'));
         $this->response->redirect($this->helper->url->to('ConfigController', $type));

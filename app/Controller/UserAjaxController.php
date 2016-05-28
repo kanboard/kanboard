@@ -4,7 +4,7 @@ namespace Kanboard\Controller;
 
 use Kanboard\Filter\UserNameFilter;
 use Kanboard\Formatter\UserAutoCompleteFormatter;
-use Kanboard\Model\User as UserModel;
+use Kanboard\Model\UserModel;
 
 /**
  * User Ajax Controller
@@ -36,7 +36,7 @@ class UserAjaxController extends BaseController
     {
         $project_id = $this->request->getStringParam('project_id');
         $query = $this->request->getStringParam('q');
-        $users = $this->projectPermission->findUsernames($project_id, $query);
+        $users = $this->projectPermissionModel->findUsernames($project_id, $query);
         $this->response->json($users);
     }
 

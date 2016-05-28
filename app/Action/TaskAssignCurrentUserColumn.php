@@ -2,7 +2,7 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Assign a task to the logged user on column change
@@ -32,7 +32,7 @@ class TaskAssignCurrentUserColumn extends Base
     public function getCompatibleEvents()
     {
         return array(
-            Task::EVENT_MOVE_COLUMN,
+            TaskModel::EVENT_MOVE_COLUMN,
         );
     }
 
@@ -81,7 +81,7 @@ class TaskAssignCurrentUserColumn extends Base
             'owner_id' => $this->userSession->getId(),
         );
 
-        return $this->taskModification->update($values);
+        return $this->taskModificationModel->update($values);
     }
 
     /**

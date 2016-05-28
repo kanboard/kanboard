@@ -19,7 +19,7 @@ class TaskFileController extends BaseController
     {
         $task = $this->getTask();
 
-        if ($this->request->isPost() && $this->taskFile->uploadScreenshot($task['id'], $this->request->getValue('screenshot')) !== false) {
+        if ($this->request->isPost() && $this->taskFileModel->uploadScreenshot($task['id'], $this->request->getValue('screenshot')) !== false) {
             $this->flash->success(t('Screenshot uploaded successfully.'));
             return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
@@ -53,7 +53,7 @@ class TaskFileController extends BaseController
     {
         $task = $this->getTask();
 
-        if (! $this->taskFile->uploadFiles($task['id'], $this->request->getFileInfo('files'))) {
+        if (! $this->taskFileModel->uploadFiles($task['id'], $this->request->getFileInfo('files'))) {
             $this->flash->failure(t('Unable to upload the file.'));
         }
 
@@ -69,9 +69,9 @@ class TaskFileController extends BaseController
     {
         $this->checkCSRFParam();
         $task = $this->getTask();
-        $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
+        $file = $this->taskFileModel->getById($this->request->getIntegerParam('file_id'));
 
-        if ($file['task_id'] == $task['id'] && $this->taskFile->remove($file['id'])) {
+        if ($file['task_id'] == $task['id'] && $this->taskFileModel->remove($file['id'])) {
             $this->flash->success(t('File removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this file.'));
@@ -88,7 +88,7 @@ class TaskFileController extends BaseController
     public function confirm()
     {
         $task = $this->getTask();
-        $file = $this->taskFile->getById($this->request->getIntegerParam('file_id'));
+        $file = $this->taskFileModel->getById($this->request->getIntegerParam('file_id'));
 
         $this->response->html($this->template->render('task_file/remove', array(
             'task' => $task,

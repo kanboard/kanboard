@@ -91,7 +91,7 @@ class TwoFactorController extends UserViewController
         if ($provider->authenticate()) {
             $this->flash->success(t('The two factor authentication code is valid.'));
 
-            $this->user->update(array(
+            $this->userModel->update(array(
                 'id' => $user['id'],
                 'twofactor_activated' => 1,
                 'twofactor_secret' => $this->authenticationManager->getPostAuthenticationProvider()->getSecret(),
@@ -117,7 +117,7 @@ class TwoFactorController extends UserViewController
         $user = $this->getUser();
         $this->checkCurrentUser($user);
 
-        $this->user->update(array(
+        $this->userModel->update(array(
             'id' => $user['id'],
             'twofactor_activated' => 0,
             'twofactor_secret' => '',
@@ -186,7 +186,7 @@ class TwoFactorController extends UserViewController
         if ($this->request->getStringParam('disable') === 'yes') {
             $this->checkCSRFParam();
 
-            $this->user->update(array(
+            $this->userModel->update(array(
                 'id' => $user['id'],
                 'twofactor_activated' => 0,
                 'twofactor_secret' => '',

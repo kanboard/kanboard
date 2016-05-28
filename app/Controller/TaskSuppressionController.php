@@ -41,7 +41,7 @@ class TaskSuppressionController extends BaseController
             throw new AccessForbiddenException();
         }
 
-        if ($this->task->remove($task['id'])) {
+        if ($this->taskModel->remove($task['id'])) {
             $this->flash->success(t('Task removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this task.'));

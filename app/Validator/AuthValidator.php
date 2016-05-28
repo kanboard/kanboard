@@ -59,7 +59,7 @@ class AuthValidator extends Base
         $result = true;
         $errors = array();
 
-        if ($this->userLocking->isLocked($values['username'])) {
+        if ($this->userLockingModel->isLocked($values['username'])) {
             $result = false;
             $errors['login'] = t('Your account is locked for %d minutes', BRUTEFORCE_LOCKDOWN_DURATION);
             $this->logger->error('Account locked: '.$values['username']);
@@ -100,7 +100,7 @@ class AuthValidator extends Base
         $result = true;
         $errors = array();
 
-        if ($this->userLocking->hasCaptcha($values['username'])) {
+        if ($this->userLockingModel->hasCaptcha($values['username'])) {
             if (! isset($this->sessionStorage->captcha)) {
                 $result = false;
             } else {

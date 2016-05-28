@@ -36,7 +36,7 @@ class SubtaskController extends BaseController
         $this->response->html($this->template->render('subtask/create', array(
             'values' => $values,
             'errors' => $errors,
-            'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
+            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($task['project_id']),
             'task' => $task,
         )));
     }
@@ -54,7 +54,7 @@ class SubtaskController extends BaseController
         list($valid, $errors) = $this->subtaskValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->subtask->create($values)) {
+            if ($this->subtaskModel->create($values)) {
                 $this->flash->success(t('Sub-task added successfully.'));
             } else {
                 $this->flash->failure(t('Unable to create your sub-task.'));
@@ -87,8 +87,8 @@ class SubtaskController extends BaseController
         $this->response->html($this->template->render('subtask/edit', array(
             'values' => empty($values) ? $subtask : $values,
             'errors' => $errors,
-            'users_list' => $this->projectUserRole->getAssignableUsersList($task['project_id']),
-            'status_list' => $this->subtask->getStatusList(),
+            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($task['project_id']),
+            'status_list' => $this->subtaskModel->getStatusList(),
             'subtask' => $subtask,
             'task' => $task,
         )));
@@ -108,7 +108,7 @@ class SubtaskController extends BaseController
         list($valid, $errors) = $this->subtaskValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->subtask->update($values)) {
+            if ($this->subtaskModel->update($values)) {
                 $this->flash->success(t('Sub-task updated successfully.'));
             } else {
                 $this->flash->failure(t('Unable to update your sub-task.'));
@@ -147,7 +147,7 @@ class SubtaskController extends BaseController
         $task = $this->getTask();
         $subtask = $this->getSubtask();
 
-        if ($this->subtask->remove($subtask['id'])) {
+        if ($this->subtaskModel->remove($subtask['id'])) {
             $this->flash->success(t('Sub-task removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this sub-task.'));
@@ -168,7 +168,7 @@ class SubtaskController extends BaseController
         $values = $this->request->getJson();
 
         if (! empty($values) && $this->helper->user->hasProjectAccess('SubtaskController', 'movePosition', $project_id)) {
-            $result = $this->subtask->changePosition($task_id, $values['subtask_id'], $values['position']);
+            $result = $this->subtaskModel->changePosition($task_id, $values['subtask_id'], $values['position']);
             $this->response->json(array('result' => $result));
         } else {
             throw new AccessForbiddenException();

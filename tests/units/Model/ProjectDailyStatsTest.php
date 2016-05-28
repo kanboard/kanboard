@@ -2,19 +2,19 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Project;
-use Kanboard\Model\ProjectDailyStats;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskStatus;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectDailyStatsModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskStatusModel;
 
 class ProjectDailyStatsTest extends Base
 {
     public function testUpdateTotals()
     {
-        $p = new Project($this->container);
-        $pds = new ProjectDailyStats($this->container);
-        $tc = new TaskCreation($this->container);
-        $ts = new TaskStatus($this->container);
+        $p = new ProjectModel($this->container);
+        $pds = new ProjectDailyStatsModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $ts = new TaskStatusModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(2, $p->create(array('name' => 'UnitTest')));

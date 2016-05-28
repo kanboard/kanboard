@@ -13,42 +13,42 @@ class ProjectApi extends BaseApi
     public function getProjectById($project_id)
     {
         $this->checkProjectPermission($project_id);
-        return $this->formatProject($this->project->getById($project_id));
+        return $this->formatProject($this->projectModel->getById($project_id));
     }
 
     public function getProjectByName($name)
     {
-        return $this->formatProject($this->project->getByName($name));
+        return $this->formatProject($this->projectModel->getByName($name));
     }
 
     public function getAllProjects()
     {
-        return $this->formatProjects($this->project->getAll());
+        return $this->formatProjects($this->projectModel->getAll());
     }
 
     public function removeProject($project_id)
     {
-        return $this->project->remove($project_id);
+        return $this->projectModel->remove($project_id);
     }
 
     public function enableProject($project_id)
     {
-        return $this->project->enable($project_id);
+        return $this->projectModel->enable($project_id);
     }
 
     public function disableProject($project_id)
     {
-        return $this->project->disable($project_id);
+        return $this->projectModel->disable($project_id);
     }
 
     public function enableProjectPublicAccess($project_id)
     {
-        return $this->project->enablePublicAccess($project_id);
+        return $this->projectModel->enablePublicAccess($project_id);
     }
 
     public function disableProjectPublicAccess($project_id)
     {
-        return $this->project->disablePublicAccess($project_id);
+        return $this->projectModel->disablePublicAccess($project_id);
     }
 
     public function getProjectActivities(array $project_ids)
@@ -70,7 +70,7 @@ class ProjectApi extends BaseApi
         );
 
         list($valid, ) = $this->projectValidator->validateCreation($values);
-        return $valid ? $this->project->create($values) : false;
+        return $valid ? $this->projectModel->create($values) : false;
     }
 
     public function updateProject($id, $name, $description = null)
@@ -82,6 +82,6 @@ class ProjectApi extends BaseApi
         );
 
         list($valid, ) = $this->projectValidator->validateModification($values);
-        return $valid && $this->project->update($values);
+        return $valid && $this->projectModel->update($values);
     }
 }

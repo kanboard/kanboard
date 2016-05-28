@@ -2,7 +2,7 @@
 
 use Kanboard\Core\Security\Role;
 use Kanboard\Event\UserProfileSyncEvent;
-use Kanboard\Model\User;
+use Kanboard\Model\UserModel;
 use Kanboard\Subscriber\LdapUserPhotoSubscriber;
 use Kanboard\User\DatabaseUserProvider;
 use Kanboard\User\LdapUserProvider;
@@ -15,7 +15,7 @@ class LdapUserPhotoSubscriberTest extends Base
     {
         $userProvider = new DatabaseUserProvider(array());
         $subscriber = new LdapUserPhotoSubscriber($this->container);
-        $userModel = new User($this->container);
+        $userModel = new UserModel($this->container);
 
         $userModel->update(array('id' => 1, 'avatar_path' => 'my avatar'));
         $user = $userModel->getById(1);
@@ -30,7 +30,7 @@ class LdapUserPhotoSubscriberTest extends Base
     {
         $userProvider = new LdapUserProvider('dn', 'admin', 'Admin', 'admin@localhost', Role::APP_ADMIN, array(), 'my photo');
         $subscriber = new LdapUserPhotoSubscriber($this->container);
-        $userModel = new User($this->container);
+        $userModel = new UserModel($this->container);
         $user = $userModel->getById(1);
 
         $this->container['objectStorage']
@@ -49,7 +49,7 @@ class LdapUserPhotoSubscriberTest extends Base
     {
         $userProvider = new LdapUserProvider('dn', 'admin', 'Admin', 'admin@localhost', Role::APP_ADMIN, array());
         $subscriber = new LdapUserPhotoSubscriber($this->container);
-        $userModel = new User($this->container);
+        $userModel = new UserModel($this->container);
         $user = $userModel->getById(1);
 
         $this->container['objectStorage']
@@ -66,7 +66,7 @@ class LdapUserPhotoSubscriberTest extends Base
     {
         $userProvider = new LdapUserProvider('dn', 'admin', 'Admin', 'admin@localhost', Role::APP_ADMIN, array(), 'my photo');
         $subscriber = new LdapUserPhotoSubscriber($this->container);
-        $userModel = new User($this->container);
+        $userModel = new UserModel($this->container);
 
         $userModel->update(array('id' => 1, 'avatar_path' => 'my avatar'));
         $user = $userModel->getById(1);

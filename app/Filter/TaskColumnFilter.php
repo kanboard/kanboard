@@ -3,8 +3,8 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Column;
-use Kanboard\Model\Task;
+use Kanboard\Model\ColumnModel;
+use Kanboard\Model\TaskModel;
 
 /**
  * Filter tasks by column
@@ -34,9 +34,9 @@ class TaskColumnFilter extends BaseFilter implements FilterInterface
     public function apply()
     {
         if (is_int($this->value) || ctype_digit($this->value)) {
-            $this->query->eq(Task::TABLE.'.column_id', $this->value);
+            $this->query->eq(TaskModel::TABLE.'.column_id', $this->value);
         } else {
-            $this->query->eq(Column::TABLE.'.title', $this->value);
+            $this->query->eq(ColumnModel::TABLE.'.title', $this->value);
         }
 
         return $this;

@@ -1,6 +1,6 @@
 <?php
 
-use Kanboard\Model\Language;
+use Kanboard\Model\LanguageModel;
 
 require_once __DIR__.'/../Base.php';
 
@@ -8,21 +8,21 @@ class LanguageTest extends Base
 {
     public function testGetCodes()
     {
-        $codes = Language::getCodes();
+        $codes = LanguageModel::getCodes();
         $this->assertContains('fr_FR', $codes);
         $this->assertContains('en_US', $codes);
     }
 
     public function testFindCode()
     {
-        $this->assertSame('', Language::findCode('xx-XX'));
-        $this->assertSame('fr_FR', Language::findCode('fr-FR'));
-        $this->assertSame('en_US', Language::findCode('en-US'));
+        $this->assertSame('', LanguageModel::findCode('xx-XX'));
+        $this->assertSame('fr_FR', LanguageModel::findCode('fr-FR'));
+        $this->assertSame('en_US', LanguageModel::findCode('en-US'));
     }
 
     public function testGetJsLanguage()
     {
-        $languageModel = new Language($this->container);
+        $languageModel = new LanguageModel($this->container);
         $this->assertEquals('en', $languageModel->getJsLanguageCode());
 
         $this->container['sessionStorage']->user = array('language' => 'fr_FR');
@@ -34,7 +34,7 @@ class LanguageTest extends Base
 
     public function testGetCurrentLanguage()
     {
-        $languageModel = new Language($this->container);
+        $languageModel = new LanguageModel($this->container);
         $this->assertEquals('en_US', $languageModel->getCurrentLanguage());
 
         $this->container['sessionStorage']->user = array('language' => 'fr_FR');
@@ -46,7 +46,7 @@ class LanguageTest extends Base
 
     public function testGetLanguages()
     {
-        $languageModel = new Language($this->container);
+        $languageModel = new LanguageModel($this->container);
         $this->assertNotEmpty($languageModel->getLanguages());
         $this->assertArrayHasKey('fr_FR', $languageModel->getLanguages());
         $this->assertContains('Français', $languageModel->getLanguages());

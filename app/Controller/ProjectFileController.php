@@ -34,7 +34,7 @@ class ProjectFileController extends BaseController
     {
         $project = $this->getProject();
 
-        if (! $this->projectFile->uploadFiles($project['id'], $this->request->getFileInfo('files'))) {
+        if (! $this->projectFileModel->uploadFiles($project['id'], $this->request->getFileInfo('files'))) {
             $this->flash->failure(t('Unable to upload the file.'));
         }
 
@@ -50,9 +50,9 @@ class ProjectFileController extends BaseController
     {
         $this->checkCSRFParam();
         $project = $this->getProject();
-        $file = $this->projectFile->getById($this->request->getIntegerParam('file_id'));
+        $file = $this->projectFileModel->getById($this->request->getIntegerParam('file_id'));
 
-        if ($this->projectFile->remove($file['id'])) {
+        if ($this->projectFileModel->remove($file['id'])) {
             $this->flash->success(t('File removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this file.'));
@@ -69,7 +69,7 @@ class ProjectFileController extends BaseController
     public function confirm()
     {
         $project = $this->getProject();
-        $file = $this->projectFile->getById($this->request->getIntegerParam('file_id'));
+        $file = $this->projectFileModel->getById($this->request->getIntegerParam('file_id'));
 
         $this->response->html($this->template->render('project_file/remove', array(
             'project' => $project,

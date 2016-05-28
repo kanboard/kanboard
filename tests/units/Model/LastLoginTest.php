@@ -2,13 +2,13 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\LastLogin;
+use Kanboard\Model\LastLoginModel;
 
 class LastLoginTest extends Base
 {
     public function testCreate()
     {
-        $lastLoginModel = new LastLogin($this->container);
+        $lastLoginModel = new LastLoginModel($this->container);
 
         $this->assertTrue($lastLoginModel->create('Test1', 1, '127.0.0.1', 'My browser'));
         $this->assertTrue($lastLoginModel->create('Test2', 1, '127.0.0.1', str_repeat('Too long', 50)));
@@ -29,7 +29,7 @@ class LastLoginTest extends Base
 
     public function testCleanup()
     {
-        $lastLoginModel = new LastLogin($this->container);
+        $lastLoginModel = new LastLoginModel($this->container);
 
         for ($i = 0; $i < $lastLoginModel::NB_LOGINS + 5; $i++) {
             $this->assertTrue($lastLoginModel->create('Test' . $i, 1, '127.0.0.1', 'My browser'));

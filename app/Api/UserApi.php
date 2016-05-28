@@ -19,37 +19,37 @@ class UserApi extends Base
 {
     public function getUser($user_id)
     {
-        return $this->user->getById($user_id);
+        return $this->userModel->getById($user_id);
     }
 
     public function getUserByName($username)
     {
-        return $this->user->getByUsername($username);
+        return $this->userModel->getByUsername($username);
     }
 
     public function getAllUsers()
     {
-        return $this->user->getAll();
+        return $this->userModel->getAll();
     }
 
     public function removeUser($user_id)
     {
-        return $this->user->remove($user_id);
+        return $this->userModel->remove($user_id);
     }
 
     public function disableUser($user_id)
     {
-        return $this->user->disable($user_id);
+        return $this->userModel->disable($user_id);
     }
 
     public function enableUser($user_id)
     {
-        return $this->user->enable($user_id);
+        return $this->userModel->enable($user_id);
     }
 
     public function isActiveUser($user_id)
     {
-        return $this->user->isActive($user_id);
+        return $this->userModel->isActive($user_id);
     }
 
     public function createUser($username, $password, $name = '', $email = '', $role = Role::APP_USER)
@@ -64,7 +64,7 @@ class UserApi extends Base
         );
 
         list($valid, ) = $this->userValidator->validateCreation($values);
-        return $valid ? $this->user->create($values) : false;
+        return $valid ? $this->userModel->create($values) : false;
     }
 
     /**
@@ -108,7 +108,7 @@ class UserApi extends Base
                 'is_ldap_user' => 1,
             );
 
-            return $this->user->create($values);
+            return $this->userModel->create($values);
 
         } catch (LdapException $e) {
             $this->logger->error($e->getMessage());
@@ -133,6 +133,6 @@ class UserApi extends Base
         }
 
         list($valid, ) = $this->userValidator->validateApiModification($values);
-        return $valid && $this->user->update($values);
+        return $valid && $this->userModel->update($values);
     }
 }

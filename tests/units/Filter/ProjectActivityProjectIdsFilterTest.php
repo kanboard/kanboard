@@ -1,11 +1,11 @@
 <?php
 
 use Kanboard\Filter\ProjectActivityProjectIdsFilter;
-use Kanboard\Model\Project;
-use Kanboard\Model\ProjectActivity;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\Task;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectActivityModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\TaskModel;
 
 require_once __DIR__.'/../Base.php';
 
@@ -13,10 +13,10 @@ class ProjectActivityProjectIdsFilterTest extends Base
 {
     public function testFilterByProjectIds()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
-        $projectActivityModel = new ProjectActivity($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectActivityModel = new ProjectActivityModel($this->container);
         $query = $projectActivityModel->getQuery();
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
@@ -27,9 +27,9 @@ class ProjectActivityProjectIdsFilterTest extends Base
         $this->assertEquals(2, $taskCreation->create(array('title' => 'Test', 'project_id' => 2)));
         $this->assertEquals(3, $taskCreation->create(array('title' => 'Test', 'project_id' => 3)));
 
-        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, Task::EVENT_CREATE, array('task' => $taskFinder->getById(1))));
-        $this->assertNotFalse($projectActivityModel->createEvent(2, 2, 1, Task::EVENT_CREATE, array('task' => $taskFinder->getById(2))));
-        $this->assertNotFalse($projectActivityModel->createEvent(3, 3, 1, Task::EVENT_CREATE, array('task' => $taskFinder->getById(3))));
+        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, TaskModel::EVENT_CREATE, array('task' => $taskFinder->getById(1))));
+        $this->assertNotFalse($projectActivityModel->createEvent(2, 2, 1, TaskModel::EVENT_CREATE, array('task' => $taskFinder->getById(2))));
+        $this->assertNotFalse($projectActivityModel->createEvent(3, 3, 1, TaskModel::EVENT_CREATE, array('task' => $taskFinder->getById(3))));
 
         $filter = new ProjectActivityProjectIdsFilter(array(1, 2));
         $filter->withQuery($query)->apply();
@@ -38,10 +38,10 @@ class ProjectActivityProjectIdsFilterTest extends Base
 
     public function testWithEmptyArgument()
     {
-        $taskFinder = new TaskFinder($this->container);
-        $taskCreation = new TaskCreation($this->container);
-        $projectModel = new Project($this->container);
-        $projectActivityModel = new ProjectActivity($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectActivityModel = new ProjectActivityModel($this->container);
         $query = $projectActivityModel->getQuery();
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
@@ -52,9 +52,9 @@ class ProjectActivityProjectIdsFilterTest extends Base
         $this->assertEquals(2, $taskCreation->create(array('title' => 'Test', 'project_id' => 2)));
         $this->assertEquals(3, $taskCreation->create(array('title' => 'Test', 'project_id' => 3)));
 
-        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, Task::EVENT_CREATE, $taskFinder->getById(1)));
-        $this->assertNotFalse($projectActivityModel->createEvent(2, 2, 1, Task::EVENT_CREATE, $taskFinder->getById(2)));
-        $this->assertNotFalse($projectActivityModel->createEvent(3, 3, 1, Task::EVENT_CREATE, $taskFinder->getById(3)));
+        $this->assertNotFalse($projectActivityModel->createEvent(1, 1, 1, TaskModel::EVENT_CREATE, $taskFinder->getById(1)));
+        $this->assertNotFalse($projectActivityModel->createEvent(2, 2, 1, TaskModel::EVENT_CREATE, $taskFinder->getById(2)));
+        $this->assertNotFalse($projectActivityModel->createEvent(3, 3, 1, TaskModel::EVENT_CREATE, $taskFinder->getById(3)));
 
         $filter = new ProjectActivityProjectIdsFilter(array());
         $filter->withQuery($query)->apply();

@@ -2,9 +2,9 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Project;
-use Kanboard\Model\TaskExternalLink;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TaskExternalLinkModel;
 use Kanboard\Core\ExternalLink\ExternalLinkManager;
 use Kanboard\ExternalLink\WebLinkProvider;
 
@@ -12,9 +12,9 @@ class TaskExternalLinkTest extends Base
 {
     public function testCreate()
     {
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $taskExternalLinkModel = new TaskExternalLink($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskExternalLinkModel = new TaskExternalLinkModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
@@ -35,9 +35,9 @@ class TaskExternalLinkTest extends Base
     {
         $this->container['sessionStorage']->user = array('id' => 1);
 
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $taskExternalLinkModel = new TaskExternalLink($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskExternalLinkModel = new TaskExternalLinkModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
@@ -56,9 +56,9 @@ class TaskExternalLinkTest extends Base
 
     public function testModification()
     {
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $taskExternalLinkModel = new TaskExternalLink($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskExternalLinkModel = new TaskExternalLinkModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
@@ -76,9 +76,9 @@ class TaskExternalLinkTest extends Base
 
     public function testRemove()
     {
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $taskExternalLinkModel = new TaskExternalLink($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskExternalLinkModel = new TaskExternalLinkModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
@@ -95,9 +95,9 @@ class TaskExternalLinkTest extends Base
         $this->container['sessionStorage']->user = array('id' => 1);
         $this->container['externalLinkManager'] = new ExternalLinkManager($this->container);
 
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $taskExternalLinkModel = new TaskExternalLink($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskExternalLinkModel = new TaskExternalLinkModel($this->container);
         $webLinkProvider = new WebLinkProvider($this->container);
 
         $this->container['externalLinkManager']->register($webLinkProvider);

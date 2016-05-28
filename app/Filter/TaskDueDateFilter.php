@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Filter tasks by due date
@@ -32,9 +32,9 @@ class TaskDueDateFilter extends BaseDateFilter implements FilterInterface
      */
     public function apply()
     {
-        $this->query->neq(Task::TABLE.'.date_due', 0);
-        $this->query->notNull(Task::TABLE.'.date_due');
-        $this->applyDateFilter(Task::TABLE.'.date_due');
+        $this->query->neq(TaskModel::TABLE.'.date_due', 0);
+        $this->query->notNull(TaskModel::TABLE.'.date_due');
+        $this->applyDateFilter(TaskModel::TABLE.'.date_due');
 
         return $this;
     }

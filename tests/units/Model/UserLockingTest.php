@@ -2,13 +2,13 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\UserLocking;
+use Kanboard\Model\UserLockingModel;
 
 class UserLockingTest extends Base
 {
     public function testFailedLogin()
     {
-        $u = new UserLocking($this->container);
+        $u = new UserLockingModel($this->container);
 
         $this->assertEquals(0, $u->getFailedLogin('admin'));
         $this->assertEquals(0, $u->getFailedLogin('not_found'));
@@ -23,7 +23,7 @@ class UserLockingTest extends Base
 
     public function testLocking()
     {
-        $u = new UserLocking($this->container);
+        $u = new UserLockingModel($this->container);
 
         $this->assertFalse($u->isLocked('admin'));
         $this->assertFalse($u->isLocked('not_found'));
@@ -33,7 +33,7 @@ class UserLockingTest extends Base
 
     public function testCaptcha()
     {
-        $u = new UserLocking($this->container);
+        $u = new UserLockingModel($this->container);
         $this->assertTrue($u->incrementFailedLogin('admin'));
         $this->assertFalse($u->hasCaptcha('admin', 2));
 

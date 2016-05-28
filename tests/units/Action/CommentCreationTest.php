@@ -3,11 +3,11 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Event\GenericEvent;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Comment;
-use Kanboard\Model\Project;
-use Kanboard\Model\ProjectUserRole;
-use Kanboard\Model\User;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\CommentModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectUserRoleModel;
+use Kanboard\Model\UserModel;
 use Kanboard\Action\CommentCreation;
 use Kanboard\Core\Security\Role;
 
@@ -15,11 +15,11 @@ class CommentCreationTest extends Base
 {
     public function testSuccess()
     {
-        $userModel = new User($this->container);
-        $projectModel = new Project($this->container);
-        $projectUserRoleModel = new ProjectUserRole($this->container);
-        $commentModel = new Comment($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
+        $commentModel = new CommentModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -44,10 +44,10 @@ class CommentCreationTest extends Base
 
     public function testWithUserNotAssignable()
     {
-        $userModel = new User($this->container);
-        $projectModel = new Project($this->container);
-        $commentModel = new Comment($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $commentModel = new CommentModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
@@ -71,9 +71,9 @@ class CommentCreationTest extends Base
 
     public function testWithNoComment()
     {
-        $userModel = new User($this->container);
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));

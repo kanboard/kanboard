@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Project;
+use Kanboard\Model\ProjectModel;
 
 /**
  * Filter project by ids
@@ -33,9 +33,9 @@ class ProjectIdsFilter extends BaseFilter implements FilterInterface
     public function apply()
     {
         if (empty($this->value)) {
-            $this->query->eq(Project::TABLE.'.id', 0);
+            $this->query->eq(ProjectModel::TABLE.'.id', 0);
         } else {
-            $this->query->in(Project::TABLE.'.id', $this->value);
+            $this->query->in(ProjectModel::TABLE.'.id', $this->value);
         }
 
         return $this;

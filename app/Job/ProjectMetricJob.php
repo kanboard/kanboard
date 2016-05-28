@@ -34,7 +34,7 @@ class ProjectMetricJob extends BaseJob
         $this->logger->debug(__METHOD__.' Run project metrics calculation');
         $now = date('Y-m-d');
 
-        $this->projectDailyColumnStats->updateTotals($projectId, $now);
-        $this->projectDailyStats->updateTotals($projectId, $now);
+        $this->projectDailyColumnStatsModel->updateTotals($projectId, $now);
+        $this->projectDailyStatsModel->updateTotals($projectId, $now);
     }
 }

@@ -44,9 +44,9 @@ class UserCredentialController extends BaseController
         list($valid, $errors) = $this->userValidator->validatePasswordModification($values);
 
         if ($valid) {
-            if ($this->user->update($values)) {
+            if ($this->userModel->update($values)) {
                 $this->flash->success(t('Password modified successfully.'));
-                $this->userLocking->resetFailedLogin($user['username']);
+                $this->userLockingModel->resetFailedLogin($user['username']);
             } else {
                 $this->flash->failure(t('Unable to change the password.'));
             }
@@ -95,7 +95,7 @@ class UserCredentialController extends BaseController
         list($valid, $errors) = $this->userValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->user->update($values)) {
+            if ($this->userModel->update($values)) {
                 $this->flash->success(t('User updated successfully.'));
             } else {
                 $this->flash->failure(t('Unable to update your user.'));

@@ -5,7 +5,7 @@ namespace Kanboard\Controller;
 use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Filter\TaskStatusFilter;
-use Kanboard\Model\Task as TaskModel;
+use Kanboard\Model\TaskModel;
 
 /**
  * Calendar Controller
@@ -29,7 +29,7 @@ class CalendarController extends BaseController
             'project' => $project,
             'title' => $project['name'],
             'description' => $this->helper->projectHeader->getDescription($project),
-            'check_interval' => $this->config->get('board_private_refresh_interval'),
+            'check_interval' => $this->configModel->get('board_private_refresh_interval'),
         )));
     }
 
@@ -75,7 +75,7 @@ class CalendarController extends BaseController
         $events = $this->helper->calendar->getTaskDateDueEvents(clone($queryBuilder), $start, $end);
         $events = array_merge($events, $this->helper->calendar->getTaskEvents(clone($queryBuilder), $start, $end));
 
-        if ($this->config->get('calendar_user_subtasks_time_tracking') == 1) {
+        if ($this->configModel->get('calendar_user_subtasks_time_tracking') == 1) {
             $events = array_merge($events, $this->helper->calendar->getSubtaskTimeTrackingEvents($user_id, $start, $end));
         }
 
@@ -98,7 +98,7 @@ class CalendarController extends BaseController
         if ($this->request->isAjax() && $this->request->isPost()) {
             $values = $this->request->getJson();
 
-            $this->taskModification->update(array(
+            $this->taskModificationModel->update(array(
                 'id' => $values['task_id'],
                 'date_due' => substr($values['date_due'], 0, 10),
             ));

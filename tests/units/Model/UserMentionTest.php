@@ -4,19 +4,19 @@ require_once __DIR__.'/../Base.php';
 
 use Kanboard\Core\Security\Role;
 use Kanboard\Event\GenericEvent;
-use Kanboard\Model\User;
-use Kanboard\Model\Task;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Project;
-use Kanboard\Model\ProjectUserRole;
-use Kanboard\Model\UserMention;
+use Kanboard\Model\UserModel;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectUserRoleModel;
+use Kanboard\Model\UserMentionModel;
 
 class UserMentionTest extends Base
 {
     public function testGetMentionedUsersWithNoMentions()
     {
-        $userModel = new User($this->container);
-        $userMentionModel = new UserMention($this->container);
+        $userModel = new UserModel($this->container);
+        $userMentionModel = new UserMentionModel($this->container);
 
         $this->assertNotFalse($userModel->create(array('username' => 'user1')));
         $this->assertEmpty($userMentionModel->getMentionedUsers('test'));
@@ -24,8 +24,8 @@ class UserMentionTest extends Base
 
     public function testGetMentionedUsersWithNotficationDisabled()
     {
-        $userModel = new User($this->container);
-        $userMentionModel = new UserMention($this->container);
+        $userModel = new UserModel($this->container);
+        $userMentionModel = new UserMentionModel($this->container);
 
         $this->assertNotFalse($userModel->create(array('username' => 'user1')));
         $this->assertEmpty($userMentionModel->getMentionedUsers('test @user1'));
@@ -33,8 +33,8 @@ class UserMentionTest extends Base
 
     public function testGetMentionedUsersWithNotficationEnabled()
     {
-        $userModel = new User($this->container);
-        $userMentionModel = new UserMention($this->container);
+        $userModel = new UserModel($this->container);
+        $userMentionModel = new UserMentionModel($this->container);
 
         $this->assertNotFalse($userModel->create(array('username' => 'user1')));
         $this->assertNotFalse($userModel->create(array('username' => 'user2', 'name' => 'Foobar', 'notifications_enabled' => 1)));
@@ -50,8 +50,8 @@ class UserMentionTest extends Base
     public function testGetMentionedUsersWithNotficationEnabledAndUserLoggedIn()
     {
         $this->container['sessionStorage']->user = array('id' => 3);
-        $userModel = new User($this->container);
-        $userMentionModel = new UserMention($this->container);
+        $userModel = new UserModel($this->container);
+        $userMentionModel = new UserMentionModel($this->container);
 
         $this->assertNotFalse($userModel->create(array('username' => 'user1')));
         $this->assertNotFalse($userModel->create(array('username' => 'user2', 'name' => 'Foobar', 'notifications_enabled' => 1)));
@@ -61,10 +61,10 @@ class UserMentionTest extends Base
 
     public function testFireEventsWithMultipleMentions()
     {
-        $projectUserRoleModel = new ProjectUserRole($this->container);
-        $projectModel = new Project($this->container);
-        $userModel = new User($this->container);
-        $userMentionModel = new UserMention($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $userModel = new UserModel($this->container);
+        $userMentionModel = new UserMentionModel($this->container);
         $event = new GenericEvent(array('project_id' => 1));
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'User 1', 'notifications_enabled' => 1)));
@@ -73,21 +73,21 @@ class UserMentionTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
         $this->assertTrue($projectUserRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
 
-        $this->container['dispatcher']->addListener(Task::EVENT_USER_MENTION, array($this, 'onUserMention'));
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_USER_MENTION, array($this, 'onUserMention'));
 
-        $userMentionModel->fireEvents('test @user1 @user2', Task::EVENT_USER_MENTION, $event);
+        $userMentionModel->fireEvents('test @user1 @user2', TaskModel::EVENT_USER_MENTION, $event);
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(Task::EVENT_USER_MENTION.'.UserMentionTest::onUserMention', $called);
+        $this->assertArrayHasKey(TaskModel::EVENT_USER_MENTION.'.UserMentionTest::onUserMention', $called);
     }
 
     public function testFireEventsWithNoProjectId()
     {
-        $projectUserRoleModel = new ProjectUserRole($this->container);
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $userModel = new User($this->container);
-        $userMentionModel = new UserMention($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $userModel = new UserModel($this->container);
+        $userMentionModel = new UserMentionModel($this->container);
         $event = new GenericEvent(array('task_id' => 1));
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'User 1', 'notifications_enabled' => 1)));
@@ -98,12 +98,12 @@ class UserMentionTest extends Base
 
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'Task 1')));
 
-        $this->container['dispatcher']->addListener(Task::EVENT_USER_MENTION, array($this, 'onUserMention'));
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_USER_MENTION, array($this, 'onUserMention'));
 
-        $userMentionModel->fireEvents('test @user1 @user2', Task::EVENT_USER_MENTION, $event);
+        $userMentionModel->fireEvents('test @user1 @user2', TaskModel::EVENT_USER_MENTION, $event);
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(Task::EVENT_USER_MENTION.'.UserMentionTest::onUserMention', $called);
+        $this->assertArrayHasKey(TaskModel::EVENT_USER_MENTION.'.UserMentionTest::onUserMention', $called);
     }
 
     public function onUserMention($event)

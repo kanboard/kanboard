@@ -3,9 +3,9 @@
 namespace Kanboard\Export;
 
 use Kanboard\Core\Base;
-use Kanboard\Model\Task;
-use Kanboard\Model\Subtask;
-use Kanboard\Model\User;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\SubtaskModel;
+use Kanboard\Model\UserModel;
 
 /**
  * Subtask Export
@@ -34,7 +34,7 @@ class SubtaskExport extends Base
      */
     public function export($project_id, $from, $to)
     {
-        $this->subtask_status = $this->subtask->getStatusList();
+        $this->subtask_status = $this->subtaskModel->getStatusList();
         $subtasks = $this->getSubtasks($project_id, $from, $to);
         $results = array($this->getColumns());
 
@@ -106,19 +106,19 @@ class SubtaskExport extends Base
             $to = $this->dateParser->removeTimeFromTimestamp(strtotime('+1 day', $this->dateParser->getTimestamp($to)));
         }
 
-        return $this->db->table(Subtask::TABLE)
+        return $this->db->table(SubtaskModel::TABLE)
                         ->eq('project_id', $project_id)
                         ->columns(
-                            Subtask::TABLE.'.*',
-                            User::TABLE.'.username AS assignee_username',
-                            User::TABLE.'.name AS assignee_name',
-                            Task::TABLE.'.title AS task_title'
+                            SubtaskModel::TABLE.'.*',
+                            UserModel::TABLE.'.username AS assignee_username',
+                            UserModel::TABLE.'.name AS assignee_name',
+                            TaskModel::TABLE.'.title AS task_title'
                         )
                         ->gte('date_creation', $from)
                         ->lte('date_creation', $to)
-                        ->join(Task::TABLE, 'id', 'task_id')
-                        ->join(User::TABLE, 'id', 'user_id')
-                        ->asc(Subtask::TABLE.'.id')
+                        ->join(TaskModel::TABLE, 'id', 'task_id')
+                        ->join(UserModel::TABLE, 'id', 'user_id')
+                        ->asc(SubtaskModel::TABLE.'.id')
                         ->findAll();
     }
 }

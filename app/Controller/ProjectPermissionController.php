@@ -50,8 +50,8 @@ class ProjectPermissionController extends BaseController
 
         $this->response->html($this->helper->layout->project('project_permission/index', array(
             'project' => $project,
-            'users' => $this->projectUserRole->getUsers($project['id']),
-            'groups' => $this->projectGroupRole->getGroups($project['id']),
+            'users' => $this->projectUserRoleModel->getUsers($project['id']),
+            'groups' => $this->projectGroupRoleModel->getGroups($project['id']),
             'roles' => $this->role->getProjectRoles(),
             'values' => $values,
             'errors' => $errors,
@@ -69,7 +69,7 @@ class ProjectPermissionController extends BaseController
         $project = $this->getProject();
         $values = $this->request->getValues() + array('is_everybody_allowed' => 0);
 
-        if ($this->project->update($values)) {
+        if ($this->projectModel->update($values)) {
             $this->flash->success(t('Project updated successfully.'));
         } else {
             $this->flash->failure(t('Unable to update this project.'));
@@ -90,7 +90,7 @@ class ProjectPermissionController extends BaseController
 
         if (empty($values['user_id'])) {
             $this->flash->failure(t('User not found.'));
-        } elseif ($this->projectUserRole->addUser($values['project_id'], $values['user_id'], $values['role'])) {
+        } elseif ($this->projectUserRoleModel->addUser($values['project_id'], $values['user_id'], $values['role'])) {
             $this->flash->success(t('Project updated successfully.'));
         } else {
             $this->flash->failure(t('Unable to update this project.'));
@@ -110,7 +110,7 @@ class ProjectPermissionController extends BaseController
         $project = $this->getProject();
         $user_id = $this->request->getIntegerParam('user_id');
 
-        if ($this->projectUserRole->removeUser($project['id'], $user_id)) {
+        if ($this->projectUserRoleModel->removeUser($project['id'], $user_id)) {
             $this->flash->success(t('Project updated successfully.'));
         } else {
             $this->flash->failure(t('Unable to update this project.'));
@@ -129,7 +129,7 @@ class ProjectPermissionController extends BaseController
         $project = $this->getProject();
         $values = $this->request->getJson();
 
-        if (! empty($project) && ! empty($values) && $this->projectUserRole->changeUserRole($project['id'], $values['id'], $values['role'])) {
+        if (! empty($project) && ! empty($values) && $this->projectUserRoleModel->changeUserRole($project['id'], $values['id'], $values['role'])) {
             $this->response->json(array('status' => 'ok'));
         } else {
             $this->response->json(array('status' => 'error'));
@@ -147,10 +147,10 @@ class ProjectPermissionController extends BaseController
         $values = $this->request->getValues();
 
         if (empty($values['group_id']) && ! empty($values['external_id'])) {
-            $values['group_id'] = $this->group->create($values['name'], $values['external_id']);
+            $values['group_id'] = $this->groupModel->create($values['name'], $values['external_id']);
         }
 
-        if ($this->projectGroupRole->addGroup($project['id'], $values['group_id'], $values['role'])) {
+        if ($this->projectGroupRoleModel->addGroup($project['id'], $values['group_id'], $values['role'])) {
             $this->flash->success(t('Project updated successfully.'));
         } else {
             $this->flash->failure(t('Unable to update this project.'));
@@ -170,7 +170,7 @@ class ProjectPermissionController extends BaseController
         $project = $this->getProject();
         $group_id = $this->request->getIntegerParam('group_id');
 
-        if ($this->projectGroupRole->removeGroup($project['id'], $group_id)) {
+        if ($this->projectGroupRoleModel->removeGroup($project['id'], $group_id)) {
             $this->flash->success(t('Project updated successfully.'));
         } else {
             $this->flash->failure(t('Unable to update this project.'));
@@ -189,7 +189,7 @@ class ProjectPermissionController extends BaseController
         $project = $this->getProject();
         $values = $this->request->getJson();
 
-        if (! empty($project) && ! empty($values) && $this->projectGroupRole->changeGroupRole($project['id'], $values['id'], $values['role'])) {
+        if (! empty($project) && ! empty($values) && $this->projectGroupRoleModel->changeGroupRole($project['id'], $values['id'], $values['role'])) {
             $this->response->json(array('status' => 'ok'));
         } else {
             $this->response->json(array('status' => 'error'));

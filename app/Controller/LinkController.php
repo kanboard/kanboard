@@ -22,7 +22,7 @@ class LinkController extends BaseController
      */
     private function getLink()
     {
-        $link = $this->link->getById($this->request->getIntegerParam('link_id'));
+        $link = $this->linkModel->getById($this->request->getIntegerParam('link_id'));
 
         if (empty($link)) {
             throw new PageNotFoundException();
@@ -41,7 +41,7 @@ class LinkController extends BaseController
     public function index(array $values = array(), array $errors = array())
     {
         $this->response->html($this->helper->layout->config('link/index', array(
-            'links' => $this->link->getMergedList(),
+            'links' => $this->linkModel->getMergedList(),
             'values' => $values,
             'errors' => $errors,
             'title' => t('Settings').' &gt; '.t('Task\'s links'),
@@ -59,7 +59,7 @@ class LinkController extends BaseController
         list($valid, $errors) = $this->linkValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->link->create($values['label'], $values['opposite_label']) !== false) {
+            if ($this->linkModel->create($values['label'], $values['opposite_label']) !== false) {
                 $this->flash->success(t('Link added successfully.'));
                 return $this->response->redirect($this->helper->url->to('LinkController', 'index'));
             } else {
@@ -86,7 +86,7 @@ class LinkController extends BaseController
         $this->response->html($this->helper->layout->config('link/edit', array(
             'values' => $values ?: $link,
             'errors' => $errors,
-            'labels' => $this->link->getList($link['id']),
+            'labels' => $this->linkModel->getList($link['id']),
             'link' => $link,
             'title' => t('Link modification')
         )));
@@ -103,7 +103,7 @@ class LinkController extends BaseController
         list($valid, $errors) = $this->linkValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->link->update($values)) {
+            if ($this->linkModel->update($values)) {
                 $this->flash->success(t('Link updated successfully.'));
                 return $this->response->redirect($this->helper->url->to('LinkController', 'index'));
             } else {
@@ -139,7 +139,7 @@ class LinkController extends BaseController
         $this->checkCSRFParam();
         $link = $this->getLink();
 
-        if ($this->link->remove($link['id'])) {
+        if ($this->linkModel->remove($link['id'])) {
             $this->flash->success(t('Link removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this link.'));

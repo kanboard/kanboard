@@ -2,11 +2,11 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\Project;
-use Kanboard\Model\TaskLink;
-use Kanboard\Model\Category;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TaskLinkModel;
+use Kanboard\Model\CategoryModel;
 use Kanboard\Event\TaskLinkEvent;
 use Kanboard\Action\TaskAssignCategoryLink;
 
@@ -14,10 +14,10 @@ class TaskAssignCategoryLinkTest extends Base
 {
     public function testAssignCategory()
     {
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-        $c = new Category($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
+        $c = new CategoryModel($this->container);
 
         $action = new TaskAssignCategoryLink($this->container);
         $action->setProjectId(1);
@@ -35,7 +35,7 @@ class TaskAssignCategoryLinkTest extends Base
             'link_id' => 2,
         ));
 
-        $this->assertTrue($action->execute($event, TaskLink::EVENT_CREATE_UPDATE));
+        $this->assertTrue($action->execute($event, TaskLinkModel::EVENT_CREATE_UPDATE));
 
         $task = $tf->getById(1);
         $this->assertEquals(1, $task['category_id']);
@@ -43,10 +43,10 @@ class TaskAssignCategoryLinkTest extends Base
 
     public function testWhenLinkDontMatch()
     {
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $p = new Project($this->container);
-        $c = new Category($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $p = new ProjectModel($this->container);
+        $c = new CategoryModel($this->container);
 
         $action = new TaskAssignCategoryLink($this->container);
         $action->setProjectId(1);
@@ -64,14 +64,14 @@ class TaskAssignCategoryLinkTest extends Base
             'link_id' => 2,
         ));
 
-        $this->assertFalse($action->execute($event, TaskLink::EVENT_CREATE_UPDATE));
+        $this->assertFalse($action->execute($event, TaskLinkModel::EVENT_CREATE_UPDATE));
     }
 
     public function testThatExistingCategoryWillNotChange()
     {
-        $tc = new TaskCreation($this->container);
-        $p = new Project($this->container);
-        $c = new Category($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $p = new ProjectModel($this->container);
+        $c = new CategoryModel($this->container);
 
         $action = new TaskAssignCategoryLink($this->container);
         $action->setProjectId(1);
@@ -90,6 +90,6 @@ class TaskAssignCategoryLinkTest extends Base
             'link_id' => 2,
         ));
 
-        $this->assertFalse($action->execute($event, TaskLink::EVENT_CREATE_UPDATE));
+        $this->assertFalse($action->execute($event, TaskLinkModel::EVENT_CREATE_UPDATE));
     }
 }

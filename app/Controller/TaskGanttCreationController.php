@@ -24,7 +24,7 @@ class TaskGanttCreationController extends BaseController
 
         $values = $values + array(
                 'project_id' => $project['id'],
-                'column_id' => $this->column->getFirstColumnId($project['id']),
+                'column_id' => $this->columnModel->getFirstColumnId($project['id']),
                 'position' => 1
             );
 
@@ -35,10 +35,10 @@ class TaskGanttCreationController extends BaseController
             'project' => $project,
             'errors' => $errors,
             'values' => $values,
-            'users_list' => $this->projectUserRole->getAssignableUsersList($project['id'], true, false, true),
-            'colors_list' => $this->color->getList(),
-            'categories_list' => $this->category->getList($project['id']),
-            'swimlanes_list' => $this->swimlane->getList($project['id'], false, true),
+            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], true, false, true),
+            'colors_list' => $this->colorModel->getList(),
+            'categories_list' => $this->categoryModel->getList($project['id']),
+            'swimlanes_list' => $this->swimlaneModel->getList($project['id'], false, true),
             'title' => $project['name'].' &gt; '.t('New task')
         )));
     }
@@ -56,7 +56,7 @@ class TaskGanttCreationController extends BaseController
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
         if ($valid) {
-            $task_id = $this->taskCreation->create($values);
+            $task_id = $this->taskCreationModel->create($values);
 
             if ($task_id !== false) {
                 $this->flash->success(t('Task created successfully.'));

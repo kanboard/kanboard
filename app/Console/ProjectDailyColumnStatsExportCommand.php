@@ -21,7 +21,7 @@ class ProjectDailyColumnStatsExportCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $data = $this->projectDailyColumnStats->getAggregatedMetrics(
+        $data = $this->projectDailyColumnStatsModel->getAggregatedMetrics(
             $input->getArgument('project_id'),
             $input->getArgument('start_date'),
             $input->getArgument('end_date')

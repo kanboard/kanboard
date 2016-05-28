@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\ProjectActivity;
+use Kanboard\Model\ProjectActivityModel;
 
 /**
  * Filter activity events by creator
@@ -54,7 +54,7 @@ class ProjectActivityCreatorFilter extends BaseFilter implements FilterInterface
     public function apply()
     {
         if ($this->value === 'me') {
-            $this->query->eq(ProjectActivity::TABLE . '.creator_id', $this->currentUserId);
+            $this->query->eq(ProjectActivityModel::TABLE . '.creator_id', $this->currentUserId);
         } else {
             $this->query->beginOr();
             $this->query->ilike('uc.username', '%'.$this->value.'%');

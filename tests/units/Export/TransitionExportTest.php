@@ -2,18 +2,18 @@
 
 require_once __DIR__ . '/../Base.php';
 
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Transition;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TransitionModel;
 use Kanboard\Export\TransitionExport;
-use Kanboard\Model\Project;
+use Kanboard\Model\ProjectModel;
 
 class TransitionExportTest extends Base
 {
     public function testExport()
     {
-        $projectModel = new Project($this->container);
-        $taskCreationModel = new TaskCreation($this->container);
-        $transitionModel = new Transition($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $transitionModel = new TransitionModel($this->container);
         $transitionExportModel = new TransitionExport($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));

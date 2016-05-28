@@ -3,8 +3,8 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Category;
-use Kanboard\Model\Task;
+use Kanboard\Model\CategoryModel;
+use Kanboard\Model\TaskModel;
 
 /**
  * Filter tasks by category
@@ -34,11 +34,11 @@ class TaskCategoryFilter extends BaseFilter implements FilterInterface
     public function apply()
     {
         if (is_int($this->value) || ctype_digit($this->value)) {
-            $this->query->eq(Task::TABLE.'.category_id', $this->value);
+            $this->query->eq(TaskModel::TABLE.'.category_id', $this->value);
         } elseif ($this->value === 'none') {
-            $this->query->eq(Task::TABLE.'.category_id', 0);
+            $this->query->eq(TaskModel::TABLE.'.category_id', 0);
         } else {
-            $this->query->eq(Category::TABLE.'.name', $this->value);
+            $this->query->eq(CategoryModel::TABLE.'.name', $this->value);
         }
 
         return $this;

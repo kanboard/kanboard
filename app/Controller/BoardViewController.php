@@ -22,7 +22,7 @@ class BoardViewController extends BaseController
     public function readonly()
     {
         $token = $this->request->getStringParam('token');
-        $project = $this->project->getByToken($token);
+        $project = $this->projectModel->getByToken($token);
 
         if (empty($project)) {
             throw AccessForbiddenException::getInstance()->withoutLayout();
@@ -30,14 +30,14 @@ class BoardViewController extends BaseController
 
         $this->response->html($this->helper->layout->app('board/view_public', array(
             'project' => $project,
-            'swimlanes' => $this->board->getBoard($project['id']),
+            'swimlanes' => $this->boardModel->getBoard($project['id']),
             'title' => $project['name'],
             'description' => $project['description'],
             'no_layout' => true,
             'not_editable' => true,
-            'board_public_refresh_interval' => $this->config->get('board_public_refresh_interval'),
-            'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
-            'board_highlight_period' => $this->config->get('board_highlight_period'),
+            'board_public_refresh_interval' => $this->configModel->get('board_public_refresh_interval'),
+            'board_private_refresh_interval' => $this->configModel->get('board_private_refresh_interval'),
+            'board_highlight_period' => $this->configModel->get('board_highlight_period'),
         )));
     }
 
@@ -55,8 +55,8 @@ class BoardViewController extends BaseController
             'project' => $project,
             'title' => $project['name'],
             'description' => $this->helper->projectHeader->getDescription($project),
-            'board_private_refresh_interval' => $this->config->get('board_private_refresh_interval'),
-            'board_highlight_period' => $this->config->get('board_highlight_period'),
+            'board_private_refresh_interval' => $this->configModel->get('board_private_refresh_interval'),
+            'board_highlight_period' => $this->configModel->get('board_highlight_period'),
             'swimlanes' => $this->taskLexer
                 ->build($search)
                 ->format(BoardFormatter::getInstance($this->container)->setProjectId($project['id']))

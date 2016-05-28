@@ -2,15 +2,15 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\Project;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\ProjectModel;
 use Kanboard\Analytic\TaskDistributionAnalytic;
 
 class TaskDistributionAnalyticTest extends Base
 {
     public function testBuild()
     {
-        $projectModel = new Project($this->container);
+        $projectModel = new ProjectModel($this->container);
         $taskDistributionModel = new TaskDistributionAnalytic($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
@@ -49,7 +49,7 @@ class TaskDistributionAnalyticTest extends Base
 
     private function createTasks($column_id, $nb_active, $nb_inactive)
     {
-        $taskCreationModel = new TaskCreation($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         for ($i = 0; $i < $nb_active; $i++) {
             $this->assertNotFalse($taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => $column_id, 'is_active' => 1)));

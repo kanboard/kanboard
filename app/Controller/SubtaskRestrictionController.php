@@ -2,7 +2,7 @@
 
 namespace Kanboard\Controller;
 
-use Kanboard\Model\Subtask as SubtaskModel;
+use Kanboard\Model\SubtaskModel;
 
 /**
  * Subtask Restriction
@@ -27,7 +27,7 @@ class SubtaskRestrictionController extends BaseController
                 SubtaskModel::STATUS_TODO => t('Todo'),
                 SubtaskModel::STATUS_DONE => t('Done'),
             ),
-            'subtask_inprogress' => $this->subtask->getSubtaskInProgress($this->userSession->getId()),
+            'subtask_inprogress' => $this->subtaskModel->getSubtaskInProgress($this->userSession->getId()),
             'subtask' => $subtask,
             'task' => $task,
         )));
@@ -45,13 +45,13 @@ class SubtaskRestrictionController extends BaseController
         $values = $this->request->getValues();
 
         // Change status of the previous "in progress" subtask
-        $this->subtask->update(array(
+        $this->subtaskModel->update(array(
             'id' => $values['id'],
             'status' => $values['status'],
         ));
 
         // Set the current subtask to "in progress"
-        $this->subtask->update(array(
+        $this->subtaskModel->update(array(
             'id' => $subtask['id'],
             'status' => SubtaskModel::STATUS_INPROGRESS,
         ));

@@ -21,13 +21,13 @@ class TaskCreationController extends BaseController
     public function show(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $swimlanes_list = $this->swimlane->getList($project['id'], false, true);
+        $swimlanes_list = $this->swimlaneModel->getList($project['id'], false, true);
 
         if (empty($values)) {
             $values = array(
                 'swimlane_id' => $this->request->getIntegerParam('swimlane_id', key($swimlanes_list)),
                 'column_id' => $this->request->getIntegerParam('column_id'),
-                'color_id' => $this->color->getDefaultColor(),
+                'color_id' => $this->colorModel->getDefaultColor(),
                 'owner_id' => $this->userSession->getId(),
             );
 
@@ -39,10 +39,10 @@ class TaskCreationController extends BaseController
             'project' => $project,
             'errors' => $errors,
             'values' => $values + array('project_id' => $project['id']),
-            'columns_list' => $this->column->getList($project['id']),
-            'users_list' => $this->projectUserRole->getAssignableUsersList($project['id'], true, false, true),
-            'colors_list' => $this->color->getList(),
-            'categories_list' => $this->category->getList($project['id']),
+            'columns_list' => $this->columnModel->getList($project['id']),
+            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], true, false, true),
+            'colors_list' => $this->colorModel->getList(),
+            'categories_list' => $this->categoryModel->getList($project['id']),
             'swimlanes_list' => $swimlanes_list,
             'title' => $project['name'].' &gt; '.t('New task')
         )));
@@ -60,7 +60,7 @@ class TaskCreationController extends BaseController
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
-        if ($valid && $this->taskCreation->create($values)) {
+        if ($valid && $this->taskCreationModel->create($values)) {
             $this->flash->success(t('Task created successfully.'));
             return $this->afterSave($project, $values);
         }

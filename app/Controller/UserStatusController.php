@@ -34,7 +34,7 @@ class UserStatusController extends BaseController
         $user = $this->getUser();
         $this->checkCSRFParam();
 
-        if ($this->user->remove($user['id'])) {
+        if ($this->userModel->remove($user['id'])) {
             $this->flash->success(t('User removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this user.'));
@@ -67,7 +67,7 @@ class UserStatusController extends BaseController
         $user = $this->getUser();
         $this->checkCSRFParam();
 
-        if ($this->user->enable($user['id'])) {
+        if ($this->userModel->enable($user['id'])) {
             $this->flash->success(t('User activated successfully.'));
         } else {
             $this->flash->failure(t('Unable to enable this user.'));
@@ -100,7 +100,7 @@ class UserStatusController extends BaseController
         $user = $this->getUser();
         $this->checkCSRFParam();
 
-        if ($this->user->disable($user['id'])) {
+        if ($this->userModel->disable($user['id'])) {
             $this->flash->success(t('User disabled successfully.'));
         } else {
             $this->flash->failure(t('Unable to disable this user.'));

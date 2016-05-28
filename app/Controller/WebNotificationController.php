@@ -19,7 +19,7 @@ class WebNotificationController extends BaseController
     {
         $user_id = $this->getUserId();
 
-        $this->userUnreadNotification->markAllAsRead($user_id);
+        $this->userUnreadNotificationModel->markAllAsRead($user_id);
         $this->response->redirect($this->helper->url->to('DashboardController', 'notifications', array('user_id' => $user_id)));
     }
 
@@ -33,7 +33,7 @@ class WebNotificationController extends BaseController
         $user_id = $this->getUserId();
         $notification_id = $this->request->getIntegerParam('notification_id');
 
-        $this->userUnreadNotification->markAsRead($user_id, $notification_id);
+        $this->userUnreadNotificationModel->markAsRead($user_id, $notification_id);
         $this->response->redirect($this->helper->url->to('DashboardController', 'notifications', array('user_id' => $user_id)));
     }
 
@@ -45,8 +45,8 @@ class WebNotificationController extends BaseController
         $user_id = $this->getUserId();
         $notification_id = $this->request->getIntegerParam('notification_id');
 
-        $notification = $this->userUnreadNotification->getById($notification_id);
-        $this->userUnreadNotification->markAsRead($user_id, $notification_id);
+        $notification = $this->userUnreadNotificationModel->getById($notification_id);
+        $this->userUnreadNotificationModel->markAsRead($user_id, $notification_id);
 
         if (empty($notification)) {
             $this->response->redirect($this->helper->url->to('DashboardController', 'notifications', array('user_id' => $user_id)));

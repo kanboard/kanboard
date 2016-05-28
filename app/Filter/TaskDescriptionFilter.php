@@ -3,7 +3,7 @@
 namespace Kanboard\Filter;
 
 use Kanboard\Core\Filter\FilterInterface;
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Filter tasks by description
@@ -32,7 +32,7 @@ class TaskDescriptionFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        $this->query->ilike(Task::TABLE.'.description', '%'.$this->value.'%');
+        $this->query->ilike(TaskModel::TABLE.'.description', '%'.$this->value.'%');
         return $this;
     }
 }

@@ -2,11 +2,11 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Config;
-use Kanboard\Model\Task;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\Project;
+use Kanboard\Model\ConfigModel;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\ProjectModel;
 
 class TaskCreationTest extends Base
 {
@@ -22,36 +22,36 @@ class TaskCreationTest extends Base
 
     public function testNoProjectId()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function () {});
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function () {});
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {});
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE, function () {});
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(0, $tc->create(array('title' => 'test', 'project_id' => 0)));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayNotHasKey(Task::EVENT_CREATE_UPDATE.'.closure', $called);
-        $this->assertArrayNotHasKey(Task::EVENT_CREATE.'.closure', $called);
+        $this->assertArrayNotHasKey(TaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertArrayNotHasKey(TaskModel::EVENT_CREATE.'.closure', $called);
     }
 
     public function testNoTitle()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function () {});
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, function () {});
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {});
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE, function () {});
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1)));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(Task::EVENT_CREATE_UPDATE.'.closure', $called);
-        $this->assertArrayHasKey(Task::EVENT_CREATE.'.closure', $called);
+        $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertArrayHasKey(TaskModel::EVENT_CREATE.'.closure', $called);
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
@@ -62,19 +62,19 @@ class TaskCreationTest extends Base
 
     public function testMinimum()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE_UPDATE, function () {});
-        $this->container['dispatcher']->addListener(Task::EVENT_CREATE, array($this, 'onCreate'));
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {});
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE, array($this, 'onCreate'));
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test')));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(Task::EVENT_CREATE_UPDATE.'.closure', $called);
-        $this->assertArrayHasKey(Task::EVENT_CREATE.'.TaskCreationTest::onCreate', $called);
+        $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertArrayHasKey(TaskModel::EVENT_CREATE.'.TaskCreationTest::onCreate', $called);
 
         $task = $tf->getById(1);
         $this->assertNotEmpty($task);
@@ -108,9 +108,9 @@ class TaskCreationTest extends Base
 
     public function testColorId()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'color_id' => 'blue')));
@@ -124,9 +124,9 @@ class TaskCreationTest extends Base
 
     public function testOwnerId()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'owner_id' => 1)));
@@ -140,9 +140,9 @@ class TaskCreationTest extends Base
 
     public function testCategoryId()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'category_id' => 1)));
@@ -156,9 +156,9 @@ class TaskCreationTest extends Base
 
     public function testCreatorId()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'creator_id' => 1)));
@@ -172,9 +172,9 @@ class TaskCreationTest extends Base
 
     public function testThatCreatorIsDefined()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->container['sessionStorage']->user = array('id' => 1);
 
@@ -190,9 +190,9 @@ class TaskCreationTest extends Base
 
     public function testColumnId()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 2)));
@@ -207,9 +207,9 @@ class TaskCreationTest extends Base
 
     public function testPosition()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 2)));
@@ -233,9 +233,9 @@ class TaskCreationTest extends Base
 
     public function testDescription()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'description' => 'test')));
@@ -249,9 +249,9 @@ class TaskCreationTest extends Base
 
     public function testReference()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'reference' => 'test')));
@@ -267,9 +267,9 @@ class TaskCreationTest extends Base
     {
         $date = '2014-11-23';
         $timestamp = strtotime('+2days');
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_due' => $date)));
@@ -293,9 +293,9 @@ class TaskCreationTest extends Base
 
     public function testDateStarted()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
 
@@ -331,9 +331,9 @@ class TaskCreationTest extends Base
 
     public function testTime()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'time_estimated' => 1.5, 'time_spent' => 2.3)));
@@ -348,9 +348,9 @@ class TaskCreationTest extends Base
 
     public function testStripColumn()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'another_task' => '1')));
@@ -361,9 +361,9 @@ class TaskCreationTest extends Base
 
     public function testScore()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'score' => '3')));
@@ -376,10 +376,10 @@ class TaskCreationTest extends Base
 
     public function testDefaultColor()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
-        $c = new Config($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
+        $c = new ConfigModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test1')));
@@ -400,9 +400,9 @@ class TaskCreationTest extends Base
 
     public function testDueDateYear2038TimestampBug()
     {
-        $p = new Project($this->container);
-        $tc = new TaskCreation($this->container);
-        $tf = new TaskFinder($this->container);
+        $p = new ProjectModel($this->container);
+        $tc = new TaskCreationModel($this->container);
+        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_due' => strtotime('2050-01-10 12:30'))));

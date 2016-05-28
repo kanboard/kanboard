@@ -47,7 +47,7 @@ class CalendarHelper extends Base
      */
     public function getTaskEvents(QueryBuilder $queryBuilder, $start, $end)
     {
-        $startColumn = $this->config->get('calendar_project_tasks', 'date_started');
+        $startColumn = $this->configModel->get('calendar_project_tasks', 'date_started');
 
         $queryBuilder->getQuery()->addCondition($this->getCalendarCondition(
             $this->dateParser->getTimestampFromIsoFormat($start),
@@ -75,7 +75,7 @@ class CalendarHelper extends Base
     {
         $formatter = new SubtaskTimeTrackingCalendarFormatter($this->container);
         return $formatter
-            ->withQuery($this->subtaskTimeTracking->getUserQuery($user_id)
+            ->withQuery($this->subtaskTimeTrackingModel->getUserQuery($user_id)
                 ->addCondition($this->getCalendarCondition(
                     $this->dateParser->getTimestampFromIsoFormat($start),
                     $this->dateParser->getTimestampFromIsoFormat($end),

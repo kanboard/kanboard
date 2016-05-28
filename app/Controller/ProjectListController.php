@@ -18,9 +18,9 @@ class ProjectListController extends BaseController
     public function show()
     {
         if ($this->userSession->isAdmin()) {
-            $project_ids = $this->project->getAllIds();
+            $project_ids = $this->projectModel->getAllIds();
         } else {
-            $project_ids = $this->projectPermission->getActiveProjectIds($this->userSession->getId());
+            $project_ids = $this->projectPermissionModel->getActiveProjectIds($this->userSession->getId());
         }
 
         $nb_projects = count($project_ids);
@@ -29,7 +29,7 @@ class ProjectListController extends BaseController
             ->setUrl('ProjectListController', 'show')
             ->setMax(20)
             ->setOrder('name')
-            ->setQuery($this->project->getQueryColumnStats($project_ids))
+            ->setQuery($this->projectModel->getQueryColumnStats($project_ids))
             ->calculate();
 
         $this->response->html($this->helper->layout->app('project_list/show', array(

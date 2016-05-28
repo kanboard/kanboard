@@ -2,20 +2,20 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Model\Config;
-use Kanboard\Model\TaskCreation;
-use Kanboard\Model\TaskFinder;
-use Kanboard\Model\Project;
-use Kanboard\Model\Category;
+use Kanboard\Model\ConfigModel;
+use Kanboard\Model\TaskCreationModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\CategoryModel;
 
 class CategoryTest extends Base
 {
     public function testCreation()
     {
-        $taskCreationModel = new TaskCreation($this->container);
-        $taskFinderModel = new TaskFinder($this->container);
-        $projectModel = new Project($this->container);
-        $categoryModel = new Category($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1)));
@@ -33,8 +33,8 @@ class CategoryTest extends Base
 
     public function testExists()
     {
-        $projectModel = new Project($this->container);
-        $categoryModel = new Category($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1)));
@@ -44,8 +44,8 @@ class CategoryTest extends Base
 
     public function testGetById()
     {
-        $projectModel = new Project($this->container);
-        $categoryModel = new Category($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1, 'description' => 'test')));
@@ -59,8 +59,8 @@ class CategoryTest extends Base
 
     public function testGetNameById()
     {
-        $projectModel = new Project($this->container);
-        $categoryModel = new Category($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1, 'description' => 'test')));
@@ -71,8 +71,8 @@ class CategoryTest extends Base
 
     public function testGetIdByName()
     {
-        $projectModel = new Project($this->container);
-        $categoryModel = new Category($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1, 'description' => 'test')));
@@ -83,8 +83,8 @@ class CategoryTest extends Base
 
     public function testGetList()
     {
-        $projectModel = new Project($this->container);
-        $categoryModel = new Category($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1, 'description' => 'test')));
@@ -117,8 +117,8 @@ class CategoryTest extends Base
 
     public function testGetAll()
     {
-        $projectModel = new Project($this->container);
-        $categoryModel = new Category($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1, 'description' => 'test')));
@@ -140,9 +140,9 @@ class CategoryTest extends Base
 
     public function testCreateDefaultCategories()
     {
-        $projectModel = new Project($this->container);
-        $categoryModel = new Category($this->container);
-        $configModel = new Config($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
+        $configModel = new ConfigModel($this->container);
 
         $this->assertTrue($configModel->save(array('project_categories' => 'C1, C2, C3')));
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
@@ -157,8 +157,8 @@ class CategoryTest extends Base
 
     public function testUpdate()
     {
-        $projectModel = new Project($this->container);
-        $categoryModel = new Category($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1)));
@@ -172,10 +172,10 @@ class CategoryTest extends Base
 
     public function testRemove()
     {
-        $taskCreationModel = new TaskCreation($this->container);
-        $taskFinderModel = new TaskFinder($this->container);
-        $projectModel = new Project($this->container);
-        $categoryModel = new Category($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1)));
@@ -195,8 +195,8 @@ class CategoryTest extends Base
 
     public function testDuplicate()
     {
-        $projectModel = new Project($this->container);
-        $categoryModel = new Category($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertEquals(2, $projectModel->create(array('name' => 'Project #2')));

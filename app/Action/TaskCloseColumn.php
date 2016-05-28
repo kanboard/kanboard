@@ -2,7 +2,7 @@
 
 namespace Kanboard\Action;
 
-use Kanboard\Model\Task;
+use Kanboard\Model\TaskModel;
 
 /**
  * Close automatically a task in a specific column
@@ -32,7 +32,7 @@ class TaskCloseColumn extends Base
     public function getCompatibleEvents()
     {
         return array(
-            Task::EVENT_MOVE_COLUMN,
+            TaskModel::EVENT_MOVE_COLUMN,
         );
     }
 
@@ -67,7 +67,7 @@ class TaskCloseColumn extends Base
      */
     public function doAction(array $data)
     {
-        return $this->taskStatus->close($data['task_id']);
+        return $this->taskStatusModel->close($data['task_id']);
     }
 
     /**

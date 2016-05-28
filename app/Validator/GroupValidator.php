@@ -4,7 +4,7 @@ namespace Kanboard\Validator;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use Kanboard\Model\Group;
+use Kanboard\Model\GroupModel;
 
 /**
  * Group Validator
@@ -63,7 +63,7 @@ class GroupValidator extends Base
         return array(
             new Validators\Required('name', t('The name is required')),
             new Validators\MaxLength('name', t('The maximum length is %d characters', 100), 100),
-            new Validators\Unique('name', t('The name must be unique'), $this->db->getConnection(), Group::TABLE, 'id'),
+            new Validators\Unique('name', t('The name must be unique'), $this->db->getConnection(), GroupModel::TABLE, 'id'),
             new Validators\MaxLength('external_id', t('The maximum length is %d characters', 255), 255),
             new Validators\Integer('id', t('This value must be an integer')),
         );
