@@ -1,11 +1,11 @@
 <?php
 
-namespace Kanboard\Notification;
+namespace Kanboard\Core\Notification;
 
 /**
  * Notification Interface
  *
- * @package  core
+ * @package  Kanboard\Core\Notification
  * @author   Frederic Guillot
  */
 interface NotificationInterface

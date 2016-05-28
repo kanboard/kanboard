@@ -3,22 +3,16 @@
 namespace Kanboard\Notification;
 
 use Kanboard\Core\Base;
+use Kanboard\Core\Notification\NotificationInterface;
 
 /**
- * Web Notification
+ * Activity Stream Notification
  *
- * @package  notification
+ * @package  Kanboard\Notification
  * @author   Frederic Guillot
  */
-class Web extends Base implements NotificationInterface
+class ActivityStreamNotification extends Base implements NotificationInterface
 {
-    /**
-     * Notification type
-     *
-     * @var string
-     */
-    const TYPE = 'web';
-
     /**
      * Send notification to a user
      *
@@ -29,7 +23,6 @@ class Web extends Base implements NotificationInterface
      */
     public function notifyUser(array $user, $event_name, array $event_data)
     {
-        $this->userUnreadNotification->create($user['id'], $event_name, $event_data);
     }
 
     /**
@@ -42,5 +35,14 @@ class Web extends Base implements NotificationInterface
      */
     public function notifyProject(array $project, $event_name, array $event_data)
     {
+        if ($this->userSession->isLogged()) {
+            $this->projectActivity->createEvent(
+                $project['id'],
+                $event_data['task']['id'],
+                $this->userSession->getId(),
+                $event_name,
+                $event_data
+            );
+        }
     }
 }

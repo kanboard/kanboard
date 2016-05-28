@@ -10,14 +10,14 @@ use Kanboard\Model\User;
 use Kanboard\Model\TaskFile;
 use Kanboard\Model\Project;
 use Kanboard\Model\Task;
-use Kanboard\Notification\Mail;
+use Kanboard\Notification\MailNotification;
 use Kanboard\Subscriber\NotificationSubscriber;
 
 class MailTest extends Base
 {
     public function testGetMailContent()
     {
-        $en = new Mail($this->container);
+        $en = new MailNotification($this->container);
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
@@ -62,7 +62,7 @@ class MailTest extends Base
 
     public function testSendWithEmailAddress()
     {
-        $en = new Mail($this->container);
+        $en = new MailNotification($this->container);
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);
@@ -93,7 +93,7 @@ class MailTest extends Base
 
     public function testSendWithoutEmailAddress()
     {
-        $en = new Mail($this->container);
+        $en = new MailNotification($this->container);
         $p = new Project($this->container);
         $tf = new TaskFinder($this->container);
         $tc = new TaskCreation($this->container);

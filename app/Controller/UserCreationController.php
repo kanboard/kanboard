@@ -3,7 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\Security\Role;
-use Kanboard\Notification\Mail as MailNotification;
+use Kanboard\Notification\MailNotification;
 
 /**
  * Class UserCreationController

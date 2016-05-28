@@ -6,8 +6,8 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Kanboard\Model\UserNotificationType;
 use Kanboard\Model\ProjectNotificationType;
-use Kanboard\Notification\Mail as MailNotification;
-use Kanboard\Notification\Web as WebNotification;
+use Kanboard\Notification\MailNotification as MailNotification;
+use Kanboard\Notification\WebNotification as WebNotification;
 
 /**
  * Notification Provider
@@ -28,15 +28,15 @@ class NotificationProvider implements ServiceProviderInterface
     {
         $container['userNotificationType'] = function ($container) {
             $type = new UserNotificationType($container);
-            $type->setType(MailNotification::TYPE, t('Email'), '\Kanboard\Notification\Mail');
-            $type->setType(WebNotification::TYPE, t('Web'), '\Kanboard\Notification\Web');
+            $type->setType(MailNotification::TYPE, t('Email'), '\Kanboard\Notification\MailNotification');
+            $type->setType(WebNotification::TYPE, t('Web'), '\Kanboard\Notification\WebNotification');
             return $type;
         };
 
         $container['projectNotificationType'] = function ($container) {
             $type = new ProjectNotificationType($container);
-            $type->setType('webhook', 'Webhook', '\Kanboard\Notification\Webhook', true);
-            $type->setType('activity_stream', 'ActivityStream', '\Kanboard\Notification\ActivityStream', true);
+            $type->setType('webhook', 'Webhook', '\Kanboard\Notification\WebhookNotification', true);
+            $type->setType('activity_stream', 'ActivityStream', '\Kanboard\Notification\ActivityStreamNotification', true);
             return $type;
         };
 

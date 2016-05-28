@@ -3,6 +3,7 @@
 namespace Kanboard\Notification;
 
 use Kanboard\Core\Base;
+use Kanboard\Core\Notification\NotificationInterface;
 use Kanboard\Model\Task;
 use Kanboard\Model\TaskFile;
 use Kanboard\Model\Comment;
@@ -11,10 +12,10 @@ use Kanboard\Model\Subtask;
 /**
  * Email Notification
  *
- * @package  notification
+ * @package  Kanboard\Notification
  * @author   Frederic Guillot
  */
-class Mail extends Base implements NotificationInterface
+class MailNotification extends Base implements NotificationInterface
 {
     /**
      * Notification type
