@@ -66,7 +66,7 @@ class ColumnController extends BaseController
         list($valid, $errors) = $this->columnValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->columnModel->create($project['id'], $values['title'], $values['task_limit'], $values['description'])) {
+            if ($this->columnModel->create($project['id'], $values['title'], $values['task_limit'], $values['description']) !== false) {
                 $this->flash->success(t('Column created successfully.'));
                 return $this->response->redirect($this->helper->url->to('ColumnController', 'index', array('project_id' => $project['id'])), true);
             } else {

@@ -3,7 +3,6 @@
 namespace Kanboard\Model;
 
 use Kanboard\Event\CommentEvent;
-
 use Kanboard\Core\Base;
 
 /**
@@ -114,7 +113,7 @@ class CommentModel extends Base
         $values['date_creation'] = time();
         $comment_id = $this->db->table(self::TABLE)->persist($values);
 
-        if ($comment_id) {
+        if ($comment_id !== false) {
             $event = new CommentEvent(array('id' => $comment_id) + $values);
             $this->dispatcher->dispatch(self::EVENT_CREATE, $event);
             $this->userMentionModel->fireEvents($values['comment'], self::EVENT_USER_MENTION, $event);

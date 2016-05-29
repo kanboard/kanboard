@@ -81,7 +81,7 @@ class SwimlaneController extends BaseController
         list($valid, $errors) = $this->swimlaneValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->swimlaneModel->create($values)) {
+            if ($this->swimlaneModel->create($values) !== false) {
                 $this->flash->success(t('Your swimlane have been created successfully.'));
                 return $this->response->redirect($this->helper->url->to('SwimlaneController', 'index', array('project_id' => $project['id'])));
             } else {

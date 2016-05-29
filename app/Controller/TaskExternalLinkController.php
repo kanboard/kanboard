@@ -76,7 +76,7 @@ class TaskExternalLinkController extends BaseController
         $values = $this->request->getValues();
         list($valid, $errors) = $this->externalLinkValidator->validateCreation($values);
 
-        if ($valid && $this->taskExternalLinkModel->create($values)) {
+        if ($valid && $this->taskExternalLinkModel->create($values) !== false) {
             $this->flash->success(t('Link added successfully.'));
             return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }

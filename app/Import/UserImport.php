@@ -56,7 +56,7 @@ class UserImport extends Base
         $row = $this->prepare($row);
 
         if ($this->validateCreation($row)) {
-            if ($this->userModel->create($row)) {
+            if ($this->userModel->create($row) !== false) {
                 $this->logger->debug('UserImport: imported successfully line '.$line_number);
                 $this->counter++;
             } else {

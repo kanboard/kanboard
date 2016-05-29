@@ -76,7 +76,7 @@ class CommentController extends BaseController
         list($valid, $errors) = $this->commentValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->commentModel->create($values)) {
+            if ($this->commentModel->create($values) !== false) {
                 $this->flash->success(t('Comment added successfully.'));
             } else {
                 $this->flash->failure(t('Unable to create your comment.'));

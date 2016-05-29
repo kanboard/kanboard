@@ -18,6 +18,9 @@ class CustomFilterController extends BaseController
      * Display list of filters
      *
      * @access public
+     * @param  array $values
+     * @param  array $errors
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
     public function index(array $values = array(), array $errors = array())
     {
@@ -47,7 +50,7 @@ class CustomFilterController extends BaseController
         list($valid, $errors) = $this->customFilterValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->customFilterModel->create($values)) {
+            if ($this->customFilterModel->create($values) !== false) {
                 $this->flash->success(t('Your custom filter have been created successfully.'));
                 return $this->response->redirect($this->helper->url->to('CustomFilterController', 'index', array('project_id' => $project['id'])));
             } else {
@@ -101,6 +104,10 @@ class CustomFilterController extends BaseController
      * Edit a custom filter (display the form)
      *
      * @access public
+     * @param  array $values
+     * @param  array $errors
+     * @throws AccessForbiddenException
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
      */
     public function edit(array $values = array(), array $errors = array())
     {

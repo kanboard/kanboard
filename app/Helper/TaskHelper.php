@@ -40,11 +40,6 @@ class TaskHelper extends Base
         return $this->taskModel->getRecurrenceBasedateList();
     }
 
-    public function canRemove(array $task)
-    {
-        return $this->taskPermission->canRemoveTask($task);
-    }
-
     public function selectAssignee(array $users, array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="3"'), $attributes);

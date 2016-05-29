@@ -28,6 +28,7 @@ use Symfony\Component\Console\Command\Command;
  * @property \Kanboard\Model\ProjectUserRoleModel               $projectUserRoleModel
  * @property \Kanboard\Core\Plugin\Loader                       $pluginLoader
  * @property \Kanboard\Core\Http\Client                         $httpClient
+ * @property \Kanboard\Core\Queue\QueueManager                  $queueManager
  * @property \Symfony\Component\EventDispatcher\EventDispatcher $dispatcher
  */
 abstract class BaseCommand extends Command

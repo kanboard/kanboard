@@ -64,7 +64,7 @@ class CategoryController extends BaseController
         list($valid, $errors) = $this->categoryValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->categoryModel->create($values)) {
+            if ($this->categoryModel->create($values) !== false) {
                 $this->flash->success(t('Your category have been created successfully.'));
                 return $this->response->redirect($this->helper->url->to('CategoryController', 'index', array('project_id' => $project['id'])));
             } else {

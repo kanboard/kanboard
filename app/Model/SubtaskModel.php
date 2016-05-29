@@ -218,7 +218,7 @@ class SubtaskModel extends Base
         $this->prepareCreation($values);
         $subtask_id = $this->db->table(self::TABLE)->persist($values);
 
-        if ($subtask_id) {
+        if ($subtask_id !== false) {
             $this->container['dispatcher']->dispatch(
                 self::EVENT_CREATE,
                 new SubtaskEvent(array('id' => $subtask_id) + $values)

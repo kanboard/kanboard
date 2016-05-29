@@ -54,7 +54,7 @@ class SubtaskController extends BaseController
         list($valid, $errors) = $this->subtaskValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->subtaskModel->create($values)) {
+            if ($this->subtaskModel->create($values) !== false) {
                 $this->flash->success(t('Sub-task added successfully.'));
             } else {
                 $this->flash->failure(t('Unable to create your sub-task.'));
