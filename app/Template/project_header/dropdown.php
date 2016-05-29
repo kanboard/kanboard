@@ -67,8 +67,15 @@
 
         <?php if ($this->user->hasProjectAccess('ExportController', 'tasks', $project['id'])): ?>
             <li>
-                <i class="fa fa-download fa-fw"></i>
+                <i class="fa fa-upload fa-fw"></i>
                 <?= $this->url->link(t('Exports'), 'ExportController', 'tasks', array('project_id' => $project['id'])) ?>
+            </li>
+        <?php endif ?>
+
+        <?php if ($this->user->hasProjectAccess('TaskImportController', 'tasks', $project['id'])): ?>
+            <li>
+                <i class="fa fa-download fa-fw"></i>
+                <?= $this->url->link(t('Imports'), 'TaskImportController', 'show', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
 

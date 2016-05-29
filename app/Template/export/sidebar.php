@@ -1,16 +1,16 @@
 <div class="sidebar">
     <h2><?= t('Exports') ?></h2>
     <ul>
-        <li <?= $this->app->getRouterAction() === 'tasks' ? 'class="active"' : '' ?>>
+        <li <?= $this->app->checkMenuSelection('ExportController', 'tasks') ?>>
             <?= $this->url->link(t('Tasks'), 'ExportController', 'tasks', array('project_id' => $project['id'])) ?>
         </li>
-        <li <?= $this->app->getRouterAction() === 'subtasks' ? 'class="active"' : '' ?>>
+        <li <?= $this->app->checkMenuSelection('ExportController', 'subtasks') ?>>
             <?= $this->url->link(t('Subtasks'), 'ExportController', 'subtasks', array('project_id' => $project['id'])) ?>
         </li>
-        <li <?= $this->app->getRouterAction() === 'transitions' ? 'class="active"' : '' ?>>
+        <li <?= $this->app->checkMenuSelection('ExportController', 'transitions') ?>>
             <?= $this->url->link(t('Task transitions'), 'ExportController', 'transitions', array('project_id' => $project['id'])) ?>
         </li>
-        <li <?= $this->app->getRouterAction() === 'summary' ? 'class="active"' : '' ?>>
+        <li <?= $this->app->checkMenuSelection('ExportController', 'summary') ?>>
             <?= $this->url->link(t('Daily project summary'), 'ExportController', 'summary', array('project_id' => $project['id'])) ?>
         </li>
         <?= $this->hook->render('template:export:sidebar') ?>

@@ -29,7 +29,7 @@
             <li <?= $this->app->checkMenuSelection('SwimlaneController') ?>>
                 <?= $this->url->link(t('Swimlanes'), 'SwimlaneController', 'index', array('project_id' => $project['id'])) ?>
             </li>
-            <li <?= $this->app->checkMenuSelection('category') ?>>
+            <li <?= $this->app->checkMenuSelection('CategoryController') ?>>
                 <?= $this->url->link(t('Categories'), 'CategoryController', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <?php if ($project['is_private'] == 0): ?>
@@ -50,9 +50,6 @@
                     <li>
                     <?= $this->url->link(t('Enable'), 'ProjectStatusController', 'confirmEnable', array('project_id' => $project['id']), false, 'popover') ?>
                 <?php endif ?>
-            </li>
-            <li <?= $this->app->checkMenuSelection('TaskImportController') ?>>
-                <?= $this->url->link(t('Import'), 'TaskImportController', 'step1', array('project_id' => $project['id'])) ?>
             </li>
             <?php if ($this->user->hasProjectAccess('ProjectStatusController', 'remove', $project['id'])): ?>
                 <li>
