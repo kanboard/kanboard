@@ -9,10 +9,10 @@ use Kanboard\Model\ProjectModel;
 /**
  * Project Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class ProjectValidator extends Base
+class ProjectValidator extends BaseValidator
 {
     /**
      * Common validation rules

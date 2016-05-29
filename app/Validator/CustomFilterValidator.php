@@ -8,10 +8,10 @@ use SimpleValidator\Validators;
 /**
  * Custom Filter Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class CustomFilterValidator extends Base
+class CustomFilterValidator extends BaseValidator
 {
     /**
      * Common validation rules

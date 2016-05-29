@@ -9,10 +9,10 @@ use Kanboard\Model\UserModel;
 /**
  * User Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class UserValidator extends Base
+class UserValidator extends BaseValidator
 {
     /**
      * Common validation rules

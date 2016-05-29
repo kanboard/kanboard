@@ -8,10 +8,10 @@ use SimpleValidator\Validators;
 /**
  * External Link Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class ExternalLinkValidator extends Base
+class ExternalLinkValidator extends BaseValidator
 {
     /**
      * Validate creation

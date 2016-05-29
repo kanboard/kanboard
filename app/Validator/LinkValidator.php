@@ -9,10 +9,10 @@ use Kanboard\Model\LinkModel;
 /**
  * Link Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class LinkValidator extends Base
+class LinkValidator extends BaseValidator
 {
     /**
      * Validate creation

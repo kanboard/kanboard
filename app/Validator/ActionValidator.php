@@ -8,10 +8,10 @@ use SimpleValidator\Validators;
 /**
  * Action Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class ActionValidator extends Base
+class ActionValidator extends BaseValidator
 {
     /**
      * Validate action creation

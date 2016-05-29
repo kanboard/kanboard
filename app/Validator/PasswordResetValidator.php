@@ -9,10 +9,10 @@ use Gregwar\Captcha\CaptchaBuilder;
 /**
  * Password Reset Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class PasswordResetValidator extends Base
+class PasswordResetValidator extends BaseValidator
 {
     /**
      * Validate creation
@@ -87,6 +87,6 @@ class PasswordResetValidator extends Base
             }
         }
 
-        return array($result, $errors);;
+        return array($result, $errors);
     }
 }

@@ -9,10 +9,10 @@ use Gregwar\Captcha\CaptchaBuilder;
 /**
  * Authentication Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class AuthValidator extends Base
+class AuthValidator extends BaseValidator
 {
     /**
      * Validate user login form

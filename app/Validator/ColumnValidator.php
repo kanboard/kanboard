@@ -8,10 +8,10 @@ use SimpleValidator\Validators;
 /**
  * Column Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class ColumnValidator extends Base
+class ColumnValidator extends BaseValidator
 {
     /**
      * Validate column modification

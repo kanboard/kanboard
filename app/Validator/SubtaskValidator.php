@@ -8,10 +8,10 @@ use SimpleValidator\Validators;
 /**
  * Subtask Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class SubtaskValidator extends Base
+class SubtaskValidator extends BaseValidator
 {
     /**
      * Validate creation

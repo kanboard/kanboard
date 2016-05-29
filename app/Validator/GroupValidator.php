@@ -9,10 +9,10 @@ use Kanboard\Model\GroupModel;
 /**
  * Group Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class GroupValidator extends Base
+class GroupValidator extends BaseValidator
 {
     /**
      * Validate creation

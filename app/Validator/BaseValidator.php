@@ -2,15 +2,16 @@
 
 namespace Kanboard\Validator;
 
+use Kanboard\Core\Base;
 use SimpleValidator\Validators;
 
 /**
  * Base Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class Base extends \Kanboard\Core\Base
+abstract class BaseValidator extends Base
 {
     /**
      * Execute multiple validators

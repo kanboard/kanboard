@@ -9,10 +9,10 @@ use Kanboard\Model\TaskModel;
 /**
  * Task Link Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class TaskLinkValidator extends Base
+class TaskLinkValidator extends BaseValidator
 {
     /**
      * Common validation rules

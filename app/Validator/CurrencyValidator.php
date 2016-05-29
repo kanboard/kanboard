@@ -8,10 +8,10 @@ use SimpleValidator\Validators;
 /**
  * Currency Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class CurrencyValidator extends Base
+class CurrencyValidator extends BaseValidator
 {
     /**
      * Validate

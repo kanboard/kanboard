@@ -8,10 +8,10 @@ use SimpleValidator\Validators;
 /**
  * Category Validator
  *
- * @package  validator
+ * @package  Kanboard\Validator
  * @author   Frederic Guillot
  */
-class CategoryValidator extends Base
+class CategoryValidator extends BaseValidator
 {
     /**
      * Validate category creation
