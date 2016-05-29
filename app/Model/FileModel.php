@@ -17,6 +17,42 @@ use Kanboard\Core\ObjectStorage\ObjectStorageException;
 abstract class FileModel extends Base
 {
     /**
+     * Get the table
+     *
+     * @abstract
+     * @access protected
+     * @return string
+     */
+    abstract protected function getTable();
+
+    /**
+     * Define the foreign key
+     *
+     * @abstract
+     * @access protected
+     * @return string
+     */
+    abstract protected function getForeignKey();
+
+    /**
+     * Get the path prefix
+     *
+     * @abstract
+     * @access protected
+     * @return string
+     */
+    abstract protected function getPathPrefix();
+
+    /**
+     * Get event name
+     *
+     * @abstract
+     * @access protected
+     * @return string
+     */
+    abstract protected function getEventName();
+
+    /**
      * Get PicoDb query to get all files
      *
      * @access protected
@@ -25,21 +61,21 @@ abstract class FileModel extends Base
     protected function getQuery()
     {
         return $this->db
-            ->table(static::TABLE)
+            ->table($this->getTable())
             ->columns(
-                static::TABLE.'.id',
-                static::TABLE.'.name',
-                static::TABLE.'.path',
-                static::TABLE.'.is_image',
-                static::TABLE.'.'.static::FOREIGN_KEY,
-                static::TABLE.'.date',
-                static::TABLE.'.user_id',
-                static::TABLE.'.size',
+                $this->getTable().'.id',
+                $this->getTable().'.name',
+                $this->getTable().'.path',
+                $this->getTable().'.is_image',
+                $this->getTable().'.'.$this->getForeignKey(),
+                $this->getTable().'.date',
+                $this->getTable().'.user_id',
+                $this->getTable().'.size',
                 UserModel::TABLE.'.username',
                 UserModel::TABLE.'.name as user_name'
             )
             ->join(UserModel::TABLE, 'id', 'user_id')
-            ->asc(static::TABLE.'.name');
+            ->asc($this->getTable().'.name');
     }
 
     /**
@@ -51,7 +87,7 @@ abstract class FileModel extends Base
      */
     public function getById($file_id)
     {
-        return $this->db->table(static::TABLE)->eq('id', $file_id)->findOne();
+        return $this->db->table($this->getTable())->eq('id', $file_id)->findOne();
     }
 
     /**
@@ -63,7 +99,7 @@ abstract class FileModel extends Base
      */
     public function getAll($id)
     {
-        return $this->getQuery()->eq(static::FOREIGN_KEY, $id)->findAll();
+        return $this->getQuery()->eq($this->getForeignKey(), $id)->findAll();
     }
 
     /**
@@ -75,7 +111,7 @@ abstract class FileModel extends Base
      */
     public function getAllImages($id)
     {
-        return $this->getQuery()->eq(static::FOREIGN_KEY, $id)->eq('is_image', 1)->findAll();
+        return $this->getQuery()->eq($this->getForeignKey(), $id)->eq('is_image', 1)->findAll();
     }
 
     /**
@@ -87,7 +123,7 @@ abstract class FileModel extends Base
      */
     public function getAllDocuments($id)
     {
-        return $this->getQuery()->eq(static::FOREIGN_KEY, $id)->eq('is_image', 0)->findAll();
+        return $this->getQuery()->eq($this->getForeignKey(), $id)->eq('is_image', 0)->findAll();
     }
 
     /**
@@ -103,7 +139,7 @@ abstract class FileModel extends Base
     public function create($id, $name, $path, $size)
     {
         $values = array(
-            static::FOREIGN_KEY => $id,
+            $this->getForeignKey() => $id,
             'name' => substr($name, 0, 255),
             'path' => $path,
             'is_image' => $this->isImage($name) ? 1 : 0,
@@ -112,12 +148,12 @@ abstract class FileModel extends Base
             'date' => time(),
         );
 
-        $result = $this->db->table(static::TABLE)->insert($values);
+        $result = $this->db->table($this->getTable())->insert($values);
 
         if ($result) {
             $file_id = (int) $this->db->getLastId();
             $event = new FileEvent($values + array('file_id' => $file_id));
-            $this->dispatcher->dispatch(static::EVENT_CREATE, $event);
+            $this->dispatcher->dispatch($this->getEventName(), $event);
             return $file_id;
         }
 
@@ -133,7 +169,7 @@ abstract class FileModel extends Base
      */
     public function removeAll($id)
     {
-        $file_ids = $this->db->table(static::TABLE)->eq(static::FOREIGN_KEY, $id)->asc('id')->findAllByColumn('id');
+        $file_ids = $this->db->table($this->getTable())->eq($this->getForeignKey(), $id)->asc('id')->findAllByColumn('id');
         $results = array();
 
         foreach ($file_ids as $file_id) {
@@ -160,7 +196,7 @@ abstract class FileModel extends Base
                 $this->objectStorage->remove($this->getThumbnailPath($file['path']));
             }
 
-            return $this->db->table(static::TABLE)->eq('id', $file['id'])->remove();
+            return $this->db->table($this->getTable())->eq('id', $file['id'])->remove();
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
             return false;
@@ -211,7 +247,7 @@ abstract class FileModel extends Base
      */
     public function generatePath($id, $filename)
     {
-        return static::PATH_PREFIX.DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR.hash('sha1', $filename.time());
+        return $this->getPathPrefix().DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR.hash('sha1', $filename.time());
     }
 
     /**
@@ -253,6 +289,7 @@ abstract class FileModel extends Base
      * @access public
      * @param  integer $id
      * @param  array   $file
+     * @throws Exception
      */
     public function uploadFile($id, array $file)
     {
