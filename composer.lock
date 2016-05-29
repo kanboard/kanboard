@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1dff423870fc9d85edd75f83ee0b5b97",
-    "content-hash": "5a7a28b3dcb87b0be20ff634d989d5b4",
+    "hash": "cb6d74d2ba01afcd7988f4ab99d614a5",
+    "content-hash": "8c9fce0f4478875b9b4dc1ae53738159",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -279,7 +279,7 @@
         },
         {
             "name": "fguillot/simple-queue",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/simple-queue.git",
@@ -1865,7 +1865,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "fguillot/simple-queue": 20,
         "paragonie/random_compat": 0,
         "ramsey/array_column": 0
     },
