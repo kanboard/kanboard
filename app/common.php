@@ -48,4 +48,5 @@ $container->register(new Kanboard\ServiceProvider\AvatarProvider());
 $container->register(new Kanboard\ServiceProvider\FilterProvider());
 $container->register(new Kanboard\ServiceProvider\QueueProvider());
 $container->register(new Kanboard\ServiceProvider\ApiProvider());
+$container->register(new Kanboard\ServiceProvider\CommandProvider());
 $container->register(new Kanboard\ServiceProvider\PluginProvider());

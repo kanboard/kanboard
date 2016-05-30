@@ -140,6 +140,7 @@ use Pimple\Container;
  * @property \Psr\Log\LoggerInterface                            $logger
  * @property \PicoDb\Database                                    $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher  $dispatcher
+ * @property \Symfony\Component\Console\Application              $cli
  * @property \JsonRPC\Server                                     $api
  */
 abstract class Base

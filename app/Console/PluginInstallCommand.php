@@ -4,6 +4,7 @@ namespace Kanboard\Console;
 
 use Kanboard\Core\Plugin\Installer;
 use Kanboard\Core\Plugin\PluginInstallerException;
+use LogicException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,7 +22,7 @@ class PluginInstallCommand extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!Installer::isConfigured()) {
-            $output->writeln('<error>Kanboard is not configured to install plugins itself</error>');
+            throw new LogicException('Kanboard is not configured to install plugins itself');
         }
 
         try {

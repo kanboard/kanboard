@@ -110,8 +110,8 @@ public function getClasses()
 {
     return array(
         'Plugin\Budget\Model' => array(
-            'HourlyRate',
-            'Budget',
+            'HourlyRateModel',
+            'BudgetModel',
         )
     );
 }
@@ -120,11 +120,42 @@ public function getClasses()
 Now, if you use a class that extends from `Core\Base`, you can access directly to those class instance:
 
 ```php
-$this->hourlyRate->remove(123);
-$this->budget->getDailyBudgetBreakdown(456);
+$this->hourlyRateModel->remove(123);
+$this->budgetModel->getDailyBudgetBreakdown(456);
 
 // It's the same thing as using the container:
-$this->container['hourlyRate']->getAll();
+$this->container['hourlyRateModel']->getAll();
 ```
 
 Keys of the containers are unique across the application. If you override an existing class, you will change the default behavior.
+
+Add new API methods
+-------------------
+
+Kanboard use this library [JSON-RPC](https://github.com/fguillot/JsonRPC) to handle API calls.
+
+To add a new method you can do something like that from your plugin:
+
+```php
+$this->api->getProcedureHandler()->withCallback('my_method', function() {
+    return 'foobar';
+});
+```
+
+`$this->container['api']` or `$this->api` expose an instance of the object `JsonRPC\Server`.
+
+Read the library documentation for more information.
+
+Add new console commands
+------------------------
+
+Kanboard use the library [Symfony Console](http://symfony.com/doc/current/components/console/introduction.html) to handle local command lines.
+
+Kanboard expose an instance of the object `Symfony\Component\Console\Application` via `$this->cli`. 
+You can add new commands from your plugin:
+
+```php
+$this->cli->add(new MyCommand());
+```
+
+Read the library documentation for more information.

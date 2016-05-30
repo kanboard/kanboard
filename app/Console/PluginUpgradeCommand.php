@@ -5,6 +5,7 @@ namespace Kanboard\Console;
 use Kanboard\Core\Plugin\Base as BasePlugin;
 use Kanboard\Core\Plugin\Directory;
 use Kanboard\Core\Plugin\Installer;
+use LogicException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -21,7 +22,7 @@ class PluginUpgradeCommand extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         if (!Installer::isConfigured()) {
-            $output->writeln('<error>Kanboard is not configured to upgrade plugins itself</error>');
+            throw new LogicException('Kanboard is not configured to install plugins itself');
         }
 
         $installer = new Installer($this->container);
