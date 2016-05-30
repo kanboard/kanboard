@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cb6d74d2ba01afcd7988f4ab99d614a5",
-    "content-hash": "8c9fce0f4478875b9b4dc1ae53738159",
+    "hash": "d47d835e84b436f531274f700ec39305",
+    "content-hash": "643b9cebc73b39d76b6b47eb759d054d",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -203,20 +203,23 @@
         },
         {
             "name": "fguillot/json-rpc",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/JsonRPC.git",
-                "reference": "e915dab71940e7ac251955c785570048f460d332"
+                "reference": "b002320b10aa1eeb7aee83f7b703cd6a6e99ff78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/e915dab71940e7ac251955c785570048f460d332",
-                "reference": "e915dab71940e7ac251955c785570048f460d332",
+                "url": "https://api.github.com/repos/fguillot/JsonRPC/zipball/b002320b10aa1eeb7aee83f7b703cd6a6e99ff78",
+                "reference": "b002320b10aa1eeb7aee83f7b703cd6a6e99ff78",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
             },
             "type": "library",
             "autoload": {
@@ -235,7 +238,7 @@
             ],
             "description": "Simple Json-RPC client/server library that just works",
             "homepage": "https://github.com/fguillot/JsonRPC",
-            "time": "2016-04-27 02:48:10"
+            "time": "2016-05-29 13:06:36"
         },
         {
             "name": "fguillot/picodb",

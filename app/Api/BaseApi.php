@@ -13,51 +13,6 @@ use Kanboard\Core\Base;
  */
 abstract class BaseApi extends Base
 {
-    private $user_allowed_procedures = array(
-        'getMe',
-        'getMyDashboard',
-        'getMyActivityStream',
-        'createMyPrivateProject',
-        'getMyProjectsList',
-        'getMyProjects',
-        'getMyOverdueTasks',
-    );
-
-    private $both_allowed_procedures = array(
-        'getTimezone',
-        'getVersion',
-        'getDefaultTaskColor',
-        'getDefaultTaskColors',
-        'getColorList',
-        'getProjectById',
-        'getTask',
-        'getTaskByReference',
-        'getAllTasks',
-        'openTask',
-        'closeTask',
-        'moveTaskPosition',
-        'createTask',
-        'updateTask',
-        'getBoard',
-        'getProjectActivity',
-        'getOverdueTasksByProject',
-        'searchTasks',
-    );
-
-    public function checkProcedurePermission($is_user, $procedure)
-    {
-        $is_both_procedure = in_array($procedure, $this->both_allowed_procedures);
-        $is_user_procedure = in_array($procedure, $this->user_allowed_procedures);
-
-        if ($is_user && ! $is_both_procedure && ! $is_user_procedure) {
-            throw new AccessDeniedException('Permission denied');
-        } elseif (! $is_user && ! $is_both_procedure && $is_user_procedure) {
-            throw new AccessDeniedException('Permission denied');
-        }
-
-        $this->logger->debug('API call: '.$procedure);
-    }
-
     public function checkProjectPermission($project_id)
     {
         if ($this->userSession->isLogged() && ! $this->projectPermissionModel->isUserAllowed($project_id, $this->userSession->getId())) {
