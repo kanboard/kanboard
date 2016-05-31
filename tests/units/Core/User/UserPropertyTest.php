@@ -56,6 +56,30 @@ class UserPropertyTest extends Base
         );
 
         $this->assertEquals($expected, UserProperty::filterProperties($profile, $properties));
+
+        $profile = array(
+            'id' => 123,
+            'username' => 'bob',
+            'name' => null,
+            'email' => '',
+            'other_column' => 'myvalue',
+            'role' => Role::APP_ADMIN,
+        );
+
+        $properties = array(
+            'external_id' => '456',
+            'username' => 'bobby',
+            'name' => 'Bobby',
+            'email' => 'admin@localhost',
+            'role' => null,
+        );
+
+        $expected = array(
+            'name' => 'Bobby',
+            'email' => 'admin@localhost',
+        );
+
+        $this->assertEquals($expected, UserProperty::filterProperties($profile, $properties));
     }
 
     public function testFilterPropertiesOverrideExistingValueWhenNecessary()

@@ -108,12 +108,18 @@ class User
     /**
      * Get role from LDAP groups
      *
+     * Note: Do not touch the current role if groups are not configured
+     *
      * @access protected
      * @param  string[] $groupIds
      * @return string
      */
     protected function getRole(array $groupIds)
     {
+        if ($this->hasGroupsNotConfigured()) {
+            return null;
+        }
+
         foreach ($groupIds as $groupId) {
             $groupId = strtolower($groupId);
 
@@ -269,6 +275,17 @@ class User
     public function hasGroupUserFilter()
     {
         return $this->getGroupUserFilter() !== '' && $this->getGroupUserFilter() !== null;
+    }
+
+    /**
+     * Return true if LDAP Group mapping is not configured
+     *
+     * @access public
+     * @return boolean
+     */
+    public function hasGroupsNotConfigured()
+    {
+        return !$this->getGroupAdminDn() && !$this->getGroupManagerDn();
     }
 
     /**

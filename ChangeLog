@@ -22,6 +22,8 @@ Improvements:
 
 Bug fixes:
 
+* Do not sync user role if LDAP groups are not configured
+* Fixed issue with unicode handling for letter based avatars and user initials
 * Do not send notifications to disabled users
 * Fix wrong redirect when removing a task from the task view page
 

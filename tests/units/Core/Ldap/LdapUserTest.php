@@ -61,7 +61,7 @@ class LdapUserTest extends Base
             ->getMock();
     }
 
-    public function testGetUser()
+    public function testGetUserWithNoGroupConfigured()
     {
         $entries = new Entries(array(
             'count' => 1,
@@ -136,7 +136,7 @@ class LdapUserTest extends Base
         $this->assertEquals('my_ldap_user', $user->getUsername());
         $this->assertEquals('My LDAP user', $user->getName());
         $this->assertEquals('user1@localhost', $user->getEmail());
-        $this->assertEquals(Role::APP_USER, $user->getRole());
+        $this->assertEquals(null, $user->getRole());
         $this->assertSame('', $user->getPhoto());
         $this->assertEquals(array(), $user->getExternalGroupIds());
         $this->assertEquals(array('is_ldap_user' => 1), $user->getExtraAttributes());
@@ -743,6 +743,11 @@ class LdapUserTest extends Base
             ->expects($this->any())
             ->method('getGroupUserFilter')
             ->will($this->returnValue('(&(objectClass=posixGroup)(memberUid=%s))'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupManagerDn')
+            ->will($this->returnValue('cn=Kanboard Managers,ou=Groups,dc=kanboard,dc=local'));
 
         $this->user
             ->expects($this->any())

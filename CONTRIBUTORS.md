@@ -13,6 +13,7 @@ Contributors:
 - [Anjar Febrianto](https://github.com/Lasut)
 - [Ashbike](https://github.com/ashbike)
 - [Ashish Kulkarni](https://github.com/ashkulz)
+- [Bitcoin 333](https://github.com/bitcoin333)
 - [Busfreak](https://github.com/Busfreak)
 - [Christian González](https://github.com/nerdoc)
 - [Chorgroup](https://github.com/chorgroup)
