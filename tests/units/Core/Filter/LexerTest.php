@@ -178,4 +178,28 @@ class LexerTest extends Base
 
         $this->assertSame($expected, $lexer->tokenize('date:<=2016-01-01 something else'));
     }
+
+    public function testTokenizeWithUtf8Letters()
+    {
+        $lexer = new Lexer();
+        $lexer->setDefaultToken('myDefaultToken');
+
+        $expected = array(
+            'myDefaultToken' => array('àa éçùe'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('àa éçùe'));
+    }
+
+    public function testTokenizeWithUtf8Numbers()
+    {
+        $lexer = new Lexer();
+        $lexer->setDefaultToken('myDefaultToken');
+
+        $expected = array(
+            'myDefaultToken' => array('६Δↈ五一'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('६Δↈ五一'));
+    }
 }
