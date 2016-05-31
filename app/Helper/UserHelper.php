@@ -36,10 +36,10 @@ class UserHelper extends Base
         $initials = '';
 
         foreach (explode(' ', $name, 2) as $string) {
-            $initials .= mb_substr($string, 0, 1);
+            $initials .= mb_substr($string, 0, 1, 'UTF-8');
         }
 
-        return mb_strtoupper($initials);
+        return mb_strtoupper($initials, 'UTF-8');
     }
 
     /**
@@ -174,7 +174,7 @@ class UserHelper extends Base
         if (isset($task['creator_id']) && $task['creator_id'] == $this->userSession->getId()) {
             return true;
         }
-        
+
         if ($this->userSession->isAdmin() || $this->getProjectUserRole($task['project_id']) === Role::PROJECT_MANAGER) {
             return true;
         }
