@@ -77,7 +77,7 @@ abstract class BaseController extends Base
         $model = 'projectFile';
 
         if ($task_id > 0) {
-            $model = 'taskFile';
+            $model = 'taskFileModel';
             $project_id = $this->taskFinderModel->getProjectId($task_id);
 
             if ($project_id !== $this->request->getIntegerParam('project_id')) {

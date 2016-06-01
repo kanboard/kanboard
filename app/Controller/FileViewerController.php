@@ -45,7 +45,7 @@ class FileViewerController extends BaseController
         $type = $this->helper->file->getPreviewType($file['name']);
         $params = array('file_id' => $file['id'], 'project_id' => $this->request->getIntegerParam('project_id'));
 
-        if ($file['model'] === 'taskFile') {
+        if ($file['model'] === 'taskFileModel') {
             $params['task_id'] = $file['task_id'];
         }
 
