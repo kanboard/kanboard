@@ -13,8 +13,8 @@ Register a new notification type
 In your plugin registration file call the method `setType()`:
 
 ```php
-$this->userNotificationType->setType('irc', t('IRC'), '\Kanboard\Plugin\IRC\Notification\IrcHandler');
-$this->projectNotificationType->setType('irc', t('IRC'), '\Kanboard\Plugin\IRC\Notification\IrcHandler');
+$this->userNotificationTypeModel->setType('irc', t('IRC'), '\Kanboard\Plugin\IRC\Notification\IrcHandler');
+$this->projectNotificationTypeModel->setType('irc', t('IRC'), '\Kanboard\Plugin\IRC\Notification\IrcHandler');
 ```
 
 Your handler can be registered for user or project notification. You don't necessarily need to support both.

@@ -74,6 +74,12 @@ Kanboard is pre-configured to work with Apache (URL rewriting).
 | ldap                       | Only for LDAP authentication  |
 | Zend OPcache               | Recommended                   |
 
+### Optional PHP extensions
+
+| PHP Extensions required    | Note                                       |
+|----------------------------|--------------------------------------------|
+| zip                        | Used to install plugins from Kanboard      |
+
 ### Recommendations
 
 - Modern Linux or Unix operating system.
