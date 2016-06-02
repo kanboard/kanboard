@@ -90,6 +90,22 @@ class SwimlaneModel extends Base
     }
 
     /**
+     * Get first active swimlane for a project
+     *
+     * @access public
+     * @param  integer $project_id
+     * @return array
+     */
+    public function getFirstActiveSwimlane($project_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->eq('is_active', self::ACTIVE)
+            ->eq('project_id', $project_id)
+            ->orderBy('position', 'asc')
+            ->findOne();
+    }
+
+    /**
      * Get default swimlane properties
      *
      * @access public

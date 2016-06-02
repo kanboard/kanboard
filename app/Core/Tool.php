@@ -13,26 +13,6 @@ use Pimple\Container;
 class Tool
 {
     /**
-     * Get the mailbox hash from an email address
-     *
-     * @static
-     * @access public
-     * @param  string  $email
-     * @return string
-     */
-    public static function getMailboxHash($email)
-    {
-        if (! strpos($email, '@') || ! strpos($email, '+')) {
-            return '';
-        }
-
-        list($local_part, ) = explode('@', $email);
-        list(, $identifier) = explode('+', $local_part);
-
-        return $identifier;
-    }
-
-    /**
      * Build dependency injection container from an array
      *
      * @static
