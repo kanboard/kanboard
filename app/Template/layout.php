@@ -58,6 +58,7 @@
             'title' => $title,
             'description' => isset($description) ? $description : '',
             'board_selector' => isset($board_selector) ? $board_selector : array(),
+            'project' => isset($project) ? $project : array(),
         )) ?>
         <section class="page">
             <?= $this->app->flashMessage() ?>
