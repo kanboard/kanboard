@@ -21,4 +21,15 @@ class MailHelperTest extends Base
         $this->assertEquals('Test', $helper->filterSubject('RE: Test'));
         $this->assertEquals('Test', $helper->filterSubject('FW: Test'));
     }
+
+    public function testGetSenderAddress()
+    {
+        $helper = new MailHelper($this->container);
+        $this->assertEquals('notifications@kanboard.local', $helper->getMailSenderAddress());
+
+        $this->container['configModel']->save(array('mail_sender_address' => 'me@here'));
+        $this->container['memoryCache']->flush();
+
+        $this->assertEquals('me@here', $helper->getMailSenderAddress());
+    }
 }

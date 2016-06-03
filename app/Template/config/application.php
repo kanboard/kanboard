@@ -9,6 +9,9 @@
     <?= $this->form->text('application_url', $values, $errors, array('placeholder="http://example.kanboard.net/"')) ?>
     <p class="form-help"><?= t('Example: http://example.kanboard.net/ (used to generate absolute URLs)') ?></p>
 
+    <?= $this->form->label(t('Email sender address'), 'mail_sender_address') ?>
+    <?= $this->form->text('mail_sender_address', $values, $errors, array('placeholder="'.MAIL_FROM.'"')) ?>
+
     <?= $this->form->label(t('Language'), 'application_language') ?>
     <?= $this->form->select('application_language', $languages, $values, $errors) ?>
 

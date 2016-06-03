@@ -45,4 +45,21 @@ class MailHelper extends Base
 
         return $subject;
     }
+
+    /**
+     * Get mail sender address
+     *
+     * @access public
+     * @return string
+     */
+    public function getMailSenderAddress()
+    {
+        $email = $this->configModel->get('mail_sender_address');
+
+        if (!empty($email)) {
+            return $email;
+        }
+
+        return MAIL_FROM;
+    }
 }
