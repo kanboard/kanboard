@@ -1,5 +1,6 @@
 
 $script = <<SCRIPT
+apt-get update
 apt-get install -y apache2 php5 php5-sqlite php5-mysql php5-pgsql php5-gd curl unzip && \
 apt-get clean && \
 echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
