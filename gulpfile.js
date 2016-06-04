@@ -90,7 +90,8 @@ var vendor = {
         'bower_components/mousetrap/plugins/global-bind/mousetrap-global-bind.min.js',
         'bower_components/simplemde/dist/simplemde.min.js',
         'bower_components/d3/d3.min.js',
-        'bower_components/c3/c3.min.js'
+        'bower_components/c3/c3.min.js',
+        'bower_components/isMobile/isMobile.min.js'
     ]
 };
 

@@ -42,7 +42,7 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
         }
     };
 
-    if ($.support.touch) {
+    if (isMobile.any) {
         $(".task-board-sort-handle").css("display", "inline");
         params["handle"] = ".task-board-sort-handle";
     }

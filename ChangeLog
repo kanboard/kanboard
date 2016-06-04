@@ -19,6 +19,7 @@ Improvements:
 * Do not display task progress for tasks with no start/end date
 * Use Gulp and Bower to manage assets
 * Controller and Middleware refactoring
+* Replace jQuery mobile detection by the library isMobile
 
 Bug fixes:
 
