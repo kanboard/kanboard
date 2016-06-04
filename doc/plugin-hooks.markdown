@@ -161,6 +161,7 @@ List of template hooks:
 | `template:dashboard:sidebar`               | Sidebar on dashboard page                          |
 | `template:export:sidebar`                  | Sidebar on export pages                            |
 | `template:import:sidebar`                  | Sidebar on import pages                            |
+| `template:header:dropdown`                 | Dropdown on header                                 |
 | `template:layout:head`                     | Page layout `<head/>` tag                          |
 | `template:layout:top`                      | Page layout top header                             |
 | `template:layout:bottom`                   | Page layout footer                                 |
