@@ -14,6 +14,10 @@ class PasswordResetController extends BaseController
 {
     /**
      * Show the form to reset the password
+     *
+     * @param array $values
+     * @param array $errors
+     * @throws \Kanboard\Core\Controller\BaseException
      */
     public function create(array $values = array(), array $errors = array())
     {
@@ -46,6 +50,10 @@ class PasswordResetController extends BaseController
 
     /**
      * Show the form to set a new password
+     *
+     * @param array $values
+     * @param array $errors
+     * @throws \Kanboard\Core\Controller\BaseException
      */
     public function change(array $values = array(), array $errors = array())
     {
@@ -93,6 +101,8 @@ class PasswordResetController extends BaseController
 
     /**
      * Send the email
+     *
+     * @param string $username
      */
     private function sendEmail($username)
     {

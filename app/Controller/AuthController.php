@@ -61,7 +61,7 @@ class AuthController extends BaseController
             $this->sessionManager->close();
             $this->response->redirect($this->helper->url->to('AuthController', 'login'));
         } else {
-            $this->response->redirect($this->helper->url->to('AuthController', 'index'));
+            $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
         }
     }
 
