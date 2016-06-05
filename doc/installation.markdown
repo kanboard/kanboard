@@ -53,13 +53,14 @@ The `.htaccess` is optional because its content can be included directly in the 
 
 You can also define a custom location for the plugins and files folders by changing the [config file](config.markdown).
 
+Optional installation
+---------------------
+
+- Some features of Kanboard require that you run [a daily background job](cronjob.markdown) (Reports and analytics)
+- [Install the background worker](worker.markdown) to improve the performances
+
 Security
 --------
 
 - Don't forget to change the default user/password
-- Don't allow everybody to access to the directory `data` from the URL. There is already a `.htaccess` for Apache but nothing for Nginx.
-
-Notes
------
-
-- Some features of Kanboard require that you run [a daily background job](cronjob.markdown)
+- Don't allow everybody to access to the directory `data` from the URL. There is already a `.htaccess` for Apache but nothing for other web servers.

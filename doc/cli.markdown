@@ -31,6 +31,7 @@ Available commands:
   cronjob                            Execute daily cronjob
   help                               Displays help for a command
   list                               Lists commands
+  worker                             Execute queue worker
  export
   export:daily-project-column-stats  Daily project column stats CSV export (number of tasks per column and per day)
   export:subtasks                    Subtasks CSV export
@@ -195,4 +196,10 @@ Note: Installed files will have the same permissions as the current user
 ./kanboard plugin:upgrade
 * Updating plugin: Budget Planning
 * Plugin up to date: Github Authentication
+```
+
+### Run Background worker
+
+```bash
+./kanboard worker
 ```

@@ -26,6 +26,7 @@ class JobHandler extends Base
         return new Job(array(
             'class' => get_class($job),
             'params' => $job->getJobParams(),
+            'user_id' => $this->userSession->getId(),
         ));
     }
 
@@ -39,12 +40,30 @@ class JobHandler extends Base
     {
         $payload = $job->getBody();
         $className = $payload['class'];
+        $this->prepareJobSession($payload['user_id']);
 
         if (DEBUG) {
-            $this->logger->debug(__METHOD__.' Received job => '.$className);
+            $this->logger->debug(__METHOD__.' Received job => '.$className.' ('.getmypid().')');
         }
 
         $worker = new $className($this->container);
         call_user_func_array(array($worker, 'execute'), $payload['params']);
+    }
+
+    /**
+     * Create the session for the job
+     *
+     * @access protected
+     * @param integer $user_id
+     */
+    protected function prepareJobSession($user_id)
+    {
+        $session = array();
+        $this->sessionStorage->setStorage($session);
+
+        if ($user_id > 0) {
+            $user = $this->userModel->getById($user_id);
+            $this->userSession->initialize($user);
+        }
     }
 }
