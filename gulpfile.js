@@ -52,7 +52,8 @@ var src = {
     ],
     js: [
         'assets/js/src/Namespace.js',
-        'assets/js/src/!(Namespace|Bootstrap)*.js',
+        'assets/js/src/!(Namespace|Bootstrap|BoardDragAndDrop)*.js',
+        'assets/js/src/BoardDragAndDrop.js',
         'assets/js/src/Bootstrap.js'
     ]
 };
