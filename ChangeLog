@@ -11,6 +11,7 @@ New features:
 
 Improvements:
 
+* Upgrade Docker image to Alpine Linux 3.4
 * Move task import to a separate section
 * Mark web notification as read when clicking on it
 * Support strtotime strings for date search

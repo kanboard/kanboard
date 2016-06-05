@@ -1,11 +1,14 @@
-FROM gliderlabs/alpine:latest
+FROM alpine:3.4
 MAINTAINER Frederic Guillot <fred@kanboard.net>
 
-RUN apk-install nginx bash ca-certificates s6 curl \
-    php-fpm php-json php-zlib php-xml php-dom php-ctype php-opcache php-zip \
-    php-pdo php-pdo_mysql php-pdo_sqlite php-pdo_pgsql php-ldap \
-    php-gd php-mcrypt php-openssl php-phar \
-    && curl -sS https://getcomposer.org/installer | php -- --filename=/usr/local/bin/composer
+RUN apk update && \
+    apk add nginx bash ca-certificates s6 curl \
+    php5-fpm php5-json php5-zlib php5-xml php5-dom php5-ctype php5-opcache php5-zip \
+    php5-pdo php5-pdo_mysql php5-pdo_sqlite php5-pdo_pgsql php5-ldap \
+    php5-gd php5-mcrypt php5-openssl php5-phar && \
+    rm -rf /var/cache/apk/*
+
+RUN curl -sS https://getcomposer.org/installer | php -- --filename=/usr/local/bin/composer
 
 RUN cd /var/www \
     && curl -LO https://github.com/fguillot/kanboard/archive/master.zip \
@@ -17,8 +20,8 @@ RUN cd /var/www \
     && chown -R nginx:nginx /var/lib/nginx
 
 COPY .docker/services.d /etc/services.d
-COPY .docker/php/conf.d/local.ini /etc/php/conf.d/
-COPY .docker/php/php-fpm.conf /etc/php/
+COPY .docker/php/conf.d/local.ini /etc/php5/conf.d/
+COPY .docker/php/php-fpm.conf /etc/php5/
 COPY .docker/nginx/nginx.conf /etc/nginx/
 COPY .docker/kanboard/config.php /var/www/kanboard/
 COPY .docker/kanboard/config.php /var/www/kanboard/
