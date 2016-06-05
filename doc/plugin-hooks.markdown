@@ -157,6 +157,7 @@ List of template hooks:
 | `template:board:task:icons`                | Task in board: tooltip icon                        |
 | `template:config:sidebar`                  | Sidebar on settings page                           |
 | `template:config:application `             | Application settings form                          |
+| `template:config:email`                    | Email settings page                                |
 | `template:config:integrations`             | Integration page in global settings                |
 | `template:dashboard:sidebar`               | Sidebar on dashboard page                          |
 | `template:export:sidebar`                  | Sidebar on export pages                            |

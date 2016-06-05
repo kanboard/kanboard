@@ -24,7 +24,7 @@ When your handler is registered, the end-user can choose to receive the new noti
 Notification Handler
 --------------------
 
-Your notification handler must implement the interface `Kanboard\Notification\NotificationInterface`:
+Your notification handler must implement the interface `Kanboard\Core\Notification\NotificationInterface`:
 
 ```php
 interface NotificationInterface

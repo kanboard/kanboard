@@ -8,7 +8,8 @@ Kanboard will run database migrations automatically for you.
 Important things to do before updating
 --------------------------------------
 
-- Always make a backup of your data before upgrading
+- **Always make a backup of your data before upgrading**
+- Check that your backup is valid
 - Always read the [change log](https://github.com/fguillot/kanboard/blob/master/ChangeLog) to check for breaking changes
 - Always close all user sessions (flush all sessions on the server)
 
