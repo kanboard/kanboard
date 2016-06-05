@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d47d835e84b436f531274f700ec39305",
-    "content-hash": "643b9cebc73b39d76b6b47eb759d054d",
+    "hash": "60ac519d67728cc5b125f77048d2e0c0",
+    "content-hash": "3dfc055d11c8010e9b16fb7df58c0f94",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -282,16 +282,16 @@
         },
         {
             "name": "fguillot/simple-queue",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/simple-queue.git",
-                "reference": "ae4359e9ee3b36da646766557c9242bb6ee3dcab"
+                "reference": "ce7801c507f9501bcca455129fb04c3d2107d5ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/simple-queue/zipball/ae4359e9ee3b36da646766557c9242bb6ee3dcab",
-                "reference": "ae4359e9ee3b36da646766557c9242bb6ee3dcab",
+                "url": "https://api.github.com/repos/fguillot/simple-queue/zipball/ce7801c507f9501bcca455129fb04c3d2107d5ff",
+                "reference": "ce7801c507f9501bcca455129fb04c3d2107d5ff",
                 "shasum": ""
             },
             "require": {
@@ -327,7 +327,7 @@
             ],
             "description": "Abstraction layer for multiple queue systems",
             "homepage": "https://github.com/fguillot/simple-queue",
-            "time": "2016-05-24 23:58:05"
+            "time": "2016-06-05 21:34:56"
         },
         {
             "name": "fguillot/simple-validator",
