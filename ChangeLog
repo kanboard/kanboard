@@ -8,6 +8,7 @@ New features:
 * Added menu entry to add tasks from all project views
 * Add tasks in bulk from the board
 * Add dropdown for projects
+* Added config parameter to allow self-signed certificates for the HTTP client
 
 Improvements:
 

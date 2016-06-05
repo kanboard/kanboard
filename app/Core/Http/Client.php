@@ -163,6 +163,7 @@ class Client extends Base
 
         if (DEBUG) {
             $this->logger->debug('HttpClient: url='.$url);
+            $this->logger->debug('HttpClient: headers='.var_export($headers, true));
             $this->logger->debug('HttpClient: payload='.$content);
             $this->logger->debug('HttpClient: metadata='.var_export(@stream_get_meta_data($stream), true));
             $this->logger->debug('HttpClient: response='.$response);
@@ -201,13 +202,21 @@ class Client extends Base
                 'timeout' => self::HTTP_TIMEOUT,
                 'max_redirects' => self::HTTP_MAX_REDIRECTS,
                 'header' => implode("\r\n", $headers),
-                'content' => $content
+                'content' => $content,
             )
         );
 
         if (HTTP_PROXY_HOSTNAME) {
             $context['http']['proxy'] = 'tcp://'.HTTP_PROXY_HOSTNAME.':'.HTTP_PROXY_PORT;
             $context['http']['request_fulluri'] = true;
+        }
+
+        if (HTTP_VERIFY_SSL_CERTIFICATE === false) {
+            $context['ssl'] = array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            );
         }
 
         return $context;
