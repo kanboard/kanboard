@@ -54,7 +54,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
         $this->container['httpClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Http\Client')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('get', 'getJson', 'postJson', 'postForm'))
+            ->setMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync'))
             ->getMock();
 
         $this->container['emailClient'] = $this

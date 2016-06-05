@@ -102,4 +102,16 @@ class Client extends Base
 
         return $this;
     }
+
+    /**
+     * Return the list of registered transports
+     *
+     * @access public
+     * @return array
+     */
+    public function getAvailableTransports()
+    {
+        $availableTransports = $this->transports->keys();
+        return array_combine($availableTransports, $availableTransports);
+    }
 }

@@ -39,11 +39,12 @@ class EmailJob extends BaseJob
      */
     public function execute($email, $name, $subject, $html, $author)
     {
-        $this->logger->debug(__METHOD__.' Sending email to '.$email.' via '.MAIL_TRANSPORT);
+        $transport = $this->helper->mail->getMailTransport();
+        $this->logger->debug(__METHOD__.' Sending email to: '.$email.' using transport: '.$transport);
         $startTime = microtime(true);
 
         $this->emailClient
-            ->getTransport(MAIL_TRANSPORT)
+            ->getTransport($transport)
             ->sendEmail($email, $name, $subject, $html, $author)
         ;
 

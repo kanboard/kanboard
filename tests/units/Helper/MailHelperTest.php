@@ -32,4 +32,15 @@ class MailHelperTest extends Base
 
         $this->assertEquals('me@here', $helper->getMailSenderAddress());
     }
+
+    public function testGetTransport()
+    {
+        $helper = new MailHelper($this->container);
+        $this->assertEquals(MAIL_TRANSPORT, $helper->getMailTransport());
+
+        $this->container['configModel']->save(array('mail_transport' => 'smtp'));
+        $this->container['memoryCache']->flush();
+
+        $this->assertEquals('smtp', $helper->getMailTransport());
+    }
 }

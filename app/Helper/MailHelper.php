@@ -62,4 +62,21 @@ class MailHelper extends Base
 
         return MAIL_FROM;
     }
+
+    /**
+     * Get mail sender address
+     *
+     * @access public
+     * @return string
+     */
+    public function getMailTransport()
+    {
+        $transport = $this->configModel->get('mail_transport');
+
+        if (!empty($transport)) {
+            return $transport;
+        }
+
+        return MAIL_TRANSPORT;
+    }
 }

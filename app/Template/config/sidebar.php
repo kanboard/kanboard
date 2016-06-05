@@ -7,6 +7,9 @@
         <li <?= $this->app->checkMenuSelection('ConfigController', 'application') ?>>
             <?= $this->url->link(t('Application settings'), 'ConfigController', 'application') ?>
         </li>
+        <li <?= $this->app->checkMenuSelection('ConfigController', 'email') ?>>
+            <?= $this->url->link(t('Email settings'), 'ConfigController', 'email') ?>
+        </li>
         <li <?= $this->app->checkMenuSelection('ConfigController', 'project') ?>>
             <?= $this->url->link(t('Project settings'), 'ConfigController', 'project') ?>
         </li>

@@ -72,12 +72,33 @@ class ConfigController extends BaseController
     public function application()
     {
         $this->response->html($this->helper->layout->config('config/application', array(
+            'mail_transports' => $this->emailClient->getAvailableTransports(),
             'languages' => $this->languageModel->getLanguages(),
             'timezones' => $this->timezoneModel->getTimezones(),
             'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'datetime_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateTimeFormats()),
             'time_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getTimeFormats()),
             'title' => t('Settings').' &gt; '.t('Application settings'),
+        )));
+    }
+
+    /**
+     * Display the email settings page
+     *
+     * @access public
+     */
+    public function email()
+    {
+        $values = $this->configModel->getAll();
+
+        if (empty($values['mail_transport'])) {
+            $values['mail_transport'] = MAIL_TRANSPORT;
+        }
+
+        $this->response->html($this->helper->layout->config('config/email', array(
+            'values' => $values,
+            'mail_transports' => $this->emailClient->getAvailableTransports(),
+            'title' => t('Settings').' &gt; '.t('Email settings'),
         )));
     }
 
