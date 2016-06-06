@@ -14,6 +14,7 @@ class DateParser extends Base
 {
     const DATE_FORMAT = 'm/d/Y';
     const DATE_TIME_FORMAT = 'm/d/Y H:i';
+    const TIME_FORMAT = 'H:i';
 
     /**
      * Get date format from settings
@@ -35,6 +36,17 @@ class DateParser extends Base
     public function getUserDateTimeFormat()
     {
         return $this->configModel->get('application_datetime_format', DateParser::DATE_TIME_FORMAT);
+    }
+
+    /**
+     * Get time format from settings
+     *
+     * @access public
+     * @return string
+     */
+    public function getUserTimeFormat()
+    {
+        return $this->configModel->get('application_time_format', DateParser::TIME_FORMAT);
     }
 
     /**

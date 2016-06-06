@@ -48,7 +48,10 @@
           data-login-url="<?= $this->url->href('AuthController', 'login') ?>"
           data-keyboard-shortcut-url="<?= $this->url->href('DocumentationController', 'shortcuts') ?>"
           data-timezone="<?= $this->app->getTimezone() ?>"
-          data-js-lang="<?= $this->app->jsLang() ?>">
+          data-js-lang="<?= $this->app->jsLang() ?>"
+          data-js-date-format="<?= $this->app->getJsDateFormat() ?>"
+          data-js-time-format="<?= $this->app->getJsTimeFormat() ?>"
+    >
 
     <?php if (isset($no_layout) && $no_layout): ?>
         <?= $content_for_layout ?>

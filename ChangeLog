@@ -12,6 +12,7 @@ New features:
 
 Improvements:
 
+* Display local date format in date picker
 * Configure email settings with the user interface in addition to config file
 * Upgrade Docker image to Alpine Linux 3.4
 * Move task import to a separate section

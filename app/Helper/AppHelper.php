@@ -94,6 +94,39 @@ class AppHelper extends Base
     }
 
     /**
+     * Get date format for Jquery DatePicker
+     *
+     * @access public
+     * @return string
+     */
+    public function getJsDateFormat()
+    {
+        $format = $this->dateParser->getUserDateFormat();
+        $format = str_replace('m', 'mm', $format);
+        $format = str_replace('Y', 'yy', $format);
+        $format = str_replace('d', 'dd', $format);
+
+        return $format;
+    }
+
+    /**
+     * Get time format for Jquery Plugin DateTimePicker
+     *
+     * @access public
+     * @return string
+     */
+    public function getJsTimeFormat()
+    {
+        $format = $this->dateParser->getUserTimeFormat();
+        $format = str_replace('H', 'HH', $format);
+        $format = str_replace('i', 'mm', $format);
+        $format = str_replace('g', 'h', $format);
+        $format = str_replace('a', 'tt', $format);
+
+        return $format;
+    }
+
+    /**
      * Get current timezone
      *
      * @access public
