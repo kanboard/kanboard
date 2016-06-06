@@ -4,7 +4,6 @@ namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Controller\PageNotFoundException;
-use Kanboard\Core\DateParser;
 
 /**
  * Task Controller

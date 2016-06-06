@@ -3,7 +3,6 @@
 namespace Kanboard\Export;
 
 use Kanboard\Core\Base;
-use Kanboard\Core\DateParser;
 
 /**
  * Transition Export

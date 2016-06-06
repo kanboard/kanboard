@@ -2,8 +2,6 @@
 
 namespace Kanboard\Controller;
 
-use Kanboard\Core\DateParser;
-
 /**
  * Task Modification controller
  *
