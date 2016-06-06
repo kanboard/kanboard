@@ -91,10 +91,9 @@ class TaskModificationController extends BaseController
             $values = $task;
             $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
             $values = $this->hook->merge('controller:task-modification:form:default', $values, array('default_values' => $values));
+            $values = $this->dateParser->format($values, array('date_due'), $this->dateParser->getUserDateFormat());
+            $values = $this->dateParser->format($values, array('date_started'), $this->dateParser->getUserDateTimeFormat());
         }
-
-        $values = $this->dateParser->format($values, array('date_due'), $this->configModel->get('application_date_format', DateParser::DATE_FORMAT));
-        $values = $this->dateParser->format($values, array('date_started'), $this->configModel->get('application_datetime_format', DateParser::DATE_TIME_FORMAT));
 
         $this->response->html($this->template->render('task_modification/edit_task', array(
             'project' => $project,

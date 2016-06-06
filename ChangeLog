@@ -26,10 +26,11 @@ Improvements:
 
 Bug fixes:
 
+* Fixed user date format parsing for dates that can be valid in multiple formats
 * Do not sync user role if LDAP groups are not configured
 * Fixed issue with unicode handling for letter based avatars and user initials
 * Do not send notifications to disabled users
-* Fix wrong redirect when removing a task from the task view page
+* Fixed wrong redirect when removing a task from the task view page
 
 Breaking changes:
 

@@ -68,7 +68,7 @@ class TransitionExport extends Base
             $transition['src_column'],
             $transition['dst_column'],
             $transition['name'] ?: $transition['username'],
-            date($this->configModel->get('application_datetime_format', DateParser::DATE_TIME_FORMAT), $transition['date']),
+            date($this->dateParser->getUserDateTimeFormat(), $transition['date']),
             round($transition['time_spent'] / 3600, 2)
         );
 

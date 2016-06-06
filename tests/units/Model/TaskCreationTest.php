@@ -312,7 +312,7 @@ class TaskCreationTest extends Base
         $this->assertEquals('2014-11-24 16:25', date('Y-m-d H:i', $task['date_started']));
 
         // Set a datetime
-        $this->assertEquals(3, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_started' => '2014-11-24 6:25pm')));
+        $this->assertEquals(3, $tc->create(array('project_id' => 1, 'title' => 'test', 'date_started' => '11/24/2014 18:25')));
 
         $task = $tf->getById(3);
         $this->assertEquals('2014-11-24 18:25', date('Y-m-d H:i', $task['date_started']));

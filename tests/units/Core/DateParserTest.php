@@ -24,6 +24,26 @@ class DateParserTest extends Base
         $this->assertContains('Y-m-d', $dateParser->getDateFormats(true));
     }
 
+    public function testThatUserDateFormatIsReturnedFirst()
+    {
+        $dateParser = new DateParser($this->container);
+
+        $dates = $dateParser->getDateFormats();
+        $this->assertEquals('m/d/Y', $dates[0]);
+
+        $dates = $dateParser->getDateFormats(true);
+        $this->assertEquals('m/d/Y', $dates[0]);
+
+        $this->container['configModel']->save(array('application_date_format' => 'd/m/Y'));
+        $this->container['memoryCache']->flush();
+
+        $dates = $dateParser->getDateFormats();
+        $this->assertEquals('d/m/Y', $dates[0]);
+
+        $dates = $dateParser->getDateFormats(true);
+        $this->assertEquals('d/m/Y', $dates[0]);
+    }
+
     public function testGetDateTimeFormats()
     {
         $dateParser = new DateParser($this->container);
@@ -32,6 +52,26 @@ class DateParserTest extends Base
         $this->assertContains('d/m/Y H:i', $dateParser->getDateTimeFormats());
         $this->assertNotContains('Y-m-d H:i', $dateParser->getDateTimeFormats());
         $this->assertContains('Y-m-d g:i a', $dateParser->getDateTimeFormats(true));
+    }
+
+    public function testThatUserDateTimeFormatIsReturnedFirst()
+    {
+        $dateParser = new DateParser($this->container);
+
+        $dates = $dateParser->getDateTimeFormats();
+        $this->assertEquals('m/d/Y H:i', $dates[0]);
+
+        $dates = $dateParser->getDateTimeFormats(true);
+        $this->assertEquals('m/d/Y H:i', $dates[0]);
+
+        $this->container['configModel']->save(array('application_datetime_format' => 'd/m/Y g:i a'));
+        $this->container['memoryCache']->flush();
+
+        $dates = $dateParser->getDateTimeFormats();
+        $this->assertEquals('d/m/Y g:i a', $dates[0]);
+
+        $dates = $dateParser->getDateTimeFormats(true);
+        $this->assertEquals('d/m/Y g:i a', $dates[0]);
     }
 
     public function testGetAllDateFormats()
@@ -52,33 +92,63 @@ class DateParserTest extends Base
 
         $formats = $dateParser->getAvailableFormats($dateParser->getDateFormats());
         $this->assertArrayHasKey('d/m/Y', $formats);
-        $this->assertContains(date('d/m/Y'), $formats);
+        $this->assertContains(date('d/m/Y').' (d/m/Y)', $formats);
 
         $formats = $dateParser->getAvailableFormats($dateParser->getDateTimeFormats());
         $this->assertArrayHasKey('d/m/Y H:i', $formats);
-        $this->assertContains(date('d/m/Y H:i'), $formats);
+        $this->assertContains(date('d/m/Y H:i').' (d/m/Y H:i)', $formats);
 
         $formats = $dateParser->getAvailableFormats($dateParser->getAllDateFormats());
         $this->assertArrayHasKey('d/m/Y', $formats);
-        $this->assertContains(date('d/m/Y'), $formats);
+        $this->assertContains(date('d/m/Y').' (d/m/Y)', $formats);
         $this->assertArrayHasKey('d/m/Y H:i', $formats);
-        $this->assertContains(date('d/m/Y H:i'), $formats);
+        $this->assertContains(date('d/m/Y H:i').' (d/m/Y H:i)', $formats);
     }
 
-    public function testGetTimestamp()
+    public function testGetTimestampFromDefaultFormats()
     {
         $dateParser = new DateParser($this->container);
 
-        $this->assertEquals(1393995600, $dateParser->getTimestamp(1393995600));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $dateParser->getTimestamp('2014-03-05')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $dateParser->getTimestamp('2014_03_05')));
-        $this->assertEquals('2014-03-05', date('Y-m-d', $dateParser->getTimestamp('03/05/2014')));
-        $this->assertEquals('2014-03-25 17:18', date('Y-m-d H:i', $dateParser->getTimestamp('03/25/2014 5:18 pm')));
-        $this->assertEquals('2014-03-25 05:18', date('Y-m-d H:i', $dateParser->getTimestamp('03/25/2014 5:18 am')));
-        $this->assertEquals('2014-03-25 17:18', date('Y-m-d H:i', $dateParser->getTimestamp('03/25/2014 5:18pm')));
-        $this->assertEquals('2014-03-25 23:14', date('Y-m-d H:i', $dateParser->getTimestamp('03/25/2014 23:14')));
-        $this->assertEquals('2014-03-29 23:14', date('Y-m-d H:i', $dateParser->getTimestamp('2014_03_29 23:14')));
-        $this->assertEquals('2014-03-29 23:14', date('Y-m-d H:i', $dateParser->getTimestamp('2014-03-29 23:14')));
+        $this->assertEquals('2016-06-09', date('Y-m-d', $dateParser->getTimestamp('06/09/2016')));
+        $this->assertEquals('2016-06-09', date('Y-m-d', $dateParser->getTimestamp('2016-06-09')));
+        $this->assertEquals('2016-06-09', date('Y-m-d', $dateParser->getTimestamp('2016_06_09')));
+        $this->assertEquals('2016-06-09 21:15', date('Y-m-d H:i', $dateParser->getTimestamp('2016-06-09 21:15')));
+        $this->assertEquals('2016-06-09 21:15', date('Y-m-d H:i', $dateParser->getTimestamp('2016_06_09 21:15')));
+        $this->assertEquals('2016-06-09 21:15', date('Y-m-d H:i', $dateParser->getTimestamp('06/09/2016 21:15')));
+    }
+
+    public function testGetTimestampFromUserDateFormats()
+    {
+        $this->container['configModel']->save(array(
+            'application_date_format' => 'd/m/Y',
+            'application_datetime_format' => 'd/m/Y g:i a',
+        ));
+
+        $dateParser = new DateParser($this->container);
+
+        $this->assertEquals('2016-06-09', date('Y-m-d', $dateParser->getTimestamp('09/06/2016')));
+        $this->assertEquals('2016-06-09', date('Y-m-d', $dateParser->getTimestamp('2016-06-09')));
+        $this->assertEquals('2016-06-09', date('Y-m-d', $dateParser->getTimestamp('2016_06_09')));
+        $this->assertEquals('2016-06-09 21:15', date('Y-m-d H:i', $dateParser->getTimestamp('2016-06-09 21:15')));
+        $this->assertEquals('2016-06-09 21:15', date('Y-m-d H:i', $dateParser->getTimestamp('2016_06_09 21:15')));
+        $this->assertEquals('2016-06-09 21:15', date('Y-m-d H:i', $dateParser->getTimestamp('09/06/2016 9:15 pm')));
+    }
+
+    public function testGetTimestampFromAnotherUserDateFormats()
+    {
+        $this->container['configModel']->save(array(
+            'application_date_format' => 'd.m.Y',
+            'application_datetime_format' => 'd.m.Y H:i',
+        ));
+
+        $dateParser = new DateParser($this->container);
+
+        $this->assertEquals('2016-06-09', date('Y-m-d', $dateParser->getTimestamp('09.06.2016')));
+        $this->assertEquals('2016-06-09', date('Y-m-d', $dateParser->getTimestamp('2016-06-09')));
+        $this->assertEquals('2016-06-09', date('Y-m-d', $dateParser->getTimestamp('2016_06_09')));
+        $this->assertEquals('2016-06-09 21:15', date('Y-m-d H:i', $dateParser->getTimestamp('2016-06-09 21:15')));
+        $this->assertEquals('2016-06-09 21:15', date('Y-m-d H:i', $dateParser->getTimestamp('2016_06_09 21:15')));
+        $this->assertEquals('2016-06-09 21:15', date('Y-m-d H:i', $dateParser->getTimestamp('09.06.2016 21:15')));
     }
 
     public function testDateRange()
@@ -117,9 +187,6 @@ class DateParserTest extends Base
         $this->assertEquals('2014-03-05', $dateParser->getIsoDate('2014-03-05'));
         $this->assertEquals('2014-03-05', $dateParser->getIsoDate('2014_03_05'));
         $this->assertEquals('2014-03-05', $dateParser->getIsoDate('03/05/2014'));
-        $this->assertEquals('2014-03-25', $dateParser->getIsoDate('03/25/2014 5:18 pm'));
-        $this->assertEquals('2014-03-25', $dateParser->getIsoDate('03/25/2014 5:18 am'));
-        $this->assertEquals('2014-03-25', $dateParser->getIsoDate('03/25/2014 5:18pm'));
         $this->assertEquals('2014-03-25', $dateParser->getIsoDate('03/25/2014 23:14'));
         $this->assertEquals('2014-03-29', $dateParser->getIsoDate('2014_03_29 23:14'));
         $this->assertEquals('2014-03-29', $dateParser->getIsoDate('2014-03-29 23:14'));

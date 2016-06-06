@@ -70,7 +70,7 @@ class TaskViewController extends BaseController
             'time_spent' => $task['time_spent'] ?: '',
         );
 
-        $values = $this->dateParser->format($values, array('date_started'), $this->configModel->get('application_datetime_format', DateParser::DATE_TIME_FORMAT));
+        $values = $this->dateParser->format($values, array('date_started'), $this->dateParser->getUserDateTimeFormat());
 
         $this->response->html($this->helper->layout->task('task/show', array(
             'task' => $task,
