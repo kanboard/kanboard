@@ -1,6 +1,10 @@
 Version 1.0.30 (unreleased)
 --------------
 
+Improvements:
+
+* Show tasks that are due today in a different color
+
 Bug fixes:
 
 * Fixed wrong controller for search in dashboard
