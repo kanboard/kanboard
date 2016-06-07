@@ -18,6 +18,7 @@ use Kanboard\Api\Middleware\AuthenticationApiMiddleware;
 use Kanboard\Api\ProjectApi;
 use Kanboard\Api\ProjectPermissionApi;
 use Kanboard\Api\SubtaskApi;
+use Kanboard\Api\SubtaskTimeTracking;
 use Kanboard\Api\SwimlaneApi;
 use Kanboard\Api\TaskApi;
 use Kanboard\Api\TaskLinkApi;
@@ -60,6 +61,7 @@ class ApiProvider implements ServiceProviderInterface
             ->withObject(new ProjectApi($container))
             ->withObject(new ProjectPermissionApi($container))
             ->withObject(new SubtaskApi($container))
+            ->withObject(new SubtaskTimeTracking($container))
             ->withObject(new SwimlaneApi($container))
             ->withObject(new TaskApi($container))
             ->withObject(new TaskLinkApi($container))
