@@ -27,7 +27,11 @@
     <?php endif ?>
 
     <?php if (! empty($task['date_due'])): ?>
-        <span class="task-board-date <?= time() > $task['date_due'] ? 'task-board-date-overdue' : '' ?>">
+        <?php if (date('d') == date('d', $task['date_due'])): ?>
+        <span class="task-board-date task-board-date-today">
+        <?php elseif (time() > $task['date_due']): ?>
+        <span class="task-board-date task-board-date-overdue">
+        <?php endif ?>
             <i class="fa fa-calendar"></i>
             <?= $this->dt->date($task['date_due']) ?>
         </span>
