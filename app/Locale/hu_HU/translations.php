@@ -1109,7 +1109,7 @@ return array(
     'Column created successfully.' => 'Az oszlop sikeresen létrejött',
     'Another column with the same name exists in the project' => 'A projektben már létezik egy ugyanilyen nevű oszlop',
     'Default filters' => 'Alap szűrők',
-    'Your board doesn\'t have any column!' => 'A táblának nincsenek oszlopai!',
+    'Your board doesn\'t have any columns!' => 'A táblának nincsenek oszlopai!',
     'Change column position' => 'Oszlop helyzetének megváltoztatása',
     'Switch to the project overview' => 'Projektek áttekintése',
     'User filters' => 'Felhasználók szűrése',

@@ -1109,7 +1109,7 @@ return array(
     'Column created successfully.' => '新增任务栏成功。',
     'Another column with the same name exists in the project' => '当前项目中重名任务栏已存在',
     'Default filters' => '默认过滤器',
-    'Your board doesn\'t have any column!' => '你的看板没有任何栏目',
+    'Your board doesn\'t have any columns!' => '你的看板没有任何栏目',
     'Change column position' => '更改任务栏位置',
     'Switch to the project overview' => '切换到项目视图',
     'User filters' => '用户过滤器',

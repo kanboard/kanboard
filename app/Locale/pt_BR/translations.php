@@ -1109,7 +1109,7 @@ return array(
     'Column created successfully.' => 'A coluna criada com sucesso.',
     'Another column with the same name exists in the project' => 'Uma outra coluna com o mesmo nome já existe no projeto',
     'Default filters' => 'Filtros padrão',
-    'Your board doesn\'t have any column!' => 'O seu painel não tem nenhuma coluna',
+    'Your board doesn\'t have any columns!' => 'O seu painel não tem nenhuma coluna',
     'Change column position' => 'Alterar a posição da coluna',
     'Switch to the project overview' => 'Mudar para a vista geral do projeto',
     'User filters' => 'Filtros dos usuários',

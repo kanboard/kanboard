@@ -1109,7 +1109,7 @@ return array(
     'Column created successfully.' => 'Spalte erfolgreich erstellt.',
     'Another column with the same name exists in the project' => 'Es gibt bereits eine Spalte mit demselben Namen im Projekt',
     'Default filters' => 'Standard-Filter',
-    'Your board doesn\'t have any column!' => 'Es gibt keine Spalten in diesem Projekt!',
+    'Your board doesn\'t have any columns!' => 'Es gibt keine Spalten in diesem Projekt!',
     'Change column position' => 'Position der Spalte ändern',
     'Switch to the project overview' => 'Zur Projektübersicht wechseln',
     'User filters' => 'Benutzer-Filter',

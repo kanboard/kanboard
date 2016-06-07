@@ -1109,7 +1109,7 @@ return array(
     'Column created successfully.' => 'Η στήλη δημιουργήθηκε με επιτυχία.',
     'Another column with the same name exists in the project' => 'Μια άλλη στήλη με το ίδιο όνομα υπάρχει στο έργο',
     'Default filters' => 'Εξ\' ορισμού φίλτρα',
-    'Your board doesn\'t have any column!' => 'Το ταμπλό δεν έχει καμία στήλη!!=',
+    'Your board doesn\'t have any columns!' => 'Το ταμπλό δεν έχει καμία στήλη!!=',
     'Change column position' => 'Αλλαγή θέσης στήλης',
     'Switch to the project overview' => 'Αλλαγή προβολής σε επισκόπηση έργου',
     'User filters' => 'Φίλτρα οριζόμενα από τον χρήστη',

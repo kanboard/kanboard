@@ -1109,7 +1109,7 @@ return array(
     'Column created successfully.' => 'Столбец успешно создан',
     'Another column with the same name exists in the project' => 'Столбец с таким именем уже существует в этом проекте',
     'Default filters' => 'Стандартные фильтры',
-    'Your board doesn\'t have any column!' => 'Ваша доска не имеет ни одного столбца!',
+    'Your board doesn\'t have any columns!' => 'Ваша доска не имеет ни одного столбца!',
     'Change column position' => 'Смена позиции столбца',
     'Switch to the project overview' => 'Переключение на обзор проекта',
     'User filters' => 'Фильтры по пользователям',

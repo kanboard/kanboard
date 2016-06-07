@@ -1109,7 +1109,7 @@ return array(
     'Column created successfully.' => 'Kolona uspješno napravljena.',
     'Another column with the same name exists in the project' => 'Već postoji kolona s istim imenom u ovom projektu.',
     'Default filters' => 'Podrazumijevani filteri',
-    'Your board doesn\'t have any column!' => 'Vaš panel nema ni jednu kolonu!',
+    'Your board doesn\'t have any columns!' => 'Vaš panel nema ni jednu kolonu!',
     'Change column position' => 'Promijeni poziciju kolone',
     'Switch to the project overview' => 'Promijeni u pregled projekta',
     'User filters' => 'Korisnički filteri',

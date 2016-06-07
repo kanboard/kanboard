@@ -1109,7 +1109,7 @@ return array(
     'Column created successfully.' => 'Colonna creata con successo.',
     'Another column with the same name exists in the project' => 'Un\'altra colonna con lo stesso nome è già esistente in questo progetto',
     'Default filters' => 'Filtri predefiniti',
-    'Your board doesn\'t have any column!' => 'La tua bacheca non ha nessuna colonna!',
+    'Your board doesn\'t have any columns!' => 'La tua bacheca non ha nessuna colonna!',
     'Change column position' => 'Modifica la posizione della colonna',
     'Switch to the project overview' => 'Passa alla panoramica di progetto',
     'User filters' => 'Filtri utente',

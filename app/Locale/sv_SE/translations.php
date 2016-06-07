@@ -1109,7 +1109,7 @@ return array(
     // 'Column created successfully.' => '',
     // 'Another column with the same name exists in the project' => '',
     // 'Default filters' => '',
-    // 'Your board doesn\'t have any column!' => '',
+    // 'Your board doesn\'t have any columns!' => '',
     // 'Change column position' => '',
     // 'Switch to the project overview' => '',
     // 'User filters' => '',

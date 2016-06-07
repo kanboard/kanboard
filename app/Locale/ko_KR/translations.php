@@ -1109,7 +1109,7 @@ return array(
     'Column created successfully.' => '칼럼이 성공적으로 생성되었습니다',
     'Another column with the same name exists in the project' => '프로젝트에 동일한 이름의 칼럼이 있습니다',
     'Default filters' => '기본 필터',
-    'Your board doesn\'t have any column!' => '보드에 칼럼이 존재하지 않습니다',
+    'Your board doesn\'t have any columns!' => '보드에 칼럼이 존재하지 않습니다',
     'Change column position' => '칼럼 위치 변경',
     'Switch to the project overview' => '프로젝트 개요로 변경',
     'User filters' => '사용자 필터',
