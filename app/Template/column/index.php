@@ -9,7 +9,7 @@
 </div>
 
 <?php if (empty($columns)): ?>
-    <p class="alert alert-error"><?= t('Your board doesn\'t have any column!') ?></p>
+    <p class="alert alert-error"><?= t('Your board doesn\'t have any columns!') ?></p>
 <?php else: ?>
     <table
         class="columns-table table-stripped"
