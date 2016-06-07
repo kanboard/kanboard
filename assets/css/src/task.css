@@ -123,6 +123,11 @@ div.task-board-status-closed {
     color: #000;
 }
 
+span.task-board-date-today {
+    color: #0000D9;
+    opacity: 1.0;
+}
+
 span.task-board-date-overdue {
     color: #D90000;
     opacity: 1.0;
