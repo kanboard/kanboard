@@ -5,7 +5,7 @@ You can hide or display columns very easily on the board:
 
 ![Hide a column](screenshots/hide-column.png)
 
-Pour cacher une colonne, ouvrez le menu déroulant de la colonne.
+To hide a column, click on the column dropdown menu and choose "Hide this column":
 
 ![Show a column](screenshots/show-column.png)
 
