@@ -12,6 +12,10 @@ service apache2 restart
 rm -f /var/www/html/index.html
 date > /etc/vagrant_provisioned_at
 
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+
+cd /var/www/html && composer install
+
 wget -q https://phar.phpunit.de/phpunit.phar
 chmod +x phpunit.phar
 sudo mv phpunit.phar /usr/local/bin/phpunit
