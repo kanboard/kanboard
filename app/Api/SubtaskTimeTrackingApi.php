@@ -2,13 +2,15 @@
 
 namespace Kanboard\Api;
 
+Use \Kanboard\Core\Base
+
 /**
  * Subtask Time Tracking  API controller
  *
  * @package  api
  * @author   Nikolaos Georgakis
  */
-class SubtaskTimeTrackingApi extends \Kanboard\Core\Base
+class SubtaskTimeTrackingApi extends Base
 {
     public function hasTimer($subtask_id,$user_id)
     {
