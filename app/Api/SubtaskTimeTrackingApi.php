@@ -2,7 +2,7 @@
 
 namespace Kanboard\Api;
 
-Use \Kanboard\Core\Base
+use Kanboard\Core\Base;
 
 /**
  * Subtask Time Tracking  API controller
@@ -14,21 +14,21 @@ class SubtaskTimeTrackingApi extends Base
 {
     public function hasTimer($subtask_id,$user_id)
     {
-        return $this->subtaskTimeTracking->hasTimer($subtask_id,$user_id);
+        return $this->subtaskTimeTrackingModel->hasTimer($subtask_id,$user_id);
     }
 
     public function logStartTime($subtask_id,$user_id)
     {
-        return $this->subtaskTimeTracking->logStartTime($subtask_id,$user_id);
+        return $this->subtaskTimeTrackingModel->logStartTime($subtask_id,$user_id);
     }
 
     public function logEndTime($subtask_id,$user_id)
     {
-        return $this->subtaskTimeTracking->logEndTime($subtask_id,$user_id);
+        return $this->subtaskTimeTrackingModel->logEndTime($subtask_id,$user_id);
     }
 
     public function getTimeSpent($subtask_id,$user_id)
     {
-        return $this->subtaskTimeTracking->getTimeSpent($subtask_id,$user_id);
+        return $this->subtaskTimeTrackingModel->getTimeSpent($subtask_id,$user_id);
     }
 }
