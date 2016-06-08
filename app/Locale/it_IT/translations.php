@@ -1194,7 +1194,7 @@ return array(
     'Convert sub-task to task' => 'Converti il sotto-task in task',
     'Do you really want to convert this sub-task to a task?' => 'Vuoi davvero convertire questo sotto-task in un task?',
     'My task title' => 'Titolo del mio task',
-    'Enter one task by line.' => 'Inserisci un task per ',
+    'Enter one task by line.' => 'Inserisci un task per ogni riga.',
     'Number of failed login:' => 'Numero di login falliti:',
     'Account locked until:' => 'Account bloccato fino al:',
     'Email settings' => 'Impostazioni Email',
