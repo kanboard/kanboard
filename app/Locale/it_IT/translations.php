@@ -1176,7 +1176,7 @@ return array(
     'Unable to download plugin archive.' => 'Impossibile scaricare l\'archivo del plugin',
     'Unable to write temporary file for plugin.' => 'Impossibile scrivere il file temporaneo per il plugin.',
     'Unable to open plugin archive.' => 'Impossibile aprire l\'archivio del plugin.',
-    'There is no file in the plugin archive.' => 'N',
+    'There is no file in the plugin archive.' => 'Non ci sono file nell\' archivio del plugin.',
     'Create tasks in bulk' => 'Creazione massiva di task',
     'Your Kanboard instance is not configured to install plugins from the user interface.' => 'La tua installazione Kanboard non è configurata per installare plugin tramite l\'interfaccia utente.',
     'There is no plugin available.' => 'Non ci sono plugin disponibili.',
