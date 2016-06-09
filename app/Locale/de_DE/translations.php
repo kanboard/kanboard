@@ -961,7 +961,7 @@ return array(
     'Add group member' => 'Gruppenmitglied hinzufügen',
     'Do you really want to remove this group: "%s"?' => 'Wollen Sie die Gruppe "%s" wirklich löschen?',
     'There is no user in this group.' => 'Es gibt keinen Benutzer in dieser Gruppe.',
-    'Remove this user' => 'Diesen Benutzer löschen',
+    'Remove this user' => 'Diesen Benutzer entfernen',
     'Permissions' => 'Berechtigungen',
     'Allowed Users' => 'Berechtigte Benutzer',
     'No user have been allowed specifically.' => 'Keine Benutzer mit ausdrücklicher Berechtigung.',
