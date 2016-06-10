@@ -12,6 +12,8 @@ Requirements
 - PHP cli
 - PHPUnit installed
 - Mysql and Postgresql (optional)
+- Selenium (optional)
+- Firefox (optional)
 
 Unit Tests
 ----------
@@ -83,6 +85,11 @@ From your Kanboard directory, run the command `phpunit -c tests/units.postgres.x
 Integration Tests
 -----------------
 
+Acceptance tests (also known as end-to-end tests and sometimes functional tests) allow us to test the actual functionality of the browser using Selenium and PHPUnit.
+
+The PHPUnit config file is `tests/acceptance.xml`.
+From your Kanboard directory, run the command `phpunit -c tests/units.sqlite.xml`.
+
 Actually only the API calls are tested.
 
 Real HTTP calls are made with those tests.
@@ -115,6 +122,30 @@ Time: 1.18 minutes, Memory: 14.75Mb
 
 OK (135 tests, 526 assertions)
 ```
+
+Acceptance Tests
+-----------------
+
+Acceptance tests (also sometimes known as end-to-end tests, and functional tests) test the actual functionality of the UI in a browser using Selenium.
+
+In order to run these tests you must have [Selenium Standalone Server](http://www.seleniumhq.org/download/) installed, and a compatible version of Firefox.
+
+The PHPUnit config file is `tests/acceptance.xml`.
+With Selenium and the Kanboard app running, from your Kanboard directory, run the command `make test-browser`. This will initiate the testing suite and you will see Firefox open automatically and perform the actions specified in the acceptance tests.  
+
+Example:
+
+```bash
+$ make test-browser
+PHPUnit 4.8.26 by Sebastian Bergmann and contributors.
+
+..
+
+Time: 5.59 seconds, Memory: 5.25MB
+
+OK (2 tests, 5 assertions)
+```
+
 
 Continuous Integration with Travis-CI
 -------------------------------------

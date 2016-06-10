@@ -52,6 +52,7 @@
     "require-dev" : {
         "symfony/yaml" : "2.1",
         "symfony/stopwatch" : "~2.6",
-        "phpunit/phpunit" : "4.8.*"
+        "phpunit/phpunit" : "4.8.*",
+        "phpunit/phpunit-selenium": "^2.0"
     }
 }

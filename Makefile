@@ -57,6 +57,9 @@ test-postgres:
 
 unittest: test-sqlite test-mysql test-postgres
 
+test-browser:
+		@ phpunit -c tests/acceptance.xml
+
 sql:
 	@ pg_dump --schema-only --no-owner --no-privileges --quote-all-identifiers -n public --file app/Schema/Sql/postgres.sql kanboard
 	@ pg_dump -d kanboard --column-inserts --data-only --table settings >> app/Schema/Sql/postgres.sql
