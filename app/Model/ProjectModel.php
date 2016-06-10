@@ -294,10 +294,12 @@ class ProjectModel extends Base
     public function getColumnStats(array &$project)
     {
         $project['columns'] = $this->columnModel->getAll($project['id']);
+        $project['nb_active_tasks'] = 0;
         $stats = $this->boardModel->getColumnStats($project['id']);
 
         foreach ($project['columns'] as &$column) {
             $column['nb_tasks'] = isset($stats[$column['id']]) ? $stats[$column['id']] : 0;
+            $project['nb_active_tasks'] += $column['nb_tasks'];
         }
 
         return $project;
