@@ -39,7 +39,7 @@ class BoardViewController extends BaseController
             'board_public_refresh_interval' => $this->configModel->get('board_public_refresh_interval'),
             'board_private_refresh_interval' => $this->configModel->get('board_private_refresh_interval'),
             'board_highlight_period' => $this->configModel->get('board_highlight_period'),
-            'nb_active_tasks' => $taskStats[nb_active_tasks],
+            'nb_active_tasks' => $taskStats['nb_active_tasks'],
         )));
     }
 
