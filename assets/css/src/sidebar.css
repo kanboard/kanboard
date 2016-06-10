@@ -42,6 +42,7 @@
 }
 
 .sidebar > ul a {
+    display: block;
     text-decoration: none;
     color: #999;
     font-weight: 300;
