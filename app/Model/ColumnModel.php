@@ -132,13 +132,14 @@ class ColumnModel extends Base
      * @param  string    $description   Column description
      * @return boolean|integer
      */
-    public function create($project_id, $title, $task_limit = 0, $description = '')
+    public function create($project_id, $title, $task_limit = 0, $description = '', $hide_in_dashboard = 0)
     {
         $values = array(
             'project_id' => $project_id,
             'title' => $title,
             'task_limit' => intval($task_limit),
             'position' => $this->getLastColumnPosition($project_id) + 1,
+            'hide_in_dashboard' => $hide_in_dashboard,
             'description' => $description,
         );
 
@@ -155,11 +156,12 @@ class ColumnModel extends Base
      * @param  string    $description   Optional description
      * @return boolean
      */
-    public function update($column_id, $title, $task_limit = 0, $description = '')
+    public function update($column_id, $title, $task_limit = 0, $description = '', $hide_in_dashboard = 0)
     {
         return $this->db->table(self::TABLE)->eq('id', $column_id)->update(array(
             'title' => $title,
             'task_limit' => intval($task_limit),
+            'hide_in_dashboard' => $hide_in_dashboard,
             'description' => $description,
         ));
     }

@@ -1203,4 +1203,5 @@ return array(
     'Email transport' => 'Transport des emails',
     'Webhook token' => 'Jeton de sécurité des webhooks',
     'Imports' => 'Importations',
+    //'Hide tasks in this column in the Dashboard' => '',
 );

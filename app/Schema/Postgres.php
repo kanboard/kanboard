@@ -6,7 +6,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 89;
+const VERSION = 90;
+
+function version_90(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE columns ADD COLUMN hide_in_dashboard INTEGER DEFAULT 0 NOT NULL");
+}
 
 function version_89(PDO $pdo)
 {
