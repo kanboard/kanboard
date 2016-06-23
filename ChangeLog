@@ -5,6 +5,10 @@ Improvements:
 
 * Make embedded documentation available in multiple languages
 
+Bug fixes:
+
+* Fixed broken CSV exports
+
 Version 1.0.30
 --------------
 
