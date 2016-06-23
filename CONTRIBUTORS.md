@@ -53,6 +53,7 @@ Contributors:
 - [Jesusaplsoft](https://github.com/jesusaplsoft)
 - [Jesús Marín](https://github.com/alu0100502114)
 - [Jules Verhaeren](https://github.com/julesverhaeren)
+- [JunglaCODE]https://github.com/junglaCODE)
 - [Karol J](https://github.com/dzudek)
 - [Kiswa](https://github.com/kiswa)
 - [Kralo](https://github.com/kralo)
