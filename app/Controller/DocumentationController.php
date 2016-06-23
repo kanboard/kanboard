@@ -20,16 +20,7 @@ class DocumentationController extends BaseController
             $page = 'index';
         }
 
-        if ($this->languageModel->getCurrentLanguage() === 'fr_FR') {
-            $filename = __DIR__.'/../../doc/fr/' . $page . '.markdown';
-        } else {
-            $filename = __DIR__ . '/../../doc/' . $page . '.markdown';
-        }
-
-        if (!file_exists($filename)) {
-            $filename = __DIR__.'/../../doc/index.markdown';
-        }
-
+        $filename = $this->getPageFilename($page);
         $this->response->html($this->helper->layout->app('doc/show', $this->render($filename)));
     }
 
@@ -83,10 +74,63 @@ class DocumentationController extends BaseController
      */
     public function replaceImageUrl(array $matches)
     {
-        if ($this->languageModel->getCurrentLanguage() === 'fr_FR') {
-            return '('.$this->helper->url->base().'doc/fr/'.$matches[1].')';
+        return '('.$this->getFileBaseUrl($matches[1]).')';
+    }
+
+    /**
+     * Get Markdown file according to the current language
+     *
+     * @access private
+     * @param  string $page
+     * @return string
+     */
+    private function getPageFilename($page)
+    {
+        return $this->getFileLocation($page . '.markdown') ?:
+            implode(DIRECTORY_SEPARATOR, array(ROOT_DIR, 'doc', 'index.markdown'));
+    }
+
+    /**
+     * Get base URL for Markdown links
+     *
+     * @access private
+     * @param  string $filename
+     * @return string
+     */
+    private function getFileBaseUrl($filename)
+    {
+        $language = $this->languageModel->getCurrentLanguage();
+        $path = $this->getFileLocation($filename);
+
+        if (strpos($path, $language) !== false) {
+            $url = implode('/', array('doc', $language, $filename));
+        } else {
+            $url = implode('/', array('doc', $filename));
         }
 
-        return '('.$this->helper->url->base().'doc/'.$matches[1].')';
+        return $this->helper->url->base().$url;
+    }
+
+    /**
+     * Get file location according to the current language
+     *
+     * @access private
+     * @param  string $filename
+     * @return string
+     */
+    private function getFileLocation($filename)
+    {
+        $files = array(
+            implode(DIRECTORY_SEPARATOR, array(ROOT_DIR, 'doc', $this->languageModel->getCurrentLanguage(), $filename)),
+            implode(DIRECTORY_SEPARATOR, array(ROOT_DIR, 'doc', $filename)),
+        );
+
+        foreach ($files as $filename) {
+            if (file_exists($filename)) {
+                return $filename;
+            }
+        }
+
+        return '';
     }
 }

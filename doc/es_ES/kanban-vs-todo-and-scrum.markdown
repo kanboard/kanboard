@@ -6,13 +6,13 @@ Kanban vs Todo lists
 
 ### Todo lists (lista de tareas) :
 
-Fase unica (es solo una lista de tareas)
-Multitarea posible (no eficiente)
+- Fase unica (es solo una lista de tareas)
+- Multitarea posible (no eficiente)
 
 ### Kanban:
 
-Multi fases, 
-Concentración absoluta para evitar multitareas por que se puede establecer un limite por columna para mejorar el progreso
+- Multi fases, 
+- Concentración absoluta para evitar multitareas por que se puede establecer un limite por columna para mejorar el progreso
 
 
 Kanban vs Scrum
@@ -20,13 +20,13 @@ Kanban vs Scrum
 
 ### Scrum:
 
-Los sprints son time-boxed, usualmente 2 o 4 semanas
-No permitir cambios durante la iteración
-La estimación es requerida
-Utiliza la velocidad como métrica predeterminada
-El tablero de Scrum se borra entre cada sprint
-Scrum tiene funciones predefinidas como scrum master , los dueños del producto y el equipo
-Una gran cantidad de reuniones: planeaciones, backlogs grooming, daily stand-up, retrospectiva
+- Los sprints son time-boxed, usualmente 2 o 4 semanas
+- No permitir cambios durante la iteración
+- La estimación es requerida
+- Utiliza la velocidad como métrica predeterminada
+- El tablero de Scrum se borra entre cada sprint
+- Scrum tiene funciones predefinidas como scrum master , los dueños del producto y el equipo
+- Una gran cantidad de reuniones: planeaciones, backlogs grooming, daily stand-up, retrospectiva
 
 ### Kanban:
 
