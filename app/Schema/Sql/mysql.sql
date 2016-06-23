@@ -44,6 +44,7 @@ CREATE TABLE `columns` (
   `position` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
   `task_limit` int(11) DEFAULT '0',
+  `hide_in_dashboard` int(11) DEFAULT '0',
   `description` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_title_project` (`title`,`project_id`),

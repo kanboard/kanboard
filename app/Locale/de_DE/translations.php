@@ -1202,4 +1202,5 @@ return array(
     'Email transport' => 'E-Mail Verkehr',
     'Webhook token' => 'Webhook Token',
     'Imports' => 'Importe',
+    'Hide tasks in this column in the Dashboard' => 'Aufgaben in dieser Spalte im Dashboard ausblenden',
 );

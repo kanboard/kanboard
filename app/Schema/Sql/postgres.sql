@@ -98,6 +98,7 @@ CREATE TABLE "columns" (
     "position" integer,
     "project_id" integer NOT NULL,
     "task_limit" integer DEFAULT 0,
+    "hide_in_dashboard" integer DEFAULT 0,
     "description" "text"
 );
 

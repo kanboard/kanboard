@@ -81,7 +81,8 @@ class TaskFinderModel extends Base
                     ->join(ColumnModel::TABLE, 'id', 'column_id')
                     ->eq(TaskModel::TABLE.'.owner_id', $user_id)
                     ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
-                    ->eq(ProjectModel::TABLE.'.is_active', ProjectModel::ACTIVE);
+                    ->eq(ProjectModel::TABLE.'.is_active', ProjectModel::ACTIVE)
+                    ->eq(ColumnModel::TABLE.'.hide_in_dashboard', 0);
     }
 
     /**

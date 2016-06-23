@@ -1202,4 +1202,5 @@ return array(
     'Email transport' => '이메일 전송',
     // 'Webhook token' => '',
     'Imports' => '가져오기',
+    //'Hide tasks in this column in the Dashboard' => '',
 );
