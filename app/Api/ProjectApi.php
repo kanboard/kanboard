@@ -21,6 +21,11 @@ class ProjectApi extends BaseApi
         return $this->formatProject($this->projectModel->getByName($name));
     }
 
+    public function getProjectByIdentifier($identifier)
+    {
+        return $this->formatProject($this->projectModel->getByIdentifier($identifier));
+    }
+
     public function getAllProjects()
     {
         return $this->formatProjects($this->projectModel->getAll());
@@ -62,26 +67,28 @@ class ProjectApi extends BaseApi
         return $this->helper->projectActivity->getProjectEvents($project_id);
     }
 
-    public function createProject($name, $description = null)
+    public function createProject($name, $description = null, $owner_id=0, $identifier=null)
     {
         $values = array(
             'name' => $name,
-            'description' => $description
+            'description' => $description,
+            'identifier' => $identifier
         );
 
         list($valid, ) = $this->projectValidator->validateCreation($values);
-        return $valid ? $this->projectModel->create($values) : false;
+        return $valid ? $this->projectModel->create($values, $owner_id) : false;
     }
 
-    public function updateProject($id, $name, $description = null)
+    public function updateProject($id, $name, $description = null, $owner_id=0,  $identifier=null)
     {
         $values = array(
             'id' => $id,
             'name' => $name,
-            'description' => $description
+            'description' => $description,
+            'identifier' => $identifier
         );
 
         list($valid, ) = $this->projectValidator->validateModification($values);
-        return $valid && $this->projectModel->update($values);
+        return $valid && $this->projectModel->update($values, $owner_id);
     }
 }
