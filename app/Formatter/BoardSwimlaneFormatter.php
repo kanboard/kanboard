@@ -15,6 +15,7 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
     protected $swimlanes = array();
     protected $columns = array();
     protected $tasks = array();
+    protected $tags = array();
 
     /**
      * Set swimlanes
@@ -56,6 +57,19 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
     }
 
     /**
+     * Set tags
+     *
+     * @access public
+     * @param  array $tags
+     * @return $this
+     */
+    public function withTags(array $tags)
+    {
+        $this->tags = $tags;
+        return $this;
+    }
+
+    /**
      * Apply formatter
      *
      * @access public
@@ -71,6 +85,7 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
                 ->withSwimlaneId($swimlane['id'])
                 ->withColumns($this->columns)
                 ->withTasks($this->tasks)
+                ->withTags($this->tags)
                 ->format();
 
             $swimlane['nb_swimlanes'] = $nb_swimlanes;

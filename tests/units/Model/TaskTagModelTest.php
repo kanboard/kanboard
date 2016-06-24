@@ -24,7 +24,7 @@ class TaskTagModelTest extends Base
 
         $this->assertTrue($taskTagModel->save(1, 1, array('My tag 1', 'My tag 2', 'My tag 3')));
 
-        $tags = $taskTagModel->getAll(1);
+        $tags = $taskTagModel->getTagsByTask(1);
         $this->assertCount(3, $tags);
 
         $this->assertEquals(1, $tags[0]['id']);
@@ -38,7 +38,7 @@ class TaskTagModelTest extends Base
 
         $this->assertTrue($taskTagModel->save(1, 1, array('My tag 3', 'My tag 1', 'My tag 4')));
 
-        $tags = $taskTagModel->getAll(1);
+        $tags = $taskTagModel->getTagsByTask(1);
         $this->assertCount(3, $tags);
 
         $this->assertEquals(1, $tags[0]['id']);
@@ -63,5 +63,51 @@ class TaskTagModelTest extends Base
 
         $this->assertEquals('My tag 4', $tags[3]['name']);
         $this->assertEquals(1, $tags[3]['project_id']);
+    }
+
+    public function testGetTagsForTasks()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskTagModel = new TaskTagModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test1')));
+        $this->assertEquals(2, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test2')));
+        $this->assertEquals(3, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test3')));
+
+        $this->assertTrue($taskTagModel->save(1, 1, array('My tag 1', 'My tag 2', 'My tag 3')));
+        $this->assertTrue($taskTagModel->save(1, 2, array('My tag 3')));
+
+        $tags = $taskTagModel->getTagsByTasks(array(1, 2, 3));
+
+        $expected = array(
+            1 => array(
+                array(
+                    'id' => 1,
+                    'name' => 'My tag 1',
+                    'task_id' => 1
+                ),
+                array(
+                    'id' => 2,
+                    'name' => 'My tag 2',
+                    'task_id' => 1
+                ),
+                array(
+                    'id' => 3,
+                    'name' => 'My tag 3',
+                    'task_id' => 1
+                ),
+            ),
+            2 => array(
+                array(
+                    'id' => 3,
+                    'name' => 'My tag 3',
+                    'task_id' => 2,
+                )
+            )
+        );
+
+        $this->assertEquals($expected, $tags);
     }
 }

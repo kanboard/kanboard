@@ -26,13 +26,35 @@ class TaskTagModel extends Base
      * @param  integer $task_id
      * @return array
      */
-    public function getAll($task_id)
+    public function getTagsByTask($task_id)
     {
         return $this->db->table(TagModel::TABLE)
             ->columns(TagModel::TABLE.'.id', TagModel::TABLE.'.name')
             ->eq(self::TABLE.'.task_id', $task_id)
             ->join(self::TABLE, 'tag_id', 'id')
             ->findAll();
+    }
+
+    /**
+     * Get all tags associated to a list of tasks
+     *
+     * @access public
+     * @param  integer[] $task_ids
+     * @return array
+     */
+    public function getTagsByTasks($task_ids)
+    {
+        if (empty($task_ids)) {
+            return array();
+        }
+
+        $tags = $this->db->table(TagModel::TABLE)
+            ->columns(TagModel::TABLE.'.id', TagModel::TABLE.'.name', self::TABLE.'.task_id')
+            ->in(self::TABLE.'.task_id', $task_ids)
+            ->join(self::TABLE, 'tag_id', 'id')
+            ->findAll();
+
+        return array_column_index($tags, 'task_id');
     }
 
     /**
@@ -44,7 +66,7 @@ class TaskTagModel extends Base
      */
     public function getList($task_id)
     {
-        $tags = $this->getAll($task_id);
+        $tags = $this->getTagsByTask($task_id);
         return array_column($tags, 'name', 'id');
     }
 
@@ -61,8 +83,8 @@ class TaskTagModel extends Base
     {
         $task_tags = $this->getList($task_id);
 
-        return $this->addTags($project_id, $task_id, $task_tags, $tags) &&
-            $this->removeTags($task_id, $task_tags, $tags);
+        return $this->associateTags($project_id, $task_id, $task_tags, $tags) &&
+            $this->dissociateTags($task_id, $task_tags, $tags);
     }
 
     /**
@@ -73,7 +95,7 @@ class TaskTagModel extends Base
      * @param  integer  $tag_id
      * @return boolean
      */
-    public function associate($task_id, $tag_id)
+    public function associateTag($task_id, $tag_id)
     {
         return $this->db->table(self::TABLE)->insert(array(
             'task_id' => $task_id,
@@ -89,7 +111,7 @@ class TaskTagModel extends Base
      * @param  integer  $tag_id
      * @return boolean
      */
-    public function dissociate($task_id, $tag_id)
+    public function dissociateTag($task_id, $tag_id)
     {
         return $this->db->table(self::TABLE)
             ->eq('task_id', $task_id)
@@ -97,12 +119,22 @@ class TaskTagModel extends Base
             ->remove();
     }
 
-    private function addTags($project_id, $task_id, $task_tags, $tags)
+    /**
+     * Associate missing tags
+     *
+     * @access protected
+     * @param  integer $project_id
+     * @param  integer $task_id
+     * @param  array   $task_tags
+     * @param  array   $tags
+     * @return bool
+     */
+    protected function associateTags($project_id, $task_id, $task_tags, $tags)
     {
         foreach ($tags as $tag) {
             $tag_id = $this->tagModel->findOrCreateTag($project_id, $tag);
 
-            if (! isset($task_tags[$tag_id]) && ! $this->associate($task_id, $tag_id)) {
+            if (! isset($task_tags[$tag_id]) && ! $this->associateTag($task_id, $tag_id)) {
                 return false;
             }
         }
@@ -110,11 +142,20 @@ class TaskTagModel extends Base
         return true;
     }
 
-    private function removeTags($task_id, $task_tags, $tags)
+    /**
+     * Dissociate removed tags
+     *
+     * @access protected
+     * @param  integer $task_id
+     * @param  array $task_tags
+     * @param  array $tags
+     * @return bool
+     */
+    protected function dissociateTags($task_id, $task_tags, $tags)
     {
         foreach ($task_tags as $tag_id => $tag) {
             if (! in_array($tag, $tags)) {
-                if (! $this->dissociate($task_id, $tag_id)) {
+                if (! $this->dissociateTag($task_id, $tag_id)) {
                     return false;
                 }
             }

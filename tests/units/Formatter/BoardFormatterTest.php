@@ -6,6 +6,7 @@ use Kanboard\Model\ProjectModel;
 use Kanboard\Model\SwimlaneModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\TaskTagModel;
 
 require_once __DIR__.'/../Base.php';
 
@@ -307,5 +308,85 @@ class BoardFormatterTest extends Base
         $this->assertSame(0, $board[2]['columns'][1]['nb_tasks']);
         $this->assertSame(0, $board[2]['columns'][2]['nb_tasks']);
         $this->assertSame(0, $board[2]['columns'][3]['nb_tasks']);
+    }
+
+    public function testFormatWithTags()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskTagModel = new TaskTagModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test1')));
+        $this->assertEquals(2, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test2', 'column_id' => 3)));
+        $this->assertEquals(3, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test3')));
+
+        $this->assertTrue($taskTagModel->save(1, 1, array('My tag 1', 'My tag 2')));
+        $this->assertTrue($taskTagModel->save(1, 2, array('My tag 3')));
+
+        $board = BoardFormatter::getInstance($this->container)
+            ->withQuery($taskFinderModel->getExtendedQuery())
+            ->withProjectId(1)
+            ->format();
+
+        $this->assertCount(1, $board);
+
+        $this->assertEquals('Default swimlane', $board[0]['name']);
+        $this->assertCount(4, $board[0]['columns']);
+        $this->assertEquals(1, $board[0]['nb_swimlanes']);
+        $this->assertEquals(4, $board[0]['nb_columns']);
+        $this->assertEquals(3, $board[0]['nb_tasks']);
+        $this->assertEquals(0, $board[0]['score']);
+
+        $this->assertEquals(2, $board[0]['columns'][0]['column_nb_tasks']);
+        $this->assertEquals(0, $board[0]['columns'][1]['column_nb_tasks']);
+        $this->assertEquals(1, $board[0]['columns'][2]['column_nb_tasks']);
+        $this->assertEquals(0, $board[0]['columns'][3]['column_nb_tasks']);
+
+        $this->assertEquals(0, $board[0]['columns'][0]['column_score']);
+        $this->assertEquals(0, $board[0]['columns'][1]['column_score']);
+        $this->assertEquals(0, $board[0]['columns'][2]['column_score']);
+        $this->assertEquals(0, $board[0]['columns'][3]['column_score']);
+
+        $this->assertSame(0, $board[0]['columns'][0]['score']);
+        $this->assertSame(0, $board[0]['columns'][1]['score']);
+        $this->assertSame(0, $board[0]['columns'][2]['score']);
+        $this->assertSame(0, $board[0]['columns'][3]['score']);
+
+        $this->assertSame(2, $board[0]['columns'][0]['nb_tasks']);
+        $this->assertSame(0, $board[0]['columns'][1]['nb_tasks']);
+        $this->assertSame(1, $board[0]['columns'][2]['nb_tasks']);
+        $this->assertSame(0, $board[0]['columns'][3]['nb_tasks']);
+
+        $this->assertEquals('test1', $board[0]['columns'][0]['tasks'][0]['title']);
+        $this->assertEquals('test3', $board[0]['columns'][0]['tasks'][1]['title']);
+        $this->assertEquals('test2', $board[0]['columns'][2]['tasks'][0]['title']);
+
+        $expected = array(
+            array(
+                'id' => 1,
+                'name' => 'My tag 1',
+                'task_id' => 1,
+            ),
+            array(
+                'id' => 2,
+                'name' => 'My tag 2',
+                'task_id' => 1,
+            ),
+        );
+
+        $this->assertEquals($expected, $board[0]['columns'][0]['tasks'][0]['tags']);
+        $this->assertEquals(array(), $board[0]['columns'][0]['tasks'][1]['tags']);
+
+        $expected = array(
+            array(
+                'id' => 3,
+                'name' => 'My tag 3',
+                'task_id' => 2,
+            ),
+        );
+
+        $this->assertEquals($expected, $board[0]['columns'][2]['tasks'][0]['tags']);
     }
 }

@@ -44,11 +44,13 @@ class BoardFormatter extends BaseFormatter implements FormatterInterface
     {
         $swimlanes = $this->swimlaneModel->getSwimlanes($this->projectId);
         $columns = $this->columnModel->getAll($this->projectId);
-
         $tasks = $this->query
             ->eq(TaskModel::TABLE.'.project_id', $this->projectId)
             ->asc(TaskModel::TABLE.'.position')
             ->findAll();
+
+        $task_ids = array_column($tasks, 'id');
+        $tags = $this->taskTagModel->getTagsByTasks($task_ids);
 
         if (empty($swimlanes) || empty($columns)) {
             return array();
@@ -58,6 +60,7 @@ class BoardFormatter extends BaseFormatter implements FormatterInterface
             ->withSwimlanes($swimlanes)
             ->withColumns($columns)
             ->withTasks($tasks)
+            ->withTags($tags)
             ->format();
     }
 }
