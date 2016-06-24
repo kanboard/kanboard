@@ -3,7 +3,7 @@
     <span
         <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
         class="task-board-assignee task-board-change-assignee"
-        data-url="<?= $this->url->href('TaskPopoverController', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
+        data-url="<?= $this->url->href('TaskModificationController', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
     <?php else: ?>
         class="task-board-assignee">
     <?php endif ?>

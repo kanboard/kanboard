@@ -6,8 +6,8 @@
         <?php else: ?>
             <?= $this->url->link(
                 $this->text->e($task['category_name']),
-                'TaskPopoverController',
-                'changeCategory',
+                'TaskModificationController',
+                'edit',
                 array('task_id' => $task['id'], 'project_id' => $task['project_id']),
                 false,
                 'popover' . (! empty($task['category_description']) ? ' tooltip' : ''),
