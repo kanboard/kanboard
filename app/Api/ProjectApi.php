@@ -89,6 +89,6 @@ class ProjectApi extends BaseApi
         );
 
         list($valid, ) = $this->projectValidator->validateModification($values);
-        return $valid && $this->projectModel->update($values, $owner_id);
+        return $valid && $this->projectModel->update($values);
     }
 }
