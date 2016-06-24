@@ -25,6 +25,7 @@ class TaskModificationModel extends Base
     {
         $original_task = $this->taskFinderModel->getById($values['id']);
 
+        $this->updateTags($values, $original_task);
         $this->prepare($values);
         $result = $this->db->table(TaskModel::TABLE)->eq('id', $original_task['id'])->update($values);
 
@@ -80,16 +81,11 @@ class TaskModificationModel extends Base
     /**
      * Prepare data before task modification
      *
-     * @access public
-     * @param  array    $values    Form values
+     * @access protected
+     * @param  array  $values
      */
-    public function prepare(array &$values)
+    protected function prepare(array &$values)
     {
-        if (isset($values['tags'])) {
-            $this->taskTagModel->save($values['project_id'], $values['id'], $values['tags']);
-            unset($values['tags']);
-        }
-
         $values = $this->dateParser->convert($values, array('date_due'));
         $values = $this->dateParser->convert($values, array('date_started'), true);
 
@@ -98,5 +94,22 @@ class TaskModificationModel extends Base
         $this->helper->model->convertIntegerFields($values, array('priority', 'is_active', 'recurrence_status', 'recurrence_trigger', 'recurrence_factor', 'recurrence_timeframe', 'recurrence_basedate'));
 
         $values['date_modification'] = time();
+    }
+
+    /**
+     * Update tags
+     *
+     * @access protected
+     * @param  array  $values
+     * @param  array  $original_task
+     */
+    protected function updateTags(array &$values, array $original_task)
+    {
+        if (isset($values['tags'])) {
+            $this->taskTagModel->save($original_task['project_id'], $values['id'], $values['tags']);
+            unset($values['tags']);
+        } else {
+            $this->taskTagModel->save($original_task['project_id'], $values['id'], array());
+        }
     }
 }

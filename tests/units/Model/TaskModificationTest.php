@@ -7,6 +7,7 @@ use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskModificationModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TaskTagModel;
 
 class TaskModificationTest extends Base
 {
@@ -45,7 +46,6 @@ class TaskModificationTest extends Base
         $p = new ProjectModel($this->container);
         $tc = new TaskCreationModel($this->container);
         $tm = new TaskModificationModel($this->container);
-        $tf = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $p->create(array('name' => 'test')));
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
@@ -279,5 +279,35 @@ class TaskModificationTest extends Base
 
         $task = $tf->getById(1);
         $this->assertEquals(13.3, $task['time_spent']);
+    }
+
+    public function testChangeTags()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskModificationModel = new TaskModificationModel($this->container);
+        $taskTagModel = new TaskTagModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1, 'tags' => array('tag1', 'tag2'))));
+        $this->assertTrue($taskModificationModel->update(array('id' => 1, 'tags' => array('tag2'))));
+
+        $tags = $taskTagModel->getList(1);
+        $this->assertEquals(array(2 => 'tag2'), $tags);
+    }
+
+    public function testRemoveAllTags()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskModificationModel = new TaskModificationModel($this->container);
+        $taskTagModel = new TaskTagModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1, 'tags' => array('tag1', 'tag2'))));
+        $this->assertTrue($taskModificationModel->update(array('id' => 1)));
+
+        $tags = $taskTagModel->getList(1);
+        $this->assertEquals(array(), $tags);
     }
 }
