@@ -18,6 +18,16 @@
 </div>
 <?php endif ?>
 
+<?php if (! empty($task['tags'])): ?>
+    <div class="task-tags">
+        <ul>
+        <?php foreach ($task['tags'] as $tag): ?>
+            <li><?= $this->text->e($tag['name']) ?></li>
+        <?php endforeach ?>
+        </ul>
+    </div>
+<?php endif ?>
+
 <div class="task-board-icons">
     <?php if ($task['score']): ?>
         <span class="task-score" title="<?= t('Complexity') ?>">

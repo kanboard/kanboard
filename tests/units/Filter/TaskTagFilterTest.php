@@ -4,6 +4,7 @@ use Kanboard\Filter\TaskTagFilter;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\TaskModel;
 use Kanboard\Model\TaskTagModel;
 
 require_once __DIR__.'/../Base.php';
@@ -32,7 +33,7 @@ class TaskTagFilterTest extends Base
         $filter->withValue('my tag 3');
         $filter->apply();
 
-        $tasks = $query->findAll();
+        $tasks = $query->asc(TaskModel::TABLE.'.title')->findAll();
         $this->assertCount(2, $tasks);
         $this->assertEquals('test1', $tasks[0]['title']);
         $this->assertEquals('test2', $tasks[1]['title']);
@@ -113,7 +114,7 @@ class TaskTagFilterTest extends Base
         $filter->withValue('my tag');
         $filter->apply();
 
-        $tasks = $query->findAll();
+        $tasks = $query->asc(TaskModel::TABLE.'.title')->findAll();
         $this->assertCount(2, $tasks);
         $this->assertEquals('test1', $tasks[0]['title']);
         $this->assertEquals('test2', $tasks[1]['title']);

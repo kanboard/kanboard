@@ -53,6 +53,19 @@ div.task-board-status-closed {
     text-overflow: ellipsis;
 }
 
+/* board saving state */
+.task-board-saving-state {
+    opacity: 0.3;
+}
+
+.task-board-saving-icon {
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    color: #000;
+}
+
 /* title one the card */
 .task-board-title {
     font-size: 1.15em;
@@ -81,6 +94,21 @@ div.task-board-status-closed {
 
 .task-board-category:hover {
     opacity: 0.6;
+}
+
+/* tags list */
+.task-tags li {
+    display: inline;
+    margin: 0;
+    margin-right: 4px;
+    padding: 2px;
+    color: #666;
+    border: 1px solid #666;
+    border-radius: 2px;
+}
+
+.task-summary-container .task-tags {
+    margin-top: 10px;
 }
 
 /* avatars on the card */
@@ -181,6 +209,9 @@ span.task-board-age-column {
     border: 2px solid #000;
     border-radius: 8px;
     padding: 15px;
+}
+
+.task-summary-columns {
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: row;

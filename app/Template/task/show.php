@@ -2,6 +2,7 @@
 
 <?= $this->render('task/details', array(
     'task' => $task,
+    'tags' => $tags,
     'project' => $project,
     'editable' => $this->user->hasProjectAccess('TaskModificationController', 'edit', $project['id']),
 )) ?>

@@ -43,6 +43,24 @@ class TagModel extends Base
     }
 
     /**
+     * Get assignable tags for a project
+     *
+     * @access public
+     * @param  integer $project_id
+     * @return array
+     */
+    public function getAssignableList($project_id)
+    {
+        return $this->db->hashtable(self::TABLE)
+            ->beginOr()
+            ->eq('project_id', $project_id)
+            ->eq('project_id', 0)
+            ->closeOr()
+            ->asc('name')
+            ->getAll('id', 'name');
+    }
+
+    /**
      * Get one tag
      *
      * @access public

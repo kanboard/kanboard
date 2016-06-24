@@ -7,8 +7,8 @@
     <?= $this->form->hidden('project_id', $values) ?>
 
     <div class="form-column">
-        <?= $this->form->label(t('Title'), 'title') ?>
-        <?= $this->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="200"', 'tabindex="1"')) ?>
+        <?= $this->task->selectTitle($values, $errors) ?>
+        <?= $this->task->selectTags($project, $tags) ?>
         <?= $this->task->selectAssignee($users_list, $values, $errors) ?>
         <?= $this->task->selectCategory($categories_list, $values, $errors) ?>
         <?= $this->task->selectPriority($project, $values) ?>

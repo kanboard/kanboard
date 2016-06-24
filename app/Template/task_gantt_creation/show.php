@@ -8,12 +8,11 @@
     <?= $this->form->hidden('position', $values) ?>
 
     <div class="form-column">
-        <?= $this->form->label(t('Title'), 'title') ?>
-        <?= $this->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="200"', 'tabindex="1"'), 'form-input-large') ?>
+        <?= $this->task->selectTitle($values, $errors) ?>
 
         <?= $this->form->label(t('Description'), 'description') ?>
         <?= $this->form->textarea('description', $values, $errors, array('placeholder="'.t('Leave a description').'"', 'tabindex="2"'), 'markdown-editor') ?>
-
+        <?= $this->task->selectTags($project) ?>
         <?= $this->render('task/color_picker', array('colors_list' => $colors_list, 'values' => $values)) ?>
     </div>
 

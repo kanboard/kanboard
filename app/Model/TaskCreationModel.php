@@ -22,11 +22,13 @@ class TaskCreationModel extends Base
      */
     public function create(array $values)
     {
-        if (! $this->projectModel->exists($values['project_id'])) {
-            return 0;
-        }
-
         $position = empty($values['position']) ? 0 : $values['position'];
+        $tags = array();
+
+        if (isset($values['tags'])) {
+            $tags = $values['tags'];
+            unset($values['tags']);
+        }
 
         $this->prepare($values);
         $task_id = $this->db->table(TaskModel::TABLE)->persist($values);
@@ -34,6 +36,10 @@ class TaskCreationModel extends Base
         if ($task_id !== false) {
             if ($position > 0 && $values['position'] > 1) {
                 $this->taskPositionModel->movePosition($values['project_id'], $task_id, $values['column_id'], $position, $values['swimlane_id'], false);
+            }
+
+            if (! empty($tags)) {
+                $this->taskTagModel->save($values['project_id'], $task_id, $tags);
             }
 
             $this->fireEvents($task_id, $values);

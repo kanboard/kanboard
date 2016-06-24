@@ -45,6 +45,7 @@ class TaskViewController extends BaseController
             'task' => $task,
             'columns_list' => $this->columnModel->getList($task['project_id']),
             'colors_list' => $this->colorModel->getList(),
+            'tags' => $this->taskTagModel->getList($task['id']),
             'title' => $task['title'],
             'no_layout' => true,
             'auto_refresh' => true,
@@ -82,6 +83,7 @@ class TaskViewController extends BaseController
             'internal_links' => $this->taskLinkModel->getAllGroupedByLabel($task['id']),
             'external_links' => $this->taskExternalLinkModel->getAll($task['id']),
             'link_label_list' => $this->linkModel->getList(0, false),
+            'tags' => $this->taskTagModel->getList($task['id']),
         )));
     }
 

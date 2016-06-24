@@ -40,6 +40,34 @@ class TaskHelper extends Base
         return $this->taskModel->getRecurrenceBasedateList();
     }
 
+    public function selectTitle(array $values, array $errors)
+    {
+        $html = $this->helper->form->label(t('Title'), 'title');
+        $html .= $this->helper->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="200"', 'tabindex="1"'), 'form-input-large');
+        return $html;
+    }
+
+    public function selectTags(array $project, array $tags = array())
+    {
+        $options = $this->tagModel->getAssignableList($project['id']);
+
+        $html = $this->helper->form->label(t('Tags'), 'tags[]');
+        $html .= '<select name="tags[]" id="form-tags" class="tag-autocomplete" multiple>';
+
+        foreach ($options as $tag) {
+            $html .= sprintf(
+                '<option value="%s" %s>%s</option>',
+                $this->helper->text->e($tag),
+                in_array($tag, $tags) ? 'selected="selected"' : '',
+                $this->helper->text->e($tag)
+            );
+        }
+
+        $html .= '</select>';
+
+        return $html;
+    }
+
     public function selectAssignee(array $users, array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="3"'), $attributes);

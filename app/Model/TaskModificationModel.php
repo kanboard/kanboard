@@ -85,6 +85,11 @@ class TaskModificationModel extends Base
      */
     public function prepare(array &$values)
     {
+        if (isset($values['tags'])) {
+            $this->taskTagModel->save($values['project_id'], $values['id'], $values['tags']);
+            unset($values['tags']);
+        }
+
         $values = $this->dateParser->convert($values, array('date_due'));
         $values = $this->dateParser->convert($values, array('date_started'), true);
 

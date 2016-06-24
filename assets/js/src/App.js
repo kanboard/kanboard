@@ -35,6 +35,7 @@ Kanboard.App.prototype.execute = function() {
     this.keyboardShortcuts();
     this.datePicker();
     this.autoComplete();
+    this.tagAutoComplete();
 };
 
 Kanboard.App.prototype.keyboardShortcuts = function() {
@@ -129,6 +130,12 @@ Kanboard.App.prototype.datePicker = function() {
         timeFormat: timeFormat,
         constrainInput: false
     });
+};
+
+Kanboard.App.prototype.tagAutoComplete = function() {
+    $(".tag-autocomplete").select2({
+        tags: true
+    })
 };
 
 Kanboard.App.prototype.autoComplete = function() {
