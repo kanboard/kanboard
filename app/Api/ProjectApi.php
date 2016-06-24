@@ -67,7 +67,7 @@ class ProjectApi extends BaseApi
         return $this->helper->projectActivity->getProjectEvents($project_id);
     }
 
-    public function createProject($name, $description = null, $owner_id=0, $identifier=null)
+    public function createProject($name, $description = null, $owner_id = 0, $identifier = null)
     {
         $values = array(
             'name' => $name,
@@ -79,7 +79,7 @@ class ProjectApi extends BaseApi
         return $valid ? $this->projectModel->create($values, $owner_id) : false;
     }
 
-    public function updateProject($id, $name, $description = null, $owner_id=0,  $identifier=null)
+    public function updateProject($id, $name, $description = null,  $identifier = null)
     {
         $values = array(
             'id' => $id,
