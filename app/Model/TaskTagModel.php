@@ -74,9 +74,9 @@ class TaskTagModel extends Base
      * Add or update a list of tags to a task
      *
      * @access public
-     * @param integer  $project_id
-     * @param integer  $task_id
-     * @param string[] $tags
+     * @param  integer  $project_id
+     * @param  integer  $task_id
+     * @param  string[] $tags
      * @return boolean
      */
     public function save($project_id, $task_id, array $tags)
@@ -123,10 +123,10 @@ class TaskTagModel extends Base
      * Associate missing tags
      *
      * @access protected
-     * @param  integer $project_id
-     * @param  integer $task_id
-     * @param  array   $task_tags
-     * @param  array   $tags
+     * @param  integer  $project_id
+     * @param  integer  $task_id
+     * @param  array    $task_tags
+     * @param  string[] $tags
      * @return bool
      */
     protected function associateTags($project_id, $task_id, $task_tags, $tags)
@@ -146,9 +146,9 @@ class TaskTagModel extends Base
      * Dissociate removed tags
      *
      * @access protected
-     * @param  integer $task_id
-     * @param  array $task_tags
-     * @param  array $tags
+     * @param  integer  $task_id
+     * @param  array    $task_tags
+     * @param  string[] $tags
      * @return bool
      */
     protected function dissociateTags($task_id, $task_tags, $tags)

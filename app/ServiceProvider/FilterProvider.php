@@ -26,6 +26,7 @@ use Kanboard\Filter\TaskReferenceFilter;
 use Kanboard\Filter\TaskStatusFilter;
 use Kanboard\Filter\TaskSubtaskAssigneeFilter;
 use Kanboard\Filter\TaskSwimlaneFilter;
+use Kanboard\Filter\TaskTagFilter;
 use Kanboard\Filter\TaskTitleFilter;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectGroupRoleModel;
@@ -163,6 +164,9 @@ class FilterProvider implements ServiceProviderInterface
                     ->setDatabase($c['db'])
                 )
                 ->withFilter(new TaskSwimlaneFilter())
+                ->withFilter(TaskTagFilter::getInstance()
+                    ->setDatabase($c['db'])
+                )
                 ->withFilter(new TaskTitleFilter(), true)
             ;
 

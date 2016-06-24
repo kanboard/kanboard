@@ -110,4 +110,18 @@ class TaskTagModelTest extends Base
 
         $this->assertEquals($expected, $tags);
     }
+
+    public function testGetTagsForTasksWithEmptyList()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskTagModel = new TaskTagModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test1')));
+        $this->assertTrue($taskTagModel->save(1, 1, array('My tag 1', 'My tag 2', 'My tag 3')));
+
+        $tags = $taskTagModel->getTagsByTasks(array());
+        $this->assertEquals(array(), $tags);
+    }
 }

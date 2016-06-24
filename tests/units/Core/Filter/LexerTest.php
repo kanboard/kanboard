@@ -202,4 +202,16 @@ class LexerTest extends Base
 
         $this->assertSame($expected, $lexer->tokenize('६Δↈ五一'));
     }
+
+    public function testTokenizeWithMultipleValues()
+    {
+        $lexer = new Lexer();
+        $lexer->addToken("/^(tag:)/", 'T_TAG');
+
+        $expected = array(
+            'T_TAG' => array('tag 1', 'tag2'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('tag:"tag 1" tag:tag2'));
+    }
 }

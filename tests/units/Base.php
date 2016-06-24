@@ -48,8 +48,8 @@ abstract class Base extends PHPUnit_Framework_TestCase
             new Stopwatch
         );
 
-        $this->container['db']->logQueries = true;
-        $this->container['logger'] = new Logger;
+        $this->container['db']->getStatementHandler()->withLogging();
+        $this->container['logger'] = new Logger();
 
         $this->container['httpClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Http\Client')
