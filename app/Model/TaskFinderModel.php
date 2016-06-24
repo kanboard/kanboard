@@ -153,26 +153,6 @@ class TaskFinderModel extends Base
     }
 
     /**
-     * Get all tasks shown on the board (sorted by position)
-     *
-     * @access public
-     * @param  integer    $project_id     Project id
-     * @param  integer    $column_id      Column id
-     * @param  integer    $swimlane_id    Swimlane id
-     * @return array
-     */
-    public function getTasksByColumnAndSwimlane($project_id, $column_id, $swimlane_id = 0)
-    {
-        return $this->getExtendedQuery()
-                    ->eq(TaskModel::TABLE.'.project_id', $project_id)
-                    ->eq(TaskModel::TABLE.'.column_id', $column_id)
-                    ->eq(TaskModel::TABLE.'.swimlane_id', $swimlane_id)
-                    ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
-                    ->asc(TaskModel::TABLE.'.position')
-                    ->findAll();
-    }
-
-    /**
      * Get all tasks for a given project and status
      *
      * @access public

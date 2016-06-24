@@ -3,6 +3,32 @@
 use Kanboard\Core\Translator;
 
 /**
+ * Sum all values from a single column in the input array
+ *
+ * $input = [
+ *   ['column' => 2'], ['column' => 3']
+ * ]
+ *
+ * array_column_sum($input, 'column') returns 5
+ *
+ * @param  array   $input
+ * @param  string  $column
+ * @return double
+ */
+function array_column_sum(array &$input, $column)
+{
+    $sum = 0.0;
+
+    foreach ($input as &$row) {
+        if (isset($row[$column])) {
+            $sum += (float) $row[$column];
+        }
+    }
+
+    return $sum;
+}
+
+/**
  * Build version number from git-archive output
  *
  * @param  string $ref

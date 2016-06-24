@@ -2,6 +2,8 @@
 
 namespace Kanboard\Api;
 
+use Kanboard\Formatter\BoardFormatter;
+
 /**
  * Board API controller
  *
@@ -13,6 +15,10 @@ class BoardApi extends BaseApi
     public function getBoard($project_id)
     {
         $this->checkProjectPermission($project_id);
-        return $this->boardModel->getBoard($project_id);
+
+        return BoardFormatter::getInstance($this->container)
+            ->withProjectId($project_id)
+            ->withQuery($this->taskFinderModel->getExtendedQuery())
+            ->format();
     }
 }

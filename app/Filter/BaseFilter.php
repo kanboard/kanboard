@@ -43,8 +43,7 @@ abstract class BaseFilter
      */
     public static function getInstance($value = null)
     {
-        $self = new static($value);
-        return $self;
+        return new static($value);
     }
 
     /**
