@@ -41,7 +41,6 @@ class TaskCreationController extends BaseController
             'values' => $values + array('project_id' => $project['id']),
             'columns_list' => $this->columnModel->getList($project['id']),
             'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], true, false, true),
-            'colors_list' => $this->colorModel->getList(),
             'categories_list' => $this->categoryModel->getList($project['id']),
             'swimlanes_list' => $swimlanes_list,
             'title' => $project['name'].' &gt; '.t('New task')

@@ -66,8 +66,7 @@ select:focus {
 }
 
 span.select2-container {
-    margin-top: 3px;
-    margin-bottom: 10px;
+    margin-top: 2px;
 }
 
 ::-webkit-input-placeholder {
@@ -155,21 +154,15 @@ input.form-input-large {
     width: 400px;
 }
 
+.form-columns {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
 .form-column {
-    float: left;
-    margin-right: 3%;
-    max-width: 50%;
-    min-width: 40%;
-}
-
-.form-column ul {
-    margin-top: 15px;
-}
-
-.form-clear {
-    clear: both;
-    padding-top: 20px;
-    padding-bottom: 10px;
+    margin-right: 25px;
 }
 
 .form-login {

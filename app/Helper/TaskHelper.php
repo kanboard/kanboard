@@ -47,6 +47,24 @@ class TaskHelper extends Base
         return $html;
     }
 
+    public function selectDescription(array $values, array $errors)
+    {
+        $html = $this->helper->form->label(t('Description'), 'description');
+        $html .= $this->helper->form->textarea(
+            'description',
+            $values,
+            $errors,
+            array(
+                'placeholder="'.t('Leave a description').'"',
+                'tabindex="2"',
+                'data-mention-search-url="'.$this->helper->url->href('UserAjaxController', 'mention', array('project_id' => $values['project_id'])).'"'
+            ),
+            'markdown-editor'
+        );
+
+        return $html;
+    }
+
     public function selectTags(array $project, array $tags = array())
     {
         $options = $this->tagModel->getAssignableList($project['id']);
@@ -65,6 +83,14 @@ class TaskHelper extends Base
 
         $html .= '</select>';
 
+        return $html;
+    }
+
+    public function selectColor(array $values)
+    {
+        $colors = $this->colorModel->getList();
+        $html = $this->helper->form->label(t('Color'), 'color_id');
+        $html .= $this->helper->form->select('color_id', $colors, $values, array(), array(), 'color-picker');
         return $html;
     }
 

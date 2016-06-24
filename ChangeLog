@@ -3,6 +3,7 @@ Version 1.0.31 (unreleased)
 
 Improvements:
 
+* Use the same task form layout everywhere
 * Make embedded documentation available in multiple languages
 
 Bug fixes:
