@@ -11,10 +11,6 @@ Kanboard.Task.prototype.keyboardShortcuts = function() {
             self.app.get("Popover").open(taskView.data("edit-url"));
         });
 
-        Mousetrap.bind("d", function() {
-            self.app.get("Popover").open(taskView.data("description-url"));
-        });
-
         Mousetrap.bind("c", function() {
             self.app.get("Popover").open(taskView.data("comment-url"));
         });
