@@ -20,23 +20,6 @@ class TaskCreationTest extends Base
         $this->assertEquals('test', $event_data['title']);
     }
 
-    public function testNoProjectId()
-    {
-        $p = new ProjectModel($this->container);
-        $tc = new TaskCreationModel($this->container);
-        $tf = new TaskFinderModel($this->container);
-
-        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {});
-        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE, function () {});
-
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(0, $tc->create(array('title' => 'test', 'project_id' => 0)));
-
-        $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayNotHasKey(TaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
-        $this->assertArrayNotHasKey(TaskModel::EVENT_CREATE.'.closure', $called);
-    }
-
     public function testNoTitle()
     {
         $p = new ProjectModel($this->container);

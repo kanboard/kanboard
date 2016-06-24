@@ -35,10 +35,6 @@
             <?= $this->url->link(t('Edit the task'), 'TaskModificationController', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
         <li>
-            <i class="fa fa-align-left fa-fw"></i>
-            <?= $this->url->link(t('Edit the description'), 'TaskModificationController', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
-        </li>
-        <li>
             <i class="fa fa-refresh fa-rotate-90 fa-fw"></i>
             <?= $this->url->link(t('Edit recurrence'), 'TaskRecurrenceController', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>

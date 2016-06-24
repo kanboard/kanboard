@@ -182,53 +182,6 @@ class TaskValidator extends BaseValidator
     }
 
     /**
-     * Validate assignee change
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateAssigneeModification(array $values)
-    {
-        $rules = array(
-            new Validators\Required('id', t('The id is required')),
-            new Validators\Required('project_id', t('The project is required')),
-            new Validators\Required('owner_id', t('This value is required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
-     * Validate category change
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateCategoryModification(array $values)
-    {
-        $rules = array(
-            new Validators\Required('id', t('The id is required')),
-            new Validators\Required('project_id', t('The project is required')),
-            new Validators\Required('category_id', t('This value is required')),
-
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
      * Validate project modification
      *
      * @access public
