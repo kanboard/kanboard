@@ -6,7 +6,29 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 89;
+const VERSION = 90;
+
+function version_90(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE tags (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            project_id INTEGER NOT NULL,
+            UNIQUE(project_id, name)
+        )
+    ");
+
+    $pdo->exec("
+        CREATE TABLE task_has_tags (
+            task_id INTEGER NOT NULL,
+            tag_id INTEGER NOT NULL,
+            FOREIGN KEY(task_id) REFERENCES tasks(id) ON DELETE CASCADE,
+            FOREIGN KEY(tag_id) REFERENCES tags(id) ON DELETE CASCADE,
+            UNIQUE(tag_id, task_id)
+        )
+    ");
+}
 
 function version_89(PDO $pdo)
 {

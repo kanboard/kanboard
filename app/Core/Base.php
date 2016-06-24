@@ -86,6 +86,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\SubtaskModel                        $subtaskModel
  * @property \Kanboard\Model\SubtaskTimeTrackingModel            $subtaskTimeTrackingModel
  * @property \Kanboard\Model\SwimlaneModel                       $swimlaneModel
+ * @property \Kanboard\Model\TagModel                            $tagModel
  * @property \Kanboard\Model\TaskModel                           $taskModel
  * @property \Kanboard\Model\TaskAnalyticModel                   $taskAnalyticModel
  * @property \Kanboard\Model\TaskCreationModel                   $taskCreationModel
@@ -96,6 +97,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskModificationModel               $taskModificationModel
  * @property \Kanboard\Model\TaskPositionModel                   $taskPositionModel
  * @property \Kanboard\Model\TaskStatusModel                     $taskStatusModel
+ * @property \Kanboard\Model\TaskTagModel                        $taskTagModel
  * @property \Kanboard\Model\TaskMetadataModel                   $taskMetadataModel
  * @property \Kanboard\Model\TimezoneModel                       $timezoneModel
  * @property \Kanboard\Model\TransitionModel                     $transitionModel
