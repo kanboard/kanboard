@@ -88,6 +88,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('ProjectFileController', '*', Role::PROJECT_MEMBER);
         $acl->add('ProjectUserOverviewController', '*', Role::PROJECT_MANAGER);
         $acl->add('ProjectStatusController', '*', Role::PROJECT_MANAGER);
+        $acl->add('ProjectTagController', '*', Role::PROJECT_MANAGER);
         $acl->add('SubtaskController', '*', Role::PROJECT_MEMBER);
         $acl->add('SubtaskRestrictionController', '*', Role::PROJECT_MEMBER);
         $acl->add('SubtaskStatusController', '*', Role::PROJECT_MEMBER);
@@ -131,6 +132,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('AvatarFileController', 'show', Role::APP_PUBLIC);
 
         $acl->add('ConfigController', '*', Role::APP_ADMIN);
+        $acl->add('TagController', '*', Role::APP_ADMIN);
         $acl->add('PluginController', '*', Role::APP_ADMIN);
         $acl->add('CurrencyController', '*', Role::APP_ADMIN);
         $acl->add('ProjectGanttController', '*', Role::APP_MANAGER);

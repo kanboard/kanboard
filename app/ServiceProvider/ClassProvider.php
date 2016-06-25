@@ -99,8 +99,9 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectValidator',
             'SubtaskValidator',
             'SwimlaneValidator',
-            'TaskValidator',
+            'TagValidator',
             'TaskLinkValidator',
+            'TaskValidator',
             'UserValidator',
         ),
         'Import' => array(

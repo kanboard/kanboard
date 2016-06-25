@@ -116,14 +116,15 @@ use Pimple\Container;
  * @property \Kanboard\Validator\CommentValidator                $commentValidator
  * @property \Kanboard\Validator\CurrencyValidator               $currencyValidator
  * @property \Kanboard\Validator\CustomFilterValidator           $customFilterValidator
+ * @property \Kanboard\Validator\ExternalLinkValidator           $externalLinkValidator
  * @property \Kanboard\Validator\GroupValidator                  $groupValidator
  * @property \Kanboard\Validator\LinkValidator                   $linkValidator
  * @property \Kanboard\Validator\PasswordResetValidator          $passwordResetValidator
  * @property \Kanboard\Validator\ProjectValidator                $projectValidator
  * @property \Kanboard\Validator\SubtaskValidator                $subtaskValidator
  * @property \Kanboard\Validator\SwimlaneValidator               $swimlaneValidator
+ * @property \Kanboard\Validator\TagValidator                    $tagValidator
  * @property \Kanboard\Validator\TaskLinkValidator               $taskLinkValidator
- * @property \Kanboard\Validator\ExternalLinkValidator           $externalLinkValidator
  * @property \Kanboard\Validator\TaskValidator                   $taskValidator
  * @property \Kanboard\Validator\UserValidator                   $userValidator
  * @property \Kanboard\Import\TaskImport                         $taskImport

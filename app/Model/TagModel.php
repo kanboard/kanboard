@@ -94,6 +94,29 @@ class TagModel extends Base
     }
 
     /**
+     * Return true if the tag exists
+     *
+     * @access public
+     * @param  integer $project_id
+     * @param  string  $tag
+     * @param  integer $tag_id
+     * @return boolean
+     */
+    public function exists($project_id, $tag, $tag_id = 0)
+    {
+        return $this->db
+            ->table(self::TABLE)
+            ->neq('id', $tag_id)
+            ->beginOr()
+            ->eq('project_id', 0)
+            ->eq('project_id', $project_id)
+            ->closeOr()
+            ->ilike('name', $tag)
+            ->asc('project_id')
+            ->exists();
+    }
+
+    /**
      * Return tag id and create a new tag if necessary
      *
      * @access public

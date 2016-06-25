@@ -19,6 +19,9 @@
         <li <?= $this->app->checkMenuSelection('ConfigController', 'calendar') ?>>
             <?= $this->url->link(t('Calendar settings'), 'ConfigController', 'calendar') ?>
         </li>
+        <li <?= $this->app->checkMenuSelection('TagController', 'index') ?>>
+            <?= $this->url->link(t('Tags management'), 'TagController', 'index') ?>
+        </li>
         <li <?= $this->app->checkMenuSelection('LinkController') ?>>
             <?= $this->url->link(t('Link settings'), 'LinkController', 'index') ?>
         </li>
