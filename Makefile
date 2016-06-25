@@ -58,7 +58,28 @@ test-postgres:
 unittest: test-sqlite test-mysql test-postgres
 
 test-browser:
-		@ phpunit -c tests/acceptance.xml
+	@ phpunit -c tests/acceptance.xml
+
+integration-test-mysql:
+	@ composer install
+	@ docker-compose -f tests/docker/compose.integration.mysql.yaml build
+	@ docker-compose -f tests/docker/compose.integration.mysql.yaml up -d mysql app
+	@ docker-compose -f tests/docker/compose.integration.mysql.yaml up tests
+	@ docker-compose -f tests/docker/compose.integration.mysql.yaml down
+
+integration-test-postgres:
+	@ composer install
+	@ docker-compose -f tests/docker/compose.integration.postgres.yaml build
+	@ docker-compose -f tests/docker/compose.integration.postgres.yaml up -d postgres app
+	@ docker-compose -f tests/docker/compose.integration.postgres.yaml up tests
+	@ docker-compose -f tests/docker/compose.integration.postgres.yaml down
+
+integration-test-sqlite:
+	@ composer install
+	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml build
+	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml up -d app
+	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml up tests
+	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml down
 
 sql:
 	@ pg_dump --schema-only --no-owner --no-privileges --quote-all-identifiers -n public --file app/Schema/Sql/postgres.sql kanboard

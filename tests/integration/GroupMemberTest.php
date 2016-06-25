@@ -1,47 +1,53 @@
 <?php
 
-require_once __DIR__.'/Base.php';
+require_once __DIR__.'/BaseIntegrationTest.php';
 
-class GroupMemberTest extends Base
+class GroupMemberTest extends BaseIntegrationTest
 {
-    public function testAddMember()
-    {
-        $this->assertNotFalse($this->app->createGroup('My Group A'));
-        $this->assertNotFalse($this->app->createGroup('My Group B'));
+    protected $username = 'user-group-member';
+    protected $groupName1 = 'My group member A';
+    protected $groupName2 = 'My group member B';
 
-        $groupId = $this->getGroupId();
-        $this->assertTrue($this->app->addGroupMember($groupId, 1));
+    public function testAll()
+    {
+        $this->assertCreateGroups();
+        $this->assertCreateUser();
+        $this->assertAddMember();
+        $this->assertGetMembers();
+        $this->assertIsGroupMember();
+        $this->assertGetGroups();
+        $this->assertRemove();
     }
 
-    public function testGetMembers()
+    public function assertAddMember()
     {
-        $groups = $this->app->getAllGroups();
-        $members = $this->app->getGroupMembers($groups[0]['id']);
+        $this->assertTrue($this->app->addGroupMember($this->groupId1, $this->userId));
+    }
+
+    public function assertGetMembers()
+    {
+        $members = $this->app->getGroupMembers($this->groupId1);
         $this->assertCount(1, $members);
-        $this->assertEquals('admin', $members[0]['username']);
-
-        $this->assertSame(array(), $this->app->getGroupMembers($groups[1]['id']));
+        $this->assertEquals($this->username, $members[0]['username']);
     }
 
-    public function testIsGroupMember()
+    public function assertIsGroupMember()
     {
-        $groupId = $this->getGroupId();
-        $this->assertTrue($this->app->isGroupMember($groupId, 1));
-        $this->assertFalse($this->app->isGroupMember($groupId, 2));
+        $this->assertTrue($this->app->isGroupMember($this->groupId1, $this->userId));
+        $this->assertFalse($this->app->isGroupMember($this->groupId1, $this->adminUserId));
     }
 
-    public function testGetGroups()
+    public function assertGetGroups()
     {
-        $groups = $this->app->getMemberGroups(1);
+        $groups = $this->app->getMemberGroups($this->userId);
         $this->assertCount(1, $groups);
-        $this->assertEquals(1, $groups[0]['id']);
-        $this->assertEquals('My Group A', $groups[0]['name']);
+        $this->assertEquals($this->groupId1, $groups[0]['id']);
+        $this->assertEquals($this->groupName1, $groups[0]['name']);
     }
 
-    public function testRemove()
+    public function assertRemove()
     {
-        $groupId = $this->getGroupId();
-        $this->assertTrue($this->app->removeGroupMember($groupId, 1));
-        $this->assertFalse($this->app->isGroupMember($groupId, 1));
+        $this->assertTrue($this->app->removeGroupMember($this->groupId1, $this->userId));
+        $this->assertFalse($this->app->isGroupMember($this->groupId1, $this->userId));
     }
 }

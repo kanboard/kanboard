@@ -73,13 +73,13 @@ class ProjectApi extends BaseApi
         return $valid ? $this->projectModel->create($values) : false;
     }
 
-    public function updateProject($id, $name, $description = null)
+    public function updateProject($project_id, $name, $description = null)
     {
-        $values = array(
-            'id' => $id,
+        $values = $this->filterValues(array(
+            'id' => $project_id,
             'name' => $name,
             'description' => $description
-        );
+        ));
 
         list($valid, ) = $this->projectValidator->validateModification($values);
         return $valid && $this->projectModel->update($values);

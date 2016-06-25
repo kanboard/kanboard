@@ -1,17 +1,21 @@
 <?php
 
-require_once __DIR__.'/Base.php';
+require_once __DIR__.'/BaseIntegrationTest.php';
 
-class BoardTest extends Base
+class BoardTest extends BaseIntegrationTest
 {
-    public function testCreateProject()
+    protected $projectName = 'My project to test board';
+
+    public function testAll()
     {
-        $this->assertEquals(1, $this->app->createProject('A project'));
+        $this->assertCreateTeamProject();
+        $this->assertGetBoard();
     }
 
-    public function testGetBoard()
+    public function assertGetBoard()
     {
-        $board = $this->app->getBoard(1);
+        $board = $this->app->getBoard($this->projectId);
+        $this->assertNotNull($board);
         $this->assertCount(1, $board);
         $this->assertEquals('Default swimlane', $board[0]['name']);
 

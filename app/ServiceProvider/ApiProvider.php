@@ -9,7 +9,7 @@ use Kanboard\Api\BoardApi;
 use Kanboard\Api\CategoryApi;
 use Kanboard\Api\ColumnApi;
 use Kanboard\Api\CommentApi;
-use Kanboard\Api\FileApi;
+use Kanboard\Api\TaskFileApi;
 use Kanboard\Api\GroupApi;
 use Kanboard\Api\GroupMemberApi;
 use Kanboard\Api\LinkApi;
@@ -56,7 +56,7 @@ class ApiProvider implements ServiceProviderInterface
             ->withObject(new ColumnApi($container))
             ->withObject(new CategoryApi($container))
             ->withObject(new CommentApi($container))
-            ->withObject(new FileApi($container))
+            ->withObject(new TaskFileApi($container))
             ->withObject(new LinkApi($container))
             ->withObject(new ProjectApi($container))
             ->withObject(new ProjectPermissionApi($container))

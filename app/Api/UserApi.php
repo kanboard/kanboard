@@ -2,7 +2,6 @@
 
 namespace Kanboard\Api;
 
-use Kanboard\Core\Base;
 use LogicException;
 use Kanboard\Core\Security\Role;
 use Kanboard\Core\Ldap\Client as LdapClient;
@@ -15,7 +14,7 @@ use Kanboard\Core\Ldap\User as LdapUser;
  * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class UserApi extends Base
+class UserApi extends BaseApi
 {
     public function getUser($user_id)
     {
@@ -118,19 +117,13 @@ class UserApi extends Base
 
     public function updateUser($id, $username = null, $name = null, $email = null, $role = null)
     {
-        $values = array(
+        $values = $this->filterValues(array(
             'id' => $id,
             'username' => $username,
             'name' => $name,
             'email' => $email,
             'role' => $role,
-        );
-
-        foreach ($values as $key => $value) {
-            if (is_null($value)) {
-                unset($values[$key]);
-            }
-        }
+        ));
 
         list($valid, ) = $this->userValidator->validateApiModification($values);
         return $valid && $this->userModel->update($values);

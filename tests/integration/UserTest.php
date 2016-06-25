@@ -1,18 +1,63 @@
 <?php
 
-require_once __DIR__.'/Base.php';
+require_once __DIR__.'/BaseIntegrationTest.php';
 
-class UserTest extends Base
+class UserTest extends BaseIntegrationTest
 {
-    public function testDisableUser()
+    public function testAll()
     {
-        $this->assertEquals(2, $this->app->createUser(array('username' => 'someone', 'password' => 'test123')));
-        $this->assertTrue($this->app->isActiveUser(2));
+        $this->assertCreateUser();
+        $this->assertGetUserById();
+        $this->assertGetUserByName();
+        $this->assertGetAllUsers();
+        $this->assertEnableDisableUser();
+        $this->assertUpdateUser();
+        $this->assertRemoveUser();
+    }
 
-        $this->assertTrue($this->app->disableUser(2));
-        $this->assertFalse($this->app->isActiveUser(2));
+    public function assertGetUserById()
+    {
+        $user = $this->app->getUser($this->userId);
+        $this->assertNotNull($user);
+        $this->assertEquals($this->username, $user['username']);
+    }
 
-        $this->assertTrue($this->app->enableUser(2));
-        $this->assertTrue($this->app->isActiveUser(2));
+    public function assertGetUserByName()
+    {
+        $user = $this->app->getUserByName($this->username);
+        $this->assertNotNull($user);
+        $this->assertEquals($this->username, $user['username']);
+    }
+
+    public function assertGetAllUsers()
+    {
+        $users = $this->app->getAllUsers();
+        $this->assertInternalType('array', $users);
+        $this->assertNotEmpty($users);
+    }
+
+    public function assertEnableDisableUser()
+    {
+        $this->assertTrue($this->app->disableUser($this->userId));
+        $this->assertFalse($this->app->isActiveUser($this->userId));
+        $this->assertTrue($this->app->enableUser($this->userId));
+        $this->assertTrue($this->app->isActiveUser($this->userId));
+    }
+
+    public function assertUpdateUser()
+    {
+        $this->assertTrue($this->app->updateUser(array(
+            'id' => $this->userId,
+            'name' => 'My user',
+        )));
+
+        $user = $this->app->getUser($this->userId);
+        $this->assertNotNull($user);
+        $this->assertEquals('My user', $user['name']);
+    }
+
+    public function assertRemoveUser()
+    {
+        $this->assertTrue($this->app->removeUser($this->userId));
     }
 }

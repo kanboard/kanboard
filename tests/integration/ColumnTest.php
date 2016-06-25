@@ -1,65 +1,69 @@
 <?php
 
-require_once __DIR__.'/Base.php';
+require_once __DIR__.'/BaseIntegrationTest.php';
 
-class ColumnTest extends Base
+class ColumnTest extends BaseIntegrationTest
 {
-    public function testCreateProject()
+    protected $projectName = 'My project to test columns';
+    private $columns = array();
+
+    public function testAll()
     {
-        $this->assertEquals(1, $this->app->createProject('A project'));
+        $this->assertCreateTeamProject();
+        $this->assertGetColumns();
+        $this->assertUpdateColumn();
+        $this->assertAddColumn();
+        $this->assertRemoveColumn();
+        $this->assertChangeColumnPosition();
     }
 
-    public function testGetColumns()
+    public function assertGetColumns()
     {
-        $columns = $this->app->getColumns($this->getProjectId());
-        $this->assertCount(4, $columns);
-        $this->assertEquals('Done', $columns[3]['title']);
+        $this->columns = $this->app->getColumns($this->projectId);
+        $this->assertCount(4, $this->columns);
+        $this->assertEquals('Done', $this->columns[3]['title']);
     }
 
-    public function testUpdateColumn()
+    public function assertUpdateColumn()
     {
-        $this->assertTrue($this->app->updateColumn(4, 'Boo', 2));
+        $this->assertTrue($this->app->updateColumn($this->columns[3]['id'], 'Another column', 2));
 
-        $columns = $this->app->getColumns($this->getProjectId());
-        $this->assertEquals('Boo', $columns[3]['title']);
-        $this->assertEquals(2, $columns[3]['task_limit']);
+        $this->columns = $this->app->getColumns($this->projectId);
+        $this->assertEquals('Another column', $this->columns[3]['title']);
+        $this->assertEquals(2, $this->columns[3]['task_limit']);
     }
 
-    public function testAddColumn()
+    public function assertAddColumn()
     {
-        $column_id = $this->app->addColumn($this->getProjectId(), 'New column');
-
+        $column_id = $this->app->addColumn($this->projectId, 'New column');
         $this->assertNotFalse($column_id);
-        $this->assertInternalType('int', $column_id);
         $this->assertTrue($column_id > 0);
 
-        $columns = $this->app->getColumns($this->getProjectId());
-        $this->assertCount(5, $columns);
-        $this->assertEquals('New column', $columns[4]['title']);
+        $this->columns = $this->app->getColumns($this->projectId);
+        $this->assertCount(5, $this->columns);
+        $this->assertEquals('New column', $this->columns[4]['title']);
     }
 
-    public function testRemoveColumn()
+    public function assertRemoveColumn()
     {
-        $this->assertTrue($this->app->removeColumn(5));
+        $this->assertTrue($this->app->removeColumn($this->columns[3]['id']));
 
-        $columns = $this->app->getColumns($this->getProjectId());
-        $this->assertCount(4, $columns);
+        $this->columns = $this->app->getColumns($this->projectId);
+        $this->assertCount(4, $this->columns);
     }
 
-    public function testChangeColumnPosition()
+    public function assertChangeColumnPosition()
     {
-        $this->assertTrue($this->app->changeColumnPosition($this->getProjectId(), 1, 3));
+        $this->assertTrue($this->app->changeColumnPosition($this->projectId, $this->columns[0]['id'], 3));
 
-        $columns = $this->app->getColumns($this->getProjectId());
-        $this->assertCount(4, $columns);
-
-        $this->assertEquals('Ready', $columns[0]['title']);
-        $this->assertEquals(1, $columns[0]['position']);
-        $this->assertEquals('Work in progress', $columns[1]['title']);
-        $this->assertEquals(2, $columns[1]['position']);
-        $this->assertEquals('Backlog', $columns[2]['title']);
-        $this->assertEquals(3, $columns[2]['position']);
-        $this->assertEquals('Boo', $columns[3]['title']);
-        $this->assertEquals(4, $columns[3]['position']);
+        $this->columns = $this->app->getColumns($this->projectId);
+        $this->assertEquals('Ready', $this->columns[0]['title']);
+        $this->assertEquals(1, $this->columns[0]['position']);
+        $this->assertEquals('Work in progress', $this->columns[1]['title']);
+        $this->assertEquals(2, $this->columns[1]['position']);
+        $this->assertEquals('Backlog', $this->columns[2]['title']);
+        $this->assertEquals(3, $this->columns[2]['position']);
+        $this->assertEquals('New column', $this->columns[3]['title']);
+        $this->assertEquals(4, $this->columns[3]['position']);
     }
 }

@@ -71,4 +71,15 @@ abstract class BaseApi extends Base
 
         return $projects;
     }
+
+    protected function filterValues(array $values)
+    {
+        foreach ($values as $key => $value) {
+            if (is_null($value)) {
+                unset($values[$key]);
+            }
+        }
+
+        return $values;
+    }
 }

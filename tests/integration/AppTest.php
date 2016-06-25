@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__.'/Base.php';
+require_once __DIR__.'/BaseIntegrationTest.php';
 
-class AppTest extends Base
+class AppTest extends BaseIntegrationTest
 {
     public function testGetTimezone()
     {
@@ -30,5 +30,25 @@ class AppTest extends Base
         $this->assertEquals('Project Manager', $roles['project-manager']);
         $this->assertEquals('Project Member', $roles['project-member']);
         $this->assertEquals('Project Viewer', $roles['project-viewer']);
+    }
+
+    public function testGetDefaultColor()
+    {
+        $this->assertEquals('yellow', $this->user->getDefaultTaskColor());
+    }
+
+    public function testGetDefaultColors()
+    {
+        $colors = $this->user->getDefaultTaskColors();
+        $this->assertNotEmpty($colors);
+        $this->assertArrayHasKey('red', $colors);
+    }
+
+    public function testGetColorList()
+    {
+        $colors = $this->user->getColorList();
+        $this->assertNotEmpty($colors);
+        $this->assertArrayHasKey('red', $colors);
+        $this->assertEquals('Red', $colors['red']);
     }
 }

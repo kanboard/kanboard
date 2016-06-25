@@ -1,48 +1,50 @@
 <?php
 
-require_once __DIR__.'/Base.php';
+require_once __DIR__.'/BaseIntegrationTest.php';
 
-class GroupTest extends Base
+class GroupTest extends BaseIntegrationTest
 {
-    public function testCreateGroup()
+    public function testAll()
     {
-        $this->assertNotFalse($this->app->createGroup('My Group A'));
-        $this->assertNotFalse($this->app->createGroup('My Group B', '1234'));
+        $this->assertCreateGroups();
+        $this->assertGetAllGroups();
+        $this->assertGetGroup();
+        $this->assertUpdateGroup();
+        $this->assertRemove();
     }
 
-    public function testGetter()
+    public function assertGetAllGroups()
     {
         $groups = $this->app->getAllGroups();
-        $this->assertCount(2, $groups);
-        $this->assertEquals('My Group A', $groups[0]['name']);
-        $this->assertEquals('', $groups[0]['external_id']);
-        $this->assertEquals('My Group B', $groups[1]['name']);
-        $this->assertEquals('1234', $groups[1]['external_id']);
+        $this->assertNotEmpty($groups);
+        $this->assertArrayHasKey('name', $groups[0]);
+        $this->assertArrayHasKey('external_id', $groups[0]);
+    }
 
-        $group = $this->app->getGroup($groups[0]['id']);
+    public function assertGetGroup()
+    {
+        $group = $this->app->getGroup($this->groupId1);
         $this->assertNotEmpty($group);
-        $this->assertEquals('My Group A', $group['name']);
+        $this->assertEquals($this->groupName1, $group['name']);
         $this->assertEquals('', $group['external_id']);
     }
 
-    public function testUpdate()
+    public function assertUpdateGroup()
     {
-        $groups = $this->app->getAllGroups();
+        $this->assertTrue($this->app->updateGroup(array(
+            'group_id' => $this->groupId2,
+            'name' => 'My Group C',
+            'external_id' => 'something else',
+        )));
 
-        $this->assertTrue($this->app->updateGroup(array('group_id' => $groups[0]['id'], 'name' => 'ABC', 'external_id' => 'something')));
-        $this->assertTrue($this->app->updateGroup(array('group_id' => $groups[1]['id'], 'external_id' => '')));
-
-        $groups = $this->app->getAllGroups();
-        $this->assertEquals('ABC', $groups[0]['name']);
-        $this->assertEquals('something', $groups[0]['external_id']);
-        $this->assertEquals('', $groups[1]['external_id']);
+        $group = $this->app->getGroup($this->groupId2);
+        $this->assertNotEmpty($group);
+        $this->assertEquals('My Group C', $group['name']);
+        $this->assertEquals('something else', $group['external_id']);
     }
 
-    public function testRemove()
+    public function assertRemove()
     {
-        $groups = $this->app->getAllGroups();
-        $this->assertTrue($this->app->removeGroup($groups[0]['id']));
-        $this->assertTrue($this->app->removeGroup($groups[1]['id']));
-        $this->assertSame(array(), $this->app->getAllGroups());
+        $this->assertTrue($this->app->removeGroup($this->groupId1));
     }
 }

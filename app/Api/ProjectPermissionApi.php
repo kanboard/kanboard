@@ -52,22 +52,4 @@ class ProjectPermissionApi extends Base
     {
         return $this->projectGroupRoleModel->changeGroupRole($project_id, $group_id, $role);
     }
-
-    // Deprecated
-    public function getMembers($project_id)
-    {
-        return $this->getProjectUsers($project_id);
-    }
-
-    // Deprecated
-    public function revokeUser($project_id, $user_id)
-    {
-        return $this->removeProjectUser($project_id, $user_id);
-    }
-
-    // Deprecated
-    public function allowUser($project_id, $user_id)
-    {
-        return $this->addProjectUser($project_id, $user_id);
-    }
 }

@@ -1,64 +1,89 @@
 <?php
 
-require_once __DIR__.'/Base.php';
+require_once __DIR__.'/BaseIntegrationTest.php';
 
-class ProjectPermissionTest extends Base
+class ProjectPermissionTest extends BaseIntegrationTest
 {
-    public function testGetProjectUsers()
+    protected $projectName = 'Project with permission';
+    protected $username = 'user-project-permission';
+    protected $groupName1 = 'My group A for project permission';
+    protected $groupName2 = 'My group B for project permission';
+
+    public function testAll()
     {
-        $this->assertNotFalse($this->app->createProject('Test'));
-        $this->assertNotFalse($this->app->createGroup('Test'));
+        $this->assertCreateTeamProject();
+        $this->assertCreateGroups();
+        $this->assertCreateUser();
 
-        $projectId = $this->getProjectId();
-        $groupId = $this->getGroupId();
+        $this->assertAddProjectUser();
+        $this->assertGetProjectUsers();
+        $this->assertGetAssignableUsers();
+        $this->assertChangeProjectUserRole();
+        $this->assertRemoveProjectUser();
 
-        $this->assertTrue($this->app->addGroupMember($projectId, $groupId));
-        $this->assertSame(array(), $this->app->getProjectUsers($projectId));
+        $this->assertAddProjectGroup();
+        $this->assertGetProjectUsers();
+        $this->assertGetAssignableUsers();
+        $this->assertChangeProjectGroupRole();
+        $this->assertRemoveProjectGroup();
     }
 
-    public function testProjectUser()
+    public function assertAddProjectUser()
     {
-        $projectId = $this->getProjectId();
-        $this->assertTrue($this->app->addProjectUser($projectId, 1));
-
-        $users = $this->app->getProjectUsers($projectId);
-        $this->assertCount(1, $users);
-        $this->assertEquals('admin', $users[1]);
-
-        $users = $this->app->getAssignableUsers($projectId);
-        $this->assertCount(1, $users);
-        $this->assertEquals('admin', $users[1]);
-
-        $this->assertTrue($this->app->changeProjectUserRole($projectId, 1, 'project-viewer'));
-
-        $users = $this->app->getAssignableUsers($projectId);
-        $this->assertCount(0, $users);
-
-        $this->assertTrue($this->app->removeProjectUser($projectId, 1));
-        $this->assertSame(array(), $this->app->getProjectUsers($projectId));
+        $this->assertTrue($this->app->addProjectUser($this->projectId, $this->userId));
     }
 
-    public function testProjectGroup()
+    public function assertGetProjectUsers()
     {
-        $projectId = $this->getProjectId();
-        $groupId = $this->getGroupId();
+        $members = $this->app->getProjectUsers($this->projectId);
+        $this->assertCount(1, $members);
+        $this->assertArrayHasKey($this->userId, $members);
+        $this->assertEquals($this->username, $members[$this->userId]);
+    }
 
-        $this->assertTrue($this->app->addProjectGroup($projectId, $groupId));
+    public function assertGetAssignableUsers()
+    {
+        $members = $this->app->getAssignableUsers($this->projectId);
+        $this->assertCount(1, $members);
+        $this->assertArrayHasKey($this->userId, $members);
+        $this->assertEquals($this->username, $members[$this->userId]);
+    }
 
-        $users = $this->app->getProjectUsers($projectId);
-        $this->assertCount(1, $users);
-        $this->assertEquals('admin', $users[1]);
+    public function assertChangeProjectUserRole()
+    {
+        $this->assertTrue($this->app->changeProjectUserRole($this->projectId, $this->userId, 'project-viewer'));
 
-        $users = $this->app->getAssignableUsers($projectId);
-        $this->assertCount(1, $users);
-        $this->assertEquals('admin', $users[1]);
+        $members = $this->app->getAssignableUsers($this->projectId);
+        $this->assertCount(0, $members);
+    }
 
-        $this->assertTrue($this->app->changeProjectGroupRole($projectId, $groupId, 'project-viewer'));
+    public function assertRemoveProjectUser()
+    {
+        $this->assertTrue($this->app->removeProjectUser($this->projectId, $this->userId));
 
-        $users = $this->app->getAssignableUsers($projectId);
-        $this->assertCount(0, $users);
+        $members = $this->app->getProjectUsers($this->projectId);
+        $this->assertCount(0, $members);
+    }
 
-        $this->assertTrue($this->app->removeProjectGroup($projectId, 1));
-        $this->assertSame(array(), $this->app->getProjectUsers($projectId));
+    public function assertAddProjectGroup()
+    {
+        $this->assertTrue($this->app->addGroupMember($this->groupId1, $this->userId));
+        $this->assertTrue($this->app->addProjectGroup($this->projectId, $this->groupId1));
+    }
+
+    public function assertChangeProjectGroupRole()
+    {
+        $this->assertTrue($this->app->changeProjectGroupRole($this->projectId, $this->groupId1, 'project-viewer'));
+
+        $members = $this->app->getAssignableUsers($this->projectId);
+        $this->assertCount(0, $members);
+    }
+
+    public function assertRemoveProjectGroup()
+    {
+        $this->assertTrue($this->app->removeProjectGroup($this->projectId, $this->groupId1));
+
+        $members = $this->app->getProjectUsers($this->projectId);
+        $this->assertCount(0, $members);
     }
 }

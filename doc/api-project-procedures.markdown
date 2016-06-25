@@ -183,7 +183,7 @@ Response example:
 
 - Purpose: **Update a project**
 - Parameters:
-    - **id** (integer, required)
+    - **project_id** (integer, required)
     - **name** (string, required)
     - **description** (string, optional)
 - Result on success: **true**
@@ -197,7 +197,7 @@ Request example:
     "method": "updateProject",
     "id": 1853996288,
     "params": {
-        "id": 1,
+        "project_id": 1,
         "name": "PHP client update"
     }
 }

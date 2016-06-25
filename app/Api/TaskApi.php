@@ -139,7 +139,7 @@ class TaskApi extends BaseApi
             return false;
         }
 
-        $values = array(
+        $values = $this->filterValues(array(
             'id' => $id,
             'title' => $title,
             'color_id' => $color_id,
@@ -155,13 +155,7 @@ class TaskApi extends BaseApi
             'recurrence_basedate' => $recurrence_basedate,
             'reference' => $reference,
             'priority' => $priority,
-        );
-
-        foreach ($values as $key => $value) {
-            if (is_null($value)) {
-                unset($values[$key]);
-            }
-        }
+        ));
 
         list($valid) = $this->taskValidator->validateApiModification($values);
         return $valid && $this->taskModificationModel->update($values);

@@ -5,12 +5,12 @@ namespace Kanboard\Api;
 use Kanboard\Core\ObjectStorage\ObjectStorageException;
 
 /**
- * File API controller
+ * Task File API controller
  *
  * @package  Kanboard\Api
  * @author   Frederic Guillot
  */
-class FileApi extends BaseApi
+class TaskFileApi extends BaseApi
 {
     public function getTaskFile($file_id)
     {
@@ -33,7 +33,7 @@ class FileApi extends BaseApi
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
         }
-        
+
         return '';
     }
 
@@ -55,37 +55,5 @@ class FileApi extends BaseApi
     public function removeAllTaskFiles($task_id)
     {
         return $this->taskFileModel->removeAll($task_id);
-    }
-
-    // Deprecated procedures
-
-    public function getFile($file_id)
-    {
-        return $this->getTaskFile($file_id);
-    }
-
-    public function getAllFiles($task_id)
-    {
-        return $this->getAllTaskFiles($task_id);
-    }
-
-    public function downloadFile($file_id)
-    {
-        return $this->downloadTaskFile($file_id);
-    }
-
-    public function createFile($project_id, $task_id, $filename, $blob)
-    {
-        return $this->createTaskFile($project_id, $task_id, $filename, $blob);
-    }
-
-    public function removeFile($file_id)
-    {
-        return $this->removeTaskFile($file_id);
-    }
-
-    public function removeAllFiles($task_id)
-    {
-        return $this->removeAllTaskFiles($task_id);
     }
 }
