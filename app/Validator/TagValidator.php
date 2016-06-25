@@ -2,7 +2,6 @@
 
 namespace Kanboard\Validator;
 
-use Kanboard\Model\TagModel;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 
