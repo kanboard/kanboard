@@ -93,7 +93,8 @@ class ProjectProcedureTest extends BaseProcedureTest
 
         $this->assertNotFalse($projectId);
 
-        $project = $this->app->getProjectById($projectId);
+        $project = $this->app->getProjectByIdentifier('MYPROJECTWITHIDENTIFIER');
+        $this->assertEquals($projectId, $project['id']);
         $this->assertEquals('My project with an identifier', $project['name']);
         $this->assertEquals('MYPROJECTWITHIDENTIFIER', $project['identifier']);
     }

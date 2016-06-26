@@ -4,14 +4,15 @@ Version 1.0.31 (unreleased)
 New features:
 
 * Added application and project roles validation for API procedure calls
+* Added new API call: "getProjectByIdentifier"
 
 Improvements:
 
 * Added argument owner_id and identifier to project API calls
 * Rewrite integration tests to run with Docker containers
 * Use the same task form layout everywhere
-* Remove some tasks dropdown menus that are now available with task edit form
-* Make embedded documentation available in multiple languages
+* Removed some tasks dropdown menus that are now available with task edit form
+* Make embedded documentation readable in multiple languages (if a translation is available)
 
 Bug fixes:
 
