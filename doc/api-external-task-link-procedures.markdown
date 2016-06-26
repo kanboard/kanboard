@@ -1,5 +1,5 @@
-Internal Task Links API Procedures
-==================================
+External Task Link API Procedures
+=================================
 
 ## getExternalTaskLinkTypes
 
