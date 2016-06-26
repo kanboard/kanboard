@@ -202,6 +202,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('SubtaskProcedure', '*', Role::PROJECT_MEMBER);
         $acl->add('SubtaskTimeTrackingProcedure', '*', Role::PROJECT_MEMBER);
         $acl->add('SwimlaneProcedure', '*', Role::PROJECT_MANAGER);
+        $acl->add('ProjectFileProcedure', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskFileProcedure', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskLinkProcedure', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskExternalLinkProcedure', array('createExternalTaskLink', 'updateExternalTaskLink', 'removeExternalTaskLink'), Role::PROJECT_MEMBER);

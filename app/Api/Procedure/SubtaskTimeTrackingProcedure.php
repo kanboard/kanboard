@@ -5,7 +5,7 @@ namespace Kanboard\Api\Procedure;
 use Kanboard\Api\Authorization\SubtaskAuthorization;
 
 /**
- * Subtask Time Tracking  API controller
+ * Subtask Time Tracking API controller
  *
  * @package  Kanboard\Api\Procedure
  * @author   Frederic Guillot
@@ -25,13 +25,13 @@ class SubtaskTimeTrackingProcedure extends BaseProcedure
         return $this->subtaskTimeTrackingModel->logStartTime($subtask_id, $user_id);
     }
 
-    public function logSubtaskEndTime($subtask_id,$user_id)
+    public function logSubtaskEndTime($subtask_id, $user_id)
     {
         SubtaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'logSubtaskEndTime', $subtask_id);
         return $this->subtaskTimeTrackingModel->logEndTime($subtask_id, $user_id);
     }
 
-    public function getSubtaskTimeSpent($subtask_id,$user_id)
+    public function getSubtaskTimeSpent($subtask_id, $user_id)
     {
         SubtaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'getSubtaskTimeSpent', $subtask_id);
         return $this->subtaskTimeTrackingModel->getTimeSpent($subtask_id, $user_id);

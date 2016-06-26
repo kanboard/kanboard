@@ -30,7 +30,7 @@ class TaskFileProcedure extends BaseProcedure
     public function downloadTaskFile($file_id)
     {
         TaskFileAuthorization::getInstance($this->container)->check($this->getClassName(), 'downloadTaskFile', $file_id);
-        
+
         try {
             $file = $this->taskFileModel->getById($file_id);
 
@@ -51,7 +51,7 @@ class TaskFileProcedure extends BaseProcedure
         try {
             return $this->taskFileModel->uploadContent($task_id, $filename, $blob);
         } catch (ObjectStorageException $e) {
-            $this->logger->error($e->getMessage());
+            $this->logger->error(__METHOD__.': '.$e->getMessage());
             return false;
         }
     }

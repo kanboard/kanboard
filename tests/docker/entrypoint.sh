@@ -23,7 +23,7 @@ case "$1" in
     /var/www/html/vendor/phpunit/phpunit/phpunit -c /var/www/html/tests/integration.sqlite.xml
     ;;
 "integration-test-postgres")
-    wait_schema_creation 5
+    wait_schema_creation 10
     /var/www/html/vendor/phpunit/phpunit/phpunit -c /var/www/html/tests/integration.postgres.xml
     ;;
 "integration-test-mysql")

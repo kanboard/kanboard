@@ -21,7 +21,7 @@ class TaskFileProcedureTest extends BaseProcedureTest
 
     public function assertCreateTaskFile()
     {
-        $this->fileId = $this->app->createTaskFile(1, $this->taskId, 'My file', base64_encode('plain text file'));
+        $this->fileId = $this->app->createTaskFile($this->projectId, $this->taskId, 'My file', base64_encode('plain text file'));
         $this->assertNotFalse($this->fileId);
     }
 

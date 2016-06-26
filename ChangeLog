@@ -5,7 +5,7 @@ New features:
 
 * Added application and project roles validation for API procedure calls
 * Added new API call: "getProjectByIdentifier"
-* Added new API calls for external task links
+* Added new API calls for external task links, project attachments
 
 Improvements:
 
