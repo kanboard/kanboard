@@ -9,6 +9,7 @@ New features:
 
 Improvements:
 
+* Improve ICal export
 * Added argument owner_id and identifier to project API calls
 * Rewrite integration tests to run with Docker containers
 * Use the same task form layout everywhere

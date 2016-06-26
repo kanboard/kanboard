@@ -367,6 +367,7 @@ class TaskFinderModel extends Base
                 'ua.name AS assignee_name',
                 'ua.username AS assignee_username',
                 'uc.email AS creator_email',
+                'uc.name AS creator_name',
                 'uc.username AS creator_username'
             );
     }
