@@ -32,7 +32,7 @@ class TaskBulkController extends BaseController
             'project' => $project,
             'values' => $values,
             'errors' => $errors,
-            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], true, false, true),
+            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], true, false, $project['is_private']),
             'colors_list' => $this->colorModel->getList(),
             'categories_list' => $this->categoryModel->getList($project['id']),
         )));
