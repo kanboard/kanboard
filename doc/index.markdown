@@ -46,6 +46,7 @@ Using Kanboard
 - [Subtasks](subtasks.markdown)
 - [Analytics for tasks](analytics-tasks.markdown)
 - [User mentions](user-mentions.markdown)
+- [Tags](tags.markdown)
 
 ### Working with users and groups
 
