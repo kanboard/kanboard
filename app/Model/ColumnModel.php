@@ -32,6 +32,18 @@ class ColumnModel extends Base
     }
 
     /**
+     * Get projectId by the columnId
+     *
+     * @access public
+     * @param  integer  $column_id    Column id
+     * @return integer
+     */
+    public function getProjectId($column_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $column_id)->findOneColumn('project_id');
+    }
+
+    /**
      * Get the first column id for a given project
      *
      * @access public

@@ -7,6 +7,8 @@ API Project Procedures
 - Parameters:
     - **name** (string, required)
     - **description** (string, optional)
+    - **owner_id** (integer, optional)
+    - **identifier** (string, optional)
 - Result on success: **project_id**
 - Result on failure: **false**
 
@@ -186,6 +188,8 @@ Response example:
     - **project_id** (integer, required)
     - **name** (string, required)
     - **description** (string, optional)
+    - **owner_id** (integer, optional)
+    - **identifier** (string, optional)
 - Result on success: **true**
 - Result on failure: **false**
 

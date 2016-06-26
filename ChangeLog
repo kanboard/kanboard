@@ -1,6 +1,10 @@
 Version 1.0.31 (unreleased)
 --------------
 
+New features:
+
+* Added application and project roles validation for API procedure calls
+
 Improvements:
 
 * Rewrite integration tests to run with Docker containers

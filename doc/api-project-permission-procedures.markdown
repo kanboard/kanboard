@@ -272,3 +272,36 @@ Response example:
     "result": true
 }
 ```
+
+## getProjectUserRole
+
+- Purpose: **Get the role of a user for a given project**
+- Parameters:
+    - **project_id** (integer, required)
+    - **user_id** (integer, required)
+- Result on success: **role name**
+- Result on failure: **false**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getProjectUserRole",
+    "id": 2114673298,
+    "params": [
+        "2",
+        "3"
+    ]
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 2114673298,
+    "result": "project-viewer"
+}
+```

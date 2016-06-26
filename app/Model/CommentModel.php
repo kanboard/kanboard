@@ -30,6 +30,22 @@ class CommentModel extends Base
     const EVENT_USER_MENTION = 'comment.user.mention';
 
     /**
+     * Get projectId from commentId
+     *
+     * @access public
+     * @param  integer $comment_id
+     * @return integer
+     */
+    public function getProjectId($comment_id)
+    {
+        return $this->db
+            ->table(self::TABLE)
+            ->eq(self::TABLE.'.id', $comment_id)
+            ->join(TaskModel::TABLE, 'id', 'task_id')
+            ->findOneColumn(TaskModel::TABLE . '.project_id') ?: 0;
+    }
+
+    /**
      * Get all comments for a given task
      *
      * @access public

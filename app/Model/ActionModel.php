@@ -86,6 +86,18 @@ class ActionModel extends Base
     }
 
     /**
+     * Get the projectId by the actionId
+     *
+     * @access public
+     * @param  integer $action_id
+     * @return integer
+     */
+    public function getProjectId($action_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $action_id)->findOneColumn('project_id') ?: 0;
+    }
+
+    /**
      * Attach parameters to actions
      *
      * @access private

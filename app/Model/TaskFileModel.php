@@ -73,6 +73,22 @@ class TaskFileModel extends FileModel
     }
 
     /**
+     * Get projectId from fileId
+     *
+     * @access public
+     * @param  integer $file_id
+     * @return integer
+     */
+    public function getProjectId($file_id)
+    {
+        return $this->db
+            ->table(self::TABLE)
+            ->eq(self::TABLE.'.id', $file_id)
+            ->join(TaskModel::TABLE, 'id', 'task_id')
+            ->findOneColumn(TaskModel::TABLE . '.project_id') ?: 0;
+    }
+
+    /**
      * Handle screenshot upload
      *
      * @access public
