@@ -60,6 +60,8 @@ Usage
 - [Subtasks](api-subtask-procedures.markdown)
 - [Files](api-file-procedures.markdown)
 - [Links](api-link-procedures.markdown)
+- [Internal Task Links](api-internal-task-link-procedures.markdown)
+- [External Task Links](api-external-task-link-procedures.markdown)
 - [Comments](api-comment-procedures.markdown)
 - [Users](api-user-procedures.markdown)
 - [Groups](api-group-procedures.markdown)

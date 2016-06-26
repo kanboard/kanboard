@@ -9,6 +9,7 @@ use Kanboard\Api\Procedure\BoardProcedure;
 use Kanboard\Api\Procedure\CategoryProcedure;
 use Kanboard\Api\Procedure\ColumnProcedure;
 use Kanboard\Api\Procedure\CommentProcedure;
+use Kanboard\Api\Procedure\TaskExternalLinkProcedure;
 use Kanboard\Api\Procedure\TaskFileProcedure;
 use Kanboard\Api\Procedure\GroupProcedure;
 use Kanboard\Api\Procedure\GroupMemberProcedure;
@@ -65,6 +66,7 @@ class ApiProvider implements ServiceProviderInterface
             ->withObject(new SwimlaneProcedure($container))
             ->withObject(new TaskProcedure($container))
             ->withObject(new TaskLinkProcedure($container))
+            ->withObject(new TaskExternalLinkProcedure($container))
             ->withObject(new UserProcedure($container))
             ->withObject(new GroupProcedure($container))
             ->withObject(new GroupMemberProcedure($container))

@@ -204,6 +204,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('SwimlaneProcedure', '*', Role::PROJECT_MANAGER);
         $acl->add('TaskFileProcedure', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskLinkProcedure', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskExternalLinkProcedure', array('createExternalTaskLink', 'updateExternalTaskLink', 'removeExternalTaskLink'), Role::PROJECT_MEMBER);
         $acl->add('TaskProcedure', '*', Role::PROJECT_MEMBER);
 
         return $acl;
