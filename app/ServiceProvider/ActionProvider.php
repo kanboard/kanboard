@@ -32,6 +32,7 @@ use Kanboard\Action\TaskMoveColumnUnAssigned;
 use Kanboard\Action\TaskOpen;
 use Kanboard\Action\TaskUpdateStartDate;
 use Kanboard\Action\TaskCloseNoActivity;
+use Kanboard\Action\TaskCloseNoActivityColumn;
 
 /**
  * Action Provider
@@ -68,6 +69,7 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskClose($container));
         $container['actionManager']->register(new TaskCloseColumn($container));
         $container['actionManager']->register(new TaskCloseNoActivity($container));
+        $container['actionManager']->register(new TaskCloseNoActivityColumn($container));
         $container['actionManager']->register(new TaskCreation($container));
         $container['actionManager']->register(new TaskDuplicateAnotherProject($container));
         $container['actionManager']->register(new TaskEmail($container));
