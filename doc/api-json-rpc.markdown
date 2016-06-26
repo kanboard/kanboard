@@ -58,6 +58,7 @@ Usage
 - [Automatic Actions](api-action-procedures.markdown)
 - [Tasks](api-task-procedures.markdown)
 - [Subtasks](api-subtask-procedures.markdown)
+- [Subtask Time Tracking](api-subtask-time-tracking-procedures.markdown)
 - [Task Files](api-task-file-procedures.markdown)
 - [Project Files](api-project-file-procedures.markdown)
 - [Links](api-link-procedures.markdown)

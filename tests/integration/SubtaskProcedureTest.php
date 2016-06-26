@@ -5,7 +5,6 @@ require_once __DIR__.'/BaseProcedureTest.php';
 class SubtaskProcedureTest extends BaseProcedureTest
 {
     protected $projectName = 'My project to test subtasks';
-    private $subtaskId = 0;
 
     public function testAll()
     {
@@ -16,16 +15,6 @@ class SubtaskProcedureTest extends BaseProcedureTest
         $this->assertUpdateSubtask();
         $this->assertGetAllSubtasks();
         $this->assertRemoveSubtask();
-    }
-
-    public function assertCreateSubtask()
-    {
-        $this->subtaskId = $this->app->createSubtask(array(
-            'task_id' => $this->taskId,
-            'title' => 'subtask #1',
-        ));
-
-        $this->assertNotFalse($this->subtaskId);
     }
 
     public function assertGetSubtask()

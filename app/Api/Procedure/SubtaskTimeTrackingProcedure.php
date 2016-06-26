@@ -19,15 +19,15 @@ class SubtaskTimeTrackingProcedure extends BaseProcedure
         return $this->subtaskTimeTrackingModel->hasTimer($subtask_id, $user_id);
     }
 
-    public function logSubtaskStartTime($subtask_id, $user_id)
+    public function setSubtaskStartTime($subtask_id, $user_id)
     {
-        SubtaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'logSubtaskStartTime', $subtask_id);
+        SubtaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'setSubtaskStartTime', $subtask_id);
         return $this->subtaskTimeTrackingModel->logStartTime($subtask_id, $user_id);
     }
 
-    public function logSubtaskEndTime($subtask_id, $user_id)
+    public function setSubtaskEndTime($subtask_id, $user_id)
     {
-        SubtaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'logSubtaskEndTime', $subtask_id);
+        SubtaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'setSubtaskEndTime', $subtask_id);
         return $this->subtaskTimeTrackingModel->logEndTime($subtask_id, $user_id);
     }
 
