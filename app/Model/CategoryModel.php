@@ -56,6 +56,18 @@ class CategoryModel extends Base
     }
 
     /**
+     * Get the projectId by the category id
+     *
+     * @access public
+     * @param  integer   $category_id    Category id
+     * @return integer
+     */
+    public function getProjectId($category_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $category_id)->findOneColumn('project_id') ?: 0;
+    }
+
+    /**
      * Get a category id by the category name and project id
      *
      * @access public

@@ -28,7 +28,7 @@ class ProjectValidator extends BaseValidator
             new Validators\Integer('priority_start', t('This value must be an integer')),
             new Validators\Integer('priority_end', t('This value must be an integer')),
             new Validators\Integer('is_active', t('This value must be an integer')),
-            new Validators\Required('name', t('The project name is required')),
+            new Validators\NotEmpty('name', t('This field cannot be empty')),
             new Validators\MaxLength('name', t('The maximum length is %d characters', 50), 50),
             new Validators\MaxLength('identifier', t('The maximum length is %d characters', 50), 50),
             new Validators\MaxLength('start_date', t('The maximum length is %d characters', 10), 10),
@@ -47,11 +47,15 @@ class ProjectValidator extends BaseValidator
      */
     public function validateCreation(array $values)
     {
+        $rules = array(
+            new Validators\Required('name', t('The project name is required')),
+        );
+
         if (! empty($values['identifier'])) {
             $values['identifier'] = strtoupper($values['identifier']);
         }
 
-        $v = new Validator($values, $this->commonValidationRules());
+        $v = new Validator($values, array_merge($this->commonValidationRules(), $rules));
 
         return array(
             $v->execute(),

@@ -52,6 +52,22 @@ class SubtaskModel extends Base
     const EVENT_DELETE = 'subtask.delete';
 
     /**
+     * Get projectId from subtaskId
+     *
+     * @access public
+     * @param  integer $subtask_id
+     * @return integer
+     */
+    public function getProjectId($subtask_id)
+    {
+        return $this->db
+            ->table(self::TABLE)
+            ->eq(self::TABLE.'.id', $subtask_id)
+            ->join(TaskModel::TABLE, 'id', 'task_id')
+            ->findOneColumn(TaskModel::TABLE . '.project_id') ?: 0;
+    }
+    
+    /**
      * Get available status
      *
      * @access public

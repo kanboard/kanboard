@@ -29,6 +29,22 @@ class TaskLinkModel extends Base
     const EVENT_CREATE_UPDATE = 'tasklink.create_update';
 
     /**
+     * Get projectId from $task_link_id
+     *
+     * @access public
+     * @param  integer $task_link_id
+     * @return integer
+     */
+    public function getProjectId($task_link_id)
+    {
+        return $this->db
+            ->table(self::TABLE)
+            ->eq(self::TABLE.'.id', $task_link_id)
+            ->join(TaskModel::TABLE, 'id', 'task_id')
+            ->findOneColumn(TaskModel::TABLE . '.project_id') ?: 0;
+    }
+
+    /**
      * Get a task link
      *
      * @access public

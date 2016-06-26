@@ -1,0 +1,6 @@
+.git
+.git*
+data/*
+Makefile
+.*.yml
+*.json

@@ -14,7 +14,7 @@
         "discard-changes": true
     },
     "require" : {
-        "php" : ">=5.3.3",
+        "php" : ">=5.3.9",
         "ext-gd" : "*",
         "ext-mbstring" : "*",
         "ext-hash" : "*",
@@ -23,21 +23,21 @@
         "ext-ctype" : "*",
         "ext-filter" : "*",
         "ext-session" : "*",
-        "christian-riesen/otp" : "1.4",
-        "eluceo/ical": "0.8.0",
+        "christian-riesen/otp" : "1.4.3",
+        "eluceo/ical": "0.10.1",
         "erusev/parsedown" : "1.6.0",
-        "fguillot/json-rpc" : "1.2.0",
+        "fguillot/json-rpc" : "1.2.1",
         "fguillot/picodb" : "1.0.12",
         "fguillot/simpleLogger" : "1.0.1",
-        "fguillot/simple-validator" : "1.0.0",
+        "fguillot/simple-validator" : "1.0.1",
         "fguillot/simple-queue" : "1.0.1",
-        "paragonie/random_compat": "@stable",
-        "pimple/pimple" : "~3.0",
-        "ramsey/array_column": "@stable",
-        "swiftmailer/swiftmailer" : "~5.4",
-        "symfony/console" : "~2.7",
-        "symfony/event-dispatcher" : "~2.7",
-        "gregwar/captcha": "1.*"
+        "paragonie/random_compat": "2.0.2",
+        "pimple/pimple" : "3.0.2",
+        "ramsey/array_column": "1.1.3",
+        "swiftmailer/swiftmailer" : "5.4.2",
+        "symfony/console" : "2.8.7",
+        "symfony/event-dispatcher" : "2.7.14",
+        "gregwar/captcha": "1.1.1"
     },
     "autoload" : {
         "classmap" : ["app/"],
@@ -50,9 +50,10 @@
         ]
     },
     "require-dev" : {
-        "symfony/yaml" : "2.1",
-        "symfony/stopwatch" : "~2.6",
-        "phpunit/phpunit" : "4.8.*",
-        "phpunit/phpunit-selenium": "^2.0"
+        "phpdocumentor/reflection-docblock": "2.0.4",
+        "symfony/yaml": "2.8.7",
+        "symfony/stopwatch" : "2.6.13",
+        "phpunit/phpunit" : "4.8.26",
+        "phpunit/phpunit-selenium": "2.0.2"
     }
 }

@@ -7,6 +7,8 @@ API Project Procedures
 - Parameters:
     - **name** (string, required)
     - **description** (string, optional)
+    - **owner_id** (integer, optional)
+    - **identifier** (string, optional)
 - Result on success: **project_id**
 - Result on failure: **false**
 
@@ -183,9 +185,11 @@ Response example:
 
 - Purpose: **Update a project**
 - Parameters:
-    - **id** (integer, required)
-    - **name** (string, required)
+    - **project_id** (integer, required)
+    - **name** (string, optional)
     - **description** (string, optional)
+    - **owner_id** (integer, optional)
+    - **identifier** (string, optional)
 - Result on success: **true**
 - Result on failure: **false**
 
@@ -197,7 +201,7 @@ Request example:
     "method": "updateProject",
     "id": 1853996288,
     "params": {
-        "id": 1,
+        "project_id": 1,
         "name": "PHP client update"
     }
 }

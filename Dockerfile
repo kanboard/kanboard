@@ -24,8 +24,7 @@ COPY .docker/php/conf.d/local.ini /etc/php5/conf.d/
 COPY .docker/php/php-fpm.conf /etc/php5/
 COPY .docker/nginx/nginx.conf /etc/nginx/
 COPY .docker/kanboard/config.php /var/www/kanboard/
-COPY .docker/kanboard/config.php /var/www/kanboard/
-COPY .docker/crontab/kanboard /var/spool/cron/crontabs/nginx
+COPY .docker/crontab/cronjob.alpine /var/spool/cron/crontabs/nginx
 
 EXPOSE 80
 
