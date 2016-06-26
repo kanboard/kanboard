@@ -35,7 +35,7 @@ class TaskGanttCreationController extends BaseController
             'project' => $project,
             'errors' => $errors,
             'values' => $values,
-            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], true, false, true),
+            'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], true, false, $project['is_private']),
             'categories_list' => $this->categoryModel->getList($project['id']),
             'swimlanes_list' => $this->swimlaneModel->getList($project['id'], false, true),
             'title' => $project['name'].' &gt; '.t('New task')
