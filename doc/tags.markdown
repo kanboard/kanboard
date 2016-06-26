@@ -17,8 +17,12 @@ By default, when you create tags from a task form they are associated to the cur
 
 ![Project Tags](screenshots/tags-projects.png)
 
-You can also create these tags manually in the project settings.
+All tags can be managed in the project settings.
 
 To define tags globally for all projects, go to the application settings:
 
 ![Global Tags](screenshots/tags-global.png)
+
+To search tasks based on tags, just use the attribute "tag":
+
+![Search Tags](screenshots/tags-search.png)
