@@ -44,7 +44,7 @@ class TaskCloseNoActivityColumn extends Base
     {
         return array(
             'duration' => t('Duration in days'),
-			'column_id' => t('Column')
+            'column_id' => t('Column')
         );
     }
 
@@ -73,8 +73,6 @@ class TaskCloseNoActivityColumn extends Base
 
         foreach ($data['tasks'] as $task) {
             $duration = time() - $task['date_modification'];
-			//echo $task['column_id']; 
-			//echo $this->getParam('column_id');
 
             if ($duration > $max && $task['column_id'] == $this->getParam('column_id')) {
                 $results[] = $this->taskStatusModel->close($task['id']);
