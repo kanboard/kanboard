@@ -186,7 +186,7 @@ Response example:
 - Purpose: **Update a project**
 - Parameters:
     - **project_id** (integer, required)
-    - **name** (string, required)
+    - **name** (string, optional)
     - **description** (string, optional)
     - **owner_id** (integer, optional)
     - **identifier** (string, optional)

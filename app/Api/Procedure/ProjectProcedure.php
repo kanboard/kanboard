@@ -78,17 +78,17 @@ class ProjectProcedure extends BaseProcedure
 
     public function createProject($name, $description = null, $owner_id = 0, $identifier = null)
     {
-        $values = array(
+        $values = $this->filterValues(array(
             'name' => $name,
             'description' => $description,
             'identifier' => $identifier,
-        );
+        ));
 
         list($valid, ) = $this->projectValidator->validateCreation($values);
         return $valid ? $this->projectModel->create($values, $owner_id, $this->userSession->isLogged()) : false;
     }
 
-    public function updateProject($project_id, $name, $description = null, $owner_id = null, $identifier = null)
+    public function updateProject($project_id, $name = null, $description = null, $owner_id = null, $identifier = null)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateProject', $project_id);
 

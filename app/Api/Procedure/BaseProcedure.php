@@ -2,7 +2,6 @@
 
 namespace Kanboard\Api\Procedure;
 
-use JsonRPC\Exception\AccessDeniedException;
 use Kanboard\Api\Authorization\ProcedureAuthorization;
 use Kanboard\Api\Authorization\UserAuthorization;
 use Kanboard\Core\Base;

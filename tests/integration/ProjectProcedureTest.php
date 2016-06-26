@@ -13,6 +13,8 @@ class ProjectProcedureTest extends BaseProcedureTest
         $this->assertGetProjectByName();
         $this->assertGetAllProjects();
         $this->assertUpdateProject();
+        $this->assertUpdateProjectIdentifier();
+        $this->assertCreateProjectWithIdentifier();
         $this->assertGetProjectActivity();
         $this->assertGetProjectsActivity();
         $this->assertEnableDisableProject();
@@ -67,6 +69,33 @@ class ProjectProcedureTest extends BaseProcedureTest
         $this->assertEquals('test', $project['description']);
 
         $this->assertTrue($this->app->updateProject(array('project_id' => $this->projectId, 'name' => $this->projectName)));
+    }
+
+    public function assertUpdateProjectIdentifier()
+    {
+        $this->assertTrue($this->app->updateProject(array(
+            'project_id' => $this->projectId,
+            'identifier' => 'MYPROJECT',
+        )));
+
+        $project = $this->app->getProjectById($this->projectId);
+        $this->assertNotNull($project);
+        $this->assertEquals($this->projectName, $project['name']);
+        $this->assertEquals('MYPROJECT', $project['identifier']);
+    }
+
+    public function assertCreateProjectWithIdentifier()
+    {
+        $projectId = $this->app->createProject(array(
+            'name' => 'My project with an identifier',
+            'identifier' => 'MYPROJECTWITHIDENTIFIER',
+        ));
+
+        $this->assertNotFalse($projectId);
+
+        $project = $this->app->getProjectById($projectId);
+        $this->assertEquals('My project with an identifier', $project['name']);
+        $this->assertEquals('MYPROJECTWITHIDENTIFIER', $project['identifier']);
     }
 
     public function assertEnableDisableProject()
