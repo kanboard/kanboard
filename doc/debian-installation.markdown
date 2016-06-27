@@ -1,12 +1,12 @@
-How to install Kanboard on Debian?
+Como instalar Kanboard en debian
 ==================================
 
-Note: Some features of Kanboard require that you run [a daily background job](cronjob.markdown).
+Nota: Algunas caracteristicas de Kanboard requieren que tu corras  [un job en background diariamente](cronjob.markdown).
 
 Debian 8 (Jessie)
 -----------------
 
-Install Apache and PHP:
+Instalar Apache y PHP :
 
 ```bash
 apt-get update
@@ -14,7 +14,7 @@ apt-get install -y php5 php5-sqlite php5-gd unzip
 service apache2 restart
 ```
 
-Install Kanboard:
+Instalar Kanboard
 
 ```bash
 cd /var/www/html
@@ -27,14 +27,14 @@ rm kanboard-latest.zip
 Debian 7 (Wheezy)
 -----------------
 
-Install Apache and PHP:
+Instalar Apache y PHP
 
 ```bash
 apt-get update
 apt-get install -y php5 php5-sqlite php5-gd unzip
 ```
 
-Install Kanboard:
+Instalar Kanboard
 
 ```bash
 cd /var/www
@@ -47,7 +47,7 @@ rm kanboard-latest.zip
 Debian 6 (Squeeze)
 ------------------
 
-Install Apache and PHP:
+Instalar Apache y PHP
 
 ```bash
 apt-get update
