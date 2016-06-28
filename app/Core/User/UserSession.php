@@ -122,7 +122,10 @@ class UserSession extends Base
     {
         return isset($this->sessionStorage->user['role']) && $this->sessionStorage->user['role'] === Role::APP_ADMIN;
     }
-
+public function isUser()
+    {
+        return isset($this->sessionStorage->user['role']) && (($this->sessionStorage->user['role'] === Role::APP_USER)or ($this->sessionStorage->user['role'] === Role::APP_ADMIN) or ($this->sessionStorage->user['role'] === Role::APP_MANAGER));
+    }
     /**
      * Get the connected user id
      *
