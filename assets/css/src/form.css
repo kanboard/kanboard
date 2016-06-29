@@ -154,6 +154,10 @@ input.form-input-large {
     width: 400px;
 }
 
+input.form-input-small {
+    width: 150px;
+}
+
 .form-columns {
     display: -webkit-flex;
     display: flex;
