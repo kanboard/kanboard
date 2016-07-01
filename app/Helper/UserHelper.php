@@ -107,6 +107,10 @@ class UserHelper extends Base
      */
     public function hasAccess($controller, $action)
     {
+        if (! $this->userSession->isLogged()) {
+            return false;
+        }
+
         $key = 'app_access:'.$controller.$action;
         $result = $this->memoryCache->get($key);
 
@@ -128,6 +132,10 @@ class UserHelper extends Base
      */
     public function hasProjectAccess($controller, $action, $project_id)
     {
+        if (! $this->userSession->isLogged()) {
+            return false;
+        }
+
         if ($this->userSession->isAdmin()) {
             return true;
         }
