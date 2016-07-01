@@ -48,6 +48,7 @@ class JobHandler extends Base
 
         $worker = new $className($this->container);
         call_user_func_array(array($worker, 'execute'), $payload['params']);
+        $this->memoryCache->flush();
     }
 
     /**
