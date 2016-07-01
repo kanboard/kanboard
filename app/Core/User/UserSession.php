@@ -122,6 +122,12 @@ class UserSession extends Base
     {
         return isset($this->sessionStorage->user['role']) && $this->sessionStorage->user['role'] === Role::APP_ADMIN;
     }
+     /**
+     * Return true if the logged user is any user
+     * Kasun Fernando
+     * @access public
+     * @return bool
+     */
 public function isUser()
     {
         return isset($this->sessionStorage->user['role']) && (($this->sessionStorage->user['role'] === Role::APP_USER)or ($this->sessionStorage->user['role'] === Role::APP_ADMIN) or ($this->sessionStorage->user['role'] === Role::APP_MANAGER));
