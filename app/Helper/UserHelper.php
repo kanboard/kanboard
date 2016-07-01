@@ -87,7 +87,7 @@ class UserHelper extends Base
     }
  /**
      * Return if the logged user is anyuser
-     *
+     *Kasun Fernando
      * @access public
      * @return boolean
      */
@@ -95,7 +95,6 @@ public function isUser()
     {
         return $this->userSession->isUser();
     }
-
     /**
      * Get role name
      *
