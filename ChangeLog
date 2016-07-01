@@ -21,6 +21,7 @@ Bug fixes:
 
 * Fixed broken CSV exports
 * Fixed identical background color for LetterAvatar on 32bits platforms (Hash greater than PHP_MAX_INT)
+* Fixed lexer issue with non word characters
 
 Version 1.0.30
 --------------
