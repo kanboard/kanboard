@@ -111,6 +111,7 @@ class UserSession extends Base
     {
         $this->sessionStorage->user['twofactor_activated'] = false;
     }
+
     /**
      * Return true if the logged user is admin
      *
@@ -121,7 +122,7 @@ class UserSession extends Base
     {
         return isset($this->sessionStorage->user['role']) && $this->sessionStorage->user['role'] === Role::APP_ADMIN;
     }
-     /**
+/**
      * Return true if the logged user is any user
      * Kasun Fernando
      * @access public
