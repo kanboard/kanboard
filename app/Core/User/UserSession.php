@@ -111,7 +111,6 @@ class UserSession extends Base
     {
         $this->sessionStorage->user['twofactor_activated'] = false;
     }
-
     /**
      * Return true if the logged user is admin
      *
