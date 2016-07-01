@@ -40,6 +40,7 @@ class JobHandler extends Base
     {
         $payload = $job->getBody();
         $className = $payload['class'];
+        $this->memoryCache->flush();
         $this->prepareJobSession($payload['user_id']);
 
         if (DEBUG) {
@@ -48,7 +49,6 @@ class JobHandler extends Base
 
         $worker = new $className($this->container);
         call_user_func_array(array($worker, 'execute'), $payload['params']);
-        $this->memoryCache->flush();
     }
 
     /**
