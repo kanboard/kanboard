@@ -1,0 +1,148 @@
+Как установить Канборд на Debian?[¶](#how-to-install-kanboard-on-debian "Ссылка на этот заголовок")
+
+===================================================================================================
+
+
+
+Некоторые возможности Канборда требуют [запуск ежедневных фоновых задач](cronjob.markdown).
+
+
+
+Debian 8 (Jessie)[¶](#debian-8-jessie "Ссылка на этот заголовок")
+
+-----------------------------------------------------------------
+
+
+
+Установите Apache и PHP:
+
+
+
+    apt-get update
+
+    apt-get install -y php5 php5-sqlite php5-gd unzip
+
+    service apache2 restart
+
+
+
+Установите Канборд:
+
+
+
+    cd /var/www/html
+
+    wget https://kanboard.net/kanboard-latest.zip
+
+    unzip kanboard-latest.zip
+
+    chown -R www-data:www-data kanboard/data
+
+    rm kanboard-latest.zip
+
+
+
+Debian 7 (Wheezy)[¶](#debian-7-wheezy "Ссылка на этот заголовок")
+
+-----------------------------------------------------------------
+
+
+
+Установите Apache и PHP:
+
+
+
+    apt-get update
+
+    apt-get install -y php5 php5-sqlite php5-gd unzip
+
+
+
+Установите Канборд:
+
+
+
+    cd /var/www
+
+    wget https://kanboard.net/kanboard-latest.zip
+
+    unzip kanboard-latest.zip
+
+    chown -R www-data:www-data kanboard/data
+
+    rm kanboard-latest.zip
+
+
+
+Debian 6 (Squeeze)[¶](#debian-6-squeeze "Ссылка на этот заголовок")
+
+-------------------------------------------------------------------
+
+
+
+Установите Apache и PHP:
+
+
+
+    apt-get update
+
+    apt-get install -y libapache2-mod-php5 php5-sqlite php5-gd unzip
+
+
+
+Установите Канборд:
+
+
+
+    cd /var/www
+
+    wget https://kanboard.net/kanboard-latest.zip
+
+    unzip kanboard-latest.zip
+
+    chown -R www-data:www-data kanboard/data
+
+    rm kanboard-latest.zip
+
+
+
+### [Оглавление](index.markdown)
+
+
+
+-   [Как установить Канборд на Debian?](#)
+
+    -   [Debian 8 (Jessie)](#debian-8-jessie)
+
+    -   [Debian 7 (Wheezy)](#debian-7-wheezy)
+
+    -   [Debian 6 (Squeeze)](#debian-6-squeeze)
+
+
+
+### Related Topics
+
+
+
+-   [Documentation overview](index.markdown)
+
+
+
+### Эта страница
+
+
+
+-   [Исходный текст](_sources/debian-installation.txt)
+
+
+
+### Быстрый поиск
+
+
+
+Введите слова для поиска или имя модуля, класса или функции.
+
+
+
+©2016, Kanboard.ru. | Powered by [Sphinx 1.3.3](http://sphinx-doc.org/) & [Alabaster 0.7.8](https://github.com/bitprophet/alabaster) | [Page source](_sources/debian-installation.txt)
+

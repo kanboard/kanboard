@@ -1,0 +1,33 @@
+How to run Kanboard on Cloudron
+===============================
+
+`Cloudron <https://cloudron.io>`__ is a private smartserver on which you
+can install web apps like Kanboard. You can install Kanboard into a
+custom domain and each installation is backed up and kept up-to-date
+with Kanboard releases automatically.
+
+|Install|
+
+Accounts
+--------
+
+The app integrates tightly with the Cloudron User Management (via LDAP).
+Only Cloudron users can access the Kanboard. In addition, any Cloudron
+administrator becomes a Kanboard administrator automatically.
+
+Installing Plugins
+------------------
+
+Plugins can be installed and configured using the `Cloudron
+CLI <https://cloudron.io/references/cli.html>`__ tool. See the `app
+description <https://cloudron.io/appstore.html?app=net.kanboard.cloudronapp>`__
+for more information.
+
+Application Source code
+-----------------------
+
+The source code for the Cloudron app is
+`here <https://github.com/cloudron-io/kanboard-app>`__.
+
+.. |Install| image:: https://cloudron.io/img/button.svg
+   :target: https://cloudron.io/button.html?app=net.kanboard.cloudronapp
