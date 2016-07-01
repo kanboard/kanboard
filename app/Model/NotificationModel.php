@@ -133,4 +133,41 @@ class NotificationModel extends Base
                 return e('Notification');
         }
     }
+
+    /**
+     * Get task id from event
+     *
+     * @access public
+     * @param  string  $event_name
+     * @param  array   $event_data
+     * @return integer
+     */
+    public function getTaskIdFromEvent($event_name, array $event_data)
+    {
+        switch ($event_name) {
+            case TaskFileModel::EVENT_CREATE:
+                return $event_data['file']['task_id'];
+            case CommentModel::EVENT_CREATE:
+            case CommentModel::EVENT_UPDATE:
+                return $event_data['comment']['task_id'];
+            case SubtaskModel::EVENT_CREATE:
+            case SubtaskModel::EVENT_UPDATE:
+                return $event_data['subtask']['task_id'];
+            case TaskModel::EVENT_CREATE:
+            case TaskModel::EVENT_UPDATE:
+            case TaskModel::EVENT_CLOSE:
+            case TaskModel::EVENT_OPEN:
+            case TaskModel::EVENT_MOVE_COLUMN:
+            case TaskModel::EVENT_MOVE_POSITION:
+            case TaskModel::EVENT_MOVE_SWIMLANE:
+            case TaskModel::EVENT_ASSIGNEE_CHANGE:
+            case CommentModel::EVENT_USER_MENTION:
+            case TaskModel::EVENT_USER_MENTION:
+                return $event_data['task']['id'];
+            case TaskModel::EVENT_OVERDUE:
+                return $event_data['tasks'][0]['id'];
+            default:
+                return 0;
+        }
+    }
 }
