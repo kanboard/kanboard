@@ -70,6 +70,7 @@ class TaskHelper extends Base
         $options = $this->tagModel->getAssignableList($project['id']);
 
         $html = $this->helper->form->label(t('Tags'), 'tags[]');
+        $html .= '<input type="hidden" name="tags[]" value="">';
         $html .= '<select name="tags[]" id="form-tags" class="tag-autocomplete" multiple>';
 
         foreach ($options as $tag) {

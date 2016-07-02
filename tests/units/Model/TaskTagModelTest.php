@@ -22,7 +22,7 @@ class TaskTagModelTest extends Base
         $this->assertEquals(1, $tagModel->create(0, 'My tag 1'));
         $this->assertEquals(2, $tagModel->create(0, 'My tag 2'));
 
-        $this->assertTrue($taskTagModel->save(1, 1, array('My tag 1', 'My tag 2', 'My tag 3')));
+        $this->assertTrue($taskTagModel->save(1, 1, array('My tag 1', 'My tag 2', '', 'My tag 3')));
 
         $tags = $taskTagModel->getTagsByTask(1);
         $this->assertCount(3, $tags);

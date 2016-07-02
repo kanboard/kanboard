@@ -82,6 +82,7 @@ class TaskTagModel extends Base
     public function save($project_id, $task_id, array $tags)
     {
         $task_tags = $this->getList($task_id);
+        $tags = array_filter($tags);
 
         return $this->associateTags($project_id, $task_id, $task_tags, $tags) &&
             $this->dissociateTags($task_id, $task_tags, $tags);
