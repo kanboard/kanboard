@@ -428,7 +428,7 @@ class ProjectDuplicationModelTest extends Base
         $this->assertEquals(2, $taskCreationModel->create(array('title' => 'T2', 'project_id' => 1, 'column_id' => 2)));
         $this->assertEquals(3, $taskCreationModel->create(array('title' => 'T3', 'project_id' => 1, 'column_id' => 3)));
 
-        $this->assertEquals(2, $projectDuplicationModel->duplicate(1, array('categoryModel', 'actionModel', 'taskModel')));
+        $this->assertEquals(2, $projectDuplicationModel->duplicate(1, array('categoryModel', 'actionModel', 'projectTaskDuplicationModel')));
 
         // Check if Tasks have been duplicated
         $tasks = $taskFinderModel->getAll(2);
@@ -458,7 +458,7 @@ class ProjectDuplicationModelTest extends Base
         $this->assertEquals(2, $taskCreationModel->create(array('title' => 'T2', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 1)));
         $this->assertEquals(3, $taskCreationModel->create(array('title' => 'T3', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1)));
 
-        $this->assertEquals(2, $projectDuplicationModel->duplicate(1, array('projectPermissionModel', 'swimlaneModel', 'taskModel')));
+        $this->assertEquals(2, $projectDuplicationModel->duplicate(1, array('projectPermissionModel', 'swimlaneModel', 'projectTaskDuplicationModel')));
 
         // Check if Swimlanes have been duplicated
         $swimlanes = $swimlaneModel->getAll(2);
@@ -496,7 +496,7 @@ class ProjectDuplicationModelTest extends Base
         $this->assertEquals(2, $taskCreationModel->create(array('title' => 'T2', 'project_id' => 1, 'column_id' => 2, 'tags' => array('A', 'B'))));
         $this->assertEquals(3, $taskCreationModel->create(array('title' => 'T3', 'project_id' => 1, 'column_id' => 3, 'tags' => array('C'))));
 
-        $this->assertEquals(2, $projectDuplicationModel->duplicate(1, array('categoryModel', 'actionModel', 'tagDuplicationModel', 'taskModel')));
+        $this->assertEquals(2, $projectDuplicationModel->duplicate(1, array('categoryModel', 'actionModel', 'tagDuplicationModel', 'projectTaskDuplicationModel')));
 
         $tasks = $taskFinderModel->getAll(2);
         $this->assertCount(3, $tasks);

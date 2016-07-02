@@ -86,6 +86,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectGroupRoleModel               $projectGroupRoleModel
  * @property \Kanboard\Model\ProjectNotificationModel            $projectNotificationModel
  * @property \Kanboard\Model\ProjectNotificationTypeModel        $projectNotificationTypeModel
+ * @property \Kanboard\Model\ProjectTaskDuplicationModel         $projectTaskDuplicationModel
  * @property \Kanboard\Model\RememberMeSessionModel              $rememberMeSessionModel
  * @property \Kanboard\Model\SubtaskModel                        $subtaskModel
  * @property \Kanboard\Model\SubtaskTimeTrackingModel            $subtaskTimeTrackingModel

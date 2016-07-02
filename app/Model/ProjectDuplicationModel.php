@@ -29,7 +29,7 @@ class ProjectDuplicationModel extends Base
             'swimlaneModel',
             'tagDuplicationModel',
             'projectMetadataModel',
-            'taskModel',
+            'projectTaskDuplicationModel',
         );
     }
 
@@ -49,7 +49,7 @@ class ProjectDuplicationModel extends Base
             'swimlaneModel',
             'tagDuplicationModel',
             'projectMetadataModel',
-            'taskModel',
+            'projectTaskDuplicationModel',
         );
     }
 
