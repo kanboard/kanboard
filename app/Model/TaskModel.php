@@ -215,7 +215,7 @@ class TaskModel extends Base
         $task_ids = $this->taskFinderModel->getAllIds($src_project_id, array(TaskModel::STATUS_OPEN, TaskModel::STATUS_CLOSED));
 
         foreach ($task_ids as $task_id) {
-            if (! $this->taskDuplicationModel->duplicateToProject($task_id, $dst_project_id)) {
+            if (! $this->taskProjectDuplicationModel->duplicateToProject($task_id, $dst_project_id)) {
                 return false;
             }
         }

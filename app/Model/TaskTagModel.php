@@ -20,6 +20,23 @@ class TaskTagModel extends Base
     const TABLE = 'task_has_tags';
 
     /**
+     * Get all tags not available in a project
+     *
+     * @access public
+     * @param  integer $task_id
+     * @param  integer $project_id
+     * @return array
+     */
+    public function getTagIdsByTaskNotAvailableInProject($task_id, $project_id)
+    {
+        return $this->db->table(TagModel::TABLE)
+            ->eq(self::TABLE.'.task_id', $task_id)
+            ->notIn(TagModel::TABLE.'.project_id', array(0, $project_id))
+            ->join(self::TABLE, 'tag_id', 'id')
+            ->findAllByColumn(TagModel::TABLE.'.id');
+    }
+
+    /**
      * Get all tags associated to a task
      *
      * @access public
