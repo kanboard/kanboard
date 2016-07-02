@@ -9,6 +9,7 @@ New features:
 
 Improvements:
 
+* Preserve role for existing users when using ReverseProxy authentication
 * Handle priority for task and project duplication
 * Expose task reference field to the user interface
 * Improve ICal export
