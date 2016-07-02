@@ -13,6 +13,26 @@ use Kanboard\Core\Base;
 class TagDuplicationModel extends Base
 {
     /**
+     * Duplicate project tags to another project
+     *
+     * @access public
+     * @param  integer $src_project_id
+     * @param  integer $dst_project_id
+     * @return bool
+     */
+    public function duplicate($src_project_id, $dst_project_id)
+    {
+        $tags = $this->tagModel->getAllByProject($src_project_id);
+        $results = array();
+
+        foreach ($tags as $tag) {
+            $results[] = $this->tagModel->create($dst_project_id, $tag['name']);
+        }
+
+        return ! in_array(false, $results, true);
+    }
+
+    /**
      * Link tags to the new tasks
      *
      * @access public

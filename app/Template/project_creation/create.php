@@ -23,6 +23,7 @@
             <?php endif ?>
 
             <?= $this->form->checkbox('categoryModel', t('Categories'), 1, true) ?>
+            <?= $this->form->checkbox('tagDuplicationModel', t('Tags'), 1, true) ?>
             <?= $this->form->checkbox('actionModel', t('Actions'), 1, true) ?>
             <?= $this->form->checkbox('swimlaneModel', t('Swimlanes'), 1, true) ?>
             <?= $this->form->checkbox('taskModel', t('Tasks'), 1, false) ?>

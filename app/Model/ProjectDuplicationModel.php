@@ -22,7 +22,15 @@ class ProjectDuplicationModel extends Base
      */
     public function getOptionalSelection()
     {
-        return array('categoryModel', 'projectPermissionModel', 'actionModel', 'swimlaneModel', 'taskModel', 'projectMetadataModel');
+        return array(
+            'categoryModel',
+            'projectPermissionModel',
+            'actionModel',
+            'swimlaneModel',
+            'tagDuplicationModel',
+            'projectMetadataModel',
+            'taskModel',
+        );
     }
 
     /**
@@ -33,7 +41,16 @@ class ProjectDuplicationModel extends Base
      */
     public function getPossibleSelection()
     {
-        return array('boardModel', 'categoryModel', 'projectPermissionModel', 'actionModel', 'swimlaneModel', 'taskModel', 'projectMetadataModel');
+        return array(
+            'boardModel',
+            'categoryModel',
+            'projectPermissionModel',
+            'actionModel',
+            'swimlaneModel',
+            'tagDuplicationModel',
+            'projectMetadataModel',
+            'taskModel',
+        );
     }
 
     /**
