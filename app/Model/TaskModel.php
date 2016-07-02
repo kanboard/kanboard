@@ -5,7 +5,7 @@ namespace Kanboard\Model;
 use Kanboard\Core\Base;
 
 /**
- * Task model
+ * Task Model
  *
  * @package  Kanboard\Model
  * @author   Frederic Guillot
@@ -115,64 +115,6 @@ class TaskModel extends Base
         }
 
         return 0;
-    }
-
-    /**
-     * Return the list user selectable recurrence status
-     *
-     * @access public
-     * @return array
-     */
-    public function getRecurrenceStatusList()
-    {
-        return array(
-            TaskModel::RECURRING_STATUS_NONE    => t('No'),
-            TaskModel::RECURRING_STATUS_PENDING => t('Yes'),
-        );
-    }
-
-    /**
-     * Return the list recurrence triggers
-     *
-     * @access public
-     * @return array
-     */
-    public function getRecurrenceTriggerList()
-    {
-        return array(
-            TaskModel::RECURRING_TRIGGER_FIRST_COLUMN => t('When task is moved from first column'),
-            TaskModel::RECURRING_TRIGGER_LAST_COLUMN  => t('When task is moved to last column'),
-            TaskModel::RECURRING_TRIGGER_CLOSE        => t('When task is closed'),
-        );
-    }
-
-    /**
-     * Return the list options to calculate recurrence due date
-     *
-     * @access public
-     * @return array
-     */
-    public function getRecurrenceBasedateList()
-    {
-        return array(
-            TaskModel::RECURRING_BASEDATE_DUEDATE     => t('Existing due date'),
-            TaskModel::RECURRING_BASEDATE_TRIGGERDATE => t('Action date'),
-        );
-    }
-
-    /**
-     * Return the list recurrence timeframes
-     *
-     * @access public
-     * @return array
-     */
-    public function getRecurrenceTimeframeList()
-    {
-        return array(
-            TaskModel::RECURRING_TIMEFRAME_DAYS   => t('Day(s)'),
-            TaskModel::RECURRING_TIMEFRAME_MONTHS => t('Month(s)'),
-            TaskModel::RECURRING_TIMEFRAME_YEARS  => t('Year(s)'),
-        );
     }
 
     /**

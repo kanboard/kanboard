@@ -10,7 +10,7 @@ use Kanboard\Model\ProjectModel;
 use Kanboard\Model\CategoryModel;
 use Kanboard\Model\TaskTagModel;
 
-class TaskDuplicationTest extends Base
+class TaskDuplicationModelTest extends Base
 {
     public function testThatDuplicateDefineCreator()
     {

@@ -8,9 +8,38 @@ use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\TaskRecurrenceModel;
+use Kanboard\Model\TaskTagModel;
 
 class TaskRecurrenceModelTest extends Base
 {
+    public function testRecurrenceSettings()
+    {
+        $taskRecurrenceModel = new TaskRecurrenceModel($this->container);
+
+        $statuses = $taskRecurrenceModel->getRecurrenceStatusList();
+        $this->assertCount(2, $statuses);
+        $this->assertArrayHasKey(TaskModel::RECURRING_STATUS_NONE, $statuses);
+        $this->assertArrayHasKey(TaskModel::RECURRING_STATUS_PENDING, $statuses);
+        $this->assertArrayNotHasKey(TaskModel::RECURRING_STATUS_PROCESSED, $statuses);
+
+        $triggers = $taskRecurrenceModel->getRecurrenceTriggerList();
+        $this->assertCount(3, $triggers);
+        $this->assertArrayHasKey(TaskModel::RECURRING_TRIGGER_FIRST_COLUMN, $triggers);
+        $this->assertArrayHasKey(TaskModel::RECURRING_TRIGGER_LAST_COLUMN, $triggers);
+        $this->assertArrayHasKey(TaskModel::RECURRING_TRIGGER_CLOSE, $triggers);
+
+        $dates = $taskRecurrenceModel->getRecurrenceBasedateList();
+        $this->assertCount(2, $dates);
+        $this->assertArrayHasKey(TaskModel::RECURRING_BASEDATE_DUEDATE, $dates);
+        $this->assertArrayHasKey(TaskModel::RECURRING_BASEDATE_TRIGGERDATE, $dates);
+
+        $timeframes = $taskRecurrenceModel->getRecurrenceTimeframeList();
+        $this->assertCount(3, $timeframes);
+        $this->assertArrayHasKey(TaskModel::RECURRING_TIMEFRAME_DAYS, $timeframes);
+        $this->assertArrayHasKey(TaskModel::RECURRING_TIMEFRAME_MONTHS, $timeframes);
+        $this->assertArrayHasKey(TaskModel::RECURRING_TIMEFRAME_YEARS, $timeframes);
+    }
+
     public function testCalculateRecurringTaskDueDate()
     {
         $taskRecurrenceModel = new TaskRecurrenceModel($this->container);
@@ -55,6 +84,7 @@ class TaskRecurrenceModelTest extends Base
         $taskFinderModel = new TaskFinderModel($this->container);
         $projectModel = new ProjectModel($this->container);
         $dateParser = new DateParser($this->container);
+        $taskTagModel = new TaskTagModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
 
@@ -67,6 +97,7 @@ class TaskRecurrenceModelTest extends Base
             'recurrence_factor' => 2,
             'recurrence_timeframe' => TaskModel::RECURRING_TIMEFRAME_DAYS,
             'recurrence_basedate' => TaskModel::RECURRING_BASEDATE_TRIGGERDATE,
+            'tags' => array('T1', 'T2'),
         )));
 
         $this->assertEquals(2, $taskRecurrenceModel->duplicateRecurringTask(1));
@@ -86,5 +117,10 @@ class TaskRecurrenceModelTest extends Base
         $this->assertEquals(1, $task['recurrence_parent']);
         $this->assertEquals(2, $task['recurrence_factor']);
         $this->assertEquals($dateParser->removeTimeFromTimestamp(strtotime('+2 days')), $task['date_due'], '', 2);
+
+        $tags = $taskTagModel->getList(2);
+        $this->assertCount(2, $tags);
+        $this->assertArrayHasKey(1, $tags);
+        $this->assertArrayHasKey(2, $tags);
     }
 }

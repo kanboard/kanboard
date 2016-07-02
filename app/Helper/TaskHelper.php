@@ -27,17 +27,17 @@ class TaskHelper extends Base
 
     public function recurrenceTriggers()
     {
-        return $this->taskModel->getRecurrenceTriggerList();
+        return $this->taskRecurrenceModel->getRecurrenceTriggerList();
     }
 
     public function recurrenceTimeframes()
     {
-        return $this->taskModel->getRecurrenceTimeframeList();
+        return $this->taskRecurrenceModel->getRecurrenceTimeframeList();
     }
 
     public function recurrenceBasedates()
     {
-        return $this->taskModel->getRecurrenceBasedateList();
+        return $this->taskRecurrenceModel->getRecurrenceBasedateList();
     }
 
     public function selectTitle(array $values, array $errors)
