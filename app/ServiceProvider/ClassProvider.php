@@ -56,6 +56,7 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectMetadataModel',
             'ProjectGroupRoleModel',
             'ProjectTaskDuplicationModel',
+            'ProjectTaskPriorityModel',
             'ProjectUserRoleModel',
             'RememberMeSessionModel',
             'SubtaskModel',

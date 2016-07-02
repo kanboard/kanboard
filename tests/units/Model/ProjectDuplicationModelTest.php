@@ -141,6 +141,28 @@ class ProjectDuplicationModelTest extends Base
         $this->assertEquals(Role::PROJECT_MANAGER, $projectUserRoleModel->getUserRole(2, 1));
     }
 
+    public function testCloneProjectWithDifferentPriorities()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $projectDuplicationModel = new ProjectDuplicationModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array(
+            'name' => 'My project',
+            'priority_default' => 2,
+            'priority_start' => -2,
+            'priority_end' => 8,
+        )));
+
+        $this->assertEquals(2, $projectDuplicationModel->duplicate(1));
+
+        $project = $projectModel->getById(2);
+        $this->assertNotEmpty($project);
+        $this->assertEquals('My project (Clone)', $project['name']);
+        $this->assertEquals(2, $project['priority_default']);
+        $this->assertEquals(-2, $project['priority_start']);
+        $this->assertEquals(8, $project['priority_end']);
+    }
+
     public function testCloneProjectWithDifferentName()
     {
         $projectModel = new ProjectModel($this->container);

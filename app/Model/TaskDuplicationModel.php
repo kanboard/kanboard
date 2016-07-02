@@ -18,7 +18,7 @@ class TaskDuplicationModel extends Base
      * @access protected
      * @var string[]
      */
-    protected $fields_to_duplicate = array(
+    protected $fieldsToDuplicate = array(
         'title',
         'description',
         'date_due',
@@ -27,6 +27,7 @@ class TaskDuplicationModel extends Base
         'column_id',
         'owner_id',
         'score',
+        'priority',
         'category_id',
         'time_estimated',
         'swimlane_id',
@@ -95,6 +96,12 @@ class TaskDuplicationModel extends Base
             $values['column_id'] = $values['column_id'] ?: $this->columnModel->getFirstColumnId($values['project_id']);
         }
 
+        // Check if priority exists for destination project
+        $values['priority'] = $this->projectTaskPriorityModel->getPriorityForProject(
+            $values['project_id'],
+            empty($values['priority']) ? 0 : $values['priority']
+        );
+
         return $values;
     }
 
@@ -110,7 +117,7 @@ class TaskDuplicationModel extends Base
         $task = $this->taskFinderModel->getById($task_id);
         $values = array();
 
-        foreach ($this->fields_to_duplicate as $field) {
+        foreach ($this->fieldsToDuplicate as $field) {
             $values[$field] = $task[$field];
         }
 

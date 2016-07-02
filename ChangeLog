@@ -9,6 +9,7 @@ New features:
 
 Improvements:
 
+* Handle priority for task and project duplication
 * Expose task reference field to the user interface
 * Improve ICal export
 * Added argument owner_id and identifier to project API calls

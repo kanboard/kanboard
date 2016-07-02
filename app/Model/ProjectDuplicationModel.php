@@ -146,6 +146,9 @@ class ProjectDuplicationModel extends Base
             'is_public' => 0,
             'is_private' => $private ? 1 : $is_private,
             'owner_id' => $owner_id,
+            'priority_default' => $project['priority_default'],
+            'priority_start' => $project['priority_start'],
+            'priority_end' => $project['priority_end'],
         );
 
         if (! $this->db->table(ProjectModel::TABLE)->save($values)) {
