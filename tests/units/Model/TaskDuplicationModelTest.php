@@ -97,7 +97,7 @@ class TaskDuplicationModelTest extends Base
         $this->assertEquals(0, $task['time_spent']);
     }
 
-    public function testDuplicateSameProjectWitTags()
+    public function testDuplicateSameProjectWithTags()
     {
         $taskDuplicationModel = new TaskDuplicationModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);
@@ -117,5 +117,26 @@ class TaskDuplicationModelTest extends Base
         $this->assertCount(2, $tags);
         $this->assertArrayHasKey(1, $tags);
         $this->assertArrayHasKey(2, $tags);
+    }
+
+    public function testDuplicateSameProjectWithPriority()
+    {
+        $taskDuplicationModel = new TaskDuplicationModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array(
+            'title' => 'test',
+            'project_id' => 1,
+            'priority' => 2
+        )));
+
+        $this->assertEquals(2, $taskDuplicationModel->duplicate(1));
+
+        $task = $taskFinderModel->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(2, $task['priority']);
     }
 }

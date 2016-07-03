@@ -3,6 +3,7 @@ Version 1.0.31 (unreleased)
 
 New features:
 
+* Added tags: global and specific by project
 * Added application and project roles validation for API procedure calls
 * Added new API call: "getProjectByIdentifier"
 * Added new API calls for external task links, project attachments and subtask time tracking
@@ -19,6 +20,7 @@ Improvements:
 * Use the same task form layout everywhere
 * Removed some tasks dropdown menus that are now available with task edit form
 * Make embedded documentation readable in multiple languages (if a translation is available)
+* Added acceptance tests (browser tests)
 
 Bug fixes:
 

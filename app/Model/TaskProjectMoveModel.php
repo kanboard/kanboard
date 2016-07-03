@@ -62,6 +62,7 @@ class TaskProjectMoveModel extends TaskDuplicationModel
         $values['swimlane_id'] = $swimlane_id !== null ? $swimlane_id : $task['swimlane_id'];
         $values['category_id'] = $category_id !== null ? $category_id : $task['category_id'];
         $values['owner_id'] = $owner_id !== null ? $owner_id : $task['owner_id'];
+        $values['priority'] = $task['priority'];
         return $values;
     }
 }

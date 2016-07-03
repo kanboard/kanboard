@@ -39,7 +39,14 @@ class TaskProjectMoveModelTest extends Base
         $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));
 
         // We create a task
-        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1, 'owner_id' => 1, 'category_id' => 10, 'position' => 333)));
+        $this->assertEquals(1, $taskCreationModel->create(array(
+            'title' => 'test',
+            'project_id' => 1,
+            'owner_id' => 1,
+            'category_id' => 10,
+            'position' => 333,
+            'priority' => 1,
+        )));
 
         $this->container['dispatcher']->addListener(TaskModel::EVENT_MOVE_PROJECT, array($this, 'onMoveProject'));
 
@@ -58,6 +65,7 @@ class TaskProjectMoveModelTest extends Base
         $this->assertEquals(2, $task['project_id']);
         $this->assertEquals(5, $task['column_id']);
         $this->assertEquals(1, $task['position']);
+        $this->assertEquals(1, $task['priority']);
         $this->assertEquals('test', $task['title']);
     }
 

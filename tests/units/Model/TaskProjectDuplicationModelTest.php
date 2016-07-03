@@ -31,7 +31,14 @@ class TaskProjectDuplicationModelTest extends Base
         $this->assertNotFalse($categoryModel->create(array('name' => 'Category #1', 'project_id' => 1)));
         $this->assertTrue($categoryModel->exists(1));
 
-        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 1, 'category_id' => 1)));
+        $this->assertEquals(1, $taskCreationModel->create(array(
+            'title' => 'test',
+            'project_id' => 1,
+            'column_id' => 2,
+            'owner_id' => 1,
+            'category_id' => 1,
+            'priority' => 3,
+        )));
 
         $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {});
         $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE, function () {});
@@ -52,6 +59,7 @@ class TaskProjectDuplicationModelTest extends Base
         $this->assertEquals(6, $task['column_id']);
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['project_id']);
+        $this->assertEquals(3, $task['priority']);
         $this->assertEquals('test', $task['title']);
     }
 
