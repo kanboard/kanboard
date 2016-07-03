@@ -37,7 +37,7 @@
     <?php endif ?>
 
     <?php if (! empty($task['date_due'])): ?>
-        <?php if (date('d') == date('d', $task['date_due'])): ?>
+        <?php if (date('Y-m-d') == date('Y-m-d', $task['date_due'])): ?>
         <span class="task-board-date task-board-date-today">
         <?php elseif (time() > $task['date_due']): ?>
         <span class="task-board-date task-board-date-overdue">
