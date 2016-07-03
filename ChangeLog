@@ -29,6 +29,7 @@ Bug fixes:
 * Fixed lexer issue with non word characters
 * Flush memory cache in worker to get latest config values
 * Fixed empty title for web notification with only one overdue task
+* Take default swimlane into consideration for SwimlaneModel::getFirstActiveSwimlane()
 
 Version 1.0.30
 --------------
