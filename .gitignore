@@ -19,6 +19,6 @@ data/files
 data/cache
 /vendor
 *.bak
-!.docker/kanboard/config.php
+!docker/kanboard/config.php
 node_modules
 bower_components
