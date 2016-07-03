@@ -64,8 +64,8 @@ Volumes
 
 You can attach 2 volumes to your container:
 
-- Data folder: `/var/www/kanboard/data`
-- Plugins folder: `/var/www/kanboard/plugins`
+- Data folder: `/var/www/app/data`
+- Plugins folder: `/var/www/app/plugins`
 
 Use the flag `-v` to mount a volume on the host machine like described in [official Docker documentation](https://docs.docker.com/engine/userguide/containers/dockervolumes/).
 
@@ -84,8 +84,8 @@ The list of environment variables is available on [this page](env.markdown).
 Config files
 ------------
 
-- The container already include a custom config file located at `/var/www/kanboard/config.php`.
-- You can store your own config file on the data volume: `/var/www/kanboard/data/config.php`.
+- The container already include a custom config file located at `/var/www/app/config.php`.
+- You can store your own config file on the data volume: `/var/www/app/data/config.php`.
 
 References
 ----------

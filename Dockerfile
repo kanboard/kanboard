@@ -8,5 +8,5 @@ COPY docker/services.d/cron /etc/services.d/cron
 RUN cd /var/www/app && composer --prefer-dist --no-dev --optimize-autoloader --quiet install
 RUN chown -R nginx:nginx /var/www/app/data /var/www/app/plugins
 
-VOLUME /var/www/kanboard/data
-VOLUME /var/www/kanboard/plugins
+VOLUME /var/www/app/data
+VOLUME /var/www/app/plugins
