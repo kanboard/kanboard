@@ -1216,4 +1216,5 @@ return array(
     'Do you really want to remove this tag: "%s"?' => 'Voulez-vous vraiment supprimer ce libellé : « %s » ?',
     'Global tags' => 'Libellés globaux',
     'There is no global tag at the moment.' => 'Il n\'y a aucun libellé global pour le moment.',
+    'This field cannot be empty' => 'Ce champ ne peut être vide',
 );

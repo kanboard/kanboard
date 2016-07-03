@@ -1215,4 +1215,5 @@ return array(
     'Do you really want to remove this tag: "%s"?' => 'Soll dieses Schlagwort wirklich entfernt werden: "%s"?',
     'Global tags' => 'Globale Schlagwörter',
     'There is no global tag at the moment.' => 'Es gibt zur Zeit kein globales Schlagwort',
+    // 'This field cannot be empty' => '',
 );

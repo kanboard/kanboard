@@ -1215,4 +1215,5 @@ return array(
     'Do you really want to remove this tag: "%s"?' => 'Tem a certeza que pretende remover esta etiqueta: "%s"?',
     'Global tags' => 'Etiquetas globais',
     'There is no global tag at the moment.' => 'De momento não existe nenhuma etiqueta global.',
+    // 'This field cannot be empty' => '',
 );

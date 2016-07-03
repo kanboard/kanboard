@@ -1215,4 +1215,5 @@ return array(
     // 'Do you really want to remove this tag: "%s"?' => '',
     // 'Global tags' => '',
     // 'There is no global tag at the moment.' => '',
+    // 'This field cannot be empty' => '',
 );
