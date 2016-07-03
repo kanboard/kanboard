@@ -1,1 +1,0 @@
-1 0 * * * cd /var/www/kanboard && ./kanboard cronjob >/dev/null 2>&1

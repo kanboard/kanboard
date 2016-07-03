@@ -3,17 +3,17 @@ How to run Kanboard with Docker?
 
 Kanboard can run easily with [Docker](https://www.docker.com).
 
-The image size is approximately **50MB** and contains:
+The image size is approximately **70MB** and contains:
 
 - [Alpine Linux](http://alpinelinux.org/)
 - The [process manager S6](http://skarnet.org/software/s6/)
 - Nginx
-- PHP-FPM
+- PHP 7
 
 The Kanboard cronjob is also running everyday at midnight.
 URL rewriting is enabled in the included config file.
 
-When the container is running, the memory utilization is around **20MB**.
+When the container is running, the memory utilization is around **30MB**.
 
 Use the stable version
 ----------------------
