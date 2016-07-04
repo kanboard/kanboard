@@ -66,7 +66,7 @@ class ColumnController extends BaseController
         list($valid, $errors) = $this->columnValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->columnModel->create($project['id'], $values['title'], $values['task_limit'], $values['description']) !== false) {
+            if ($this->columnModel->create($project['id'], $values['title'], $values['task_limit'], $values['description'], $values['hide_in_dashboard']) !== false) {
                 $this->flash->success(t('Column created successfully.'));
                 return $this->response->redirect($this->helper->url->to('ColumnController', 'index', array('project_id' => $project['id'])), true);
             } else {
@@ -111,7 +111,7 @@ class ColumnController extends BaseController
         list($valid, $errors) = $this->columnValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->columnModel->update($values['id'], $values['title'], $values['task_limit'], $values['description'])) {
+            if ($this->columnModel->update($values['id'], $values['title'], $values['task_limit'], $values['description'], $values['hide_in_dashboard']) !== false) {
                 $this->flash->success(t('Board updated successfully.'));
                 return $this->response->redirect($this->helper->url->to('ColumnController', 'index', array('project_id' => $project['id'])));
             } else {
