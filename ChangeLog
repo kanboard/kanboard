@@ -1,4 +1,4 @@
-Version 1.0.31 (unreleased)
+Version 1.0.31
 --------------
 
 New features:
@@ -30,6 +30,7 @@ Bug fixes:
 * Flush memory cache in worker to get latest config values
 * Fixed empty title for web notification with only one overdue task
 * Take default swimlane into consideration for SwimlaneModel::getFirstActiveSwimlane()
+* Fixed "due today" highlighting
 
 Version 1.0.30
 --------------

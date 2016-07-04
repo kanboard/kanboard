@@ -48,6 +48,7 @@ Contributors:
 - [Iterate From 0](https://github.com/freebsd-kanboard)
 - [Jan Dittrich](https://github.com/jdittrich)
 - [Janne Mäntyharju](https://github.com/JanneMantyharju)
+- [Jannik Winkel](https://github.com/kiney)
 - [Jean-François Magnier](https://github.com/lefakir)
 - [Jeff Guillou](https://github.com/jf-guillou)
 - [Jesusaplsoft](https://github.com/jesusaplsoft)
