@@ -1216,4 +1216,5 @@ return array(
     'Global tags' => 'Globale Schlagwörter',
     'There is no global tag at the moment.' => 'Es gibt zur Zeit kein globales Schlagwort',
     // 'This field cannot be empty' => '',
+    'Hide tasks in this column in the Dashboard' => 'Aufgaben in dieser Spalte im Dashboard ausblenden',
 );

@@ -54,9 +54,10 @@
 </div>
 <table class="table-stripped">
     <tr>
-        <th class="column-60"><?= t('Column') ?></th>
+        <th class="column-40"><?= t('Column') ?></th>
         <th class="column-20"><?= t('Task limit') ?></th>
         <th class="column-20"><?= t('Active tasks') ?></th>
+        <th class="column-20"><?= t('Hide tasks in this column in the Dashboard') ?></th>
     </tr>
     <?php foreach ($stats['columns'] as $column): ?>
     <tr>
@@ -70,6 +71,13 @@
         </td>
         <td><?= $column['task_limit'] ?: '∞' ?></td>
         <td><?= $column['nb_active_tasks'] ?></td>
+        <td>
+        <?php if ($column['hide_in_dashboard'] == 1): ?>
+            <?= t('Yes') ?>
+        <?php else: ?>
+            <?= t('No') ?>
+        <?php endif ?>
+        </td>
     </tr>
     <?php endforeach ?>
 </table>
