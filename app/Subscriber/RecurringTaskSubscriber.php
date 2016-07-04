@@ -22,9 +22,9 @@ class RecurringTaskSubscriber extends BaseSubscriber implements EventSubscriberI
 
         if ($event['recurrence_status'] == TaskModel::RECURRING_STATUS_PENDING) {
             if ($event['recurrence_trigger'] == TaskModel::RECURRING_TRIGGER_FIRST_COLUMN && $this->columnModel->getFirstColumnId($event['project_id']) == $event['src_column_id']) {
-                $this->taskDuplicationModel->duplicateRecurringTask($event['task_id']);
+                $this->taskRecurrenceModel->duplicateRecurringTask($event['task_id']);
             } elseif ($event['recurrence_trigger'] == TaskModel::RECURRING_TRIGGER_LAST_COLUMN && $this->columnModel->getLastColumnId($event['project_id']) == $event['dst_column_id']) {
-                $this->taskDuplicationModel->duplicateRecurringTask($event['task_id']);
+                $this->taskRecurrenceModel->duplicateRecurringTask($event['task_id']);
             }
         }
     }
@@ -34,7 +34,7 @@ class RecurringTaskSubscriber extends BaseSubscriber implements EventSubscriberI
         $this->logger->debug('Subscriber executed: '.__METHOD__);
 
         if ($event['recurrence_status'] == TaskModel::RECURRING_STATUS_PENDING && $event['recurrence_trigger'] == TaskModel::RECURRING_TRIGGER_CLOSE) {
-            $this->taskDuplicationModel->duplicateRecurringTask($event['task_id']);
+            $this->taskRecurrenceModel->duplicateRecurringTask($event['task_id']);
         }
     }
 }

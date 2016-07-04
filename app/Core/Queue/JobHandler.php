@@ -40,6 +40,7 @@ class JobHandler extends Base
     {
         $payload = $job->getBody();
         $className = $payload['class'];
+        $this->memoryCache->flush();
         $this->prepareJobSession($payload['user_id']);
 
         if (DEBUG) {

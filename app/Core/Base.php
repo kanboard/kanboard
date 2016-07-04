@@ -86,15 +86,21 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectGroupRoleModel               $projectGroupRoleModel
  * @property \Kanboard\Model\ProjectNotificationModel            $projectNotificationModel
  * @property \Kanboard\Model\ProjectNotificationTypeModel        $projectNotificationTypeModel
+ * @property \Kanboard\Model\ProjectTaskDuplicationModel         $projectTaskDuplicationModel
+ * @property \Kanboard\Model\ProjectTaskPriorityModel            $projectTaskPriorityModel
  * @property \Kanboard\Model\RememberMeSessionModel              $rememberMeSessionModel
  * @property \Kanboard\Model\SubtaskModel                        $subtaskModel
  * @property \Kanboard\Model\SubtaskTimeTrackingModel            $subtaskTimeTrackingModel
  * @property \Kanboard\Model\SwimlaneModel                       $swimlaneModel
+ * @property \Kanboard\Model\TagDuplicationModel                 $tagDuplicationModel
  * @property \Kanboard\Model\TagModel                            $tagModel
  * @property \Kanboard\Model\TaskModel                           $taskModel
  * @property \Kanboard\Model\TaskAnalyticModel                   $taskAnalyticModel
  * @property \Kanboard\Model\TaskCreationModel                   $taskCreationModel
  * @property \Kanboard\Model\TaskDuplicationModel                $taskDuplicationModel
+ * @property \Kanboard\Model\TaskProjectDuplicationModel         $taskProjectDuplicationModel
+ * @property \Kanboard\Model\TaskProjectMoveModel                $taskProjectMoveModel
+ * @property \Kanboard\Model\TaskRecurrenceModel                 $taskRecurrenceModel
  * @property \Kanboard\Model\TaskExternalLinkModel               $taskExternalLinkModel
  * @property \Kanboard\Model\TaskFinderModel                     $taskFinderModel
  * @property \Kanboard\Model\TaskLinkModel                       $taskLinkModel

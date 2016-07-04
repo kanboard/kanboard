@@ -22,14 +22,23 @@ class ReverseProxyUserProvider implements UserProviderInterface
     protected $username = '';
 
     /**
+     * User profile if the user already exists
+     *
+     * @access protected
+     * @var array
+     */
+    private $userProfile = array();
+
+    /**
      * Constructor
      *
      * @access public
      * @param  string $username
      */
-    public function __construct($username)
+    public function __construct($username, array $userProfile = array())
     {
         $this->username = $username;
+        $this->userProfile = $userProfile;
     }
 
     /**
@@ -84,7 +93,15 @@ class ReverseProxyUserProvider implements UserProviderInterface
      */
     public function getRole()
     {
-        return REVERSE_PROXY_DEFAULT_ADMIN === $this->username ? Role::APP_ADMIN : Role::APP_USER;
+        if (REVERSE_PROXY_DEFAULT_ADMIN === $this->username) {
+            return Role::APP_ADMIN;
+        }
+
+        if (isset($this->userProfile['role'])) {
+            return $this->userProfile['role'];
+        }
+
+        return Role::APP_USER;
     }
 
     /**

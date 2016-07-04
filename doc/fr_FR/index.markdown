@@ -22,6 +22,7 @@ Utiliser Kanboard
 - [Types de projets](project-types.markdown)
 - [Créer des projets](creating-projects.markdown)
 - [Modifier des projets](editing-projects.markdown)
+- [Supprimer des projets](removing-projects.markdown)
 - [Partager des tableaux et des tâches](sharing-projects.markdown)
 - [Actions automatiques](automatic-actions.markdown)
 - [Permissions des projets](project-permissions.markdown)

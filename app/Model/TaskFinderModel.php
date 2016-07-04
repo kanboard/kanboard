@@ -166,6 +166,7 @@ class TaskFinderModel extends Base
                     ->table(TaskModel::TABLE)
                     ->eq(TaskModel::TABLE.'.project_id', $project_id)
                     ->eq(TaskModel::TABLE.'.is_active', $status_id)
+                    ->asc(TaskModel::TABLE.'.id')
                     ->findAll();
     }
 
@@ -183,7 +184,8 @@ class TaskFinderModel extends Base
                     ->table(TaskModel::TABLE)
                     ->eq(TaskModel::TABLE.'.project_id', $project_id)
                     ->in(TaskModel::TABLE.'.is_active', $status)
-                    ->findAllByColumn('id');
+                    ->asc(TaskModel::TABLE.'.id')
+                    ->findAllByColumn(TaskModel::TABLE.'.id');
     }
 
     /**

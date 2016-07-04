@@ -31,6 +31,12 @@ class UserHelperTest extends Base
         $this->assertEquals('Project Viewer', $helper->getRoleName(Role::PROJECT_VIEWER));
     }
 
+    public function testHasAccessWithoutSession()
+    {
+        $helper = new UserHelper($this->container);
+        $this->assertFalse($helper->hasAccess('UserCreationController', 'create'));
+    }
+
     public function testHasAccessForAdmins()
     {
         $helper = new UserHelper($this->container);
@@ -71,6 +77,15 @@ class UserHelperTest extends Base
         $this->assertFalse($helper->hasAccess('UserCreationController', 'show'));
         $this->assertFalse($helper->hasAccess('ProjectCreationController', 'create'));
         $this->assertTrue($helper->hasAccess('ProjectCreationController', 'createPrivate'));
+    }
+
+    public function testHasProjectAccessWithoutSession()
+    {
+        $helper = new UserHelper($this->container);
+        $project = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $project->create(array('name' => 'My project')));
+        $this->assertFalse($helper->hasProjectAccess('ProjectEditController', 'edit', 1));
     }
 
     public function testHasProjectAccessForAdmins()

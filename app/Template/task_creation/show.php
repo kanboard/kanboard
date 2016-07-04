@@ -27,6 +27,7 @@
             <?= $this->task->selectColumn($columns_list, $values, $errors) ?>
             <?= $this->task->selectPriority($project, $values) ?>
             <?= $this->task->selectScore($values, $errors) ?>
+            <?= $this->task->selectReference($values, $errors) ?>
 
             <?= $this->hook->render('template:task:form:second-column', array('values' => $values, 'errors' => $errors)) ?>
         </div>

@@ -77,13 +77,13 @@ class TaskProcedure extends BaseProcedure
     public function moveTaskToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'moveTaskToProject', $project_id);
-        return $this->taskDuplicationModel->moveToProject($task_id, $project_id, $swimlane_id, $column_id, $category_id, $owner_id);
+        return $this->taskProjectMoveModel->moveToProject($task_id, $project_id, $swimlane_id, $column_id, $category_id, $owner_id);
     }
 
     public function duplicateTaskToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'duplicateTaskToProject', $project_id);
-        return $this->taskDuplicationModel->duplicateToProject($task_id, $project_id, $swimlane_id, $column_id, $category_id, $owner_id);
+        return $this->taskProjectDuplicationModel->duplicateToProject($task_id, $project_id, $swimlane_id, $column_id, $category_id, $owner_id);
     }
 
     public function createTask($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0,

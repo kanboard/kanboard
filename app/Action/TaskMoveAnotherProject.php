@@ -75,7 +75,7 @@ class TaskMoveAnotherProject extends Base
      */
     public function doAction(array $data)
     {
-        return $this->taskDuplicationModel->moveToProject($data['task_id'], $this->getParam('project_id'));
+        return $this->taskProjectMoveModel->moveToProject($data['task_id'], $this->getParam('project_id'));
     }
 
     /**

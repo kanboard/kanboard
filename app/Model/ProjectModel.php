@@ -246,19 +246,6 @@ class ProjectModel extends Base
     }
 
     /**
-     * Get Priority range from a project
-     *
-     * @access public
-     * @param  array $project
-     * @return array
-     */
-    public function getPriorities(array $project)
-    {
-        $range = range($project['priority_start'], $project['priority_end']);
-        return array_combine($range, $range);
-    }
-
-    /**
      * Gather some task metrics for a given project
      *
      * @access public

@@ -76,7 +76,7 @@ class TaskDuplicateAnotherProject extends Base
     public function doAction(array $data)
     {
         $destination_column_id = $this->columnModel->getFirstColumnId($this->getParam('project_id'));
-        return (bool) $this->taskDuplicationModel->duplicateToProject($data['task_id'], $this->getParam('project_id'), null, $destination_column_id);
+        return (bool) $this->taskProjectDuplicationModel->duplicateToProject($data['task_id'], $this->getParam('project_id'), null, $destination_column_id);
     }
 
     /**

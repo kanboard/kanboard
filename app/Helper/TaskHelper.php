@@ -27,17 +27,17 @@ class TaskHelper extends Base
 
     public function recurrenceTriggers()
     {
-        return $this->taskModel->getRecurrenceTriggerList();
+        return $this->taskRecurrenceModel->getRecurrenceTriggerList();
     }
 
     public function recurrenceTimeframes()
     {
-        return $this->taskModel->getRecurrenceTimeframeList();
+        return $this->taskRecurrenceModel->getRecurrenceTimeframeList();
     }
 
     public function recurrenceBasedates()
     {
-        return $this->taskModel->getRecurrenceBasedateList();
+        return $this->taskRecurrenceModel->getRecurrenceBasedateList();
     }
 
     public function selectTitle(array $values, array $errors)
@@ -70,6 +70,7 @@ class TaskHelper extends Base
         $options = $this->tagModel->getAssignableList($project['id']);
 
         $html = $this->helper->form->label(t('Tags'), 'tags[]');
+        $html .= '<input type="hidden" name="tags[]" value="">';
         $html .= '<select name="tags[]" id="form-tags" class="tag-autocomplete" multiple>';
 
         foreach ($options as $tag) {
@@ -167,9 +168,19 @@ class TaskHelper extends Base
         return $html;
     }
 
-    public function selectTimeEstimated(array $values, array $errors = array(), array $attributes = array())
+    public function selectReference(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="9"'), $attributes);
+
+        $html = $this->helper->form->label(t('Reference'), 'reference');
+        $html .= $this->helper->form->text('reference', $values, $errors, $attributes, 'form-input-small');
+
+        return $html;
+    }
+
+    public function selectTimeEstimated(array $values, array $errors = array(), array $attributes = array())
+    {
+        $attributes = array_merge(array('tabindex="10"'), $attributes);
 
         $html = $this->helper->form->label(t('Original estimate'), 'time_estimated');
         $html .= $this->helper->form->numeric('time_estimated', $values, $errors, $attributes);
@@ -180,7 +191,7 @@ class TaskHelper extends Base
 
     public function selectTimeSpent(array $values, array $errors = array(), array $attributes = array())
     {
-        $attributes = array_merge(array('tabindex="10"'), $attributes);
+        $attributes = array_merge(array('tabindex="11"'), $attributes);
 
         $html = $this->helper->form->label(t('Time spent'), 'time_spent');
         $html .= $this->helper->form->numeric('time_spent', $values, $errors, $attributes);
@@ -192,7 +203,7 @@ class TaskHelper extends Base
     public function selectStartDate(array $values, array $errors = array(), array $attributes = array())
     {
         $placeholder = date($this->configModel->get('application_date_format', 'm/d/Y H:i'));
-        $attributes = array_merge(array('tabindex="11"', 'placeholder="'.$placeholder.'"'), $attributes);
+        $attributes = array_merge(array('tabindex="12"', 'placeholder="'.$placeholder.'"'), $attributes);
 
         $html = $this->helper->form->label(t('Start Date'), 'date_started');
         $html .= $this->helper->form->text('date_started', $values, $errors, $attributes, 'form-datetime');
@@ -203,7 +214,7 @@ class TaskHelper extends Base
     public function selectDueDate(array $values, array $errors = array(), array $attributes = array())
     {
         $placeholder = date($this->configModel->get('application_date_format', 'm/d/Y'));
-        $attributes = array_merge(array('tabindex="12"', 'placeholder="'.$placeholder.'"'), $attributes);
+        $attributes = array_merge(array('tabindex="13"', 'placeholder="'.$placeholder.'"'), $attributes);
 
         $html = $this->helper->form->label(t('Due Date'), 'date_due');
         $html .= $this->helper->form->text('date_due', $values, $errors, $attributes, 'form-date');

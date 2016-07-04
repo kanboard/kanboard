@@ -22,7 +22,7 @@ class TaskTagModelTest extends Base
         $this->assertEquals(1, $tagModel->create(0, 'My tag 1'));
         $this->assertEquals(2, $tagModel->create(0, 'My tag 2'));
 
-        $this->assertTrue($taskTagModel->save(1, 1, array('My tag 1', 'My tag 2', 'My tag 3')));
+        $this->assertTrue($taskTagModel->save(1, 1, array('My tag 1', 'My tag 2', '', 'My tag 3')));
 
         $tags = $taskTagModel->getTagsByTask(1);
         $this->assertCount(3, $tags);
@@ -123,5 +123,26 @@ class TaskTagModelTest extends Base
 
         $tags = $taskTagModel->getTagsByTasks(array());
         $this->assertEquals(array(), $tags);
+    }
+
+    public function testGetTagIdNotAvailableInDestinationProject()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskTagModel = new TaskTagModel($this->container);
+        $tagModel = new TagModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'P2')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test1')));
+
+        $this->assertEquals(1, $tagModel->create(0, 'T0'));
+        $this->assertEquals(2, $tagModel->create(2, 'T1'));
+        $this->assertEquals(3, $tagModel->create(2, 'T3'));
+        $this->assertEquals(4, $tagModel->create(1, 'T2'));
+        $this->assertEquals(5, $tagModel->create(1, 'T3'));
+        $this->assertTrue($taskTagModel->save(1, 1, array('T0', 'T2', 'T3')));
+
+        $this->assertEquals(array(4, 5), $taskTagModel->getTagIdsByTaskNotAvailableInProject(1, 2));
     }
 }

@@ -108,8 +108,6 @@ class TaskModificationModel extends Base
         if (isset($values['tags'])) {
             $this->taskTagModel->save($original_task['project_id'], $values['id'], $values['tags']);
             unset($values['tags']);
-        } else {
-            $this->taskTagModel->save($original_task['project_id'], $values['id'], array());
         }
     }
 }

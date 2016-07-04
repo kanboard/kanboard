@@ -26,7 +26,8 @@ archive:
 	@ rm -rf ${BUILD_DIR}/kanboard/*.lock
 	@ rm -rf ${BUILD_DIR}/kanboard/*.json
 	@ rm -rf ${BUILD_DIR}/kanboard/*.js
-	@ rm -rf ${BUILD_DIR}/kanboard/.docker
+	@ rm -rf ${BUILD_DIR}/kanboard/.dockerignore
+	@ rm -rf ${BUILD_DIR}/kanboard/docker
 	@ rm -rf ${BUILD_DIR}/kanboard/nitrous*
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name doc -type d -exec rm -rf {} +;
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name notes -type d -exec rm -rf {} +;
