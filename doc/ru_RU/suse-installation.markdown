@@ -34,29 +34,29 @@ OpenSuse Leap 42.1[¶](#opensuse-leap-42-1 "Ссылка на этот заго�
 
 
 
-### Related Topics
+ 
 
 
 
--   [Documentation overview](index.markdown)
+ 
 
 
 
-### Эта страница
+ 
 
 
 
--   [Исходный текст](_sources/suse-installation.txt)
+ 
 
 
 
-### Быстрый поиск
+ 
 
 
 
-Введите слова для поиска или имя модуля, класса или функции.
+ 
 
 
 
-©2016, Kanboard.ru. | Powered by [Sphinx 1.3.3](http://sphinx-doc.org/) & [Alabaster 0.7.8](https://github.com/bitprophet/alabaster) | [Page source](_sources/suse-installation.txt)
+[Русская документация Kanboard](http://kanboard.ru/doc/)
 

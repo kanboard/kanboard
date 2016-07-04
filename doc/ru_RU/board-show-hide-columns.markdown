@@ -8,7 +8,7 @@
 
 
 
-![Hide a column](_images/hide-column.png)
+![Hide a column](screenshots/hide-column.png)
 
 
 
@@ -20,7 +20,7 @@
 
 
 
-![Show a column](_images/show-column.png)
+![Show a column](screenshots/show-column.png)
 
 
 
@@ -32,29 +32,29 @@
 
 
 
-### Related Topics
+ 
 
 
 
--   [Documentation overview](index.markdown)
+ 
 
 
 
-### Эта страница
+ 
 
 
 
--   [Исходный текст](_sources/board-show-hide-columns.txt)
+ 
 
 
 
-### Быстрый поиск
+ 
 
 
 
-Введите слова для поиска или имя модуля, класса или функции.
+ 
 
 
 
-©2016, Kanboard.ru. | Powered by [Sphinx 1.3.3](http://sphinx-doc.org/) & [Alabaster 0.7.8](https://github.com/bitprophet/alabaster) | [Page source](_sources/board-show-hide-columns.txt)
+[Русская документация Kanboard](http://kanboard.ru/doc/)
 

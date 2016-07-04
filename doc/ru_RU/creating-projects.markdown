@@ -34,7 +34,7 @@ Kanboard может содержать одновременно нескольк
 
 
 
-![Project creation form](_images/new-project.png)
+![Project creation form](screenshots/new-project.png)
 
 
 
@@ -112,29 +112,29 @@ Kanboard может содержать одновременно нескольк
 
 
 
-### Related Topics
+ 
 
 
 
--   [Documentation overview](index.markdown)
+ 
 
 
 
-### Эта страница
+ 
 
 
 
--   [Исходный текст](_sources/creating-projects.txt)
+ 
 
 
 
-### Быстрый поиск
+ 
 
 
 
-Введите слова для поиска или имя модуля, класса или функции.
+ 
 
 
 
-©2016, Kanboard.ru. | Powered by [Sphinx 1.3.3](http://sphinx-doc.org/) & [Alabaster 0.7.8](https://github.com/bitprophet/alabaster) | [Page source](_sources/creating-projects.txt)
+[Русская документация Kanboard](http://kanboard.ru/doc/)
 

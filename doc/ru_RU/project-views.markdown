@@ -14,7 +14,7 @@
 
 
 
-![Board view](_images/board-view.png)
+![Board view](screenshots/board-view.png)
 
 
 
@@ -34,7 +34,7 @@
 
 
 
-![Board Task Limit](_images/board-task-limit.png)
+![Board Task Limit](screenshots/board-task-limit.png)
 
 
 
@@ -46,7 +46,7 @@
 
 
 
-[Ознакомится с настройками Доски (нажмите ссылку)](board-configuration.markdown)
+[Ознакомится с настройками Доски](board-configuration.markdown)
 
 
 
@@ -56,7 +56,7 @@
 
 
 
-![Calendar view](_images/calendar-view.png)
+![Calendar view](screenshots/calendar-view.png)
 
 
 
@@ -108,7 +108,7 @@
 
 
 
-![Gantt view](_images/gantt-view.png)
+![Gantt view](screenshots/gantt-view.png)
 
 
 
@@ -134,7 +134,7 @@
 
 
 
-![Project overview](_images/project-view.png)
+![Project overview](screenshots/project-view.png)
 
 
 
@@ -176,29 +176,29 @@
 
 
 
-### Related Topics
+ 
 
 
 
--   [Documentation overview](index.markdown)
+ 
 
 
 
-### Эта страница
+ 
 
 
 
--   [Исходный текст](_sources/project-views.txt)
+ 
 
 
 
-### Быстрый поиск
+ 
 
 
 
-Введите слова для поиска или имя модуля, класса или функции.
+ 
 
 
 
-©2016, Kanboard.ru. | Powered by [Sphinx 1.3.3](http://sphinx-doc.org/) & [Alabaster 0.7.8](https://github.com/bitprophet/alabaster) | [Page source](_sources/project-views.txt)
+[Русская документация Kanboard](http://kanboard.ru/doc/)
 

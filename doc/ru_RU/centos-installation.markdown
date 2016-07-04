@@ -140,29 +140,29 @@ Centos 6.x[¶](#centos-6-x "Ссылка на этот заголовок")
 
 
 
-### Related Topics
+ 
 
 
 
--   [Documentation overview](index.markdown)
+ 
 
 
 
-### Эта страница
+ 
 
 
 
--   [Исходный текст](_sources/centos-installation.txt)
+ 
 
 
 
-### Быстрый поиск
+ 
 
 
 
-Введите слова для поиска или имя модуля, класса или функции.
+ 
 
 
 
-©2016, Kanboard.ru. | Powered by [Sphinx 1.3.3](http://sphinx-doc.org/) & [Alabaster 0.7.8](https://github.com/bitprophet/alabaster) | [Page source](_sources/centos-installation.txt)
+[Русская документация Kanboard](http://kanboard.ru/doc/)
 
