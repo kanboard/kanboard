@@ -1,10 +1,10 @@
-Документация[¶](#documentation "Ссылка на этот заголовок")
+Документация[¶](#documentation)
 
 ==========================================================
 
 
 
-Как работать в Kanboard[¶](#using-kanboard "Ссылка на этот заголовок")
+Как работать в Kanboard[¶](#using-kanboard)
 
 ----------------------------------------------------------------------
 
@@ -114,7 +114,7 @@
 
 
 
--   [Добавление снимка экрана (скриншота)](screenshots.markdown)
+-   [Добавление снимка экрана](screenshots.markdown)
 
 
 
@@ -465,30 +465,5 @@
         -   [Участие в проекте](#contributors)
 
 
-
-### Related Topics
-
-
-
--   [Documentation overview](#)
-
-
-
-### Эта страница
-
-
-
--   [Исходный текст](_sources/index.txt)
-
-
-
-### Быстрый поиск
-
-
-
-Введите слова для поиска или имя модуля, класса или функции.
-
-
-
-©2016, Kanboard.ru. | Powered by [Sphinx 1.3.3](http://sphinx-doc.org/) & [Alabaster 0.7.8](https://github.com/bitprophet/alabaster) | [Page source](_sources/index.txt)
+[Русская документация Канборд](http://kanboard.ru/doc/)
 
