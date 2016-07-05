@@ -10,7 +10,7 @@ const VERSION = 91;
 
 function version_91(PDO $pdo)
 {
-    $pdo->exec("ALTER TABLE columns ADD COLUMN hide_in_dashboard INTEGER DEFAULT 0 NOT NULL");
+    $pdo->exec("ALTER TABLE columns ADD COLUMN hide_in_dashboard BOOLEAN DEFAULT '0'");
 }
 
 function version_90(PDO $pdo)
