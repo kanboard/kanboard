@@ -56,6 +56,10 @@ class TwoFactorController extends UserViewController
         $label = $user['email'] ?: $user['username'];
         $provider = $this->authenticationManager->getPostAuthenticationProvider();
 
+        print "SN: " . SERVER_NAME."<br>";
+
+        $options['issuer'] = SERVER_NAME;
+
         if (! isset($this->sessionStorage->twoFactorSecret)) {
             $provider->generateSecret();
             $provider->beforeCode();
@@ -67,8 +71,8 @@ class TwoFactorController extends UserViewController
         $this->response->html($this->helper->layout->user('twofactor/show', array(
             'user' => $user,
             'secret' => $this->sessionStorage->twoFactorSecret,
-            'qrcode_url' => $provider->getQrCodeUrl($label),
-            'key_url' => $provider->getKeyUrl($label),
+            'qrcode_url' => $provider->getQrCodeUrl($label,$options),
+            'key_url' => $provider->getKeyUrl($label,$options),
         )));
     }
 
