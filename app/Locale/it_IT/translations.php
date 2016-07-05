@@ -1216,4 +1216,5 @@ return array(
     'Global tags' => 'Tag globali',
     'There is no global tag at the moment.' => 'Non sono definiti tag globali al momento.',
     'This field cannot be empty' => 'Questo campo non può essere vuoto',
+    // 'Hide tasks in this column in the Dashboard' => '',
 );
