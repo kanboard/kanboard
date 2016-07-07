@@ -56,9 +56,7 @@ class TwoFactorController extends UserViewController
         $label = $user['email'] ?: $user['username'];
         $provider = $this->authenticationManager->getPostAuthenticationProvider();
 
-        print "SN: " . SERVER_NAME."<br>";
-
-        $options['issuer'] = SERVER_NAME;
+        $options['issuer'] = TOTP_ISSUER;
 
         if (! isset($this->sessionStorage->twoFactorSecret)) {
             $provider->generateSecret();

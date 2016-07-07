@@ -1,4 +1,4 @@
-<?php
+G<?php
 
 /*******************************************************************/
 /* Rename this file to config.php if you want to change the values */
@@ -55,6 +55,10 @@ define('DB_PORT', null);
 
 // Mysql SSL key
 define('DB_SSL_KEY', null);
+
+//  Used to generate the issuer for the QR Code
+// Defaults to Server Name
+//define('TOTP_ISSUER',"Kanboard Development");
 
 // Mysql SSL certificate
 define('DB_SSL_CERT', null);
