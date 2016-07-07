@@ -944,7 +944,7 @@ return array(
     'Project Manager' => 'Chef de projet',
     'Project Member' => 'Membre du projet',
     'Project Viewer' => 'Visualiseur de projet',
-    'Your account is locked for %d minutes' => 'Votre compte est vérouillé pour %d minutes',
+    'Your account is locked for %d minutes' => 'Votre compte est verrouillé pour %d minutes',
     'Invalid captcha' => 'Captcha invalid',
     'The name must be unique' => 'Le nom doit être unique',
     'View all groups' => 'Voir tous les groupes',
