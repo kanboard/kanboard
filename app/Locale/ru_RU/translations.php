@@ -1216,5 +1216,5 @@ return array(
     'Global tags' => 'Глобальные метка',
     'There is no global tag at the moment.' => 'Нет глобальных меток.',
     'This field cannot be empty' => 'Это поле не может быть пустым',
-    // 'Hide tasks in this column in the Dashboard' => '',
+    'Hide tasks in this column in the Dashboard' => 'Не показывать задачи из этой колонки в кабинете',
 );
