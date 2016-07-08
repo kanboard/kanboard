@@ -152,8 +152,10 @@ class Client extends Base
         }
 
         $startTime = microtime(true);
-        $stream = @fopen(trim($url), 'r', false, stream_context_create($this->getContext($method, $content, $headers)));
+        $stream = fopen(trim($url), 'r', false, stream_context_create($this->getContext($method, $content, $headers)));
         $response = '';
+
+	$this->logger->debug('HttpClient: stream='.$stream);
 
         if (is_resource($stream)) {
             $response = stream_get_contents($stream);

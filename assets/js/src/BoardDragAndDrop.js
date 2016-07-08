@@ -29,11 +29,14 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
             var newSwimlaneId = task.parent().attr('data-swimlane-id');
             var newPosition = task.index() + 1;
 
+            var boardId = task.closest("table").attr("data-project-id");
+            var saveURL = task.closest("table").attr("data-save-url");
+
             task.removeClass("draggable-item-selected");
 
             if (newColumnId != taskColumnId || newSwimlaneId != taskSwimlaneId || newPosition != taskPosition) {
-                self.changeTaskState(taskId);
-                self.save(taskId, newColumnId, newPosition, newSwimlaneId);
+                self.changeTaskState(boardId,taskId);
+                self.save(saveURL, boardId,taskId, newColumnId, newPosition, newSwimlaneId);
             }
         },
         start: function(event, ui) {
@@ -50,20 +53,21 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
     $(".board-task-list").sortable(params);
 };
 
-Kanboard.BoardDragAndDrop.prototype.changeTaskState = function(taskId) {
-    var task = $("div[data-task-id=" + taskId + "]");
+Kanboard.BoardDragAndDrop.prototype.changeTaskState = function(boardId, taskId) {
+    var board = $("table[data-project-id=" + boardId+"]");
+    var task = board.find("div[data-task-id=" + taskId + "]");
     task.addClass('task-board-saving-state');
     task.find('.task-board-saving-icon').show();
 };
 
-Kanboard.BoardDragAndDrop.prototype.save = function(taskId, columnId, position, swimlaneId) {
+Kanboard.BoardDragAndDrop.prototype.save = function(saveURL,boardId,taskId, columnId, position, swimlaneId) {
     var self = this;
     self.app.showLoadingIcon();
     self.savingInProgress = true;
 
     $.ajax({
         cache: false,
-        url: $("#board").data("save-url"),
+        url: saveURL,
         contentType: "application/json",
         type: "POST",
         processData: false,
@@ -74,7 +78,7 @@ Kanboard.BoardDragAndDrop.prototype.save = function(taskId, columnId, position, 
             "position": position
         }),
         success: function(data) {
-            self.refresh(data);
+            self.refresh(boardId,data);
             self.savingInProgress = false;
         },
         error: function() {
@@ -84,8 +88,8 @@ Kanboard.BoardDragAndDrop.prototype.save = function(taskId, columnId, position, 
     });
 };
 
-Kanboard.BoardDragAndDrop.prototype.refresh = function(data) {
-    $("#board-container").replaceWith(data);
+Kanboard.BoardDragAndDrop.prototype.refresh = function(boardId,data) {
+    $("div[id=board-container][data-project-id="+boardId+"]").replaceWith(data);
 
     this.app.hideLoadingIcon();
     this.dragAndDrop();
