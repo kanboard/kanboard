@@ -1217,5 +1217,5 @@ return array(
     'Global tags' => 'Libellés globaux',
     'There is no global tag at the moment.' => 'Il n\'y a aucun libellé global pour le moment.',
     'This field cannot be empty' => 'Ce champ ne peut être vide',
-    // 'Hide tasks in this column in the Dashboard' => '',
+    // 'Hide tasks in this column in the dashboard' => '',
 );

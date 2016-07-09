@@ -98,8 +98,8 @@ CREATE TABLE "columns" (
     "position" integer,
     "project_id" integer NOT NULL,
     "task_limit" integer DEFAULT 0,
-    "hide_in_dashboard" integer DEFAULT 0,
-    "description" "text"
+    "description" "text",
+    "hide_in_dashboard" boolean DEFAULT false
 );
 
 
@@ -2243,7 +2243,8 @@ INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_high
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_public_refresh_interval', '60', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_private_refresh_interval', '10', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_columns', '', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', '1aff324d30632aaed0d4f4dc1281be0d5bbc7b4fcddccc4badcd6c8f3d43', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', 'c9a7c2a4523f1724b2ca047c5685f8e2b26bba47eb69baf4f22d5d50d837', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', 'c57a6cb1789269547b616454e4e2f06d3de0514f83baf8fa5b5a8af44a08', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_language', 'en_US', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_timezone', 'UTC', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_url', '', 0, 0);
@@ -2261,7 +2262,6 @@ INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('default_co
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('subtask_time_tracking', '1', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('cfd_include_closed_tasks', '1', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('password_reset', '1', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', '19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929', 0, 0);
 
 
 --
@@ -2313,4 +2313,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$Kv6fus67I/ZG/3LYJ7bRLeis8bk8455Lwtu12ElgnGm3lhRs/z7Ni', 'app-admin');INSERT INTO schema_version VALUES ('90');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$g28mYPBdsf3/gX/ayd7A8.HSPBRQ/zM/PXlfijelJhXwhnukCRIDi', 'app-admin');INSERT INTO schema_version VALUES ('91');

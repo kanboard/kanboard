@@ -44,8 +44,8 @@ CREATE TABLE `columns` (
   `position` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
   `task_limit` int(11) DEFAULT '0',
-  `hide_in_dashboard` int(11) DEFAULT '0',
   `description` text,
+  `hide_in_dashboard` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_title_project` (`title`,`project_id`),
   KEY `columns_project_idx` (`project_id`),
@@ -700,4 +700,4 @@ UNLOCK TABLES;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$Kv6fus67I/ZG/3LYJ7bRLeis8bk8455Lwtu12ElgnGm3lhRs/z7Ni', 'app-admin');INSERT INTO schema_version VALUES ('111');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$g28mYPBdsf3/gX/ayd7A8.HSPBRQ/zM/PXlfijelJhXwhnukCRIDi', 'app-admin');INSERT INTO schema_version VALUES ('112');

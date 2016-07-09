@@ -57,7 +57,7 @@
         <th class="column-40"><?= t('Column') ?></th>
         <th class="column-20"><?= t('Task limit') ?></th>
         <th class="column-20"><?= t('Active tasks') ?></th>
-        <th class="column-20"><?= t('Hide tasks in this column in the Dashboard') ?></th>
+        <th class="column-20"><?= t('Hide tasks in this column in the dashboard') ?></th>
     </tr>
     <?php foreach ($stats['columns'] as $column): ?>
     <tr>

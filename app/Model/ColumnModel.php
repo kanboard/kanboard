@@ -138,11 +138,12 @@ class ColumnModel extends Base
      * Add a new column to the board
      *
      * @access public
-     * @param  integer   $project_id    Project id
-     * @param  string    $title         Column title
-     * @param  integer   $task_limit    Task limit
-     * @param  string    $description   Column description
-     * @return boolean|integer
+     * @param  integer $project_id  Project id
+     * @param  string  $title       Column title
+     * @param  integer $task_limit  Task limit
+     * @param  string  $description Column description
+     * @param  integer $hide_in_dashboard
+     * @return bool|int
      */
     public function create($project_id, $title, $task_limit = 0, $description = '', $hide_in_dashboard = 0)
     {
@@ -166,6 +167,7 @@ class ColumnModel extends Base
      * @param  string    $title         Column title
      * @param  integer   $task_limit    Task limit
      * @param  string    $description   Optional description
+     * @param  integer   $hide_in_dashboard
      * @return boolean
      */
     public function update($column_id, $title, $task_limit = 0, $description = '', $hide_in_dashboard = 0)

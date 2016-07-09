@@ -1216,5 +1216,5 @@ return array(
     'Global tags' => 'Etiquetas globais',
     'There is no global tag at the moment.' => 'De momento não existe nenhuma etiqueta global.',
     // 'This field cannot be empty' => '',
-    //'Hide tasks in this column in the Dashboard' => '',
+    //'Hide tasks in this column in the dashboard' => '',
 );

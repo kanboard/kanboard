@@ -15,7 +15,7 @@
     <?= $this->form->label(t('Task limit'), 'task_limit') ?>
     <?= $this->form->number('task_limit', $values, $errors) ?>
 
-    <?= $this->form->checkbox('hide_in_dashboard', t('Hide tasks in this column in the Dashboard'), 1, $values['hide_in_dashboard'] == 1) ?>
+    <?= $this->form->checkbox('hide_in_dashboard', t('Hide tasks in this column in the dashboard'), 1, $values['hide_in_dashboard'] == 1) ?>
 
     <?= $this->form->label(t('Description'), 'description') ?>
     <?= $this->form->textarea('description', $values, $errors, array(), 'markdown-editor') ?>
