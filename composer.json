@@ -37,7 +37,8 @@
         "swiftmailer/swiftmailer" : "5.4.2",
         "symfony/console" : "2.8.7",
         "symfony/event-dispatcher" : "2.7.14",
-        "gregwar/captcha": "1.1.1"
+        "gregwar/captcha": "1.1.1",
+        "symfony/stopwatch": "^2.8"
     },
     "autoload" : {
         "classmap" : ["app/"],
@@ -52,7 +53,6 @@
     "require-dev" : {
         "phpdocumentor/reflection-docblock": "2.0.4",
         "symfony/yaml": "2.8.7",
-        "symfony/stopwatch" : "2.6.13",
         "phpunit/phpunit" : "4.8.26",
         "phpunit/phpunit-selenium": "2.0.2"
     }

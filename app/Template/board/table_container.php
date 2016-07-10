@@ -1,4 +1,4 @@
-<div id="board-container">
+<div id="board-container" data-project-id="<?= $project['id'] ?>">
     <?php if (empty($swimlanes) || empty($swimlanes[0]['nb_columns'])): ?>
         <p class="alert alert-error"><?= t('There is no column or swimlane activated in your project!') ?></p>
     <?php else: ?>

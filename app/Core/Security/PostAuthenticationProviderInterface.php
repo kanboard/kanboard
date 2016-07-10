@@ -56,7 +56,7 @@ interface PostAuthenticationProviderInterface extends AuthenticationProviderInte
      * @param  string $label
      * @return string
      */
-    public function getQrCodeUrl($label);
+    public function getQrCodeUrl($label,$options);
 
     /**
      * Get key url (empty if no url can be provided)
@@ -65,5 +65,5 @@ interface PostAuthenticationProviderInterface extends AuthenticationProviderInte
      * @param  string $label
      * @return string
      */
-    public function getKeyUrl($label);
+    public function getKeyUrl($label,$options);
 }
