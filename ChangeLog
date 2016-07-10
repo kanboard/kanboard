@@ -6,6 +6,10 @@ New features:
 * New automated action to close tasks without activity in a specific column
 * Added the possibility to hide tasks in dashboard for a specific column
 
+Improvements:
+
+* Display TOTP issuer for 2FA
+
 Version 1.0.31
 --------------
 
