@@ -1,3 +1,11 @@
+Version 1.0.32 (unreleased)
+--------------
+
+New features:
+
+* New automated action to close tasks without activity in a specific column
+* Added the possibility to hide tasks in dashboard for a specific column
+
 Version 1.0.31
 --------------
 
@@ -31,6 +39,10 @@ Bug fixes:
 * Fixed empty title for web notification with only one overdue task
 * Take default swimlane into consideration for SwimlaneModel::getFirstActiveSwimlane()
 * Fixed "due today" highlighting
+
+Breaking changes:
+
+* Docker volume paths are changed to /var/www/app/{data,plugins}
 
 Version 1.0.30
 --------------
