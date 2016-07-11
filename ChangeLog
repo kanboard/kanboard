@@ -10,6 +10,10 @@ Improvements:
 
 * Display TOTP issuer for 2FA
 
+Bug fixes:
+
+* Fixed compatibility issue with PHP 5.3 for OAuthUserProvider class
+
 Version 1.0.31
 --------------
 
