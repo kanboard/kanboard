@@ -9,7 +9,7 @@
             <th class="column-5"><?= $paginator->order('Id', 'tasks.id') ?></th>
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
             <th><?= $paginator->order(t('Task'), 'title') ?></th>
-            <th class="column-5"><?= $paginator->order('Priority', 'tasks.priority') ?></th>
+            <th class="column-5"><?= $paginator->order(t('Priority'), 'tasks.priority') ?></th>
             <th class="column-20"><?= t('Time tracking') ?></th>
             <th class="column-10"><?= $paginator->order(t('Due date'), 'date_due') ?></th>
             <th class="column-10"><?= $paginator->order(t('Column'), 'column_title') ?></th>
