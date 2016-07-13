@@ -19,16 +19,16 @@ Kanboard.BoardPolling.prototype.check = function() {
 
         // Poll every board
         $("table[id=board]").each(function() {
-            var boardid = $(this).attr("data-project-id");
-            var url = $(this).attr("data-check-url");
+          var boardid = $(this).attr("data-project-id");
+          var url = $(this).attr("data-check-url");
             $.ajax({
                 cache: false,
                 url: url,
                 statusCode: {
                     200: function(data) {
-                        self.app.get("BoardDragAndDrop").refresh(boardid, data);
+                        self.app.get("BoardDragAndDrop").refresh(boardid,data);
                     },
-                    304: function() {
+                    304: function () {
                         self.app.hideLoadingIcon();
                     }
                 }
