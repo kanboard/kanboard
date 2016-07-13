@@ -17,17 +17,22 @@ Kanboard.BoardPolling.prototype.check = function() {
         var self = this;
         this.app.showLoadingIcon();
 
-        $.ajax({
-            cache: false,
-            url: $("#board").data("check-url"),
-            statusCode: {
-                200: function(data) {
-                    self.app.get("BoardDragAndDrop").refresh(data);
-                },
-                304: function () {
-                    self.app.hideLoadingIcon();
+        // Poll every board
+        $("table[id=board]").each(function() {
+            var boardid = $(this).attr("data-project-id");
+            var url = $(this).attr("data-check-url");
+            $.ajax({
+                cache: false,
+                url: url,
+                statusCode: {
+                    200: function(data) {
+                        self.app.get("BoardDragAndDrop").refresh(boardid, data);
+                    },
+                    304: function() {
+                        self.app.hideLoadingIcon();
+                    }
                 }
-            }
+            });
         });
     }
 };

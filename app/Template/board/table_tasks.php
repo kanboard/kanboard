@@ -8,7 +8,7 @@
         >
 
             <!-- tasks list -->
-            <div class="board-task-list board-column-expanded" data-column-id="<?= $column['id'] ?>" data-swimlane-id="<?= $swimlane['id'] ?>" data-task-limit="<?= $column['task_limit'] ?>">
+            <div class="board-task-list board-column-expanded" data-project-id="<?= $project['id'] ?>" data-column-id="<?= $column['id'] ?>" data-swimlane-id="<?= $swimlane['id'] ?>" data-task-limit="<?= $column['task_limit'] ?>">
                 <?php foreach ($column['tasks'] as $task): ?>
                     <?= $this->render($not_editable ? 'board/task_public' : 'board/task_private', array(
                         'project' => $project,
