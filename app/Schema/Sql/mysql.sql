@@ -671,7 +671,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES ('api_token','19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929',0,0),('application_currency','USD',0,0),('application_date_format','m/d/Y',0,0),('application_language','en_US',0,0),('application_stylesheet','',0,0),('application_timezone','UTC',0,0),('application_url','',0,0),('board_columns','',0,0),('board_highlight_period','172800',0,0),('board_private_refresh_interval','10',0,0),('board_public_refresh_interval','60',0,0),('calendar_project_tasks','date_started',0,0),('calendar_user_subtasks_time_tracking','0',0,0),('calendar_user_tasks','date_started',0,0),('cfd_include_closed_tasks','1',0,0),('default_color','yellow',0,0),('integration_gravatar','0',0,0),('password_reset','1',0,0),('project_categories','',0,0),('subtask_restriction','0',0,0),('subtask_time_tracking','1',0,0),('webhook_token','1d62395a742260738a406789366a84138ced50a1be62e8862c5cf8d0a561',0,0),('webhook_url','',0,0);
+INSERT INTO `settings` VALUES ('api_token','4064ef3d26efa9a0ff78fa7067d8bb9d99323455128edd89e9dc7c53ed76',0,0),('application_currency','USD',0,0),('application_date_format','m/d/Y',0,0),('application_language','en_US',0,0),('application_stylesheet','',0,0),('application_timezone','UTC',0,0),('application_url','',0,0),('board_columns','',0,0),('board_highlight_period','172800',0,0),('board_private_refresh_interval','10',0,0),('board_public_refresh_interval','60',0,0),('calendar_project_tasks','date_started',0,0),('calendar_user_subtasks_time_tracking','0',0,0),('calendar_user_tasks','date_started',0,0),('cfd_include_closed_tasks','1',0,0),('default_color','yellow',0,0),('integration_gravatar','0',0,0),('password_reset','1',0,0),('project_categories','',0,0),('subtask_restriction','0',0,0),('subtask_time_tracking','1',0,0),('webhook_token','c8f53c0bcd8aead902ad04f180ffafd7889b9c0062c2d510e2297ef543b8',0,0),('webhook_url','',0,0);
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -700,4 +700,4 @@ UNLOCK TABLES;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$g28mYPBdsf3/gX/ayd7A8.HSPBRQ/zM/PXlfijelJhXwhnukCRIDi', 'app-admin');INSERT INTO schema_version VALUES ('112');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$yUJ9QnhG.f47yO.YvWKo3eMAHULukpluDNTOF9.Z7QQg0vOfFRB6u', 'app-admin');INSERT INTO schema_version VALUES ('112');

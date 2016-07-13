@@ -9,6 +9,7 @@ New features:
 Improvements:
 
 * Display TOTP issuer for 2FA
+* Make sure that the table schema_version use InnoDB for Mysql
 
 Bug fixes:
 
