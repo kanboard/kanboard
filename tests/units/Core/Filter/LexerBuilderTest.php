@@ -103,4 +103,24 @@ class LexerBuilderTest extends Base
         $this->assertFalse($builder === $clone);
         $this->assertFalse($builder->build('test')->getQuery() === $clone->build('test')->getQuery());
     }
+
+    public function testBuilderWithMixedCaseSearchAttribute()
+    {
+        $project = new ProjectModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $taskFinder = new TaskFinderModel($this->container);
+        $query = $taskFinder->getExtendedQuery();
+
+        $this->assertEquals(1, $project->create(array('name' => 'Project')));
+        $this->assertNotFalse($taskCreation->create(array('project_id' => 1, 'title' => 'Test')));
+
+        $builder = new LexerBuilder();
+        $builder->withFilter(new TaskAssigneeFilter());
+        $builder->withFilter(new TaskTitleFilter(), true);
+        $builder->withQuery($query);
+        $tasks = $builder->build('AsSignEe:nobody')->toArray();
+
+        $this->assertCount(1, $tasks);
+        $this->assertEquals('Test', $tasks[0]['title']);
+    }
 }
