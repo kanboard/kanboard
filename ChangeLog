@@ -4,6 +4,7 @@ Version 1.0.32 (unreleased)
 New features:
 
 * New automated action to close tasks without activity in a specific column
+* Added search filter for task priority
 * Added the possibility to hide tasks in dashboard for a specific column
 
 Improvements:
