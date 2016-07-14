@@ -58,10 +58,6 @@ class NotificationJob extends BaseJob
     {
         $values = array();
 
-        if (! empty($event['changes'])) {
-            $values['changes'] = $event['changes'];
-        }
-
         switch ($eventObjectName) {
             case 'Kanboard\Event\TaskEvent':
                 $values['task'] = $this->taskFinderModel->getDetails($event['task_id']);
@@ -80,6 +76,13 @@ class NotificationJob extends BaseJob
                 break;
         }
 
+        // Need to use an array filter to remove any unset/null values in $values. This can happen e.g.
+        // when receiving an event for a task, but the task is already removed. This can happen when
+        // using the Kanboard background worker thread.
+        $values = array_filter($values);
+        if (!empty($values) && !empty($event['changes'])) {
+          $values['changes'] = $event['changes'];
+        }
         return $values;
     }
 }
