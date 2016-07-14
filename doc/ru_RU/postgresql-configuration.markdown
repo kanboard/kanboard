@@ -1,6 +1,5 @@
-Настройка Postgresql[¶](#postgresql-configuration "Ссылка на этот заголовок")
-
-=============================================================================
+Настройка Postgresql
+====================
 
 
 
@@ -9,7 +8,6 @@
 
 
 Требования[¶](#requirements "Ссылка на этот заголовок")
-
 -------------------------------------------------------
 
 
@@ -18,7 +16,7 @@
 
 
 
--   Установленное PHP расширение - `pdo_pgsql`{.docutils .literal} (Debian/Ubuntu: `apt-get install php5-pgsql`{.docutils .literal})
+-   Установленное PHP расширение - `pdo_pgsql` (Debian/Ubuntu: `apt-get install php5-pgsql`)
 
 
 
@@ -27,12 +25,11 @@
 
 
 Настройка[¶](#configuration "Ссылка на этот заголовок")
-
 -------------------------------------------------------
 
 
 
-### Создайте пустую базу данных выполнив команду `pgsql`{.docutils .literal}:[¶](#create-an-empty-database-with-the-command-pgsql "Ссылка на этот заголовок")
+### Создайте пустую базу данных выполнив команду `pgsql`:[¶](#create-an-empty-database-with-the-command-pgsql "Ссылка на этот заголовок")
 
 
 
@@ -44,33 +41,24 @@
 
 
 
-Файл `config.php`{.docutils .literal} должен содержать следующие значения:
+Файл `config.php` должен содержать следующие значения:
+
+```php
+<?php
+
+// We choose to use Postgresql instead of Sqlite
+define('DB_DRIVER', 'postgres');
+
+// Mysql parameters
+define('DB_USERNAME', 'REPLACE_ME');
+define('DB_PASSWORD', 'REPLACE_ME');
+define('DB_HOSTNAME', 'REPLACE_ME');
+define('DB_NAME', 'kanboard');
+```
 
 
 
-    <?php
-
-
-
-    // We choose to use Postgresql instead of Sqlite
-
-    define('DB_DRIVER', 'postgres');
-
-
-
-    // Mysql parameters
-
-    define('DB_USERNAME', 'REPLACE_ME');
-
-    define('DB_PASSWORD', 'REPLACE_ME');
-
-    define('DB_HOSTNAME', 'REPLACE_ME');
-
-    define('DB_NAME', 'kanboard');
-
-
-
-Примечание: Вы можете переименовать демонстрационный файл `config.default.php`{.docutils .literal} в `config.php`{.docutils .literal}.
+Примечание: Вы можете переименовать демонстрационный файл `config.default.php` в `config.php`.
 
 
 
@@ -84,13 +72,11 @@
 
 Для избежания проблем или задержек вы можете инициализировать базу данных напрямую посредством импорта схемы SQL:
 
+```bash
+psql -U postgres my_database < app/Schema/Sql/postgres.sql
+```
 
-
-    psql -U postgres my_database < app/Schema/Sql/postgres.sql
-
-
-
-Файл `app/Schema/Sql/postgres.sql`{.docutils .literal} - это sql дамп, который представляет последнюю версию базы данных.
+Файл `app/Schema/Sql/postgres.sql` - это sql дамп, который представляет последнюю версию базы данных.
 
 
 
