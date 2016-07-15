@@ -146,26 +146,6 @@
 
 
 
-### [Оглавление](index.markdown)
-
-
-
--   [Синхронизация групп LDAP](#)
-
-    -   [Требования](#requirements)
-
-    -   [Автоматическое определение ролей пользователей на основании LDAP групп](#define-automatically-user-roles-based-on-ldap-groups)
-
-        -   [Пример для Active Directory:](#example-for-active-directory)
-
-        -   [Пример OpenLDAP с Posix Groups:](#example-for-openldap-with-posix-groups)
-
-    -   [Автоматическая загрузка групп LDAP для Канборд проекта](#automatically-load-ldap-groups-for-project-permissions)
-
-        -   [Пример для Active Directory:](#id1)
-
-        -   [Пример OpenLDAP с Posix Groups:](#id2)
-
 
 
 

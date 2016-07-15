@@ -80,40 +80,6 @@ psql -U postgres my_database < app/Schema/Sql/postgres.sql
 
 
 
-### [Оглавление](index.markdown)
-
-
-
--   [Настройка Postgresql](#)
-
-    -   [Требования](#requirements)
-
-    -   [Настройка](#configuration)
-
-        -   [Создайте пустую базу данных выполнив команду `pgsql`{.docutils .literal}:](#create-an-empty-database-with-the-command-pgsql)
-
-        -   [Создание конфигурационного файла](#create-a-config-file)
-
-        -   [Импортирование дампа SQL (альтернативный метод)](#importing-sql-dump-alternative-method)
-
-
-
- 
-
-
-
- 
-
-
-
- 
-
-
-
- 
-
-
-
  
 
 

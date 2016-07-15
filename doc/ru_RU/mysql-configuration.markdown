@@ -122,25 +122,6 @@
 
 
 
-### [Оглавление](index.markdown)
-
-
-
--   [Настройка Mysql/MariaDB](#)
-
-    -   [Требования](#requirements)
-
-    -   [Настройка Mysql](#mysql-configuration)
-
-        -   [Создание базы данных](#create-a-database)
-
-        -   [Создание файла конфигурации](#create-a-config-file)
-
-        -   [Импорт SQL дампа (альтернативный метод)](#importing-sql-dump-alternative-method)
-
-    -   [Конфигурация SSL](#ssl-configuration)
-
-
 
 
 [Русская документация Kanboard](http://kanboard.ru/doc/)

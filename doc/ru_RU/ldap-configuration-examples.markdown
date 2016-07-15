@@ -1,14 +1,9 @@
-Пример конфигурации LDAP[¶](#ldap-configuration-examples "Ссылка на этот заголовок")
-
-====================================================================================
-
+Пример конфигурации LDAP
+========================
 
 
 Microsoft Active Directory[¶](#microsoft-active-directory "Ссылка на этот заголовок")
-
 -------------------------------------------------------------------------------------
-
-
 
 -   Аутентификация пользователя
 
@@ -85,13 +80,9 @@ Microsoft Active Directory[¶](#microsoft-active-directory "Ссылка на э
 
 
 OpenLDAP с memberOf overlay[¶](#openldap-with-memberof-overlay "Ссылка на этот заголовок")
-
 ------------------------------------------------------------------------------------------
 
-
-
 Пример LDIF пользователя:
-
 
 
     dn: uid=manager,ou=Users,dc=kanboard,dc=local
@@ -139,7 +130,6 @@ OpenLDAP с memberOf overlay[¶](#openldap-with-memberof-overlay "Ссылка �
 
 
 Конфигурация Канборд:
-
 
 
 -   Аутентификация пользователя
@@ -199,9 +189,7 @@ OpenLDAP с memberOf overlay[¶](#openldap-with-memberof-overlay "Ссылка �
 
 
 OpenLDAP с Posix groups (memberUid)[¶](#openldap-with-posix-groups-memberuid "Ссылка на этот заголовок")
-
 --------------------------------------------------------------------------------------------------------
-
 
 
 Пример LDIF пользователя:
@@ -321,9 +309,7 @@ OpenLDAP с Posix groups (memberUid)[¶](#openldap-with-posix-groups-memberuid "
 
 
 OpenLDAP с groupOfNames[¶](#openldap-with-groupofnames "Ссылка на этот заголовок")
-
 ----------------------------------------------------------------------------------
-
 
 
 Пример LDIF пользователя:
@@ -437,36 +423,6 @@ OpenLDAP с groupOfNames[¶](#openldap-with-groupofnames "Ссылка на эт
     define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
 
-
-### [Оглавление](index.markdown)
-
-
-
--   [Пример конфигурации LDAP](#)
-
-    -   [Microsoft Active Directory](#microsoft-active-directory)
-
-    -   [OpenLDAP с memberOf overlay](#openldap-with-memberof-overlay)
-
-    -   [OpenLDAP с Posix groups (memberUid)](#openldap-with-posix-groups-memberuid)
-
-    -   [OpenLDAP с groupOfNames](#openldap-with-groupofnames)
-
-
-
- 
-
-
-
- 
-
-
-
- 
-
-
-
- 
 
 
 

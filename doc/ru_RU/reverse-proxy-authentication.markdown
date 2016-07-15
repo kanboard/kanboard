@@ -1,6 +1,5 @@
-Аутентификация Reverse Proxy[¶](#reverse-proxy-authentication "Ссылка на этот заголовок")
-
-=========================================================================================
+Аутентификация Reverse Proxy
+============================
 
 
 
@@ -13,7 +12,6 @@
 
 
 Требования[¶](#requirements "Ссылка на этот заголовок")
-
 -------------------------------------------------------
 
 
@@ -31,7 +29,6 @@
 
 
 Как это работает?[¶](#how-does-this-work "Ссылка на этот заголовок")
-
 --------------------------------------------------------------------
 
 
@@ -53,7 +50,6 @@
 
 
 Инструкция по установке[¶](#installation-instructions "Ссылка на этот заголовок")
-
 ---------------------------------------------------------------------------------
 
 
@@ -70,7 +66,7 @@
 
 
 
-Создайте свой файл конфигурации `config.php`{.docutils .literal} или скопируйте конфигурацию из файла `config.default.php`{.docutils .literal}:
+Создайте свой файл конфигурации `config.php` или скопируйте конфигурацию из файла `config.default.php`:
 
 
 
@@ -114,45 +110,15 @@
 
 
 
--   Если proxy находится на том же сервере, что и Канборд, то в соответствии с протоколом \<[http://www.ietf.org/rfc/rfc3875](http://www.ietf.org/rfc/rfc3875)\>\`\_\_ имя заголовка будет `REMOTE_USER`{.docutils .literal}. Например, Apache добавляет `REMOTE_USER`{.docutils .literal} по умолчанию, если установлено `Require valid-user`{.docutils .literal}.
+-   Если proxy находится на том же сервере, что и Канборд, то в соответствии с протоколом \<[http://www.ietf.org/rfc/rfc3875](http://www.ietf.org/rfc/rfc3875)\>\`\_\_ имя заголовка будет `REMOTE_USER`. Например, Apache добавляет `REMOTE_USER` по умолчанию, если установлено `Require valid-user`.
 
 
 
--   Если Apache служит reverse proxy для другого Apache выполняющего Канборд, то заголовок `REMOTE_USER`{.docutils .literal} не установлен (это же относится к IIS и Nginx).
+-   Если Apache служит reverse proxy для другого Apache выполняющего Канборд, то заголовок `REMOTE_USER` не установлен (это же относится к IIS и Nginx).
 
 
 
--   Если у вас имеется действующий reverse proxy, то [проект HTTP ICAP](http://tools.ietf.org/html/draft-stecher-icap-subid-00#section-3.4) предпологает, что заголовок должен быть `X-Authenticated-User`{.docutils .literal}. Этот стандарт де-факто был принят разными инструментами.
-
-
-
-### [Оглавление](index.markdown)
-
-
-
--   [Аутентификация Reverse Proxy](#)
-
-    -   [Требования](#requirements)
-
-    -   [Как это работает?](#how-does-this-work)
-
-    -   [Инструкция по установке](#installation-instructions)
-
-        -   [Настройка вашего reverse proxy](#setting-up-your-reverse-proxy)
-
-        -   [Настройки Канборда](#setting-up-kanboard)
-
-
-
- 
-
-
-
- 
-
-
-
- 
+-   Если у вас имеется действующий reverse proxy, то [проект HTTP ICAP](http://tools.ietf.org/html/draft-stecher-icap-subid-00#section-3.4) предполагает, что заголовок должен быть `X-Authenticated-User`. Этот стандарт де-факто был принят разными инструментами.
 
 
 

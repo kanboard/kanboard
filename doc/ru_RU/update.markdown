@@ -52,20 +52,6 @@
 
 
 
-### [Оглавление](index.markdown)
-
-
-
--   [Обновление Канборд до новой версии](#)
-
-    -   [Важные замечания перед обновлением](#important-things-to-do-before-updating)
-
-    -   [Обновление из архива (стабильная версия)](#from-the-archive-stable-version)
-
-    -   [Обновление из репозитория (разрабатываемая версия)](#from-the-repository-development-version)
-
-
-
 
 [Русская документация Kanboard](http://kanboard.ru/doc/)
 

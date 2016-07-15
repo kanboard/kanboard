@@ -1,6 +1,5 @@
-Диаграмма Ганта для задач[¶](#gantt-chart-for-tasks "Ссылка на этот заголовок")
-
-===============================================================================
+Диаграмма Ганта для задач
+=========================
 
 
 
@@ -17,8 +16,6 @@
 
 
 ![Gantt Chart](https://kanboard.net/screenshots/documentation/gantt-chart-project.png)
-
-
 
 Рисунок. Диаграмма Ганта.
 
@@ -58,30 +55,7 @@
 
 ![Task not defined](https://kanboard.net/screenshots/documentation/gantt-chart-not-defined.png)
 
-
-
 Рисунок. Задача без указанных дат начала или завершения
-
-
-
- 
-
-
-
- 
-
-
-
- 
-
-
-
- 
-
-
-
- 
-
 
 
  

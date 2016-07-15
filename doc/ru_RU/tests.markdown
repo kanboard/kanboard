@@ -1,6 +1,5 @@
-Автоматизированные тесты[¶](#automated-tests "Ссылка на этот заголовок")
-
-========================================================================
+Автоматизированные тесты
+========================
 
 
 
@@ -13,7 +12,6 @@
 
 
 Требования[¶](#requirements "Ссылка на этот заголовок")
-
 -------------------------------------------------------
 
 
@@ -35,7 +33,6 @@
 
 
 Unit тесты[¶](#unit-tests "Ссылка на этот заголовок")
-
 -----------------------------------------------------
 
 
@@ -48,7 +45,7 @@ Sqlite тестирование использует базу данных в п
 
 
 
-Конфигурационный файл PHPUnit - `tests/units.sqlite.xml`{.docutils .literal}. Из директории Kanboard запустите команду `phpunit -c tests/units.sqlite.xml`{.docutils .literal}.
+Конфигурационный файл PHPUnit - `tests/units.sqlite.xml`. Из директории Kanboard запустите команду `phpunit -c tests/units.sqlite.xml`.
 
 
 
@@ -122,7 +119,7 @@ Sqlite тестирование использует базу данных в п
 
 
 
-Конфигурационный файл HPUnit - `tests/units.mysql.xml`{.docutils .literal}. Из директории Kanboard запустите команду `phpunit -c tests/units.mysql.xml`{.docutils .literal}.
+Конфигурационный файл HPUnit - `tests/units.mysql.xml`. Из директории Kanboard запустите команду `phpunit -c tests/units.mysql.xml`.
 
 
 
@@ -148,16 +145,15 @@ Sqlite тестирование использует базу данных в п
 
 
 
-Убедитесь, что пользователь `postgres`{.docutils .literal} может создавать и удалять базу данных. База данных пересоздается при каждом выполнении теста.
+Убедитесь, что пользователь `postgres` может создавать и удалять базу данных. База данных пересоздается при каждом выполнении теста.
 
 
 
-Конфигурационных файл PHPUnit - `tests/units.postgres.xml`{.docutils .literal}. Из директории Kanboard, запустите команду `phpunit -c tests/units.postgres.xml`{.docutils .literal}.
+Конфигурационных файл PHPUnit - `tests/units.postgres.xml`. Из директории Kanboard, запустите команду `phpunit -c tests/units.postgres.xml`.
 
 
 
 Тесты интеграции[¶](#integration-tests "Ссылка на этот заголовок")
-
 ------------------------------------------------------------------
 
 
@@ -166,7 +162,7 @@ Sqlite тестирование использует базу данных в п
 
 
 
-Реальные HTTP calls выполняются с этими тестами. Поэтому, необходим локальный экземпляр Канборда, который слушает на `http://localhost:8000/`{.docutils .literal}.
+Реальные HTTP calls выполняются с этими тестами. Поэтому, необходим локальный экземпляр Канборда, который слушает на `http://localhost:8000/`.
 
 
 
@@ -174,7 +170,7 @@ Sqlite тестирование использует базу данных в п
 
 
 
-1.  Запустите локольный экземпляр Канборда: `php -S 127.0.0.1:8000`{.docutils .literal}
+1.  Запустите локольный экземпляр Канборда: `php -S 127.0.0.1:8000`
 
 
 
@@ -186,11 +182,11 @@ Sqlite тестирование использует базу данных в п
 
 
 
--   Sqlite: `phpunit -c tests/integration.sqlite.xml`{.docutils .literal}
+-   Sqlite: `phpunit -c tests/integration.sqlite.xml`
 
--   Mysql: `phpunit -c tests/integration.mysql.xml`{.docutils .literal}
+-   Mysql: `phpunit -c tests/integration.mysql.xml`
 
--   Postgresql: `phpunit -c tests/integration.postgres.xml`{.docutils .literal}
+-   Postgresql: `phpunit -c tests/integration.postgres.xml`
 
 
 
@@ -248,45 +244,9 @@ Sqlite тестирование использует базу данных в п
 
 
 
-Конфигурационный файл Travis - `.travis.yml`{.docutils .literal} - находится в корневой директории Kanboard.
+Конфигурационный файл Travis - `.travis.yml` - находится в корневой директории Kanboard.
 
 
-
-### [Оглавление](index.markdown)
-
-
-
--   [Автоматизированные тесты](#)
-
-    -   [Требования](#requirements)
-
-    -   [Unit тесты](#unit-tests)
-
-        -   [Тестирование с Sqlite](#test-with-sqlite)
-
-        -   [Тестирование с Mysql](#test-with-mysql)
-
-        -   [Тестирование с Postgresql](#test-with-postgresql)
-
-    -   [Тесты интеграции](#integration-tests)
-
-    -   [Непрерывная интеграция с Travis-CI](#continuous-integration-with-travis-ci)
-
-
-
- 
-
-
-
- 
-
-
-
- 
-
-
-
- 
 
 
 

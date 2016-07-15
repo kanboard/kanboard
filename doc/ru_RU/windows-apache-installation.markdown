@@ -1,6 +1,5 @@
-Установка Канборд на Windows Server и Apache[¶](#installation-on-windows-server-and-apache "Ссылка на этот заголовок")
-
-======================================================================================================================
+Установка Канборд на Windows Server и Apache
+============================================
 
 
 
@@ -13,7 +12,6 @@
 
 
 Установка распространяемого пакета Visual C++[¶](#visual-c-redistributable-installation "Ссылка на этот заголовок")
-
 -------------------------------------------------------------------------------------------------------------------
 
 
@@ -26,12 +24,11 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 
-2.  Запустите установку `vcredist_x64.exe`{.docutils .literal} или `vcredist_x86.exe`{.docutils .literal}, в соответствии с вашей платформой
+2.  Запустите установку `vcredist_x64.exe` или `vcredist_x86.exe`, в соответствии с вашей платформой
 
 
 
 Установка Apache[¶](#apache-installation "Ссылка на этот заголовок")
-
 --------------------------------------------------------------------
 
 
@@ -40,7 +37,7 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 
-2.  Разархивируйте Apache24 в каталог `C:\Apache24`{.docutils .literal}
+2.  Разархивируйте Apache24 в каталог `C:\Apache24`
 
 
 
@@ -48,7 +45,7 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 
-Откройте файл `C:\Apache24\conf\httpd.conf`{.docutils .literal} и добавьте директиву:
+Откройте файл `C:\Apache24\conf\httpd.conf` и добавьте директиву:
 
 
 
@@ -60,7 +57,7 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 
-Откройте консоль (`cmd.exe`{.docutils .literal}), перейдите в каталог `C:\Apache24\bin`{.docutils .literal} и установите сервис Apache:
+Откройте консоль (`cmd.exe`), перейдите в каталог `C:\Apache24\bin` и установите сервис Apache:
 
 
 
@@ -78,7 +75,7 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 
--   Выполните `C:\Apache24\bin\ApacheMonitor.exe`{.docutils .literal} и добавьте его в автозагрузку.
+-   Выполните `C:\Apache24\bin\ApacheMonitor.exe` и добавьте его в автозагрузку.
 
 
 
@@ -95,7 +92,6 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 Установка PHP[¶](#php-installation "Ссылка на этот заголовок")
-
 --------------------------------------------------------------
 
 
@@ -104,15 +100,15 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 
-2.  Разархивируйте файлы в `C:\php`{.docutils .literal}
+2.  Разархивируйте файлы в `C:\php`
 
 
 
-3.  Перейдите в каталог PHP (`C:\php`{.docutils .literal}) и переименуйе файл `php.ini-production`{.docutils .literal} в `php.ini`{.docutils .literal}
+3.  Перейдите в каталог PHP (`C:\php`) и переименуйе файл `php.ini-production` в `php.ini`
 
 
 
-Отредактируйте `php.ini`{.docutils .literal}:
+Отредактируйте `php.ini`:
 
 
 
@@ -156,7 +152,7 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 
-Добавьте следующие строки конфигурации в файл `C:\Apache24\conf\httpd.conf`{.docutils .literal}:
+Добавьте следующие строки конфигурации в файл `C:\Apache24\conf\httpd.conf`:
 
 
 
@@ -186,7 +182,7 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 
-Создайте файл `phpinfo.php`{.docutils .literal} в каталоге `C:\Apache24\htdocs`{.docutils .literal}:
+Создайте файл `phpinfo.php` в каталоге `C:\Apache24\htdocs`:
 
 
 
@@ -207,7 +203,6 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 Устновка Канборд[¶](#kanboard-installation "Ссылка на этот заголовок")
-
 ----------------------------------------------------------------------
 
 
@@ -216,7 +211,7 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 
--   Разархивируйте архив в `C:\Apache24\htdocs\kanboard`{.docutils .literal}
+-   Разархивируйте архив в `C:\Apache24\htdocs\kanboard`
 
 
 
@@ -229,7 +224,6 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 Протестировано на[¶](#tested-configuration "Ссылка на этот заголовок")
-
 ----------------------------------------------------------------------
 
 
@@ -239,56 +233,11 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 Примечание[¶](#notes "Ссылка на этот заголовок")
-
 ------------------------------------------------
 
 
 
 -   Некоторые функции Канборда требуют выполнять [запуск ежедневных фоновых задач](cronjob.markdown).
-
-
-
-### [Оглавление](index.markdown)
-
-
-
--   [Установка Канборд на Windows Server и Apache](#)
-
-    -   [Установка распространяемого пакета Visual C++](#visual-c-redistributable-installation)
-
-    -   [Установка Apache](#apache-installation)
-
-        -   [Назначение имени сервера](#define-the-server-name)
-
-        -   [Установка сервиса Apache](#install-the-apache-service)
-
-        -   [Установка ApacheMonitor](#install-apachemonitor)
-
-        -   [Проверка работы Apache](#check-the-apache-installation)
-
-    -   [Установка PHP](#php-installation)
-
-    -   [Устновка Канборд](#kanboard-installation)
-
-    -   [Протестировано на](#tested-configuration)
-
-    -   [Примечание](#notes)
-
-
-
- 
-
-
-
- 
-
-
-
- 
-
-
-
- 
 
 
 

@@ -1,4 +1,4 @@
-Поиск {#search-documentation}
+Поиск
 
 =====
 

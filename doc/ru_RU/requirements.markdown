@@ -132,33 +132,6 @@ PHP \>= 5.3.3, PHP 5.4, PHP 5.5, PHP 5.6, PHP 7.x
 
 
 
-### [Оглавление](index.markdown)
-
-
-
--   [Системные требования](#)
-
-    -   [На сервере](#server-side)
-
-        -   [Поддерживаемые операционные системы](#compatible-operating-systems)
-
-        -   [Поддерживаемые базы данных](#compatible-databases)
-
-        -   [Совместимые веб сервера](#compatible-web-servers)
-
-        -   [Версии PHP](#php-versions)
-
-        -   [Требуемые расширения для PHP](#php-extensions-required)
-
-        -   [Рекомендуется](#recommendations)
-
-    -   [На клиенте](#client-side)
-
-        -   [Браузеры](#browsers)
-
-        -   [Устройства](#devices)
-
-
 
 [Русская документация Kanboard](http://kanboard.ru/doc/)
 

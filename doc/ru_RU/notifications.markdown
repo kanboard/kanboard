@@ -1,6 +1,5 @@
-Уведомления[¶](#notifications "Ссылка на этот заголовок")
-
-=========================================================
+Уведомления
+===========
 
 
 
@@ -19,7 +18,6 @@
 
 
 Настройка[¶](#configuration "Ссылка на этот заголовок")
-
 -------------------------------------------------------
 
 
@@ -34,9 +32,7 @@
 
 ![Notifications](https://kanboard.net/screenshots/documentation/notifications.png)
 
-
-
-Уведомления
+Рисунок. Уведомления
 
 
 
@@ -77,7 +73,6 @@
 
 
 Веб уведомления[¶](#web-notifications "Ссылка на этот заголовок")
-
 -----------------------------------------------------------------
 
 
@@ -87,8 +82,6 @@
 
 
 ![Web Notifications Icon](https://kanboard.net/screenshots/documentation/web-notifications-icon.png)
-
-
 
 Рисунок. Иконка веб уведомления.
 
@@ -100,43 +93,11 @@
 
 ![Web Notifications](https://kanboard.net/screenshots/documentation/web-notifications.png)
 
-
-
 Рисунок. Веб уведомления.
 
 
 
 Таким образом, вы можете получать веб уведомления без использования электронной почты.
-
-
-
-### [Оглавление](index.markdown)
-
-
-
--   [Уведомления](#)
-
-    -   [Настройка](#configuration)
-
-    -   [Веб уведомления](#web-notifications)
-
-
-
- 
-
-
-
- 
-
-
-
- 
-
-
-
- 
-
-
 
  
 

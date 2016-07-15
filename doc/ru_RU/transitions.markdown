@@ -1,6 +1,5 @@
-Перемещения задач[¶](#task-transitions "Ссылка на этот заголовок")
-
-==================================================================
+Перемещения задач
+=================
 
 
 
@@ -9,8 +8,6 @@
 
 
 ![Transitions](https://kanboard.net/screenshots/documentation/transitions.png)
-
-
 
 Рисунок. Перемещения.
 
@@ -46,8 +43,6 @@
 
 ![Transitions Export](https://kanboard.net/screenshots/documentation/transitions-export.png)
 
-
-
 Рисунок. Экспорт перемещений задач.
 
 
@@ -57,25 +52,6 @@
 
 
  
-
-
-
- 
-
-
-
- 
-
-
-
- 
-
-
-
- 
-
-
-
  
 
 
