@@ -9,6 +9,7 @@ New features:
 
 Improvements:
 
+* Handle header X-Real-IP to get IP address
 * Display project name for task auto-complete fields
 * Make search attributes not case sensitive
 * Display TOTP issuer for 2FA
