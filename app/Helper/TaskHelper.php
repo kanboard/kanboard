@@ -50,6 +50,7 @@ class TaskHelper extends Base
     public function selectDescription(array $values, array $errors)
     {
         $html = $this->helper->form->label(t('Description'), 'description');
+        $html .= '<div class="markdown-editor-container">';
         $html .= $this->helper->form->textarea(
             'description',
             $values,
@@ -62,6 +63,7 @@ class TaskHelper extends Base
             'markdown-editor'
         );
 
+        $html .= '</div>';
         return $html;
     }
 
