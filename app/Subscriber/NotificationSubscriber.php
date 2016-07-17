@@ -28,6 +28,7 @@ class NotificationSubscriber extends BaseSubscriber implements EventSubscriberIn
             SubtaskModel::EVENT_UPDATE       => 'handleEvent',
             CommentModel::EVENT_CREATE       => 'handleEvent',
             CommentModel::EVENT_UPDATE       => 'handleEvent',
+            CommentModel::EVENT_REMOVE       => 'handleEvent',
             CommentModel::EVENT_USER_MENTION => 'handleEvent',
             TaskFileModel::EVENT_CREATE      => 'handleEvent',
         );

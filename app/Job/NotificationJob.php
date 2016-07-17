@@ -75,8 +75,7 @@ class NotificationJob extends BaseJob
                 $values['task'] = $this->taskFinderModel->getDetails($values['file']['task_id']);
                 break;
             case 'Kanboard\Event\CommentEvent':
-                $values['comment'] = $this->commentModel->getById($event['id']);
-                $values['task'] = $this->taskFinderModel->getDetails($values['comment']['task_id']);
+                $values = $event;
                 break;
         }
 

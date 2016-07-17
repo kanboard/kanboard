@@ -26,6 +26,10 @@ class ClassProvider implements ServiceProviderInterface
             'AverageLeadCycleTimeAnalytic',
             'AverageTimeSpentColumnAnalytic',
         ),
+        'Job' => array(
+            'CommentEventJob',
+            'NotificationJob',
+        ),
         'Model' => array(
             'ActionModel',
             'ActionParameterModel',

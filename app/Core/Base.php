@@ -150,6 +150,8 @@ use Pimple\Container;
  * @property \Kanboard\Core\Filter\QueryBuilder                  $taskQuery
  * @property \Kanboard\Core\Filter\LexerBuilder                  $taskLexer
  * @property \Kanboard\Core\Filter\LexerBuilder                  $projectActivityLexer
+ * @property \Kanboard\Job\CommentEventJob                       $commentEventJob
+ * @property \Kanboard\Job\NotificationJob                       $notificationJob
  * @property \Psr\Log\LoggerInterface                            $logger
  * @property \PicoDb\Database                                    $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher  $dispatcher
