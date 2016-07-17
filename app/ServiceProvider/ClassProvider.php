@@ -28,6 +28,8 @@ class ClassProvider implements ServiceProviderInterface
         ),
         'Job' => array(
             'CommentEventJob',
+            'TaskFileEventJob',
+            'ProjectFileEventJob',
             'NotificationJob',
         ),
         'Model' => array(
