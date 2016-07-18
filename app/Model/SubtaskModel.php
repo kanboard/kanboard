@@ -66,7 +66,7 @@ class SubtaskModel extends Base
             ->join(TaskModel::TABLE, 'id', 'task_id')
             ->findOneColumn(TaskModel::TABLE . '.project_id') ?: 0;
     }
-    
+
     /**
      * Get available status
      *
@@ -235,10 +235,7 @@ class SubtaskModel extends Base
         $subtask_id = $this->db->table(self::TABLE)->persist($values);
 
         if ($subtask_id !== false) {
-            $this->container['dispatcher']->dispatch(
-                self::EVENT_CREATE,
-                new SubtaskEvent(array('id' => $subtask_id) + $values)
-            );
+            $this->queueManager->push($this->subtaskEventJob->withParams($subtask_id, self::EVENT_CREATE));
         }
 
         return $subtask_id;
@@ -255,13 +252,10 @@ class SubtaskModel extends Base
     public function update(array $values, $fire_events = true)
     {
         $this->prepare($values);
-        $subtask = $this->getById($values['id']);
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
 
         if ($result && $fire_events) {
-            $event = $subtask;
-            $event['changes'] = array_diff_assoc($values, $subtask);
-            $this->container['dispatcher']->dispatch(self::EVENT_UPDATE, new SubtaskEvent($event));
+            $this->queueManager->push($this->subtaskEventJob->withParams($values['id'], self::EVENT_UPDATE, $values));
         }
 
         return $result;
@@ -377,14 +371,8 @@ class SubtaskModel extends Base
      */
     public function remove($subtask_id)
     {
-        $subtask = $this->getById($subtask_id);
-        $result = $this->db->table(self::TABLE)->eq('id', $subtask_id)->remove();
-
-        if ($result) {
-            $this->container['dispatcher']->dispatch(self::EVENT_DELETE, new SubtaskEvent($subtask));
-        }
-
-        return $result;
+        $this->subtaskEventJob->execute($subtask_id, self::EVENT_DELETE);
+        return $this->db->table(self::TABLE)->eq('id', $subtask_id)->remove();
     }
 
     /**

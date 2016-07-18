@@ -70,6 +70,8 @@ class NotificationModel extends Base
                 return e('%s updated a subtask for the task #%d', $event_author, $event_data['task']['id']);
             case SubtaskModel::EVENT_CREATE:
                 return e('%s created a subtask for the task #%d', $event_author, $event_data['task']['id']);
+            case SubtaskModel::EVENT_DELETE:
+                return e('%s removed a subtask for the task #%d', $event_author, $event_data['task']['id']);
             case CommentModel::EVENT_UPDATE:
                 return e('%s updated a comment on the task #%d', $event_author, $event_data['task']['id']);
             case CommentModel::EVENT_CREATE:
@@ -110,6 +112,8 @@ class NotificationModel extends Base
                 return e('New subtask on task #%d', $event_data['subtask']['task_id']);
             case SubtaskModel::EVENT_UPDATE:
                 return e('Subtask updated on task #%d', $event_data['subtask']['task_id']);
+            case SubtaskModel::EVENT_DELETE:
+                return e('Subtask removed on task #%d', $event_data['subtask']['task_id']);
             case TaskModel::EVENT_CREATE:
                 return e('New task #%d: %s', $event_data['task']['id'], $event_data['task']['title']);
             case TaskModel::EVENT_UPDATE:
@@ -157,6 +161,7 @@ class NotificationModel extends Base
                 return $event_data['comment']['task_id'];
             case SubtaskModel::EVENT_CREATE:
             case SubtaskModel::EVENT_UPDATE:
+            case SubtaskModel::EVENT_DELETE:
                 return $event_data['subtask']['task_id'];
             case TaskModel::EVENT_CREATE:
             case TaskModel::EVENT_UPDATE:
