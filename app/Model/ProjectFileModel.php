@@ -61,14 +61,13 @@ class ProjectFileModel extends FileModel
     }
 
     /**
-     * Get event name
+     * Fire file creation event
      *
-     * @abstract
      * @access protected
-     * @return string
+     * @param  integer $file_id
      */
-    protected function getEventName()
+    protected function fireCreationEvent($file_id)
     {
-        return self::EVENT_CREATE;
+        $this->queueManager->push($this->projectFileEventJob->withParams($file_id, self::EVENT_CREATE));
     }
 }

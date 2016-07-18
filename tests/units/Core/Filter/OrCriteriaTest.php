@@ -22,8 +22,9 @@ class OrCriteriaTest extends Base
 
         $this->assertEquals(2, $userModel->create(array('username' => 'foobar', 'name' => 'Foo Bar')));
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
-        $this->assertEquals(1, $taskCreation->create(array('title' => 'Test', 'project_id' => 1, 'owner_id' => 2)));
-        $this->assertEquals(2, $taskCreation->create(array('title' => 'Test', 'project_id' => 1, 'owner_id' => 1)));
+        $this->assertEquals(1, $taskCreation->create(array('title' => 'Test 1', 'project_id' => 1, 'owner_id' => 2)));
+        $this->assertEquals(2, $taskCreation->create(array('title' => 'Test 2', 'project_id' => 1, 'owner_id' => 1)));
+        $this->assertEquals(3, $taskCreation->create(array('title' => 'Test 3', 'project_id' => 1, 'owner_id' => 0)));
 
         $criteria = new OrCriteria();
         $criteria->withQuery($query);

@@ -6,7 +6,7 @@ use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\CommentModel;
 
-class CommentTest extends Base
+class CommentModelTest extends Base
 {
     public function testCreate()
     {
@@ -75,7 +75,7 @@ class CommentTest extends Base
         $this->assertEquals('bla', $comment['comment']);
     }
 
-    public function validateRemove()
+    public function testRemove()
     {
         $commentModel = new CommentModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);

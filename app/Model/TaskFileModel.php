@@ -61,18 +61,6 @@ class TaskFileModel extends FileModel
     }
 
     /**
-     * Get event name
-     *
-     * @abstract
-     * @access protected
-     * @return string
-     */
-    protected function getEventName()
-    {
-        return self::EVENT_CREATE;
-    }
-
-    /**
      * Get projectId from fileId
      *
      * @access public
@@ -100,5 +88,16 @@ class TaskFileModel extends FileModel
     {
         $original_filename = e('Screenshot taken %s', $this->helper->dt->datetime(time())).'.png';
         return $this->uploadContent($task_id, $original_filename, $blob);
+    }
+
+    /**
+     * Fire file creation event
+     *
+     * @access protected
+     * @param  integer $file_id
+     */
+    protected function fireCreationEvent($file_id)
+    {
+        $this->queueManager->push($this->taskFileEventJob->withParams($file_id, self::EVENT_CREATE));
     }
 }

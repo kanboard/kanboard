@@ -4,15 +4,22 @@ Version 1.0.32 (unreleased)
 New features:
 
 * New automated action to close tasks without activity in a specific column
+* Added new event for removed comments
+* Added search filter for task priority
 * Added the possibility to hide tasks in dashboard for a specific column
 
 Improvements:
 
+* Handle header X-Real-IP to get IP address
+* Display project name for task auto-complete fields
+* Make search attributes not case sensitive
 * Display TOTP issuer for 2FA
 * Make sure that the table schema_version use InnoDB for Mysql
 
 Bug fixes:
 
+* Fixed search query with multiple assignees (nested OR conditions)
+* Fixed Markdown editor auto-grow on the task form (Safari)
 * Fixed compatibility issue with PHP 5.3 for OAuthUserProvider class
 
 Version 1.0.31

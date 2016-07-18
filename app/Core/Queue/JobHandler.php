@@ -2,6 +2,7 @@
 
 namespace Kanboard\Core\Queue;
 
+use Exception;
 use Kanboard\Core\Base;
 use Kanboard\Job\BaseJob;
 use SimpleQueue\Job;
@@ -39,16 +40,23 @@ class JobHandler extends Base
     public function executeJob(Job $job)
     {
         $payload = $job->getBody();
-        $className = $payload['class'];
-        $this->memoryCache->flush();
-        $this->prepareJobSession($payload['user_id']);
 
-        if (DEBUG) {
-            $this->logger->debug(__METHOD__.' Received job => '.$className.' ('.getmypid().')');
+        try {
+            $className = $payload['class'];
+            $this->memoryCache->flush();
+            $this->prepareJobSession($payload['user_id']);
+
+            if (DEBUG) {
+                $this->logger->debug(__METHOD__.' Received job => '.$className.' ('.getmypid().')');
+                $this->logger->debug(__METHOD__.' => '.json_encode($payload));
+            }
+
+            $worker = new $className($this->container);
+            call_user_func_array(array($worker, 'execute'), $payload['params']);
+        } catch (Exception $e) {
+            $this->logger->error(__METHOD__.': Error during job execution: '.$e->getMessage());
+            $this->logger->error(__METHOD__ .' => '.json_encode($payload));
         }
-
-        $worker = new $className($this->container);
-        call_user_func_array(array($worker, 'execute'), $payload['params']);
     }
 
     /**

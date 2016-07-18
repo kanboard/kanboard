@@ -46,6 +46,7 @@ $container->register(new Kanboard\ServiceProvider\ActionProvider());
 $container->register(new Kanboard\ServiceProvider\ExternalLinkProvider());
 $container->register(new Kanboard\ServiceProvider\AvatarProvider());
 $container->register(new Kanboard\ServiceProvider\FilterProvider());
+$container->register(new Kanboard\ServiceProvider\JobProvider());
 $container->register(new Kanboard\ServiceProvider\QueueProvider());
 $container->register(new Kanboard\ServiceProvider\ApiProvider());
 $container->register(new Kanboard\ServiceProvider\CommandProvider());

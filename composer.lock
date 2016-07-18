@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "77e9464e13331b1dec5c810d1c186ebf",
-    "content-hash": "0d13e80c805e296f3765cc329d51358a",
+    "hash": "daa76b43d528f87e3bed91133fdb9259",
+    "content-hash": "dde1b92fc6f9ca106cf927f4cd141a21",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -245,16 +245,16 @@
         },
         {
             "name": "fguillot/picodb",
-            "version": "v1.0.13",
+            "version": "v1.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "e8e02cd6a170811eed6c70d1edcbb419818d303a"
+                "reference": "86a831302ab10af800c83dbe4b3b01c88d5433f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/e8e02cd6a170811eed6c70d1edcbb419818d303a",
-                "reference": "e8e02cd6a170811eed6c70d1edcbb419818d303a",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/86a831302ab10af800c83dbe4b3b01c88d5433f1",
+                "reference": "86a831302ab10af800c83dbe4b3b01c88d5433f1",
                 "shasum": ""
             },
             "require": {
@@ -281,7 +281,7 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2016-07-13 02:11:01"
+            "time": "2016-07-16 22:59:59"
         },
         {
             "name": "fguillot/simple-queue",

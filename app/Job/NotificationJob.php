@@ -66,18 +66,8 @@ class NotificationJob extends BaseJob
             case 'Kanboard\Event\TaskEvent':
                 $values['task'] = $this->taskFinderModel->getDetails($event['task_id']);
                 break;
-            case 'Kanboard\Event\SubtaskEvent':
-                $values['subtask'] = $this->subtaskModel->getById($event['id'], true);
-                $values['task'] = $this->taskFinderModel->getDetails($values['subtask']['task_id']);
-                break;
-            case 'Kanboard\Event\FileEvent':
-                $values['file'] = $event;
-                $values['task'] = $this->taskFinderModel->getDetails($values['file']['task_id']);
-                break;
-            case 'Kanboard\Event\CommentEvent':
-                $values['comment'] = $this->commentModel->getById($event['id']);
-                $values['task'] = $this->taskFinderModel->getDetails($values['comment']['task_id']);
-                break;
+            default:
+                $values = $event;
         }
 
         return $values;

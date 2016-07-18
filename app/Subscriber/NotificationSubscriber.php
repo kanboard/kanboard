@@ -26,8 +26,10 @@ class NotificationSubscriber extends BaseSubscriber implements EventSubscriberIn
             TaskModel::EVENT_ASSIGNEE_CHANGE => 'handleEvent',
             SubtaskModel::EVENT_CREATE       => 'handleEvent',
             SubtaskModel::EVENT_UPDATE       => 'handleEvent',
+            SubtaskModel::EVENT_DELETE       => 'handleEvent',
             CommentModel::EVENT_CREATE       => 'handleEvent',
             CommentModel::EVENT_UPDATE       => 'handleEvent',
+            CommentModel::EVENT_REMOVE       => 'handleEvent',
             CommentModel::EVENT_USER_MENTION => 'handleEvent',
             TaskFileModel::EVENT_CREATE      => 'handleEvent',
         );
@@ -35,12 +37,10 @@ class NotificationSubscriber extends BaseSubscriber implements EventSubscriberIn
 
     public function handleEvent(GenericEvent $event, $eventName)
     {
-        if (!$this->isExecuted($eventName)) {
-            $this->logger->debug('Subscriber executed: ' . __METHOD__);
+        $this->logger->debug('Subscriber executed: ' . __METHOD__);
 
-            $this->queueManager->push(NotificationJob::getInstance($this->container)
-                ->withParams($event, $eventName, get_class($event))
-            );
-        }
+        $this->queueManager->push(NotificationJob::getInstance($this->container)
+            ->withParams($event, $eventName, get_class($event))
+        );
     }
 }

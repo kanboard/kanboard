@@ -69,7 +69,7 @@ class LexerBuilder
 
         foreach ($attributes as $attribute) {
             $this->filters[$attribute] = $filter;
-            $this->lexer->addToken(sprintf("/^(%s:)/", $attribute), $attribute);
+            $this->lexer->addToken(sprintf("/^(%s:)/i", $attribute), $attribute);
 
             if ($default) {
                 $this->lexer->setDefaultToken($attribute);

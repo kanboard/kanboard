@@ -9,64 +9,6 @@ use Kanboard\Model\TaskFinderModel;
 
 class SubtaskModelTest extends Base
 {
-    public function onSubtaskCreated($event)
-    {
-        $this->assertInstanceOf('Kanboard\Event\SubtaskEvent', $event);
-        $data = $event->getAll();
-
-        $this->assertArrayHasKey('id', $data);
-        $this->assertArrayHasKey('title', $data);
-        $this->assertArrayHasKey('status', $data);
-        $this->assertArrayHasKey('time_estimated', $data);
-        $this->assertArrayHasKey('time_spent', $data);
-        $this->assertArrayHasKey('status', $data);
-        $this->assertArrayHasKey('task_id', $data);
-        $this->assertArrayHasKey('user_id', $data);
-        $this->assertArrayHasKey('position', $data);
-        $this->assertNotEmpty($data['task_id']);
-        $this->assertNotEmpty($data['id']);
-    }
-
-    public function onSubtaskUpdated($event)
-    {
-        $this->assertInstanceOf('Kanboard\Event\SubtaskEvent', $event);
-        $data = $event->getAll();
-
-        $this->assertArrayHasKey('id', $data);
-        $this->assertArrayHasKey('title', $data);
-        $this->assertArrayHasKey('status', $data);
-        $this->assertArrayHasKey('time_estimated', $data);
-        $this->assertArrayHasKey('time_spent', $data);
-        $this->assertArrayHasKey('status', $data);
-        $this->assertArrayHasKey('task_id', $data);
-        $this->assertArrayHasKey('user_id', $data);
-        $this->assertArrayHasKey('position', $data);
-        $this->assertArrayHasKey('changes', $data);
-        $this->assertArrayHasKey('user_id', $data['changes']);
-        $this->assertArrayHasKey('status', $data['changes']);
-
-        $this->assertEquals(SubtaskModel::STATUS_INPROGRESS, $data['changes']['status']);
-        $this->assertEquals(1, $data['changes']['user_id']);
-    }
-
-    public function onSubtaskDeleted($event)
-    {
-        $this->assertInstanceOf('Kanboard\Event\SubtaskEvent', $event);
-        $data = $event->getAll();
-
-        $this->assertArrayHasKey('id', $data);
-        $this->assertArrayHasKey('title', $data);
-        $this->assertArrayHasKey('status', $data);
-        $this->assertArrayHasKey('time_estimated', $data);
-        $this->assertArrayHasKey('time_spent', $data);
-        $this->assertArrayHasKey('status', $data);
-        $this->assertArrayHasKey('task_id', $data);
-        $this->assertArrayHasKey('user_id', $data);
-        $this->assertArrayHasKey('position', $data);
-        $this->assertNotEmpty($data['task_id']);
-        $this->assertNotEmpty($data['id']);
-    }
-
     public function testCreation()
     {
         $taskCreationModel = new TaskCreationModel($this->container);
@@ -75,9 +17,6 @@ class SubtaskModelTest extends Base
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
-
-        $this->container['dispatcher']->addListener(SubtaskModel::EVENT_CREATE, array($this, 'onSubtaskCreated'));
-
         $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #1', 'task_id' => 1)));
 
         $subtask = $subtaskModel->getById(1);
@@ -100,8 +39,6 @@ class SubtaskModelTest extends Base
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
-
-        $this->container['dispatcher']->addListener(SubtaskModel::EVENT_UPDATE, array($this, 'onSubtaskUpdated'));
 
         $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #1', 'task_id' => 1)));
         $this->assertTrue($subtaskModel->update(array('id' => 1, 'user_id' => 1, 'status' => SubtaskModel::STATUS_INPROGRESS)));
@@ -127,8 +64,6 @@ class SubtaskModelTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
         $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #1', 'task_id' => 1)));
-
-        $this->container['dispatcher']->addListener(SubtaskModel::EVENT_DELETE, array($this, 'onSubtaskDeleted'));
 
         $subtask = $subtaskModel->getById(1);
         $this->assertNotEmpty($subtask);
@@ -269,7 +204,6 @@ class SubtaskModelTest extends Base
         $this->assertTrue($subtaskModel->duplicate(1, 2));
         $subtasks = $subtaskModel->getAll(2);
 
-        $this->assertNotFalse($subtasks);
         $this->assertNotEmpty($subtasks);
         $this->assertEquals(2, count($subtasks));
 
@@ -383,7 +317,7 @@ class SubtaskModelTest extends Base
         $this->assertEquals(2, $task['time_spent']);
         $this->assertEquals(3, $task['time_estimated']);
     }
-    
+
     public function testGetProjectId()
     {
         $taskCreationModel = new TaskCreationModel($this->container);
@@ -393,7 +327,7 @@ class SubtaskModelTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
         $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #1', 'task_id' => 1)));
-        
+
         $this->assertEquals(1, $subtaskModel->getProjectId(1));
         $this->assertEquals(0, $subtaskModel->getProjectId(2));
     }
