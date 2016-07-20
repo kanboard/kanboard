@@ -52,6 +52,7 @@ class TaskCreation extends Base
     public function getEventRequiredParameters()
     {
         return array(
+            'project_id',
             'reference',
             'title',
         );

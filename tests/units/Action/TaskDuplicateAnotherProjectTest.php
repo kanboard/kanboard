@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Event\GenericEvent;
+use Kanboard\Event\TaskEvent;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\TaskCreationModel;
@@ -21,7 +21,13 @@ class TaskDuplicateAnotherProjectTest extends Base
         $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
 
-        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'column_id' => 2));
+        $event = new TaskEvent(array(
+            'task_id' => 1,
+            'task' => array(
+                'project_id' => 1,
+                'column_id' => 2,
+            )
+        ));
 
         $action = new TaskDuplicateAnotherProject($this->container);
         $action->setProjectId(1);
@@ -43,7 +49,13 @@ class TaskDuplicateAnotherProjectTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));
 
-        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'column_id' => 3));
+        $event = new TaskEvent(array(
+            'task_id' => 1,
+            'task' => array(
+                'project_id' => 1,
+                'column_id' => 3,
+            )
+        ));
 
         $action = new TaskDuplicateAnotherProject($this->container);
         $action->setProjectId(1);

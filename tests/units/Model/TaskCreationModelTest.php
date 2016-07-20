@@ -17,7 +17,7 @@ class TaskCreationModelTest extends Base
         $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);
         $this->assertEquals(1, $event_data['task_id']);
-        $this->assertEquals('test', $event_data['title']);
+        $this->assertEquals('test', $event_data['task']['title']);
     }
 
     public function testNoTitle()

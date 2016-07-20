@@ -21,8 +21,8 @@ class SubtaskEventJobTest extends Base
     {
         $this->container['dispatcher']->addListener(SubtaskModel::EVENT_CREATE, function() {});
 
-        $SubtaskEventJob = new SubtaskEventJob($this->container);
-        $SubtaskEventJob->execute(42, SubtaskModel::EVENT_CREATE);
+        $subtaskEventJob = new SubtaskEventJob($this->container);
+        $subtaskEventJob->execute(42, SubtaskModel::EVENT_CREATE);
 
         $called = $this->container['dispatcher']->getCalledListeners();
         $this->assertEmpty($called);

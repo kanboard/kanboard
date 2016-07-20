@@ -55,7 +55,13 @@ class TaskCloseColumn extends Base
      */
     public function getEventRequiredParameters()
     {
-        return array('task_id', 'column_id');
+        return array(
+            'task_id',
+            'task' => array(
+                'project_id',
+                'column_id',
+            )
+        );
     }
 
     /**
@@ -79,6 +85,6 @@ class TaskCloseColumn extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['column_id'] == $this->getParam('column_id');
+        return $data['task']['column_id'] == $this->getParam('column_id');
     }
 }
