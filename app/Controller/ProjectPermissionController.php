@@ -147,7 +147,13 @@ class ProjectPermissionController extends BaseController
         $values = $this->request->getValues();
 
         if (empty($values['group_id']) && ! empty($values['external_id'])) {
-            $values['group_id'] = $this->groupModel->create($values['name'], $values['external_id']);
+            $group = $this->groupModel->getByExternalId($values['external_id']);
+            if ($group) {
+                $values['group_id'] = $group['id'];
+            }
+            else {
+                $values['group_id'] = $this->groupModel->create($values['name'], $values['external_id']);
+            }
         }
 
         if ($this->projectGroupRoleModel->addGroup($project['id'], $values['group_id'], $values['role'])) {
