@@ -4,7 +4,7 @@ require_once __DIR__.'/../Base.php';
 
 use Kanboard\Model\GroupModel;
 
-class GroupTest extends Base
+class GroupModelTest extends Base
 {
     public function testCreation()
     {
@@ -56,5 +56,14 @@ class GroupTest extends Base
         $this->assertEquals(1, $groupModel->create('Test'));
         $this->assertTrue($groupModel->remove(1));
         $this->assertEmpty($groupModel->getById(1));
+    }
+
+    public function testGetOrCreateExternalGroupId()
+    {
+        $groupModel = new GroupModel($this->container);
+        $this->assertEquals(1, $groupModel->create('Group 1', 'ExternalId1'));
+        $this->assertEquals(1, $groupModel->getOrCreateExternalGroupId('Group 1', 'ExternalId1'));
+        $this->assertEquals(1, $groupModel->getOrCreateExternalGroupId('Group 2', 'ExternalId1'));
+        $this->assertEquals(2, $groupModel->getOrCreateExternalGroupId('Group 2', 'ExternalId2'));
     }
 }

@@ -116,4 +116,23 @@ class GroupModel extends Base
     {
         return $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
     }
+
+    /**
+     * Get groupId from externalGroupId and create the group if not found
+     *
+     * @access public
+     * @param  string $name
+     * @param  string $external_id
+     * @return bool|integer
+     */
+    public function getOrCreateExternalGroupId($name, $external_id)
+    {
+        $group_id = $this->db->table(self::TABLE)->eq('external_id', $external_id)->findOneColumn('id');
+
+        if (empty($group_id)) {
+            $group_id = $this->create($name, $external_id);
+        }
+
+        return $group_id;
+    }
 }
