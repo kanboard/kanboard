@@ -4,7 +4,7 @@ Deploy Kanboard on Heroku
 You can try Kanboard for free on [Heroku](https://www.heroku.com/).
 You can use this one click install button or follow the manual instructions below:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/fguillot/kanboard)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/kanboard/kanboard)
 
 Requirements
 ------------
@@ -17,7 +17,7 @@ Manual instructions
 
 ```bash
 # Get the last development version
-git clone https://github.com/fguillot/kanboard.git
+git clone https://github.com/kanboard/kanboard.git
 cd kanboard
 
 # Push the code to Heroku (You can also use SSH if git over HTTP doesn't work)

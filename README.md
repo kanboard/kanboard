@@ -15,16 +15,16 @@ Official website: <https://kanboard.net>
 - Open source and self-hosted
 - Super simple installation
 - Translated in many languages
-- Distributed under [MIT License](https://github.com/fguillot/kanboard/blob/master/LICENSE)
+- Distributed under [MIT License](https://github.com/kanboard/kanboard/blob/master/LICENSE)
 - The complete [list of features are available on the website](https://kanboard.net/features)
-- [Change Log](https://github.com/fguillot/kanboard/blob/master/ChangeLog)
-- [Documentation](https://github.com/fguillot/kanboard/blob/master/doc/index.markdown)
+- [Change Log](https://github.com/kanboard/kanboard/blob/master/ChangeLog)
+- [Documentation](https://github.com/kanboard/kanboard/blob/master/doc/index.markdown)
 
 Authors
 -------
 
 - Main developer: [Frédéric Guillot](https://github.com/fguillot)
-- [List of contributors](https://github.com/fguillot/kanboard/blob/master/CONTRIBUTORS.md)
+- [List of contributors](https://github.com/kanboard/kanboard/blob/master/CONTRIBUTORS.md)
 
 Installation and Upgrade
 ------------------------
