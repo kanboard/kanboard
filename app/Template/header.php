@@ -59,6 +59,7 @@
                             <?= $this->url->link(t('New private project'), 'ProjectCreationController', 'createPrivate', array(), false, 'popover') ?>
                         </li>
                         <?php endif ?>
+                        <?= $this->hook->render('template:header:creation-dropdown') ?>
                     </ul>
                 </div>
                 <?php endif ?>
