@@ -42,21 +42,9 @@ Kanboard.BoardColumnScrolling.prototype.render = function() {
     var filterMin = $(".filter-min-height");
 
     if (localStorage.getItem("column_scroll") == 0) {
-        var height = 80;
-
         filterMax.show();
         filterMin.hide();
         rotationWrapper.css("min-height", '');
-
-        taskList.each(function() {
-            var columnHeight = $(this).height();
-
-            if (columnHeight > height) {
-                height = columnHeight;
-            }
-        });
-
-        taskList.css("min-height", height);
         taskList.css("height", '');
     }
     else {
@@ -70,7 +58,6 @@ Kanboard.BoardColumnScrolling.prototype.render = function() {
                     $(this).css("height", 500);
                 }
                 else {
-                    $(this).css("min-height", 320); // Height of the dropdown menu
                     rotationWrapper.css("min-height", 320);
                 }
             });
