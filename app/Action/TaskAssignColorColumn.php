@@ -61,7 +61,10 @@ class TaskAssignColorColumn extends Base
     {
         return array(
             'task_id',
-            'column_id',
+            'task' => array(
+                'project_id',
+                'column_id',
+            ),
         );
     }
 
@@ -91,6 +94,6 @@ class TaskAssignColorColumn extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['column_id'] == $this->getParam('column_id');
+        return $data['task']['column_id'] == $this->getParam('column_id');
     }
 }

@@ -93,4 +93,4 @@ References
 - [Official Kanboard images](https://registry.hub.docker.com/u/kanboard/kanboard/)
 - [Docker documentation](https://docs.docker.com/)
 - [Dockerfile stable version](https://github.com/kanboard/docker)
-- [Dockerfile dev version](https://github.com/fguillot/kanboard/blob/master/Dockerfile)
+- [Dockerfile dev version](https://github.com/kanboard/kanboard/blob/master/Dockerfile)

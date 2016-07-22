@@ -3,7 +3,6 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Base;
-use Kanboard\Event\TaskEvent;
 
 /**
  * Task Position
@@ -212,8 +211,7 @@ class TaskPositionModel extends Base
      */
     private function fireEvents(array $task, $new_column_id, $new_position, $new_swimlane_id)
     {
-        $event_data = array(
-            'task_id' => $task['id'],
+        $changes = array(
             'project_id' => $task['project_id'],
             'position' => $new_position,
             'column_id' => $new_column_id,
@@ -226,14 +224,26 @@ class TaskPositionModel extends Base
         );
 
         if ($task['swimlane_id'] != $new_swimlane_id) {
-            $this->logger->debug('Event fired: '.TaskModel::EVENT_MOVE_SWIMLANE);
-            $this->dispatcher->dispatch(TaskModel::EVENT_MOVE_SWIMLANE, new TaskEvent($event_data));
+            $this->queueManager->push($this->taskEventJob->withParams(
+                $task['id'],
+                array(TaskModel::EVENT_MOVE_SWIMLANE),
+                $changes,
+                $changes
+            ));
         } elseif ($task['column_id'] != $new_column_id) {
-            $this->logger->debug('Event fired: '.TaskModel::EVENT_MOVE_COLUMN);
-            $this->dispatcher->dispatch(TaskModel::EVENT_MOVE_COLUMN, new TaskEvent($event_data));
+            $this->queueManager->push($this->taskEventJob->withParams(
+                $task['id'],
+                array(TaskModel::EVENT_MOVE_COLUMN),
+                $changes,
+                $changes
+            ));
         } elseif ($task['position'] != $new_position) {
-            $this->logger->debug('Event fired: '.TaskModel::EVENT_MOVE_POSITION);
-            $this->dispatcher->dispatch(TaskModel::EVENT_MOVE_POSITION, new TaskEvent($event_data));
+            $this->queueManager->push($this->taskEventJob->withParams(
+                $task['id'],
+                array(TaskModel::EVENT_MOVE_POSITION),
+                $changes,
+                $changes
+            ));
         }
     }
 }

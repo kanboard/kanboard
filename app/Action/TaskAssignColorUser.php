@@ -61,7 +61,10 @@ class TaskAssignColorUser extends Base
     {
         return array(
             'task_id',
-            'owner_id',
+            'task' => array(
+                'project_id',
+                'owner_id',
+            ),
         );
     }
 
@@ -91,6 +94,6 @@ class TaskAssignColorUser extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['owner_id'] == $this->getParam('user_id');
+        return $data['task']['owner_id'] == $this->getParam('user_id');
     }
 }

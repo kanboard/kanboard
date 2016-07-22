@@ -17,59 +17,27 @@ class NotificationJob extends BaseJob
      *
      * @param GenericEvent $event
      * @param string       $eventName
-     * @param string       $eventObjectName
      * @return $this
      */
-    public function withParams(GenericEvent $event, $eventName, $eventObjectName)
+    public function withParams(GenericEvent $event, $eventName)
     {
-        $this->jobParams = array($event->getAll(), $eventName, $eventObjectName);
+        $this->jobParams = array($event->getAll(), $eventName);
         return $this;
     }
 
     /**
      * Execute job
      *
-     * @param array  $event
+     * @param array  $eventData
      * @param string $eventName
-     * @param string $eventObjectName
      */
-    public function execute(array $event, $eventName, $eventObjectName)
+    public function execute(array $eventData, $eventName)
     {
-        $eventData = $this->getEventData($event, $eventObjectName);
-
-        if (! empty($eventData)) {
-            if (! empty($event['mention'])) {
-                $this->userNotificationModel->sendUserNotification($event['mention'], $eventName, $eventData);
-            } else {
-                $this->userNotificationModel->sendNotifications($eventName, $eventData);
-                $this->projectNotificationModel->sendNotifications($eventData['task']['project_id'], $eventName, $eventData);
-            }
+        if (! empty($eventData['mention'])) {
+            $this->userNotificationModel->sendUserNotification($eventData['mention'], $eventName, $eventData);
+        } else {
+            $this->userNotificationModel->sendNotifications($eventName, $eventData);
+            $this->projectNotificationModel->sendNotifications($eventData['task']['project_id'], $eventName, $eventData);
         }
-    }
-
-    /**
-     * Get event data
-     *
-     * @param array  $event
-     * @param string $eventObjectName
-     * @return array
-     */
-    public function getEventData(array $event, $eventObjectName)
-    {
-        $values = array();
-
-        if (! empty($event['changes'])) {
-            $values['changes'] = $event['changes'];
-        }
-
-        switch ($eventObjectName) {
-            case 'Kanboard\Event\TaskEvent':
-                $values['task'] = $this->taskFinderModel->getDetails($event['task_id']);
-                break;
-            default:
-                $values = $event;
-        }
-
-        return $values;
     }
 }

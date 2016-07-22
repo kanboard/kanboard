@@ -26,7 +26,7 @@ class CommentModel extends Base
      */
     const EVENT_UPDATE       = 'comment.update';
     const EVENT_CREATE       = 'comment.create';
-    const EVENT_REMOVE       = 'comment.remove';
+    const EVENT_DELETE       = 'comment.delete';
     const EVENT_USER_MENTION = 'comment.user.mention';
 
     /**
@@ -166,7 +166,7 @@ class CommentModel extends Base
      */
     public function remove($comment_id)
     {
-        $this->commentEventJob->execute($comment_id, self::EVENT_REMOVE);
+        $this->commentEventJob->execute($comment_id, self::EVENT_DELETE);
         return $this->db->table(self::TABLE)->eq('id', $comment_id)->remove();
     }
 }
