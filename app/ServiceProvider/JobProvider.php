@@ -6,6 +6,7 @@ use Kanboard\Job\CommentEventJob;
 use Kanboard\Job\NotificationJob;
 use Kanboard\Job\ProjectFileEventJob;
 use Kanboard\Job\SubtaskEventJob;
+use Kanboard\Job\TaskEventJob;
 use Kanboard\Job\TaskFileEventJob;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -33,6 +34,10 @@ class JobProvider implements ServiceProviderInterface
 
         $container['subtaskEventJob'] = $container->factory(function ($c) {
             return new SubtaskEventJob($c);
+        });
+
+        $container['taskEventJob'] = $container->factory(function ($c) {
+            return new TaskEventJob($c);
         });
 
         $container['taskFileEventJob'] = $container->factory(function ($c) {

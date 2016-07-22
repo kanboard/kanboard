@@ -4,7 +4,6 @@ namespace Kanboard\Model;
 
 use PicoDb\Database;
 use Kanboard\Core\Base;
-use Kanboard\Event\SubtaskEvent;
 
 /**
  * Subtask Model

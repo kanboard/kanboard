@@ -3,7 +3,6 @@
 namespace Kanboard\Subscriber;
 
 use Kanboard\Event\GenericEvent;
-use Kanboard\Job\NotificationJob;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\CommentModel;
 use Kanboard\Model\SubtaskModel;
@@ -29,7 +28,7 @@ class NotificationSubscriber extends BaseSubscriber implements EventSubscriberIn
             SubtaskModel::EVENT_DELETE       => 'handleEvent',
             CommentModel::EVENT_CREATE       => 'handleEvent',
             CommentModel::EVENT_UPDATE       => 'handleEvent',
-            CommentModel::EVENT_REMOVE       => 'handleEvent',
+            CommentModel::EVENT_DELETE       => 'handleEvent',
             CommentModel::EVENT_USER_MENTION => 'handleEvent',
             TaskFileModel::EVENT_CREATE      => 'handleEvent',
         );
@@ -38,9 +37,6 @@ class NotificationSubscriber extends BaseSubscriber implements EventSubscriberIn
     public function handleEvent(GenericEvent $event, $eventName)
     {
         $this->logger->debug('Subscriber executed: ' . __METHOD__);
-
-        $this->queueManager->push(NotificationJob::getInstance($this->container)
-            ->withParams($event, $eventName, get_class($event))
-        );
+        $this->queueManager->push($this->notificationJob->withParams($event, $eventName));
     }
 }

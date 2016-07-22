@@ -32,7 +32,7 @@ class CommentEventJobTest extends Base
     {
         $this->container['dispatcher']->addListener(CommentModel::EVENT_CREATE, function() {});
         $this->container['dispatcher']->addListener(CommentModel::EVENT_UPDATE, function() {});
-        $this->container['dispatcher']->addListener(CommentModel::EVENT_REMOVE, function() {});
+        $this->container['dispatcher']->addListener(CommentModel::EVENT_DELETE, function() {});
 
         $commentModel = new CommentModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);
@@ -47,6 +47,6 @@ class CommentEventJobTest extends Base
         $called = $this->container['dispatcher']->getCalledListeners();
         $this->assertArrayHasKey(CommentModel::EVENT_CREATE.'.closure', $called);
         $this->assertArrayHasKey(CommentModel::EVENT_UPDATE.'.closure', $called);
-        $this->assertArrayHasKey(CommentModel::EVENT_REMOVE.'.closure', $called);
+        $this->assertArrayHasKey(CommentModel::EVENT_DELETE.'.closure', $called);
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Kanboard\Model;
 
-use Kanboard\Event\TaskEvent;
-
 /**
  * Task Project Move
  *
@@ -32,9 +30,8 @@ class TaskProjectMoveModel extends TaskDuplicationModel
         $this->checkDestinationProjectValues($values);
         $this->tagDuplicationModel->syncTaskTagsToAnotherProject($task_id, $project_id);
 
-        if ($this->db->table(TaskModel::TABLE)->eq('id', $task['id'])->update($values)) {
-            $event = new TaskEvent(array_merge($task, $values, array('task_id' => $task['id'])));
-            $this->dispatcher->dispatch(TaskModel::EVENT_MOVE_PROJECT, $event);
+        if ($this->db->table(TaskModel::TABLE)->eq('id', $task_id)->update($values)) {
+            $this->queueManager->push($this->taskEventJob->withParams($task_id, array(TaskModel::EVENT_MOVE_PROJECT), $values));
         }
 
         return true;
