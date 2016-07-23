@@ -3,6 +3,7 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Base;
+use Kanboard\EventBuilder\TaskLinkEventBuilder;
 
 /**
  * Notification
@@ -85,7 +86,9 @@ class NotificationModel extends Base
             case CommentModel::EVENT_USER_MENTION:
                 return e('%s mentioned you in a comment on the task #%d', $event_author, $event_data['task']['id']);
             default:
-                return e('Notification');
+                return TaskLinkEventBuilder::getInstance($this->container)
+                    ->buildTitleWithAuthor($event_author, $event_name, $event_data) ?:
+                e('Notification');
         }
     }
 
@@ -138,7 +141,9 @@ class NotificationModel extends Base
             case CommentModel::EVENT_USER_MENTION:
                 return e('You were mentioned in a comment on the task #%d', $event_data['task']['id']);
             default:
-                return e('Notification');
+                return TaskLinkEventBuilder::getInstance($this->container)
+                    ->buildTitleWithoutAuthor($event_name, $event_data) ?:
+                    e('Notification');
         }
     }
 
@@ -152,32 +157,10 @@ class NotificationModel extends Base
      */
     public function getTaskIdFromEvent($event_name, array $event_data)
     {
-        switch ($event_name) {
-            case TaskFileModel::EVENT_CREATE:
-                return $event_data['file']['task_id'];
-            case CommentModel::EVENT_CREATE:
-            case CommentModel::EVENT_UPDATE:
-            case CommentModel::EVENT_DELETE:
-                return $event_data['comment']['task_id'];
-            case SubtaskModel::EVENT_CREATE:
-            case SubtaskModel::EVENT_UPDATE:
-            case SubtaskModel::EVENT_DELETE:
-                return $event_data['subtask']['task_id'];
-            case TaskModel::EVENT_CREATE:
-            case TaskModel::EVENT_UPDATE:
-            case TaskModel::EVENT_CLOSE:
-            case TaskModel::EVENT_OPEN:
-            case TaskModel::EVENT_MOVE_COLUMN:
-            case TaskModel::EVENT_MOVE_POSITION:
-            case TaskModel::EVENT_MOVE_SWIMLANE:
-            case TaskModel::EVENT_ASSIGNEE_CHANGE:
-            case CommentModel::EVENT_USER_MENTION:
-            case TaskModel::EVENT_USER_MENTION:
-                return $event_data['task']['id'];
-            case TaskModel::EVENT_OVERDUE:
-                return $event_data['tasks'][0]['id'];
-            default:
-                return 0;
+        if ($event_name === TaskModel::EVENT_OVERDUE) {
+            return $event_data['tasks'][0]['id'];
         }
+        
+        return isset($event_data['task']['id']) ? $event_data['task']['id'] : 0;
     }
 }

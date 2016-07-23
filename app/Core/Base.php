@@ -154,6 +154,7 @@ use Pimple\Container;
  * @property \Kanboard\Job\SubtaskEventJob                       $subtaskEventJob
  * @property \Kanboard\Job\TaskEventJob                          $taskEventJob
  * @property \Kanboard\Job\TaskFileEventJob                      $taskFileEventJob
+ * @property \Kanboard\Job\TaskLinkEventJob                      $taskLinkEventJob
  * @property \Kanboard\Job\ProjectFileEventJob                   $projectFileEventJob
  * @property \Kanboard\Job\NotificationJob                       $notificationJob
  * @property \Psr\Log\LoggerInterface                            $logger

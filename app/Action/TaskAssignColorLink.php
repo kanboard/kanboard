@@ -59,8 +59,10 @@ class TaskAssignColorLink extends Base
     public function getEventRequiredParameters()
     {
         return array(
-            'task_id',
-            'link_id',
+            'task_link' => array(
+                'task_id',
+                'link_id',
+            )
         );
     }
 
@@ -74,7 +76,7 @@ class TaskAssignColorLink extends Base
     public function doAction(array $data)
     {
         $values = array(
-            'id' => $data['task_id'],
+            'id' => $data['task_link']['task_id'],
             'color_id' => $this->getParam('color_id'),
         );
 
@@ -90,6 +92,6 @@ class TaskAssignColorLink extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['link_id'] == $this->getParam('link_id');
+        return $data['task_link']['link_id'] == $this->getParam('link_id');
     }
 }

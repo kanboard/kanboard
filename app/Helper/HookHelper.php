@@ -56,7 +56,7 @@ class HookHelper extends Base
      * @access public
      * @param  string  $hook
      * @param  string  $template
-     * @return \Kanboard\Helper\Hook
+     * @return $this
      */
     public function attach($hook, $template)
     {

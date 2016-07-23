@@ -8,6 +8,7 @@ use Kanboard\Job\ProjectFileEventJob;
 use Kanboard\Job\SubtaskEventJob;
 use Kanboard\Job\TaskEventJob;
 use Kanboard\Job\TaskFileEventJob;
+use Kanboard\Job\TaskLinkEventJob;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -42,6 +43,10 @@ class JobProvider implements ServiceProviderInterface
 
         $container['taskFileEventJob'] = $container->factory(function ($c) {
             return new TaskFileEventJob($c);
+        });
+
+        $container['taskLinkEventJob'] = $container->factory(function ($c) {
+            return new TaskLinkEventJob($c);
         });
 
         $container['projectFileEventJob'] = $container->factory(function ($c) {
