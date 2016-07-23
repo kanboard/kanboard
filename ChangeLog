@@ -7,6 +7,7 @@ New features:
     - Close tasks without activity in a specific column
     - Set due date automatically
     - Move a task to another column when closed
+    - Move a task to another column when not moved during a given period
 * Added internal task links to activity stream
 * Added new event for removed comments
 * Added search filter for task priority
