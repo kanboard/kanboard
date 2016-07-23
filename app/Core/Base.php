@@ -185,10 +185,10 @@ abstract class Base
     }
 
     /**
-     * Load automatically models
+     * Load automatically dependencies
      *
      * @access public
-     * @param  string $name Model name
+     * @param  string $name Class name
      * @return mixed
      */
     public function __get($name)
@@ -206,7 +206,6 @@ abstract class Base
      */
     public static function getInstance(Container $container)
     {
-        $self = new static($container);
-        return $self;
+        return new static($container);
     }
 }

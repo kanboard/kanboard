@@ -15,6 +15,10 @@ class EventIteratorBuilder implements Iterator {
     private $builders = array();
 
     /**
+     * Set builder
+     *
+     * @access public
+     * @param  BaseEventBuilder $builder
      * @return $this
      */
     public function withBuilder(BaseEventBuilder $builder)
