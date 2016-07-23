@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Close automatically a task in a specific column
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskCloseColumn extends Base

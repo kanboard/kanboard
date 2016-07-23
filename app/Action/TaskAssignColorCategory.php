@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Assign a color to a specific category
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskAssignColorCategory extends Base

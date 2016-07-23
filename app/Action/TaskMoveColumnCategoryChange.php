@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Move a task to another column when the category is changed
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Francois Ferrand
  */
 class TaskMoveColumnCategoryChange extends Base

@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Set the start date of task
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskUpdateStartDate extends Base

@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Email a task to someone
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskEmail extends Base

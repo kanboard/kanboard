@@ -4,6 +4,7 @@ namespace Kanboard\ServiceProvider;
 
 use Kanboard\Action\TaskAssignColorPriority;
 use Kanboard\Action\TaskAssignDueDateOnCreation;
+use Kanboard\Action\TaskMoveColumnClosed;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Kanboard\Core\Action\ActionManager;
@@ -78,6 +79,7 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskMoveAnotherProject($container));
         $container['actionManager']->register(new TaskMoveColumnAssigned($container));
         $container['actionManager']->register(new TaskMoveColumnCategoryChange($container));
+        $container['actionManager']->register(new TaskMoveColumnClosed($container));
         $container['actionManager']->register(new TaskMoveColumnUnAssigned($container));
         $container['actionManager']->register(new TaskOpen($container));
         $container['actionManager']->register(new TaskUpdateStartDate($container));

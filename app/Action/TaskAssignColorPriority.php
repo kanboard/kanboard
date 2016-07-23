@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Assign a color to a priority
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskAssignColorPriority extends Base

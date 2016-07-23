@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Move a task to another column when an assignee is cleared
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Francois Ferrand
  */
 class TaskMoveColumnUnAssigned extends Base

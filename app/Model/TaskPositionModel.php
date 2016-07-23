@@ -16,15 +16,16 @@ class TaskPositionModel extends Base
      * Move a task to another column or to another position
      *
      * @access public
-     * @param  integer    $project_id        Project id
-     * @param  integer    $task_id           Task id
-     * @param  integer    $column_id         Column id
-     * @param  integer    $position          Position (must be >= 1)
-     * @param  integer    $swimlane_id       Swimlane id
-     * @param  boolean    $fire_events       Fire events
-     * @return boolean
+     * @param  integer $project_id  Project id
+     * @param  integer $task_id     Task id
+     * @param  integer $column_id   Column id
+     * @param  integer $position    Position (must be >= 1)
+     * @param  integer $swimlane_id Swimlane id
+     * @param  boolean $fire_events Fire events
+     * @param  bool    $onlyOpen    Do not move closed tasks
+     * @return bool
      */
-    public function movePosition($project_id, $task_id, $column_id, $position, $swimlane_id = 0, $fire_events = true)
+    public function movePosition($project_id, $task_id, $column_id, $position, $swimlane_id = 0, $fire_events = true, $onlyOpen = true)
     {
         if ($position < 1) {
             return false;
@@ -32,7 +33,7 @@ class TaskPositionModel extends Base
 
         $task = $this->taskFinderModel->getById($task_id);
 
-        if ($task['is_active'] == TaskModel::STATUS_CLOSED) {
+        if ($onlyOpen && $task['is_active'] == TaskModel::STATUS_CLOSED) {
             return true;
         }
 

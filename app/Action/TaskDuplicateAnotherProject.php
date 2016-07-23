@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Duplicate a task to another project
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskDuplicateAnotherProject extends Base

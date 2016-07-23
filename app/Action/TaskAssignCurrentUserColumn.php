@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Assign a task to the logged user on column change
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskAssignCurrentUserColumn extends Base

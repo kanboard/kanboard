@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Move a task to another project
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskMoveAnotherProject extends Base

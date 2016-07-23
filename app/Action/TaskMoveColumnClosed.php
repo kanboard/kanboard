@@ -2,13 +2,15 @@
 
 namespace Kanboard\Action;
 
+use Kanboard\Model\TaskModel;
+
 /**
- * Create automatically a task from a webhook
+ * Move a task to another column when the task is closed
  *
  * @package Kanboard\Action
  * @author  Frederic Guillot
  */
-class TaskCreation extends Base
+class TaskMoveColumnClosed extends Base
 {
     /**
      * Get automatic action description
@@ -18,7 +20,7 @@ class TaskCreation extends Base
      */
     public function getDescription()
     {
-        return t('Create a task from an external provider');
+        return t('Move the task to another column when closed');
     }
 
     /**
@@ -29,7 +31,9 @@ class TaskCreation extends Base
      */
     public function getCompatibleEvents()
     {
-        return array();
+        return array(
+            TaskModel::EVENT_CLOSE,
+        );
     }
 
     /**
@@ -40,7 +44,9 @@ class TaskCreation extends Base
      */
     public function getActionRequiredParameters()
     {
-        return array();
+        return array(
+            'dest_column_id' => t('Destination column'),
+        );
     }
 
     /**
@@ -52,14 +58,18 @@ class TaskCreation extends Base
     public function getEventRequiredParameters()
     {
         return array(
-            'project_id',
-            'reference',
-            'title',
+            'task_id',
+            'task' => array(
+                'project_id',
+                'column_id',
+                'swimlane_id',
+                'is_active',
+            )
         );
     }
 
     /**
-     * Execute the action (create a new task)
+     * Execute the action (move the task to another column)
      *
      * @access public
      * @param  array   $data   Event data dictionary
@@ -67,12 +77,15 @@ class TaskCreation extends Base
      */
     public function doAction(array $data)
     {
-        return (bool) $this->taskCreationModel->create(array(
-            'project_id' => $data['project_id'],
-            'title' => $data['title'],
-            'reference' => $data['reference'],
-            'description' => isset($data['description']) ? $data['description'] : '',
-        ));
+        return $this->taskPositionModel->movePosition(
+            $data['task']['project_id'],
+            $data['task']['id'],
+            $this->getParam('dest_column_id'),
+            1,
+            $data['task']['swimlane_id'],
+            false,
+            false
+        );
     }
 
     /**
@@ -84,6 +97,6 @@ class TaskCreation extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return true;
+        return $data['task']['column_id'] != $this->getParam('dest_column_id') && $data['task']['is_active'] == 0;
     }
 }

@@ -6,6 +6,7 @@ New features:
 * New automated actions:
     - Close tasks without activity in a specific column
     - Set due date automatically
+    - Move a task to another column when closed
 * Added internal task links to activity stream
 * Added new event for removed comments
 * Added search filter for task priority

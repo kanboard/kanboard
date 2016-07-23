@@ -5,7 +5,7 @@ namespace Kanboard\Action;
 /**
  * Open automatically a task
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskOpen extends Base

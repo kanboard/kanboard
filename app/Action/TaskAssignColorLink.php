@@ -7,7 +7,7 @@ use Kanboard\Model\TaskLinkModel;
 /**
  * Assign a color to a specific task link
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskAssignColorLink extends Base

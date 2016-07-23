@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Assign a task to a specific user
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskAssignSpecificUser extends Base

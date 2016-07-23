@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Assign a color to a task
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskAssignColorColumn extends Base

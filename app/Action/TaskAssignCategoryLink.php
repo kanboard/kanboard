@@ -7,7 +7,7 @@ use Kanboard\Model\TaskLinkModel;
 /**
  * Set a category automatically according to a task link
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Olivier Maridat
  * @author  Frederic Guillot
  */

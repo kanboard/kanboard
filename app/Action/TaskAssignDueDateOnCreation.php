@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Set the due date of task
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskAssignDueDateOnCreation extends Base
