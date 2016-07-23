@@ -33,7 +33,7 @@ class TaskLinkEventBuilder extends BaseEventBuilder
      * @access public
      * @return TaskLinkEvent|null
      */
-    public function build()
+    public function buildEvent()
     {
         $taskLink = $this->taskLinkModel->getById($this->taskLinkId);
 

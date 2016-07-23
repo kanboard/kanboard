@@ -36,7 +36,7 @@ class TaskLinkEventJob extends BaseJob
     {
         $event = TaskLinkEventBuilder::getInstance($this->container)
             ->withTaskLinkId($taskLinkId)
-            ->build();
+            ->buildEvent();
 
         if ($event !== null) {
             $this->dispatcher->dispatch($eventName, $event);

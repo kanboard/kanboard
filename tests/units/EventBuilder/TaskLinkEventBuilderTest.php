@@ -13,7 +13,7 @@ class TaskLinkEventBuilderTest extends Base
     {
         $taskLinkEventBuilder = new TaskLinkEventBuilder($this->container);
         $taskLinkEventBuilder->withTaskLinkId(42);
-        $this->assertNull($taskLinkEventBuilder->build());
+        $this->assertNull($taskLinkEventBuilder->buildEvent());
     }
 
     public function testBuild()
@@ -28,7 +28,7 @@ class TaskLinkEventBuilderTest extends Base
         $this->assertEquals(2, $taskCreationModel->create(array('title' => 'task 2', 'project_id' => 1)));
         $this->assertEquals(1, $taskLinkModel->create(1, 2, 1));
 
-        $event = $taskLinkEventBuilder->withTaskLinkId(1)->build();
+        $event = $taskLinkEventBuilder->withTaskLinkId(1)->buildEvent();
 
         $this->assertInstanceOf('Kanboard\Event\TaskLinkEvent', $event);
         $this->assertNotEmpty($event['task_link']);
@@ -47,7 +47,7 @@ class TaskLinkEventBuilderTest extends Base
         $this->assertEquals(2, $taskCreationModel->create(array('title' => 'task 2', 'project_id' => 1)));
         $this->assertEquals(1, $taskLinkModel->create(1, 2, 1));
 
-        $eventData = $taskLinkEventBuilder->withTaskLinkId(1)->build();
+        $eventData = $taskLinkEventBuilder->withTaskLinkId(1)->buildEvent();
 
         $title = $taskLinkEventBuilder->buildTitleWithAuthor('Foobar', TaskLinkModel::EVENT_CREATE_UPDATE, $eventData->getAll());
         $this->assertEquals('Foobar set a new internal link for the task #1', $title);

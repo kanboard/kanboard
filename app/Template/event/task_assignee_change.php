@@ -8,7 +8,7 @@
                 $this->text->e($assignee)
             ) ?>
     <?php else: ?>
-        <?= e('%s remove the assignee of the task %s', $this->text->e($author), $this->url->link(t('#%d', $task['id']), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']))) ?>
+        <?= e('%s removed the assignee of the task %s', $this->text->e($author), $this->url->link(t('#%d', $task['id']), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']))) ?>
     <?php endif ?>
     <span class="activity-date"><?= $this->dt->datetime($date_creation) ?></span>
 </p>

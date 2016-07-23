@@ -33,7 +33,7 @@ class TaskAssignCategoryLinkTest extends Base
 
         $event = TaskLinkEventBuilder::getInstance($this->container)
             ->withTaskLinkId(1)
-            ->build();
+            ->buildEvent();
 
         $this->assertTrue($action->execute($event, TaskLinkModel::EVENT_CREATE_UPDATE));
 
@@ -62,7 +62,7 @@ class TaskAssignCategoryLinkTest extends Base
 
         $event = TaskLinkEventBuilder::getInstance($this->container)
             ->withTaskLinkId(1)
-            ->build();
+            ->buildEvent();
 
         $this->assertFalse($action->execute($event, TaskLinkModel::EVENT_CREATE_UPDATE));
 
@@ -91,7 +91,7 @@ class TaskAssignCategoryLinkTest extends Base
 
         $event = TaskLinkEventBuilder::getInstance($this->container)
             ->withTaskLinkId(1)
-            ->build();
+            ->buildEvent();
 
         $this->assertFalse($action->execute($event, TaskLinkModel::EVENT_CREATE_UPDATE));
 

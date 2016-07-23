@@ -13,7 +13,7 @@ class TaskFileEventBuilderTest extends Base
     {
         $taskFileEventBuilder = new TaskFileEventBuilder($this->container);
         $taskFileEventBuilder->withFileId(42);
-        $this->assertNull($taskFileEventBuilder->build());
+        $this->assertNull($taskFileEventBuilder->buildEvent());
     }
 
     public function testBuild()
@@ -27,7 +27,7 @@ class TaskFileEventBuilderTest extends Base
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1)));
         $this->assertEquals(1, $taskFileModel->create(1, 'Test', '/tmp/test', 123));
 
-        $event = $taskFileEventBuilder->withFileId(1)->build();
+        $event = $taskFileEventBuilder->withFileId(1)->buildEvent();
 
         $this->assertInstanceOf('Kanboard\Event\TaskFileEvent', $event);
         $this->assertNotEmpty($event['file']);

@@ -36,7 +36,7 @@ class TaskFileEventJob extends BaseJob
     {
         $event = TaskFileEventBuilder::getInstance($this->container)
             ->withFileId($fileId)
-            ->build();
+            ->buildEvent();
 
         if ($event !== null) {
             $this->dispatcher->dispatch($eventName, $event);

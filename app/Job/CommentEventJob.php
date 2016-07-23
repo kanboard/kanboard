@@ -37,7 +37,7 @@ class CommentEventJob extends BaseJob
     {
         $event = CommentEventBuilder::getInstance($this->container)
             ->withCommentId($commentId)
-            ->build();
+            ->buildEvent();
 
         if ($event !== null) {
             $this->dispatcher->dispatch($eventName, $event);

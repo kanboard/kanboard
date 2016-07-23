@@ -33,7 +33,7 @@ class ProjectFileEventBuilder extends BaseEventBuilder
      * @access public
      * @return GenericEvent|null
      */
-    public function build()
+    public function buildEvent()
     {
         $file = $this->projectFileModel->getById($this->fileId);
 
@@ -46,5 +46,32 @@ class ProjectFileEventBuilder extends BaseEventBuilder
             'file' => $file,
             'project' => $this->projectModel->getById($file['project_id']),
         ));
+    }
+
+    /**
+     * Get event title with author
+     *
+     * @access public
+     * @param  string $author
+     * @param  string $eventName
+     * @param  array  $eventData
+     * @return string
+     */
+    public function buildTitleWithAuthor($author, $eventName, array $eventData)
+    {
+        return '';
+    }
+
+    /**
+     * Get event title without author
+     *
+     * @access public
+     * @param  string $eventName
+     * @param  array  $eventData
+     * @return string
+     */
+    public function buildTitleWithoutAuthor($eventName, array $eventData)
+    {
+        return '';
     }
 }

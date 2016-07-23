@@ -39,7 +39,7 @@ class SubtaskEventJob extends BaseJob
         $event = SubtaskEventBuilder::getInstance($this->container)
             ->withSubtaskId($subtaskId)
             ->withValues($values)
-            ->build();
+            ->buildEvent();
 
         if ($event !== null) {
             $this->dispatcher->dispatch($eventName, $event);

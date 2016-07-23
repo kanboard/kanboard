@@ -12,7 +12,7 @@ class TaskEventBuilderTest extends Base
     {
         $taskEventBuilder = new TaskEventBuilder($this->container);
         $taskEventBuilder->withTaskId(42);
-        $this->assertNull($taskEventBuilder->build());
+        $this->assertNull($taskEventBuilder->buildEvent());
     }
 
     public function testBuildWithTask()
@@ -28,7 +28,7 @@ class TaskEventBuilderTest extends Base
             ->withTaskId(1)
             ->withTask(array('title' => 'before'))
             ->withChanges(array('title' => 'after'))
-            ->build();
+            ->buildEvent();
 
         $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
         $this->assertNotEmpty($event['task']);
@@ -45,7 +45,7 @@ class TaskEventBuilderTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1)));
 
-        $event = $taskEventBuilder->withTaskId(1)->build();
+        $event = $taskEventBuilder->withTaskId(1)->buildEvent();
 
         $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
         $this->assertNotEmpty($event['task']);
@@ -65,7 +65,7 @@ class TaskEventBuilderTest extends Base
         $event = $taskEventBuilder
             ->withTaskId(1)
             ->withChanges(array('title' => 'new title'))
-            ->build();
+            ->buildEvent();
 
         $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
         $this->assertNotEmpty($event['task']);
@@ -86,7 +86,7 @@ class TaskEventBuilderTest extends Base
             ->withTaskId(1)
             ->withChanges(array('title' => 'new title', 'project_id' => 1))
             ->withValues(array('key' => 'value'))
-            ->build();
+            ->buildEvent();
 
         $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
         $this->assertNotEmpty($event['task']);

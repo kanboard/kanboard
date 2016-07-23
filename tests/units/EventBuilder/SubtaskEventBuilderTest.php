@@ -13,7 +13,7 @@ class SubtaskEventBuilderTest extends Base
     {
         $subtaskEventBuilder = new SubtaskEventBuilder($this->container);
         $subtaskEventBuilder->withSubtaskId(42);
-        $this->assertNull($subtaskEventBuilder->build());
+        $this->assertNull($subtaskEventBuilder->buildEvent());
     }
 
     public function testBuildWithoutChanges()
@@ -27,7 +27,7 @@ class SubtaskEventBuilderTest extends Base
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1)));
         $this->assertEquals(1, $subtaskModel->create(array('task_id' => 1, 'title' => 'test')));
 
-        $event = $subtaskEventBuilder->withSubtaskId(1)->build();
+        $event = $subtaskEventBuilder->withSubtaskId(1)->buildEvent();
 
         $this->assertInstanceOf('Kanboard\Event\SubtaskEvent', $event);
         $this->assertNotEmpty($event['subtask']);
@@ -49,7 +49,7 @@ class SubtaskEventBuilderTest extends Base
         $event = $subtaskEventBuilder
             ->withSubtaskId(1)
             ->withValues(array('title' => 'new title', 'user_id' => 1))
-            ->build();
+            ->buildEvent();
 
         $this->assertInstanceOf('Kanboard\Event\SubtaskEvent', $event);
         $this->assertNotEmpty($event['subtask']);
