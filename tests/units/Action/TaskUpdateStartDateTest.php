@@ -2,7 +2,6 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Event\GenericEvent;
 use Kanboard\Event\TaskEvent;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
@@ -12,7 +11,7 @@ use Kanboard\Action\TaskUpdateStartDate;
 
 class TaskUpdateStartDateTest extends Base
 {
-    public function testClose()
+    public function testAction()
     {
         $projectModel = new ProjectModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);

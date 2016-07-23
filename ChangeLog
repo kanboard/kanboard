@@ -3,7 +3,9 @@ Version 1.0.32 (unreleased)
 
 New features:
 
-* New automated action to close tasks without activity in a specific column
+* New automated actions:
+    - Close tasks without activity in a specific column
+    - Set due date automatically
 * Added internal task links to activity stream
 * Added new event for removed comments
 * Added search filter for task priority
@@ -11,6 +13,7 @@ New features:
 
 Improvements:
 
+* Internal events management refactoring
 * Handle header X-Real-IP to get IP address
 * Display project name for task auto-complete fields
 * Make search attributes not case sensitive
