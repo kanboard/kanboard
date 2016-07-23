@@ -1226,4 +1226,10 @@ return array(
     '%s removed a subtask for the task %s' => '%s removeu uma sub-tarefa da tarefa %s',
     'Comment removed' => 'Comentário removido',
     'Subtask removed' => 'Sub-tarefa removida',
+    // '%s set a new internal link for the task #%d' => '',
+    // '%s removed an internal link for the task #%d' => '',
+    // 'A new internal link for the task #%d have been defined' => '',
+    // 'Internal link removed for the task #%d' => '',
+    // '%s set a new internal link for the task %s' => '',
+    // '%s removed an internal link for the task %s' => '',
 );
