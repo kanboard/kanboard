@@ -157,6 +157,7 @@ use Pimple\Container;
  * @property \Kanboard\Job\TaskLinkEventJob                      $taskLinkEventJob
  * @property \Kanboard\Job\ProjectFileEventJob                   $projectFileEventJob
  * @property \Kanboard\Job\NotificationJob                       $notificationJob
+ * @property \Kanboard\Job\ProjectMetricJob                      $projectMetricJob
  * @property \Psr\Log\LoggerInterface                            $logger
  * @property \PicoDb\Database                                    $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher  $dispatcher

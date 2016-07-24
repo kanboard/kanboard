@@ -5,6 +5,7 @@ namespace Kanboard\ServiceProvider;
 use Kanboard\Job\CommentEventJob;
 use Kanboard\Job\NotificationJob;
 use Kanboard\Job\ProjectFileEventJob;
+use Kanboard\Job\ProjectMetricJob;
 use Kanboard\Job\SubtaskEventJob;
 use Kanboard\Job\TaskEventJob;
 use Kanboard\Job\TaskFileEventJob;
@@ -55,6 +56,10 @@ class JobProvider implements ServiceProviderInterface
 
         $container['notificationJob'] = $container->factory(function ($c) {
             return new NotificationJob($c);
+        });
+
+        $container['projectMetricJob'] = $container->factory(function ($c) {
+            return new ProjectMetricJob($c);
         });
 
         return $container;
