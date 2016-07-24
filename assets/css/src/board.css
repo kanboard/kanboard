@@ -126,7 +126,6 @@ a.board-swimlane-toggle:focus {
 
 /* board task list */
 .board-task-list {
-    overflow: auto;
     min-height: 60px;
 }
 

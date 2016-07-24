@@ -15,6 +15,7 @@ New features:
 
 Improvements:
 
+* Removed individual column scrolling on board, columns use the height of all tasks
 * Improve project page title
 * Remove sidebar titles when not necessary
 * Internal events management refactoring
