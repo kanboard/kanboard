@@ -1,5 +1,7 @@
 <div class="sidebar sidebar-icons">
-    <h2><?= t('Task #%d', $task['id']) ?></h2>
+    <div class="sidebar-title">
+        <h2><?= t('Task #%d', $task['id']) ?></h2>
+    </div>
     <ul>
         <li <?= $this->app->checkMenuSelection('TaskViewController', 'show') ?>>
             <i class="fa fa-newspaper-o fa-fw"></i>
@@ -28,7 +30,9 @@
     </ul>
 
     <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
-    <h2><?= t('Actions') ?></h2>
+    <div class="sidebar-title">
+        <h2><?= t('Actions') ?></h2>
+    </div>
     <ul>
         <li>
             <i class="fa fa-pencil-square-o fa-fw"></i>
