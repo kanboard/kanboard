@@ -13,6 +13,21 @@ use Kanboard\Model\UserModel;
 
 class UserHelperTest extends Base
 {
+    public function testGetFullname()
+    {
+        $userModel = new UserModel($this->container);
+        $userHelper = new UserHelper($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'name' => 'User #2')));
+
+        $user1 = $userModel->getById(2);
+        $user2 = $userModel->getById(3);
+
+        $this->assertEquals('user1', $userHelper->getFullname($user1));
+        $this->assertEquals('User #2', $userHelper->getFullname($user2));
+    }
+
     public function testInitials()
     {
         $helper = new UserHelper($this->container);
