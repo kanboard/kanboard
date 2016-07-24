@@ -21,25 +21,13 @@ class SubtaskModel extends Base
     const TABLE = 'subtasks';
 
     /**
-     * Task "done" status
-     *
-     * @var integer
-     */
-    const STATUS_DONE = 2;
-
-    /**
-     * Task "in progress" status
-     *
-     * @var integer
-     */
-    const STATUS_INPROGRESS = 1;
-
-    /**
-     * Task "todo" status
+     * Subtask status
      *
      * @var integer
      */
     const STATUS_TODO = 0;
+    const STATUS_INPROGRESS = 1;
+    const STATUS_DONE = 2;
 
     /**
      * Events
@@ -79,26 +67,6 @@ class SubtaskModel extends Base
             self::STATUS_INPROGRESS => t('In progress'),
             self::STATUS_DONE => t('Done'),
         );
-    }
-
-    /**
-     * Add subtask status status to the resultset
-     *
-     * @access public
-     * @param  array    $subtasks   Subtasks
-     * @return array
-     */
-    public function addStatusName(array $subtasks)
-    {
-        $status = $this->getStatusList();
-
-        foreach ($subtasks as &$subtask) {
-            $subtask['status_name'] = $status[$subtask['status']];
-            $subtask['timer_start_date'] = isset($subtask['timer_start_date']) ? $subtask['timer_start_date'] : 0;
-            $subtask['is_timer_started'] = ! empty($subtask['timer_start_date']);
-        }
-
-        return $subtasks;
     }
 
     /**
@@ -177,35 +145,6 @@ class SubtaskModel extends Base
     }
 
     /**
-     * Prepare data before insert/update
-     *
-     * @access public
-     * @param  array    $values    Form values
-     */
-    public function prepare(array &$values)
-    {
-        $this->helper->model->removeFields($values, array('another_subtask'));
-        $this->helper->model->resetFields($values, array('time_estimated', 'time_spent'));
-    }
-
-    /**
-     * Prepare data before insert
-     *
-     * @access public
-     * @param  array    $values    Form values
-     */
-    public function prepareCreation(array &$values)
-    {
-        $this->prepare($values);
-
-        $values['position'] = $this->getLastPosition($values['task_id']) + 1;
-        $values['status'] = isset($values['status']) ? $values['status'] : self::STATUS_TODO;
-        $values['time_estimated'] = isset($values['time_estimated']) ? $values['time_estimated'] : 0;
-        $values['time_spent'] = isset($values['time_spent']) ? $values['time_spent'] : 0;
-        $values['user_id'] = isset($values['user_id']) ? $values['user_id'] : 0;
-    }
-
-    /**
      * Get the position of the last column for a given project
      *
      * @access public
@@ -261,74 +200,6 @@ class SubtaskModel extends Base
     }
 
     /**
-     * Close all subtasks of a task
-     *
-     * @access public
-     * @param  integer  $task_id
-     * @return boolean
-     */
-    public function closeAll($task_id)
-    {
-        return $this->db->table(self::TABLE)->eq('task_id', $task_id)->update(array('status' => self::STATUS_DONE));
-    }
-
-    /**
-     * Change the status of subtask
-     *
-     * @access public
-     * @param  integer  $subtask_id
-     * @return boolean|integer
-     */
-    public function toggleStatus($subtask_id)
-    {
-        $subtask = $this->getById($subtask_id);
-        $status = ($subtask['status'] + 1) % 3;
-
-        $values = array(
-            'id' => $subtask['id'],
-            'status' => $status,
-            'task_id' => $subtask['task_id'],
-        );
-
-        if (empty($subtask['user_id']) && $this->userSession->isLogged()) {
-            $values['user_id'] = $this->userSession->getId();
-        }
-
-        return $this->update($values) ? $status : false;
-    }
-
-    /**
-     * Get the subtask in progress for this user
-     *
-     * @access public
-     * @param  integer   $user_id
-     * @return array
-     */
-    public function getSubtaskInProgress($user_id)
-    {
-        return $this->db->table(self::TABLE)
-                        ->eq('status', self::STATUS_INPROGRESS)
-                        ->eq('user_id', $user_id)
-                        ->findOne();
-    }
-
-    /**
-     * Return true if the user have a subtask in progress
-     *
-     * @access public
-     * @param  integer   $user_id
-     * @return boolean
-     */
-    public function hasSubtaskInProgress($user_id)
-    {
-        return $this->configModel->get('subtask_restriction') == 1 &&
-               $this->db->table(self::TABLE)
-                        ->eq('status', self::STATUS_INPROGRESS)
-                        ->eq('user_id', $user_id)
-                        ->exists();
-    }
-
-    /**
      * Remove
      *
      * @access public
@@ -367,5 +238,54 @@ class SubtaskModel extends Base
                 }
             }
         });
+    }
+
+    /**
+     * Prepare data before insert/update
+     *
+     * @access protected
+     * @param  array    $values    Form values
+     */
+    protected function prepare(array &$values)
+    {
+        $this->helper->model->removeFields($values, array('another_subtask'));
+        $this->helper->model->resetFields($values, array('time_estimated', 'time_spent'));
+    }
+
+    /**
+     * Prepare data before insert
+     *
+     * @access protected
+     * @param  array    $values    Form values
+     */
+    protected function prepareCreation(array &$values)
+    {
+        $this->prepare($values);
+
+        $values['position'] = $this->getLastPosition($values['task_id']) + 1;
+        $values['status'] = isset($values['status']) ? $values['status'] : self::STATUS_TODO;
+        $values['time_estimated'] = isset($values['time_estimated']) ? $values['time_estimated'] : 0;
+        $values['time_spent'] = isset($values['time_spent']) ? $values['time_spent'] : 0;
+        $values['user_id'] = isset($values['user_id']) ? $values['user_id'] : 0;
+    }
+
+    /**
+     * Add subtask status status to the resultset
+     *
+     * @access public
+     * @param  array    $subtasks   Subtasks
+     * @return array
+     */
+    public function addStatusName(array $subtasks)
+    {
+        $status = $this->getStatusList();
+
+        foreach ($subtasks as &$subtask) {
+            $subtask['status_name'] = $status[$subtask['status']];
+            $subtask['timer_start_date'] = isset($subtask['timer_start_date']) ? $subtask['timer_start_date'] : 0;
+            $subtask['is_timer_started'] = ! empty($subtask['timer_start_date']);
+        }
+
+        return $subtasks;
     }
 }

@@ -20,7 +20,7 @@ class SubtaskStatusController extends BaseController
         $task = $this->getTask();
         $subtask = $this->getSubtask();
 
-        $status = $this->subtaskModel->toggleStatus($subtask['id']);
+        $status = $this->subtaskStatusModel->toggleStatus($subtask['id']);
 
         if ($this->request->getIntegerParam('refresh-table') === 0) {
             $subtask['status'] = $status;

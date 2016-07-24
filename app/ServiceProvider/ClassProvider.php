@@ -61,6 +61,7 @@ class ClassProvider implements ServiceProviderInterface
             'RememberMeSessionModel',
             'SubtaskModel',
             'SubtaskPositionModel',
+            'SubtaskStatusModel',
             'SubtaskTaskConversionModel',
             'SubtaskTimeTrackingModel',
             'SwimlaneModel',
