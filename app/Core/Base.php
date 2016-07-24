@@ -90,6 +90,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectTaskPriorityModel            $projectTaskPriorityModel
  * @property \Kanboard\Model\RememberMeSessionModel              $rememberMeSessionModel
  * @property \Kanboard\Model\SubtaskModel                        $subtaskModel
+ * @property \Kanboard\Model\SubtaskPositionModel                $subtaskPositionModel
  * @property \Kanboard\Model\SubtaskTimeTrackingModel            $subtaskTimeTrackingModel
  * @property \Kanboard\Model\SwimlaneModel                       $swimlaneModel
  * @property \Kanboard\Model\TagDuplicationModel                 $tagDuplicationModel
