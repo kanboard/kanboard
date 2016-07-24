@@ -159,7 +159,7 @@ class ProjectDuplicationModel extends Base
     }
 
     /**
-     * Make sure that the creator of the duplicated project is alsp owner
+     * Make sure that the creator of the duplicated project is also owner
      *
      * @access private
      * @param  integer $dst_project_id

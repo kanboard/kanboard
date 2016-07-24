@@ -9,7 +9,7 @@ use Kanboard\Model\ProjectModel;
 
 class TaskFinderModelTest extends Base
 {
-    public function testGetTasksForDashboard()
+    public function testGetTasksForDashboardWithHiddenColumn()
     {
         $taskCreationModel = new TaskCreationModel($this->container);
         $taskFinderModel = new TaskFinderModel($this->container);

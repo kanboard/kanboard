@@ -122,6 +122,10 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserNotificationFilterModel         $userNotificationFilterModel
  * @property \Kanboard\Model\UserUnreadNotificationModel         $userUnreadNotificationModel
  * @property \Kanboard\Model\UserMetadataModel                   $userMetadataModel
+ * @property \Kanboard\Pagination\TaskPagination                 $taskPagination
+ * @property \Kanboard\Pagination\SubtaskPagination              $subtaskPagination
+ * @property \Kanboard\Pagination\ProjectPagination              $projectPagination
+ * @property \Kanboard\Pagination\UserPagination                 $userPagination
  * @property \Kanboard\Validator\ActionValidator                 $actionValidator
  * @property \Kanboard\Validator\AuthValidator                   $authValidator
  * @property \Kanboard\Validator\ColumnValidator                 $columnValidator

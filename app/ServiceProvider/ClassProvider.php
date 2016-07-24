@@ -122,6 +122,12 @@ class ClassProvider implements ServiceProviderInterface
             'TaskExport',
             'TransitionExport',
         ),
+        'Pagination' => array(
+            'TaskPagination',
+            'SubtaskPagination',
+            'ProjectPagination',
+            'UserPagination',
+        ),
         'Core' => array(
             'DateParser',
             'Lexer',

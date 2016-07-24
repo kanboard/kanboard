@@ -318,7 +318,7 @@ class ProjectModel extends Base
     public function getQueryColumnStats(array $project_ids)
     {
         if (empty($project_ids)) {
-            return $this->db->table(ProjectModel::TABLE)->limit(0);
+            return $this->db->table(ProjectModel::TABLE)->eq(ProjectModel::TABLE.'.id', 0);
         }
 
         return $this->db
