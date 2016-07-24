@@ -63,7 +63,10 @@ class SubtaskStatusModel extends Base
 
         if (empty($subtask['user_id']) && $this->userSession->isLogged()) {
             $values['user_id'] = $this->userSession->getId();
+            $subtask['user_id'] = $values['user_id'];
         }
+
+        $this->subtaskTimeTrackingModel->toggleTimer($subtask_id, $subtask['user_id'], $status);
 
         return $this->subtaskModel->update($values) ? $status : false;
     }

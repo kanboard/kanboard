@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
+use Kanboard\Model\ConfigModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\SubtaskModel;
@@ -10,6 +11,42 @@ use Kanboard\Model\ProjectModel;
 
 class SubtaskTimeTrackingModelTest extends Base
 {
+    public function testToggleTimer()
+    {
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $subtaskModel = new SubtaskModel($this->container);
+        $subtaskTimeTrackingModel = new SubtaskTimeTrackingModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
+        $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #2', 'task_id' => 1, 'user_id' => 1)));
+
+        $this->assertFalse($subtaskTimeTrackingModel->toggleTimer(1, 1, SubtaskModel::STATUS_TODO));
+        $this->assertTrue($subtaskTimeTrackingModel->toggleTimer(1, 1, SubtaskModel::STATUS_INPROGRESS));
+        $this->assertTrue($subtaskTimeTrackingModel->toggleTimer(1, 1, SubtaskModel::STATUS_DONE));
+    }
+
+    public function testToggleTimerWhenFeatureDisabled()
+    {
+        $configModel = new ConfigModel($this->container);
+        $configModel->save(array('subtask_time_tracking' => '0'));
+        $this->container['memoryCache']->flush();
+
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $subtaskModel = new SubtaskModel($this->container);
+        $subtaskTimeTrackingModel = new SubtaskTimeTrackingModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
+        $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #2', 'task_id' => 1, 'user_id' => 1)));
+
+        $this->assertFalse($subtaskTimeTrackingModel->toggleTimer(1, 1, SubtaskModel::STATUS_TODO));
+        $this->assertFalse($subtaskTimeTrackingModel->toggleTimer(1, 1, SubtaskModel::STATUS_INPROGRESS));
+        $this->assertFalse($subtaskTimeTrackingModel->toggleTimer(1, 1, SubtaskModel::STATUS_DONE));
+    }
+
     public function testHasTimer()
     {
         $taskCreationModel = new TaskCreationModel($this->container);

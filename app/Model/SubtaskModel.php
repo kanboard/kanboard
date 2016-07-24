@@ -173,6 +173,7 @@ class SubtaskModel extends Base
         $subtask_id = $this->db->table(self::TABLE)->persist($values);
 
         if ($subtask_id !== false) {
+            $this->subtaskTimeTrackingModel->updateTaskTimeTracking($values['task_id']);
             $this->queueManager->push($this->subtaskEventJob->withParams($subtask_id, self::EVENT_CREATE));
         }
 
@@ -183,17 +184,21 @@ class SubtaskModel extends Base
      * Update
      *
      * @access public
-     * @param  array $values      Form values
-     * @param  bool  $fire_events If true, will be called an event
+     * @param  array $values
+     * @param  bool  $fire_event
      * @return bool
      */
-    public function update(array $values, $fire_events = true)
+    public function update(array $values, $fire_event = true)
     {
         $this->prepare($values);
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
 
-        if ($result && $fire_events) {
-            $this->queueManager->push($this->subtaskEventJob->withParams($values['id'], self::EVENT_UPDATE, $values));
+        if ($result) {
+            $this->subtaskTimeTrackingModel->updateTaskTimeTracking($values['task_id']);
+
+            if ($fire_event) {
+                $this->queueManager->push($this->subtaskEventJob->withParams($values['id'], self::EVENT_UPDATE, $values));
+            }
         }
 
         return $result;

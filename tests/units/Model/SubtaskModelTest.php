@@ -5,6 +5,7 @@ require_once __DIR__.'/../Base.php';
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\SubtaskModel;
 use Kanboard\Model\ProjectModel;
+use Kanboard\Model\TaskFinderModel;
 
 class SubtaskModelTest extends Base
 {
@@ -30,6 +31,24 @@ class SubtaskModelTest extends Base
         $this->assertEquals(1, $subtask['position']);
     }
 
+    public function testCreationUpdateTaskTimeTracking()
+    {
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $subtaskModel = new SubtaskModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
+
+        $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #1', 'task_id' => 1, 'time_estimated' => 2, 'time_spent' => 1)));
+        $this->assertEquals(2, $subtaskModel->create(array('title' => 'subtask #2', 'task_id' => 1, 'time_estimated' => 5, 'time_spent' => 5)));
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertEquals(7, $task['time_estimated']);
+        $this->assertEquals(6, $task['time_spent']);
+    }
+
     public function testModification()
     {
         $taskCreationModel = new TaskCreationModel($this->container);
@@ -40,7 +59,7 @@ class SubtaskModelTest extends Base
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
 
         $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #1', 'task_id' => 1)));
-        $this->assertTrue($subtaskModel->update(array('id' => 1, 'user_id' => 1, 'status' => SubtaskModel::STATUS_INPROGRESS)));
+        $this->assertTrue($subtaskModel->update(array('id' => 1, 'task_id' => 1, 'user_id' => 1, 'status' => SubtaskModel::STATUS_INPROGRESS)));
 
         $subtask = $subtaskModel->getById(1);
         $this->assertNotEmpty($subtask);
@@ -52,6 +71,27 @@ class SubtaskModelTest extends Base
         $this->assertEquals(0, $subtask['time_spent']);
         $this->assertEquals(1, $subtask['user_id']);
         $this->assertEquals(1, $subtask['position']);
+    }
+
+    public function testModificationUpdateTaskTimeTracking()
+    {
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $subtaskModel = new SubtaskModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
+
+        $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #1', 'task_id' => 1)));
+        $this->assertEquals(2, $subtaskModel->create(array('title' => 'subtask #2', 'task_id' => 1)));
+        $this->assertTrue($subtaskModel->update(array('id' => 1, 'task_id' => 1, 'time_estimated' => 2, 'time_spent' => 1)));
+        $this->assertTrue($subtaskModel->update(array('id' => 2, 'task_id' => 1, 'time_estimated' => 2, 'time_spent' => 1)));
+        $this->assertTrue($subtaskModel->update(array('id' => 1, 'task_id' => 1, 'time_estimated' => 5, 'time_spent' => 5)));
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertEquals(7, $task['time_estimated']);
+        $this->assertEquals(6, $task['time_spent']);
     }
 
     public function testRemove()
