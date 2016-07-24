@@ -56,7 +56,7 @@ class MailNotificationTest extends Base
                 'changes' => array()
             );
             $this->assertNotEmpty($mailNotification->getMailContent($eventName, $eventData));
-            $this->assertNotEmpty($mailNotification->getMailSubject($eventName, $eventData));
+            $this->assertStringStartsWith('[test] ', $mailNotification->getMailSubject($eventName, $eventData));
         }
     }
 
@@ -84,7 +84,7 @@ class MailNotificationTest extends Base
             ->with(
                 $this->equalTo('test@localhost'),
                 $this->equalTo('admin'),
-                $this->equalTo('[test][New task] test (#1)'),
+                $this->equalTo('[test] New task #1: test'),
                 $this->stringContains('test')
             );
 
