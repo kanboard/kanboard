@@ -1,5 +1,4 @@
 <div class="sidebar">
-    <h2><?= t('Actions') ?></h2>
     <ul>
         <li <?= $this->app->checkMenuSelection('ConfigController', 'index') ?>>
             <?= $this->url->link(t('About'), 'ConfigController', 'index') ?>
