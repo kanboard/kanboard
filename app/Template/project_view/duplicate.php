@@ -11,7 +11,7 @@
         <?= $this->form->csrf() ?>
 
         <?php if ($project['is_private'] == 0): ?>
-            <?= $this->form->checkbox('projectPermission', t('Permissions'), 1, true) ?>
+            <?= $this->form->checkbox('projectPermissionModel', t('Permissions'), 1, true) ?>
         <?php endif ?>
 
         <?= $this->form->checkbox('categoryModel', t('Categories'), 1, true) ?>

@@ -24,6 +24,7 @@ Improvements:
 
 Bug fixes:
 
+* Fixed typo in template that prevent project permissions to be duplicated
 * Fixed search query with multiple assignees (nested OR conditions)
 * Fixed Markdown editor auto-grow on the task form (Safari)
 * Fixed compatibility issue with PHP 5.3 for OAuthUserProvider class
