@@ -24,6 +24,7 @@ Improvements:
 * Make search attributes not case sensitive
 * Display TOTP issuer for 2FA
 * Make sure that the table schema_version use InnoDB for Mysql
+* Use the library PicoFeed to generate RSS/Atom feeds
 
 Bug fixes:
 
