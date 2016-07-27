@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Email a task with no activity
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskEmailNoActivity extends Base

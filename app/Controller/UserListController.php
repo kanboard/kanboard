@@ -17,12 +17,7 @@ class UserListController extends BaseController
      */
     public function show()
     {
-        $paginator = $this->paginator
-            ->setUrl('UserListController', 'show')
-            ->setMax(30)
-            ->setOrder('username')
-            ->setQuery($this->userModel->getQuery())
-            ->calculate();
+        $paginator = $this->userPagination->getListingPaginator();
 
         $this->response->html($this->helper->layout->app('user_list/show', array(
             'title' => t('Users').' ('.$paginator->getTotal().')',

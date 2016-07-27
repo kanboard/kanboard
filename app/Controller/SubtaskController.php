@@ -168,7 +168,7 @@ class SubtaskController extends BaseController
         $values = $this->request->getJson();
 
         if (! empty($values) && $this->helper->user->hasProjectAccess('SubtaskController', 'movePosition', $project_id)) {
-            $result = $this->subtaskModel->changePosition($task_id, $values['subtask_id'], $values['position']);
+            $result = $this->subtaskPositionModel->changePosition($task_id, $values['subtask_id'], $values['position']);
             $this->response->json(array('result' => $result));
         } else {
             throw new AccessForbiddenException();

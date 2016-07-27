@@ -3,7 +3,6 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Base;
-use Kanboard\Event\TaskEvent;
 
 /**
  * Task Modification
@@ -23,14 +22,14 @@ class TaskModificationModel extends Base
      */
     public function update(array $values, $fire_events = true)
     {
-        $original_task = $this->taskFinderModel->getById($values['id']);
+        $task = $this->taskFinderModel->getById($values['id']);
 
-        $this->updateTags($values, $original_task);
+        $this->updateTags($values, $task);
         $this->prepare($values);
-        $result = $this->db->table(TaskModel::TABLE)->eq('id', $original_task['id'])->update($values);
+        $result = $this->db->table(TaskModel::TABLE)->eq('id', $task['id'])->update($values);
 
         if ($fire_events && $result) {
-            $this->fireEvents($original_task, $values);
+            $this->fireEvents($task, $values);
         }
 
         return $result;
@@ -39,43 +38,56 @@ class TaskModificationModel extends Base
     /**
      * Fire events
      *
-     * @access public
-     * @param  array     $task
-     * @param  array     $new_values
+     * @access protected
+     * @param  array $task
+     * @param  array $changes
      */
-    public function fireEvents(array $task, array $new_values)
+    protected function fireEvents(array $task, array $changes)
     {
         $events = array();
-        $event_data = array_merge($task, $new_values, array('task_id' => $task['id']));
 
-        // Values changed
-        $event_data['changes'] = array_diff_assoc($new_values, $task);
-        unset($event_data['changes']['date_modification']);
-
-        if ($this->isFieldModified('owner_id', $event_data['changes'])) {
+        if ($this->isAssigneeChanged($task, $changes)) {
             $events[] = TaskModel::EVENT_ASSIGNEE_CHANGE;
-        } elseif (! empty($event_data['changes'])) {
+        } elseif ($this->isModified($task, $changes)) {
             $events[] = TaskModel::EVENT_CREATE_UPDATE;
             $events[] = TaskModel::EVENT_UPDATE;
         }
 
-        foreach ($events as $event) {
-            $this->logger->debug('Event fired: '.$event);
-            $this->dispatcher->dispatch($event, new TaskEvent($event_data));
+        if (! empty($events)) {
+            $this->queueManager->push($this->taskEventJob
+                ->withParams($task['id'], $events, $changes, array(), $task)
+            );
         }
+    }
+
+    /**
+     * Return true if the task have been modified
+     *
+     * @access protected
+     * @param  array $task
+     * @param  array $changes
+     * @return bool
+     */
+    protected function isModified(array $task, array $changes)
+    {
+        $diff = array_diff_assoc($changes, $task);
+        unset($diff['date_modification']);
+        return count($diff) > 0;
     }
 
     /**
      * Return true if the field is the only modified value
      *
-     * @access public
-     * @param  string  $field
-     * @param  array   $changes
-     * @return boolean
+     * @access protected
+     * @param  array  $task
+     * @param  array  $changes
+     * @return bool
      */
-    public function isFieldModified($field, array $changes)
+    protected function isAssigneeChanged(array $task, array $changes)
     {
-        return isset($changes[$field]) && count($changes) === 1;
+        $diff = array_diff_assoc($changes, $task);
+        unset($diff['date_modification']);
+        return isset($changes['owner_id']) && $task['owner_id'] != $changes['owner_id'] && count($diff) === 1;
     }
 
     /**

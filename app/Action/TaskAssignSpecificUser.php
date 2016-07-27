@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Assign a task to a specific user
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskAssignSpecificUser extends Base
@@ -61,7 +61,10 @@ class TaskAssignSpecificUser extends Base
     {
         return array(
             'task_id',
-            'column_id',
+            'task' => array(
+                'project_id',
+                'column_id',
+            ),
         );
     }
 
@@ -91,6 +94,6 @@ class TaskAssignSpecificUser extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['column_id'] == $this->getParam('column_id');
+        return $data['task']['column_id'] == $this->getParam('column_id');
     }
 }

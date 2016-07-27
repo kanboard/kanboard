@@ -1,4 +1,8 @@
 /* markdown editor */
+.markdown-editor-container {
+    max-width: 400px;
+}
+
 div.CodeMirror,
 div.CodeMirror-scroll {
     max-height: 250px;

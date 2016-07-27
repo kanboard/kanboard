@@ -19,7 +19,7 @@
             <p class="alert"><?= t('Which parts of the project do you want to duplicate?') ?></p>
 
             <?php if (! $is_private): ?>
-                <?= $this->form->checkbox('projectPermission', t('Permissions'), 1, true) ?>
+                <?= $this->form->checkbox('projectPermissionModel', t('Permissions'), 1, true) ?>
             <?php endif ?>
 
             <?= $this->form->checkbox('categoryModel', t('Categories'), 1, true) ?>

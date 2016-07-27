@@ -21,6 +21,7 @@ use Kanboard\Filter\TaskDueDateFilter;
 use Kanboard\Filter\TaskIdFilter;
 use Kanboard\Filter\TaskLinkFilter;
 use Kanboard\Filter\TaskModificationDateFilter;
+use Kanboard\Filter\TaskPriorityFilter;
 use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Filter\TaskReferenceFilter;
 use Kanboard\Filter\TaskStatusFilter;
@@ -137,6 +138,7 @@ class FilterProvider implements ServiceProviderInterface
                 ->withFilter(TaskColorFilter::getInstance()
                     ->setColorModel($c['colorModel'])
                 )
+                ->withFilter(new TaskPriorityFilter())
                 ->withFilter(new TaskColumnFilter())
                 ->withFilter(new TaskCommentFilter())
                 ->withFilter(TaskCreationDateFilter::getInstance()

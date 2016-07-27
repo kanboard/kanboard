@@ -3,7 +3,6 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Base;
-use Kanboard\Event\TaskEvent;
 
 /**
  * Task Creation
@@ -42,7 +41,10 @@ class TaskCreationModel extends Base
                 $this->taskTagModel->save($values['project_id'], $task_id, $tags);
             }
 
-            $this->fireEvents($task_id, $values);
+            $this->queueManager->push($this->taskEventJob->withParams(
+                $task_id,
+                array(TaskModel::EVENT_CREATE_UPDATE, TaskModel::EVENT_CREATE)
+            ));
         }
 
         return (int) $task_id;
@@ -51,10 +53,10 @@ class TaskCreationModel extends Base
     /**
      * Prepare data
      *
-     * @access public
+     * @access protected
      * @param  array    $values    Form values
      */
-    public function prepare(array &$values)
+    protected function prepare(array &$values)
     {
         $values = $this->dateParser->convert($values, array('date_due'));
         $values = $this->dateParser->convert($values, array('date_started'), true);
@@ -83,27 +85,5 @@ class TaskCreationModel extends Base
         $values['date_modification'] = $values['date_creation'];
         $values['date_moved'] = $values['date_creation'];
         $values['position'] = $this->taskFinderModel->countByColumnAndSwimlaneId($values['project_id'], $values['column_id'], $values['swimlane_id']) + 1;
-    }
-
-    /**
-     * Fire events
-     *
-     * @access private
-     * @param  integer  $task_id     Task id
-     * @param  array    $values      Form values
-     */
-    private function fireEvents($task_id, array $values)
-    {
-        $event = new TaskEvent(array('task_id' => $task_id) + $values);
-
-        $this->logger->debug('Event fired: '.TaskModel::EVENT_CREATE_UPDATE);
-        $this->logger->debug('Event fired: '.TaskModel::EVENT_CREATE);
-
-        $this->dispatcher->dispatch(TaskModel::EVENT_CREATE_UPDATE, $event);
-        $this->dispatcher->dispatch(TaskModel::EVENT_CREATE, $event);
-
-        if (! empty($values['description'])) {
-            $this->userMentionModel->fireEvents($values['description'], TaskModel::EVENT_USER_MENTION, $event);
-        }
     }
 }

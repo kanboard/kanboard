@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Move a task to another column when an assignee is cleared
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Francois Ferrand
  */
 class TaskMoveColumnUnAssigned extends Base
@@ -61,8 +61,13 @@ class TaskMoveColumnUnAssigned extends Base
     {
         return array(
             'task_id',
-            'column_id',
-            'owner_id'
+            'task' => array(
+                'project_id',
+                'column_id',
+                'owner_id',
+                'position',
+                'swimlane_id',
+            )
         );
     }
 
@@ -75,14 +80,12 @@ class TaskMoveColumnUnAssigned extends Base
      */
     public function doAction(array $data)
     {
-        $original_task = $this->taskFinderModel->getById($data['task_id']);
-
         return $this->taskPositionModel->movePosition(
-            $data['project_id'],
+            $data['task']['project_id'],
             $data['task_id'],
             $this->getParam('dest_column_id'),
-            $original_task['position'],
-            $original_task['swimlane_id'],
+            $data['task']['position'],
+            $data['task']['swimlane_id'],
             false
         );
     }
@@ -96,6 +99,6 @@ class TaskMoveColumnUnAssigned extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['column_id'] == $this->getParam('src_column_id') && $data['owner_id'] == 0;
+        return $data['task']['column_id'] == $this->getParam('src_column_id') && $data['task']['owner_id'] == 0;
     }
 }

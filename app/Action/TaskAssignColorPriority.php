@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Assign a color to a priority
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskAssignColorPriority extends Base
@@ -60,7 +60,10 @@ class TaskAssignColorPriority extends Base
     {
         return array(
             'task_id',
-            'priority',
+            'task' => array(
+                'project_id',
+                'priority',
+            ),
         );
     }
 
@@ -90,6 +93,6 @@ class TaskAssignColorPriority extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['priority'] == $this->getParam('priority');
+        return $data['task']['priority'] == $this->getParam('priority');
     }
 }

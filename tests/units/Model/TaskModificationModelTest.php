@@ -18,7 +18,8 @@ class TaskModificationModelTest extends Base
         $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);
         $this->assertEquals(1, $event_data['task_id']);
-        $this->assertEquals('Task #1', $event_data['title']);
+        $this->assertEquals('After', $event_data['task']['title']);
+        $this->assertEquals('After', $event_data['changes']['title']);
     }
 
     public function onUpdate($event)
@@ -28,7 +29,7 @@ class TaskModificationModelTest extends Base
         $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);
         $this->assertEquals(1, $event_data['task_id']);
-        $this->assertEquals('Task #1', $event_data['title']);
+        $this->assertEquals('After', $event_data['task']['title']);
     }
 
     public function onAssigneeChange($event)
@@ -38,7 +39,7 @@ class TaskModificationModelTest extends Base
         $event_data = $event->getAll();
         $this->assertNotEmpty($event_data);
         $this->assertEquals(1, $event_data['task_id']);
-        $this->assertEquals(1, $event_data['owner_id']);
+        $this->assertEquals(1, $event_data['changes']['owner_id']);
     }
 
     public function testThatNoEventAreFiredWhenNoChanges()
@@ -66,19 +67,19 @@ class TaskModificationModelTest extends Base
         $taskFinderModel = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
-        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1)));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Before', 'project_id' => 1)));
 
         $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, array($this, 'onCreateUpdate'));
         $this->container['dispatcher']->addListener(TaskModel::EVENT_UPDATE, array($this, 'onUpdate'));
 
-        $this->assertTrue($taskModificationModel->update(array('id' => 1, 'title' => 'Task #1')));
+        $this->assertTrue($taskModificationModel->update(array('id' => 1, 'title' => 'After')));
 
         $called = $this->container['dispatcher']->getCalledListeners();
         $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.TaskModificationModelTest::onCreateUpdate', $called);
         $this->assertArrayHasKey(TaskModel::EVENT_UPDATE.'.TaskModificationModelTest::onUpdate', $called);
 
         $task = $taskFinderModel->getById(1);
-        $this->assertEquals('Task #1', $task['title']);
+        $this->assertEquals('After', $task['title']);
     }
 
     public function testChangeAssignee()

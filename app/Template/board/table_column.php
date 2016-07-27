@@ -47,6 +47,7 @@
                                     </li>
                                 <?php endif ?>
                             <?php endif ?>
+                            <?= $this->hook->render('template:board:column:dropdown', array('swimlane' => $swimlane, 'column' => $column)) ?>
                         </ul>
                     </span>
                 <?php endif ?>

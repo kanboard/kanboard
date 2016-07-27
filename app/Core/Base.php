@@ -90,6 +90,9 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectTaskPriorityModel            $projectTaskPriorityModel
  * @property \Kanboard\Model\RememberMeSessionModel              $rememberMeSessionModel
  * @property \Kanboard\Model\SubtaskModel                        $subtaskModel
+ * @property \Kanboard\Model\SubtaskPositionModel                $subtaskPositionModel
+ * @property \Kanboard\Model\SubtaskStatusModel                  $subtaskStatusModel
+ * @property \Kanboard\Model\SubtaskTaskConversionModel          $subtaskTaskConversionModel
  * @property \Kanboard\Model\SubtaskTimeTrackingModel            $subtaskTimeTrackingModel
  * @property \Kanboard\Model\SwimlaneModel                       $swimlaneModel
  * @property \Kanboard\Model\TagDuplicationModel                 $tagDuplicationModel
@@ -119,6 +122,10 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserNotificationFilterModel         $userNotificationFilterModel
  * @property \Kanboard\Model\UserUnreadNotificationModel         $userUnreadNotificationModel
  * @property \Kanboard\Model\UserMetadataModel                   $userMetadataModel
+ * @property \Kanboard\Pagination\TaskPagination                 $taskPagination
+ * @property \Kanboard\Pagination\SubtaskPagination              $subtaskPagination
+ * @property \Kanboard\Pagination\ProjectPagination              $projectPagination
+ * @property \Kanboard\Pagination\UserPagination                 $userPagination
  * @property \Kanboard\Validator\ActionValidator                 $actionValidator
  * @property \Kanboard\Validator\AuthValidator                   $authValidator
  * @property \Kanboard\Validator\ColumnValidator                 $columnValidator
@@ -150,6 +157,14 @@ use Pimple\Container;
  * @property \Kanboard\Core\Filter\QueryBuilder                  $taskQuery
  * @property \Kanboard\Core\Filter\LexerBuilder                  $taskLexer
  * @property \Kanboard\Core\Filter\LexerBuilder                  $projectActivityLexer
+ * @property \Kanboard\Job\CommentEventJob                       $commentEventJob
+ * @property \Kanboard\Job\SubtaskEventJob                       $subtaskEventJob
+ * @property \Kanboard\Job\TaskEventJob                          $taskEventJob
+ * @property \Kanboard\Job\TaskFileEventJob                      $taskFileEventJob
+ * @property \Kanboard\Job\TaskLinkEventJob                      $taskLinkEventJob
+ * @property \Kanboard\Job\ProjectFileEventJob                   $projectFileEventJob
+ * @property \Kanboard\Job\NotificationJob                       $notificationJob
+ * @property \Kanboard\Job\ProjectMetricJob                      $projectMetricJob
  * @property \Psr\Log\LoggerInterface                            $logger
  * @property \PicoDb\Database                                    $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher  $dispatcher
@@ -178,10 +193,10 @@ abstract class Base
     }
 
     /**
-     * Load automatically models
+     * Load automatically dependencies
      *
      * @access public
-     * @param  string $name Model name
+     * @param  string $name Class name
      * @return mixed
      */
     public function __get($name)
@@ -199,7 +214,6 @@ abstract class Base
      */
     public static function getInstance(Container $container)
     {
-        $self = new static($container);
-        return $self;
+        return new static($container);
     }
 }

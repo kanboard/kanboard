@@ -21,7 +21,7 @@ class BootstrapSubscriber extends BaseSubscriber implements EventSubscriberInter
         $this->actionManager->attachEvents();
 
         if ($this->userSession->isLogged()) {
-            $this->sessionStorage->hasSubtaskInProgress = $this->subtaskModel->hasSubtaskInProgress($this->userSession->getId());
+            $this->sessionStorage->hasSubtaskInProgress = $this->subtaskStatusModel->hasSubtaskInProgress($this->userSession->getId());
         }
     }
 

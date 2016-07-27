@@ -1,5 +1,4 @@
 <div class="sidebar">
-    <h2><?= t('Reportings') ?></h2>
     <ul>
         <li <?= $this->app->checkMenuSelection('AnalyticController', 'tasks') ?>>
             <?= $this->url->link(t('Task distribution'), 'AnalyticController', 'tasks', array('project_id' => $project['id'])) ?>

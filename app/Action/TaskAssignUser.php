@@ -5,7 +5,7 @@ namespace Kanboard\Action;
 /**
  * Assign a task to someone
  *
- * @package action
+ * @package Kanboard\Actionv
  * @author  Frederic Guillot
  */
 class TaskAssignUser extends Base

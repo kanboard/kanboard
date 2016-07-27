@@ -52,4 +52,4 @@ $groupManager->register(new MyCustomLdapBackendGroupProvider($this->container));
 Examples
 --------
 
-- [Group providers included in Kanboard (LDAP and Database)](https://github.com/fguillot/kanboard/tree/master/app/Group)
+- [Group providers included in Kanboard (LDAP and Database)](https://github.com/kanboard/kanboard/tree/master/app/Group)

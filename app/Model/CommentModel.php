@@ -2,7 +2,6 @@
 
 namespace Kanboard\Model;
 
-use Kanboard\Event\CommentEvent;
 use Kanboard\Core\Base;
 
 /**
@@ -27,6 +26,7 @@ class CommentModel extends Base
      */
     const EVENT_UPDATE       = 'comment.update';
     const EVENT_CREATE       = 'comment.create';
+    const EVENT_DELETE       = 'comment.delete';
     const EVENT_USER_MENTION = 'comment.user.mention';
 
     /**
@@ -130,9 +130,7 @@ class CommentModel extends Base
         $comment_id = $this->db->table(self::TABLE)->persist($values);
 
         if ($comment_id !== false) {
-            $event = new CommentEvent(array('id' => $comment_id) + $values);
-            $this->dispatcher->dispatch(self::EVENT_CREATE, $event);
-            $this->userMentionModel->fireEvents($values['comment'], self::EVENT_USER_MENTION, $event);
+            $this->queueManager->push($this->commentEventJob->withParams($comment_id, self::EVENT_CREATE));
         }
 
         return $comment_id;
@@ -153,7 +151,7 @@ class CommentModel extends Base
                     ->update(array('comment' => $values['comment']));
 
         if ($result) {
-            $this->container['dispatcher']->dispatch(self::EVENT_UPDATE, new CommentEvent($values));
+            $this->queueManager->push($this->commentEventJob->withParams($values['id'], self::EVENT_UPDATE));
         }
 
         return $result;
@@ -168,6 +166,7 @@ class CommentModel extends Base
      */
     public function remove($comment_id)
     {
+        $this->commentEventJob->execute($comment_id, self::EVENT_DELETE);
         return $this->db->table(self::TABLE)->eq('id', $comment_id)->remove();
     }
 }

@@ -3,7 +3,6 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Base;
-use Kanboard\Event\TaskEvent;
 
 /**
  * Task Status
@@ -46,7 +45,7 @@ class TaskStatusModel extends Base
      */
     public function close($task_id)
     {
-        $this->subtaskModel->closeAll($task_id);
+        $this->subtaskStatusModel->closeAll($task_id);
         return $this->changeStatus($task_id, TaskModel::STATUS_CLOSED, time(), TaskModel::EVENT_CLOSE);
     }
 
@@ -101,10 +100,10 @@ class TaskStatusModel extends Base
      * @param  integer   $task_id             Task id
      * @param  integer   $status              Task status
      * @param  integer   $date_completed      Timestamp
-     * @param  string    $event               Event name
+     * @param  string    $event_name          Event name
      * @return boolean
      */
-    private function changeStatus($task_id, $status, $date_completed, $event)
+    private function changeStatus($task_id, $status, $date_completed, $event_name)
     {
         if (! $this->taskFinderModel->exists($task_id)) {
             return false;
@@ -120,8 +119,7 @@ class TaskStatusModel extends Base
                         ));
 
         if ($result) {
-            $this->logger->debug('Event fired: '.$event);
-            $this->dispatcher->dispatch($event, new TaskEvent(array('task_id' => $task_id) + $this->taskFinderModel->getById($task_id)));
+            $this->queueManager->push($this->taskEventJob->withParams($task_id, array($event_name)));
         }
 
         return $result;

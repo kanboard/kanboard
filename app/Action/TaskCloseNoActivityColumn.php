@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Close automatically a task after inactive and in an defined column
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskCloseNoActivityColumn extends Base

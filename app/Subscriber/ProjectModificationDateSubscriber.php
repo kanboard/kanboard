@@ -24,9 +24,7 @@ class ProjectModificationDateSubscriber extends BaseSubscriber implements EventS
 
     public function execute(GenericEvent $event)
     {
-        if (isset($event['project_id']) && !$this->isExecuted()) {
-            $this->logger->debug('Subscriber executed: '.__METHOD__);
-            $this->projectModel->updateModificationDate($event['project_id']);
-        }
+        $this->logger->debug('Subscriber executed: '.__METHOD__);
+        $this->projectModel->updateModificationDate($event['task']['project_id']);
     }
 }

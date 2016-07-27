@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Assign a color to a specific category
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskAssignColorCategory extends Base
@@ -60,7 +60,10 @@ class TaskAssignColorCategory extends Base
     {
         return array(
             'task_id',
-            'category_id',
+            'task' => array(
+                'project_id',
+                'category_id',
+            ),
         );
     }
 
@@ -90,6 +93,6 @@ class TaskAssignColorCategory extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['category_id'] == $this->getParam('category_id');
+        return $data['task']['category_id'] == $this->getParam('category_id');
     }
 }

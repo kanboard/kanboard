@@ -11,7 +11,6 @@ use Kanboard\Subscriber\BootstrapSubscriber;
 use Kanboard\Subscriber\NotificationSubscriber;
 use Kanboard\Subscriber\ProjectDailySummarySubscriber;
 use Kanboard\Subscriber\ProjectModificationDateSubscriber;
-use Kanboard\Subscriber\SubtaskTimeTrackingSubscriber;
 use Kanboard\Subscriber\TransitionSubscriber;
 use Kanboard\Subscriber\RecurringTaskSubscriber;
 
@@ -31,7 +30,6 @@ class EventDispatcherProvider implements ServiceProviderInterface
         $container['dispatcher']->addSubscriber(new ProjectDailySummarySubscriber($container));
         $container['dispatcher']->addSubscriber(new ProjectModificationDateSubscriber($container));
         $container['dispatcher']->addSubscriber(new NotificationSubscriber($container));
-        $container['dispatcher']->addSubscriber(new SubtaskTimeTrackingSubscriber($container));
         $container['dispatcher']->addSubscriber(new TransitionSubscriber($container));
         $container['dispatcher']->addSubscriber(new RecurringTaskSubscriber($container));
 
