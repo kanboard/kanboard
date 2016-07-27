@@ -21,6 +21,7 @@ use Kanboard\Filter\TaskDueDateFilter;
 use Kanboard\Filter\TaskIdFilter;
 use Kanboard\Filter\TaskLinkFilter;
 use Kanboard\Filter\TaskModificationDateFilter;
+use Kanboard\Filter\TaskMovedDateFilter;
 use Kanboard\Filter\TaskPriorityFilter;
 use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Filter\TaskReferenceFilter;
@@ -156,6 +157,9 @@ class FilterProvider implements ServiceProviderInterface
                     ->setDatabase($c['db'])
                 )
                 ->withFilter(TaskModificationDateFilter::getInstance()
+                    ->setDateParser($c['dateParser'])
+                )
+                ->withFilter(TaskMovedDateFilter::getInstance()
                     ->setDateParser($c['dateParser'])
                 )
                 ->withFilter(new TaskProjectFilter())
