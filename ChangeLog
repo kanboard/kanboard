@@ -28,6 +28,7 @@ Improvements:
 
 Bug fixes:
 
+* Allow users to see inactive projects
 * Fixed typo in template that prevent project permissions to be duplicated
 * Fixed search query with multiple assignees (nested OR conditions)
 * Fixed Markdown editor auto-grow on the task form (Safari)
