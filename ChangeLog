@@ -8,15 +8,18 @@ New features:
     - Set due date automatically
     - Move a task to another column when closed
     - Move a task to another column when not moved during a given period
+* New filter "moved" for moved date of tasks
 * Added internal task links to activity stream
 * Added new event for removed comments
 * Added search filter for task priority
 * Added the possibility to hide tasks in dashboard for a specific column
+* Documentation translated in Russian
 
 Improvements:
 
+* New template hooks
 * Removed individual column scrolling on board, columns use the height of all tasks
-* Improve project page title
+* Improve project page titles
 * Remove sidebar titles when not necessary
 * Internal events management refactoring
 * Handle header X-Real-IP to get IP address
@@ -25,6 +28,7 @@ Improvements:
 * Display TOTP issuer for 2FA
 * Make sure that the table schema_version use InnoDB for Mysql
 * Use the library PicoFeed to generate RSS/Atom feeds
+* Change all links to the new repository
 
 Bug fixes:
 

@@ -18,6 +18,7 @@ Contributors:
 - [Bitcoin 333](https://github.com/bitcoin333)
 - [Busfreak](https://github.com/Busfreak)
 - [Christian González](https://github.com/nerdoc)
+- [Christopher Geelen](https://github.com/cdgeelen)
 - [Chorgroup](https://github.com/chorgroup)
 - Claudio Lobo
 - [Cluxter](https://github.com/cluxter)
@@ -46,7 +47,9 @@ Contributors:
 - [Gavlepeter](https://github.com/gavlepeter)
 - [Gerardo Zamudio](https://github.com/gerardozamudio)
 - [Goofy](https://github.com/goofy-bz)
+- [Hairetdin](https://github.com/hairetdin)
 - [Hendrik Stocker](https://github.com/hendrik-stoker)
+- [Honda2](https://github.com/honda2)
 - [Iterate From 0](https://github.com/freebsd-kanboard)
 - [Jan Dittrich](https://github.com/jdittrich)
 - [Janne Mäntyharju](https://github.com/JanneMantyharju)
