@@ -105,7 +105,7 @@ return array(
     'Add a new task' => '添加新任务',
     'The username is required' => '需要用户名',
     'The maximum length is %d characters' => '最长%d个英文字符',
-    'The minimum length is %d characters' => '最短%d个英文自负',
+    'The minimum length is %d characters' => '最短%d个英文字符',
     'The password is required' => '需要密码',
     'This value must be an integer' => '该值必须为整数',
     'The username must be unique' => '用户名必须唯一',
