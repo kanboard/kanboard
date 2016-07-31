@@ -6,7 +6,6 @@ use Kanboard\Api\Authorization\ProjectAuthorization;
 use Kanboard\Api\Authorization\TaskAuthorization;
 use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Model\TaskModel;
-use Kanboard\Model\TaskMetadataModel;
 
 /**
  * Task API controller
@@ -16,30 +15,6 @@ use Kanboard\Model\TaskMetadataModel;
  */
 class TaskProcedure extends BaseProcedure
 {
-    public function getTaskMetadata($task_id)
-    {
-        TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'getTask', $task_id);
-        return $this->taskMetadataModel->getAll($task_id);
-    }
-
-    public function getTaskMetadataByName($task_id, $name)
-    {
-        TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'getTask', $task_id);
-        return $this->taskMetadataModel->get($task_id, $name);
-    }
-
-    public function saveTaskMetadata($task_id, array $values)
-    {
-        TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateTask', $task_id);
-        return $this->taskMetadataModel->save($task_id, $values);
-    }
-
-    public function removeTaskMetadata($task_id, $name)
-    {
-        TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateTask', $task_id);
-        return $this->taskMetadataModel->remove($task_id, $name);
-    }
-
     public function searchTasks($project_id, $query)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'searchTasks', $project_id);
@@ -117,7 +92,7 @@ class TaskProcedure extends BaseProcedure
                                 $recurrence_basedate = 0, $reference = '')
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'createTask', $project_id);
-        
+
         if ($owner_id !== 0 && ! $this->projectPermissionModel->isAssignable($project_id, $owner_id)) {
             return false;
         }
