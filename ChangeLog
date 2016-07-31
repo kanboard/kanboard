@@ -1,4 +1,4 @@
-Version 1.0.32 (unreleased)
+Version 1.0.32
 --------------
 
 New features:
@@ -17,6 +17,7 @@ New features:
 
 Improvements:
 
+* Improve background worker and job handler
 * New template hooks
 * Removed individual column scrolling on board, columns use the height of all tasks
 * Improve project page titles
