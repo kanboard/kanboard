@@ -23,7 +23,6 @@ class WorkerCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->dispatcher->dispatch('app.bootstrap');
         $this->queueManager->listen();
     }
 }
