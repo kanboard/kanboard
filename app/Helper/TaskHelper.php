@@ -148,7 +148,7 @@ class TaskHelper extends Base
     {
         $html = '';
 
-        if ($project['priority_end'] > $project['priority_start']) {
+        if ($project['priority_end'] != $project['priority_start']) {
             $range = range($project['priority_start'], $project['priority_end']);
             $options = array_combine($range, $range);
             $values += array('priority' => $project['priority_default']);
