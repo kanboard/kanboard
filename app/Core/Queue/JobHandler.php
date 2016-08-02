@@ -43,8 +43,8 @@ class JobHandler extends Base
 
         try {
             $className = $payload['class'];
-            $this->memoryCache->flush();
             $this->prepareJobSession($payload['user_id']);
+            $this->prepareJobEnvironment();
 
             if (DEBUG) {
                 $this->logger->debug(__METHOD__.' Received job => '.$className.' ('.getmypid().')');
@@ -74,5 +74,17 @@ class JobHandler extends Base
             $user = $this->userModel->getById($user_id);
             $this->userSession->initialize($user);
         }
+    }
+
+    /**
+     * Flush in-memory caching and specific events
+     *
+     * @access protected
+     */
+    protected function prepareJobEnvironment()
+    {
+        $this->memoryCache->flush();
+        $this->actionManager->removeEvents();
+        $this->dispatcher->dispatch('app.bootstrap');
     }
 }

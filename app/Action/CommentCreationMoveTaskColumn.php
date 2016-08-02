@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Add a comment of the triggering event to the task description.
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Oren Ben-Kiki
  */
 class CommentCreationMoveTaskColumn extends Base

@@ -41,7 +41,7 @@ class SubtaskEventJobTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1)));
         $this->assertEquals(1, $subtaskModel->create(array('task_id' => 1, 'title' => 'before')));
-        $this->assertTrue($subtaskModel->update(array('id' => 1, 'title' => 'after')));
+        $this->assertTrue($subtaskModel->update(array('id' => 1, 'task_id' => 1, 'title' => 'after')));
         $this->assertTrue($subtaskModel->remove(1));
 
         $called = $this->container['dispatcher']->getCalledListeners();

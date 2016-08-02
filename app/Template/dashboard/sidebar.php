@@ -1,5 +1,4 @@
 <div class="sidebar">
-    <h2><?= $this->text->e($user['name'] ?: $user['username']) ?></h2>
     <ul>
         <li <?= $this->app->checkMenuSelection('DashboardController', 'show') ?>>
             <?= $this->url->link(t('Overview'), 'DashboardController', 'show', array('user_id' => $user['id'])) ?>

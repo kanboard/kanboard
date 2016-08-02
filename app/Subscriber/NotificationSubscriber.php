@@ -3,6 +3,7 @@
 namespace Kanboard\Subscriber;
 
 use Kanboard\Event\GenericEvent;
+use Kanboard\Model\TaskLinkModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\CommentModel;
 use Kanboard\Model\SubtaskModel;
@@ -31,6 +32,8 @@ class NotificationSubscriber extends BaseSubscriber implements EventSubscriberIn
             CommentModel::EVENT_DELETE       => 'handleEvent',
             CommentModel::EVENT_USER_MENTION => 'handleEvent',
             TaskFileModel::EVENT_CREATE      => 'handleEvent',
+            TaskLinkModel::EVENT_CREATE_UPDATE      => 'handleEvent',
+            TaskLinkModel::EVENT_DELETE             => 'handleEvent',
         );
     }
 

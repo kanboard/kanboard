@@ -47,7 +47,7 @@ class TaskEventJob extends BaseJob
             ->withChanges($changes)
             ->withValues($values)
             ->withTask($task)
-            ->build();
+            ->buildEvent();
 
         if ($event !== null) {
             foreach ($eventNames as $eventName) {

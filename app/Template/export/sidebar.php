@@ -1,5 +1,4 @@
 <div class="sidebar">
-    <h2><?= t('Exports') ?></h2>
     <ul>
         <li <?= $this->app->checkMenuSelection('ExportController', 'tasks') ?>>
             <?= $this->url->link(t('Tasks'), 'ExportController', 'tasks', array('project_id' => $project['id'])) ?>

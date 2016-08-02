@@ -92,7 +92,7 @@ class TaskProcedure extends BaseProcedure
                                 $recurrence_basedate = 0, $reference = '')
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'createTask', $project_id);
-        
+
         if ($owner_id !== 0 && ! $this->projectPermissionModel->isAssignable($project_id, $owner_id)) {
             return false;
         }

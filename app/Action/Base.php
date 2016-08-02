@@ -7,7 +7,7 @@ use Kanboard\Event\GenericEvent;
 /**
  * Base class for automatic actions
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 abstract class Base extends \Kanboard\Core\Base

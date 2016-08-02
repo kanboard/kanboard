@@ -36,7 +36,7 @@ class ProjectFileEventJob extends BaseJob
     {
         $event = ProjectFileEventBuilder::getInstance($this->container)
             ->withFileId($fileId)
-            ->build();
+            ->buildEvent();
 
         if ($event !== null) {
             $this->dispatcher->dispatch($eventName, $event);

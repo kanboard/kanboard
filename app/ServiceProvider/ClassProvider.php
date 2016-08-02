@@ -60,6 +60,9 @@ class ClassProvider implements ServiceProviderInterface
             'ProjectUserRoleModel',
             'RememberMeSessionModel',
             'SubtaskModel',
+            'SubtaskPositionModel',
+            'SubtaskStatusModel',
+            'SubtaskTaskConversionModel',
             'SubtaskTimeTrackingModel',
             'SwimlaneModel',
             'TagDuplicationModel',
@@ -118,6 +121,12 @@ class ClassProvider implements ServiceProviderInterface
             'SubtaskExport',
             'TaskExport',
             'TransitionExport',
+        ),
+        'Pagination' => array(
+            'TaskPagination',
+            'SubtaskPagination',
+            'ProjectPagination',
+            'UserPagination',
         ),
         'Core' => array(
             'DateParser',

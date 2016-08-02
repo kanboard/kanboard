@@ -5,7 +5,7 @@ namespace Kanboard\Action;
 /**
  * Set a category automatically according to a label
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskAssignCategoryLabel extends Base

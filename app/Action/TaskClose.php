@@ -5,7 +5,7 @@ namespace Kanboard\Action;
 /**
  * Close automatically a task
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskClose extends Base

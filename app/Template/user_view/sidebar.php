@@ -1,5 +1,7 @@
 <div class="sidebar">
-    <h2><?= t('Information') ?></h2>
+    <div class="sidebar-title">
+        <h2><?= t('Information') ?></h2>
+    </div>
     <ul>
         <?php if ($this->user->hasAccess('UserViewController', 'show')): ?>
             <li <?= $this->app->checkMenuSelection('UserViewController', 'show') ?>>
@@ -37,7 +39,9 @@
         <?= $this->hook->render('template:user:sidebar:information', array('user' => $user)) ?>
     </ul>
 
-    <h2><?= t('Actions') ?></h2>
+    <div class="sidebar-title">
+        <h2><?= t('Actions') ?></h2>
+    </div>
     <ul>
         <?php if ($this->user->isAdmin() || $this->user->isCurrentUser($user['id'])): ?>
 

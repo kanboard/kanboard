@@ -9,6 +9,34 @@ use Kanboard\Model\ProjectModel;
 
 class TaskLinkModelTest extends Base
 {
+    public function testGeyById()
+    {
+        $taskLinkModel = new TaskLinkModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'A')));
+        $this->assertEquals(2, $taskCreationModel->create(array('project_id' => 1, 'title' => 'B')));
+        $this->assertEquals(1, $taskLinkModel->create(1, 2, 6));
+
+        $taskLink = $taskLinkModel->getById(1);
+        $this->assertEquals(1, $taskLink['id']);
+        $this->assertEquals(1, $taskLink['task_id']);
+        $this->assertEquals(2, $taskLink['opposite_task_id']);
+        $this->assertEquals(6, $taskLink['link_id']);
+        $this->assertEquals(7, $taskLink['opposite_link_id']);
+        $this->assertEquals('is a child of', $taskLink['label']);
+
+        $taskLink = $taskLinkModel->getById(2);
+        $this->assertEquals(2, $taskLink['id']);
+        $this->assertEquals(2, $taskLink['task_id']);
+        $this->assertEquals(1, $taskLink['opposite_task_id']);
+        $this->assertEquals(7, $taskLink['link_id']);
+        $this->assertEquals(6, $taskLink['opposite_link_id']);
+        $this->assertEquals('is a parent of', $taskLink['label']);
+    }
+
     // Check postgres issue: "Cardinality violation: 7 ERROR:  more than one row returned by a subquery used as an expression"
     public function testGetTaskWithMultipleMilestoneLink()
     {

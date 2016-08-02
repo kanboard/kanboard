@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= t('Compare Estimated Time vs Actual Time') ?></h2>
+    <h2><?= t('Estimated vs actual time') ?></h2>
 </div>
 
 <div class="listing">

@@ -13,7 +13,7 @@ class CommentEventBuilderTest extends Base
     {
         $commentEventBuilder = new CommentEventBuilder($this->container);
         $commentEventBuilder->withCommentId(42);
-        $this->assertNull($commentEventBuilder->build());
+        $this->assertNull($commentEventBuilder->buildEvent());
     }
 
     public function testBuild()
@@ -28,7 +28,7 @@ class CommentEventBuilderTest extends Base
         $this->assertEquals(1, $commentModel->create(array('task_id' => 1, 'comment' => 'bla bla', 'user_id' => 1)));
 
         $commentEventBuilder->withCommentId(1);
-        $event = $commentEventBuilder->build();
+        $event = $commentEventBuilder->buildEvent();
 
         $this->assertInstanceOf('Kanboard\Event\CommentEvent', $event);
         $this->assertNotEmpty($event['comment']);
