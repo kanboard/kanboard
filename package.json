@@ -4,9 +4,9 @@
     "bower": "^1.7.9",
     "gulp": "^3.9.1",
     "gulp-bower": "0.0.13",
-    "gulp-clean-css": "^2.0.7",
     "gulp-cli": "^1.2.1",
     "gulp-concat": "^2.6.0",
-    "gulp-uglify": "^1.5.3"
+    "gulp-uglify": "^1.5.3",
+    "gulp-sass": "^2.3.2"
   }
 }

@@ -1,0 +1,35 @@
+.task-board
+  position: relative
+  margin-bottom: 4px
+  border: 1px solid #000
+  padding: 2px
+  font-size: 0.85em
+  word-wrap: break-word
+
+div
+  &.task-board-recent
+    border-width: 2px
+  &.task-board-status-closed
+    user-select: none
+    border: 1px dotted #555
+
+.task-board
+  a
+    color: #000
+    text-decoration: none
+  .dropdown-menu
+    font-weight: bold
+  .task-score
+    font-weight: bold
+
+.task-board-collapsed
+  overflow: hidden
+  white-space: nowrap
+  text-overflow: ellipsis
+
+.task-board-title
+  font-size: 1.15em
+  margin-top: 5px
+  margin-bottom: 8px
+  a:hover
+    text-decoration: underline

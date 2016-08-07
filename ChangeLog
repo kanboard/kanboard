@@ -1,3 +1,10 @@
+Version 1.0.33 (unreleased)
+--------------
+
+Improvements:
+
+* Convert vanilla CSS to SASS
+
 Version 1.0.32
 --------------
 
