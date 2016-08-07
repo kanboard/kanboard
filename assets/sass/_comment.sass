@@ -1,11 +1,13 @@
+@import variables
+
 .comment-sorting
   text-align: right
   a
-    color: #555
+    color: color('medium')
     font-weight: normal
     text-decoration: none
     &:hover
-      color: #aaa
+      color: color('light')
 
 .comment
   padding: 5px
@@ -19,20 +21,20 @@
   margin-bottom: 10px
 
 .comment-date
-  color: #999
+  color: color('light')
   font-weight: 200
 
 .comment-actions
-  font-size: $text-small
+  font-size: size('small')
   margin-left: 55px
   margin-top: 8px
   li
     display: inline
   a
-    color: #999
+    color: color('light')
     text-decoration: none
     &:focus, &:hover
-      color: #333
+      color: color('primary')
       text-decoration: underline
 
 .comment-content

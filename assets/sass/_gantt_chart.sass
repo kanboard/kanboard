@@ -1,3 +1,5 @@
+@import variables
+
 div
   &.ganttview-hzheader-month, &.ganttview-hzheader-day, &.ganttview-vtheader, &.ganttview-vtheader-item-name, &.ganttview-vtheader-series, &.ganttview-grid, &.ganttview-grid-row-cell
     float: left
@@ -19,14 +21,14 @@ div
     border-right: 1px solid #f0f0f0
     border-top: 1px solid #d0d0d0
     line-height: 20px
-    color: #777
+    color: color('medium')
   &.ganttview-vtheader
     margin-top: 41px
     width: 400px
     overflow: hidden
     background-color: #fff
   &.ganttview-vtheader-item
-    color: #666
+    color: color('medium')
   &.ganttview-vtheader-series-name
     width: 400px
     height: 31px
@@ -37,15 +39,15 @@ div
     overflow: hidden
     white-space: nowrap
     a
-      color: #666
+      color: color('medium')
       text-decoration: none
       &:hover
-        color: #333
+        color: color('primary')
         text-decoration: underline
       i
-        color: #000
+        color: color('dark')
       &:hover i
-        color: #666
+        color: color('medium')
   &.ganttview-slide-container
     overflow: auto
     border-left: 1px solid #999
@@ -78,8 +80,8 @@ div
   &.ganttview-block-text
     position: absolute
     height: 12px
-    font-size: $text-tiny
-    color: #999
+    font-size: size('tiny')
+    color: color('light')
     padding: 2px 3px
   &.ganttview-block div.ui-resizable-handle.ui-resizable-s
     bottom: -0

@@ -1,3 +1,5 @@
+@import variables
+
 .public-board
   margin-top: 5px
 
@@ -31,7 +33,7 @@
 
 td.board-column-task-collapsed
   font-weight: bold
-  background-color: #fbfbfb
+  background-color: bg-color('primary')
 
 #board th.board-column-header-collapsed
   width: 28px
@@ -65,21 +67,21 @@ td.board-column-task-collapsed
   padding: 0 5px
   a
     text-decoration: none
-    color: #3366CC
-    font-size: $text-xlarge
+    color: link-color('primary')
+    font-size: size('xlarge')
     line-height: 70%
     &:focus, &:hover
       text-decoration: none
       color: red
 
 .board-column-header-task-count
-  color: #999
+  color: color('light')
   font-weight: normal
 
 a.board-swimlane-toggle
   text-decoration: none
   &:hover, &:focus
-    color: #000
+    color: color('dark')
     text-decoration: none
     border: none
 
@@ -87,7 +89,7 @@ a.board-swimlane-toggle
   min-height: 60px
 
 .board-task-list-limit
-  background-color: #DF5353
+  background-color: $board-task-limit-color
 
 .draggable-item
   cursor: pointer

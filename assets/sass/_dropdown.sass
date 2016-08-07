@@ -1,3 +1,5 @@
+@import variables
+
 .dropdown
   display: inline
   position: relative
@@ -39,12 +41,12 @@ ul.dropdown-submenu-open
 
 .dropdown-submenu-open a
   text-decoration: none
-  color: #333
+  color: color('primary')
   &:focus
     text-decoration: underline
 
 .dropdown-menu-link-text, .dropdown-menu-link-icon
-  color: #333
+  color: color('primary')
   text-decoration: none
 
 .dropdown-menu-link-text:hover

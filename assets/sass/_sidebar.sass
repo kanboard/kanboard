@@ -1,3 +1,5 @@
+@import variables
+
 .sidebar-container
   margin-top: 10px
   height: 100%
@@ -37,10 +39,10 @@
   > ul
     a
       text-decoration: none
-      color: #999
+      color: color('light')
       font-weight: 300
       &:hover
-        color: #333
+        color: color('primary')
     li
       list-style-type: none
       line-height: 35px
@@ -53,7 +55,7 @@
         border-left: 5px solid #333
         padding-left: 8px
         a
-          color: #333
+          color: color('primary')
           font-weight: bold
 
 .sidebar-icons > ul li
@@ -65,6 +67,6 @@
 .sidebar > ul li
   &.active a
     &:focus, &:hover
-      color: #555
+      color: color('medium')
   &:last-child
     margin-bottom: 15px

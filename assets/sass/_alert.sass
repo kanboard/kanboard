@@ -1,31 +1,33 @@
+@import variables
+
 .alert
   padding: 8px 35px 8px 14px
   margin-top: 5px
   margin-bottom: 5px
-  color: $alert-default-text-color
-  background-color: $alert-default-background-color
-  border: 1px solid $alert-default-border-color
+  color: alert-color('default')
+  background-color: alert-bg-color('default')
+  border: 1px solid alert-border-color('default')
   border-radius: 4px
 
 .alert-success
-  color: $alert-success-text-color
-  background-color: $alert-success-background-color
-  border-color: $alert-success-border-color
+  color: alert-color('success')
+  background-color: alert-bg-color('success')
+  border-color: alert-border-color('success')
 
 .alert-error
-  color: $alert-error-text-color
-  background-color: $alert-error-background-color
-  border-color: $alert-error-border-color
+  color: alert-color('error')
+  background-color: alert-bg-color('error')
+  border-color: alert-border-color('error')
 
 .alert-info
-  color: $alert-info-text-color
-  background-color: $alert-info-background-color
-  border-color: $alert-info-border-color
+  color: alert-color('info')
+  background-color: alert-bg-color('info')
+  border-color: alert-border-color('info')
 
 .alert-normal
-  color: $alert-normal-text-color
-  background-color: $alert-normal-background-color
-  border-color: $alert-normal-border-color
+  color: alert-color('normal')
+  background-color: alert-bg-color('normal')
+  border-color: alert-border-color('normal')
 
 .alert
   ul

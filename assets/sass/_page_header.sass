@@ -1,3 +1,5 @@
+@import variables
+
 .page-header
   margin-bottom: 20px
   .dropdown
@@ -8,10 +10,10 @@
     font-weight: bold
     border-bottom: 1px dotted #ccc
     a
-      color: #333
+      color: color('primary')
       text-decoration: none
       &:focus, &:hover
-        color: #aaa
+        color: color('light')
   ul
     text-align: left
     margin-top: 5px
@@ -20,7 +22,7 @@
     display: inline
     padding-right: 15px
     &.active a
-      color: #333
+      color: color('primary')
       text-decoration: none
       font-weight: bold
       &:hover, &:focus

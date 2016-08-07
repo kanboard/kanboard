@@ -1,3 +1,5 @@
+@import variables
+
 .views
   display: inline-block
   margin-left: 10px
@@ -10,21 +12,21 @@
     padding: 5px 8px
     display: inline
   a
-    color: #555
+    color: color('medium')
     text-decoration: none
     &:hover
-      color: #333
+      color: color('primary')
       text-decoration: underline
 
 .menu-inline li.active a
   font-weight: bold
-  color: #000
+  color: color('dark')
   text-decoration: none
 
 .views li
   &.active a
     font-weight: bold
-    color: #000
+    color: color('dark')
     text-decoration: none
   &:first-child
     border-top-left-radius: 5px

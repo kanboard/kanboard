@@ -1,3 +1,5 @@
+@import variables
+
 form
   margin-bottom: 20px
 
@@ -8,24 +10,24 @@ label
 
 input
   &[type="number"], &[type="date"], &[type="email"], &[type="password"], &[type="text"]
-    color: #888
+    color: color('light')
     border: 1px solid #ccc
     width: 300px
     max-width: 95%
-    font-size: $text-normal
+    font-size: size('normal')
     height: 25px
     padding-bottom: 0
     font-family: sans-serif
     margin-top: 10px
     +appearance
   &[type="number"]:focus, &[type="date"]:focus, &[type="email"]:focus, &[type="password"]:focus, &[type="text"]:focus
-    color: #000
+    color: color('dark')
     border-color: rgba(82, 168, 236, 0.8)
     outline: 0
     box-shadow: 0 0 8px rgba(82, 168, 236, 0.6)
 
 textarea:focus
-  color: #000
+  color: color('dark')
   border-color: rgba(82, 168, 236, 0.8)
   outline: 0
   box-shadow: 0 0 8px rgba(82, 168, 236, 0.6)
@@ -53,7 +55,8 @@ span.select2-container
   margin-top: 2px
 
 \::-webkit-input-placeholder, ::-ms-input-placeholder, ::-moz-placeholder
-  color: #ddd
+  color: color('light')
+  opacity: 0.2
   padding-top: 2px
 
 .form-actions
@@ -73,14 +76,14 @@ input.form-error:focus, textarea.form-error:focus
   font-weight: bold
 
 .form-errors
-  color: #b94a48
+  color: color('error')
   list-style-type: none
 
 ul.form-errors li
   margin-left: 0
 
 .form-help
-  font-size: $text-small
+  font-size: size('small')
   color: brown
   margin-bottom: 15px
 
@@ -128,4 +131,4 @@ input
 .reset-password
   margin-top: 20px
   a
-    color: #999
+    color: color('light')

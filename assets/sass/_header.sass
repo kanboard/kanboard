@@ -1,14 +1,16 @@
+@import variables
+
 header
   margin-top: 5px
   margin-bottom: 5px
   border-bottom: 1px solid #dedede
   h1
-    font-size: $page-title-size
+    font-size: size('title')
     .tooltip
       opacity: 0.3
-      font-size: $text-tiny
+      font-size: size('tiny')
 
 .web-notification-icon
-  color: #3366CC
+  color: link-color('primary')
   &:focus, &:hover
-    color: #000
+    color: color('dark')
