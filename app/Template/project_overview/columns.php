@@ -2,7 +2,7 @@
     <?php foreach ($project['columns'] as $column): ?>
         <div class="project-overview-column">
             <strong title="<?= t('Task count') ?>"><?= $column['nb_tasks'] ?></strong><br>
-            <span><?= $this->text->e($column['title']) ?></span>
+            <small><?= $this->text->e($column['title']) ?></small>
         </div>
     <?php endforeach ?>
 </div>

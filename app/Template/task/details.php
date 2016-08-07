@@ -31,18 +31,21 @@
                         </li>
                     <?php endif ?>
                     <?php if ($project['is_public']): ?>
-                    <li class="smaller">
-                        <i class="fa fa-external-link fa-fw"></i>
-                        <?= $this->url->link(t('Public link'), 'TaskViewController', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
+                    <li>
+                        <small>
+                            <i class="fa fa-external-link fa-fw"></i>
+                            <?= $this->url->link(t('Public link'), 'TaskViewController', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
+                        </small>
                     </li>
                     <?php endif ?>
                     <?php if ($project['is_public'] && !$editable): ?>
-                    <li class="smaller">
-                        <i class="fa fa-th fa-fw"></i>
-                        <?= $this->url->link(t('Back to the board'), 'BoardViewController', 'readonly', array('token' => $project['token'])) ?>
+                    <li>
+                        <small>
+                            <i class="fa fa-th fa-fw"></i>
+                            <?= $this->url->link(t('Back to the board'), 'BoardViewController', 'readonly', array('token' => $project['token'])) ?>
+                        </small>
                     </li>
                     <?php endif ?>
-                    <li class="smaller">
 
                     <?= $this->hook->render('template:task:details:first-column', array('task' => $task)) ?>
                 </ul>

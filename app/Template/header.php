@@ -12,9 +12,9 @@
                 <?php endif ?>
             </span>
             <?php if (! empty($description)): ?>
-                <span class="tooltip" title="<?= $this->text->markdownAttribute($description) ?>">
+                <small class="tooltip" title="<?= $this->text->markdownAttribute($description) ?>">
                     <i class="fa fa-info-circle"></i>
-                </span>
+                </small>
             <?php endif ?>
         </h1>
         <ul>

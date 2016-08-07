@@ -43,7 +43,7 @@
             <td class="dashboard-project-stats">
                 <?php foreach ($project['columns'] as $column): ?>
                     <strong title="<?= t('Task count') ?>"><?= $column['nb_tasks'] ?></strong>
-                    <span><?= $this->text->e($column['title']) ?></span>
+                    <small><?= $this->text->e($column['title']) ?></small>
                 <?php endforeach ?>
             </td>
 
