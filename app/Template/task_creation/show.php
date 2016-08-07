@@ -1,4 +1,5 @@
 <div class="page-header">
+    <span class="project-name"><?= $this->text->e($project['name']) ?></span>
     <h2><?= t('New task') ?></h2>
 </div>
 
