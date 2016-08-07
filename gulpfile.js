@@ -22,7 +22,8 @@ var vendor = {
         'bower_components/fullcalendar/dist/fullcalendar.min.css',
         'bower_components/simplemde/dist/simplemde.min.css',
         'bower_components/font-awesome/css/font-awesome.min.css',
-        'bower_components/c3/c3.min.css'
+        'bower_components/c3/c3.min.css',
+        'bower_components/gridlex/dist/gridlex.min.css'
     ],
     js: [
         'bower_components/jquery/dist/jquery.min.js',
