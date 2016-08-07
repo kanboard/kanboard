@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\PageNotFoundException;
+
 /**
  * Task Creation Controller
  *
@@ -14,9 +16,9 @@ class TaskCreationController extends BaseController
      * Display a form to create a new task
      *
      * @access public
-     * @param array $values
-     * @param array $errors
-     * @throws \Kanboard\Core\Controller\PageNotFoundException
+     * @param  array $values
+     * @param  array $errors
+     * @throws PageNotFoundException
      */
     public function show(array $values = array(), array $errors = array())
     {
@@ -24,15 +26,7 @@ class TaskCreationController extends BaseController
         $swimlanes_list = $this->swimlaneModel->getList($project['id'], false, true);
 
         if (empty($values)) {
-            $values = array(
-                'swimlane_id' => $this->request->getIntegerParam('swimlane_id', key($swimlanes_list)),
-                'column_id' => $this->request->getIntegerParam('column_id'),
-                'color_id' => $this->colorModel->getDefaultColor(),
-                'owner_id' => $this->userSession->getId(),
-            );
-
-            $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
-            $values = $this->hook->merge('controller:task-creation:form:default', $values, array('default_values' => $values));
+            $values = $this->prepareValues($swimlanes_list);
         }
 
         $this->response->html($this->template->render('task_creation/show', array(
@@ -43,7 +37,6 @@ class TaskCreationController extends BaseController
             'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], true, false, true),
             'categories_list' => $this->categoryModel->getList($project['id']),
             'swimlanes_list' => $swimlanes_list,
-            'title' => $project['name'].' &gt; '.t('New task')
         )));
     }
 
@@ -61,17 +54,17 @@ class TaskCreationController extends BaseController
 
         if ($valid && $this->taskCreationModel->create($values)) {
             $this->flash->success(t('Task created successfully.'));
-            return $this->afterSave($project, $values);
+            $this->afterSave($project, $values);
+        } else {
+            $this->flash->failure(t('Unable to create your task.'));
+            $this->show($values, $errors);
         }
-
-        $this->flash->failure(t('Unable to create your task.'));
-        return $this->show($values, $errors);
     }
 
     private function afterSave(array $project, array &$values)
     {
         if (isset($values['another_task']) && $values['another_task'] == 1) {
-            return $this->show(array(
+            $this->show(array(
                 'owner_id' => $values['owner_id'],
                 'color_id' => $values['color_id'],
                 'category_id' => isset($values['category_id']) ? $values['category_id'] : 0,
@@ -79,8 +72,29 @@ class TaskCreationController extends BaseController
                 'swimlane_id' => isset($values['swimlane_id']) ? $values['swimlane_id'] : 0,
                 'another_task' => 1,
             ));
+        } else {
+            $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);
         }
+    }
 
-        return $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);
+    /**
+     * Prepare form values
+     *
+     * @access protected
+     * @param  array $swimlanes_list
+     * @return array
+     */
+    protected function prepareValues(array $swimlanes_list)
+    {
+        $values = array(
+            'swimlane_id' => $this->request->getIntegerParam('swimlane_id', key($swimlanes_list)),
+            'column_id'   => $this->request->getIntegerParam('column_id'),
+            'color_id'    => $this->colorModel->getDefaultColor(),
+            'owner_id'    => $this->userSession->getId(),
+        );
+
+        $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
+        $values = $this->hook->merge('controller:task-creation:form:default', $values, array('default_values' => $values));
+        return $values;
     }
 }
