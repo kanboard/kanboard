@@ -1,0 +1,25 @@
+@import variables
+
+@mixin xs-device
+  @media (max-width: #{$xs-device-width})
+    @content
+
+@mixin sm-device
+  @media (max-width: #{$sm-device-width})
+    @content
+
+@mixin md-device
+  @media (min-width: #{$sm-device-width}) and (max-width: #{$md-device-width})
+    @content
+
+@mixin grid($columns: 0)
+  box-sizing: border-box
+  display: flex
+  flex-wrap: wrap
+  > *
+    box-sizing: border-box
+  > *
+    width: (1/$columns) * 100%
+
+@mixin grid_width($width)
+  width: $width * 100%
