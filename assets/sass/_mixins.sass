@@ -1,5 +1,9 @@
 @import variables
 
+@mixin custom-device($width)
+  @media (max-width: #{$width})
+    @content
+
 @mixin xs-device
   @media (max-width: #{$xs-device-width})
     @content

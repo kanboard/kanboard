@@ -2,8 +2,13 @@
     <form method="get" action="<?= $this->url->dir() ?>" class="search">
         <?= $this->form->hidden('controller', array('controller' => 'SearchController')) ?>
         <?= $this->form->hidden('action', array('action' => 'index')) ?>
-        <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"'), 'form-input-large') ?>
-        <?= $this->render('app/filters_helper') ?>
+
+        <div class="input-addon">
+            <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"'), 'input-addon-field') ?>
+            <div class="input-addon-item">
+                <?= $this->render('app/filters_helper') ?>
+            </div>
+        </div>
     </form>
 </div>
 
