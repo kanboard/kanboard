@@ -1,3 +1,5 @@
+@import mixins
+
 .input-addon
   display: flex
 
@@ -12,9 +14,10 @@
   font: inherit
   font-weight: normal
 
-  .dropdown
-    .fa-caret-down
-      display: none
+  @include xs-device
+    .dropdown
+      .fa-caret-down
+        display: none
 
 .input-addon-field, .input-addon-item
   border: 1px solid rgba(147, 128, 108, 0.25)
