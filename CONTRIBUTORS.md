@@ -10,7 +10,7 @@ Contributors:
 - [Aleix Pol](https://github.com/aleixpol)
 - [Ally Raza](https://github.com/alirz23)
 - [Angystardust](https://github.com/angystardust)
-- [Anjar Febrianto](https://github.com/Lasut)
+- [Anjar Febrianto](https://github.com/febrianjar)
 - [Anton](https://github.com/tester22)
 - [Ashbike](https://github.com/ashbike)
 - [Ashish Kulkarni](https://github.com/ashkulz)
