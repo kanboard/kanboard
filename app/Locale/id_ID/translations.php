@@ -896,7 +896,7 @@ return array(
     'Assignee Username' => 'Username yang ditugaskan',
     'Assignee Name' => 'Nama yang ditugaskan',
     'Groups' => 'Grup',
-    'Members of %s' => 'Anggota dari',
+    'Members of %s' => 'Anggota dari %s',
     'New group' => 'Grup baru',
     'Group created successfully.' => 'Grup berhasil dibuat',
     'Unable to create your group.' => 'Tidak dapat membuat grup anda',
