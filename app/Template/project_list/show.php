@@ -12,13 +12,13 @@
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('No project') ?></p>
     <?php else: ?>
-        <table class="table-stripped table-small">
+        <table class="table-stripped">
             <tr>
-                <th class="column-3"><?= $paginator->order(t('Id'), 'id') ?></th>
-                <th class="column-5"><?= $paginator->order(t('Status'), 'is_active') ?></th>
+                <th class="column-5"><?= $paginator->order(t('Id'), 'id') ?></th>
+                <th class="column-8"><?= $paginator->order(t('Status'), 'is_active') ?></th>
                 <th class="column-15"><?= $paginator->order(t('Project'), 'name') ?></th>
-                <th class="column-8"><?= $paginator->order(t('Start date'), 'start_date') ?></th>
-                <th class="column-8"><?= $paginator->order(t('End date'), 'end_date') ?></th>
+                <th class="column-10"><?= $paginator->order(t('Start date'), 'start_date') ?></th>
+                <th class="column-10"><?= $paginator->order(t('End date'), 'end_date') ?></th>
                 <th class="column-15"><?= $paginator->order(t('Owner'), 'owner_id') ?></th>
                 <?php if ($this->user->hasAccess('ProjectUserOverviewController', 'managers')): ?>
                     <th class="column-10"><?= t('Users') ?></th>
@@ -73,7 +73,7 @@
                 <td class="dashboard-project-stats">
                     <?php foreach ($project['columns'] as $column): ?>
                         <strong title="<?= t('Task count') ?>"><?= $column['nb_tasks'] ?></strong>
-                        <span><?= $this->text->e($column['title']) ?></span>
+                        <small><?= $this->text->e($column['title']) ?></small>
                     <?php endforeach ?>
                 </td>
             </tr>

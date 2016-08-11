@@ -16,6 +16,11 @@ abstract class Base extends PHPUnit_Framework_TestCase
 {
     protected $container;
 
+    /**
+     * @var EventDispatcher
+     */
+    protected $dispatcher;
+
     public function setUp()
     {
         date_default_timezone_set('UTC');
@@ -48,6 +53,8 @@ abstract class Base extends PHPUnit_Framework_TestCase
             new EventDispatcher,
             new Stopwatch
         );
+
+        $this->dispatcher = $this->container['dispatcher'];
 
         $this->container['db']->getStatementHandler()->withLogging();
         $this->container['logger'] = new Logger();

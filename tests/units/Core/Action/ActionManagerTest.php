@@ -96,7 +96,7 @@ class ActionManagerTest extends Base
         $actions = $actionManager->getAvailableActions();
 
         $actionManager->attachEvents();
-        $this->assertEmpty($this->container['dispatcher']->getListeners());
+        $this->assertEmpty($this->dispatcher->getListeners());
 
         $this->assertEquals(1, $projectModel->create(array('name' =>'test')));
         $this->assertEquals(1, $actionModel->create(array(
@@ -107,7 +107,7 @@ class ActionManagerTest extends Base
         )));
 
         $actionManager->attachEvents();
-        $listeners = $this->container['dispatcher']->getListeners(TaskModel::EVENT_CREATE);
+        $listeners = $this->dispatcher->getListeners(TaskModel::EVENT_CREATE);
         $this->assertCount(1, $listeners);
         $this->assertInstanceOf(get_class($actionTaskAssignColorColumn), $listeners[0][0]);
 
@@ -148,7 +148,7 @@ class ActionManagerTest extends Base
 
         $actionManager->attachEvents();
 
-        $listeners = $this->container['dispatcher']->getListeners(TaskModel::EVENT_MOVE_COLUMN);
+        $listeners = $this->dispatcher->getListeners(TaskModel::EVENT_MOVE_COLUMN);
         $this->assertCount(1, $listeners);
         $this->assertInstanceOf(get_class($actionTaskAssignColorColumn), $listeners[0][0]);
 
@@ -158,7 +158,6 @@ class ActionManagerTest extends Base
     public function testThatEachListenerAreDifferentInstance()
     {
         $projectModel = new ProjectModel($this->container);
-        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
         $actionModel = new ActionModel($this->container);
         $actionTaskAssignColorColumn = new TaskAssignColorColumn($this->container);
         $actionManager = new ActionManager($this->container);
@@ -183,7 +182,7 @@ class ActionManagerTest extends Base
 
         $actionManager->attachEvents();
 
-        $listeners = $this->container['dispatcher']->getListeners(TaskModel::EVENT_MOVE_COLUMN);
+        $listeners = $this->dispatcher->getListeners(TaskModel::EVENT_MOVE_COLUMN);
         $this->assertCount(2, $listeners);
         $this->assertFalse($listeners[0][0] === $listeners[1][0]);
 
@@ -192,5 +191,36 @@ class ActionManagerTest extends Base
 
         $this->assertEquals(1, $listeners[1][0]->getParam('column_id'));
         $this->assertEquals('red', $listeners[1][0]->getParam('color_id'));
+    }
+
+    public function testRemoveEvents()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $actionModel = new ActionModel($this->container);
+        $actionTaskAssignColorColumn = new TaskAssignColorColumn($this->container);
+        $actionManager = new ActionManager($this->container);
+        $actionManager->register($actionTaskAssignColorColumn);
+
+        $actions = $actionManager->getAvailableActions();
+
+        $this->assertEquals(1, $projectModel->create(array('name' =>'test')));
+        $this->assertEquals(1, $actionModel->create(array(
+            'project_id' => 1,
+            'event_name' => TaskModel::EVENT_CREATE,
+            'action_name' => key($actions),
+            'params' => array('column_id' => 1, 'color_id' => 'red'),
+        )));
+
+        $actionManager->attachEvents();
+        $this->dispatcher->addListener(TaskModel::EVENT_CREATE, function () {});
+
+        $listeners = $this->dispatcher->getListeners(TaskModel::EVENT_CREATE);
+        $this->assertCount(2, $listeners);
+
+        $actionManager->removeEvents();
+
+        $listeners = $this->dispatcher->getListeners(TaskModel::EVENT_CREATE);
+        $this->assertCount(1, $listeners);
+        $this->assertNotInstanceOf(get_class($actionTaskAssignColorColumn), $listeners[0]);
     }
 }

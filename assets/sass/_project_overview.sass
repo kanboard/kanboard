@@ -1,0 +1,19 @@
+@import variables
+
+.project-overview-columns
+  +display-flex
+  +flex-direction(row)
+  +flex-wrap
+  +align-content(center)
+  margin-bottom: 20px
+  font-size: size('large')
+
+.project-overview-column
+  text-align: center
+  margin-right: 3%
+  padding: 3px 15px 3px 15px
+  border: 1px dashed #ddd
+  small
+    color: color('light')
+  strong
+    color: color('medium')

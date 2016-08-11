@@ -12,8 +12,13 @@
         <form method="get" action="<?= $this->url->dir() ?>" class="search">
             <?= $this->form->hidden('controller', $values) ?>
             <?= $this->form->hidden('action', $values) ?>
-            <?= $this->form->text('search', $values, array(), array(empty($values['search']) ? 'autofocus' : '', 'placeholder="'.t('Search').'"'), 'form-input-large') ?>
-            <?= $this->render('app/filters_helper') ?>
+
+            <div class="input-addon">
+                <?= $this->form->text('search', $values, array(), array(empty($values['search']) ? 'autofocus' : '', 'placeholder="'.t('Search').'"'), 'input-addon-field') ?>
+                <div class="input-addon-item">
+                    <?= $this->render('app/filters_helper') ?>
+                </div>
+            </div>
         </form>
     </div>
 

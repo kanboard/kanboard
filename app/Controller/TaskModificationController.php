@@ -37,11 +37,7 @@ class TaskModificationController extends BaseController
         $project = $this->projectModel->getById($task['project_id']);
 
         if (empty($values)) {
-            $values = $task;
-            $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
-            $values = $this->hook->merge('controller:task-modification:form:default', $values, array('default_values' => $values));
-            $values = $this->dateParser->format($values, array('date_due'), $this->dateParser->getUserDateFormat());
-            $values = $this->dateParser->format($values, array('date_started'), $this->dateParser->getUserDateTimeFormat());
+            $values = $this->prepareValues($task);
         }
 
         $this->response->html($this->template->render('task_modification/show', array(
@@ -74,5 +70,23 @@ class TaskModificationController extends BaseController
             $this->flash->failure(t('Unable to update your task.'));
             $this->edit($values, $errors);
         }
+    }
+
+    /**
+     * Prepare form values
+     *
+     * @access protected
+     * @param  array $task
+     * @return array
+     */
+    protected function prepareValues(array $task)
+    {
+        $values = $task;
+        $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
+        $values = $this->hook->merge('controller:task-modification:form:default', $values, array('default_values' => $values));
+        $values = $this->dateParser->format($values, array('date_due'), $this->dateParser->getUserDateFormat());
+        $values = $this->dateParser->format($values, array('date_started'), $this->dateParser->getUserDateTimeFormat());
+
+        return $values;
     }
 }

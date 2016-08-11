@@ -38,7 +38,6 @@ class TaskGanttCreationController extends BaseController
             'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], true, false, true),
             'categories_list' => $this->categoryModel->getList($project['id']),
             'swimlanes_list' => $this->swimlaneModel->getList($project['id'], false, true),
-            'title' => $project['name'].' &gt; '.t('New task')
         )));
     }
 
@@ -54,17 +53,12 @@ class TaskGanttCreationController extends BaseController
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
-        if ($valid) {
-            $task_id = $this->taskCreationModel->create($values);
-
-            if ($task_id !== false) {
-                $this->flash->success(t('Task created successfully.'));
-                return $this->response->redirect($this->helper->url->to('TaskGanttController', 'show', array('project_id' => $project['id'])));
-            } else {
-                $this->flash->failure(t('Unable to create your task.'));
-            }
+        if ($valid && $this->taskCreationModel->create($values)) {
+            $this->flash->success(t('Task created successfully.'));
+            $this->response->redirect($this->helper->url->to('TaskGanttController', 'show', array('project_id' => $project['id'])));
+        } else {
+            $this->flash->failure(t('Unable to create your task.'));
+            $this->show($values, $errors);
         }
-
-        return $this->show($values, $errors);
     }
 }

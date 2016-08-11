@@ -1,0 +1,111 @@
+@import variables
+
+.public-board
+  margin-top: 5px
+
+.public-task
+  max-width: 800px
+  margin: 5px auto 0
+
+#board-container
+  overflow-x: auto
+
+#board
+  table-layout: fixed
+  margin-bottom: 0
+  th.board-column-header
+    width: 240px
+  td
+    vertical-align: top
+
+.board-container-compact
+  overflow-x: initial
+
+@media all and (-ms-high-contrast: active), (-ms-high-contrast: none)
+  .board-container-compact #board
+    table-layout: auto
+
+#board th.board-column-header.board-column-compact
+  width: initial
+
+.board-column-collapsed
+  display: none
+
+td.board-column-task-collapsed
+  font-weight: bold
+  background-color: bg-color('primary')
+
+#board th.board-column-header-collapsed
+  width: 28px
+  min-width: 28px
+  text-align: center
+  overflow: hidden
+
+.board-rotation-wrapper
+  position: relative
+  padding: 8px 4px
+  min-height: 150px
+  overflow: hidden
+
+.board-rotation
+  white-space: nowrap
+  -webkit-backface-visibility: hidden
+  -webkit-transform: rotate(90deg)
+  -moz-transform: rotate(90deg)
+  -ms-transform: rotate(90deg)
+  transform: rotate(90deg)
+  -webkit-transform-origin: 0 100%
+  -moz-transform-origin: 0 100%
+  -ms-transform-origin: 0 100%
+  transform-origin: 0 100%
+
+.board-column-title .dropdown-menu
+  text-decoration: none
+
+.board-add-icon
+  float: left
+  padding: 0 5px
+  a
+    text-decoration: none
+    color: link-color('primary')
+    font-size: size('xlarge')
+    line-height: 70%
+    &:focus, &:hover
+      text-decoration: none
+      color: red
+
+.board-column-header-task-count
+  color: color('light')
+  font-weight: normal
+
+a.board-swimlane-toggle
+  text-decoration: none
+  &:hover, &:focus
+    color: color('dark')
+    text-decoration: none
+    border: none
+
+.board-task-list
+  min-height: 60px
+
+.board-task-list-limit
+  background-color: $board-task-limit-color
+
+.draggable-item
+  cursor: pointer
+  user-select: none
+  -webkit-user-select: none
+  -moz-user-select: none
+
+.draggable-placeholder
+  border: 2px dashed #000
+  background: #fafafa
+  height: 70px
+  margin-bottom: 10px
+
+div.draggable-item-selected
+  border: 1px solid #000
+
+.task-board-sort-handle
+  float: left
+  padding-right: 5px

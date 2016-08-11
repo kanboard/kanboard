@@ -1,0 +1,15 @@
+@import variables
+
+.logo
+  a
+    opacity: 0.5
+    color: #d40000
+    text-decoration: none
+  span
+    color: color('primary')
+  a
+    &:hover
+      opacity: 0.8
+      color: color('primary')
+    &:focus span, &:hover span
+      color: #d40000

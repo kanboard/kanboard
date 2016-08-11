@@ -1,0 +1,72 @@
+@import variables
+
+.sidebar-container
+  margin-top: 10px
+  height: 100%
+  width: 100%
+  display: -ms-flexbox
+  display: -webkit-box
+  display: -moz-box
+  display: -ms-box
+  display: box
+  -ms-flex-direction: row
+  -webkit-box-orient: horizontal
+  -moz-box-orient: horizontal
+  -ms-box-orient: horizontal
+  box-orient: horizontal
+
+.sidebar-content
+  padding-left: 10px
+  -ms-flex: 1
+  -webkit-box-flex: 1
+  -moz-box-flex: 1
+  -ms-box-flex: 1
+  box-flex: 1
+
+.sidebar
+  padding-right: 10px
+  border-right: 1px dotted #eee
+  max-width: 240px
+  min-width: 190px
+  width: 18%
+  -ms-flex: 0 100px
+  -webkit-box-flex: 0
+  -moz-box-flex: 0
+  -ms-box-flex: 0
+  box-flex: 0
+  h2
+    margin-top: 0
+  > ul
+    a
+      text-decoration: none
+      color: color('light')
+      font-weight: 300
+      &:hover
+        color: color('primary')
+    li
+      list-style-type: none
+      line-height: 35px
+      border-bottom: 1px dotted #efefef
+      padding-left: 13px
+      &:hover
+        border-left: 5px solid #555
+        padding-left: 8px
+      &.active
+        border-left: 5px solid #333
+        padding-left: 8px
+        a
+          color: color('primary')
+          font-weight: bold
+
+.sidebar-icons > ul li
+  padding-left: 0
+  &:hover, &.active
+    padding-left: 0
+    border-left: none
+
+.sidebar > ul li
+  &.active a
+    &:focus, &:hover
+      color: color('medium')
+  &:last-child
+    margin-bottom: 15px
