@@ -96,4 +96,21 @@ class Hook
 
         return null;
     }
+
+    /**
+     * Hook with reference
+     *
+     * @access public
+     * @param  string $hook
+     * @param  mixed  $param
+     * @return mixed
+     */
+    public function reference($hook, &$param)
+    {
+        foreach ($this->getListeners($hook) as $listener) {
+            $listener($param);
+        }
+
+        return $param;
+    }
 }

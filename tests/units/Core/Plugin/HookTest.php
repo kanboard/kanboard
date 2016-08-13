@@ -8,89 +8,103 @@ class HookTest extends Base
 {
     public function testGetListeners()
     {
-        $h = new Hook;
-        $this->assertEmpty($h->getListeners('myhook'));
+        $hook = new Hook;
+        $this->assertEmpty($hook->getListeners('myhook'));
 
-        $h->on('myhook', 'A');
-        $h->on('myhook', 'B');
+        $hook->on('myhook', 'A');
+        $hook->on('myhook', 'B');
 
-        $this->assertEquals(array('A', 'B'), $h->getListeners('myhook'));
+        $this->assertEquals(array('A', 'B'), $hook->getListeners('myhook'));
     }
 
     public function testExists()
     {
-        $h = new Hook;
-        $this->assertFalse($h->exists('myhook'));
+        $hook = new Hook;
+        $this->assertFalse($hook->exists('myhook'));
 
-        $h->on('myhook', 'A');
+        $hook->on('myhook', 'A');
 
-        $this->assertTrue($h->exists('myhook'));
+        $this->assertTrue($hook->exists('myhook'));
     }
 
     public function testMergeWithNoBinding()
     {
-        $h = new Hook;
+        $hook = new Hook;
         $values = array('A', 'B');
 
-        $result = $h->merge('myhook', $values, array('p' => 'c'));
+        $result = $hook->merge('myhook', $values, array('p' => 'c'));
         $this->assertEquals($values, $result);
     }
 
     public function testMergeWithBindings()
     {
-        $h = new Hook;
+        $hook = new Hook;
         $values = array('A', 'B');
         $expected = array('A', 'B', 'c', 'D');
 
-        $h->on('myhook', function ($p) {
+        $hook->on('myhook', function ($p) {
             return array($p);
         });
 
-        $h->on('myhook', function () {
+        $hook->on('myhook', function () {
             return array('D');
         });
 
-        $result = $h->merge('myhook', $values, array('p' => 'c'));
+        $result = $hook->merge('myhook', $values, array('p' => 'c'));
         $this->assertEquals($expected, $result);
         $this->assertEquals($expected, $values);
     }
 
     public function testMergeWithBindingButReturningBadData()
     {
-        $h = new Hook;
+        $hook = new Hook;
         $values = array('A', 'B');
         $expected = array('A', 'B');
 
-        $h->on('myhook', function () {
+        $hook->on('myhook', function () {
             return 'string';
         });
 
-        $result = $h->merge('myhook', $values);
+        $result = $hook->merge('myhook', $values);
         $this->assertEquals($expected, $result);
         $this->assertEquals($expected, $values);
     }
 
     public function testFirstWithNoBinding()
     {
-        $h = new Hook;
+        $hook = new Hook;
 
-        $result = $h->first('myhook', array('p' => 2));
+        $result = $hook->first('myhook', array('p' => 2));
         $this->assertEquals(null, $result);
     }
 
     public function testFirstWithMultipleBindings()
     {
-        $h = new Hook;
+        $hook = new Hook;
 
-        $h->on('myhook', function ($p) {
+        $hook->on('myhook', function ($p) {
             return $p + 1;
         });
 
-        $h->on('myhook', function ($p) {
+        $hook->on('myhook', function ($p) {
             return $p;
         });
 
-        $result = $h->first('myhook', array('p' => 3));
+        $result = $hook->first('myhook', array('p' => 3));
         $this->assertEquals(4, $result);
+    }
+
+    public function testHookWithReference()
+    {
+        $hook = new Hook();
+
+        $hook->on('myhook', function (&$p) {
+            $p = 2;
+        });
+
+        $param = 123;
+        $result = $hook->reference('myhook', $param);
+        $this->assertSame(2, $result);
+        $this->assertSame(2, $param);
     }
 }

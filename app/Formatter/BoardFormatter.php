@@ -44,6 +44,13 @@ class BoardFormatter extends BaseFormatter implements FormatterInterface
     {
         $swimlanes = $this->swimlaneModel->getSwimlanes($this->projectId);
         $columns = $this->columnModel->getAll($this->projectId);
+
+        if (empty($swimlanes) || empty($columns)) {
+            return array();
+        }
+
+        $this->hook->reference('formatter:board:query', $this->query);
+
         $tasks = $this->query
             ->eq(TaskModel::TABLE.'.project_id', $this->projectId)
             ->asc(TaskModel::TABLE.'.position')
@@ -51,10 +58,6 @@ class BoardFormatter extends BaseFormatter implements FormatterInterface
 
         $task_ids = array_column($tasks, 'id');
         $tags = $this->taskTagModel->getTagsByTasks($task_ids);
-
-        if (empty($swimlanes) || empty($columns)) {
-            return array();
-        }
 
         return BoardSwimlaneFormatter::getInstance($this->container)
             ->withSwimlanes($swimlanes)

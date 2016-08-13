@@ -3,6 +3,7 @@ Version 1.0.33 (unreleased)
 
 Improvements:
 
+* Add "reference" hooks
 * Show project name in task forms
 * Convert vanilla CSS to SASS
 

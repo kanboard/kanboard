@@ -115,6 +115,31 @@ List of asset Hooks:
 - `template:layout:css`
 - `template:layout:js`
 
+
+Reference hooks
+---------------
+
+Reference hooks are passing a variable by reference.
+
+Example:
+
+```php
+$this->hook->on('formatter:board:query', function (\PicoDb\Table &query) {
+    $query->eq('color_id', 'red');
+});
+```
+
+The code above will show only tasks in red on the board.
+
+List of reference hooks:
+
+| Hook                                       | Description                                                   |
+|--------------------------------------------|---------------------------------------------------------------|
+| `formatter:board:query`                    | Alter database query before rendering board                   |
+| `pagination:dashboard:task:query`          | Alter database query for tasks pagination on the dashboard    |
+| `pagination:dashboard:subtask:query`       | Alter database query for subtasks pagination on the dashboard |
+
+
 Template Hooks
 --------------
 
