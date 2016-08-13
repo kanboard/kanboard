@@ -138,6 +138,8 @@ List of reference hooks:
 | `formatter:board:query`                    | Alter database query before rendering board                   |
 | `pagination:dashboard:task:query`          | Alter database query for tasks pagination on the dashboard    |
 | `pagination:dashboard:subtask:query`       | Alter database query for subtasks pagination on the dashboard |
+| `model:task:creation:prepare`              | Alter form values before to save a task                       |
+| `model:task:modification:prepare`          | Alter form values before to edit a task                       |
 
 
 Template Hooks
@@ -186,6 +188,7 @@ List of template hooks:
 | `template:config:email`                    | Email settings page                                |
 | `template:config:integrations`             | Integration page in global settings                |
 | `template:dashboard:sidebar`               | Sidebar on dashboard page                          |
+| `template:dashboard:show`                  | Main page of the dashboard                         |
 | `template:export:sidebar`                  | Sidebar on export pages                            |
 | `template:import:sidebar`                  | Sidebar on import pages                            |
 | `template:header:dropdown`                 | Page header dropdown menu (user avatar icon)       |

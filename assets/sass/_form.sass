@@ -26,15 +26,24 @@ input
     outline: 0
     box-shadow: 0 0 8px rgba(82, 168, 236, 0.6)
 
+input[type="number"]
+  width: 70px
+
+input[type="text"]:not(.input-addon-field)
+  &.form-numeric
+    width: 70px
+  &.form-datetime, &.form-date
+    width: 150px
+  &.form-input-large
+    width: 400px
+  &.form-input-small
+    width: 150px
+
 textarea:focus
   color: color('dark')
   border-color: rgba(82, 168, 236, 0.8)
   outline: 0
   box-shadow: 0 0 8px rgba(82, 168, 236, 0.6)
-
-input
-  &.form-numeric, &[type="number"]
-    width: 70px
 
 textarea
   border: 1px solid #ccc
@@ -100,14 +109,6 @@ ul.form-errors li
 
 .form-inline-group
   display: inline
-
-input
-  &.form-datetime, &.form-date
-    width: 150px
-  &.form-input-large
-    width: 400px
-  &.form-input-small
-    width: 150px
 
 .form-columns
   display: -webkit-flex

@@ -207,24 +207,14 @@ class TaskHelper extends Base
 
     public function selectStartDate(array $values, array $errors = array(), array $attributes = array())
     {
-        $placeholder = date($this->configModel->get('application_date_format', 'm/d/Y H:i'));
-        $attributes = array_merge(array('tabindex="12"', 'placeholder="'.$placeholder.'"'), $attributes);
-
-        $html = $this->helper->form->label(t('Start Date'), 'date_started');
-        $html .= $this->helper->form->text('date_started', $values, $errors, $attributes, 'form-datetime');
-
-        return $html;
+        $attributes = array_merge(array('tabindex="12"'), $attributes);
+        return $this->helper->form->datetime(t('Start Date'), 'date_started', $values, $errors, $attributes);
     }
 
     public function selectDueDate(array $values, array $errors = array(), array $attributes = array())
     {
-        $placeholder = date($this->configModel->get('application_date_format', 'm/d/Y'));
-        $attributes = array_merge(array('tabindex="13"', 'placeholder="'.$placeholder.'"'), $attributes);
-
-        $html = $this->helper->form->label(t('Due Date'), 'date_due');
-        $html .= $this->helper->form->text('date_due', $values, $errors, $attributes, 'form-date');
-
-        return $html;
+        $attributes = array_merge(array('tabindex="13"'), $attributes);
+        return $this->helper->form->date(t('Due Date'), 'date_due', $values, $errors, $attributes);
     }
 
     public function formatPriority(array $project, array $task)
