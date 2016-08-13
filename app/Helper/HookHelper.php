@@ -24,8 +24,8 @@ class HookHelper extends Base
     {
         $buffer = '';
 
-        foreach ($this->hook->getListeners($hook) as $file) {
-            $buffer .= $this->helper->asset->$type($file);
+        foreach ($this->hook->getListeners($hook) as $params) {
+            $buffer .= $this->helper->asset->$type($params['template']);
         }
 
         return $buffer;
@@ -43,8 +43,12 @@ class HookHelper extends Base
     {
         $buffer = '';
 
-        foreach ($this->hook->getListeners($hook) as $template) {
-            $buffer .= $this->template->render($template, $variables);
+        foreach ($this->hook->getListeners($hook) as $params) {
+            if (! empty($params['variables'])) {
+                $variables = array_merge($variables, $params['variables']);
+            }
+
+            $buffer .= $this->template->render($params['template'], $variables);
         }
 
         return $buffer;
@@ -54,13 +58,18 @@ class HookHelper extends Base
      * Attach a template to a hook
      *
      * @access public
-     * @param  string  $hook
-     * @param  string  $template
+     * @param  string $hook
+     * @param  string $template
+     * @param  array  $variables
      * @return $this
      */
-    public function attach($hook, $template)
+    public function attach($hook, $template, array $variables = array())
     {
-        $this->hook->on($hook, $template);
+        $this->hook->on($hook, array(
+            'template' => $template,
+            'variables' => $variables,
+        ));
+
         return $this;
     }
 }

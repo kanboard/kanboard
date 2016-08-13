@@ -153,6 +153,14 @@ Example to add new content in the dashboard sidebar:
 $this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/sidebar');
 ```
 
+Example to attach a template with local variables:
+
+```php
+$this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/sidebar', array(
+    'variable' => 'foobar',
+));
+```
+
 This call is usually defined in the `initialize()` method.
 The first argument is name of the hook and the second argument is the template name.
 
