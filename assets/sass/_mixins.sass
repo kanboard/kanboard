@@ -27,3 +27,13 @@
 
 @mixin grid_width($width)
   width: $width * 100%
+
+@mixin placeholder
+  &::-webkit-input-placeholder
+    @content
+  &:-moz-placeholder
+    @content
+  &::-moz-placeholder
+    @content
+  &:-ms-input-placeholder
+    @content

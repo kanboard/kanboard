@@ -1,4 +1,5 @@
 @import variables
+@import mixins
 
 form
   margin-bottom: 20px
@@ -20,6 +21,8 @@ input
     font-family: sans-serif
     margin-top: 10px
     +appearance
+    @include placeholder
+      color: color('lighter')
   &[type="number"]:focus, &[type="date"]:focus, &[type="email"]:focus, &[type="password"]:focus, &[type="text"]:focus
     color: color('dark')
     border-color: rgba(82, 168, 236, 0.8)
@@ -62,11 +65,6 @@ select
 
 span.select2-container
   margin-top: 2px
-
-\::-webkit-input-placeholder, ::-ms-input-placeholder, ::-moz-placeholder
-  color: color('light')
-  opacity: 0.2
-  padding-top: 2px
 
 .form-actions
   padding-top: 20px

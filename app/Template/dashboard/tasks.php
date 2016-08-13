@@ -4,12 +4,12 @@
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('There is nothing assigned to you.') ?></p>
 <?php else: ?>
-    <table class="table-fixed table-small">
+    <table class="table-small">
         <tr>
             <th class="column-5"><?= $paginator->order('Id', \Kanboard\Model\TaskModel::TABLE.'.id') ?></th>
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
             <th><?= $paginator->order(t('Task'), \Kanboard\Model\TaskModel::TABLE.'.title') ?></th>
-            <th class="column-5"><?= $paginator->order(t('Priority'), \Kanboard\Model\TaskModel::TABLE.'.priority') ?></th>
+            <th class="column-8"><?= $paginator->order(t('Priority'), \Kanboard\Model\TaskModel::TABLE.'.priority') ?></th>
             <th class="column-20"><?= t('Time tracking') ?></th>
             <th class="column-10"><?= $paginator->order(t('Due date'), \Kanboard\Model\TaskModel::TABLE.'.date_due') ?></th>
             <th class="column-10"><?= $paginator->order(t('Column'), 'column_title') ?></th>
