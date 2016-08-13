@@ -6,6 +6,57 @@ use Kanboard\Helper\HookHelper;
 
 class HookHelperTest extends Base
 {
+    public function testAttachCallable()
+    {
+        $this->container['template'] = $this
+            ->getMockBuilder('\Kanboard\Core\Template')
+            ->setConstructorArgs(array($this->container['helper']))
+            ->setMethods(array('render'))
+            ->getMock();
+
+        $this->container['template']
+            ->expects($this->once())
+            ->method('render')
+            ->with(
+                $this->equalTo('tpl1'),
+                $this->equalTo(array('k0' => 'v0', 'k1' => 'v1'))
+            )
+            ->will($this->returnValue('tpl1_content'));
+
+        $hookHelper = new HookHelper($this->container);
+        $hookHelper->attachCallable('test', 'tpl1', function() {
+            return array(
+                'k1' => 'v1',
+            );
+        });
+
+        $this->assertEquals('tpl1_content', $hookHelper->render('test', array('k0' => 'v0')));
+    }
+
+    public function testAttachCallableWithNoResult()
+    {
+        $this->container['template'] = $this
+            ->getMockBuilder('\Kanboard\Core\Template')
+            ->setConstructorArgs(array($this->container['helper']))
+            ->setMethods(array('render'))
+            ->getMock();
+
+        $this->container['template']
+            ->expects($this->once())
+            ->method('render')
+            ->with(
+                $this->equalTo('tpl1'),
+                $this->equalTo(array('k0' => 'v0'))
+            )
+            ->will($this->returnValue('tpl1_content'));
+
+        $hookHelper = new HookHelper($this->container);
+        $hookHelper->attachCallable('test', 'tpl1', function() {
+        });
+
+        $this->assertEquals('tpl1_content', $hookHelper->render('test', array('k0' => 'v0')));
+    }
+
     public function testAttachLocalVariables()
     {
         $this->container['template'] = $this

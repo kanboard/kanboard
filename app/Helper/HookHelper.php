@@ -46,6 +46,12 @@ class HookHelper extends Base
         foreach ($this->hook->getListeners($hook) as $params) {
             if (! empty($params['variables'])) {
                 $variables = array_merge($variables, $params['variables']);
+            } elseif (! empty($params['callable'])) {
+                $result = call_user_func_array($params['callable'], $variables);
+
+                if (is_array($result)) {
+                    $variables = array_merge($variables, $result);
+                }
             }
 
             $buffer .= $this->template->render($params['template'], $variables);
@@ -68,6 +74,27 @@ class HookHelper extends Base
         $this->hook->on($hook, array(
             'template' => $template,
             'variables' => $variables,
+        ));
+
+        return $this;
+    }
+
+    /**
+     * Attach a template to a hook with a callable
+     *
+     * Arguments passed to the callback are the one passed to the hook
+     *
+     * @access public
+     * @param  string   $hook
+     * @param  string   $template
+     * @param  callable $callable
+     * @return $this
+     */
+    public function attachCallable($hook, $template, callable $callable)
+    {
+        $this->hook->on($hook, array(
+            'template' => $template,
+            'callable' => $callable,
         ));
 
         return $this;

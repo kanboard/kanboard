@@ -161,6 +161,14 @@ $this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/
 ));
 ```
 
+Example to attach a template with a callable:
+
+```php
+$this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/sidebar', function($hook_param1, $hook_param2) {
+    return array('new_template_variable' => 'foobar'); // Inject a new variable into the plugin template
+});
+```
+
 This call is usually defined in the `initialize()` method.
 The first argument is name of the hook and the second argument is the template name.
 
