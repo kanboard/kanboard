@@ -1,4 +1,5 @@
 @import variables
+@import mixins
 
 #popover-container
   position: fixed
@@ -12,13 +13,21 @@
 
 #popover-content
   position: absolute
-  width: 70%
-  left: 15%
+  width: 75%
+  left: 12%
   top: 1%
   padding: 15px
   background: #fff
   overflow: auto
-  max-height: 90%
+  max-height: 95%
+
+  @include xs-device
+    left: 0
+    width: 100%
+
+  @include sm-device
+    left: 2.5%
+    width: 85%
 
 .popover-form
   margin-bottom: 0

@@ -70,17 +70,20 @@ span.select2-container
   padding-top: 20px
   clear: both
 
+.form-required
+  color: red
+  padding-left: 5px
+  font-weight: bold
+
+  @include xs-device
+    display: none
+
 input.form-error, textarea.form-error
   border: 2px solid #b94a48
 
 input.form-error:focus, textarea.form-error:focus
   box-shadow: none
   border: 2px solid #b94a48
-
-.form-required
-  color: red
-  padding-left: 5px
-  font-weight: bold
 
 .form-errors
   color: color('error')
@@ -109,13 +112,13 @@ ul.form-errors li
   display: inline
 
 .form-columns
-  display: -webkit-flex
-  display: flex
-  -webkit-flex-direction: row
-  flex-direction: row
+  +display-flex
+  +flex-direction(row)
+  +flex-wrap
+  +justify-content(flex-start)
 
-.form-column
-  margin-right: 25px
+  .form-column
+    margin-right: 25px
 
 .form-login
   width: 350px
