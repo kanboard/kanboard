@@ -1,6 +1,10 @@
-<div class="task-show-title color-<?= $task['color_id'] ?>">
-    <h2><?= $this->text->e($task['title']) ?></h2>
-</div>
+<?= $this->render('task/details', array(
+    'task' => $task,
+    'tags' => $tags,
+    'project' => $project,
+    'editable' => false,
+)) ?>
+
 <div class="page-header">
     <h2><?= t('Analytics') ?></h2>
 </div>

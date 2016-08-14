@@ -91,6 +91,7 @@ class TaskViewController extends BaseController
             'lead_time' => $this->taskAnalyticModel->getLeadTime($task),
             'cycle_time' => $this->taskAnalyticModel->getCycleTime($task),
             'time_spent_columns' => $this->taskAnalyticModel->getTimeSpentByColumn($task),
+            'tags' => $this->taskTagModel->getList($task['id']),
         )));
     }
 
@@ -115,6 +116,7 @@ class TaskViewController extends BaseController
             'task' => $task,
             'project' => $this->projectModel->getById($task['project_id']),
             'subtask_paginator' => $subtask_paginator,
+            'tags' => $this->taskTagModel->getList($task['id']),
         )));
     }
 
@@ -131,6 +133,7 @@ class TaskViewController extends BaseController
             'task' => $task,
             'project' => $this->projectModel->getById($task['project_id']),
             'transitions' => $this->transitionModel->getAllByTask($task['id']),
+            'tags' => $this->taskTagModel->getList($task['id']),
         )));
     }
 }

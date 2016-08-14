@@ -40,6 +40,7 @@ class ActivityController extends BaseController
             'task' => $task,
             'project' => $this->projectModel->getById($task['project_id']),
             'events' => $this->helper->projectActivity->getTaskEvents($task['id']),
+            'tags' => $this->taskTagModel->getList($task['id']),
         )));
     }
 }
