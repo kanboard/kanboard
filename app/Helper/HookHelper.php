@@ -2,6 +2,7 @@
 
 namespace Kanboard\Helper;
 
+use Closure;
 use Kanboard\Core\Base;
 
 /**
@@ -87,10 +88,10 @@ class HookHelper extends Base
      * @access public
      * @param  string   $hook
      * @param  string   $template
-     * @param  callable $callable
+     * @param  Closure  $callable
      * @return $this
      */
-    public function attachCallable($hook, $template, callable $callable)
+    public function attachCallable($hook, $template, Closure $callable)
     {
         $this->hook->on($hook, array(
             'template' => $template,
