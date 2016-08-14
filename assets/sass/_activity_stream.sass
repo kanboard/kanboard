@@ -1,4 +1,5 @@
 @import variables
+@import mixins
 
 .activity-event
   margin-bottom: 15px
@@ -22,6 +23,8 @@
 .activity-description
   color: color('medium')
   margin-top: 10px
+  @include xs-device
+    overflow: auto
   li
     list-style-type: circle
   ul
