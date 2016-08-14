@@ -4,7 +4,7 @@
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('There is nothing assigned to you.') ?></p>
 <?php else: ?>
-    <table class="table-small">
+    <table class="table-striped table-small table-scrolling">
         <tr>
             <th class="column-5"><?= $paginator->order('Id', \Kanboard\Model\TaskModel::TABLE.'.id') ?></th>
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>

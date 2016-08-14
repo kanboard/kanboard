@@ -1,5 +1,5 @@
 <div class="tooltip-large">
-    <table>
+    <table class="table-small">
         <tr>
             <th class="column-20"><?= t('Type') ?></th>
             <th class="column-70"><?= t('Title') ?></th>

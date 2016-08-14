@@ -1,5 +1,5 @@
 <div class="tooltip-large">
-    <table>
+    <table class="table-small">
         <?php foreach ($files as $file): ?>
         <tr>
             <th>

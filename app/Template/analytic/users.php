@@ -9,7 +9,7 @@
 
     <div id="chart" data-metrics='<?= json_encode($metrics, JSON_HEX_APOS) ?>'></div>
 
-    <table>
+    <table class="table-striped">
         <tr>
             <th><?= t('User') ?></th>
             <th><?= t('Number of tasks') ?></th>

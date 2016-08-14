@@ -12,7 +12,7 @@
 <?php if (empty($transitions)): ?>
     <p class="alert"><?= t('There is nothing to show.') ?></p>
 <?php else: ?>
-    <table class="table-stripped">
+    <table class="table-striped table-scrolling">
         <tr>
             <th><?= t('Date') ?></th>
             <th><?= t('Source column') ?></th>

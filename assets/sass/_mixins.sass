@@ -37,3 +37,8 @@
     @content
   &:-ms-input-placeholder
     @content
+
+@mixin col-x($n)
+  @for $i from 1 through $n
+    .column-#{$i}
+      width: $i * 1%

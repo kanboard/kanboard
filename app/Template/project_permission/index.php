@@ -9,7 +9,7 @@
     <?php if (empty($users)): ?>
         <div class="alert"><?= t('No user have been allowed specifically.') ?></div>
     <?php else: ?>
-        <table>
+        <table class="table-scrolling">
             <tr>
                 <th class="column-50"><?= t('User') ?></th>
                 <th><?= t('Role') ?></th>
@@ -69,7 +69,7 @@
     <?php if (empty($groups)): ?>
         <div class="alert"><?= t('No group have been allowed specifically.') ?></div>
     <?php else: ?>
-        <table>
+        <table class="table-scrolling">
             <tr>
                 <th class="column-50"><?= t('Group') ?></th>
                 <th><?= t('Role') ?></th>

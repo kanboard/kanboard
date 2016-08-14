@@ -1,4 +1,4 @@
-<table class="table-fixed table-small">
+<table class="table-small table-scrolling">
     <tr>
         <th class="column-8"><?= $paginator->order(t('Project'), 'tasks.project_id') ?></th>
         <th class="column-5"><?= $paginator->order(t('Id'), 'tasks.id') ?></th>

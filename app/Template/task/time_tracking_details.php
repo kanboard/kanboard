@@ -11,7 +11,7 @@
 <?php if ($subtask_paginator->isEmpty()): ?>
     <p class="alert"><?= t('There is nothing to show.') ?></p>
 <?php else: ?>
-    <table class="table-fixed">
+    <table class="table-fixed table-scrolling">
         <tr>
             <th class="column-15"><?= $subtask_paginator->order(t('User'), 'username') ?></th>
             <th><?= $subtask_paginator->order(t('Subtask'), 'subtask_title') ?></th>

@@ -13,7 +13,7 @@
     </ul>
 </div>
 
-    <table class="table-fixed table-small">
+    <table class="table-striped table-scrolling table-small">
         <tr>
             <th><?= t('Notification') ?></th>
             <th class="column-20"><?= t('Date') ?></th>
