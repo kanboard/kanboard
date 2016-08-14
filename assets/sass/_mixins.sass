@@ -42,3 +42,27 @@
   @for $i from 1 through $n
     .column-#{$i}
       width: $i * 1%
+
+=appearance
+  -webkit-appearance: none
+  -moz-appearance: none
+
+=display-flex
+  display: -webkit-flex
+  display: flex
+
+=flex-direction($direction)
+  -webkit-flex-direction: $direction
+  flex-direction: $direction
+
+=flex-wrap
+  -webkit-flex-wrap: wrap
+  flex-wrap: wrap
+
+=align-content($position)
+  -webkit-align-items: $position
+  align-items: $position
+
+=justify-content($position)
+  -webkit-justify-content: $position
+  justify-content: $position

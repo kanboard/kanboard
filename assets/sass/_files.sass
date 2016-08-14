@@ -1,14 +1,11 @@
 @import variables
+@import mixins
 
 .file-thumbnails
-  display: -webkit-flex
-  display: flex
-  -webkit-flex-direction: row
-  flex-direction: row
-  -webkit-flex-wrap: wrap
-  flex-wrap: wrap
-  -webkit-justify-content: flex-start
-  justify-content: flex-start
+  +display-flex
+  +flex-direction(row)
+  +flex-wrap
+  +justify-content(flex-start)
 
 .file-thumbnail
   width: 250px
@@ -29,11 +26,11 @@
 
 .file-thumbnail-title
   font-weight: 700
-  font-size: 0.9em
+  font-size: size('compact')
   color: color('medium')
 
 .file-thumbnail-description
-  font-size: 0.8em
+  font-size: size('small')
   color: color('light')
   margin-top: 8px
   margin-bottom: 5px
