@@ -1,39 +1,22 @@
 @import variables
 
 .sidebar-container
-  margin-top: 10px
-  height: 100%
-  width: 100%
-  display: -ms-flexbox
-  display: -webkit-box
-  display: -moz-box
-  display: -ms-box
-  display: box
-  -ms-flex-direction: row
-  -webkit-box-orient: horizontal
-  -moz-box-orient: horizontal
-  -ms-box-orient: horizontal
-  box-orient: horizontal
+  @include grid(100)
 
 .sidebar-content
   padding-left: 10px
-  -ms-flex: 1
-  -webkit-box-flex: 1
-  -moz-box-flex: 1
-  -ms-box-flex: 1
-  box-flex: 1
+  @include grid_width(80/100)
+  @include xs-device
+    @include grid_width(1)
 
 .sidebar
-  padding-right: 10px
-  border-right: 1px dotted #eee
   max-width: 240px
   min-width: 190px
-  width: 18%
-  -ms-flex: 0 100px
-  -webkit-box-flex: 0
-  -moz-box-flex: 0
-  -ms-box-flex: 0
-  box-flex: 0
+  @include grid_width(18/100)
+  @include xs-device
+    @include grid_width(1)
+    max-width: 99%
+    min-width: 0
   h2
     margin-top: 0
   > ul
