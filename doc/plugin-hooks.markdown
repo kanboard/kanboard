@@ -105,7 +105,7 @@ class Plugin extends Base
 {
     public function initialize()
     {
-        $this->hook->on('template:layout:css', 'plugins/Css/skin.css');
+        $this->hook->on('template:layout:css', array('template' => 'plugins/Css/skin.css'));
     }
 }
 ```
