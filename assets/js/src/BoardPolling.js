@@ -16,19 +16,23 @@ Kanboard.BoardPolling.prototype.check = function() {
         var self = this;
         this.app.showLoadingIcon();
         // Poll every board
+        var pollsinprogress=0;
         $("table.board-project").each(function() {
           var boardid = $(this).attr("data-project-id");
           var url = $(this).attr("data-check-url");
+          pollsinprogress++;
             $.ajax({
                 cache: false,
                 url: url,
                 statusCode: {
                     200: function(data) {
                         self.app.get("BoardDragAndDrop").refresh(boardid,data);
+                        pollsinprogress--;
+                        if (pollsinprogress <= 0) self.app.hideLoadingIcon();
                     },
                     304: function () {
-                        // TODO: Hide loading Icon after all boards have been checked.
-                        self.app.hideLoadingIcon();
+                        pollsinprogress--;
+                        if (pollsinprogress <= 0) self.app.hideLoadingIcon();
                     }
                 }
             });
