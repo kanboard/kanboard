@@ -17,6 +17,7 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
 
     // Run for every Board List, connecting the Items within the same project id
     dropzone.each(function() {
+        // Set dropzone height to the height of the table cell
         $(this).css("min-height", $(this).parent().height());
         var project_id = $(this).closest("table.board-project").attr("data-project-id");
         var params = {
