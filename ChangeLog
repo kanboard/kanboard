@@ -1,3 +1,22 @@
+Version 1.0.33 (unreleased)
+--------------
+
+New features:
+
+* New API calls for task metadata
+
+Improvements:
+
+* Allow priority changes for inverted priority scales
+* Add the possibility to attach template hooks with local variables and callback
+* Add "reference" hooks
+* Show project name in task forms
+* Convert vanilla CSS to SASS
+
+Bug fixes:
+
+* Fix PHP notice when sending overdue notifications
+
 Version 1.0.32
 --------------
 

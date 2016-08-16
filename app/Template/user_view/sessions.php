@@ -5,7 +5,7 @@
 <?php if (empty($sessions)): ?>
     <p class="alert"><?= t('No session.') ?></p>
 <?php else: ?>
-    <table class="table-small table-fixed">
+    <table class="table-small table-fixed table-scrolling table-striped">
     <tr>
         <th class="column-20"><?= t('Creation date') ?></th>
         <th class="column-20"><?= t('Expiration date') ?></th>

@@ -2,54 +2,9 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var bower = require('gulp-bower');
 var uglify = require('gulp-uglify');
-var cleanCSS = require('gulp-clean-css');
+var sass = require('gulp-sass');
 
 var src = {
-    css: [
-        'assets/css/src/base.css',
-        'assets/css/src/links.css',
-        'assets/css/src/title.css',
-        'assets/css/src/table.css',
-        'assets/css/src/form.css',
-        'assets/css/src/button.css',
-        'assets/css/src/alert.css',
-        'assets/css/src/tooltip.css',
-        'assets/css/src/header.css',
-        'assets/css/src/board.css',
-        'assets/css/src/task.css',
-        'assets/css/src/comment.css',
-        'assets/css/src/subtask.css',
-        'assets/css/src/tasklink.css',
-        'assets/css/src/markdown.css',
-        'assets/css/src/listing.css',
-        'assets/css/src/activity.css',
-        'assets/css/src/dashboard.css',
-        'assets/css/src/pagination.css',
-        'assets/css/src/popover.css',
-        'assets/css/src/confirm.css',
-        'assets/css/src/sidebar.css',
-        'assets/css/src/responsive.css',
-        'assets/css/src/dropdown.css',
-        'assets/css/src/upload.css',
-        'assets/css/src/filters.css',
-        'assets/css/src/gantt.css',
-        'assets/css/src/project.css',
-        'assets/css/src/files.css',
-        'assets/css/src/views.css',
-        'assets/css/src/accordion.css',
-        'assets/css/src/avatar.css'
-    ],
-    print: [
-        'assets/css/src/print.css',
-        'assets/css/src/links.css',
-        'assets/css/src/table.css',
-        'assets/css/src/board.css',
-        'assets/css/src/task.css',
-        'assets/css/src/comment.css',
-        'assets/css/src/subtask.css',
-        'assets/css/src/tasklink.css',
-        'assets/css/src/markdown.css'
-    ],
     js: [
         'assets/js/src/Namespace.js',
         'assets/js/src/!(Namespace|Bootstrap|BoardDragAndDrop)*.js',
@@ -139,17 +94,10 @@ gulp.task('js', function() {
 });
 
 gulp.task('css', function() {
-    gulp.src(src.css)
+    gulp.src('assets/sass/*.sass')
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(concat('app.min.css'))
-        .pipe(cleanCSS())
-        .pipe(gulp.dest(dist.css))
-    ;
-
-    gulp.src(src.print)
-        .pipe(concat('print.min.css'))
-        .pipe(cleanCSS())
-        .pipe(gulp.dest(dist.css))
-    ;
+        .pipe(gulp.dest(dist.css));
 });
 
 gulp.task('default', ['bower', 'vendor', 'js', 'css']);

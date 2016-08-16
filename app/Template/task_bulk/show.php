@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= t('Create tasks in bulk') ?></h2>
+    <h2><?= $this->text->e($project['name']) ?> &gt; <?= t('Create tasks in bulk') ?></h2>
 </div>
 
 <form class="popover-form" method="post" action="<?= $this->url->href('TaskBulkController', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">

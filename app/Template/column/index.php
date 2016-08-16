@@ -12,7 +12,7 @@
     <p class="alert alert-error"><?= t('Your board doesn\'t have any columns!') ?></p>
 <?php else: ?>
     <table
-        class="columns-table table-stripped"
+        class="columns-table table-striped"
         data-save-position-url="<?= $this->url->href('ColumnController', 'move', array('project_id' => $project['id'])) ?>">
         <thead>
         <tr>

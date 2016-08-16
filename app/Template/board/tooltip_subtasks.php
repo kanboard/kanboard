@@ -1,5 +1,5 @@
 <div class="tooltip-large">
-    <table>
+    <table class="table-small">
         <tr>
             <th class="column-80"><?= t('Subtask') ?></th>
             <th><?= t('Assignee') ?></th>

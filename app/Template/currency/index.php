@@ -4,7 +4,7 @@
 
 <?php if (! empty($rates)): ?>
 
-<table class="table-stripped">
+<table class="table-striped">
     <tr>
         <th class="column-35"><?= t('Currency') ?></th>
         <th><?= t('Rate') ?></th>

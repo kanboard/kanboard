@@ -5,7 +5,7 @@
 <?php if (empty($tokens)): ?>
     <p class="alert"><?= t('The password has never been reinitialized.') ?></p>
 <?php else: ?>
-    <table class="table-small table-fixed">
+    <table class="table-small table-fixed table-scrolling table-striped">
     <tr>
         <th class="column-20"><?= t('Creation') ?></th>
         <th class="column-20"><?= t('Expiration') ?></th>

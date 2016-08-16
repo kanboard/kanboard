@@ -1,0 +1,87 @@
+@import variables
+
+div
+  &.ganttview-hzheader-month, &.ganttview-hzheader-day, &.ganttview-vtheader, &.ganttview-vtheader-item-name, &.ganttview-vtheader-series, &.ganttview-grid, &.ganttview-grid-row-cell
+    float: left
+  &.ganttview-hzheader-month, &.ganttview-hzheader-day
+    text-align: center
+  &.ganttview-grid-row-cell.last, &.ganttview-hzheader-day.last, &.ganttview-hzheader-month.last
+    border-right: none
+  &.ganttview
+    border: 1px solid #999
+  &.ganttview-hzheader-month
+    width: 60px
+    height: 20px
+    border-right: 1px solid #d0d0d0
+    line-height: 20px
+    overflow: hidden
+  &.ganttview-hzheader-day
+    width: 20px
+    height: 20px
+    border-right: 1px solid #f0f0f0
+    border-top: 1px solid #d0d0d0
+    line-height: 20px
+    color: color('medium')
+  &.ganttview-vtheader
+    margin-top: 41px
+    width: 400px
+    overflow: hidden
+    background-color: #fff
+  &.ganttview-vtheader-item
+    color: color('medium')
+  &.ganttview-vtheader-series-name
+    width: 400px
+    height: 31px
+    line-height: 31px
+    padding-left: 3px
+    border-top: 1px solid #d0d0d0
+    text-overflow: ellipsis
+    overflow: hidden
+    white-space: nowrap
+    a
+      color: color('medium')
+      text-decoration: none
+      &:hover
+        color: color('primary')
+        text-decoration: underline
+      i
+        color: color('dark')
+      &:hover i
+        color: color('medium')
+  &.ganttview-slide-container
+    overflow: auto
+    border-left: 1px solid #999
+  &.ganttview-grid-row-cell
+    width: 20px
+    height: 31px
+    border-right: 1px solid #f0f0f0
+    border-top: 1px solid #f0f0f0
+    &.ganttview-weekend
+      background-color: #fafafa
+  &.ganttview-blocks
+    margin-top: 40px
+  &.ganttview-block-container
+    height: 28px
+    padding-top: 4px
+  &.ganttview-block
+    position: relative
+    height: 25px
+    background-color: #E5ECF9
+    border: 1px solid #c0c0c0
+    border-radius: 3px
+
+.ganttview-block-movable
+  cursor: move
+
+div
+  &.ganttview-block-not-defined
+    border-color: #000
+    background-color: #000
+  &.ganttview-block-text
+    position: absolute
+    height: 12px
+    font-size: size('tiny')
+    color: color('light')
+    padding: 2px 3px
+  &.ganttview-block div.ui-resizable-handle.ui-resizable-s
+    bottom: -0

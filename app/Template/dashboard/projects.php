@@ -4,7 +4,7 @@
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('Your are not member of any project.') ?></p>
 <?php else: ?>
-    <table class="table-fixed table-small">
+    <table class="table-striped table-small table-scrolling">
         <tr>
             <th class="column-5"><?= $paginator->order('Id', \Kanboard\Model\ProjectModel::TABLE.'.id') ?></th>
             <th class="column-3"><?= $paginator->order('<i class="fa fa-lock fa-fw" title="'.t('Private project').'"></i>', \Kanboard\Model\ProjectModel::TABLE.'.is_private') ?></th>
@@ -43,7 +43,7 @@
             <td class="dashboard-project-stats">
                 <?php foreach ($project['columns'] as $column): ?>
                     <strong title="<?= t('Task count') ?>"><?= $column['nb_tasks'] ?></strong>
-                    <span><?= $this->text->e($column['title']) ?></span>
+                    <small><?= $this->text->e($column['title']) ?></small>
                 <?php endforeach ?>
             </td>
 

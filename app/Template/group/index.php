@@ -8,7 +8,7 @@
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('There is no group.') ?></p>
     <?php else: ?>
-        <table class="table-small table-fixed">
+        <table class="table-small table-fixed table-scrolling">
             <tr>
                 <th class="column-5"><?= $paginator->order(t('Id'), 'id') ?></th>
                 <th class="column-20"><?= $paginator->order(t('External Id'), 'external_id') ?></th>

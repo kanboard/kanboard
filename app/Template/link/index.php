@@ -2,7 +2,7 @@
     <h2><?= t('Link labels') ?></h2>
 </div>
 <?php if (! empty($links)): ?>
-<table>
+<table class="table-striped table-scrolling">
     <tr>
         <th class="column-70"><?= t('Link labels') ?></th>
         <th><?= t('Actions') ?></th>

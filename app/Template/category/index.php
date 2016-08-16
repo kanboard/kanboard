@@ -2,7 +2,7 @@
 <div class="page-header">
     <h2><?= t('Categories') ?></h2>
 </div>
-<table>
+<table class="table-striped">
     <tr>
         <th><?= t('Category Name') ?></th>
         <th class="column-8"><?= t('Actions') ?></th>

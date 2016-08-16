@@ -21,6 +21,6 @@
         <li <?= $this->app->checkMenuSelection('DashboardController', 'notifications') ?>>
             <?= $this->url->link(t('My notifications'), 'DashboardController', 'notifications', array('user_id' => $user['id'])) ?>
         </li>
-        <?= $this->hook->render('template:dashboard:sidebar') ?>
+        <?= $this->hook->render('template:dashboard:sidebar', array('user' => $user)) ?>
     </ul>
 </div>
