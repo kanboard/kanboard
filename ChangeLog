@@ -13,6 +13,10 @@ Improvements:
 * Show project name in task forms
 * Convert vanilla CSS to SASS
 
+Bug fixes:
+
+* Fix PHP notice when sending overdue notifications
+
 Version 1.0.32
 --------------
 
