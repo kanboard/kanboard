@@ -1,42 +1,45 @@
-Calendar settings
+Configuración de calendarios
 =================
 
-Go to the menu **Settings**, then choose **Calendar settings** on the left.
+Ir al menu de configuraciones, despues elegir cofiguracion de calendarios que se encuentra al lado izquierdo 
 
-![Calendar settings](https://kanboard.net/screenshots/documentation/calendar-settings.png)
+![Configuración de calendarios](https://kanboard.net/screenshots/documentation/calendar-settings.png)
 
-There are two different calendars in Kanboard:
+Existe dos diferentes calendarios en kanboard :
 
-- Project calendar
-- User calendar (available from the dashboard)
+- Calendarios de projectos
+- Calendario por usuario (disponible desde el dashboard)
 
-Project calendar
+Calendario por projectos
 ----------------
 
-This calendar shows tasks with defined due date and tasks based on the creation date or the start date.
+Este calendario visualiza las tareas que se le asignan fechas de vencimiento y las tareas estan basadas sobre 
+la fecha de creación o el inicio de fecha
 
-### Show tasks based on the creation date
+### Visualizar tareas basadas en la fecha de creacion
 
-- The start date of the calendar event is the creation date of the task.
-- The end date of the event is the date of completion.
+- El inicio de fecha del evento del calendario es la fecha de creacion de la tarea 
+- El finalización de fecha del evento es cuendo se completa una tarea
 
-### Show tasks based on the start date
+### Visualizar tareas basadas en las fechas de inicio
 
-- The start date of the calendar event is the start date of the task.
-- This date can be defined manually.
-- The end date of the event is the date of completion.
-- If there is no start date the task will not appear on the calendar.
+- La fecha de inicio del evento del calendario is la fecha de incio de la tarea
+- Esta fecha puede ser definida manualmente.
+- La fecha de finalización del evento es la fecha de terminación
+- Si no hay una fecha de inicio de la tarea no aparece en el calendario.
 
-User calendar
+Calendarios por usuarios
 -------------
 
-This calendar shows only tasks assigned to the user and optionally sub-tasks information.
+Este calendario visualiza solo las tareas asignadas para el usuario y opcionalmente la información de las subtareas
 
-### Show sub-tasks based on the time tracking
+### 
+Visualizar subtareas basadas en el tiempo de tracking
 
-- Display sub-tasks in the calendar from the information recorded in the time tracking table.
-- The intersection with the user timetable is also calculated.
+- Despliega la información de las subtareas desde el calendario o en el registro de la tabla de seguimiento de tiempo
+- La intersección con los usuarios timetable es calculad
 
-### Show sub-task estimates (forecast of future work)
+### Las estimaciones muestran las subtareas ( la previsión de los trabajos futuros )
 
-- Display the estimate of future work for sub-tasks in status "todo" and with a defined "estimate" value.
+- 
+Mostrar la estimación de los trabajos futuros de las subtareas en estado de "todo" y con un valor definido " estimación " . 
