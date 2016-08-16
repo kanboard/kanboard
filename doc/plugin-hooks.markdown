@@ -218,8 +218,8 @@ List of template hooks:
 | `template:project:integrations`            | Integration page in projects settings              |
 | `template:project:sidebar`                 | Sidebar in project settings                        |
 | `template:project-user:sidebar`            | Sidebar on project user overview page              |
-| `template:projectlist:menubefore`          | Projectlist: before menu entries                   |
-| `template:projectlist:menuafter`           | Projectlist: after menu entries                    |
+| `template:project-list:menu:before`        | Project list: before menu entries                  |
+| `template:project-list:menu:after`         | Project list: after menu entries                   |
 | `template:task:layout:top`                 | Task layout top (after page header)                |
 | `template:task:details:top`                | Task summary top                                   |
 | `template:task:details:bottom`             | Task summary bottom                                |
