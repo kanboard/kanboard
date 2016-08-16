@@ -5,7 +5,7 @@ namespace Kanboard\Action;
 /**
  * Create automatically a comment from a webhook
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class CommentCreation extends Base

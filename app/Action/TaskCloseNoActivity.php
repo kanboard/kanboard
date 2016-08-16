@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Close automatically a task after when inactive
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskCloseNoActivity extends Base

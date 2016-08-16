@@ -116,7 +116,7 @@ class User
      */
     protected function getRole(array $groupIds)
     {
-        if ($this->hasGroupsNotConfigured()) {
+        if (! $this->hasGroupsConfigured()) {
             return null;
         }
 
@@ -278,14 +278,14 @@ class User
     }
 
     /**
-     * Return true if LDAP Group mapping is not configured
+     * Return true if LDAP Group mapping are configured
      *
      * @access public
      * @return boolean
      */
-    public function hasGroupsNotConfigured()
+    public function hasGroupsConfigured()
     {
-        return !$this->getGroupAdminDn() && !$this->getGroupManagerDn();
+        return $this->getGroupAdminDn() || $this->getGroupManagerDn();
     }
 
     /**

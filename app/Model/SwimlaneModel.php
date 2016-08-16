@@ -94,15 +94,17 @@ class SwimlaneModel extends Base
      *
      * @access public
      * @param  integer $project_id
-     * @return array
+     * @return array|null
      */
     public function getFirstActiveSwimlane($project_id)
     {
-        return $this->db->table(self::TABLE)
-            ->eq('is_active', self::ACTIVE)
-            ->eq('project_id', $project_id)
-            ->orderBy('position', 'asc')
-            ->findOne();
+        $swimlanes = $this->getSwimlanes($project_id);
+
+        if (empty($swimlanes)) {
+            return null;
+        }
+
+        return $swimlanes[0];
     }
 
     /**
@@ -184,18 +186,18 @@ class SwimlaneModel extends Base
             ->orderBy('position', 'asc')
             ->findAll();
 
-        $default_swimlane = $this->db
+        $defaultSwimlane = $this->db
             ->table(ProjectModel::TABLE)
             ->eq('id', $project_id)
             ->eq('show_default_swimlane', 1)
             ->findOneColumn('default_swimlane');
 
-        if ($default_swimlane) {
-            if ($default_swimlane === 'Default swimlane') {
-                $default_swimlane = t($default_swimlane);
+        if ($defaultSwimlane) {
+            if ($defaultSwimlane === 'Default swimlane') {
+                $defaultSwimlane = t($defaultSwimlane);
             }
 
-            array_unshift($swimlanes, array('id' => 0, 'name' => $default_swimlane));
+            array_unshift($swimlanes, array('id' => 0, 'name' => $defaultSwimlane));
         }
 
         return $swimlanes;

@@ -152,6 +152,12 @@ Attribute: **comment**
 
 - Find comments that contains this title: `comment:"My comment message"`
 
+### Search by tags
+
+Attribute: **tag**
+
+- Example: `tag:"My tag"`
+
 Activity stream search
 ----------------------
 

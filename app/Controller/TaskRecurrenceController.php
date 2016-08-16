@@ -31,10 +31,10 @@ class TaskRecurrenceController extends BaseController
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
-            'recurrence_status_list' => $this->taskModel->getRecurrenceStatusList(),
-            'recurrence_trigger_list' => $this->taskModel->getRecurrenceTriggerList(),
-            'recurrence_timeframe_list' => $this->taskModel->getRecurrenceTimeframeList(),
-            'recurrence_basedate_list' => $this->taskModel->getRecurrenceBasedateList(),
+            'recurrence_status_list' => $this->taskRecurrenceModel->getRecurrenceStatusList(),
+            'recurrence_trigger_list' => $this->taskRecurrenceModel->getRecurrenceTriggerList(),
+            'recurrence_timeframe_list' => $this->taskRecurrenceModel->getRecurrenceTimeframeList(),
+            'recurrence_basedate_list' => $this->taskRecurrenceModel->getRecurrenceBasedateList(),
         )));
     }
 

@@ -139,4 +139,20 @@ class ActionManager extends Base
 
         return $this;
     }
+
+    /**
+     * Remove all listeners for automated actions
+     *
+     * @access public
+     */
+    public function removeEvents()
+    {
+        foreach ($this->dispatcher->getListeners() as $eventName => $listeners) {
+            foreach ($listeners as $listener) {
+                if (is_array($listener) && $listener[0] instanceof ActionBase) {
+                    $this->dispatcher->removeListener($eventName, $listener);
+                }
+            }
+        }
+    }
 }

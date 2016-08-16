@@ -12,7 +12,10 @@ PHP installation
     - [Microsoft IIS 7.0 and later](http://php.net/manual/en/install.windows.iis7.php)
     - [PHP for Windows is available here](http://windows.php.net/download/)
 
-Edit the `php.ini`, uncomment these PHP modules:
+
+### PHP.ini
+
+You need at least, these extensions in your `php.ini`:
 
 ```ini
 extension=php_gd2.dll
@@ -22,7 +25,9 @@ extension=php_openssl.dll
 extension=php_pdo_sqlite.dll
 ```
 
-Set the time zone:
+The complete list of required PHP extensions is available on the [requirements page](requirements.markdown)
+
+Do not forget to set the time zone:
 
 ```ini
 date.timezone = America/Montreal
@@ -30,26 +35,20 @@ date.timezone = America/Montreal
 
 The list of supported time zones can be found in the [PHP documentation](http://php.net/manual/en/timezones.america.php).
 
-Check if PHP runs correctly:
-
-Go the IIS document root `C:\inetpub\wwwroot` and create a file `phpinfo.php`:
-
-```php
-<?php
-
-phpinfo();
-
-?>
-```
-
-Open a browser at `http://localhost/phpinfo.php` and you should see the current PHP settings.
-If you got an error 500, something is not correctly done in your installation.
-
 Notes:
 
 - If you use PHP < 5.4, you have to enable the short tags in your php.ini
 - Don't forget to enable the required php extensions mentioned above
 - If you got an error about "the library MSVCP110.dll is missing", you probably need to download the Visual C++ Redistributable for Visual Studio from the Microsoft website.
+
+IIS Modules
+-----------
+
+The Kanboard archive contains a `web.config` file to enable [URL rewriting](nice-urls.markdown). 
+This configuration require the [Rewrite module for IIS](http://www.iis.net/learn/extensions/url-rewrite-module/using-the-url-rewrite-module).
+
+If you don't have the rewrite module, you will get an internal server error (500) from IIS.
+If you don't want to have Kanboard with nice URLs, you can remove the file `web.config`.
 
 Kanboard installation
 ---------------------
@@ -59,12 +58,7 @@ Kanboard installation
 - Make sure the directory `data` is writable by the IIS user
 - Open your web browser to use Kanboard http://localhost/kanboard/
 - The default credentials are **admin/admin**
-
-Tested configurations
----------------------
-
-- Windows 2008 R2 Standard Edition / IIS 7.5 / PHP 5.5.16
-- Windows 2012 Standard Edition / IIS 8.5 / PHP 5.3.29
+- [URL rewrite configuration](nice-urls.markdown)
 
 Notes
 -----

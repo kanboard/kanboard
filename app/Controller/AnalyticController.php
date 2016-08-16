@@ -33,7 +33,7 @@ class AnalyticController extends BaseController
             'metrics' => $this->projectDailyStatsModel->getRawMetrics($project['id'], $from, $to),
             'date_format' => $this->configModel->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
-            'title' => t('Lead and Cycle time for "%s"', $project['name']),
+            'title' => t('Lead and cycle time'),
         )));
     }
 
@@ -60,7 +60,7 @@ class AnalyticController extends BaseController
             'project' => $project,
             'paginator' => $paginator,
             'metrics' => $this->estimatedTimeComparisonAnalytic->build($project['id']),
-            'title' => t('Compare hours for "%s"', $project['name']),
+            'title' => t('Estimated vs actual time'),
         )));
     }
 
@@ -76,7 +76,7 @@ class AnalyticController extends BaseController
         $this->response->html($this->helper->layout->analytic('analytic/avg_time_columns', array(
             'project' => $project,
             'metrics' => $this->averageTimeSpentColumnAnalytic->build($project['id']),
-            'title' => t('Average time spent into each column for "%s"', $project['name']),
+            'title' => t('Average time into each column'),
         )));
     }
 
@@ -92,7 +92,7 @@ class AnalyticController extends BaseController
         $this->response->html($this->helper->layout->analytic('analytic/tasks', array(
             'project' => $project,
             'metrics' => $this->taskDistributionAnalytic->build($project['id']),
-            'title' => t('Task repartition for "%s"', $project['name']),
+            'title' => t('Task distribution'),
         )));
     }
 
@@ -108,7 +108,7 @@ class AnalyticController extends BaseController
         $this->response->html($this->helper->layout->analytic('analytic/users', array(
             'project' => $project,
             'metrics' => $this->userDistributionAnalytic->build($project['id']),
-            'title' => t('User repartition for "%s"', $project['name']),
+            'title' => t('User repartition'),
         )));
     }
 
@@ -119,7 +119,7 @@ class AnalyticController extends BaseController
      */
     public function cfd()
     {
-        $this->commonAggregateMetrics('analytic/cfd', 'total', 'Cumulative flow diagram for "%s"');
+        $this->commonAggregateMetrics('analytic/cfd', 'total', t('Cumulative flow diagram'));
     }
 
     /**
@@ -129,7 +129,7 @@ class AnalyticController extends BaseController
      */
     public function burndown()
     {
-        $this->commonAggregateMetrics('analytic/burndown', 'score', 'Burndown chart for "%s"');
+        $this->commonAggregateMetrics('analytic/burndown', 'score', t('Burndown chart'));
     }
 
     /**
@@ -157,7 +157,7 @@ class AnalyticController extends BaseController
             'project' => $project,
             'date_format' => $this->configModel->get('application_date_format'),
             'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
-            'title' => t($title, $project['name']),
+            'title' => $title,
         )));
     }
 

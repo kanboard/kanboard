@@ -6,6 +6,7 @@ use DateTime;
 use Eluceo\iCal\Component\Calendar;
 use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\Event\Attendees;
+use Eluceo\iCal\Property\Event\Organizer;
 use Kanboard\Core\Filter\FormatterInterface;
 
 /**
@@ -117,16 +118,24 @@ class TaskICalFormatter extends BaseTaskCalendarFormatter implements FormatterIn
         $vEvent->setModified($dateModif);
         $vEvent->setUseTimezone(true);
         $vEvent->setSummary(t('#%d', $task['id']).' '.$task['title']);
+        $vEvent->setDescription($task['description']);
+        $vEvent->setDescriptionHTML($this->helper->text->markdown($task['description']));
         $vEvent->setUrl($this->helper->url->base().$this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
 
         if (! empty($task['owner_id'])) {
-            $vEvent->setOrganizer($task['assignee_name'] ?: $task['assignee_username'], $task['assignee_email']);
+            $attendees = new Attendees;
+            $attendees->add(
+                'MAILTO:'.($task['assignee_email'] ?: $task['assignee_username'].'@kanboard.local'),
+                array('CN' => $task['assignee_name'] ?: $task['assignee_username'])
+            );
+            $vEvent->setAttendees($attendees);
         }
 
         if (! empty($task['creator_id'])) {
-            $attendees = new Attendees;
-            $attendees->add('MAILTO:'.($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'));
-            $vEvent->setAttendees($attendees);
+            $vEvent->setOrganizer(new Organizer(
+                'MAILTO:' . $task['creator_email'] ?: $task['creator_username'].'@kanboard.local',
+                array('CN' => $task['creator_name'] ?: $task['creator_username'])
+            ));
         }
 
         return $vEvent;

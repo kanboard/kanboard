@@ -21,11 +21,14 @@ use Kanboard\Filter\TaskDueDateFilter;
 use Kanboard\Filter\TaskIdFilter;
 use Kanboard\Filter\TaskLinkFilter;
 use Kanboard\Filter\TaskModificationDateFilter;
+use Kanboard\Filter\TaskMovedDateFilter;
+use Kanboard\Filter\TaskPriorityFilter;
 use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Filter\TaskReferenceFilter;
 use Kanboard\Filter\TaskStatusFilter;
 use Kanboard\Filter\TaskSubtaskAssigneeFilter;
 use Kanboard\Filter\TaskSwimlaneFilter;
+use Kanboard\Filter\TaskTagFilter;
 use Kanboard\Filter\TaskTitleFilter;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectGroupRoleModel;
@@ -136,6 +139,7 @@ class FilterProvider implements ServiceProviderInterface
                 ->withFilter(TaskColorFilter::getInstance()
                     ->setColorModel($c['colorModel'])
                 )
+                ->withFilter(new TaskPriorityFilter())
                 ->withFilter(new TaskColumnFilter())
                 ->withFilter(new TaskCommentFilter())
                 ->withFilter(TaskCreationDateFilter::getInstance()
@@ -155,6 +159,9 @@ class FilterProvider implements ServiceProviderInterface
                 ->withFilter(TaskModificationDateFilter::getInstance()
                     ->setDateParser($c['dateParser'])
                 )
+                ->withFilter(TaskMovedDateFilter::getInstance()
+                    ->setDateParser($c['dateParser'])
+                )
                 ->withFilter(new TaskProjectFilter())
                 ->withFilter(new TaskReferenceFilter())
                 ->withFilter(new TaskStatusFilter())
@@ -163,6 +170,9 @@ class FilterProvider implements ServiceProviderInterface
                     ->setDatabase($c['db'])
                 )
                 ->withFilter(new TaskSwimlaneFilter())
+                ->withFilter(TaskTagFilter::getInstance()
+                    ->setDatabase($c['db'])
+                )
                 ->withFilter(new TaskTitleFilter(), true)
             ;
 

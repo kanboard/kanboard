@@ -26,7 +26,7 @@ class SubtaskConverterController extends BaseController
         $project = $this->getProject();
         $subtask = $this->getSubtask();
 
-        $task_id = $this->subtaskModel->convertToTask($project['id'], $subtask['id']);
+        $task_id = $this->subtaskTaskConversionModel->convertToTask($project['id'], $subtask['id']);
 
         if ($task_id !== false) {
             $this->flash->success(t('Subtask converted to task successfully.'));

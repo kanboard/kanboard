@@ -152,6 +152,18 @@ class ProjectPermissionModel extends Base
     }
 
     /**
+     * Get all project ids by user
+     *
+     * @access public
+     * @param  integer $user_id
+     * @return array
+     */
+    public function getProjectIds($user_id)
+    {
+        return array_keys($this->projectUserRoleModel->getProjectsByUser($user_id));
+    }
+
+    /**
      * Copy permissions to another project
      *
      * @param  integer  $project_src_id  Project Template

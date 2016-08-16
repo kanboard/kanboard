@@ -5,7 +5,6 @@ namespace Kanboard\Model;
 use Exception;
 use Kanboard\Core\Base;
 use Kanboard\Core\Thumbnail;
-use Kanboard\Event\FileEvent;
 use Kanboard\Core\ObjectStorage\ObjectStorageException;
 
 /**
@@ -44,13 +43,13 @@ abstract class FileModel extends Base
     abstract protected function getPathPrefix();
 
     /**
-     * Get event name
+     * Fire file creation event
      *
      * @abstract
      * @access protected
-     * @return string
+     * @param  integer $file_id
      */
-    abstract protected function getEventName();
+    abstract protected function fireCreationEvent($file_id);
 
     /**
      * Get PicoDb query to get all files
@@ -130,16 +129,16 @@ abstract class FileModel extends Base
      * Create a file entry in the database
      *
      * @access public
-     * @param  integer  $id         Foreign key
-     * @param  string   $name       Filename
-     * @param  string   $path       Path on the disk
-     * @param  integer  $size       File size
+     * @param  integer $foreign_key_id Foreign key
+     * @param  string  $name           Filename
+     * @param  string  $path           Path on the disk
+     * @param  integer $size           File size
      * @return bool|integer
      */
-    public function create($id, $name, $path, $size)
+    public function create($foreign_key_id, $name, $path, $size)
     {
         $values = array(
-            $this->getForeignKey() => $id,
+            $this->getForeignKey() => $foreign_key_id,
             'name' => substr($name, 0, 255),
             'path' => $path,
             'is_image' => $this->isImage($name) ? 1 : 0,
@@ -152,8 +151,7 @@ abstract class FileModel extends Base
 
         if ($result) {
             $file_id = (int) $this->db->getLastId();
-            $event = new FileEvent($values + array('file_id' => $file_id));
-            $this->dispatcher->dispatch($this->getEventName(), $event);
+            $this->fireCreationEvent($file_id);
             return $file_id;
         }
 

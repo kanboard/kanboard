@@ -88,18 +88,25 @@ define('ENABLE_URL_REWRITE', true);
 Adapt the example above according to your own configuration.
 
 IIS configuration example
----------------------------
+-------------------------
 
-Create a web.config in you installation folder:
+1. Download and install the Rewrite module for IIS: [Download link](http://www.iis.net/learn/extensions/url-rewrite-module/using-the-url-rewrite-module)
+2. Create a web.config in you installation folder:
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <configuration>
     <system.webServer>
+        <defaultDocument>
+            <files>
+                <clear />
+                <add value="index.php" />
+            </files>
+        </defaultDocument>
         <rewrite>
             <rules>
-                <rule name="Imported Rule 1" stopProcessing="true">
-                    <match url="^" ignoreCase="false" />
+                <rule name="Kanboard URL Rewrite" stopProcessing="true">
+                    <match url="^(.*)$" ignoreCase="false" />
                     <conditions logicalGrouping="MatchAll">
                         <add input="{REQUEST_FILENAME}" matchType="IsFile" ignoreCase="false" negate="true" />
                     </conditions>
@@ -109,7 +116,6 @@ Create a web.config in you installation folder:
         </rewrite>
     </system.webServer>
 </configuration>
-
 ```
 
 In your Kanboard `config.php`:

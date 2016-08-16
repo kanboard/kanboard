@@ -31,22 +31,23 @@ class ExportController extends BaseController
             $data = $this->$model->$method($project['id'], $from, $to);
             $this->response->withFileDownload($filename.'.csv');
             $this->response->csv($data);
-        }
+        } else {
 
-        $this->response->html($this->helper->layout->project('export/'.$action, array(
-            'values' => array(
-                'controller' => 'ExportController',
-                'action' => $action,
-                'project_id' => $project['id'],
-                'from' => $from,
-                'to' => $to,
-            ),
-            'errors' => array(),
-            'date_format' => $this->configModel->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
-            'project' => $project,
-            'title' => $page_title,
-        ), 'export/sidebar'));
+            $this->response->html($this->helper->layout->project('export/'.$action, array(
+                'values' => array(
+                    'controller' => 'ExportController',
+                    'action' => $action,
+                    'project_id' => $project['id'],
+                    'from' => $from,
+                    'to' => $to,
+                ),
+                'errors' => array(),
+                'date_format' => $this->configModel->get('application_date_format'),
+                'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
+                'project' => $project,
+                'title' => $page_title,
+            ), 'export/sidebar'));
+        }
     }
 
     /**
@@ -76,7 +77,7 @@ class ExportController extends BaseController
      */
     public function summary()
     {
-        $this->common('projectDailyColumnStats', 'getAggregatedMetrics', t('Summary'), 'summary', t('Daily project summary export'));
+        $this->common('projectDailyColumnStatsModel', 'getAggregatedMetrics', t('Summary'), 'summary', t('Daily project summary export'));
     }
 
     /**

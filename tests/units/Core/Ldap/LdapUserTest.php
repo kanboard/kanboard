@@ -845,4 +845,64 @@ class LdapUserTest extends Base
 
         $this->assertTrue($this->user->hasGroupUserFilter());
     }
+
+    public function testHasGroupsConfigured()
+    {
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupAdminDn')
+            ->will($this->returnValue('something'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupManagerDn')
+            ->will($this->returnValue('something'));
+
+        $this->assertTrue($this->user->hasGroupsConfigured());
+    }
+
+    public function testHasGroupAdminDnConfigured()
+    {
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupAdminDn')
+            ->will($this->returnValue('something'));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupManagerDn')
+            ->will($this->returnValue(''));
+
+        $this->assertTrue($this->user->hasGroupsConfigured());
+    }
+
+    public function testHasGroupManagerDnConfigured()
+    {
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupAdminDn')
+            ->will($this->returnValue(''));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupManagerDn')
+            ->will($this->returnValue('something'));
+
+        $this->assertTrue($this->user->hasGroupsConfigured());
+    }
+
+    public function testHasGroupsNotConfigured()
+    {
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupAdminDn')
+            ->will($this->returnValue(''));
+
+        $this->user
+            ->expects($this->any())
+            ->method('getGroupManagerDn')
+            ->will($this->returnValue(''));
+
+        $this->assertFalse($this->user->hasGroupsConfigured());
+    }
 }

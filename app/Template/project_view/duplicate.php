@@ -11,14 +11,15 @@
         <?= $this->form->csrf() ?>
 
         <?php if ($project['is_private'] == 0): ?>
-            <?= $this->form->checkbox('projectPermission', t('Permissions'), 1, true) ?>
+            <?= $this->form->checkbox('projectPermissionModel', t('Permissions'), 1, true) ?>
         <?php endif ?>
 
         <?= $this->form->checkbox('categoryModel', t('Categories'), 1, true) ?>
+        <?= $this->form->checkbox('tagDuplicationModel', t('Tags'), 1, true) ?>
         <?= $this->form->checkbox('actionModel', t('Actions'), 1, true) ?>
         <?= $this->form->checkbox('swimlaneModel', t('Swimlanes'), 1, false) ?>
-        <?= $this->form->checkbox('taskModel', t('Tasks'), 1, false) ?>
         <?= $this->form->checkbox('projectMetadataModel', t('Metadata'), 1, false) ?>
+        <?= $this->form->checkbox('projectTaskDuplicationModel', t('Tasks'), 1, false) ?>
 
         <div class="form-actions">
             <button type="submit" class="btn btn-red"><?= t('Duplicate') ?></button>

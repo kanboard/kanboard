@@ -160,6 +160,28 @@ class SubtaskTimeTrackingModel extends Base
     }
 
     /**
+     * Start or stop timer according to subtask status
+     *
+     * @access public
+     * @param  integer $subtask_id
+     * @param  integer $user_id
+     * @param  integer $status
+     * @return boolean
+     */
+    public function toggleTimer($subtask_id, $user_id, $status)
+    {
+        if ($this->configModel->get('subtask_time_tracking') == 1) {
+            if ($status == SubtaskModel::STATUS_INPROGRESS) {
+                return $this->subtaskTimeTrackingModel->logStartTime($subtask_id, $user_id);
+            } elseif ($status == SubtaskModel::STATUS_DONE) {
+                return $this->subtaskTimeTrackingModel->logEndTime($subtask_id, $user_id);
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Log start time
      *
      * @access public
@@ -252,7 +274,6 @@ class SubtaskTimeTrackingModel extends Base
     {
         $subtask = $this->subtaskModel->getById($subtask_id);
 
-        // Fire the event subtask.update
         return $this->subtaskModel->update(array(
             'id' => $subtask['id'],
             'time_spent' => $subtask['time_spent'] + $time_spent,

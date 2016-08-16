@@ -246,19 +246,6 @@ class ProjectModel extends Base
     }
 
     /**
-     * Get Priority range from a project
-     *
-     * @access public
-     * @param  array $project
-     * @return array
-     */
-    public function getPriorities(array $project)
-    {
-        $range = range($project['priority_start'], $project['priority_end']);
-        return array_combine($range, $range);
-    }
-
-    /**
      * Gather some task metrics for a given project
      *
      * @access public
@@ -331,7 +318,7 @@ class ProjectModel extends Base
     public function getQueryColumnStats(array $project_ids)
     {
         if (empty($project_ids)) {
-            return $this->db->table(ProjectModel::TABLE)->limit(0);
+            return $this->db->table(ProjectModel::TABLE)->eq(ProjectModel::TABLE.'.id', 0);
         }
 
         return $this->db

@@ -30,7 +30,11 @@ class BoardViewController extends BaseController
 
         $this->response->html($this->helper->layout->app('board/view_public', array(
             'project' => $project,
-            'swimlanes' => $this->boardModel->getBoard($project['id']),
+            'swimlanes' => BoardFormatter::getInstance($this->container)
+                ->withProjectId($project['id'])
+                ->withQuery($this->taskFinderModel->getExtendedQuery())
+                ->format()
+            ,
             'title' => $project['name'],
             'description' => $project['description'],
             'no_layout' => true,
@@ -59,7 +63,7 @@ class BoardViewController extends BaseController
             'board_highlight_period' => $this->configModel->get('board_highlight_period'),
             'swimlanes' => $this->taskLexer
                 ->build($search)
-                ->format(BoardFormatter::getInstance($this->container)->setProjectId($project['id']))
+                ->format(BoardFormatter::getInstance($this->container)->withProjectId($project['id']))
         )));
     }
 }

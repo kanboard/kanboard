@@ -9,7 +9,7 @@ static:
 archive:
 	@ echo "Build archive: version=${version}, destination=${dst}"
 	@ rm -rf ${BUILD_DIR}/kanboard ${BUILD_DIR}/kanboard-*.zip
-	@ cd ${BUILD_DIR} && git clone --depth 1 -q https://github.com/fguillot/kanboard.git
+	@ cd ${BUILD_DIR} && git clone --depth 1 -q https://github.com/kanboard/kanboard.git
 	@ cd ${BUILD_DIR}/kanboard && composer --prefer-dist --no-dev --optimize-autoloader --quiet install
 	@ rm -rf ${BUILD_DIR}/kanboard/data/*.sqlite
 	@ rm -rf ${BUILD_DIR}/kanboard/data/*.log
@@ -26,7 +26,8 @@ archive:
 	@ rm -rf ${BUILD_DIR}/kanboard/*.lock
 	@ rm -rf ${BUILD_DIR}/kanboard/*.json
 	@ rm -rf ${BUILD_DIR}/kanboard/*.js
-	@ rm -rf ${BUILD_DIR}/kanboard/.docker
+	@ rm -rf ${BUILD_DIR}/kanboard/.dockerignore
+	@ rm -rf ${BUILD_DIR}/kanboard/docker
 	@ rm -rf ${BUILD_DIR}/kanboard/nitrous*
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name doc -type d -exec rm -rf {} +;
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name notes -type d -exec rm -rf {} +;
@@ -58,7 +59,28 @@ test-postgres:
 unittest: test-sqlite test-mysql test-postgres
 
 test-browser:
-		@ phpunit -c tests/acceptance.xml
+	@ phpunit -c tests/acceptance.xml
+
+integration-test-mysql:
+	@ composer install
+	@ docker-compose -f tests/docker/compose.integration.mysql.yaml build
+	@ docker-compose -f tests/docker/compose.integration.mysql.yaml up -d mysql app
+	@ docker-compose -f tests/docker/compose.integration.mysql.yaml up tests
+	@ docker-compose -f tests/docker/compose.integration.mysql.yaml down
+
+integration-test-postgres:
+	@ composer install
+	@ docker-compose -f tests/docker/compose.integration.postgres.yaml build
+	@ docker-compose -f tests/docker/compose.integration.postgres.yaml up -d postgres app
+	@ docker-compose -f tests/docker/compose.integration.postgres.yaml up tests
+	@ docker-compose -f tests/docker/compose.integration.postgres.yaml down
+
+integration-test-sqlite:
+	@ composer install
+	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml build
+	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml up -d app
+	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml up tests
+	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml down
 
 sql:
 	@ pg_dump --schema-only --no-owner --no-privileges --quote-all-identifiers -n public --file app/Schema/Sql/postgres.sql kanboard

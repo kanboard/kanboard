@@ -32,6 +32,18 @@ class ColumnModel extends Base
     }
 
     /**
+     * Get projectId by the columnId
+     *
+     * @access public
+     * @param  integer  $column_id    Column id
+     * @return integer
+     */
+    public function getProjectId($column_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $column_id)->findOneColumn('project_id');
+    }
+
+    /**
      * Get the first column id for a given project
      *
      * @access public
@@ -126,19 +138,21 @@ class ColumnModel extends Base
      * Add a new column to the board
      *
      * @access public
-     * @param  integer   $project_id    Project id
-     * @param  string    $title         Column title
-     * @param  integer   $task_limit    Task limit
-     * @param  string    $description   Column description
-     * @return boolean|integer
+     * @param  integer $project_id  Project id
+     * @param  string  $title       Column title
+     * @param  integer $task_limit  Task limit
+     * @param  string  $description Column description
+     * @param  integer $hide_in_dashboard
+     * @return bool|int
      */
-    public function create($project_id, $title, $task_limit = 0, $description = '')
+    public function create($project_id, $title, $task_limit = 0, $description = '', $hide_in_dashboard = 0)
     {
         $values = array(
             'project_id' => $project_id,
             'title' => $title,
             'task_limit' => intval($task_limit),
             'position' => $this->getLastColumnPosition($project_id) + 1,
+            'hide_in_dashboard' => $hide_in_dashboard,
             'description' => $description,
         );
 
@@ -153,13 +167,15 @@ class ColumnModel extends Base
      * @param  string    $title         Column title
      * @param  integer   $task_limit    Task limit
      * @param  string    $description   Optional description
+     * @param  integer   $hide_in_dashboard
      * @return boolean
      */
-    public function update($column_id, $title, $task_limit = 0, $description = '')
+    public function update($column_id, $title, $task_limit = 0, $description = '', $hide_in_dashboard = 0)
     {
         return $this->db->table(self::TABLE)->eq('id', $column_id)->update(array(
             'title' => $title,
             'task_limit' => intval($task_limit),
+            'hide_in_dashboard' => $hide_in_dashboard,
             'description' => $description,
         ));
     }

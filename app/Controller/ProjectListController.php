@@ -20,7 +20,7 @@ class ProjectListController extends BaseController
         if ($this->userSession->isAdmin()) {
             $project_ids = $this->projectModel->getAllIds();
         } else {
-            $project_ids = $this->projectPermissionModel->getActiveProjectIds($this->userSession->getId());
+            $project_ids = $this->projectPermissionModel->getProjectIds($this->userSession->getId());
         }
 
         $nb_projects = count($project_ids);

@@ -373,7 +373,7 @@ Response example:
 
 ## disableSwimlane
 
-- Purpose: **Enable a swimlane**
+- Purpose: **Disable a swimlane**
 - Parameters:
     - **project_id** (integer, required)
     - **swimlane_id** (integer, required)

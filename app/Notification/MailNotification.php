@@ -4,10 +4,6 @@ namespace Kanboard\Notification;
 
 use Kanboard\Core\Base;
 use Kanboard\Core\Notification\NotificationInterface;
-use Kanboard\Model\TaskModel;
-use Kanboard\Model\TaskFileModel;
-use Kanboard\Model\CommentModel;
-use Kanboard\Model\SubtaskModel;
 
 /**
  * Email Notification
@@ -76,76 +72,16 @@ class MailNotification extends Base implements NotificationInterface
      * Get the mail subject for a given template name
      *
      * @access public
-     * @param  string    $event_name  Event name
-     * @param  array     $event_data  Event data
+     * @param  string $eventName Event name
+     * @param  array  $eventData Event data
      * @return string
      */
-    public function getMailSubject($event_name, array $event_data)
+    public function getMailSubject($eventName, array $eventData)
     {
-        switch ($event_name) {
-            case TaskFileModel::EVENT_CREATE:
-                $subject = $this->getStandardMailSubject(e('New attachment'), $event_data);
-                break;
-            case CommentModel::EVENT_CREATE:
-                $subject = $this->getStandardMailSubject(e('New comment'), $event_data);
-                break;
-            case CommentModel::EVENT_UPDATE:
-                $subject = $this->getStandardMailSubject(e('Comment updated'), $event_data);
-                break;
-            case SubtaskModel::EVENT_CREATE:
-                $subject = $this->getStandardMailSubject(e('New subtask'), $event_data);
-                break;
-            case SubtaskModel::EVENT_UPDATE:
-                $subject = $this->getStandardMailSubject(e('Subtask updated'), $event_data);
-                break;
-            case TaskModel::EVENT_CREATE:
-                $subject = $this->getStandardMailSubject(e('New task'), $event_data);
-                break;
-            case TaskModel::EVENT_UPDATE:
-                $subject = $this->getStandardMailSubject(e('Task updated'), $event_data);
-                break;
-            case TaskModel::EVENT_CLOSE:
-                $subject = $this->getStandardMailSubject(e('Task closed'), $event_data);
-                break;
-            case TaskModel::EVENT_OPEN:
-                $subject = $this->getStandardMailSubject(e('Task opened'), $event_data);
-                break;
-            case TaskModel::EVENT_MOVE_COLUMN:
-                $subject = $this->getStandardMailSubject(e('Column change'), $event_data);
-                break;
-            case TaskModel::EVENT_MOVE_POSITION:
-                $subject = $this->getStandardMailSubject(e('Position change'), $event_data);
-                break;
-            case TaskModel::EVENT_MOVE_SWIMLANE:
-                $subject = $this->getStandardMailSubject(e('Swimlane change'), $event_data);
-                break;
-            case TaskModel::EVENT_ASSIGNEE_CHANGE:
-                $subject = $this->getStandardMailSubject(e('Assignee change'), $event_data);
-                break;
-            case TaskModel::EVENT_USER_MENTION:
-            case CommentModel::EVENT_USER_MENTION:
-                $subject = $this->getStandardMailSubject(e('Mentioned'), $event_data);
-                break;
-            case TaskModel::EVENT_OVERDUE:
-                $subject = e('[%s] Overdue tasks', $event_data['project_name']);
-                break;
-            default:
-                $subject = e('Notification');
-        }
-
-        return $subject;
-    }
-
-    /**
-     * Get the mail subject for a given label
-     *
-     * @access private
-     * @param  string    $label       Label
-     * @param  array     $data        Template data
-     * @return string
-     */
-    private function getStandardMailSubject($label, array $data)
-    {
-        return sprintf('[%s][%s] %s (#%d)', $data['task']['project_name'], $label, $data['task']['title'], $data['task']['id']);
+        return sprintf(
+            '[%s] %s',
+            isset($eventData['project_name']) ? $eventData['project_name'] : $eventData['task']['project_name'],
+            $this->notificationModel->getTitleWithoutAuthor($eventName, $eventData)
+        );
     }
 }

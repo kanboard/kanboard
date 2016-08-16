@@ -3,26 +3,29 @@
 namespace Kanboard\ServiceProvider;
 
 use JsonRPC\Server;
-use Kanboard\Api\ActionApi;
-use Kanboard\Api\AppApi;
-use Kanboard\Api\BoardApi;
-use Kanboard\Api\CategoryApi;
-use Kanboard\Api\ColumnApi;
-use Kanboard\Api\CommentApi;
-use Kanboard\Api\FileApi;
-use Kanboard\Api\GroupApi;
-use Kanboard\Api\GroupMemberApi;
-use Kanboard\Api\LinkApi;
-use Kanboard\Api\MeApi;
-use Kanboard\Api\Middleware\AuthenticationApiMiddleware;
-use Kanboard\Api\ProjectApi;
-use Kanboard\Api\ProjectPermissionApi;
-use Kanboard\Api\SubtaskApi;
-use Kanboard\Api\SubtaskTimeTrackingApi;
-use Kanboard\Api\SwimlaneApi;
-use Kanboard\Api\TaskApi;
-use Kanboard\Api\TaskLinkApi;
-use Kanboard\Api\UserApi;
+use Kanboard\Api\Procedure\ActionProcedure;
+use Kanboard\Api\Procedure\AppProcedure;
+use Kanboard\Api\Procedure\BoardProcedure;
+use Kanboard\Api\Procedure\CategoryProcedure;
+use Kanboard\Api\Procedure\ColumnProcedure;
+use Kanboard\Api\Procedure\CommentProcedure;
+use Kanboard\Api\Procedure\ProjectFileProcedure;
+use Kanboard\Api\Procedure\TaskExternalLinkProcedure;
+use Kanboard\Api\Procedure\TaskFileProcedure;
+use Kanboard\Api\Procedure\GroupProcedure;
+use Kanboard\Api\Procedure\GroupMemberProcedure;
+use Kanboard\Api\Procedure\LinkProcedure;
+use Kanboard\Api\Procedure\MeProcedure;
+use Kanboard\Api\Middleware\AuthenticationMiddleware;
+use Kanboard\Api\Procedure\ProjectProcedure;
+use Kanboard\Api\Procedure\ProjectPermissionProcedure;
+use Kanboard\Api\Procedure\SubtaskProcedure;
+use Kanboard\Api\Procedure\SubtaskTimeTrackingProcedure;
+use Kanboard\Api\Procedure\SwimlaneProcedure;
+use Kanboard\Api\Procedure\TaskMetadataProcedure;
+use Kanboard\Api\Procedure\TaskProcedure;
+use Kanboard\Api\Procedure\TaskLinkProcedure;
+use Kanboard\Api\Procedure\UserProcedure;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -45,31 +48,35 @@ class ApiProvider implements ServiceProviderInterface
         $server = new Server();
         $server->setAuthenticationHeader(API_AUTHENTICATION_HEADER);
         $server->getMiddlewareHandler()
-            ->withMiddleware(new AuthenticationApiMiddleware($container))
+            ->withMiddleware(new AuthenticationMiddleware($container))
         ;
 
         $server->getProcedureHandler()
-            ->withObject(new MeApi($container))
-            ->withObject(new ActionApi($container))
-            ->withObject(new AppApi($container))
-            ->withObject(new BoardApi($container))
-            ->withObject(new ColumnApi($container))
-            ->withObject(new CategoryApi($container))
-            ->withObject(new CommentApi($container))
-            ->withObject(new FileApi($container))
-            ->withObject(new LinkApi($container))
-            ->withObject(new ProjectApi($container))
-            ->withObject(new ProjectPermissionApi($container))
-            ->withObject(new SubtaskApi($container))
-            ->withObject(new SubtaskTimeTrackingApi($container))
-            ->withObject(new SwimlaneApi($container))
-            ->withObject(new TaskApi($container))
-            ->withObject(new TaskLinkApi($container))
-            ->withObject(new UserApi($container))
-            ->withObject(new GroupApi($container))
-            ->withObject(new GroupMemberApi($container))
+            ->withObject(new MeProcedure($container))
+            ->withObject(new ActionProcedure($container))
+            ->withObject(new AppProcedure($container))
+            ->withObject(new BoardProcedure($container))
+            ->withObject(new ColumnProcedure($container))
+            ->withObject(new CategoryProcedure($container))
+            ->withObject(new CommentProcedure($container))
+            ->withObject(new TaskFileProcedure($container))
+            ->withObject(new ProjectFileProcedure($container))
+            ->withObject(new LinkProcedure($container))
+            ->withObject(new ProjectProcedure($container))
+            ->withObject(new ProjectPermissionProcedure($container))
+            ->withObject(new SubtaskProcedure($container))
+            ->withObject(new SubtaskTimeTrackingProcedure($container))
+            ->withObject(new SwimlaneProcedure($container))
+            ->withObject(new TaskProcedure($container))
+            ->withObject(new TaskLinkProcedure($container))
+            ->withObject(new TaskExternalLinkProcedure($container))
+            ->withObject(new TaskMetadataProcedure($container))
+            ->withObject(new UserProcedure($container))
+            ->withObject(new GroupProcedure($container))
+            ->withObject(new GroupMemberProcedure($container))
+            ->withBeforeMethod('beforeProcedure')
         ;
-        
+
         $container['api'] = $server;
         return $container;
     }

@@ -54,14 +54,14 @@ class WebNotificationController extends BaseController
             $this->response->redirect($this->helper->url->to(
                 'TaskViewController',
                 'show',
-                array('task_id' => $notification['event_data']['task']['id'], 'project_id' => $notification['event_data']['task']['project_id']),
+                array('task_id' => $this->notificationModel->getTaskIdFromEvent($notification['event_name'], $notification['event_data'])),
                 'comment-'.$notification['event_data']['comment']['id']
             ));
         } else {
             $this->response->redirect($this->helper->url->to(
                 'TaskViewController',
                 'show',
-                array('task_id' => $notification['event_data']['task']['id'], 'project_id' => $notification['event_data']['task']['project_id'])
+                array('task_id' => $this->notificationModel->getTaskIdFromEvent($notification['event_name'], $notification['event_data']))
             ));
         }
     }

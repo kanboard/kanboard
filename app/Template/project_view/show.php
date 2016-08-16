@@ -52,11 +52,12 @@
 <div class="page-header">
     <h2><?= t('Board') ?></h2>
 </div>
-<table class="table-stripped">
+<table class="table-striped table-scrolling">
     <tr>
-        <th class="column-60"><?= t('Column') ?></th>
+        <th class="column-40"><?= t('Column') ?></th>
         <th class="column-20"><?= t('Task limit') ?></th>
         <th class="column-20"><?= t('Active tasks') ?></th>
+        <th class="column-20"><?= t('Hide tasks in this column in the dashboard') ?></th>
     </tr>
     <?php foreach ($stats['columns'] as $column): ?>
     <tr>
@@ -70,6 +71,13 @@
         </td>
         <td><?= $column['task_limit'] ?: '∞' ?></td>
         <td><?= $column['nb_active_tasks'] ?></td>
+        <td>
+        <?php if ($column['hide_in_dashboard'] == 1): ?>
+            <?= t('Yes') ?>
+        <?php else: ?>
+            <?= t('No') ?>
+        <?php endif ?>
+        </td>
     </tr>
     <?php endforeach ?>
 </table>

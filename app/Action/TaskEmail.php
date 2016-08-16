@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Email a task to someone
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskEmail extends Base
@@ -62,7 +62,10 @@ class TaskEmail extends Base
     {
         return array(
             'task_id',
-            'column_id',
+            'task' => array(
+                'project_id',
+                'column_id',
+            ),
         );
     }
 
@@ -78,13 +81,14 @@ class TaskEmail extends Base
         $user = $this->userModel->getById($this->getParam('user_id'));
 
         if (! empty($user['email'])) {
-            $task = $this->taskFinderModel->getDetails($data['task_id']);
-
             $this->emailClient->send(
                 $user['email'],
                 $user['name'] ?: $user['username'],
                 $this->getParam('subject'),
-                $this->template->render('notification/task_create', array('task' => $task, 'application_url' => $this->configModel->get('application_url')))
+                $this->template->render('notification/task_create', array(
+                    'task' => $data['task'],
+                    'application_url' => $this->configModel->get('application_url'),
+                ))
             );
 
             return true;
@@ -102,6 +106,6 @@ class TaskEmail extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['column_id'] == $this->getParam('column_id');
+        return $data['task']['column_id'] == $this->getParam('column_id');
     }
 }

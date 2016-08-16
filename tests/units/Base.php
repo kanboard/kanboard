@@ -16,6 +16,11 @@ abstract class Base extends PHPUnit_Framework_TestCase
 {
     protected $container;
 
+    /**
+     * @var EventDispatcher
+     */
+    protected $dispatcher;
+
     public function setUp()
     {
         date_default_timezone_set('UTC');
@@ -41,6 +46,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
         $this->container->register(new Kanboard\ServiceProvider\RouteProvider());
         $this->container->register(new Kanboard\ServiceProvider\AvatarProvider());
         $this->container->register(new Kanboard\ServiceProvider\FilterProvider());
+        $this->container->register(new Kanboard\ServiceProvider\JobProvider());
         $this->container->register(new Kanboard\ServiceProvider\QueueProvider());
 
         $this->container['dispatcher'] = new TraceableEventDispatcher(
@@ -48,8 +54,10 @@ abstract class Base extends PHPUnit_Framework_TestCase
             new Stopwatch
         );
 
-        $this->container['db']->logQueries = true;
-        $this->container['logger'] = new Logger;
+        $this->dispatcher = $this->container['dispatcher'];
+
+        $this->container['db']->getStatementHandler()->withLogging();
+        $this->container['logger'] = new Logger();
 
         $this->container['httpClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Http\Client')

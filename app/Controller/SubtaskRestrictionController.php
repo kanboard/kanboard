@@ -27,7 +27,7 @@ class SubtaskRestrictionController extends BaseController
                 SubtaskModel::STATUS_TODO => t('Todo'),
                 SubtaskModel::STATUS_DONE => t('Done'),
             ),
-            'subtask_inprogress' => $this->subtaskModel->getSubtaskInProgress($this->userSession->getId()),
+            'subtask_inprogress' => $this->subtaskStatusModel->getSubtaskInProgress($this->userSession->getId()),
             'subtask' => $subtask,
             'task' => $task,
         )));

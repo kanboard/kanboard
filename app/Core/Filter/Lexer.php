@@ -30,7 +30,7 @@ class Lexer
         '/^([<=>]{1,2}\w+)/u'                            => 'T_STRING',
         '/^([<=>]{1,2}".+")/'                            => 'T_STRING',
         '/^("(.+)")/'                                    => 'T_STRING',
-        '/^(\w+)/u'                                      => 'T_STRING',
+        '/^(\S+)/u'                                      => 'T_STRING',
         '/^(#\d+)/'                                      => 'T_STRING',
     );
 

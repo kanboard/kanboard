@@ -1,0 +1,41 @@
+@import variables
+
+.comment-sorting
+  text-align: right
+  a
+    color: color('medium')
+    font-weight: normal
+    text-decoration: none
+    &:hover
+      color: color('light')
+
+.comment
+  padding: 5px
+  margin-bottom: 15px
+  &:hover
+    background: #fafafa
+
+.comment-title
+  border-bottom: 1px dotted #eee
+  margin-left: 55px
+  margin-bottom: 10px
+
+.comment-date
+  color: color('light')
+  font-weight: 200
+
+.comment-actions
+  font-size: size('small')
+  margin-left: 55px
+  margin-top: 8px
+  li
+    display: inline
+  a
+    color: color('light')
+    text-decoration: none
+    &:focus, &:hover
+      color: color('primary')
+      text-decoration: underline
+
+.comment-content
+  margin-left: 55px

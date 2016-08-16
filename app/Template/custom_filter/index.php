@@ -3,7 +3,7 @@
     <h2><?= t('Custom filters') ?></h2>
 </div>
 <div>
-    <table>
+    <table class="table-striped table-scrolling">
         <tr>
             <th class="column-15"><?= t('Name') ?></th>
             <th class="column-30"><?= t('Filter') ?></th>

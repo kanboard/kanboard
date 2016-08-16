@@ -6,8 +6,8 @@
         <?php else: ?>
             <?= $this->url->link(
                 $this->text->e($task['category_name']),
-                'TaskPopoverController',
-                'changeCategory',
+                'TaskModificationController',
+                'edit',
                 array('task_id' => $task['id'], 'project_id' => $task['project_id']),
                 false,
                 'popover' . (! empty($task['category_description']) ? ' tooltip' : ''),
@@ -16,6 +16,16 @@
         <?php endif ?>
     </span>
 </div>
+<?php endif ?>
+
+<?php if (! empty($task['tags'])): ?>
+    <div class="task-tags">
+        <ul>
+        <?php foreach ($task['tags'] as $tag): ?>
+            <li><?= $this->text->e($tag['name']) ?></li>
+        <?php endforeach ?>
+        </ul>
+    </div>
 <?php endif ?>
 
 <div class="task-board-icons">
@@ -27,7 +37,7 @@
     <?php endif ?>
 
     <?php if (! empty($task['date_due'])): ?>
-        <?php if (date('d') == date('d', $task['date_due'])): ?>
+        <?php if (date('Y-m-d') == date('Y-m-d', $task['date_due'])): ?>
         <span class="task-board-date task-board-date-today">
         <?php elseif (time() > $task['date_due']): ?>
         <span class="task-board-date task-board-date-overdue">

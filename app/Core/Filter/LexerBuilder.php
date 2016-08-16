@@ -51,7 +51,7 @@ class LexerBuilder
      */
     public function __construct()
     {
-        $this->lexer = new Lexer;
+        $this->lexer = new Lexer();
         $this->queryBuilder = new QueryBuilder();
     }
 
@@ -69,7 +69,7 @@ class LexerBuilder
 
         foreach ($attributes as $attribute) {
             $this->filters[$attribute] = $filter;
-            $this->lexer->addToken(sprintf("/^(%s:)/", $attribute), $attribute);
+            $this->lexer->addToken(sprintf("/^(%s:)/i", $attribute), $attribute);
 
             if ($default) {
                 $this->lexer->setDefaultToken($attribute);

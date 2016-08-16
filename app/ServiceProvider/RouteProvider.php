@@ -59,6 +59,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/duplicate', 'ProjectViewController', 'duplicate');
             $container['route']->addRoute('project/:project_id/permissions', 'ProjectPermissionController', 'index');
             $container['route']->addRoute('project/:project_id/activity', 'ActivityController', 'project');
+            $container['route']->addRoute('project/:project_id/tags', 'ProjectTagController', 'index');
 
             // Project Overview
             $container['route']->addRoute('project/:project_id/overview', 'ProjectOverviewController', 'show');
@@ -174,6 +175,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('settings/api', 'ConfigController', 'api');
             $container['route']->addRoute('settings/links', 'LinkController', 'index');
             $container['route']->addRoute('settings/currencies', 'CurrencyController', 'index');
+            $container['route']->addRoute('settings/tags', 'TagController', 'index');
 
             // Plugins
             $container['route']->addRoute('extensions', 'PluginController', 'show');

@@ -147,4 +147,5 @@ Kanboard.Popover.prototype.afterOpen = function() {
 
     this.app.datePicker();
     this.app.autoComplete();
+    this.app.tagAutoComplete();
 };

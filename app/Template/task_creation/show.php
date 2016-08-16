@@ -1,49 +1,45 @@
 <div class="page-header">
-    <h2><?= t('New task') ?></h2>
+    <h2><?= $this->text->e($project['name']) ?> &gt; <?= t('New task') ?></h2>
 </div>
 
 <form class="popover-form" method="post" action="<?= $this->url->href('TaskCreationController', 'save', array('project_id' => $values['project_id'])) ?>" autocomplete="off">
-
     <?= $this->form->csrf() ?>
 
-    <div class="form-column">
-        <?= $this->form->label(t('Title'), 'title') ?>
-        <?= $this->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="200"', 'tabindex="1"'), 'form-input-large') ?>
+    <div class="form-columns">
+        <div class="form-column">
+            <?= $this->task->selectTitle($values, $errors) ?>
+            <?= $this->task->selectDescription($values, $errors) ?>
+            <?= $this->task->selectTags($project) ?>
 
-        <?= $this->form->label(t('Description'), 'description') ?>
-        <?= $this->form->textarea(
-            'description',
-            $values,
-            $errors,
-            array(
-                'placeholder="'.t('Leave a description').'"',
-                'tabindex="2"',
-                'data-mention-search-url="'.$this->url->href('UserAjaxController', 'mention', array('project_id' => $values['project_id'])).'"'
-            ),
-            'markdown-editor'
-        ) ?>
+            <?php if (! isset($duplicate)): ?>
+                <?= $this->form->checkbox('another_task', t('Create another task'), 1, isset($values['another_task']) && $values['another_task'] == 1) ?>
+            <?php endif ?>
 
-        <?= $this->render('task/color_picker', array('colors_list' => $colors_list, 'values' => $values)) ?>
+            <?= $this->hook->render('template:task:form:first-column', array('values' => $values, 'errors' => $errors)) ?>
+        </div>
 
-        <?php if (! isset($duplicate)): ?>
-            <?= $this->form->checkbox('another_task', t('Create another task'), 1, isset($values['another_task']) && $values['another_task'] == 1) ?>
-        <?php endif ?>
+        <div class="form-column">
+            <?= $this->form->hidden('project_id', $values) ?>
+            <?= $this->task->selectColor($values) ?>
+            <?= $this->task->selectAssignee($users_list, $values, $errors) ?>
+            <?= $this->task->selectCategory($categories_list, $values, $errors) ?>
+            <?= $this->task->selectSwimlane($swimlanes_list, $values, $errors) ?>
+            <?= $this->task->selectColumn($columns_list, $values, $errors) ?>
+            <?= $this->task->selectPriority($project, $values) ?>
+            <?= $this->task->selectScore($values, $errors) ?>
+            <?= $this->task->selectReference($values, $errors) ?>
 
-        <?= $this->hook->render('template:task:form:left-column', array('values' => $values, 'errors' => $errors)) ?>
-    </div>
+            <?= $this->hook->render('template:task:form:second-column', array('values' => $values, 'errors' => $errors)) ?>
+        </div>
 
-    <div class="form-column">
-        <?= $this->form->hidden('project_id', $values) ?>
-        <?= $this->task->selectAssignee($users_list, $values, $errors) ?>
-        <?= $this->task->selectCategory($categories_list, $values, $errors) ?>
-        <?= $this->task->selectSwimlane($swimlanes_list, $values, $errors) ?>
-        <?= $this->task->selectColumn($columns_list, $values, $errors) ?>
-        <?= $this->task->selectPriority($project, $values) ?>
-        <?= $this->task->selectScore($values, $errors) ?>
-        <?= $this->task->selectTimeEstimated($values, $errors) ?>
-        <?= $this->task->selectDueDate($values, $errors) ?>
+        <div class="form-column">
+            <?= $this->task->selectTimeEstimated($values, $errors) ?>
+            <?= $this->task->selectTimeSpent($values, $errors) ?>
+            <?= $this->task->selectStartDate($values, $errors) ?>
+            <?= $this->task->selectDueDate($values, $errors) ?>
 
-        <?= $this->hook->render('template:task:form:right-column', array('values' => $values, 'errors' => $errors)) ?>
+            <?= $this->hook->render('template:task:form:third-column', array('values' => $values, 'errors' => $errors)) ?>
+        </div>
     </div>
 
     <div class="form-actions">

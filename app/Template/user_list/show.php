@@ -12,7 +12,7 @@
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('No user') ?></p>
     <?php else: ?>
-        <table class="table-stripped">
+        <table class="table-scrolling table-striped">
             <tr>
                 <th class="column-5"><?= $paginator->order(t('Id'), 'id') ?></th>
                 <th class="column-18"><?= $paginator->order(t('Username'), 'username') ?></th>

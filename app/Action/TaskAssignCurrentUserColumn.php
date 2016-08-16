@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Assign a task to the logged user on column change
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskAssignCurrentUserColumn extends Base
@@ -59,7 +59,10 @@ class TaskAssignCurrentUserColumn extends Base
     {
         return array(
             'task_id',
-            'column_id',
+            'task' => array(
+                'project_id',
+                'column_id',
+            ),
         );
     }
 
@@ -93,6 +96,6 @@ class TaskAssignCurrentUserColumn extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['column_id'] == $this->getParam('column_id');
+        return $data['task']['column_id'] == $this->getParam('column_id');
     }
 }

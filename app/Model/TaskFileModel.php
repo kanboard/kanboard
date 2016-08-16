@@ -61,15 +61,19 @@ class TaskFileModel extends FileModel
     }
 
     /**
-     * Get event name
+     * Get projectId from fileId
      *
-     * @abstract
-     * @access protected
-     * @return string
+     * @access public
+     * @param  integer $file_id
+     * @return integer
      */
-    protected function getEventName()
+    public function getProjectId($file_id)
     {
-        return self::EVENT_CREATE;
+        return $this->db
+            ->table(self::TABLE)
+            ->eq(self::TABLE.'.id', $file_id)
+            ->join(TaskModel::TABLE, 'id', 'task_id')
+            ->findOneColumn(TaskModel::TABLE . '.project_id') ?: 0;
     }
 
     /**
@@ -84,5 +88,16 @@ class TaskFileModel extends FileModel
     {
         $original_filename = e('Screenshot taken %s', $this->helper->dt->datetime(time())).'.png';
         return $this->uploadContent($task_id, $original_filename, $blob);
+    }
+
+    /**
+     * Fire file creation event
+     *
+     * @access protected
+     * @param  integer $file_id
+     */
+    protected function fireCreationEvent($file_id)
+    {
+        $this->queueManager->push($this->taskFileEventJob->withParams($file_id, self::EVENT_CREATE));
     }
 }

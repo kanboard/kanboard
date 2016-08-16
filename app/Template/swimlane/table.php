@@ -1,5 +1,5 @@
 <table
-    class="swimlanes-table table-stripped"
+    class="swimlanes-table table-striped table-scrolling"
     data-save-position-url="<?= $this->url->href('SwimlaneController', 'move', array('project_id' => $project['id'])) ?>">
     <thead>
         <tr>

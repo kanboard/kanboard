@@ -105,7 +105,7 @@ class Plugin extends Base
 {
     public function initialize()
     {
-        $this->hook->on('template:layout:css', 'plugins/Css/skin.css');
+        $this->hook->on('template:layout:css', array('template' => 'plugins/Css/skin.css'));
     }
 }
 ```
@@ -114,6 +114,33 @@ List of asset Hooks:
 
 - `template:layout:css`
 - `template:layout:js`
+
+
+Reference hooks
+---------------
+
+Reference hooks are passing a variable by reference.
+
+Example:
+
+```php
+$this->hook->on('formatter:board:query', function (\PicoDb\Table &query) {
+    $query->eq('color_id', 'red');
+});
+```
+
+The code above will show only tasks in red on the board.
+
+List of reference hooks:
+
+| Hook                                       | Description                                                   |
+|--------------------------------------------|---------------------------------------------------------------|
+| `formatter:board:query`                    | Alter database query before rendering board                   |
+| `pagination:dashboard:task:query`          | Alter database query for tasks pagination on the dashboard    |
+| `pagination:dashboard:subtask:query`       | Alter database query for subtasks pagination on the dashboard |
+| `model:task:creation:prepare`              | Alter form values before to save a task                       |
+| `model:task:modification:prepare`          | Alter form values before to edit a task                       |
+
 
 Template Hooks
 --------------
@@ -124,6 +151,22 @@ Example to add new content in the dashboard sidebar:
 
 ```php
 $this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/sidebar');
+```
+
+Example to attach a template with local variables:
+
+```php
+$this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/sidebar', array(
+    'variable' => 'foobar',
+));
+```
+
+Example to attach a template with a callable:
+
+```php
+$this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/sidebar', function($hook_param1, $hook_param2) {
+    return array('new_template_variable' => 'foobar'); // Inject a new variable into the plugin template
+});
 ```
 
 This call is usually defined in the `initialize()` method.
@@ -155,14 +198,17 @@ List of template hooks:
 | `template:board:public:task:after-title`   | Task in public board: after title                  |
 | `template:board:task:footer`               | Task in board: footer                              |
 | `template:board:task:icons`                | Task in board: tooltip icon                        |
+| `template:board:column:dropdown`           | Dropdown menu in board columns                     |
 | `template:config:sidebar`                  | Sidebar on settings page                           |
 | `template:config:application `             | Application settings form                          |
 | `template:config:email`                    | Email settings page                                |
 | `template:config:integrations`             | Integration page in global settings                |
 | `template:dashboard:sidebar`               | Sidebar on dashboard page                          |
+| `template:dashboard:show`                  | Main page of the dashboard                         |
 | `template:export:sidebar`                  | Sidebar on export pages                            |
 | `template:import:sidebar`                  | Sidebar on import pages                            |
-| `template:header:dropdown`                 | Dropdown on header                                 |
+| `template:header:dropdown`                 | Page header dropdown menu (user avatar icon)       |
+| `template:header:creation-dropdown`        | Page header dropdown menu (plus icon)              |
 | `template:layout:head`                     | Page layout `<head/>` tag                          |
 | `template:layout:top`                      | Page layout top header                             |
 | `template:layout:bottom`                   | Page layout footer                                 |
@@ -182,8 +228,9 @@ List of template hooks:
 | `template:task:dropdown`                   | Task dropdown menu in listing pages                |
 | `template:task:sidebar:actions`            | Sidebar on task page (section actions)             |
 | `template:task:sidebar:information`        | Sidebar on task page (section information)         |
-| `template:task:form:left-column`           | Left column in task form                           |
-| `template:task:form:right-column`          | Right column in task form                          |
+| `template:task:form:first-column`          | 1st column in task form                            |
+| `template:task:form:second-column`         | 2nd column in task form                            |
+| `template:task:form:third-column`          | 3nd column in task form                            |
 | `template:task:show:top   `                | Show task page: top                                |
 | `template:task:show:bottom`                | Show task page: bottom                             |
 | `template:task:show:before-description`    | Show task page: before description                 |

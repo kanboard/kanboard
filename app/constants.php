@@ -21,7 +21,7 @@ defined('PLUGIN_INSTALLER') or define('PLUGIN_INSTALLER', true);
 defined('DEBUG') or define('DEBUG', strtolower(getenv('DEBUG')) === 'true');
 
 // Logging drivers: syslog, stdout, stderr or file
-defined('LOG_DRIVER') or define('LOG_DRIVER', getenv('LOG_DRIVER'));
+defined('LOG_DRIVER') or define('LOG_DRIVER', '');
 
 // Logging file
 defined('LOG_FILE') or define('LOG_FILE', DATA_DIR.DIRECTORY_SEPARATOR.'debug.log');
@@ -134,3 +134,5 @@ defined('HTTP_PROXY_PORT') or define('HTTP_PROXY_PORT', '3128');
 defined('HTTP_PROXY_USERNAME') or define('HTTP_PROXY_USERNAME', '');
 defined('HTTP_PROXY_PASSWORD') or define('HTTP_PROXY_PASSWORD', '');
 defined('HTTP_VERIFY_SSL_CERTIFICATE') or define('HTTP_VERIFY_SSL_CERTIFICATE', true);
+
+defined('TOTP_ISSUER') or define('TOTP_ISSUER', 'Kanboard');

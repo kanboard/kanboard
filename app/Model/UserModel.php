@@ -65,17 +65,6 @@ class UserModel extends Base
     }
 
     /**
-     * Return the full name
-     *
-     * @param  array    $user   User properties
-     * @return string
-     */
-    public function getFullname(array $user)
-    {
-        return $user['name'] ?: $user['username'];
-    }
-
-    /**
      * Return true is the given user id is administrator
      *
      * @access public
@@ -230,7 +219,7 @@ class UserModel extends Base
         $result = array();
 
         foreach ($users as $user) {
-            $result[$user['id']] = $this->getFullname($user);
+            $result[$user['id']] = $this->helper->user->getFullname($user);
         }
 
         asort($result);

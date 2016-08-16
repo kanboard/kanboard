@@ -23,7 +23,7 @@ class DummyAction extends Kanboard\Action\Base
 
     public function getEventRequiredParameters()
     {
-        return array('p1', 'p2');
+        return array('p1', 'p2', 'p3' => array('p4'));
     }
 
     public function doAction(array $data)
@@ -60,7 +60,7 @@ class BaseActionTest extends Base
     public function testGetEventRequiredParameters()
     {
         $dummyAction = new DummyAction($this->container);
-        $this->assertEquals(array('p1', 'p2'), $dummyAction->getEventRequiredParameters());
+        $this->assertEquals(array('p1', 'p2', 'p3' => array('p4')), $dummyAction->getEventRequiredParameters());
     }
 
     public function testGetCompatibleEvents()
@@ -113,7 +113,7 @@ class BaseActionTest extends Base
         $dummyAction = new DummyAction($this->container);
         $dummyAction->setProjectId(1234);
 
-        $this->assertTrue($dummyAction->hasRequiredParameters(array('p1' => 12, 'p2' => 34)));
+        $this->assertTrue($dummyAction->hasRequiredParameters(array('p1' => 12, 'p2' => 34, 'p3' => array('p4' => 'foobar'))));
         $this->assertFalse($dummyAction->hasRequiredParameters(array('p1' => 12)));
         $this->assertFalse($dummyAction->hasRequiredParameters(array()));
     }
@@ -125,7 +125,7 @@ class BaseActionTest extends Base
         $dummyAction->addEvent('my.event', 'My Event Overrided');
 
         $events = $dummyAction->getEvents();
-        $this->assertcount(2, $events);
+        $this->assertCount(2, $events);
         $this->assertEquals(array('my.event', 'foobar'), $events);
     }
 
@@ -136,7 +136,7 @@ class BaseActionTest extends Base
         $dummyAction->setParam('p1', 'something');
         $dummyAction->addEvent('foobar', 'FooBar');
 
-        $event = new GenericEvent(array('project_id' => 1234, 'p1' => 'something', 'p2' => 'abc'));
+        $event = new GenericEvent(array('project_id' => 1234, 'p1' => 'something', 'p2' => 'abc', 'p3' => array('p4' => 'a')));
 
         $this->assertTrue($dummyAction->execute($event, 'foobar'));
         $this->assertFalse($dummyAction->execute($event, 'foobar'));

@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= t('Compare Estimated Time vs Actual Time') ?></h2>
+    <h2><?= t('Estimated vs actual time') ?></h2>
 </div>
 
 <div class="listing">
@@ -23,7 +23,7 @@
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('No tasks found.') ?></p>
     <?php elseif (! $paginator->isEmpty()): ?>
-        <table class="table-fixed table-small">
+        <table class="table-fixed table-small table-scrolling">
             <tr>
                 <th class="column-5"><?= $paginator->order(t('Id'), 'tasks.id') ?></th>
                 <th><?= $paginator->order(t('Title'), 'tasks.title') ?></th>

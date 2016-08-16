@@ -19,12 +19,13 @@ class RecurringTaskSubscriber extends BaseSubscriber implements EventSubscriberI
     public function onMove(TaskEvent $event)
     {
         $this->logger->debug('Subscriber executed: '.__METHOD__);
+        $task = $event['task'];
 
-        if ($event['recurrence_status'] == TaskModel::RECURRING_STATUS_PENDING) {
-            if ($event['recurrence_trigger'] == TaskModel::RECURRING_TRIGGER_FIRST_COLUMN && $this->columnModel->getFirstColumnId($event['project_id']) == $event['src_column_id']) {
-                $this->taskDuplicationModel->duplicateRecurringTask($event['task_id']);
-            } elseif ($event['recurrence_trigger'] == TaskModel::RECURRING_TRIGGER_LAST_COLUMN && $this->columnModel->getLastColumnId($event['project_id']) == $event['dst_column_id']) {
-                $this->taskDuplicationModel->duplicateRecurringTask($event['task_id']);
+        if ($task['recurrence_status'] == TaskModel::RECURRING_STATUS_PENDING) {
+            if ($task['recurrence_trigger'] == TaskModel::RECURRING_TRIGGER_FIRST_COLUMN && $this->columnModel->getFirstColumnId($task['project_id']) == $event['src_column_id']) {
+                $this->taskRecurrenceModel->duplicateRecurringTask($task['id']);
+            } elseif ($task['recurrence_trigger'] == TaskModel::RECURRING_TRIGGER_LAST_COLUMN && $this->columnModel->getLastColumnId($task['project_id']) == $event['dst_column_id']) {
+                $this->taskRecurrenceModel->duplicateRecurringTask($task['id']);
             }
         }
     }
@@ -32,9 +33,10 @@ class RecurringTaskSubscriber extends BaseSubscriber implements EventSubscriberI
     public function onClose(TaskEvent $event)
     {
         $this->logger->debug('Subscriber executed: '.__METHOD__);
+        $task = $event['task'];
 
-        if ($event['recurrence_status'] == TaskModel::RECURRING_STATUS_PENDING && $event['recurrence_trigger'] == TaskModel::RECURRING_TRIGGER_CLOSE) {
-            $this->taskDuplicationModel->duplicateRecurringTask($event['task_id']);
+        if ($task['recurrence_status'] == TaskModel::RECURRING_STATUS_PENDING && $task['recurrence_trigger'] == TaskModel::RECURRING_TRIGGER_CLOSE) {
+            $this->taskRecurrenceModel->duplicateRecurringTask($event['task_id']);
         }
     }
 }

@@ -1,0 +1,35 @@
+@import mixins
+
+.input-addon
+  display: flex
+
+.input-addon-field
+  flex: 1
+  font-size: size('normal')
+  color: color('light')
+  margin: 0
+  +appearance
+
+.input-addon-item
+  background-color: rgba(147, 128, 108, 0.1)
+  color: #666
+  font: inherit
+  font-weight: normal
+
+  @include xs-device
+    .dropdown
+      .fa-caret-down
+        display: none
+
+.input-addon-field, .input-addon-item
+  border: 1px solid rgba(147, 128, 108, 0.25)
+  padding: 4px 0.75em
+
+  &:not(:first-child)
+    border-left: 0
+
+.input-addon-field:first-child, .input-addon-item:first-child
+  border-radius: 5px 0 0 5px
+
+.input-addon-field:last-child, .input-addon-item:last-child
+  border-radius: 0 5px 5px 0

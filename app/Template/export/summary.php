@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= t('Daily project summary export for "%s"', $project['name']) ?></h2>
+    <h2><?= t('Daily project summary export') ?></h2>
 </div>
 
 <p class="alert alert-info"><?= t('This export contains the number of tasks per column grouped per day.') ?></p>

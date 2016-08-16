@@ -5,9 +5,9 @@
 
         <!-- column in collapsed mode -->
         <div class="board-column-collapsed">
-            <span class="board-column-header-task-count" title="<?= t('Show this column') ?>">
+            <small class="board-column-header-task-count" title="<?= t('Show this column') ?>">
                 <span id="task-number-column-<?= $column['id'] ?>"><?= $column['nb_tasks'] ?></span>
-            </span>
+            </small>
         </div>
 
         <!-- column in expanded mode -->
@@ -18,9 +18,9 @@
                 </div>
             <?php endif ?>
 
-            <?php if ($swimlane['nb_swimlanes'] > 1 && ! empty($column['nb_column_tasks'])): ?>
+            <?php if ($swimlane['nb_swimlanes'] > 1 && ! empty($column['column_nb_tasks'])): ?>
                 <span title="<?= t('Total number of tasks in this column across all swimlanes') ?>" class="board-column-header-task-count">
-                    (<span><?= $column['nb_column_tasks'] ?></span>)
+                    (<span><?= $column['column_nb_tasks'] ?></span>)
                 </span>
             <?php endif ?>
 
@@ -47,6 +47,7 @@
                                     </li>
                                 <?php endif ?>
                             <?php endif ?>
+                            <?= $this->hook->render('template:board:column:dropdown', array('swimlane' => $swimlane, 'column' => $column)) ?>
                         </ul>
                     </span>
                 <?php endif ?>

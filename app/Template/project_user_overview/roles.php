@@ -1,7 +1,7 @@
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('No project') ?></p>
 <?php else: ?>
-    <table class="table-fixed">
+    <table class="table-fixed table-scrolling">
         <tr>
             <th class="column-20"><?= $paginator->order(t('User'), 'users.username') ?></th>
             <th class="column-25"><?= $paginator->order(t('Project'), 'projects.name') ?></th>

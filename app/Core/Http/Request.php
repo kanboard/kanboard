@@ -301,6 +301,7 @@ class Request extends Base
     public function getIpAddress()
     {
         $keys = array(
+            'HTTP_X_REAL_IP',
             'HTTP_CLIENT_IP',
             'HTTP_X_FORWARDED_FOR',
             'HTTP_X_FORWARDED',
