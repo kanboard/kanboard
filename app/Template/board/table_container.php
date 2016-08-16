@@ -4,10 +4,10 @@
     <?php else: ?>
 
         <?php if (isset($not_editable)): ?>
-            <table id="board" class="board-project-<?= $project['id'] ?>">
+            <table id="board-<?= $project['id'] ?>" class="board-project board-project-<?= $project['id'] ?>">
         <?php else: ?>
-            <table id="board"
-                   class="board-project-<?= $project['id'] ?>"
+            <table id="board-<?= $project['id'] ?>"
+                   class="board-project board-project-<?= $project['id'] ?>"
                    data-project-id="<?= $project['id'] ?>"
                    data-check-interval="<?= $board_private_refresh_interval ?>"
                    data-save-url="<?= $this->url->href('BoardAjaxController', 'save', array('project_id' => $project['id'])) ?>"
