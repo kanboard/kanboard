@@ -4,7 +4,6 @@ Kanboard.BoardDragAndDrop = function(app) {
 };
 
 Kanboard.BoardDragAndDrop.prototype.execute = function() {
-    console.log(this.app.hasId("board-container"));
     if (this.app.hasId("board-container")) {
         this.dragAndDrop();
         this.executeListeners();
