@@ -9,7 +9,7 @@ use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Action\TaskAssignPrioritySwimlane;
 
-class TaskAssignColorColumnTest extends Base
+class TaskAssignPrioritySwimlaneTest extends Base
 {
     public function testChangeSwimlane()
     {
