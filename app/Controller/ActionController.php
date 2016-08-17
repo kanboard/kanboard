@@ -33,6 +33,7 @@ class ActionController extends BaseController
             'colors_list' => $this->colorModel->getList(),
             'categories_list' => $this->categoryModel->getList($project['id']),
             'links_list' => $this->linkModel->getList(0, false),
+            'swimlane_list' => $this->swimlaneModel->getList($project['id']),
             'title' => t('Automatic actions')
         )));
     }
