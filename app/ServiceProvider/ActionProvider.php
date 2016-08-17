@@ -36,6 +36,8 @@ use Kanboard\Action\TaskOpen;
 use Kanboard\Action\TaskUpdateStartDate;
 use Kanboard\Action\TaskCloseNoActivity;
 use Kanboard\Action\TaskCloseNoActivityColumn;
+use Kanboard\Action\TaskAssignColorSwimlane;
+use Kanboard\Action\TaskAssignPrioritySwimlane;
 
 /**
  * Action Provider
@@ -86,6 +88,8 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskOpen($container));
         $container['actionManager']->register(new TaskUpdateStartDate($container));
         $container['actionManager']->register(new TaskAssignDueDateOnCreation($container));
+        $container['actionManager']->register(new TaskAssignColorSwimlane($container));
+        $container['actionManager']->register(new TaskAssignPrioritySwimlane($container));
 
         return $container;
     }
