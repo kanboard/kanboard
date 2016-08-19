@@ -10,7 +10,7 @@
 #board-container
   overflow-x: auto
 
-#board
+table[id^='board']
   table-layout: fixed
   margin-bottom: 0
   th.board-column-header
@@ -25,7 +25,7 @@
   .board-container-compact #board
     table-layout: auto
 
-#board th.board-column-header.board-column-compact
+table[id^='board'] th.board-column-header.board-column-compact
   width: initial
 
 .board-column-collapsed
@@ -35,7 +35,7 @@ td.board-column-task-collapsed
   font-weight: bold
   background-color: bg-color('primary')
 
-#board th.board-column-header-collapsed
+table[id^='board'] th.board-column-header-collapsed
   width: 28px
   min-width: 28px
   text-align: center
