@@ -27,7 +27,6 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
             placeholder: "draggable-placeholder",
             items: ".draggable-item[data-project-id=" + project_id + "]",
             stop: function(event, ui) {
-                console.log("draggable stop");
                 var task = ui.item;
                 var taskId = task.attr('data-task-id');
                 var taskPosition = task.attr('data-position');
@@ -49,7 +48,6 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
                 }
             },
             start: function(event, ui) {
-                console.log("draggable start");
                 ui.item.addClass("draggable-item-selected");
                 ui.placeholder.height(ui.item.height());
             }
