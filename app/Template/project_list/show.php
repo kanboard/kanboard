@@ -1,14 +1,14 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <?= $this->hook->render('template:project-list:menu:before', array('project' => $project)) ?>
+            <?= $this->hook->render('template:project-list:menu:before') ?>
             <?php if ($this->user->hasAccess('ProjectUserOverviewController', 'managers')): ?>
                 <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('Users overview'), 'ProjectUserOverviewController', 'managers') ?></li>
             <?php endif ?>
             <?php if ($this->user->hasAccess('ProjectGanttController', 'show')): ?>
                 <li><i class="fa fa-sliders fa-fw"></i><?= $this->url->link(t('Projects Gantt chart'), 'ProjectGanttController', 'show') ?></li>
             <?php endif ?>
-            <?= $this->hook->render('template:project-list:menu:after', array('project' => $project)) ?>
+            <?= $this->hook->render('template:project-list:menu:after') ?>
         </ul>
     </div>
     <?php if ($paginator->isEmpty()): ?>
