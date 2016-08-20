@@ -2,10 +2,7 @@
 
 namespace Kanboard\Model;
 
-use DateTime;
-use DateInterval;
 use Kanboard\Core\Base;
-use Kanboard\Event\TaskEvent;
 
 /**
  * Task Duplication
@@ -18,10 +15,10 @@ class TaskDuplicationModel extends Base
     /**
      * Fields to copy when duplicating a task
      *
-     * @access private
-     * @var array
+     * @access protected
+     * @var string[]
      */
-    private $fields_to_duplicate = array(
+    protected $fieldsToDuplicate = array(
         'title',
         'description',
         'date_due',
@@ -30,6 +27,7 @@ class TaskDuplicationModel extends Base
         'column_id',
         'owner_id',
         'score',
+        'priority',
         'category_id',
         'time_estimated',
         'swimlane_id',
@@ -49,106 +47,13 @@ class TaskDuplicationModel extends Base
      */
     public function duplicate($task_id)
     {
-        return $this->save($task_id, $this->copyFields($task_id));
-    }
+        $new_task_id = $this->save($task_id, $this->copyFields($task_id));
 
-    /**
-     * Duplicate recurring task
-     *
-     * @access public
-     * @param  integer             $task_id      Task id
-     * @return boolean|integer                   Recurrence task id
-     */
-    public function duplicateRecurringTask($task_id)
-    {
-        $values = $this->copyFields($task_id);
-
-        if ($values['recurrence_status'] == TaskModel::RECURRING_STATUS_PENDING) {
-            $values['recurrence_parent'] = $task_id;
-            $values['column_id'] = $this->columnModel->getFirstColumnId($values['project_id']);
-            $this->calculateRecurringTaskDueDate($values);
-
-            $recurring_task_id = $this->save($task_id, $values);
-
-            if ($recurring_task_id > 0) {
-                $parent_update = $this->db
-                    ->table(TaskModel::TABLE)
-                    ->eq('id', $task_id)
-                    ->update(array(
-                        'recurrence_status' => TaskModel::RECURRING_STATUS_PROCESSED,
-                        'recurrence_child' => $recurring_task_id,
-                    ));
-
-                if ($parent_update) {
-                    return $recurring_task_id;
-                }
-            }
+        if ($new_task_id !== false) {
+            $this->tagDuplicationModel->duplicateTaskTags($task_id, $new_task_id);
         }
 
-        return false;
-    }
-
-    /**
-     * Duplicate a task to another project
-     *
-     * @access public
-     * @param  integer    $task_id
-     * @param  integer    $project_id
-     * @param  integer    $swimlane_id
-     * @param  integer    $column_id
-     * @param  integer    $category_id
-     * @param  integer    $owner_id
-     * @return boolean|integer
-     */
-    public function duplicateToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
-    {
-        $values = $this->copyFields($task_id);
-        $values['project_id'] = $project_id;
-        $values['column_id'] = $column_id !== null ? $column_id : $values['column_id'];
-        $values['swimlane_id'] = $swimlane_id !== null ? $swimlane_id : $values['swimlane_id'];
-        $values['category_id'] = $category_id !== null ? $category_id : $values['category_id'];
-        $values['owner_id'] = $owner_id !== null ? $owner_id : $values['owner_id'];
-
-        $this->checkDestinationProjectValues($values);
-
-        return $this->save($task_id, $values);
-    }
-
-    /**
-     * Move a task to another project
-     *
-     * @access public
-     * @param  integer    $task_id
-     * @param  integer    $project_id
-     * @param  integer    $swimlane_id
-     * @param  integer    $column_id
-     * @param  integer    $category_id
-     * @param  integer    $owner_id
-     * @return boolean
-     */
-    public function moveToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
-    {
-        $task = $this->taskFinderModel->getById($task_id);
-
-        $values = array();
-        $values['is_active'] = 1;
-        $values['project_id'] = $project_id;
-        $values['column_id'] = $column_id !== null ? $column_id : $task['column_id'];
-        $values['position'] = $this->taskFinderModel->countByColumnId($project_id, $values['column_id']) + 1;
-        $values['swimlane_id'] = $swimlane_id !== null ? $swimlane_id : $task['swimlane_id'];
-        $values['category_id'] = $category_id !== null ? $category_id : $task['category_id'];
-        $values['owner_id'] = $owner_id !== null ? $owner_id : $task['owner_id'];
-
-        $this->checkDestinationProjectValues($values);
-
-        if ($this->db->table(TaskModel::TABLE)->eq('id', $task['id'])->update($values)) {
-            $this->container['dispatcher']->dispatch(
-                TaskModel::EVENT_MOVE_PROJECT,
-                new TaskEvent(array_merge($task, $values, array('task_id' => $task['id'])))
-            );
-        }
-
-        return true;
+        return $new_task_id;
     }
 
     /**
@@ -191,58 +96,28 @@ class TaskDuplicationModel extends Base
             $values['column_id'] = $values['column_id'] ?: $this->columnModel->getFirstColumnId($values['project_id']);
         }
 
+        // Check if priority exists for destination project
+        $values['priority'] = $this->projectTaskPriorityModel->getPriorityForProject(
+            $values['project_id'],
+            empty($values['priority']) ? 0 : $values['priority']
+        );
+
         return $values;
-    }
-
-    /**
-     * Calculate new due date for new recurrence task
-     *
-     * @access public
-     * @param  array   $values   Task fields
-     */
-    public function calculateRecurringTaskDueDate(array &$values)
-    {
-        if (! empty($values['date_due']) && $values['recurrence_factor'] != 0) {
-            if ($values['recurrence_basedate'] == TaskModel::RECURRING_BASEDATE_TRIGGERDATE) {
-                $values['date_due'] = time();
-            }
-
-            $factor = abs($values['recurrence_factor']);
-            $subtract = $values['recurrence_factor'] < 0;
-
-            switch ($values['recurrence_timeframe']) {
-                case TaskModel::RECURRING_TIMEFRAME_MONTHS:
-                    $interval = 'P' . $factor . 'M';
-                    break;
-                case TaskModel::RECURRING_TIMEFRAME_YEARS:
-                    $interval = 'P' . $factor . 'Y';
-                    break;
-                default:
-                    $interval = 'P' . $factor . 'D';
-            }
-
-            $date_due = new DateTime();
-            $date_due->setTimestamp($values['date_due']);
-
-            $subtract ? $date_due->sub(new DateInterval($interval)) : $date_due->add(new DateInterval($interval));
-
-            $values['date_due'] = $date_due->getTimestamp();
-        }
     }
 
     /**
      * Duplicate fields for the new task
      *
-     * @access private
+     * @access protected
      * @param  integer       $task_id      Task id
      * @return array
      */
-    private function copyFields($task_id)
+    protected function copyFields($task_id)
     {
         $task = $this->taskFinderModel->getById($task_id);
         $values = array();
 
-        foreach ($this->fields_to_duplicate as $field) {
+        foreach ($this->fieldsToDuplicate as $field) {
             $values[$field] = $task[$field];
         }
 
@@ -252,16 +127,16 @@ class TaskDuplicationModel extends Base
     /**
      * Create the new task and duplicate subtasks
      *
-     * @access private
+     * @access protected
      * @param  integer            $task_id      Task id
      * @param  array              $values       Form values
      * @return boolean|integer
      */
-    private function save($task_id, array $values)
+    protected function save($task_id, array $values)
     {
         $new_task_id = $this->taskCreationModel->create($values);
 
-        if ($new_task_id) {
+        if ($new_task_id !== false) {
             $this->subtaskModel->duplicate($task_id, $new_task_id);
         }
 

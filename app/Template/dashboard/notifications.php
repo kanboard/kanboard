@@ -36,10 +36,8 @@
                     <i class="fa fa-file-o fa-fw"></i>
                 <?php endif ?>
 
-                <?php if ($this->text->contains($notification['event_name'], 'task.overdue')): ?>
-                    <?php if (count($notification['event_data']['tasks']) > 1): ?>
-                        <?= $notification['title'] ?>
-                    <?php endif ?>
+                <?php if ($this->text->contains($notification['event_name'], 'task.overdue') && count($notification['event_data']['tasks']) > 1): ?>
+                    <?= $notification['title'] ?>
                 <?php else: ?>
                     <?= $this->url->link($notification['title'], 'WebNotificationController', 'redirect', array('notification_id' => $notification['id'], 'user_id' => $user['id'])) ?>
                 <?php endif ?>

@@ -5,8 +5,8 @@ services:
     ports:
      - "80:80"
     volumes:
-     - kanboard_data:/var/www/kanboard/data
-     - kanboard_plugins:/var/www/kanboard/plugins
+     - kanboard_data:/var/www/app/data
+     - kanboard_plugins:/var/www/app/plugins
 volumes:
   kanboard_data:
     driver: local

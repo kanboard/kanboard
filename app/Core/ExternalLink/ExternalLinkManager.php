@@ -153,6 +153,30 @@ class ExternalLinkManager extends Base
     }
 
     /**
+     * Set provider type
+     *
+     * @access public
+     * @param  string $userInputType
+     * @return ExternalLinkManager
+     */
+    public function setUserInputType($userInputType)
+    {
+        $this->userInputType = $userInputType;
+        return $this;
+    }
+
+    /**
+     * Set external link
+     * @param  string $userInputText
+     * @return ExternalLinkManager
+     */
+    public function setUserInputText($userInputText)
+    {
+        $this->userInputText = $userInputText;
+        return $this;
+    }
+
+    /**
      * Find a provider that user input
      *
      * @access private

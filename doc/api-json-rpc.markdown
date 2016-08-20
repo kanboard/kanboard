@@ -8,25 +8,25 @@ There are two types of API access:
 
 ### Application API
 
-- Access to the API with the user "jsonrpc" and the token available in settings
+- Access to the API with the user "jsonrpc" and the token available on the settings page
 - Access to all procedures
 - No permission checked
 - There is no user session on the server
+- No access to procedures that starts with "My..." (example: "getMe" or "getMyProjects")
 - Example of possible clients: tools to migrate/import data, create tasks from another system, etc...
 
 ### User API
 
 - Access to the API with the user credentials (username and password)
-- Access to a restricted set of procedures
-- The project permissions are checked
+- Application role and project permissions are checked for each procedure
 - A user session is created on the server
-- Example of possible clients: mobile/desktop application, command line utility, etc...
+- Example of possible clients: native mobile/desktop application, command line utility, etc...
 
 Security
 --------
 
-- Always use HTTPS with a valid certificate
-- If you make a mobile application, it's your job to store securely the user credentials on the device
+- Always use HTTPS with a valid certificate (avoid clear text communication)
+- If you make a mobile application, it's your responsability to store securely the user credentials on the device
 - After 3 authentication failure on the user api, the end-user have to unlock his account by using the login form
 - Two factor authentication is not yet available through the API
 
@@ -58,8 +58,12 @@ Usage
 - [Automatic Actions](api-action-procedures.markdown)
 - [Tasks](api-task-procedures.markdown)
 - [Subtasks](api-subtask-procedures.markdown)
-- [Files](api-file-procedures.markdown)
+- [Subtask Time Tracking](api-subtask-time-tracking-procedures.markdown)
+- [Task Files](api-task-file-procedures.markdown)
+- [Project Files](api-project-file-procedures.markdown)
 - [Links](api-link-procedures.markdown)
+- [Internal Task Links](api-internal-task-link-procedures.markdown)
+- [External Task Links](api-external-task-link-procedures.markdown)
 - [Comments](api-comment-procedures.markdown)
 - [Users](api-user-procedures.markdown)
 - [Groups](api-group-procedures.markdown)

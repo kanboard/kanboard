@@ -3,7 +3,6 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Base;
-use Kanboard\Event\TaskLinkEvent;
 
 /**
  * TaskLink model
@@ -26,7 +25,24 @@ class TaskLinkModel extends Base
      *
      * @var string
      */
-    const EVENT_CREATE_UPDATE = 'tasklink.create_update';
+    const EVENT_CREATE_UPDATE = 'task_internal_link.create_update';
+    const EVENT_DELETE        = 'task_internal_link.delete';
+
+    /**
+     * Get projectId from $task_link_id
+     *
+     * @access public
+     * @param  integer $task_link_id
+     * @return integer
+     */
+    public function getProjectId($task_link_id)
+    {
+        return $this->db
+            ->table(self::TABLE)
+            ->eq(self::TABLE.'.id', $task_link_id)
+            ->join(TaskModel::TABLE, 'id', 'task_id')
+            ->findOneColumn(TaskModel::TABLE . '.project_id') ?: 0;
+    }
 
     /**
      * Get a task link
@@ -37,7 +53,19 @@ class TaskLinkModel extends Base
      */
     public function getById($task_link_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $task_link_id)->findOne();
+        return $this->db
+            ->table(self::TABLE)
+            ->columns(
+                self::TABLE.'.id',
+                self::TABLE.'.opposite_task_id',
+                self::TABLE.'.task_id',
+                self::TABLE.'.link_id',
+                LinkModel::TABLE.'.label',
+                LinkModel::TABLE.'.opposite_id AS opposite_link_id'
+            )
+            ->eq(self::TABLE.'.id', $task_link_id)
+            ->join(LinkModel::TABLE, 'id', 'link_id')
+            ->findOne();
     }
 
     /**
@@ -124,62 +152,31 @@ class TaskLinkModel extends Base
     }
 
     /**
-     * Publish events
-     *
-     * @access private
-     * @param  array $events
-     */
-    private function fireEvents(array $events)
-    {
-        foreach ($events as $event) {
-            $event['project_id'] = $this->taskFinderModel->getProjectId($event['task_id']);
-            $this->container['dispatcher']->dispatch(self::EVENT_CREATE_UPDATE, new TaskLinkEvent($event));
-        }
-    }
-
-    /**
      * Create a new link
      *
      * @access public
      * @param  integer   $task_id            Task id
      * @param  integer   $opposite_task_id   Opposite task id
      * @param  integer   $link_id            Link id
-     * @return integer                       Task link id
+     * @return integer|boolean
      */
     public function create($task_id, $opposite_task_id, $link_id)
     {
-        $events = array();
         $this->db->startTransaction();
 
-        // Get opposite link
         $opposite_link_id = $this->linkModel->getOppositeLinkId($link_id);
+        $task_link_id1 = $this->createTaskLink($task_id, $opposite_task_id, $link_id);
+        $task_link_id2 = $this->createTaskLink($opposite_task_id, $task_id, $opposite_link_id);
 
-        $values = array(
-            'task_id' => $task_id,
-            'opposite_task_id' => $opposite_task_id,
-            'link_id' => $link_id,
-        );
-
-        // Create the original task link
-        $this->db->table(self::TABLE)->insert($values);
-        $task_link_id = $this->db->getLastId();
-        $events[] = $values;
-
-        // Create the opposite task link
-        $values = array(
-            'task_id' => $opposite_task_id,
-            'opposite_task_id' => $task_id,
-            'link_id' => $opposite_link_id,
-        );
-
-        $this->db->table(self::TABLE)->insert($values);
-        $events[] = $values;
+        if ($task_link_id1 === false || $task_link_id2 === false) {
+            $this->db->cancelTransaction();
+            return false;
+        }
 
         $this->db->closeTransaction();
+        $this->fireEvents(array($task_link_id1, $task_link_id2), self::EVENT_CREATE_UPDATE);
 
-        $this->fireEvents($events);
-
-        return (int) $task_link_id;
+        return $task_link_id1;
     }
 
     /**
@@ -194,46 +191,24 @@ class TaskLinkModel extends Base
      */
     public function update($task_link_id, $task_id, $opposite_task_id, $link_id)
     {
-        $events = array();
         $this->db->startTransaction();
 
-        // Get original task link
         $task_link = $this->getById($task_link_id);
-
-        // Find opposite task link
         $opposite_task_link = $this->getOppositeTaskLink($task_link);
-
-        // Get opposite link
         $opposite_link_id = $this->linkModel->getOppositeLinkId($link_id);
 
-        // Update the original task link
-        $values = array(
-            'task_id' => $task_id,
-            'opposite_task_id' => $opposite_task_id,
-            'link_id' => $link_id,
-        );
+        $result1 = $this->updateTaskLink($task_link_id, $task_id, $opposite_task_id, $link_id);
+        $result2 = $this->updateTaskLink($opposite_task_link['id'], $opposite_task_id, $task_id, $opposite_link_id);
 
-        $rs1 = $this->db->table(self::TABLE)->eq('id', $task_link_id)->update($values);
-        $events[] = $values;
-
-        // Update the opposite link
-        $values = array(
-            'task_id' => $opposite_task_id,
-            'opposite_task_id' => $task_id,
-            'link_id' => $opposite_link_id,
-        );
-
-        $rs2 = $this->db->table(self::TABLE)->eq('id', $opposite_task_link['id'])->update($values);
-        $events[] = $values;
-
-        $this->db->closeTransaction();
-
-        if ($rs1 && $rs2) {
-            $this->fireEvents($events);
-            return true;
+        if ($result1 === false || $result2 === false) {
+            $this->db->cancelTransaction();
+            return false;
         }
 
-        return false;
+        $this->db->closeTransaction();
+        $this->fireEvents(array($task_link_id, $opposite_task_link['id']), self::EVENT_CREATE_UPDATE);
+
+        return true;
     }
 
     /**
@@ -245,21 +220,83 @@ class TaskLinkModel extends Base
      */
     public function remove($task_link_id)
     {
+        $this->taskLinkEventJob->execute($task_link_id, self::EVENT_DELETE);
+
         $this->db->startTransaction();
 
         $link = $this->getById($task_link_id);
         $link_id = $this->linkModel->getOppositeLinkId($link['link_id']);
 
-        $this->db->table(self::TABLE)->eq('id', $task_link_id)->remove();
+        $result1 = $this->db
+            ->table(self::TABLE)
+            ->eq('id', $task_link_id)
+            ->remove();
 
-        $this->db
+        $result2 = $this->db
             ->table(self::TABLE)
             ->eq('opposite_task_id', $link['task_id'])
             ->eq('task_id', $link['opposite_task_id'])
-            ->eq('link_id', $link_id)->remove();
+            ->eq('link_id', $link_id)
+            ->remove();
+
+        if ($result1 === false || $result2 === false) {
+            $this->db->cancelTransaction();
+            return false;
+        }
 
         $this->db->closeTransaction();
 
         return true;
+    }
+
+    /**
+     * Publish events
+     *
+     * @access protected
+     * @param  integer[] $task_link_ids
+     * @param  string    $eventName
+     */
+    protected function fireEvents(array $task_link_ids, $eventName)
+    {
+        foreach ($task_link_ids as $task_link_id) {
+            $this->queueManager->push($this->taskLinkEventJob->withParams($task_link_id, $eventName));
+        }
+    }
+
+    /**
+     * Create task link
+     *
+     * @access protected
+     * @param  integer $task_id
+     * @param  integer $opposite_task_id
+     * @param  integer $link_id
+     * @return integer|boolean
+     */
+    protected function createTaskLink($task_id, $opposite_task_id, $link_id)
+    {
+        return $this->db->table(self::TABLE)->persist(array(
+            'task_id'          => $task_id,
+            'opposite_task_id' => $opposite_task_id,
+            'link_id'          => $link_id,
+        ));
+    }
+
+    /**
+     * Update task link
+     *
+     * @access protected
+     * @param  integer $task_link_id
+     * @param  integer $task_id
+     * @param  integer $opposite_task_id
+     * @param  integer $link_id
+     * @return boolean
+     */
+    protected function updateTaskLink($task_link_id, $task_id, $opposite_task_id, $link_id)
+    {
+        return $this->db->table(self::TABLE)->eq('id', $task_link_id)->update(array(
+            'task_id' => $task_id,
+            'opposite_task_id' => $opposite_task_id,
+            'link_id' => $link_id,
+        ));
     }
 }

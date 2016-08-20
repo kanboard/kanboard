@@ -22,6 +22,7 @@ Using Kanboard
 - [Project Types](project-types.markdown)
 - [Creating projects](creating-projects.markdown)
 - [Editing projects](editing-projects.markdown)
+- [Removing projects](removing-projects.markdown)
 - [Sharing boards and tasks](sharing-projects.markdown)
 - [Automatic actions](automatic-actions.markdown)
 - [Project permissions](project-permissions.markdown)
@@ -46,6 +47,7 @@ Using Kanboard
 - [Subtasks](subtasks.markdown)
 - [Analytics for tasks](analytics-tasks.markdown)
 - [User mentions](user-mentions.markdown)
+- [Tags](tags.markdown)
 
 ### Working with users and groups
 

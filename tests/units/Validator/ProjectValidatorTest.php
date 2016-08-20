@@ -55,13 +55,19 @@ class ProjectValidatorTest extends Base
         $r = $validator->validateModification(array('id' => 1, 'name' => 'test', 'identifier' => 'TEST1'));
         $this->assertTrue($r[0]);
 
-        $r = $validator->validateModification(array('id' => 1, 'name' => 'test', 'identifier' => 'test3'));
+        $r = $validator->validateModification(array('id' => 1, 'identifier' => 'test3'));
         $this->assertTrue($r[0]);
 
-        $r = $validator->validateModification(array('id' => 1, 'name' => 'test', 'identifier' => ''));
+        $r = $validator->validateModification(array('id' => 1, 'identifier' => ''));
         $this->assertTrue($r[0]);
 
-        $r = $validator->validateModification(array('id' => 1, 'name' => 'test', 'identifier' => 'TEST2'));
+        $r = $validator->validateModification(array('id' => 1, 'identifier' => 'TEST2'));
+        $this->assertFalse($r[0]);
+
+        $r = $validator->validateModification(array('id' => 1, 'name' => ''));
+        $this->assertFalse($r[0]);
+
+        $r = $validator->validateModification(array('id' => 1, 'name' => null));
         $this->assertFalse($r[0]);
     }
 }

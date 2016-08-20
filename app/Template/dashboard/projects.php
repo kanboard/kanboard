@@ -6,8 +6,8 @@
 <?php else: ?>
     <table class="table-fixed table-small">
         <tr>
-            <th class="column-5"><?= $paginator->order('Id', 'id') ?></th>
-            <th class="column-3"><?= $paginator->order('<i class="fa fa-lock fa-fw" title="'.t('Private project').'"></i>', 'is_private') ?></th>
+            <th class="column-5"><?= $paginator->order('Id', \Kanboard\Model\ProjectModel::TABLE.'.id') ?></th>
+            <th class="column-3"><?= $paginator->order('<i class="fa fa-lock fa-fw" title="'.t('Private project').'"></i>', \Kanboard\Model\ProjectModel::TABLE.'.is_private') ?></th>
             <th class="column-25"><?= $paginator->order(t('Project'), \Kanboard\Model\ProjectModel::TABLE.'.name') ?></th>
             <th class="column-10"><?= t('Tasks') ?></th>
             <th><?= t('Columns') ?></th>

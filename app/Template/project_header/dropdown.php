@@ -20,14 +20,6 @@
                 <i class="fa fa-arrows-h fa-fw"></i> <a href="#" class="filter-toggle-scrolling" title="<?= t('Keyboard shortcut: "%s"', 'c') ?>"><?= t('Horizontal scrolling') ?></a>
             </span>
         </li>
-        <li>
-            <span class="filter-max-height" style="display: none">
-                <i class="fa fa-arrows-v fa-fw"></i> <a href="#" class="filter-toggle-height"><?= t('Set maximum column height') ?></a>
-            </span>
-            <span class="filter-min-height">
-                <i class="fa fa-arrows-v fa-fw"></i> <a href="#" class="filter-toggle-height"><?= t('Remove maximum column height') ?></a>
-            </span>
-        </li>
         <?php endif ?>
 
         <?php if ($this->user->hasProjectAccess('TaskCreationController', 'show', $project['id'])): ?>

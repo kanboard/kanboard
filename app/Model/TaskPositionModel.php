@@ -3,7 +3,6 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Base;
-use Kanboard\Event\TaskEvent;
 
 /**
  * Task Position
@@ -17,15 +16,16 @@ class TaskPositionModel extends Base
      * Move a task to another column or to another position
      *
      * @access public
-     * @param  integer    $project_id        Project id
-     * @param  integer    $task_id           Task id
-     * @param  integer    $column_id         Column id
-     * @param  integer    $position          Position (must be >= 1)
-     * @param  integer    $swimlane_id       Swimlane id
-     * @param  boolean    $fire_events       Fire events
-     * @return boolean
+     * @param  integer $project_id  Project id
+     * @param  integer $task_id     Task id
+     * @param  integer $column_id   Column id
+     * @param  integer $position    Position (must be >= 1)
+     * @param  integer $swimlane_id Swimlane id
+     * @param  boolean $fire_events Fire events
+     * @param  bool    $onlyOpen    Do not move closed tasks
+     * @return bool
      */
-    public function movePosition($project_id, $task_id, $column_id, $position, $swimlane_id = 0, $fire_events = true)
+    public function movePosition($project_id, $task_id, $column_id, $position, $swimlane_id = 0, $fire_events = true, $onlyOpen = true)
     {
         if ($position < 1) {
             return false;
@@ -33,7 +33,7 @@ class TaskPositionModel extends Base
 
         $task = $this->taskFinderModel->getById($task_id);
 
-        if ($task['is_active'] == TaskModel::STATUS_CLOSED) {
+        if ($onlyOpen && $task['is_active'] == TaskModel::STATUS_CLOSED) {
             return true;
         }
 
@@ -212,8 +212,7 @@ class TaskPositionModel extends Base
      */
     private function fireEvents(array $task, $new_column_id, $new_position, $new_swimlane_id)
     {
-        $event_data = array(
-            'task_id' => $task['id'],
+        $changes = array(
             'project_id' => $task['project_id'],
             'position' => $new_position,
             'column_id' => $new_column_id,
@@ -226,14 +225,26 @@ class TaskPositionModel extends Base
         );
 
         if ($task['swimlane_id'] != $new_swimlane_id) {
-            $this->logger->debug('Event fired: '.TaskModel::EVENT_MOVE_SWIMLANE);
-            $this->dispatcher->dispatch(TaskModel::EVENT_MOVE_SWIMLANE, new TaskEvent($event_data));
+            $this->queueManager->push($this->taskEventJob->withParams(
+                $task['id'],
+                array(TaskModel::EVENT_MOVE_SWIMLANE),
+                $changes,
+                $changes
+            ));
         } elseif ($task['column_id'] != $new_column_id) {
-            $this->logger->debug('Event fired: '.TaskModel::EVENT_MOVE_COLUMN);
-            $this->dispatcher->dispatch(TaskModel::EVENT_MOVE_COLUMN, new TaskEvent($event_data));
+            $this->queueManager->push($this->taskEventJob->withParams(
+                $task['id'],
+                array(TaskModel::EVENT_MOVE_COLUMN),
+                $changes,
+                $changes
+            ));
         } elseif ($task['position'] != $new_position) {
-            $this->logger->debug('Event fired: '.TaskModel::EVENT_MOVE_POSITION);
-            $this->dispatcher->dispatch(TaskModel::EVENT_MOVE_POSITION, new TaskEvent($event_data));
+            $this->queueManager->push($this->taskEventJob->withParams(
+                $task['id'],
+                array(TaskModel::EVENT_MOVE_POSITION),
+                $changes,
+                $changes
+            ));
         }
     }
 }

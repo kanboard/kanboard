@@ -53,6 +53,19 @@ div.task-board-status-closed {
     text-overflow: ellipsis;
 }
 
+/* board saving state */
+.task-board-saving-state {
+    opacity: 0.3;
+}
+
+.task-board-saving-icon {
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    color: #000;
+}
+
 /* title one the card */
 .task-board-title {
     font-size: 1.15em;
@@ -81,6 +94,21 @@ div.task-board-status-closed {
 
 .task-board-category:hover {
     opacity: 0.6;
+}
+
+/* tags list */
+.task-tags li {
+    display: inline;
+    margin: 0;
+    margin-right: 4px;
+    padding: 2px;
+    color: #666;
+    border: 1px solid #666;
+    border-radius: 2px;
+}
+
+.task-summary-container .task-tags {
+    margin-top: 10px;
 }
 
 /* avatars on the card */
@@ -181,6 +209,9 @@ span.task-board-age-column {
     border: 2px solid #000;
     border-radius: 8px;
     padding: 15px;
+}
+
+.task-summary-columns {
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: row;
@@ -225,28 +256,29 @@ span.task-board-age-column {
 
 /* color picker */
 .color-picker {
-    min-height: 35px;
+    width: 180px;
 }
 
-.color-square {
+.color-picker-option {
+    height: 25px;
+}
+
+.color-picker-square {
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: 18px;
+    height: 18px;
     margin-right: 5px;
-    margin-bottom: 5px;
     border: 1px solid #000;
-    cursor: pointer;
 }
 
-.color-square:hover {
-    border-style: dotted;
+.color-picker-label {
+    display: inline-block;
+    vertical-align: bottom;
+    padding-bottom: 3px;
 }
 
-div.color-square-selected {
-    border-width: 2px;
-    width: 28px;
-    height: 28px;
-    box-shadow: 3px 2px 10px 0 rgba(180,180,180,0.9);
+#select2-form-color_id-results li.select2-results__option {
+    padding: 3px;
 }
 
 /* Assign to me */

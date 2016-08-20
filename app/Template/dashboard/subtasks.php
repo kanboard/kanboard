@@ -6,10 +6,10 @@
 <?php else: ?>
     <table class="table-fixed table-small">
         <tr>
-            <th class="column-5"><?= $paginator->order('Id', 'tasks.id') ?></th>
+            <th class="column-5"><?= $paginator->order('Id', \Kanboard\Model\TaskModel::TABLE.'.id') ?></th>
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
             <th><?= $paginator->order(t('Task'), 'task_name') ?></th>
-            <th><?= $paginator->order(t('Subtask'), 'title') ?></th>
+            <th><?= $paginator->order(t('Subtask'), \Kanboard\Model\SubtaskModel::TABLE.'.title') ?></th>
             <th class="column-20"><?= t('Time tracking') ?></th>
         </tr>
         <?php foreach ($paginator->getCollection() as $subtask): ?>

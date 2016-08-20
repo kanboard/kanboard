@@ -42,9 +42,13 @@ class QueueManager extends Base
      */
     public function push(BaseJob $job)
     {
+        $jobClassName = get_class($job);
+
         if ($this->queue !== null) {
+            $this->logger->debug(__METHOD__.': Job pushed in queue: '.$jobClassName);
             $this->queue->push(JobHandler::getInstance($this->container)->serializeJob($job));
         } else {
+            $this->logger->debug(__METHOD__.': Job executed synchronously: '.$jobClassName);
             call_user_func_array(array($job, 'execute'), $job->getJobParams());
         }
 
@@ -60,7 +64,7 @@ class QueueManager extends Base
     public function listen()
     {
         if ($this->queue === null) {
-            throw new LogicException('No Queue Driver defined!');
+            throw new LogicException('No queue driver defined!');
         }
 
         while ($job = $this->queue->pull()) {

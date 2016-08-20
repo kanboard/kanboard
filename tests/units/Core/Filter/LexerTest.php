@@ -202,4 +202,60 @@ class LexerTest extends Base
 
         $this->assertSame($expected, $lexer->tokenize('६Δↈ五一'));
     }
+
+    public function testTokenizeWithMultipleValues()
+    {
+        $lexer = new Lexer();
+        $lexer->addToken("/^(tag:)/", 'T_TAG');
+
+        $expected = array(
+            'T_TAG' => array('tag 1', 'tag2'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('tag:"tag 1" tag:tag2'));
+    }
+
+    public function testTokenizeWithDash()
+    {
+        $lexer = new Lexer();
+        $lexer->addToken("/^(test:)/", 'T_TEST');
+
+        $expected = array(
+            'T_TEST' => array('PO-123'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('test:PO-123'));
+
+        $lexer = new Lexer();
+        $lexer->setDefaultToken('myDefaultToken');
+
+        $expected = array(
+            'myDefaultToken' => array('PO-123'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('PO-123'));
+    }
+
+    public function testTokenizeWithUnderscore()
+    {
+        $lexer = new Lexer();
+        $lexer->addToken("/^(test:)/", 'T_TEST');
+
+        $expected = array(
+            'T_TEST' => array('PO_123'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('test:PO_123'));
+
+        $lexer = new Lexer();
+        $lexer->addToken("/^(test:)/", 'T_TEST');
+        $lexer->setDefaultToken('myDefaultToken');
+
+        $expected = array(
+            'T_TEST' => array('ABC-123'),
+            'myDefaultToken' => array('PO_123'),
+        );
+
+        $this->assertSame($expected, $lexer->tokenize('test:ABC-123 PO_123'));
+    }
 }

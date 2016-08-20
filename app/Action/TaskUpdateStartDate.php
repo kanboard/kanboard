@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Set the start date of task
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskUpdateStartDate extends Base
@@ -59,7 +59,10 @@ class TaskUpdateStartDate extends Base
     {
         return array(
             'task_id',
-            'column_id',
+            'task' => array(
+                'project_id',
+                'column_id',
+            ),
         );
     }
 
@@ -89,6 +92,6 @@ class TaskUpdateStartDate extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['column_id'] == $this->getParam('column_id');
+        return $data['task']['column_id'] == $this->getParam('column_id');
     }
 }

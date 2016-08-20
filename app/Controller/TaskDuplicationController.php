@@ -50,7 +50,7 @@ class TaskDuplicationController extends BaseController
             $values = $this->request->getValues();
             list($valid, ) = $this->taskValidator->validateProjectModification($values);
 
-            if ($valid && $this->taskDuplicationModel->moveToProject($task['id'],
+            if ($valid && $this->taskProjectMoveModel->moveToProject($task['id'],
                                                                 $values['project_id'],
                                                                 $values['swimlane_id'],
                                                                 $values['column_id'],
@@ -80,7 +80,7 @@ class TaskDuplicationController extends BaseController
             list($valid, ) = $this->taskValidator->validateProjectModification($values);
 
             if ($valid) {
-                $task_id = $this->taskDuplicationModel->duplicateToProject(
+                $task_id = $this->taskProjectDuplicationModel->duplicateToProject(
                     $task['id'], $values['project_id'], $values['swimlane_id'],
                     $values['column_id'], $values['category_id'], $values['owner_id']
                 );

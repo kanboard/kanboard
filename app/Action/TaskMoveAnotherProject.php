@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Move a task to another project
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Frederic Guillot
  */
 class TaskMoveAnotherProject extends Base
@@ -61,8 +61,10 @@ class TaskMoveAnotherProject extends Base
     {
         return array(
             'task_id',
-            'column_id',
-            'project_id',
+            'task' => array(
+                'project_id',
+                'column_id',
+            )
         );
     }
 
@@ -75,7 +77,7 @@ class TaskMoveAnotherProject extends Base
      */
     public function doAction(array $data)
     {
-        return $this->taskDuplicationModel->moveToProject($data['task_id'], $this->getParam('project_id'));
+        return $this->taskProjectMoveModel->moveToProject($data['task_id'], $this->getParam('project_id'));
     }
 
     /**
@@ -87,6 +89,6 @@ class TaskMoveAnotherProject extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['column_id'] == $this->getParam('column_id') && $data['project_id'] != $this->getParam('project_id');
+        return $data['task']['column_id'] == $this->getParam('column_id') && $data['task']['project_id'] != $this->getParam('project_id');
     }
 }

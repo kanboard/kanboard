@@ -15,9 +15,11 @@ use Pimple\ServiceProviderInterface;
 class QueueProvider implements ServiceProviderInterface
 {
     /**
-     * Registers services on the given container.
+     * Register providers
      *
-     * @param Container $container
+     * @access public
+     * @param  \Pimple\Container $container
+     * @return \Pimple\Container
      */
     public function register(Container $container)
     {

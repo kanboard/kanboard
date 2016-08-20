@@ -61,6 +61,14 @@ select:focus {
     outline: 0;
 }
 
+.tag-autocomplete {
+    width: 400px;
+}
+
+span.select2-container {
+    margin-top: 2px;
+}
+
 ::-webkit-input-placeholder {
     color: #ddd;
     padding-top: 2px;
@@ -146,21 +154,19 @@ input.form-input-large {
     width: 400px;
 }
 
+input.form-input-small {
+    width: 150px;
+}
+
+.form-columns {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
 .form-column {
-    float: left;
-    margin-right: 3%;
-    max-width: 50%;
-    min-width: 40%;
-}
-
-.form-column ul {
-    margin-top: 15px;
-}
-
-.form-clear {
-    clear: both;
-    padding-top: 20px;
-    padding-bottom: 10px;
+    margin-right: 25px;
 }
 
 .form-login {
@@ -169,7 +175,6 @@ input.form-input-large {
     margin-top: 8%;
 }
 
-.form-column li,
 .form-login li {
     margin-left: 25px;
     line-height: 25px;

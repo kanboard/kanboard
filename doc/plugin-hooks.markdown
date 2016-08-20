@@ -155,6 +155,7 @@ List of template hooks:
 | `template:board:public:task:after-title`   | Task in public board: after title                  |
 | `template:board:task:footer`               | Task in board: footer                              |
 | `template:board:task:icons`                | Task in board: tooltip icon                        |
+| `template:board:column:dropdown`           | Dropdown menu in board columns                     |
 | `template:config:sidebar`                  | Sidebar on settings page                           |
 | `template:config:application `             | Application settings form                          |
 | `template:config:email`                    | Email settings page                                |
@@ -162,7 +163,8 @@ List of template hooks:
 | `template:dashboard:sidebar`               | Sidebar on dashboard page                          |
 | `template:export:sidebar`                  | Sidebar on export pages                            |
 | `template:import:sidebar`                  | Sidebar on import pages                            |
-| `template:header:dropdown`                 | Dropdown on header                                 |
+| `template:header:dropdown`                 | Page header dropdown menu (user avatar icon)       |
+| `template:header:creation-dropdown`        | Page header dropdown menu (plus icon)              |
 | `template:layout:head`                     | Page layout `<head/>` tag                          |
 | `template:layout:top`                      | Page layout top header                             |
 | `template:layout:bottom`                   | Page layout footer                                 |
@@ -182,8 +184,9 @@ List of template hooks:
 | `template:task:dropdown`                   | Task dropdown menu in listing pages                |
 | `template:task:sidebar:actions`            | Sidebar on task page (section actions)             |
 | `template:task:sidebar:information`        | Sidebar on task page (section information)         |
-| `template:task:form:left-column`           | Left column in task form                           |
-| `template:task:form:right-column`          | Right column in task form                          |
+| `template:task:form:first-column`          | 1st column in task form                            |
+| `template:task:form:second-column`         | 2nd column in task form                            |
+| `template:task:form:third-column`          | 3nd column in task form                            |
 | `template:task:show:top   `                | Show task page: top                                |
 | `template:task:show:bottom`                | Show task page: bottom                             |
 | `template:task:show:before-description`    | Show task page: before description                 |

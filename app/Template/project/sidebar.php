@@ -1,5 +1,4 @@
 <div class="sidebar">
-    <h2><?= t('Actions') ?></h2>
     <ul>
         <li <?= $this->app->checkMenuSelection('ProjectViewController', 'show') ?>>
             <?= $this->url->link(t('Summary'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>
@@ -31,6 +30,9 @@
             </li>
             <li <?= $this->app->checkMenuSelection('CategoryController') ?>>
                 <?= $this->url->link(t('Categories'), 'CategoryController', 'index', array('project_id' => $project['id'])) ?>
+            </li>
+            <li <?= $this->app->checkMenuSelection('ProjectTagController') ?>>
+                <?= $this->url->link(t('Tags'), 'ProjectTagController', 'index', array('project_id' => $project['id'])) ?>
             </li>
             <?php if ($project['is_private'] == 0): ?>
             <li <?= $this->app->checkMenuSelection('ProjectPermissionController') ?>>

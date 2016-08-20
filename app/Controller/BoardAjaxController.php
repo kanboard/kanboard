@@ -134,7 +134,7 @@ class BoardAjaxController extends BaseController
             'board_highlight_period' => $this->configModel->get('board_highlight_period'),
             'swimlanes' => $this->taskLexer
                 ->build($this->userSession->getFilters($project_id))
-                ->format(BoardFormatter::getInstance($this->container)->setProjectId($project_id))
+                ->format(BoardFormatter::getInstance($this->container)->withProjectId($project_id))
         ));
     }
 }

@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 /**
  * Add a comment of the triggering event to the task description.
  *
- * @package action
+ * @package Kanboard\Action
  * @author  Oren Ben-Kiki
  */
 class CommentCreationMoveTaskColumn extends Base
@@ -55,7 +55,13 @@ class CommentCreationMoveTaskColumn extends Base
      */
     public function getEventRequiredParameters()
     {
-        return array('task_id', 'column_id');
+        return array(
+            'task_id',
+            'task' => array(
+                'column_id',
+                'project_id',
+            ),
+        );
     }
 
     /**
@@ -71,7 +77,7 @@ class CommentCreationMoveTaskColumn extends Base
             return false;
         }
 
-        $column = $this->columnModel->getById($data['column_id']);
+        $column = $this->columnModel->getById($data['task']['column_id']);
 
         return (bool) $this->commentModel->create(array(
             'comment' => t('Moved to column %s', $column['title']),
@@ -89,6 +95,6 @@ class CommentCreationMoveTaskColumn extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['column_id'] == $this->getParam('column_id');
+        return $data['task']['column_id'] == $this->getParam('column_id');
     }
 }

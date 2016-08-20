@@ -156,6 +156,10 @@ class LayoutHelper extends Base
      */
     public function analytic($template, array $params)
     {
+        if (isset($params['project']['name'])) {
+            $params['title'] = $params['project']['name'].' &gt; '.$params['title'];
+        }
+
         return $this->subLayout('analytic/layout', 'analytic/sidebar', $template, $params);
     }
 

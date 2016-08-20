@@ -142,7 +142,7 @@ class LetterAvatarProvider extends Base implements AvatarProviderInterface
 
         // Make hash more sensitive for short string like 'a', 'b', 'c'
         $str .= 'x';
-        $max = intval(9007199254740991 / $seed2);
+        $max = intval(PHP_INT_MAX / $seed2);
 
         for ($i = 0, $ilen = mb_strlen($str, 'UTF-8'); $i < $ilen; $i++) {
             if ($hash > $max) {

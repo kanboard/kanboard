@@ -267,6 +267,29 @@ class ProjectPermissionTest extends Base
         $this->assertEquals(array(1), $projectPermission->getActiveProjectIds(3));
     }
 
+    public function testGetProjectIds()
+    {
+        $userModel = new UserModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $userRoleModel = new ProjectUserRoleModel($this->container);
+        $projectPermission = new ProjectPermissionModel($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user 2')));
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2', 'is_active' => 0)));
+
+        $this->assertTrue($userRoleModel->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(2, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
+        $this->assertTrue($userRoleModel->addUser(2, 3, Role::PROJECT_MEMBER));
+
+        $this->assertEmpty($projectPermission->getProjectIds(1));
+        $this->assertEquals(array(1, 2), $projectPermission->getProjectIds(2));
+        $this->assertEquals(array(1, 2), $projectPermission->getProjectIds(3));
+    }
+
     public function testDuplicate()
     {
         $userModel = new UserModel($this->container);

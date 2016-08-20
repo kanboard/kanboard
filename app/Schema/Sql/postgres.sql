@@ -98,7 +98,8 @@ CREATE TABLE "columns" (
     "position" integer,
     "project_id" integer NOT NULL,
     "task_limit" integer DEFAULT 0,
-    "description" "text"
+    "description" "text",
+    "hide_in_dashboard" boolean DEFAULT false
 );
 
 
@@ -740,6 +741,36 @@ ALTER SEQUENCE "swimlanes_id_seq" OWNED BY "swimlanes"."id";
 
 
 --
+-- Name: tags; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE "tags" (
+    "id" integer NOT NULL,
+    "name" character varying(255) NOT NULL,
+    "project_id" integer NOT NULL
+);
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE "tags_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE "tags_id_seq" OWNED BY "tags"."id";
+
+
+--
 -- Name: task_has_external_links; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -871,6 +902,16 @@ CREATE SEQUENCE "task_has_subtasks_id_seq"
 --
 
 ALTER SEQUENCE "task_has_subtasks_id_seq" OWNED BY "subtasks"."id";
+
+
+--
+-- Name: task_has_tags; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE "task_has_tags" (
+    "task_id" integer NOT NULL,
+    "tag_id" integer NOT NULL
+);
 
 
 --
@@ -1236,6 +1277,13 @@ ALTER TABLE ONLY "swimlanes" ALTER COLUMN "id" SET DEFAULT "nextval"('"swimlanes
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY "tags" ALTER COLUMN "id" SET DEFAULT "nextval"('"tags_id_seq"'::"regclass");
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY "task_has_external_links" ALTER COLUMN "id" SET DEFAULT "nextval"('"task_has_external_links_id_seq"'::"regclass");
 
 
@@ -1545,6 +1593,22 @@ ALTER TABLE ONLY "swimlanes"
 
 
 --
+-- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "tags"
+    ADD CONSTRAINT "tags_pkey" PRIMARY KEY ("id");
+
+
+--
+-- Name: tags_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "tags"
+    ADD CONSTRAINT "tags_project_id_name_key" UNIQUE ("project_id", "name");
+
+
+--
 -- Name: task_has_external_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1582,6 +1646,14 @@ ALTER TABLE ONLY "task_has_metadata"
 
 ALTER TABLE ONLY "subtasks"
     ADD CONSTRAINT "task_has_subtasks_pkey" PRIMARY KEY ("id");
+
+
+--
+-- Name: task_has_tags_tag_id_task_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "task_has_tags"
+    ADD CONSTRAINT "task_has_tags_tag_id_task_id_key" UNIQUE ("tag_id", "task_id");
 
 
 --
@@ -2031,6 +2103,22 @@ ALTER TABLE ONLY "subtasks"
 
 
 --
+-- Name: task_has_tags_tag_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "task_has_tags"
+    ADD CONSTRAINT "task_has_tags_tag_id_fkey" FOREIGN KEY ("tag_id") REFERENCES "tags"("id") ON DELETE CASCADE;
+
+
+--
+-- Name: task_has_tags_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "task_has_tags"
+    ADD CONSTRAINT "task_has_tags_task_id_fkey" FOREIGN KEY ("task_id") REFERENCES "tasks"("id") ON DELETE CASCADE;
+
+
+--
 -- Name: tasks_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2155,8 +2243,8 @@ INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_high
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_public_refresh_interval', '60', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_private_refresh_interval', '10', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_columns', '', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', '85b9f242e49f4c50176591a2f9b812c626384b89ff985a02068455a5be07', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', '207d1aaeb9d6d5c01f9ef1e6d61baca86c4c66fdd0b95e76b5c5953681e4', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', 'c9a7c2a4523f1724b2ca047c5685f8e2b26bba47eb69baf4f22d5d50d837', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', 'c57a6cb1789269547b616454e4e2f06d3de0514f83baf8fa5b5a8af44a08', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_language', 'en_US', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_timezone', 'UTC', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_url', '', 0, 0);
@@ -2225,4 +2313,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$kliMGeKgDYtx9Igek9jGDu0eZM.KXivgzvqtnMuWMkjvZiIc.8p8S', 'app-admin');INSERT INTO schema_version VALUES ('89');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$yUJ9QnhG.f47yO.YvWKo3eMAHULukpluDNTOF9.Z7QQg0vOfFRB6u', 'app-admin');INSERT INTO schema_version VALUES ('91');

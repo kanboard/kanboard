@@ -1,6 +1,4 @@
 <div class="sidebar">
-    <h2><?= t('Actions') ?></h2>
-
     <?= $this->form->select(
             'user_id',
             $users,

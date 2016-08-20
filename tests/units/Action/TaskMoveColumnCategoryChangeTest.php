@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Event\GenericEvent;
+use Kanboard\Event\TaskEvent;
 use Kanboard\Model\CategoryModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\TaskFinderModel;
@@ -24,7 +24,16 @@ class TaskMoveColumnCategoryChangeTest extends Base
         $this->assertEquals(1, $categoryModel->create(array('name' => 'c1', 'project_id' => 1)));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
 
-        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'column_id' => 1, 'category_id' => 1));
+        $event = new TaskEvent(array(
+            'task_id' => 1,
+            'task' => array(
+                'project_id' => 1,
+                'column_id' => 1,
+                'category_id' => 1,
+                'position' => 1,
+                'swimlane_id' => 0,
+            )
+        ));
 
         $action = new TaskMoveColumnCategoryChange($this->container);
         $action->setProjectId(1);
@@ -50,7 +59,14 @@ class TaskMoveColumnCategoryChangeTest extends Base
         $this->assertEquals(1, $categoryModel->create(array('name' => 'c1', 'project_id' => 1)));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
 
-        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'column_id' => 2, 'category_id' => 1));
+        $event = new TaskEvent(array(
+            'task_id' => 1,
+            'task' => array(
+                'project_id' => 1,
+                'column_id' => 2,
+                'category_id' => 1,
+            )
+        ));
 
         $action = new TaskMoveColumnCategoryChange($this->container);
         $action->setProjectId(1);
@@ -72,7 +88,14 @@ class TaskMoveColumnCategoryChangeTest extends Base
         $this->assertEquals(2, $categoryModel->create(array('name' => 'c2', 'project_id' => 1)));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
 
-        $event = new GenericEvent(array('project_id' => 1, 'task_id' => 1, 'column_id' => 1, 'category_id' => 2));
+        $event = new TaskEvent(array(
+            'task_id' => 1,
+            'task' => array(
+                'project_id' => 1,
+                'column_id' => 1,
+                'category_id' => 2,
+            )
+        ));
 
         $action = new TaskMoveColumnCategoryChange($this->container);
         $action->setProjectId(1);

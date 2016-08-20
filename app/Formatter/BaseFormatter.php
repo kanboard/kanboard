@@ -3,8 +3,8 @@
 namespace Kanboard\Formatter;
 
 use Kanboard\Core\Base;
-use Kanboard\Core\Filter\FormatterInterface;
 use PicoDb\Table;
+use Pimple\Container;
 
 /**
  * Class BaseFormatter
@@ -23,11 +23,24 @@ abstract class BaseFormatter extends Base
     protected $query;
 
     /**
+     * Get object instance
+     *
+     * @static
+     * @access public
+     * @param  Container $container
+     * @return static
+     */
+    public static function getInstance(Container $container)
+    {
+        return new static($container);
+    }
+
+    /**
      * Set query
      *
      * @access public
      * @param  Table $query
-     * @return FormatterInterface
+     * @return $this
      */
     public function withQuery(Table $query)
     {

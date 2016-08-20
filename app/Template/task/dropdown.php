@@ -8,20 +8,8 @@
         </li>
         <?php endif ?>
         <li>
-            <i class="fa fa-user fa-fw"></i>
-            <?= $this->url->link(t('Change assignee'), 'TaskPopoverController', 'changeAssignee', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
-        </li>
-        <li>
-            <i class="fa fa-tag fa-fw"></i>
-            <?= $this->url->link(t('Change category'), 'TaskPopoverController', 'changeCategory', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
-        </li>
-        <li>
             <i class="fa fa-pencil-square-o fa-fw"></i>
             <?= $this->url->link(t('Edit the task'), 'TaskModificationController', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
-        </li>
-        <li>
-            <i class="fa fa-align-left fa-fw"></i>
-            <?= $this->url->link(t('Edit the description'), 'TaskModificationController', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
         <li>
             <i class="fa fa-plus fa-fw"></i>

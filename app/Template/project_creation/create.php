@@ -19,13 +19,14 @@
             <p class="alert"><?= t('Which parts of the project do you want to duplicate?') ?></p>
 
             <?php if (! $is_private): ?>
-                <?= $this->form->checkbox('projectPermission', t('Permissions'), 1, true) ?>
+                <?= $this->form->checkbox('projectPermissionModel', t('Permissions'), 1, true) ?>
             <?php endif ?>
 
             <?= $this->form->checkbox('categoryModel', t('Categories'), 1, true) ?>
+            <?= $this->form->checkbox('tagDuplicationModel', t('Tags'), 1, true) ?>
             <?= $this->form->checkbox('actionModel', t('Actions'), 1, true) ?>
             <?= $this->form->checkbox('swimlaneModel', t('Swimlanes'), 1, true) ?>
-            <?= $this->form->checkbox('taskModel', t('Tasks'), 1, false) ?>
+            <?= $this->form->checkbox('projectTaskDuplicationModel', t('Tasks'), 1, false) ?>
         </div>
 
         <div class="form-actions">

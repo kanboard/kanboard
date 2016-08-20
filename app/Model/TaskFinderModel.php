@@ -63,25 +63,26 @@ class TaskFinderModel extends Base
         return $this->db
                     ->table(TaskModel::TABLE)
                     ->columns(
-                        'tasks.id',
-                        'tasks.title',
-                        'tasks.date_due',
-                        'tasks.date_creation',
-                        'tasks.project_id',
-                        'tasks.color_id',
-                        'tasks.priority',
-                        'tasks.time_spent',
-                        'tasks.time_estimated',
-                        'tasks.is_active',
-                        'tasks.creator_id',
-                        'projects.name AS project_name',
-                        'columns.title AS column_title'
+                        TaskModel::TABLE.'.id',
+                        TaskModel::TABLE.'.title',
+                        TaskModel::TABLE.'.date_due',
+                        TaskModel::TABLE.'.date_creation',
+                        TaskModel::TABLE.'.project_id',
+                        TaskModel::TABLE.'.color_id',
+                        TaskModel::TABLE.'.priority',
+                        TaskModel::TABLE.'.time_spent',
+                        TaskModel::TABLE.'.time_estimated',
+                        TaskModel::TABLE.'.is_active',
+                        TaskModel::TABLE.'.creator_id',
+                        ProjectModel::TABLE.'.name AS project_name',
+                        ColumnModel::TABLE.'.title AS column_title'
                     )
                     ->join(ProjectModel::TABLE, 'id', 'project_id')
                     ->join(ColumnModel::TABLE, 'id', 'column_id')
                     ->eq(TaskModel::TABLE.'.owner_id', $user_id)
                     ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
-                    ->eq(ProjectModel::TABLE.'.is_active', ProjectModel::ACTIVE);
+                    ->eq(ProjectModel::TABLE.'.is_active', ProjectModel::ACTIVE)
+                    ->eq(ColumnModel::TABLE.'.hide_in_dashboard', 0);
     }
 
     /**
@@ -102,36 +103,36 @@ class TaskFinderModel extends Base
                 '(SELECT COUNT(*) FROM '.TaskLinkModel::TABLE.' WHERE '.TaskLinkModel::TABLE.'.task_id = tasks.id) AS nb_links',
                 '(SELECT COUNT(*) FROM '.TaskExternalLinkModel::TABLE.' WHERE '.TaskExternalLinkModel::TABLE.'.task_id = tasks.id) AS nb_external_links',
                 '(SELECT DISTINCT 1 FROM '.TaskLinkModel::TABLE.' WHERE '.TaskLinkModel::TABLE.'.task_id = tasks.id AND '.TaskLinkModel::TABLE.'.link_id = 9) AS is_milestone',
-                'tasks.id',
-                'tasks.reference',
-                'tasks.title',
-                'tasks.description',
-                'tasks.date_creation',
-                'tasks.date_modification',
-                'tasks.date_completed',
-                'tasks.date_started',
-                'tasks.date_due',
-                'tasks.color_id',
-                'tasks.project_id',
-                'tasks.column_id',
-                'tasks.swimlane_id',
-                'tasks.owner_id',
-                'tasks.creator_id',
-                'tasks.position',
-                'tasks.is_active',
-                'tasks.score',
-                'tasks.category_id',
-                'tasks.priority',
-                'tasks.date_moved',
-                'tasks.recurrence_status',
-                'tasks.recurrence_trigger',
-                'tasks.recurrence_factor',
-                'tasks.recurrence_timeframe',
-                'tasks.recurrence_basedate',
-                'tasks.recurrence_parent',
-                'tasks.recurrence_child',
-                'tasks.time_estimated',
-                'tasks.time_spent',
+                TaskModel::TABLE.'.id',
+                TaskModel::TABLE.'.reference',
+                TaskModel::TABLE.'.title',
+                TaskModel::TABLE.'.description',
+                TaskModel::TABLE.'.date_creation',
+                TaskModel::TABLE.'.date_modification',
+                TaskModel::TABLE.'.date_completed',
+                TaskModel::TABLE.'.date_started',
+                TaskModel::TABLE.'.date_due',
+                TaskModel::TABLE.'.color_id',
+                TaskModel::TABLE.'.project_id',
+                TaskModel::TABLE.'.column_id',
+                TaskModel::TABLE.'.swimlane_id',
+                TaskModel::TABLE.'.owner_id',
+                TaskModel::TABLE.'.creator_id',
+                TaskModel::TABLE.'.position',
+                TaskModel::TABLE.'.is_active',
+                TaskModel::TABLE.'.score',
+                TaskModel::TABLE.'.category_id',
+                TaskModel::TABLE.'.priority',
+                TaskModel::TABLE.'.date_moved',
+                TaskModel::TABLE.'.recurrence_status',
+                TaskModel::TABLE.'.recurrence_trigger',
+                TaskModel::TABLE.'.recurrence_factor',
+                TaskModel::TABLE.'.recurrence_timeframe',
+                TaskModel::TABLE.'.recurrence_basedate',
+                TaskModel::TABLE.'.recurrence_parent',
+                TaskModel::TABLE.'.recurrence_child',
+                TaskModel::TABLE.'.time_estimated',
+                TaskModel::TABLE.'.time_spent',
                 UserModel::TABLE.'.username AS assignee_username',
                 UserModel::TABLE.'.name AS assignee_name',
                 UserModel::TABLE.'.email AS assignee_email',
@@ -153,26 +154,6 @@ class TaskFinderModel extends Base
     }
 
     /**
-     * Get all tasks shown on the board (sorted by position)
-     *
-     * @access public
-     * @param  integer    $project_id     Project id
-     * @param  integer    $column_id      Column id
-     * @param  integer    $swimlane_id    Swimlane id
-     * @return array
-     */
-    public function getTasksByColumnAndSwimlane($project_id, $column_id, $swimlane_id = 0)
-    {
-        return $this->getExtendedQuery()
-                    ->eq(TaskModel::TABLE.'.project_id', $project_id)
-                    ->eq(TaskModel::TABLE.'.column_id', $column_id)
-                    ->eq(TaskModel::TABLE.'.swimlane_id', $swimlane_id)
-                    ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
-                    ->asc(TaskModel::TABLE.'.position')
-                    ->findAll();
-    }
-
-    /**
      * Get all tasks for a given project and status
      *
      * @access public
@@ -186,6 +167,7 @@ class TaskFinderModel extends Base
                     ->table(TaskModel::TABLE)
                     ->eq(TaskModel::TABLE.'.project_id', $project_id)
                     ->eq(TaskModel::TABLE.'.is_active', $status_id)
+                    ->asc(TaskModel::TABLE.'.id')
                     ->findAll();
     }
 
@@ -203,7 +185,8 @@ class TaskFinderModel extends Base
                     ->table(TaskModel::TABLE)
                     ->eq(TaskModel::TABLE.'.project_id', $project_id)
                     ->in(TaskModel::TABLE.'.is_active', $status)
-                    ->findAllByColumn('id');
+                    ->asc(TaskModel::TABLE.'.id')
+                    ->findAllByColumn(TaskModel::TABLE.'.id');
     }
 
     /**
@@ -387,6 +370,7 @@ class TaskFinderModel extends Base
                 'ua.name AS assignee_name',
                 'ua.username AS assignee_username',
                 'uc.email AS creator_email',
+                'uc.name AS creator_name',
                 'uc.username AS creator_username'
             );
     }

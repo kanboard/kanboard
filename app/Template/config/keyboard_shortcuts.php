@@ -19,7 +19,6 @@
     <h3><?= t('Task view') ?></h3>
     <ul>
         <li><?= t('Edit task') ?> = <strong>e</strong></li>
-        <li><?= t('Edit description') ?> = <strong>d</strong></li>
         <li><?= t('New subtask') ?> = <strong>s</strong></li>
         <li><?= t('New comment') ?> = <strong>c</strong></li>
         <li><?= t('New internal link') ?> = <strong>l</strong></li>
