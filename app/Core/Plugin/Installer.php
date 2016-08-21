@@ -2,9 +2,8 @@
 
 namespace Kanboard\Core\Plugin;
 
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 use ZipArchive;
+use Kanboard\Core\Tool;
 
 /**
  * Class Installer
@@ -64,7 +63,7 @@ class Installer extends \Kanboard\Core\Base
             throw new PluginInstallerException(e('You don\'t have the permission to remove this plugin.'));
         }
 
-        $this->removeAllDirectories($pluginFolder);
+        Tool::removeAllFiles($pluginFolder);
     }
 
     /**
@@ -136,27 +135,5 @@ class Installer extends \Kanboard\Core\Base
     {
         unlink($zip->filename);
         $zip->close();
-    }
-
-    /**
-     * Remove recursively a directory
-     *
-     * @access protected
-     * @param  string $directory
-     */
-    protected function removeAllDirectories($directory)
-    {
-        $it = new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS);
-        $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
-
-        foreach ($files as $file) {
-            if ($file->isDir()) {
-                rmdir($file->getRealPath());
-            } else {
-                unlink($file->getRealPath());
-            }
-        }
-
-        rmdir($directory);
     }
 }

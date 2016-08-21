@@ -18,6 +18,7 @@ use Pimple\Container;
  * @property \Kanboard\Core\Action\ActionManager                 $actionManager
  * @property \Kanboard\Core\ExternalLink\ExternalLinkManager     $externalLinkManager
  * @property \Kanboard\Core\Cache\MemoryCache                    $memoryCache
+ * @property \Kanboard\Core\Cache\BaseCache                      $cacheDriver
  * @property \Kanboard\Core\Event\EventManager                   $eventManager
  * @property \Kanboard\Core\Group\GroupManager                   $groupManager
  * @property \Kanboard\Core\Http\Client                          $httpClient
