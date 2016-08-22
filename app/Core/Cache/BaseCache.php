@@ -8,41 +8,8 @@ namespace Kanboard\Core\Cache;
  * @package  Kanboard\Core\Cache
  * @author   Frederic Guillot
  */
-abstract class BaseCache
+abstract class BaseCache implements CacheInterface
 {
-    /**
-     * Store an item in the cache
-     *
-     * @access public
-     * @param  string  $key
-     * @param  string  $value
-     */
-    abstract public function set($key, $value);
-
-    /**
-     * Retrieve an item from the cache by key
-     *
-     * @access public
-     * @param  string  $key
-     * @return mixed            Null when not found, cached value otherwise
-     */
-    abstract public function get($key);
-
-    /**
-     * Remove all items from the cache
-     *
-     * @access public
-     */
-    abstract public function flush();
-
-    /**
-     * Remove an item from the cache
-     *
-     * @access public
-     * @param  string  $key
-     */
-    abstract public function remove($key);
-
     /**
      * Proxy cache
      *

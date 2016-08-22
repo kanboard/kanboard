@@ -56,6 +56,7 @@ use Pimple\Container;
  * @property \Kanboard\Core\Helper                               $helper
  * @property \Kanboard\Core\Paginator                            $paginator
  * @property \Kanboard\Core\Template                             $template
+ * @property \Kanboard\Decorator\MetadataCacheDecorator          $userMetadataCacheDecorator
  * @property \Kanboard\Model\ActionModel                         $actionModel
  * @property \Kanboard\Model\ActionParameterModel                $actionParameterModel
  * @property \Kanboard\Model\AvatarFileModel                     $avatarFileModel

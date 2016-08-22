@@ -7,6 +7,7 @@ New features:
 
 Improvements:
 
+* Store comment sorting direction in the database
 * Avoid tags overlapping on the board
 * Show project name in notifications
 * Allow priority changes for inverted priority scales

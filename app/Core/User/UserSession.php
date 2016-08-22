@@ -203,26 +203,4 @@ class UserSession extends Base
     {
         $this->sessionStorage->boardCollapsed[$project_id] = $is_collapsed;
     }
-
-    /**
-     * Set comments sorting
-     *
-     * @access public
-     * @param  string $order
-     */
-    public function setCommentSorting($order)
-    {
-        $this->sessionStorage->commentSorting = $order;
-    }
-
-    /**
-     * Get comments sorting direction
-     *
-     * @access public
-     * @return string
-     */
-    public function getCommentSorting()
-    {
-        return empty($this->sessionStorage->commentSorting) ? 'ASC' : $this->sessionStorage->commentSorting;
-    }
 }

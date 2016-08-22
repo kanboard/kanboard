@@ -4,6 +4,7 @@ namespace Kanboard\ServiceProvider;
 
 use Kanboard\Core\Cache\FileCache;
 use Kanboard\Core\Cache\MemoryCache;
+use Kanboard\Decorator\MetadataCacheDecorator;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -35,6 +36,15 @@ class CacheProvider implements ServiceProviderInterface
         } else {
             $container['cacheDriver'] = $container['memoryCache'];
         }
+
+        $container['userMetadataCacheDecorator'] = function($c) {
+            return new MetadataCacheDecorator(
+                $c['cacheDriver'],
+                $c['userMetadataModel'],
+                'user.metadata.',
+                $c['userSession']->getId()
+            );
+        };
 
         return $container;
     }
