@@ -18,13 +18,17 @@ class TaskAssignPrioritySwimlaneTest extends Base
         $taskFinderModel = new TaskFinderModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
-        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'priority' => 1)));
 
+        $task = $taskFinderModel->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(1, $task['priority']);				
+				
         $event = new TaskEvent(array(
             'task_id' => 1,
             'task' => array(
                 'project_id' => 1,
-                'priority' => 1,
+                'swimlane_id' => 2,
             )
         ));
 
@@ -38,29 +42,5 @@ class TaskAssignPrioritySwimlaneTest extends Base
         $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals(2, $task['priority']);
-    }
-
-    public function testWithWrongCategory()
-    {
-        $projectModel = new ProjectModel($this->container);
-        $taskCreationModel = new TaskCreationModel($this->container);
-
-        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
-        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
-
-        $event = new TaskEvent(array(
-            'task_id' => 1,
-            'task' => array(
-                'project_id' => 1,
-                'swimlane_id' => 3,
-            )
-        ));
-
-        $action = new TaskAssignColorColumn($this->container);
-        $action->setProjectId(1);
-        $action->setParam('priority', 2);
-        $action->setParam('swimlane_id', 2);
-
-        $this->assertFalse($action->execute($event, TaskModel::EVENT_MOVE_SWIMLANE));
     }
 }

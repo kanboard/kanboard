@@ -28,6 +28,10 @@ class TaskAssignColorSwimlaneTest extends Base
             )
         ));
 
+        $task = $taskFinderModel->getById(1);
+        $this->assertNotEmpty($task);
+        $this->assertNotEquals('red', $task['color_id']);				
+				
         $action = new TaskAssignColorSwimlane($this->container);
         $action->setProjectId(1);
         $action->setParam('color_id', 'red');
@@ -40,7 +44,7 @@ class TaskAssignColorSwimlaneTest extends Base
         $this->assertEquals('red', $task['color_id']);
     }
 
-    public function testWithWrongCategory()
+    public function testWithWrongSwimlane()
     {
         $projectModel = new ProjectModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);
