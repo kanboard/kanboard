@@ -2,7 +2,7 @@
 
 namespace Kanboard\Core\ObjectStorage;
 
-require_once __DIR__.'/../Base.php';
+require_once __DIR__.'/../../Base.php';
 
 function file_put_contents($filename, $data)
 {
@@ -105,7 +105,7 @@ class FileStorageTest extends \Base
             ->method('file_put_contents')
             ->with(
                 $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey'),
-                $this->equalTo('data')
+                $this->equalTo($data)
             )
             ->will($this->returnValue(true));
 

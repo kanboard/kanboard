@@ -1,10 +1,26 @@
 Version 1.0.33 (unreleased)
 --------------
 
+New features:
+
+* New API calls for task metadata
+
 Improvements:
 
+* Store board collapsed mode user preference in the database
+* Store comment sorting direction in the database
+* Avoid tags overlapping on the board
+* Show project name in notifications
+* Allow priority changes for inverted priority scales
+* Add the possibility to attach template hooks with local variables and callback
+* Add "reference" hooks
 * Show project name in task forms
 * Convert vanilla CSS to SASS
+
+Bug fixes:
+
+* Fix undefined constant in config example file
+* Fix PHP notice when sending overdue notifications
 
 Version 1.0.32
 --------------

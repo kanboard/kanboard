@@ -11,7 +11,7 @@
 <?php if (empty($tags)): ?>
     <p class="alert"><?= t('There is no global tag at the moment.') ?></p>
 <?php else: ?>
-    <table class="table-striped">
+    <table class="table-striped table-scrolling">
         <tr>
             <th class="column-80"><?= t('Tag') ?></th>
             <th><?= t('Action') ?></th>

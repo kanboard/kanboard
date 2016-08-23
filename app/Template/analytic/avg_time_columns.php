@@ -9,7 +9,7 @@
 
         <div id="chart" data-metrics='<?= json_encode($metrics, JSON_HEX_APOS) ?>' data-label="<?= t('Average time spent') ?>"></div>
 
-        <table class="table-stripped">
+        <table class="table-striped">
         <tr>
             <th><?= t('Column') ?></th>
             <th><?= t('Average time spent') ?></th>

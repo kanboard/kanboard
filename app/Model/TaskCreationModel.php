@@ -85,5 +85,7 @@ class TaskCreationModel extends Base
         $values['date_modification'] = $values['date_creation'];
         $values['date_moved'] = $values['date_creation'];
         $values['position'] = $this->taskFinderModel->countByColumnAndSwimlaneId($values['project_id'], $values['column_id'], $values['swimlane_id']) + 1;
+
+        $this->hook->reference('model:task:creation:prepare', $values);
     }
 }

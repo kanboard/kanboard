@@ -1,18 +1,20 @@
 <section id="main">
     <div class="page-header">
         <ul>
+            <?= $this->hook->render('template:project-list:menu:before', array('project' => $project)) ?>
             <?php if ($this->user->hasAccess('ProjectUserOverviewController', 'managers')): ?>
                 <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('Users overview'), 'ProjectUserOverviewController', 'managers') ?></li>
             <?php endif ?>
             <?php if ($this->user->hasAccess('ProjectGanttController', 'show')): ?>
                 <li><i class="fa fa-sliders fa-fw"></i><?= $this->url->link(t('Projects Gantt chart'), 'ProjectGanttController', 'show') ?></li>
             <?php endif ?>
+            <?= $this->hook->render('template:project-list:menu:after', array('project' => $project)) ?>
         </ul>
     </div>
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('No project') ?></p>
     <?php else: ?>
-        <table class="table-stripped">
+        <table class="table-striped table-scrolling">
             <tr>
                 <th class="column-5"><?= $paginator->order(t('Id'), 'id') ?></th>
                 <th class="column-8"><?= $paginator->order(t('Status'), 'is_active') ?></th>

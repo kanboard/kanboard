@@ -1,6 +1,10 @@
-<div class="task-show-title color-<?= $task['color_id'] ?>">
-    <h2><?= $this->text->e($task['title']) ?></h2>
-</div>
+<?= $this->render('task/details', array(
+    'task' => $task,
+    'tags' => $tags,
+    'project' => $project,
+    'editable' => false,
+)) ?>
+
 <div class="page-header">
     <h2><?= t('Analytics') ?></h2>
 </div>
@@ -14,7 +18,7 @@
 
 <h3 id="analytic-task-time-column"><?= t('Time spent into each column') ?></h3>
 <div id="chart" data-metrics='<?= json_encode($time_spent_columns, JSON_HEX_APOS) ?>' data-label="<?= t('Time spent') ?>"></div>
-<table class="table-stripped">
+<table class="table-striped">
     <tr>
         <th><?= t('Column') ?></th>
         <th><?= t('Time spent') ?></th>

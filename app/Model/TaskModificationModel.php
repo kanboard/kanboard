@@ -106,6 +106,8 @@ class TaskModificationModel extends Base
         $this->helper->model->convertIntegerFields($values, array('priority', 'is_active', 'recurrence_status', 'recurrence_trigger', 'recurrence_factor', 'recurrence_timeframe', 'recurrence_basedate'));
 
         $values['date_modification'] = time();
+
+        $this->hook->reference('model:task:modification:prepare', $values);
     }
 
     /**

@@ -15,3 +15,5 @@
 <?= $this->render('dashboard/projects', array('paginator' => $project_paginator, 'user' => $user)) ?>
 <?= $this->render('dashboard/tasks', array('paginator' => $task_paginator, 'user' => $user)) ?>
 <?= $this->render('dashboard/subtasks', array('paginator' => $subtask_paginator, 'user' => $user)) ?>
+
+<?= $this->hook->render('template:dashboard:show', array('user' => $user)) ?>

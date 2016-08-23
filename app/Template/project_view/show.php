@@ -52,7 +52,7 @@
 <div class="page-header">
     <h2><?= t('Board') ?></h2>
 </div>
-<table class="table-stripped">
+<table class="table-striped table-scrolling">
     <tr>
         <th class="column-40"><?= t('Column') ?></th>
         <th class="column-20"><?= t('Task limit') ?></th>

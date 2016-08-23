@@ -15,7 +15,7 @@
 <?php if (empty($actions)): ?>
     <p class="alert"><?= t('There is no action at the moment.') ?></p>
 <?php else: ?>
-    <table>
+    <table class="table-scrolling">
         <tr>
             <th><?= t('Automatic actions') ?></th>
             <th><?= t('Action parameters') ?></th>

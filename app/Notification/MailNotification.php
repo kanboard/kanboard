@@ -80,7 +80,7 @@ class MailNotification extends Base implements NotificationInterface
     {
         return sprintf(
             '[%s] %s',
-            $eventData['task']['project_name'],
+            isset($eventData['project_name']) ? $eventData['project_name'] : $eventData['task']['project_name'],
             $this->notificationModel->getTitleWithoutAuthor($eventName, $eventData)
         );
     }

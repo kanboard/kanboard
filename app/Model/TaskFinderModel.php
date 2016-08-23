@@ -2,7 +2,6 @@
 
 namespace Kanboard\Model;
 
-use PDO;
 use Kanboard\Core\Base;
 
 /**
@@ -298,59 +297,30 @@ class TaskFinderModel extends Base
      */
     public function getDetails($task_id)
     {
-        $sql = '
-            SELECT
-            tasks.id,
-            tasks.reference,
-            tasks.title,
-            tasks.description,
-            tasks.date_creation,
-            tasks.date_completed,
-            tasks.date_modification,
-            tasks.date_due,
-            tasks.date_started,
-            tasks.time_estimated,
-            tasks.time_spent,
-            tasks.color_id,
-            tasks.project_id,
-            tasks.column_id,
-            tasks.owner_id,
-            tasks.creator_id,
-            tasks.position,
-            tasks.is_active,
-            tasks.score,
-            tasks.category_id,
-            tasks.priority,
-            tasks.swimlane_id,
-            tasks.date_moved,
-            tasks.recurrence_status,
-            tasks.recurrence_trigger,
-            tasks.recurrence_factor,
-            tasks.recurrence_timeframe,
-            tasks.recurrence_basedate,
-            tasks.recurrence_parent,
-            tasks.recurrence_child,
-            project_has_categories.name AS category_name,
-            swimlanes.name AS swimlane_name,
-            projects.name AS project_name,
-            projects.default_swimlane,
-            columns.title AS column_title,
-            users.username AS assignee_username,
-            users.name AS assignee_name,
-            creators.username AS creator_username,
-            creators.name AS creator_name
-            FROM tasks
-            LEFT JOIN users ON users.id = tasks.owner_id
-            LEFT JOIN users AS creators ON creators.id = tasks.creator_id
-            LEFT JOIN project_has_categories ON project_has_categories.id = tasks.category_id
-            LEFT JOIN projects ON projects.id = tasks.project_id
-            LEFT JOIN columns ON columns.id = tasks.column_id
-            LEFT JOIN swimlanes ON swimlanes.id = tasks.swimlane_id
-            WHERE tasks.id = ?
-        ';
-
-        $rq = $this->db->execute($sql, array($task_id));
-        return $rq->fetch(PDO::FETCH_ASSOC);
+        return $this->db->table(TaskModel::TABLE)
+            ->columns(
+                TaskModel::TABLE.'.*',
+                CategoryModel::TABLE.'.name AS category_name',
+                SwimlaneModel::TABLE.'.name AS swimlane_name',
+                ProjectModel::TABLE.'.name AS project_name',
+                ProjectModel::TABLE.'.default_swimlane',
+                ColumnModel::TABLE.'.title AS column_title',
+                UserModel::TABLE.'.username AS assignee_username',
+                UserModel::TABLE.'.name AS assignee_name',
+                'uc.username AS creator_username',
+                'uc.name AS creator_name',
+                CategoryModel::TABLE.'.description AS category_description',
+                ColumnModel::TABLE.'.position AS column_position',
+                ProjectModel::TABLE.'.default_swimlane'
+            )
+            ->join(UserModel::TABLE, 'id', 'owner_id', TaskModel::TABLE)
+            ->left(UserModel::TABLE, 'uc', 'id', TaskModel::TABLE, 'creator_id')
+            ->join(CategoryModel::TABLE, 'id', 'category_id', TaskModel::TABLE)
+            ->join(ColumnModel::TABLE, 'id', 'column_id', TaskModel::TABLE)
+            ->join(SwimlaneModel::TABLE, 'id', 'swimlane_id', TaskModel::TABLE)
+            ->join(ProjectModel::TABLE, 'id', 'project_id', TaskModel::TABLE)
+            ->eq(TaskModel::TABLE.'.id', $task_id)
+            ->findOne();
     }
 
     /**

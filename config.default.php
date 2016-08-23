@@ -4,6 +4,9 @@
 /* Rename this file to config.php if you want to change the values */
 /*******************************************************************/
 
+// Data folder (must be writeable by the web server user)
+define('DATA_DIR', 'data');
+
 // Enable/Disable debug
 define('DEBUG', false);
 
@@ -14,9 +17,15 @@ define('LOG_DRIVER', '');
 define('LOG_FILE', DATA_DIR.DIRECTORY_SEPARATOR.'debug.log');
 
 // Plugins directory
-define('PLUGINS_DIR', ROOT_DIR.DIRECTORY_SEPARATOR.'plugins');
+define('PLUGINS_DIR', 'plugins');
 
-// Folder for uploaded files
+// Available cache drivers are "file" and "memory"
+define('CACHE_DRIVER', 'memory');
+
+// Cache folder to use if cache driver is "file" (must be writeable by the web server user)
+define('CACHE_DIR', DATA_DIR.DIRECTORY_SEPARATOR.'cache');
+
+// Folder for uploaded files (must be writeable by the web server user)
 define('FILES_DIR', DATA_DIR.DIRECTORY_SEPARATOR.'files');
 
 // E-mail address for the "From" header (notifications)

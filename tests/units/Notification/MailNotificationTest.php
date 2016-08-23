@@ -58,6 +58,11 @@ class MailNotificationTest extends Base
             $this->assertNotEmpty($mailNotification->getMailContent($eventName, $eventData));
             $this->assertStringStartsWith('[test] ', $mailNotification->getMailSubject($eventName, $eventData));
         }
+
+        $this->assertStringStartsWith('[Test1, Test2] ', $mailNotification->getMailSubject(TaskModel::EVENT_OVERDUE, array(
+            'tasks' => array(array('id' => 123), array('id' => 456)),
+            'project_name' => 'Test1, Test2',
+        )));
     }
 
     public function testSendWithEmailAddress()

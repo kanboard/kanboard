@@ -111,6 +111,7 @@ Contributors:
 - [Raphaël Doursenaud](https://github.com/rdoursenaud)
 - [René Stoltenberg](https://github.com/rstoltenberg)
 - [Renothing](https://github.com/renothing)
+- [Rys Sommefeldt](https://github.com/rys)
 - [Rzeka](https://github.com/rzeka)
 - [Sébastien Kergreis](https://github.com/kerro)
 - [Sebastien Pacilly](https://github.com/spacilly)

@@ -3,12 +3,12 @@
 namespace Kanboard\Core\Cache;
 
 /**
- * Memory Cache
+ * Memory Cache Driver
  *
- * @package  cache
+ * @package  Kanboard\Core\Cache
  * @author   Frederic Guillot
  */
-class MemoryCache extends Base implements CacheInterface
+class MemoryCache extends BaseCache
 {
     /**
      * Container
@@ -19,7 +19,7 @@ class MemoryCache extends Base implements CacheInterface
     private $storage = array();
 
     /**
-     * Save a new value in the cache
+     * Store an item in the cache
      *
      * @access public
      * @param  string  $key
@@ -31,7 +31,7 @@ class MemoryCache extends Base implements CacheInterface
     }
 
     /**
-     * Fetch value from cache
+     * Retrieve an item from the cache by key
      *
      * @access public
      * @param  string  $key

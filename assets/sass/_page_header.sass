@@ -1,4 +1,5 @@
 @import variables
+@import mixins
 
 .page-header
   margin-bottom: 20px
@@ -21,6 +22,11 @@
   li
     display: inline
     padding-right: 15px
+
+    @include xs-device
+      display: block
+      line-height: 1.5em
+
     &.active a
       color: color('primary')
       text-decoration: none

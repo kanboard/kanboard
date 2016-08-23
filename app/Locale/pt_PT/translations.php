@@ -371,7 +371,7 @@ return array(
     'Not assigned, estimate of %sh' => 'Não assignado, estimado em %sh',
     '%s updated a comment on the task %s' => '%s actualizou o comentário na tarefa %s',
     '%s commented the task %s' => '%s comentou a tarefa %s',
-    '%s\'s activity' => 'Atividades de%s',
+    '%s\'s activity' => 'Atividades %s',
     'RSS feed' => 'Feed RSS',
     '%s updated a comment on the task #%d' => '%s actualizou um comentário sobre a tarefa #%d',
     '%s commented on the task #%d' => '%s comentou sobre a tarefa #%d',
