@@ -37,6 +37,17 @@ Folder for uploaded files
 define('FILES_DIR', 'data/files');
 ```
 
+Cache parameters
+----------------
+
+```php
+// Available cache drivers are "file" and "memory"
+define('CACHE_DRIVER', 'memory');
+
+// Cache folder to use if cache driver is "file" (must be writeable by the web server user)
+define('CACHE_DIR', DATA_DIR.DIRECTORY_SEPARATOR.'cache');
+```
+
 Enable/disable url rewrite
 --------------------------
 

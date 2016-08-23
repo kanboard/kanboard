@@ -19,6 +19,7 @@ Improvements:
 
 Bug fixes:
 
+* Fix undefined constant in config example file
 * Fix PHP notice when sending overdue notifications
 
 Version 1.0.32
