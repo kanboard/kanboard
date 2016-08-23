@@ -83,18 +83,6 @@ class UserSessionTest extends Base
         $this->assertFalse($us->isAdmin());
     }
 
-    public function testBoardCollapseMode()
-    {
-        $us = new UserSession($this->container);
-        $this->assertFalse($us->isBoardCollapsed(2));
-
-        $us->setBoardDisplayMode(3, false);
-        $this->assertFalse($us->isBoardCollapsed(3));
-
-        $us->setBoardDisplayMode(3, true);
-        $this->assertTrue($us->isBoardCollapsed(3));
-    }
-
     public function testFilters()
     {
         $us = new UserSession($this->container);

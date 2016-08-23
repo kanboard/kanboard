@@ -7,6 +7,7 @@ New features:
 
 Improvements:
 
+* Store board collapsed mode user preference in the database
 * Store comment sorting direction in the database
 * Avoid tags overlapping on the board
 * Show project name in notifications

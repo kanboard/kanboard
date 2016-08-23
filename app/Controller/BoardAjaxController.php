@@ -4,6 +4,7 @@ namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Formatter\BoardFormatter;
+use Kanboard\Model\UserMetadataModel;
 
 /**
  * Class BoardAjaxController
@@ -88,7 +89,7 @@ class BoardAjaxController extends BaseController
      */
     public function collapse()
     {
-        $this->changeDisplayMode(true);
+        $this->changeDisplayMode(1);
     }
 
     /**
@@ -98,19 +99,19 @@ class BoardAjaxController extends BaseController
      */
     public function expand()
     {
-        $this->changeDisplayMode(false);
+        $this->changeDisplayMode(0);
     }
 
     /**
      * Change display mode
      *
      * @access private
-     * @param  boolean $mode
+     * @param  int $mode
      */
     private function changeDisplayMode($mode)
     {
         $project_id = $this->request->getIntegerParam('project_id');
-        $this->userSession->setBoardDisplayMode($project_id, $mode);
+        $this->userMetadataCacheDecorator->set(UserMetadataModel::KEY_BOARD_COLLAPSED.$project_id, $mode);
 
         if ($this->request->isAjax()) {
             $this->response->html($this->renderBoard($project_id));

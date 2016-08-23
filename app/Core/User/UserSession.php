@@ -179,28 +179,4 @@ class UserSession extends Base
     {
         $this->sessionStorage->filters[$project_id] = $filters;
     }
-
-    /**
-     * Is board collapsed or expanded
-     *
-     * @access public
-     * @param  integer  $project_id
-     * @return boolean
-     */
-    public function isBoardCollapsed($project_id)
-    {
-        return ! empty($this->sessionStorage->boardCollapsed[$project_id]) ? $this->sessionStorage->boardCollapsed[$project_id] : false;
-    }
-
-    /**
-     * Set board display mode
-     *
-     * @access public
-     * @param  integer  $project_id
-     * @param  boolean  $is_collapsed
-     */
-    public function setBoardDisplayMode($project_id, $is_collapsed)
-    {
-        $this->sessionStorage->boardCollapsed[$project_id] = $is_collapsed;
-    }
 }
