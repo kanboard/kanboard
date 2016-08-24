@@ -160,7 +160,7 @@ class ActionParameterModel extends Base
             case 'swimlane_id':
                 $column = $this->swimlaneModel->getById($value);
                 return empty($column) ? false : $this->swimlaneModel->getIdByName($project_id, $column['name']) ?: false;
-			default:
+            default:
                 return $value;
         }
     }
