@@ -25,22 +25,18 @@ La API usa la [Autentificación Basica del esquema HTTP descrita en el RFC2617](
 Modificar el header HTTP
 ------------------------
 
-Se puede usar un hedear HTTP alternativo para la autentificación si tu servidor es muy especifico
-You can use an alternative HTTP header for the authentication if your server have a very specific
-configuración.
+Se puede usar un header HTTP alternativo para la autentificación si tu servidor es muy especifico
+
 configuration.
 
-- The header name can be anything you want, by example `X-API-Auth`.
-- The header value is the `username:password` encoded in Base64.
+- El nombre del header puede ser cualquier cosa que desee, por ejemplo `X-API-Auth`.
+- El valor del header `username:password` esta codificado en Base64.
 
 Configuración:
 
-1. Definir tu cabecera modificada en tu `config.php`: `define('API_AUTHENTICATION_HEADER', 'X-API-Auth');`
-1. Define your custom header in your `config.php`: `define('API_AUTHENTICATION_HEADER', 'X-API-Auth');`
-2. Codificar las credenciales en Base64, ejemplo con PHP
-2. Encode the credentials in Base64, example with PHP `base64_encode('jsonrpc:19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929');`
+1. Definir tu header personalizado en tu `config.php`: `define('API_AUTHENTICATION_HEADER', 'X-API-Auth');`
+2. Codificar las credenciales en Base64, ejemplo con PHP  `base64_encode('jsonrpc:19ffd9709d03ce50675c3a43d1c49c1ac207f4bc45f06c5b2701fbdf8929');`
 3. Verificar con curl
-3. Test with curl:
 
 ```bash
 curl \
@@ -60,8 +56,5 @@ If the credentials are wrong, you will receive a `401 Not Authorized` and the co
 
 Error de Autorización
 ----------------------
-Authorization error
--------------------
 
-Si el usuario no  , recibira un `403 Forbidden`.
-If the connected user is not allowed to access to the resource, you will receive a `403 Forbidden`.
+Si el usuario conectado no tiene permiso para acceder al recurso , recibirá un `403 Forbidden`.
