@@ -1,5 +1,5 @@
 Configuración de calendarios
-=================
+============================
 
 Ir al menu de configuraciones, despues elegir cofiguracion de calendarios que se encuentra al lado izquierdo 
 
@@ -11,7 +11,7 @@ Existe dos diferentes calendarios en kanboard :
 - Calendario por usuario (disponible desde el dashboard)
 
 Calendario por projectos
-----------------
+------------------------
 
 Este calendario visualiza las tareas que se le asignan fechas de vencimiento y las tareas estan basadas sobre 
 la fecha de creación o el inicio de fecha
@@ -29,17 +29,15 @@ la fecha de creación o el inicio de fecha
 - Si no hay una fecha de inicio de la tarea no aparece en el calendario.
 
 Calendarios por usuarios
--------------
+------------------------
 
 Este calendario visualiza solo las tareas asignadas para el usuario y opcionalmente la información de las subtareas
 
-### 
-Visualizar subtareas basadas en el tiempo de tracking
+### Visualizar subtareas basadas en el tiempo de tracking
 
 - Despliega la información de las subtareas desde el calendario o en el registro de la tabla de seguimiento de tiempo
 - La intersección con los usuarios timetable es calculad
 
 ### Las estimaciones muestran las subtareas ( la previsión de los trabajos futuros )
 
-- 
-Mostrar la estimación de los trabajos futuros de las subtareas en estado de "todo" y con un valor definido " estimación " . 
+- Mostrar la estimación de los trabajos futuros de las subtareas en estado de "todo" y con un valor definido " estimación " . 

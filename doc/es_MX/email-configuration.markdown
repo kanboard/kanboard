@@ -1,8 +1,8 @@
 Configuración del Email 
-===================
+=======================
 
 Configuración de usuarios 
--------------
+-------------------------
 
 Para recibir notificaciones por email los usuarios de Kanboard deben tener
 
@@ -13,7 +13,7 @@ Para recibir notificaciones por email los usuarios de Kanboard deben tener
 Nota: El usuario que genera una sesión y que realiza alguna acción no recibe ninguna notificación, sólo otros miembros del proyecto.
 
 Comunicación con correos electronicos
-----------------
+-------------------------------------
 
 There are several email transports available:
 
@@ -23,7 +23,7 @@ There are several email transports available:
 - Otros métodos que pueden ser proporcionados por  externos : Postmark, Sendgrid and Mailgun
 
 Configuración del servidor
----------------
+--------------------------
 
 Por default, Kanboard usa el  bundled PHP mail function para el envio de emails.
 Porque usualmente el servidor no requiere una configuración y así tu servidor puede estar listo para enviar emails.
@@ -86,7 +86,6 @@ Tu puedes personalizar esta direccion cambiando el valor de la constante `MAIL_F
 define('MAIL_FROM', 'kanboard@mydomain.tld');
 ```
 
-
 Esto puede ser útil si su configuracion del servidor SMTP no acepta una dirección por default.
 
 ### Cómo mostrar un enlace a la tarea en las notificaciones ?
@@ -106,8 +105,7 @@ No se olvide de la barra final `/`.
 Es necesario definir de forma manual debido a que Kanboard no puede adivinar la dirección URL de una secuencia de comandos de línea de comandos y algunas personas tienen una configuración muy específica.
 
 Solución de problemas
----------------
-
+---------------------
 
 Si no hay mensajes de correo electrónico se envían y que está seguro de que todo está configurado correctamente entonces:
 
