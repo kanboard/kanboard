@@ -68,7 +68,6 @@ return array(
     'Do you really want to remove this project: "%s"?' => '프로젝트를 삭제하시겠습니까: "%s"?',
     'Remove project' => '프로젝트의 삭제',
     'Edit the board for "%s"' => '"%s"를 위한 보드 수정',
-    'All projects' => '모든 프로젝트',
     'Add a new column' => '컬럼의 추가',
     'Title' => '제목',
     'Assigned to %s' => '담당자 %s',
@@ -88,7 +87,6 @@ return array(
     '(VACUUM command)' => '(VACUUM명령)',
     '(Gzip compressed Sqlite file)' => '(GZip명령으로 압축된 Sqlite파일)',
     'Close a task' => '할일 마치기',
-    'Edit a task' => '할일 수정',
     'Column' => '컬럼',
     'Color' => '색',
     'Assignee' => '담당자',
@@ -1212,6 +1210,6 @@ return array(
     'Activity stream for %s' => '%s의 활동기록',
     'Calendar for %s' => '%s의 달력',
     'Notifications for %s' => '%s의 알림',
-	'Tasks exportation' => '할일 내보내기',
     'Subtasks export' => '서브할일 내보내기',
+    'Tasks exportation' => '할일 내보내기',
 );
