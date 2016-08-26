@@ -4,6 +4,9 @@ Version 1.0.33 (unreleased)
 New features:
 
 * New API calls for task metadata
+* New automatic actions:
+    - Define colour by Swimlane
+    - Define priority by Swimlane
 
 Improvements:
 
