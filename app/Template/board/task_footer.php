@@ -81,8 +81,10 @@
         </span>
     <?php endif ?>
 
-    <?php if (! empty($task['time_estimated'])): ?>
-        <span class="task-time-estimated" title="<?= t('Time estimated') ?>"><?= $this->text->e($task['time_estimated']).'h' ?></span>
+    <?php if (! empty($task['time_estimated']) || ! empty($task['time_spent'])): ?>
+        <span class="task-time-estimated" title="<?= t('Time spent and estimated') ?>">
+            <?= $this->text->e($task['time_spent']) ?>/<?= $this->text->e($task['time_estimated']) ?>h
+        </span>
     <?php endif ?>
 
     <?php if ($task['is_milestone'] == 1): ?>
