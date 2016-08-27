@@ -12,6 +12,9 @@ However, **after three authentication failure through the user API**, the accoun
 
 Kanboard doesn't block any IP addresses since bots can use several anonymous proxies. However, you can use external tools like [fail2ban](http://www.fail2ban.org) to avoid massive scans.
 
+Configuration
+-------------
+
 Default settings can be changed with these configuration variables:
 
 ```php
@@ -24,3 +27,9 @@ define('BRUTEFORCE_LOCKDOWN', 6);
 // Lock account duration in minutes
 define('BRUTEFORCE_LOCKDOWN_DURATION', 15);
 ```
+
+Unlocking users
+---------------
+
+If you don't want to wait 15 minutes, you can unlock a user from the user interface.
+As administrator, go to the user profile and click on "Unlock this user".

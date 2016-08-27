@@ -3,6 +3,7 @@ Version 1.0.33 (unreleased)
 
 New features:
 
+* Add the possibility to unlock users from the user interface
 * New API calls for task metadata
 * New automatic actions:
     - Define colour by Swimlane
