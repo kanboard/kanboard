@@ -6,6 +6,7 @@ var sass = require('gulp-sass');
 
 var src = {
     js: [
+        'assets/js/components/*.js',
         'assets/js/src/Namespace.js',
         'assets/js/src/!(Namespace|Bootstrap|BoardDragAndDrop)*.js',
         'assets/js/src/BoardDragAndDrop.js',
@@ -49,7 +50,8 @@ var vendor = {
         'bower_components/simplemde/dist/simplemde.min.js',
         'bower_components/d3/d3.min.js',
         'bower_components/c3/c3.min.js',
-        'bower_components/isMobile/isMobile.min.js'
+        'bower_components/isMobile/isMobile.min.js',
+        'node_modules/vue/dist/vue.min.js'
     ]
 };
 

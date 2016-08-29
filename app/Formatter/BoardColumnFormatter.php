@@ -78,6 +78,7 @@ class BoardColumnFormatter extends BaseFormatter implements FormatterInterface
     public function format()
     {
         foreach ($this->columns as &$column) {
+            $column['id'] = (int) $column['id'];
             $column['tasks'] = BoardTaskFormatter::getInstance($this->container)
                 ->withTasks($this->tasks)
                 ->withTags($this->tags)
