@@ -3,6 +3,7 @@ var concat = require('gulp-concat');
 var bower = require('gulp-bower');
 var uglify = require('gulp-uglify');
 var sass = require('gulp-sass');
+var strip = require('gulp-strip-comments');
 
 var src = {
     js: [
@@ -50,8 +51,7 @@ var vendor = {
         'bower_components/simplemde/dist/simplemde.min.js',
         'bower_components/d3/d3.min.js',
         'bower_components/c3/c3.min.js',
-        'bower_components/isMobile/isMobile.min.js',
-        'node_modules/vue/dist/vue.min.js'
+        'bower_components/isMobile/isMobile.min.js'
     ]
 };
 
@@ -67,6 +67,13 @@ gulp.task('bower', function() {
 });
 
 gulp.task('vendor', function() {
+    gulp.src('node_modules/vue/dist/vue.min.js')
+        .pipe(strip({trim: true}))
+        .pipe(gulp.dest('node_modules/vue/dist/'))
+    ;
+
+    vendor.js.push('node_modules/vue/dist/vue.min.js');
+
     gulp.src(vendor.js)
         .pipe(concat('vendor.min.js'))
         .pipe(gulp.dest(dist.js))

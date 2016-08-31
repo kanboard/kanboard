@@ -7,7 +7,8 @@
     "gulp-cli": "^1.2.1",
     "gulp-concat": "^2.6.0",
     "gulp-sass": "^2.3.2",
+    "gulp-strip-comments": "^2.4.3",
     "gulp-uglify": "^1.5.3",
-    "vue": "^1.0.26-csp"
+    "vue": "1.0.26-csp"
   }
 }
