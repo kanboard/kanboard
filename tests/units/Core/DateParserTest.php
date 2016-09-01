@@ -212,6 +212,9 @@ class DateParserTest extends Base
 
         $this->assertEquals(array('date' => '06/02/2016'), $dateParser->format($values, array('date'), 'd/m/Y'));
         $this->assertEquals(array('date' => '02/06/2016 7:30 pm'), $dateParser->format($values, array('date'), 'm/d/Y g:i a'));
+
+        $values['date'] = '2016-02-06';
+        $this->assertEquals(array('date' => '06/02/2016'), $dateParser->format($values, array('date'), 'd/m/Y'));
     }
 
     public function testConvert()

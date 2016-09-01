@@ -39,6 +39,24 @@ class ProjectModelTest extends Base
         $this->assertEquals(0, $project['is_private']);
         $this->assertEquals(time(), $project['last_modified'], '', 1);
         $this->assertEmpty($project['token']);
+        $this->assertEmpty($project['start_date']);
+        $this->assertEmpty($project['end_date']);
+    }
+
+    public function testProjectDate()
+    {
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
+        $this->assertTrue($projectModel->update(array(
+            'id' => 1,
+            'start_date' => '2016-08-31',
+            'end_date' => '08/31/2016',
+        )));
+
+        $project = $projectModel->getById(1);
+        $this->assertEquals('2016-08-31', $project['start_date']);
+        $this->assertEquals('2016-08-31', $project['end_date']);
     }
 
     public function testCreationWithDuplicateName()
