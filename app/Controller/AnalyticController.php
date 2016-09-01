@@ -31,8 +31,6 @@ class AnalyticController extends BaseController
             'project' => $project,
             'average' => $this->averageLeadCycleTimeAnalytic->build($project['id']),
             'metrics' => $this->projectDailyStatsModel->getRawMetrics($project['id'], $from, $to),
-            'date_format' => $this->configModel->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'title' => t('Lead and cycle time'),
         )));
     }
@@ -155,8 +153,6 @@ class AnalyticController extends BaseController
             'display_graph' => $display_graph,
             'metrics' => $display_graph ? $this->projectDailyColumnStatsModel->getAggregatedMetrics($project['id'], $from, $to, $column) : array(),
             'project' => $project,
-            'date_format' => $this->configModel->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'title' => $title,
         )));
     }
@@ -169,8 +165,8 @@ class AnalyticController extends BaseController
         $to = $this->request->getStringParam('to', date('Y-m-d'));
 
         if (! empty($values)) {
-            $from = $values['from'];
-            $to = $values['to'];
+            $from = $this->dateParser->getIsoDate($values['from']);
+            $to = $this->dateParser->getIsoDate($values['to']);
         }
 
         return array($from, $to);

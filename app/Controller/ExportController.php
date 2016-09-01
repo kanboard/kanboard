@@ -42,8 +42,6 @@ class ExportController extends BaseController
                     'to' => $to,
                 ),
                 'errors' => array(),
-                'date_format' => $this->configModel->get('application_date_format'),
-                'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
                 'project' => $project,
                 'title' => $page_title,
             ), 'export/sidebar'));
