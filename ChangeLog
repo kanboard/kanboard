@@ -24,6 +24,10 @@ Improvements:
 * Show project name in task forms
 * Convert vanilla CSS to SASS
 
+Other changes:
+
+* Time spent (in hours) for subtasks are not rounded too the nearest quarter anymore
+
 Bug fixes:
 
 * Fix undefined constant in config example file
