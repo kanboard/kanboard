@@ -30,6 +30,7 @@ Other changes:
 
 Bug fixes:
 
+* Do not show closed tasks on public boards
 * Fix undefined constant in config example file
 * Fix PHP notice when sending overdue notifications
 * Fix wrong project date format (shown as 01/01/1970)
