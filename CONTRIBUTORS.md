@@ -98,6 +98,7 @@ Contributors:
 - [Oliver Jakoubek](https://github.com/jakoubek)
 - [Olivier Maridat](https://github.com/oliviermaridat)
 - [Oren Ben-Kiki](https://github.com/orenbenkiki)
+- [Patrick Keil](https://github.com/Soily)
 - [Patrick Van Elk](https://github.com/patrickvanelk)
 - Paolo Mainieri
 - [Pavel Roušar](https://github.com/rousarp)
