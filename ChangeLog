@@ -13,6 +13,7 @@ New features:
 Improvements:
 
 * Introduce Vue.js to manage user interface components
+* Add column "Reference" and "Creator Name" in CSV task export
 * Show both time spent and estimated on the board
 * Store board collapsed mode user preference in the database
 * Store comment sorting direction in the database
