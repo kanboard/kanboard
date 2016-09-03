@@ -12,6 +12,11 @@ class DirectoryTest extends Base
         $this->assertFalse($pluginDirectory->isCompatible(array('compatible_version' => '1.0.29'), '1.0.28'));
         $this->assertTrue($pluginDirectory->isCompatible(array('compatible_version' => '1.0.28'), '1.0.28'));
         $this->assertTrue($pluginDirectory->isCompatible(array('compatible_version' => '1.0.28'), 'master.1234'));
+        $this->assertTrue($pluginDirectory->isCompatible(array('compatible_version' => '>=1.0.32'), 'master'));
+        $this->assertTrue($pluginDirectory->isCompatible(array('compatible_version' => '>=1.0.32'), '1.0.32'));
+        $this->assertTrue($pluginDirectory->isCompatible(array('compatible_version' => '>=1.0.32'), '1.0.33'));
+        $this->assertTrue($pluginDirectory->isCompatible(array('compatible_version' => '>1.0.32'), '1.0.33'));
+        $this->assertFalse($pluginDirectory->isCompatible(array('compatible_version' => '>1.0.32'), '1.0.32'));
     }
 
     public function testGetAvailablePlugins()
