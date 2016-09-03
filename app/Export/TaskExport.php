@@ -69,7 +69,8 @@ class TaskExport extends Base
             tasks.date_completed,
             tasks.date_started,
             tasks.time_estimated,
-            tasks.time_spent
+            tasks.time_spent,
+			tasks.reference
             FROM tasks
             LEFT JOIN users ON users.id = tasks.owner_id
             LEFT JOIN users AS creators ON creators.id = tasks.creator_id
@@ -143,6 +144,7 @@ class TaskExport extends Base
             e('Start date'),
             e('Time estimated'),
             e('Time spent'),
+			e('Reference'),
         );
     }
 }
