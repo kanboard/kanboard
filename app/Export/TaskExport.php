@@ -95,6 +95,7 @@ class TaskExport extends Base
             ->gte(TaskModel::TABLE . '.date_creation', $from)
             ->lte(TaskModel::TABLE . '.date_creation', $to)
             ->eq(TaskModel::TABLE . '.project_id', $project_id)
+            ->asc(TaskModel::TABLE.'.id')
             ->findAll();
     }
 
