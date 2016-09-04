@@ -1,7 +1,7 @@
 <div class="sidebar">
     <ul>
-        <li <?= $this->app->checkMenuSelection('AnalyticController', 'tasks') ?>>
-            <?= $this->url->link(t('Task distribution'), 'AnalyticController', 'tasks', array('project_id' => $project['id'])) ?>
+        <li <?= $this->app->checkMenuSelection('AnalyticController', 'taskDistribution') ?>>
+            <?= $this->url->link(t('Task distribution'), 'AnalyticController', 'taskDistribution', array('project_id' => $project['id'])) ?>
         </li>
         <li <?= $this->app->checkMenuSelection('AnalyticController', 'users') ?>>
             <?= $this->url->link(t('User repartition'), 'AnalyticController', 'users', array('project_id' => $project['id'])) ?>

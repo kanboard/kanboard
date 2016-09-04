@@ -83,11 +83,11 @@ class AnalyticController extends BaseController
      *
      * @access public
      */
-    public function tasks()
+    public function taskDistribution()
     {
         $project = $this->getProject();
 
-        $this->response->html($this->helper->layout->analytic('analytic/tasks', array(
+        $this->response->html($this->helper->layout->analytic('analytic/task_distribution', array(
             'project' => $project,
             'metrics' => $this->taskDistributionAnalytic->build($project['id']),
             'title' => t('Task distribution'),

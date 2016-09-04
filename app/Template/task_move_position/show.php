@@ -2,7 +2,7 @@
     <h2><?= t('Move task to another position on the board') ?></h2>
 </div>
 
-<script type="x/templates" id="template-task-move-position">
+<script type="x/template" id="template-task-move-position">
     <?= $this->form->label(t('Swimlane'), 'swimlane') ?>
     <select v-model="swimlaneId" @change="onChangeSwimlane()" id="form-swimlane">
         <option v-for="swimlane in board" v-bind:value="swimlane.id">
