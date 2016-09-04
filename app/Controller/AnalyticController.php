@@ -99,11 +99,11 @@ class AnalyticController extends BaseController
      *
      * @access public
      */
-    public function users()
+    public function userDistribution()
     {
         $project = $this->getProject();
 
-        $this->response->html($this->helper->layout->analytic('analytic/users', array(
+        $this->response->html($this->helper->layout->analytic('analytic/user_distribution', array(
             'project' => $project,
             'metrics' => $this->userDistributionAnalytic->build($project['id']),
             'title' => t('User repartition'),

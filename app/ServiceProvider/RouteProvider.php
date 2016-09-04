@@ -110,7 +110,7 @@ class RouteProvider implements ServiceProviderInterface
 
             // Analytics routes
             $container['route']->addRoute('analytics/tasks/:project_id', 'AnalyticController', 'taskDistribution');
-            $container['route']->addRoute('analytics/users/:project_id', 'AnalyticController', 'users');
+            $container['route']->addRoute('analytics/users/:project_id', 'AnalyticController', 'userDistribution');
             $container['route']->addRoute('analytics/cfd/:project_id', 'AnalyticController', 'cfd');
             $container['route']->addRoute('analytics/burndown/:project_id', 'AnalyticController', 'burndown');
             $container['route']->addRoute('analytics/average-time-column/:project_id', 'AnalyticController', 'averageTimeByColumn');
