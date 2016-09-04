@@ -40,12 +40,12 @@ class AnalyticController extends BaseController
      *
      * @access public
      */
-    public function compareHours()
+    public function timeComparison()
     {
         $project = $this->getProject();
 
         $paginator = $this->paginator
-            ->setUrl('AnalyticController', 'compareHours', array('project_id' => $project['id']))
+            ->setUrl('AnalyticController', 'timeComparison', array('project_id' => $project['id']))
             ->setMax(30)
             ->setOrder(TaskModel::TABLE.'.id')
             ->setQuery($this->taskQuery
@@ -54,7 +54,7 @@ class AnalyticController extends BaseController
             )
             ->calculate();
 
-        $this->response->html($this->helper->layout->analytic('analytic/compare_hours', array(
+        $this->response->html($this->helper->layout->analytic('analytic/time_comparison', array(
             'project' => $project,
             'paginator' => $paginator,
             'metrics' => $this->estimatedTimeComparisonAnalytic->build($project['id']),
