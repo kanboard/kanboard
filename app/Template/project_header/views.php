@@ -7,7 +7,7 @@
         <i class="fa fa-th fa-fw"></i>
         <?= $this->url->link(t('Board'), 'BoardViewController', 'show', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-board', t('Keyboard shortcut: "%s"', 'v b')) ?>
     </li>
-    <li <?= $this->app->checkMenuSelection('Calendar') ?>>
+    <li <?= $this->app->checkMenuSelection('CalendarController') ?>>
         <i class="fa fa-calendar fa-fw"></i>
         <?= $this->url->link(t('Calendar'), 'CalendarController', 'show', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-calendar', t('Keyboard shortcut: "%s"', 'v c')) ?>
     </li>
