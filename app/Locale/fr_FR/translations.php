@@ -1221,7 +1221,7 @@ return array(
     'Creator Name' => 'Nom du créateur',
     'Time spent and estimated' => 'Temps passé et estimé',
     'Move position' => 'Changer la position',
-    'Move task to another position on the board' => 'Déplaçer la tâche vers une autre position sur le board',
+    'Move task to another position on the board' => 'Déplaçer la tâche vers une autre position sur le tableau',
     'Insert before this task' => 'Insérer avant cette tâche',
     'Insert after this task' => 'Insérer après cette tâche',
     'Unlock this user' => 'Débloquer cet utilisateur',
