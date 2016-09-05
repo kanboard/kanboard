@@ -38,9 +38,11 @@
 
     <?php if (! empty($task['date_due'])): ?>
         <?php if (date('Y-m-d') == date('Y-m-d', $task['date_due'])): ?>
-        <span class="task-board-date task-board-date-today">
+            <span class="task-board-date task-board-date-today">
         <?php elseif (time() > $task['date_due']): ?>
-        <span class="task-board-date task-board-date-overdue">
+            <span class="task-board-date task-board-date-overdue">
+        <?php else: ?>
+            <span class="task-board-date">
         <?php endif ?>
             <i class="fa fa-calendar"></i>
             <?= $this->dt->date($task['date_due']) ?>
