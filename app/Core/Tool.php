@@ -3,6 +3,8 @@
 namespace Kanboard\Core;
 
 use Pimple\Container;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 /**
  * Tool class
@@ -12,6 +14,32 @@ use Pimple\Container;
  */
 class Tool
 {
+    /**
+     * Remove recursively a directory
+     *
+     * @static
+     * @access public
+     * @param  string $directory
+     * @param  bool   $removeDirectory
+     */
+    public static function removeAllFiles($directory, $removeDirectory = true)
+    {
+        $it = new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
+
+        foreach ($files as $file) {
+            if ($file->isDir()) {
+                rmdir($file->getRealPath());
+            } else {
+                unlink($file->getRealPath());
+            }
+        }
+
+        if ($removeDirectory) {
+            rmdir($directory);
+        }
+    }
+
     /**
      * Build dependency injection container from an array
      *

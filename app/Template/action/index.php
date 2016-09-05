@@ -15,7 +15,7 @@
 <?php if (empty($actions)): ?>
     <p class="alert"><?= t('There is no action at the moment.') ?></p>
 <?php else: ?>
-    <table>
+    <table class="table-scrolling">
         <tr>
             <th><?= t('Automatic actions') ?></th>
             <th><?= t('Action parameters') ?></th>
@@ -54,6 +54,8 @@
                             <?= $this->text->in($param_value, $categories_list) ?>
                         <?php elseif ($this->text->contains($param_name, 'link_id')): ?>
                             <?= $this->text->in($param_value, $links_list) ?>
+                        <?php elseif ($this->text->contains($param_name, 'swimlane_id')): ?>
+                            <?= $this->text->in($param_value, $swimlane_list) ?>
                         <?php else: ?>
                             <?= $this->text->e($param_value) ?>
                         <?php endif ?>

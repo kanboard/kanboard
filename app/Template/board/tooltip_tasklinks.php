@@ -1,5 +1,5 @@
 <div class="tooltip-large">
-    <table>
+    <table class="table-small">
     <?php foreach ($links as $label => $grouped_links): ?>
         <tr>
             <th colspan="4"><?= t($label) ?></th>

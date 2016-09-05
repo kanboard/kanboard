@@ -51,7 +51,7 @@ class LexerBuilder
      */
     public function __construct()
     {
-        $this->lexer = new Lexer;
+        $this->lexer = new Lexer();
         $this->queryBuilder = new QueryBuilder();
     }
 

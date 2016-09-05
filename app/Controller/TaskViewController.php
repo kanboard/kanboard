@@ -4,6 +4,7 @@ namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Controller\PageNotFoundException;
+use Kanboard\Model\UserMetadataModel;
 
 /**
  * Task Controller
@@ -22,7 +23,6 @@ class TaskViewController extends BaseController
     {
         $project = $this->projectModel->getByToken($this->request->getStringParam('token'));
 
-        // Token verification
         if (empty($project)) {
             throw AccessForbiddenException::getInstance()->withoutLayout();
         }
@@ -62,23 +62,14 @@ class TaskViewController extends BaseController
     {
         $task = $this->getTask();
         $subtasks = $this->subtaskModel->getAll($task['id']);
-
-        $values = array(
-            'id' => $task['id'],
-            'date_started' => $task['date_started'],
-            'time_estimated' => $task['time_estimated'] ?: '',
-            'time_spent' => $task['time_spent'] ?: '',
-        );
-
-        $values = $this->dateParser->format($values, array('date_started'), $this->dateParser->getUserDateTimeFormat());
+        $commentSortingDirection = $this->userMetadataCacheDecorator->get(UserMetadataModel::KEY_COMMENT_SORTING_DIRECTION, 'ASC');
 
         $this->response->html($this->helper->layout->task('task/show', array(
             'task' => $task,
             'project' => $this->projectModel->getById($task['project_id']),
-            'values' => $values,
             'files' => $this->taskFileModel->getAllDocuments($task['id']),
             'images' => $this->taskFileModel->getAllImages($task['id']),
-            'comments' => $this->commentModel->getAll($task['id'], $this->userSession->getCommentSorting()),
+            'comments' => $this->commentModel->getAll($task['id'], $commentSortingDirection),
             'subtasks' => $subtasks,
             'internal_links' => $this->taskLinkModel->getAllGroupedByLabel($task['id']),
             'external_links' => $this->taskExternalLinkModel->getAll($task['id']),
@@ -102,6 +93,7 @@ class TaskViewController extends BaseController
             'lead_time' => $this->taskAnalyticModel->getLeadTime($task),
             'cycle_time' => $this->taskAnalyticModel->getCycleTime($task),
             'time_spent_columns' => $this->taskAnalyticModel->getTimeSpentByColumn($task),
+            'tags' => $this->taskTagModel->getList($task['id']),
         )));
     }
 
@@ -126,6 +118,7 @@ class TaskViewController extends BaseController
             'task' => $task,
             'project' => $this->projectModel->getById($task['project_id']),
             'subtask_paginator' => $subtask_paginator,
+            'tags' => $this->taskTagModel->getList($task['id']),
         )));
     }
 
@@ -142,6 +135,7 @@ class TaskViewController extends BaseController
             'task' => $task,
             'project' => $this->projectModel->getById($task['project_id']),
             'transitions' => $this->transitionModel->getAllByTask($task['id']),
+            'tags' => $this->taskTagModel->getList($task['id']),
         )));
     }
 }

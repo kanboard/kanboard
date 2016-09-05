@@ -40,6 +40,13 @@ class Directory extends BaseCore
             return true;
         }
 
+        foreach (array('>=', '>') as $operator) {
+            if (strpos($plugin['compatible_version'], $operator) === 0) {
+                $pluginVersion = substr($plugin['compatible_version'], strlen($operator));
+                return version_compare($appVersion, $pluginVersion, $operator);
+            }
+        }
+
         return $plugin['compatible_version'] === $appVersion;
     }
 

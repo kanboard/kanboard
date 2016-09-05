@@ -1,3 +1,43 @@
+Version 1.0.33 (unreleased)
+--------------
+
+New features:
+
+* Move a task without drag and drop (smartphones and tablets)
+* Add the possibility to unlock users from the user interface
+* New API calls for task metadata
+* New automatic actions:
+    - Define color by Swimlane
+    - Define priority by Swimlane
+
+Improvements:
+
+* Introduce Vue.js to manage user interface components
+* Add column "Reference" and "Creator Name" in CSV task export
+* Show both time spent and estimated on the board
+* Store board collapsed mode user preference in the database
+* Store comment sorting direction in the database
+* Avoid tags overlapping on the board
+* Show project name in notifications
+* Allow priority changes for inverted priority scales
+* Add the possibility to attach template hooks with local variables and callback
+* Add "reference" hooks
+* Show project name in task forms
+* Convert vanilla CSS to SASS
+* Support version operators for plugin directory: >= and >
+
+Other changes:
+
+* Time spent (in hours) for subtasks are not rounded too the nearest quarter anymore
+
+Bug fixes:
+
+* Do not show closed tasks on public boards
+* Fix undefined constant in config example file
+* Fix PHP notice when sending overdue notifications
+* Fix wrong project date format (shown as 01/01/1970)
+    - If the dates still not correct, modify and save the date
+
 Version 1.0.32
 --------------
 

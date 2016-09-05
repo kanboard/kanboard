@@ -1,0 +1,56 @@
+@import variables
+@import mixins
+
+.sidebar-container
+  @include grid(100)
+
+.sidebar-content
+  padding-left: 10px
+  @include grid_width(82/100)
+  @include xs-device
+    @include grid_width(1)
+
+.sidebar
+  max-width: 240px
+  min-width: 190px
+  @include grid_width(18/100)
+  @include xs-device
+    @include grid_width(1)
+    max-width: 99%
+    min-width: 0
+  h2
+    margin-top: 0
+  > ul
+    a
+      text-decoration: none
+      color: color('light')
+      font-weight: 300
+      &:hover
+        color: color('primary')
+    li
+      list-style-type: none
+      line-height: 35px
+      border-bottom: 1px dotted #efefef
+      padding-left: 13px
+      &:hover
+        border-left: 5px solid #555
+        padding-left: 8px
+      &.active
+        border-left: 5px solid #333
+        padding-left: 8px
+        a
+          color: color('primary')
+          font-weight: bold
+
+.sidebar-icons > ul li
+  padding-left: 0
+  &:hover, &.active
+    padding-left: 0
+    border-left: none
+
+.sidebar > ul li
+  &.active a
+    &:focus, &:hover
+      color: color('medium')
+  &:last-child
+    margin-bottom: 15px

@@ -1,6 +1,9 @@
-<div class="task-show-title color-<?= $task['color_id'] ?>">
-    <h2><?= $this->text->e($task['title']) ?></h2>
-</div>
+<?= $this->render('task/details', array(
+    'task' => $task,
+    'tags' => $tags,
+    'project' => $project,
+    'editable' => false,
+)) ?>
 
 <?= $this->render('task/time_tracking_summary', array('task' => $task)) ?>
 
@@ -8,7 +11,7 @@
 <?php if ($subtask_paginator->isEmpty()): ?>
     <p class="alert"><?= t('There is nothing to show.') ?></p>
 <?php else: ?>
-    <table class="table-fixed">
+    <table class="table-fixed table-scrolling">
         <tr>
             <th class="column-15"><?= $subtask_paginator->order(t('User'), 'username') ?></th>
             <th><?= $subtask_paginator->order(t('Subtask'), 'subtask_title') ?></th>

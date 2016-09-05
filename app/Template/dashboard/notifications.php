@@ -13,14 +13,28 @@
     </ul>
 </div>
 
-    <table class="table-fixed table-small">
+    <table class="table-striped table-scrolling table-small">
         <tr>
+            <th class="column-20"><?= t('Project') ?></th>
             <th><?= t('Notification') ?></th>
-            <th class="column-20"><?= t('Date') ?></th>
+            <th class="column-15"><?= t('Date') ?></th>
             <th class="column-15"><?= t('Action') ?></th>
         </tr>
         <?php foreach ($notifications as $notification): ?>
         <tr>
+            <td>
+                <?php if (isset($notification['event_data']['task']['project_name'])): ?>
+                    <?= $this->url->link(
+                            $this->text->e($notification['event_data']['task']['project_name']),
+                            'BoardViewController',
+                            'show',
+                            array('project_id' => $notification['event_data']['task']['project_id'])
+                        )
+                    ?>
+                <?php elseif (isset($notification['event_data']['project_name'])): ?>
+                    <?= $this->text->e($notification['event_data']['project_name']) ?>
+                <?php endif ?>
+            </td>
             <td>
                 <?php if ($this->text->contains($notification['event_name'], 'subtask')): ?>
                     <i class="fa fa-tasks fa-fw"></i>

@@ -174,7 +174,7 @@ class FormHelper extends Base
 
         $html = '<textarea name="'.$name.'" id="form-'.$name.'" class="'.$class.'" ';
         $html .= implode(' ', $attributes).'>';
-        $html .= isset($values->$name) ? $this->helper->text->e($values->$name) : isset($values[$name]) ? $values[$name] : '';
+        $html .= isset($values[$name]) ? $this->helper->text->e($values[$name]) : '';
         $html .= '</textarea>';
         $html .= $this->errorList($errors, $name);
 
@@ -304,6 +304,48 @@ class FormHelper extends Base
     public function numeric($name, $values = array(), array $errors = array(), array $attributes = array(), $class = '')
     {
         return $this->input('text', $name, $values, $errors, $attributes, $class.' form-numeric');
+    }
+
+    /**
+     * Date field
+     *
+     * @access public
+     * @param  string $label
+     * @param  string $name
+     * @param  array  $values
+     * @param  array  $errors
+     * @param  array  $attributes
+     * @return string
+     */
+    public function date($label, $name, array $values, array $errors = array(), array $attributes = array())
+    {
+        $userFormat = $this->dateParser->getUserDateFormat();
+        $values = $this->dateParser->format($values, array($name), $userFormat);
+        $attributes = array_merge(array('placeholder="'.date($userFormat).'"'), $attributes);
+
+        return $this->helper->form->label($label, $name) .
+            $this->helper->form->text($name, $values, $errors, $attributes, 'form-date');
+    }
+
+    /**
+     * Datetime field
+     *
+     * @access public
+     * @param  string $label
+     * @param  string $name
+     * @param  array  $values
+     * @param  array  $errors
+     * @param  array  $attributes
+     * @return string
+     */
+    public function datetime($label, $name, array $values, array $errors = array(), array $attributes = array())
+    {
+        $userFormat = $this->dateParser->getUserDateTimeFormat();
+        $values = $this->dateParser->format($values, array($name), $userFormat);
+        $attributes = array_merge(array('placeholder="'.date($userFormat).'"'), $attributes);
+
+        return $this->helper->form->label($label, $name) .
+            $this->helper->form->text($name, $values, $errors, $attributes, 'form-datetime');
     }
 
     /**

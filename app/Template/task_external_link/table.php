@@ -1,5 +1,5 @@
 <?php if (! empty($links)): ?>
-<table class="table-stripped table-small">
+<table class="table-striped table-scrolling">
     <tr>
         <th class="column-10"><?= t('Type') ?></th>
         <th><?= t('Title') ?></th>

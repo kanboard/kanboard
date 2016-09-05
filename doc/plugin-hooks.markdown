@@ -105,7 +105,7 @@ class Plugin extends Base
 {
     public function initialize()
     {
-        $this->hook->on('template:layout:css', 'plugins/Css/skin.css');
+        $this->hook->on('template:layout:css', array('template' => 'plugins/Css/skin.css'));
     }
 }
 ```
@@ -114,6 +114,33 @@ List of asset Hooks:
 
 - `template:layout:css`
 - `template:layout:js`
+
+
+Reference hooks
+---------------
+
+Reference hooks are passing a variable by reference.
+
+Example:
+
+```php
+$this->hook->on('formatter:board:query', function (\PicoDb\Table &query) {
+    $query->eq('color_id', 'red');
+});
+```
+
+The code above will show only tasks in red on the board.
+
+List of reference hooks:
+
+| Hook                                       | Description                                                   |
+|--------------------------------------------|---------------------------------------------------------------|
+| `formatter:board:query`                    | Alter database query before rendering board                   |
+| `pagination:dashboard:task:query`          | Alter database query for tasks pagination on the dashboard    |
+| `pagination:dashboard:subtask:query`       | Alter database query for subtasks pagination on the dashboard |
+| `model:task:creation:prepare`              | Alter form values before to save a task                       |
+| `model:task:modification:prepare`          | Alter form values before to edit a task                       |
+
 
 Template Hooks
 --------------
@@ -124,6 +151,22 @@ Example to add new content in the dashboard sidebar:
 
 ```php
 $this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/sidebar');
+```
+
+Example to attach a template with local variables:
+
+```php
+$this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/sidebar', array(
+    'variable' => 'foobar',
+));
+```
+
+Example to attach a template with a callable:
+
+```php
+$this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/sidebar', function($hook_param1, $hook_param2) {
+    return array('new_template_variable' => 'foobar'); // Inject a new variable into the plugin template
+});
 ```
 
 This call is usually defined in the `initialize()` method.
@@ -161,6 +204,7 @@ List of template hooks:
 | `template:config:email`                    | Email settings page                                |
 | `template:config:integrations`             | Integration page in global settings                |
 | `template:dashboard:sidebar`               | Sidebar on dashboard page                          |
+| `template:dashboard:show`                  | Main page of the dashboard                         |
 | `template:export:sidebar`                  | Sidebar on export pages                            |
 | `template:import:sidebar`                  | Sidebar on import pages                            |
 | `template:header:dropdown`                 | Page header dropdown menu (user avatar icon)       |
@@ -174,6 +218,8 @@ List of template hooks:
 | `template:project:integrations`            | Integration page in projects settings              |
 | `template:project:sidebar`                 | Sidebar in project settings                        |
 | `template:project-user:sidebar`            | Sidebar on project user overview page              |
+| `template:project-list:menu:before`        | Project list: before menu entries                  |
+| `template:project-list:menu:after`         | Project list: after menu entries                   |
 | `template:task:layout:top`                 | Task layout top (after page header)                |
 | `template:task:details:top`                | Task summary top                                   |
 | `template:task:details:bottom`             | Task summary bottom                                |

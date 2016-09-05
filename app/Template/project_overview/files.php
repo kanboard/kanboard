@@ -1,5 +1,5 @@
 <?php if (! empty($files)): ?>
-    <table class="table-stripped">
+    <table class="table-striped table-scrolling">
         <tr>
             <th><?= t('Filename') ?></th>
             <th><?= t('Creator') ?></th>

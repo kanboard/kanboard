@@ -41,4 +41,4 @@ Pour chaque sous-tâche, le chrono peut être à tout moment arrêté/démarré
 - Le chrono ne dépend pas du statut de la sous-tâche
 - Chaque fois que vous démarrez le chrono, un nouvel enregistrement est créé dans la table de suivi des temps
 - Chaque fois que vous arrêtez l'horloge, la date de fin est enregistrée dans la table de suivi des temps
-- Le temps passé est arrondi au quart d’heure le plus proche
+- Le temps passé est arrondi au quart d’heure le plus proche (seulement pour Kanboard < 1.0.32)

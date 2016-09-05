@@ -53,6 +53,7 @@ class EventManager
             TaskModel::EVENT_CREATE_UPDATE     => t('Task creation or modification'),
             TaskModel::EVENT_ASSIGNEE_CHANGE   => t('Task assignee change'),
             TaskModel::EVENT_DAILY_CRONJOB     => t('Daily background job for tasks'),
+            TaskModel::EVENT_MOVE_SWIMLANE     => t('Move a task to another swimlane'),
         );
 
         $events = array_merge($events, $this->events);

@@ -419,6 +419,14 @@ class ProjectModel extends Base
             $values['identifier'] = strtoupper($values['identifier']);
         }
 
+        if (! empty($values['start_date'])) {
+            $values['start_date'] = $this->dateParser->getIsoDate($values['start_date']);
+        }
+
+        if (! empty($values['end_date'])) {
+            $values['end_date'] = $this->dateParser->getIsoDate($values['end_date']);
+        }
+
         $this->helper->model->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end'));
 
         return $this->exists($values['id']) &&

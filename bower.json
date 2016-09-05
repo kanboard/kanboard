@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "jquery": "^2.2.3",
-    "fullcalendar": "^2.7.1",
+    "fullcalendar": "^2.9.1",
     "chosen": "^1.5.1",
     "c3": "^0.4.11",
     "jquery-ui": "^1.11.4",
@@ -20,6 +20,6 @@
     "font-awesome": "fontawesome#^4.6.3",
     "d3": "~3.5.0",
     "isMobile": "0.4.0",
-    "select2": "4.0.1"
+    "select2": "4.0.2"
   }
 }

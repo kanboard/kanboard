@@ -10,6 +10,9 @@ namespace Kanboard\Model;
  */
 class UserMetadataModel extends MetadataModel
 {
+    const KEY_COMMENT_SORTING_DIRECTION = 'comment.sorting.direction';
+    const KEY_BOARD_COLLAPSED = 'board.collapsed.';
+
     /**
      * Get the table
      *

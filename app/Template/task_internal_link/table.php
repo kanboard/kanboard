@@ -1,5 +1,5 @@
 <?php if (! empty($links)): ?>
-<table class="task-links-table table-stripped">
+<table class="task-links-table table-striped table-scrolling">
     <?php foreach ($links as $label => $grouped_links): ?>
         <?php $hide_td = false ?>
         <?php foreach ($grouped_links as $link): ?>

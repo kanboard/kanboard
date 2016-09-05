@@ -26,3 +26,4 @@ before_script:
 
 script:
   - phpunit -c tests/units.$DB.xml
+  - phpunit tests/configtest

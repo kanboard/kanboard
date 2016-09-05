@@ -1,7 +1,7 @@
 <?php if (empty($users)): ?>
     <p><?= t('There is no project member.') ?></p>
 <?php else: ?>
-    <table>
+    <table class="table-small">
     <?php foreach ($roles as $role => $role_name): ?>
         <?php if (isset($users[$role])): ?>
         <tr><th><?= $role_name ?></th></tr>

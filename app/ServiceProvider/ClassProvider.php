@@ -140,9 +140,6 @@ class ClassProvider implements ServiceProviderInterface
             'Response',
             'RememberMeCookie',
         ),
-        'Core\Cache' => array(
-            'MemoryCache',
-        ),
         'Core\Plugin' => array(
             'Hook',
         ),

@@ -1,0 +1,32 @@
+@import variables
+@import mixins
+
+.project-overview-columns
+  +display-flex
+  +flex-direction(row)
+  +flex-wrap
+  +align-content(center)
+  +justify-content(center)
+  margin-bottom: 20px
+  font-size: size('large')
+  @include xs-device
+    display: block
+
+.project-overview-column
+  text-align: center
+  margin-right: 3%
+  margin-top: 5px
+  padding: 3px 15px 3px 15px
+  border: 1px dashed #ddd
+
+  @include xs-device
+    text-align: left
+
+  small
+    color: color('light')
+  strong
+    color: color('medium')
+    display: block
+
+    @include xs-device
+      display: inline

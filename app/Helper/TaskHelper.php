@@ -103,7 +103,10 @@ class TaskHelper extends Base
 
         $html = $this->helper->form->label(t('Assignee'), 'owner_id');
         $html .= $this->helper->form->select('owner_id', $users, $values, $errors, $attributes);
-        $html .= '&nbsp;<a href="#" class="assign-me" data-target-id="form-owner_id" data-current-id="'.$this->userSession->getId().'" title="'.t('Assign to me').'">'.t('Me').'</a>';
+        $html .= '&nbsp;';
+        $html .= '<small>';
+        $html .= '<a href="#" class="assign-me" data-target-id="form-owner_id" data-current-id="'.$this->userSession->getId().'" title="'.t('Assign to me').'">'.t('Me').'</a>';
+        $html .= '</small>';
 
         return $html;
     }
@@ -148,7 +151,7 @@ class TaskHelper extends Base
     {
         $html = '';
 
-        if ($project['priority_end'] > $project['priority_start']) {
+        if ($project['priority_end'] != $project['priority_start']) {
             $range = range($project['priority_start'], $project['priority_end']);
             $options = array_combine($range, $range);
             $values += array('priority' => $project['priority_default']);
@@ -204,31 +207,21 @@ class TaskHelper extends Base
 
     public function selectStartDate(array $values, array $errors = array(), array $attributes = array())
     {
-        $placeholder = date($this->configModel->get('application_date_format', 'm/d/Y H:i'));
-        $attributes = array_merge(array('tabindex="12"', 'placeholder="'.$placeholder.'"'), $attributes);
-
-        $html = $this->helper->form->label(t('Start Date'), 'date_started');
-        $html .= $this->helper->form->text('date_started', $values, $errors, $attributes, 'form-datetime');
-
-        return $html;
+        $attributes = array_merge(array('tabindex="12"'), $attributes);
+        return $this->helper->form->datetime(t('Start Date'), 'date_started', $values, $errors, $attributes);
     }
 
     public function selectDueDate(array $values, array $errors = array(), array $attributes = array())
     {
-        $placeholder = date($this->configModel->get('application_date_format', 'm/d/Y'));
-        $attributes = array_merge(array('tabindex="13"', 'placeholder="'.$placeholder.'"'), $attributes);
-
-        $html = $this->helper->form->label(t('Due Date'), 'date_due');
-        $html .= $this->helper->form->text('date_due', $values, $errors, $attributes, 'form-date');
-
-        return $html;
+        $attributes = array_merge(array('tabindex="13"'), $attributes);
+        return $this->helper->form->date(t('Due Date'), 'date_due', $values, $errors, $attributes);
     }
 
     public function formatPriority(array $project, array $task)
     {
         $html = '';
 
-        if ($project['priority_end'] > $project['priority_start']) {
+        if ($project['priority_end'] != $project['priority_start']) {
             $html .= '<span class="task-board-priority" title="'.t('Task priority').'">';
             $html .= $task['priority'] >= 0 ? 'P'.$task['priority'] : '-P'.abs($task['priority']);
             $html .= '</span>';

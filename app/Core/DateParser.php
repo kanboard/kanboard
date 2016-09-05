@@ -239,20 +239,8 @@ class DateParser extends Base
      */
     public function getHours(DateTime $d1, DateTime $d2)
     {
-        $seconds = $this->getRoundedSeconds(abs($d1->getTimestamp() - $d2->getTimestamp()));
+        $seconds = abs($d1->getTimestamp() - $d2->getTimestamp());
         return round($seconds / 3600, 2);
-    }
-
-    /**
-     * Round the timestamp to the nearest quarter
-     *
-     * @access public
-     * @param  integer    $seconds   Timestamp
-     * @return integer
-     */
-    public function getRoundedSeconds($seconds)
-    {
-        return (int) round($seconds / (15 * 60)) * (15 * 60);
     }
 
     /**
@@ -304,6 +292,10 @@ class DateParser extends Base
     {
         foreach ($fields as $field) {
             if (! empty($values[$field])) {
+                if (! ctype_digit($values[$field])) {
+                    $values[$field] = strtotime($values[$field]);
+                }
+
                 $values[$field] = date($format, $values[$field]);
             } else {
                 $values[$field] = '';

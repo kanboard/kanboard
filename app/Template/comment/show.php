@@ -4,10 +4,10 @@
 
     <div class="comment-title">
         <?php if (! empty($comment['username'])): ?>
-            <span class="comment-username"><?= $this->text->e($comment['name'] ?: $comment['username']) ?></span>
+            <strong class="comment-username"><?= $this->text->e($comment['name'] ?: $comment['username']) ?></strong>
         <?php endif ?>
 
-        <span class="comment-date"><?= $this->dt->datetime($comment['date_creation']) ?></span>
+        <small class="comment-date"><?= $this->dt->datetime($comment['date_creation']) ?></small>
     </div>
 
     <div class="comment-content">
