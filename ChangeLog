@@ -25,6 +25,7 @@ Improvements:
 * Show project name in task forms
 * Convert vanilla CSS to SASS
 * Support version operators for plugin directory: >= and >
+* Update Spanish documentation
 
 Other changes:
 
@@ -32,6 +33,7 @@ Other changes:
 
 Bug fixes:
 
+* Fix improper HTML escaping for textarea (potential XSS)
 * Do not show closed tasks on public boards
 * Fix undefined constant in config example file
 * Fix PHP notice when sending overdue notifications
