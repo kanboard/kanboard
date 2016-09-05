@@ -30,11 +30,12 @@
         <label><input type="radio" value="after" v-model="positionChoice"><?= t('Insert after this task') ?></label>
     </div>
 
-    <div class="form-actions">
-        <input type="button" value="<?= t('Save') ?>" class="btn btn-blue" @click="onSubmit">
-        <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
-    </div>
+    <submit-cancel
+        label-button="<?= t('Save') ?>"
+        label-or="<?= t('or') ?>"
+        label-cancel="<?= t('cancel') ?>"
+        :callback="onSubmit">
+    </submit-cancel>
 </script>
 
 <task-move-position

@@ -3,7 +3,7 @@ Version 1.0.33 (unreleased)
 
 New features:
 
-* Move a task without drag and drop (mobiles)
+* Move a task without drag and drop (smartphones and tablets)
 * Add the possibility to unlock users from the user interface
 * New API calls for task metadata
 * New automatic actions:
