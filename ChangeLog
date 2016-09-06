@@ -1,4 +1,4 @@
-Version 1.0.33 (unreleased)
+Version 1.0.33
 --------------
 
 New features:
@@ -24,6 +24,7 @@ Improvements:
 * Add "reference" hooks
 * Show project name in task forms
 * Convert vanilla CSS to SASS
+* Make user interface more responsive for smartphones and tablets
 * Support version operators for plugin directory: >= and >
 * Update Spanish documentation
 
