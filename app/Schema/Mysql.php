@@ -6,7 +6,40 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 112;
+const VERSION = 113;
+
+function version_113(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_has_roles (
+            role_id INT NOT NULL AUTO_INCREMENT,
+            role VARCHAR(255) NOT NULL,
+            project_id INT NOT NULL,
+            UNIQUE(project_id, role),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            PRIMARY KEY(role_id)
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("
+        CREATE TABLE column_has_move_restrictions (
+            restriction_id INT NOT NULL AUTO_INCREMENT,
+            project_id INT NOT NULL,
+            role_id INT NOT NULL,
+            src_column_id INT NOT NULL,
+            dst_column_id INT NOT NULL,
+            UNIQUE(role_id, src_column_id, dst_column_id),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(role_id) REFERENCES project_has_roles(role_id) ON DELETE CASCADE,
+            FOREIGN KEY(src_column_id) REFERENCES columns(id) ON DELETE CASCADE,
+            FOREIGN KEY(dst_column_id) REFERENCES columns(id) ON DELETE CASCADE,
+            PRIMARY KEY(restriction_id)
+        ) ENGINE=InnoDB CHARSET=utf8
+    ");
+
+    $pdo->exec("ALTER TABLE `project_has_users` MODIFY `role` VARCHAR(255) NOT NULL");
+    $pdo->exec("ALTER TABLE `project_has_groups` MODIFY `role` VARCHAR(255) NOT NULL");
+}
 
 function version_112(PDO $pdo)
 {
