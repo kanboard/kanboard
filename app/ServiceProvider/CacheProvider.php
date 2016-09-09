@@ -4,6 +4,7 @@ namespace Kanboard\ServiceProvider;
 
 use Kanboard\Core\Cache\FileCache;
 use Kanboard\Core\Cache\MemoryCache;
+use Kanboard\Decorator\ColumnMoveRestrictionCacheDecorator;
 use Kanboard\Decorator\MetadataCacheDecorator;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -43,6 +44,13 @@ class CacheProvider implements ServiceProviderInterface
                 $c['userMetadataModel'],
                 'user.metadata.',
                 $c['userSession']->getId()
+            );
+        };
+
+        $container['columnMoveRestrictionCacheDecorator'] = function($c) {
+            return new ColumnMoveRestrictionCacheDecorator(
+                $c['memoryCache'],
+                $c['columnMoveRestrictionModel']
             );
         };
 

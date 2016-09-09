@@ -123,6 +123,7 @@ class BoardFormatterTest extends Base
         $this->assertSame(0, $board[2]['columns'][3]['nb_tasks']);
 
         $this->assertEquals('Task 8', $board[2]['columns'][2]['tasks'][0]['title']);
+        $this->assertArrayHasKey('is_draggable', $board[2]['columns'][2]['tasks'][0]);
     }
 
     public function testFormatWithoutDefaultSwimlane()

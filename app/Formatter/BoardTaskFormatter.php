@@ -79,6 +79,11 @@ class BoardTaskFormatter extends BaseFormatter implements FormatterInterface
     {
         $tasks = array_values(array_filter($this->tasks, array($this, 'filterTasks')));
         array_merge_relation($tasks, $this->tags, 'tags', 'id');
+
+        foreach ($tasks as &$task) {
+            $task['is_draggable'] = $this->helper->board->isDraggable($task);
+        }
+
         return $tasks;
     }
 

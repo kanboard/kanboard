@@ -1,6 +1,7 @@
 <div class="
         task-board
-        <?= $task['is_active'] == 1 ? ($this->user->hasProjectAccess('BoardViewController', 'save', $task['project_id']) ? 'draggable-item ' : '').'task-board-status-open '.($task['date_modification'] > (time() - $board_highlight_period) ? 'task-board-recent' : '') : 'task-board-status-closed' ?>
+        <?= $task['is_draggable'] ? 'draggable-item ' : '' ?>
+        <?= $task['is_active'] == 1 ? 'task-board-status-open '.($task['date_modification'] > (time() - $board_highlight_period) ? 'task-board-recent' : '') : 'task-board-status-closed' ?>
         color-<?= $task['color_id'] ?>"
      data-task-id="<?= $task['id'] ?>"
      data-column-id="<?= $task['column_id'] ?>"

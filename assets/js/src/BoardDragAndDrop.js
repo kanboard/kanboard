@@ -34,7 +34,7 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
 
             if (newColumnId != taskColumnId || newSwimlaneId != taskSwimlaneId || newPosition != taskPosition) {
                 self.changeTaskState(taskId);
-                self.save(taskId, newColumnId, newPosition, newSwimlaneId);
+                self.save(taskId, taskColumnId, newColumnId, newPosition, newSwimlaneId);
             }
         },
         start: function(event, ui) {
@@ -62,7 +62,7 @@ Kanboard.BoardDragAndDrop.prototype.changeTaskState = function(taskId) {
     task.find('.task-board-saving-icon').show();
 };
 
-Kanboard.BoardDragAndDrop.prototype.save = function(taskId, columnId, position, swimlaneId) {
+Kanboard.BoardDragAndDrop.prototype.save = function(taskId, srcColumnId, dstColumnId, position, swimlaneId) {
     var self = this;
     self.app.showLoadingIcon();
     self.savingInProgress = true;
@@ -75,7 +75,8 @@ Kanboard.BoardDragAndDrop.prototype.save = function(taskId, columnId, position, 
         processData: false,
         data: JSON.stringify({
             "task_id": taskId,
-            "column_id": columnId,
+            "src_column_id": srcColumnId,
+            "dst_column_id": dstColumnId,
             "swimlane_id": swimlaneId,
             "position": position
         }),

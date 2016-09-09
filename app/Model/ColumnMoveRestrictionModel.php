@@ -42,7 +42,8 @@ class ColumnMoveRestrictionModel extends Base
      */
     public function getAll($project_id)
     {
-        return $this->db->table(self::TABLE)
+        return $this->db
+            ->table(self::TABLE)
             ->columns(
                 'restriction_id',
                 'src_column_id',
@@ -56,6 +57,20 @@ class ColumnMoveRestrictionModel extends Base
             ->left(ProjectRoleModel::TABLE, 'pr', 'role_id', self::TABLE, 'role_id')
             ->eq(self::TABLE.'.project_id', $project_id)
             ->findAll();
+    }
+
+    /**
+     * Get all source column Ids
+     * 
+     * @param  int $project_id
+     * @return array
+     */
+    public function getAllSrcColumns($project_id)
+    {
+        return $this->db
+            ->hashtable(self::TABLE)
+            ->eq(self::TABLE.'.project_id', $project_id)
+            ->getAll('src_column_id', 'src_column_id');
     }
 
     /**

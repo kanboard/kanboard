@@ -12,6 +12,7 @@ use Pimple\Container;
  *
  * @property \Kanboard\Helper\AppHelper               $app
  * @property \Kanboard\Helper\AssetHelper             $asset
+ * @property \Kanboard\Helper\BoardHelper             $board
  * @property \Kanboard\Helper\CalendarHelper          $calendar
  * @property \Kanboard\Helper\DateHelper              $dt
  * @property \Kanboard\Helper\FileHelper              $file
