@@ -5,6 +5,7 @@ require_once __DIR__.'/../Base.php';
 use Kanboard\Core\User\UserSession;
 use Kanboard\Helper\UserHelper;
 use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectRoleModel;
 use Kanboard\Model\ProjectUserRoleModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
@@ -256,6 +257,37 @@ class UserHelperTest extends Base
         $this->assertTrue($helper->hasProjectAccess('BoardViewController', 'show', 1));
         $this->assertTrue($helper->hasProjectAccess('TaskViewController', 'show', 1));
         $this->assertFalse($helper->hasProjectAccess('TaskCreationController', 'save', 1));
+
+        $this->assertFalse($helper->hasProjectAccess('ProjectEditController', 'edit', 2));
+        $this->assertFalse($helper->hasProjectAccess('BoardViewController', 'show', 2));
+        $this->assertFalse($helper->hasProjectAccess('TaskViewController', 'show', 2));
+        $this->assertFalse($helper->hasProjectAccess('TaskCreationController', 'save', 2));
+    }
+
+    public function testHasProjectAccessForCustomProjectRole()
+    {
+        $helper = new UserHelper($this->container);
+        $user = new UserModel($this->container);
+        $project = new ProjectModel($this->container);
+        $projectUserRole = new ProjectUserRoleModel($this->container);
+        $projectRole = new ProjectRoleModel($this->container);
+
+        $this->container['sessionStorage']->user = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+        );
+
+        $this->assertEquals(1, $project->create(array('name' => 'My project')));
+        $this->assertEquals(2, $project->create(array('name' => 'My project')));
+        $this->assertEquals(2, $user->create(array('username' => 'user')));
+        $this->assertEquals(1, $projectRole->create(1, 'Custom Role'));
+
+        $this->assertTrue($projectUserRole->addUser(1, 2, 'Custom Role'));
+
+        $this->assertFalse($helper->hasProjectAccess('ProjectEditController', 'edit', 1));
+        $this->assertTrue($helper->hasProjectAccess('BoardViewController', 'show', 1));
+        $this->assertTrue($helper->hasProjectAccess('TaskViewController', 'show', 1));
+        $this->assertTrue($helper->hasProjectAccess('TaskCreationController', 'save', 1));
 
         $this->assertFalse($helper->hasProjectAccess('ProjectEditController', 'edit', 2));
         $this->assertFalse($helper->hasProjectAccess('BoardViewController', 'show', 2));

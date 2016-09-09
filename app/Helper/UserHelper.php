@@ -150,6 +150,11 @@ class UserHelper extends Base
 
         if ($result === null) {
             $role = $this->getProjectUserRole($project_id);
+
+            if ($this->role->isCustomProjectRole($role)) {
+                $role = Role::PROJECT_MEMBER;
+            }
+
             $result = $this->projectAuthorization->isAllowed($controller, $action, $role);
             $this->memoryCache->set($key, $result);
         }
