@@ -1,32 +1,32 @@
-What is Kanban?
+¿Qué es Kanban?
 ===============
 
-Kanban is a methodology originally developed by Toyota to be more efficient.
+Kanban es una metodología desarrollada originalmente por Toyota para ser más eficientes.
 
-There are only two constraints imposed by Kanban:
+Sólo hay dos limitaciones impuestas por Kanban:
 
-- Visualize your workflow
-- Limit your work in progress
+- Visualizar el flujo de trabajo
+- Limitar el trabajo en curso
 
-Visualize your workflow
+Visualizar el flujo de trabajo
 -----------------------
 
-- Your work is displayed on a board, you have a clear overview of your project
-- Each column represents a step in your workflow
+- Su trabajo se muestra en una tabla, se obtiene una visión clara de su proyecto
+- Cada columna representa un paso en el flujo de trabajo
 
-Bring focus and avoid multitasking
+Concentrar la atención y evitar la multitarea
 ----------------------------------
 
-- Each phase can have a work in progress limits
-- Limits are great to identify bottlenecks
-- Limits avoid working on too many tasks at the same time
+- Cada fase puede tener un trabajo en progreso con límites
+- Los límites sirven pasra identificar los cuellos de botella
+- Límita evitar trabajar en demasiadas tareas al mismo tiempo,
 
-Measure performance and improvement
+Medir el desempeño y la mejora
 -----------------------------------
 
-Kanban uses lead and cycle times to measure performance:
+Kanban utiliza la iniciativa y los tiempos de ciclo para medir el rendimiento:
 
-- **Lead time**: Time between the task is created and completed
-- **Cycle time**: Time between the task is started and completed
+- ** ** Plazo de ejecución: El tiempo entre la tarea creada y terminada
+- ** ** Tiempo de ciclo: El tiempo entre la tarea iniciada y termida 
 
-For example, you may have a lead time of 100 days and only have to work 1 hour to complete the task.
+Por ejemplo, usted puede tener un plazo de ejecución de 100 días y sólo tienen que trabajar 1 hora para completar la tarea.
