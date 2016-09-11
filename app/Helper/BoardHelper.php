@@ -34,8 +34,14 @@ class BoardHelper extends Base
     public function isDraggable(array $task)
     {
         if ($task['is_active'] == 1 && $this->helper->user->hasProjectAccess('BoardViewController', 'save', $task['project_id'])) {
-            $srcColumnIds = $this->columnMoveRestrictionCacheDecorator->getAllSrcColumns($task['project_id']);
-            return ! isset($srcColumnIds[$task['column_id']]);
+            $role = $this->helper->user->getProjectUserRole($task['project_id']);
+
+            if ($this->role->isCustomProjectRole($role)) {
+                $srcColumnIds = $this->columnMoveRestrictionCacheDecorator->getAllSrcColumns($task['project_id'], $role);
+                return ! isset($srcColumnIds[$task['column_id']]);
+            }
+
+            return true;
         }
 
         return false;

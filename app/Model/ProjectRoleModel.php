@@ -3,6 +3,7 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Base;
+use Kanboard\Core\Security\Role;
 
 /**
  * Class ProjectRoleModel
@@ -13,6 +14,38 @@ use Kanboard\Core\Base;
 class ProjectRoleModel extends Base
 {
     const TABLE = 'project_has_roles';
+
+    /**
+     * Get list of project roles
+     * 
+     * @param  int $project_id
+     * @return array
+     */
+    public function getList($project_id)
+    {
+        $defaultRoles = $this->role->getProjectRoles();
+        $customRoles = $this->db
+            ->hashtable(self::TABLE)
+            ->eq('project_id', $project_id)
+            ->getAll('role', 'role');
+
+        return $defaultRoles + $customRoles;
+    }
+
+    /**
+     * Get a role
+     *
+     * @param  int $project_id
+     * @param  int $role_id
+     * @return array|null
+     */
+    public function getById($project_id, $role_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->eq('project_id', $project_id)
+            ->eq('role_id', $role_id)
+            ->findOne();
+    }
 
     /**
      * Get all project roles
@@ -26,6 +59,22 @@ class ProjectRoleModel extends Base
             ->eq('project_id', $project_id)
             ->asc('role')
             ->findAll();
+    }
+
+    /**
+     * Get all project roles with restrictions
+     *
+     * @param  int $project_id
+     * @return array
+     */
+    public function getAllWithRestrictions($project_id)
+    {
+        $roles = $this->getAll($project_id);
+        $restrictions = $this->columnMoveRestrictionModel->getAll($project_id);
+        $restrictions = array_column_index($restrictions, 'role_id');
+        array_merge_relation($roles, $restrictions, 'restrictions', 'role_id');
+
+        return $roles;
     }
 
     /**
@@ -73,10 +122,38 @@ class ProjectRoleModel extends Base
      */
     public function remove($project_id, $role_id)
     {
-        return $this->db
+        $this->db->startTransaction();
+
+        $role = $this->getById($project_id, $role_id);
+
+        $r1 = $this->db
+            ->table(ProjectUserRoleModel::TABLE)
+            ->eq('project_id', $project_id)
+            ->eq('role', $role['role'])
+            ->update(array(
+                'role' => Role::PROJECT_MEMBER
+            ));
+
+        $r2 = $this->db
+            ->table(ProjectGroupRoleModel::TABLE)
+            ->eq('project_id', $project_id)
+            ->eq('role', $role['role'])
+            ->update(array(
+                'role' => Role::PROJECT_MEMBER
+            ));
+
+        $r3 = $this->db
             ->table(self::TABLE)
             ->eq('project_id', $project_id)
             ->eq('role_id', $role_id)
             ->remove();
+
+        if ($r1 && $r2 && $r3) {
+            $this->db->closeTransaction();
+            return true;
+        }
+
+        $this->db->cancelTransaction();
+        return false;
     }
 }

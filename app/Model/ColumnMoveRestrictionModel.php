@@ -35,6 +35,35 @@ class ColumnMoveRestrictionModel extends Base
     }
 
     /**
+     * Fetch one restriction
+     *
+     * @param  int $project_id
+     * @param  int $restriction_id
+     * @return array|null
+     */
+    public function getById($project_id, $restriction_id)
+    {
+        return $this->db
+            ->table(self::TABLE)
+            ->columns(
+                self::TABLE.'.restriction_id',
+                self::TABLE.'.project_id',
+                self::TABLE.'.role_id',
+                self::TABLE.'.src_column_id',
+                self::TABLE.'.dst_column_id',
+                'pr.role',
+                'sc.title as src_column_title',
+                'dc.title as dst_column_title'
+            )
+            ->left(ColumnModel::TABLE, 'sc', 'id', self::TABLE, 'src_column_id')
+            ->left(ColumnModel::TABLE, 'dc', 'id', self::TABLE, 'dst_column_id')
+            ->left(ProjectRoleModel::TABLE, 'pr', 'role_id', self::TABLE, 'role_id')
+            ->eq(self::TABLE.'.project_id', $project_id)
+            ->eq(self::TABLE.'.restriction_id', $restriction_id)
+            ->findOne();
+    }
+
+    /**
      * Get all project column restrictions
      *
      * @param  int $project_id
@@ -45,9 +74,11 @@ class ColumnMoveRestrictionModel extends Base
         return $this->db
             ->table(self::TABLE)
             ->columns(
-                'restriction_id',
-                'src_column_id',
-                'dst_column_id',
+                self::TABLE.'.restriction_id',
+                self::TABLE.'.project_id',
+                self::TABLE.'.role_id',
+                self::TABLE.'.src_column_id',
+                self::TABLE.'.dst_column_id',
                 'pr.role',
                 'sc.title as src_column_title',
                 'dc.title as dst_column_title'
@@ -61,15 +92,18 @@ class ColumnMoveRestrictionModel extends Base
 
     /**
      * Get all source column Ids
-     * 
-     * @param  int $project_id
+     *
+     * @param  int    $project_id
+     * @param  string $role
      * @return array
      */
-    public function getAllSrcColumns($project_id)
+    public function getAllSrcColumns($project_id, $role)
     {
         return $this->db
             ->hashtable(self::TABLE)
+            ->left(ProjectRoleModel::TABLE, 'pr', 'role_id', self::TABLE, 'role_id')
             ->eq(self::TABLE.'.project_id', $project_id)
+            ->eq('pr.role', $role)
             ->getAll('src_column_id', 'src_column_id');
     }
 

@@ -25,13 +25,13 @@ function array_merge_relation(array &$input, array &$relations, $relation, $colu
  * Create indexed array from a list of dict
  *
  * $input = [
- *   ['k1' => 1, 'k2' => 2], ['k1' => 3, 'k2' => 4], ['k1' => 2, 'k2' => 5]
+ *   ['k1' => 1, 'k2' => 2], ['k1' => 3, 'k2' => 4], ['k1' => 1, 'k2' => 5]
  * ]
  *
  * array_column_index($input, 'k1') will returns:
  *
  * [
- *   1 => [['k1' => 1, 'k2' => 2], ['k1' => 2, 'k2' => 5]],
+ *   1 => [['k1' => 1, 'k2' => 2], ['k1' => 1, 'k2' => 5]],
  *   3 => [['k1' => 3, 'k2' => 4]],
  * ]
  *

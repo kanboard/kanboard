@@ -38,6 +38,9 @@
             <li <?= $this->app->checkMenuSelection('ProjectPermissionController') ?>>
                 <?= $this->url->link(t('Permissions'), 'ProjectPermissionController', 'index', array('project_id' => $project['id'])) ?>
             </li>
+            <li <?= $this->app->checkMenuSelection('ProjectRoleController') ?>>
+                <?= $this->url->link(t('Custom roles'), 'ProjectRoleController', 'show', array('project_id' => $project['id'])) ?>
+            </li>
             <?php endif ?>
             <li <?= $this->app->checkMenuSelection('ActionController') ?>>
                 <?= $this->url->link(t('Automatic actions'), 'ActionController', 'index', array('project_id' => $project['id'])) ?>

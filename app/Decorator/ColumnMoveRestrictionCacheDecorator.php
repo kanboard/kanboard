@@ -42,13 +42,13 @@ class ColumnMoveRestrictionCacheDecorator
      * @param  int $project_id
      * @return array|mixed
      */
-    public function getAllSrcColumns($project_id)
+    public function getAllSrcColumns($project_id, $role)
     {
-        $key = $this->cachePrefix.$project_id;
+        $key = $this->cachePrefix.$project_id.$role;
         $columnIds = $this->cache->get($key);
 
         if ($columnIds === null) {
-            $columnIds = $this->columnMoveRestrictionModel->getAllSrcColumns($project_id);
+            $columnIds = $this->columnMoveRestrictionModel->getAllSrcColumns($project_id, $role);
             $this->cache->set($key, $columnIds);
         }
 

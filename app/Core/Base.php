@@ -135,6 +135,7 @@ use Pimple\Container;
  * @property \Kanboard\Validator\AuthValidator                       $authValidator
  * @property \Kanboard\Validator\ColumnValidator                     $columnValidator
  * @property \Kanboard\Validator\CategoryValidator                   $categoryValidator
+ * @property \Kanboard\Validator\ColumnMoveRestrictionValidator      $columnMoveRestrictionValidator
  * @property \Kanboard\Validator\CommentValidator                    $commentValidator
  * @property \Kanboard\Validator\CurrencyValidator                   $currencyValidator
  * @property \Kanboard\Validator\CustomFilterValidator               $customFilterValidator
@@ -143,6 +144,7 @@ use Pimple\Container;
  * @property \Kanboard\Validator\LinkValidator                       $linkValidator
  * @property \Kanboard\Validator\PasswordResetValidator              $passwordResetValidator
  * @property \Kanboard\Validator\ProjectValidator                    $projectValidator
+ * @property \Kanboard\Validator\ProjectRoleValidator                $projectRoleValidator
  * @property \Kanboard\Validator\SubtaskValidator                    $subtaskValidator
  * @property \Kanboard\Validator\SwimlaneValidator                   $swimlaneValidator
  * @property \Kanboard\Validator\TagValidator                        $tagValidator
