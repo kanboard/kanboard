@@ -20,6 +20,10 @@
                     <ul>
                         <li>
                             <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
+                            <?= $this->url->link(t('Add a new project restriction'), 'ProjectRoleRestrictionController', 'create', array('project_id' => $project['id'], 'role_id' => $role['role_id']), false, 'popover') ?>
+                        </li>
+                        <li>
+                            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
                             <?= $this->url->link(t('Add a new column restriction'), 'ColumnMoveRestrictionController', 'create', array('project_id' => $project['id'], 'role_id' => $role['role_id']), false, 'popover') ?>
                         </li>
                         <li>
@@ -33,15 +37,26 @@
                 <?= t('Actions') ?>
             </th>
         </tr>
-        <?php if (empty($role['restrictions'])): ?>
+        <?php if (empty($role['project_restrictions']) && empty($role['column_restrictions'])): ?>
             <tr>
                 <td colspan="2"><?= t('There is no restriction for this role.') ?></td>
             </tr>
         <?php else: ?>
-            <?php foreach ($role['restrictions'] as $restriction): ?>
+            <?php foreach ($role['project_restrictions'] as $restriction): ?>
                 <tr>
                     <td>
-                        <?= t('Moving task from the column "%s" to "%s" is permitted', $restriction['src_column_title'], $restriction['dst_column_title']) ?>
+                        <?= $this->text->e($restriction['title']) ?>
+                    </td>
+                    <td>
+                        <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
+                        <?= $this->url->link(t('Remove'), 'ProjectRoleRestrictionController', 'confirm', array('project_id' => $project['id'], 'restriction_id' => $restriction['restriction_id']), false, 'popover') ?>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+            <?php foreach ($role['column_restrictions'] as $restriction): ?>
+                <tr>
+                    <td>
+                        <?= t('Only moving task from the column "%s" to "%s" is permitted', $restriction['src_column_title'], $restriction['dst_column_title']) ?>
                     </td>
                     <td>
                         <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>

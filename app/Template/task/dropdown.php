@@ -43,7 +43,7 @@
             <i class="fa fa-clone fa-fw"></i>
             <?= $this->url->link(t('Move to another project'), 'TaskDuplicationController', 'move', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
-        <?php if ($this->user->canRemoveTask($task)): ?>
+        <?php if ($this->projectRole->canRemoveTask($task)): ?>
             <li>
                 <i class="fa fa-trash-o fa-fw"></i>
                 <?= $this->url->link(t('Remove'), 'TaskSuppressionController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>

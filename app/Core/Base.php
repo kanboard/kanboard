@@ -91,6 +91,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectNotificationModel                $projectNotificationModel
  * @property \Kanboard\Model\ProjectNotificationTypeModel            $projectNotificationTypeModel
  * @property \Kanboard\Model\ProjectRoleModel                        $projectRoleModel
+ * @property \Kanboard\Model\ProjectRoleRestrictionModel             $projectRoleRestrictionModel
  * @property \Kanboard\Model\ProjectTaskDuplicationModel             $projectTaskDuplicationModel
  * @property \Kanboard\Model\ProjectTaskPriorityModel                $projectTaskPriorityModel
  * @property \Kanboard\Model\RememberMeSessionModel                  $rememberMeSessionModel

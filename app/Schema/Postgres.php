@@ -6,7 +6,22 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 92;
+const VERSION = 93;
+
+function version_93(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE project_role_has_restrictions (
+            restriction_id SERIAL PRIMARY KEY,
+            project_id INTEGER NOT NULL,
+            role_id INTEGER NOT NULL,
+            rule VARCHAR(255) NOT NULL,
+            UNIQUE(role_id, rule),
+            FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
+            FOREIGN KEY(role_id) REFERENCES project_has_roles(role_id) ON DELETE CASCADE
+        )
+    ");
+}
 
 function version_92(PDO $pdo)
 {

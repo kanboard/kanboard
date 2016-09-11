@@ -5,15 +5,15 @@ namespace Kanboard\Controller;
 use Kanboard\Core\Controller\AccessForbiddenException;
 
 /**
- * Class ColumnMoveRestrictionController
+ * Class ProjectRoleRestrictionController
  *
  * @package Kanboard\Controller
  * @author  Frederic Guillot
  */
-class ColumnMoveRestrictionController extends BaseController
+class ProjectRoleRestrictionController extends BaseController
 {
     /**
-     * Show form to create a new column restriction
+     * Show form to create a new project restriction
      *
      * @param  array $values
      * @param  array $errors
@@ -25,43 +25,36 @@ class ColumnMoveRestrictionController extends BaseController
         $role_id = $this->request->getIntegerParam('role_id');
         $role = $this->projectRoleModel->getById($project['id'], $role_id);
 
-        $this->response->html($this->template->render('column_move_restriction/create', array(
+        $this->response->html($this->template->render('project_role_restriction/create', array(
             'project' => $project,
             'role' => $role,
-            'columns' => $this->columnModel->getList($project['id']),
             'values' => $values + array('project_id' => $project['id'], 'role_id' => $role['role_id']),
             'errors' => $errors,
+            'restrictions' => $this->projectRoleRestrictionModel->getRules(),
         )));
     }
 
     /**
-     * Save new column restriction
+     * Save new restriction
      */
     public function save()
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
 
-        list($valid, $errors) = $this->columnMoveRestrictionValidator->validateCreation($values);
+        $restriction_id = $this->projectRoleRestrictionModel->create(
+            $project['id'],
+            $values['role_id'],
+            $values['rule']
+        );
 
-        if ($valid) {
-            $restriction_id = $this->columnMoveRestrictionModel->create(
-                $project['id'],
-                $values['role_id'],
-                $values['src_column_id'],
-                $values['dst_column_id']
-            );
-
-            if ($restriction_id !== false) {
-                $this->flash->success(t('The column restriction has been created successfully.'));
-            } else {
-                $this->flash->failure(t('Unable to create this column restriction.'));
-            }
-
-            $this->response->redirect($this->helper->url->to('ProjectRoleController', 'show', array('project_id' => $project['id'])));
+        if ($restriction_id !== false) {
+            $this->flash->success(t('The project restriction has been created successfully.'));
         } else {
-            $this->create($values, $errors);
+            $this->flash->failure(t('Unable to create this project restriction.'));
         }
+
+        $this->response->redirect($this->helper->url->to('ProjectRoleController', 'show', array('project_id' => $project['id'])));
     }
 
     /**
@@ -74,9 +67,10 @@ class ColumnMoveRestrictionController extends BaseController
         $project = $this->getProject();
         $restriction_id = $this->request->getIntegerParam('restriction_id');
 
-        $this->response->html($this->helper->layout->project('column_move_restriction/remove', array(
+        $this->response->html($this->helper->layout->project('project_role_restriction/remove', array(
             'project' => $project,
-            'restriction' => $this->columnMoveRestrictionModel->getById($project['id'], $restriction_id),
+            'restriction' => $this->projectRoleRestrictionModel->getById($project['id'], $restriction_id),
+            'restrictions' => $this->projectRoleRestrictionModel->getRules(),
         )));
     }
 
@@ -91,8 +85,8 @@ class ColumnMoveRestrictionController extends BaseController
         $this->checkCSRFParam();
         $restriction_id = $this->request->getIntegerParam('restriction_id');
 
-        if ($this->columnMoveRestrictionModel->remove($restriction_id)) {
-            $this->flash->success(t('Column restriction removed successfully.'));
+        if ($this->projectRoleRestrictionModel->remove($restriction_id)) {
+            $this->flash->success(t('Project restriction removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this restriction.'));
         }

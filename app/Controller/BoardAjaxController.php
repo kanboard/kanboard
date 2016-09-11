@@ -28,14 +28,8 @@ class BoardAjaxController extends BaseController
         }
 
         $values = $this->request->getJson();
-        $canMoveTask = $this->columnMoveRestrictionModel->isAllowed(
-            $project_id,
-            $this->helper->user->getProjectUserRole($project_id),
-            $values['src_column_id'],
-            $values['dst_column_id']
-        );
 
-        if (! $canMoveTask) {
+        if (! $this->helper->projectRole->canMoveTask($project_id, $values['src_column_id'], $values['dst_column_id'])) {
             throw new AccessForbiddenException(e("You don't have the permission to move this task"));
         }
 

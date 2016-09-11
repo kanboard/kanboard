@@ -17,7 +17,7 @@ class ProjectRoleModel extends Base
 
     /**
      * Get list of project roles
-     * 
+     *
      * @param  int $project_id
      * @return array
      */
@@ -70,9 +70,14 @@ class ProjectRoleModel extends Base
     public function getAllWithRestrictions($project_id)
     {
         $roles = $this->getAll($project_id);
-        $restrictions = $this->columnMoveRestrictionModel->getAll($project_id);
-        $restrictions = array_column_index($restrictions, 'role_id');
-        array_merge_relation($roles, $restrictions, 'restrictions', 'role_id');
+
+        $column_restrictions = $this->columnMoveRestrictionModel->getAll($project_id);
+        $column_restrictions = array_column_index($column_restrictions, 'role_id');
+        array_merge_relation($roles, $column_restrictions, 'column_restrictions', 'role_id');
+
+        $project_restrictions = $this->projectRoleRestrictionModel->getAll($project_id);
+        $project_restrictions = array_column_index($project_restrictions, 'role_id');
+        array_merge_relation($roles, $project_restrictions, 'project_restrictions', 'role_id');
 
         return $roles;
     }
