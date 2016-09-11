@@ -18,7 +18,8 @@ function version_114(PDO $pdo)
             rule VARCHAR(255) NOT NULL,
             UNIQUE(role_id, rule),
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
-            FOREIGN KEY(role_id) REFERENCES project_has_roles(role_id) ON DELETE CASCADE
+            FOREIGN KEY(role_id) REFERENCES project_has_roles(role_id) ON DELETE CASCADE,
+            PRIMARY KEY(restriction_id)
         ) ENGINE=InnoDB CHARSET=utf8
     ");
 }
