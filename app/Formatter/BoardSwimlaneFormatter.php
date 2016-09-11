@@ -24,7 +24,7 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
      * @param  array $swimlanes
      * @return $this
      */
-    public function withSwimlanes($swimlanes)
+    public function withSwimlanes(array $swimlanes)
     {
         $this->swimlanes = $swimlanes;
         return $this;
@@ -37,7 +37,7 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
      * @param  array $columns
      * @return $this
      */
-    public function withColumns($columns)
+    public function withColumns(array $columns)
     {
         $this->columns = $columns;
         return $this;

@@ -15,26 +15,6 @@ class ColumnMoveRestrictionModel extends Base
     const TABLE = 'column_has_move_restrictions';
 
     /**
-     * Check if the custom project role is allowed to move a task
-     *
-     * @param  int $project_id
-     * @param  string $role
-     * @param  int $src_column_id
-     * @param  int $dst_column_id
-     * @return int
-     */
-    public function isAllowed($project_id, $role, $src_column_id, $dst_column_id)
-    {
-        return $this->db->table(self::TABLE)
-            ->left(ProjectRoleModel::TABLE, 'pr', 'role_id', self::TABLE, 'role_id')
-            ->eq(self::TABLE.'.project_id', $project_id)
-            ->eq(self::TABLE.'.src_column_id', $src_column_id)
-            ->eq(self::TABLE.'.dst_column_id', $dst_column_id)
-            ->eq('pr.role', $role)
-            ->exists();
-    }
-
-    /**
      * Fetch one restriction
      *
      * @param  int $project_id
@@ -91,20 +71,21 @@ class ColumnMoveRestrictionModel extends Base
     }
 
     /**
-     * Get all source column Ids
+     * Get all sortable column Ids
      *
      * @param  int    $project_id
      * @param  string $role
      * @return array
      */
-    public function getAllSrcColumns($project_id, $role)
+    public function getSortableColumns($project_id, $role)
     {
         return $this->db
-            ->hashtable(self::TABLE)
+            ->table(self::TABLE)
+            ->columns(self::TABLE.'.src_column_id', self::TABLE.'.dst_column_id')
             ->left(ProjectRoleModel::TABLE, 'pr', 'role_id', self::TABLE, 'role_id')
             ->eq(self::TABLE.'.project_id', $project_id)
             ->eq('pr.role', $role)
-            ->getAll('src_column_id', 'src_column_id');
+            ->findAll();
     }
 
     /**

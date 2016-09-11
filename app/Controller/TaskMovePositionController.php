@@ -30,6 +30,10 @@ class TaskMovePositionController extends BaseController
         $task = $this->getTask();
         $values = $this->request->getJson();
 
+        if (! $this->helper->projectRole->canMoveTask($task['project_id'], $task['column_id'], $values['column_id'])) {
+            throw new AccessForbiddenException(e("You don't have the permission to move this task"));
+        }
+
         $result = $this->taskPositionModel->movePosition(
             $task['project_id'],
             $task['id'],

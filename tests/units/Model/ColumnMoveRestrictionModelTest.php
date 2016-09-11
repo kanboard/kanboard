@@ -54,32 +54,6 @@ class ColumnMoveRestrictionModelTest extends Base
         $this->assertEquals(3, $restriction['dst_column_id']);
     }
 
-    public function testGetSrcColumns()
-    {
-        $projectModel = new ProjectModel($this->container);
-        $projectRoleModel = new ProjectRoleModel($this->container);
-        $columnMoveRestrictionModel = new ColumnMoveRestrictionModel($this->container);
-
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
-        $this->assertEquals(2, $projectModel->create(array('name' => 'Test')));
-
-        $this->assertEquals(1, $projectRoleModel->create(1, 'Role A'));
-        $this->assertEquals(2, $projectRoleModel->create(1, 'Role B'));
-        $this->assertEquals(3, $projectRoleModel->create(2, 'Role C'));
-
-        $this->assertEquals(1, $columnMoveRestrictionModel->create(1, 1, 2, 3));
-        $this->assertEquals(2, $columnMoveRestrictionModel->create(1, 2, 3, 4));
-
-        $columnIds = $columnMoveRestrictionModel->getAllSrcColumns(1, 'Role A');
-        $this->assertEquals(2, $columnIds[2]);
-
-        $this->assertEmpty($columnMoveRestrictionModel->getAllSrcColumns(2, 'Role A'));
-        $this->assertEmpty($columnMoveRestrictionModel->getAllSrcColumns(2, 'Role C'));
-
-        $columnIds = $columnMoveRestrictionModel->getAllSrcColumns(1, 'Role B');
-        $this->assertEquals(3, $columnIds[3]);
-    }
-
     public function testGetAll()
     {
         $projectModel = new ProjectModel($this->container);
@@ -114,25 +88,5 @@ class ColumnMoveRestrictionModelTest extends Base
         $this->assertEquals('Done', $restrictions[1]['dst_column_title']);
         $this->assertEquals(3, $restrictions[1]['src_column_id']);
         $this->assertEquals(4, $restrictions[1]['dst_column_id']);
-    }
-
-    public function testIsAllowed()
-    {
-        $projectModel = new ProjectModel($this->container);
-        $projectRoleModel = new ProjectRoleModel($this->container);
-        $columnMoveRestrictionModel = new ColumnMoveRestrictionModel($this->container);
-
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
-        $this->assertEquals(2, $projectModel->create(array('name' => 'Test')));
-
-        $this->assertEquals(1, $projectRoleModel->create(1, 'Role A'));
-        $this->assertEquals(2, $projectRoleModel->create(1, 'Role B'));
-        $this->assertEquals(3, $projectRoleModel->create(2, 'Role C'));
-
-        $this->assertEquals(1, $columnMoveRestrictionModel->create(1, 1, 2, 3));
-        $this->assertEquals(2, $columnMoveRestrictionModel->create(1, 2, 3, 4));
-
-        $this->assertFalse($columnMoveRestrictionModel->isAllowed(1, 'Role A', 1, 2));
-        $this->assertTrue($columnMoveRestrictionModel->isAllowed(1, 'Role A', 2, 3));
     }
 }

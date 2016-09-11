@@ -38,17 +38,18 @@ class ColumnMoveRestrictionCacheDecorator
     }
 
     /**
-     * Proxy method to get column Ids
+     * Proxy method to get sortable columns
+     *
      * @param  int $project_id
      * @return array|mixed
      */
-    public function getAllSrcColumns($project_id, $role)
+    public function getSortableColumns($project_id, $role)
     {
         $key = $this->cachePrefix.$project_id.$role;
         $columnIds = $this->cache->get($key);
 
         if ($columnIds === null) {
-            $columnIds = $this->columnMoveRestrictionModel->getAllSrcColumns($project_id, $role);
+            $columnIds = $this->columnMoveRestrictionModel->getSortableColumns($project_id, $role);
             $this->cache->set($key, $columnIds);
         }
 

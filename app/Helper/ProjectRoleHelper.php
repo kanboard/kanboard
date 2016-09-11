@@ -26,25 +26,45 @@ class ProjectRoleHelper extends Base
     }
 
     /**
-     * Return true if the task can be moved by the connected user
+     * Return true if the task can be moved by the logged user
      *
      * @param array $task
      * @return bool
      */
-    public function isDraggable(array $task)
+    public function isDraggable(array &$task)
     {
         if ($task['is_active'] == 1 && $this->helper->user->hasProjectAccess('BoardViewController', 'save', $task['project_id'])) {
-            $role = $this->getProjectUserRole($task['project_id']);
-
-            if ($this->role->isCustomProjectRole($role)) {
-                $srcColumnIds = $this->columnMoveRestrictionCacheDecorator->getAllSrcColumns($task['project_id'], $role);
-                return isset($srcColumnIds[$task['column_id']]);
-            }
-
-            return true;
+            return $this->isSortableColumn($task['project_id'], $task['column_id'], 'src_column_id');
         }
 
         return false;
+    }
+
+    /**
+     * Return true is the column is sortable
+     *
+     * @param  int $project_id
+     * @param  int $column_id
+     * @param  string $field
+     * @return bool
+     */
+    public function isSortableColumn($project_id, $column_id, $field)
+    {
+        $role = $this->getProjectUserRole($project_id);
+
+        if ($this->role->isCustomProjectRole($role)) {
+            $sortableColumns = $this->columnMoveRestrictionCacheDecorator->getSortableColumns($project_id, $role);
+
+            foreach ($sortableColumns as $column) {
+                if ($column[$field] == $column_id) {
+                    return true;
+                }
+            }
+
+            return empty($sortableColumns);
+        }
+
+        return true;
     }
 
     /**
@@ -60,12 +80,19 @@ class ProjectRoleHelper extends Base
         $role = $this->getProjectUserRole($project_id);
 
         if ($this->role->isCustomProjectRole($role)) {
-            return $this->columnMoveRestrictionModel->isAllowed(
-                $project_id,
-                $role,
-                $src_column_id,
-                $dst_column_id
-            );
+            if ($src_column_id == $dst_column_id) {
+                return true;
+            }
+
+            $sortableColumns = $this->columnMoveRestrictionCacheDecorator->getSortableColumns($project_id, $role);
+
+            foreach ($sortableColumns as $column) {
+                if ($column['src_column_id'] == $src_column_id && $column['dst_column_id'] == $dst_column_id) {
+                    return true;
+                }
+            }
+
+            return empty($sortableColumns);
         }
 
         return true;
