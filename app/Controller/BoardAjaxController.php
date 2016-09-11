@@ -36,7 +36,7 @@ class BoardAjaxController extends BaseController
         );
 
         if (! $canMoveTask) {
-            throw new AccessForbiddenException("You don't have the permission to move this task");
+            throw new AccessForbiddenException(e("You don't have the permission to move this task"));
         }
 
         $result =$this->taskPositionModel->movePosition(

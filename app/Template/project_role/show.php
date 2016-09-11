@@ -16,7 +16,7 @@
         <tr>
             <th>
                 <div class="dropdown">
-                    <a href="#" class="dropdown-menu"><?= t('Column restrictions for the role "%s"', $role['role']) ?> <i class="fa fa-caret-down"></i></a>
+                    <a href="#" class="dropdown-menu"><?= t('Restrictions for the role "%s"', $role['role']) ?> <i class="fa fa-caret-down"></i></a>
                     <ul>
                         <li>
                             <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
@@ -41,10 +41,7 @@
             <?php foreach ($role['restrictions'] as $restriction): ?>
                 <tr>
                     <td>
-                        <i class="fa fa-ban fa-fw" aria-hidden="true"></i>
-                        <?= $this->text->e($restriction['src_column_title']) ?>
-                        <i class="fa fa-arrow-right fa-fw" aria-hidden="true"></i>
-                        <?= $this->text->e($restriction['dst_column_title']) ?>
+                        <?= t('Moving task from the column "%s" to "%s" is permitted', $restriction['src_column_title'], $restriction['dst_column_title']) ?>
                     </td>
                     <td>
                         <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>

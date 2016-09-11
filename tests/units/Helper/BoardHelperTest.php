@@ -87,8 +87,12 @@ class BoardHelperTest extends Base
 
         $this->assertTrue($projectUserRole->addUser(1, 2, 'Custom Role'));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 2)));
+        $this->assertEquals(2, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 3)));
 
         $task = $taskFinderModel->getById(1);
+        $this->assertTrue($boardHelper->isDraggable($task));
+
+        $task = $taskFinderModel->getById(2);
         $this->assertFalse($boardHelper->isDraggable($task));
     }
 }

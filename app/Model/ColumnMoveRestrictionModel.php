@@ -25,7 +25,7 @@ class ColumnMoveRestrictionModel extends Base
      */
     public function isAllowed($project_id, $role, $src_column_id, $dst_column_id)
     {
-        return ! $this->db->table(self::TABLE)
+        return $this->db->table(self::TABLE)
             ->left(ProjectRoleModel::TABLE, 'pr', 'role_id', self::TABLE, 'role_id')
             ->eq(self::TABLE.'.project_id', $project_id)
             ->eq(self::TABLE.'.src_column_id', $src_column_id)

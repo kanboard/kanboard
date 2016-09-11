@@ -132,8 +132,7 @@ class ColumnMoveRestrictionModelTest extends Base
         $this->assertEquals(1, $columnMoveRestrictionModel->create(1, 1, 2, 3));
         $this->assertEquals(2, $columnMoveRestrictionModel->create(1, 2, 3, 4));
 
-        $this->assertTrue($columnMoveRestrictionModel->isAllowed(1, 'Role D', 1, 2));
-        $this->assertTrue($columnMoveRestrictionModel->isAllowed(1, 'Role A', 1, 2));
-        $this->assertFalse($columnMoveRestrictionModel->isAllowed(1, 'Role A', 2, 3));
+        $this->assertFalse($columnMoveRestrictionModel->isAllowed(1, 'Role A', 1, 2));
+        $this->assertTrue($columnMoveRestrictionModel->isAllowed(1, 'Role A', 2, 3));
     }
 }

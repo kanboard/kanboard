@@ -19,6 +19,6 @@
             <?= $this->url->link(t('cancel'), 'ProjectRoleController', 'show', array(), false, 'close-popover') ?>
         </div>
 
-        <p class="alert alert-info"><?= t('People belonging to this role won\'t be able to move tasks between the source and the destination column.') ?></p>
+        <p class="alert alert-info"><?= t('People belonging to this role will be able to move tasks only between the source and the destination column.') ?></p>
     </form>
 </section>

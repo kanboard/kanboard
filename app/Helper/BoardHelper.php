@@ -38,7 +38,7 @@ class BoardHelper extends Base
 
             if ($this->role->isCustomProjectRole($role)) {
                 $srcColumnIds = $this->columnMoveRestrictionCacheDecorator->getAllSrcColumns($task['project_id'], $role);
-                return ! isset($srcColumnIds[$task['column_id']]);
+                return isset($srcColumnIds[$task['column_id']]);
             }
 
             return true;

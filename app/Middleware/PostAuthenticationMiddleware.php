@@ -26,9 +26,9 @@ class PostAuthenticationMiddleware extends BaseMiddleware
 
             if ($this->request->isAjax()) {
                 $this->response->text('Not Authorized', 401);
+            } else {
+                $this->response->redirect($this->helper->url->to('TwoFactorController', 'code'));
             }
-
-            $this->response->redirect($this->helper->url->to('TwoFactorController', 'code'));
         }
 
         $this->next();

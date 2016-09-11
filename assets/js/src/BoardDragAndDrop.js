@@ -87,6 +87,12 @@ Kanboard.BoardDragAndDrop.prototype.save = function(taskId, srcColumnId, dstColu
         error: function() {
             self.app.hideLoadingIcon();
             self.savingInProgress = false;
+        },
+        statusCode: {
+            403: function(data) {
+                window.alert(data.responseJSON.message);
+                document.location.reload(true);
+            }
         }
     });
 };
