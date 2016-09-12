@@ -1,3 +1,11 @@
+Version 1.0.34
+--------------
+
+New features:
+
+* Custom project roles with configurable restrictions
+* Duplicate a task to multiple projects during creation
+
 Version 1.0.33
 --------------
 
