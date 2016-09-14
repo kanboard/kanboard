@@ -5,7 +5,7 @@ Kanboard.BoardCollapsedMode = function(app) {
 Kanboard.BoardCollapsedMode.prototype.keyboardShortcuts = function() {
     var self = this;
 
-    if (self.app.hasId("board")) {
+    if (self.app.hasId("board-container")) {
         Mousetrap.bind("s", function() {
             self.toggle();
         });
