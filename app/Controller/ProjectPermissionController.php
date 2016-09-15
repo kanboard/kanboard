@@ -52,7 +52,7 @@ class ProjectPermissionController extends BaseController
             'project' => $project,
             'users' => $this->projectUserRoleModel->getUsers($project['id']),
             'groups' => $this->projectGroupRoleModel->getGroups($project['id']),
-            'roles' => $this->role->getProjectRoles(),
+            'roles' => $this->projectRoleModel->getList($project['id']),
             'values' => $values,
             'errors' => $errors,
             'title' => t('Project Permissions'),

@@ -20,6 +20,6 @@
     "font-awesome": "fontawesome#^4.6.3",
     "d3": "~3.5.0",
     "isMobile": "0.4.0",
-    "select2": "4.0.1"
+    "select2": "4.0.2"
   }
 }

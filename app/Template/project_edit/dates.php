@@ -11,12 +11,8 @@
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('id', $values) ?>
     <?= $this->form->hidden('name', $values) ?>
-
-    <?= $this->form->label(t('Start date'), 'start_date') ?>
-    <?= $this->form->text('start_date', $values, $errors, array('maxlength="10"'), 'form-date') ?>
-
-    <?= $this->form->label(t('End date'), 'end_date') ?>
-    <?= $this->form->text('end_date', $values, $errors, array('maxlength="10"'), 'form-date') ?>
+    <?= $this->form->date(t('Start date'), 'start_date', $values, $errors) ?>
+    <?= $this->form->date(t('End date'), 'end_date', $values, $errors) ?>
 
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>

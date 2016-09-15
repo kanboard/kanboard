@@ -157,6 +157,9 @@ class ActionParameterModel extends Base
             case 'user_id':
             case 'owner_id':
                 return $this->projectPermissionModel->isAssignable($project_id, $value) ? $value : false;
+            case 'swimlane_id':
+                $column = $this->swimlaneModel->getById($value);
+                return empty($column) ? false : $this->swimlaneModel->getIdByName($project_id, $column['name']) ?: false;
             default:
                 return $value;
         }

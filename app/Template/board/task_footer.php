@@ -38,9 +38,11 @@
 
     <?php if (! empty($task['date_due'])): ?>
         <?php if (date('Y-m-d') == date('Y-m-d', $task['date_due'])): ?>
-        <span class="task-board-date task-board-date-today">
+            <span class="task-board-date task-board-date-today">
         <?php elseif (time() > $task['date_due']): ?>
-        <span class="task-board-date task-board-date-overdue">
+            <span class="task-board-date task-board-date-overdue">
+        <?php else: ?>
+            <span class="task-board-date">
         <?php endif ?>
             <i class="fa fa-calendar"></i>
             <?= $this->dt->date($task['date_due']) ?>
@@ -81,8 +83,10 @@
         </span>
     <?php endif ?>
 
-    <?php if (! empty($task['time_estimated'])): ?>
-        <span class="task-time-estimated" title="<?= t('Time estimated') ?>"><?= $this->text->e($task['time_estimated']).'h' ?></span>
+    <?php if (! empty($task['time_estimated']) || ! empty($task['time_spent'])): ?>
+        <span class="task-time-estimated" title="<?= t('Time spent and estimated') ?>">
+            <?= $this->text->e($task['time_spent']) ?>/<?= $this->text->e($task['time_estimated']) ?>h
+        </span>
     <?php endif ?>
 
     <?php if ($task['is_milestone'] == 1): ?>

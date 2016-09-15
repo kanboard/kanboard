@@ -154,6 +154,8 @@ class ColorModel extends Base
             $listing[$color_id] = t($color['name']);
         }
 
+        $this->hook->reference('model:color:get-list', $listing);
+
         return $listing;
     }
 

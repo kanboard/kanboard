@@ -31,8 +31,6 @@ class AnalyticController extends BaseController
             'project' => $project,
             'average' => $this->averageLeadCycleTimeAnalytic->build($project['id']),
             'metrics' => $this->projectDailyStatsModel->getRawMetrics($project['id'], $from, $to),
-            'date_format' => $this->configModel->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'title' => t('Lead and cycle time'),
         )));
     }
@@ -42,12 +40,12 @@ class AnalyticController extends BaseController
      *
      * @access public
      */
-    public function compareHours()
+    public function timeComparison()
     {
         $project = $this->getProject();
 
         $paginator = $this->paginator
-            ->setUrl('AnalyticController', 'compareHours', array('project_id' => $project['id']))
+            ->setUrl('AnalyticController', 'timeComparison', array('project_id' => $project['id']))
             ->setMax(30)
             ->setOrder(TaskModel::TABLE.'.id')
             ->setQuery($this->taskQuery
@@ -56,7 +54,7 @@ class AnalyticController extends BaseController
             )
             ->calculate();
 
-        $this->response->html($this->helper->layout->analytic('analytic/compare_hours', array(
+        $this->response->html($this->helper->layout->analytic('analytic/time_comparison', array(
             'project' => $project,
             'paginator' => $paginator,
             'metrics' => $this->estimatedTimeComparisonAnalytic->build($project['id']),
@@ -85,11 +83,11 @@ class AnalyticController extends BaseController
      *
      * @access public
      */
-    public function tasks()
+    public function taskDistribution()
     {
         $project = $this->getProject();
 
-        $this->response->html($this->helper->layout->analytic('analytic/tasks', array(
+        $this->response->html($this->helper->layout->analytic('analytic/task_distribution', array(
             'project' => $project,
             'metrics' => $this->taskDistributionAnalytic->build($project['id']),
             'title' => t('Task distribution'),
@@ -101,11 +99,11 @@ class AnalyticController extends BaseController
      *
      * @access public
      */
-    public function users()
+    public function userDistribution()
     {
         $project = $this->getProject();
 
-        $this->response->html($this->helper->layout->analytic('analytic/users', array(
+        $this->response->html($this->helper->layout->analytic('analytic/user_distribution', array(
             'project' => $project,
             'metrics' => $this->userDistributionAnalytic->build($project['id']),
             'title' => t('User repartition'),
@@ -155,8 +153,6 @@ class AnalyticController extends BaseController
             'display_graph' => $display_graph,
             'metrics' => $display_graph ? $this->projectDailyColumnStatsModel->getAggregatedMetrics($project['id'], $from, $to, $column) : array(),
             'project' => $project,
-            'date_format' => $this->configModel->get('application_date_format'),
-            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
             'title' => $title,
         )));
     }
@@ -169,8 +165,8 @@ class AnalyticController extends BaseController
         $to = $this->request->getStringParam('to', date('Y-m-d'));
 
         if (! empty($values)) {
-            $from = $values['from'];
-            $to = $values['to'];
+            $from = $this->dateParser->getIsoDate($values['from']);
+            $to = $this->dateParser->getIsoDate($values['to']);
         }
 
         return array($from, $to);

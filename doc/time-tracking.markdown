@@ -40,4 +40,4 @@ For each subtask, the timer can be stopped/started at any time:
 - The timer doesn't depend of the subtask status
 - Each time you start the timer a new record is created in the time tracking table
 - Each time you stop the clock the end date is recorded in the time tracking table
-- The calculated time spent is rounded to the nearest quarter
+- The calculated time spent is rounded to the nearest quarter (only for Kanboard < 1.0.32)

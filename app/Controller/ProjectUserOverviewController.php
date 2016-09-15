@@ -122,9 +122,9 @@ class ProjectUserOverviewController extends BaseController
     {
         $project = $this->getProject();
 
-        return $this->response->html($this->template->render('project_user_overview/tooltip_users', array(
+        $this->response->html($this->template->render('project_user_overview/tooltip_users', array(
             'users' => $this->projectUserRoleModel->getAllUsersGroupedByRole($project['id']),
-            'roles' => $this->role->getProjectRoles(),
+            'roles' => $this->projectRoleModel->getList($project['id']),
         )));
     }
 }

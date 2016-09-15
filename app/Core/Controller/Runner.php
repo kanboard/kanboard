@@ -35,7 +35,7 @@ class Runner extends Base
             $controllerObject->notFound($e->hasLayout());
         } catch (AccessForbiddenException $e) {
             $controllerObject = new AppController($this->container);
-            $controllerObject->accessForbidden($e->hasLayout());
+            $controllerObject->accessForbidden($e->hasLayout(), $e->getMessage());
         }
     }
 

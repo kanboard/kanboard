@@ -5,6 +5,7 @@ require_once __DIR__.'/../Base.php';
 use Kanboard\Core\User\UserSession;
 use Kanboard\Helper\UserHelper;
 use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectRoleModel;
 use Kanboard\Model\ProjectUserRoleModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
@@ -263,93 +264,34 @@ class UserHelperTest extends Base
         $this->assertFalse($helper->hasProjectAccess('TaskCreationController', 'save', 2));
     }
 
-    public function testCanRemoveTask()
+    public function testHasProjectAccessForCustomProjectRole()
     {
-        $taskCreationModel = new TaskCreationModel($this->container);
-        $taskFinderModel = new TaskFinderModel($this->container);
         $helper = new UserHelper($this->container);
-        $projectModel = new ProjectModel($this->container);
-        $userModel = new UserModel($this->container);
-        $userSessionModel = new UserSession($this->container);
+        $user = new UserModel($this->container);
+        $project = new ProjectModel($this->container);
+        $projectUserRole = new ProjectUserRoleModel($this->container);
+        $projectRole = new ProjectRoleModel($this->container);
 
-        $this->assertNotFalse($userModel->create(array('username' => 'toto', 'password' => '123456')));
-        $this->assertNotFalse($userModel->create(array('username' => 'toto2', 'password' => '123456')));
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
-        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'TaskViewController #1', 'project_id' => 1, 'creator_id' => 1)));
-        $this->assertEquals(2, $taskCreationModel->create(array('title' => 'TaskViewController #2', 'project_id' => 1, 'creator_id' => 2)));
-        $this->assertEquals(3, $taskCreationModel->create(array('title' => 'TaskViewController #3', 'project_id' => 1, 'creator_id' => 3)));
-        $this->assertEquals(4, $taskCreationModel->create(array('title' => 'TaskViewController #4', 'project_id' => 1)));
+        $this->container['sessionStorage']->user = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+        );
 
-        // User #1 can remove everything
-        $user = $userModel->getById(1);
-        $this->assertNotEmpty($user);
-        $userSessionModel->initialize($user);
+        $this->assertEquals(1, $project->create(array('name' => 'My project')));
+        $this->assertEquals(2, $project->create(array('name' => 'My project')));
+        $this->assertEquals(2, $user->create(array('username' => 'user')));
+        $this->assertEquals(1, $projectRole->create(1, 'Custom Role'));
 
-        $task = $taskFinderModel->getById(1);
-        $this->assertNotEmpty($task);
-        $this->assertTrue($helper->canRemoveTask($task));
+        $this->assertTrue($projectUserRole->addUser(1, 2, 'Custom Role'));
 
-        // User #2 can't remove the TaskViewController #1
-        $user = $userModel->getById(2);
-        $this->assertNotEmpty($user);
-        $userSessionModel->initialize($user);
+        $this->assertFalse($helper->hasProjectAccess('ProjectEditController', 'edit', 1));
+        $this->assertTrue($helper->hasProjectAccess('BoardViewController', 'show', 1));
+        $this->assertTrue($helper->hasProjectAccess('TaskViewController', 'show', 1));
+        $this->assertTrue($helper->hasProjectAccess('TaskCreationController', 'save', 1));
 
-        $task = $taskFinderModel->getById(1);
-        $this->assertNotEmpty($task);
-        $this->assertFalse($helper->canRemoveTask($task));
-
-        // User #1 can remove everything
-        $user = $userModel->getById(1);
-        $this->assertNotEmpty($user);
-        $userSessionModel->initialize($user);
-
-        $task = $taskFinderModel->getById(2);
-        $this->assertNotEmpty($task);
-        $this->assertTrue($helper->canRemoveTask($task));
-
-        // User #2 can remove his own TaskViewController
-        $user = $userModel->getById(2);
-        $this->assertNotEmpty($user);
-        $userSessionModel->initialize($user);
-
-        $task = $taskFinderModel->getById(2);
-        $this->assertNotEmpty($task);
-        $this->assertTrue($helper->canRemoveTask($task));
-
-        // User #1 can remove everything
-        $user = $userModel->getById(1);
-        $this->assertNotEmpty($user);
-        $userSessionModel->initialize($user);
-
-        $task = $taskFinderModel->getById(3);
-        $this->assertNotEmpty($task);
-        $this->assertTrue($helper->canRemoveTask($task));
-
-        // User #2 can't remove the TaskViewController #3
-        $user = $userModel->getById(2);
-        $this->assertNotEmpty($user);
-        $userSessionModel->initialize($user);
-
-        $task = $taskFinderModel->getById(3);
-        $this->assertNotEmpty($task);
-        $this->assertFalse($helper->canRemoveTask($task));
-
-        // User #1 can remove everything
-        $user = $userModel->getById(1);
-        $this->assertNotEmpty($user);
-        $userSessionModel->initialize($user);
-
-        $task = $taskFinderModel->getById(4);
-        $this->assertNotEmpty($task);
-        $this->assertTrue($helper->canRemoveTask($task));
-
-        // User #2 can't remove the TaskViewController #4
-        $user = $userModel->getById(2);
-        $this->assertNotEmpty($user);
-        $userSessionModel->initialize($user);
-
-        $task = $taskFinderModel->getById(4);
-        $this->assertNotEmpty($task);
-        $this->assertFalse($helper->canRemoveTask($task));
+        $this->assertFalse($helper->hasProjectAccess('ProjectEditController', 'edit', 2));
+        $this->assertFalse($helper->hasProjectAccess('BoardViewController', 'show', 2));
+        $this->assertFalse($helper->hasProjectAccess('TaskViewController', 'show', 2));
+        $this->assertFalse($helper->hasProjectAccess('TaskCreationController', 'save', 2));
     }
 }

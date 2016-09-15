@@ -25,7 +25,7 @@ class ColumnController extends BaseController
         $this->response->html($this->helper->layout->project('column/index', array(
             'columns' => $columns,
             'project' => $project,
-            'title' => t('Edit board')
+            'title' => t('Edit columns')
         )));
     }
 
@@ -49,7 +49,6 @@ class ColumnController extends BaseController
             'values' => $values,
             'errors' => $errors,
             'project' => $project,
-            'title' => t('Add a new column')
         )));
     }
 
@@ -102,7 +101,6 @@ class ColumnController extends BaseController
             'values' => $values ?: $column,
             'project' => $project,
             'column' => $column,
-            'title' => t('Edit column "%s"', $column['title'])
         )));
     }
 
@@ -168,7 +166,6 @@ class ColumnController extends BaseController
         $this->response->html($this->helper->layout->project('column/remove', array(
             'column' => $this->columnModel->getById($this->request->getIntegerParam('column_id')),
             'project' => $project,
-            'title' => t('Remove a column from a board')
         )));
     }
 

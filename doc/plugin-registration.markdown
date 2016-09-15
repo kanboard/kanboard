@@ -159,3 +159,23 @@ $this->cli->add(new MyCommand());
 ```
 
 Read the library documentation for more information.
+
+Add new task filters
+--------------------
+
+Since the task lexer is a factory that returns a new instance each time, 
+you have to extend the `taskLexer` container with the method `extend()` of Pimple.
+
+Here is a example:
+
+```php
+public function initialize()
+{
+    $this->container->extend('taskLexer', function($taskLexer, $c) {
+        $taskLexer->withFilter(TaskBoardDateFilter::getInstance($c)->setDateParser($c['dateParser']));
+        return $taskLexer;
+    });
+}
+```
+
+For the filter class implementation, there are several examples in the source code under the namespace `Kanboard\Filter`.

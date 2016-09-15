@@ -18,6 +18,11 @@
     <li><?= t('Number of failed login:') ?> <strong><?= $user['nb_failed_login'] ?></strong></li>
     <?php if ($user['lock_expiration_date'] != 0): ?>
         <li><?= t('Account locked until:') ?> <strong><?= $this->dt->datetime($user['lock_expiration_date']) ?></strong></li>
+        <?php if ($this->user->isAdmin()): ?>
+            <li>
+                <?= $this->url->link(t('Unlock this user'), 'UserCredentialController', 'unlock', array('user_id' => $user['id']), true) ?>
+            </li>
+        <?php endif ?>
     <?php endif ?>
 </ul>
 

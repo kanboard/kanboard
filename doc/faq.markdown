@@ -129,3 +129,9 @@ Are there some tutorials about Kanboard in other languages?
 -----------------------------------------------------------
 
 - [German article series about Kanboard](http://demaya.de/wp/2014/07/kanboard-eine-jira-alternative-im-detail-installation/)
+
+
+Tips
+----
+
+- [Easy way to remove name constraint in SQLite database](https://github.com/kanboard/kanboard/issues/1508)

@@ -16,7 +16,7 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
     var params = {
         forcePlaceholderSize: true,
         tolerance: "pointer",
-        connectWith: ".board-task-list",
+        connectWith: ".sortable-column",
         placeholder: "draggable-placeholder",
         items: ".draggable-item",
         stop: function(event, ui) {
@@ -34,7 +34,7 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
 
             if (newColumnId != taskColumnId || newSwimlaneId != taskSwimlaneId || newPosition != taskPosition) {
                 self.changeTaskState(taskId);
-                self.save(taskId, newColumnId, newPosition, newSwimlaneId);
+                self.save(taskId, taskColumnId, newColumnId, newPosition, newSwimlaneId);
             }
         },
         start: function(event, ui) {
@@ -62,7 +62,7 @@ Kanboard.BoardDragAndDrop.prototype.changeTaskState = function(taskId) {
     task.find('.task-board-saving-icon').show();
 };
 
-Kanboard.BoardDragAndDrop.prototype.save = function(taskId, columnId, position, swimlaneId) {
+Kanboard.BoardDragAndDrop.prototype.save = function(taskId, srcColumnId, dstColumnId, position, swimlaneId) {
     var self = this;
     self.app.showLoadingIcon();
     self.savingInProgress = true;
@@ -75,7 +75,8 @@ Kanboard.BoardDragAndDrop.prototype.save = function(taskId, columnId, position, 
         processData: false,
         data: JSON.stringify({
             "task_id": taskId,
-            "column_id": columnId,
+            "src_column_id": srcColumnId,
+            "dst_column_id": dstColumnId,
             "swimlane_id": swimlaneId,
             "position": position
         }),
@@ -86,6 +87,12 @@ Kanboard.BoardDragAndDrop.prototype.save = function(taskId, columnId, position, 
         error: function() {
             self.app.hideLoadingIcon();
             self.savingInProgress = false;
+        },
+        statusCode: {
+            403: function(data) {
+                window.alert(data.responseJSON.message);
+                document.location.reload(true);
+            }
         }
     });
 };

@@ -3,9 +3,11 @@ var concat = require('gulp-concat');
 var bower = require('gulp-bower');
 var uglify = require('gulp-uglify');
 var sass = require('gulp-sass');
+var strip = require('gulp-strip-comments');
 
 var src = {
     js: [
+        'assets/js/components/*.js',
         'assets/js/src/Namespace.js',
         'assets/js/src/!(Namespace|Bootstrap|BoardDragAndDrop)*.js',
         'assets/js/src/BoardDragAndDrop.js',
@@ -65,6 +67,13 @@ gulp.task('bower', function() {
 });
 
 gulp.task('vendor', function() {
+    gulp.src('node_modules/vue/dist/vue.min.js')
+        .pipe(strip({trim: true}))
+        .pipe(gulp.dest('node_modules/vue/dist/'))
+    ;
+
+    vendor.js.push('node_modules/vue/dist/vue.min.js');
+
     gulp.src(vendor.js)
         .pipe(concat('vendor.min.js'))
         .pipe(gulp.dest(dist.js))
