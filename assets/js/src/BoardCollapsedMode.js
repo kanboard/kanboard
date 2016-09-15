@@ -16,12 +16,42 @@ Kanboard.BoardCollapsedMode.prototype.toggle = function() {
     var self = this;
     this.app.showLoadingIcon();
 
-    $.ajax({
-        cache: false,
-        url: $('.filter-display-mode:not([style="display: none;"]) a').attr('href'),
-        success: function(data) {
-            $('.filter-display-mode').toggle();
-            self.app.get("BoardDragAndDrop").refresh(data);
-        }
-    });
+    var url = $('.filter-display-mode:not([style="display: none;"]) a').attr('href');
+
+    if (self.app.hasId("bigboard")) {
+      self.refreshAll(url)
+    } else {
+      var project_id = $("table.board-project").attr("data-project-id");
+      self.refreshOne(project_id, url);
+    }
+};
+
+Kanboard.BoardCollapsedMode.prototype.refreshOne = function(boardId, url) {
+  var self = this;
+
+  $.ajax({
+      cache: false,
+      url: url,
+      success: function(data) {
+          $('.filter-display-mode').toggle();
+          self.app.get("BoardDragAndDrop").refresh(boardId,data);
+      }
+  });
+};
+
+Kanboard.BoardCollapsedMode.prototype.refreshAll = function(url) {
+  var self = this;
+
+  $.ajax({
+      cache: false,
+      url: url,
+      success: function(data) {
+          $('.filter-display-mode').toggle();
+          $("div[id=bigboard]").replaceWith(data);
+
+          this.app.hideLoadingIcon();
+          self.app.get("BoardDragAndDrop").dragAndDrop();
+          self.app.get("BoardDragAndDrop").executeListeners();
+      }
+  });
 };
