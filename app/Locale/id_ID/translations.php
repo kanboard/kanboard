@@ -1059,7 +1059,7 @@ return array(
     'View profile' => 'Lihat profil',
     'Two Factor' => 'Dua Faktor',
     'Disable user' => 'Nonaktifkan pengguna',
-    'Do you really want to disable this user: "%s"?' => '',
+    // 'Do you really want to disable this user: "%s"?' => '',
     // 'Enable user' => '',
     // 'Do you really want to enable this user: "%s"?' => '',
     // 'Download' => '',
