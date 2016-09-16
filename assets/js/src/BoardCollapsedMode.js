@@ -49,7 +49,7 @@ Kanboard.BoardCollapsedMode.prototype.refreshAll = function(url) {
           $('.filter-display-mode').toggle();
           $("div[id=bigboard]").replaceWith(data);
 
-          this.app.hideLoadingIcon();
+          self.app.hideLoadingIcon();
           self.app.get("BoardDragAndDrop").dragAndDrop();
           self.app.get("BoardDragAndDrop").executeListeners();
       }

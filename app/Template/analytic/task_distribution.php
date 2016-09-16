@@ -5,9 +5,7 @@
 <?php if (empty($metrics)): ?>
     <p class="alert"><?= t('Not enough data to show the graph.') ?></p>
 <?php else: ?>
-    <section id="analytic-task-repartition">
-
-    <div id="chart" data-metrics='<?= json_encode($metrics, JSON_HEX_APOS) ?>'></div>
+    <chart-project-task-distribution :metrics='<?= json_encode($metrics, JSON_HEX_APOS) ?>'></chart-project-task-distribution>
 
     <table class="table-striped">
         <tr>
@@ -29,6 +27,4 @@
         </tr>
         <?php endforeach ?>
     </table>
-
-    </section>
 <?php endif ?>

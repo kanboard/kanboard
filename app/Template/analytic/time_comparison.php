@@ -12,17 +12,17 @@
 <?php if (empty($metrics)): ?>
     <p class="alert"><?= t('Not enough data to show the graph.') ?></p>
 <?php else: ?>
-<section id="analytic-compare-hours">
-    <div id="chart"
-        data-metrics='<?= json_encode($metrics, JSON_HEX_APOS)?>'
-        data-label-spent="<?= t('Hours Spent') ?>"
-        data-label-estimated="<?= t('Hours Estimated') ?>"
-        data-label-closed="<?= t('Closed') ?>"
-        data-label-open="<?= t('Open') ?>"></div>
-
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('No tasks found.') ?></p>
     <?php elseif (! $paginator->isEmpty()): ?>
+        <chart-project-time-comparison
+            :metrics='<?= json_encode($metrics, JSON_HEX_APOS)?>'
+            label-spent="<?= t('Hours Spent') ?>"
+            label-estimated="<?= t('Hours Estimated') ?>"
+            label-closed="<?= t('Closed') ?>"
+            label-open="<?= t('Open') ?>">
+        </chart-project-time-comparison>
+
         <table class="table-fixed table-small table-scrolling">
             <tr>
                 <th class="column-5"><?= $paginator->order(t('Id'), 'tasks.id') ?></th>
@@ -58,5 +58,4 @@
 
         <?= $paginator ?>
     <?php endif ?>
-</section>
 <?php endif ?>

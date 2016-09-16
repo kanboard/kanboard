@@ -3,12 +3,12 @@
 namespace Kanboard\Core\Cache;
 
 /**
- * Base class for cache drivers
+ * Base Class for Cache Drivers
  *
- * @package  cache
+ * @package  Kanboard\Core\Cache
  * @author   Frederic Guillot
  */
-abstract class Base
+abstract class BaseCache implements CacheInterface
 {
     /**
      * Proxy cache

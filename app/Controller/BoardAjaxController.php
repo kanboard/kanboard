@@ -4,6 +4,7 @@ namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Formatter\BoardFormatter;
+use Kanboard\Model\UserMetadataModel;
 
 /**
  * Class BoardAjaxController
@@ -28,10 +29,14 @@ class BoardAjaxController extends BaseController
 
         $values = $this->request->getJson();
 
+        if (! $this->helper->projectRole->canMoveTask($project_id, $values['src_column_id'], $values['dst_column_id'])) {
+            throw new AccessForbiddenException(e("You don't have the permission to move this task"));
+        }
+
         $result =$this->taskPositionModel->movePosition(
             $project_id,
             $values['task_id'],
-            $values['column_id'],
+            $values['dst_column_id'],
             $values['position'],
             $values['swimlane_id']
         );
@@ -88,7 +93,7 @@ class BoardAjaxController extends BaseController
      */
     public function collapse()
     {
-        $this->changeDisplayMode(true);
+        $this->changeDisplayMode(1);
     }
 
     /**
@@ -98,19 +103,19 @@ class BoardAjaxController extends BaseController
      */
     public function expand()
     {
-        $this->changeDisplayMode(false);
+        $this->changeDisplayMode(0);
     }
 
     /**
      * Change display mode
      *
      * @access private
-     * @param  boolean $mode
+     * @param  int $mode
      */
     private function changeDisplayMode($mode)
     {
         $project_id = $this->request->getIntegerParam('project_id');
-        $this->userSession->setBoardDisplayMode($project_id, $mode);
+        $this->userMetadataCacheDecorator->set(UserMetadataModel::KEY_BOARD_COLLAPSED.$project_id, $mode);
 
         if ($this->request->isAjax()) {
             $this->response->html($this->renderBoard($project_id));

@@ -35,6 +35,7 @@ $container->register(new Kanboard\ServiceProvider\MailProvider());
 $container->register(new Kanboard\ServiceProvider\HelperProvider());
 $container->register(new Kanboard\ServiceProvider\SessionProvider());
 $container->register(new Kanboard\ServiceProvider\LoggingProvider());
+$container->register(new Kanboard\ServiceProvider\CacheProvider());
 $container->register(new Kanboard\ServiceProvider\DatabaseProvider());
 $container->register(new Kanboard\ServiceProvider\AuthenticationProvider());
 $container->register(new Kanboard\ServiceProvider\NotificationProvider());

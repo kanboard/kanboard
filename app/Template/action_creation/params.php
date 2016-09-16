@@ -41,6 +41,9 @@
         <?php elseif ($this->text->contains($param_name, 'duration')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->number('params['.$param_name.']', $values) ?>
+        <?php elseif ($this->text->contains($param_name, 'swimlane_id')): ?>
+            <?= $this->form->label($param_desc, $param_name) ?>
+            <?= $this->form->select('params['.$param_name.']', $swimlane_list, $values) ?>
         <?php else: ?>
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->text('params['.$param_name.']', $values) ?>

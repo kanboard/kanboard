@@ -174,7 +174,7 @@ class FormHelper extends Base
 
         $html = '<textarea name="'.$name.'" id="form-'.$name.'" class="'.$class.'" ';
         $html .= implode(' ', $attributes).'>';
-        $html .= isset($values->$name) ? $this->helper->text->e($values->$name) : isset($values[$name]) ? $values[$name] : '';
+        $html .= isset($values[$name]) ? $this->helper->text->e($values[$name]) : '';
         $html .= '</textarea>';
         $html .= $this->errorList($errors, $name);
 

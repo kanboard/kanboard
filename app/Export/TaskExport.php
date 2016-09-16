@@ -3,9 +3,12 @@
 namespace Kanboard\Export;
 
 use Kanboard\Core\Base;
-use Kanboard\Core\DateParser;
+use Kanboard\Model\CategoryModel;
+use Kanboard\Model\ColumnModel;
+use Kanboard\Model\ProjectModel;
+use Kanboard\Model\SwimlaneModel;
 use Kanboard\Model\TaskModel;
-use PDO;
+use Kanboard\Model\UserModel;
 
 /**
  * Task Export
@@ -19,19 +22,21 @@ class TaskExport extends Base
      * Fetch tasks and return the prepared CSV
      *
      * @access public
-     * @param  integer    $project_id      Project id
-     * @param  mixed      $from            Start date (timestamp or user formatted date)
-     * @param  mixed      $to              End date (timestamp or user formatted date)
+     * @param  integer $project_id Project id
+     * @param  mixed   $from       Start date (timestamp or user formatted date)
+     * @param  mixed   $to         End date (timestamp or user formatted date)
      * @return array
      */
     public function export($project_id, $from, $to)
     {
         $tasks = $this->getTasks($project_id, $from, $to);
-        $swimlanes = $this->swimlaneModel->getList($project_id);
+        $colors = $this->colorModel->getList();
+        $defaultSwimlane = $this->swimlaneModel->getDefault($project_id);
         $results = array($this->getColumns());
 
         foreach ($tasks as &$task) {
-            $results[] = array_values($this->format($task, $swimlanes));
+            $task = $this->format($task, $defaultSwimlane['default_swimlane'], $colors);
+            $results[] = array_values($task);
         }
 
         return $results;
@@ -40,76 +45,81 @@ class TaskExport extends Base
     /**
      * Get the list of tasks for a given project and date range
      *
-     * @access public
-     * @param  integer    $project_id      Project id
-     * @param  mixed      $from            Start date (timestamp or user formatted date)
-     * @param  mixed      $to              End date (timestamp or user formatted date)
+     * @access protected
+     * @param  integer $project_id Project id
+     * @param  mixed   $from       Start date (timestamp or user formatted date)
+     * @param  mixed   $to         End date (timestamp or user formatted date)
      * @return array
      */
-    public function getTasks($project_id, $from, $to)
+    protected function getTasks($project_id, $from, $to)
     {
-        $sql = '
-            SELECT
-            tasks.id,
-            projects.name AS project_name,
-            tasks.is_active,
-            project_has_categories.name AS category_name,
-            tasks.swimlane_id,
-            columns.title AS column_title,
-            tasks.position,
-            tasks.color_id,
-            tasks.date_due,
-            creators.username AS creator_username,
-            users.username AS assignee_username,
-            users.name AS assignee_name,
-            tasks.score,
-            tasks.title,
-            tasks.date_creation,
-            tasks.date_modification,
-            tasks.date_completed,
-            tasks.date_started,
-            tasks.time_estimated,
-            tasks.time_spent
-            FROM tasks
-            LEFT JOIN users ON users.id = tasks.owner_id
-            LEFT JOIN users AS creators ON creators.id = tasks.creator_id
-            LEFT JOIN project_has_categories ON project_has_categories.id = tasks.category_id
-            LEFT JOIN columns ON columns.id = tasks.column_id
-            LEFT JOIN projects ON projects.id = tasks.project_id
-            WHERE tasks.date_creation >= ? AND tasks.date_creation <= ? AND tasks.project_id = ?
-            ORDER BY tasks.id ASC
-        ';
-
-        if (! is_numeric($from)) {
+        if (!is_numeric($from)) {
             $from = $this->dateParser->removeTimeFromTimestamp($this->dateParser->getTimestamp($from));
         }
 
-        if (! is_numeric($to)) {
+        if (!is_numeric($to)) {
             $to = $this->dateParser->removeTimeFromTimestamp(strtotime('+1 day', $this->dateParser->getTimestamp($to)));
         }
 
-        $rq = $this->db->execute($sql, array($from, $to, $project_id));
-        return $rq->fetchAll(PDO::FETCH_ASSOC);
+        return $this->db->table(TaskModel::TABLE)
+            ->columns(
+                TaskModel::TABLE . '.id',
+                TaskModel::TABLE . '.reference',
+                ProjectModel::TABLE . '.name AS project_name',
+                TaskModel::TABLE . '.is_active',
+                CategoryModel::TABLE . '.name AS category_name',
+                SwimlaneModel::TABLE . '.name AS swimlane_name',
+                ColumnModel::TABLE . '.title AS column_title',
+                TaskModel::TABLE . '.position',
+                TaskModel::TABLE . '.color_id',
+                TaskModel::TABLE . '.date_due',
+                'uc.username AS creator_username',
+                'uc.name AS creator_name',
+                UserModel::TABLE . '.username AS assignee_username',
+                UserModel::TABLE . '.name AS assignee_name',
+                TaskModel::TABLE . '.score',
+                TaskModel::TABLE . '.title',
+                TaskModel::TABLE . '.date_creation',
+                TaskModel::TABLE . '.date_modification',
+                TaskModel::TABLE . '.date_completed',
+                TaskModel::TABLE . '.date_started',
+                TaskModel::TABLE . '.time_estimated',
+                TaskModel::TABLE . '.time_spent'
+            )
+            ->join(UserModel::TABLE, 'id', 'owner_id', TaskModel::TABLE)
+            ->left(UserModel::TABLE, 'uc', 'id', TaskModel::TABLE, 'creator_id')
+            ->join(CategoryModel::TABLE, 'id', 'category_id', TaskModel::TABLE)
+            ->join(ColumnModel::TABLE, 'id', 'column_id', TaskModel::TABLE)
+            ->join(SwimlaneModel::TABLE, 'id', 'swimlane_id', TaskModel::TABLE)
+            ->join(ProjectModel::TABLE, 'id', 'project_id', TaskModel::TABLE)
+            ->gte(TaskModel::TABLE . '.date_creation', $from)
+            ->lte(TaskModel::TABLE . '.date_creation', $to)
+            ->eq(TaskModel::TABLE . '.project_id', $project_id)
+            ->asc(TaskModel::TABLE.'.id')
+            ->findAll();
     }
 
     /**
      * Format the output of a task array
      *
-     * @access public
-     * @param  array     $task        Task properties
-     * @param  array     $swimlanes   List of swimlanes
+     * @access protected
+     * @param  array  $task
+     * @param  string $defaultSwimlaneName
+     * @param  array   $colors
      * @return array
      */
-    public function format(array &$task, array &$swimlanes)
+    protected function format(array &$task, $defaultSwimlaneName, array $colors)
     {
-        $colors = $this->colorModel->getList();
-
         $task['is_active'] = $task['is_active'] == TaskModel::STATUS_OPEN ? e('Open') : e('Closed');
         $task['color_id'] = $colors[$task['color_id']];
         $task['score'] = $task['score'] ?: 0;
-        $task['swimlane_id'] = isset($swimlanes[$task['swimlane_id']]) ? $swimlanes[$task['swimlane_id']] : '?';
+        $task['swimlane_name'] = $task['swimlane_name'] ?: $defaultSwimlaneName;
 
-        $task = $this->dateParser->format($task, array('date_due', 'date_modification', 'date_creation', 'date_started', 'date_completed'), DateParser::DATE_FORMAT);
+        $task = $this->dateParser->format(
+            $task,
+            array('date_due', 'date_modification', 'date_creation', 'date_started', 'date_completed'),
+            $this->dateParser->getUserDateTimeFormat()
+        );
 
         return $task;
     }
@@ -117,13 +127,14 @@ class TaskExport extends Base
     /**
      * Get column titles
      *
-     * @access public
+     * @access protected
      * @return string[]
      */
-    public function getColumns()
+    protected function getColumns()
     {
         return array(
             e('Task Id'),
+            e('Reference'),
             e('Project'),
             e('Status'),
             e('Category'),
@@ -133,6 +144,7 @@ class TaskExport extends Base
             e('Color'),
             e('Due date'),
             e('Creator'),
+            e('Creator Name'),
             e('Assignee Username'),
             e('Assignee Name'),
             e('Complexity'),

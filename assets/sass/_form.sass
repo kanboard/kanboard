@@ -56,9 +56,13 @@ textarea
   font-family: sans-serif
 
 select
+  font-size: 1.0em
   max-width: 95%
   &:focus
     outline: 0
+
+select[multiple]
+  width: 300px
 
 .tag-autocomplete
   width: 400px
@@ -119,6 +123,7 @@ ul.form-errors li
 
   .form-column
     margin-right: 25px
+    flex-grow: 1
 
 .form-login
   max-width: 350px

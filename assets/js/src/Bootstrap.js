@@ -1,4 +1,6 @@
+var _KB = null;
+
 jQuery(document).ready(function() {
-    var app = new Kanboard.App();
-    app.execute();
+    _KB = new Kanboard.App();
+    _KB.execute();
 });

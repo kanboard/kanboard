@@ -166,17 +166,9 @@ class DateParserTest extends Base
         $this->assertEquals(1, $dateParser->getHours(new DateTime('2015-03-14 15:00:00'), new DateTime('2015-03-14 16:00:00')));
         $this->assertEquals(2.5, $dateParser->getHours(new DateTime('2015-03-14 15:00:00'), new DateTime('2015-03-14 17:30:00')));
         $this->assertEquals(2.75, $dateParser->getHours(new DateTime('2015-03-14 15:00:00'), new DateTime('2015-03-14 17:45:00')));
-        $this->assertEquals(3, $dateParser->getHours(new DateTime('2015-03-14 14:57:00'), new DateTime('2015-03-14 17:58:00')));
-        $this->assertEquals(3, $dateParser->getHours(new DateTime('2015-03-14 14:57:00'), new DateTime('2015-03-14 11:58:00')));
-    }
-
-    public function testRoundSeconds()
-    {
-        $dateParser = new DateParser($this->container);
-        $this->assertEquals('16:30', date('H:i', $dateParser->getRoundedSeconds(strtotime('16:28'))));
-        $this->assertEquals('16:00', date('H:i', $dateParser->getRoundedSeconds(strtotime('16:02'))));
-        $this->assertEquals('16:15', date('H:i', $dateParser->getRoundedSeconds(strtotime('16:14'))));
-        $this->assertEquals('17:00', date('H:i', $dateParser->getRoundedSeconds(strtotime('16:58'))));
+        $this->assertEquals(3.02, $dateParser->getHours(new DateTime('2015-03-14 14:57:00'), new DateTime('2015-03-14 17:58:00')));
+        $this->assertEquals(2.98, $dateParser->getHours(new DateTime('2015-03-14 14:57:00'), new DateTime('2015-03-14 11:58:00')));
+        $this->assertEquals(0, $dateParser->getHours(new DateTime('2015-03-14 14:57:00'), new DateTime('2015-03-14 14:57:10')));
     }
 
     public function testGetIsoDate()
@@ -212,6 +204,9 @@ class DateParserTest extends Base
 
         $this->assertEquals(array('date' => '06/02/2016'), $dateParser->format($values, array('date'), 'd/m/Y'));
         $this->assertEquals(array('date' => '02/06/2016 7:30 pm'), $dateParser->format($values, array('date'), 'm/d/Y g:i a'));
+
+        $values['date'] = '2016-02-06';
+        $this->assertEquals(array('date' => '06/02/2016'), $dateParser->format($values, array('date'), 'd/m/Y'));
     }
 
     public function testConvert()

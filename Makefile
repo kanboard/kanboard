@@ -2,9 +2,13 @@ BUILD_DIR = /tmp
 
 all: static
 
-static:
+clean:
+	@ rm -rf ./node_modules ./bower_components
+
+static: clean
 	@ npm install
-	@ ./node_modules/gulp-cli/bin/gulp.js
+	@ ./node_modules/.bin/gulp bower
+	@ ./node_modules/.bin/gulp vendor js css
 
 archive:
 	@ echo "Build archive: version=${version}, destination=${dst}"

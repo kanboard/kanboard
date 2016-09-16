@@ -4,6 +4,9 @@
 
 <?php if (empty($projects_list)): ?>
     <p class="alert"><?= t('There is no destination project available.') ?></p>
+    <div class="form-actions">
+        <?= $this->url->link(t('cancel'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover btn') ?>
+    </div>
 <?php else: ?>
 
     <form class="popover-form" method="post" action="<?= $this->url->href('TaskDuplicationController', 'move', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">

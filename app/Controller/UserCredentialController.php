@@ -106,4 +106,21 @@ class UserCredentialController extends BaseController
 
         return $this->changeAuthentication($values, $errors);
     }
+
+    /**
+     * Unlock user
+     */
+    public function unlock()
+    {
+        $user = $this->getUser();
+        $this->checkCSRFParam();
+
+        if ($this->userLockingModel->resetFailedLogin($user['username'])) {
+            $this->flash->success(t('User unlocked successfully.'));
+        } else {
+            $this->flash->failure(t('Unable to unlock the user.'));
+        }
+
+        $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])));
+    }
 }

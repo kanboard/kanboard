@@ -83,27 +83,6 @@ class UserSessionTest extends Base
         $this->assertFalse($us->isAdmin());
     }
 
-    public function testCommentSorting()
-    {
-        $us = new UserSession($this->container);
-        $this->assertEquals('ASC', $us->getCommentSorting());
-
-        $us->setCommentSorting('DESC');
-        $this->assertEquals('DESC', $us->getCommentSorting());
-    }
-
-    public function testBoardCollapseMode()
-    {
-        $us = new UserSession($this->container);
-        $this->assertFalse($us->isBoardCollapsed(2));
-
-        $us->setBoardDisplayMode(3, false);
-        $this->assertFalse($us->isBoardCollapsed(3));
-
-        $us->setBoardDisplayMode(3, true);
-        $this->assertTrue($us->isBoardCollapsed(3));
-    }
-
     public function testFilters()
     {
         $us = new UserSession($this->container);

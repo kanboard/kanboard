@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Model\UserMetadataModel;
+
 /**
  * Board Tooltip
  *
@@ -75,10 +77,11 @@ class BoardTooltipController extends BaseController
     public function comments()
     {
         $task = $this->getTask();
+        $commentSortingDirection = $this->userMetadataCacheDecorator->get(UserMetadataModel::KEY_COMMENT_SORTING_DIRECTION, 'ASC');
 
         $this->response->html($this->template->render('board/tooltip_comments', array(
             'task' => $task,
-            'comments' => $this->commentModel->getAll($task['id'], $this->userSession->getCommentSorting())
+            'comments' => $this->commentModel->getAll($task['id'], $commentSortingDirection)
         )));
     }
 

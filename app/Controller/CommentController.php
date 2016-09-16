@@ -4,6 +4,7 @@ namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Controller\PageNotFoundException;
+use Kanboard\Model\UserMetadataModel;
 
 /**
  * Comment Controller
@@ -82,10 +83,10 @@ class CommentController extends BaseController
                 $this->flash->failure(t('Unable to create your comment.'));
             }
 
-            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'), true);
+            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'), true);
+        } else {
+            $this->create($values, $errors);
         }
-
-        return $this->create($values, $errors);
     }
 
     /**
@@ -183,9 +184,16 @@ class CommentController extends BaseController
     {
         $task = $this->getTask();
 
-        $order = $this->userSession->getCommentSorting() === 'ASC' ? 'DESC' : 'ASC';
-        $this->userSession->setCommentSorting($order);
+        $oldDirection = $this->userMetadataCacheDecorator->get(UserMetadataModel::KEY_COMMENT_SORTING_DIRECTION, 'ASC');
+        $newDirection = $oldDirection === 'ASC' ? 'DESC' : 'ASC';
 
-        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'));
+        $this->userMetadataCacheDecorator->set(UserMetadataModel::KEY_COMMENT_SORTING_DIRECTION, $newDirection);
+
+        $this->response->redirect($this->helper->url->to(
+            'TaskViewController',
+            'show',
+            array('task_id' => $task['id'], 'project_id' => $task['project_id']),
+            'comments'
+        ));
     }
 }
