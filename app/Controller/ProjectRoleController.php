@@ -70,6 +70,55 @@ class ProjectRoleController extends BaseController
     }
 
     /**
+     * Show form to change existing role
+     *
+     * @param  array $values
+     * @param  array $errors
+     * @throws AccessForbiddenException
+     */
+    public function edit(array $values = array(), array $errors = array())
+    {
+        $project = $this->getProject();
+        $role = $this->getRole($project['id']);
+
+        if (empty($values)) {
+            $values = $role;
+        }
+
+        $this->response->html($this->template->render('project_role/edit', array(
+            'role' => $role,
+            'project' => $project,
+            'values' => $values,
+            'errors' => $errors,
+        )));
+    }
+
+    /**
+     * Update role
+     */
+    public function update()
+    {
+        $project = $this->getProject();
+        $role = $this->getRole($project['id']);
+
+        $values = $this->request->getValues();
+
+        list($valid, $errors) = $this->projectRoleValidator->validateModification($values);
+
+        if ($valid) {
+            if ($this->projectRoleModel->update($role['role_id'], $project['id'], $values['role'])) {
+                $this->flash->success(t('Your custom project role has been updated successfully.'));
+            } else {
+                $this->flash->failure(t('Unable to update custom project role.'));
+            }
+
+            $this->response->redirect($this->helper->url->to('ProjectRoleController', 'show', array('project_id' => $project['id'])));
+        } else {
+            $this->edit($values, $errors);
+        }
+    }
+
+    /**
      * Confirm suppression
      *
      * @access public
@@ -77,11 +126,11 @@ class ProjectRoleController extends BaseController
     public function confirm()
     {
         $project = $this->getProject();
-        $role_id = $this->request->getIntegerParam('role_id');
+        $role = $this->getRole($project['id']);
 
         $this->response->html($this->helper->layout->project('project_role/remove', array(
             'project' => $project,
-            'role' => $this->projectRoleModel->getById($project['id'], $role_id),
+            'role' => $role,
         )));
     }
 
@@ -103,5 +152,11 @@ class ProjectRoleController extends BaseController
         }
 
         $this->response->redirect($this->helper->url->to('ProjectRoleController', 'show', array('project_id' => $project['id'])));
+    }
+
+    protected function getRole($project_id)
+    {
+        $role_id = $this->request->getIntegerParam('role_id');
+        return $this->projectRoleModel->getById($project_id, $role_id);
     }
 }

@@ -40,7 +40,7 @@ class ProjectRoleValidator extends BaseValidator
     public function validateModification(array $values)
     {
         $rules = array(
-            new Validators\Required('id', t('The id is required')),
+            new Validators\Required('role_id', t('The id is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
@@ -64,7 +64,7 @@ class ProjectRoleValidator extends BaseValidator
             new Validators\MaxLength('role', t('The maximum length is %d characters', 100), 100),
             new Validators\Required('project_id', t('This field is required')),
             new Validators\Integer('project_id', t('This value must be an integer')),
-            new Validators\Integer('id', t('This value must be an integer')),
+            new Validators\Integer('role_id', t('This value must be an integer')),
         );
     }
 }

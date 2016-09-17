@@ -27,6 +27,10 @@
                             <?= $this->url->link(t('Add a new column restriction'), 'ColumnMoveRestrictionController', 'create', array('project_id' => $project['id'], 'role_id' => $role['role_id']), false, 'popover') ?>
                         </li>
                         <li>
+                            <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
+                            <?= $this->url->link(t('Edit this role'), 'ProjectRoleController', 'edit', array('project_id' => $project['id'], 'role_id' => $role['role_id']), false, 'popover') ?>
+                        </li>
+                        <li>
                             <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
                             <?= $this->url->link(t('Remove this role'), 'ProjectRoleController', 'confirm', array('project_id' => $project['id'], 'role_id' => $role['role_id']), false, 'popover') ?>
                         </li>
