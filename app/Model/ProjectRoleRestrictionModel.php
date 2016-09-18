@@ -13,11 +13,16 @@ use Kanboard\Core\Base;
 class ProjectRoleRestrictionModel extends Base
 {
     const TABLE = 'project_role_has_restrictions';
-    const RULE_TASK_CREATION = 'task_creation';
+
+    const RULE_TASK_CREATION    = 'task_creation';
+    const RULE_TASK_OPEN_CLOSE  = 'task_open_close';
 
     protected $ruleMapping = array(
         self::RULE_TASK_CREATION => array(
             array('controller' => 'TaskCreationController', 'method' => '*'),
+        ),
+        self::RULE_TASK_OPEN_CLOSE => array(
+            array('controller' => 'TaskStatusController', 'method' => '*'),
         )
     );
 
@@ -29,7 +34,8 @@ class ProjectRoleRestrictionModel extends Base
     public function getRules()
     {
         return array(
-            self::RULE_TASK_CREATION => t('Task creation is not permitted'),
+            self::RULE_TASK_CREATION    => t('Task creation is not permitted'),
+            self::RULE_TASK_OPEN_CLOSE  => t('Closing or opening a task is not permitted'),
         );
     }
 

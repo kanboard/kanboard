@@ -78,20 +78,22 @@
             <i class="fa fa-clone fa-fw"></i>
             <?= $this->url->link(t('Move to another project'), 'TaskDuplicationController', 'move', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
-        <?php if ($task['is_active'] == 1): ?>
-            <li>
-                <i class="fa fa-arrows fa-fw"></i>
-                <?= $this->url->link(t('Move position'), 'TaskMovePositionController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
-            </li>
-            <li>
-                <i class="fa fa-times fa-fw"></i>
-                <?= $this->url->link(t('Close this task'), 'TaskStatusController', 'close', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
-            </li>
-        <?php else: ?>
-            <li>
-                <i class="fa fa-check-square-o fa-fw"></i>
-                <?= $this->url->link(t('Open this task'), 'TaskStatusController', 'open', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
-            </li>
+        <?php if ($this->user->hasProjectAccess('TaskStatusController', 'close', $task['project_id'])): ?>
+            <?php if ($task['is_active'] == 1): ?>
+                <li>
+                    <i class="fa fa-arrows fa-fw"></i>
+                    <?= $this->url->link(t('Move position'), 'TaskMovePositionController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+                </li>
+                <li>
+                    <i class="fa fa-times fa-fw"></i>
+                    <?= $this->url->link(t('Close this task'), 'TaskStatusController', 'close', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+                </li>
+            <?php else: ?>
+                <li>
+                    <i class="fa fa-check-square-o fa-fw"></i>
+                    <?= $this->url->link(t('Open this task'), 'TaskStatusController', 'open', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+                </li>
+            <?php endif ?>
         <?php endif ?>
         <?php if ($this->projectRole->canRemoveTask($task)): ?>
             <li>

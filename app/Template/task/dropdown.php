@@ -49,7 +49,7 @@
                 <?= $this->url->link(t('Remove'), 'TaskSuppressionController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
             </li>
         <?php endif ?>
-        <?php if (isset($task['is_active'])): ?>
+        <?php if (isset($task['is_active']) && $this->user->hasProjectAccess('TaskStatusController', 'close', $task['project_id'])): ?>
         <li>
             <?php if ($task['is_active'] == 1): ?>
                 <i class="fa fa-times fa-fw"></i>
