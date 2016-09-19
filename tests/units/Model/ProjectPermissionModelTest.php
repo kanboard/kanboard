@@ -11,7 +11,7 @@ use Kanboard\Model\ProjectGroupRoleModel;
 use Kanboard\Model\ProjectUserRoleModel;
 use Kanboard\Core\Security\Role;
 
-class ProjectPermissionTest extends Base
+class ProjectPermissionModelTest extends Base
 {
     public function testFindByUsernames()
     {

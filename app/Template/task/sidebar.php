@@ -78,7 +78,7 @@
             <i class="fa fa-clone fa-fw"></i>
             <?= $this->url->link(t('Move to another project'), 'TaskDuplicationController', 'move', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
-        <?php if ($this->user->hasProjectAccess('TaskStatusController', 'close', $task['project_id'])): ?>
+        <?php if ($this->projectRole->canChangeTaskStatusInColumn($task['project_id'], $task['column_id'])): ?>
             <?php if ($task['is_active'] == 1): ?>
                 <li>
                     <i class="fa fa-arrows fa-fw"></i>

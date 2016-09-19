@@ -17,15 +17,6 @@ class ProjectRoleRestrictionModel extends Base
     const RULE_TASK_CREATION    = 'task_creation';
     const RULE_TASK_OPEN_CLOSE  = 'task_open_close';
 
-    protected $ruleMapping = array(
-        self::RULE_TASK_CREATION => array(
-            array('controller' => 'TaskCreationController', 'method' => '*'),
-        ),
-        self::RULE_TASK_OPEN_CLOSE => array(
-            array('controller' => 'TaskStatusController', 'method' => '*'),
-        )
-    );
-
     /**
      * Get rules
      *
@@ -91,7 +82,7 @@ class ProjectRoleRestrictionModel extends Base
      */
     public function getAllByRole($project_id, $role)
     {
-        $rules = $this->db
+        return $this->db
             ->table(self::TABLE)
             ->columns(
                 self::TABLE.'.restriction_id',
@@ -104,12 +95,6 @@ class ProjectRoleRestrictionModel extends Base
             ->eq('role', $role)
             ->left(ProjectRoleModel::TABLE, 'pr', 'role_id', self::TABLE, 'role_id')
             ->findAll();
-
-        foreach ($rules as &$rule) {
-            $rule['acl'] = $this->ruleMapping[$rule['rule']];
-        }
-
-        return $rules;
     }
 
     /**
@@ -139,32 +124,5 @@ class ProjectRoleRestrictionModel extends Base
     public function remove($restriction_id)
     {
         return $this->db->table(self::TABLE)->eq('restriction_id', $restriction_id)->remove();
-    }
-
-    /**
-     * Check if the controller/method is allowed
-     *
-     * @param  array  $restrictions
-     * @param  string $controller
-     * @param  string $method
-     * @return bool
-     */
-    public function isAllowed(array $restrictions, $controller, $method)
-    {
-        $controller = strtolower($controller);
-        $method = strtolower($method);
-
-        foreach ($restrictions as $restriction) {
-            foreach ($restriction['acl'] as $acl) {
-                $acl['controller'] = strtolower($acl['controller']);
-                $acl['method'] = strtolower($acl['method']);
-
-                if ($acl['controller'] === $controller && ($acl['method'] === '*' || $acl['method'] === $method)) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 }

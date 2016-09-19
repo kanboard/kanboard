@@ -122,8 +122,13 @@ class ProjectPermissionModel extends Base
      */
     public function isAssignable($project_id, $user_id)
     {
-        return $this->userModel->isActive($user_id) &&
-            in_array($this->projectUserRoleModel->getUserRole($project_id, $user_id), array(Role::PROJECT_MEMBER, Role::PROJECT_MANAGER));
+        if ($this->userModel->isActive($user_id)) {
+            $role = $this->projectUserRoleModel->getUserRole($project_id, $user_id);
+
+            return ! empty($role) && $role !== Role::PROJECT_VIEWER;
+        }
+
+        return false;
     }
 
     /**

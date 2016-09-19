@@ -4,6 +4,8 @@ namespace Kanboard\Helper;
 
 use Kanboard\Core\Base;
 use Kanboard\Core\Security\Role;
+use Kanboard\Model\ColumnRestrictionModel;
+use Kanboard\Model\ProjectRoleRestrictionModel;
 
 /**
  * Class ProjectRoleHelper
@@ -99,6 +101,46 @@ class ProjectRoleHelper extends Base
     }
 
     /**
+     * Return true if the user can create a task for the given column
+     *
+     * @param  int $project_id
+     * @param  int $column_id
+     * @return bool
+     */
+    public function canCreateTaskInColumn($project_id, $column_id)
+    {
+        $role = $this->getProjectUserRole($project_id);
+
+        if ($this->role->isCustomProjectRole($role)) {
+            if (! $this->isAllowedToCreateTask($project_id, $column_id, $role)) {
+                return false;
+            }
+        }
+
+        return $this->helper->user->hasProjectAccess('TaskCreationController', 'show', $project_id);
+    }
+
+    /**
+     * Return true if the user can create a task for the given column
+     *
+     * @param  int $project_id
+     * @param  int $column_id
+     * @return bool
+     */
+    public function canChangeTaskStatusInColumn($project_id, $column_id)
+    {
+        $role = $this->getProjectUserRole($project_id);
+
+        if ($this->role->isCustomProjectRole($role)) {
+            if (! $this->isAllowedToChangeTaskStatus($project_id, $column_id, $role)) {
+                return false;
+            }
+        }
+
+        return $this->helper->user->hasProjectAccess('TaskStatusController', 'close', $project_id);
+    }
+
+    /**
      * Return true if the user can remove a task
      *
      * Regular users can't remove tasks from other people
@@ -145,13 +187,77 @@ class ProjectRoleHelper extends Base
         $role = $this->getProjectUserRole($project_id);
 
         if ($this->role->isCustomProjectRole($role)) {
-            $restrictions = $this->projectRoleRestrictionModel->getAllByRole($project_id, $role);
-            $result = $this->projectRoleRestrictionModel->isAllowed($restrictions, $controller, $action);
-            $result = $result && $this->projectAuthorization->isAllowed($controller, $action, Role::PROJECT_MEMBER);
+            $result = $this->projectAuthorization->isAllowed($controller, $action, Role::PROJECT_MEMBER);
         } else {
             $result = $this->projectAuthorization->isAllowed($controller, $action, $role);
         }
 
         return $result;
+    }
+
+    /**
+     * Check authorization for a custom project role to change the task status
+     *
+     * @param  int    $project_id
+     * @param  int    $column_id
+     * @param  string $role
+     * @return bool
+     */
+    protected function isAllowedToChangeTaskStatus($project_id, $column_id, $role)
+    {
+        $columnRestrictions = $this->columnRestrictionCacheDecorator->getAllByRole($project_id, $role);
+
+        foreach ($columnRestrictions as $restriction) {
+            if ($restriction['column_id'] == $column_id) {
+                if ($restriction['rule'] == ColumnRestrictionModel::RULE_ALLOW_TASK_OPEN_CLOSE) {
+                    return true;
+                } else if ($restriction['rule'] == ColumnRestrictionModel::RULE_BLOCK_TASK_OPEN_CLOSE) {
+                    return false;
+                }
+            }
+        }
+
+        $projectRestrictions = $this->projectRoleRestrictionCacheDecorator->getAllByRole($project_id, $role);
+
+        foreach ($projectRestrictions as $restriction) {
+            if ($restriction['rule'] == ProjectRoleRestrictionModel::RULE_TASK_OPEN_CLOSE) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Check authorization for a custom project role to create a task
+     *
+     * @param  int    $project_id
+     * @param  int    $column_id
+     * @param  string $role
+     * @return bool
+     */
+    protected function isAllowedToCreateTask($project_id, $column_id, $role)
+    {
+        $columnRestrictions = $this->columnRestrictionCacheDecorator->getAllByRole($project_id, $role);
+
+        foreach ($columnRestrictions as $restriction) {
+            if ($restriction['column_id'] == $column_id) {
+                if ($restriction['rule'] == ColumnRestrictionModel::RULE_ALLOW_TASK_CREATION) {
+                    return true;
+                } else if ($restriction['rule'] == ColumnRestrictionModel::RULE_BLOCK_TASK_CREATION) {
+                    return false;
+                }
+            }
+        }
+
+        $projectRestrictions = $this->projectRoleRestrictionCacheDecorator->getAllByRole($project_id, $role);
+
+        foreach ($projectRestrictions as $restriction) {
+            if ($restriction['rule'] == ProjectRoleRestrictionModel::RULE_TASK_CREATION) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

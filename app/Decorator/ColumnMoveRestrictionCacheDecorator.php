@@ -40,7 +40,8 @@ class ColumnMoveRestrictionCacheDecorator
     /**
      * Proxy method to get sortable columns
      *
-     * @param  int $project_id
+     * @param  int    $project_id
+     * @param  string $role
      * @return array|mixed
      */
     public function getSortableColumns($project_id, $role)

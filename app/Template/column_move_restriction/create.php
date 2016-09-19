@@ -1,6 +1,6 @@
 <section id="main">
     <div class="page-header">
-        <h2><?= t('New column restriction for the role "%s"', $role['role']) ?></h2>
+        <h2><?= t('New drag and drop restriction for the role "%s"', $role['role']) ?></h2>
     </div>
     <form class="popover-form" method="post" action="<?= $this->url->href('ColumnMoveRestrictionController', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
         <?= $this->form->csrf() ?>

@@ -166,7 +166,7 @@ class ProjectUserRoleModel extends Base
             ->join(UserModel::TABLE, 'id', 'user_id')
             ->eq(UserModel::TABLE.'.is_active', 1)
             ->eq(self::TABLE.'.project_id', $project_id)
-            ->in(self::TABLE.'.role', array(Role::PROJECT_MANAGER, Role::PROJECT_MEMBER))
+            ->neq(self::TABLE.'.role', Role::PROJECT_VIEWER)
             ->findAll();
 
         $groupMembers = $this->projectGroupRoleModel->getAssignableUsers($project_id);

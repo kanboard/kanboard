@@ -57,7 +57,9 @@ use Pimple\Container;
  * @property \Kanboard\Core\Paginator                                $paginator
  * @property \Kanboard\Core\Template                                 $template
  * @property \Kanboard\Decorator\MetadataCacheDecorator              $userMetadataCacheDecorator
+ * @property \Kanboard\Decorator\columnRestrictionCacheDecorator     $columnRestrictionCacheDecorator
  * @property \Kanboard\Decorator\ColumnMoveRestrictionCacheDecorator $columnMoveRestrictionCacheDecorator
+ * @property \Kanboard\Decorator\ProjectRoleRestrictionCacheDecorator $projectRoleRestrictionCacheDecorator
  * @property \Kanboard\Model\ActionModel                             $actionModel
  * @property \Kanboard\Model\ActionParameterModel                    $actionParameterModel
  * @property \Kanboard\Model\AvatarFileModel                         $avatarFileModel
@@ -65,6 +67,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\CategoryModel                           $categoryModel
  * @property \Kanboard\Model\ColorModel                              $colorModel
  * @property \Kanboard\Model\ColumnModel                             $columnModel
+ * @property \Kanboard\Model\ColumnRestrictionModel                  $columnRestrictionModel
  * @property \Kanboard\Model\ColumnMoveRestrictionModel              $columnMoveRestrictionModel
  * @property \Kanboard\Model\CommentModel                            $commentModel
  * @property \Kanboard\Model\ConfigModel                             $configModel
@@ -136,6 +139,7 @@ use Pimple\Container;
  * @property \Kanboard\Validator\AuthValidator                       $authValidator
  * @property \Kanboard\Validator\ColumnValidator                     $columnValidator
  * @property \Kanboard\Validator\CategoryValidator                   $categoryValidator
+ * @property \Kanboard\Validator\ColumnRestrictionValidator          $columnRestrictionValidator
  * @property \Kanboard\Validator\ColumnMoveRestrictionValidator      $columnMoveRestrictionValidator
  * @property \Kanboard\Validator\CommentValidator                    $commentValidator
  * @property \Kanboard\Validator\CurrencyValidator                   $currencyValidator

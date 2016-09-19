@@ -41,14 +41,44 @@ class ProjectRoleModelTest extends Base
         $this->assertEquals('Role B', $roles[1]['role']);
     }
 
-    public function testModification()
+    public function testModificationWithUserRole()
     {
         $projectModel = new ProjectModel($this->container);
         $projectRoleModel = new ProjectRoleModel($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
+        $groupModel = new GroupModel($this->container);
+        $groupMemberModel = new GroupMemberModel($this->container);
+
+        $this->assertEquals(1, $groupModel->create('Group A'));
+        $this->assertTrue($groupMemberModel->addUser(1, 1));
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $projectRoleModel->create(1, 'Role A'));
+        $this->assertTrue($projectUserRoleModel->addUser(1, 1, 'Role A'));
+        $this->assertEquals('Role A', $projectUserRoleModel->getUserRole(1, 1));
+
         $this->assertTrue($projectRoleModel->update(1, 1, 'Role B'));
+        $this->assertEquals('Role B', $projectUserRoleModel->getUserRole(1, 1));
+    }
+
+    public function testModificationWithGroupRole()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $projectRoleModel = new ProjectRoleModel($this->container);
+        $projectGroupRoleModel = new ProjectGroupRoleModel($this->container);
+        $groupModel = new GroupModel($this->container);
+        $groupMemberModel = new GroupMemberModel($this->container);
+
+        $this->assertEquals(1, $groupModel->create('Group A'));
+        $this->assertTrue($groupMemberModel->addUser(1, 1));
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $projectRoleModel->create(1, 'Role A'));
+        $this->assertTrue($projectGroupRoleModel->addGroup(1, 1, 'Role A'));
+        $this->assertEquals('Role A', $projectGroupRoleModel->getUserRole(1, 1));
+
+        $this->assertTrue($projectRoleModel->update(1, 1, 'Role B'));
+        $this->assertEquals('Role B', $projectGroupRoleModel->getUserRole(1, 1));
     }
 
     public function testRemoveWithUserRole()
