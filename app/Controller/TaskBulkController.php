@@ -47,7 +47,12 @@ class TaskBulkController extends BaseController
         $values = $this->request->getValues();
         list($valid, $errors) = $this->taskValidator->validateBulkCreation($values);
 
-        if ($valid) {
+        if (! $valid) {
+            $this->show($values, $errors);
+        } else if (! $this->helper->projectRole->canCreateTaskInColumn($project['id'], $values['column_id'])) {
+            $this->flash->failure(t('You cannot create tasks in this column.'));
+            $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);
+        } else {
             $this->createTasks($project, $values);
             $this->response->redirect($this->helper->url->to(
                 'BoardViewController',
@@ -55,8 +60,6 @@ class TaskBulkController extends BaseController
                 array('project_id' => $project['id']),
                 'swimlane-'. $values['swimlane_id']
             ), true);
-        } else {
-            $this->show($values, $errors);
         }
     }
 
