@@ -17,7 +17,7 @@ class FileCache extends BaseCache
      *
      * @access public
      * @param  string $key
-     * @param  string $value
+     * @param  mixed  $value
      */
     public function set($key, $value)
     {
