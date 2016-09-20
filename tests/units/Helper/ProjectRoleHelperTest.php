@@ -265,13 +265,21 @@ class ProjectRoleHelperTest extends Base
         $this->assertEquals(1, $columnMoveRestrictionModel->create(1, 1, 2, 3));
 
         $this->assertTrue($projectUserRole->addUser(1, 2, 'Custom Role'));
-        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 2)));
-        $this->assertEquals(2, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 3)));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 1)));
+        $this->assertEquals(2, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 2)));
+        $this->assertEquals(3, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 3)));
+        $this->assertEquals(4, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 4)));
 
         $task = $taskFinderModel->getById(1);
-        $this->assertTrue($projectRoleHelper->isDraggable($task));
+        $this->assertFalse($projectRoleHelper->isDraggable($task));
 
         $task = $taskFinderModel->getById(2);
+        $this->assertTrue($projectRoleHelper->isDraggable($task));
+
+        $task = $taskFinderModel->getById(3);
+        $this->assertTrue($projectRoleHelper->isDraggable($task));
+
+        $task = $taskFinderModel->getById(4);
         $this->assertFalse($projectRoleHelper->isDraggable($task));
     }
 

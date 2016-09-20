@@ -9,7 +9,7 @@
 
             <!-- tasks list -->
             <div
-                class="board-task-list board-column-expanded <?= $this->projectRole->isSortableColumn($column['project_id'], $column['id'], 'dst_column_id') ? 'sortable-column' : '' ?>"
+                class="board-task-list board-column-expanded <?= $this->projectRole->isSortableColumn($column['project_id'], $column['id']) ? 'sortable-column' : '' ?>"
                 data-column-id="<?= $column['id'] ?>"
                 data-swimlane-id="<?= $swimlane['id'] ?>"
                 data-task-limit="<?= $column['task_limit'] ?>">

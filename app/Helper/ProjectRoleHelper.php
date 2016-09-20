@@ -36,7 +36,7 @@ class ProjectRoleHelper extends Base
     public function isDraggable(array &$task)
     {
         if ($task['is_active'] == 1 && $this->helper->user->hasProjectAccess('BoardViewController', 'save', $task['project_id'])) {
-            return $this->isSortableColumn($task['project_id'], $task['column_id'], 'src_column_id');
+            return $this->isSortableColumn($task['project_id'], $task['column_id']);
         }
 
         return false;
@@ -47,10 +47,9 @@ class ProjectRoleHelper extends Base
      *
      * @param  int $project_id
      * @param  int $column_id
-     * @param  string $field
      * @return bool
      */
-    public function isSortableColumn($project_id, $column_id, $field)
+    public function isSortableColumn($project_id, $column_id)
     {
         $role = $this->getProjectUserRole($project_id);
 
@@ -58,7 +57,7 @@ class ProjectRoleHelper extends Base
             $sortableColumns = $this->columnMoveRestrictionCacheDecorator->getSortableColumns($project_id, $role);
 
             foreach ($sortableColumns as $column) {
-                if ($column[$field] == $column_id) {
+                if ($column['src_column_id'] == $column_id || $column['dst_column_id'] == $column_id) {
                     return true;
                 }
             }
@@ -90,6 +89,10 @@ class ProjectRoleHelper extends Base
 
             foreach ($sortableColumns as $column) {
                 if ($column['src_column_id'] == $src_column_id && $column['dst_column_id'] == $dst_column_id) {
+                    return true;
+                }
+
+                if ($column['dst_column_id'] == $src_column_id && $column['src_column_id'] == $dst_column_id) {
                     return true;
                 }
             }
