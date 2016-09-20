@@ -5,12 +5,12 @@ namespace Kanboard\Action;
 use Kanboard\Model\TaskModel;
 
 /**
- * Close automatically a task after inactive and in a defined column
+ * Close automatically in a defined column after a certain amount of time
  *
  * @package Kanboard\Action
  * @author  Frederic Guillot
  */
-class TaskCloseNoActivityColumn extends Base
+class TaskCloseNotMovedColumn extends Base
 {
     /**
      * Get automatic action description
@@ -20,7 +20,7 @@ class TaskCloseNoActivityColumn extends Base
      */
     public function getDescription()
     {
-        return t('Close a task when there is no activity in an specific column');
+        return t('Close a task in a specific column when not moved during a given period');
     }
 
     /**
@@ -72,7 +72,7 @@ class TaskCloseNoActivityColumn extends Base
         $max = $this->getParam('duration') * 86400;
 
         foreach ($data['tasks'] as $task) {
-            $duration = time() - $task['date_modification'];
+            $duration = time() - $task['date_moved'];
 
             if ($duration > $max && $task['column_id'] == $this->getParam('column_id')) {
                 $results[] = $this->taskStatusModel->close($task['id']);

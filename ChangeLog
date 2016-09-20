@@ -1,10 +1,12 @@
-Version 1.0.34
+Version 1.0.34 (unreleased)
 --------------
 
 New features:
 
 * Custom project roles with configurable restrictions
 * Duplicate a task to multiple projects during creation
+* New automatic action:
+    - Close a task in a specific column when not moved during a given period
 
 Version 1.0.33
 --------------
