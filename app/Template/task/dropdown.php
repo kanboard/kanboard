@@ -33,12 +33,12 @@
         <li>
             <?= $this->url->link('<i class="fa fa-clone fa-fw"></i>' . t('Move to another project'), 'TaskDuplicationController', 'move', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
-        <?php if ($this->projectRole->canRemoveTask($task)): ?>
+        <?php if ($this->user->canRemoveTask($task)): ?>
             <li>
                 <?= $this->url->link('<i class="fa fa-trash-o fa-fw"></i>' . t('Remove'), 'TaskSuppressionController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
             </li>
         <?php endif ?>
-        <?php if (isset($task['is_active']) && $this->projectRole->canChangeTaskStatusInColumn($task['project_id'], $task['column_id'])): ?>
+        <?php if (isset($task['is_active'])): ?>
         <li>
             <?php if ($task['is_active'] == 1): ?>
                 <?= $this->url->link('<i class="fa fa-times fa-fw"></i>' . t('Close this task'), 'TaskStatusController', 'close', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
