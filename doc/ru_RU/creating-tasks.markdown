@@ -7,14 +7,14 @@
 
 ![Task creation from the board](https://kanboard.net/screenshots/documentation/task-creation-board.png)
 
-Рисунок. Создание задачи на Доске
+Создание задачи на Доске
 
 
 Далее появится форма создания задачи:
 
 ![Task creation form](https://kanboard.net/screenshots/documentation/task-creation-form.png)
 
-Рисунок. Форма создания задачи.
+Форма создания задачи.
 
 
 Только поле **Название** является обязательным полем для заполнения.

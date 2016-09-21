@@ -9,7 +9,7 @@
 
 ![Close a task from drop-down menu](https://kanboard.net/screenshots/documentation/menu-close-task.png)
 
-Рисунок. Закрытие задачи, используя выпадающее меню.
+Закрытие задачи, используя выпадающее меню.
 
 
 или - Используя детальное представление задачи, выбрать **Закрыть задачу** в меню боковой панели (слева)
@@ -17,7 +17,7 @@
 
 ![Close task](https://kanboard.net/screenshots/documentation/closing-tasks.png)
 
-Рисунок. Закрытие задачи.
+Закрытие задачи.
 
 
 

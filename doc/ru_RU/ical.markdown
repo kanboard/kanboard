@@ -34,7 +34,7 @@
 
 ![Add iCal subscription](https://kanboard.net/screenshots/documentation/apple-calendar-add-subscription.png)
 
-Рисунок. Добавление подписки на календарь.
+Добавление подписки на календарь.
 
 
 -   Вы можете выбрать синхронизацию календаря с iCloud, чтобы иметь доступ к календарю с любых ваших устройств
@@ -43,7 +43,7 @@
 
 ![Edit iCal subscription](https://kanboard.net/screenshots/documentation/apple-calendar-edit-subscription.png)
 
-Рисунок. Редактирование подписки на календарь.
+Редактирование подписки на календарь.
 
 
 Добавление вашего календаря из Канборд в Microsoft Outlook[¶](#adding-your-kanboard-calendar-to-microsoft-outlook "Ссылка на этот заголовок")
@@ -51,7 +51,7 @@
 
 ![Outlook Add Internet Calendar](https://kanboard.net/screenshots/documentation/outlook-add-subscription.png)
 
-Рисунок. Добавление в Outlook календаря из интернет
+Добавление в Outlook календаря из интернет
 
 -   Откройте Outlook
 -   Выберите **Открыть календарь** -\> **Из интернета**
@@ -60,7 +60,7 @@
 
 ![Outlook Edit Internet Calendar](https://kanboard.net/screenshots/documentation/outlook-edit-subscription.png)
 
-Рисунок. Настройка интернет календаря в Outlook.
+Настройка интернет календаря в Outlook.
 
 
 Добавление вашего календаря из Канборд в Mozilla Thunderbird[¶](#adding-your-kanboard-calendar-to-mozilla-thunderbird "Ссылка на этот заголовок")
@@ -73,7 +73,7 @@
 
 ![Thunderbird Step 1](https://kanboard.net/screenshots/documentation/thunderbird-new-calendar-step1.png)
 
-Рисунок. Создание календаря в Thunderbird, шаг 1.
+Создание календаря в Thunderbird, шаг 1.
 
 
 
@@ -82,7 +82,7 @@
 
 ![Thunderbird Step 2](https://kanboard.net/screenshots/documentation/thunderbird-new-calendar-step2.png)
 
-Рисунок. Создание календаря в Thunderbird, шаг 2.
+Создание календаря в Thunderbird, шаг 2.
 
 -   Выберите цвета и другие настройки и в завершении нажмите **Сохранить**.
 
@@ -97,7 +97,7 @@
 
 ![Google Calendar](https://kanboard.net/screenshots/documentation/google-calendar-add-subscription.png)
 
-Рисунок. Календарь Google.
+Календарь Google.
 
 Ваш календарь из Канборд будет доступен на планшетах и смартфонах, нужно только сделать синхронизацию.
 

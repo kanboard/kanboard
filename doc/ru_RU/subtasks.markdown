@@ -37,7 +37,7 @@
 
 ![Add a subtask](https://kanboard.net/screenshots/documentation/add-subtask.png)
 
-Рисунок. Добавление подзадачи.
+Добавление подзадачи.
 
 
 
@@ -47,7 +47,7 @@
 
 ![Add a subtask from the task view](https://kanboard.net/screenshots/documentation/add-subtask-shortcut.png)
 
-Рисунок. Добавление подзадачи на странице детального просмотра задачи.
+Добавление подзадачи на странице детального просмотра задачи.
 
 
 
@@ -62,7 +62,7 @@
 
 ![Subtask in progress](https://kanboard.net/screenshots/documentation/subtask-status-inprogress.png)
 
-Рисунок. Выполнение подзадачи.
+Выполнение подзадачи.
 
 
 
@@ -72,7 +72,7 @@
 
 ![Subtask done](https://kanboard.net/screenshots/documentation/subtask-status-done.png)
 
-Рисунок. Подзадача выполнена.
+Подзадача выполнена.
 
 
 

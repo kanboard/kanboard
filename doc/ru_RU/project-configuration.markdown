@@ -9,7 +9,7 @@
 
 ![Project settings](https://kanboard.net/screenshots/documentation/project-settings.png)
 
-Рисунок. Настройки проекта.
+Настройки проекта.
 
 
 
@@ -58,7 +58,7 @@
 
 ![Subtask user restriction](https://kanboard.net/screenshots/documentation/subtask-user-restriction.png)
 
-Рисунок. Ограничение пользовательских подзадач.
+Ограничение пользовательских подзадач.
 
 
 

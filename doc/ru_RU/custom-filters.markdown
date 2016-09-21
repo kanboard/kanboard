@@ -15,7 +15,7 @@
 
 ![Custom Filter Creation](https://kanboard.net/screenshots/documentation/custom-filter-creation.png)
 
-Рисунок. Создание пользовательского фильтра.
+Создание пользовательского фильтра.
 
 
 
@@ -23,7 +23,7 @@
 
 ![Custom Filter Dropdown](https://kanboard.net/screenshots/documentation/custom-filter-dropdown.png)
 
-Рисунок. Выпадающий список - Пользовательский фильтр.
+Выпадающий список - Пользовательский фильтр.
 
 
 

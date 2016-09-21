@@ -6,7 +6,7 @@
 
 ![Calendar settings](https://kanboard.net/screenshots/documentation/calendar-settings.png)
 
-Рисунок. Настройки календаря
+Настройки календаря
 
 
 В Канборде имеется два вида Календаря:

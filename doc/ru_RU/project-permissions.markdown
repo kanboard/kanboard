@@ -33,7 +33,7 @@
 
 ![Project Permissions](screenshots/project-permissions.png)
 
-Рисунок. Права доступа к проекту
+Права доступа к проекту
 
 
 

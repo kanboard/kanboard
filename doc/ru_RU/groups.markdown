@@ -17,7 +17,7 @@
 
 ![Group Management](screenshots/groups-management.png)
 
-Рисунок. Управление группами.
+Управление группами.
 
 
 
