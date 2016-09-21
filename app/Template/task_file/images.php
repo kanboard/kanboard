@@ -9,13 +9,11 @@
                             <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->text->e($file['name']) ?> <i class="fa fa-caret-down"></i></a>
                             <ul>
                                 <li>
-                                    <i class="fa fa-download fa-fw"></i>
-                                    <?= $this->url->link(t('Download'), 'FileViewerController', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                                    <?= $this->url->link('<i class="fa fa-download fa-fw"></i>' . t('Download'), 'FileViewerController', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                                 </li>
                                 <?php if ($this->user->hasProjectAccess('TaskFileController', 'remove', $task['project_id'])): ?>
                                     <li>
-                                        <i class="fa fa-trash fa-fw"></i>
-                                        <?= $this->url->link(t('Remove'), 'TaskFileController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>
+                                        <?= $this->url->link('<i class="fa fa-trash fa-fw"></i>' . t('Remove'), 'TaskFileController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>
                                     </li>
                                 <?php endif ?>
                             </ul>

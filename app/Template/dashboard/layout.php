@@ -3,23 +3,19 @@
         <ul>
             <?php if ($this->user->hasAccess('ProjectCreationController', 'create')): ?>
                 <li>
-                    <i class="fa fa-plus fa-fw"></i>
-                    <?= $this->url->link(t('New project'), 'ProjectCreationController', 'create', array(), false, 'popover') ?>
+                    <?= $this->url->link('<i class="fa fa-plus fa-fw"></i>' . t('New project'), 'ProjectCreationController', 'create', array(), false, 'popover') ?>
                 </li>
             <?php endif ?>
             <?php if ($this->app->config('disable_private_project', 0) == 0): ?>
             <li>
-                <i class="fa fa-lock fa-fw"></i>
-                <?= $this->url->link(t('New private project'), 'ProjectCreationController', 'createPrivate', array(), false, 'popover') ?>
+                <?= $this->url->link('<i class="fa fa-lock fa-fw"></i>' . t('New private project'), 'ProjectCreationController', 'createPrivate', array(), false, 'popover') ?>
             </li>
             <?php endif ?>
             <li>
-                <i class="fa fa-search fa-fw"></i>
-                <?= $this->url->link(t('Search'), 'SearchController', 'index') ?>
+                <?= $this->url->link('<i class="fa fa-search fa-fw"></i>' . t('Search'), 'SearchController', 'index') ?>
             </li>
             <li>
-                <i class="fa fa-folder fa-fw"></i>
-                <?= $this->url->link(t('Project management'), 'ProjectListController', 'show') ?>
+                <?= $this->url->link('<i class="fa fa-folder fa-fw"></i>' . t('Project management'), 'ProjectListController', 'show') ?>
             </li>
         </ul>
     </div>

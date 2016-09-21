@@ -2,8 +2,7 @@
     <h2><?= t('Edit the board for "%s"', $project['name']) ?></h2>
     <ul>
         <li>
-            <i class="fa fa-plus fa-fw"></i>
-            <?= $this->url->link(t('Add a new column'), 'ColumnController', 'create', array('project_id' => $project['id']), false, 'popover') ?>
+            <?= $this->url->link('<i class="fa fa-plus fa-fw"></i>' . t('Add a new column'), 'ColumnController', 'create', array('project_id' => $project['id']), false, 'popover') ?>
         </li>
     </ul>
 </div>
@@ -41,12 +40,10 @@
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
                     <li>
-                        <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>
-                        <?= $this->url->link(t('Edit'), 'ColumnController', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id']), false, 'popover') ?>
+                        <?= $this->url->link('<i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>' . t('Edit'), 'ColumnController', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id']), false, 'popover') ?>
                     </li>
                     <li>
-                        <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
-                        <?= $this->url->link(t('Remove'), 'ColumnController', 'confirm', array('project_id' => $project['id'], 'column_id' => $column['id']), false, 'popover') ?>
+                        <?= $this->url->link('<i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>' . t('Remove'), 'ColumnController', 'confirm', array('project_id' => $project['id'], 'column_id' => $column['id']), false, 'popover') ?>
                     </li>
                 </ul>
                 </div>

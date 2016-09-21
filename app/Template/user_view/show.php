@@ -42,8 +42,8 @@
 
     <div class="listing">
         <ul class="no-bullet">
-            <li><strong><i class="fa fa-rss-square"></i> <?= $this->url->link(t('RSS feed'), 'FeedController', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>
-            <li><strong><i class="fa fa-calendar"></i> <?= $this->url->link(t('iCal feed'), 'ICalendarController', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>
+            <li><strong><?= $this->url->link('<i class="fa fa-rss-square"></i>' . t('RSS feed'), 'FeedController', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>
+            <li><strong><?= $this->url->link('<i class="fa fa-calendar"></i>' . t('iCal feed'), 'ICalendarController', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>
         </ul>
     </div>
 <?php endif ?>

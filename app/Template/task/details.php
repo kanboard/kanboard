@@ -33,16 +33,14 @@
                     <?php if ($project['is_public']): ?>
                     <li>
                         <small>
-                            <i class="fa fa-external-link fa-fw"></i>
-                            <?= $this->url->link(t('Public link'), 'TaskViewController', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
+                            <?= $this->url->link('<i class="fa fa-external-link fa-fw"></i>' . t('Public link'), 'TaskViewController', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
                         </small>
                     </li>
                     <?php endif ?>
                     <?php if ($project['is_public'] && !$editable): ?>
                     <li>
                         <small>
-                            <i class="fa fa-th fa-fw"></i>
-                            <?= $this->url->link(t('Back to the board'), 'BoardViewController', 'readonly', array('token' => $project['token'])) ?>
+                            <?= $this->url->link('<i class="fa fa-th fa-fw"></i>' . t('Back to the board'), 'BoardViewController', 'readonly', array('token' => $project['token'])) ?>
                         </small>
                     </li>
                     <?php endif ?>

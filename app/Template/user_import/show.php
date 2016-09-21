@@ -2,8 +2,7 @@
     <h2><?= t('Import users from CSV file') ?></h2>
     <ul>
         <li>
-            <i class="fa fa-download fa-fw"></i>
-            <?= $this->url->link(t('Download CSV template'), 'UserImportController', 'template') ?>
+            <?= $this->url->link('<i class="fa fa-download fa-fw"></i>' . t('Download CSV template'), 'UserImportController', 'template') ?>
         </li>
     </ul>
 </div>
