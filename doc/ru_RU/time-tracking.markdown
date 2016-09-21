@@ -7,14 +7,14 @@
 
 
 
-Отслеживание времени испольнения задач[¶](#task-time-tracking "Ссылка на этот заголовок")
+Отслеживание времени исполнения задач[¶](#task-time-tracking "Ссылка на этот заголовок")
 -----------------------------------------------------------------------------------------
 
 
 
 ![Task time tracking](https://kanboard.net/screenshots/documentation/task-time-tracking.png)
 
-Рисунок. Отслеживание времени испольнения задач
+Отслеживание времени исполнения задач
 
 
 
@@ -41,7 +41,7 @@
 
 ![Subtask time tracking](https://kanboard.net/screenshots/documentation/subtask-time-tracking.png)
 
-Рисунок. Отслеживание времени подзадач
+Отслеживание времени подзадач
 
 
 
@@ -71,7 +71,7 @@
 
 ![Task timesheet](https://kanboard.net/screenshots/documentation/task-timesheet.png)
 
-Рисунок. Таблица учета времени.
+Таблица учета времени.
 
 
 
@@ -81,7 +81,7 @@
 
 ![Subtask timer](https://kanboard.net/screenshots/documentation/subtask-timer.png)
 
-Рисунок. Таймер подзадач.
+Таймер подзадач.
 
 
 
@@ -97,7 +97,7 @@
 
 
 
--   Подсчет затраченного времени округляется до четверти часа
+-   Подсчёт затраченного времени округляется до четверти часа
 
 
  

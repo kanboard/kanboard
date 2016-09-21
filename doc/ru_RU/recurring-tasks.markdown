@@ -30,7 +30,7 @@
 
 ![Recurring task](https://kanboard.net/screenshots/documentation/recurring-tasks.png)
 
-Рисунок. Редактировать повторы.
+Редактировать повторы.
 
 
 

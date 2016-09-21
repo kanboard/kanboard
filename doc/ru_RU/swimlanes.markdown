@@ -14,7 +14,7 @@
 
 ![Swimlanes](screenshots/swimlanes.png)
 
-Рисунок. Дорожки
+Дорожки
 
 
 
@@ -49,7 +49,7 @@
 
 ![Swimlanes Configuration](screenshots/swimlane-configuration.png)
 
-Рисунок. Настройка Дорожек.
+Настройка Дорожек.
 
 
 

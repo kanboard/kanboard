@@ -17,7 +17,7 @@
 
 ![Gantt Chart](https://kanboard.net/screenshots/documentation/gantt-chart-project.png)
 
-Рисунок. Диаграмма Ганта.
+Диаграмма Ганта.
 
 
 
@@ -55,7 +55,7 @@
 
 ![Task not defined](https://kanboard.net/screenshots/documentation/gantt-chart-not-defined.png)
 
-Рисунок. Задача без указанных дат начала или завершения
+Задача без указанных дат начала или завершения
 
 
  

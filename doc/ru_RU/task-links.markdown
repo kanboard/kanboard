@@ -9,7 +9,7 @@
 
 ![Task Links](https://kanboard.net/screenshots/documentation/task-links.png)
 
-Рисунок. Ссылки на задачи
+Ссылки на задачи
 
 
 

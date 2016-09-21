@@ -13,7 +13,7 @@
 
 ![User Mention](screenshots/mention-autocomplete.png)
 
-Рисунок. Ссылка на пользователя.
+Ссылка на пользователя.
 
 
 

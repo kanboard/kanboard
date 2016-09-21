@@ -30,7 +30,7 @@ RSS/Atom подписки
 
 ![Disable public access](https://kanboard.net/screenshots/documentation/project-disable-sharing.png)
 
-Рисунок. Выключение общего доступа.
+Выключение общего доступа.
 
 
 

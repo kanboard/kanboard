@@ -25,7 +25,7 @@
 
 ![Gantt Chart for all projects](https://kanboard.net/screenshots/documentation/gantt-chart-all-projects.png)
 
-Рисунок. Диаграмма Ганта для всех проектов
+Диаграмма Ганта для всех проектов
 
 
 

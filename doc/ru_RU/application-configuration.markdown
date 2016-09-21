@@ -6,7 +6,7 @@
 
 ![Application settings](https://kanboard.net/screenshots/documentation/application-settings.png)
 
-Рисунок. Настройки приложения
+Настройки приложения
 
 
 URL приложения[¶](#application-url "Ссылка на этот заголовок")
@@ -39,7 +39,7 @@ URL приложения[¶](#application-url "Ссылка на этот заг
 -   ГГГГ/ММ/ДД
 -   ММ.ДД.ГГГГ
 
-Формат [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) всегда принимается (YYYY-MM-DD or YYYY\_MM\_DD).
+Формат [ISO 8601](http://ru.wikipedia.org/wiki/ISO_8601) всегда принимается (YYYY-MM-DD or YYYY\_MM\_DD).
 
 
 Пользовательский стиль CSS[¶](#custom-stylesheet "Ссылка на этот заголовок")
