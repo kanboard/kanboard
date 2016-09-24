@@ -9,9 +9,9 @@
         </tr>
         <tr>
             <td>
-                <i class="fa fa-download fa-fw"></i><?= $this->url->link(t('download'), 'FileViewerController', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                <?= $this->url->link('<i class="fa fa-download fa-fw"></i>' . t('download'), 'FileViewerController', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                 <?php if ($file['is_image'] == 1): ?>
-                    &nbsp;<i class="fa fa-eye"></i> <?= $this->url->link(t('open file'), 'FileViewerController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>
+                    &nbsp;<?= $this->url->link('<i class="fa fa-eye"></i>' . t('open file'), 'FileViewerController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>
                 <?php endif ?>
             </td>
         </tr>

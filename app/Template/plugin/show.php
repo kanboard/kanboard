@@ -28,8 +28,7 @@
         <td><?= $this->text->e($plugin->getPluginVersion()) ?></td>
         <?php if ($is_configured): ?>
             <td>
-                <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
-                <?= $this->url->link(t('Uninstall'), 'PluginController', 'confirm', array('pluginId' => $pluginFolder), false, 'popover') ?>
+                <?= $this->url->link('<i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>' . t('Uninstall'), 'PluginController', 'confirm', array('pluginId' => $pluginFolder), false, 'popover') ?>
             </td>
         <?php endif ?>
     </tr>

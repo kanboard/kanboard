@@ -1,8 +1,8 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <li><i class="fa fa-users fa-fw"></i><?= $this->url->link(t('View all groups'), 'GroupListController', 'index') ?></li>
-            <li><i class="fa fa-plus fa-fw"></i><?= $this->url->link(t('Add group member'), 'GroupListController', 'associate', array('group_id' => $group['id']), false, 'popover') ?></li>
+            <li><?= $this->url->link('<i class="fa fa-users fa-fw"></i>' . t('View all groups'), 'GroupListController', 'index') ?></li>
+            <li><?= $this->url->link('<i class="fa fa-plus fa-fw"></i>' . t('Add group member'), 'GroupListController', 'associate', array('group_id' => $group['id']), false, 'popover') ?></li>
         </ul>
     </div>
     <?php if ($paginator->isEmpty()): ?>
@@ -31,8 +31,7 @@
                     <a href="mailto:<?= $this->text->e($user['email']) ?>"><?= $this->text->e($user['email']) ?></a>
                 </td>
                 <td>
-                    <i class="fa fa-times fa-fw" aria-hidden="true"></i>
-                    <?= $this->url->link(t('Remove this user'), 'GroupListController', 'dissociate', array('group_id' => $group['id'], 'user_id' => $user['id']), false, 'popover') ?>
+                    <?= $this->url->link('<i class="fa fa-times fa-fw" aria-hidden="true"></i>' . t('Remove this user'), 'GroupListController', 'dissociate', array('group_id' => $group['id'], 'user_id' => $user['id']), false, 'popover') ?>
                 </td>
             </tr>
             <?php endforeach ?>

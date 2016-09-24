@@ -2,10 +2,10 @@
     <div class="page-header">
         <ul>
             <li>
-                <i class="fa fa-folder fa-fw"></i><?= $this->url->link(t('Projects list'), 'ProjectListController', 'show') ?>
+                <?= $this->url->link('<i class="fa fa-folder fa-fw"></i>' . t('Projects list'), 'ProjectListController', 'show') ?>
             </li>
             <?php if ($this->user->hasAccess('ProjectUserOverviewController', 'managers')): ?>
-                <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('Users overview'), 'ProjectUserOverviewController', 'managers') ?></li>
+                <li><?= $this->url->link('<i class="fa fa-user fa-fw"></i>' . t('Users overview'), 'ProjectUserOverviewController', 'managers') ?></li>
             <?php endif ?>
         </ul>
     </div>
