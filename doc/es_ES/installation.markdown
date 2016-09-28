@@ -1,6 +1,6 @@
 Instalación
 
-En primer lugar, comprobar los [requisitos] (requirements.markdown)antes de ir más lejos.
+En primer lugar, comprobar los [requisitos] ( requirements.markdown)antes de ir más lejos.
 
 Del archivo (versión estable)
 ---------------------------------
@@ -10,7 +10,7 @@ Del archivo (versión estable)
 2. Descargar el código fuente y copiar el directorio ` kanboard` en la que desea.
 3. Comprobar si el directorio ` data` se puede escribir
 4. Con el navegador vaya a < http://yourpersonalserver/kanboard >
-5. El nombre de usuario y contraseña por defecto es ** admin / admin **
+5. El nombre de usuario y contraseña por defecto es **admin/admin**
 6. Comience a utilizar el software
 7. No se olvide de cambiar su contraseña!
 
@@ -31,10 +31,10 @@ Desde el repositorio (versión de desarrollo)
 Debe instalar [compositora] (https://getcomposer.org/)para utilizar este método.
 
 1. ` git clone https: // github.com / kanboard / kanboard.git`
-2. ` compositor instalar --no- dev`
+2. ` composer instalar --no- dev`
 3. Ir a la tercera etapa justo por encima
 
-Nota: Este método se instalará la versión de desarrollo actual ** ** , utilice a su propio riesgo .
+Nota: Este método se instalará la versión de **desarrollo actual** , utilice a su propio riesgo .
 
 Instalación exterior de la raíz del documento
 ---------------------------------------------
