@@ -62,7 +62,7 @@
         <li>
             <?= $this->url->link('<i class="fa fa-clone fa-fw"></i>' . t('Move to another project'), 'TaskDuplicationController', 'move', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
         </li>
-        <?php if ($task['is_active'] == 1): ?>
+        <?php if ($this->projectRole->canChangeTaskStatusInColumn($task['project_id'], $task['column_id'])): ?>
             <li>
                 <?= $this->url->link('<i class="fa fa-arrows fa-fw"></i>' . t('Move position'), 'TaskMovePositionController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
             </li>
