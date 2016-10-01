@@ -10,7 +10,7 @@
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
             <th><?= $paginator->order(t('Task'), 'task_name') ?></th>
             <th><?= $paginator->order(t('Subtask'), \Kanboard\Model\SubtaskModel::TABLE.'.title') ?></th>
-            <?= $this->hook->render('template:dashboard:subtasks:header', array('values' => $values, 'errors' => $errors, 'paginator' => $paginator)) ?>
+            <?= $this->hook->render('template:dashboard:subtasks:header', array('paginator' => $paginator)) ?>
             <th class="column-20"><?= t('Time tracking') ?></th>
         </tr>
         <?php foreach ($paginator->getCollection() as $subtask): ?>
