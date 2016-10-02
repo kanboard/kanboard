@@ -1230,7 +1230,7 @@ return array(
     'Restrictions for the role "%s"' => 'Restrictions pour le rôle "%s"',
     'Add a new project restriction' => 'Ajouter une nouvelle restriction pour ce projet',
     'Add a new drag and drop restriction' => 'Ajouter une nouvelle restriction pour le glisser-déposer',
-    'Add a new column restriction' => 'Ajouter une nouvelle restriction pour les colonnes',
+    'Add a new column restriction' => 'Ajouter une nouvelle restriction de colonne',
     'Edit this role' => 'Modifier ce rôle',
     'Remove this role' => 'Supprimer ce rôle',
     'There is no restriction for this role.' => 'Il n\'y a aucune restriction pour ce rôle',
