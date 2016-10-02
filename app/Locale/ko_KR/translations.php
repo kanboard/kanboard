@@ -1232,9 +1232,7 @@ return array(
     // 'Add a new column restriction' => '',
     // 'Edit this role' => '',
     // 'Remove this role' => '',
-    // 'Actions' => '',
     // 'There is no restriction for this role.' => '',
-    // 'Project' => '',
-    // 'Remove' => '',
     // 'Only moving task between those columns is permitted' => '',
+    // 'Close a task in a specific column when not moved during a given period' => '',
 );
