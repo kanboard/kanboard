@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <a href="#" class="dropdown-menu">#<?= $task['id'] ?><i class="fa fa-caret-down"></i></a>
+    <a href="#" class="dropdown-menu">#<?= $task['id'] ?> <i class="fa fa-caret-down"></i></a>
     <ul>
         <?php if (array_key_exists('date_started', $task) && empty($task['date_started'])): ?>
         <li>
