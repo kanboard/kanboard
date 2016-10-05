@@ -2,6 +2,7 @@
     <table class="table-small">
         <tr>
             <th class="column-70"><?= t('Subtask') ?></th>
+            <?= $this->hook->render('template:board:tooltip:subtasks:header:before-assignee') ?>
             <th><?= t('Assignee') ?></th>
         </tr>
         <?php foreach ($subtasks as $subtask): ?>
