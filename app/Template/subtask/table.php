@@ -7,7 +7,7 @@
         <tr>
             <th class="column-40"><?= t('Title') ?></th>
             <th><?= t('Assignee') ?></th>
-            <?= $this->hook->render('template:subtask:table:header') ?>
+            <?= $this->hook->render('template:subtask:table:header:before-timetracking') ?>
             <th><?= t('Time tracking') ?></th>
             <?php if ($editable): ?>
                 <th class="column-5"></th>
