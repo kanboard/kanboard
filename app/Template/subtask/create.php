@@ -9,7 +9,8 @@
     <?= $this->subtask->selectTitle($values, $errors, array('autofocus')) ?>
     <?= $this->subtask->selectAssignee($users_list, $values, $errors) ?>
     <?= $this->subtask->selectTimeEstimated($values, $errors) ?>
-
+    <?= $this->hook->render('template:subtask:form:create', array('values' => $values, 'errors' => $errors)) ?>
+    
     <?= $this->form->checkbox('another_subtask', t('Create another sub-task'), 1, isset($values['another_subtask']) && $values['another_subtask'] == 1) ?>
 
     <div class="form-actions">

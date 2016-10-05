@@ -11,7 +11,8 @@
     <?= $this->subtask->selectAssignee($users_list, $values, $errors) ?>
     <?= $this->subtask->selectTimeEstimated($values, $errors) ?>
     <?= $this->subtask->selectTimeSpent($values, $errors) ?>
-
+    <?= $this->hook->render('template:subtask:form:edit', array('values' => $values, 'errors' => $errors)) ?>
+    
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
         <?= t('or') ?>

@@ -10,6 +10,7 @@
             <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
             <th><?= $paginator->order(t('Task'), 'task_name') ?></th>
             <th><?= $paginator->order(t('Subtask'), \Kanboard\Model\SubtaskModel::TABLE.'.title') ?></th>
+            <?= $this->hook->render('template:dashboard:subtasks:header:before-timetracking', array('paginator' => $paginator)) ?>
             <th class="column-20"><?= t('Time tracking') ?></th>
         </tr>
         <?php foreach ($paginator->getCollection() as $subtask): ?>
@@ -26,6 +27,7 @@
             <td>
                 <?= $this->subtask->toggleStatus($subtask, $subtask['project_id']) ?>
             </td>
+            <?= $this->hook->render('template:dashboard:subtasks:rows', array('subtask' => $subtask)) ?>
             <td>
                 <?php if (! empty($subtask['time_spent'])): ?>
                     <strong><?= $this->text->e($subtask['time_spent']).'h' ?></strong> <?= t('spent') ?>
