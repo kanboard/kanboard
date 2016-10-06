@@ -22,9 +22,7 @@
     <div v-if="tasks.length > 0">
         <?= $this->form->label(t('Position'), 'position') ?>
         <select v-model="position" id="form-position">
-            <option v-for="task in tasks" v-bind:value="task.position">
-                #{{ task.id }} - {{ task.title }}
-            </option>
+            <option v-for="task in tasks" v-bind:value="task.position">#{{ task.id }} - {{ task.title }}</option>
         </select>
         <label><input type="radio" value="before" v-model="positionChoice"><?= t('Insert before this task') ?></label>
         <label><input type="radio" value="after" v-model="positionChoice"><?= t('Insert after this task') ?></label>

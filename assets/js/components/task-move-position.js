@@ -42,6 +42,10 @@ Vue.component('task-move-position', {
             this.columns.forEach(function(column) {
                 if (column.id == self.columnId) {
                     self.tasks = column.tasks;
+
+                    if (self.tasks.length > 0) {
+                        self.position = parseInt(self.tasks[0]['position']);
+                    }
                 }
             });
         },
