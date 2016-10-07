@@ -90,7 +90,7 @@ class ProjectRoleRestrictionModelTest extends Base
         $projectRoleRestrictionModel = new ProjectRoleRestrictionModel($this->container);
         $rules = $projectRoleRestrictionModel->getRules();
 
-        $this->assertCount(2, $rules);
+        $this->assertCount(3, $rules);
         $this->assertArrayHasKey(ProjectRoleRestrictionModel::RULE_TASK_OPEN_CLOSE, $rules);
     }
 }

@@ -1275,4 +1275,5 @@ return array(
     'Do you really want to remove this project restriction: "%s"?' => 'Tem a certeza que quer remover a restrição de projeto: "%s"?',
     'Duplicate to multiple projects' => 'Duplicar para vários projetos',
     'This field is required' => 'Este campo é obrigatório',
+    // 'Moving a task is not permitted' => '',
 );

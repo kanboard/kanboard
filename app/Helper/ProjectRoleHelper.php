@@ -62,7 +62,7 @@ class ProjectRoleHelper extends Base
                 }
             }
 
-            return empty($sortableColumns);
+            return empty($sortableColumns) && $this->isAllowedToMoveTask($project_id, $role);
         }
 
         return true;
@@ -97,7 +97,7 @@ class ProjectRoleHelper extends Base
                 }
             }
 
-            return empty($sortableColumns);
+            return empty($sortableColumns) && $this->isAllowedToMoveTask($project_id, $role);
         }
 
         return true;
@@ -257,6 +257,26 @@ class ProjectRoleHelper extends Base
 
         foreach ($projectRestrictions as $restriction) {
             if ($restriction['rule'] == ProjectRoleRestrictionModel::RULE_TASK_CREATION) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if the role can move task in the given project
+     *
+     * @param  int     $project_id
+     * @param  string  $role
+     * @return bool
+     */
+    protected function isAllowedToMoveTask($project_id, $role)
+    {
+        $projectRestrictions = $this->projectRoleRestrictionCacheDecorator->getAllByRole($project_id, $role);
+
+        foreach ($projectRestrictions as $restriction) {
+            if ($restriction['rule'] == ProjectRoleRestrictionModel::RULE_TASK_MOVE) {
                 return false;
             }
         }

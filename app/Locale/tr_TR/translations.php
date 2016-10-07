@@ -1275,4 +1275,5 @@ return array(
     // 'Do you really want to remove this project restriction: "%s"?' => '',
     // 'Duplicate to multiple projects' => '',
     // 'This field is required' => '',
+    // 'Moving a task is not permitted' => '',
 );
