@@ -51,20 +51,35 @@ class UrlHelper extends Base
      * Link element
      *
      * @access public
-     * @param  string  $label      Link label
-     * @param  string  $controller Controller name
-     * @param  string  $action     Action name
-     * @param  array   $params     Url parameters
-     * @param  boolean $csrf       Add a CSRF token
-     * @param  string  $class      CSS class attribute
-     * @param  string  $title
-     * @param  boolean $new_tab    Open the link in a new tab
-     * @param  string  $anchor     Link Anchor
+     * @param  string  $label       Link label
+     * @param  string  $controller  Controller name
+     * @param  string  $action      Action name
+     * @param  array   $params      Url parameters
+     * @param  boolean $csrf        Add a CSRF token
+     * @param  string  $class       CSS class attribute
+     * @param  string  $title       Link title
+     * @param  boolean $new_tab     Open the link in a new tab
+     * @param  string  $anchor      Link Anchor
+     * @param  bool    $absolute
      * @return string
      */
-    public function link($label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '', $new_tab = false, $anchor = '')
+    public function link($label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '', $new_tab = false, $anchor = '', $absolute = false)
     {
-        return '<a href="'.$this->href($controller, $action, $params, $csrf, $anchor).'" class="'.$class.'" title=\''.$title.'\' '.($new_tab ? 'target="_blank"' : '').'>'.$label.'</a>';
+        return '<a href="'.$this->href($controller, $action, $params, $csrf, $anchor, $absolute).'" class="'.$class.'" title=\''.$title.'\' '.($new_tab ? 'target="_blank"' : '').'>'.$label.'</a>';
+    }
+
+    /**
+     * Absolute link
+     *
+     * @param  string $label
+     * @param  string $controller
+     * @param  string $action
+     * @param  array $params
+     * @return string
+     */
+    public function absoluteLink($label, $controller, $action, array $params = array())
+    {
+        return $this->link($label, $controller, $action, $params, false, '', '', true, '', true);
     }
 
     /**
@@ -155,7 +170,7 @@ class UrlHelper extends Base
     /**
      * Build relative url
      *
-     * @access private
+     * @access protected
      * @param  string   $separator   Querystring argument separator
      * @param  string   $controller  Controller name
      * @param  string   $action      Action name
@@ -165,7 +180,7 @@ class UrlHelper extends Base
      * @param  boolean  $absolute    Absolute or relative link
      * @return string
      */
-    private function build($separator, $controller, $action, array $params = array(), $csrf = false, $anchor = '', $absolute = false)
+    protected function build($separator, $controller, $action, array $params = array(), $csrf = false, $anchor = '', $absolute = false)
     {
         $path = $this->route->findUrl($controller, $action, $params);
         $qs = array();
