@@ -1,9 +1,11 @@
-Task Links
-==========
+Internal Task Links
+===================
 
 Tasks can be linked together with pre-defined relationships:
 
-![Task Links](https://kanboard.net/screenshots/documentation/task-links.png)
+![Task Links](screenshots/internal-task-links.png)
+
+This is also possible to link tasks across projects.
 
 The default relationships are:
 

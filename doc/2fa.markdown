@@ -4,12 +4,12 @@ Two-Factor Authentication
 Each user can enable the [two-factor authentication](http://en.wikipedia.org/wiki/Two_factor_authentication).
 After a successful login, a one-time code (6 characters) is asked to the user to allow access to Kanboard.
 
-This code has to be provided by a compatible software generally installed on your smartphone.
+This code has to be provided by a compatible software usually installed on your smartphone.
 
 Kanboard use the [Time-based One-time Password Algorithm](http://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm) defined in the [RFC 6238](http://tools.ietf.org/html/rfc6238).
 
 There are many software compatible with the standard TOTP system.
-For example, you can use these free and open source applications:
+For example, you can use these applications:
 
 - [Google Authenticator](https://github.com/google/google-authenticator/) (Android, iOS, Blackberry)
 - [FreeOTP](https://fedorahosted.org/freeotp/) (Android, iOS)

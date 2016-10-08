@@ -38,7 +38,7 @@ Utiliser Kanboard
 - [Fermer des tâches](closing-tasks.markdown)
 - [Dupliquer et déplacer des tâches](duplicate-move-tasks.markdown)
 - [Ajouter des captures d'écran](screenshots.markdown)
-- [Liens entre les tâches](task-links.markdown)
+- [Liens internes entre les tâches](task-links.markdown)
 - [Transitions](transitions.markdown)
 - [Suivi du temps](time-tracking.markdown)
 - [Tâches récurrentes](recurring-tasks.markdown)

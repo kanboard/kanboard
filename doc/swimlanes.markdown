@@ -29,4 +29,3 @@ You can also disable and change the position of the different swimlanes.
 - The default swimlane is always on the top but you can hide it.
 - Inactive swimlanes are not shown on the board.
 - **Removing a swimlane doesn't remove tasks assigned to it**, those tasks will be moved to the default swimlane.
-

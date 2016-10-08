@@ -32,4 +32,4 @@ This feature is optional and require the installation of a queue daemon on your 
 ### Notes
 
 - You should start the Kanboard worker with a process supervisor (systemd, upstart or supervisord)
-- The process must be have access to the data folder if you store files on the local filesystem and have Sqlite
+- The process must have access to the data folder if you store files on the local filesystem or use Sqlite
