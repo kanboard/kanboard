@@ -8,12 +8,12 @@ class GroupValidatorTest extends Base
 {
     public function testValidateCreation()
     {
-        $validator = new GroupValidator($this->container);
+        $groupValidator = new GroupValidator($this->container);
 
-        $result = $validator->validateCreation(array('name' => 'Test'));
+        $result = $groupValidator->validateCreation(array('name' => 'Test'));
         $this->assertTrue($result[0]);
 
-        $result = $validator->validateCreation(array('name' => ''));
+        $result = $groupValidator->validateCreation(array('name' => ''));
         $this->assertFalse($result[0]);
     }
 

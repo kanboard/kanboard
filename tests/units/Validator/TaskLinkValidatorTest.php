@@ -11,62 +11,62 @@ class TaskLinkValidatorTest extends Base
 {
     public function testValidateCreation()
     {
-        $validator = new TaskLinkValidator($this->container);
-        $tl = new TaskLinkModel($this->container);
-        $p = new ProjectModel($this->container);
-        $tc = new TaskCreationModel($this->container);
+        $taskLinkValidator = new TaskLinkValidator($this->container);
+        $taskLinkModel = new TaskLinkModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'A')));
-        $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'B')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'A')));
+        $this->assertEquals(2, $taskCreationModel->create(array('project_id' => 1, 'title' => 'B')));
 
-        $links = $tl->getAll(1);
+        $links = $taskLinkModel->getAll(1);
         $this->assertEmpty($links);
 
-        $links = $tl->getAll(2);
+        $links = $taskLinkModel->getAll(2);
         $this->assertEmpty($links);
 
         // Check creation
-        $r = $validator->validateCreation(array('task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 2));
+        $r = $taskLinkValidator->validateCreation(array('task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 2));
         $this->assertTrue($r[0]);
 
-        $r = $validator->validateCreation(array('task_id' => 1, 'link_id' => 1));
+        $r = $taskLinkValidator->validateCreation(array('task_id' => 1, 'link_id' => 1));
         $this->assertFalse($r[0]);
 
-        $r = $validator->validateCreation(array('task_id' => 1, 'opposite_task_id' => 2));
+        $r = $taskLinkValidator->validateCreation(array('task_id' => 1, 'opposite_task_id' => 2));
         $this->assertFalse($r[0]);
 
-        $r = $validator->validateCreation(array('task_id' => 1, 'opposite_task_id' => 2));
+        $r = $taskLinkValidator->validateCreation(array('task_id' => 1, 'opposite_task_id' => 2));
         $this->assertFalse($r[0]);
 
-        $r = $validator->validateCreation(array('task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 1));
+        $r = $taskLinkValidator->validateCreation(array('task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 1));
         $this->assertFalse($r[0]);
     }
 
     public function testValidateModification()
     {
-        $validator = new TaskLinkValidator($this->container);
-        $p = new ProjectModel($this->container);
-        $tc = new TaskCreationModel($this->container);
+        $taskLinkValidator = new TaskLinkValidator($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
-        $this->assertEquals(1, $p->create(array('name' => 'test')));
-        $this->assertEquals(1, $tc->create(array('project_id' => 1, 'title' => 'A')));
-        $this->assertEquals(2, $tc->create(array('project_id' => 1, 'title' => 'B')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'A')));
+        $this->assertEquals(2, $taskCreationModel->create(array('project_id' => 1, 'title' => 'B')));
 
         // Check modification
-        $r = $validator->validateModification(array('id' => 1, 'task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 2));
+        $r = $taskLinkValidator->validateModification(array('id' => 1, 'task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 2));
         $this->assertTrue($r[0]);
 
-        $r = $validator->validateModification(array('id' => 1, 'task_id' => 1, 'link_id' => 1));
+        $r = $taskLinkValidator->validateModification(array('id' => 1, 'task_id' => 1, 'link_id' => 1));
         $this->assertFalse($r[0]);
 
-        $r = $validator->validateModification(array('id' => 1, 'task_id' => 1, 'opposite_task_id' => 2));
+        $r = $taskLinkValidator->validateModification(array('id' => 1, 'task_id' => 1, 'opposite_task_id' => 2));
         $this->assertFalse($r[0]);
 
-        $r = $validator->validateModification(array('id' => 1, 'task_id' => 1, 'opposite_task_id' => 2));
+        $r = $taskLinkValidator->validateModification(array('id' => 1, 'task_id' => 1, 'opposite_task_id' => 2));
         $this->assertFalse($r[0]);
 
-        $r = $validator->validateModification(array('id' => 1, 'task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 1));
+        $r = $taskLinkValidator->validateModification(array('id' => 1, 'task_id' => 1, 'link_id' => 1, 'opposite_task_id' => 1));
         $this->assertFalse($r[0]);
     }
 }

@@ -1276,4 +1276,5 @@ return array(
     'Duplicate to multiple projects' => 'Duplicar para vários projetos',
     'This field is required' => 'Este campo é obrigatório',
     // 'Moving a task is not permitted' => '',
+    // 'This value must be in the range %d to %d' => '',
 );
