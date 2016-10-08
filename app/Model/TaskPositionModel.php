@@ -72,9 +72,10 @@ class TaskPositionModel extends Base
         $this->db->startTransaction();
         $r1 = $this->saveTaskPositions($project_id, $task_id, 0, $original_column_id, $original_swimlane_id);
         $r2 = $this->saveTaskPositions($project_id, $task_id, $position, $new_column_id, $new_swimlane_id);
+        $r3 = $this->saveTaskTimestamps($task_id);
         $this->db->closeTransaction();
 
-        return $r1 && $r2;
+        return $r1 && $r2 && $r3;
     }
 
     /**
@@ -94,9 +95,10 @@ class TaskPositionModel extends Base
         $this->db->startTransaction();
         $r1 = $this->saveTaskPositions($project_id, $task_id, 0, $original_column_id, $swimlane_id);
         $r2 = $this->saveTaskPositions($project_id, $task_id, $position, $new_column_id, $swimlane_id);
+        $r3 = $this->saveTaskTimestamps($task_id);
         $this->db->closeTransaction();
 
-        return $r1 && $r2;
+        return $r1 && $r2 && $r3;
     }
 
     /**
@@ -167,6 +169,18 @@ class TaskPositionModel extends Base
             return false;
         }
 
+        return true;
+    }
+
+    /**
+     * Update task timestamps
+     *
+     * @access private
+     * @param  integer $task_id
+     * @return bool
+     */
+    private function saveTaskTimestamps($task_id)
+    {
         $now = time();
 
         return $this->db->table(TaskModel::TABLE)->eq('id', $task_id)->update(array(
