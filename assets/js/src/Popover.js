@@ -13,10 +13,6 @@ Kanboard.Popover.prototype.listen = function() {
         self.close(e);
     });
 
-    $(document).on("click", "#popover-container", function(e) {
-        self.close(e);
-    });
-
     $(document).on("click", "#popover-content", function(e) {
         e.stopPropagation();
     });
