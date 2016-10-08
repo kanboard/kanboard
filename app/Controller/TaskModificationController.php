@@ -37,8 +37,11 @@ class TaskModificationController extends BaseController
         $project = $this->projectModel->getById($task['project_id']);
 
         if (empty($values)) {
-            $values = $this->prepareValues($task);
+            $values = $task;
         }
+
+        $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
+        $values = $this->hook->merge('controller:task-modification:form:default', $values, array('default_values' => $values));
 
         $this->response->html($this->template->render('task_modification/show', array(
             'project' => $project,
@@ -70,20 +73,5 @@ class TaskModificationController extends BaseController
             $this->flash->failure(t('Unable to update your task.'));
             $this->edit($values, $errors);
         }
-    }
-
-    /**
-     * Prepare form values
-     *
-     * @access protected
-     * @param  array $task
-     * @return array
-     */
-    protected function prepareValues(array $task)
-    {
-        $values = $task;
-        $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
-        $values = $this->hook->merge('controller:task-modification:form:default', $values, array('default_values' => $values));
-        return $values;
     }
 }

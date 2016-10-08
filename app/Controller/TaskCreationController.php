@@ -29,6 +29,9 @@ class TaskCreationController extends BaseController
             $values = $this->prepareValues($swimlanes_list);
         }
 
+        $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
+        $values = $this->hook->merge('controller:task-creation:form:default', $values, array('default_values' => $values));
+
         $this->response->html($this->template->render('task_creation/show', array(
             'project' => $project,
             'errors' => $errors,
@@ -125,8 +128,6 @@ class TaskCreationController extends BaseController
             'owner_id'    => $this->userSession->getId(),
         );
 
-        $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
-        $values = $this->hook->merge('controller:task-creation:form:default', $values, array('default_values' => $values));
         return $values;
     }
 

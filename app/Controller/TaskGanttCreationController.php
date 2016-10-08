@@ -23,10 +23,10 @@ class TaskGanttCreationController extends BaseController
         $project = $this->getProject();
 
         $values = $values + array(
-                'project_id' => $project['id'],
-                'column_id' => $this->columnModel->getFirstColumnId($project['id']),
-                'position' => 1
-            );
+            'project_id' => $project['id'],
+            'column_id' => $this->columnModel->getFirstColumnId($project['id']),
+            'position' => 1
+        );
 
         $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
         $values = $this->hook->merge('controller:gantt:task:form:default', $values, array('default_values' => $values));
