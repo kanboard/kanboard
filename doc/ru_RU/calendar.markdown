@@ -14,7 +14,7 @@
 -   Отслеживание времени подзадачи. Все записанные временные диапазоны будут отображены в Календаре.
 -   Подсчёты, прогнозы затрачиваемого время на подзадачу.
 
-![Calendar](https://kanboard.net/screenshots/documentation/calendar.png)
+![Calendar](screenshots/calendar.png)
 
 Календарь
 

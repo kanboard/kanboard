@@ -76,7 +76,7 @@
 
 
 
-![List view](https://kanboard.net/screenshots/documentation/list-view.png)
+![List view](screenshots/list-view.png)
 
 Представление списком.
 

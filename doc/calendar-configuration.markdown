@@ -3,7 +3,7 @@ Calendar settings
 
 Go to the menu **Settings**, then choose **Calendar settings** on the left.
 
-![Calendar settings](https://kanboard.net/screenshots/documentation/calendar-settings.png)
+![Calendar settings](screenshots/calendar-settings.png)
 
 There are two different calendars in Kanboard:
 

@@ -6,6 +6,6 @@ Si vous avez à manipuler plusieurs devises, vous pouvez définir ici le taux en
 
 Cette fonctionnalité est utilisée pour calculer le budget du projet.
 
-![Currency Rate](https://kanboard.net/screenshots/documentation/currency-rate.png)
+![Currency Rate](screenshots/currency-rate.png)
 
 Les paramètres pour le taux de change des devises sont situés dans **Paramètres > Taux de change**

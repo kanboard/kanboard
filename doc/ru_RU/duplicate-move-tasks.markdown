@@ -8,7 +8,7 @@
 
 Перейдите в детальное представление задачи и выберите в боковой панели (слева) **Клонировать**.
 
-![Task Duplication](https://kanboard.net/screenshots/documentation/task-duplication.png)
+![Task Duplication](screenshots/task-duplication.png)
 
 Создание копии задачи.
 
@@ -22,7 +22,7 @@
 
 Перейдите в детальное представление задачи и выберите в боковом меню (слева) **Клонировать в другой проект**.
 
-![Task Duplication Another Project](https://kanboard.net/screenshots/documentation/task-duplication-another-project.png)
+![Task Duplication Another Project](screenshots/task-duplication-another-project.png)
 
 Создание копии задачи в другой проект.
 

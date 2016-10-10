@@ -7,7 +7,7 @@
 
 
 
-![Task Links](https://kanboard.net/screenshots/documentation/task-links.png)
+![Task Links](screenshots/task-links.png)
 
 Ссылки на задачи
 

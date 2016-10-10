@@ -3,7 +3,7 @@ Paramètres du calendrier
 
 Allez au menu **Paramètres**, puis choisissez **Paramètres du calendrier** sur la gauche.
 
-![Paramètres du calendrier](https://kanboard.net/screenshots/documentation/calendar-settings.png)
+![Paramètres du calendrier](screenshots/calendar-settings.png)
 
 il existe deux calendriers distincts dans Kanboard :
 

@@ -1,5 +1,5 @@
-How to install Kanboard on Ubuntu?
-==================================
+Kanboard Installation on Ubuntu
+================================
 
 Ubuntu Xenial 16.04 LTS
 -----------------------

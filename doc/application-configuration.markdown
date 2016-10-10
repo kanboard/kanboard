@@ -6,7 +6,7 @@ Only administrators can change those settings.
 
 Go to the menu **Settings**, then choose **Application settings** on the left.
 
-![Application settings](https://kanboard.net/screenshots/documentation/application-settings.png)
+![Application settings](screenshots/application-settings.png)
 
 ### Application URL
 

@@ -1,7 +1,5 @@
-Centos Installation
-===================
-
-Note: Some features of Kanboard require that you run [a daily background job](cronjob.markdown).
+Kanboard Installation on CentOS
+===============================
 
 Centos 7
 --------
@@ -12,7 +10,7 @@ Install PHP and Apache:
 yum install -y php php-mbstring php-pdo php-gd unzip wget
 ```
 
-By default Centos 7 use PHP 5.4.16 and Apache 2.4.6.
+By default, Centos 7 use PHP 5.4.16 and Apache 2.4.6.
 
 Restart Apache:
 
@@ -30,20 +28,6 @@ chown -R apache:apache kanboard/data
 rm kanboard-latest.zip
 ```
 
-If SELinux is enabled, be sure that the Apache user can write to the directory data:
-
-```bash
-chcon -R -t httpd_sys_content_rw_t /var/www/html/kanboard/data
-```
-
-Be sure to configure your server to allow Kanboard to send emails and make external network requests, by example with SELinux:
-
-```bash
-setsebool -P httpd_can_network_connect=1
-```
-
-Allowing external connections is necessary if you use LDAP, SMTP, Web hooks or any third-party integration.
-
 Centos 6.x
 ----------
 
@@ -53,7 +37,7 @@ Install PHP and Apache:
 yum install -y php php-mbstring php-pdo php-gd unzip wget
 ```
 
-By default Centos 6.5 use PHP 5.3.3 and Apache 2.2.15.
+By default, Centos 6.5 use PHP 5.3.3 and Apache 2.2.15.
 
 Enable short tags:
 
@@ -76,4 +60,24 @@ chown -R apache:apache kanboard/data
 rm kanboard-latest.zip
 ```
 
-Go to `http://your_server/kanboard/`.
+SELinux restrictions
+--------------------
+
+If SELinux is enabled, be sure that the Apache user can write to the directory data:
+
+```bash
+chcon -R -t httpd_sys_content_rw_t /var/www/html/kanboard/data
+```
+
+Be sure to configure your server to allow Kanboard to send emails and make external network requests, by example with SELinux:
+
+```bash
+setsebool -P httpd_can_network_connect=1
+```
+
+Allowing external connections is necessary if you use LDAP, SMTP, Web hooks or any third-party integration.
+
+Notes
+-----
+
+Some features of Kanboard require that you run [a daily background job](cronjob.markdown).

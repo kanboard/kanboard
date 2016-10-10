@@ -5,14 +5,14 @@
 На Доске нажмите значок плюс рядом с названием колонки:
 
 
-![Task creation from the board](https://kanboard.net/screenshots/documentation/task-creation-board.png)
+![Task creation from the board](screenshots/task-creation-board.png)
 
 Создание задачи на Доске
 
 
 Далее появится форма создания задачи:
 
-![Task creation form](https://kanboard.net/screenshots/documentation/task-creation-form.png)
+![Task creation form](screenshots/task-creation-form.png)
 
 Форма создания задачи.
 

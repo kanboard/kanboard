@@ -24,7 +24,7 @@ Paramétrage
 2. Sur la gauche, cliquez sur **Authentification à deux facteurs** et cochez la case.
 3. Une clef secrète est générée pour vous.
 
-![2FA](https://kanboard.net/screenshots/documentation/2fa.png)
+![2FA](screenshots/2fa.png)
 
 - Vous devez sauvegarder votre clef dans votre logiciel TOTP. Si vous utilisez un smartphone, la solution la plus simple est de scanner le QR code avec FreeOTP ou Google Authenticator
 - À chaque ouverture de session, un nouveau code sera demandé

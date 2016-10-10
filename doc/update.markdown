@@ -18,7 +18,7 @@ From the archive (stable version)
 ---------------------------------
 
 1. Decompress the new archive
-2. Copy the content of your data folder into the newly uncompressed directory
+2. Copy the `data` folder into the newly uncompressed directory
 3. Copy your custom `config.php` if you have one
 4. If you have installed some plugins, use the latest version
 5. Make sure the directory `data` is writeable by your web server user

@@ -101,7 +101,8 @@ abstract class MetadataModel extends Base
             if ($this->exists($entity_id, $key)) {
                 $results[] = $this->db->table($this->getTable())
                     ->eq($this->getEntityKey(), $entity_id)
-                    ->eq('name', $key)->update(array(
+                    ->eq('name', $key)
+                    ->update(array(
                         'value' => $value,
                         'changed_on' => $timestamp,
                         'changed_by' => $user_id,

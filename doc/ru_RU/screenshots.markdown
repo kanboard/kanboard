@@ -15,7 +15,7 @@
 
 
 
-![Drop-down screenshot menu](https://kanboard.net/screenshots/documentation/dropdown-screenshot.png)
+![Drop-down screenshot menu](screenshots/dropdown-screenshot.png)
 
 
 
@@ -27,7 +27,7 @@
 
 
 
-![Screenshot page](https://kanboard.net/screenshots/documentation/task-screenshot.png)
+![Screenshot page](screenshots/task-screenshot.png)
 
 Прикрепить картинку.
 

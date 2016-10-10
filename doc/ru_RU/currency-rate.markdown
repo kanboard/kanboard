@@ -6,7 +6,7 @@
 
 Эта опция используются для расчета бюджета проекта.
 
-![Currency Rate](https://kanboard.net/screenshots/documentation/currency-rate.png)
+![Currency Rate](screenshots/currency-rate.png)
 
 Курсы валют
 

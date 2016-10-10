@@ -28,7 +28,7 @@
 
 
 
-![Recurring task](https://kanboard.net/screenshots/documentation/recurring-tasks.png)
+![Recurring task](screenshots/recurring-tasks.png)
 
 Редактировать повторы.
 
