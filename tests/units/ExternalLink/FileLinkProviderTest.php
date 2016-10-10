@@ -31,6 +31,21 @@ class FileLinkProviderTest extends Base
         $attachmentLinkProvider->setUserTextInput('file:///tmp/test.txt');
         $this->assertTrue($attachmentLinkProvider->match());
 
+        $attachmentLinkProvider->setUserTextInput('owncloud:///tmp/test.txt');
+        $this->assertTrue($attachmentLinkProvider->match());
+
+        $attachmentLinkProvider->setUserTextInput('notebooks:///tmp/test.txt');
+        $this->assertTrue($attachmentLinkProvider->match());
+
+        $attachmentLinkProvider->setUserTextInput('http://google.com/');
+        $this->assertFalse($attachmentLinkProvider->match());
+
+        $attachmentLinkProvider->setUserTextInput('https://google.com/');
+        $this->assertFalse($attachmentLinkProvider->match());
+
+        $attachmentLinkProvider->setUserTextInput('ftp://google.com/');
+        $this->assertFalse($attachmentLinkProvider->match());
+
         $attachmentLinkProvider->setUserTextInput('');
         $this->assertFalse($attachmentLinkProvider->match());
     }
