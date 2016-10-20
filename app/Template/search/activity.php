@@ -2,8 +2,7 @@
     <div class="page-header">
         <ul>
             <li>
-                <i class="fa fa-search fa-fw"></i>
-                <?= $this->url->link(t('Search tasks'), 'SearchController', 'index') ?>
+                <?= $this->url->link('<i class="fa fa-search fa-fw"></i>' . t('Search tasks'), 'SearchController', 'index') ?>
             </li>
         </ul>
     </div>

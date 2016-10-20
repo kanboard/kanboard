@@ -3,16 +3,13 @@
     <div class="menu-inline">
         <ul>
             <li <?= $sorting === 'board' ? 'class="active"' : '' ?>>
-                <i class="fa fa-sort-numeric-asc fa-fw"></i>
-                <?= $this->url->link(t('Sort by position'), 'TaskGanttController', 'show', array('project_id' => $project['id'], 'sorting' => 'board')) ?>
+                <?= $this->url->link('<i class="fa fa-sort-numeric-asc fa-fw"></i>' . t('Sort by position'), 'TaskGanttController', 'show', array('project_id' => $project['id'], 'sorting' => 'board')) ?>
             </li>
             <li <?= $sorting === 'date' ? 'class="active"' : '' ?>>
-                <i class="fa fa-sort-amount-asc fa-fw"></i>
-                <?= $this->url->link(t('Sort by date'), 'TaskGanttController', 'show', array('project_id' => $project['id'], 'sorting' => 'date')) ?>
+                <?= $this->url->link('<i class="fa fa-sort-amount-asc fa-fw"></i>' . t('Sort by date'), 'TaskGanttController', 'show', array('project_id' => $project['id'], 'sorting' => 'date')) ?>
             </li>
             <li>
-                <i class="fa fa-plus fa-fw"></i>
-                <?= $this->url->link(t('Add task'), 'TaskGanttCreationController', 'show', array('project_id' => $project['id']), false, 'popover') ?>
+                <?= $this->url->link('<i class="fa fa-plus fa-fw"></i>' . ('Add task'), 'TaskGanttCreationController', 'show', array('project_id' => $project['id']), false, 'popover') ?>
             </li>
         </ul>
     </div>

@@ -7,8 +7,7 @@
 <?php else: ?>
     <ul>
         <li>
-            <i class="fa fa-check-square-o fa-fw"></i>
-            <?= $this->url->link(t('Mark all as read'), 'WebNotificationController', 'flush', array('user_id' => $user['id'])) ?>
+            <?= $this->url->link('<i class="fa fa-check-square-o fa-fw"></i>' . t('Mark all as read'), 'WebNotificationController', 'flush', array('user_id' => $user['id'])) ?>
         </li>
     </ul>
 </div>
@@ -60,8 +59,7 @@
                 <?= $this->dt->datetime($notification['date_creation']) ?>
             </td>
             <td>
-                <i class="fa fa-check fa-fw"></i>
-                <?= $this->url->link(t('Mark as read'), 'WebNotificationController', 'remove', array('user_id' => $user['id'], 'notification_id' => $notification['id'])) ?>
+                <?= $this->url->link('<i class="fa fa-check fa-fw"></i>' . t('Mark as read'), 'WebNotificationController', 'remove', array('user_id' => $user['id'], 'notification_id' => $notification['id'])) ?>
             </td>
         </tr>
         <?php endforeach ?>

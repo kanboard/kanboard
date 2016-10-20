@@ -3,10 +3,10 @@
         <ul>
             <?= $this->hook->render('template:project-list:menu:before') ?>
             <?php if ($this->user->hasAccess('ProjectUserOverviewController', 'managers')): ?>
-                <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('Users overview'), 'ProjectUserOverviewController', 'managers') ?></li>
+                <li><?= $this->url->link('<i class="fa fa-user fa-fw"></i>' . t('Users overview'), 'ProjectUserOverviewController', 'managers') ?></li>
             <?php endif ?>
             <?php if ($this->user->hasAccess('ProjectGanttController', 'show')): ?>
-                <li><i class="fa fa-sliders fa-fw"></i><?= $this->url->link(t('Projects Gantt chart'), 'ProjectGanttController', 'show') ?></li>
+                <li><?= $this->url->link('<i class="fa fa-sliders fa-fw"></i>' . t('Projects Gantt chart'), 'ProjectGanttController', 'show') ?></li>
             <?php endif ?>
             <?= $this->hook->render('template:project-list:menu:after') ?>
         </ul>
