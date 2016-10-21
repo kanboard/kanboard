@@ -119,6 +119,7 @@ Contributors:
 - [Sebastian Reese](https://github.com/ReeseSebastian)
 - [Semyon Novikov](https://github.com/semka)
 - [StavrosKa](https://github.com/StavrosKa)
+- [Stefan](https://github.com/spst)
 - [Sylvain Veyrié](https://github.com/turb)
 - [Thomas Lutz](https://github.com/phoen1x)
 - [Thomas Stinner](https://github.com/stinnux)
