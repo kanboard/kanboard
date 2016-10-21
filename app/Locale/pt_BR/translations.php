@@ -1277,4 +1277,5 @@ return array(
     'This field is required' => 'Este campo é obrigatório',
     'Moving a task is not permitted' => 'Mover uma tarefa não é permitido',
     'This value must be in the range %d to %d' => 'Este valor precisa estar no intervalo %d até %d',
+    // 'You are not allowed to move this task.' => '',
 );

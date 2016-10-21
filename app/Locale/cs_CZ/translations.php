@@ -1277,4 +1277,5 @@ return array(
     // 'This field is required' => '',
     // 'Moving a task is not permitted' => '',
     // 'This value must be in the range %d to %d' => '',
+    // 'You are not allowed to move this task.' => '',
 );

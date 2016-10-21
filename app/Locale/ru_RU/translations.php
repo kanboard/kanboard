@@ -1277,4 +1277,5 @@ return array(
     'This field is required' => 'Заполните это поле',
     'Moving a task is not permitted' => 'Перемещение задачи не разрешено',
     'This value must be in the range %d to %d' => 'Значение должно находиться в диапазоне от %d до %d',
+    // 'You are not allowed to move this task.' => '',
 );

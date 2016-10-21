@@ -28,6 +28,10 @@
         <label><input type="radio" value="after" v-model="positionChoice"><?= t('Insert after this task') ?></label>
     </div>
 
+    <div v-if="errorMessage">
+        <div class="alert alert-error">{{ errorMessage }}</div>
+    </div>
+
     <submit-cancel
         label-button="<?= t('Save') ?>"
         label-or="<?= t('or') ?>"

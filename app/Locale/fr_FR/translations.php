@@ -1278,4 +1278,5 @@ return array(
     'This field is required' => 'Ce champ est requis',
     'Moving a task is not permitted' => 'Déplaçer une tâche n\'est pas autorisé',
     'This value must be in the range %d to %d' => 'Cette valeur doit être définie entre %d et %d',
+    'You are not allowed to move this task.' => 'Vous n\'êtes pas autorisé à déplacer cette tâche.',
 );
