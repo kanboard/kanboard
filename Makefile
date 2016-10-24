@@ -49,21 +49,21 @@ archive:
 	@ rm -rf ${BUILD_DIR}/kanboard
 
 test-sqlite-coverage:
-	@ phpunit --coverage-html /tmp/coverage --whitelist app/ -c tests/units.sqlite.xml
+	@ ./vendor/bin/phpunit --coverage-html /tmp/coverage --whitelist app/ -c tests/units.sqlite.xml
 
 test-sqlite:
-	@ phpunit -c tests/units.sqlite.xml
+	@ ./vendor/bin/phpunit -c tests/units.sqlite.xml
 
 test-mysql:
-	@ phpunit -c tests/units.mysql.xml
+	@ ./vendor/bin/phpunit -c tests/units.mysql.xml
 
 test-postgres:
-	@ phpunit -c tests/units.postgres.xml
+	@ ./vendor/bin/phpunit -c tests/units.postgres.xml
 
 unittest: test-sqlite test-mysql test-postgres
 
 test-browser:
-	@ phpunit -c tests/acceptance.xml
+	@ ./vendor/bin/phpunit -c tests/acceptance.xml
 
 integration-test-mysql:
 	@ composer install

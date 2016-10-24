@@ -31,6 +31,7 @@ Utiliser Kanboard
 - [Analytique](analytics.markdown)
 - [Diagramme de Gantt pour les tâches](gantt-chart-tasks.markdown)
 - [Diagramme de Gantt pour tous les projets](gantt-chart-projects.markdown)
+- [Rôles personnalisés pour les projets](custom-project-roles.markdown)
 
 ### Travailler avec les tâches
 
@@ -38,7 +39,7 @@ Utiliser Kanboard
 - [Fermer des tâches](closing-tasks.markdown)
 - [Dupliquer et déplacer des tâches](duplicate-move-tasks.markdown)
 - [Ajouter des captures d'écran](screenshots.markdown)
-- [Liens entre les tâches](task-links.markdown)
+- [Liens internes entre les tâches](task-links.markdown)
 - [Transitions](transitions.markdown)
 - [Suivi du temps](time-tracking.markdown)
 - [Tâches récurrentes](recurring-tasks.markdown)
@@ -62,3 +63,15 @@ Utiliser Kanboard
 - [Paramètres du calendrier](calendar-configuration.markdown)
 - [Paramètres du lien](link-labels.markdown)
 - [Taux de change](currency-rate.markdown)
+
+Détails techniques
+------------------
+
+### Installation
+
+- [Prérequis](requirements.markdown)
+- [Instructions d'installation](installation.markdown)
+- [Mise à jour vers une nouvelle version](update.markdown)
+- [Installation sur Ubuntu](ubuntu-installation.markdown)
+- [Installation sur Debian](debian-installation.markdown)
+- [Installation sur Centos](centos-installation.markdown)

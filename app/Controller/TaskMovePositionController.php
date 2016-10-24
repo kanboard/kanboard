@@ -2,7 +2,9 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Formatter\BoardFormatter;
+use Kanboard\Model\TaskModel;
 
 /**
  * Class TaskMovePositionController
@@ -20,7 +22,10 @@ class TaskMovePositionController extends BaseController
             'task' => $task,
             'board' => BoardFormatter::getInstance($this->container)
                 ->withProjectId($task['project_id'])
-                ->withQuery($this->taskFinderModel->getExtendedQuery())
+                ->withQuery($this->taskFinderModel->getExtendedQuery()
+                    ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
+                    ->neq(TaskModel::TABLE.'.id', $task['id'])
+                )
                 ->format()
         )));
     }
@@ -31,7 +36,7 @@ class TaskMovePositionController extends BaseController
         $values = $this->request->getJson();
 
         if (! $this->helper->projectRole->canMoveTask($task['project_id'], $task['column_id'], $values['column_id'])) {
-            throw new AccessForbiddenException(e("You don't have the permission to move this task"));
+            throw new AccessForbiddenException(e('You are not allowed to move this task.'));
         }
 
         $result = $this->taskPositionModel->movePosition(

@@ -255,6 +255,7 @@ class SubtaskModel extends Base
     {
         $this->helper->model->removeFields($values, array('another_subtask'));
         $this->helper->model->resetFields($values, array('time_estimated', 'time_spent'));
+        $this->hook->reference('model:subtask:modification:prepare', $values);
     }
 
     /**
@@ -272,6 +273,7 @@ class SubtaskModel extends Base
         $values['time_estimated'] = isset($values['time_estimated']) ? $values['time_estimated'] : 0;
         $values['time_spent'] = isset($values['time_spent']) ? $values['time_spent'] : 0;
         $values['user_id'] = isset($values['user_id']) ? $values['user_id'] : 0;
+        $this->hook->reference('model:subtask:creation:prepare', $values);
     }
 
     /**

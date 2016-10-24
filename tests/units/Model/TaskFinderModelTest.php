@@ -89,6 +89,7 @@ class TaskFinderModelTest extends Base
         $tasks = $taskFinderModel->getUserQuery(1)->findAll();
         $this->assertCount(1, $tasks);
         $this->assertEquals('Task #1', $tasks[0]['title']);
+        $this->assertEquals(1, $tasks[0]['column_id']);
 
         $this->assertTrue($columnModel->update(2, 'Test', 0, '', 0));
 

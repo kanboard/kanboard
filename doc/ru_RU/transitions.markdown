@@ -7,9 +7,9 @@
 
 
 
-![Transitions](https://kanboard.net/screenshots/documentation/transitions.png)
+![Transitions](screenshots/transitions.png)
 
-Рисунок. Перемещения.
+Перемещения.
 
 
 
@@ -41,9 +41,9 @@
 
 
 
-![Transitions Export](https://kanboard.net/screenshots/documentation/transitions-export.png)
+![Transitions Export](screenshots/transitions-export.png)
 
-Рисунок. Экспорт перемещений задач.
+Экспорт перемещений задач.
 
 
 

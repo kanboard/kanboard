@@ -22,7 +22,7 @@
 
 
 
-Плагины могут быть установлены и настроены с помощью утилиты [Cloudron CLI](https://cloudron.io/references/cli.html). Для подробной информации смотрите [описание приложения](https://cloudron.io/appstore.html?app=net.kanboard.cloudronapp).
+Плагины могут быть установлены и настроены с помощью утилиты [Cloudron CLI](https://git.cloudron.io/cloudron/kanboard-app). Для подробной информации смотрите [описание приложения](https://cloudron.io/appstore.html?app=net.kanboard.cloudronapp).
 
 
 
@@ -31,7 +31,7 @@
 
 
 
-Исходный код приложения Cloudron находится [здесь](https://github.com/cloudron-io/kanboard-app).
+Исходный код приложения Cloudron находится [здесь](https://git.cloudron.io/cloudron/kanboard-app).
 
 
 

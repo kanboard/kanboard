@@ -8,13 +8,13 @@ From the archive (stable version)
 
 1. You must have a web server with PHP installed
 2. Download the source code and copy the directory `kanboard` where you want
-3. Check if the directory `data` is writeable
+3. Check if the directory `data` is writeable by the web server user
 4. With your browser go to <http://yourpersonalserver/kanboard>
 5. The default login and password is **admin/admin**
 6. Start to use the software
 7. Don't forget to change your password!
 
-The data folder is used to store:
+The `data` folder is used to store:
 
 - Sqlite database: `db.sqlite`
 - Debug file: `debug.log` (if debug mode enabled)
@@ -23,8 +23,8 @@ The data folder is used to store:
 
 People who are using a remote database (Mysql/Postgresql) and a remote file storage (Aws S3 or similar) don't necessarily need to have a persistent local data folder or to change the permission.
 
-From the repository (development version)
------------------------------------------
+From the git repository (development version)
+---------------------------------------------
 
 You must install [composer](https://getcomposer.org/) to use this method.
 
@@ -63,4 +63,4 @@ Security
 --------
 
 - Don't forget to change the default user/password
-- Don't allow everybody to access to the directory `data` from the URL. There is already a `.htaccess` for Apache but nothing for other web servers.
+- Don't allow everybody to access to the directory `data` from the URL. There is already a `.htaccess` for Apache and a `web.config` file for IIS but nothing for other web servers.

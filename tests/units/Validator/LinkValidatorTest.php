@@ -8,21 +8,21 @@ class LinkValidatorTest extends Base
 {
     public function testValidateCreation()
     {
-        $validator = new LinkValidator($this->container);
+        $linkValidator = new LinkValidator($this->container);
 
-        $r = $validator->validateCreation(array('label' => 'a'));
+        $r = $linkValidator->validateCreation(array('label' => 'a'));
         $this->assertTrue($r[0]);
 
-        $r = $validator->validateCreation(array('label' => 'a', 'opposite_label' => 'b'));
+        $r = $linkValidator->validateCreation(array('label' => 'a', 'opposite_label' => 'b'));
         $this->assertTrue($r[0]);
 
-        $r = $validator->validateCreation(array('label' => 'relates to'));
+        $r = $linkValidator->validateCreation(array('label' => 'relates to'));
         $this->assertFalse($r[0]);
 
-        $r = $validator->validateCreation(array('label' => 'a', 'opposite_label' => 'a'));
+        $r = $linkValidator->validateCreation(array('label' => 'a', 'opposite_label' => 'a'));
         $this->assertFalse($r[0]);
 
-        $r = $validator->validateCreation(array('label' => ''));
+        $r = $linkValidator->validateCreation(array('label' => ''));
         $this->assertFalse($r[0]);
     }
 

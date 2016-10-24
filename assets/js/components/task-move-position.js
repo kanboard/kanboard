@@ -8,13 +8,15 @@ Vue.component('task-move-position', {
             position: 1,
             columns: [],
             tasks: [],
-            positionChoice: 'before'
+            positionChoice: 'before',
+            errorMessage: ''
         }
     },
     ready: function () {
         this.columns = this.board[0].columns;
         this.columnId = this.columns[0].id;
         this.tasks = this.columns[0].tasks;
+        this.errorMessage = '';
     },
     methods: {
         onChangeSwimlane: function () {
@@ -42,10 +44,16 @@ Vue.component('task-move-position', {
             this.columns.forEach(function(column) {
                 if (column.id == self.columnId) {
                     self.tasks = column.tasks;
+
+                    if (self.tasks.length > 0) {
+                        self.position = parseInt(self.tasks[0]['position']);
+                    }
                 }
             });
         },
         onSubmit: function () {
+            var self = this;
+
             if (this.positionChoice == 'after') {
                 this.position++;
             }
@@ -61,8 +69,16 @@ Vue.component('task-move-position', {
                     "swimlane_id": this.swimlaneId,
                     "position": this.position
                 }),
-                complete: function() {
-                    window.location.reload(true);
+                statusCode: {
+                    200: function() {
+                        window.location.reload(true);
+                    },
+                    403: function(jqXHR) {
+                        var response = JSON.parse(jqXHR.responseText);
+                        self.errorMessage = response.message;
+
+                        self.$broadcast('submitCancelled');
+                    }
                 }
             });
         }

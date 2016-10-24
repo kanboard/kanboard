@@ -28,6 +28,7 @@ class TaskValidator extends BaseValidator
             new Validators\Integer('owner_id', t('This value must be an integer')),
             new Validators\Integer('creator_id', t('This value must be an integer')),
             new Validators\Integer('score', t('This value must be an integer')),
+            new Validators\Range('score', t('This value must be in the range %d to %d', -2147483647, 2147483647), -2147483647, 2147483647),
             new Validators\Integer('category_id', t('This value must be an integer')),
             new Validators\Integer('swimlane_id', t('This value must be an integer')),
             new Validators\Integer('recurrence_child', t('This value must be an integer')),
@@ -85,27 +86,6 @@ class TaskValidator extends BaseValidator
             new Validators\Required('swimlane_id', t('Field required')),
             new Validators\Integer('category_id', t('This value must be an integer')),
             new Validators\Integer('swimlane_id', t('This value must be an integer')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
-     * Validate description creation
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateDescriptionCreation(array $values)
-    {
-        $rules = array(
-            new Validators\Required('id', t('The id is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));

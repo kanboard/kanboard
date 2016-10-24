@@ -2,12 +2,12 @@
 
 namespace Kanboard\ServiceProvider;
 
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Kanboard\Action\TaskAssignColorPriority;
 use Kanboard\Action\TaskAssignDueDateOnCreation;
 use Kanboard\Action\TaskMoveColumnClosed;
 use Kanboard\Action\TaskMoveColumnNotMovedPeriod;
-use Pimple\Container;
-use Pimple\ServiceProviderInterface;
 use Kanboard\Core\Action\ActionManager;
 use Kanboard\Action\CommentCreation;
 use Kanboard\Action\CommentCreationMoveTaskColumn;
@@ -36,6 +36,7 @@ use Kanboard\Action\TaskOpen;
 use Kanboard\Action\TaskUpdateStartDate;
 use Kanboard\Action\TaskCloseNoActivity;
 use Kanboard\Action\TaskCloseNoActivityColumn;
+use Kanboard\Action\TaskCloseNotMovedColumn;
 use Kanboard\Action\TaskAssignColorSwimlane;
 use Kanboard\Action\TaskAssignPrioritySwimlane;
 
@@ -75,6 +76,7 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskCloseColumn($container));
         $container['actionManager']->register(new TaskCloseNoActivity($container));
         $container['actionManager']->register(new TaskCloseNoActivityColumn($container));
+        $container['actionManager']->register(new TaskCloseNotMovedColumn($container));
         $container['actionManager']->register(new TaskCreation($container));
         $container['actionManager']->register(new TaskDuplicateAnotherProject($container));
         $container['actionManager']->register(new TaskEmail($container));

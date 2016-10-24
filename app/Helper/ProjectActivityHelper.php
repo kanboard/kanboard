@@ -26,7 +26,7 @@ class ProjectActivityHelper extends Base
      */
     public function searchEvents($search)
     {
-        $projects = $this->projectUserRoleModel->getProjectsByUser($this->userSession->getId());
+        $projects = $this->projectUserRoleModel->getActiveProjectsByUser($this->userSession->getId());
         $events = array();
 
         if ($search !== '') {

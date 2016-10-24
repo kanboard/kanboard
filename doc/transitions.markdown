@@ -1,9 +1,9 @@
-Task transitions
+Task Transitions
 ================
 
-Transitions record each movement of the tasks between columns.
+Each movement of a task between columns is recorded in the database.
 
-![Transitions](https://kanboard.net/screenshots/documentation/transitions.png)
+![Task Transitions](screenshots/task-transitions.png)
 
 Available from the task view, you can see that information:
 
@@ -12,9 +12,3 @@ Available from the task view, you can see that information:
 - Destination column
 - Executor (users that moves the task)
 - Time spent in the origin column
-
-Task transition data can also be exported from the project settings page.
-
-![Transitions Export](https://kanboard.net/screenshots/documentation/transitions-export.png)
-
-For the specified time range you will generate a CSV file that you can use with any spreadsheet software.

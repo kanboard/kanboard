@@ -35,7 +35,7 @@ Which database to choose?
 | Sqlite          | Single user or small team (almost no concurrency)   |
 | Mysql/Postgres  | Larger team, high-availability configuration        |
 
-Do not use Sqlite on NFS mounts, use Sqlite only when you have a disk with fast I/O
+Do not use Sqlite on NFS mounts, only when you have a disk with fast I/O.
 
 ### Compatible Web Servers
 
@@ -59,7 +59,7 @@ Kanboard is pre-configured to work with Apache (URL rewriting).
 
 ### PHP Extensions Required
 
-| PHP Extensions required    | Note                          |
+| PHP Extension              | Note                          |
 |----------------------------|-------------------------------|
 | pdo_sqlite                 | Only if you use Sqlite        |
 | pdo_mysql                  | Only if you use Mysql/MariaDB |
@@ -76,7 +76,7 @@ Kanboard is pre-configured to work with Apache (URL rewriting).
 
 ### Optional PHP extensions
 
-| PHP Extensions required    | Note                                       |
+| PHP Extension              | Note                                       |
 |----------------------------|--------------------------------------------|
 | zip                        | Used to install plugins from Kanboard      |
 
@@ -106,5 +106,3 @@ Always use a modern browser with the latest version if possible:
 |-------------------|--------------------|
 | Laptop or desktop | >= 1366 x 768      |
 | Tablet            | >= 1024 x 768      |
-
-Kanboard is not yet optimized for smartphones. It's working but the user interface is not really convenient to use.

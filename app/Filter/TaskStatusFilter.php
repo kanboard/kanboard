@@ -34,7 +34,7 @@ class TaskStatusFilter extends BaseFilter implements FilterInterface
     {
         if ($this->value === 'open' || $this->value === 'closed') {
             $this->query->eq(TaskModel::TABLE.'.is_active', $this->value === 'open' ? TaskModel::STATUS_OPEN : TaskModel::STATUS_CLOSED);
-        } else {
+        } elseif (is_int($this->value) || ctype_digit($this->value)) {
             $this->query->eq(TaskModel::TABLE.'.is_active', $this->value);
         }
 

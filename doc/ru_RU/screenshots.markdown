@@ -15,11 +15,11 @@
 
 
 
-![Drop-down screenshot menu](https://kanboard.net/screenshots/documentation/dropdown-screenshot.png)
+![Drop-down screenshot menu](screenshots/dropdown-screenshot.png)
 
 
 
-Рисунок. Выпадающее меню задачи - **Прикрепить картинку**.
+Выпадающее меню задачи - **Прикрепить картинку**.
 
 
 
@@ -27,9 +27,9 @@
 
 
 
-![Screenshot page](https://kanboard.net/screenshots/documentation/task-screenshot.png)
+![Screenshot page](screenshots/task-screenshot.png)
 
-Рисунок. Прикрепить картинку.
+Прикрепить картинку.
 
 
 

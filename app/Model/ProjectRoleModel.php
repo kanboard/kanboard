@@ -71,9 +71,13 @@ class ProjectRoleModel extends Base
     {
         $roles = $this->getAll($project_id);
 
-        $column_restrictions = $this->columnMoveRestrictionModel->getAll($project_id);
+        $column_restrictions = $this->columnRestrictionModel->getAll($project_id);
         $column_restrictions = array_column_index($column_restrictions, 'role_id');
         array_merge_relation($roles, $column_restrictions, 'column_restrictions', 'role_id');
+
+        $column_move_restrictions = $this->columnMoveRestrictionModel->getAll($project_id);
+        $column_move_restrictions = array_column_index($column_move_restrictions, 'role_id');
+        array_merge_relation($roles, $column_move_restrictions, 'column_move_restrictions', 'role_id');
 
         $project_restrictions = $this->projectRoleRestrictionModel->getAll($project_id);
         $project_restrictions = array_column_index($project_restrictions, 'role_id');
@@ -109,13 +113,41 @@ class ProjectRoleModel extends Base
      */
     public function update($role_id, $project_id, $role)
     {
-        return $this->db
+        $this->db->startTransaction();
+
+        $previousRole = $this->getById($project_id, $role_id);
+
+        $r1 = $this->db
+            ->table(ProjectUserRoleModel::TABLE)
+            ->eq('project_id', $project_id)
+            ->eq('role', $previousRole['role'])
+            ->update(array(
+                'role' => $role
+            ));
+
+        $r2 = $this->db
+            ->table(ProjectGroupRoleModel::TABLE)
+            ->eq('project_id', $project_id)
+            ->eq('role', $previousRole['role'])
+            ->update(array(
+                'role' => $role
+            ));
+
+        $r3 = $this->db
             ->table(self::TABLE)
             ->eq('role_id', $role_id)
             ->eq('project_id', $project_id)
             ->update(array(
                 'role' => $role,
             ));
+
+        if ($r1 && $r2 && $r3) {
+            $this->db->closeTransaction();
+            return true;
+        }
+
+        $this->db->cancelTransaction();
+        return false;
     }
 
     /**

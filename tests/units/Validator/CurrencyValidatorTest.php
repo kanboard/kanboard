@@ -8,20 +8,20 @@ class CurrencyValidatorTest extends Base
 {
     public function testValidation()
     {
-        $validator = new CurrencyValidator($this->container);
-        $result = $validator->validateCreation(array());
+        $currencyValidator = new CurrencyValidator($this->container);
+        $result = $currencyValidator->validateCreation(array());
         $this->assertFalse($result[0]);
 
-        $result = $validator->validateCreation(array('currency' => 'EUR'));
+        $result = $currencyValidator->validateCreation(array('currency' => 'EUR'));
         $this->assertFalse($result[0]);
 
-        $result = $validator->validateCreation(array('rate' => 1.9));
+        $result = $currencyValidator->validateCreation(array('rate' => 1.9));
         $this->assertFalse($result[0]);
 
-        $result = $validator->validateCreation(array('currency' => 'EUR', 'rate' => 'foobar'));
+        $result = $currencyValidator->validateCreation(array('currency' => 'EUR', 'rate' => 'foobar'));
         $this->assertFalse($result[0]);
 
-        $result = $validator->validateCreation(array('currency' => 'EUR', 'rate' => 1.25));
+        $result = $currencyValidator->validateCreation(array('currency' => 'EUR', 'rate' => 1.25));
         $this->assertTrue($result[0]);
     }
 }

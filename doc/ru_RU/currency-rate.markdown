@@ -6,9 +6,9 @@
 
 Эта опция используются для расчета бюджета проекта.
 
-![Currency Rate](https://kanboard.net/screenshots/documentation/currency-rate.png)
+![Currency Rate](screenshots/currency-rate.png)
 
-Рисунок. Курсы валют
+Курсы валют
 
 
 Для настроек курса валют выберите, справа вверху в выпадающем меню, **Настройки** -\> затем, слева, **Курсы валют**.

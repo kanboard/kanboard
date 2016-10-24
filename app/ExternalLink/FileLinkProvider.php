@@ -12,6 +12,11 @@ use Kanboard\Core\ExternalLink\ExternalLinkProviderInterface;
  */
 class FileLinkProvider extends BaseLinkProvider implements ExternalLinkProviderInterface
 {
+    protected $excludedPrefixes= array(
+        'http',
+        'ftp',
+    );
+
     /**
      * Get provider name
      *
@@ -55,7 +60,17 @@ class FileLinkProvider extends BaseLinkProvider implements ExternalLinkProviderI
      */
     public function match()
     {
-        return strpos($this->userInput, 'file://') === 0;
+        if (strpos($this->userInput, '://') === false) {
+            return false;
+        }
+
+        foreach ($this->excludedPrefixes as $prefix) {
+            if (strpos($this->userInput, $prefix) === 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

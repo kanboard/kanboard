@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <a href="#" class="dropdown-menu">#<?= $task['id'] ?></a>
+    <a href="#" class="dropdown-menu">#<?= $task['id'] ?> <i class="fa fa-caret-down"></i></a>
     <ul>
         <?php if (array_key_exists('date_started', $task) && empty($task['date_started'])): ?>
         <li>
@@ -49,7 +49,7 @@
                 <?= $this->url->link(t('Remove'), 'TaskSuppressionController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
             </li>
         <?php endif ?>
-        <?php if (isset($task['is_active'])): ?>
+        <?php if (isset($task['is_active']) && $this->projectRole->canChangeTaskStatusInColumn($task['project_id'], $task['column_id'])): ?>
         <li>
             <?php if ($task['is_active'] == 1): ?>
                 <i class="fa fa-times fa-fw"></i>

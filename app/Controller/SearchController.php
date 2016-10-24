@@ -14,7 +14,7 @@ class SearchController extends BaseController
 {
     public function index()
     {
-        $projects = $this->projectUserRoleModel->getProjectsByUser($this->userSession->getId());
+        $projects = $this->projectUserRoleModel->getActiveProjectsByUser($this->userSession->getId());
         $search = urldecode($this->request->getStringParam('search'));
         $nb_tasks = 0;
 

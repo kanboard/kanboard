@@ -13,17 +13,17 @@
 
 Перейдите в **Меню** -\> **Пользовательские фильтры** или **Меню** -\> **Настройки** -\> **Пользовательские фильтры**
 
-![Custom Filter Creation](https://kanboard.net/screenshots/documentation/custom-filter-creation.png)
+![Custom Filter Creation](screenshots/custom-filter-creation.png)
 
-Рисунок. Создание пользовательского фильтра.
+Создание пользовательского фильтра.
 
 
 
 Созданый фильтр появится на Доске рядом со стандартными фильтрами
 
-![Custom Filter Dropdown](https://kanboard.net/screenshots/documentation/custom-filter-dropdown.png)
+![Custom Filter Dropdown](screenshots/custom-filter-dropdown.png)
 
-Рисунок. Выпадающий список - Пользовательский фильтр.
+Выпадающий список - Пользовательский фильтр.
 
 
 

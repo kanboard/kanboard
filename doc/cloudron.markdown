@@ -17,12 +17,12 @@ becomes a Kanboard administrator automatically.
 Installing Plugins
 ------------------
 
-Plugins can be installed and configured using the [Cloudron CLI](https://cloudron.io/references/cli.html)
+Plugins can be installed and configured using the [Cloudron CLI](https://git.cloudron.io/cloudron/cloudron-cli)
 tool. See the [app description](https://cloudron.io/appstore.html?app=net.kanboard.cloudronapp) for
 more information.
 
 Application Source code
 ----------------------
 
-The source code for the Cloudron app is [here](https://github.com/cloudron-io/kanboard-app).
+The source code for the Cloudron app is [here](https://git.cloudron.io/cloudron/kanboard-app).
 

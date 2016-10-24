@@ -12,7 +12,7 @@
 
         <!-- column in expanded mode -->
         <div class="board-column-expanded">
-            <?php if (! $not_editable && $this->user->hasProjectAccess('TaskCreationController', 'show', $column['project_id'])): ?>
+            <?php if (! $not_editable && $this->projectRole->canCreateTaskInColumn($column['project_id'], $column['id'])): ?>
                 <div class="board-add-icon">
                     <?= $this->url->link('+', 'TaskCreationController', 'show', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover', t('Add a new task')) ?>
                 </div>
@@ -35,18 +35,20 @@
                                 <i class="fa fa-minus-square fa-fw"></i>
                                 <a href="#" class="board-toggle-column-view" data-column-id="<?= $column['id'] ?>"><?= t('Hide this column') ?></a>
                             </li>
-                            <?php if ($this->user->hasProjectAccess('TaskCreationController', 'show', $column['project_id'])): ?>
+                            <?php if ($this->projectRole->canCreateTaskInColumn($column['project_id'], $column['id'])): ?>
                                 <li>
                                     <i class="fa fa-align-justify fa-fw" aria-hidden="true"></i>
                                     <?= $this->url->link(t('Create tasks in bulk'), 'TaskBulkController', 'show', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
                                 </li>
-                                <?php if ($column['nb_tasks'] > 0): ?>
-                                    <li>
-                                        <i class="fa fa-close fa-fw"></i>
-                                        <?= $this->url->link(t('Close all tasks of this column'), 'BoardPopoverController', 'confirmCloseColumnTasks', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
-                                    </li>
-                                <?php endif ?>
                             <?php endif ?>
+
+                            <?php if ($column['nb_tasks'] > 0 && $this->projectRole->canChangeTaskStatusInColumn($column['project_id'], $column['id'])): ?>
+                                <li>
+                                    <i class="fa fa-close fa-fw"></i>
+                                    <?= $this->url->link(t('Close all tasks of this column'), 'BoardPopoverController', 'confirmCloseColumnTasks', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
+                                </li>
+                            <?php endif ?>
+
                             <?= $this->hook->render('template:board:column:dropdown', array('swimlane' => $swimlane, 'column' => $column)) ?>
                         </ul>
                     </span>

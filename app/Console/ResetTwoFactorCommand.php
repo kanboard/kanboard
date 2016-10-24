@@ -23,16 +23,14 @@ class ResetTwoFactorCommand extends BaseCommand
 
         if (empty($userId)) {
             $output->writeln('<error>User not found</error>');
-            return false;
+            return 1;
         }
 
         if (!$this->userModel->update(array('id' => $userId, 'twofactor_activated' => 0, 'twofactor_secret' => ''))) {
             $output->writeln('<error>Unable to update user profile</error>');
-            return false;
+            return 1;
         }
 
         $output->writeln('<info>Two-factor authentication disabled</info>');
-
-        return true;
     }
 }

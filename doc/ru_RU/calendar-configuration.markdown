@@ -4,9 +4,9 @@
 В правом верхнем выпадающем меню выберите **Настройки**, затем, слева, выберите **Настройки календаря**.
 
 
-![Calendar settings](https://kanboard.net/screenshots/documentation/calendar-settings.png)
+![Calendar settings](screenshots/calendar-settings.png)
 
-Рисунок. Настройки календаря
+Настройки календаря
 
 
 В Канборде имеется два вида Календаря:

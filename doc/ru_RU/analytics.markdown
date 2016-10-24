@@ -6,7 +6,7 @@
 Перераспределение(загрузка) пользователей
 -----------------------------------------
 
-![User repartition](https://kanboard.net/screenshots/documentation/user-repartition.png)
+![User repartition](screenshots/user-repartition.png)
 
 Перераспределение(загрузка) пользователей
 
@@ -17,9 +17,9 @@
 Распределение задач
 -------------------
 
-![Task distribution](https://kanboard.net/screenshots/documentation/task-distribution.png)
+![Task distribution](screenshots/task-distribution.png)
 
-Рисунок. Распределение задач
+Распределение задач
 
 
 
@@ -30,9 +30,9 @@
 Накопительная диаграмма
 -----------------------
 
-![Cumulative flow diagram](https://kanboard.net/screenshots/documentation/cfd.png)
+![Cumulative flow diagram](screenshots/cfd.png)
 
-Рисунок. Накопительная диаграмма
+Накопительная диаграмма
 
 
 -   Эта диаграмма отображает количество задач выполненных в каждой колонке в определенный промежуток времени.
@@ -46,9 +46,9 @@
 Диаграмма сгорания
 ------------------
 
-![Burndown chart](https://kanboard.net/screenshots/documentation/burndown-chart.png)
+![Burndown chart](screenshots/burndown-chart.png)
 
-Рисунок. Диаграмма сгорания
+Диаграмма сгорания
 
 
 
@@ -62,22 +62,22 @@
 Среднее время затраченное в каждой колонке
 ------------------------------------------
 
-![Average time spent into each column](https://kanboard.net/screenshots/documentation/average-time-spent-into-each-column.png)
+![Average time spent into each column](screenshots/average-time-spent-into-each-column.png)
 
-Рисунок. Среднее время затраченное в каждой колонке
+Среднее время затраченное в каждой колонке
 
 
 Этот график показывает среднее время затраченное в каждой колонке для последних 1000 задач.
 
--   Канборд использует для подсчета данных переходы задач между колонками.
+-   Канборд использует для подсчёта данных переходы задач между колонками.
 -   Затраченное время подсчитывается до закрытия задачи.
 
 Среднее время выполнения и время цикла
 --------------------------------------
 
-![Average time spent into each column](https://kanboard.net/screenshots/documentation/average-lead-cycle-time.png)
+![Average time spent into each column](screenshots/average-lead-cycle-time.png)
 
-Рисунок. Среднее время затраченное в каждой колонке
+Среднее время затраченное в каждой колонке
 
 Эта диаграмма показывает Среднее время выполнения и цикла для последних 1000 задач.
 -   Время выполнения - время между созданием задачи и датой завершения.

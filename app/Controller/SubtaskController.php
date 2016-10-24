@@ -27,10 +27,7 @@ class SubtaskController extends BaseController
         $task = $this->getTask();
 
         if (empty($values)) {
-            $values = array(
-                'task_id' => $task['id'],
-                'another_subtask' => $this->request->getIntegerParam('another_subtask', 0)
-            );
+            $values = $this->prepareValues($task);
         }
 
         $this->response->html($this->template->render('subtask/create', array(
@@ -39,6 +36,24 @@ class SubtaskController extends BaseController
             'users_list' => $this->projectUserRoleModel->getAssignableUsersList($task['project_id']),
             'task' => $task,
         )));
+    }
+    
+    /**
+     * Prepare form values
+     *
+     * @access protected
+     * @param  array $task
+     * @return array
+     */
+    protected function prepareValues(array $task)
+    {
+        $values = array(
+            'task_id' => $task['id'],
+            'another_subtask' => $this->request->getIntegerParam('another_subtask', 0)
+        );
+
+        $values = $this->hook->merge('controller:subtask:form:default', $values, array('default_values' => $values));
+        return $values;
     }
 
     /**

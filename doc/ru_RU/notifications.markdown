@@ -30,9 +30,9 @@
 
 
 
-![Notifications](https://kanboard.net/screenshots/documentation/notifications.png)
+![Notifications](screenshots/notifications.png)
 
-Рисунок. Уведомления
+Уведомления
 
 
 
@@ -81,9 +81,9 @@
 
 
 
-![Web Notifications Icon](https://kanboard.net/screenshots/documentation/web-notifications-icon.png)
+![Web Notifications Icon](screenshots/web-notifications-icon.png)
 
-Рисунок. Иконка веб уведомления.
+Иконка веб уведомления.
 
 
 
@@ -91,9 +91,9 @@
 
 
 
-![Web Notifications](https://kanboard.net/screenshots/documentation/web-notifications.png)
+![Web Notifications](screenshots/web-notifications.png)
 
-Рисунок. Веб уведомления.
+Веб уведомления.
 
 
 

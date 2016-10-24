@@ -26,5 +26,10 @@ Vue.component('submit-cancel', {
         onCancel: function () {
             _KB.get('Popover').close();
         }
+    },
+    events: {
+        'submitCancelled': function() {
+            this.loading = false;
+        }
     }
 });

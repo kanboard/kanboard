@@ -67,6 +67,7 @@ class TaskFinderModel extends Base
                         TaskModel::TABLE.'.date_due',
                         TaskModel::TABLE.'.date_creation',
                         TaskModel::TABLE.'.project_id',
+                        TaskModel::TABLE.'.column_id',
                         TaskModel::TABLE.'.color_id',
                         TaskModel::TABLE.'.priority',
                         TaskModel::TABLE.'.time_spent',

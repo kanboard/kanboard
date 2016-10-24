@@ -5,7 +5,7 @@ namespace Kanboard\Action;
 use Kanboard\Model\TaskModel;
 
 /**
- * Close automatically a task after inactive and in an defined column
+ * Close automatically a task after inactive and in a defined column
  *
  * @package Kanboard\Action
  * @author  Frederic Guillot

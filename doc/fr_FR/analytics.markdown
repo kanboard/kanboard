@@ -6,21 +6,21 @@ Chaque projet dispose d'une section analytique. En fonction de la façon dont vo
 Répartition des utilisateurs
 ----------------
 
-![Répartition des utilisateurs](https://kanboard.net/screenshots/documentation/user-repartition.png)
+![Répartition des utilisateurs](screenshots/user-repartition.png)
 
 Ce graphique circulaire affiche le nombre de tâches assignées par utilisateur.
 
 Distribution des tâches
 -----------------
 
-![Distribution des tâches](https://kanboard.net/screenshots/documentation/task-distribution.png)
+![Distribution des tâches](screenshots/task-distribution.png)
 
 Ce graphique circulaire donne une vue d'ensemble du nombre de tâches ouvertes par colonne.
 
 Diagramme de flux cumulé
 -----------------------
 
-![Diagramme de flux cumulé](https://kanboard.net/screenshots/documentation/cfd.png)
+![Diagramme de flux cumulé](screenshots/cfd.png)
 
 - Ce graphique affiche le nombre de tâches de façon cumulée pour chaque colonne en fonction du temps passé.
 - Chaque jour, le nombre total de tâches est enregistré pour chaque colonne.
@@ -31,7 +31,7 @@ Remarque : il faut au moins deux jours de données pour que le graphique apparai
 Graphique d'avancement
 --------------
 
-![Graphique d'avancement](https://kanboard.net/screenshots/documentation/burndown-chart.png)
+![Graphique d'avancement](screenshots/burndown-chart.png)
 
 Un [graphique d'avancement](http://en.wikipedia.org/wiki/Burn_down_chart) est disponible pour chaque projet.
 
@@ -42,7 +42,7 @@ Un [graphique d'avancement](http://en.wikipedia.org/wiki/Burn_down_chart) est di
 Temps moyen passé pour chaque colonne
 -----------------------------------
 
-![Temps moyen passé pour chaque colonne](https://kanboard.net/screenshots/documentation/average-time-spent-into-each-column.png)
+![Temps moyen passé pour chaque colonne](screenshots/average-time-spent-into-each-column.png)
 
 Ce graphique affiche le temps moyen passé pour chaque colonne pour les 1000 dernière tâches.
 
@@ -52,7 +52,7 @@ Ce graphique affiche le temps moyen passé pour chaque colonne pour les 1000 der
 Temps moyen de Lead et Cycle
 ---------------------------
 
-![Temps moyen passé pour chaque colonne](https://kanboard.net/screenshots/documentation/average-lead-cycle-time.png)
+![Temps moyen passé pour chaque colonne](screenshots/average-lead-cycle-time.png)
 
 Ce graphique affiche le temps moyen de lead et cycle pour les 1000 dernières tâches au cours du temps.
 

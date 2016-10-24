@@ -96,6 +96,10 @@ Attribute: **created**
 
 Works in the same way as the modification date queries.
 
+### Search by start date
+
+Attribute: **started**
+
 ### Search by description
 
 Attribute: **description** or **desc**

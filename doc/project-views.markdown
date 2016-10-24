@@ -33,7 +33,7 @@ Calendar View
 List View
 ---------
 
-![List view](https://kanboard.net/screenshots/documentation/list-view.png)
+![List view](screenshots/list-view.png)
 
 - With this view all results of your search are displayed in a table.
 - You can also use the keyboard shortcut **"v l"** to switch to the list view.

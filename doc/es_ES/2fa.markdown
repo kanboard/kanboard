@@ -24,7 +24,7 @@ Instalacion
 2. Click a la izquierda en **Two factor authentication** y selecionar la caja
 3. Una key secret es geradada para ti
 
-![2FA](https://kanboard.net/screenshots/documentation/2fa.png)
+![2FA](screenshots/2fa.png)
 
 - Tienes que salvar la key secret en tu software TOTP. Si usas un smartphone, la solución sera mas fácil ya que puedes escanear el Qr code con FreeOTP o Google Authenticator.
 - Cada vez que abras una nueva session , un nuevo código se pedirá.

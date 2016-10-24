@@ -40,7 +40,7 @@ Using Kanboard
 - [Closing tasks](closing-tasks.markdown)
 - [Duplicate and move tasks](duplicate-move-tasks.markdown)
 - [Adding screenshots](screenshots.markdown)
-- [Task links](task-links.markdown)
+- [Internal Task links](task-links.markdown)
 - [Transitions](transitions.markdown)
 - [Time tracking](time-tracking.markdown)
 - [Recurring tasks](recurring-tasks.markdown)
@@ -77,13 +77,19 @@ Using Kanboard
 - [Webhooks](webhooks.markdown)
 - [Plugins](plugins.markdown)
 
-### More
+### More information
 
 - [Advanced Search Syntax](search.markdown)
 - [Command line interface](cli.markdown)
 - [Syntax guide](syntax-guide.markdown)
 - [Brute force protection](bruteforce-protection.markdown)
 - [Frequently asked questions](faq.markdown)
+
+### Troubleshooting
+
+- [Solving database migration issues](solving-database-migration-issues.markdown)
+- [Blank page after upgrading](solving-blank-page-issue.markdown)
+- [Performances](performances.markdown)
 
 Technical details
 -----------------
@@ -108,7 +114,6 @@ Technical details
 
 ### Configuration
 
-- [Performances](performances.markdown)
 - [Daily background job](cronjob.markdown)
 - [Background Worker](worker.markdown)
 - [Config file](config.markdown)

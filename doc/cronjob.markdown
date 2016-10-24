@@ -14,7 +14,7 @@ Configuration on Unix and Linux platforms
 -----------------------------------------
 
 There are multiple ways to define a cronjob on Unix/Linux operating systems, this example is for Ubuntu 14.04.
-The procedure is similar to other systems.
+The procedure is similar for other systems.
 
 Edit the crontab of your web server user:
 
@@ -30,3 +30,26 @@ Example to execute the daily cronjob at 8am:
 
 Note: the cronjob process must have write access to the database in case you are using Sqlite.
 Usually, running the cronjob under the web server user is enough.
+
+Configuration on Microsoft Windows Server
+-----------------------------------------
+
+Before to configure the recurring task, create a batch file (*.bat or *.cmd) that run the Kanboard CLI script.
+
+Here an example (`C:\kanboard.bat`):
+
+```
+"C:\php\php.exe" -f "C:\inetpub\wwwroot\kanboard\kanboard" cronjob
+```
+
+**You must change the path of the PHP executable and the path of the Kanboard's script according to your installation.**
+
+Configure the Windows Task Scheduler:
+
+1. Go to "Administrative Tools"
+2. Open the "Task Scheduler"
+3. On the right, choose "Create Task"
+4. Choose a name, for example you can use "Kanboard"
+5. Under "Security Options", choose a user that can write to the database in case you are using Sqlite (might be IIS_IUSRS depending of your configuration)
+6. Create a new "Trigger", choose daily and a time, midnight for example
+7. Add a new action, choose "Start a program" and select the batch file created above
