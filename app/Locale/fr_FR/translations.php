@@ -36,7 +36,7 @@ return array(
     'Remove user' => 'Supprimer un utilisateur',
     'Do you really want to remove this user: "%s"?' => 'Voulez-vous vraiment supprimer cet utilisateur : « %s » ?',
     'All users' => 'Tous les utilisateurs',
-    'Username' => 'Nom d\'utilisateur',
+    'Username' => 'Identifiant',
     'Password' => 'Mot de passe',
     'Administrator' => 'Administrateur',
     'Sign in' => 'Connexion',
