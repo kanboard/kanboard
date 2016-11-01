@@ -1209,7 +1209,7 @@ return array(
     'Projects overview for %s' => '%s için proje özeti',
     'Activity stream for %s' => '%s için akış',
     'Calendar for %s' => '%s için takvim',
-    'Notifications for %s' => '% için bildirimler',
+    'Notifications for %s' => '%s için bildirimler',
     'Subtasks export' => 'Alt görev dışa aktar',
     'Tasks exportation' => 'Görev dışa aktar',
     'Assign a color when the task is moved to a specific swimlane' => 'Görev bir kulvara taşındığında rengini değiştir',
