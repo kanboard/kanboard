@@ -1,13 +1,13 @@
-<div id="board-container">
+<div id="board-container" data-project-id="<?= $project['id'] ?>">
     <?php if (empty($swimlanes) || empty($swimlanes[0]['nb_columns'])): ?>
         <p class="alert alert-error"><?= t('There is no column or swimlane activated in your project!') ?></p>
     <?php else: ?>
 
         <?php if (isset($not_editable)): ?>
-            <table id="board" class="board-project-<?= $project['id'] ?>">
+            <table id="board-<?= $project['id'] ?>" class="board-project board-project-<?= $project['id'] ?>">
         <?php else: ?>
-            <table id="board"
-                   class="board-project-<?= $project['id'] ?>"
+            <table id="board-<?= $project['id'] ?>"
+                   class="board-project board-project-<?= $project['id'] ?>"
                    data-project-id="<?= $project['id'] ?>"
                    data-check-interval="<?= $board_private_refresh_interval ?>"
                    data-save-url="<?= $this->url->href('BoardAjaxController', 'save', array('project_id' => $project['id'])) ?>"

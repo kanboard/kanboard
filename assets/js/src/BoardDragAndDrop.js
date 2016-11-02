@@ -4,7 +4,7 @@ Kanboard.BoardDragAndDrop = function(app) {
 };
 
 Kanboard.BoardDragAndDrop.prototype.execute = function() {
-    if (this.app.hasId("board")) {
+    if (this.app.hasId("board-container")) {
         this.dragAndDrop();
         this.executeListeners();
     }
@@ -12,64 +12,70 @@ Kanboard.BoardDragAndDrop.prototype.execute = function() {
 
 Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
     var self = this;
+
     var dropzone = $(".board-task-list");
-    var params = {
-        forcePlaceholderSize: true,
-        tolerance: "pointer",
-        connectWith: ".sortable-column",
-        placeholder: "draggable-placeholder",
-        items: ".draggable-item",
-        stop: function(event, ui) {
-            var task = ui.item;
-            var taskId = task.attr('data-task-id');
-            var taskPosition = task.attr('data-position');
-            var taskColumnId = task.attr('data-column-id');
-            var taskSwimlaneId = task.attr('data-swimlane-id');
 
-            var newColumnId = task.parent().attr("data-column-id");
-            var newSwimlaneId = task.parent().attr('data-swimlane-id');
-            var newPosition = task.index() + 1;
-
-            task.removeClass("draggable-item-selected");
-
-            if (newColumnId != taskColumnId || newSwimlaneId != taskSwimlaneId || newPosition != taskPosition) {
-                self.changeTaskState(taskId);
-                self.save(taskId, taskColumnId, newColumnId, newPosition, newSwimlaneId);
-            }
-        },
-        start: function(event, ui) {
-            ui.item.addClass("draggable-item-selected");
-            ui.placeholder.height(ui.item.height());
-        }
-    };
-
-    if (isMobile.any) {
-        $(".task-board-sort-handle").css("display", "inline");
-        params["handle"] = ".task-board-sort-handle";
-    }
-
-    // Set dropzone height to the height of the table cell
+    // Run for every Board List, connecting the Items within the same project id
     dropzone.each(function() {
+        // Set dropzone height to the height of the table cell
         $(this).css("min-height", $(this).parent().height());
-    });
+        var project_id = $(this).closest("table.board-project").attr("data-project-id");
+        var params = {
+            forcePlaceholderSize: true,
+            tolerance: "pointer",
+            connectWith: ".sortable-column[data-project-id=" + project_id + "]",
+            placeholder: "draggable-placeholder",
+            items: ".draggable-item[data-project-id=" + project_id + "]",
+            stop: function(event, ui) {
+                var task = ui.item;
+                var taskId = task.attr('data-task-id');
+                var taskPosition = task.attr('data-position');
+                var taskColumnId = task.attr('data-column-id');
+                var taskSwimlaneId = task.attr('data-swimlane-id');
 
-    dropzone.sortable(params);
+                var newColumnId = task.parent().attr("data-column-id");
+                var newSwimlaneId = task.parent().attr('data-swimlane-id');
+                var newPosition = task.index() + 1;
+
+                var boardId = task.closest("table").attr("data-project-id");
+                var saveURL = task.closest("table").attr("data-save-url");
+
+                task.removeClass("draggable-item-selected");
+
+                if (newColumnId != taskColumnId || newSwimlaneId != taskSwimlaneId || newPosition != taskPosition) {
+                    self.changeTaskState(boardId, taskId);
+                    self.save(saveURL, boardId, taskId, taskColumnId, newColumnId, newPosition, newSwimlaneId);
+                }
+            },
+            start: function(event, ui) {
+                ui.item.addClass("draggable-item-selected");
+                ui.placeholder.height(ui.item.height());
+            }
+
+        };
+        if (isMobile.any) {
+            $(".task-board-sort-handle").css("display", "inline");
+            params["handle"] = ".task-board-sort-handle";
+        }
+        $(this).sortable(params);
+    });
 };
 
-Kanboard.BoardDragAndDrop.prototype.changeTaskState = function(taskId) {
-    var task = $("div[data-task-id=" + taskId + "]");
+Kanboard.BoardDragAndDrop.prototype.changeTaskState = function(boardId, taskId) {
+    var board = $("table[data-project-id=" + boardId + "]");
+    var task = board.find("div[data-task-id=" + taskId + "]");
     task.addClass('task-board-saving-state');
     task.find('.task-board-saving-icon').show();
 };
 
-Kanboard.BoardDragAndDrop.prototype.save = function(taskId, srcColumnId, dstColumnId, position, swimlaneId) {
+Kanboard.BoardDragAndDrop.prototype.save = function(saveURL, boardId, taskId, srcColumnId, dstColumnId, position, swimlaneId) {
     var self = this;
     self.app.showLoadingIcon();
     self.savingInProgress = true;
 
     $.ajax({
         cache: false,
-        url: $("#board").data("save-url"),
+        url: saveURL,
         contentType: "application/json",
         type: "POST",
         processData: false,
@@ -81,7 +87,7 @@ Kanboard.BoardDragAndDrop.prototype.save = function(taskId, srcColumnId, dstColu
             "position": position
         }),
         success: function(data) {
-            self.refresh(data);
+            self.refresh(boardId, data);
             self.savingInProgress = false;
         },
         error: function() {
@@ -97,8 +103,8 @@ Kanboard.BoardDragAndDrop.prototype.save = function(taskId, srcColumnId, dstColu
     });
 };
 
-Kanboard.BoardDragAndDrop.prototype.refresh = function(data) {
-    $("#board-container").replaceWith(data);
+Kanboard.BoardDragAndDrop.prototype.refresh = function(boardId, data) {
+    $("div[id=board-container][data-project-id=" + boardId + "]").replaceWith(data);
 
     this.app.hideLoadingIcon();
     this.dragAndDrop();
