@@ -17,6 +17,7 @@ use Pimple\Container;
  * @property \Kanboard\Analytic\AverageTimeSpentColumnAnalytic       $averageTimeSpentColumnAnalytic
  * @property \Kanboard\Core\Action\ActionManager                     $actionManager
  * @property \Kanboard\Core\ExternalLink\ExternalLinkManager         $externalLinkManager
+ * @property \Kanboard\Core\ExternalTask\ExternalTaskManager         $externalTaskManager
  * @property \Kanboard\Core\Cache\MemoryCache                        $memoryCache
  * @property \Kanboard\Core\Cache\BaseCache                          $cacheDriver
  * @property \Kanboard\Core\Event\EventManager                       $eventManager
