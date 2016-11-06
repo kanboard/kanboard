@@ -8,7 +8,7 @@
     RewriteRule ^ index.php [QSA,L]
 </IfModule>
 
-<FilesMatch "(kanboard|config.php|config.default.php)">
+<FilesMatch "(kanboard|config.php|config.default.php)$">
     <IfModule mod_version.c>
         <IfVersion >= 2.3>
             Require all denied
