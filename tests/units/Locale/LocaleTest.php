@@ -10,13 +10,7 @@ class LocaleTest extends Base
             $locale = require($file . '/translations.php');
 
             foreach ($locale as $k => $v) {
-                if (strpos($k, '%B %e, %Y') !== false) {
-                    continue;
-                }
-
-                if (strpos($k, '%b %e, %Y') !== false) {
-                    continue;
-                }
+                $this->assertNotEmpty($v, 'Empty value for the key "'.$k.'" in translation '.basename($file));
 
                 foreach (array('%s', '%d') as $placeholder) {
                     $this->assertEquals(
