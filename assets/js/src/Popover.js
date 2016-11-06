@@ -137,7 +137,7 @@ Kanboard.Popover.prototype.afterOpen = function() {
     });
 
     // Autofocus fields (html5 autofocus works only with page onload)
-    $("[autofocus]").each(function() {
+    $("#popover-content input[autofocus]").each(function() {
         $(this).focus();
     });
 

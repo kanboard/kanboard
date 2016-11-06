@@ -6,7 +6,13 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 106;
+const VERSION = 107;
+
+function version_107(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN external_provider TEXT");
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN external_uri TEXT");
+}
 
 function version_106(PDO $pdo)
 {

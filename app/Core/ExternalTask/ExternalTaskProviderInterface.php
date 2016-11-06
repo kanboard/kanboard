@@ -11,15 +11,6 @@ namespace Kanboard\Core\ExternalTask;
 interface ExternalTaskProviderInterface
 {
     /**
-     * Get templates
-     *
-     * @return string
-     */
-    public function getCreationFormTemplate();
-    public function getModificationFormTemplate();
-    public function getTaskViewTemplate();
-
-    /**
      * Get provider name (visible in the user interface)
      *
      * @access public
@@ -34,17 +25,29 @@ interface ExternalTaskProviderInterface
      * @throws \Kanboard\Core\ExternalTask\AccessForbiddenException
      * @throws \Kanboard\Core\ExternalTask\NotFoundException
      * @param  string $uri
-     * @return array       Dict that will populate the form
+     * @return ExternalTaskInterface
      */
     public function retrieve($uri);
 
     /**
-     * Save the task to the external system and/or update the cache
+     * Get task import template name
      *
-     * @access public
-     * @param  string  $uri
-     * @param  array   $data
-     * @return bool
+     * @return string
      */
-    public function persist($uri, array $data);
+    public function getImportFormTemplate();
+
+    /**
+     * Get creation form template
+     *
+     * @return string
+     */
+    public function getCreationFormTemplate();
+
+    /**
+     * Build external task URI based on import form values
+     *
+     * @param  array $values
+     * @return string
+     */
+    public function buildTaskUri(array $values);
 }

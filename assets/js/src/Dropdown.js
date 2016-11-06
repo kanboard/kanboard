@@ -9,6 +9,10 @@ Kanboard.Dropdown.prototype.listen = function() {
         self.close();
     });
 
+    $(document).on('click', '#popover-content', function() {
+        self.close();
+    });
+
     $(document).on('click', '.dropdown-menu', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();

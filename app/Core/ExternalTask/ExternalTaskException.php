@@ -2,12 +2,14 @@
 
 namespace Kanboard\Core\ExternalTask;
 
+use Exception;
+
 /**
- * Class AccessForbiddenException
+ * Class NotFoundException
  *
  * @package Kanboard\Core\ExternalTask
  * @author  Frederic Guillot
  */
-class AccessForbiddenException extends ExternalTaskException
+class ExternalTaskException extends Exception
 {
 }
