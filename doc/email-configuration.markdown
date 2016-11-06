@@ -1,38 +1,40 @@
+
+
 Email configuration
 ===================
 
-User settings
+Configuración de usuarios 
 -------------
 
-To receive email notifications, users of Kanboard must have:
+Para recibir notificaciones por email los usuarios de Kanboard deben tener
 
-- Activated notifications in their profile
-- Have a valid email address in their profile
-- Be a member of the project that will trigger notifications
+- Activar las notificaciones de su perfil
+- Tener una dirección valida de email en su perfil
+- Ser miembro del proyecto y que este tenga activo la opción de notificaciones
 
-Note: The logged user who performs the action doesn't receive any notifications, only other project members.
+Nota: El usuario que genera una sesión y que realiza alguna acción no recibe ninguna notificación, sólo otros miembros del proyecto.
 
-Email transports
+Comunicación con correos electronicos
 ----------------
 
 There are several email transports available:
 
 - SMTP
 - Sendmail
-- PHP native mail function
-- Other methods can be provided by external plugins: Postmark, Sendgrid and Mailgun
+- PHP mail funcion nativa
+- Otros métodos que pueden ser proporcionados por  externos : Postmark, Sendgrid and Mailgun
 
-Server settings
+Configuración del servidor
 ---------------
 
-By default, Kanboard will use the bundled PHP mail function to send emails.
-Usually that requires no configuration if your server can already send emails.
+Por default, Kanboard usa el  bundled PHP mail function para el envio de emails.
+Porque usualmente el servidor no requiere una configuración y así tu servidor puede estar listo para enviar emails.
 
-However, it's possible to use other methods, the SMTP protocol and Sendmail.
+Sin embargo, es posible usar otros metodos, como el protocolo SMTP  y Sendmail
 
-### SMTP configuration
+###  Configuración SMTP
 
-Rename the file `config.default.php` to `config.php` and change these values:
+Renombrar el archivo `config.default.php` a `config.php` y modificar estos valores:
 
 ```php
 // We choose "smtp" as mail transport
@@ -47,17 +49,17 @@ define('MAIL_SMTP_USERNAME', 'username');
 define('MAIL_SMTP_PASSWORD', 'super password');
 ```
 
-It's also possible to use a secure connection, TLS or SSL:
+También es posible utilizar una conexión segura, TLS or SSL:
 
 ```php
 define('MAIL_SMTP_ENCRYPTION', 'ssl'); // Valid values are "null", "ssl" or "tls"
 ```
 
-### Sendmail configuration
+### Configuración Sendmail 
 
-By default the sendmail command will be `/usr/sbin/sendmail -bs` but you can customize that in your config file.
+Por default el comando para el sendmail esta `/usr/sbin/sendmail -bs` Pero usted puede personalizarlo en su archivo de configuración.
 
-Example:
+Ejemplo:
 
 ```php
 // We choose "sendmail" as mail transport
@@ -67,48 +69,51 @@ define('MAIL_TRANSPORT', 'sendmail');
 define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
 ```
 
-### PHP native mail function
+### PHP funcion nativa de email
 
-This is the default configuration:
+Esta es la configuración por default
 
 ```php
 define('MAIL_TRANSPORT', 'mail');
 ```
 
-### The sender email address
+### La dirección de correo electrónico del remitente
 
-By default, emails will use the sender address `notifications@kanboard.local`.
-It's not possible to reply to this address.
+Por default, los correos electrónicos utilizarán la dirección del remitente `notifications@kanboard.local`.
+con este correo no es posible responderle
 
-You can customize this address by changing the value of the constant `MAIL_FROM` in your config file.
+Tu puedes personalizar esta direccion cambiando el valor de la constante `MAIL_FROM` en tu archivo de configuración
 
 ```php
 define('MAIL_FROM', 'kanboard@mydomain.tld');
 ```
 
-That can be useful if your SMTP server configuration doesn't accept the default address.
 
-### How to display a link to the task in notifications?
+Esto puede ser útil si su configuracion del servidor SMTP no acepta una dirección por default.
 
-To do that, you have to specify the URL of your Kanboard installation in your [Application Settings](https://kanboard.net/documentation/application-configuration).
-By default, nothing is defined, so no links will be displayed.
+### Cómo mostrar un enlace a la tarea en las notificaciones ?
 
-Examples:
+Para hacer eso, tu tienes que especificar la URL de tu instalación de tu kanboard [Application Settings](https://kanboard.net/documentation/application-configuration).
+
+De manera predeterminada, no se define nada, por lo que no se mostrará los enlaces.
+
+Ejemplos :
 
 - http://demo.kanboard.net/
 - http://myserver/kanboard/
 - http://kanboard.mydomain.com/
 
-Don't forget the ending slash `/`.
+No se olvide de la barra final `/`.
 
-You need to define that manually because Kanboard cannot guess the URL from a command line script and some people have a very specific configuration.
+Es necesario definir de forma manual debido a que Kanboard no puede adivinar la dirección URL de una secuencia de comandos de línea de comandos y algunas personas tienen una configuración muy específica.
 
-Troubleshooting
+Solución de problemas
 ---------------
 
-If no emails are sent and you are sure that everything is configured correctly:
 
-- Check your spam folder
-- Enable the debug mode and check the debug file `data/debug.log`, you should see the exact error
-- Be sure that your server or your hosting provider allows you to send emails
-- If you use SeLinux, allow PHP to send emails
+Si no hay mensajes de correo electrónico se envían y que está seguro de que todo está configurado correctamente entonces:
+
+- Verificar el correo de spam
+- Habilita el modo debug y verifique el archivo `data/debug.log`, Debería ver el error exacto
+- Asegúrese de que el servidor o el proveedor de alojamiento le permite enviar mensajes de correo electrónico
+- Si usa Selinux Permitir a PHP enviar emails
