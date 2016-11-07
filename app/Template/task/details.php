@@ -160,6 +160,10 @@
         <?php endif ?>
     </div>
 
+    <?php if (! empty($task['external_uri']) && ! empty($task['external_provider'])): ?>
+        <external-task-view url="<?= $this->url->href('ExternalTaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])) ?>"></external-task-view>
+    <?php endif ?>
+
     <?php if ($editable && empty($task['date_started'])): ?>
         <div class="buttons-header">
             <?= $this->url->button('fa-play', t('Set start date'), 'TaskModificationController', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>

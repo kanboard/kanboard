@@ -44,6 +44,13 @@ interface ExternalTaskProviderInterface
     public function getCreationFormTemplate();
 
     /**
+     * Get task view template name
+     *
+     * @return string
+     */
+    public function getViewTemplate();
+
+    /**
      * Build external task URI based on import form values
      *
      * @param  array $values
