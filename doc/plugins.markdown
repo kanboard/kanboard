@@ -23,6 +23,7 @@ Plugin creators should specify explicitly the compatible versions of Kanboard. I
 - [Authorization architecture](plugin-authorization-architecture.markdown)
 - [Custom group providers](plugin-group-provider.markdown)
 - [External link providers](plugin-external-link.markdown)
+- [External tasks](plugin-external-tasks.markdown)
 - [Add avatar providers](plugin-avatar-provider.markdown)
 - [LDAP client](plugin-ldap-client.markdown)
 

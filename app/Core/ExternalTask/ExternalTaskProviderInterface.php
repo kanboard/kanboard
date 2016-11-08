@@ -70,8 +70,8 @@ interface ExternalTaskProviderInterface
     /**
      * Build external task URI based on import form values
      *
-     * @param  array $values
+     * @param  array $formValues
      * @return string
      */
-    public function buildTaskUri(array $values);
+    public function buildTaskUri(array $formValues);
 }
