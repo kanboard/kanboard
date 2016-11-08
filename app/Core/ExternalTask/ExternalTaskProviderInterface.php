@@ -22,12 +22,22 @@ interface ExternalTaskProviderInterface
      * Retrieve task from external system or cache
      *
      * @access public
-     * @throws \Kanboard\Core\ExternalTask\AccessForbiddenException
-     * @throws \Kanboard\Core\ExternalTask\NotFoundException
+     * @throws \Kanboard\Core\ExternalTask\ExternalTaskException
      * @param  string $uri
      * @return ExternalTaskInterface
      */
-    public function retrieve($uri);
+    public function fetch($uri);
+
+    /**
+     * Save external task to another system
+     *
+     * @throws \Kanboard\Core\ExternalTask\ExternalTaskException
+     * @param  string $uri
+     * @param  array  $formValues
+     * @param  array  $formErrors
+     * @return bool
+     */
+    public function save($uri, array $formValues, array &$formErrors);
 
     /**
      * Get task import template name
@@ -42,6 +52,13 @@ interface ExternalTaskProviderInterface
      * @return string
      */
     public function getCreationFormTemplate();
+
+    /**
+     * Get modification form template
+     *
+     * @return string
+     */
+    public function getModificationFormTemplate();
 
     /**
      * Get task view template name

@@ -2,6 +2,10 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+use Kanboard\Core\ExternalTask\AccessForbiddenException as ExternalTaskAccessForbiddenException;
+use Kanboard\Core\ExternalTask\ExternalTaskException;
+
 /**
  * Task Modification controller
  *
@@ -43,7 +47,7 @@ class TaskModificationController extends BaseController
         $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
         $values = $this->hook->merge('controller:task-modification:form:default', $values, array('default_values' => $values));
 
-        $this->response->html($this->template->render('task_modification/show', array(
+        $params = array(
             'project' => $project,
             'values' => $values,
             'errors' => $errors,
@@ -51,7 +55,29 @@ class TaskModificationController extends BaseController
             'tags' => $this->taskTagModel->getList($task['id']),
             'users_list' => $this->projectUserRoleModel->getAssignableUsersList($task['project_id']),
             'categories_list' => $this->categoryModel->getList($task['project_id']),
-        )));
+        );
+
+        $this->renderTemplate($task, $params);
+    }
+
+    protected function renderTemplate(array &$task, array &$params)
+    {
+        if (empty($task['external_uri'])) {
+            $this->response->html($this->template->render('task_modification/show', $params));
+        } else {
+
+            try {
+                $taskProvider = $this->externalTaskManager->getProvider($task['external_provider']);
+                $params['template'] = $taskProvider->getModificationFormTemplate();
+                $params['external_task'] = $taskProvider->fetch($task['external_uri']);
+            } catch (ExternalTaskAccessForbiddenException $e) {
+                throw new AccessForbiddenException($e->getMessage());
+            } catch (ExternalTaskException $e) {
+                $params['error_message'] = $e->getMessage();
+            }
+
+            $this->response->html($this->template->render('external_task_modification/show', $params));
+        }
     }
 
     /**
@@ -66,12 +92,31 @@ class TaskModificationController extends BaseController
 
         list($valid, $errors) = $this->taskValidator->validateModification($values);
 
-        if ($valid && $this->taskModificationModel->update($values)) {
+        if ($valid && $this->updateTask($task, $values, $errors)) {
             $this->flash->success(t('Task updated successfully.'));
             $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
         } else {
             $this->flash->failure(t('Unable to update your task.'));
             $this->edit($values, $errors);
         }
+    }
+
+    protected function updateTask(array &$task, array &$values, array &$errors)
+    {
+        $result = $this->taskModificationModel->update($values);
+
+        if ($result && ! empty($task['external_uri'])) {
+            try {
+                $taskProvider = $this->externalTaskManager->getProvider($task['external_provider']);
+                $result = $taskProvider->save($task['external_uri'], $values, $errors);
+            } catch (ExternalTaskAccessForbiddenException $e) {
+                throw new AccessForbiddenException($e->getMessage());
+            } catch (ExternalTaskException $e) {
+                $this->logger->error($e->getMessage());
+                $result = false;
+            }
+        }
+
+        return $result;
     }
 }

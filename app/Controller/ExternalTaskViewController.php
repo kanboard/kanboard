@@ -17,7 +17,7 @@ class ExternalTaskViewController extends BaseController
         try {
             $task = $this->getTask();
             $taskProvider = $this->externalTaskManager->getProvider($task['external_provider']);
-            $externalTask = $taskProvider->retrieve($task['external_uri']);
+            $externalTask = $taskProvider->fetch($task['external_uri']);
 
             $this->response->html($this->template->render($taskProvider->getViewTemplate(), array(
                 'task' => $task,
