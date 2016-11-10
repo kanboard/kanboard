@@ -129,6 +129,18 @@ class Response extends Base
     }
 
     /**
+     * Add P3P headers for Internet Explorer
+     *
+     * @access public
+     * @return $this
+     */
+    public function withP3P()
+    {
+        $this->withHeader('P3P', 'CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
+        return $this;
+    }
+
+    /**
      * Set HTTP response body
      *
      * @access public

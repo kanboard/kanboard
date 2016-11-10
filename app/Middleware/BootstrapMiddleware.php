@@ -32,6 +32,7 @@ class BootstrapMiddleware extends BaseMiddleware
     {
         $this->response->withContentSecurityPolicy($this->container['cspRules']);
         $this->response->withSecurityHeaders();
+        $this->response->withP3P();
 
         if (ENABLE_XFRAME) {
             $this->response->withXframe();
