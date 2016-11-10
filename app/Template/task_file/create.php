@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= t('Attach a document') ?></h2>
+    <h2><?= t('Attach a document') ?><div class="form-actions-header"><?= $this->url->link('X', 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?></div></h2>
 </div>
 <div id="file-done" style="display:none">
     <p class="alert alert-success">
