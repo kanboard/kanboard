@@ -13,6 +13,10 @@ Kanboard.Popover.prototype.listen = function() {
         self.close(e);
     });
 
+    $(document).on("click", "#popover-close-button", function(e) {
+        self.close(e);
+    });
+
     $(document).on("click", "#popover-content", function(e) {
         e.stopPropagation();
     });
@@ -43,7 +47,15 @@ Kanboard.Popover.prototype.open = function(link) {
 
     if (!self.isOpen()) {
         $.get(link, function(content) {
-            $("body").prepend('<div id="popover-container"><div id="popover-content">' + content + '</div></div>');
+            $("body").prepend(
+                '<div id="popover-container">' +
+                '<div id="popover-content">' +
+                '<div id="popover-content-header"><a href="#" id="popover-close-button"><i class="fa fa-times"></i></a></div>' +
+                content +
+                '</div>' +
+                '</div>'
+            );
+
             self.executeOnOpenedListeners();
         });
     }
