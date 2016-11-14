@@ -49,11 +49,15 @@ textarea:focus
   box-shadow: 0 0 8px rgba(82, 168, 236, 0.6)
 
 textarea
+  padding: 3px
   border: 1px solid #ccc
   width: 400px
   max-width: 99%
   height: 200px
   font-family: sans-serif
+  font-size: size('normal')
+  @include placeholder
+    color: color('lighter')
 
 select
   font-size: 1.0em

@@ -11,7 +11,7 @@
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('id', $values) ?>
     <?= $this->form->hidden('name', $values) ?>
-    <?= $this->form->textarea('description', $values, $errors, array(), 'markdown-editor') ?>
+    <?= $this->form->textEditor('description', $values, $errors, array('autofocus' => true)) ?>
 
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>

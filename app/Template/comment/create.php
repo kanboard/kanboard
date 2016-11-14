@@ -6,20 +6,7 @@
     <?= $this->form->hidden('task_id', $values) ?>
     <?= $this->form->hidden('user_id', $values) ?>
 
-    <div class="markdown-editor-small">
-        <?= $this->form->textarea(
-            'comment',
-            $values,
-            $errors,
-            array(
-                'autofocus',
-                'required',
-                'placeholder="'.t('Leave a comment').'"',
-                'data-mention-search-url="'.$this->url->href('UserAjaxController', 'mention', array('project_id' => $task['project_id'])).'"',
-            ),
-            'markdown-editor'
-        ) ?>
-    </div>
+    <?= $this->form->textEditor('comment', $values, $errors, array('autofocus' => true, 'required' => true)) ?>
 
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>

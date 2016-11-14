@@ -18,7 +18,7 @@
     <?= $this->form->checkbox('hide_in_dashboard', t('Hide tasks in this column in the dashboard'), 1, $values['hide_in_dashboard'] == 1) ?>
 
     <?= $this->form->label(t('Description'), 'description') ?>
-    <?= $this->form->textarea('description', $values, $errors, array(), 'markdown-editor') ?>
+    <?= $this->form->textEditor('description', $values, $errors) ?>
 
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>

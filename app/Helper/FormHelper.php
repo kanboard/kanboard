@@ -182,6 +182,44 @@ class FormHelper extends Base
     }
 
     /**
+     * Display a markdown editor
+     *
+     * @access public
+     * @param  string  $name     Field name
+     * @param  array   $values   Form values
+     * @param  array   $errors   Form errors
+     * @param  array   $attributes
+     * @return string
+     */
+    public function textEditor($name, $values = array(), array $errors = array(), array $attributes = array())
+    {
+        if (! isset($attributes['css'])) {
+            $attributes['css'] = '';
+        }
+
+        $attrHtml = '';
+        $attributes['css'] .= $this->errorClass($errors, $name);
+
+        foreach ($attributes as $attribute => $value) {
+            $attrHtml .= sprintf(' %s="%s"', $attribute, $value);
+        }
+
+        $html = sprintf(
+            '<texteditor name="%s" text="%s" label-preview="%s" label-write="%s" placeholder="%s" %s></texteditor>',
+            $name,
+            isset($values[$name]) ? $this->helper->text->e($values[$name]) : '',
+            t('Preview'),
+            t('Write'),
+            t('Write your text in Markdown'),
+            $attrHtml
+        );
+
+        $html .= $this->errorList($errors, $name);
+
+        return $html;
+    }
+
+    /**
      * Display file field
      *
      * @access public

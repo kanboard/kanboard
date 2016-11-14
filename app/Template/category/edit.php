@@ -13,7 +13,7 @@
     <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="50"')) ?>
 
     <?= $this->form->label(t('Description'), 'description') ?>
-    <?= $this->form->textarea('description', $values, $errors, array(), 'markdown-editor') ?>
+    <?= $this->form->textEditor('description', $values, $errors) ?>
 
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>

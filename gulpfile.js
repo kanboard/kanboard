@@ -22,7 +22,6 @@ var vendor = {
         'bower_components/chosen/chosen.css',
         'bower_components/select2/dist/css/select2.min.css',
         'bower_components/fullcalendar/dist/fullcalendar.min.css',
-        'bower_components/simplemde/dist/simplemde.min.css',
         'bower_components/font-awesome/css/font-awesome.min.css',
         'bower_components/c3/c3.min.css'
     ],
@@ -48,10 +47,10 @@ var vendor = {
         'bower_components/fullcalendar/dist/lang-all.js',
         'bower_components/mousetrap/mousetrap.min.js',
         'bower_components/mousetrap/plugins/global-bind/mousetrap-global-bind.min.js',
-        'bower_components/simplemde/dist/simplemde.min.js',
         'bower_components/d3/d3.min.js',
         'bower_components/c3/c3.min.js',
-        'bower_components/isMobile/isMobile.min.js'
+        'bower_components/isMobile/isMobile.min.js',
+        'bower_components/marked/marked.min.js'
     ]
 };
 

@@ -50,20 +50,7 @@ class TaskHelper extends Base
     public function selectDescription(array $values, array $errors)
     {
         $html = $this->helper->form->label(t('Description'), 'description');
-        $html .= '<div class="markdown-editor-container">';
-        $html .= $this->helper->form->textarea(
-            'description',
-            $values,
-            $errors,
-            array(
-                'placeholder="'.t('Leave a description').'"',
-                'tabindex="2"',
-                'data-mention-search-url="'.$this->helper->url->href('UserAjaxController', 'mention', array('project_id' => $values['project_id'])).'"'
-            ),
-            'markdown-editor'
-        );
-
-        $html .= '</div>';
+        $html .= $this->helper->form->textEditor('description', $values, $errors, array('tabindex' => 2));
         return $html;
     }
 
