@@ -1260,7 +1260,7 @@ return array(
     'People belonging to this role will be able to move tasks only between the source and the destination column.' => 'Gli utenti che appartengono a questa regola saranno in grado di muovere i task solo tra la colonna di origine e quella di destinazione',
     'Remove a column restriction' => 'Rimuovere restrizione colonna',
     'Do you really want to remove this column restriction: "%s" to "%s"?' => 'Vuoi davvero rimuovere questa restrizione di colonna: "%s" a "%s"?',
-    'New column restriction for the role "%s"' => '',
+    'New column restriction for the role "%s"' => 'Nuova restrizione colonna per la regola "%s"',
     'Rule' => 'Regola',
     'Do you really want to remove this column restriction?' => 'Vuoi davvero rimuovere questa restrizione di colonna?',
     'Custom roles' => 'Regole personalizzate',
