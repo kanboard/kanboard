@@ -1275,7 +1275,7 @@ return array(
     'Do you really want to remove this project restriction: "%s"?' => 'Tem a certeza que quer remover a restrição de projeto: "%s"?',
     'Duplicate to multiple projects' => 'Duplicar para vários projetos',
     'This field is required' => 'Este campo é obrigatório',
-    // 'Moving a task is not permitted' => '',
-    // 'This value must be in the range %d to %d' => '',
-    // 'You are not allowed to move this task.' => '',
+    'Moving a task is not permitted' => 'Não é permitido mover uma tarefa',
+    'This value must be in the range %d to %d' => 'Este valor deve estar entre %d e %d',
+    'You are not allowed to move this task.' => 'Não lhe é permitido mover esta tarefa.',
 );
