@@ -1,5 +1,2 @@
-<div id="calendar"
-     data-check-url="<?= $this->url->href('CalendarController', 'user', array('user_id' => $user['id'])) ?>"
-     data-save-url="<?= $this->url->href('CalendarController', 'save') ?>"
->
-</div>
+<calendar check-url="<?= $this->url->href('CalendarController', 'user', array('user_id' => $user['id'])) ?>"
+          save-url="<?= $this->url->href('CalendarController', 'save') ?>"></calendar>

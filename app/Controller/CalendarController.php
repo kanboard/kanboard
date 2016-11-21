@@ -29,7 +29,6 @@ class CalendarController extends BaseController
             'project' => $project,
             'title' => $project['name'],
             'description' => $this->helper->projectHeader->getDescription($project),
-            'check_interval' => $this->configModel->get('board_private_refresh_interval'),
         )));
     }
 

@@ -11,13 +11,6 @@ namespace Kanboard\Core;
 class Translator
 {
     /**
-     * Locale path
-     *
-     * @var string
-     */
-    const PATH = 'app/Locale';
-
-    /**
      * Locale
      *
      * @static
@@ -171,9 +164,13 @@ class Translator
      * @param  string   $language   Locale code: fr_FR
      * @param  string   $path       Locale folder
      */
-    public static function load($language, $path = self::PATH)
+    public static function load($language, $path = '')
     {
-        $filename = $path.DIRECTORY_SEPARATOR.$language.DIRECTORY_SEPARATOR.'translations.php';
+        if ($path === '') {
+            $path = self::getDefaultFolder();
+        }
+
+        $filename = implode(DIRECTORY_SEPARATOR, array($path, $language, 'translations.php'));
 
         if (file_exists($filename)) {
             self::$locales = array_merge(self::$locales, require($filename));
@@ -189,5 +186,16 @@ class Translator
     public static function unload()
     {
         self::$locales = array();
+    }
+
+    /**
+     * Get default locales folder
+     *
+     * @access public
+     * @return string
+     */
+    public static function getDefaultFolder()
+    {
+        return implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', 'Locale'));
     }
 }
