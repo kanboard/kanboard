@@ -1,19 +1,16 @@
 @import variables
 
 .text-editor
-  button
+  a
     font-size: size('normal')
-    border: none
     color: color('light')
-    background: transparent
+    text-decoration: none
+    margin-right: 10px
     &:hover
       color: link-color('primary')
-      cursor: pointer
   .text-editor-preview-area
     border: 1px solid color('lighter')
     width: 400px
     height: 200px
     overflow: auto
-  .text-editor-toolbar
-    button:first-child
-      padding-left: 0
+    padding: 2px

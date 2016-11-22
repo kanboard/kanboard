@@ -193,27 +193,18 @@ class FormHelper extends Base
      */
     public function textEditor($name, $values = array(), array $errors = array(), array $attributes = array())
     {
-        if (! isset($attributes['css'])) {
-            $attributes['css'] = '';
-        }
-
-        $attrHtml = '';
-        $attributes['css'] .= $this->errorClass($errors, $name);
-
-        foreach ($attributes as $attribute => $value) {
-            $attrHtml .= sprintf(' %s="%s"', $attribute, $value);
-        }
-
-        $html = sprintf(
-            '<texteditor name="%s" text="%s" label-preview="%s" label-write="%s" placeholder="%s" %s></texteditor>',
-            $name,
-            isset($values[$name]) ? $this->helper->text->e($values[$name]) : '',
-            t('Preview'),
-            t('Write'),
-            t('Write your text in Markdown'),
-            $attrHtml
+        $params = array(
+            'name' => $name,
+            'text' => isset($values[$name]) ? $this->helper->text->e($values[$name]) : '',
+            'css' => $this->errorClass($errors, $name),
+            'required' => isset($attributes['required']) && $attributes['required'],
+            'tabindex' => isset($attributes['tabindex']) ? $attributes['tabindex'] : '-1',
+            'labelPreview' => t('Preview'),
+            'labelWrite' => t('Write'),
+            'placeholder' => t('Write your text in Markdown'),
         );
 
+        $html = '<div class="js-text-editor" data-params=\''.json_encode($params, JSON_HEX_APOS).'\'></div>';
         $html .= $this->errorList($errors, $name);
 
         return $html;

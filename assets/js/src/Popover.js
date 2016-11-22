@@ -160,4 +160,6 @@ Kanboard.Popover.prototype.afterOpen = function() {
     new Vue({
         el: '#popover-container'
     });
+
+    KB.render();
 };

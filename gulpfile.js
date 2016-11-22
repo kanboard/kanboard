@@ -7,10 +7,10 @@ var strip = require('gulp-strip-comments');
 
 var src = {
     js: [
-        'assets/js/components/*.js',
         'assets/js/src/Namespace.js',
         'assets/js/src/!(Namespace|Bootstrap|BoardDragAndDrop)*.js',
         'assets/js/src/BoardDragAndDrop.js',
+        'assets/js/components/*.js',
         'assets/js/src/Bootstrap.js'
     ]
 };
