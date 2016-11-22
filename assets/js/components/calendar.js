@@ -1,9 +1,7 @@
-Vue.component('calendar', {
-    props: ['saveUrl', 'checkUrl'],
-    template: '<div id="calendar"></div>',
-    ready: function() {
-        var self = this;
-        var calendar = $('#calendar');
+KB.component('calendar', function (containerElement, options) {
+
+    this.render = function () {
+        var calendar = $(containerElement);
 
         calendar.fullCalendar({
             locale: $("body").data("js-lang"),
@@ -18,7 +16,7 @@ Vue.component('calendar', {
             eventDrop: function(event) {
                 $.ajax({
                     cache: false,
-                    url: self.saveUrl,
+                    url: options.saveUrl,
                     contentType: "application/json",
                     type: "POST",
                     processData: false,
@@ -29,7 +27,7 @@ Vue.component('calendar', {
                 });
             },
             viewRender: function() {
-                var url = self.checkUrl;
+                var url = options.checkUrl;
                 var params = {
                     "start": calendar.fullCalendar('getView').start.format(),
                     "end": calendar.fullCalendar('getView').end.format()
@@ -46,5 +44,5 @@ Vue.component('calendar', {
                 });
             }
         });
-    }
+    };
 });
