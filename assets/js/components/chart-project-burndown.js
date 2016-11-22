@@ -1,4 +1,4 @@
-KB.component('chart-burndown', function (containerElement, options) {
+KB.component('chart-project-burndown', function (containerElement, options) {
 
     this.render = function () {
         var metrics = options.metrics;

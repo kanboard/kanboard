@@ -5,7 +5,7 @@
 <?php if (! $display_graph): ?>
     <p class="alert"><?= t('You need at least 2 days of data to show the chart.') ?></p>
 <?php else: ?>
-    <?= $this->app->component('chart-burndown', array(
+    <?= $this->app->component('chart-project-burndown', array(
         'metrics' => $metrics,
         'labelTotal' => t('Total for all columns'),
         'dateFormat' => e('%%Y-%%m-%%d'),

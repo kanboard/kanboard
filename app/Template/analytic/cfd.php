@@ -5,7 +5,7 @@
 <?php if (! $display_graph): ?>
     <p class="alert"><?= t('You need at least 2 days of data to show the chart.') ?></p>
 <?php else: ?>
-    <?= $this->app->component('chart-cumulative-flow', array(
+    <?= $this->app->component('chart-project-cumulative-flow', array(
         'metrics' => $metrics,
         'dateFormat' => e('%%Y-%%m-%%d'),
     )) ?>

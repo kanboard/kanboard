@@ -12,10 +12,10 @@
 <?php if (empty($metrics)): ?>
     <p class="alert"><?= t('Not enough data to show the graph.') ?></p>
 <?php else: ?>
-    <?= $this->app->component('chart-lead-cycle-time', array(
+    <?= $this->app->component('chart-project-lead-cycle-time', array(
         'metrics' => $metrics,
         'labelCycle' => t('Cycle Time'),
-        'labelTime' => t('Lead Time'),
+        'labelLead' => t('Lead Time'),
     )) ?>
 
     <form method="post" class="form-inline" action="<?= $this->url->href('AnalyticController', 'leadAndCycleTime', array('project_id' => $project['id'])) ?>" autocomplete="off">

@@ -1,13 +1,13 @@
-KB.component('chart-avg-time-column', function (containerElement, options) {
+KB.component('chart-task-time-column', function (containerElement, options) {
 
     this.render = function () {
         var metrics = options.metrics;
         var plots = [options.label];
         var categories = [];
 
-        for (var column_id in metrics) {
-            plots.push(metrics[column_id].average);
-            categories.push(metrics[column_id].title);
+        for (var i = 0; i < metrics.length; i++) {
+            plots.push(metrics[i].time_spent);
+            categories.push(metrics[i].title);
         }
 
         KB.el(containerElement).add(KB.el('div').attr('id', 'chart').build());

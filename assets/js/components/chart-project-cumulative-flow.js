@@ -1,4 +1,4 @@
-KB.component('chart-cumulative-flow', function (containerElement, options) {
+KB.component('chart-project-cumulative-flow', function (containerElement, options) {
 
     this.render = function () {
         var metrics = options.metrics;

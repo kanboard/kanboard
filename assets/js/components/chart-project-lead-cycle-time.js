@@ -1,4 +1,4 @@
-KB.component('chart-lead-cycle-time', function (containerElement, options) {
+KB.component('chart-project-lead-cycle-time', function (containerElement, options) {
 
     this.render = function () {
         var metrics = options.metrics;

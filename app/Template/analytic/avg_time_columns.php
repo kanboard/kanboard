@@ -5,7 +5,7 @@
 <?php if (empty($metrics)): ?>
     <p class="alert"><?= t('Not enough data to show the graph.') ?></p>
 <?php else: ?>
-    <?= $this->app->component('chart-avg-time-column', array(
+    <?= $this->app->component('chart-project-avg-time-column', array(
         'metrics' => $metrics,
         'label' => t('Average time spent'),
     )) ?>
