@@ -15,13 +15,13 @@
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('No tasks found.') ?></p>
     <?php elseif (! $paginator->isEmpty()): ?>
-        <chart-project-time-comparison
-            :metrics='<?= json_encode($metrics, JSON_HEX_APOS)?>'
-            label-spent="<?= t('Hours Spent') ?>"
-            label-estimated="<?= t('Hours Estimated') ?>"
-            label-closed="<?= t('Closed') ?>"
-            label-open="<?= t('Open') ?>">
-        </chart-project-time-comparison>
+        <?= $this->app->component('chart-project-time-comparison', array(
+            'metrics' => $metrics,
+            'labelSpent' => t('Hours Spent'),
+            'labelEstimated' => t('Hours Estimated'),
+            'labelClosed' => t('Closed'),
+            'labelOpen' => t('Open'),
+        )) ?>
 
         <table class="table-fixed table-small table-scrolling">
             <tr>

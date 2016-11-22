@@ -5,7 +5,9 @@
 <?php if (empty($metrics)): ?>
     <p class="alert"><?= t('Not enough data to show the graph.') ?></p>
 <?php else: ?>
-    <chart-project-task-distribution :metrics='<?= json_encode($metrics, JSON_HEX_APOS) ?>'></chart-project-task-distribution>
+    <?= $this->app->component('chart-project-task-distribution', array(
+        'metrics' => $metrics,
+    )) ?>
 
     <table class="table-striped">
         <tr>

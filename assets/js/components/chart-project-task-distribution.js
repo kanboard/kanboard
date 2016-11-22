@@ -1,12 +1,13 @@
-Vue.component('chart-project-task-distribution', {
-    props: ['metrics'],
-    template: '<div id="chart"></div>',
-    ready: function () {
+KB.component('chart-project-task-distribution', function (containerElement, options) {
+
+    this.render = function () {
         var columns = [];
 
-        for (var i = 0; i < this.metrics.length; i++) {
-            columns.push([this.metrics[i].column_title, this.metrics[i].nb_tasks]);
+        for (var i = 0; i < options.metrics.length; i++) {
+            columns.push([options.metrics[i].column_title, options.metrics[i].nb_tasks]);
         }
+
+        KB.el(containerElement).add(KB.el('div').attr('id', 'chart').build());
 
         c3.generate({
             data: {
@@ -14,5 +15,5 @@ Vue.component('chart-project-task-distribution', {
                 type : 'donut'
             }
         });
-    }
+    };
 });

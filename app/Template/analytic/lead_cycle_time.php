@@ -12,29 +12,30 @@
 <?php if (empty($metrics)): ?>
     <p class="alert"><?= t('Not enough data to show the graph.') ?></p>
 <?php else: ?>
-    <section id="analytic-lead-cycle-time">
+    <?= $this->app->component('chart-lead-cycle-time', array(
+        'metrics' => $metrics,
+        'labelCycle' => t('Cycle Time'),
+        'labelTime' => t('Lead Time'),
+    )) ?>
 
-        <div id="chart" data-metrics='<?= json_encode($metrics, JSON_HEX_APOS) ?>' data-label-cycle="<?= t('Cycle Time') ?>" data-label-lead="<?= t('Lead Time') ?>"></div>
+    <form method="post" class="form-inline" action="<?= $this->url->href('AnalyticController', 'leadAndCycleTime', array('project_id' => $project['id'])) ?>" autocomplete="off">
 
-        <form method="post" class="form-inline" action="<?= $this->url->href('AnalyticController', 'leadAndCycleTime', array('project_id' => $project['id'])) ?>" autocomplete="off">
+        <?= $this->form->csrf() ?>
 
-            <?= $this->form->csrf() ?>
+        <div class="form-inline-group">
+            <?= $this->form->date(t('Start date'), 'from', $values) ?>
+        </div>
 
-            <div class="form-inline-group">
-                <?= $this->form->date(t('Start date'), 'from', $values) ?>
-            </div>
+        <div class="form-inline-group">
+            <?= $this->form->date(t('End date'), 'to', $values) ?>
+        </div>
 
-            <div class="form-inline-group">
-                <?= $this->form->date(t('End date'), 'to', $values) ?>
-            </div>
+        <div class="form-inline-group">
+            <button type="submit" class="btn btn-blue"><?= t('Execute') ?></button>
+        </div>
+    </form>
 
-            <div class="form-inline-group">
-                <button type="submit" class="btn btn-blue"><?= t('Execute') ?></button>
-            </div>
-        </form>
-
-        <p class="alert alert-info">
-            <?= t('This chart show the average lead and cycle time for the last %d tasks over the time.', 1000) ?>
-        </p>
-    </section>
+    <p class="alert alert-info">
+        <?= t('This chart show the average lead and cycle time for the last %d tasks over the time.', 1000) ?>
+    </p>
 <?php endif ?>

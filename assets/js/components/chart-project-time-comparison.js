@@ -1,16 +1,17 @@
-Vue.component('chart-project-time-comparison', {
-    props: ['metrics', 'labelSpent', 'labelEstimated', 'labelClosed', 'labelOpen'],
-    template: '<div id="chart"></div>',
-    ready: function () {
-        var spent = [this.labelSpent];
-        var estimated = [this.labelEstimated];
+KB.component('chart-project-time-comparison', function (containerElement, options) {
+
+    this.render = function () {
+        var spent = [options.labelSpent];
+        var estimated = [options.labelEstimated];
         var categories = [];
 
-        for (var status in this.metrics) {
-            spent.push(this.metrics[status].time_spent);
-            estimated.push(this.metrics[status].time_estimated);
-            categories.push(status === 'open' ? this.labelOpen : this.labelClosed);
+        for (var status in options.metrics) {
+            spent.push(options.metrics[status].time_spent);
+            estimated.push(options.metrics[status].time_estimated);
+            categories.push(status === 'open' ? options.labelOpen : options.labelClosed);
         }
+
+        KB.el(containerElement).add(KB.el('div').attr('id', 'chart').build());
 
         c3.generate({
             data: {
@@ -32,5 +33,5 @@ Vue.component('chart-project-time-comparison', {
                 show: true
             }
         });
-    }
+    };
 });

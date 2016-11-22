@@ -5,9 +5,11 @@
 <?php if (! $display_graph): ?>
     <p class="alert"><?= t('You need at least 2 days of data to show the chart.') ?></p>
 <?php else: ?>
-    <section id="analytic-burndown">
-        <div id="chart" data-metrics='<?= json_encode($metrics, JSON_HEX_APOS) ?>' data-date-format="<?= e('%%Y-%%m-%%d') ?>" data-label-total="<?= t('Total for all columns') ?>"></div>
-    </section>
+    <?= $this->app->component('chart-burndown', array(
+        'metrics' => $metrics,
+        'labelTotal' => t('Total for all columns'),
+        'dateFormat' => e('%%Y-%%m-%%d'),
+    )) ?>
 <?php endif ?>
 
 <hr/>

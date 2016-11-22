@@ -13,6 +13,18 @@ use Kanboard\Core\Base;
 class AppHelper extends Base
 {
     /**
+     * Render Javascript component
+     *
+     * @param  string $name
+     * @param  array  $params
+     * @return string
+     */
+    public function component($name, array $params = array())
+    {
+        return '<div class="js-'.$name.'" data-params=\''.json_encode($params, JSON_HEX_APOS).'\'></div>';
+    }
+
+    /**
      * Get config variable
      *
      * @access public
