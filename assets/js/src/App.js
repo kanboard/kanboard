@@ -36,10 +36,6 @@ Kanboard.App.prototype.execute = function() {
     this.datePicker();
     this.autoComplete();
     this.tagAutoComplete();
-
-    new Vue({
-        el: 'body'
-    });
 };
 
 Kanboard.App.prototype.keyboardShortcuts = function() {
