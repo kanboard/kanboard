@@ -161,7 +161,9 @@
     </div>
 
     <?php if (! empty($task['external_uri']) && ! empty($task['external_provider'])): ?>
-        <external-task-view url="<?= $this->url->href('ExternalTaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])) ?>"></external-task-view>
+        <?= $this->app->component('external-task-view', array(
+            'url' => $this->url->href('ExternalTaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])),
+        )) ?>
     <?php endif ?>
 
     <?php if ($editable && empty($task['date_started'])): ?>
