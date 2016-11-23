@@ -21,7 +21,7 @@ matrix:
   fast_finish: true
 
 before_script:
-  - phpenv config-rm xdebug.ini
+  - if [[ $TRAVIS_PHP_VERSION != 7.x ]]; then phpenv config-rm xdebug.ini; fi
   - phpenv config-add tests/php.ini
   - composer install
 
