@@ -1,12 +1,12 @@
-Version 1.0.35
---------------
+Version 1.0.35 (not released yet)
+--------------------------------
 
 Improvements:
 
 * Add button to close inline popups
 
-Version 1.0.34
---------------
+Version 1.0.34 (11 Oct 2016)
+---------------------------
 
 New features:
 
@@ -37,8 +37,8 @@ Bug fixes:
 * Do not show closed tasks in task move position form
 * Avoid "Controller not found" in Settings > Links
 
-Version 1.0.33
---------------
+Version 1.0.33 (6 Sep 2016)
+--------------------------
 
 New features:
 
@@ -80,8 +80,8 @@ Bug fixes:
 * Fix wrong project date format (shown as 01/01/1970)
     - If the dates still not correct, modify and save the date
 
-Version 1.0.32
---------------
+Version 1.0.32 (1 Aug 2016)
+--------------------------
 
 New features:
 
@@ -121,8 +121,8 @@ Bug fixes:
 * Fixed Markdown editor auto-grow on the task form (Safari)
 * Fixed compatibility issue with PHP 5.3 for OAuthUserProvider class
 
-Version 1.0.31
---------------
+Version 1.0.31 (4 Jul 2016)
+---------------------------
 
 New features:
 
@@ -159,8 +159,8 @@ Breaking changes:
 
 * Docker volume paths are changed to /var/www/app/{data,plugins}
 
-Version 1.0.30
---------------
+Version 1.0.30 (9 Jun 2016)
+--------------------------
 
 Improvements:
 
@@ -172,8 +172,8 @@ Bug fixes:
 * Fixed plural form in alert message
 * Fixed CSS cosmetic issue with popover and tooltips
 
-Version 1.0.29
---------------
+Version 1.0.29 (6 Jun 2016)
+--------------------------
 
 New features:
 
@@ -214,8 +214,8 @@ Breaking changes:
 * All controllers have been renamed, people who are not using URL rewriting will see different URLs
 * All models have been renamed, plugin maintainers will have to update their plugins
 
-Version 1.0.28
---------------
+Version 1.0.28 (8 May 2016)
+---------------------------
 
 New features:
 
@@ -257,8 +257,8 @@ Bug fixes:
 * Fixed form submission with Meta+Enter keyboard shortcut
 * Removed PHP notices in comment suppression view
 
-Version 1.0.27
---------------
+Version 1.0.27 (28 Mar 2016)
+----------------------------
 
 New features:
 
@@ -302,8 +302,8 @@ Bug fixes:
 * Fix invalid user filter for API procedure createLdapUser()
 * Ambiguous column name with very old version of Sqlite
 
-Version 1.0.26
---------------
+Version 1.0.26 (28 Feb 2016)
+---------------------------
 
 Breaking changes:
 
@@ -335,8 +335,8 @@ Bug fixes:
 * Fix filter dropdown not accessible when there are too many items
 * Fix regression: unable to change project in "task move/duplicate to another project"
 
-Version 1.0.25
---------------
+Version 1.0.25 (7 Feb 2016)
+--------------------------
 
 Breaking changes:
 
@@ -382,8 +382,8 @@ Bug fixes:
 * Category label is broken on the board if there's a url in the description
 * Fix pagination on task time tracking page
 
-Version 1.0.24
---------------
+Version 1.0.24 (24 Jan 2016)
+-----------------------
 
 New features:
 
@@ -424,8 +424,8 @@ Bug fixes:
 * Unable to unassign a task from the API
 * Revert back previous optimizations of TaskPosition (incompatibility with some environment)
 
-Version 1.0.23
---------------
+Version 1.0.23 (9 Jan 2016)
+--------------------------
 
 Breaking changes:
 
@@ -459,8 +459,8 @@ Bug fixes:
 * Fix pagination in group members listing
 * Avoid PHP error when enabling LDAP group provider with PHP < 5.5
 
-Version 1.0.22
---------------
+Version 1.0.22 (14 Dec 2015)
+---------------------------
 
 Breaking changes:
 
@@ -489,8 +489,8 @@ New features:
 * Add capability to reopen Gitlab issues
 * Try to load config.php from /data if not available
 
-Version 1.0.21
---------------
+Version 1.0.21 (22 Nov 2015)
+----------------------------
 
 Breaking changes:
 
@@ -528,8 +528,8 @@ Bug fixes:
 * Make CSV export compatible with PHP 5.3
 * Avoid Safari to append .html at the end of downloaded files
 
-Version 1.0.20
---------------
+Version 1.0.20 (25 Oct 2015)
+----------------------------
 
 Breaking changes:
 
@@ -555,8 +555,8 @@ Bug fixes:
 * People should not see any tasks during a search when they are not associated to a project
 * Avoid disabling the default swimlane during renaming when there is no other activated swimlane
 
-Version 1.0.19
---------------
+Version 1.0.19 (11 Oct 2015)
+-----------------------
 
 New features:
 
@@ -619,8 +619,8 @@ Bug fixes:
 * Fix Postgres issue "Cardinality violation" when there is multiple "is_milestone_of" links
 * Fix issue with due date greater than year 2038
 
-Version 1.0.18
---------------
+Version 1.0.18 (30 Aug 2015)
+----------------------------
 
 New features:
 
@@ -666,8 +666,8 @@ Bug fixes:
 * Fix screenshot feature with Firefox 40
 * Fix bug when uploading files with Cyrilic characters
 
-Version 1.0.17
---------------
+Version 1.0.17 (26 Jul 2015)
+----------------------------
 
 New features:
 
