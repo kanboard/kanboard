@@ -24,6 +24,8 @@ before_script:
   - if [[ $TRAVIS_PHP_VERSION != 7.x ]]; then phpenv config-rm xdebug.ini; fi
   - phpenv config-add tests/php.ini
   - composer install
+  - npm install
+  - ./node_modules/.bin/jshint assets/js/{core,components}
 
 script:
   - phpunit -c tests/units.$DB.xml

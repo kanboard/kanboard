@@ -8,5 +8,5 @@ KB.component('external-task-view', function (containerElement, options) {
                 KB.dom(containerElement).html('<div id="external-task-view">' + data + '</div>');
             }
         });
-    }
+    };
 });

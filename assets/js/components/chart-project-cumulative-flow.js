@@ -12,18 +12,17 @@ KB.component('chart-project-cumulative-flow', function (containerElement, option
 
             for (var j = 0; j < metrics[i].length; j++) {
 
-                if (i == 0) {
+                if (i === 0) {
                     columns.push([metrics[i][j]]);
 
                     if (j > 0) {
                         groups.push(metrics[i][j]);
                     }
-                }
-                else {
+                } else {
 
                     columns[j].push(metrics[i][j]);
 
-                    if (j == 0) {
+                    if (j === 0) {
                         categories.push(outputFormat(inputFormat.parse(metrics[i][j])));
                     }
                 }

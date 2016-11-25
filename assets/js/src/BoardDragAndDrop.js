@@ -45,7 +45,7 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
 
     if (isMobile.any) {
         $(".task-board-sort-handle").css("display", "inline");
-        params["handle"] = ".task-board-sort-handle";
+        params.handle = ".task-board-sort-handle";
     }
 
     // Set dropzone height to the height of the table cell

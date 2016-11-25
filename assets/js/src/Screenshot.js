@@ -44,7 +44,7 @@ Kanboard.Screenshot.prototype.initialize = function() {
 
 // Destroy contentEditable element
 Kanboard.Screenshot.prototype.destroy = function() {
-    if (this.pasteCatcher != null) {
+    if (this.pasteCatcher !== null) {
         document.body.removeChild(this.pasteCatcher);
     }
     else if (document.getElementById("screenshot-pastezone")) {

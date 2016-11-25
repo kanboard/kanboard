@@ -11,22 +11,21 @@ KB.component('chart-project-burndown', function (containerElement, options) {
 
             for (var j = 0; j < metrics[i].length; j++) {
 
-                if (i == 0) {
+                if (i === 0) {
                     columns.push([metrics[i][j]]);
-                }
-                else {
+                } else {
                     columns[j + 1].push(metrics[i][j]);
 
                     if (j > 0) {
 
-                        if (columns[0][i] == undefined) {
+                        if (columns[0][i] === undefined) {
                             columns[0].push(0);
                         }
 
                         columns[0][i] += metrics[i][j];
                     }
 
-                    if (j == 0) {
+                    if (j === 0) {
                         categories.push(outputFormat(inputFormat.parse(metrics[i][j])));
                     }
                 }

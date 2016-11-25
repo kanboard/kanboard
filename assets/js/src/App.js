@@ -135,7 +135,7 @@ Kanboard.App.prototype.datePicker = function() {
 Kanboard.App.prototype.tagAutoComplete = function() {
     $(".tag-autocomplete").select2({
         tags: true
-    })
+    });
 };
 
 Kanboard.App.prototype.autoComplete = function() {
@@ -144,7 +144,7 @@ Kanboard.App.prototype.autoComplete = function() {
         var field = input.data("dst-field");
         var extraField = input.data("dst-extra-field");
 
-        if ($('#form-' + field).val() == '') {
+        if ($('#form-' + field).val() === '') {
             input.parent().find("button[type=submit]").attr('disabled','disabled');
         }
 
@@ -189,7 +189,7 @@ Kanboard.App.prototype.isVisible = function() {
         property = "webkitVisibilityState";
     }
 
-    if (property != "") {
+    if (property !== "") {
         return document[property] == "visible";
     }
 

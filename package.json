@@ -10,5 +10,8 @@
     "gulp-strip-comments": "^2.4.3",
     "gulp-uglify": "^1.5.3",
     "vue": "1.0.26-csp"
+  },
+  "devDependencies": {
+    "jshint": "^2.9.4"
   }
 }
