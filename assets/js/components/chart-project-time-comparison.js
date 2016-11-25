@@ -11,7 +11,7 @@ KB.component('chart-project-time-comparison', function (containerElement, option
             categories.push(status === 'open' ? options.labelOpen : options.labelClosed);
         }
 
-        KB.el(containerElement).add(KB.el('div').attr('id', 'chart').build());
+        KB.dom(containerElement).add(KB.dom('div').attr('id', 'chart').build());
 
         c3.generate({
             data: {

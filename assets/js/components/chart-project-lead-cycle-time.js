@@ -20,7 +20,7 @@ KB.component('chart-project-lead-cycle-time', function (containerElement, option
             categories.push(metrics[i].day);
         }
 
-        KB.el(containerElement).add(KB.el('div').attr('id', 'chart').build());
+        KB.dom(containerElement).add(KB.dom('div').attr('id', 'chart').build());
 
         c3.generate({
             data: {

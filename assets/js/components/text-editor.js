@@ -5,7 +5,7 @@ KB.component('text-editor', function (containerElement, options) {
         writeModeElement = buildWriteMode();
         viewModeElement = buildViewMode();
 
-        containerElement.appendChild(KB.el('div')
+        containerElement.appendChild(KB.dom('div')
             .attr('class', 'text-editor')
             .add(viewModeElement)
             .add(writeModeElement)
@@ -13,18 +13,18 @@ KB.component('text-editor', function (containerElement, options) {
     };
 
     function buildViewMode() {
-        var toolbarElement = KB.el('div')
+        var toolbarElement = KB.dom('div')
             .attr('class', 'text-editor-toolbar')
             .for('a', [
                 {href: '#', html: '<i class="fa fa-pencil-square-o fa-fw"></i> ' + options.labelWrite, click: function() { toggleViewMode(); }}
             ])
             .build();
 
-        previewElement = KB.el('div')
+        previewElement = KB.dom('div')
             .attr('class', 'text-editor-preview-area markdown')
             .build();
 
-        return KB.el('div')
+        return KB.dom('div')
             .attr('class', 'text-editor-view-mode')
             .add(toolbarElement)
             .add(previewElement)
@@ -33,7 +33,7 @@ KB.component('text-editor', function (containerElement, options) {
     }
 
     function buildWriteMode() {
-        var toolbarElement = KB.el('div')
+        var toolbarElement = KB.dom('div')
             .attr('class', 'text-editor-toolbar')
             .for('a', [
                 {href: '#', html: '<i class="fa fa-eye fa-fw"></i> ' + options.labelPreview, click: function() { toggleViewMode(); }},
@@ -46,7 +46,7 @@ KB.component('text-editor', function (containerElement, options) {
             ])
             .build();
 
-        textarea = KB.el('textarea')
+        textarea = KB.dom('textarea')
             .attr('name', options.name)
             .attr('tabindex', options.tabindex || '-1')
             .attr('required', options.required || false)
@@ -55,7 +55,7 @@ KB.component('text-editor', function (containerElement, options) {
             .text(options.text)
             .build();
 
-        return KB.el('div')
+        return KB.dom('div')
             .attr('class', 'text-editor-write-mode')
             .add(toolbarElement)
             .add(textarea)
@@ -63,9 +63,9 @@ KB.component('text-editor', function (containerElement, options) {
     }
 
     function toggleViewMode() {
-        KB.el(previewElement).html(marked(textarea.value, {sanitize: true}));
-        KB.el(viewModeElement).toggle();
-        KB.el(writeModeElement).toggle();
+        KB.dom(previewElement).html(marked(textarea.value, {sanitize: true}));
+        KB.dom(viewModeElement).toggle();
+        KB.dom(writeModeElement).toggle();
     }
 
     function getSelectedText() {

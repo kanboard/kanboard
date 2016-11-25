@@ -5,7 +5,7 @@ KB.component('external-task-view', function (containerElement, options) {
             cache: false,
             url: options.url,
             success: function(data) {
-                KB.el(containerElement).html('<div id="external-task-view">' + data + '</div>');
+                KB.dom(containerElement).html('<div id="external-task-view">' + data + '</div>');
             }
         });
     }

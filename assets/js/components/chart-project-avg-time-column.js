@@ -10,7 +10,7 @@ KB.component('chart-project-avg-time-column', function (containerElement, option
             categories.push(metrics[column_id].title);
         }
 
-        KB.el(containerElement).add(KB.el('div').attr('id', 'chart').build());
+        KB.dom(containerElement).add(KB.dom('div').attr('id', 'chart').build());
 
         c3.generate({
             data: {
