@@ -157,9 +157,5 @@ Kanboard.Popover.prototype.afterOpen = function() {
     this.app.autoComplete();
     this.app.tagAutoComplete();
 
-    new Vue({
-        el: '#popover-container'
-    });
-
     KB.render();
 };

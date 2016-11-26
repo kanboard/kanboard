@@ -51,8 +51,8 @@ KB.component('text-editor', function (containerElement, options) {
             .attr('tabindex', options.tabindex || '-1')
             .attr('required', options.required || false)
             .attr('autofocus', options.autofocus || null)
-            .attr('placeholder', options.placeholder || '')
-            .text(options.text)
+            .text(options.text) // Order is important for IE11
+            .attr('placeholder', options.placeholder || null)
             .build();
 
         return KB.dom('div')
@@ -124,7 +124,7 @@ KB.component('text-editor', function (containerElement, options) {
                 document.execCommand('ms-beginUndoUnit');
             } catch (error) {}
 
-            textarea.value = replaceTextRange(text, textarea.selectionStart, textarea.selectionEnd, replacedText);
+            textarea.value = replaceTextRange(textarea.value, textarea.selectionStart, textarea.selectionEnd, replacedText);
 
             try {
                 document.execCommand('ms-endUndoUnit');

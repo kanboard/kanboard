@@ -1,4 +1,3 @@
-
 KB.dom = function (tag) {
 
     function DomManipulation(tag) {
@@ -31,16 +30,30 @@ KB.dom = function (tag) {
             return this;
         };
 
-        this.click = function (callback) {
-            element.onclick = function (e) {
+        this.on = function (eventName, callback) {
+            element.addEventListener(eventName, function (e) {
                 e.preventDefault();
-                callback();
-            };
+                callback(e.target);
+            });
+
             return this;
+        };
+
+        this.click = function (callback) {
+            return this.on('click', callback);
+        };
+
+        this.change = function (callback) {
+            return this.on('change', callback);
         };
 
         this.add = function (node) {
             element.appendChild(node);
+            return this;
+        };
+
+        this.replace = function (node) {
+            element.parentNode.replaceChild(node, element);
             return this;
         };
 
@@ -73,6 +86,16 @@ KB.dom = function (tag) {
             return element.classList.contains(className);
         };
 
+        this.disable = function () {
+            element.disabled = true;
+            return this;
+        };
+
+        this.enable = function () {
+            element.disabled = false;
+            return this;
+        };
+
         this.parent = function (selector) {
             for (; element && element !== document; element = element.parentNode) {
                 if (element.matches(selector)) {
@@ -83,7 +106,7 @@ KB.dom = function (tag) {
             return null;
         };
 
-        this.child = function (selector) {
+        this.find = function (selector) {
             return element.querySelector(selector);
         };
 
@@ -117,4 +140,14 @@ KB.dom = function (tag) {
     }
 
     return new DomManipulation(tag);
+};
+
+KB.find = function (selector) {
+    var element = document.querySelector(selector);
+
+    if (element) {
+        return KB.dom(element);
+    }
+
+    return null;
 };

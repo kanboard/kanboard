@@ -1,6 +1,6 @@
 {
   "name": "kanboard",
-  "dependencies": {
+  "devDependencies": {
     "bower": "^1.7.9",
     "gulp": "^3.9.1",
     "gulp-bower": "0.0.13",
@@ -9,9 +9,6 @@
     "gulp-sass": "^2.3.2",
     "gulp-strip-comments": "^2.4.3",
     "gulp-uglify": "^1.5.3",
-    "vue": "1.0.26-csp"
-  },
-  "devDependencies": {
     "jshint": "^2.9.4"
   }
 }

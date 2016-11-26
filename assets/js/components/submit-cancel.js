@@ -1,35 +1,52 @@
-Vue.component('submit-cancel', {
-    props: ['labelButton', 'labelOr', 'labelCancel', 'callback'],
-    template: '<div class="form-actions">' +
-              '<button type="button" class="btn btn-blue" @click="onSubmit" :disabled="isLoading">' +
-              '<span v-show="isLoading"><i class="fa fa-spinner fa-pulse"></i> </span>' +
-              '{{ labelButton }}' +
-              '</button> ' +
-              '{{ labelOr }} <a href="#" v-on:click.prevent="onCancel">{{ labelCancel }}</a>' +
-              '</div>'
-    ,
-    data: function () {
-        return {
-            loading: false
-        };
-    },
-    computed: {
-        isLoading: function () {
-            return this.loading;
-        }
-    },
-    methods: {
-        onSubmit: function () {
-            this.loading = true;
-            this.callback();
-        },
-        onCancel: function () {
-            _KB.get('Popover').close();
-        }
-    },
-    events: {
-        'submitCancelled': function() {
-            this.loading = false;
-        }
+KB.component('submit-cancel', function (containerElement, options) {
+    var isLoading = false;
+
+    function onSubmit() {
+        isLoading = true;
+        KB.find('#modal-submit-button').replace(buildButton());
+        KB.trigger('modal.submit');
     }
+
+    function onCancel() {
+        KB.trigger('modal.cancel');
+        _KB.get('Popover').close();
+    }
+
+    function onStop() {
+        isLoading = false;
+        KB.find('#modal-submit-button').replace(buildButton());
+    }
+
+    function buildButton() {
+        var button = KB.dom('button')
+            .click(onSubmit)
+            .attr('id', 'modal-submit-button')
+            .attr('type', 'submit')
+            .attr('class', 'btn btn-blue');
+
+        if (isLoading) {
+            button
+                .disable()
+                .add(KB.dom('i').attr('class', 'fa fa-spinner fa-pulse').build())
+                .text(' ')
+            ;
+        }
+
+        return button
+            .text(options.submitLabel)
+            .build();
+    }
+
+    this.render = function () {
+        KB.on('modal.stop', onStop);
+
+        var element = KB.dom('div')
+            .attr('class', 'form-actions')
+            .add(buildButton())
+            .text(' ' + options.orLabel + ' ')
+            .add(KB.dom('a').attr('href', '#').click(onCancel).text(options.cancelLabel).build())
+            .build();
+
+        containerElement.appendChild(element);
+    };
 });

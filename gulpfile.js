@@ -7,8 +7,9 @@ var strip = require('gulp-strip-comments');
 
 var src = {
     js: [
-        'assets/js/core/kb.js',
-        'assets/js/core/dom.js',
+        'assets/js/polyfills/*.js',
+        'assets/js/core/base.js',
+        'assets/js/core/!(base|bootstrap)*.js',
         'assets/js/components/*.js',
         'assets/js/core/bootstrap.js',
         'assets/js/src/Namespace.js',
@@ -69,13 +70,6 @@ gulp.task('bower', function() {
 });
 
 gulp.task('vendor', function() {
-    gulp.src('node_modules/vue/dist/vue.min.js')
-        .pipe(strip({trim: true}))
-        .pipe(gulp.dest('node_modules/vue/dist/'))
-    ;
-
-    vendor.js.push('node_modules/vue/dist/vue.min.js');
-
     gulp.src(vendor.js)
         .pipe(concat('vendor.min.js'))
         .pipe(gulp.dest(dist.js))

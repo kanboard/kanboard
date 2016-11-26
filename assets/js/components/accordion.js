@@ -3,6 +3,6 @@ KB.onClick('.accordion-toggle', function(e) {
 
     if (section) {
         KB.dom(section).toggleClass('accordion-collapsed');
-        KB.dom(KB.dom(section).child('.accordion-content')).toggle();
+        KB.dom(KB.dom(section).find('.accordion-content')).toggle();
     }
 });
