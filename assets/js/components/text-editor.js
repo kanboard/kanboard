@@ -10,6 +10,10 @@ KB.component('text-editor', function (containerElement, options) {
             .add(viewModeElement)
             .add(writeModeElement)
             .build());
+
+        if (options.autofocus) {
+            textarea.focus();
+        }
     };
 
     function buildViewMode() {
@@ -50,7 +54,6 @@ KB.component('text-editor', function (containerElement, options) {
             .attr('name', options.name)
             .attr('tabindex', options.tabindex || '-1')
             .attr('required', options.required || false)
-            .attr('autofocus', options.autofocus || null)
             .text(options.text) // Order is important for IE11
             .attr('placeholder', options.placeholder || null)
             .build();

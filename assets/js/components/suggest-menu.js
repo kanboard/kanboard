@@ -55,7 +55,6 @@ KB.component('suggest-menu', function(containerElement, options) {
         var lines = element.value.substring(0, element.selectionEnd).split("\n");
         var lastLine = lines[lines.length - 1];
         var words = lastLine.split(' ');
-        console.log(words);
         return words[words.length - 1];
     }
 

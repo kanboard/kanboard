@@ -220,6 +220,7 @@ class FormHelper extends Base
             'labelPreview' => t('Preview'),
             'labelWrite' => t('Write'),
             'placeholder' => t('Write your text in Markdown'),
+            'autofocus' => isset($attributes['autofocus']) && $attributes['autofocus']
         );
 
         if (isset($values['project_id'])) {
