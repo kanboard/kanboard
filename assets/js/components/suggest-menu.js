@@ -38,11 +38,25 @@ KB.component('suggest-menu', function(containerElement, options) {
         var element = KB.find('.suggest-menu-item.active');
         var value = element.data('value');
         var trigger = element.data('trigger');
-        var position = containerElement.value.lastIndexOf(trigger) + 1;
-        var content = containerElement.value.substring(0, position);
+        var content = containerElement.value;
+        var text = getLastWord(containerElement);
+        var substitute = trigger + value + ' ';
+        var before = content.substring(0, containerElement.selectionStart - text.length);
+        var after = content.substring(containerElement.selectionEnd);
+        var position = before.length + substitute.length;
 
-        containerElement.value = content + value;
+        containerElement.value = before + substitute + after;
+        containerElement.setSelectionRange(position, position);
+
         destroy();
+    }
+
+    function getLastWord(element) {
+        var lines = element.value.substring(0, element.selectionEnd).split("\n");
+        var lastLine = lines[lines.length - 1];
+        var words = lastLine.split(' ');
+        console.log(words);
+        return words[words.length - 1];
     }
 
     function getParentElement() {
@@ -103,7 +117,7 @@ KB.component('suggest-menu', function(containerElement, options) {
     }
 
     function search(element) {
-        var text = element.value.substring(element.value.lastIndexOf(' ') + 1, element.selectionEnd);
+        var text = getLastWord(element);
         var trigger = getTrigger(text, options.triggers);
 
         destroy();
