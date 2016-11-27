@@ -10,13 +10,13 @@
     <?= $this->form->hidden('project_id', $values) ?>
 
     <?= $this->form->label(t('Name'), 'name') ?>
-    <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="50"')) ?>
+    <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="50"', 'tabindex="1"')) ?>
 
     <?= $this->form->label(t('Description'), 'description') ?>
-    <?= $this->form->textEditor('description', $values, $errors) ?>
+    <?= $this->form->textEditor('description', $values, $errors, array('tabindex' => 2)) ?>
 
     <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
+        <button type="submit" class="btn btn-blue" tabindex="3"><?= t('Save') ?></button>
         <?= t('or') ?>
         <?= $this->url->link(t('cancel'), 'SwimlaneController', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
     </div>

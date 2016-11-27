@@ -131,16 +131,34 @@ class FormHelper extends Base
      * Display a checkbox field
      *
      * @access public
-     * @param  string  $name      Field name
-     * @param  string  $label     Form label
-     * @param  string  $value     Form value
-     * @param  boolean $checked   Field selected or not
-     * @param  string  $class     CSS class
+     * @param  string  $name        Field name
+     * @param  string  $label       Form label
+     * @param  string  $value       Form value
+     * @param  boolean $checked     Field selected or not
+     * @param  string  $class       CSS class
+     * @param  array   $attributes
      * @return string
      */
-    public function checkbox($name, $label, $value, $checked = false, $class = '')
+    public function checkbox($name, $label, $value, $checked = false, $class = '', array $attributes = array())
     {
-        return '<label><input type="checkbox" name="'.$name.'" class="'.$class.'" value="'.$this->helper->text->e($value).'" '.($checked ? 'checked="checked"' : '').'>&nbsp;'.$this->helper->text->e($label).'</label>';
+        $htmlAttributes = '';
+
+        if ($checked) {
+            $attributes['checked'] = 'checked';
+        }
+
+        foreach ($attributes as $attribute => $value) {
+            $htmlAttributes .= sprintf('%s="%s"', $attribute, $this->helper->text->e($value));
+        }
+
+        return sprintf(
+            '<label><input type="checkbox" name="%s" class="%s" value="%s" %s>&nbsp;%s</label>',
+            $name,
+            $class,
+            $this->helper->text->e($value),
+            $htmlAttributes,
+            $this->helper->text->e($label)
+        );
     }
 
     /**

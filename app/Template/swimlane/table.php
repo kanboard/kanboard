@@ -20,12 +20,15 @@
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
                     <li>
+                        <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>
                         <?= $this->url->link(t('Edit'), 'SwimlaneController', 'editDefault', array('project_id' => $project['id']), false, 'popover') ?>
                     </li>
                     <li>
                         <?php if ($default_swimlane['show_default_swimlane'] == 1): ?>
+                            <i class="fa fa-toggle-off fa-fw" aria-hidden="true"></i>
                             <?= $this->url->link(t('Disable'), 'SwimlaneController', 'disableDefault', array('project_id' => $project['id']), true) ?>
                         <?php else: ?>
+                            <i class="fa fa-toggle-on fa-fw" aria-hidden="true"></i>
                             <?= $this->url->link(t('Enable'), 'SwimlaneController', 'enableDefault', array('project_id' => $project['id']), true) ?>
                         <?php endif ?>
                     </li>
@@ -55,16 +58,20 @@
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
                     <li>
+                        <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>
                         <?= $this->url->link(t('Edit'), 'SwimlaneController', 'edit', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
                     </li>
                     <li>
                         <?php if ($swimlane['is_active']): ?>
+                            <i class="fa fa-toggle-off fa-fw" aria-hidden="true"></i>
                             <?= $this->url->link(t('Disable'), 'SwimlaneController', 'disable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
                         <?php else: ?>
+                            <i class="fa fa-toggle-on fa-fw" aria-hidden="true"></i>
                             <?= $this->url->link(t('Enable'), 'SwimlaneController', 'enable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
                         <?php endif ?>
                     </li>
                     <li>
+                        <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
                         <?= $this->url->link(t('Remove'), 'SwimlaneController', 'confirm', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
                     </li>
                 </ul>

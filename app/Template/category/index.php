@@ -15,9 +15,11 @@
             <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
             <ul>
                 <li>
+                    <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>
                     <?= $this->url->link(t('Edit'), 'CategoryController', 'edit', array('project_id' => $project['id'], 'category_id' => $category_id), false, 'popover') ?>
                 </li>
                 <li>
+                    <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
                     <?= $this->url->link(t('Remove'), 'CategoryController', 'confirm', array('project_id' => $project['id'], 'category_id' => $category_id), false, 'popover') ?>
                 </li>
             </ul>
