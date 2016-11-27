@@ -48,6 +48,7 @@ class CommentController extends BaseController
      */
     public function create(array $values = array(), array $errors = array())
     {
+        $project = $this->getProject();
         $task = $this->getTask();
 
         if (empty($values)) {
@@ -57,10 +58,13 @@ class CommentController extends BaseController
             );
         }
 
-        $this->response->html($this->template->render('comment/create', array(
+        $values['project_id'] = $task['project_id'];
+
+        $this->response->html($this->helper->layout->task('comment/create', array(
             'values' => $values,
             'errors' => $errors,
             'task' => $task,
+            'project' => $project,
         )));
     }
 
@@ -103,8 +107,14 @@ class CommentController extends BaseController
         $task = $this->getTask();
         $comment = $this->getComment();
 
+        if (empty($values)) {
+            $values = $comment;
+        }
+
+        $values['project_id'] = $task['project_id'];
+
         $this->response->html($this->template->render('comment/edit', array(
-            'values' => empty($values) ? $comment : $values,
+            'values' => $values,
             'errors' => $errors,
             'comment' => $comment,
             'task' => $task,
