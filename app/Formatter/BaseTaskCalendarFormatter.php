@@ -2,8 +2,6 @@
 
 namespace Kanboard\Formatter;
 
-use Kanboard\Core\Filter\FormatterInterface;
-
 /**
  * Common class to handle calendar events
  *
@@ -34,7 +32,7 @@ abstract class BaseTaskCalendarFormatter extends BaseFormatter
      * @access public
      * @param  string  $start_column    Column name for the start date
      * @param  string  $end_column      Column name for the end date
-     * @return FormatterInterface
+     * @return $this
      */
     public function setColumns($start_column, $end_column = '')
     {

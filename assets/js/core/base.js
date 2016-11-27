@@ -61,7 +61,13 @@ KB.render = function () {
 
         for (var i = 0; i < elementList.length; i++) {
             if (this.components.hasOwnProperty(name)) {
-                var component = KB.getComponent(name, elementList[i], JSON.parse(elementList[i].dataset.params));
+                var options;
+
+                if (elementList[i].dataset.params) {
+                    options = JSON.parse(elementList[i].dataset.params);
+                }
+
+                var component = KB.getComponent(name, elementList[i], options);
                 component.render();
                 elementList[i].className = elementList[i].className + '-rendered';
             }

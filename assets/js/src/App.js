@@ -64,8 +64,10 @@ Kanboard.App.prototype.keyboardShortcuts = function() {
 
     // Close popover and dropdown
     Mousetrap.bindGlobal("esc", function() {
-        self.get("Popover").close();
-        self.get("Dropdown").close();
+        if (! document.getElementById('suggest-menu')) {
+            self.get("Popover").close();
+            self.get("Dropdown").close();
+        }
     });
 
     // Show keyboard shortcut

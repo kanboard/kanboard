@@ -26,7 +26,7 @@ class ProjectPermissionModelTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user1')));
-        $this->assertEquals(3, $userModel->create(array('username' => 'user2')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'name' => 'User 2', 'email' => 'test@here', 'avatar_path' => 'test')));
         $this->assertEquals(4, $userModel->create(array('username' => 'user3')));
 
         $this->assertEquals(1, $groupModel->create('Group A'));
@@ -35,7 +35,24 @@ class ProjectPermissionModelTest extends Base
         $this->assertTrue($groupRoleModel->addGroup(1, 1, Role::PROJECT_MEMBER));
         $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MANAGER));
 
-        $this->assertEquals(array('user1', 'user2'), $projectPermissionModel->findUsernames(1, 'us'));
+        $expected = array(
+            'user1' => array(
+                'username' => 'user1',
+                'name' => null,
+                'email' => null,
+                'avatar_path' => null,
+                'id' => '2',
+            ),
+            'user2' => array(
+                'username' => 'user2',
+                'name' => 'User 2',
+                'email' => 'test@here',
+                'avatar_path' => 'test',
+                'id' => '3',
+            )
+        );
+
+        $this->assertEquals($expected, $projectPermissionModel->findUsernames(1, 'us'));
         $this->assertEmpty($projectPermissionModel->findUsernames(1, 'a'));
         $this->assertEmpty($projectPermissionModel->findUsernames(2, 'user'));
     }

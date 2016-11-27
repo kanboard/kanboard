@@ -59,6 +59,38 @@ class FunctionTest extends Base
         $this->assertSame($expected, array_column_index($input, 'k1'));
     }
 
+    public function testArrayColumnIndexUnique()
+    {
+        $input = array(
+            array(
+                'k1' => 11,
+                'k2' => 22,
+            ),
+            array(
+                'k1' => 11,
+                'k2' => 55,
+            ),
+            array(
+                'k1' => 33,
+                'k2' => 44,
+            ),
+            array()
+        );
+
+        $expected = array(
+            11 => array(
+                'k1' => 11,
+                'k2' => 22,
+            ),
+            33 => array(
+                'k1' => 33,
+                'k2' => 44,
+            )
+        );
+
+        $this->assertSame($expected, array_column_index_unique($input, 'k1'));
+    }
+
     public function testArrayMergeRelation()
     {
         $relations = array(

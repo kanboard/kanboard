@@ -10,6 +10,14 @@ KB.dom = function (tag) {
             return this;
         };
 
+        this.data = function (attribute, value) {
+            if (arguments.length === 1) {
+                return element.dataset[attribute];
+            }
+            element.dataset[attribute] = value;
+            return this;
+        };
+
         this.hide = function () {
             element.style.display = 'none';
             return this;
@@ -30,6 +38,11 @@ KB.dom = function (tag) {
             return this;
         };
 
+        this.style = function(attribute, value) {
+            element.style[attribute] = value;
+            return this;
+        };
+
         this.on = function (eventName, callback) {
             element.addEventListener(eventName, function (e) {
                 e.preventDefault();
@@ -41,6 +54,10 @@ KB.dom = function (tag) {
 
         this.click = function (callback) {
             return this.on('click', callback);
+        };
+
+        this.mouseover = function (callback) {
+            return this.on('mouseover', callback);
         };
 
         this.change = function (callback) {
@@ -93,6 +110,11 @@ KB.dom = function (tag) {
 
         this.enable = function () {
             element.disabled = false;
+            return this;
+        };
+
+        this.remove = function () {
+            element.parentNode.removeChild(element);
             return this;
         };
 

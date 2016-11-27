@@ -55,6 +55,10 @@ KB.component('text-editor', function (containerElement, options) {
             .attr('placeholder', options.placeholder || null)
             .build();
 
+        if (options.mentionUrl) {
+            KB.getComponent('suggest-menu', textarea, {triggers: {'@': options.mentionUrl}}).render();
+        }
+
         return KB.dom('div')
             .attr('class', 'text-editor-write-mode')
             .add(toolbarElement)

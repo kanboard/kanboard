@@ -1,0 +1,28 @@
+@import variables
+
+#suggest-menu
+  position: absolute
+  display: block
+  z-index: 1000
+  min-width: 160px
+  padding: 5px 0
+  background: #fff
+  list-style: none
+  border: 1px solid #ccc
+  border-radius: 3px
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175)
+
+.suggest-menu-item
+  white-space: nowrap
+  padding: 3px 10px
+  color: color('primary')
+  font-weight: bold
+  cursor: pointer
+  &.active
+    color: #fff
+    background: #428bca
+    small
+      color: #fff
+  small
+    color: color('light')
+    font-weight: normal

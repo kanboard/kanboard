@@ -7,6 +7,7 @@ var strip = require('gulp-strip-comments');
 
 var src = {
     js: [
+        'node_modules/textarea-caret/index.js',
         'assets/js/polyfills/*.js',
         'assets/js/core/base.js',
         'assets/js/core/!(base|bootstrap)*.js',

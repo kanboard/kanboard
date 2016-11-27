@@ -204,6 +204,10 @@ class FormHelper extends Base
             'placeholder' => t('Write your text in Markdown'),
         );
 
+        if (isset($values['project_id'])) {
+            $params['mentionUrl'] = $this->helper->url->to('UserAjaxController', 'mention', array('project_id' => $values['project_id']));
+        }
+
         $html = '<div class="js-text-editor" data-params=\''.json_encode($params, JSON_HEX_APOS).'\'></div>';
         $html .= $this->errorList($errors, $name);
 

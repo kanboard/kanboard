@@ -4,7 +4,6 @@ namespace Kanboard\Formatter;
 
 use Kanboard\Core\Base;
 use PicoDb\Table;
-use Pimple\Container;
 
 /**
  * Class BaseFormatter
@@ -21,19 +20,6 @@ abstract class BaseFormatter extends Base
      * @var Table
      */
     protected $query;
-
-    /**
-     * Get object instance
-     *
-     * @static
-     * @access public
-     * @param  Container $container
-     * @return static
-     */
-    public static function getInstance(Container $container)
-    {
-        return new static($container);
-    }
 
     /**
      * Set query
