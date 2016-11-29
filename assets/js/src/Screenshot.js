@@ -9,6 +9,10 @@ Kanboard.Screenshot.prototype.onPopoverOpened = function() {
     }
 };
 
+Kanboard.Screenshot.prototype.onPopoverClosed = function() {
+    this.destroy();
+};
+
 // Setup event listener and workarounds
 Kanboard.Screenshot.prototype.initialize = function() {
     this.destroy();
