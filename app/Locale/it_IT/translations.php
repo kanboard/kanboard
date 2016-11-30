@@ -297,7 +297,7 @@ return array(
     'Display another project' => 'Mostra un altro progetto',
     'Created by %s' => 'Creato da %s',
     'Tasks Export' => 'Export dei task',
-    'Start Date' => 'Data d\'inizio',
+    'Start Date' => 'Data di inizio',
     'End Date' => 'Data di fine',
     'Execute' => 'Esegui',
     'Task Id' => 'Id del task',
