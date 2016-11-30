@@ -10,6 +10,10 @@ Breaking changes:
 
 * Rename command line tool `./kanboard` to `./cli`
 
+Bug fixes:
+
+* Fix link generation when user mention is followed by a punctuation mark
+
 Version 1.0.34
 --------------
 

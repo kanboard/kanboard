@@ -86,7 +86,7 @@ class Markdown extends Parsedown
      */
     protected function inlineUserLink(array $Excerpt)
     {
-        if (! $this->isPublicLink && preg_match('/^@([^\s]+)/', $Excerpt['text'], $matches)) {
+        if (! $this->isPublicLink && preg_match('/^@([^\s,!.:?]+)/', $Excerpt['text'], $matches)) {
             $user_id = $this->container['userModel']->getIdByUsername($matches[1]);
 
             if (! empty($user_id)) {
