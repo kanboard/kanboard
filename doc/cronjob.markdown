@@ -25,7 +25,7 @@ sudo crontab -u www-data -e
 Example to execute the daily cronjob at 8am:
 
 ```bash
-0 8 * * * cd /path/to/kanboard && ./kanboard cronjob >/dev/null 2>&1
+0 8 * * * cd /path/to/kanboard && ./cli cronjob >/dev/null 2>&1
 ```
 
 Note: the cronjob process must have write access to the database in case you are using Sqlite.

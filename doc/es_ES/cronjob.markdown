@@ -1,4 +1,4 @@
-Programación de Jobs en background
+Programaciï¿½n de Jobs en background
 ==================================
 
 Para trabajar correctamente,Kanboard requiere que se corra un job en background diariamente.
@@ -10,7 +10,7 @@ Este job es necesario para estas caracteristicas:
 - Enviar notificaciones de tareas atrasadas.
 - Ejecutar automaticamente acciones conectadas a el evento "Daily background job for tasks"
 
-Configuración de plataformas Unix y Linux
+Configuraciï¿½n de plataformas Unix y Linux
 -----------------------------------------
 
 Hay varias maneras de definir una tarea programada en sistemas operativos Unix/Linux , este ejemplo es para Ubuntu 14.04 .
@@ -25,7 +25,7 @@ sudo crontab -u www-data -e
 Ejemplo para ejecutar diariamente cronjob a las 8am:
 
 ```bash
-0 8 * * * cd /path/to/kanboard && ./kanboard cronjob >/dev/null 2>&1
+0 8 * * * cd /path/to/kanboard && ./cli cronjob >/dev/null 2>&1
 ```
 
 Nota : El proceso del cronjob debe tener acceso a escritura de la base de datos en caso de usar Sqlite.

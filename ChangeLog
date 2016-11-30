@@ -4,6 +4,11 @@ Version 1.0.35
 Improvements:
 
 * Add button to close inline popups
+* Simplify `.htaccess` to avoid potential issues with possible specific Apache configurations
+
+Breaking changes:
+
+* Rename command line tool `./kanboard` to `./cli`
 
 Version 1.0.34
 --------------

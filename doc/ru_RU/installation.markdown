@@ -75,6 +75,7 @@
 
     ├── assets -> ../kanboard/assets
     ├── doc -> ../kanboard/doc
+    ├── cli -> ../kanboard/cli
     ├── favicon.ico -> ../kanboard/favicon.ico
     ├── index.php -> ../kanboard/index.php
     ├── jsonrpc.php -> ../kanboard/jsonrpc.php

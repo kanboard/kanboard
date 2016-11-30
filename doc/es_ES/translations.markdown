@@ -50,7 +50,7 @@ How to find missing translations in the applications?
 From a terminal, run the following command:
 
 ```bash
-./kanboard locale:compare
+./cli locale:compare
 ```
 
 All missing and unused translations are displayed on the screen.
@@ -62,7 +62,7 @@ How to synchronize translation files?
 From a Unix shell run this command:
 
 ```bash
-./kanboard locale:sync
+./cli locale:sync
 ```
 
 The French translation is used a reference to other locales.

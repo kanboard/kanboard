@@ -44,6 +44,7 @@ Si desea instalar Kanboard fuera de la raíz de documentos del servidor web, es 
 ```bash
 .
 ├── assets -> ../kanboard/assets
+├── cli -> ../kanboard/cli
 ├── doc -> ../kanboard/doc
 ├── favicon.ico -> ../kanboard/favicon.ico
 ├── index.php -> ../kanboard/index.php
