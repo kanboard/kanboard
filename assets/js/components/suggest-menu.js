@@ -194,8 +194,8 @@ KB.component('suggest-menu', function(containerElement, options) {
     function renderMenu(items) {
         var parentElement = getParentElement();
         var caretPosition = getCaretCoordinates(containerElement, containerElement.selectionEnd);
-        var left = caretPosition.left + containerElement.offsetLeft;
-        var top = caretPosition.top + containerElement.offsetTop + 16;
+        var left = caretPosition.left + containerElement.offsetLeft - containerElement.scrollLeft;
+        var top = caretPosition.top + containerElement.offsetTop - containerElement.scrollTop + 16;
 
         document.addEventListener('keydown', onKeyDown, false);
 
