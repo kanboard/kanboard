@@ -118,9 +118,20 @@ KB.component('text-editor', function (containerElement, options) {
     function insertText(replacedText) {
         var result = false;
 
-        selectionStart = textarea.selectionStart;
-        selectionEnd = textarea.selectionEnd;
         textarea.focus();
+
+        // Fix issue with IE11 (last line with wrong position)
+        if (textarea.value.length < textarea.selectionStart) {
+            selectionStart = textarea.value.length;
+        } else {
+            selectionStart = textarea.selectionStart;
+        }
+
+        if (textarea.selectionStart === textarea.selectionEnd) {
+            selectionEnd = selectionStart;
+        } else {
+            selectionEnd = textarea.selectionEnd;
+        }
 
         if (document.queryCommandSupported('insertText')) {
             result = document.execCommand('insertText', false, replacedText);
@@ -131,7 +142,7 @@ KB.component('text-editor', function (containerElement, options) {
                 document.execCommand('ms-beginUndoUnit');
             } catch (error) {}
 
-            textarea.value = replaceTextRange(textarea.value, textarea.selectionStart, textarea.selectionEnd, replacedText);
+            textarea.value = replaceTextRange(textarea.value, selectionStart, textarea.selectionEnd, replacedText);
 
             try {
                 document.execCommand('ms-endUndoUnit');
