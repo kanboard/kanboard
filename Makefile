@@ -9,7 +9,10 @@ static: clean
 	@ npm install
 	@ ./node_modules/.bin/gulp bower
 	@ ./node_modules/.bin/gulp vendor js css
-	@ ./node_modules/.bin/jshint assets/js/{core,components}
+	@ ./node_modules/.bin/jshint assets/js/{core,components,polyfills}
+
+jshint:
+	@ ./node_modules/.bin/jshint assets/js/{core,components,polyfills}
 
 archive:
 	@ echo "Build archive: version=${version}, destination=${dst}"
@@ -59,8 +62,6 @@ test-mysql:
 
 test-postgres:
 	@ ./vendor/bin/phpunit -c tests/units.postgres.xml
-
-unittest: test-sqlite test-mysql test-postgres
 
 test-browser:
 	@ ./vendor/bin/phpunit -c tests/acceptance.xml
