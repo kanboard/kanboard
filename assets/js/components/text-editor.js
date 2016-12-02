@@ -50,13 +50,25 @@ KB.component('text-editor', function (containerElement, options) {
             ])
             .build();
 
-        textarea = KB.dom('textarea')
-            .attr('name', options.name)
-            .attr('tabindex', options.tabindex || '-1')
-            .attr('required', options.required || false)
-            .text(options.text) // Order is important for IE11
-            .attr('placeholder', options.placeholder || null)
-            .build();
+        var textareaElement = KB.dom('textarea');
+        textareaElement.attr('name', options.name);
+
+        if (options.tabindex) {
+            textareaElement.attr('tabindex', options.tabindex);
+        }
+
+        if (options.required) {
+            textareaElement.attr('required', 'required');
+        }
+
+        // Order is important for IE11 (especially for the placeholder)
+        textareaElement.text(options.text);
+
+        if (options.placeholder) {
+            textareaElement.attr('placeholder', options.placeholder);
+        }
+
+        textarea = textareaElement.build();
 
         if (options.mentionUrl) {
             KB.getComponent('suggest-menu', textarea, {triggers: {'@': options.mentionUrl}}).render();
