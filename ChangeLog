@@ -5,6 +5,7 @@ Improvements:
 
 * Add button to close inline popups
 * Simplify `.htaccess` to avoid potential issues with possible specific Apache configurations
+* Replace notifications Javascript code by CSS
 
 Breaking changes:
 
