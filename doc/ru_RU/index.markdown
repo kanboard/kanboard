@@ -178,7 +178,6 @@
 
 -   [Запуск Kanboard на Cloudron](cloudron.markdown)
 
--   [Запуск Kanboard на Nitrous](nitrous.markdown)
 
 
 ### Настройка[¶](#configuration "Ссылка на этот заголовок")

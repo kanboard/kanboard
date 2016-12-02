@@ -12,7 +12,6 @@ Makefile
 *.sh
 app.json
 bower.json
-nitrous.json
 package.json
 Vagrantfile
 web.config

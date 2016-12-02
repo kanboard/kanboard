@@ -110,7 +110,6 @@ Technical details
 - [Run Kanboard with Docker](docker.markdown)
 - [Run Kanboard with Vagrant](vagrant.markdown)
 - [Run Kanboard on Cloudron](cloudron.markdown)
-- [Run Kanboard on Nitrous](nitrous.markdown)
 
 ### Configuration
 
