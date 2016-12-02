@@ -10,6 +10,7 @@ use Kanboard\Job\SubtaskEventJob;
 use Kanboard\Job\TaskEventJob;
 use Kanboard\Job\TaskFileEventJob;
 use Kanboard\Job\TaskLinkEventJob;
+use Kanboard\Job\UserMentionJob;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -60,6 +61,10 @@ class JobProvider implements ServiceProviderInterface
 
         $container['projectMetricJob'] = $container->factory(function ($c) {
             return new ProjectMetricJob($c);
+        });
+
+        $container['userMentionJob'] = $container->factory(function ($c) {
+            return new UserMentionJob($c);
         });
 
         return $container;

@@ -32,5 +32,7 @@ class TaskFileEventBuilderTest extends Base
         $this->assertInstanceOf('Kanboard\Event\TaskFileEvent', $event);
         $this->assertNotEmpty($event['file']);
         $this->assertNotEmpty($event['task']);
+        $this->assertEquals(1, $event->getTaskId());
+        $this->assertEquals(1, $event->getProjectId());
     }
 }

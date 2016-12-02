@@ -6,6 +6,7 @@ Improvements:
 * Add button to close inline popups
 * Simplify `.htaccess` to avoid potential issues with possible specific Apache configurations
 * Replace notifications Javascript code by CSS
+* Refactoring of user mentions job
 
 Breaking changes:
 
@@ -14,6 +15,7 @@ Breaking changes:
 Bug fixes:
 
 * Fix link generation when user mention is followed by a punctuation mark
+* Make user mentions works again
 
 Version 1.0.34
 --------------

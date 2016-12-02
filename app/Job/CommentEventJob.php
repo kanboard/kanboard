@@ -31,7 +31,6 @@ class CommentEventJob extends BaseJob
      *
      * @param  int    $commentId
      * @param  string $eventName
-     * @return $this
      */
     public function execute($commentId, $eventName)
     {
@@ -43,7 +42,8 @@ class CommentEventJob extends BaseJob
             $this->dispatcher->dispatch($eventName, $event);
 
             if ($eventName === CommentModel::EVENT_CREATE) {
-                $this->userMentionModel->fireEvents($event['comment']['comment'], CommentModel::EVENT_USER_MENTION, $event);
+                $userMentionJob = $this->userMentionJob->withParams($event['comment']['comment'], CommentModel::EVENT_USER_MENTION, $event);
+                $this->queueManager->push($userMentionJob);
             }
         }
     }

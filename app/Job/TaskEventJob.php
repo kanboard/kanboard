@@ -69,7 +69,8 @@ class TaskEventJob extends BaseJob
         $this->dispatcher->dispatch($eventName, $event);
 
         if ($eventName === TaskModel::EVENT_CREATE) {
-            $this->userMentionModel->fireEvents($event['task']['description'], TaskModel::EVENT_USER_MENTION, $event);
+            $userMentionJob = $this->userMentionJob->withParams($event['task']['description'], TaskModel::EVENT_USER_MENTION, $event);
+            $this->queueManager->push($userMentionJob);
         }
     }
 }

@@ -126,7 +126,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\TransitionModel                         $transitionModel
  * @property \Kanboard\Model\UserModel                               $userModel
  * @property \Kanboard\Model\UserLockingModel                        $userLockingModel
- * @property \Kanboard\Model\UserMentionModel                        $userMentionModel
  * @property \Kanboard\Model\UserNotificationModel                   $userNotificationModel
  * @property \Kanboard\Model\UserNotificationTypeModel               $userNotificationTypeModel
  * @property \Kanboard\Model\UserNotificationFilterModel             $userNotificationFilterModel
@@ -178,6 +177,7 @@ use Pimple\Container;
  * @property \Kanboard\Job\ProjectFileEventJob                       $projectFileEventJob
  * @property \Kanboard\Job\NotificationJob                           $notificationJob
  * @property \Kanboard\Job\ProjectMetricJob                          $projectMetricJob
+ * @property \Kanboard\Job\UserMentionJob                            $userMentionJob
  * @property \Psr\Log\LoggerInterface                                $logger
  * @property \PicoDb\Database                                        $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher      $dispatcher

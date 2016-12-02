@@ -33,5 +33,7 @@ class CommentEventBuilderTest extends Base
         $this->assertInstanceOf('Kanboard\Event\CommentEvent', $event);
         $this->assertNotEmpty($event['comment']);
         $this->assertNotEmpty($event['task']);
+        $this->assertEquals(1, $event->getTaskId());
+        $this->assertEquals(1, $event->getProjectId());
     }
 }
