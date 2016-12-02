@@ -11,3 +11,24 @@ KB.utils.formatDuration = function (d) {
 
     return d + "s";
 };
+
+KB.utils.getSelectionPosition = function (element) {
+    var selectionStart, selectionEnd;
+
+    if (element.value.length < element.selectionStart) {
+        selectionStart = element.value.length;
+    } else {
+        selectionStart = element.selectionStart;
+    }
+
+    if (element.selectionStart === element.selectionEnd) {
+        selectionEnd = selectionStart;
+    } else {
+        selectionEnd = element.selectionEnd;
+    }
+
+    return {
+        selectionStart: selectionStart,
+        selectionEnd: selectionEnd
+    };
+};

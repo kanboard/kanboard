@@ -35,14 +35,17 @@ KB.component('suggest-menu', function(containerElement, options) {
     }
 
     function insertSelectedItem() {
+        containerElement.focus();
+
         var element = KB.find('.suggest-menu-item.active');
         var value = element.data('value');
         var trigger = element.data('trigger');
         var content = containerElement.value;
         var text = getLastWord(containerElement);
         var substitute = trigger + value + ' ';
-        var before = content.substring(0, containerElement.selectionStart - text.length);
-        var after = content.substring(containerElement.selectionEnd);
+        var selectionPosition = KB.utils.getSelectionPosition(containerElement);
+        var before = content.substring(0, selectionPosition.selectionStart - text.length);
+        var after = content.substring(selectionPosition.selectionEnd);
         var position = before.length + substitute.length;
 
         containerElement.value = before + substitute + after;
