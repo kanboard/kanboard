@@ -213,7 +213,7 @@ class FormHelper extends Base
     {
         $params = array(
             'name' => $name,
-            'text' => isset($values[$name]) ? $this->helper->text->e($values[$name]) : '',
+            'text' => isset($values[$name]) ? $values[$name] : '',
             'css' => $this->errorClass($errors, $name),
             'required' => isset($attributes['required']) && $attributes['required'],
             'tabindex' => isset($attributes['tabindex']) ? $attributes['tabindex'] : '-1',
