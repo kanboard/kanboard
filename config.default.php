@@ -19,6 +19,12 @@ define('LOG_FILE', DATA_DIR.DIRECTORY_SEPARATOR.'debug.log');
 // Plugins directory
 define('PLUGINS_DIR', 'plugins');
 
+// Plugins directory URL
+define('PLUGIN_API_URL', 'https://kanboard.net/plugins.json');
+
+// Enable/Disable plugin installer
+define('PLUGIN_INSTALLER', true);
+
 // Available cache drivers are "file" and "memory"
 define('CACHE_DRIVER', 'memory');
 
@@ -196,7 +202,7 @@ define('ENABLE_URL_REWRITE', false);
 // Hide login form, useful if all your users use Google/Github/ReverseProxy authentication
 define('HIDE_LOGIN_FORM', false);
 
-// Disabling logout (for external SSO authentication)
+// Disabling logout (useful for external SSO authentication)
 define('DISABLE_LOGOUT', false);
 
 // Enable captcha after 3 authentication failure
