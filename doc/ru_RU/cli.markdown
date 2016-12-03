@@ -12,83 +12,51 @@
 -   Выполните команду `./cli`
 
 
-    Kanboard version master
+```bash
+Kanboard version master
 
+Usage:
+  command [options] [arguments]
 
+Options:
+  -h, --help            Display this help message
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi            Force ANSI output
+      --no-ansi         Disable ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 
-    Usage:
-
-      command [options] [arguments]
-
-
-
-    Options:
-
-      -h, --help            Display this help message
-
-      -q, --quiet           Do not output any message
-
-      -V, --version         Display this application version
-
-          --ansi            Force ANSI output
-
-          --no-ansi         Disable ANSI output
-
-      -n, --no-interaction  Do not ask any interactive question
-
-      -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
-
-
-
-    Available commands:
-
-      cronjob                            Execute daily cronjob
-
-      help                               Displays help for a command
-
-      list                               Lists commands
-
-     export
-
-      export:daily-project-column-stats  Daily project column stats CSV export (number of tasks per column and per day)
-
-      export:subtasks                    Subtasks CSV export
-
-      export:tasks                       Tasks CSV export
-
-      export:transitions                 Task transitions CSV export
-
-     locale
-
-      locale:compare                     Compare application translations with the fr_FR locale
-
-      locale:sync                        Synchronize all translations based on the fr_FR locale
-
-     notification
-
-      notification:overdue-tasks         Send notifications for overdue tasks
-
-     plugin
-
-      plugin:install                     Install a plugin from a remote Zip archive
-
-      plugin:uninstall                   Remove a plugin
-
-      plugin:upgrade                     Update all installed plugins
-
-     projects
-
-      projects:daily-stats               Calculate daily statistics for all projects
-
-     trigger
-
-      trigger:tasks                      Trigger scheduler event for all tasks
-
-     user
-
-      user:reset-2fa                     Remove two-factor authentication for a user
-
-      user:reset-password                Change user password
+Available commands:
+  cronjob                            Execute daily cronjob
+  help                               Displays help for a command
+  list                               Lists commands
+  worker                             Execute queue worker
+ db
+  db:migrate                         Execute SQL migrations
+  db:version                         Show database schema version
+ export
+  export:daily-project-column-stats  Daily project column stats CSV export (number of tasks per column and per day)
+  export:subtasks                    Subtasks CSV export
+  export:tasks                       Tasks CSV export
+  export:transitions                 Task transitions CSV export
+ locale
+  locale:compare                     Compare application translations with the fr_FR locale
+  locale:sync                        Synchronize all translations based on the fr_FR locale
+ notification
+  notification:overdue-tasks         Send notifications for overdue tasks
+ plugin
+  plugin:install                     Install a plugin from a remote Zip archive
+  plugin:uninstall                   Remove a plugin
+  plugin:upgrade                     Update all installed plugins
+ projects
+  projects:daily-stats               Calculate daily statistics for all projects
+ trigger
+  trigger:tasks                      Trigger scheduler event for all tasks
+ user
+  user:reset-2fa                     Remove two-factor authentication for a user
+  user:reset-password                Change user password
+```
 
 
 Доступные команды[¶](#available-commands "Ссылка на этот заголовок")

@@ -6,10 +6,8 @@ By default, Kanboard use Sqlite to store its data but it's also possible to use 
 Requirements
 ------------
 
-- Postgresql server already installed and configured
+- Postgresql >= 9.3
 - The PHP extension `pdo_pgsql` installed (Debian/Ubuntu: `apt-get install php5-pgsql`)
-
-Note: Kanboard is tested with **Postgresql 9.3 and 9.4**
 
 Configuration
 -------------
@@ -43,10 +41,10 @@ Note: You can also rename the template file `config.default.php` to `config.php`
 
 For the first time, Kanboard will run one by one each database migration and this process can take some time according to your configuration.
 
-To avoid any issues or potential timeouts you can initialize the database directly by importing the SQL schema:
+To avoid any issues or potential timeouts, you can initialize the database directly by importing the SQL schema:
 
 ```bash
 psql -U postgres my_database < app/Schema/Sql/postgres.sql
 ```
 
-The file `app/Schema/Sql/postgres.sql` is a sql dump that represents the last version of the database.
+The file `app/Schema/Sql/postgres.sql` is a SQL dump that represents the last version of the database.

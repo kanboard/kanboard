@@ -11,8 +11,9 @@ Important things to do before updating
 - **Always make a backup of your data before upgrading**
 - **Check that your backup is valid!**
 - Check again
-- Always read the [change log](https://github.com/kanboard/kanboard/blob/master/ChangeLog) to check for breaking changes
-- Always close all user sessions (flush all sessions on the server)
+- Always read the [change history](https://github.com/kanboard/kanboard/blob/master/ChangeLog) to check for breaking changes
+- Stop the worker if you use it
+- Put the web server in maintenance mode to avoid people use the software while upgrading
 
 From the archive (stable version)
 ---------------------------------
@@ -33,3 +34,20 @@ From the repository (development version)
 3. Login and check if everything is ok
 
 Note: This method will install the **current development version**, use at your own risk.
+
+Running SQL migrations manually
+-------------------------------
+
+By default, SQL migrations are executed automatically. The schema version is checked at each request.
+In this way, when you upgrade Kanboard to another version, the database schema is updated for you.
+
+You may want to disable this behaviour is case you have a specific configuration.
+For example, if multiple processes try to apply the migrations in the same time you might have some concurrency problems even if each operation is executed inside a transaction.
+
+To disable this feature, set the parameter `DB_RUN_MIGRATIONS` at `false` in your [config file](config.markdown).
+
+When you will have to upgrade Kanboard, run this command:
+
+```bash
+./cli db:migrate
+```

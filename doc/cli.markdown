@@ -32,6 +32,9 @@ Available commands:
   help                               Displays help for a command
   list                               Lists commands
   worker                             Execute queue worker
+ db
+  db:migrate                         Execute SQL migrations
+  db:version                         Show database schema version
  export
   export:daily-project-column-stats  Daily project column stats CSV export (number of tasks per column and per day)
   export:subtasks                    Subtasks CSV export
@@ -202,4 +205,20 @@ Note: Installed files will have the same permissions as the current user
 
 ```bash
 ./cli worker
+```
+
+### Execute database migrations
+
+If the parameter `DB_RUN_MIGRATIONS` is set to `false`, you have run the database migrations manually:
+
+```bash
+./cli db:migrate
+```
+
+### Check database schema version
+
+```bash
+./cli db:version
+Current version: 95
+Last version: 96
 ```
