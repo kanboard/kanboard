@@ -1278,4 +1278,13 @@ return array(
     'Moving a task is not permitted' => '할일 이동이 거부되었습니다.',
     'This value must be in the range %d to %d' => '값의 범위는 %d 부터 %d 까지 입니다.',
     'You are not allowed to move this task.' => '당신은 할일 이동이 거부되었습니다.',
+    // 'API User Access' => '',
+    // 'Preview' => '',
+    // 'Write' => '',
+    // 'Write your text in Markdown' => '',
+    // 'New External Task: %s' => '',
+    // 'No personal API access token registered.' => '',
+    // 'Your personal API access token is "%s"' => '',
+    // 'Remove your token' => '',
+    // 'Generate a new token' => '',
 );

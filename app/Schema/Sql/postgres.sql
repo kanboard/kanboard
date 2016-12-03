@@ -1245,7 +1245,8 @@ CREATE TABLE "users" (
     "gitlab_id" integer,
     "role" character varying(25) DEFAULT 'app-user'::character varying NOT NULL,
     "is_active" boolean DEFAULT true,
-    "avatar_path" character varying(255)
+    "avatar_path" character varying(255),
+    "api_access_token" character varying(255) DEFAULT NULL::character varying
 );
 
 
@@ -2544,8 +2545,8 @@ INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_high
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_public_refresh_interval', '60', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_private_refresh_interval', '10', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_columns', '', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', 'c12181512f9cfd66a6b2af4edf199390b922bbb8a259dc5397c2329ed47c', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', '4e05046a5cb5b907da712ab02af98e9752da48bfacc0a625c4c08493bc8f', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', '8687190194e06d34c2cd84a57b36f67696c971c2f8e453f96e59eccb8e73', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', '8381164131e3995ca17c754a5b0cf7039d66b9f389b80250978de9fcf2f5', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_language', 'en_US', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_timezone', 'UTC', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_url', '', 0, 0);
@@ -2615,4 +2616,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$ZYX2JNGPsH/SMc3UBk0rYu2LYCLYRVEqokhOjIULKXs6RjvaV2RBu', 'app-admin');INSERT INTO schema_version VALUES ('96');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$R1zYk04d96KcHRpd9.r5I.5I6mgKIgUdsaISZYmaDLPIJCUO0FFJG', 'app-admin');INSERT INTO schema_version VALUES ('97');

@@ -3,6 +3,7 @@ Version 1.0.35
 
 New features:
 
+* Add personal API access token for users
 * Rewrite of Markdown editor (remove CodeMirror)
 * Suggest menu for task ID and user mentions in Markdown editor
 

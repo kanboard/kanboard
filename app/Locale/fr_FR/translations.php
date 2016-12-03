@@ -1279,4 +1279,13 @@ return array(
     'Moving a task is not permitted' => 'Déplaçer une tâche n\'est pas autorisé',
     'This value must be in the range %d to %d' => 'Cette valeur doit être définie entre %d et %d',
     'You are not allowed to move this task.' => 'Vous n\'êtes pas autorisé à déplacer cette tâche.',
+    'API User Access' => 'Accès utilisateur de l\'API',
+    'Preview' => 'Aperçu',
+    'Write' => 'Écrire',
+    'Write your text in Markdown' => 'Écrivez votre texte en Markdown',
+    'New External Task: %s' => 'Nouvelle tâche externe : %s',
+    'No personal API access token registered.' => 'Aucun jeton d\'accès personnel à l\'API enregistré.',
+    'Your personal API access token is "%s"' => 'Votre jeton d\'accès personnel à l\'API est « %s »',
+    'Remove your token' => 'Supprimer votre jeton',
+    'Generate a new token' => 'Générer un nouveau jeton',
 );

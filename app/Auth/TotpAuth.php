@@ -11,7 +11,7 @@ use Kanboard\Core\Security\PostAuthenticationProviderInterface;
 /**
  * TOTP Authentication Provider
  *
- * @package  auth
+ * @package  Kanboard\Auth
  * @author   Frederic Guillot
  */
 class TotpAuth extends Base implements PostAuthenticationProviderInterface

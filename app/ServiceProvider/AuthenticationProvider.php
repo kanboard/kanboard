@@ -2,6 +2,7 @@
 
 namespace Kanboard\ServiceProvider;
 
+use Kanboard\Auth\ApiAccessTokenAuth;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Kanboard\Core\Security\AuthenticationManager;
@@ -43,6 +44,8 @@ class AuthenticationProvider implements ServiceProviderInterface
         if (LDAP_AUTH) {
             $container['authenticationManager']->register(new LdapAuth($container));
         }
+
+        $container['authenticationManager']->register(new ApiAccessTokenAuth($container));
 
         $container['projectAccessMap'] = $this->getProjectAccessMap();
         $container['applicationAccessMap'] = $this->getApplicationAccessMap();

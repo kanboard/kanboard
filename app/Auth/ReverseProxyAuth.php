@@ -10,7 +10,7 @@ use Kanboard\User\ReverseProxyUserProvider;
 /**
  * Reverse-Proxy Authentication Provider
  *
- * @package  auth
+ * @package  Kanboard\Auth
  * @author   Frederic Guillot
  */
 class ReverseProxyAuth extends Base implements PreAuthenticationProviderInterface, SessionCheckProviderInterface

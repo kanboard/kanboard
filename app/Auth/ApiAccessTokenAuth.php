@@ -4,17 +4,16 @@ namespace Kanboard\Auth;
 
 use Kanboard\Core\Base;
 use Kanboard\Core\Security\PasswordAuthenticationProviderInterface;
-use Kanboard\Core\Security\SessionCheckProviderInterface;
 use Kanboard\Model\UserModel;
 use Kanboard\User\DatabaseUserProvider;
 
 /**
- * Database Authentication Provider
+ * API Access Token Authentication Provider
  *
  * @package  Kanboard\Auth
  * @author   Frederic Guillot
  */
-class DatabaseAuth extends Base implements PasswordAuthenticationProviderInterface, SessionCheckProviderInterface
+class ApiAccessTokenAuth extends Base implements PasswordAuthenticationProviderInterface
 {
     /**
      * User properties
@@ -48,7 +47,7 @@ class DatabaseAuth extends Base implements PasswordAuthenticationProviderInterfa
      */
     public function getName()
     {
-        return 'Database';
+        return 'API Access Token';
     }
 
     /**
@@ -59,32 +58,26 @@ class DatabaseAuth extends Base implements PasswordAuthenticationProviderInterfa
      */
     public function authenticate()
     {
+        if (! isset($this->sessionStorage->scope) ||  $this->sessionStorage->scope !== 'API') {
+            $this->logger->debug(__METHOD__.': Authentication provider skipped because invalid scope');
+            return false;
+        }
+
         $user = $this->db
             ->table(UserModel::TABLE)
             ->columns('id', 'password')
             ->eq('username', $this->username)
-            ->eq('disable_login_form', 0)
-            ->eq('is_ldap_user', 0)
+            ->eq('api_access_token', $this->password)
+            ->notNull('api_access_token')
             ->eq('is_active', 1)
             ->findOne();
 
-        if (! empty($user) && password_verify($this->password, $user['password'])) {
+        if (! empty($user)) {
             $this->userInfo = $user;
             return true;
         }
 
         return false;
-    }
-
-    /**
-     * Check if the user session is valid
-     *
-     * @access public
-     * @return boolean
-     */
-    public function isValidSession()
-    {
-        return $this->userModel->isActive($this->userSession->getId());
     }
 
     /**

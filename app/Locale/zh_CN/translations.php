@@ -1278,4 +1278,13 @@ return array(
     'Moving a task is not permitted' => '禁止移动任务',
     'This value must be in the range %d to %d' => '输入值必须在%d到%d之间',
     'You are not allowed to move this task.' => '你不能移动此任务',
+    // 'API User Access' => '',
+    // 'Preview' => '',
+    // 'Write' => '',
+    // 'Write your text in Markdown' => '',
+    // 'New External Task: %s' => '',
+    // 'No personal API access token registered.' => '',
+    // 'Your personal API access token is "%s"' => '',
+    // 'Remove your token' => '',
+    // 'Generate a new token' => '',
 );

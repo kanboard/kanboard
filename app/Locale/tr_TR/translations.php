@@ -1278,4 +1278,13 @@ return array(
     'Moving a task is not permitted' => 'Görev taşımaya izin verilmemiş',
     'This value must be in the range %d to %d' => 'Bu değer şu aralıkta olmalı: "%d" "%d"',
     'You are not allowed to move this task.' => 'Bu görevi taşımaya izniniz yok.',
+    // 'API User Access' => '',
+    // 'Preview' => '',
+    // 'Write' => '',
+    // 'Write your text in Markdown' => '',
+    // 'New External Task: %s' => '',
+    // 'No personal API access token registered.' => '',
+    // 'Your personal API access token is "%s"' => '',
+    // 'Remove your token' => '',
+    // 'Generate a new token' => '',
 );
