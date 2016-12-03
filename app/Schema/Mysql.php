@@ -6,7 +6,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 116;
+const VERSION = 117;
+
+function version_117(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE `settings` MODIFY `value` TEXT");
+}
 
 function version_116(PDO $pdo)
 {

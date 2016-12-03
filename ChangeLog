@@ -15,6 +15,7 @@ Breaking changes:
 
 Bug fixes:
 
+* Change column type for application settings value (field too small)
 * Fix link generation when user mention is followed by a punctuation mark
 * Make user mentions works again
 
