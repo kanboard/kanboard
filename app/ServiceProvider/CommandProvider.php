@@ -3,6 +3,8 @@
 namespace Kanboard\ServiceProvider;
 
 use Kanboard\Console\CronjobCommand;
+use Kanboard\Console\DatabaseMigrationCommand;
+use Kanboard\Console\DatabaseVersionCommand;
 use Kanboard\Console\LocaleComparatorCommand;
 use Kanboard\Console\LocaleSyncCommand;
 use Kanboard\Console\PluginInstallCommand;
@@ -55,6 +57,8 @@ class CommandProvider implements ServiceProviderInterface
         $application->add(new PluginUpgradeCommand($container));
         $application->add(new PluginInstallCommand($container));
         $application->add(new PluginUninstallCommand($container));
+        $application->add(new DatabaseMigrationCommand($container));
+        $application->add(new DatabaseVersionCommand($container));
 
         $container['cli'] = $application;
         return $container;

@@ -50,6 +50,11 @@ define('MAIL_SMTP_ENCRYPTION', null); // Valid values are "null", "ssl" or "tls"
 // Sendmail command to use when the transport is "sendmail"
 define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
 
+// Run automatically database migrations
+// If set to false, you will have to run manually the SQL migrations from the CLI during the next Kanboard upgrade
+// Do not run the migrations from multiple processes at the same time (example: web page + background worker)
+define('DB_RUN_MIGRATIONS', true);
+
 // Database driver: sqlite, mysql or postgres (sqlite by default)
 define('DB_DRIVER', 'sqlite');
 
@@ -226,3 +231,6 @@ define('HTTP_PROXY_PASSWORD', '');
 
 // Set to false to allow self-signed certificates
 define('HTTP_VERIFY_SSL_CERTIFICATE', true);
+
+// TOTP (2FA) issuer name
+define('TOTP_ISSUER', 'Kanboard');
