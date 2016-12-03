@@ -220,11 +220,16 @@ class FormHelper extends Base
             'labelPreview' => t('Preview'),
             'labelWrite' => t('Write'),
             'placeholder' => t('Write your text in Markdown'),
-            'autofocus' => isset($attributes['autofocus']) && $attributes['autofocus']
+            'autofocus' => isset($attributes['autofocus']) && $attributes['autofocus'],
+            'suggestOptions' => array(
+                'triggers' => array(
+                    '#' => $this->helper->url->to('TaskAjaxController', 'suggest', array('search' => 'SEARCH_TERM')),
+                )
+            ),
         );
 
         if (isset($values['project_id'])) {
-            $params['mentionUrl'] = $this->helper->url->to('UserAjaxController', 'mention', array('project_id' => $values['project_id']));
+            $params['suggestOptions']['triggers']['@'] = $this->helper->url->to('UserAjaxController', 'mention', array('project_id' => $values['project_id'], 'search' => 'SEARCH_TERM'));
         }
 
         $html = '<div class="js-text-editor" data-params=\''.json_encode($params, JSON_HEX_APOS).'\'></div>';

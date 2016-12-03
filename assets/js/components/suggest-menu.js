@@ -139,13 +139,16 @@ KB.component('suggest-menu', function(containerElement, options) {
         return null;
     }
 
-    function fetchItems(trigger, text, value) {
-        if (typeof value === 'string') {
-            KB.http.get(value).success(function (response) {
+    function fetchItems(trigger, text, params) {
+        if (typeof params === 'string') {
+            var regex = new RegExp('SEARCH_TERM', 'g');
+            var url = params.replace(regex, text);
+
+            KB.http.get(url).success(function (response) {
                 onItemFetched(trigger, text, response);
             });
         } else {
-            onItemFetched(trigger, text, value);
+            onItemFetched(trigger, text, params);
         }
     }
 

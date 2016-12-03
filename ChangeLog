@@ -1,13 +1,18 @@
 Version 1.0.35
 --------------
 
+New features:
+
+* Rewrite of Markdown editor (remove CodeMirror)
+* Suggest menu for task ID and user mentions in Markdown editor
+
 Improvements:
 
 * Add button to close inline popups
 * Simplify `.htaccess` to avoid potential issues with possible specific Apache configurations
 * Replace notifications Javascript code by CSS
 * Refactoring of user mentions job
-* Remove nitrous installer
+* Remove Nitrous installer
 
 Breaking changes:
 

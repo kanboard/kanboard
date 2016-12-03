@@ -7,12 +7,12 @@ use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskModel;
 
 /**
- * Task AutoComplete Formatter
+ * Class TaskSuggestMenuFormatter
  *
- * @package formatter
+ * @package Kanboard\Formatter
  * @author  Frederic Guillot
  */
-class TaskAutoCompleteFormatter extends BaseFormatter implements FormatterInterface
+class TaskSuggestMenuFormatter extends BaseFormatter implements FormatterInterface
 {
     protected $limit = 25;
 
@@ -32,10 +32,11 @@ class TaskAutoCompleteFormatter extends BaseFormatter implements FormatterInterf
      * Apply formatter
      *
      * @access public
-     * @return array
+     * @return mixed
      */
     public function format()
     {
+        $result = array();
         $tasks = $this->query
             ->columns(
                 TaskModel::TABLE.'.id',
@@ -46,11 +47,17 @@ class TaskAutoCompleteFormatter extends BaseFormatter implements FormatterInterf
             ->limit($this->limit)
             ->findAll();
 
-        foreach ($tasks as &$task) {
-            $task['value'] = $task['title'];
-            $task['label'] = $task['project_name'].' > #'.$task['id'].' '.$task['title'];
+        foreach ($tasks as $task) {
+            $html = '#'.$task['id'].' ';
+            $html .= $this->helper->text->e($task['title']).' ';
+            $html .= '<small>'.$this->helper->text->e($task['project_name']).'</small>';
+
+            $result[] = array(
+                'value' => (string) $task['id'],
+                'html' => $html,
+            );
         }
 
-        return $tasks;
+        return $result;
     }
 }

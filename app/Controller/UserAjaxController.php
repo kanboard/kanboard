@@ -36,7 +36,7 @@ class UserAjaxController extends BaseController
     public function mention()
     {
         $project_id = $this->request->getStringParam('project_id');
-        $query = $this->request->getStringParam('q');
+        $query = $this->request->getStringParam('search');
         $users = $this->projectPermissionModel->findUsernames($project_id, $query);
 
         $this->response->json(

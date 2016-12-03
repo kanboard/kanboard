@@ -2,6 +2,6 @@
 
 <h3><?= t('Comment removed') ?></h3>
 
-<?= $this->text->markdown($comment['comment']) ?>
+<?= $this->text->markdown($comment['comment'], true) ?>
 
 <?= $this->render('notification/footer', array('task' => $task, 'application_url' => $application_url)) ?>

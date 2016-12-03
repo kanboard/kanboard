@@ -70,8 +70,8 @@ KB.component('text-editor', function (containerElement, options) {
 
         textarea = textareaElement.build();
 
-        if (options.mentionUrl) {
-            KB.getComponent('suggest-menu', textarea, {triggers: {'@': options.mentionUrl}}).render();
+        if (options.suggestOptions) {
+            KB.getComponent('suggest-menu', textarea, options.suggestOptions).render();
         }
 
         return KB.dom('div')
