@@ -147,8 +147,8 @@ class FormHelper extends Base
             $attributes['checked'] = 'checked';
         }
 
-        foreach ($attributes as $attribute => $value) {
-            $htmlAttributes .= sprintf('%s="%s"', $attribute, $this->helper->text->e($value));
+        foreach ($attributes as $attribute => $attributeValue) {
+            $htmlAttributes .= sprintf('%s="%s"', $attribute, $this->helper->text->e($attributeValue));
         }
 
         return sprintf(
