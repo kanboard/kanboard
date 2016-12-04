@@ -90,7 +90,7 @@ class UserMentionJobTest extends Base
 
         $this->container['dispatcher']->addListener(TaskModel::EVENT_USER_MENTION, array($this, 'onUserMention'));
 
-        $userMentionJob->execute('test @user1 @user2', TaskModel::EVENT_USER_MENTION, $event);
+        $userMentionJob->execute('test @user1 @user2', TaskModel::EVENT_USER_MENTION, $event->getAll());
 
         $called = $this->container['dispatcher']->getCalledListeners();
         $this->assertArrayHasKey(TaskModel::EVENT_USER_MENTION.'.UserMentionJobTest::onUserMention', $called);

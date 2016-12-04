@@ -23,7 +23,7 @@ class UserMentionJob extends BaseJob
      */
     public function withParams($text, $eventName, GenericEvent $event)
     {
-        $this->jobParams = array($text, $eventName, $event);
+        $this->jobParams = array($text, $eventName, $event->getAll());
         return $this;
     }
 
@@ -32,10 +32,11 @@ class UserMentionJob extends BaseJob
      *
      * @param string       $text
      * @param string       $eventName
-     * @param GenericEvent $event
+     * @param array        $eventData
      */
-    public function execute($text, $eventName, GenericEvent $event)
+    public function execute($text, $eventName, array $eventData)
     {
+        $event = new GenericEvent($eventData);
         $users = $this->getMentionedUsers($text);
 
         foreach ($users as $user) {
