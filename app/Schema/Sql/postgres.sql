@@ -7,7 +7,6 @@
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -2528,7 +2527,6 @@ ALTER TABLE ONLY "user_has_unread_notifications"
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -2545,8 +2543,8 @@ INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_high
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_public_refresh_interval', '60', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_private_refresh_interval', '10', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_columns', '', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', '8687190194e06d34c2cd84a57b36f67696c971c2f8e453f96e59eccb8e73', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', '8381164131e3995ca17c754a5b0cf7039d66b9f389b80250978de9fcf2f5', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', 'b64911d9b61ea71adada348105281e16470e268fce7cb9bf1895958d4bbc', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', 'f63bd25c2e952d78b70f178fd96b4207ef29315ca73d308af37c02d8d51f', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_language', 'en_US', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_timezone', 'UTC', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_url', '', 0, 0);
@@ -2579,7 +2577,6 @@ INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('password_r
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -2616,4 +2613,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$R1zYk04d96KcHRpd9.r5I.5I6mgKIgUdsaISZYmaDLPIJCUO0FFJG', 'app-admin');INSERT INTO schema_version VALUES ('97');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$0.8BJyhOEBHGqfwD3nIJHuxObqTlZGJ/KRNDVHfSu7RGd42rEbSa.', 'app-admin');INSERT INTO schema_version VALUES ('97');
