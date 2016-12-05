@@ -122,7 +122,7 @@ Bug fixes:
 * Fixed compatibility issue with PHP 5.3 for OAuthUserProvider class
 
 Version 1.0.31 (4 Jul 2016)
----------------------------
+--------------------------
 
 New features:
 
@@ -215,7 +215,7 @@ Breaking changes:
 * All models have been renamed, plugin maintainers will have to update their plugins
 
 Version 1.0.28 (8 May 2016)
----------------------------
+--------------------------
 
 New features:
 
@@ -258,7 +258,7 @@ Bug fixes:
 * Removed PHP notices in comment suppression view
 
 Version 1.0.27 (28 Mar 2016)
-----------------------------
+---------------------------
 
 New features:
 
@@ -383,7 +383,7 @@ Bug fixes:
 * Fix pagination on task time tracking page
 
 Version 1.0.24 (24 Jan 2016)
------------------------
+---------------------------
 
 New features:
 
@@ -490,7 +490,7 @@ New features:
 * Try to load config.php from /data if not available
 
 Version 1.0.21 (22 Nov 2015)
-----------------------------
+---------------------------
 
 Breaking changes:
 
@@ -529,7 +529,7 @@ Bug fixes:
 * Avoid Safari to append .html at the end of downloaded files
 
 Version 1.0.20 (25 Oct 2015)
-----------------------------
+---------------------------
 
 Breaking changes:
 
@@ -556,7 +556,7 @@ Bug fixes:
 * Avoid disabling the default swimlane during renaming when there is no other activated swimlane
 
 Version 1.0.19 (11 Oct 2015)
------------------------
+---------------------------
 
 New features:
 
@@ -620,7 +620,7 @@ Bug fixes:
 * Fix issue with due date greater than year 2038
 
 Version 1.0.18 (30 Aug 2015)
-----------------------------
+---------------------------
 
 New features:
 
@@ -667,7 +667,7 @@ Bug fixes:
 * Fix bug when uploading files with Cyrilic characters
 
 Version 1.0.17 (26 Jul 2015)
-----------------------------
+---------------------------
 
 New features:
 
