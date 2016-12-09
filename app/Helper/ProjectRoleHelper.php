@@ -35,7 +35,7 @@ class ProjectRoleHelper extends Base
      */
     public function isDraggable(array &$task)
     {
-        if ($task['is_active'] == 1 && $this->helper->user->hasProjectAccess('BoardViewController', 'save', $task['project_id'])) {
+        if ($task['is_active'] == 1 && $this->helper->user->hasProjectAccess('BoardAjaxController', 'save', $task['project_id'])) {
             return $this->isSortableColumn($task['project_id'], $task['column_id']);
         }
 
