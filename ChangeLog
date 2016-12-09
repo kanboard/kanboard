@@ -7,6 +7,7 @@ Improvements:
 
 Bug fixes:
 
+* Fix wrong controller name on project activity page when using filters
 
 Version 1.0.35 (Dec 4, 2016)
 ----------------------------
