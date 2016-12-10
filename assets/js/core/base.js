@@ -5,6 +5,7 @@ var KB = {
     http: {},
     listeners: {
         clicks: {},
+        changes: {},
         internals: {}
     }
 };
@@ -31,6 +32,10 @@ KB.onClick = function (selector, callback) {
     this.listeners.clicks[selector] = callback;
 };
 
+KB.onChange = function (selector, callback) {
+    this.listeners.changes[selector] = callback;
+};
+
 KB.listen = function () {
     var self = this;
 
@@ -43,7 +48,16 @@ KB.listen = function () {
         }
     }
 
+    function onChange(e) {
+        for (var selector in self.listeners.changes) {
+            if (self.listeners.changes.hasOwnProperty(selector) && e.target.matches(selector)) {
+                self.listeners.changes[selector](e.target);
+            }
+        }
+    }
+
     document.addEventListener('click', onClick, false);
+    document.addEventListener('change', onChange, false);
 };
 
 KB.component = function (name, object) {

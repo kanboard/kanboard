@@ -12,10 +12,10 @@
 
         <?php if (count($projects_list) > 1): ?>
             <?= $this->form->label(t('Create from another project'), 'src_project_id') ?>
-            <?= $this->form->select('src_project_id', $projects_list, $values) ?>
+            <?= $this->form->select('src_project_id', $projects_list, $values, array(), array(), 'js-project-creation-select-options') ?>
         <?php endif ?>
 
-        <div class="project-creation-options" <?= isset($values['src_project_id']) && $values['src_project_id'] > 0 ? '' : 'style="display: none"' ?>>
+        <div class="js-project-creation-options" <?= isset($values['src_project_id']) && $values['src_project_id'] > 0 ? '' : 'style="display: none"' ?>>
             <p class="alert"><?= t('Which parts of the project do you want to duplicate?') ?></p>
 
             <?php if (! $is_private): ?>
