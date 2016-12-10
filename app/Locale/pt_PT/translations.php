@@ -1284,7 +1284,7 @@ return array(
     'Write your text in Markdown' => 'Escreva o seu texto em Markdown',
     'New External Task: %s' => 'Nova Tarefa Externa: %s',
     'No personal API access token registered.' => 'Nenhum token pessoal de acesso ao API ',
-    'Your personal API access token is "%s"' => 'O seu token de acesso pessoal ao API "%s"',
+    'Your personal API access token is "%s"' => 'O seu token de acesso pessoal ao API é "%s"',
     'Remove your token' => 'Remover o seu token',
     'Generate a new token' => 'Gerar um novo token',
 );
