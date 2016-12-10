@@ -132,7 +132,7 @@ class ProjectPermissionController extends BaseController
         if (! empty($project) && ! empty($values) && $this->projectUserRoleModel->changeUserRole($project['id'], $values['id'], $values['role'])) {
             $this->response->json(array('status' => 'ok'));
         } else {
-            $this->response->json(array('status' => 'error'));
+            $this->response->json(array('status' => 'error'), 500);
         }
     }
 

@@ -122,11 +122,11 @@ KB.component('task-move-position', function (containerElement, options) {
         var columnId = getColumnId();
         var container = KB.dom('div').attr('id', 'form-tasks');
 
-        options.board.forEach(function(swimlane) {
+        options.board.forEach(function (swimlane) {
             if (swimlaneId === swimlane.id) {
-                swimlane.columns.forEach(function(column) {
+                swimlane.columns.forEach(function (column) {
                     if (columnId === column.id) {
-                        column.tasks.forEach(function(task) {
+                        column.tasks.forEach(function (task) {
                             tasks.push({'value': task.position, 'text': '#' + task.id + ' - ' + task.title});
                         });
                     }

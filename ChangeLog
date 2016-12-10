@@ -5,6 +5,8 @@ New features:
 
 Improvements:
 
+* Rewrite ui component that change user/group roles
+
 Bug fixes:
 
 * Fix wrong controller name on project activity page when using filters
