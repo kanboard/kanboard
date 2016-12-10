@@ -88,3 +88,7 @@ KB.render = function () {
         }
     }
 };
+
+KB.interval = function (seconds, callback) {
+    setInterval(callback, seconds * 1000);
+};
