@@ -2,7 +2,16 @@
     <div class="file-thumbnails">
         <?php foreach ($images as $file): ?>
             <div class="file-thumbnail">
-                <a href="<?= $this->url->href('FileViewerController', 'show', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>" class="popover"><img src="<?= $this->url->href('FileViewerController', 'thumbnail', array('file_id' => $file['id'], 'project_id' => $project['id'])) ?>" title="<?= $this->text->e($file['name']) ?>" alt="<?= $this->text->e($file['name']) ?>"></a>
+                <?= $this->app->component('image-slideshow', array(
+                    'images' => $images,
+                    'image' => $file,
+                    'regex' => 'FILE_ID',
+                    'url' => array(
+                        'image' => $this->url->to('FileViewerController', 'image', array('file_id' => 'FILE_ID', 'project_id' => $project['id'])),
+                        'thumbnail' => $this->url->to('FileViewerController', 'thumbnail', array('file_id' => 'FILE_ID', 'project_id' => $project['id'])),
+                    )
+                )) ?>
+
                 <div class="file-thumbnail-content">
                     <div class="file-thumbnail-title">
                         <div class="dropdown">

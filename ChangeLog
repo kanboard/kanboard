@@ -3,6 +3,8 @@ Version 1.0.36 (unreleased)
 
 New features:
 
+* Add slideshow for images
+
 Improvements:
 
 * Replace Chosen jQuery plugin by custom UI component
