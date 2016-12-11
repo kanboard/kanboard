@@ -43,9 +43,11 @@ KB.dom = function (tag) {
             return this;
         };
 
-        this.on = function (eventName, callback) {
+        this.on = function (eventName, callback, ignorePrevent) {
             element.addEventListener(eventName, function (e) {
-                e.preventDefault();
+                if (! ignorePrevent) {
+                    e.preventDefault();
+                }
                 callback(e.target);
             });
 

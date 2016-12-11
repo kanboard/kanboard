@@ -5,7 +5,8 @@ New features:
 
 Improvements:
 
-* Rewrite ui component that change user/group roles
+* Replace Chosen jQuery plugin by custom UI component
+* Rewrite UI component that change user/group roles
 
 Bug fixes:
 

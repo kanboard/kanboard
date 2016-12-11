@@ -31,7 +31,6 @@ Kanboard.App.prototype.execute = function() {
     }
 
     this.focus();
-    this.chosen();
     this.keyboardShortcuts();
     this.datePicker();
     this.autoComplete();
@@ -54,12 +53,6 @@ Kanboard.App.prototype.keyboardShortcuts = function() {
                 $("#popover-container form").submit();
             }
         }
-    });
-
-    // Open board selector
-    Mousetrap.bind("b", function(e) {
-        e.preventDefault();
-        $('#board-selector').trigger('chosen:open');
     });
 
     // Close popover and dropdown
@@ -85,27 +78,6 @@ Kanboard.App.prototype.focus = function() {
     // Workaround for chrome
     $(document).on('mouseup', '.auto-select', function(e) {
         e.preventDefault();
-    });
-};
-
-Kanboard.App.prototype.chosen = function() {
-    $(".chosen-select").each(function() {
-        var searchThreshold = $(this).data("search-threshold");
-
-        if (searchThreshold === undefined) {
-            searchThreshold = 10;
-        }
-
-        $(this).chosen({
-            width: "180px",
-            no_results_text: $(this).data("notfound"),
-            disable_search_threshold: searchThreshold
-        });
-    });
-
-    $(".select-auto-redirect").change(function() {
-        var regex = new RegExp($(this).data('redirect-regex'), 'g');
-        window.location = $(this).data('redirect-url').replace(regex, $(this).val());
     });
 };
 

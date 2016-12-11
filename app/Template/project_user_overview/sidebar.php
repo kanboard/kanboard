@@ -1,14 +1,17 @@
 <div class="sidebar">
-    <?= $this->form->select(
-            'user_id',
-            $users,
-            $filter,
-            array(),
-            array('data-redirect-url="'.$this->url->href('ProjectUserOverviewController', $this->app->getRouterAction(), array('user_id' => 'USER_ID')).'"', 'data-redirect-regex="USER_ID"'),
-            'chosen-select select-auto-redirect'
-        ) ?>
+    <?= $this->app->component('select-dropdown-autocomplete', array(
+        'name' => 'user_id',
+        'items' => $users,
+        'defaultValue' => $filter['user_id'],
+        'sortByKeys' => true,
+        'redirect' => array(
+            'regex' => 'USER_ID',
+            'url' => $this->url->to('ProjectUserOverviewController', $this->app->getRouterAction(), array('user_id' => 'USER_ID')),
+        ),
+    )) ?>
 
-    <br><br>
+    <br>
+
     <ul>
         <li <?= $this->app->checkMenuSelection('ProjectUserOverviewController', 'managers') ?>>
             <?= $this->url->link(t('Project managers'), 'ProjectUserOverviewController', 'managers', $filter) ?>

@@ -6,6 +6,7 @@ var KB = {
     listeners: {
         clicks: {},
         changes: {},
+        keys: {},
         internals: {}
     }
 };
@@ -36,6 +37,10 @@ KB.onChange = function (selector, callback) {
     this.listeners.changes[selector] = callback;
 };
 
+KB.onKey = function (key, callback) {
+    this.listeners.keys[key] = callback;
+};
+
 KB.listen = function () {
     var self = this;
 
@@ -56,8 +61,28 @@ KB.listen = function () {
         }
     }
 
+    function onKeypress(e) {
+        var key = (typeof e.which === 'number') ? e.which : e.keyCode;
+        var element = e.target;
+
+        if (element.tagName === 'INPUT' ||
+            element.tagName === 'SELECT' ||
+            element.tagName === 'TEXTAREA' ||
+            element.isContentEditable) {
+            return;
+        }
+
+        for (var keyMap in self.listeners.keys) {
+            if (self.listeners.keys.hasOwnProperty(keyMap) && key === parseInt(keyMap)) {
+                e.preventDefault();
+                self.listeners.keys[key](e);
+            }
+        }
+    }
+
     document.addEventListener('click', onClick, false);
     document.addEventListener('change', onChange, false);
+    document.addEventListener('keypress', onKeypress, false);
 };
 
 KB.component = function (name, object) {
