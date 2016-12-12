@@ -9,6 +9,7 @@
                     'url' => array(
                         'image' => $this->url->to('FileViewerController', 'image', array('file_id' => 'FILE_ID', 'project_id' => $task['project_id'], 'task_id' => $task['id'])),
                         'thumbnail' => $this->url->to('FileViewerController', 'thumbnail', array('file_id' => 'FILE_ID', 'project_id' => $task['project_id'], 'task_id' => $task['id'])),
+                        'download' => $this->url->to('FileViewerController', 'download', array('file_id' => 'FILE_ID', 'project_id' => $task['project_id'], 'task_id' => $task['id'])),
                     )
                 )) ?>
 

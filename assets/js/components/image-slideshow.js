@@ -20,6 +20,8 @@ KB.component('image-slideshow', function (containerElement, options) {
             renderNextSlide();
         } else if (element.matches('.slideshow-previous-icon')) {
             renderPreviousSlide();
+        } else if (element.matches('.slideshow-download-icon')) {
+            window.location.href = element.href;
         } else {
             destroySlide();
         }
@@ -75,6 +77,11 @@ KB.component('image-slideshow', function (containerElement, options) {
             .attr('class', 'fa fa-window-close slideshow-icon slideshow-close-icon')
             .build();
 
+        var downloadElement = KB.dom('a')
+            .attr('class', 'fa fa-download slideshow-icon slideshow-download-icon')
+            .attr('href', getUrl(currentImage, 'download'))
+            .build();
+
         var previousElement = KB.dom('div')
             .attr('class', 'fa fa-chevron-circle-left slideshow-icon slideshow-previous-icon')
             .build();
@@ -102,6 +109,7 @@ KB.component('image-slideshow', function (containerElement, options) {
         var overlayElement = KB.dom('div')
             .addClass('image-slideshow-overlay')
             .add(closeElement)
+            .add(downloadElement)
             .add(previousElement)
             .add(nextElement)
             .add(figureElement)
