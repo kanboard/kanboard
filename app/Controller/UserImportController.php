@@ -23,7 +23,7 @@ class UserImportController extends BaseController
         $this->response->html($this->template->render('user_import/show', array(
             'values' => $values,
             'errors' => $errors,
-            'max_size' => ini_get('upload_max_filesize'),
+            'max_size' => get_upload_max_size(),
             'delimiters' => Csv::getDelimiters(),
             'enclosures' => Csv::getEnclosures(),
         )));

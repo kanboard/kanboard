@@ -136,6 +136,16 @@ function build_app_version($ref, $commit_hash)
 }
 
 /**
+ * Get upload max size.
+ *
+ * @return string
+ */
+function get_upload_max_size()
+{
+    return min(ini_get('upload_max_filesize'), ini_get('post_max_size'));
+}
+
+/**
  * Translate a string
  *
  * @return string
