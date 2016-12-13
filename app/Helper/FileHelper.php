@@ -106,4 +106,23 @@ class FileHelper extends Base
 
         return null;
     }
+
+    /**
+     * Return the browser view mimetype based on the file extension.
+     *
+     * @param  $filename
+     *
+     * @return string
+     */
+    public function getBrowserViewType($filename)
+    {
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+        switch ($extension) {
+            case 'pdf':
+                return 'application/pdf';
+        }
+
+        return null;
+    }
 }

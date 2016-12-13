@@ -83,6 +83,31 @@ class FileViewerController extends BaseController
     }
 
     /**
+     * Display file in browser
+     *
+     * @access public
+     */
+    public function browser()
+    {
+        $file = $this->getFile();
+        $etag = md5($file['path']);
+        $this->response->withContentType($this->helper->file->getBrowserViewType($file['name']));
+        $this->response->withCache(5 * 86400, $etag);
+
+        if ($this->request->getHeader('If-None-Match') === '"'.$etag.'"') {
+            $this->response->status(304);
+        } else {
+
+            try {
+                $this->response->send();
+                $this->objectStorage->output($file['path']);
+            } catch (ObjectStorageException $e) {
+                $this->logger->error($e->getMessage());
+            }
+        }
+    }
+
+    /**
      * Display image thumbnail
      *
      * @access public
