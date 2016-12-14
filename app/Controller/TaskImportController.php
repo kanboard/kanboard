@@ -27,7 +27,7 @@ class TaskImportController extends BaseController
             'project' => $project,
             'values' => $values,
             'errors' => $errors,
-            'max_size' => ini_get('upload_max_filesize'),
+            'max_size' => get_upload_max_size(),
             'delimiters' => Csv::getDelimiters(),
             'enclosures' => Csv::getEnclosures(),
             'title' => t('Import tasks from CSV file'),
