@@ -210,6 +210,8 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('TaskLinkProcedure', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskExternalLinkProcedure', array('createExternalTaskLink', 'updateExternalTaskLink', 'removeExternalTaskLink'), Role::PROJECT_MEMBER);
         $acl->add('TaskProcedure', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskTagProcedure', array('setTaskTags'), Role::PROJECT_MEMBER);
+        $acl->add('TagProcedure', array('createTag', 'updateTag', 'removeTag'), Role::PROJECT_MEMBER);
 
         return $acl;
     }

@@ -4,6 +4,7 @@ Version 1.0.36 (unreleased)
 New features:
 
 * Add slideshow for images
+* Add API calls to manage tags
 
 Improvements:
 
