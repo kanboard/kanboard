@@ -31,7 +31,7 @@ class AuthenticationMiddleware extends Base implements MiddlewareInterface
         $this->sessionStorage->scope = 'API';
 
         if ($this->isUserAuthenticated($username, $password)) {
-            $this->userSession->initialize($this->userModel->getByUsername($username));
+            $this->userSession->initialize($this->userCacheDecorator->getByUsername($username));
         } elseif (! $this->isAppAuthenticated($username, $password)) {
             $this->logger->error('API authentication failure for '.$username);
             throw new AuthenticationFailureException('Wrong credentials');

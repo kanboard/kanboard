@@ -58,7 +58,8 @@ use Pimple\Container;
  * @property \Kanboard\Core\Paginator                                $paginator
  * @property \Kanboard\Core\Template                                 $template
  * @property \Kanboard\Decorator\MetadataCacheDecorator              $userMetadataCacheDecorator
- * @property \Kanboard\Decorator\columnRestrictionCacheDecorator     $columnRestrictionCacheDecorator
+ * @property \Kanboard\Decorator\UserCacheDecorator                  $userCacheDecorator
+ * @property \Kanboard\Decorator\ColumnRestrictionCacheDecorator     $columnRestrictionCacheDecorator
  * @property \Kanboard\Decorator\ColumnMoveRestrictionCacheDecorator $columnMoveRestrictionCacheDecorator
  * @property \Kanboard\Decorator\ProjectRoleRestrictionCacheDecorator $projectRoleRestrictionCacheDecorator
  * @property \Kanboard\Model\ActionModel                             $actionModel

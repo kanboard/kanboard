@@ -88,7 +88,7 @@ class Markdown extends Parsedown
     {
         if (! $this->isPublicLink && preg_match('/^@([^\s,!:?]+)/', $Excerpt['text'], $matches)) {
             $username = rtrim($matches[1], '.');
-            $user = $this->container['userModel']->getByUsername($username);
+            $user = $this->container['userCacheDecorator']->getByUsername($username);
 
             if (! empty($user)) {
                 $url = $this->container['helper']->url->href('UserViewController', 'profile', array('user_id' => $user['id']));
