@@ -53,13 +53,19 @@ class UserMentionJobTest extends Base
 
         $this->assertNotFalse($userModel->create(array('username' => 'user1')));
         $this->assertNotFalse($userModel->create(array('username' => 'user2', 'name' => 'Foobar', 'notifications_enabled' => 1)));
+        $this->assertNotFalse($userModel->create(array('username' => 'user3.with.dot', 'notifications_enabled' => 1)));
 
-        $users = $userMentionJob->getMentionedUsers('test @user2, test');
-        $this->assertCount(1, $users);
+        $users = $userMentionJob->getMentionedUsers('test @user2, test, @user3.with.dot.');
+        $this->assertCount(2, $users);
         $this->assertEquals('user2', $users[0]['username']);
         $this->assertEquals('Foobar', $users[0]['name']);
         $this->assertEquals('', $users[0]['email']);
         $this->assertEquals('', $users[0]['language']);
+
+        $this->assertEquals('user3.with.dot', $users[1]['username']);
+        $this->assertEquals('', $users[1]['name']);
+        $this->assertEquals('', $users[1]['email']);
+        $this->assertEquals('', $users[1]['language']);
     }
 
     public function testGetMentionedUsersWithNotficationEnabledAndUserLoggedIn()
