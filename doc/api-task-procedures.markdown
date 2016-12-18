@@ -17,11 +17,12 @@ API Task Procedures
     - **score** (integer, optional)
     - **swimlane_id** (integer, optional)
     - **priority** (integer, optional)
-    - **recurrence_status**  (integer, optional)
-    - **recurrence_trigger**  (integer, optional)
-    - **recurrence_factor**  (integer, optional)
-    - **recurrence_timeframe**  (integer, optional)
-    - **recurrence_basedate**  (integer, optional)
+    - **recurrence_status** (integer, optional)
+    - **recurrence_trigger** (integer, optional)
+    - **recurrence_factor** (integer, optional)
+    - **recurrence_timeframe** (integer, optional)
+    - **recurrence_basedate** (integer, optional)
+    - **tags** ([]string, optional)
 - Result on success: **task_id**
 - Result on failure: **false**
 
@@ -400,11 +401,12 @@ Response example:
     - **category_id** (integer, optional)
     - **score** (integer, optional)
     - **priority** (integer, optional)
-    - **recurrence_status**  (integer, optional)
-    - **recurrence_trigger**  (integer, optional)
-    - **recurrence_factor**  (integer, optional)
-    - **recurrence_timeframe**  (integer, optional)
-    - **recurrence_basedate**  (integer, optional)
+    - **recurrence_status** (integer, optional)
+    - **recurrence_trigger** (integer, optional)
+    - **recurrence_factor** (integer, optional)
+    - **recurrence_timeframe** (integer, optional)
+    - **recurrence_basedate** (integer, optional)
+    - **tags** ([]string, optional)
 - Result on success: **true**
 - Result on failure: **false**
 
