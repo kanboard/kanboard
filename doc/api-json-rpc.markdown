@@ -63,6 +63,7 @@ Usage
 - [Task Files](api-task-file-procedures.markdown)
 - [Project Files](api-project-file-procedures.markdown)
 - [Links](api-link-procedures.markdown)
+- [Tags](api-tags-procedures.markdown)
 - [Internal Task Links](api-internal-task-link-procedures.markdown)
 - [External Task Links](api-external-task-link-procedures.markdown)
 - [Comments](api-comment-procedures.markdown)
