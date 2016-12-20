@@ -30,7 +30,14 @@ class FileHelperTest extends Base
         $helper = new FileHelper($this->container);
         $this->assertEquals('text', $helper->getPreviewType('test.txt'));
         $this->assertEquals('markdown', $helper->getPreviewType('test.markdown'));
-        $this->assertEquals('md', $helper->getPreviewType('test.md'));
+        $this->assertEquals('markdown', $helper->getPreviewType('test.md'));
         $this->assertEquals(null, $helper->getPreviewType('test.doc'));
+    }
+
+    public function testGetBrowserViewType()
+    {
+        $fileHelper = new FileHelper($this->container);
+        $this->assertSame('application/pdf', $fileHelper->getBrowserViewType('SomeFile.PDF'));
+        $this->assertSame(null, $fileHelper->getBrowserViewType('SomeFile.doc'));
     }
 }

@@ -18,6 +18,11 @@
                                     <i class="fa fa-eye fa-fw"></i>
                                     <?= $this->url->link(t('View file'), 'FileViewerController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>
                                 </li>
+                            <?php elseif ($this->file->getBrowserViewType($file['name']) !== null): ?>
+                                <li>
+                                    <i class="fa fa-eye fa-fw"></i>
+                                    <?= $this->url->link(t('View file'), 'FileViewerController', 'browser', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, '', '', true) ?>
+                                </li>
                             <?php endif ?>
                             <li>
                                 <i class="fa fa-download fa-fw"></i>

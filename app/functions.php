@@ -146,6 +146,17 @@ function get_upload_max_size()
 }
 
 /**
+ * Get file extension
+ *
+ * @param  $filename
+ * @return string
+ */
+function get_file_extension($filename)
+{
+    return strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+}
+
+/**
  * Translate a string
  *
  * @return string

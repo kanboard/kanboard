@@ -210,9 +210,7 @@ abstract class FileModel extends Base
      */
     public function isImage($filename)
     {
-        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-
-        switch ($extension) {
+        switch (get_file_extension($filename)) {
             case 'jpeg':
             case 'jpg':
             case 'png':
