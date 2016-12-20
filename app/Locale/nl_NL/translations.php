@@ -566,6 +566,7 @@ return array(
     // 'JPY - Japanese Yen' => '',
     // 'NZD - New Zealand Dollar' => '',
     // 'RSD - Serbian dinar' => '',
+    // 'CNY - Chinese Yuan' => '',
     // 'USD - US Dollar' => '',
     'Destination column' => 'Doel kolom',
     // 'Move the task to another column when assigned to a user' => '',

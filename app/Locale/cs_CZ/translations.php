@@ -566,6 +566,7 @@ return array(
     'JPY - Japanese Yen' => 'JPY - Japanischer Yen',
     'NZD - New Zealand Dollar' => 'NZD - Neuseeland-Dollar',
     'RSD - Serbian dinar' => 'RSD - Serbische Dinar',
+    // 'CNY - Chinese Yuan' => '',
     'USD - US Dollar' => 'USD - US Dollar',
     'Destination column' => 'Cílový sloupec',
     'Move the task to another column when assigned to a user' => 'Přesunout úkol do jiného sloupce, když je úkol přiřazen uživateli.',

@@ -566,6 +566,7 @@ return array(
     'JPY - Japanese Yen' => 'JPY - Japanese Yen',
     'NZD - New Zealand Dollar' => 'NZD - New Zealand Dollar',
     'RSD - Serbian dinar' => 'RSD - Serbian dinar',
+    // 'CNY - Chinese Yuan' => '',
     'USD - US Dollar' => 'USD - US Dollar',
     'Destination column' => 'Στήλη προορισμού',
     'Move the task to another column when assigned to a user' => 'Μετακινήστε την εργασία σε άλλη στήλη όταν ανατεθεί σε ένα χρήστη',

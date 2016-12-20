@@ -566,6 +566,7 @@ return array(
     'JPY - Japanese Yen' => 'JPY - Japanski jen',
     'NZD - New Zealand Dollar' => 'NZD - Novozelandski dolar',
     'RSD - Serbian dinar' => 'RSD - Srpski dinar',
+    // 'CNY - Chinese Yuan' => '',
     'USD - US Dollar' => 'USD - Američki dolar',
     'Destination column' => 'Odredišna kolona',
     'Move the task to another column when assigned to a user' => 'Premjesti zadatak u neku drugu kolonu kada se dodijeli izvršiocu',

@@ -566,6 +566,7 @@ return array(
     // 'JPY - Japanese Yen' => '',
     // 'NZD - New Zealand Dollar' => '',
     // 'RSD - Serbian dinar' => '',
+    // 'CNY - Chinese Yuan' => '',
     // 'USD - US Dollar' => '',
     'Destination column' => 'Ny kolonne',
     'Move the task to another column when assigned to a user' => 'Flytt oppgaven til en annen kolonne når den er tildelt en bruker',
