@@ -11,6 +11,7 @@ Improvements:
 * Handle username with dots in user mentions
 * Replace Chosen jQuery plugin by custom UI component
 * Rewrite UI component that change user/group roles
+* Disable PageSpeed module from .htaccess if present
 
 Bug fixes:
 
