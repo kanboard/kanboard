@@ -567,6 +567,7 @@ return array(
     'NZD - New Zealand Dollar' => '新西兰元',
     'RSD - Serbian dinar' => '第纳尔',
     'USD - US Dollar' => '美元',
+    'CNY - Chinese Yuan' => '人民币',
     'Destination column' => '目标栏目',
     'Move the task to another column when assigned to a user' => '指定负责人时移动到其它栏目',
     'Move the task to another column when assignee is cleared' => '移除负责人时移动到其它栏目',

@@ -566,6 +566,7 @@ return array(
     'JPY - Japanese Yen' => 'JPY - Japán Yen',
     'NZD - New Zealand Dollar' => 'NZD - Új-Zélandi dollár',
     'RSD - Serbian dinar' => 'RSD - Szerb dínár',
+    // 'CNY - Chinese Yuan' => '',
     'USD - US Dollar' => 'USD - Amerikai dollár',
     'Destination column' => 'Cél oszlop',
     'Move the task to another column when assigned to a user' => 'Feladat másik oszlopba helyezése felhasználóhoz rendélés után',

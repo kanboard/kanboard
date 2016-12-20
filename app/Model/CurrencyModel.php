@@ -42,6 +42,7 @@ class CurrencyModel extends Base
             'NOK' => t('NOK - Norwegian Krone'),
             'BAM' => t('BAM - Konvertible Mark'),
             'RUB' => t('RUB - Russian Ruble'),
+            'CNY' => t('CNY - Chinese Yuan'),
         );
     }
 

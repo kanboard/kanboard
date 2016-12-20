@@ -566,6 +566,7 @@ return array(
     'JPY - Japanese Yen' => 'JPY - Japanische Yen',
     'NZD - New Zealand Dollar' => 'NZD - Neuseeland-Dollar',
     'RSD - Serbian dinar' => 'RSD - Serbische Dinar',
+    // 'CNY - Chinese Yuan' => '',
     'USD - US Dollar' => 'USD - US-Dollar',
     'Destination column' => 'Zielspalte',
     'Move the task to another column when assigned to a user' => 'Aufgabe in eine andere Spalte verschieben, wenn ein User zugeordnet wurde.',

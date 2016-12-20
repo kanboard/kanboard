@@ -566,6 +566,7 @@ return array(
     'JPY - Japanese Yen' => 'JPY - 일본 엔',
     'NZD - New Zealand Dollar' => 'NZD - 뉴질랜드 달러',
     'RSD - Serbian dinar' => 'RSD - 세르비아 디나르',
+    // 'CNY - Chinese Yuan' => '',
     'USD - US Dollar' => 'USD - 미국 달러',
     'Destination column' => '이동 후 컬럼',
     'Move the task to another column when assigned to a user' => '사용자의 할당을 하면 할일을 다른 컬럼에 이동',
