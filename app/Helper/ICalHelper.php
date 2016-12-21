@@ -5,7 +5,6 @@ namespace Kanboard\Helper;
 use Kanboard\Core\Base;
 use Kanboard\Core\Filter\QueryBuilder;
 use Kanboard\Filter\TaskDueDateRangeFilter;
-use Kanboard\Formatter\TaskICalFormatter;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 
 /**
@@ -29,10 +28,10 @@ class ICalHelper extends Base
     {
         $queryBuilder->withFilter(new TaskDueDateRangeFilter(array($start, $end)));
 
-        $formatter = new TaskICalFormatter($this->container);
-        $formatter->setColumns('date_due');
-        $formatter->setCalendar($calendar);
-        $formatter->withQuery($queryBuilder->getQuery());
-        $formatter->addFullDayEvents();
+        $this->taskICalFormatter
+            ->setColumns('date_due')
+            ->setCalendar($calendar)
+            ->withQuery($queryBuilder->getQuery())
+            ->addFullDayEvents();
     }
 }

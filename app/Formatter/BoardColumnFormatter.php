@@ -79,7 +79,7 @@ class BoardColumnFormatter extends BaseFormatter implements FormatterInterface
     {
         foreach ($this->columns as &$column) {
             $column['id'] = (int) $column['id'];
-            $column['tasks'] = BoardTaskFormatter::getInstance($this->container)
+            $column['tasks'] = $this->boardTaskFormatter
                 ->withTasks($this->tasks)
                 ->withTags($this->tags)
                 ->withSwimlaneId($this->swimlaneId)

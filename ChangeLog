@@ -5,6 +5,7 @@ New features:
 
 * Add slideshow for images
 * Add API calls to manage tags
+* Offer the possibility to override internal formatter objects from plugins
 
 Improvements:
 

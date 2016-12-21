@@ -8,8 +8,6 @@ use Kanboard\Filter\TaskProjectsFilter;
 use Kanboard\Filter\TaskStartsWithIdFilter;
 use Kanboard\Filter\TaskStatusFilter;
 use Kanboard\Filter\TaskTitleFilter;
-use Kanboard\Formatter\TaskAutoCompleteFormatter;
-use Kanboard\Formatter\TaskSuggestMenuFormatter;
 use Kanboard\Model\TaskModel;
 
 /**
@@ -46,7 +44,7 @@ class TaskAjaxController extends BaseController
                 $filter->withFilter(new TaskTitleFilter($search));
             }
 
-            $this->response->json($filter->format(new TaskAutoCompleteFormatter($this->container)));
+            $this->response->json($filter->format($this->taskAutoCompleteFormatter));
         }
     }
 
@@ -66,7 +64,7 @@ class TaskAjaxController extends BaseController
                 ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
                 ->withFilter(new TaskStartsWithIdFilter($taskId));
 
-            $this->response->json($filter->format(new TaskSuggestMenuFormatter($this->container)));
+            $this->response->json($filter->format($this->taskSuggestMenuFormatter));
         }
     }
 }

@@ -47,6 +47,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
         $this->container->register(new Kanboard\ServiceProvider\RouteProvider());
         $this->container->register(new Kanboard\ServiceProvider\AvatarProvider());
         $this->container->register(new Kanboard\ServiceProvider\FilterProvider());
+        $this->container->register(new Kanboard\ServiceProvider\FormatterProvider());
         $this->container->register(new Kanboard\ServiceProvider\JobProvider());
         $this->container->register(new Kanboard\ServiceProvider\QueueProvider());
         $this->container->register(new Kanboard\ServiceProvider\ExternalTaskProvider());

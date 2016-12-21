@@ -3,7 +3,6 @@
 namespace Kanboard\Api\Procedure;
 
 use Kanboard\Api\Authorization\ProjectAuthorization;
-use Kanboard\Formatter\BoardFormatter;
 
 /**
  * Board API controller
@@ -17,7 +16,7 @@ class BoardProcedure extends BaseProcedure
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getBoard', $project_id);
         
-        return BoardFormatter::getInstance($this->container)
+        return $this->boardFormatter
             ->withProjectId($project_id)
             ->withQuery($this->taskFinderModel->getExtendedQuery())
             ->format();

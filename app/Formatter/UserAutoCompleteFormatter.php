@@ -14,7 +14,7 @@ use Kanboard\Core\Filter\FormatterInterface;
 class UserAutoCompleteFormatter extends BaseFormatter implements FormatterInterface
 {
     /**
-     * Format the tasks for the ajax autocompletion
+     * Format the tasks for the ajax auto-completion
      *
      * @access public
      * @return array
