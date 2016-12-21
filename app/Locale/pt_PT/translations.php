@@ -1288,4 +1288,5 @@ return array(
     'Your personal API access token is "%s"' => 'O seu token de acesso pessoal ao API é "%s"',
     'Remove your token' => 'Remover o seu token',
     'Generate a new token' => 'Gerar um novo token',
+    // 'Showing %d-%d of %d' => '',
 );

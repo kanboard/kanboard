@@ -1289,4 +1289,5 @@ return array(
     'Your personal API access token is "%s"' => 'Votre jeton d\'accès personnel à l\'API est « %s »',
     'Remove your token' => 'Supprimer votre jeton',
     'Generate a new token' => 'Générer un nouveau jeton',
+    // 'Showing %d-%d of %d' => '',
 );
