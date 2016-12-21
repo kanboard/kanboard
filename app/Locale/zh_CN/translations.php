@@ -1288,4 +1288,5 @@ return array(
     // 'Your personal API access token is "%s"' => '',
     // 'Remove your token' => '',
     // 'Generate a new token' => '',
+    'Showing %d-%d of %d' => '本页显示 %d-%d 条，共有: %d 条',
 );
