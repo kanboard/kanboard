@@ -5,6 +5,7 @@ New features:
 
 * Add slideshow for images
 * Add API calls to manage tags
+* Offer the possibility to override internal formatter objects from plugins
 
 Improvements:
 
@@ -16,6 +17,7 @@ Improvements:
 
 Bug fixes:
 
+* Fix compatibility issue with PHP 5.3 for array_combine function
 * Fix wrong controller name on project activity page when using filters
 
 Version 1.0.35 (Dec 4, 2016)

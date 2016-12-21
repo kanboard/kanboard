@@ -62,6 +62,21 @@ use Pimple\Container;
  * @property \Kanboard\Decorator\ColumnRestrictionCacheDecorator     $columnRestrictionCacheDecorator
  * @property \Kanboard\Decorator\ColumnMoveRestrictionCacheDecorator $columnMoveRestrictionCacheDecorator
  * @property \Kanboard\Decorator\ProjectRoleRestrictionCacheDecorator $projectRoleRestrictionCacheDecorator
+ * @property \Kanboard\Formatter\BoardColumnFormatter                $boardColumnFormatter
+ * @property \Kanboard\Formatter\BoardFormatter                      $boardFormatter
+ * @property \Kanboard\Formatter\BoardSwimlaneFormatter              $boardSwimlaneFormatter
+ * @property \Kanboard\Formatter\BoardTaskFormatter                  $boardTaskFormatter
+ * @property \Kanboard\Formatter\GroupAutoCompleteFormatter          $groupAutoCompleteFormatter
+ * @property \Kanboard\Formatter\ProjectActivityEventFormatter       $projectActivityEventFormatter
+ * @property \Kanboard\Formatter\ProjectGanttFormatter               $projectGanttFormatter
+ * @property \Kanboard\Formatter\SubtaskTimeTrackingCalendarFormatter $subtaskTimeTrackingCalendarFormatter
+ * @property \Kanboard\Formatter\TaskAutoCompleteFormatter           $taskAutoCompleteFormatter
+ * @property \Kanboard\Formatter\TaskCalendarFormatter               $taskCalendarFormatter
+ * @property \Kanboard\Formatter\TaskGanttFormatter                  $taskGanttFormatter
+ * @property \Kanboard\Formatter\TaskICalFormatter                   $taskICalFormatter
+ * @property \Kanboard\Formatter\TaskSuggestMenuFormatter            $taskSuggestMenuFormatter
+ * @property \Kanboard\Formatter\UserAutoCompleteFormatter           $userAutoCompleteFormatter
+ * @property \Kanboard\Formatter\UserMentionFormatter                $userMentionFormatter
  * @property \Kanboard\Model\ActionModel                             $actionModel
  * @property \Kanboard\Model\ActionParameterModel                    $actionParameterModel
  * @property \Kanboard\Model\AvatarFileModel                         $avatarFileModel

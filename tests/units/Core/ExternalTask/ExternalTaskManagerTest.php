@@ -41,4 +41,10 @@ class ExternalTaskManagerTest extends Base
         $expected = array('MyProvider1' => 'MyProvider1', 'MyProvider2' => 'MyProvider2');
         $this->assertEquals($expected, $providers);
     }
+
+    public function testGetProviderListWithNoProviders()
+    {
+        $manager = new ExternalTaskManager();
+        $this->assertSame(array(), $manager->getProvidersList());
+    }
 }

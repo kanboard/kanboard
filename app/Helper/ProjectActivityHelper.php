@@ -6,7 +6,6 @@ use Kanboard\Core\Base;
 use Kanboard\Filter\ProjectActivityProjectIdFilter;
 use Kanboard\Filter\ProjectActivityProjectIdsFilter;
 use Kanboard\Filter\ProjectActivityTaskIdFilter;
-use Kanboard\Formatter\ProjectActivityEventFormatter;
 use Kanboard\Model\ProjectActivityModel;
 
 /**
@@ -38,7 +37,7 @@ class ProjectActivityHelper extends Base
                 ->limit(500)
             ;
 
-            $events = $queryBuilder->format(new ProjectActivityEventFormatter($this->container));
+            $events = $queryBuilder->format($this->projectActivityEventFormatter);
         }
 
         return $events;
@@ -62,7 +61,7 @@ class ProjectActivityHelper extends Base
             ->limit($limit)
         ;
 
-        return $queryBuilder->format(new ProjectActivityEventFormatter($this->container));
+        return $queryBuilder->format($this->projectActivityEventFormatter);
     }
 
     /**
@@ -83,7 +82,7 @@ class ProjectActivityHelper extends Base
             ->limit($limit)
         ;
 
-        return $queryBuilder->format(new ProjectActivityEventFormatter($this->container));
+        return $queryBuilder->format($this->projectActivityEventFormatter);
     }
 
     /**
@@ -100,6 +99,6 @@ class ProjectActivityHelper extends Base
 
         $queryBuilder->getQuery()->desc(ProjectActivityModel::TABLE.'.id');
 
-        return $queryBuilder->format(new ProjectActivityEventFormatter($this->container));
+        return $queryBuilder->format($this->projectActivityEventFormatter);
     }
 }

@@ -5,7 +5,6 @@ namespace Kanboard\Controller;
 use Kanboard\Filter\ProjectIdsFilter;
 use Kanboard\Filter\ProjectStatusFilter;
 use Kanboard\Filter\ProjectTypeFilter;
-use Kanboard\Formatter\ProjectGanttFormatter;
 use Kanboard\Model\ProjectModel;
 
 /**
@@ -30,7 +29,7 @@ class ProjectGanttController extends BaseController
         $filter->getQuery()->asc(ProjectModel::TABLE.'.start_date');
 
         $this->response->html($this->helper->layout->app('project_gantt/show', array(
-            'projects' => $filter->format(new ProjectGanttFormatter($this->container)),
+            'projects' => $filter->format($this->projectGanttFormatter),
             'title' => t('Gantt chart for all projects'),
         )));
     }

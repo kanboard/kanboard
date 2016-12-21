@@ -5,8 +5,6 @@ namespace Kanboard\Helper;
 use Kanboard\Core\Base;
 use Kanboard\Core\Filter\QueryBuilder;
 use Kanboard\Filter\TaskDueDateRangeFilter;
-use Kanboard\Formatter\SubtaskTimeTrackingCalendarFormatter;
-use Kanboard\Formatter\TaskCalendarFormatter;
 
 /**
  * Calendar Helper
@@ -44,7 +42,7 @@ class CalendarHelper extends Base
      */
     public function getTaskDateDueEvents(QueryBuilder $queryBuilder, $start, $end)
     {
-        $formatter = new TaskCalendarFormatter($this->container);
+        $formatter = $this->taskCalendarFormatter;
         $formatter->setFullDay();
         $formatter->setColumns('date_due');
 
@@ -73,7 +71,7 @@ class CalendarHelper extends Base
             'date_due'
         ));
 
-        $formatter = new TaskCalendarFormatter($this->container);
+        $formatter = $this->taskCalendarFormatter;
         $formatter->setColumns($startColumn, 'date_due');
 
         return $queryBuilder->format($formatter);
@@ -90,8 +88,7 @@ class CalendarHelper extends Base
      */
     public function getSubtaskTimeTrackingEvents($user_id, $start, $end)
     {
-        $formatter = new SubtaskTimeTrackingCalendarFormatter($this->container);
-        return $formatter
+        return $this->subtaskTimeTrackingCalendarFormatter
             ->withQuery($this->subtaskTimeTrackingModel->getUserQuery($user_id)
                 ->addCondition($this->getCalendarCondition(
                     $this->dateParser->getTimestampFromIsoFormat($start),

@@ -40,3 +40,34 @@ You can still use the original template using the "kanboard:" prefix:
 ```php
 <?= $this->render('kanboard:header') ?>
 ```
+
+Formatter Overrides
+-------------------
+
+Here an example to override formatter objects in Kanboard:
+
+```php
+class MyFormatter extends UserAutoCompleteFormatter
+{
+    public function format()
+    {
+        $users = parent::format();
+
+        foreach ($users as &$user) {
+            $user['label'] = 'something'; // Do something useful here
+        }
+
+        return $users;
+    }
+}
+
+class Plugin extends Base
+{
+    public function initialize()
+    {
+        $this->container['userAutoCompleteFormatter'] = $this->container->factory(function ($c) {
+            return new MyFormatter($c);
+        });
+    }
+}
+```

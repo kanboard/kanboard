@@ -12,36 +12,26 @@ use PicoDb\Table;
  * @package  formatter
  * @author   Frederic Guillot
  */
-class GroupAutoCompleteFormatter implements FormatterInterface
+class GroupAutoCompleteFormatter extends BaseFormatter implements FormatterInterface
 {
     /**
      * Groups found
      *
-     * @access private
+     * @access protected
      * @var GroupProviderInterface[]
      */
-    private $groups;
+    protected $groups;
 
     /**
-     * Format groups for the ajax auto-completion
+     * Set groups
      *
      * @access public
      * @param  GroupProviderInterface[] $groups
+     * @return $this
      */
-    public function __construct(array $groups)
+    public function withGroups(array $groups)
     {
         $this->groups = $groups;
-    }
-
-    /**
-     * Set query
-     *
-     * @access public
-     * @param  Table $query
-     * @return FormatterInterface
-     */
-    public function withQuery(Table $query)
-    {
         return $this;
     }
 

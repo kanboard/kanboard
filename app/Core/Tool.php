@@ -41,7 +41,7 @@ class Tool
     }
 
     /**
-     * Build dependency injection container from an array
+     * Build dependency injection containers from an array
      *
      * @static
      * @access public
@@ -57,6 +57,29 @@ class Tool
                 $container[lcfirst($name)] = function ($c) use ($class) {
                     return new $class($c);
                 };
+            }
+        }
+
+        return $container;
+    }
+
+    /**
+     * Build dependency injection container from an array
+     *
+     * @static
+     * @access public
+     * @param  Container  $container
+     * @param  array      $namespaces
+     * @return Container
+     */
+    public static function buildFactories(Container $container, array $namespaces)
+    {
+        foreach ($namespaces as $namespace => $classes) {
+            foreach ($classes as $name) {
+                $class = '\\Kanboard\\'.$namespace.'\\'.$name;
+                $container[lcfirst($name)] = $container->factory(function ($c) use ($class) {
+                    return new $class($c);
+                });
             }
         }
 

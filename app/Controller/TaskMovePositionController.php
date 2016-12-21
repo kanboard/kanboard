@@ -3,7 +3,6 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
-use Kanboard\Formatter\BoardFormatter;
 use Kanboard\Model\TaskModel;
 
 /**
@@ -20,7 +19,7 @@ class TaskMovePositionController extends BaseController
 
         $this->response->html($this->template->render('task_move_position/show', array(
             'task' => $task,
-            'board' => BoardFormatter::getInstance($this->container)
+            'board' => $this->boardFormatter
                 ->withProjectId($task['project_id'])
                 ->withQuery($this->taskFinderModel->getExtendedQuery()
                     ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)

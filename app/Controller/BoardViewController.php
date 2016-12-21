@@ -3,7 +3,6 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
-use Kanboard\Formatter\BoardFormatter;
 use Kanboard\Model\TaskModel;
 
 /**
@@ -35,7 +34,7 @@ class BoardViewController extends BaseController
 
         $this->response->html($this->helper->layout->app('board/view_public', array(
             'project' => $project,
-            'swimlanes' => BoardFormatter::getInstance($this->container)
+            'swimlanes' => $this->boardFormatter
                 ->withProjectId($project['id'])
                 ->withQuery($query)
                 ->format()
@@ -68,7 +67,7 @@ class BoardViewController extends BaseController
             'board_highlight_period' => $this->configModel->get('board_highlight_period'),
             'swimlanes' => $this->taskLexer
                 ->build($search)
-                ->format(BoardFormatter::getInstance($this->container)->withProjectId($project['id']))
+                ->format($this->boardFormatter->withProjectId($project['id']))
         )));
     }
 }

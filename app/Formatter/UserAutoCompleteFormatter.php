@@ -14,7 +14,7 @@ use Kanboard\Core\Filter\FormatterInterface;
 class UserAutoCompleteFormatter extends BaseFormatter implements FormatterInterface
 {
     /**
-     * Format the tasks for the ajax autocompletion
+     * Format the tasks for the ajax auto-completion
      *
      * @access public
      * @return array
@@ -24,11 +24,11 @@ class UserAutoCompleteFormatter extends BaseFormatter implements FormatterInterf
         $users = $this->query->columns(UserModel::TABLE.'.id', UserModel::TABLE.'.username', UserModel::TABLE.'.name')->findAll();
 
         foreach ($users as &$user) {
-            $user['value'] = $user['username'].' (#'.$user['id'].')';
-
             if (empty($user['name'])) {
+                $user['value'] = $user['username'].' (#'.$user['id'].')';
                 $user['label'] = $user['username'];
             } else {
+                $user['value'] = $user['name'].' (#'.$user['id'].')';
                 $user['label'] = $user['name'].' ('.$user['username'].')';
             }
         }
