@@ -48,6 +48,8 @@ class ExternalTaskManager
     public function getProvidersList()
     {
         $providers = array_keys($this->providers);
-        return array_combine($providers, $providers);
+        if (count($providers)) {
+            return array_combine($providers, $providers);
+        }
     }
 }
