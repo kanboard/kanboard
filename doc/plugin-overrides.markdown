@@ -47,8 +47,8 @@ Formatter Overrides
 Here an example to override formatter objects in Kanboard:
 
 ```php
-class MyFormatter extends UserAutoCompleteFormatter {
-
+class MyFormatter extends UserAutoCompleteFormatter
+{
     public function format()
     {
         $users = parent::format();
