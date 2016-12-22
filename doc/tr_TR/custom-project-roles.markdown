@@ -12,14 +12,14 @@ Mevcut kısıtlamalar
 ----------------------
 
 - Proje Kısıtlamaları:
-     - Görev oluşturulmasına izin verilmiyor
-     - Bir görevi kapatmak veya açmak yasaktır
-     - Görevin taşınmasına izin verilmiyor
+    - Görev oluşturulmasına izin verilmiyor
+    - Bir görevi kapatmak veya açmak yasaktır
+    - Görevin taşınmasına izin verilmiyor
 - Sütun Kısıtlamaları:
-     - Görev oluşturulması sadece belirli bir sütun için **izin** verilir
-     - Görev oluşturulması yalnızca belirli bir sütun için **engel** lenir
-     - Bir görevi kapatmak veya açmak için sadece belirli bir sütuna **izin** verilir
-     - Bir görevi kapatmak veya açmak için yalnızca belirli bir sütun için **engel** lenir
+    - Görev oluşturulması sadece belirli bir sütun için **izin** verilir
+    - Görev oluşturulması yalnızca belirli bir sütun için **engel** lenir
+    - Bir görevi kapatmak veya açmak için sadece belirli bir sütuna **izin** verilir
+    - Bir görevi kapatmak veya açmak için yalnızca belirli bir sütun için **engel** lenir
 - Görevleri yalnızca belirtilen sütunlar arasında taşıma
 
 Yapılandırma
