@@ -3,7 +3,7 @@ Görevleri kapatma
 
 Bir görev kapatıldığında, panodan gizlenir.
 
-Bununla birlikte, her zaman arama durumundaki **durum:kapanmış** sorgusunu kullanarak kapalı görev listesine her zaman erişebilir veya filtre açılır menüsünden **Kapalı görev** seçeneğini belirleyin.
+Bununla birlikte, her zaman arama durumundaki **status:closed** sorgusunu kullanarak kapalı görev listesine her zaman erişebilir veya filtre açılır menüsünden **Kapalı görev** seçeneğini belirleyin.
 
 Bir görevi kapatmak için panodaki görev açılır menüsünden iki farklı yol vardır:
 
