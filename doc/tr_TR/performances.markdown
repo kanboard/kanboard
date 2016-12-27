@@ -34,6 +34,6 @@ Sqlite performansını geliştirin
 
 Olası çözümler:
 
--Eşzamanlılık (çok sayıda kullanıcı) çok olduğunda Sqlite kullanmayın, bunun yerine Postgres veya Mysql seçin
--Sqlite'i paylaşılan bir NFS bağdaştırıcısı üzerinde kullanmayın
--Zayıf IOPS'li bir diskte Sqlite kullanmayın, yerel SSD sürücülerini kullanmak her zaman tercih edilir
+- Eşzamanlılık (çok sayıda kullanıcı) çok olduğunda Sqlite kullanmayın, bunun yerine Postgres veya Mysql seçin
+- Sqlite'i paylaşılan bir NFS bağdaştırıcısı üzerinde kullanmayın
+- Zayıf IOPS'li bir diskte Sqlite kullanmayın, yerel SSD sürücülerini kullanmak her zaman tercih edilir
