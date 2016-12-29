@@ -18,11 +18,11 @@ Kanboard'u Apache ile kullanıyorsanız ve mod yeniden yazma özelliği etkinse,
 URL Kısayolları
 -------------
 
-- Görev #123'e gidin: : **/t/123**
-- #2 numaralı proje panosuna gidin: **/b/2**
-- Proje takvimi #5'e gidin: **/c/5**
-- #8. Projenin liste görünümüne gidin : **/l/8**
-- Proje numarası  #42 için proje ayarlarına gidin: **/p/42**
+- Görev "#123"'e gidin: **/t/123**
+- "#2" numaralı proje panosuna gidin: **/b/2**
+- Proje takvimi "#5"'e gidin: **/c/5**
+- "#8." Projenin liste görünümüne gidin : **/l/8**
+- Proje numarası  "#42" için proje ayarlarına gidin: **/p/42**
 
 Yapılandırma
 -------------
@@ -35,7 +35,7 @@ URL yeniden yazmanın web sunucusundan otomatik olarak algılanmasını önlemek
 define('ENABLE_URL_REWRITE', true);
 ```
 
-Bu sabit "`true` olduğunda:
+Bu sabit `true` olduğunda:
 
 - Komut satırı araçlarından üretilen URL'ler de dönüştürülecek
 - Apache'den başka bir web sunucusu, örnegin Nginx veya Microsoft IIS kullanıyorsanız, kendinize URL yeniden yazmayı yapılandırmanız gerekir
