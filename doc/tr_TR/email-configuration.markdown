@@ -47,7 +47,7 @@ define('MAIL_SMTP_USERNAME', 'username');
 define('MAIL_SMTP_PASSWORD', 'super password');
 ```
 
-It's also possible to use a secure connection, TLS or SSL:
+Güvenli bir bağlantı, TLS veya SSL kullanmak da mümkündür:
 
 ```php
 define('MAIL_SMTP_ENCRYPTION', 'ssl'); // Valid values are "null", "ssl" or "tls"
