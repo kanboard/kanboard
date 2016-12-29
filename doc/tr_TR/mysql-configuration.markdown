@@ -10,7 +10,7 @@ Gereksinimler
 - MySQL sunucusu
 - PHP'nin `pdo_mysql` uzantısı kuruldu
 
-Not: Kanboard, **Mysql> = 5.5 ve MariaDB> = 10.0** ile test edilmiştir **
+Not: Kanboard, **Mysql> = 5.5 ve MariaDB> = 10.0** ile test edilmiştir
 
 MySQL yapılandırması
 -------------------
