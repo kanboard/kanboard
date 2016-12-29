@@ -167,7 +167,7 @@ Kanboard'u yalnızca bazı kişilere kısıtlamak için kullanıcı hesapları o
 define('LDAP_ACCOUNT_CREATION', false);
 ```
 
-Troubleshooting
+Sorun giderme
 ---------------
 
 ### SELinux kısıtlamaları
@@ -182,3 +182,4 @@ Her halükarda, resmi Redhat/Centos belgelerine bakın.
 ### Hata ayıklama modunu etkinleştir
 
 Doğru şekilde LDAP kimlik doğrulamasını kuramazsanız, [hata ayıklama modunu etkinleştirebilirsiniz](config.markdown) ve günlük dosyalarını izleyebilirsiniz.
+
