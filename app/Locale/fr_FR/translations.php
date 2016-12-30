@@ -1289,5 +1289,5 @@ return array(
     'Your personal API access token is "%s"' => 'Votre jeton d\'accès personnel à l\'API est « %s »',
     'Remove your token' => 'Supprimer votre jeton',
     'Generate a new token' => 'Générer un nouveau jeton',
-    // 'Showing %d-%d of %d' => '',
+    'Showing %d-%d of %d' => 'Éléments %d à %d sur %d',
 );
