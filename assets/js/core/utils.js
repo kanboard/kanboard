@@ -32,3 +32,58 @@ KB.utils.getSelectionPosition = function (element) {
         selectionEnd: selectionEnd
     };
 };
+
+KB.utils.arraysIdentical = function (a, b) {
+    var i = a.length;
+
+    if (i !== b.length) {
+        return false;
+    }
+
+    while (i--) {
+        if (a[i] !== b[i]) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
+KB.utils.arraysStartsWith = function (array1, array2) {
+    var length = Math.min(array1.length, array2.length);
+
+    for (var i = 0; i < length; i++) {
+        if (array1[i] !== array2[i]) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
+KB.utils.isInputField = function (event) {
+    var element = event.target;
+
+    return !!(element.tagName === 'INPUT' ||
+    element.tagName === 'SELECT' ||
+    element.tagName === 'TEXTAREA' ||
+    element.isContentEditable);
+};
+
+KB.utils.getKey = function (e) {
+    var mapping = {
+        'Esc': 'Escape',
+        'Up': 'ArrowUp',
+        'Down': 'ArrowDown',
+        'Left': 'ArrowLeft',
+        'Right': 'ArrowRight'
+    };
+
+    for (var key in mapping) {
+        if (mapping.hasOwnProperty(key) && key === e.key) {
+            return mapping[key];
+        }
+    }
+
+    return e.key;
+};

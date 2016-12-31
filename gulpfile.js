@@ -48,8 +48,6 @@ var vendor = {
         'bower_components/moment/min/moment.min.js',
         'bower_components/fullcalendar/dist/fullcalendar.min.js',
         'bower_components/fullcalendar/dist/locale-all.js',
-        'bower_components/mousetrap/mousetrap.min.js',
-        'bower_components/mousetrap/plugins/global-bind/mousetrap-global-bind.min.js',
         'bower_components/d3/d3.min.js',
         'bower_components/c3/c3.min.js',
         'bower_components/isMobile/isMobile.min.js',

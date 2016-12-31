@@ -2,16 +2,6 @@ Kanboard.BoardCollapsedMode = function(app) {
     this.app = app;
 };
 
-Kanboard.BoardCollapsedMode.prototype.keyboardShortcuts = function() {
-    var self = this;
-
-    if (self.app.hasId("board")) {
-        Mousetrap.bind("s", function() {
-            self.toggle();
-        });
-    }
-};
-
 Kanboard.BoardCollapsedMode.prototype.toggle = function() {
     var self = this;
     this.app.showLoadingIcon();

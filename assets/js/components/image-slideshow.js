@@ -2,14 +2,14 @@ KB.component('image-slideshow', function (containerElement, options) {
     var currentImage;
 
     function onKeyDown(e) {
-        switch (e.keyCode) {
-            case 27:
+        switch (KB.utils.getKey(e)) {
+            case 'Escape':
                 destroySlide();
                 break;
-            case 39:
+            case 'ArrowRight':
                 renderNextSlide();
                 break;
-            case 37:
+            case 'ArrowLeft':
                 renderPreviousSlide();
                 break;
         }

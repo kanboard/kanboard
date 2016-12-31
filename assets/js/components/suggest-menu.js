@@ -1,21 +1,21 @@
 KB.component('suggest-menu', function(containerElement, options) {
 
     function onKeyDown(e) {
-        switch (e.keyCode) {
-            case 27:
+        switch (KB.utils.getKey(e)) {
+            case 'Escape':
                 destroy();
                 break;
-            case 38:
+            case 'ArrowUp':
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 moveUp();
                 break;
-            case 40:
+            case 'ArrowDown':
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 moveDown();
                 break;
-            case 13:
+            case 'Enter':
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 insertSelectedItem();

@@ -17,16 +17,6 @@ Kanboard.BoardHorizontalScrolling.prototype.listen = function() {
     });
 };
 
-Kanboard.BoardHorizontalScrolling.prototype.keyboardShortcuts = function() {
-    var self = this;
-
-    if (self.app.hasId("board")) {
-        Mousetrap.bind("c", function () {
-            self.toggle();
-        });
-    }
-};
-
 Kanboard.BoardHorizontalScrolling.prototype.onBoardRendered = function() {
     this.render();
 };

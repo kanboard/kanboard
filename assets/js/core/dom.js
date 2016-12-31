@@ -4,10 +4,12 @@ KB.dom = function (tag) {
         var element = typeof tag === 'string' ? document.createElement(tag) : tag;
 
         this.attr = function (attribute, value) {
-            if (value !== null) {
+            if (value !== null && typeof value !== 'undefined') {
                 element.setAttribute(attribute, value);
+                return this;
+            } else {
+                return element.getAttribute(attribute);
             }
-            return this;
         };
 
         this.data = function (attribute, value) {
@@ -174,4 +176,16 @@ KB.find = function (selector) {
     }
 
     return null;
+};
+
+KB.exists = function (selector) {
+    return !!document.querySelector(selector);
+};
+
+KB.focus = function (selector) {
+    var element = document.querySelector(selector);
+
+    if (element) {
+        return element.focus();
+    }
 };

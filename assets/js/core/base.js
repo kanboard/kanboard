@@ -37,12 +37,16 @@ KB.onChange = function (selector, callback) {
     this.listeners.changes[selector] = callback;
 };
 
-KB.onKey = function (key, callback) {
-    this.listeners.keys[key] = callback;
+KB.onKey = function (key, callback, ignoreInputField) {
+    this.listeners.keys[key] = {
+        'callback': callback,
+        'ignoreInputField': ignoreInputField || false
+    };
 };
 
 KB.listen = function () {
     var self = this;
+    var keysQueue = [];
 
     function onClick(e) {
         for (var selector in self.listeners.clicks) {
@@ -61,28 +65,48 @@ KB.listen = function () {
         }
     }
 
-    function onKeypress(e) {
-        var key = (typeof e.which === 'number') ? e.which : e.keyCode;
-        var element = e.target;
+    function onKeyPressed(e) {
+        var key = KB.utils.getKey(e);
+        var isInputField = KB.utils.isInputField(e);
 
-        if (element.tagName === 'INPUT' ||
-            element.tagName === 'SELECT' ||
-            element.tagName === 'TEXTAREA' ||
-            element.isContentEditable) {
-            return;
+        if (! isInputField || ['Escape', 'Meta', 'Enter', 'Control'].indexOf(key) !== -1) {
+            keysQueue.push(key);
         }
 
-        for (var keyMap in self.listeners.keys) {
-            if (self.listeners.keys.hasOwnProperty(keyMap) && key === parseInt(keyMap)) {
-                e.preventDefault();
-                self.listeners.keys[key](e);
+        if (keysQueue.length > 0) {
+            var reset = true;
+
+            for (var combination in self.listeners.keys) {
+                if (self.listeners.keys.hasOwnProperty(combination)) {
+                    var keyboardListener = self.listeners.keys[combination];
+                    var sequence = combination.split('+');
+
+                    if (KB.utils.arraysIdentical(keysQueue, sequence)) {
+                        if (isInputField && !keyboardListener.ignoreInputField) {
+                            keysQueue = [];
+                            return;
+                        }
+
+                        e.preventDefault();
+                        e.stopPropagation();
+                        keysQueue = [];
+                        keyboardListener.callback(e);
+                        break;
+                    } else if (KB.utils.arraysStartsWith(keysQueue, sequence)) {
+                        reset = false;
+                    }
+                }
+            }
+
+            if (reset) {
+                keysQueue = [];
             }
         }
     }
 
     document.addEventListener('click', onClick, false);
     document.addEventListener('change', onChange, false);
-    document.addEventListener('keypress', onKeypress, false);
+    window.addEventListener('keydown', onKeyPressed, false);
 };
 
 KB.component = function (name, object) {

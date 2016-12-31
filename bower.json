@@ -14,7 +14,6 @@
     "jquery-ui": "^1.11.4",
     "jqueryui-touch-punch": "*",
     "jqueryui-timepicker-addon": "^1.6.3",
-    "mousetrap": "^1.5.3",
     "font-awesome": "fontawesome#^4.7.0",
     "d3": "~3.5.0",
     "isMobile": "0.4.0",

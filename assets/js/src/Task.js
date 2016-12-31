@@ -2,29 +2,6 @@ Kanboard.Task = function(app) {
     this.app = app;
 };
 
-Kanboard.Task.prototype.keyboardShortcuts = function() {
-    var taskView = $("#task-view");
-    var self = this;
-
-    if (this.app.hasId("task-view")) {
-        Mousetrap.bind("e", function() {
-            self.app.get("Popover").open(taskView.data("edit-url"));
-        });
-
-        Mousetrap.bind("c", function() {
-            self.app.get("Popover").open(taskView.data("comment-url"));
-        });
-
-        Mousetrap.bind("s", function() {
-            self.app.get("Popover").open(taskView.data("subtask-url"));
-        });
-
-        Mousetrap.bind("l", function() {
-            self.app.get("Popover").open(taskView.data("internal-link-url"));
-        });
-    }
-};
-
 Kanboard.Task.prototype.onPopoverOpened = function() {
     var self = this;
     var reloadingProjectId = 0;

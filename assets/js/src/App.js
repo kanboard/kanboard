@@ -23,50 +23,13 @@ Kanboard.App.prototype.execute = function() {
             if (typeof controller.focus === "function") {
                 controller.focus();
             }
-
-            if (typeof controller.keyboardShortcuts === "function") {
-                controller.keyboardShortcuts();
-            }
         }
     }
 
     this.focus();
-    this.keyboardShortcuts();
     this.datePicker();
     this.autoComplete();
     this.tagAutoComplete();
-};
-
-Kanboard.App.prototype.keyboardShortcuts = function() {
-    var self = this;
-
-    // Submit form
-    Mousetrap.bindGlobal("mod+enter", function() {
-        var forms = $("form");
-
-        if (forms.length == 1) {
-            forms.submit();
-        } else if (forms.length > 1) {
-            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
-                $(document.activeElement).parents("form").submit();
-            } else if (self.get("Popover").isOpen()) {
-                $("#popover-container form").submit();
-            }
-        }
-    });
-
-    // Close popover and dropdown
-    Mousetrap.bindGlobal("esc", function() {
-        if (! document.getElementById('suggest-menu')) {
-            self.get("Popover").close();
-            self.get("Dropdown").close();
-        }
-    });
-
-    // Show keyboard shortcut
-    Mousetrap.bind("?", function() {
-        self.get("Popover").open($("body").data("keyboard-shortcut-url"));
-    });
 };
 
 Kanboard.App.prototype.focus = function() {
