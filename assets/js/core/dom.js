@@ -88,6 +88,11 @@ KB.dom = function (tag) {
             return this;
         };
 
+        this.replaceText = function (text) {
+            element.textContent = text;
+            return this;
+        };
+
         this.addClass = function (className) {
             element.classList.add(className);
             return this;
@@ -119,6 +124,13 @@ KB.dom = function (tag) {
 
         this.remove = function () {
             element.parentNode.removeChild(element);
+            return this;
+        };
+
+        this.empty = function () {
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
             return this;
         };
 

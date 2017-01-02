@@ -2,7 +2,7 @@
     <h2><?= t('Add a new link') ?></h2>
 </div>
 
-<form class="popover-form" action="<?= $this->url->href('TaskInternalLinkController', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" method="post" autocomplete="off">
+<form action="<?= $this->url->href('TaskInternalLinkController', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" method="post" autocomplete="off">
 
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('task_id', array('task_id' => $task['id'])) ?>
@@ -25,9 +25,5 @@
         ),
         'autocomplete') ?>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-        <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
-    </div>
+    <?= $this->modal->submitButtons() ?>
 </form>

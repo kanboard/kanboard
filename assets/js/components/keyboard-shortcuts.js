@@ -15,19 +15,19 @@ KB.keyboardShortcuts = function () {
         } else if (forms.length > 1) {
             if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
                 $(document.activeElement).parents("form").submit();
-            } else if (_KB.get("Popover").isOpen()) {
-                $("#popover-container form").submit();
+            } else if (KB.modal.isOpen()) {
+                KB.modal.getForm().submit();
             }
         }
     }
 
     KB.onKey('?', function () {
-        _KB.get("Popover").open($("body").data("keyboard-shortcut-url"));
+        KB.modal.open(KB.find('body').data('keyboardShortcutUrl'));
     });
 
     KB.onKey('Escape', function () {
         if (! KB.exists('#suggest-menu')) {
-            _KB.get("Popover").close();
+            KB.trigger('modal.close');
             _KB.get("Dropdown").close();
         }
     });
@@ -49,25 +49,25 @@ KB.keyboardShortcuts = function () {
         });
 
         KB.onKey('n', function () {
-            _KB.get("Popover").open($("#board").data("task-creation-url"));
+            KB.modal.open(KB.find('#board').data('taskCreationUrl'), 'large', false);
         });
     }
 
     if (KB.exists('#task-view')) {
         KB.onKey('e', function () {
-            _KB.get("Popover").open(KB.find('#task-view').data('editUrl'));
+            KB.modal.open(KB.find('#task-view').data('editUrl'), 'large');
         });
 
         KB.onKey('c', function () {
-            _KB.get("Popover").open(KB.find('#task-view').data('commentUrl'));
+            KB.modal.open(KB.find('#task-view').data('commentUrl'));
         });
 
         KB.onKey('s', function () {
-            _KB.get("Popover").open(KB.find('#task-view').data('subtaskUrl'));
+            KB.modal.open(KB.find('#task-view').data('subtaskUrl'));
         });
 
         KB.onKey('l', function () {
-            _KB.get("Popover").open(KB.find('#task-view').data('internalLinkUrl'));
+            KB.modal.open(KB.find('#task-view').data('internalLinkUrl'));
         });
     }
 

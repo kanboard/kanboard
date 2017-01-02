@@ -2,7 +2,7 @@
     <div class="page-header">
         <ul>
             <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('All users'), 'UserListController', 'show') ?></li>
-            <li><i class="fa fa-user-plus fa-fw"></i><?= $this->url->link(t('New group'), 'GroupCreationController', 'show', array(), false, 'popover') ?></li>
+            <li><?= $this->modal->medium('user-plus', t('New group'), 'GroupCreationController', 'show') ?></li>
         </ul>
     </div>
     <?php if ($paginator->isEmpty()): ?>
@@ -30,10 +30,10 @@
                     <div class="dropdown">
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
-                        <li><?= $this->url->link(t('Add group member'), 'GroupListController', 'associate', array('group_id' => $group['id']), false, 'popover') ?></li>
-                        <li><?= $this->url->link(t('Members'), 'GroupListController', 'users', array('group_id' => $group['id'])) ?></li>
-                        <li><?= $this->url->link(t('Edit'), 'GroupModificationController', 'show', array('group_id' => $group['id']), false, 'popover') ?></li>
-                        <li><?= $this->url->link(t('Remove'), 'GroupListController', 'confirm', array('group_id' => $group['id']), false, 'popover') ?></li>
+                        <li><?= $this->modal->medium('plus', t('Add group member'), 'GroupListController', 'associate', array('group_id' => $group['id'])) ?></li>
+                        <li><i class="fa fa-users fa-fw"></i> <?= $this->url->link(t('Members'), 'GroupListController', 'users', array('group_id' => $group['id'])) ?></li>
+                        <li><?= $this->modal->medium('edit', t('Edit'), 'GroupModificationController', 'show', array('group_id' => $group['id'])) ?></li>
+                        <li><?= $this->modal->confirm('trash-o', t('Remove'), 'GroupListController', 'confirm', array('group_id' => $group['id'])) ?></li>
                     </ul>
                     </div>
                 </td>

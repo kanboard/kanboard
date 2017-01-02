@@ -42,16 +42,23 @@ class TaskHelper extends Base
 
     public function selectTitle(array $values, array $errors)
     {
-        $html = $this->helper->form->label(t('Title'), 'title');
-        $html .= $this->helper->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="200"', 'tabindex="1"'), 'form-input-large');
-        return $html;
+        return $this->helper->form->text(
+            'title',
+            $values,
+            $errors,
+            array(
+                'autofocus',
+                'required',
+                'maxlength="200"',
+                'tabindex="1"',
+                'placeholder="'.t('Title').'"'
+            )
+        );
     }
 
     public function selectDescription(array $values, array $errors)
     {
-        $html = $this->helper->form->label(t('Description'), 'description');
-        $html .= $this->helper->form->textEditor('description', $values, $errors, array('tabindex' => 2));
-        return $html;
+        return $this->helper->form->textEditor('description', $values, $errors, array('tabindex' => 2));
     }
 
     public function selectTags(array $project, array $tags = array())
@@ -152,7 +159,7 @@ class TaskHelper extends Base
 
     public function selectScore(array $values, array $errors = array(), array $attributes = array())
     {
-        $attributes = array_merge(array('tabindex="8"'), $attributes);
+        $attributes = array_merge(array('tabindex="13"'), $attributes);
 
         $html = $this->helper->form->label(t('Complexity'), 'score');
         $html .= $this->helper->form->number('score', $values, $errors, $attributes);
@@ -162,7 +169,7 @@ class TaskHelper extends Base
 
     public function selectReference(array $values, array $errors = array(), array $attributes = array())
     {
-        $attributes = array_merge(array('tabindex="9"'), $attributes);
+        $attributes = array_merge(array('tabindex="14"'), $attributes);
 
         $html = $this->helper->form->label(t('Reference'), 'reference');
         $html .= $this->helper->form->text('reference', $values, $errors, $attributes, 'form-input-small');
@@ -172,7 +179,7 @@ class TaskHelper extends Base
 
     public function selectTimeEstimated(array $values, array $errors = array(), array $attributes = array())
     {
-        $attributes = array_merge(array('tabindex="10"'), $attributes);
+        $attributes = array_merge(array('tabindex="11"'), $attributes);
 
         $html = $this->helper->form->label(t('Original estimate'), 'time_estimated');
         $html .= $this->helper->form->numeric('time_estimated', $values, $errors, $attributes);
@@ -183,7 +190,7 @@ class TaskHelper extends Base
 
     public function selectTimeSpent(array $values, array $errors = array(), array $attributes = array())
     {
-        $attributes = array_merge(array('tabindex="11"'), $attributes);
+        $attributes = array_merge(array('tabindex="12"'), $attributes);
 
         $html = $this->helper->form->label(t('Time spent'), 'time_spent');
         $html .= $this->helper->form->numeric('time_spent', $values, $errors, $attributes);
@@ -194,13 +201,13 @@ class TaskHelper extends Base
 
     public function selectStartDate(array $values, array $errors = array(), array $attributes = array())
     {
-        $attributes = array_merge(array('tabindex="12"'), $attributes);
+        $attributes = array_merge(array('tabindex="10"'), $attributes);
         return $this->helper->form->datetime(t('Start Date'), 'date_started', $values, $errors, $attributes);
     }
 
     public function selectDueDate(array $values, array $errors = array(), array $attributes = array())
     {
-        $attributes = array_merge(array('tabindex="13"'), $attributes);
+        $attributes = array_merge(array('tabindex="9"'), $attributes);
         return $this->helper->form->date(t('Due Date'), 'date_due', $values, $errors, $attributes);
     }
 

@@ -1,13 +1,19 @@
 @import variables
 @import mixins
 
-form
-  margin-bottom: 20px
+fieldset
+  border: 1px solid #ccc
+  margin-top: 20px
+
+legend
+  font-weight: 500
+  font-size: size('medium')
 
 label
   cursor: pointer
   display: block
   margin-top: 10px
+  font-weight: 400
 
 input
   &[type="number"], &[type="date"], &[type="email"], &[type="password"], &[type="text"]:not(.input-addon-field)
@@ -19,7 +25,6 @@ input
     height: 25px
     padding-bottom: 0
     font-family: sans-serif
-    margin-top: 10px
     +appearance
     @include placeholder
       color: color('lighter')

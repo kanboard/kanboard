@@ -2,7 +2,7 @@
     <h2><?= $this->text->e($project['name']) ?> &gt; <?= t('Create tasks in bulk') ?></h2>
 </div>
 
-<form class="popover-form" method="post" action="<?= $this->url->href('TaskBulkController', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('TaskBulkController', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('column_id', $values) ?>
     <?= $this->form->hidden('swimlane_id', $values) ?>
@@ -16,9 +16,6 @@
     <?= $this->form->textarea('tasks', $values, $errors, array('placeholder="'.t('My task title').'"')) ?>
     <p class="form-help"><?= t('Enter one task by line.') ?></p>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-        <?= t('or') ?> <?= $this->url->link(t('cancel'), 'BoardViewController', 'show', array('project_id' => $project['id']), false, 'close-popover') ?>
-    </div>
+    <?= $this->modal->submitButtons() ?>
 </form>
 

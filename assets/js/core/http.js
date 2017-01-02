@@ -3,11 +3,21 @@ KB.http.request = function (method, url, headers, body) {
     var errorCallback = function() {};
 
     function parseResponse(request) {
-        try {
-            return JSON.parse(request.responseText);
-        } catch (e) {
-            return request.responseText;
+        var redirect = request.getResponseHeader('X-Ajax-Redirect');
+
+        if (redirect === 'self') {
+            window.location.reload();
+        } else if (redirect && redirect.indexOf('#') > -1) {
+            window.location = redirect.split('#')[0];
+        } else if (redirect) {
+            window.location = redirect;
+        } else if (request.getResponseHeader('Content-Type') === 'application/json') {
+            try {
+                return JSON.parse(request.responseText);
+            } catch (e) {}
         }
+
+        return request.responseText;
     }
 
     this.execute = function () {
@@ -63,4 +73,21 @@ KB.http.postJson = function (url, body) {
     };
 
     return (new KB.http.request('POST', url, headers, JSON.stringify(body))).execute();
+};
+
+KB.http.postForm = function (url, formElement) {
+    var formData = new FormData(formElement);
+    return (new KB.http.request('POST', url, {}, formData)).execute();
+};
+
+KB.http.uploadFile = function (url, file, onProgress, onComplete, onError) {
+    var fd = new FormData();
+    fd.append('files[]', file);
+
+    var xhr = new XMLHttpRequest();
+    xhr.upload.addEventListener('progress', onProgress);
+    xhr.upload.addEventListener('load', onComplete);
+    xhr.upload.addEventListener('error', onError);
+    xhr.open('POST', url, true);
+    xhr.send(fd);
 };

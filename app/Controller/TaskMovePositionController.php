@@ -38,7 +38,7 @@ class TaskMovePositionController extends BaseController
             throw new AccessForbiddenException(e('You are not allowed to move this task.'));
         }
 
-        $result = $this->taskPositionModel->movePosition(
+        $this->taskPositionModel->movePosition(
             $task['project_id'],
             $task['id'],
             $values['column_id'],
@@ -46,6 +46,6 @@ class TaskMovePositionController extends BaseController
             $values['swimlane_id']
         );
 
-        $this->response->json(array('result' => $result));
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 }

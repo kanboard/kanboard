@@ -1,7 +1,7 @@
 @import variables
 @import mixins
 
-#popover-container
+#modal-overlay
   position: fixed
   top: 0
   left: 0
@@ -11,25 +11,24 @@
   overflow: auto
   z-index: 100
 
-#popover-content
+#modal-box
   position: fixed
-  width: 950px
-  max-width: 95%
   max-height: calc(100% - 50px)
-  top: 5%
+  top: 2%
   left: 50%
   transform: translateX(-50%)
-  padding: 0 15px 15px
   background: #fff
   overflow: auto
+  border-radius: 5px
 
-#popover-content-header
+#modal-content
+  padding: 0 5px 5px
+
+#modal-header
   text-align: right
+  padding-right: 5px
 
-#popover-close-button
+#modal-close-button
   color: color('primary')
   &:hover
     color: color('error')
-
-.popover-form
-  margin-bottom: 0

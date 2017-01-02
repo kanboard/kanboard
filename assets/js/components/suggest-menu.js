@@ -62,7 +62,7 @@ KB.component('suggest-menu', function(containerElement, options) {
     }
 
     function getParentElement() {
-        var selectors = ['.popover-form', '#popover-content', 'body'];
+        var selectors = ['#modal-content form', '#modal-content', 'body'];
 
         for (var i = 0; i < selectors.length; i++) {
             var element = document.querySelector(selectors[i]);

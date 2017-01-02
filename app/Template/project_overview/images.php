@@ -24,8 +24,7 @@
                                 </li>
                                 <?php if ($this->user->hasProjectAccess('ProjectFileController', 'remove', $project['id'])): ?>
                                     <li>
-                                        <i class="fa fa-trash fa-fw"></i>
-                                        <?= $this->url->link(t('Remove'), 'ProjectFileController', 'confirm', array('project_id' => $project['id'], 'file_id' => $file['id']), false, 'popover') ?>
+                                        <?= $this->modal->confirm('trash-o', t('Remove'), 'ProjectFileController', 'confirm', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
                                     </li>
                                 <?php endif ?>
                             </ul>

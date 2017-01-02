@@ -1,6 +1,7 @@
 @import variables
 
 .text-editor
+  margin-top: 10px
   a
     font-size: size('normal')
     color: color('light')
@@ -10,7 +11,12 @@
       color: link-color('primary')
   .text-editor-preview-area
     border: 1px solid color('lighter')
-    width: 400px
-    height: 200px
+    width: 700px
+    max-width: 99%
+    height: 250px
     overflow: auto
     padding: 2px
+  textarea
+    width: 700px
+    max-width: 98%
+    height: 250px

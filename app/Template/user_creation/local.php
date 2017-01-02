@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('New local user') ?></h2>
 </div>
-<form class="popover-form" method="post" action="<?= $this->url->href('UserCreationController', 'save') ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('UserCreationController', 'save') ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
 
     <div class="form-columns">
@@ -39,9 +39,5 @@
         </div>
     </div>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-        <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'UserListController', 'show', array(), false, 'close-popover') ?>
-    </div>
+    <?= $this->modal->submitButtons() ?>
 </form>

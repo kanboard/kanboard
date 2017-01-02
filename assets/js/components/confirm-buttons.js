@@ -1,28 +1,27 @@
-KB.component('submit-cancel', function (containerElement, options) {
+KB.component('confirm-buttons', function (containerElement, options) {
     var isLoading = false;
 
     function onSubmit() {
         isLoading = true;
-        KB.find('#modal-submit-button').replace(buildButton());
-        KB.trigger('modal.submit');
+        KB.find('#modal-confirm-button').replace(buildButton());
+        window.location.href = options.url;
     }
 
     function onCancel() {
-        KB.trigger('modal.cancel');
-        _KB.get('Popover').close();
+        KB.trigger('modal.close');
     }
 
     function onStop() {
         isLoading = false;
-        KB.find('#modal-submit-button').replace(buildButton());
+        KB.find('#modal-confirm-button').replace(buildButton());
     }
 
     function buildButton() {
         var button = KB.dom('button')
             .click(onSubmit)
-            .attr('id', 'modal-submit-button')
-            .attr('type', 'submit')
-            .attr('class', 'btn btn-blue');
+            .attr('id', 'modal-confirm-button')
+            .attr('type', 'button')
+            .attr('class', 'btn btn-red');
 
         if (isLoading) {
             button
@@ -30,6 +29,10 @@ KB.component('submit-cancel', function (containerElement, options) {
                 .add(KB.dom('i').attr('class', 'fa fa-spinner fa-pulse').build())
                 .text(' ')
             ;
+        }
+
+        if (options.tabindex) {
+            button.attr('tabindex', options.tabindex);
         }
 
         return button

@@ -15,6 +15,7 @@ Kanboard.Search.prototype.focus = function() {
     });
 };
 
+// TODO: rewrite this code
 Kanboard.Search.prototype.listen = function() {
     $(document).on("click", ".filter-helper", function (e) {
         e.preventDefault();

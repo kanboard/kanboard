@@ -87,3 +87,10 @@ KB.utils.getKey = function (e) {
 
     return e.key;
 };
+
+KB.utils.getViewportSize = function () {
+    return {
+        width: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
+        height: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    };
+};

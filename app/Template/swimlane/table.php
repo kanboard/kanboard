@@ -20,8 +20,7 @@
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
                     <li>
-                        <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>
-                        <?= $this->url->link(t('Edit'), 'SwimlaneController', 'editDefault', array('project_id' => $project['id']), false, 'popover') ?>
+                        <?= $this->modal->medium('edit', t('Edit'), 'SwimlaneController', 'editDefault', array('project_id' => $project['id'])) ?>
                     </li>
                     <li>
                         <?php if ($default_swimlane['show_default_swimlane'] == 1): ?>
@@ -58,8 +57,7 @@
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
                     <li>
-                        <i class="fa fa-pencil-square-o fa-fw" aria-hidden="true"></i>
-                        <?= $this->url->link(t('Edit'), 'SwimlaneController', 'edit', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
+                        <?= $this->modal->medium('edit', t('Edit'), 'SwimlaneController', 'edit', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>
                     </li>
                     <li>
                         <?php if ($swimlane['is_active']): ?>
@@ -71,8 +69,7 @@
                         <?php endif ?>
                     </li>
                     <li>
-                        <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
-                        <?= $this->url->link(t('Remove'), 'SwimlaneController', 'confirm', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), false, 'popover') ?>
+                        <?= $this->modal->confirm('trash-o', t('Remove'), 'SwimlaneController', 'confirm', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>
                     </li>
                 </ul>
                 </div>

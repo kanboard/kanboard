@@ -24,8 +24,7 @@
                                 </li>
                                 <?php if ($this->user->hasProjectAccess('TaskFileController', 'remove', $task['project_id'])): ?>
                                     <li>
-                                        <i class="fa fa-trash fa-fw"></i>
-                                        <?= $this->url->link(t('Remove'), 'TaskFileController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, 'popover') ?>
+                                        <?= $this->modal->confirm('trash-o', t('Remove'), 'TaskFileController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                                     </li>
                                 <?php endif ?>
                             </ul>

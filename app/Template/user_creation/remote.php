@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('New remote user') ?></h2>
 </div>
-<form class="popover-form" method="post" action="<?= $this->url->href('UserCreationController', 'save') ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('UserCreationController', 'save') ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('is_ldap_user', array('is_ldap_user' => 1)) ?>
 
@@ -37,11 +37,7 @@
         </div>
     </div>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-        <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'UserListController', 'show', array(), false, 'close-popover') ?>
-    </div>
+    <?= $this->modal->submitButtons() ?>
 </form>
 <div class="alert alert-info">
     <ul>

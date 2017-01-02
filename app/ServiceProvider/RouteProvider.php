@@ -65,10 +65,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/overview', 'ProjectOverviewController', 'show');
 
             // ProjectEdit routes
-            $container['route']->addRoute('project/:project_id/edit', 'ProjectEditController', 'edit');
-            $container['route']->addRoute('project/:project_id/edit/dates', 'ProjectEditController', 'dates');
-            $container['route']->addRoute('project/:project_id/edit/description', 'ProjectEditController', 'description');
-            $container['route']->addRoute('project/:project_id/edit/priority', 'ProjectEditController', 'priority');
+            $container['route']->addRoute('project/:project_id/edit', 'ProjectEditController', 'show');
 
             // ProjectUser routes
             $container['route']->addRoute('projects/managers/:user_id', 'ProjectUserOverviewController', 'managers');

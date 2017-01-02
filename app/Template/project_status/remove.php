@@ -7,8 +7,9 @@
         <?= t('Do you really want to remove this project: "%s"?', $project['name']) ?>
     </p>
 
-    <div class="form-actions">
-        <?= $this->url->link(t('Yes'), 'ProjectStatusController', 'remove', array('project_id' => $project['id']), true, 'btn btn-red') ?>
-        <?= t('or') ?> <?= $this->url->link(t('cancel'), 'ProjectViewController', 'show', array('project_id' => $project['id']), false, 'close-popover') ?>
-    </div>
+    <?= $this->modal->confirmButtons(
+        'ProjectStatusController',
+        'remove',
+        array('project_id' => $project['id'])
+    ) ?>
 </div>

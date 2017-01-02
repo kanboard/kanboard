@@ -9,9 +9,9 @@
         </li>
         <?php endif ?>
 
-        <?php if ($this->user->hasProjectAccess('ProjectEditController', 'edit', $project['id'])): ?>
+        <?php if ($this->user->hasProjectAccess('ProjectEditController', 'show', $project['id'])): ?>
             <li <?= $this->app->checkMenuSelection('ProjectEditController') ?>>
-                <?= $this->url->link(t('Edit project'), 'ProjectEditController', 'edit', array('project_id' => $project['id'])) ?>
+                <?= $this->url->link(t('Edit project'), 'ProjectEditController', 'show', array('project_id' => $project['id'])) ?>
             </li>
             <li <?= $this->app->checkMenuSelection('ProjectViewController', 'share') ?>>
                 <?= $this->url->link(t('Public access'), 'ProjectViewController', 'share', array('project_id' => $project['id'])) ?>
@@ -50,15 +50,15 @@
             </li>
                 <?php if ($project['is_active']): ?>
                     <li>
-                    <?= $this->url->link(t('Disable'), 'ProjectStatusController', 'confirmDisable', array('project_id' => $project['id']), false, 'popover') ?>
+                    <?= $this->modal->confirm('close', t('Disable'), 'ProjectStatusController', 'confirmDisable', array('project_id' => $project['id'])) ?>
                 <?php else: ?>
                     <li>
-                    <?= $this->url->link(t('Enable'), 'ProjectStatusController', 'confirmEnable', array('project_id' => $project['id']), false, 'popover') ?>
+                    <?= $this->modal->confirm('check-square-o', t('Enable'), 'ProjectStatusController', 'confirmEnable', array('project_id' => $project['id'])) ?>
                 <?php endif ?>
             </li>
             <?php if ($this->user->hasProjectAccess('ProjectStatusController', 'remove', $project['id'])): ?>
                 <li>
-                    <?= $this->url->link(t('Remove'), 'ProjectStatusController', 'confirmRemove', array('project_id' => $project['id']), false, 'popover') ?>
+                    <?= $this->modal->confirm('trash-o', t('Remove'), 'ProjectStatusController', 'confirmRemove', array('project_id' => $project['id'])) ?>
                 </li>
             <?php endif ?>
         <?php endif ?>

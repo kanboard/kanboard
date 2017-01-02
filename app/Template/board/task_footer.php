@@ -10,7 +10,7 @@
                 'edit',
                 array('task_id' => $task['id'], 'project_id' => $task['project_id']),
                 false,
-                'popover' . (! empty($task['category_description']) ? ' tooltip' : ''),
+                'js-modal-medium' . (! empty($task['category_description']) ? ' tooltip' : ''),
                 ! empty($task['category_description']) ? $this->text->markdownAttribute($task['category_description']) : t('Change category')
             ) ?>
         <?php endif ?>

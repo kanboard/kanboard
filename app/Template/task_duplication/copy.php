@@ -5,25 +5,25 @@
 <?php if (empty($projects_list)): ?>
     <p class="alert"><?= t('There is no destination project available.') ?></p>
     <div class="form-actions">
-        <?= $this->url->link(t('cancel'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover btn') ?>
+        <?= $this->url->link(t('cancel'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'js-modal-close btn') ?>
     </div>
 <?php else: ?>
 
-    <form class="popover-form" method="post" action="<?= $this->url->href('TaskDuplicationController', 'copy', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
-
+    <form method="post" action="<?= $this->url->href('TaskDuplicationController', 'copy', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
         <?= $this->form->csrf() ?>
         <?= $this->form->hidden('id', $values) ?>
 
         <?= $this->form->label(t('Project'), 'project_id') ?>
-        <?= $this->form->select(
-            'project_id',
-            $projects_list,
-            $values,
-            array(),
-            array('data-redirect="'.$this->url->href('TaskDuplicationController', 'copy', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'dst_project_id' => 'PROJECT_ID')).'"'),
-            'task-reload-project-destination'
-        ) ?>
-        <span class="loading-icon" style="display: none">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>
+        <?= $this->app->component('select-dropdown-autocomplete', array(
+            'name'         => 'project_id',
+            'items'        => $projects_list,
+            'defaultValue' => isset($values['project_id']) ? $values['project_id'] : null,
+            'placeholder'  => t('Choose a project'),
+            'replace'      => array(
+                'regex' => 'PROJECT_ID',
+                'url' => $this->url->href('TaskDuplicationController', 'copy', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'dst_project_id' => 'PROJECT_ID')),
+            )
+        )) ?>
 
         <?= $this->form->label(t('Swimlane'), 'swimlane_id') ?>
         <?= $this->form->select('swimlane_id', $swimlanes_list, $values) ?>
@@ -41,10 +41,6 @@
         <?= $this->form->select('owner_id', $users_list, $values) ?>
         <p class="form-help"><?= t('Current assignee: %s', ($task['assignee_name'] ?: $task['assignee_username']) ?: e('not assigned')) ?></p>
 
-        <div class="form-actions">
-            <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-            <?= t('or') ?>
-            <?= $this->url->link(t('cancel'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
-        </div>
+        <?= $this->modal->submitButtons() ?>
     </form>
 <?php endif ?>

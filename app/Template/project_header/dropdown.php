@@ -24,8 +24,7 @@
 
         <?php if ($this->user->hasProjectAccess('TaskCreationController', 'show', $project['id'])): ?>
             <li>
-                <i class="fa fa-plus fa-fw"></i>
-                <?= $this->url->link(t('Add a new task'), 'TaskCreationController', 'show', array('project_id' => $project['id']), false, 'popover') ?>
+                <?= $this->modal->large('plus', t('Add a new task'), 'TaskCreationController', 'show', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
 
@@ -71,7 +70,7 @@
             </li>
         <?php endif ?>
 
-        <?php if ($this->user->hasProjectAccess('ProjectEditController', 'edit', $project['id'])): ?>
+        <?php if ($this->user->hasProjectAccess('ProjectEditController', 'show', $project['id'])): ?>
             <li>
                 <i class="fa fa-cog fa-fw"></i>
                 <?= $this->url->link(t('Settings'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>

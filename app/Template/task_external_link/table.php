@@ -33,12 +33,10 @@
                         <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                         <ul>
                             <li>
-                                <i class="fa fa-edit fa-fw"></i>
-                                <?= $this->url->link(t('Edit'), 'TaskExternalLinkController', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+                                <?= $this->modal->medium('edit', t('Edit'), 'TaskExternalLinkController', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
                             </li>
                             <li>
-                                <i class="fa fa-trash-o fa-fw"></i>
-                                <?= $this->url->link(t('Remove'), 'TaskExternalLinkController', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'popover') ?>
+                                <?= $this->modal->confirm('trash-o', t('Remove'), 'TaskExternalLinkController', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
                             </li>
                         </ul>
                     </div>

@@ -2,8 +2,7 @@
     <h2><?= t('Project tags') ?></h2>
     <ul>
         <li>
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            <?= $this->url->link(t('Add new tag'), 'ProjectTagController', 'create', array('project_id' => $project['id']), false, 'popover') ?>
+            <?= $this->modal->medium('plus', t('Add new tag'), 'ProjectTagController', 'create', array('project_id' => $project['id'])) ?>
         </li>
     </ul>
 </div>
@@ -20,10 +19,8 @@
             <tr>
                 <td><?= $this->text->e($tag['name']) ?></td>
                 <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                    <?= $this->url->link(t('Remove'), 'ProjectTagController', 'confirm', array('tag_id' => $tag['id'], 'project_id' => $project['id']), false, 'popover') ?>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    <?= $this->url->link(t('Edit'), 'ProjectTagController', 'edit', array('tag_id' => $tag['id'], 'project_id' => $project['id']), false, 'popover') ?>
+                    <?= $this->modal->medium('edit', t('Edit'), 'ProjectTagController', 'edit', array('tag_id' => $tag['id'], 'project_id' => $project['id'])) ?>
+                    <?= $this->modal->confirm('trash-o', t('Remove'), 'ProjectTagController', 'confirm', array('tag_id' => $tag['id'], 'project_id' => $project['id'])) ?>
                 </td>
             </tr>
         <?php endforeach ?>

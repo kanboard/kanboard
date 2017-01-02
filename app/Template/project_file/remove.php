@@ -7,9 +7,9 @@
         <?= t('Do you really want to remove this file: "%s"?', $this->text->e($file['name'])) ?>
     </p>
 
-    <div class="form-actions">
-        <?= $this->url->link(t('Yes'), 'ProjectFileController', 'remove', array('project_id' => $project['id'], 'file_id' => $file['id']), true, 'btn btn-red') ?>
-        <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'ProjectOverviewController', 'show', array('project_id' => $project['id']), false, 'close-popover') ?>
-    </div>
+    <?= $this->modal->confirmButtons(
+        'ProjectFileController',
+        'remove',
+        array('project_id' => $project['id'], 'file_id' => $file['id'])
+    ) ?>
 </div>

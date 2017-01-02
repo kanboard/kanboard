@@ -168,7 +168,7 @@
 
     <?php if ($editable && empty($task['date_started'])): ?>
         <div class="buttons-header">
-            <?= $this->url->button('fa-play', t('Set start date'), 'TaskModificationController', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->button('play', t('Set start date'), 'TaskModificationController', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </div>
     <?php endif ?>
 

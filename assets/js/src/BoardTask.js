@@ -2,6 +2,7 @@ Kanboard.BoardTask = function(app) {
     this.app = app;
 };
 
+// TODO: rewrite this code
 Kanboard.BoardTask.prototype.listen = function() {
     var self = this;
 

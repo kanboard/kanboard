@@ -1,5 +1,24 @@
 KB.component('select-dropdown-autocomplete', function(containerElement, options) {
-    var componentElement, inputElement, inputHiddenElement;
+    var componentElement, inputElement, inputHiddenElement, chevronIconElement, loadingIconElement;
+
+    function onLoadingStart() {
+        KB.dom(loadingIconElement).show();
+        KB.dom(chevronIconElement).hide();
+    }
+
+    function onLoadingStop() {
+        KB.dom(loadingIconElement).hide();
+        KB.dom(chevronIconElement).show();
+    }
+
+    function onScroll() {
+        var menuElement = KB.find('#select-dropdown-menu');
+
+        if (menuElement) {
+            var componentPosition = componentElement.getBoundingClientRect();
+            menuElement.style('top', (document.body.scrollTop + componentPosition.bottom) + 'px');
+        }
+    }
 
     function onKeyDown(e) {
         switch (KB.utils.getKey(e)) {
@@ -66,8 +85,10 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
         destroyDropdownMenu();
 
         if (options.redirect) {
-            var regex = new RegExp(options.redirect.regex, 'g');
-            window.location = options.redirect.url.replace(regex, value);
+            window.location = options.redirect.url.replace(new RegExp(options.redirect.regex, 'g'), value);
+        } else if (options.replace) {
+            onLoadingStart();
+            KB.modal.replace(options.replace.url.replace(new RegExp(options.replace.regex, 'g'), value));
         }
     }
 
@@ -158,7 +179,7 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
 
         return KB.dom('ul')
             .attr('id', 'select-dropdown-menu')
-            .style('top', componentPosition.bottom + 'px')
+            .style('top', (document.body.scrollTop + componentPosition.bottom) + 'px')
             .style('left', componentPosition.left + 'px')
             .style('width', componentPosition.width + 'px')
             .style('maxHeight', (window.innerHeight - componentPosition.bottom - 20) + 'px')
@@ -203,9 +224,18 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
     }
 
     this.render = function () {
-        var dropdownIconElement = KB.dom('i')
+        KB.on('select.dropdown.loading.start', onLoadingStart);
+        KB.on('select.dropdown.loading.stop', onLoadingStop);
+
+        chevronIconElement = KB.dom('i')
             .attr('class', 'fa fa-chevron-down select-dropdown-chevron')
             .click(toggleDropdownMenu)
+            .build();
+
+        loadingIconElement = KB.dom('span')
+            .hide()
+            .addClass('select-loading-icon')
+            .add(KB.dom('i').attr('class', 'fa fa-spinner fa-pulse').build())
             .build();
 
         inputHiddenElement = KB.dom('input')
@@ -227,7 +257,8 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
             .addClass('select-dropdown-input-container')
             .add(inputHiddenElement)
             .add(inputElement)
-            .add(dropdownIconElement)
+            .add(chevronIconElement)
+            .add(loadingIconElement)
             .build();
 
         containerElement.appendChild(componentElement);
@@ -237,5 +268,7 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
                 KB.on(eventName, function() { inputElement.focus(); });
             });
         }
+
+        window.addEventListener('scroll', onScroll, false);
     };
 });

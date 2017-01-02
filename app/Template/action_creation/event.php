@@ -2,8 +2,7 @@
     <h2><?= t('Choose an event') ?></h2>
 </div>
 
-<form class="popover-form" method="post" action="<?= $this->url->href('ActionCreationController', 'params', array('project_id' => $project['id'])) ?>">
-
+<form method="post" action="<?= $this->url->href('ActionCreationController', 'params', array('project_id' => $project['id'])) ?>">
     <?= $this->form->csrf() ?>
 
     <?= $this->form->hidden('project_id', $values) ?>
@@ -19,9 +18,5 @@
         <?= t('When the selected event occurs execute the corresponding action.') ?>
     </div>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Next step') ?></button>
-        <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'ActionController', 'index', array('project_id' => $project['id']), false, 'close-popover') ?>
-    </div>
+    <?= $this->modal->submitButtons(t('Next step')) ?>
 </form>

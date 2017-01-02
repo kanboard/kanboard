@@ -2,7 +2,7 @@
     <div class="page-header">
         <h2><?= $title ?></h2>
     </div>
-    <form class="popover-form" id="project-creation-form" method="post" action="<?= $this->url->href('ProjectCreationController', 'save') ?>" autocomplete="off">
+    <form id="project-creation-form" method="post" action="<?= $this->url->href('ProjectCreationController', 'save') ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
         <?= $this->form->hidden('is_private', $values) ?>
@@ -29,11 +29,7 @@
             <?= $this->form->checkbox('projectTaskDuplicationModel', t('Tasks'), 1, false) ?>
         </div>
 
-        <div class="form-actions">
-            <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-            <?= t('or') ?>
-            <?= $this->url->link(t('cancel'), 'ProjectListController', 'show', array(), false, 'close-popover') ?>
-        </div>
+        <?= $this->modal->submitButtons() ?>
     </form>
     <?php if ($is_private): ?>
     <div class="alert alert-info">

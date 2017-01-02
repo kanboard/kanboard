@@ -11,8 +11,7 @@
                 <?= $this->url->link(t('Sort by date'), 'TaskGanttController', 'show', array('project_id' => $project['id'], 'sorting' => 'date')) ?>
             </li>
             <li>
-                <i class="fa fa-plus fa-fw"></i>
-                <?= $this->url->link(t('Add task'), 'TaskGanttCreationController', 'show', array('project_id' => $project['id']), false, 'popover') ?>
+                <?= $this->modal->large('plus', t('Add task'), 'TaskCreationController', 'show', array('project_id' => $project['id'])) ?>
             </li>
         </ul>
     </div>

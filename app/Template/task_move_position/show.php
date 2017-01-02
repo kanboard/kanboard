@@ -14,10 +14,6 @@
     'afterLabel' => t('Insert after this task'),
 )) ?>
 
-<?= $this->app->component('submit-cancel', array(
-    'submitLabel' => t('Save'),
-    'orLabel' => t('or'),
-    'cancelLabel' => t('cancel'),
-)) ?>
+<?= $this->modal->submitButtons() ?>
 
 </form>

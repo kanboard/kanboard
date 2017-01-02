@@ -3,14 +3,12 @@
         <ul>
             <?php if ($this->user->hasAccess('ProjectCreationController', 'create')): ?>
                 <li>
-                    <i class="fa fa-plus fa-fw"></i>
-                    <?= $this->url->link(t('New project'), 'ProjectCreationController', 'create', array(), false, 'popover') ?>
+                    <?= $this->modal->medium('plus', t('New project'), 'ProjectCreationController', 'create') ?>
                 </li>
             <?php endif ?>
             <?php if ($this->app->config('disable_private_project', 0) == 0): ?>
             <li>
-                <i class="fa fa-lock fa-fw"></i>
-                <?= $this->url->link(t('New private project'), 'ProjectCreationController', 'createPrivate', array(), false, 'popover') ?>
+                <?= $this->modal->medium('lock', t('New private project'), 'ProjectCreationController', 'createPrivate') ?>
             </li>
             <?php endif ?>
             <li>

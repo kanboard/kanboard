@@ -33,9 +33,5 @@
 
     <p class="form-help"><?= t('Maximum size: ') ?><?= is_integer($max_size) ? $this->text->bytes($max_size) : $max_size ?></p>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Import') ?></button>
-        <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'UserListController', 'show', array(), false, 'close-popover') ?>
-    </div>
+    <?= $this->modal->submitButtons(array('labelSubmit' => t('Import'))) ?>
 </form>

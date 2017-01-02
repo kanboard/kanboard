@@ -22,9 +22,7 @@ KB.on = function (eventType, callback) {
 KB.trigger = function (eventType, eventData) {
     if (this.listeners.internals.hasOwnProperty(eventType)) {
         for (var i = 0; i < this.listeners.internals[eventType].length; i++) {
-            if (! this.listeners.internals[eventType][i](eventData)) {
-                break;
-            }
+            this.listeners.internals[eventType][i](eventData);
         }
     }
 };

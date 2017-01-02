@@ -15,7 +15,7 @@
 
 <?php if ($task['recurrence_status'] != \Kanboard\Model\TaskModel::RECURRING_STATUS_PROCESSED): ?>
 
-    <form class="popover-form" method="post" action="<?= $this->url->href('TaskRecurrenceController', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+    <form method="post" action="<?= $this->url->href('TaskRecurrenceController', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
 
@@ -37,11 +37,7 @@
         <?= $this->form->label(t('Base date to calculate new due date'), 'recurrence_basedate') ?>
         <?= $this->form->select('recurrence_basedate', $recurrence_basedate_list, $values, $errors) ?>
 
-        <div class="form-actions">
-            <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-            <?= t('or') ?>
-            <?= $this->url->link(t('cancel'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
-        </div>
+        <?= $this->modal->submitButtons() ?>
     </form>
 
 <?php endif ?>

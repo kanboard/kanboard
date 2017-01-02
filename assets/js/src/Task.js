@@ -2,9 +2,9 @@ Kanboard.Task = function(app) {
     this.app = app;
 };
 
+// TODO: rewrite this code
 Kanboard.Task.prototype.onPopoverOpened = function() {
     var self = this;
-    var reloadingProjectId = 0;
 
     self.renderColorPicker();
 
@@ -17,29 +17,6 @@ Kanboard.Task.prototype.onPopoverOpened = function() {
 
         if ($(dropdownId + ' option[value=' + currentId + ']').length) {
             $(dropdownId).val(currentId);
-        }
-    });
-
-    // Reload page when a destination project is changed
-    $(document).on("change", "select.task-reload-project-destination", function() {
-        if (reloadingProjectId > 0) {
-            $(this).val(reloadingProjectId);
-        }
-        else {
-            reloadingProjectId = $(this).val();
-            var url = $(this).data("redirect").replace(/PROJECT_ID/g, reloadingProjectId);
-
-            $(".loading-icon").show();
-
-            $.ajax({
-                type: "GET",
-                url: url,
-                success: function(data, textStatus, request) {
-                    reloadingProjectId = 0;
-                    $(".loading-icon").hide();
-                    self.app.get("Popover").ajaxReload(data, request, self.app.get("Popover"));
-                }
-            });
         }
     });
 };
