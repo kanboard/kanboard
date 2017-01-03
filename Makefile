@@ -6,7 +6,7 @@ clean:
 	@ rm -rf ./node_modules ./bower_components
 
 static: clean
-	@ npm install
+	@ yarn install || npm install
 	@ ./node_modules/.bin/gulp bower
 	@ ./node_modules/.bin/gulp vendor js css
 	@ ./node_modules/.bin/jshint assets/js/{core,components,polyfills}

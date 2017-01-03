@@ -4,7 +4,7 @@
             return e.target.parentNode.getAttribute('href');
         }
 
-        return e.target.getAttribute('href')
+        return e.target.getAttribute('href');
     }
 
     KB.onClick('.js-modal-large', function (e) {

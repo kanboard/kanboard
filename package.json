@@ -1,14 +1,13 @@
 {
   "name": "kanboard",
   "devDependencies": {
-    "bower": "^1.7.9",
+    "bower": "^1.8.0",
     "gulp": "^3.9.1",
-    "gulp-bower": "0.0.13",
-    "gulp-cli": "^1.2.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-sass": "^2.3.2",
-    "gulp-strip-comments": "^2.4.3",
-    "gulp-uglify": "^1.5.3",
+    "gulp-bower": "^0.0.13",
+    "gulp-cli": "^1.2.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^3.0.0",
+    "gulp-uglify": "^2.0.0",
     "jshint": "^2.9.4"
   },
   "dependencies": {

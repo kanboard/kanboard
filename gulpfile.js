@@ -3,7 +3,6 @@ var concat = require('gulp-concat');
 var bower = require('gulp-bower');
 var uglify = require('gulp-uglify');
 var sass = require('gulp-sass');
-var strip = require('gulp-strip-comments');
 
 var src = {
     js: [

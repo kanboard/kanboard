@@ -85,7 +85,7 @@ KB.component('submit-buttons', function (containerElement, options) {
         if (KB.modal.isOpen()) {
             formActionElementBuilder
                 .text(' ' + options.orLabel + ' ')
-                .add(KB.dom('a').attr('href', '#').click(onCancel).text(options.cancelLabel).build())
+                .add(KB.dom('a').attr('href', '#').click(onCancel).text(options.cancelLabel).build());
         }
 
         formActionElement = formActionElementBuilder.build();

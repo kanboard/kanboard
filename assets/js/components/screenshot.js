@@ -2,6 +2,10 @@ KB.component('screenshot', function (containerElement) {
     var pasteCatcher = null;
     var inputElement = null;
 
+    function onFileLoaded(e) {
+        createImage(e.target.result);
+    }
+
     function onPaste(e) {
         // Firefox doesn't have the property e.clipboardData.items (only Chrome)
         if (e.clipboardData && e.clipboardData.items) {
@@ -16,10 +20,7 @@ KB.component('screenshot', function (containerElement) {
 
                         // Get the image as base64 data
                         var reader = new FileReader();
-                        reader.onload = function (event) {
-                            createImage(event.target.result);
-                        };
-
+                        reader.onload = onFileLoaded;
                         reader.readAsDataURL(blob);
                     }
                 }
