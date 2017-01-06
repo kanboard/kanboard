@@ -33,8 +33,8 @@ class Mail extends Base implements ClientInterface
             $message = Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom(array($this->helper->mail->getMailSenderAddress() => $author))
-                ->setBody($html, 'text/html')
-                ->setTo(array($email => $name));
+                ->setTo(array($email => $name))
+                ->setBody($html, 'text/html');
 
             Swift_Mailer::newInstance($this->getTransport())->send($message);
         } catch (Swift_TransportException $e) {
