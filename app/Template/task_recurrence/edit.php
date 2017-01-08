@@ -3,7 +3,7 @@
 </div>
 
 <?php if ($task['recurrence_status'] != \Kanboard\Model\TaskModel::RECURRING_STATUS_NONE): ?>
-<div class="listing">
+<div class="panel">
     <?= $this->render('task_recurrence/info', array(
         'task' => $task,
         'recurrence_trigger_list' => $recurrence_trigger_list,

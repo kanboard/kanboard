@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Summary') ?></h2>
 </div>
-<ul class="listing">
+<ul class="panel">
     <li><strong><?= $project['is_active'] ? t('Active') : t('Inactive') ?></strong></li>
 
     <?php if ($project['owner_id'] > 0): ?>

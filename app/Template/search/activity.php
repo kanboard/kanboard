@@ -22,7 +22,7 @@
     </div>
 
     <?php if (empty($values['search'])): ?>
-        <div class="listing">
+        <div class="panel">
             <h3><?= t('Advanced search') ?></h3>
             <p><?= t('Example of query: ') ?><strong>project:"My project" creator:me</strong></p>
             <ul>

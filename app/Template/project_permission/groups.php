@@ -33,7 +33,7 @@
 <?php endif ?>
 
 <?php if ($project['is_private'] == 0): ?>
-    <div class="listing">
+    <div class="panel">
         <form method="post" action="<?= $this->url->href('ProjectPermissionController', 'addGroup', array('project_id' => $project['id'])) ?>" autocomplete="off" class="form-inline">
             <?= $this->form->csrf() ?>
             <?= $this->form->hidden('project_id', array('project_id' => $project['id'])) ?>

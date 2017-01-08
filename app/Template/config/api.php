@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('API') ?></h2>
 </div>
-<section class="listing">
+<section class="panel">
     <ul>
         <li>
             <?= t('API token:') ?>

@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Summary') ?></h2>
 </div>
-<ul class="listing">
+<ul class="panel">
     <li><?= t('Username:') ?> <strong><?= $this->text->e($user['username']) ?></strong></li>
     <li><?= t('Name:') ?> <strong><?= $this->text->e($user['name']) ?: t('None') ?></strong></li>
     <li><?= t('Email:') ?> <strong><?= $this->text->e($user['email']) ?: t('None') ?></strong></li>
@@ -11,7 +11,7 @@
 <div class="page-header">
     <h2><?= t('Security') ?></h2>
 </div>
-<ul class="listing">
+<ul class="panel">
     <li><?= t('Role:') ?> <strong><?= $this->user->getRoleName($user['role']) ?></strong></li>
     <li><?= t('Account type:') ?> <strong><?= $user['is_ldap_user'] ? t('Remote') : t('Local') ?></strong></li>
     <li><?= $user['twofactor_activated'] == 1 ? t('Two factor authentication enabled') :  t('Two factor authentication disabled') ?></li>
@@ -29,7 +29,7 @@
 <div class="page-header">
     <h2><?= t('Preferences') ?></h2>
 </div>
-<ul class="listing">
+<ul class="panel">
     <li><?= t('Timezone:') ?> <strong><?= $this->text->in($user['timezone'], $timezones) ?></strong></li>
     <li><?= t('Language:') ?> <strong><?= $this->text->in($user['language'], $languages) ?></strong></li>
     <li><?= t('Notifications:') ?> <strong><?= $user['notifications_enabled'] == 1 ? t('Enabled') : t('Disabled') ?></strong></li>
@@ -40,7 +40,7 @@
         <h2><?= t('Public access') ?></h2>
     </div>
 
-    <div class="listing">
+    <div class="panel">
         <ul class="no-bullet">
             <li><strong><?= $this->url->icon('rss-square', t('RSS feed'), 'FeedController', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>
             <li><strong><?= $this->url->icon('calendar', t('iCal feed'), 'ICalendarController', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>

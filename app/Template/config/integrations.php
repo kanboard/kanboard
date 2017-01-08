@@ -7,7 +7,7 @@
     <?= $this->hook->render('template:config:integrations', array('values' => $values)) ?>
 
     <h3><img src="<?= $this->url->dir() ?>assets/img/gravatar-icon.png"/>&nbsp;<?= t('Gravatar') ?></h3>
-    <div class="listing">
+    <div class="panel">
         <?= $this->form->checkbox('integration_gravatar', t('Enable Gravatar images'), 1, $values['integration_gravatar'] == 1) ?>
     </div>
 

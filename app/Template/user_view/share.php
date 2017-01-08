@@ -3,7 +3,7 @@
 </div>
 
 <?php if (! empty($user['token'])): ?>
-    <div class="listing">
+    <div class="panel">
         <ul class="no-bullet">
             <li><strong><?= $this->url->icon('rss-square', t('RSS feed'), 'FeedController', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>
             <li><strong><?= $this->url->icon('calendar', t('iCal feed'), 'ICalendarController', 'user', array('token' => $user['token']), false, '', '', true) ?></strong></li>

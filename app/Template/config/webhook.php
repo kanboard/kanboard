@@ -18,7 +18,7 @@
 <div class="page-header">
     <h2><?= t('Webhook token') ?></h2>
 </div>
-<section class="listing">
+<section class="panel">
     <ul>
         <li>
             <?= t('Webhook token:') ?>

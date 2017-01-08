@@ -3,7 +3,7 @@
         <h3><a href="#" class="fa accordion-toggle"></a> <?= t('Information') ?></h3>
     </div>
     <div class="accordion-content">
-        <div class="listing">
+        <div class="panel">
             <ul>
                 <?php if ($project['owner_id'] > 0): ?>
                     <li><?= t('Project owner: ') ?><strong><?= $this->text->e($project['owner_name'] ?: $project['owner_username']) ?></strong></li>

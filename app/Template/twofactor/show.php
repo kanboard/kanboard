@@ -3,7 +3,7 @@
 </div>
 
 <?php if (! empty($secret) || ! empty($qrcode_url) || ! empty($key_url)): ?>
-<div class="listing">
+<div class="panel">
     <?php if (! empty($secret)): ?>
         <p><?= t('Secret key: ') ?><strong><?= $this->text->e($secret) ?></strong></p>
     <?php endif ?>
