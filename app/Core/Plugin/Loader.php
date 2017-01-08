@@ -4,6 +4,7 @@ namespace Kanboard\Core\Plugin;
 
 use Composer\Autoload\ClassLoader;
 use DirectoryIterator;
+use Exception;
 use LogicException;
 use Kanboard\Core\Tool;
 
@@ -22,6 +23,7 @@ class Loader extends \Kanboard\Core\Base
      * @var array
      */
     protected $plugins = array();
+    protected $incompatiblePlugins = array();
 
     /**
      * Get list of loaded plugins
@@ -32,6 +34,17 @@ class Loader extends \Kanboard\Core\Base
     public function getPlugins()
     {
         return $this->plugins;
+    }
+
+    /**
+     * Get list of not compatible plugins
+     *
+     * @access public
+     * @return Base[]
+     */
+    public function getIncompatiblePlugins()
+    {
+        return $this->incompatiblePlugins;
     }
 
     /**
@@ -51,8 +64,7 @@ class Loader extends \Kanboard\Core\Base
             foreach ($dir as $fileInfo) {
                 if ($fileInfo->isDir() && substr($fileInfo->getFilename(), 0, 1) !== '.') {
                     $pluginName = $fileInfo->getFilename();
-                    $this->loadSchema($pluginName);
-                    $this->initializePlugin($pluginName, $this->loadPlugin($pluginName));
+                    $this->initializePlugin($pluginName);
                 }
             }
         }
@@ -85,7 +97,7 @@ class Loader extends \Kanboard\Core\Base
         $className = '\Kanboard\Plugin\\'.$pluginName.'\\Plugin';
 
         if (! class_exists($className)) {
-            throw new LogicException('Unable to load this plugin class '.$className);
+            throw new LogicException('Unable to load this plugin class: '.$className);
         }
 
         return new $className($this->container);
@@ -96,18 +108,30 @@ class Loader extends \Kanboard\Core\Base
      *
      * @access public
      * @param  string $pluginName
-     * @param  Base   $plugin
      */
-    public function initializePlugin($pluginName, Base $plugin)
+    public function initializePlugin($pluginName)
     {
-        if (method_exists($plugin, 'onStartup')) {
-            $this->dispatcher->addListener('app.bootstrap', array($plugin, 'onStartup'));
+        try {
+            $plugin = $this->loadPlugin($pluginName);
+
+            if (Version::isCompatible($plugin->getCompatibleVersion(), APP_VERSION)) {
+                $this->loadSchema($pluginName);
+
+                if (method_exists($plugin, 'onStartup')) {
+                    $this->dispatcher->addListener('app.bootstrap', array($plugin, 'onStartup'));
+                }
+
+                Tool::buildDIC($this->container, $plugin->getClasses());
+                Tool::buildDICHelpers($this->container, $plugin->getHelpers());
+
+                $plugin->initialize();
+                $this->plugins[$pluginName] = $plugin;
+            } else {
+                $this->incompatiblePlugins[$pluginName] = $plugin;
+                $this->logger->error($pluginName.' is not compatible with this version');
+            }
+        } catch (Exception $e) {
+            $this->logger->critical($pluginName.': '.$e->getMessage());
         }
-
-        Tool::buildDIC($this->container, $plugin->getClasses());
-        Tool::buildDICHelpers($this->container, $plugin->getHelpers());
-
-        $plugin->initialize();
-        $this->plugins[$pluginName] = $plugin;
     }
 }

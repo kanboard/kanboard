@@ -2,12 +2,14 @@
 
 namespace Kanboard\Core\Plugin;
 
+use Exception;
+
 /**
- * Class PluginInstallerException
+ * Class PluginException
  *
  * @package Kanboard\Core\Plugin
  * @author  Frederic Guillot
  */
-class PluginInstallerException extends PluginException
+class PluginException extends Exception
 {
 }
