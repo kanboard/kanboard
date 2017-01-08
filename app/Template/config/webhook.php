@@ -15,7 +15,7 @@
 </form>
 </section>
 
-<div class="page-header">
+<div class="page-header margin-top">
     <h2><?= t('Webhook token') ?></h2>
 </div>
 <section class="panel">
