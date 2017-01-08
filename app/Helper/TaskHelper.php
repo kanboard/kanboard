@@ -40,7 +40,7 @@ class TaskHelper extends Base
         return $this->taskRecurrenceModel->getRecurrenceBasedateList();
     }
 
-    public function selectTitle(array $values, array $errors)
+    public function renderTitleField(array $values, array $errors)
     {
         return $this->helper->form->text(
             'title',
@@ -56,12 +56,12 @@ class TaskHelper extends Base
         );
     }
 
-    public function selectDescription(array $values, array $errors)
+    public function renderDescriptionField(array $values, array $errors)
     {
         return $this->helper->form->textEditor('description', $values, $errors, array('tabindex' => 2));
     }
 
-    public function selectTags(array $project, array $tags = array())
+    public function renderTagField(array $project, array $tags = array())
     {
         $options = $this->tagModel->getAssignableList($project['id']);
 
@@ -83,7 +83,7 @@ class TaskHelper extends Base
         return $html;
     }
 
-    public function selectColor(array $values)
+    public function renderColorField(array $values)
     {
         $colors = $this->colorModel->getList();
         $html = $this->helper->form->label(t('Color'), 'color_id');
@@ -91,7 +91,7 @@ class TaskHelper extends Base
         return $html;
     }
 
-    public function selectAssignee(array $users, array $values, array $errors = array(), array $attributes = array())
+    public function renderAssigneeField(array $users, array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="3"'), $attributes);
 
@@ -105,7 +105,7 @@ class TaskHelper extends Base
         return $html;
     }
 
-    public function selectCategory(array $categories, array $values, array $errors = array(), array $attributes = array(), $allow_one_item = false)
+    public function renderCategoryField(array $categories, array $values, array $errors = array(), array $attributes = array(), $allow_one_item = false)
     {
         $attributes = array_merge(array('tabindex="4"'), $attributes);
         $html = '';
@@ -118,7 +118,7 @@ class TaskHelper extends Base
         return $html;
     }
 
-    public function selectSwimlane(array $swimlanes, array $values, array $errors = array(), array $attributes = array())
+    public function renderSwimlaneField(array $swimlanes, array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="5"'), $attributes);
         $html = '';
@@ -131,7 +131,7 @@ class TaskHelper extends Base
         return $html;
     }
 
-    public function selectColumn(array $columns, array $values, array $errors = array(), array $attributes = array())
+    public function renderColumnField(array $columns, array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="6"'), $attributes);
 
@@ -141,7 +141,7 @@ class TaskHelper extends Base
         return $html;
     }
 
-    public function selectPriority(array $project, array $values)
+    public function renderPriorityField(array $project, array $values)
     {
         $html = '';
 
@@ -157,7 +157,7 @@ class TaskHelper extends Base
         return $html;
     }
 
-    public function selectScore(array $values, array $errors = array(), array $attributes = array())
+    public function renderScoreField(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="13"'), $attributes);
 
@@ -167,7 +167,7 @@ class TaskHelper extends Base
         return $html;
     }
 
-    public function selectReference(array $values, array $errors = array(), array $attributes = array())
+    public function renderReferenceField(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="14"'), $attributes);
 
@@ -177,7 +177,7 @@ class TaskHelper extends Base
         return $html;
     }
 
-    public function selectTimeEstimated(array $values, array $errors = array(), array $attributes = array())
+    public function renderTimeEstimatedField(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="11"'), $attributes);
 
@@ -188,7 +188,7 @@ class TaskHelper extends Base
         return $html;
     }
 
-    public function selectTimeSpent(array $values, array $errors = array(), array $attributes = array())
+    public function renderTimeSpentField(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="12"'), $attributes);
 
@@ -199,13 +199,13 @@ class TaskHelper extends Base
         return $html;
     }
 
-    public function selectStartDate(array $values, array $errors = array(), array $attributes = array())
+    public function renderStartDateField(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="10"'), $attributes);
         return $this->helper->form->datetime(t('Start Date'), 'date_started', $values, $errors, $attributes);
     }
 
-    public function selectDueDate(array $values, array $errors = array(), array $attributes = array())
+    public function renderDueDateField(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="9"'), $attributes);
         return $this->helper->form->date(t('Due Date'), 'date_due', $values, $errors, $attributes);
@@ -251,7 +251,7 @@ class TaskHelper extends Base
                 'step1',
                 array('project_id' => $projectId, 'swimlane_id' => $swimlaneId, 'column_id' => $columnId, 'provider_name' => $providerName),
                 false,
-                'popover-link'
+                'js-modal-replace'
             );
 
             $html .= '<li><i class="fa fa-fw fa-plus-square" aria-hidden="true"></i> '.$link.'</li>';

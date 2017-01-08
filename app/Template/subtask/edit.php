@@ -6,10 +6,12 @@
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('id', $values) ?>
     <?= $this->form->hidden('task_id', $values) ?>
-    <?= $this->subtask->selectTitle($values, $errors, array('autofocus')) ?>
-    <?= $this->subtask->selectAssignee($users_list, $values, $errors) ?>
-    <?= $this->subtask->selectTimeEstimated($values, $errors) ?>
-    <?= $this->subtask->selectTimeSpent($values, $errors) ?>
+
+    <?= $this->subtask->renderTitleField($values, $errors, array('autofocus')) ?>
+    <?= $this->subtask->renderAssigneeField($users_list, $values, $errors) ?>
+    <?= $this->subtask->renderTimeEstimatedField($values, $errors) ?>
+    <?= $this->subtask->renderTimeSpentField($values, $errors) ?>
+
     <?= $this->hook->render('template:subtask:form:edit', array('values' => $values, 'errors' => $errors)) ?>
 
     <?= $this->modal->submitButtons() ?>

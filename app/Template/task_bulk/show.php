@@ -8,9 +8,9 @@
     <?= $this->form->hidden('swimlane_id', $values) ?>
     <?= $this->form->hidden('project_id', $values) ?>
 
-    <?= $this->task->selectColor($values) ?>
-    <?= $this->task->selectAssignee($users_list, $values, $errors) ?>
-    <?= $this->task->selectCategory($categories_list, $values, $errors) ?>
+    <?= $this->task->renderColorField($values) ?>
+    <?= $this->task->renderAssigneeField($users_list, $values, $errors) ?>
+    <?= $this->task->renderCategoryField($categories_list, $values, $errors) ?>
 
     <?= $this->form->label(t('Tasks'), 'tasks') ?>
     <?= $this->form->textarea('tasks', $values, $errors, array('placeholder="'.t('My task title').'"')) ?>

@@ -12,5 +12,5 @@
         <div class="alert alert-error"><?= $this->text->e($error_message) ?></div>
     <?php endif ?>
 
-    <?= $this->modal->submitButtons(t('Next')) ?>
+    <?= $this->modal->submitButtons(array('submitLabel' => t('Next'))) ?>
 </form>

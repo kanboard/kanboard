@@ -50,7 +50,7 @@ class SubtaskHelper extends Base
         return $this->helper->url->link($this->getTitle($subtask), 'SubtaskStatusController', 'change', $params, false, $class);
     }
 
-    public function selectTitle(array $values, array $errors = array(), array $attributes = array())
+    public function renderTitleField(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="1"', 'required', 'maxlength="255"'), $attributes);
 
@@ -60,7 +60,7 @@ class SubtaskHelper extends Base
         return $html;
     }
 
-    public function selectAssignee(array $users, array $values, array $errors = array(), array $attributes = array())
+    public function renderAssigneeField(array $users, array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="2"'), $attributes);
 
@@ -74,7 +74,7 @@ class SubtaskHelper extends Base
         return $html;
     }
 
-    public function selectTimeEstimated(array $values, array $errors = array(), array $attributes = array())
+    public function renderTimeEstimatedField(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="3"'), $attributes);
 
@@ -85,7 +85,7 @@ class SubtaskHelper extends Base
         return $html;
     }
 
-    public function selectTimeSpent(array $values, array $errors = array(), array $attributes = array())
+    public function renderTimeSpentField(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="4"'), $attributes);
 
