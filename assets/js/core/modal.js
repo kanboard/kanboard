@@ -19,7 +19,7 @@
     }
 
     function getForm() {
-        return document.querySelector('#modal-content form');
+        return document.querySelector('#modal-content form:not(.js-modal-ignore-form)');
     }
 
     function submitForm() {

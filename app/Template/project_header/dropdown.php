@@ -52,7 +52,7 @@
 
         <?php if ($this->user->hasProjectAccess('ExportController', 'tasks', $project['id'])): ?>
             <li>
-                <?= $this->url->icon('upload', t('Exports'), 'ExportController', 'tasks', array('project_id' => $project['id'])) ?>
+                <?= $this->modal->medium('upload', t('Exports'), 'ExportController', 'tasks', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
 

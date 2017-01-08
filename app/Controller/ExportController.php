@@ -24,27 +24,29 @@ class ExportController extends BaseController
     private function common($model, $method, $filename, $action, $page_title)
     {
         $project = $this->getProject();
-        $from = $this->request->getStringParam('from');
-        $to = $this->request->getStringParam('to');
 
-        if ($from && $to) {
-            $data = $this->$model->$method($project['id'], $from, $to);
-            $this->response->withFileDownload($filename.'.csv');
-            $this->response->csv($data);
+        if ($this->request->isPost()) {
+            $values = $this->request->getValues();
+            $from = empty($values['from']) ? '' : $values['from'];
+            $to = empty($values['to']) ? '' : $values['to'];
+
+            if ($from && $to) {
+                $data = $this->$model->$method($project['id'], $from, $to);
+                $this->response->withFileDownload($filename.'.csv');
+                $this->response->csv($data);
+                return;
+            }
         } else {
-
-            $this->response->html($this->helper->layout->project('export/'.$action, array(
-                'values' => array(
-                    'controller' => 'ExportController',
-                    'action' => $action,
+            $this->response->html($this->template->render('export/'.$action, array(
+                'values'  => array(
                     'project_id' => $project['id'],
-                    'from' => $from,
-                    'to' => $to,
+                    'from'       => '',
+                    'to'         => '',
                 ),
-                'errors' => array(),
+                'errors'  => array(),
                 'project' => $project,
-                'title' => $page_title,
-            ), 'export/sidebar'));
+                'title'   => $page_title,
+            )));
         }
     }
 
