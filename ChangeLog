@@ -8,6 +8,7 @@ Improvements:
 * Remove TaskGanttCreationController
 * Add helpers to open modal boxes
 * Make icons clickable in menus
+* Open task import in modal box
 
 Version 1.0.36 (Dec 30, 2016)
 -----------------------------

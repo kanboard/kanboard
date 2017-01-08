@@ -58,7 +58,7 @@
 
         <?php if ($this->user->hasProjectAccess('TaskImportController', 'tasks', $project['id'])): ?>
             <li>
-                <?= $this->url->icon('download', t('Imports'), 'TaskImportController', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->modal->medium('download', t('Import tasks'), 'TaskImportController', 'show', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
 
