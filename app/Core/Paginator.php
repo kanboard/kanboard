@@ -374,7 +374,9 @@ class Paginator
                 '&larr; '.t('Previous'),
                 $this->controller,
                 $this->action,
-                $this->getUrlParams($this->page - 1, $this->order, $this->direction)
+                $this->getUrlParams($this->page - 1, $this->order, $this->direction),
+                false,
+                'js-modal-replace'
             );
         } else {
             $html .= '&larr; '.t('Previous');
@@ -400,7 +402,9 @@ class Paginator
                 t('Next').' &rarr;',
                 $this->controller,
                 $this->action,
-                $this->getUrlParams($this->page + 1, $this->order, $this->direction)
+                $this->getUrlParams($this->page + 1, $this->order, $this->direction),
+                false,
+                'js-modal-replace'
             );
         } else {
             $html .= t('Next').' &rarr;';
@@ -486,7 +490,9 @@ class Paginator
             $label,
             $this->controller,
             $this->action,
-            $this->getUrlParams($this->page, $column, $direction)
+            $this->getUrlParams($this->page, $column, $direction),
+            false,
+            'js-modal-replace'
         );
     }
 }

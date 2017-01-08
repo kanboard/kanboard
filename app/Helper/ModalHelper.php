@@ -75,4 +75,9 @@ class ModalHelper extends Base
     {
         return $this->helper->url->link($label, $controller, $action, $params, false, 'js-modal-confirm');
     }
+
+    public function replaceLink($label, $controller, $action, array $params = array())
+    {
+        return $this->helper->url->link($label, $controller, $action, $params, false, 'js-modal-replace');
+    }
 }

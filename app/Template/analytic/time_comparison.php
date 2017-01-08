@@ -1,6 +1,8 @@
-<div class="page-header">
-    <h2><?= t('Estimated vs actual time') ?></h2>
-</div>
+<?php if (! $is_ajax): ?>
+    <div class="page-header">
+        <h2><?= t('Estimated vs actual time') ?></h2>
+    </div>
+<?php endif ?>
 
 <div class="panel">
     <ul>
@@ -27,9 +29,9 @@
             <tr>
                 <th class="column-5"><?= $paginator->order(t('Id'), 'tasks.id') ?></th>
                 <th><?= $paginator->order(t('Title'), 'tasks.title') ?></th>
-                <th class="column-5"><?= $paginator->order(t('Status'), 'tasks.is_active') ?></th>
-                <th class="column-10"><?= $paginator->order(t('Estimated Time'), 'tasks.time_estimated') ?></th>
-                <th class="column-10"><?= $paginator->order(t('Actual Time'), 'tasks.time_spent') ?></th>
+                <th class="column-10"><?= $paginator->order(t('Status'), 'tasks.is_active') ?></th>
+                <th class="column-12"><?= $paginator->order(t('Estimated Time'), 'tasks.time_estimated') ?></th>
+                <th class="column-12"><?= $paginator->order(t('Actual Time'), 'tasks.time_spent') ?></th>
             </tr>
             <?php foreach ($paginator->getCollection() as $task): ?>
             <tr>

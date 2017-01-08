@@ -1,6 +1,8 @@
-<div class="page-header">
-    <h2><?= t('Task distribution') ?></h2>
-</div>
+<?php if (! $is_ajax): ?>
+    <div class="page-header">
+        <h2><?= t('Task distribution') ?></h2>
+    </div>
+<?php endif ?>
 
 <?php if (empty($metrics)): ?>
     <p class="alert"><?= t('Not enough data to show the graph.') ?></p>

@@ -26,4 +26,14 @@
     KB.onClick('.js-modal-close', function () {
         KB.modal.close();
     });
+
+    KB.onClick('.js-modal-replace', function (e) {
+        var link = getLink(e);
+
+        if (KB.modal.isOpen()) {
+            KB.modal.replace(link);
+        } else {
+            window.location.href = link;
+        }
+    });
 }());

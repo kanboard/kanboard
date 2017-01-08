@@ -22,7 +22,10 @@ class LayoutHelper extends Base
      */
     public function app($template, array $params = array())
     {
-        if ($this->request->isAjax()) {
+        $isAjax = $this->request->isAjax();
+        $params['is_ajax'] = $isAjax;
+
+        if ($isAjax) {
             return $this->template->render($template, $params);
         }
 
@@ -160,7 +163,7 @@ class LayoutHelper extends Base
             $params['title'] = $params['project']['name'].' &gt; '.$params['title'];
         }
 
-        return $this->subLayout('analytic/layout', 'analytic/sidebar', $template, $params);
+        return $this->subLayout('analytic/layout', 'analytic/sidebar', $template, $params, true);
     }
 
     /**
@@ -188,13 +191,16 @@ class LayoutHelper extends Base
      * @param  string $sidebar
      * @param  string $template
      * @param  array  $params
+     * @param  bool   $ignoreAjax
      * @return string
      */
-    public function subLayout($sublayout, $sidebar, $template, array $params = array())
+    public function subLayout($sublayout, $sidebar, $template, array $params = array(), $ignoreAjax = false)
     {
+        $isAjax = $this->request->isAjax();
+        $params['is_ajax'] = $isAjax;
         $content = $this->template->render($template, $params);
 
-        if ($this->request->isAjax()) {
+        if (!$ignoreAjax && $isAjax) {
             return $content;
         }
 

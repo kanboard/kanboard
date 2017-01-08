@@ -125,7 +125,7 @@
 
         switch (size) {
             case 'large':
-                return viewport.width < 1300 ? '95%' : '1300px';
+                return viewport.width < 1350 ? '98%' : '1350px';
             case 'medium':
                 return viewport.width < 1024 ? '70%' : '1024px';
         }
