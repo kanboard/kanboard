@@ -32,7 +32,7 @@
 
         <?php if ($this->user->hasProjectAccess('CustomFilterController', 'index', $project['id'])): ?>
             <li>
-                <?= $this->url->icon('filter', t('Custom filters'), 'CustomFilterController', 'index', array('project_id' => $project['id'])) ?>
+                <?= $this->modal->medium('filter', t('Add custom filters'), 'CustomFilterController', 'create', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
 
