@@ -3,7 +3,7 @@
         <?php if ($this->user->hasAccess('UserCreationController', 'show')): ?>
         <ul>
             <li>
-                <i class="fa fa-user fa-fw"></i><?= $this->url->link(t('All users'), 'UserListController', 'show') ?>
+                <?= $this->url->icon('user', t('All users'), 'UserListController', 'show') ?>
             </li>
             <li>
                 <?= $this->modal->medium('plus', t('New local user'), 'UserCreationController', 'show') ?>
@@ -15,7 +15,7 @@
                 <?= $this->modal->medium('upload', t('Import'), 'UserImportController', 'show') ?>
             </li>
             <li>
-                <i class="fa fa-users fa-fw"></i><?= $this->url->link(t('View all groups'), 'GroupListController', 'index') ?>
+                <?= $this->url->icon('users', t('View all groups'), 'GroupListController', 'index') ?>
             </li>
         </ul>
         <?php endif ?>

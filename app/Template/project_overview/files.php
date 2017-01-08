@@ -19,13 +19,11 @@
                                 </li>
                             <?php elseif ($this->file->getBrowserViewType($file['name']) !== null): ?>
                                 <li>
-                                    <i class="fa fa-eye fa-fw"></i>
-                                    <?= $this->url->link(t('View file'), 'FileViewerController', 'browser', array('project_id' => $project['id'], 'file_id' => $file['id']), false, '', '', true) ?>
+                                    <?= $this->url->icon('eye', t('View file'), 'FileViewerController', 'browser', array('project_id' => $project['id'], 'file_id' => $file['id']), false, '', '', true) ?>
                                 </li>
                             <?php endif ?>
                             <li>
-                                <i class="fa fa-download fa-fw"></i>
-                                <?= $this->url->link(t('Download'), 'FileViewerController', 'download', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
+                                <?= $this->url->icon('download', t('Download'), 'FileViewerController', 'download', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
                             </li>
                             <?php if ($this->user->hasProjectAccess('ProjectFileController', 'remove', $project['id'])): ?>
                                 <li>

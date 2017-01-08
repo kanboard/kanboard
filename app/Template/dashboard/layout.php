@@ -12,12 +12,10 @@
             </li>
             <?php endif ?>
             <li>
-                <i class="fa fa-search fa-fw"></i>
-                <?= $this->url->link(t('Search'), 'SearchController', 'index') ?>
+                <?= $this->url->icon('search', t('Search'), 'SearchController', 'index') ?>
             </li>
             <li>
-                <i class="fa fa-folder fa-fw"></i>
-                <?= $this->url->link(t('Project management'), 'ProjectListController', 'show') ?>
+                <?= $this->url->icon('folder', t('Project management'), 'ProjectListController', 'show') ?>
             </li>
         </ul>
     </div>

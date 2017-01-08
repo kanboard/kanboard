@@ -24,11 +24,9 @@
                     </li>
                     <li>
                         <?php if ($default_swimlane['show_default_swimlane'] == 1): ?>
-                            <i class="fa fa-toggle-off fa-fw" aria-hidden="true"></i>
-                            <?= $this->url->link(t('Disable'), 'SwimlaneController', 'disableDefault', array('project_id' => $project['id']), true) ?>
+                            <?= $this->url->icon('toggle-off', t('Disable'), 'SwimlaneController', 'disableDefault', array('project_id' => $project['id']), true) ?>
                         <?php else: ?>
-                            <i class="fa fa-toggle-on fa-fw" aria-hidden="true"></i>
-                            <?= $this->url->link(t('Enable'), 'SwimlaneController', 'enableDefault', array('project_id' => $project['id']), true) ?>
+                            <?= $this->url->icon('toggle-on', t('Enable'), 'SwimlaneController', 'enableDefault', array('project_id' => $project['id']), true) ?>
                         <?php endif ?>
                     </li>
                 </ul>
@@ -61,11 +59,9 @@
                     </li>
                     <li>
                         <?php if ($swimlane['is_active']): ?>
-                            <i class="fa fa-toggle-off fa-fw" aria-hidden="true"></i>
-                            <?= $this->url->link(t('Disable'), 'SwimlaneController', 'disable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
+                            <?= $this->url->icon('toggle-off', t('Disable'), 'SwimlaneController', 'disable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
                         <?php else: ?>
-                            <i class="fa fa-toggle-on fa-fw" aria-hidden="true"></i>
-                            <?= $this->url->link(t('Enable'), 'SwimlaneController', 'enable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
+                            <?= $this->url->icon('toggle-on', t('Enable'), 'SwimlaneController', 'enable', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id']), true) ?>
                         <?php endif ?>
                     </li>
                     <li>

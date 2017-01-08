@@ -25,8 +25,7 @@
                     )) ?>
                 </td>
                 <td>
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                    <?= $this->url->link(t('Remove'), 'ProjectPermissionController', 'removeGroup', array('project_id' => $project['id'], 'group_id' => $group['id']), true) ?>
+                    <?= $this->url->icon('trash-o', t('Remove'), 'ProjectPermissionController', 'removeGroup', array('project_id' => $project['id'], 'group_id' => $group['id']), true) ?>
                 </td>
             </tr>
         <?php endforeach ?>

@@ -1,7 +1,7 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <li><i class="fa fa-users fa-fw"></i><?= $this->url->link(t('View all groups'), 'GroupListController', 'index') ?></li>
+            <li><?= $this->url->icon('users', t('View all groups'), 'GroupListController', 'index') ?></li>
             <li><?= $this->modal->medium('plus', t('Add group member'), 'GroupListController', 'associate', array('group_id' => $group['id'])) ?></li>
         </ul>
     </div>

@@ -21,8 +21,7 @@
                     )) ?>
                 </td>
                 <td>
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                    <?= $this->url->link(t('Remove'), 'ProjectPermissionController', 'removeUser', array('project_id' => $project['id'], 'user_id' => $user['id']), true) ?>
+                    <?= $this->url->icon('trash-o', t('Remove'), 'ProjectPermissionController', 'removeUser', array('project_id' => $project['id'], 'user_id' => $user['id']), true) ?>
                 </td>
             </tr>
         <?php endforeach ?>

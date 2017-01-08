@@ -12,7 +12,7 @@
                 <?= $this->modal->medium('upload', t('Import'), 'UserImportController', 'show') ?>
             </li>
             <li>
-                <i class="fa fa-users fa-fw"></i><?= $this->url->link(t('View all groups'), 'GroupListController', 'index') ?>
+                <?= $this->url->icon('users', t('View all groups'), 'GroupListController', 'index') ?>
             </li>
         </ul>
         <?php endif ?>

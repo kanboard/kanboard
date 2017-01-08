@@ -1,14 +1,14 @@
 <section id="main">
     <div class="page-header">
         <ul>
-            <li><i class="fa fa-user fa-fw"></i><?= $this->url->link(t('All users'), 'UserListController', 'show') ?></li>
+            <li><?= $this->url->icon('user', t('All users'), 'UserListController', 'show') ?></li>
             <li><?= $this->modal->medium('user-plus', t('New group'), 'GroupCreationController', 'show') ?></li>
         </ul>
     </div>
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('There is no group.') ?></p>
     <?php else: ?>
-        <table class="table-small table-fixed table-scrolling">
+        <table class="table-fixed table-scrolling">
             <tr>
                 <th class="column-5"><?= $paginator->order(t('Id'), 'id') ?></th>
                 <th class="column-20"><?= $paginator->order(t('External Id'), 'external_id') ?></th>
@@ -31,7 +31,7 @@
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
                         <li><?= $this->modal->medium('plus', t('Add group member'), 'GroupListController', 'associate', array('group_id' => $group['id'])) ?></li>
-                        <li><i class="fa fa-users fa-fw"></i> <?= $this->url->link(t('Members'), 'GroupListController', 'users', array('group_id' => $group['id'])) ?></li>
+                        <li><?= $this->url->icon('users', t('Members'), 'GroupListController', 'users', array('group_id' => $group['id'])) ?></li>
                         <li><?= $this->modal->medium('edit', t('Edit'), 'GroupModificationController', 'show', array('group_id' => $group['id'])) ?></li>
                         <li><?= $this->modal->confirm('trash-o', t('Remove'), 'GroupListController', 'confirm', array('group_id' => $group['id'])) ?></li>
                     </ul>

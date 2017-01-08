@@ -3,12 +3,10 @@
     <div class="menu-inline">
         <ul>
             <li <?= $sorting === 'board' ? 'class="active"' : '' ?>>
-                <i class="fa fa-sort-numeric-asc fa-fw"></i>
-                <?= $this->url->link(t('Sort by position'), 'TaskGanttController', 'show', array('project_id' => $project['id'], 'sorting' => 'board')) ?>
+                <?= $this->url->icon('sort-numeric-asc', t('Sort by position'), 'TaskGanttController', 'show', array('project_id' => $project['id'], 'sorting' => 'board')) ?>
             </li>
             <li <?= $sorting === 'date' ? 'class="active"' : '' ?>>
-                <i class="fa fa-sort-amount-asc fa-fw"></i>
-                <?= $this->url->link(t('Sort by date'), 'TaskGanttController', 'show', array('project_id' => $project['id'], 'sorting' => 'date')) ?>
+                <?= $this->url->icon('sort-amount-asc', t('Sort by date'), 'TaskGanttController', 'show', array('project_id' => $project['id'], 'sorting' => 'date')) ?>
             </li>
             <li>
                 <?= $this->modal->large('plus', t('Add task'), 'TaskCreationController', 'show', array('project_id' => $project['id'])) ?>

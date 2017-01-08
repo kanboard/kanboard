@@ -9,7 +9,7 @@
         </tr>
         <tr>
             <td>
-                <i class="fa fa-download fa-fw"></i><?= $this->url->link(t('download'), 'FileViewerController', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                <?= $this->url->icon('download', t('download'), 'FileViewerController', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                 <?php if ($file['is_image'] == 1): ?>
                     &nbsp;<?= $this->modal->large('eye', t('open file'), 'FileViewerController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                 <?php endif ?>

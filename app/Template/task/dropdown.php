@@ -3,8 +3,7 @@
     <ul>
         <?php if (array_key_exists('date_started', $task) && empty($task['date_started'])): ?>
         <li>
-            <i class="fa fa-play fa-fw"></i>
-            <?= $this->url->link(t('Set automatically the start date'), 'TaskModificationController', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->icon('play', t('Set automatically the start date'), 'TaskModificationController', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <?php endif ?>
         <li>

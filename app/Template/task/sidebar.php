@@ -4,25 +4,20 @@
     </div>
     <ul>
         <li <?= $this->app->checkMenuSelection('TaskViewController', 'show') ?>>
-            <i class="fa fa-newspaper-o fa-fw"></i>
-            <?= $this->url->link(t('Summary'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->icon('newspaper-o', t('Summary'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <li <?= $this->app->checkMenuSelection('ActivityController', 'task') ?>>
-            <i class="fa fa-dashboard fa-fw"></i>
-            <?= $this->url->link(t('Activity stream'), 'ActivityController', 'task', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->icon('dashboard', t('Activity stream'), 'ActivityController', 'task', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <li <?= $this->app->checkMenuSelection('TaskViewController', 'transitions') ?>>
-            <i class="fa fa-arrows-h fa-fw"></i>
-            <?= $this->url->link(t('Transitions'), 'TaskViewController', 'transitions', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->icon('arrows-h', t('Transitions'), 'TaskViewController', 'transitions', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <li <?= $this->app->checkMenuSelection('TaskViewController', 'analytics') ?>>
-            <i class="fa fa-bar-chart fa-fw"></i>
-            <?= $this->url->link(t('Analytics'), 'TaskViewController', 'analytics', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->icon('bar-chart', t('Analytics'), 'TaskViewController', 'analytics', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <?php if ($task['time_estimated'] > 0 || $task['time_spent'] > 0): ?>
         <li <?= $this->app->checkMenuSelection('TaskViewController', 'timetracking') ?>>
-            <i class="fa fa-clock-o fa-fw"></i>
-            <?= $this->url->link(t('Time tracking'), 'TaskViewController', 'timetracking', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->icon('clock-o', t('Time tracking'), 'TaskViewController', 'timetracking', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>
         <?php endif ?>
 

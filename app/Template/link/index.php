@@ -18,9 +18,9 @@
         </td>
         <td>
             <ul>
-                <?= $this->url->link(t('Edit'), 'LinkController', 'edit', array('link_id' => $link['id'])) ?>
+                <?= $this->modal->medium('edit', t('Edit'), 'LinkController', 'edit', array('link_id' => $link['id'])) ?>
                 <?= t('or') ?>
-                <?= $this->url->link(t('Remove'), 'LinkController', 'confirm', array('link_id' => $link['id'])) ?>
+                <?= $this->modal->confirm('trash-o', t('Remove'), 'LinkController', 'confirm', array('link_id' => $link['id'])) ?>
             </ul>
         </td>
     </tr>

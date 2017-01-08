@@ -7,6 +7,7 @@ Improvements:
 * Rewrite dialog and confirmation boxes (inline popup)
 * Remove TaskGanttCreationController
 * Add helpers to open modal boxes
+* Make icons clickable in menus
 
 Version 1.0.36 (Dec 30, 2016)
 -----------------------------
