@@ -17,7 +17,7 @@
         <?php endif ?>
 
         <li>
-            <?= $this->url->icon('dashboard', t('Activity'), 'ActivityController', 'project', array('project_id' => $project['id'])) ?>
+            <?= $this->modal->medium('dashboard', t('Activity'), 'ActivityController', 'project', array('project_id' => $project['id'])) ?>
         </li>
 
         <?php if ($this->user->hasProjectAccess('AnalyticController', 'taskDistribution', $project['id'])): ?>

@@ -19,10 +19,9 @@ class ActivityController extends BaseController
     {
         $project = $this->getProject();
 
-        $this->response->html($this->helper->layout->app('activity/project', array(
+        $this->response->html($this->template->render('activity/project', array(
             'events' => $this->helper->projectActivity->getProjectEvents($project['id']),
             'project' => $project,
-            'title' => t('%s\'s activity', $project['name'])
         )));
     }
 
