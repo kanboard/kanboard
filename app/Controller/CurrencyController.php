@@ -19,9 +19,9 @@ class CurrencyController extends BaseController
     {
         $this->response->html($this->helper->layout->config('currency/show', array(
             'application_currency' => $this->configModel->get('application_currency'),
-            'rates' => $this->currencyModel->getAll(),
-            'currencies' => $this->currencyModel->getCurrencies(),
-            'title' => t('Settings').' &gt; '.t('Currency rates'),
+            'rates'                => $this->currencyModel->getAll(),
+            'currencies'           => $this->currencyModel->getCurrencies(),
+            'title'                => t('Settings') . ' &gt; ' . t('Currency rates'),
         )));
     }
 
@@ -34,9 +34,9 @@ class CurrencyController extends BaseController
      */
     public function create(array $values = array(), array $errors = array())
     {
-        $this->response->html($this->helper->layout->config('currency/create', array(
-            'values' => $values,
-            'errors' => $errors,
+        $this->response->html($this->template->render('currency/create', array(
+            'values'     => $values,
+            'errors'     => $errors,
             'currencies' => $this->currencyModel->getCurrencies(),
         )));
     }
@@ -77,9 +77,9 @@ class CurrencyController extends BaseController
             $values['application_currency'] = $this->configModel->get('application_currency');
         }
 
-        $this->response->html($this->helper->layout->config('currency/change', array(
-            'values' => $values,
-            'errors' => $errors,
+        $this->response->html($this->template->render('currency/change', array(
+            'values'     => $values,
+            'errors'     => $errors,
             'currencies' => $this->currencyModel->getCurrencies(),
         )));
     }
