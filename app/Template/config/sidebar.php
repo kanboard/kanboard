@@ -24,8 +24,8 @@
         <li <?= $this->app->checkMenuSelection('LinkController') ?>>
             <?= $this->url->link(t('Link settings'), 'LinkController', 'index') ?>
         </li>
-        <li <?= $this->app->checkMenuSelection('CurrencyController', 'index') ?>>
-            <?= $this->url->link(t('Currency rates'), 'CurrencyController', 'index') ?>
+        <li <?= $this->app->checkMenuSelection('CurrencyController', 'show') ?>>
+            <?= $this->url->link(t('Currency rates'), 'CurrencyController', 'show') ?>
         </li>
         <li <?= $this->app->checkMenuSelection('ConfigController', 'integrations') ?>>
             <?= $this->url->link(t('Integrations'), 'ConfigController', 'integrations') ?>
