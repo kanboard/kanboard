@@ -167,13 +167,14 @@ class CustomFilterController extends BaseController
         if ($valid) {
             if ($this->customFilterModel->update($values)) {
                 $this->flash->success(t('Your custom filter have been updated successfully.'));
-                return $this->response->redirect($this->helper->url->to('CustomFilterController', 'index', array('project_id' => $project['id'])));
+                $this->response->redirect($this->helper->url->to('CustomFilterController', 'index', array('project_id' => $project['id'])), true);
+                return;
             } else {
                 $this->flash->failure(t('Unable to update custom filter.'));
             }
         }
 
-        return $this->edit($values, $errors);
+        $this->edit($values, $errors);
     }
 
     private function checkPermission(array $project, array $filter)
