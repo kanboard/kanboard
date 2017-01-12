@@ -4,6 +4,7 @@ Version 1.0.37 (unreleased)
 Improvements:
 
 * Improve keyboard shortcuts handling
+* Improve auto-complete dropdown elements sorting
 * Larger task form
 * Rewrite dialog and confirmation boxes (inline popup)
 * Remove TaskGanttCreationController

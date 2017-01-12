@@ -127,18 +127,29 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
 
     function buildItems(items) {
         var elements = [];
-        var keys = Object.keys(items);
 
-        if (options.sortByKeys) {
-            keys.sort();
+        for (var key in items) {
+            if (items.hasOwnProperty(key)) {
+                elements.push({
+                    'class': 'select-dropdown-menu-item',
+                    'text': items[key],
+                    'data-label': items[key],
+                    'data-value': key
+                });
+            }
         }
 
-        for (var i = 0; i < keys.length; i++) {
-            elements.push({
-                'class': 'select-dropdown-menu-item',
-                'text': items[keys[i]],
-                'data-label': items[keys[i]],
-                'data-value': keys[i]
+        if (options.sortByKeys) {
+            elements.sort(function (a, b) {
+                var value1 = a['data-value'].toLowerCase();
+                var value2 = b['data-value'].toLowerCase();
+                return value1 < value2 ? -1 : (value1 > value2 ? 1 : 0);
+            });
+        } else {
+            elements.sort(function (a, b) {
+                var value1 = a['data-label'].toLowerCase();
+                var value2 = b['data-label'].toLowerCase();
+                return value1 < value2 ? -1 : (value1 > value2 ? 1 : 0);
             });
         }
 
