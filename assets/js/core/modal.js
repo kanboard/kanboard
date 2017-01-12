@@ -113,6 +113,7 @@
     }
 
     function destroy() {
+        isOpen = false;
         var overlayElement = KB.find('#modal-overlay');
 
         if (overlayElement) {
@@ -156,7 +157,6 @@
             });
         },
         close: function () {
-            isOpen = false;
             destroy();
         },
         isOpen: function () {

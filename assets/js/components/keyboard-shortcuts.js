@@ -1,9 +1,11 @@
 KB.keyboardShortcuts = function () {
     function goToLink (selector) {
-        var element = KB.find(selector);
+        if (! KB.modal.isOpen()) {
+            var element = KB.find(selector);
 
-        if (element !== null) {
-            window.location = element.attr('href');
+            if (element !== null) {
+                window.location = element.attr('href');
+            }
         }
     }
 
@@ -22,7 +24,9 @@ KB.keyboardShortcuts = function () {
     }
 
     KB.onKey('?', function () {
-        KB.modal.open(KB.find('body').data('keyboardShortcutUrl'));
+        if (! KB.modal.isOpen()) {
+            KB.modal.open(KB.find('body').data('keyboardShortcutUrl'));
+        }
     });
 
     KB.onKey('Escape', function () {
@@ -32,55 +36,75 @@ KB.keyboardShortcuts = function () {
         }
     });
 
-    KB.onKey('Meta+Enter', submitForm, true);
-    KB.onKey('Control+Enter', submitForm, true);
+    KB.onKey('Enter', submitForm, true, true);
+    KB.onKey('Enter', submitForm, true, false, true);
 
     KB.onKey('b', function () {
-        KB.trigger('board.selector.open');
+        if (! KB.modal.isOpen()) {
+            KB.trigger('board.selector.open');
+        }
     });
 
     if (KB.exists('#board')) {
         KB.onKey('c', function () {
-            _KB.get('BoardHorizontalScrolling').toggle();
+            if (! KB.modal.isOpen()) {
+                _KB.get('BoardHorizontalScrolling').toggle();
+            }
         });
 
         KB.onKey('s', function () {
-            _KB.get('BoardCollapsedMode').toggle();
+            if (! KB.modal.isOpen()) {
+                _KB.get('BoardCollapsedMode').toggle();
+            }
         });
 
         KB.onKey('n', function () {
-            KB.modal.open(KB.find('#board').data('taskCreationUrl'), 'large', false);
+            if (! KB.modal.isOpen()) {
+                KB.modal.open(KB.find('#board').data('taskCreationUrl'), 'large', false);
+            }
         });
     }
 
     if (KB.exists('#task-view')) {
         KB.onKey('e', function () {
-            KB.modal.open(KB.find('#task-view').data('editUrl'), 'large');
+            if (! KB.modal.isOpen()) {
+                KB.modal.open(KB.find('#task-view').data('editUrl'), 'large', false);
+            }
         });
 
         KB.onKey('c', function () {
-            KB.modal.open(KB.find('#task-view').data('commentUrl'));
+            if (! KB.modal.isOpen()) {
+                KB.modal.open(KB.find('#task-view').data('commentUrl'), 'medium', false);
+            }
         });
 
         KB.onKey('s', function () {
-            KB.modal.open(KB.find('#task-view').data('subtaskUrl'));
+            if (! KB.modal.isOpen()) {
+                KB.modal.open(KB.find('#task-view').data('subtaskUrl'), 'medium', false);
+            }
         });
 
         KB.onKey('l', function () {
-            KB.modal.open(KB.find('#task-view').data('internalLinkUrl'));
+            if (! KB.modal.isOpen()) {
+                KB.modal.open(KB.find('#task-view').data('internalLinkUrl'), 'medium', false);
+            }
         });
     }
 
     KB.onKey('f', function () {
-        KB.focus('#form-search');
+        if (! KB.modal.isOpen()) {
+            KB.focus('#form-search');
+        }
     });
 
     KB.onKey('r', function () {
-        var reset = $(".filter-reset").data("filter");
-        var input = $("#form-search");
+        if (! KB.modal.isOpen()) {
+            var reset = $(".filter-reset").data("filter");
+            var input = $("#form-search");
 
-        input.val(reset);
-        $("form.search").submit();
+            input.val(reset);
+            $("form.search").submit();
+        }
     });
 
     KB.onKey('v+o', function () {

@@ -6,7 +6,7 @@ var KB = {
     listeners: {
         clicks: {},
         changes: {},
-        keys: {},
+        keys: [],
         internals: {}
     }
 };
@@ -35,11 +35,14 @@ KB.onChange = function (selector, callback) {
     this.listeners.changes[selector] = callback;
 };
 
-KB.onKey = function (key, callback, ignoreInputField) {
-    this.listeners.keys[key] = {
+KB.onKey = function (combination, callback, ignoreInputField, ctrlKey, metaKey) {
+    this.listeners.keys.push({
+        'combination': combination,
         'callback': callback,
-        'ignoreInputField': ignoreInputField || false
-    };
+        'ignoreInputField': ignoreInputField || false,
+        'ctrlKey': ctrlKey || false,
+        'metaKey': metaKey || false
+    });
 };
 
 KB.listen = function () {
@@ -67,32 +70,32 @@ KB.listen = function () {
         var key = KB.utils.getKey(e);
         var isInputField = KB.utils.isInputField(e);
 
-        if (! isInputField || ['Escape', 'Meta', 'Enter', 'Control'].indexOf(key) !== -1) {
+        if (! isInputField || ['Escape', 'Enter'].indexOf(key) !== -1) {
             keysQueue.push(key);
         }
 
         if (keysQueue.length > 0) {
             var reset = true;
 
-            for (var combination in self.listeners.keys) {
-                if (self.listeners.keys.hasOwnProperty(combination)) {
-                    var keyboardListener = self.listeners.keys[combination];
-                    var sequence = combination.split('+');
+            for (var i = 0; i < self.listeners.keys.length; i++) {
+                var params = self.listeners.keys[i];
+                var combination = params.combination;
+                var sequence = combination.split('+');
 
-                    if (KB.utils.arraysIdentical(keysQueue, sequence)) {
-                        if (isInputField && !keyboardListener.ignoreInputField) {
-                            keysQueue = [];
-                            return;
-                        }
-
-                        e.preventDefault();
-                        e.stopPropagation();
+                if (KB.utils.arraysIdentical(keysQueue, sequence) &&
+                    e.ctrlKey === params.ctrlKey && e.metaKey === params.metaKey) {
+                    if (isInputField && !params.ignoreInputField) {
                         keysQueue = [];
-                        keyboardListener.callback(e);
-                        break;
-                    } else if (KB.utils.arraysStartsWith(keysQueue, sequence)) {
-                        reset = false;
+                        return;
                     }
+
+                    e.preventDefault();
+                    e.stopPropagation();
+                    keysQueue = [];
+                    params.callback(e);
+                    break;
+                } else if (KB.utils.arraysStartsWith(keysQueue, sequence) && keysQueue.length < sequence.length) {
+                    reset = false;
                 }
             }
 
