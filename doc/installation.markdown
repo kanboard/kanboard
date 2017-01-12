@@ -60,7 +60,7 @@ Other Database Types
 
 Kanboard supports Mysql and Postgres as alternative to Sqlite.
 
-- [Mysql configuration](mysql-configuration.markdown]
+- [Mysql configuration](mysql-configuration.markdown)
 - [Postgres configuration](postgresql-configuration.markdown)
 
 Optional Installation
