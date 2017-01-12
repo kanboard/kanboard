@@ -8,5 +8,7 @@
     <?= $this->form->label(t('Action'), 'action_name') ?>
     <?= $this->form->select('action_name', $available_actions, $values) ?>
 
-    <?= $this->modal->submitButtons(t('Next step')) ?>
+    <?= $this->modal->submitButtons(array(
+        'submitLabel' => t('Next step')
+    )) ?>
 </form>

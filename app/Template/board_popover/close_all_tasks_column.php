@@ -8,5 +8,8 @@
 
     <p class="alert"><?= t('%d task(s) in the column "%s" and the swimlane "%s" will be closed.', $nb_tasks, $column, $swimlane) ?></p>
 
-    <?= $this->modal->submitButtons(t('Yes'), 'red') ?>
+    <?= $this->modal->submitButtons(array(
+        'submitLabel' => t('Yes'),
+        'color' => 'red',
+    )) ?>
 </form>

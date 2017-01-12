@@ -18,5 +18,7 @@
         <?= t('When the selected event occurs execute the corresponding action.') ?>
     </div>
 
-    <?= $this->modal->submitButtons(t('Next step')) ?>
+    <?= $this->modal->submitButtons(array(
+        'submitLabel' => t('Next step')
+    )) ?>
 </form>
