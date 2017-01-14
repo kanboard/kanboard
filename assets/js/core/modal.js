@@ -10,7 +10,7 @@
     }
 
     function onCloseButtonClick() {
-        destroy();
+        KB.trigger('modal.close');
     }
 
     function onFormSubmit() {

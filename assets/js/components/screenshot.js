@@ -109,6 +109,10 @@ KB.component('screenshot', function (containerElement) {
         initialize();
     }
 
+    KB.on('modal.close', function () {
+        destroy();
+    });
+
     this.render = function () {
         inputElement = KB.dom('input')
             .attr('type', 'hidden')
