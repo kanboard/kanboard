@@ -10,9 +10,10 @@ KB.component('chart-task-time-column', function (containerElement, options) {
             categories.push(metrics[i].title);
         }
 
-        KB.dom(containerElement).add(KB.dom('div').attr('id', 'chart').build());
+        KB.dom(containerElement).add(KB.dom('div').attr('id', 'chart-task-time-column').build());
 
         c3.generate({
+            bindto: '#chart-task-time-column',
             data: {
                 columns: [plots],
                 type: 'bar'
