@@ -43,6 +43,9 @@ class RequestTest extends Base
 
         $request = new Request($this->container, array(), array(), array('myvar' => 'myvalue', 'csrf_token' => $this->container['token']->getCSRFToken()), array(), array());
         $this->assertEquals(array('myvar' => 'myvalue'), $request->getValues());
+
+        $request = new Request($this->container, array(), array(), array('myvar' => 'myvalue', '-----------------------------7e1c32510025c--' => '', 'csrf_token' => $this->container['token']->getCSRFToken()), array(), array());
+        $this->assertEquals(array('myvar' => 'myvalue'), $request->getValues());
     }
 
     public function testGetFileContent()
