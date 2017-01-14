@@ -34,6 +34,7 @@ class TaskEmail extends Base
         return array(
             TaskModel::EVENT_MOVE_COLUMN,
             TaskModel::EVENT_CLOSE,
+            TaskModel::EVENT_CREATE,
         );
     }
 

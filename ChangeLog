@@ -20,6 +20,7 @@ Improvements:
 * Improve link labels pages navigation
 * Improve settings pages layout
 * Offer the possibility to define version compatibility from plugins
+* Add task creation event to automatic action to send task by email
 
 Version 1.0.36 (Dec 30, 2016)
 -----------------------------
