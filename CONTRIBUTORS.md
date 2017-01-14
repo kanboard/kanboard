@@ -77,6 +77,7 @@ Contributors:
 - [Łukasz Klim](https://github.com/lukas346)
 - [Maces](https://github.com/maces)
 - [Manish Lad](https://github.com/manishlad)
+- [Mark Szymanski](https://github.com/markjszy)
 - [Mathgl67](https://github.com/mathgl67)
 - [Matthieu Keller](https://github.com/maggick)
 - [Mauro Mariño](https://github.com/moromarino)

@@ -1,26 +1,26 @@
-Version 1.0.37 (unreleased)
----------------------------
+Version 1.0.37 (Jan 14, 2017)
+-----------------------------
 
 Improvements:
 
 * Improve keyboard shortcuts handling
 * Improve auto-complete dropdown elements sorting
 * Larger task form
-* Rewrite dialog and confirmation boxes (inline popup)
+* Rewrite dialog and confirmation boxes (inline popups)
 * Remove TaskGanttCreationController
 * Add helpers to open modal boxes
 * Make icons clickable in menus
-* Open task import in modal box
+* Open task imports in modal box
 * Open form to create customer filters in modal box
 * Open project activities in modal box
 * Display project analytics in modal box
 * Display project exports in modal box
 * Improve accordion component
-* Improve currencies pages navigation
-* Improve link labels pages navigation
-* Improve settings pages layout
+* Improve currencies page navigation
+* Improve link labels page navigation
+* Improve settings page layout
 * Offer the possibility to define version compatibility from plugins
-* Add task creation event to automatic action to send task by email
+* Add task creation event to the automatic action to send task by email
 
 Bug fixes:
 
