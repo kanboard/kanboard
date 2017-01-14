@@ -60,10 +60,8 @@ KB.component('screenshot', function (containerElement) {
     }
 
     function destroy() {
-        if (pasteCatcher !== null) {
-            document.body.removeChild(pasteCatcher);
-        } else if (document.getElementById('screenshot-pastezone')) {
-            document.body.removeChild(document.getElementById('screenshot-pastezone'));
+        if (KB.exists('#screenshot-pastezone')) {
+            KB.find('#screenshot-pastezone').remove();
         }
 
         document.removeEventListener('click', setFocus);
