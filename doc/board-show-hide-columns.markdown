@@ -9,4 +9,4 @@ To hide a column, click on the column dropdown menu and choose "Hide this column
 
 ![Show a column](screenshots/show-column.png)
 
-To show again the column, click on the "plus icon".
+To show the column again, click on the "plus icon".
