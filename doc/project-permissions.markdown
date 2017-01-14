@@ -1,8 +1,8 @@
 Project Permissions
 ===================
 
-Each project is isolated and compartmented from each other.
-The project access must be allowed by the project owner.
+Each project is isolated from other projects.
+Project access must be allowed by the project owner.
 
 Each user and each group can have a different role assigned.
 There are 3 types of [roles for projects](roles.markdown):
@@ -13,11 +13,11 @@ There are 3 types of [roles for projects](roles.markdown):
 
 Only administrators have access to everything.
 
-Roles assignation is available from **Project Settings > Permissions**:
+Role assignments are visible in **Project Settings > Permissions**:
 
 ![Project Permissions](screenshots/project-permissions.png)
 
-If you choose to allow everybody, all Kanboard users will be considered Project Member.
-That also means there is no role management anymore. Permission per user or per group cannot be applied.
+If you choose to allow everybody, all Kanboard users will be considered 'Project Member'.
+With this setting, role management will have no effect. Permission per user or per group cannot be applied.
 
-Private projects cannot define permission.
+Private projects cannot define permissions.

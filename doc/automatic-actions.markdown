@@ -1,15 +1,15 @@
 Automatic Actions
 =================
 
-To minimize the user interaction, Kanboard support automated actions.
+To minimize user interaction, Kanboard support automated actions.
 
-Each automatic action is defined like that:
+Each automatic action is defined with these properties:
 
 - An event to listen
-- Action linked to this event
-- Eventually there is some parameters to define
+- Action linked to the event
+- Additional parameters
 
-Each project has a different set of automatic actions, the configuration panel is located on the project listing page, just click on the link **Automatic actions**.
+Each project has a different set of automatic actions. The configuration panel is located on the project listing page - just click on the link **Automatic actions**.
 
 Add a new action
 ----------------
@@ -18,19 +18,19 @@ Click on the link **Add a new automatic action**.
 
 ![Automatique action](screenshots/automatic-action-creation.png)
 
-- Choose an action
-- Then, select an event
-- And finally, define the parameters
+1. Choose an action
+2. Select an event
+3. Define the parameters
 
-List of available actions
+Available actions
 -------------------------
 
 - Create a comment from an external provider
 - Add a comment log when moving the task between columns
-- Assign automatically a category based on a color
+- Automatically assign a category based on a color
 - Change the category based on an external label
-- Assign automatically a category based on a link
-- Assign automatically a color based on a category
+- Automatically assign a category based on a link
+- Automatically assign a color based on a category
 - Assign a color when the task is moved to a specific column
 - Change task color when using a specific task link
 - Assign a color to a specific user
@@ -75,7 +75,7 @@ Here are some examples used in real life:
 
 ### When a task is completed, duplicate this task to another project
 
-Let's say we have two projects "Customer orders" and "Production", once the order is validated, swap it to the "Production" project.
+Let's say we have two projects: "Customer orders" and "Production". Once the order is validated, swap it to the "Production" project.
 
 - Choose action: **Duplicate the task to another project**
 - Choose the event: **Closing a task**
@@ -83,7 +83,7 @@ Let's say we have two projects "Customer orders" and "Production", once the orde
 
 ### When a task is moved to the last column, move the exact same task to another project
 
-Let's say we have two projects "Ideas" and "Development", once the idea is validated, swap it to the "Development" project.
+Let's say we have two projects: "Ideas" and "Development".  Once the idea is validated, swap it to the "Development" project.
 
 - Choose action: **Move the task to another project**
 - Choose the event: **Move a task to another column**
