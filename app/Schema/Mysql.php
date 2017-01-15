@@ -63,9 +63,9 @@ function version_113(PDO $pdo)
     $pdo->exec("
         CREATE TABLE project_has_roles (
             role_id INT NOT NULL AUTO_INCREMENT,
-            role VARCHAR(255) NOT NULL,
+            `role` VARCHAR(255) NOT NULL,
             project_id INT NOT NULL,
-            UNIQUE(project_id, role),
+            UNIQUE(project_id, `role`),
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             PRIMARY KEY(role_id)
         ) ENGINE=InnoDB CHARSET=utf8
