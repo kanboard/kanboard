@@ -6,7 +6,12 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 108;
+const VERSION = 109;
+
+function version_109(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE comments ADD COLUMN date_modification INTEGER');
+}
 
 function version_108(PDO $pdo)
 {
