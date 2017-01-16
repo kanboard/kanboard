@@ -10,7 +10,7 @@ const VERSION = 98;
 
 function version_98(PDO $pdo)
 {
-    $pdo->exec('ALTER TABLE "comments" ADD COLUMN date_modification INT')
+    $pdo->exec('ALTER TABLE "comments" ADD COLUMN date_modification INT');
 }
 
 function version_97(PDO $pdo)
