@@ -8,6 +8,6 @@
         <const name="DB_DRIVER" value="postgres" />
         <const name="DB_USERNAME" value="postgres" />
         <const name="DB_PASSWORD" value="" />
-        <const name="DB_NAME" value="kanboard_unit_test" />
+        <const name="DB_NAME" value="kanboard" />
     </php>
 </phpunit>

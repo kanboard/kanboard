@@ -26,6 +26,7 @@ class CommentModelTest extends Base
         $this->assertEquals(1, $comment['user_id']);
         $this->assertEquals('admin', $comment['username']);
         $this->assertEquals(time(), $comment['date_creation'], '', 3);
+        $this->assertEquals(time(), $comment['date_modification'], '', 3);
 
         $comment = $commentModel->getById(2);
         $this->assertNotEmpty($comment);
@@ -34,6 +35,7 @@ class CommentModelTest extends Base
         $this->assertEquals(0, $comment['user_id']);
         $this->assertEquals('', $comment['username']);
         $this->assertEquals(time(), $comment['date_creation'], '', 3);
+        $this->assertEquals(time(), $comment['date_modification'], '', 3);
     }
 
     public function testGetAll()
@@ -73,6 +75,7 @@ class CommentModelTest extends Base
         $comment = $commentModel->getById(1);
         $this->assertNotEmpty($comment);
         $this->assertEquals('bla', $comment['comment']);
+        $this->assertEquals(time(), $comment['date_modification'], '', 3);
     }
 
     public function testRemove()
