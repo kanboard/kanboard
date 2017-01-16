@@ -60,6 +60,7 @@ class CommentModel extends Base
             ->columns(
                 self::TABLE.'.id',
                 self::TABLE.'.date_creation',
+                self::TABLE.'.date_modification',
                 self::TABLE.'.task_id',
                 self::TABLE.'.user_id',
                 self::TABLE.'.comment',
@@ -69,7 +70,7 @@ class CommentModel extends Base
                 UserModel::TABLE.'.avatar_path'
             )
             ->join(UserModel::TABLE, 'id', 'user_id')
-            ->orderBy(self::TABLE.'.date_creation', $sorting)
+            ->orderBy(self::TABLE.'.date_modification', $sorting)
             ->eq(self::TABLE.'.task_id', $task_id)
             ->findAll();
     }
@@ -90,6 +91,7 @@ class CommentModel extends Base
                 self::TABLE.'.task_id',
                 self::TABLE.'.user_id',
                 self::TABLE.'.date_creation',
+                self::TABLE.'.date_modification',
                 self::TABLE.'.comment',
                 self::TABLE.'.reference',
                 UserModel::TABLE.'.username',
@@ -127,6 +129,7 @@ class CommentModel extends Base
     public function create(array $values)
     {
         $values['date_creation'] = time();
+        $values['date_modification'] = time();
         $comment_id = $this->db->table(self::TABLE)->persist($values);
 
         if ($comment_id !== false) {
@@ -148,7 +151,7 @@ class CommentModel extends Base
         $result = $this->db
                     ->table(self::TABLE)
                     ->eq('id', $values['id'])
-                    ->update(array('comment' => $values['comment']));
+                    ->update(array('comment' => $values['comment'], 'date_modification' => time()));
 
         if ($result) {
             $this->queueManager->push($this->commentEventJob->withParams($values['id'], self::EVENT_UPDATE));
