@@ -24,6 +24,7 @@ class Smtp extends Mail
         $transport->setUsername(MAIL_SMTP_USERNAME);
         $transport->setPassword(MAIL_SMTP_PASSWORD);
         $transport->setEncryption(MAIL_SMTP_ENCRYPTION);
+
         if (HTTP_VERIFY_SSL_CERTIFICATE === false) {
             $transport->setStreamOptions(array(
                 'ssl' => array(

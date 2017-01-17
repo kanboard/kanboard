@@ -7,9 +7,9 @@ use Kanboard\Core\Security\PreAuthenticationProviderInterface;
 use Kanboard\User\DatabaseUserProvider;
 
 /**
- * Rember Me Cookie Authentication Provider
+ * RememberMe Cookie Authentication Provider
  *
- * @package  auth
+ * @package  Kanboard\Auth
  * @author   Frederic Guillot
  */
 class RememberMeAuth extends Base implements PreAuthenticationProviderInterface

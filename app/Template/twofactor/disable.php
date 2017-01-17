@@ -7,8 +7,9 @@
         <?= t('Do you really want to disable the two factor authentication for this user: "%s"?', $user['name'] ?: $user['username']) ?>
     </p>
 
-    <div class="form-actions">
-        <?= $this->url->link(t('Yes'), 'TwoFactorController', 'disable', array('user_id' => $user['id'], 'disable' => 'yes'), true, 'btn btn-red') ?>
-        <?= t('or') ?> <?= $this->url->link(t('cancel'), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
-    </div>
+    <?= $this->modal->confirmButtons(
+        'TwoFactorController',
+        'disable',
+        array('user_id' => $user['id'], 'disable' => 'yes')
+    ) ?>
 </div>

@@ -10,7 +10,7 @@ Uso
 -----
 
 - Abre una terminal y ve a tu directorio de kanboard (ejemplo : `cd /var/www/kanboard`)
-- Corre el comando `./kanboard`
+- Corre el comando `./cli` / `php cli`
 
 ```bash
 Kanboard version master
@@ -33,10 +33,10 @@ Available commands:
   list                               Lista de comandos
   worker                             Execute queue worker
  export
-  export:daily-project-column-stats  Diariamente estadísticas de exportación de CSV (número de tareas por columna y por día )
+  export:daily-project-column-stats  Diariamente estadï¿½sticas de exportaciï¿½n de CSV (nï¿½mero de tareas por columna y por dï¿½a )
   export:subtasks                    Exportar a CSV las subtareas
   export:tasks                       Exportar a CSV las tareas
-  export:transitions                 Exportar a CSV tareas de transición
+  export:transitions                 Exportar a CSV tareas de transiciï¿½n
  locale
   locale:compare                     Comparar aplicacion de traducciones con el locale fr_FR
   locale:sync                        Sincronizar todas las traducciones basadas en el locale fr_FR
@@ -51,7 +51,7 @@ Available commands:
  trigger
   trigger:tasks                      Disparadores de eventos calendarizados para todas las tareas
  user
-  user:reset-2fa                     Eliminar la autenticación two-factor para un usuario
+  user:reset-2fa                     Eliminar la autenticaciï¿½n two-factor para un usuario
   user:reset-password                Cambiar el passwor del usuario
 ```
 
@@ -63,13 +63,13 @@ Comandos disponibles
 Uso:
 
 ```bash
-./kanboard export:tasks <project_id> <start_date> <end_date>
+./cli export:tasks <project_id> <start_date> <end_date>
 ```
 
 Ejemplo:
 
 ```bash
-./kanboard export:tasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+./cli export:tasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
 CSV los datos son enviados a `stdout`.
@@ -79,41 +79,41 @@ CSV los datos son enviados a `stdout`.
 Uso:
 
 ```bash
-./kanboard export:subtasks <project_id> <start_date> <end_date>
+./cli export:subtasks <project_id> <start_date> <end_date>
 ```
 
 Ejemplo:
 
 ```bash
-./kanboard export:subtasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+./cli export:subtasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
-### Exportación a CSV de tareas de transición
+### Exportaciï¿½n a CSV de tareas de transiciï¿½n
 
 Uso:
 
 ```bash
-./kanboard export:transitions <project_id> <start_date> <end_date>
+./cli export:transitions <project_id> <start_date> <end_date>
 ```
 
 Ejemplo:
 
 ```bash
-./kanboard export:transitions 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+./cli export:transitions 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
 ### Exportar diariamente resumenes de datos en CSV
 
-Los datos exportados se pueden imprimir en la salida estándar:
+Los datos exportados se pueden imprimir en la salida estï¿½ndar:
 
 ```bash
-./kanboard export:daily-project-column-stats <project_id> <start_date> <end_date>
+./cli export:daily-project-column-stats <project_id> <start_date> <end_date>
 ```
 
 Ejemplo:
 
 ```bash
-./kanboard export:daily-project-column-stats 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+./cli export:daily-project-column-stats 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
 ###  Envio de notificaciones para tareas atrasadas
@@ -121,7 +121,7 @@ Ejemplo:
 Los Emails se enviaran a todos los usuarios con las notificaciones habilitadas.
 
 ```bash
-./kanboard notification:overdue-tasks
+./cli notification:overdue-tasks
 ```
 
 Parametros opcionales:
@@ -130,10 +130,10 @@ Parametros opcionales:
 - `--group`: Grupo tareas atrasadas todo para un usuario (desde todos los proyectos) en un email
 - `--manager`: Enviar todas las tareas atrasadas a un project manager(s) en un email
 
-También puede mostrar las tareas atrasadas con la bandera `--show`:
+Tambiï¿½n puede mostrar las tareas atrasadas con la bandera `--show`:
 
 ```bash
-./kanboard notification:overdue-tasks --show
+./cli notification:overdue-tasks --show
 +-----+---------+------------+------------+--------------+----------+
 | Id  | Title   | Due date   | Project Id | Project name | Assignee |
 +-----+---------+------------+------------+--------------+----------+
@@ -147,7 +147,7 @@ También puede mostrar las tareas atrasadas con la bandera `--show`:
 Este comando calcula las estadisticas por cada proyecto:
 
 ```bash
-./kanboard projects:daily-stats
+./cli projects:daily-stats
 Run calculation for Project #0
 Run calculation for Project #1
 Run calculation for Project #10
@@ -158,42 +158,42 @@ Run calculation for Project #10
 Este comando envia a "daily cronjob event" a todas las tareas abiertas de cada proyecto.
 
 ```bash
-./kanboard trigger:tasks
+./cli trigger:tasks
 Trigger task event: project_id=2, nb_tasks=1
 ```
 
 ### Resetear el password del usuario
 
 ```bash
-./kanboard user:reset-password my_user
+./cli user:reset-password my_user
 ```
 
-Se le pedirá una contraseña y la confirmación. Los caracteres no se imprimen en la pantalla.
+Se le pedirï¿½ una contraseï¿½a y la confirmaciï¿½n. Los caracteres no se imprimen en la pantalla.
 
-### Eliminar la autenticación two-factor para un usuario
+### Eliminar la autenticaciï¿½n two-factor para un usuario
 
 ```bash
-./kanboard user:reset-2fa my_user
+./cli user:reset-2fa my_user
 ```
 
 ### Instalar un plugin
 
 ```bash
-./kanboard plugin:install https://github.com/kanboard/plugin-github-auth/releases/download/v1.0.1/GithubAuth-1.0.1.zip
+./cli plugin:install https://github.com/kanboard/plugin-github-auth/releases/download/v1.0.1/GithubAuth-1.0.1.zip
 ```
 
-Nota: Los archivos instalados tendrán los mismos permisos que el usuario actual
+Nota: Los archivos instalados tendrï¿½n los mismos permisos que el usuario actual
 
 ### Eliminar un usuario
 
 ```bash
-./kanboard plugin:uninstall Budget
+./cli plugin:uninstall Budget
 ```
 
 ### Upgrade todos los plugins
 
 ```bash
-./kanboard plugin:upgrade
+./cli plugin:upgrade
 * Updating plugin: Budget Planning
 * Plugin up to date: Github Authentication
 ```
@@ -201,5 +201,5 @@ Nota: Los archivos instalados tendrán los mismos permisos que el usuario actual
 ### Run Background worker
 
 ```bash
-./kanboard worker
+./cli worker
 ```

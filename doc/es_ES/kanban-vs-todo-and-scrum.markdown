@@ -11,7 +11,7 @@ Kanban vs Todo lists
 
 ### Kanban:
 
-- Multi fases, 
+- Multi fases,
 - Concentración absoluta para evitar multitareas por que se puede establecer un limite por columna para mejorar el progreso
 
 

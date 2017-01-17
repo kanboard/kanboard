@@ -4,10 +4,12 @@ KB.dom = function (tag) {
         var element = typeof tag === 'string' ? document.createElement(tag) : tag;
 
         this.attr = function (attribute, value) {
-            if (value !== null) {
+            if (value !== null && typeof value !== 'undefined') {
                 element.setAttribute(attribute, value);
+                return this;
+            } else {
+                return element.getAttribute(attribute);
             }
-            return this;
         };
 
         this.data = function (attribute, value) {
@@ -43,9 +45,11 @@ KB.dom = function (tag) {
             return this;
         };
 
-        this.on = function (eventName, callback) {
+        this.on = function (eventName, callback, ignorePrevent) {
             element.addEventListener(eventName, function (e) {
-                e.preventDefault();
+                if (! ignorePrevent) {
+                    e.preventDefault();
+                }
                 callback(e.target);
             });
 
@@ -84,6 +88,11 @@ KB.dom = function (tag) {
             return this;
         };
 
+        this.replaceText = function (text) {
+            element.textContent = text;
+            return this;
+        };
+
         this.addClass = function (className) {
             element.classList.add(className);
             return this;
@@ -115,6 +124,13 @@ KB.dom = function (tag) {
 
         this.remove = function () {
             element.parentNode.removeChild(element);
+            return this;
+        };
+
+        this.empty = function () {
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
             return this;
         };
 
@@ -172,4 +188,16 @@ KB.find = function (selector) {
     }
 
     return null;
+};
+
+KB.exists = function (selector) {
+    return !!document.querySelector(selector);
+};
+
+KB.focus = function (selector) {
+    var element = document.querySelector(selector);
+
+    if (element) {
+        return element.focus();
+    }
 };

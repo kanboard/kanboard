@@ -8,6 +8,7 @@ use Kanboard\Decorator\ColumnMoveRestrictionCacheDecorator;
 use Kanboard\Decorator\ColumnRestrictionCacheDecorator;
 use Kanboard\Decorator\MetadataCacheDecorator;
 use Kanboard\Decorator\ProjectRoleRestrictionCacheDecorator;
+use Kanboard\Decorator\UserCacheDecorator;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -39,6 +40,13 @@ class CacheProvider implements ServiceProviderInterface
         } else {
             $container['cacheDriver'] = $container['memoryCache'];
         }
+
+        $container['userCacheDecorator'] = function($c) {
+            return new UserCacheDecorator(
+                $c['memoryCache'],
+                $c['userModel']
+            );
+        };
 
         $container['userMetadataCacheDecorator'] = function($c) {
             return new MetadataCacheDecorator(

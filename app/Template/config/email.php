@@ -4,11 +4,14 @@
 <form method="post" action="<?= $this->url->href('ConfigController', 'save', array('redirect' => 'email')) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
 
-    <?= $this->form->label(t('Email sender address'), 'mail_sender_address') ?>
-    <?= $this->form->text('mail_sender_address', $values, $errors, array('placeholder="'.MAIL_FROM.'"')) ?>
+    <fieldset>
+        <legend><?= t('Outgoing Emails') ?></legend>
+        <?= $this->form->label(t('Email sender address'), 'mail_sender_address') ?>
+        <?= $this->form->text('mail_sender_address', $values, $errors, array('placeholder="'.MAIL_FROM.'"')) ?>
 
-    <?= $this->form->label(t('Email transport'), 'mail_transport') ?>
-    <?= $this->form->select('mail_transport', $mail_transports, $values, $errors) ?>
+        <?= $this->form->label(t('Email transport'), 'mail_transport') ?>
+        <?= $this->form->select('mail_transport', $mail_transports, $values, $errors) ?>
+    </fieldset>
 
     <?= $this->hook->render('template:config:email', array('values' => $values, 'errors' => $errors)) ?>
 

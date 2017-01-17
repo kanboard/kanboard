@@ -13,9 +13,5 @@
     <?= $this->form->label(t('Opposite label'), 'opposite_id') ?>
     <?= $this->form->select('opposite_id', $labels, $values, $errors) ?>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-        <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'LinkController', 'index') ?>
-    </div>
+    <?= $this->modal->submitButtons() ?>
 </form>

@@ -7,8 +7,9 @@
         <?= t('Do you really want to remove this column restriction: "%s" to "%s"?', $restriction['src_column_title'], $restriction['dst_column_title']) ?>
     </p>
 
-    <div class="form-actions">
-        <?= $this->url->link(t('Yes'), 'ColumnMoveRestrictionController', 'remove', array('project_id' => $project['id'], 'restriction_id' => $restriction['restriction_id']), true, 'btn btn-red') ?>
-        <?= t('or') ?> <?= $this->url->link(t('cancel'), 'ProjectRoleController', 'show', array('project_id' => $project['id']), false, 'close-popover') ?>
-    </div>
+    <?= $this->modal->confirmButtons(
+        'ColumnMoveRestrictionController',
+        'remove',
+        array('project_id' => $project['id'], 'restriction_id' => $restriction['restriction_id'])
+    ) ?>
 </div>

@@ -2,12 +2,10 @@
     <h2><?= t('Automatic actions for the project "%s"', $project['name']) ?></h2>
     <ul>
         <li>
-            <i class="fa fa-plus fa-fw"></i>
-            <?= $this->url->link(t('Add a new action'), 'ActionCreationController', 'create', array('project_id' => $project['id']), false, 'popover') ?>
+            <?= $this->modal->medium('plus', t('Add a new action'), 'ActionCreationController', 'create', array('project_id' => $project['id'])) ?>
         </li>
         <li>
-            <i class="fa fa-copy fa-fw"></i>
-            <?= $this->url->link(t('Import from another project'), 'ProjectActionDuplicationController', 'show', array('project_id' => $project['id']), false, 'popover') ?>
+            <?= $this->modal->medium('copy', t('Import from another project'), 'ProjectActionDuplicationController', 'show', array('project_id' => $project['id'])) ?>
         </li>
     </ul>
 </div>
@@ -17,8 +15,8 @@
 <?php else: ?>
     <table class="table-scrolling">
         <tr>
-            <th><?= t('Automatic actions') ?></th>
-            <th><?= t('Action parameters') ?></th>
+            <th class="column-60"><?= t('Automatic actions') ?></th>
+            <th class="column-25"><?= t('Action parameters') ?></th>
             <th><?= t('Action') ?></th>
         </tr>
 
@@ -65,7 +63,7 @@
                 </ul>
             </td>
             <td>
-                <?= $this->url->link(t('Remove'), 'ActionController', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id']), false, 'popover') ?>
+                <?= $this->modal->confirm('trash-o', t('Remove'), 'ActionController', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id'])) ?>
             </td>
         </tr>
         <?php endforeach ?>

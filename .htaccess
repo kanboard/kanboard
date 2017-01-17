@@ -6,21 +6,15 @@
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [QSA,L]
+    
+    ############################
+    ## Uncomment the two lines below to enable force HTTPS capabilities
+    ############################
+    
+    # RewriteCond %{HTTPS} !=on 
+    # RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
 </IfModule>
 
-<FilesMatch "(kanboard|config.php|config.default.php)">
-    <IfModule mod_version.c>
-        <IfVersion >= 2.3>
-            Require all denied
-        </IfVersion>
-        <IfVersion < 2.3>
-            Order allow,deny
-            Deny from all
-        </IfVersion>
-    </IfModule>
-
-    <IfModule !mod_version.c>
-        Order allow,deny
-        Deny from all
-    </IfModule>
-</FilesMatch>
+<IfModule pagespeed_module>
+    ModPagespeed Off
+</IfModule>

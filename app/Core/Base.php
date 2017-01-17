@@ -58,9 +58,25 @@ use Pimple\Container;
  * @property \Kanboard\Core\Paginator                                $paginator
  * @property \Kanboard\Core\Template                                 $template
  * @property \Kanboard\Decorator\MetadataCacheDecorator              $userMetadataCacheDecorator
- * @property \Kanboard\Decorator\columnRestrictionCacheDecorator     $columnRestrictionCacheDecorator
+ * @property \Kanboard\Decorator\UserCacheDecorator                  $userCacheDecorator
+ * @property \Kanboard\Decorator\ColumnRestrictionCacheDecorator     $columnRestrictionCacheDecorator
  * @property \Kanboard\Decorator\ColumnMoveRestrictionCacheDecorator $columnMoveRestrictionCacheDecorator
  * @property \Kanboard\Decorator\ProjectRoleRestrictionCacheDecorator $projectRoleRestrictionCacheDecorator
+ * @property \Kanboard\Formatter\BoardColumnFormatter                $boardColumnFormatter
+ * @property \Kanboard\Formatter\BoardFormatter                      $boardFormatter
+ * @property \Kanboard\Formatter\BoardSwimlaneFormatter              $boardSwimlaneFormatter
+ * @property \Kanboard\Formatter\BoardTaskFormatter                  $boardTaskFormatter
+ * @property \Kanboard\Formatter\GroupAutoCompleteFormatter          $groupAutoCompleteFormatter
+ * @property \Kanboard\Formatter\ProjectActivityEventFormatter       $projectActivityEventFormatter
+ * @property \Kanboard\Formatter\ProjectGanttFormatter               $projectGanttFormatter
+ * @property \Kanboard\Formatter\SubtaskTimeTrackingCalendarFormatter $subtaskTimeTrackingCalendarFormatter
+ * @property \Kanboard\Formatter\TaskAutoCompleteFormatter           $taskAutoCompleteFormatter
+ * @property \Kanboard\Formatter\TaskCalendarFormatter               $taskCalendarFormatter
+ * @property \Kanboard\Formatter\TaskGanttFormatter                  $taskGanttFormatter
+ * @property \Kanboard\Formatter\TaskICalFormatter                   $taskICalFormatter
+ * @property \Kanboard\Formatter\TaskSuggestMenuFormatter            $taskSuggestMenuFormatter
+ * @property \Kanboard\Formatter\UserAutoCompleteFormatter           $userAutoCompleteFormatter
+ * @property \Kanboard\Formatter\UserMentionFormatter                $userMentionFormatter
  * @property \Kanboard\Model\ActionModel                             $actionModel
  * @property \Kanboard\Model\ActionParameterModel                    $actionParameterModel
  * @property \Kanboard\Model\AvatarFileModel                         $avatarFileModel
@@ -126,7 +142,6 @@ use Pimple\Container;
  * @property \Kanboard\Model\TransitionModel                         $transitionModel
  * @property \Kanboard\Model\UserModel                               $userModel
  * @property \Kanboard\Model\UserLockingModel                        $userLockingModel
- * @property \Kanboard\Model\UserMentionModel                        $userMentionModel
  * @property \Kanboard\Model\UserNotificationModel                   $userNotificationModel
  * @property \Kanboard\Model\UserNotificationTypeModel               $userNotificationTypeModel
  * @property \Kanboard\Model\UserNotificationFilterModel             $userNotificationFilterModel
@@ -178,6 +193,7 @@ use Pimple\Container;
  * @property \Kanboard\Job\ProjectFileEventJob                       $projectFileEventJob
  * @property \Kanboard\Job\NotificationJob                           $notificationJob
  * @property \Kanboard\Job\ProjectMetricJob                          $projectMetricJob
+ * @property \Kanboard\Job\UserMentionJob                            $userMentionJob
  * @property \Psr\Log\LoggerInterface                                $logger
  * @property \PicoDb\Database                                        $db
  * @property \Symfony\Component\EventDispatcher\EventDispatcher      $dispatcher

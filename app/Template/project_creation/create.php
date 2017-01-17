@@ -2,7 +2,7 @@
     <div class="page-header">
         <h2><?= $title ?></h2>
     </div>
-    <form class="popover-form" id="project-creation-form" method="post" action="<?= $this->url->href('ProjectCreationController', 'save') ?>" autocomplete="off">
+    <form id="project-creation-form" method="post" action="<?= $this->url->href('ProjectCreationController', 'save') ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
         <?= $this->form->hidden('is_private', $values) ?>
@@ -12,10 +12,10 @@
 
         <?php if (count($projects_list) > 1): ?>
             <?= $this->form->label(t('Create from another project'), 'src_project_id') ?>
-            <?= $this->form->select('src_project_id', $projects_list, $values) ?>
+            <?= $this->form->select('src_project_id', $projects_list, $values, array(), array(), 'js-project-creation-select-options') ?>
         <?php endif ?>
 
-        <div class="project-creation-options" <?= isset($values['src_project_id']) && $values['src_project_id'] > 0 ? '' : 'style="display: none"' ?>>
+        <div class="js-project-creation-options" <?= isset($values['src_project_id']) && $values['src_project_id'] > 0 ? '' : 'style="display: none"' ?>>
             <p class="alert"><?= t('Which parts of the project do you want to duplicate?') ?></p>
 
             <?php if (! $is_private): ?>
@@ -29,11 +29,7 @@
             <?= $this->form->checkbox('projectTaskDuplicationModel', t('Tasks'), 1, false) ?>
         </div>
 
-        <div class="form-actions">
-            <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-            <?= t('or') ?>
-            <?= $this->url->link(t('cancel'), 'ProjectListController', 'show', array(), false, 'close-popover') ?>
-        </div>
+        <?= $this->modal->submitButtons() ?>
     </form>
     <?php if ($is_private): ?>
     <div class="alert alert-info">

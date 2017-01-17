@@ -89,6 +89,7 @@ Using Kanboard
 
 - [Solving database migration issues](solving-database-migration-issues.markdown)
 - [Blank page after upgrading](solving-blank-page-issue.markdown)
+- [Unable to open a session on Windows IIS and Internet Explorer](solving-session-issue-windows-iis-ie.markdown)
 - [Performances](performances.markdown)
 
 Technical details
@@ -110,7 +111,6 @@ Technical details
 - [Run Kanboard with Docker](docker.markdown)
 - [Run Kanboard with Vagrant](vagrant.markdown)
 - [Run Kanboard on Cloudron](cloudron.markdown)
-- [Run Kanboard on Nitrous](nitrous.markdown)
 
 ### Configuration
 

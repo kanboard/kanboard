@@ -1,6 +1,28 @@
 Plugin Registration
 ===================
 
+Project skeleton generator
+--------------------------
+
+You can use `cookiecutter` to create the project structure of your plugin automatically.
+
+Install Cookiecutter:
+
+```bash
+pip install -U cookiecutter
+```
+
+Run Kanboard cookiecutter:
+
+```bash
+cookiecutter gh:kanboard/cookiecutter-plugin
+plugin_name [My Plugin]: Some Plugin
+plugin_namespace [MyPlugin]: SomePlugin
+plugin_author [Plugin Author]: Me
+plugin_description [My plugin is awesome]:
+plugin_homepage [https://github.com/kanboard/plugin-myplugin]:
+```
+
 Directory structure
 -------------------
 
@@ -49,6 +71,15 @@ class Plugin extends Base
     {
         $this->template->hook->attach('template:layout:head', 'theme:layout/head');
     }
+
+    public function getCompatibleVersion()
+    {
+        // Examples:
+        // >=1.0.37
+        // <1.0.37
+        // <=1.0.37
+        return '1.0.37';
+    }
 }
 ```
 
@@ -71,6 +102,7 @@ Available methods from `Kanboard\Core\Plugin\Base`:
 - `getPluginHomepage()`: Should return plugin Homepage (link)
 - `setContentSecurityPolicy(array $rules)`: Override default HTTP CSP rules
 - `onStartup()`: If present, this method is executed automatically when the event "app.bootstrap" is triggered
+- `getCompatibleVersion()`: You may want to specify the Kanboard version compatible with the plugin
 
 Your plugin registration class can also inherit from Kanboard\Core\Base, that way you can access all classes and methods of Kanboard easily.
 

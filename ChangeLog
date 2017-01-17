@@ -1,12 +1,93 @@
-Version 1.0.35
---------------
+Version 1.0.37 (Jan 14, 2017)
+-----------------------------
+
+Improvements:
+
+* Improve keyboard shortcuts handling
+* Improve auto-complete dropdown elements sorting
+* Larger task form
+* Rewrite dialog and confirmation boxes (inline popups)
+* Remove TaskGanttCreationController
+* Add helpers to open modal boxes
+* Make icons clickable in menus
+* Open task imports in modal box
+* Open form to create customer filters in modal box
+* Open project activities in modal box
+* Display project analytics in modal box
+* Display project exports in modal box
+* Improve accordion component
+* Improve currencies page navigation
+* Improve link labels page navigation
+* Improve settings page layout
+* Offer the possibility to define version compatibility from plugins
+* Add task creation event to the automatic action to send task by email
+
+Bug fixes:
+
+* Closing screenshot dialog prevent input elements to get focus
+
+Version 1.0.36 (Dec 30, 2016)
+-----------------------------
+
+New features:
+
+* Add slideshow for images
+* Add API calls to manage tags
+* Offer the possibility to override internal formatter objects from plugins
+* Open PDF attachments in browser tab (preview)
+
+Improvements:
+
+* Add pagination details
+* Handle username with dots in user mentions
+* Rewrite UI component that change user/group roles
+* Replace Chosen jQuery plugin by custom UI component
+* Remove dependency on Mousetrap Javascript library
+* Disable PageSpeed module from .htaccess if present
+* Add currency of Chinese Yuan
+
+Bug fixes:
+
+* Fix compatibility issue with PHP 5.3 for array_combine function
+* Fix wrong controller name on project activity page when using filters
+* Uploaded avatar images are now visible in public board view
+
+Version 1.0.35 (Dec 4, 2016)
+----------------------------
+
+New features:
+
+* Add external tasks plugin interfaces
+* Add personal API access token for users
+* Rewrite of Markdown editor (remove CodeMirror)
+* Suggest menu for task ID and user mentions in Markdown editor
+* Add config parameter to disable automatic SQL migrations
 
 Improvements:
 
 * Add button to close inline popups
+* Simplify `.htaccess` to avoid potential issues with possible specific Apache configurations
+* Replace notifications Javascript code by CSS
+* Refactoring of user mentions job
+* Remove Nitrous installer
+* Update translations
+* Rewrite some components in Vanilla Javascript
+* Started Javascript code refactoring to avoid to much dependencies on jQuery
+* Remove dependency on VueJS and CoreMirror
+* Add P3P headers to avoid potential issues with IE
 
-Version 1.0.34
---------------
+Breaking changes:
+
+* Rename command line tool `./kanboard` to `./cli`
+
+Bug fixes:
+
+* Change column type for application settings value (field too small)
+* Fix link generation when user mention is followed by a punctuation mark
+* Make user mentions works again
+
+Version 1.0.34 (Oct 11, 2016)
+-----------------------------
 
 New features:
 
@@ -37,8 +118,8 @@ Bug fixes:
 * Do not show closed tasks in task move position form
 * Avoid "Controller not found" in Settings > Links
 
-Version 1.0.33
---------------
+Version 1.0.33 (Sep 5, 2016)
+----------------------------
 
 New features:
 
@@ -80,8 +161,8 @@ Bug fixes:
 * Fix wrong project date format (shown as 01/01/1970)
     - If the dates still not correct, modify and save the date
 
-Version 1.0.32
---------------
+Version 1.0.32 (July 31, 2016)
+------------------------------
 
 New features:
 
@@ -121,8 +202,8 @@ Bug fixes:
 * Fixed Markdown editor auto-grow on the task form (Safari)
 * Fixed compatibility issue with PHP 5.3 for OAuthUserProvider class
 
-Version 1.0.31
---------------
+Version 1.0.31 (Jul 3, 2016)
+----------------------------
 
 New features:
 
@@ -159,8 +240,8 @@ Breaking changes:
 
 * Docker volume paths are changed to /var/www/app/{data,plugins}
 
-Version 1.0.30
---------------
+Version 1.0.30 (Jun 8, 2016)
+----------------------------
 
 Improvements:
 
@@ -172,8 +253,8 @@ Bug fixes:
 * Fixed plural form in alert message
 * Fixed CSS cosmetic issue with popover and tooltips
 
-Version 1.0.29
---------------
+Version 1.0.29 (Jun 5, 2016)
+----------------------------
 
 New features:
 
@@ -214,8 +295,8 @@ Breaking changes:
 * All controllers have been renamed, people who are not using URL rewriting will see different URLs
 * All models have been renamed, plugin maintainers will have to update their plugins
 
-Version 1.0.28
---------------
+Version 1.0.28 (May 8, 2016)
+----------------------------
 
 New features:
 
@@ -257,8 +338,8 @@ Bug fixes:
 * Fixed form submission with Meta+Enter keyboard shortcut
 * Removed PHP notices in comment suppression view
 
-Version 1.0.27
---------------
+Version 1.0.27 (Mar 27, 2016)
+-----------------------------
 
 New features:
 
@@ -302,8 +383,8 @@ Bug fixes:
 * Fix invalid user filter for API procedure createLdapUser()
 * Ambiguous column name with very old version of Sqlite
 
-Version 1.0.26
---------------
+Version 1.0.26 (Feb 28, 2016)
+-----------------------------
 
 Breaking changes:
 
@@ -335,8 +416,8 @@ Bug fixes:
 * Fix filter dropdown not accessible when there are too many items
 * Fix regression: unable to change project in "task move/duplicate to another project"
 
-Version 1.0.25
---------------
+Version 1.0.25 (Feb 7, 2016)
+----------------------------
 
 Breaking changes:
 
@@ -382,8 +463,8 @@ Bug fixes:
 * Category label is broken on the board if there's a url in the description
 * Fix pagination on task time tracking page
 
-Version 1.0.24
---------------
+Version 1.0.24 (Jan 23, 2016)
+-----------------------------
 
 New features:
 
@@ -424,8 +505,8 @@ Bug fixes:
 * Unable to unassign a task from the API
 * Revert back previous optimizations of TaskPosition (incompatibility with some environment)
 
-Version 1.0.23
---------------
+Version 1.0.23 (Jan 9, 2016)
+----------------------------
 
 Breaking changes:
 
@@ -459,8 +540,8 @@ Bug fixes:
 * Fix pagination in group members listing
 * Avoid PHP error when enabling LDAP group provider with PHP < 5.5
 
-Version 1.0.22
---------------
+Version 1.0.22 (Dec 13, 2015)
+-----------------------------
 
 Breaking changes:
 
@@ -489,8 +570,8 @@ New features:
 * Add capability to reopen Gitlab issues
 * Try to load config.php from /data if not available
 
-Version 1.0.21
---------------
+Version 1.0.21 (Nov 22, 2015)
+-----------------------------
 
 Breaking changes:
 
@@ -528,8 +609,8 @@ Bug fixes:
 * Make CSV export compatible with PHP 5.3
 * Avoid Safari to append .html at the end of downloaded files
 
-Version 1.0.20
---------------
+Version 1.0.20 (Oct 24, 2015)
+-----------------------------
 
 Breaking changes:
 
@@ -555,8 +636,8 @@ Bug fixes:
 * People should not see any tasks during a search when they are not associated to a project
 * Avoid disabling the default swimlane during renaming when there is no other activated swimlane
 
-Version 1.0.19
---------------
+Version 1.0.19 (Oct 11, 2015)
+-----------------------------
 
 New features:
 
@@ -619,8 +700,8 @@ Bug fixes:
 * Fix Postgres issue "Cardinality violation" when there is multiple "is_milestone_of" links
 * Fix issue with due date greater than year 2038
 
-Version 1.0.18
---------------
+Version 1.0.18 (Aug 30, 2015)
+-----------------------------
 
 New features:
 
@@ -666,8 +747,8 @@ Bug fixes:
 * Fix screenshot feature with Firefox 40
 * Fix bug when uploading files with Cyrilic characters
 
-Version 1.0.17
---------------
+Version 1.0.17 (Jul 27, 2015)
+-----------------------------
 
 New features:
 

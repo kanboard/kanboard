@@ -7,9 +7,9 @@
         <?= t('Do you really want to remove this link: "%s"?', $link['label']) ?>
     </p>
 
-    <div class="form-actions">
-        <?= $this->url->link(t('Yes'), 'LinkController', 'remove', array('link_id' => $link['id']), true, 'btn btn-red') ?>
-        <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'LinkController', 'index') ?>
-    </div>
+    <?= $this->modal->confirmButtons(
+        'LinkController',
+        'remove',
+        array('link_id' => $link['id'])
+    ) ?>
 </div>

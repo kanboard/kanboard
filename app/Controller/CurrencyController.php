@@ -11,21 +11,33 @@ namespace Kanboard\Controller;
 class CurrencyController extends BaseController
 {
     /**
-     * Display all currency rates and form
+     * Display all currency rates
+     *
+     * @access public
+     */
+    public function show()
+    {
+        $this->response->html($this->helper->layout->config('currency/show', array(
+            'application_currency' => $this->configModel->get('application_currency'),
+            'rates'                => $this->currencyModel->getAll(),
+            'currencies'           => $this->currencyModel->getCurrencies(),
+            'title'                => t('Settings') . ' &gt; ' . t('Currency rates'),
+        )));
+    }
+
+    /**
+     * Add or change currency rate
      *
      * @access public
      * @param array $values
      * @param array $errors
      */
-    public function index(array $values = array(), array $errors = array())
+    public function create(array $values = array(), array $errors = array())
     {
-        $this->response->html($this->helper->layout->config('currency/index', array(
-            'config_values' => array('application_currency' => $this->configModel->get('application_currency')),
-            'values' => $values,
-            'errors' => $errors,
-            'rates' => $this->currencyModel->getAll(),
+        $this->response->html($this->template->render('currency/create', array(
+            'values'     => $values,
+            'errors'     => $errors,
             'currencies' => $this->currencyModel->getCurrencies(),
-            'title' => t('Settings').' &gt; '.t('Currency rates'),
         )));
     }
 
@@ -34,7 +46,7 @@ class CurrencyController extends BaseController
      *
      * @access public
      */
-    public function create()
+    public function save()
     {
         $values = $this->request->getValues();
         list($valid, $errors) = $this->currencyValidator->validateCreation($values);
@@ -42,13 +54,34 @@ class CurrencyController extends BaseController
         if ($valid) {
             if ($this->currencyModel->create($values['currency'], $values['rate'])) {
                 $this->flash->success(t('The currency rate have been added successfully.'));
-                return $this->response->redirect($this->helper->url->to('CurrencyController', 'index'));
+                $this->response->redirect($this->helper->url->to('CurrencyController', 'show'), true);
+                return;
             } else {
                 $this->flash->failure(t('Unable to add this currency rate.'));
             }
         }
 
-        return $this->index($values, $errors);
+        $this->create($values, $errors);
+    }
+
+    /**
+     * Change reference currency
+     *
+     * @access public
+     * @param array $values
+     * @param array $errors
+     */
+    public function change(array $values = array(), array $errors = array())
+    {
+        if (empty($values)) {
+            $values['application_currency'] = $this->configModel->get('application_currency');
+        }
+
+        $this->response->html($this->template->render('currency/change', array(
+            'values'     => $values,
+            'errors'     => $errors,
+            'currencies' => $this->currencyModel->getCurrencies(),
+        )));
     }
 
     /**
@@ -56,7 +89,7 @@ class CurrencyController extends BaseController
      *
      * @access public
      */
-    public function reference()
+    public function update()
     {
         $values = $this->request->getValues();
 
@@ -66,6 +99,6 @@ class CurrencyController extends BaseController
             $this->flash->failure(t('Unable to save your settings.'));
         }
 
-        $this->response->redirect($this->helper->url->to('CurrencyController', 'index'));
+        $this->response->redirect($this->helper->url->to('CurrencyController', 'show'), true);
     }
 }

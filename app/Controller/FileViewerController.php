@@ -15,11 +15,11 @@ class FileViewerController extends BaseController
     /**
      * Get file content from object storage
      *
-     * @access private
+     * @access protected
      * @param  array $file
      * @return string
      */
-    private function getFileContent(array $file)
+    protected function getFileContent(array $file)
     {
         $content = '';
 
@@ -32,6 +32,30 @@ class FileViewerController extends BaseController
         }
 
         return $content;
+    }
+
+    /**
+     * Output file with cache
+     *
+     * @param array $file
+     * @param $mimetype
+     */
+    protected function renderFileWithCache(array $file, $mimetype)
+    {
+        $etag = md5($file['path']);
+
+        if ($this->request->getHeader('If-None-Match') === '"'.$etag.'"') {
+            $this->response->status(304);
+        } else {
+            try {
+                $this->response->withContentType($mimetype);
+                $this->response->withCache(5 * 86400, $etag);
+                $this->response->send();
+                $this->objectStorage->output($file['path']);
+            } catch (ObjectStorageException $e) {
+                $this->logger->error($e->getMessage());
+            }
+        }
     }
 
     /**
@@ -65,21 +89,18 @@ class FileViewerController extends BaseController
     public function image()
     {
         $file = $this->getFile();
-        $etag = md5($file['path']);
-        $this->response->withContentType($this->helper->file->getImageMimeType($file['name']));
-        $this->response->withCache(5 * 86400, $etag);
+        $this->renderFileWithCache($file, $this->helper->file->getImageMimeType($file['name']));
+    }
 
-        if ($this->request->getHeader('If-None-Match') === '"'.$etag.'"') {
-            $this->response->status(304);
-        } else {
-
-            try {
-                $this->response->send();
-                $this->objectStorage->output($file['path']);
-            } catch (ObjectStorageException $e) {
-                $this->logger->error($e->getMessage());
-            }
-        }
+    /**
+     * Display file in browser
+     *
+     * @access public
+     */
+    public function browser()
+    {
+        $file = $this->getFile();
+        $this->renderFileWithCache($file, $this->helper->file->getBrowserViewType($file['name']));
     }
 
     /**

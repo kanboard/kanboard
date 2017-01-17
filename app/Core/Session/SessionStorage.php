@@ -19,6 +19,7 @@ namespace Kanboard\Core\Session;
  * @property bool   $hasSubtaskInProgress
  * @property bool   $hasRememberMe
  * @property bool   $boardCollapsed
+ * @property string $scope
  * @property bool   $twoFactorBeforeCodeCalled
  * @property string $twoFactorSecret
  * @property string $oauthState

@@ -12,7 +12,7 @@ use Kanboard\Core\Security\PasswordAuthenticationProviderInterface;
 /**
  * LDAP Authentication Provider
  *
- * @package  auth
+ * @package  Kanboard\Auth
  * @author   Frederic Guillot
  */
 class LdapAuth extends Base implements PasswordAuthenticationProviderInterface

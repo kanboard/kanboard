@@ -4,11 +4,11 @@
 
 <?php if ($project['is_public']): ?>
 
-    <div class="listing">
+    <div class="panel">
         <ul class="no-bullet">
-            <li><strong><i class="fa fa-share-alt"></i> <?= $this->url->link(t('Public link'), 'BoardViewController', 'readonly', array('token' => $project['token']), false, '', '', true) ?></strong></li>
-            <li><strong><i class="fa fa-rss-square"></i> <?= $this->url->link(t('RSS feed'), 'FeedController', 'project', array('token' => $project['token']), false, '', '', true) ?></strong></li>
-            <li><strong><i class="fa fa-calendar"></i> <?= $this->url->link(t('iCal feed'), 'ICalendarController', 'project', array('token' => $project['token']), false, '', '', true) ?></strong></li>
+            <li><strong><?= $this->url->icon('share-alt', t('Public link'), 'BoardViewController', 'readonly', array('token' => $project['token']), false, '', '', true) ?></strong></li>
+            <li><strong><?= $this->url->icon('rss-square', t('RSS feed'), 'FeedController', 'project', array('token' => $project['token']), false, '', '', true) ?></strong></li>
+            <li><strong><?= $this->url->icon('calendar', t('iCal feed'), 'ICalendarController', 'project', array('token' => $project['token']), false, '', '', true) ?></strong></li>
         </ul>
     </div>
 

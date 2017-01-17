@@ -14,6 +14,28 @@ class GenericEvent extends BaseEvent implements ArrayAccess
         $this->container = $values;
     }
 
+    public function getTaskId()
+    {
+        if (isset($this->container['task']['id'])) {
+            return $this->container['task']['id'];
+        }
+
+        if (isset($this->container['task_id'])) {
+            return $this->container['task_id'];
+        }
+
+        return null;
+    }
+
+    public function getProjectId()
+    {
+        if (isset($this->container['task']['project_id'])) {
+            return $this->container['task']['project_id'];
+        }
+
+        return null;
+    }
+
     public function getAll()
     {
         return $this->container;

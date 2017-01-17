@@ -23,6 +23,7 @@ class PluginController extends BaseController
     {
         $this->response->html($this->helper->layout->plugin('plugin/show', array(
             'plugins' => $this->pluginLoader->getPlugins(),
+            'incompatible_plugins' => $this->pluginLoader->getIncompatiblePlugins(),
             'title' => t('Installed Plugins'),
             'is_configured' => Installer::isConfigured(),
         )));

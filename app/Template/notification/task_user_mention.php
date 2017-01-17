@@ -2,6 +2,6 @@
 <p><?= $this->text->e($task['title']) ?></p>
 
 <h2><?= t('Description') ?></h2>
-<?= $this->text->markdown($task['description']) ?>
+<?= $this->text->markdown($task['description'], true) ?>
 
 <?= $this->render('notification/footer', array('task' => $task, 'application_url' => $application_url)) ?>

@@ -6,10 +6,13 @@ clean:
 	@ rm -rf ./node_modules ./bower_components
 
 static: clean
-	@ npm install
+	@ yarn install || npm install
 	@ ./node_modules/.bin/gulp bower
 	@ ./node_modules/.bin/gulp vendor js css
-	@ ./node_modules/.bin/jshint assets/js/{core,components}
+	@ ./node_modules/.bin/jshint assets/js/{core,components,polyfills}
+
+jshint:
+	@ ./node_modules/.bin/jshint assets/js/{core,components,polyfills}
 
 archive:
 	@ echo "Build archive: version=${version}, destination=${dst}"
@@ -33,7 +36,6 @@ archive:
 	@ rm -rf ${BUILD_DIR}/kanboard/*.js
 	@ rm -rf ${BUILD_DIR}/kanboard/.dockerignore
 	@ rm -rf ${BUILD_DIR}/kanboard/docker
-	@ rm -rf ${BUILD_DIR}/kanboard/nitrous*
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name doc -type d -exec rm -rf {} +;
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name notes -type d -exec rm -rf {} +;
 	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name test -type d -exec rm -rf {} +;
@@ -60,8 +62,6 @@ test-mysql:
 
 test-postgres:
 	@ ./vendor/bin/phpunit -c tests/units.postgres.xml
-
-unittest: test-sqlite test-mysql test-postgres
 
 test-browser:
 	@ ./vendor/bin/phpunit -c tests/acceptance.xml
@@ -104,6 +104,8 @@ sql:
 
 	@ let pg_version=`psql -U postgres -A -c 'copy(select version from schema_version) to stdout;' kanboard` ;\
 	echo "INSERT INTO schema_version VALUES ('$$pg_version');" >> app/Schema/Sql/postgres.sql
+
+	@ grep -v "SET idle_in_transaction_session_timeout = 0;" app/Schema/Sql/postgres.sql > temp && mv temp app/Schema/Sql/postgres.sql
 
 docker-image:
 	@ docker build -t kanboard/kanboard:latest .

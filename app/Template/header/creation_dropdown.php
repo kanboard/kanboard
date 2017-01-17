@@ -6,14 +6,13 @@
         <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-plus fa-fw"></i><i class="fa fa-caret-down"></i></a>
         <ul>
             <?php if ($has_project_creation_access): ?>
-                <li><i class="fa fa-plus fa-fw"></i>
-                    <?= $this->url->link(t('New project'), 'ProjectCreationController', 'create', array(), false, 'popover') ?>
+                <li>
+                    <?= $this->modal->medium('plus', t('New project'), 'ProjectCreationController', 'create') ?>
                 </li>
             <?php endif ?>
             <?php if ($is_private_project_enabled): ?>
                 <li>
-                    <i class="fa fa-lock fa-fw"></i>
-                    <?= $this->url->link(t('New private project'), 'ProjectCreationController', 'createPrivate', array(), false, 'popover') ?>
+                    <?= $this->modal->medium('lock', t('New private project'), 'ProjectCreationController', 'createPrivate') ?>
                 </li>
             <?php endif ?>
             <?= $this->hook->render('template:header:creation-dropdown') ?>

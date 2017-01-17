@@ -10,7 +10,7 @@ Usage
 -----
 
 - Open a terminal and go to your Kanboard directory (example: `cd /var/www/kanboard`)
-- Run the command `./kanboard`
+- Run the command `./cli` or `php cli`
 
 ```bash
 Kanboard version master
@@ -32,6 +32,9 @@ Available commands:
   help                               Displays help for a command
   list                               Lists commands
   worker                             Execute queue worker
+ db
+  db:migrate                         Execute SQL migrations
+  db:version                         Show database schema version
  export
   export:daily-project-column-stats  Daily project column stats CSV export (number of tasks per column and per day)
   export:subtasks                    Subtasks CSV export
@@ -63,13 +66,13 @@ Available commands
 Usage:
 
 ```bash
-./kanboard export:tasks <project_id> <start_date> <end_date>
+./cli export:tasks <project_id> <start_date> <end_date>
 ```
 
 Example:
 
 ```bash
-./kanboard export:tasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+./cli export:tasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
 CSV data are sent to `stdout`.
@@ -79,13 +82,13 @@ CSV data are sent to `stdout`.
 Usage:
 
 ```bash
-./kanboard export:subtasks <project_id> <start_date> <end_date>
+./cli export:subtasks <project_id> <start_date> <end_date>
 ```
 
 Example:
 
 ```bash
-./kanboard export:subtasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+./cli export:subtasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
 ### Task transitions CSV export
@@ -93,13 +96,13 @@ Example:
 Usage:
 
 ```bash
-./kanboard export:transitions <project_id> <start_date> <end_date>
+./cli export:transitions <project_id> <start_date> <end_date>
 ```
 
 Example:
 
 ```bash
-./kanboard export:transitions 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+./cli export:transitions 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
 ### Export daily summaries data in CSV
@@ -107,13 +110,13 @@ Example:
 The exported data will be printed on the standard output:
 
 ```bash
-./kanboard export:daily-project-column-stats <project_id> <start_date> <end_date>
+./cli export:daily-project-column-stats <project_id> <start_date> <end_date>
 ```
 
 Example:
 
 ```bash
-./kanboard export:daily-project-column-stats 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
+./cli export:daily-project-column-stats 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
 ### Send notifications for overdue tasks
@@ -121,7 +124,7 @@ Example:
 Emails will be sent to all users with notifications enabled.
 
 ```bash
-./kanboard notification:overdue-tasks
+./cli notification:overdue-tasks
 ```
 
 Optional parameters:
@@ -147,7 +150,7 @@ You can also display the overdue tasks with the flag `--show`:
 This command calculate the statistics of each project:
 
 ```bash
-./kanboard projects:daily-stats
+./cli projects:daily-stats
 Run calculation for Project #0
 Run calculation for Project #1
 Run calculation for Project #10
@@ -158,14 +161,14 @@ Run calculation for Project #10
 This command send a "daily cronjob event" to all open tasks of each project.
 
 ```bash
-./kanboard trigger:tasks
+./cli trigger:tasks
 Trigger task event: project_id=2, nb_tasks=1
 ```
 
 ### Reset user password
 
 ```bash
-./kanboard user:reset-password my_user
+./cli user:reset-password my_user
 ```
 
 You will be prompted for a password and confirmation. Characters are not printed to the screen.
@@ -173,13 +176,13 @@ You will be prompted for a password and confirmation. Characters are not printed
 ### Remove two-factor authentication for a user
 
 ```bash
-./kanboard user:reset-2fa my_user
+./cli user:reset-2fa my_user
 ```
 
 ### Install a plugin
 
 ```bash
-./kanboard plugin:install https://github.com/kanboard/plugin-github-auth/releases/download/v1.0.1/GithubAuth-1.0.1.zip
+./cli plugin:install https://github.com/kanboard/plugin-github-auth/releases/download/v1.0.1/GithubAuth-1.0.1.zip
 ```
 
 Note: Installed files will have the same permissions as the current user
@@ -187,13 +190,13 @@ Note: Installed files will have the same permissions as the current user
 ### Remove a plugin
 
 ```bash
-./kanboard plugin:uninstall Budget
+./cli plugin:uninstall Budget
 ```
 
 ### Upgrade all plugins
 
 ```bash
-./kanboard plugin:upgrade
+./cli plugin:upgrade
 * Updating plugin: Budget Planning
 * Plugin up to date: Github Authentication
 ```
@@ -201,5 +204,21 @@ Note: Installed files will have the same permissions as the current user
 ### Run Background worker
 
 ```bash
-./kanboard worker
+./cli worker
+```
+
+### Execute database migrations
+
+If the parameter `DB_RUN_MIGRATIONS` is set to `false`, you have run the database migrations manually:
+
+```bash
+./cli db:migrate
+```
+
+### Check database schema version
+
+```bash
+./cli db:version
+Current version: 95
+Last version: 96
 ```

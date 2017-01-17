@@ -10,7 +10,7 @@ use Kanboard\User\ReverseProxyUserProvider;
 /**
  * Reverse-Proxy Authentication Provider
  *
- * @package  auth
+ * @package  Kanboard\Auth
  * @author   Frederic Guillot
  */
 class ReverseProxyAuth extends Base implements PreAuthenticationProviderInterface, SessionCheckProviderInterface
@@ -45,7 +45,7 @@ class ReverseProxyAuth extends Base implements PreAuthenticationProviderInterfac
         $username = $this->request->getRemoteUser();
 
         if (! empty($username)) {
-            $userProfile = $this->userModel->getByUsername($username);
+            $userProfile = $this->userCacheDecorator->getByUsername($username);
             $this->userInfo = new ReverseProxyUserProvider($username, $userProfile ?: array());
             return true;
         }

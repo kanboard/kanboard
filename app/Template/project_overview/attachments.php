@@ -5,7 +5,7 @@
     <div class="accordion-content">
         <?php if ($this->user->hasProjectAccess('ProjectFileController', 'create', $project['id'])): ?>
         <div class="buttons-header">
-            <?= $this->url->button('fa-plus', t('Upload a file'), 'ProjectFileController', 'create', array('project_id' => $project['id']), 'popover') ?>
+            <?= $this->modal->mediumButton('plus', t('Upload a file'), 'ProjectFileController', 'create', array('project_id' => $project['id'])) ?>
         </div>
         <?php endif ?>
 

@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.2
--- Dumped by pg_dump version 9.5.2
+-- Dumped from database version 9.6.1
+-- Dumped by pg_dump version 9.6.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -86,6 +86,70 @@ CREATE SEQUENCE "actions_id_seq"
 --
 
 ALTER SEQUENCE "actions_id_seq" OWNED BY "actions"."id";
+
+
+--
+-- Name: column_has_move_restrictions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE "column_has_move_restrictions" (
+    "restriction_id" integer NOT NULL,
+    "project_id" integer NOT NULL,
+    "role_id" integer NOT NULL,
+    "src_column_id" integer NOT NULL,
+    "dst_column_id" integer NOT NULL
+);
+
+
+--
+-- Name: column_has_move_restrictions_restriction_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE "column_has_move_restrictions_restriction_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: column_has_move_restrictions_restriction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE "column_has_move_restrictions_restriction_id_seq" OWNED BY "column_has_move_restrictions"."restriction_id";
+
+
+--
+-- Name: column_has_restrictions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE "column_has_restrictions" (
+    "restriction_id" integer NOT NULL,
+    "project_id" integer NOT NULL,
+    "role_id" integer NOT NULL,
+    "column_id" integer NOT NULL,
+    "rule" character varying(255) NOT NULL
+);
+
+
+--
+-- Name: column_has_restrictions_restriction_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE "column_has_restrictions_restriction_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: column_has_restrictions_restriction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE "column_has_restrictions_restriction_id_seq" OWNED BY "column_has_restrictions"."restriction_id";
 
 
 --
@@ -499,7 +563,7 @@ ALTER SEQUENCE "project_has_files_id_seq" OWNED BY "project_has_files"."id";
 CREATE TABLE "project_has_groups" (
     "group_id" integer NOT NULL,
     "project_id" integer NOT NULL,
-    "role" character varying(25) NOT NULL
+    "role" character varying(255) NOT NULL
 );
 
 
@@ -547,14 +611,75 @@ ALTER SEQUENCE "project_has_notification_types_id_seq" OWNED BY "project_has_not
 
 
 --
+-- Name: project_has_roles; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE "project_has_roles" (
+    "role_id" integer NOT NULL,
+    "role" character varying(255) NOT NULL,
+    "project_id" integer NOT NULL
+);
+
+
+--
+-- Name: project_has_roles_role_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE "project_has_roles_role_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: project_has_roles_role_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE "project_has_roles_role_id_seq" OWNED BY "project_has_roles"."role_id";
+
+
+--
 -- Name: project_has_users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE "project_has_users" (
     "project_id" integer NOT NULL,
     "user_id" integer NOT NULL,
-    "role" character varying(25) DEFAULT 'project-viewer'::character varying NOT NULL
+    "role" character varying(255) DEFAULT 'project-viewer'::character varying NOT NULL
 );
+
+
+--
+-- Name: project_role_has_restrictions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE "project_role_has_restrictions" (
+    "restriction_id" integer NOT NULL,
+    "project_id" integer NOT NULL,
+    "role_id" integer NOT NULL,
+    "rule" character varying(255) NOT NULL
+);
+
+
+--
+-- Name: project_role_has_restrictions_restriction_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE "project_role_has_restrictions_restriction_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: project_role_has_restrictions_restriction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE "project_role_has_restrictions_restriction_id_seq" OWNED BY "project_role_has_restrictions"."restriction_id";
 
 
 --
@@ -652,7 +777,7 @@ CREATE TABLE "schema_version" (
 
 CREATE TABLE "settings" (
     "option" character varying(100) NOT NULL,
-    "value" character varying(255) DEFAULT ''::character varying,
+    "value" "text" DEFAULT ''::character varying,
     "changed_by" integer DEFAULT 0 NOT NULL,
     "changed_on" integer DEFAULT 0 NOT NULL
 );
@@ -948,7 +1073,9 @@ CREATE TABLE "tasks" (
     "recurrence_basedate" integer DEFAULT 0 NOT NULL,
     "recurrence_parent" integer,
     "recurrence_child" integer,
-    "priority" integer DEFAULT 0
+    "priority" integer DEFAULT 0,
+    "external_provider" character varying(255),
+    "external_uri" character varying(255)
 );
 
 
@@ -1117,7 +1244,8 @@ CREATE TABLE "users" (
     "gitlab_id" integer,
     "role" character varying(25) DEFAULT 'app-user'::character varying NOT NULL,
     "is_active" boolean DEFAULT true,
-    "avatar_path" character varying(255)
+    "avatar_path" character varying(255),
+    "api_access_token" character varying(255) DEFAULT NULL::character varying
 );
 
 
@@ -1141,203 +1269,231 @@ ALTER SEQUENCE "users_id_seq" OWNED BY "users"."id";
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: action_has_params id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "action_has_params" ALTER COLUMN "id" SET DEFAULT "nextval"('"action_has_params_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: actions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "actions" ALTER COLUMN "id" SET DEFAULT "nextval"('"actions_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: column_has_move_restrictions restriction_id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_move_restrictions" ALTER COLUMN "restriction_id" SET DEFAULT "nextval"('"column_has_move_restrictions_restriction_id_seq"'::"regclass");
+
+
+--
+-- Name: column_has_restrictions restriction_id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_restrictions" ALTER COLUMN "restriction_id" SET DEFAULT "nextval"('"column_has_restrictions_restriction_id_seq"'::"regclass");
+
+
+--
+-- Name: columns id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "columns" ALTER COLUMN "id" SET DEFAULT "nextval"('"columns_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "comments" ALTER COLUMN "id" SET DEFAULT "nextval"('"comments_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: custom_filters id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "custom_filters" ALTER COLUMN "id" SET DEFAULT "nextval"('"custom_filters_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: groups id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "groups" ALTER COLUMN "id" SET DEFAULT "nextval"('"groups_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: last_logins id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "last_logins" ALTER COLUMN "id" SET DEFAULT "nextval"('"last_logins_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: links id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "links" ALTER COLUMN "id" SET DEFAULT "nextval"('"links_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: project_activities id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_activities" ALTER COLUMN "id" SET DEFAULT "nextval"('"project_activities_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: project_daily_column_stats id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_daily_column_stats" ALTER COLUMN "id" SET DEFAULT "nextval"('"project_daily_summaries_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: project_daily_stats id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_daily_stats" ALTER COLUMN "id" SET DEFAULT "nextval"('"project_daily_stats_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: project_has_categories id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_categories" ALTER COLUMN "id" SET DEFAULT "nextval"('"project_has_categories_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: project_has_files id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_files" ALTER COLUMN "id" SET DEFAULT "nextval"('"project_has_files_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: project_has_notification_types id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_notification_types" ALTER COLUMN "id" SET DEFAULT "nextval"('"project_has_notification_types_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: project_has_roles role_id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "project_has_roles" ALTER COLUMN "role_id" SET DEFAULT "nextval"('"project_has_roles_role_id_seq"'::"regclass");
+
+
+--
+-- Name: project_role_has_restrictions restriction_id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "project_role_has_restrictions" ALTER COLUMN "restriction_id" SET DEFAULT "nextval"('"project_role_has_restrictions_restriction_id_seq"'::"regclass");
+
+
+--
+-- Name: projects id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "projects" ALTER COLUMN "id" SET DEFAULT "nextval"('"projects_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: remember_me id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "remember_me" ALTER COLUMN "id" SET DEFAULT "nextval"('"remember_me_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: subtask_time_tracking id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "subtask_time_tracking" ALTER COLUMN "id" SET DEFAULT "nextval"('"subtask_time_tracking_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: subtasks id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "subtasks" ALTER COLUMN "id" SET DEFAULT "nextval"('"task_has_subtasks_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: swimlanes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "swimlanes" ALTER COLUMN "id" SET DEFAULT "nextval"('"swimlanes_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: tags id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "tags" ALTER COLUMN "id" SET DEFAULT "nextval"('"tags_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: task_has_external_links id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_external_links" ALTER COLUMN "id" SET DEFAULT "nextval"('"task_has_external_links_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: task_has_files id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_files" ALTER COLUMN "id" SET DEFAULT "nextval"('"task_has_files_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: task_has_links id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_links" ALTER COLUMN "id" SET DEFAULT "nextval"('"task_has_links_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: tasks id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "tasks" ALTER COLUMN "id" SET DEFAULT "nextval"('"tasks_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: transitions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "transitions" ALTER COLUMN "id" SET DEFAULT "nextval"('"transitions_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: user_has_notification_types id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user_has_notification_types" ALTER COLUMN "id" SET DEFAULT "nextval"('"user_has_notification_types_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: user_has_unread_notifications id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user_has_unread_notifications" ALTER COLUMN "id" SET DEFAULT "nextval"('"user_has_unread_notifications_id_seq"'::"regclass");
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "users" ALTER COLUMN "id" SET DEFAULT "nextval"('"users_id_seq"'::"regclass");
 
 
 --
--- Name: action_has_params_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: action_has_params action_has_params_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "action_has_params"
@@ -1345,7 +1501,7 @@ ALTER TABLE ONLY "action_has_params"
 
 
 --
--- Name: actions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: actions actions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "actions"
@@ -1353,7 +1509,39 @@ ALTER TABLE ONLY "actions"
 
 
 --
--- Name: columns_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: column_has_move_restrictions column_has_move_restrictions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_move_restrictions"
+    ADD CONSTRAINT "column_has_move_restrictions_pkey" PRIMARY KEY ("restriction_id");
+
+
+--
+-- Name: column_has_move_restrictions column_has_move_restrictions_role_id_src_column_id_dst_colu_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_move_restrictions"
+    ADD CONSTRAINT "column_has_move_restrictions_role_id_src_column_id_dst_colu_key" UNIQUE ("role_id", "src_column_id", "dst_column_id");
+
+
+--
+-- Name: column_has_restrictions column_has_restrictions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_restrictions"
+    ADD CONSTRAINT "column_has_restrictions_pkey" PRIMARY KEY ("restriction_id");
+
+
+--
+-- Name: column_has_restrictions column_has_restrictions_role_id_column_id_rule_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_restrictions"
+    ADD CONSTRAINT "column_has_restrictions_role_id_column_id_rule_key" UNIQUE ("role_id", "column_id", "rule");
+
+
+--
+-- Name: columns columns_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "columns"
@@ -1361,7 +1549,7 @@ ALTER TABLE ONLY "columns"
 
 
 --
--- Name: columns_title_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: columns columns_title_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "columns"
@@ -1369,7 +1557,7 @@ ALTER TABLE ONLY "columns"
 
 
 --
--- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "comments"
@@ -1377,7 +1565,7 @@ ALTER TABLE ONLY "comments"
 
 
 --
--- Name: currencies_currency_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: currencies currencies_currency_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "currencies"
@@ -1385,7 +1573,7 @@ ALTER TABLE ONLY "currencies"
 
 
 --
--- Name: custom_filters_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: custom_filters custom_filters_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "custom_filters"
@@ -1393,7 +1581,7 @@ ALTER TABLE ONLY "custom_filters"
 
 
 --
--- Name: group_has_users_group_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: group_has_users group_has_users_group_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "group_has_users"
@@ -1401,7 +1589,7 @@ ALTER TABLE ONLY "group_has_users"
 
 
 --
--- Name: groups_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: groups groups_name_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "groups"
@@ -1409,7 +1597,7 @@ ALTER TABLE ONLY "groups"
 
 
 --
--- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: groups groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "groups"
@@ -1417,7 +1605,7 @@ ALTER TABLE ONLY "groups"
 
 
 --
--- Name: last_logins_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: last_logins last_logins_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "last_logins"
@@ -1425,7 +1613,7 @@ ALTER TABLE ONLY "last_logins"
 
 
 --
--- Name: links_label_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: links links_label_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "links"
@@ -1433,7 +1621,7 @@ ALTER TABLE ONLY "links"
 
 
 --
--- Name: links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: links links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "links"
@@ -1441,7 +1629,7 @@ ALTER TABLE ONLY "links"
 
 
 --
--- Name: password_reset_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: password_reset password_reset_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "password_reset"
@@ -1449,7 +1637,7 @@ ALTER TABLE ONLY "password_reset"
 
 
 --
--- Name: plugin_schema_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: plugin_schema_versions plugin_schema_versions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "plugin_schema_versions"
@@ -1457,7 +1645,7 @@ ALTER TABLE ONLY "plugin_schema_versions"
 
 
 --
--- Name: project_activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_activities project_activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_activities"
@@ -1465,7 +1653,7 @@ ALTER TABLE ONLY "project_activities"
 
 
 --
--- Name: project_daily_stats_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_daily_stats project_daily_stats_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_daily_stats"
@@ -1473,7 +1661,7 @@ ALTER TABLE ONLY "project_daily_stats"
 
 
 --
--- Name: project_daily_summaries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_daily_column_stats project_daily_summaries_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_daily_column_stats"
@@ -1481,7 +1669,7 @@ ALTER TABLE ONLY "project_daily_column_stats"
 
 
 --
--- Name: project_has_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_categories project_has_categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_categories"
@@ -1489,7 +1677,7 @@ ALTER TABLE ONLY "project_has_categories"
 
 
 --
--- Name: project_has_categories_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_categories project_has_categories_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_categories"
@@ -1497,7 +1685,7 @@ ALTER TABLE ONLY "project_has_categories"
 
 
 --
--- Name: project_has_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_files project_has_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_files"
@@ -1505,7 +1693,7 @@ ALTER TABLE ONLY "project_has_files"
 
 
 --
--- Name: project_has_groups_group_id_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_groups project_has_groups_group_id_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_groups"
@@ -1513,7 +1701,7 @@ ALTER TABLE ONLY "project_has_groups"
 
 
 --
--- Name: project_has_metadata_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_metadata project_has_metadata_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_metadata"
@@ -1521,7 +1709,7 @@ ALTER TABLE ONLY "project_has_metadata"
 
 
 --
--- Name: project_has_notification_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_notification_types project_has_notification_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_notification_types"
@@ -1529,7 +1717,7 @@ ALTER TABLE ONLY "project_has_notification_types"
 
 
 --
--- Name: project_has_notification_types_project_id_notification_type_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_notification_types project_has_notification_types_project_id_notification_type_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_notification_types"
@@ -1537,7 +1725,23 @@ ALTER TABLE ONLY "project_has_notification_types"
 
 
 --
--- Name: project_has_users_project_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_roles project_has_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "project_has_roles"
+    ADD CONSTRAINT "project_has_roles_pkey" PRIMARY KEY ("role_id");
+
+
+--
+-- Name: project_has_roles project_has_roles_project_id_role_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "project_has_roles"
+    ADD CONSTRAINT "project_has_roles_project_id_role_key" UNIQUE ("project_id", "role");
+
+
+--
+-- Name: project_has_users project_has_users_project_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_users"
@@ -1545,7 +1749,23 @@ ALTER TABLE ONLY "project_has_users"
 
 
 --
--- Name: projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: project_role_has_restrictions project_role_has_restrictions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "project_role_has_restrictions"
+    ADD CONSTRAINT "project_role_has_restrictions_pkey" PRIMARY KEY ("restriction_id");
+
+
+--
+-- Name: project_role_has_restrictions project_role_has_restrictions_role_id_rule_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "project_role_has_restrictions"
+    ADD CONSTRAINT "project_role_has_restrictions_role_id_rule_key" UNIQUE ("role_id", "rule");
+
+
+--
+-- Name: projects projects_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "projects"
@@ -1553,7 +1773,7 @@ ALTER TABLE ONLY "projects"
 
 
 --
--- Name: remember_me_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: remember_me remember_me_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "remember_me"
@@ -1561,7 +1781,7 @@ ALTER TABLE ONLY "remember_me"
 
 
 --
--- Name: settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: settings settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "settings"
@@ -1569,7 +1789,7 @@ ALTER TABLE ONLY "settings"
 
 
 --
--- Name: subtask_time_tracking_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: subtask_time_tracking subtask_time_tracking_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "subtask_time_tracking"
@@ -1577,7 +1797,7 @@ ALTER TABLE ONLY "subtask_time_tracking"
 
 
 --
--- Name: swimlanes_name_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: swimlanes swimlanes_name_project_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "swimlanes"
@@ -1585,7 +1805,7 @@ ALTER TABLE ONLY "swimlanes"
 
 
 --
--- Name: swimlanes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: swimlanes swimlanes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "swimlanes"
@@ -1593,7 +1813,7 @@ ALTER TABLE ONLY "swimlanes"
 
 
 --
--- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tags tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "tags"
@@ -1601,7 +1821,7 @@ ALTER TABLE ONLY "tags"
 
 
 --
--- Name: tags_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tags tags_project_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "tags"
@@ -1609,7 +1829,7 @@ ALTER TABLE ONLY "tags"
 
 
 --
--- Name: task_has_external_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_external_links task_has_external_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_external_links"
@@ -1617,7 +1837,7 @@ ALTER TABLE ONLY "task_has_external_links"
 
 
 --
--- Name: task_has_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_files task_has_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_files"
@@ -1625,7 +1845,7 @@ ALTER TABLE ONLY "task_has_files"
 
 
 --
--- Name: task_has_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_links task_has_links_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_links"
@@ -1633,7 +1853,7 @@ ALTER TABLE ONLY "task_has_links"
 
 
 --
--- Name: task_has_metadata_task_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_metadata task_has_metadata_task_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_metadata"
@@ -1641,7 +1861,7 @@ ALTER TABLE ONLY "task_has_metadata"
 
 
 --
--- Name: task_has_subtasks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: subtasks task_has_subtasks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "subtasks"
@@ -1649,7 +1869,7 @@ ALTER TABLE ONLY "subtasks"
 
 
 --
--- Name: task_has_tags_tag_id_task_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_tags task_has_tags_tag_id_task_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_tags"
@@ -1657,7 +1877,7 @@ ALTER TABLE ONLY "task_has_tags"
 
 
 --
--- Name: tasks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tasks tasks_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "tasks"
@@ -1665,7 +1885,7 @@ ALTER TABLE ONLY "tasks"
 
 
 --
--- Name: transitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: transitions transitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "transitions"
@@ -1673,7 +1893,7 @@ ALTER TABLE ONLY "transitions"
 
 
 --
--- Name: user_has_metadata_user_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: user_has_metadata user_has_metadata_user_id_name_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user_has_metadata"
@@ -1681,7 +1901,7 @@ ALTER TABLE ONLY "user_has_metadata"
 
 
 --
--- Name: user_has_notification_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: user_has_notification_types user_has_notification_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user_has_notification_types"
@@ -1689,7 +1909,7 @@ ALTER TABLE ONLY "user_has_notification_types"
 
 
 --
--- Name: user_has_notifications_project_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: user_has_notifications user_has_notifications_project_id_user_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user_has_notifications"
@@ -1697,7 +1917,7 @@ ALTER TABLE ONLY "user_has_notifications"
 
 
 --
--- Name: user_has_unread_notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: user_has_unread_notifications user_has_unread_notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user_has_unread_notifications"
@@ -1705,7 +1925,7 @@ ALTER TABLE ONLY "user_has_unread_notifications"
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "users"
@@ -1839,7 +2059,7 @@ CREATE UNIQUE INDEX "users_username_idx" ON "users" USING "btree" ("username");
 
 
 --
--- Name: action_has_params_action_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: action_has_params action_has_params_action_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "action_has_params"
@@ -1847,7 +2067,7 @@ ALTER TABLE ONLY "action_has_params"
 
 
 --
--- Name: actions_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: actions actions_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "actions"
@@ -1855,7 +2075,63 @@ ALTER TABLE ONLY "actions"
 
 
 --
--- Name: columns_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: column_has_move_restrictions column_has_move_restrictions_dst_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_move_restrictions"
+    ADD CONSTRAINT "column_has_move_restrictions_dst_column_id_fkey" FOREIGN KEY ("dst_column_id") REFERENCES "columns"("id") ON DELETE CASCADE;
+
+
+--
+-- Name: column_has_move_restrictions column_has_move_restrictions_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_move_restrictions"
+    ADD CONSTRAINT "column_has_move_restrictions_project_id_fkey" FOREIGN KEY ("project_id") REFERENCES "projects"("id") ON DELETE CASCADE;
+
+
+--
+-- Name: column_has_move_restrictions column_has_move_restrictions_role_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_move_restrictions"
+    ADD CONSTRAINT "column_has_move_restrictions_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "project_has_roles"("role_id") ON DELETE CASCADE;
+
+
+--
+-- Name: column_has_move_restrictions column_has_move_restrictions_src_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_move_restrictions"
+    ADD CONSTRAINT "column_has_move_restrictions_src_column_id_fkey" FOREIGN KEY ("src_column_id") REFERENCES "columns"("id") ON DELETE CASCADE;
+
+
+--
+-- Name: column_has_restrictions column_has_restrictions_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_restrictions"
+    ADD CONSTRAINT "column_has_restrictions_column_id_fkey" FOREIGN KEY ("column_id") REFERENCES "columns"("id") ON DELETE CASCADE;
+
+
+--
+-- Name: column_has_restrictions column_has_restrictions_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_restrictions"
+    ADD CONSTRAINT "column_has_restrictions_project_id_fkey" FOREIGN KEY ("project_id") REFERENCES "projects"("id") ON DELETE CASCADE;
+
+
+--
+-- Name: column_has_restrictions column_has_restrictions_role_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "column_has_restrictions"
+    ADD CONSTRAINT "column_has_restrictions_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "project_has_roles"("role_id") ON DELETE CASCADE;
+
+
+--
+-- Name: columns columns_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "columns"
@@ -1863,7 +2139,7 @@ ALTER TABLE ONLY "columns"
 
 
 --
--- Name: comments_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: comments comments_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "comments"
@@ -1871,7 +2147,7 @@ ALTER TABLE ONLY "comments"
 
 
 --
--- Name: group_has_users_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: group_has_users group_has_users_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "group_has_users"
@@ -1879,7 +2155,7 @@ ALTER TABLE ONLY "group_has_users"
 
 
 --
--- Name: group_has_users_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: group_has_users group_has_users_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "group_has_users"
@@ -1887,7 +2163,7 @@ ALTER TABLE ONLY "group_has_users"
 
 
 --
--- Name: last_logins_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: last_logins last_logins_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "last_logins"
@@ -1895,7 +2171,7 @@ ALTER TABLE ONLY "last_logins"
 
 
 --
--- Name: password_reset_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: password_reset password_reset_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "password_reset"
@@ -1903,7 +2179,7 @@ ALTER TABLE ONLY "password_reset"
 
 
 --
--- Name: project_activities_creator_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_activities project_activities_creator_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_activities"
@@ -1911,7 +2187,7 @@ ALTER TABLE ONLY "project_activities"
 
 
 --
--- Name: project_activities_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_activities project_activities_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_activities"
@@ -1919,7 +2195,7 @@ ALTER TABLE ONLY "project_activities"
 
 
 --
--- Name: project_activities_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_activities project_activities_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_activities"
@@ -1927,7 +2203,7 @@ ALTER TABLE ONLY "project_activities"
 
 
 --
--- Name: project_daily_stats_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_daily_stats project_daily_stats_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_daily_stats"
@@ -1935,7 +2211,7 @@ ALTER TABLE ONLY "project_daily_stats"
 
 
 --
--- Name: project_daily_summaries_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_daily_column_stats project_daily_summaries_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_daily_column_stats"
@@ -1943,7 +2219,7 @@ ALTER TABLE ONLY "project_daily_column_stats"
 
 
 --
--- Name: project_daily_summaries_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_daily_column_stats project_daily_summaries_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_daily_column_stats"
@@ -1951,7 +2227,7 @@ ALTER TABLE ONLY "project_daily_column_stats"
 
 
 --
--- Name: project_has_categories_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_categories project_has_categories_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_categories"
@@ -1959,7 +2235,7 @@ ALTER TABLE ONLY "project_has_categories"
 
 
 --
--- Name: project_has_files_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_files project_has_files_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_files"
@@ -1967,7 +2243,7 @@ ALTER TABLE ONLY "project_has_files"
 
 
 --
--- Name: project_has_groups_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_groups project_has_groups_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_groups"
@@ -1975,7 +2251,7 @@ ALTER TABLE ONLY "project_has_groups"
 
 
 --
--- Name: project_has_groups_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_groups project_has_groups_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_groups"
@@ -1983,7 +2259,7 @@ ALTER TABLE ONLY "project_has_groups"
 
 
 --
--- Name: project_has_metadata_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_metadata project_has_metadata_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_metadata"
@@ -1991,7 +2267,7 @@ ALTER TABLE ONLY "project_has_metadata"
 
 
 --
--- Name: project_has_notification_types_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_notification_types project_has_notification_types_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_notification_types"
@@ -1999,7 +2275,15 @@ ALTER TABLE ONLY "project_has_notification_types"
 
 
 --
--- Name: project_has_users_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_roles project_has_roles_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "project_has_roles"
+    ADD CONSTRAINT "project_has_roles_project_id_fkey" FOREIGN KEY ("project_id") REFERENCES "projects"("id") ON DELETE CASCADE;
+
+
+--
+-- Name: project_has_users project_has_users_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_users"
@@ -2007,7 +2291,7 @@ ALTER TABLE ONLY "project_has_users"
 
 
 --
--- Name: project_has_users_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_has_users project_has_users_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "project_has_users"
@@ -2015,7 +2299,23 @@ ALTER TABLE ONLY "project_has_users"
 
 
 --
--- Name: remember_me_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: project_role_has_restrictions project_role_has_restrictions_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "project_role_has_restrictions"
+    ADD CONSTRAINT "project_role_has_restrictions_project_id_fkey" FOREIGN KEY ("project_id") REFERENCES "projects"("id") ON DELETE CASCADE;
+
+
+--
+-- Name: project_role_has_restrictions project_role_has_restrictions_role_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "project_role_has_restrictions"
+    ADD CONSTRAINT "project_role_has_restrictions_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "project_has_roles"("role_id") ON DELETE CASCADE;
+
+
+--
+-- Name: remember_me remember_me_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "remember_me"
@@ -2023,7 +2323,7 @@ ALTER TABLE ONLY "remember_me"
 
 
 --
--- Name: subtask_time_tracking_subtask_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: subtask_time_tracking subtask_time_tracking_subtask_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "subtask_time_tracking"
@@ -2031,7 +2331,7 @@ ALTER TABLE ONLY "subtask_time_tracking"
 
 
 --
--- Name: subtask_time_tracking_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: subtask_time_tracking subtask_time_tracking_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "subtask_time_tracking"
@@ -2039,7 +2339,7 @@ ALTER TABLE ONLY "subtask_time_tracking"
 
 
 --
--- Name: swimlanes_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: swimlanes swimlanes_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "swimlanes"
@@ -2047,7 +2347,7 @@ ALTER TABLE ONLY "swimlanes"
 
 
 --
--- Name: task_has_external_links_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_external_links task_has_external_links_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_external_links"
@@ -2055,7 +2355,7 @@ ALTER TABLE ONLY "task_has_external_links"
 
 
 --
--- Name: task_has_files_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_files task_has_files_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_files"
@@ -2063,7 +2363,7 @@ ALTER TABLE ONLY "task_has_files"
 
 
 --
--- Name: task_has_links_link_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_links task_has_links_link_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_links"
@@ -2071,7 +2371,7 @@ ALTER TABLE ONLY "task_has_links"
 
 
 --
--- Name: task_has_links_opposite_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_links task_has_links_opposite_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_links"
@@ -2079,7 +2379,7 @@ ALTER TABLE ONLY "task_has_links"
 
 
 --
--- Name: task_has_links_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_links task_has_links_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_links"
@@ -2087,7 +2387,7 @@ ALTER TABLE ONLY "task_has_links"
 
 
 --
--- Name: task_has_metadata_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_metadata task_has_metadata_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_metadata"
@@ -2095,7 +2395,7 @@ ALTER TABLE ONLY "task_has_metadata"
 
 
 --
--- Name: task_has_subtasks_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: subtasks task_has_subtasks_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "subtasks"
@@ -2103,7 +2403,7 @@ ALTER TABLE ONLY "subtasks"
 
 
 --
--- Name: task_has_tags_tag_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_tags task_has_tags_tag_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_tags"
@@ -2111,7 +2411,7 @@ ALTER TABLE ONLY "task_has_tags"
 
 
 --
--- Name: task_has_tags_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: task_has_tags task_has_tags_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "task_has_tags"
@@ -2119,7 +2419,7 @@ ALTER TABLE ONLY "task_has_tags"
 
 
 --
--- Name: tasks_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: tasks tasks_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "tasks"
@@ -2127,7 +2427,7 @@ ALTER TABLE ONLY "tasks"
 
 
 --
--- Name: tasks_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: tasks tasks_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "tasks"
@@ -2135,7 +2435,7 @@ ALTER TABLE ONLY "tasks"
 
 
 --
--- Name: transitions_dst_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: transitions transitions_dst_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "transitions"
@@ -2143,7 +2443,7 @@ ALTER TABLE ONLY "transitions"
 
 
 --
--- Name: transitions_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: transitions transitions_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "transitions"
@@ -2151,7 +2451,7 @@ ALTER TABLE ONLY "transitions"
 
 
 --
--- Name: transitions_src_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: transitions transitions_src_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "transitions"
@@ -2159,7 +2459,7 @@ ALTER TABLE ONLY "transitions"
 
 
 --
--- Name: transitions_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: transitions transitions_task_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "transitions"
@@ -2167,7 +2467,7 @@ ALTER TABLE ONLY "transitions"
 
 
 --
--- Name: transitions_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: transitions transitions_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "transitions"
@@ -2175,7 +2475,7 @@ ALTER TABLE ONLY "transitions"
 
 
 --
--- Name: user_has_metadata_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: user_has_metadata user_has_metadata_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user_has_metadata"
@@ -2183,7 +2483,7 @@ ALTER TABLE ONLY "user_has_metadata"
 
 
 --
--- Name: user_has_notification_types_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: user_has_notification_types user_has_notification_types_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user_has_notification_types"
@@ -2191,7 +2491,7 @@ ALTER TABLE ONLY "user_has_notification_types"
 
 
 --
--- Name: user_has_notifications_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: user_has_notifications user_has_notifications_project_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user_has_notifications"
@@ -2199,7 +2499,7 @@ ALTER TABLE ONLY "user_has_notifications"
 
 
 --
--- Name: user_has_notifications_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: user_has_notifications user_has_notifications_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user_has_notifications"
@@ -2207,7 +2507,7 @@ ALTER TABLE ONLY "user_has_notifications"
 
 
 --
--- Name: user_has_unread_notifications_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: user_has_unread_notifications user_has_unread_notifications_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY "user_has_unread_notifications"
@@ -2222,8 +2522,8 @@ ALTER TABLE ONLY "user_has_unread_notifications"
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.2
--- Dumped by pg_dump version 9.5.2
+-- Dumped from database version 9.6.1
+-- Dumped by pg_dump version 9.6.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2243,8 +2543,8 @@ INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_high
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_public_refresh_interval', '60', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_private_refresh_interval', '10', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_columns', '', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', 'c9a7c2a4523f1724b2ca047c5685f8e2b26bba47eb69baf4f22d5d50d837', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', 'c57a6cb1789269547b616454e4e2f06d3de0514f83baf8fa5b5a8af44a08', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', 'b64911d9b61ea71adada348105281e16470e268fce7cb9bf1895958d4bbc', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', 'f63bd25c2e952d78b70f178fd96b4207ef29315ca73d308af37c02d8d51f', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_language', 'en_US', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_timezone', 'UTC', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_url', '', 0, 0);
@@ -2272,8 +2572,8 @@ INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('password_r
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.2
--- Dumped by pg_dump version 9.5.2
+-- Dumped from database version 9.6.1
+-- Dumped by pg_dump version 9.6.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -2313,4 +2613,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$yUJ9QnhG.f47yO.YvWKo3eMAHULukpluDNTOF9.Z7QQg0vOfFRB6u', 'app-admin');INSERT INTO schema_version VALUES ('91');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$0.8BJyhOEBHGqfwD3nIJHuxObqTlZGJ/KRNDVHfSu7RGd42rEbSa.', 'app-admin');INSERT INTO schema_version VALUES ('97');

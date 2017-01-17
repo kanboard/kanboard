@@ -5,6 +5,8 @@ var KB = {
     http: {},
     listeners: {
         clicks: {},
+        changes: {},
+        keys: [],
         internals: {}
     }
 };
@@ -20,9 +22,7 @@ KB.on = function (eventType, callback) {
 KB.trigger = function (eventType, eventData) {
     if (this.listeners.internals.hasOwnProperty(eventType)) {
         for (var i = 0; i < this.listeners.internals[eventType].length; i++) {
-            if (! this.listeners.internals[eventType][i](eventData)) {
-                break;
-            }
+            this.listeners.internals[eventType][i](eventData);
         }
     }
 };
@@ -31,8 +31,23 @@ KB.onClick = function (selector, callback) {
     this.listeners.clicks[selector] = callback;
 };
 
+KB.onChange = function (selector, callback) {
+    this.listeners.changes[selector] = callback;
+};
+
+KB.onKey = function (combination, callback, ignoreInputField, ctrlKey, metaKey) {
+    this.listeners.keys.push({
+        'combination': combination,
+        'callback': callback,
+        'ignoreInputField': ignoreInputField || false,
+        'ctrlKey': ctrlKey || false,
+        'metaKey': metaKey || false
+    });
+};
+
 KB.listen = function () {
     var self = this;
+    var keysQueue = [];
 
     function onClick(e) {
         for (var selector in self.listeners.clicks) {
@@ -43,7 +58,56 @@ KB.listen = function () {
         }
     }
 
+    function onChange(e) {
+        for (var selector in self.listeners.changes) {
+            if (self.listeners.changes.hasOwnProperty(selector) && e.target.matches(selector)) {
+                self.listeners.changes[selector](e.target);
+            }
+        }
+    }
+
+    function onKeyPressed(e) {
+        var key = KB.utils.getKey(e);
+        var isInputField = KB.utils.isInputField(e);
+
+        if (! isInputField || ['Escape', 'Enter'].indexOf(key) !== -1) {
+            keysQueue.push(key);
+        }
+
+        if (keysQueue.length > 0) {
+            var reset = true;
+
+            for (var i = 0; i < self.listeners.keys.length; i++) {
+                var params = self.listeners.keys[i];
+                var combination = params.combination;
+                var sequence = combination.split('+');
+
+                if (KB.utils.arraysIdentical(keysQueue, sequence) &&
+                    e.ctrlKey === params.ctrlKey && e.metaKey === params.metaKey) {
+                    if (isInputField && !params.ignoreInputField) {
+                        keysQueue = [];
+                        return;
+                    }
+
+                    e.preventDefault();
+                    e.stopPropagation();
+                    keysQueue = [];
+                    params.callback(e);
+                    break;
+                } else if (KB.utils.arraysStartsWith(keysQueue, sequence) && keysQueue.length < sequence.length) {
+                    reset = false;
+                }
+            }
+
+            if (reset) {
+                keysQueue = [];
+            }
+        }
+    }
+
     document.addEventListener('click', onClick, false);
+    document.addEventListener('change', onChange, false);
+    window.addEventListener('keydown', onKeyPressed, false);
 };
 
 KB.component = function (name, object) {
@@ -73,4 +137,8 @@ KB.render = function () {
             }
         }
     }
+};
+
+KB.interval = function (seconds, callback) {
+    setInterval(callback, seconds * 1000);
 };

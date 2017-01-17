@@ -136,6 +136,27 @@ function build_app_version($ref, $commit_hash)
 }
 
 /**
+ * Get upload max size.
+ *
+ * @return string
+ */
+function get_upload_max_size()
+{
+    return min(ini_get('upload_max_filesize'), ini_get('post_max_size'));
+}
+
+/**
+ * Get file extension
+ *
+ * @param  $filename
+ * @return string
+ */
+function get_file_extension($filename)
+{
+    return strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+}
+
+/**
  * Translate a string
  *
  * @return string

@@ -2,8 +2,7 @@
     <div class="page-header">
         <ul>
             <li>
-                <i class="fa fa-search fa-fw"></i>
-                <?= $this->url->link(t('Activity stream search'), 'SearchController', 'activity') ?>
+                <?= $this->url->icon('search', t('Activity stream search'), 'SearchController', 'activity') ?>
             </li>
         </ul>
     </div>
@@ -23,7 +22,7 @@
     </div>
 
     <?php if (empty($values['search'])): ?>
-        <div class="listing">
+        <div class="panel">
             <h3><?= t('Advanced search') ?></h3>
             <p><?= t('Example of query: ') ?><strong>project:"My project" assignee:me due:tomorrow</strong></p>
             <ul>

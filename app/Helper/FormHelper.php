@@ -147,8 +147,8 @@ class FormHelper extends Base
             $attributes['checked'] = 'checked';
         }
 
-        foreach ($attributes as $attribute => $value) {
-            $htmlAttributes .= sprintf('%s="%s"', $attribute, $this->helper->text->e($value));
+        foreach ($attributes as $attribute => $attributeValue) {
+            $htmlAttributes .= sprintf('%s="%s"', $attribute, $this->helper->text->e($attributeValue));
         }
 
         return sprintf(
@@ -213,18 +213,23 @@ class FormHelper extends Base
     {
         $params = array(
             'name' => $name,
-            'text' => isset($values[$name]) ? $this->helper->text->e($values[$name]) : '',
+            'text' => isset($values[$name]) ? $values[$name] : '',
             'css' => $this->errorClass($errors, $name),
             'required' => isset($attributes['required']) && $attributes['required'],
             'tabindex' => isset($attributes['tabindex']) ? $attributes['tabindex'] : '-1',
             'labelPreview' => t('Preview'),
             'labelWrite' => t('Write'),
             'placeholder' => t('Write your text in Markdown'),
-            'autofocus' => isset($attributes['autofocus']) && $attributes['autofocus']
+            'autofocus' => isset($attributes['autofocus']) && $attributes['autofocus'],
+            'suggestOptions' => array(
+                'triggers' => array(
+                    '#' => $this->helper->url->to('TaskAjaxController', 'suggest', array('search' => 'SEARCH_TERM')),
+                )
+            ),
         );
 
         if (isset($values['project_id'])) {
-            $params['mentionUrl'] = $this->helper->url->to('UserAjaxController', 'mention', array('project_id' => $values['project_id']));
+            $params['suggestOptions']['triggers']['@'] = $this->helper->url->to('UserAjaxController', 'mention', array('project_id' => $values['project_id'], 'search' => 'SEARCH_TERM'));
         }
 
         $html = '<div class="js-text-editor" data-params=\''.json_encode($params, JSON_HEX_APOS).'\'></div>';

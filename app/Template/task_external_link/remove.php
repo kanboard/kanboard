@@ -7,9 +7,9 @@
         <?= t('Do you really want to remove this link: "%s"?', $link['title']) ?>
     </p>
 
-    <div class="form-actions">
-        <?= $this->url->link(t('Yes'), 'TaskExternalLinkController', 'remove', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id']), true, 'btn btn-red') ?>
-        <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'TaskExternalLinkController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'close-popover') ?>
-    </div>
+    <?= $this->modal->confirmButtons(
+        'TaskExternalLinkController',
+        'remove',
+        array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])
+    ) ?>
 </div>

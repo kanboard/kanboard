@@ -1,6 +1,0 @@
-{
-  "template": "php-apache",
-  "ports": [3000],
-  "name": "Kanboard",
-  "description": "Kanban project management software"
-}

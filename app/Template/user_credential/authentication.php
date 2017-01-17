@@ -4,13 +4,15 @@
 <form method="post" action="<?= $this->url->href('UserCredentialController', 'saveAuthentication', array('user_id' => $user['id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
 
-    <?= $this->form->hidden('id', $values) ?>
-    <?= $this->form->hidden('username', $values) ?>
+    <fieldset>
+        <?= $this->form->hidden('id', $values) ?>
+        <?= $this->form->hidden('username', $values) ?>
 
-    <?= $this->hook->render('template:user:authentication:form', array('values' => $values, 'errors' => $errors, 'user' => $user)) ?>
+        <?= $this->hook->render('template:user:authentication:form', array('values' => $values, 'errors' => $errors, 'user' => $user)) ?>
 
-    <?= $this->form->checkbox('is_ldap_user', t('Remote user'), 1, isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1) ?>
-    <?= $this->form->checkbox('disable_login_form', t('Disallow login form'), 1, isset($values['disable_login_form']) && $values['disable_login_form'] == 1) ?>
+        <?= $this->form->checkbox('is_ldap_user', t('Remote user'), 1, isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1) ?>
+        <?= $this->form->checkbox('disable_login_form', t('Disallow login form'), 1, isset($values['disable_login_form']) && $values['disable_login_form'] == 1) ?>
+    </fieldset>
 
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>

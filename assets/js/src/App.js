@@ -23,57 +23,13 @@ Kanboard.App.prototype.execute = function() {
             if (typeof controller.focus === "function") {
                 controller.focus();
             }
-
-            if (typeof controller.keyboardShortcuts === "function") {
-                controller.keyboardShortcuts();
-            }
         }
     }
 
     this.focus();
-    this.chosen();
-    this.keyboardShortcuts();
     this.datePicker();
     this.autoComplete();
     this.tagAutoComplete();
-};
-
-Kanboard.App.prototype.keyboardShortcuts = function() {
-    var self = this;
-
-    // Submit form
-    Mousetrap.bindGlobal("mod+enter", function() {
-        var forms = $("form");
-
-        if (forms.length == 1) {
-            forms.submit();
-        } else if (forms.length > 1) {
-            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
-                $(document.activeElement).parents("form").submit();
-            } else if (self.get("Popover").isOpen()) {
-                $("#popover-container form").submit();
-            }
-        }
-    });
-
-    // Open board selector
-    Mousetrap.bind("b", function(e) {
-        e.preventDefault();
-        $('#board-selector').trigger('chosen:open');
-    });
-
-    // Close popover and dropdown
-    Mousetrap.bindGlobal("esc", function() {
-        if (! document.getElementById('suggest-menu')) {
-            self.get("Popover").close();
-            self.get("Dropdown").close();
-        }
-    });
-
-    // Show keyboard shortcut
-    Mousetrap.bind("?", function() {
-        self.get("Popover").open($("body").data("keyboard-shortcut-url"));
-    });
 };
 
 Kanboard.App.prototype.focus = function() {
@@ -85,27 +41,6 @@ Kanboard.App.prototype.focus = function() {
     // Workaround for chrome
     $(document).on('mouseup', '.auto-select', function(e) {
         e.preventDefault();
-    });
-};
-
-Kanboard.App.prototype.chosen = function() {
-    $(".chosen-select").each(function() {
-        var searchThreshold = $(this).data("search-threshold");
-
-        if (searchThreshold === undefined) {
-            searchThreshold = 10;
-        }
-
-        $(this).chosen({
-            width: "180px",
-            no_results_text: $(this).data("notfound"),
-            disable_search_threshold: searchThreshold
-        });
-    });
-
-    $(".select-auto-redirect").change(function() {
-        var regex = new RegExp($(this).data('redirect-regex'), 'g');
-        window.location = $(this).data('redirect-url').replace(regex, $(this).val());
     });
 };
 

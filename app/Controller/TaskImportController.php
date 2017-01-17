@@ -23,15 +23,14 @@ class TaskImportController extends BaseController
     {
         $project = $this->getProject();
 
-        $this->response->html($this->helper->layout->project('task_import/show', array(
+        $this->response->html($this->template->render('task_import/show', array(
             'project' => $project,
             'values' => $values,
             'errors' => $errors,
-            'max_size' => ini_get('upload_max_filesize'),
+            'max_size' => get_upload_max_size(),
             'delimiters' => Csv::getDelimiters(),
             'enclosures' => Csv::getEnclosures(),
-            'title' => t('Import tasks from CSV file'),
-        ), 'task_import/sidebar'));
+        )));
     }
 
     /**
@@ -58,7 +57,7 @@ class TaskImportController extends BaseController
                 $this->flash->failure(t('Nothing have been imported!'));
             }
 
-            $this->response->redirect($this->helper->url->to('TaskImportController', 'show', array('project_id' => $project['id'])));
+            $this->response->redirect($this->helper->url->to('TaskImportController', 'show', array('project_id' => $project['id'])), true);
         }
     }
 

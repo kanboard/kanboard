@@ -3,7 +3,6 @@ var concat = require('gulp-concat');
 var bower = require('gulp-bower');
 var uglify = require('gulp-uglify');
 var sass = require('gulp-sass');
-var strip = require('gulp-strip-comments');
 
 var src = {
     js: [
@@ -24,7 +23,6 @@ var vendor = {
     css: [
         'bower_components/jquery-ui/themes/base/jquery-ui.min.css',
         'bower_components/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.min.css',
-        'bower_components/chosen/chosen.css',
         'bower_components/select2/dist/css/select2.min.css',
         'bower_components/fullcalendar/dist/fullcalendar.min.css',
         'bower_components/font-awesome/css/font-awesome.min.css',
@@ -45,13 +43,10 @@ var vendor = {
         'bower_components/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.min.js',
         'bower_components/jqueryui-timepicker-addon/dist/i18n/jquery-ui-timepicker-addon-i18n.min.js',
         'bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.min.js',
-        'bower_components/chosen/chosen.jquery.js',
         'bower_components/select2/dist/js/select2.min.js',
         'bower_components/moment/min/moment.min.js',
         'bower_components/fullcalendar/dist/fullcalendar.min.js',
         'bower_components/fullcalendar/dist/locale-all.js',
-        'bower_components/mousetrap/mousetrap.min.js',
-        'bower_components/mousetrap/plugins/global-bind/mousetrap-global-bind.min.js',
         'bower_components/d3/d3.min.js',
         'bower_components/c3/c3.min.js',
         'bower_components/isMobile/isMobile.min.js',
@@ -86,9 +81,6 @@ gulp.task('vendor', function() {
 
     gulp.src('bower_components/jquery-ui/themes/base/images/*')
         .pipe(gulp.dest(dist.css + 'images/'));
-
-    gulp.src('bower_components/chosen/*.png')
-        .pipe(gulp.dest(dist.css + ''));
 });
 
 gulp.task('js', function() {

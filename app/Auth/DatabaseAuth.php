@@ -11,7 +11,7 @@ use Kanboard\User\DatabaseUserProvider;
 /**
  * Database Authentication Provider
  *
- * @package  auth
+ * @package  Kanboard\Auth
  * @author   Frederic Guillot
  */
 class DatabaseAuth extends Base implements PasswordAuthenticationProviderInterface, SessionCheckProviderInterface

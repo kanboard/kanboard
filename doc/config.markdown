@@ -30,6 +30,12 @@ Enable/disable plugin installation from the user interface:
 define('PLUGIN_INSTALLER', true); // Default is true
 ```
 
+Change default plugin directory URL:
+
+```php
+define('PLUGIN_API_URL', 'https://kanboard.net/plugins.json');
+```
+
 Folder for uploaded files
 -------------------------
 
@@ -80,6 +86,11 @@ Database settings
 -----------------
 
 ```php
+// Run automatically database migrations
+// If set to false, you will have to run manually the SQL migrations from the CLI during the next Kanboard upgrade
+// Do not run the migrations from multiple processes at the same time (example: web page + background worker)
+define('DB_RUN_MIGRATIONS', true);
+
 // Database driver: sqlite, mysql or postgres (sqlite by default)
 define('DB_DRIVER', 'sqlite');
 
@@ -315,4 +326,7 @@ define('DISABLE_LOGOUT', false);
 
 // Override API token stored in the database, useful for automated tests
 define('API_AUTHENTICATION_TOKEN', 'My unique API Token');
+
+// TOTP (2FA) issuer name
+define('TOTP_ISSUER', 'Kanboard');
 ```

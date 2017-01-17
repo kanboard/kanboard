@@ -2,6 +2,7 @@ Kanboard.BoardTask = function(app) {
     this.app = app;
 };
 
+// TODO: rewrite this code
 Kanboard.BoardTask.prototype.listen = function() {
     var self = this;
 
@@ -16,14 +17,4 @@ Kanboard.BoardTask.prototype.listen = function() {
             window.location = $(this).data("task-url");
         }
     });
-};
-
-Kanboard.BoardTask.prototype.keyboardShortcuts = function() {
-    var self = this;
-
-    if (self.app.hasId("board")) {
-        Mousetrap.bind("n", function () {
-            self.app.get("Popover").open($("#board").data("task-creation-url"));
-        });
-    }
 };

@@ -46,6 +46,7 @@ Utiliser Kanboard
 - [Créer des tâches par email](create-tasks-by-email.markdown)
 - [Sous-tâches](subtasks.markdown)
 - [Analytique des tâches](analytics-tasks.markdown)
+- [Mentionner les utilisateurs](user-mentions.markdown)
 
 ### Travailler avec les utilisateurs
 

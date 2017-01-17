@@ -74,8 +74,6 @@ KB.component('task-move-position', function (containerElement, options) {
             "column_id": getColumnId(),
             "swimlane_id": getSwimlaneId(),
             "position": position
-        }).success(function () {
-            window.location.reload(true);
         }).error(function (response) {
             if (response) {
                 onError(response.message);
@@ -122,11 +120,11 @@ KB.component('task-move-position', function (containerElement, options) {
         var columnId = getColumnId();
         var container = KB.dom('div').attr('id', 'form-tasks');
 
-        options.board.forEach(function(swimlane) {
+        options.board.forEach(function (swimlane) {
             if (swimlaneId === swimlane.id) {
-                swimlane.columns.forEach(function(column) {
+                swimlane.columns.forEach(function (column) {
                     if (columnId === column.id) {
-                        column.tasks.forEach(function(task) {
+                        column.tasks.forEach(function (task) {
                             tasks.push({'value': task.position, 'text': '#' + task.id + ' - ' + task.title});
                         });
                     }
@@ -150,7 +148,6 @@ KB.component('task-move-position', function (containerElement, options) {
         KB.on('modal.submit', onSubmit);
 
         var form = KB.dom('div')
-            .on('submit', onSubmit)
             .add(KB.dom('div').attr('id', 'message-container').build())
             .add(KB.html.label(options.swimlaneLabel, 'form-swimlanes'))
             .add(buildSwimlaneSelect())

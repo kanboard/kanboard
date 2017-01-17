@@ -2,8 +2,7 @@
     <h2><?= t('Custom Project Roles') ?></h2>
     <ul>
         <li>
-            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
-            <?= $this->url->link(t('Add a new custom role'), 'ProjectRoleController', 'create', array('project_id' => $project['id']), false, 'popover') ?>
+            <?= $this->modal->medium('plus', t('Add a new custom role'), 'ProjectRoleController', 'create', array('project_id' => $project['id'])) ?>
         </li>
     </ul>
 </div>
@@ -19,24 +18,19 @@
                     <a href="#" class="dropdown-menu"><?= t('Restrictions for the role "%s"', $role['role']) ?> <i class="fa fa-caret-down"></i></a>
                     <ul>
                         <li>
-                            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
-                            <?= $this->url->link(t('Add a new project restriction'), 'ProjectRoleRestrictionController', 'create', array('project_id' => $project['id'], 'role_id' => $role['role_id']), false, 'popover') ?>
+                            <?= $this->modal->medium('plus', t('Add a new project restriction'), 'ProjectRoleRestrictionController', 'create', array('project_id' => $project['id'], 'role_id' => $role['role_id'])) ?>
                         </li>
                         <li>
-                            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
-                            <?= $this->url->link(t('Add a new drag and drop restriction'), 'ColumnMoveRestrictionController', 'create', array('project_id' => $project['id'], 'role_id' => $role['role_id']), false, 'popover') ?>
+                            <?= $this->modal->medium('plus', t('Add a new drag and drop restriction'), 'ColumnMoveRestrictionController', 'create', array('project_id' => $project['id'], 'role_id' => $role['role_id'])) ?>
                         </li>
                         <li>
-                            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
-                            <?= $this->url->link(t('Add a new column restriction'), 'ColumnRestrictionController', 'create', array('project_id' => $project['id'], 'role_id' => $role['role_id']), false, 'popover') ?>
+                            <?= $this->modal->medium('plus', t('Add a new column restriction'), 'ColumnRestrictionController', 'create', array('project_id' => $project['id'], 'role_id' => $role['role_id'])) ?>
                         </li>
                         <li>
-                            <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
-                            <?= $this->url->link(t('Edit this role'), 'ProjectRoleController', 'edit', array('project_id' => $project['id'], 'role_id' => $role['role_id']), false, 'popover') ?>
+                            <?= $this->modal->medium('edit', t('Edit this role'), 'ProjectRoleController', 'edit', array('project_id' => $project['id'], 'role_id' => $role['role_id'])) ?>
                         </li>
                         <li>
-                            <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
-                            <?= $this->url->link(t('Remove this role'), 'ProjectRoleController', 'confirm', array('project_id' => $project['id'], 'role_id' => $role['role_id']), false, 'popover') ?>
+                            <?= $this->modal->confirm('trash-o', t('Remove this role'), 'ProjectRoleController', 'confirm', array('project_id' => $project['id'], 'role_id' => $role['role_id'])) ?>
                         </li>
                     </ul>
                 </div>
@@ -59,8 +53,7 @@
                         <?= $this->text->e($restriction['title']) ?>
                     </td>
                     <td>
-                        <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
-                        <?= $this->url->link(t('Remove'), 'ProjectRoleRestrictionController', 'confirm', array('project_id' => $project['id'], 'restriction_id' => $restriction['restriction_id']), false, 'popover') ?>
+                        <?= $this->modal->confirm('trash-o', t('Remove'), 'ProjectRoleRestrictionController', 'confirm', array('project_id' => $project['id'], 'restriction_id' => $restriction['restriction_id'])) ?>
                     </td>
                 </tr>
             <?php endforeach ?>
@@ -77,8 +70,7 @@
                         <?= $this->text->e($restriction['title']) ?>
                     </td>
                     <td>
-                        <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
-                        <?= $this->url->link(t('Remove'), 'ColumnRestrictionController', 'confirm', array('project_id' => $project['id'], 'restriction_id' => $restriction['restriction_id']), false, 'popover') ?>
+                        <?= $this->modal->confirm('trash-o', t('Remove'), 'ColumnRestrictionController', 'confirm', array('project_id' => $project['id'], 'restriction_id' => $restriction['restriction_id'])) ?>
                     </td>
                 </tr>
             <?php endforeach ?>
@@ -91,8 +83,7 @@
                         <?= t('Only moving task between those columns is permitted') ?>
                     </td>
                     <td>
-                        <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
-                        <?= $this->url->link(t('Remove'), 'ColumnMoveRestrictionController', 'confirm', array('project_id' => $project['id'], 'restriction_id' => $restriction['restriction_id']), false, 'popover') ?>
+                        <?= $this->modal->confirm('trash-o', t('Remove'), 'ColumnMoveRestrictionController', 'confirm', array('project_id' => $project['id'], 'restriction_id' => $restriction['restriction_id'])) ?>
                     </td>
                 </tr>
             <?php endforeach ?>

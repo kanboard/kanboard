@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\EventDispatcher\Event;
+
+if (php_sapi_name() !== 'cli') {
+    echo 'This script run only from the command line'.PHP_EOL;
+    exit(255);
+}
+
+try {
+    require __DIR__.'/app/common.php';
+    $container['dispatcher']->dispatch('app.bootstrap', new Event);
+    $container['cli']->run();
+} catch (Exception $e) {
+    echo $e->getMessage().PHP_EOL;
+    exit(255);
+}

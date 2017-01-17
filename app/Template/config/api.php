@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('API') ?></h2>
 </div>
-<section class="listing">
+<div class="panel">
     <ul>
         <li>
             <?= t('API token:') ?>
@@ -9,10 +9,10 @@
         </li>
         <li>
             <?= t('API endpoint:') ?>
-            <input type="text" class="auto-select" readonly="readonly" value="<?= $this->url->base().'jsonrpc.php' ?>">
-        </li>
-        <li>
-            <?= $this->url->link(t('Reset token'), 'ConfigController', 'token', array('type' => 'api'), true) ?>
+            <strong><?= $this->url->base().'jsonrpc.php' ?></strong>
         </li>
     </ul>
-</section>
+</div>
+
+<?= $this->url->link(t('Reset token'), 'ConfigController', 'token', array('type' => 'api'), true, 'btn btn-red') ?>
+

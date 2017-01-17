@@ -35,6 +35,9 @@ defined('LOG_FILE') or define('LOG_FILE', DATA_DIR.DIRECTORY_SEPARATOR.'debug.lo
 // Application version
 defined('APP_VERSION') or define('APP_VERSION', build_app_version('$Format:%d$', '$Format:%H$'));
 
+// Run automatically database migrations
+defined('DB_RUN_MIGRATIONS') or define('DB_RUN_MIGRATIONS', true);
+
 // Database driver: sqlite, mysql or postgres
 defined('DB_DRIVER') or define('DB_DRIVER', 'sqlite');
 

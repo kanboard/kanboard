@@ -9,7 +9,7 @@
     <h2><?= t('Analytics') ?></h2>
 </div>
 
-<div class="listing">
+<div class="panel">
     <ul>
         <li><?= t('Lead time: ').'<strong>'.$this->dt->duration($lead_time) ?></strong></li>
         <li><?= t('Cycle time: ').'<strong>'.$this->dt->duration($cycle_time) ?></strong></li>

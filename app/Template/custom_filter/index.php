@@ -1,8 +1,12 @@
-<?php if (! empty($custom_filters)): ?>
 <div class="page-header">
     <h2><?= t('Custom filters') ?></h2>
+    <ul>
+        <li>
+            <?= $this->modal->medium('filter', t('Add custom filters'), 'CustomFilterController', 'create', array('project_id' => $project['id'])) ?>
+        </li>
+    </ul>
 </div>
-<div>
+<?php if (! empty($custom_filters)): ?>
     <table class="table-striped table-scrolling">
         <tr>
             <th class="column-15"><?= t('Name') ?></th>
@@ -36,8 +40,8 @@
                     <div class="dropdown">
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
-                        <li><?= $this->url->link(t('Remove'), 'CustomFilterController', 'confirm', array('project_id' => $filter['project_id'], 'filter_id' => $filter['id']), false, 'popover') ?></li>
-                        <li><?= $this->url->link(t('Edit'), 'CustomFilterController', 'edit', array('project_id' => $filter['project_id'], 'filter_id' => $filter['id']), false, 'popover') ?></li>
+                        <li><?= $this->modal->medium('edit', t('Edit'), 'CustomFilterController', 'edit', array('project_id' => $filter['project_id'], 'filter_id' => $filter['id'])) ?></li>
+                        <li><?= $this->modal->confirm('trash-o', t('Remove'), 'CustomFilterController', 'confirm', array('project_id' => $filter['project_id'], 'filter_id' => $filter['id'])) ?></li>
                     </ul>
                     </div>
                 <?php endif ?>
@@ -45,7 +49,7 @@
         </tr>
     <?php endforeach ?>
     </table>
-</div>
+<?php else: ?>
+    <p class="alert"><?= t('There is no custom filter.') ?></p>
 <?php endif ?>
 
-<?= $this->render('custom_filter/add', array('project' => $project, 'values' => $values, 'errors' => $errors)) ?>

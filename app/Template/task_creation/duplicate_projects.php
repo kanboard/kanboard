@@ -5,10 +5,10 @@
 <?php if (empty($projects_list)): ?>
     <p class="alert"><?= t('There is no destination project available.') ?></p>
     <div class="form-actions">
-        <?= $this->url->link(t('cancel'), 'BoardViewController', 'show', array('project_id' => $task['project_id']), false, 'close-popover btn') ?>
+        <?= $this->url->link(t('cancel'), 'BoardViewController', 'show', array('project_id' => $task['project_id']), false, 'js-modal-close btn') ?>
     </div>
 <?php else: ?>
-    <form class="popover-form" method="post" action="<?= $this->url->href('TaskCreationController', 'duplicateProjects', array('project_id' => $task['project_id'])) ?>" autocomplete="off">
+    <form method="post" action="<?= $this->url->href('TaskCreationController', 'duplicateProjects', array('project_id' => $task['project_id'])) ?>" autocomplete="off">
         <?= $this->form->csrf() ?>
         <?= $this->form->hidden('task_id', $values) ?>
 
@@ -20,9 +20,6 @@
             array('multiple')
         ) ?>
 
-        <div class="form-actions">
-            <button type="submit" class="btn btn-blue"><?= t('Duplicate') ?></button>
-            <?= t('or') ?> <?= $this->url->link(t('cancel'), 'BoardViewController', 'show', array('project_id' => $task['project_id']), false, 'close-popover') ?>
-        </div>
+        <?= $this->modal->submitButtons() ?>
     </form>
 <?php endif ?>

@@ -212,8 +212,6 @@ List of template hooks:
 | `template:dashboard:show`                                 | Main page of the dashboard                         |
 | `template:dashboard:subtasks:header:before-timetracking`  | Header of Subtask table before Time Tracking       |
 | `template:dashboard:subtasks:rows`                        | Column on row of Subtask table of the dashboard    |
-| `template:export:sidebar`                                 | Sidebar on export pages                            |
-| `template:import:sidebar`                                 | Sidebar on import pages                            |
 | `template:header:dropdown`                                | Page header dropdown menu (user avatar icon)       |
 | `template:header:creation-dropdown`                       | Page header dropdown menu (plus icon)              |
 | `template:layout:head`                                    | Page layout `<head/>` tag                          |

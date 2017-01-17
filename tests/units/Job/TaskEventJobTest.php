@@ -186,4 +186,44 @@ class TaskEventJobTest extends Base
         $called = $this->container['dispatcher']->getCalledListeners();
         $this->assertArrayHasKey(TaskModel::EVENT_MOVE_PROJECT.'.closure', $called);
     }
+
+    public function testThatUserMentionJobIsCalled()
+    {
+        $description = 'something';
+
+        $this->container['queueManager'] = $this
+            ->getMockBuilder('\Kanboard\Core\Queue\QueueManager')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(array(
+                'push',
+            ))
+            ->getMock();
+
+        $this->container['userMentionJob'] = $this
+            ->getMockBuilder('\Kanboard\Job\UserMentionJob')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(array(
+                'withParams',
+            ))
+            ->getMock();
+
+        $this->container['queueManager']
+            ->expects($this->any())
+            ->method('push');
+
+        $this->container['userMentionJob']
+            ->expects($this->once())
+            ->method('withParams')
+            ->with($description, TaskModel::EVENT_USER_MENTION, $this->anything())
+            ->will($this->returnValue($this->container['userMentionJob']));
+
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskEventJob = new TaskEventJob($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'description' => $description, 'project_id' => 1)));
+
+        $taskEventJob->execute(1, array(TaskModel::EVENT_CREATE));
+    }
 }

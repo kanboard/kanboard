@@ -33,6 +33,8 @@ class TaskEventBuilderTest extends Base
         $this->assertInstanceOf('Kanboard\Event\TaskEvent', $event);
         $this->assertNotEmpty($event['task']);
         $this->assertEquals(1, $event['task_id']);
+        $this->assertEquals(1, $event->getTaskId());
+        $this->assertEquals(1, $event->getProjectId());
         $this->assertEquals(array('title' => 'after'), $event['changes']);
     }
 

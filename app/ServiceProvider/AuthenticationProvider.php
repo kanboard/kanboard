@@ -2,6 +2,7 @@
 
 namespace Kanboard\ServiceProvider;
 
+use Kanboard\Auth\ApiAccessTokenAuth;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Kanboard\Core\Security\AuthenticationManager;
@@ -44,6 +45,8 @@ class AuthenticationProvider implements ServiceProviderInterface
             $container['authenticationManager']->register(new LdapAuth($container));
         }
 
+        $container['authenticationManager']->register(new ApiAccessTokenAuth($container));
+
         $container['projectAccessMap'] = $this->getProjectAccessMap();
         $container['applicationAccessMap'] = $this->getApplicationAccessMap();
         $container['apiAccessMap'] = $this->getApiAccessMap();
@@ -85,7 +88,6 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('ExportController', '*', Role::PROJECT_MANAGER);
         $acl->add('TaskFileController', array('screenshot', 'create', 'save', 'remove', 'confirm'), Role::PROJECT_MEMBER);
         $acl->add('TaskGanttController', '*', Role::PROJECT_MANAGER);
-        $acl->add('TaskGanttCreationController', '*', Role::PROJECT_MANAGER);
         $acl->add('ProjectViewController', array('share', 'updateSharing', 'integrations', 'updateIntegrations', 'notifications', 'updateNotifications', 'duplicate', 'doDuplication'), Role::PROJECT_MANAGER);
         $acl->add('ProjectPermissionController', '*', Role::PROJECT_MANAGER);
         $acl->add('ProjectEditController', '*', Role::PROJECT_MANAGER);
@@ -133,7 +135,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('BoardViewController', 'readonly', Role::APP_PUBLIC);
         $acl->add('ICalendarController', '*', Role::APP_PUBLIC);
         $acl->add('FeedController', '*', Role::APP_PUBLIC);
-        $acl->add('AvatarFileController', 'show', Role::APP_PUBLIC);
+        $acl->add('AvatarFileController', array('show', 'image'), Role::APP_PUBLIC);
 
         $acl->add('ConfigController', '*', Role::APP_ADMIN);
         $acl->add('TagController', '*', Role::APP_ADMIN);
@@ -207,6 +209,8 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('TaskLinkProcedure', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskExternalLinkProcedure', array('createExternalTaskLink', 'updateExternalTaskLink', 'removeExternalTaskLink'), Role::PROJECT_MEMBER);
         $acl->add('TaskProcedure', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskTagProcedure', array('setTaskTags'), Role::PROJECT_MEMBER);
+        $acl->add('TagProcedure', array('createTag', 'updateTag', 'removeTag'), Role::PROJECT_MEMBER);
 
         return $acl;
     }

@@ -18,6 +18,7 @@ There are two types of API access:
 ### User API
 
 - Access to the API with the user credentials (username and password)
+- You can also generate a personal access token instead of your password
 - Application role and project permissions are checked for each procedure
 - A user session is created on the server
 - Example of possible clients: native mobile/desktop application, command line utility, etc...
@@ -62,6 +63,7 @@ Usage
 - [Task Files](api-task-file-procedures.markdown)
 - [Project Files](api-project-file-procedures.markdown)
 - [Links](api-link-procedures.markdown)
+- [Tags](api-tags-procedures.markdown)
 - [Internal Task Links](api-internal-task-link-procedures.markdown)
 - [External Task Links](api-external-task-link-procedures.markdown)
 - [Comments](api-comment-procedures.markdown)

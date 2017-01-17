@@ -33,6 +33,8 @@ class TaskLinkEventBuilderTest extends Base
         $this->assertInstanceOf('Kanboard\Event\TaskLinkEvent', $event);
         $this->assertNotEmpty($event['task_link']);
         $this->assertNotEmpty($event['task']);
+        $this->assertEquals(1, $event->getTaskId());
+        $this->assertEquals(1, $event->getProjectId());
     }
 
     public function testBuildTitle()

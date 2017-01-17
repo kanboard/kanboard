@@ -25,8 +25,8 @@ before_script:
   - phpenv config-add tests/php.ini
   - composer install
   - npm install
-  - ./node_modules/.bin/jshint assets/js/{core,components}
 
 script:
+  - ./node_modules/.bin/jshint assets/js/{core,components}
   - phpunit -c tests/units.$DB.xml
   - phpunit tests/configtest

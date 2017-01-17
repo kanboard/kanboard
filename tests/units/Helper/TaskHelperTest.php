@@ -9,9 +9,9 @@ class TaskHelperTest extends Base
     public function testSelectPriority()
     {
         $helper = new TaskHelper($this->container);
-        $this->assertNotEmpty($helper->selectPriority(array('priority_end' => '1', 'priority_start' => '5', 'priority_default' => '2'), array()));
-        $this->assertNotEmpty($helper->selectPriority(array('priority_end' => '3', 'priority_start' => '1', 'priority_default' => '2'), array()));
-        $this->assertEmpty($helper->selectPriority(array('priority_end' => '3', 'priority_start' => '3', 'priority_default' => '2'), array()));
+        $this->assertNotEmpty($helper->renderPriorityField(array('priority_end' => '1', 'priority_start' => '5', 'priority_default' => '2'), array()));
+        $this->assertNotEmpty($helper->renderPriorityField(array('priority_end' => '3', 'priority_start' => '1', 'priority_default' => '2'), array()));
+        $this->assertEmpty($helper->renderPriorityField(array('priority_end' => '3', 'priority_start' => '3', 'priority_default' => '2'), array()));
     }
 
     public function testFormatPriority()

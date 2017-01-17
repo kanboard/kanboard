@@ -6,7 +6,17 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 116;
+const VERSION = 118;
+
+function version_118(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `users` ADD COLUMN `api_access_token` VARCHAR(255) DEFAULT NULL');
+}
+
+function version_117(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE `settings` MODIFY `value` TEXT");
+}
 
 function version_116(PDO $pdo)
 {
@@ -53,9 +63,9 @@ function version_113(PDO $pdo)
     $pdo->exec("
         CREATE TABLE project_has_roles (
             role_id INT NOT NULL AUTO_INCREMENT,
-            role VARCHAR(255) NOT NULL,
+            `role` VARCHAR(255) NOT NULL,
             project_id INT NOT NULL,
-            UNIQUE(project_id, role),
+            UNIQUE(project_id, `role`),
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             PRIMARY KEY(role_id)
         ) ENGINE=InnoDB CHARSET=utf8

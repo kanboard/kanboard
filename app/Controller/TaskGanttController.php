@@ -3,7 +3,6 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Filter\TaskProjectFilter;
-use Kanboard\Formatter\TaskGanttFormatter;
 use Kanboard\Model\TaskModel;
 
 /**
@@ -35,7 +34,7 @@ class TaskGanttController extends BaseController
             'title' => $project['name'],
             'description' => $this->helper->projectHeader->getDescription($project),
             'sorting' => $sorting,
-            'tasks' => $filter->format(new TaskGanttFormatter($this->container)),
+            'tasks' => $filter->format($this->taskGanttFormatter),
         )));
     }
 

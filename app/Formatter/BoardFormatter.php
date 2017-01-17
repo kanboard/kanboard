@@ -59,7 +59,7 @@ class BoardFormatter extends BaseFormatter implements FormatterInterface
         $task_ids = array_column($tasks, 'id');
         $tags = $this->taskTagModel->getTagsByTasks($task_ids);
 
-        return BoardSwimlaneFormatter::getInstance($this->container)
+        return $this->boardSwimlaneFormatter
             ->withSwimlanes($swimlanes)
             ->withColumns($columns)
             ->withTasks($tasks)

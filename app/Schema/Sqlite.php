@@ -6,7 +6,12 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 107;
+const VERSION = 108;
+
+function version_108(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE users ADD COLUMN api_access_token VARCHAR(255) DEFAULT NULL');
+}
 
 function version_107(PDO $pdo)
 {

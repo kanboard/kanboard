@@ -36,18 +36,7 @@ class Directory extends BaseCore
      */
     public function isCompatible(array $plugin, $appVersion = APP_VERSION)
     {
-        if (strpos($appVersion, 'master') !== false) {
-            return true;
-        }
-
-        foreach (array('>=', '>') as $operator) {
-            if (strpos($plugin['compatible_version'], $operator) === 0) {
-                $pluginVersion = substr($plugin['compatible_version'], strlen($operator));
-                return version_compare($appVersion, $pluginVersion, $operator);
-            }
-        }
-
-        return $plugin['compatible_version'] === $appVersion;
+        return Version::isCompatible($plugin['compatible_version'], $appVersion);
     }
 
     /**

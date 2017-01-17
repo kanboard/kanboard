@@ -19,6 +19,8 @@ $button-hover-border-colors: ('default': #bbb, 'red': #b0281a, 'blue': #3079ed)
 
 $font-sizes: ('normal': 1.0em, 'tiny': 0.7em, 'small': 0.8em, 'compact': 0.9em, 'medium': 1.2em, 'large': 1.4em, 'xlarge': 1.6em, 'title': 1.5em)
 
+$icon-colors: ('success': #468847, 'error': #b94a48)
+
 $text-font: 'Helvetica Neue', Helvetica, Arial, sans-serif
 $board-task-limit-color: #DF5353
 
@@ -33,6 +35,9 @@ $board-task-limit-color: #DF5353
 
 @function bg-color($key: 'primary')
   @return map-get($background-colors, $key)
+
+@function icon-color($key)
+  @return map-get($icon-colors, $key)
 
 @function alert-color($key)
   @return map-get($alert-colors, $key)

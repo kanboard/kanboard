@@ -7,7 +7,6 @@ use Kanboard\Core\Filter\QueryBuilder;
 use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Filter\TaskStatusFilter;
-use Kanboard\Formatter\TaskICalFormatter;
 use Kanboard\Model\TaskModel;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 
@@ -94,8 +93,6 @@ class ICalendarController extends BaseController
         $end = $this->request->getStringParam('end', strtotime('+6 months'));
 
         $this->helper->ical->addTaskDateDueEvents($queryBuilder, $calendar, $start, $end);
-
-        $formatter = new TaskICalFormatter($this->container);
-        $this->response->ical($formatter->setCalendar($calendar)->format());
+        $this->response->ical($this->taskICalFormatter->setCalendar($calendar)->format());
     }
 }

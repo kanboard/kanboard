@@ -21,7 +21,7 @@ The `data` folder is used to store:
 - Uploaded files: `files/*`
 - Image thumbnails: `files/thumbnails/*`
 
-People who are using a remote database (Mysql/Postgresql) and a remote file storage (Aws S3 or similar) don't necessarily need to have a persistent local data folder or to change the permission.
+People who are using a remote database (Mysql/Postgresql) and a remote object storage (Aws S3 or similar) don't necessarily need to have a persistent local data folder or to change the permission.
 
 From the git repository (development version)
 ---------------------------------------------
@@ -42,6 +42,7 @@ If you would like to install Kanboard outside of the web server document root, y
 ```bash
 .
 ├── assets -> ../kanboard/assets
+├── cli -> ../kanboard/cli
 ├── doc -> ../kanboard/doc
 ├── favicon.ico -> ../kanboard/favicon.ico
 ├── index.php -> ../kanboard/index.php
@@ -53,7 +54,16 @@ The `.htaccess` is optional because its content can be included directly in the 
 
 You can also define a custom location for the plugins and files folders by changing the [config file](config.markdown).
 
-Optional installation
+
+Other Database Types
+--------------------
+
+Kanboard supports Mysql and Postgres as alternative to Sqlite.
+
+- [Mysql configuration](mysql-configuration.markdown)
+- [Postgres configuration](postgresql-configuration.markdown)
+
+Optional Installation
 ---------------------
 
 - Some features of Kanboard require that you run [a daily background job](cronjob.markdown) (Reports and analytics)

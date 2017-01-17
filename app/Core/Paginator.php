@@ -232,6 +232,17 @@ class Paginator
     }
 
     /**
+     * Get the number of current page
+     *
+     * @access public
+     * @return integer
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
      * Set the default column order
      *
      * @access public
@@ -268,6 +279,16 @@ class Paginator
     {
         $this->limit = $limit;
         return $this;
+    }
+
+    /**
+     * Get the maximum number of items per page.
+     *
+     * @return int
+     */
+    public function getMax()
+    {
+        return $this->limit;
     }
 
     /**
@@ -353,7 +374,9 @@ class Paginator
                 '&larr; '.t('Previous'),
                 $this->controller,
                 $this->action,
-                $this->getUrlParams($this->page - 1, $this->order, $this->direction)
+                $this->getUrlParams($this->page - 1, $this->order, $this->direction),
+                false,
+                'js-modal-replace'
             );
         } else {
             $html .= '&larr; '.t('Previous');
@@ -379,7 +402,9 @@ class Paginator
                 t('Next').' &rarr;',
                 $this->controller,
                 $this->action,
-                $this->getUrlParams($this->page + 1, $this->order, $this->direction)
+                $this->getUrlParams($this->page + 1, $this->order, $this->direction),
+                false,
+                'js-modal-replace'
             );
         } else {
             $html .= t('Next').' &rarr;';
@@ -388,6 +413,17 @@ class Paginator
         $html .= '</span>';
 
         return $html;
+    }
+
+    /**
+     * Generate the page showing.
+     *
+     * @access public
+     * @return string
+     */
+    public function generatPageShowing()
+    {
+        return '<span class="pagination-showing">'.t('Showing %d-%d of %d', (($this->getPage() - 1) * $this->getMax() + 1), min($this->getTotal(), $this->getPage() * $this->getMax()), $this->getTotal()).'</span>';
     }
 
     /**
@@ -413,6 +449,7 @@ class Paginator
 
         if (! $this->hasNothingtoShow()) {
             $html .= '<div class="pagination">';
+            $html .= $this->generatPageShowing();
             $html .= $this->generatePreviousLink();
             $html .= $this->generateNextLink();
             $html .= '</div>';
@@ -453,7 +490,9 @@ class Paginator
             $label,
             $this->controller,
             $this->action,
-            $this->getUrlParams($this->page, $column, $direction)
+            $this->getUrlParams($this->page, $column, $direction),
+            false,
+            'js-modal-replace'
         );
     }
 }

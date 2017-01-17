@@ -1,21 +1,21 @@
 KB.component('suggest-menu', function(containerElement, options) {
 
     function onKeyDown(e) {
-        switch (e.keyCode) {
-            case 27:
+        switch (KB.utils.getKey(e)) {
+            case 'Escape':
                 destroy();
                 break;
-            case 38:
+            case 'ArrowUp':
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 moveUp();
                 break;
-            case 40:
+            case 'ArrowDown':
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 moveDown();
                 break;
-            case 13:
+            case 'Enter':
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 insertSelectedItem();
@@ -35,14 +35,17 @@ KB.component('suggest-menu', function(containerElement, options) {
     }
 
     function insertSelectedItem() {
+        containerElement.focus();
+
         var element = KB.find('.suggest-menu-item.active');
         var value = element.data('value');
         var trigger = element.data('trigger');
         var content = containerElement.value;
         var text = getLastWord(containerElement);
         var substitute = trigger + value + ' ';
-        var before = content.substring(0, containerElement.selectionStart - text.length);
-        var after = content.substring(containerElement.selectionEnd);
+        var selectionPosition = KB.utils.getSelectionPosition(containerElement);
+        var before = content.substring(0, selectionPosition.selectionStart - text.length);
+        var after = content.substring(selectionPosition.selectionEnd);
         var position = before.length + substitute.length;
 
         containerElement.value = before + substitute + after;
@@ -59,7 +62,7 @@ KB.component('suggest-menu', function(containerElement, options) {
     }
 
     function getParentElement() {
-        var selectors = ['.popover-form', '#popover-content', 'body'];
+        var selectors = ['#modal-content form', '#modal-content', 'body'];
 
         for (var i = 0; i < selectors.length; i++) {
             var element = document.querySelector(selectors[i]);
@@ -136,13 +139,16 @@ KB.component('suggest-menu', function(containerElement, options) {
         return null;
     }
 
-    function fetchItems(trigger, text, value) {
-        if (typeof value === 'string') {
-            KB.http.get(value).success(function (response) {
+    function fetchItems(trigger, text, params) {
+        if (typeof params === 'string') {
+            var regex = new RegExp('SEARCH_TERM', 'g');
+            var url = params.replace(regex, text);
+
+            KB.http.get(url).success(function (response) {
                 onItemFetched(trigger, text, response);
             });
         } else {
-            onItemFetched(trigger, text, value);
+            onItemFetched(trigger, text, params);
         }
     }
 
@@ -194,8 +200,8 @@ KB.component('suggest-menu', function(containerElement, options) {
     function renderMenu(items) {
         var parentElement = getParentElement();
         var caretPosition = getCaretCoordinates(containerElement, containerElement.selectionEnd);
-        var left = caretPosition.left + containerElement.offsetLeft;
-        var top = caretPosition.top + containerElement.offsetTop + 16;
+        var left = caretPosition.left + containerElement.offsetLeft - containerElement.scrollLeft;
+        var top = caretPosition.top + containerElement.offsetTop - containerElement.scrollTop + 16;
 
         document.addEventListener('keydown', onKeyDown, false);
 

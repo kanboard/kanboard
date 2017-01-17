@@ -1,13 +1,13 @@
 Sharing boards and tasks
 ========================
 
-By default, boards are private but it's possible to make a board public.
+By default, boards are private, but it's possible to make a board public.
 
-A public board **cannot be modified, it's a read-only access**.
-This access is protected by a random token, only people who have the right URL can see the board.
+A public board **cannot be modified: it has read-only access**.
+Access is protected by a random token. Only people who have the right URL can see the board.
 
 Public boards are automatically refreshed every 60 seconds.
-Task details are also available in read-only.
+Task details are also available in read-only mode.
 
 Usage examples:
 
@@ -21,7 +21,7 @@ Select your project, then click on "Public access" and finally click on the butt
 
 ![Enable public access](screenshots/project-enable-sharing.png)
 
-When the public access is enabled, a couple of links are generated:
+When public access is enabled, a couple of links are generated:
 
 - Public board view
 - RSS feed subscription link
@@ -29,7 +29,7 @@ When the public access is enabled, a couple of links are generated:
 
 ![Disable public access](screenshots/project-disable-sharing.png)
 
-You can also disable the public access whenever you want.
+You can also disable public access whenever you want.
 
-Each time, you enable or disable the public access a new random token is generated.
-**The previous links will not work anymore**.
+Each time you enable or disable public access, a new random token is generated.
+**The previous links will not work anymore**!

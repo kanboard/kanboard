@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('About') ?></h2>
 </div>
-<div class="listing">
+<div class="panel">
     <ul>
         <li>
             <?= t('Official website:') ?>
@@ -21,7 +21,7 @@
 <div class="page-header">
     <h2><?= t('Configuration') ?></h2>
 </div>
-<div class="listing">
+<div class="panel">
     <ul>
         <li>
             <?= t('Application version:') ?>
@@ -58,7 +58,7 @@
     <div class="page-header">
         <h2><?= t('Database') ?></h2>
     </div>
-    <div class="listing">
+    <div class="panel">
         <ul>
             <li>
                 <?= t('Database size:') ?>
@@ -81,6 +81,6 @@
 <div class="page-header">
     <h2><?= t('License') ?></h2>
 </div>
-<div class="listing">
+<div class="panel">
 <?= nl2br(file_get_contents(ROOT_DIR.DIRECTORY_SEPARATOR.'LICENSE')) ?>
 </div>

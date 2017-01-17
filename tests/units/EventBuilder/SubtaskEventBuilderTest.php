@@ -58,5 +58,7 @@ class SubtaskEventBuilderTest extends Base
         $this->assertCount(2, $event['changes']);
         $this->assertEquals('new title', $event['changes']['title']);
         $this->assertEquals(1, $event['changes']['user_id']);
+        $this->assertEquals(1, $event->getTaskId());
+        $this->assertEquals(1, $event->getProjectId());
     }
 }

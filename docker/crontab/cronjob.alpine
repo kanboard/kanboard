@@ -1,1 +1,1 @@
-1 0 * * * cd /var/www/app && ./kanboard cronjob
+1 0 * * * cd /var/www/app && ./cli cronjob

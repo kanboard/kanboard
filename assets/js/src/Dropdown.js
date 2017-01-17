@@ -2,14 +2,11 @@ Kanboard.Dropdown = function(app) {
     this.app = app;
 };
 
+// TODO: rewrite this code
 Kanboard.Dropdown.prototype.listen = function() {
     var self = this;
 
     $(document).on('click', function() {
-        self.close();
-    });
-
-    $(document).on('click', '#popover-content', function() {
         self.close();
     });
 
@@ -55,8 +52,4 @@ Kanboard.Dropdown.prototype.listen = function() {
 
 Kanboard.Dropdown.prototype.close = function() {
     $("#dropdown").remove();
-};
-
-Kanboard.Dropdown.prototype.onPopoverOpened = function() {
-    this.close();
 };

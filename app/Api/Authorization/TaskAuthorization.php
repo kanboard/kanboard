@@ -10,10 +10,10 @@ namespace Kanboard\Api\Authorization;
  */
 class TaskAuthorization extends ProjectAuthorization
 {
-    public function check($class, $method, $category_id)
+    public function check($class, $method, $task_id)
     {
         if ($this->userSession->isLogged()) {
-            $this->checkProjectPermission($class, $method, $this->taskFinderModel->getProjectId($category_id));
+            $this->checkProjectPermission($class, $method, $this->taskFinderModel->getProjectId($task_id));
         }
     }
 }

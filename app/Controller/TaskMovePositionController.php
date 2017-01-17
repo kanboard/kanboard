@@ -3,7 +3,6 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
-use Kanboard\Formatter\BoardFormatter;
 use Kanboard\Model\TaskModel;
 
 /**
@@ -20,7 +19,7 @@ class TaskMovePositionController extends BaseController
 
         $this->response->html($this->template->render('task_move_position/show', array(
             'task' => $task,
-            'board' => BoardFormatter::getInstance($this->container)
+            'board' => $this->boardFormatter
                 ->withProjectId($task['project_id'])
                 ->withQuery($this->taskFinderModel->getExtendedQuery()
                     ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
@@ -39,7 +38,7 @@ class TaskMovePositionController extends BaseController
             throw new AccessForbiddenException(e('You are not allowed to move this task.'));
         }
 
-        $result = $this->taskPositionModel->movePosition(
+        $this->taskPositionModel->movePosition(
             $task['project_id'],
             $task['id'],
             $values['column_id'],
@@ -47,6 +46,6 @@ class TaskMovePositionController extends BaseController
             $values['swimlane_id']
         );
 
-        $this->response->json(array('result' => $result));
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
     }
 }

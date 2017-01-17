@@ -3,7 +3,6 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
-use Kanboard\Formatter\BoardFormatter;
 use Kanboard\Model\UserMetadataModel;
 
 /**
@@ -139,7 +138,7 @@ class BoardAjaxController extends BaseController
             'board_highlight_period' => $this->configModel->get('board_highlight_period'),
             'swimlanes' => $this->taskLexer
                 ->build($this->userSession->getFilters($project_id))
-                ->format(BoardFormatter::getInstance($this->container)->withProjectId($project_id))
+                ->format($this->boardFormatter->withProjectId($project_id))
         ));
     }
 }

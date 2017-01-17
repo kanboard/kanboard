@@ -65,10 +65,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/overview', 'ProjectOverviewController', 'show');
 
             // ProjectEdit routes
-            $container['route']->addRoute('project/:project_id/edit', 'ProjectEditController', 'edit');
-            $container['route']->addRoute('project/:project_id/edit/dates', 'ProjectEditController', 'dates');
-            $container['route']->addRoute('project/:project_id/edit/description', 'ProjectEditController', 'description');
-            $container['route']->addRoute('project/:project_id/edit/priority', 'ProjectEditController', 'priority');
+            $container['route']->addRoute('project/:project_id/edit', 'ProjectEditController', 'show');
 
             // ProjectUser routes
             $container['route']->addRoute('projects/managers/:user_id', 'ProjectUserOverviewController', 'managers');
@@ -158,6 +155,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('user/:user_id/authentication', 'UserCredentialController', 'changeAuthentication');
             $container['route']->addRoute('user/:user_id/2fa', 'TwoFactorController', 'index');
             $container['route']->addRoute('user/:user_id/avatar', 'AvatarFileController', 'show');
+            $container['route']->addRoute('user/:user_id/api', 'UserApiAccessController', 'show');
 
             // Groups
             $container['route']->addRoute('groups', 'GroupListController', 'index');

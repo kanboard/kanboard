@@ -2,8 +2,7 @@
     <h2><?= t('Import users from CSV file') ?></h2>
     <ul>
         <li>
-            <i class="fa fa-download fa-fw"></i>
-            <?= $this->url->link(t('Download CSV template'), 'UserImportController', 'template') ?>
+            <?= $this->url->icon('download', t('Download CSV template'), 'UserImportController', 'template') ?>
         </li>
     </ul>
 </div>
@@ -33,9 +32,5 @@
 
     <p class="form-help"><?= t('Maximum size: ') ?><?= is_integer($max_size) ? $this->text->bytes($max_size) : $max_size ?></p>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Import') ?></button>
-        <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'UserListController', 'show', array(), false, 'close-popover') ?>
-    </div>
+    <?= $this->modal->submitButtons(array('submitLabel' => t('Import'))) ?>
 </form>

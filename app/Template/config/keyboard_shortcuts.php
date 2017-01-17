@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Keyboard shortcuts') ?></h2>
 </div>
-<div class="listing">
+<div class="panel">
     <h3><?= t('Board/Calendar/List view') ?></h3>
     <ul>
         <li><?= t('Switch to the project overview') ?> = <strong>v o</strong></li>

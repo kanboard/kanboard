@@ -2,19 +2,16 @@
     <div class="page-header">
         <ul>
             <li>
-                <i class="fa fa-folder fa-fw"></i>
-                <?= $this->url->link(t('Projects list'), 'ProjectListController', 'show') ?>
+                <?= $this->url->icon('folder', t('Projects list'), 'ProjectListController', 'show') ?>
             </li>
             <?php if ($this->user->hasAccess('ProjectGanttController', 'show')): ?>
                 <li>
-                    <i class="fa fa-sliders fa-fw"></i>
-                    <?= $this->url->link(t('Projects Gantt chart'), 'ProjectGanttController', 'show') ?>
+                    <?= $this->url->icon('sliders', t('Projects Gantt chart'), 'ProjectGanttController', 'show') ?>
                 </li>
             <?php endif ?>
         </ul>
     </div>
     <section class="sidebar-container">
-
         <?= $this->render($sidebar_template, array('users' => $users, 'filter' => $filter)) ?>
 
         <div class="sidebar-content">

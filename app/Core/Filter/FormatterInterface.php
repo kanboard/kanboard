@@ -17,7 +17,7 @@ interface FormatterInterface
      *
      * @access public
      * @param  Table $query
-     * @return FormatterInterface
+     * @return $this
      */
     public function withQuery(Table $query);
 

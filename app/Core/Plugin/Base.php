@@ -131,4 +131,17 @@ abstract class Base extends \Kanboard\Core\Base
     {
         return '';
     }
+
+    /**
+     * Get application compatibility version
+     *
+     * Examples: >=1.0.36, 1.0.37, APP_VERSION
+     *
+     * @access public
+     * @return string
+     */
+    public function getCompatibleVersion()
+    {
+        return APP_VERSION;
+    }
 }

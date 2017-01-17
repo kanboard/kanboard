@@ -8,7 +8,7 @@ Software development
 
 - Backlog
 - Ready
-- Work in progress
+- Work-in-progress
 - To be validated
 - Validated
 - Deployed in production
@@ -18,7 +18,7 @@ Bug tracking
 
 - Reported
 - Confirmed
-- Work in progress
+- Work-in-progress
 - Tested
 - Fixed
 

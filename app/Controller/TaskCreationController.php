@@ -24,10 +24,7 @@ class TaskCreationController extends BaseController
     {
         $project = $this->getProject();
         $swimlanes_list = $this->swimlaneModel->getList($project['id'], false, true);
-
-        if (empty($values)) {
-            $values = $this->prepareValues($swimlanes_list);
-        }
+        $values += $this->prepareValues($swimlanes_list);
 
         $values = $this->hook->merge('controller:task:form:default', $values, array('default_values' => $values));
         $values = $this->hook->merge('controller:task-creation:form:default', $values, array('default_values' => $values));
