@@ -14,9 +14,14 @@ Kanboard.Popover.prototype.listen = function() {
     });
 
     $(document).on("click", "#popover-container", function(e) {
-        self.close(e);
+        if($(this).find('form,input,textarea,select,option').length <= 0) {
+            self.close(e);
+        }
+        else if (confirm("Are you sure you want to close this layer-box?") == true) {
+            self.close(e);
+        }
     });
-    
+
     $(document).on("click", "#popover-close-button", function(e) {
         self.close(e);
     });
