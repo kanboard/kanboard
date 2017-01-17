@@ -9,7 +9,7 @@ Kanboard.BoardTask.prototype.listen = function() {
     $(document).on("click", ".task-board-change-assignee", function(e) {
         e.preventDefault();
         e.stopPropagation();
-        KB.modal.open($(e.target).closest(".task-board-change-assignee").data("url"), "medium", false);
+        KB.modal.open($(this).data("url"), "medium", false);
     });
 
     $(document).on("click", ".task-board", function(e) {
