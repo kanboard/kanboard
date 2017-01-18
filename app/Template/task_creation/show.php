@@ -16,7 +16,8 @@
 
         <div class="task-form-secondary-column">
             <?= $this->task->renderColorField($values) ?>
-            <?= $this->task->renderAssigneeField($users_list, $values, $errors) ?>
+            <?php $filtered_values = array_filter($values, function ($key) { return $key != 'owner_id'; }, ARRAY_FILTER_USE_KEY); ?>
+            <?= $this->task->renderAssigneeField($users_list, $filtered_values, $errors) ?>
             <?= $this->task->renderCategoryField($categories_list, $values, $errors) ?>
             <?= $this->task->renderSwimlaneField($swimlanes_list, $values, $errors) ?>
             <?= $this->task->renderColumnField($columns_list, $values, $errors) ?>
