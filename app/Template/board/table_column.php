@@ -74,6 +74,7 @@
                     (<span id="task-number-column-<?= $column['id'] ?>"><?= $column['nb_tasks'] ?></span>)
                 </span>
             <?php endif ?>
+	    <?= $this->hook->render('template:board:column:header', array('swimlane' => $swimlane, 'column' => $column)) ?> 
         </div>
 
     </th>
