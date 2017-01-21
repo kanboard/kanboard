@@ -7,8 +7,8 @@
             <strong class="comment-username"><?= $this->text->e($comment['name'] ?: $comment['username']) ?></strong>
         <?php endif ?>
 
-        <small class="comment-date">Created At: <?= $this->dt->datetime($comment['date_creation']) ?></small>
-        <small class="comment-date">Updated At: <?= $this->dt->datetime($comment['date_modification']) ?></small>
+        <small class="comment-date"><?= t('Created At')?>: <?= $this->dt->datetime($comment['date_creation']) ?></small>
+        <small class="comment-date"><?= t('Updated At')?>: <?= $this->dt->datetime($comment['date_modification']) ?></small>
 
     </div>
 
