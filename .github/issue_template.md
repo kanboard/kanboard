@@ -1,6 +1,4 @@
-### Expected behaviour
-
-Tell us what should happen
+**Please, do not create duplicate issues**
 
 
 ### Actual behaviour
@@ -8,9 +6,14 @@ Tell us what should happen
 Tell us what happens instead
 
 
+### Expected behaviour
+
+Tell us what should happen
+
+
 ### Steps to reproduce
 
-1.
+1. Please, describe _exactly_ how to reproduce the issue
 2.
 3.
 
