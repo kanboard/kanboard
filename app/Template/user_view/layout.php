@@ -6,10 +6,7 @@
                 <?= $this->url->icon('user', t('All users'), 'UserListController', 'show') ?>
             </li>
             <li>
-                <?= $this->modal->medium('plus', t('New local user'), 'UserCreationController', 'show') ?>
-            </li>
-            <li>
-                <?= $this->modal->medium('plus', t('New remote user'), 'UserCreationController', 'show', array('remote' => 1)) ?>
+                <?= $this->modal->medium('plus', t('New user'), 'UserCreationController', 'show') ?>
             </li>
             <li>
                 <?= $this->modal->medium('upload', t('Import'), 'UserImportController', 'show') ?>
