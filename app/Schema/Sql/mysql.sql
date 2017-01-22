@@ -98,6 +98,7 @@ CREATE TABLE `comments` (
   `task_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT '0',
   `date_creation` bigint(20) DEFAULT NULL,
+  `date_modification` bigint(20) DEFAULT NULL,
   `comment` text,
   `reference` varchar(50) DEFAULT '',
   PRIMARY KEY (`id`),
@@ -768,4 +769,4 @@ UNLOCK TABLES;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$R1zYk04d96KcHRpd9.r5I.5I6mgKIgUdsaISZYmaDLPIJCUO0FFJG', 'app-admin');INSERT INTO schema_version VALUES ('118');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$R1zYk04d96KcHRpd9.r5I.5I6mgKIgUdsaISZYmaDLPIJCUO0FFJG', 'app-admin');INSERT INTO schema_version VALUES ('119');

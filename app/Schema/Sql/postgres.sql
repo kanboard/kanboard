@@ -195,6 +195,7 @@ CREATE TABLE "comments" (
     "task_id" integer NOT NULL,
     "user_id" integer DEFAULT 0,
     "date_creation" bigint NOT NULL,
+    "date_modification" bigint NOT NULL,
     "comment" "text",
     "reference" character varying(50) DEFAULT ''::character varying
 );
@@ -2613,4 +2614,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$0.8BJyhOEBHGqfwD3nIJHuxObqTlZGJ/KRNDVHfSu7RGd42rEbSa.', 'app-admin');INSERT INTO schema_version VALUES ('97');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$0.8BJyhOEBHGqfwD3nIJHuxObqTlZGJ/KRNDVHfSu7RGd42rEbSa.', 'app-admin');INSERT INTO schema_version VALUES ('98');

@@ -6,7 +6,15 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 97;
+const VERSION = 98;
+
+function version_98(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE "comments" ADD COLUMN date_modification BIGINT');
+    $pdo->exec('UPDATE "comments"
+        SET date_modificaiton = date_creation
+        WHERE date_modification IS NULL');
+}
 
 function version_97(PDO $pdo)
 {
