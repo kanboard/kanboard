@@ -16,7 +16,8 @@
         <thead>
         <tr>
             <th class="column-70"><?= t('Column title') ?></th>
-            <th class="column-25"><?= t('Task limit') ?></th>
+            <th class="column-10"><?= t('Task limit') ?></th>
+            <th class="column-20"><?= t('Visible on dashboard') ?></th>
             <th class="column-5"><?= t('Actions') ?></th>
         </tr>
         </thead>
@@ -34,6 +35,9 @@
             </td>
             <td>
                 <?= $this->text->e($column['task_limit']) ?>
+            </td>
+            <td>
+                <?= $column['hide_in_dashboard'] == 1 ? t('Yes') : t('No') ?>
             </td>
             <td>
                 <div class="dropdown">
