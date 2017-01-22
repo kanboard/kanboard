@@ -12,7 +12,7 @@ function version_98(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE "comments" ADD COLUMN date_modification BIGINT');
     $pdo->exec('UPDATE "comments"
-        SET date_modificaiton = date_creation
+        SET date_modification = date_creation
         WHERE date_modification IS NULL');
 }
 
