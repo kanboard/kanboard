@@ -4,8 +4,8 @@
 /* Rename this file to config.php if you want to change the values */
 /*******************************************************************/
 
-// Data folder (must be writeable by the web server user)
-define('DATA_DIR', 'data');
+// Data folder (must be writeable by the web server user and absolute)
+define('DATA_DIR', __DIR__.DIRECTORY_SEPARATOR.'data');
 
 // Enable/Disable debug
 define('DEBUG', false);
