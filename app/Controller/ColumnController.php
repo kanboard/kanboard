@@ -60,7 +60,7 @@ class ColumnController extends BaseController
     public function save()
     {
         $project = $this->getProject();
-        $values = $this->request->getValues();
+        $values = $this->request->getValues() + array('hide_in_dashboard' => 0);
 
         list($valid, $errors) = $this->columnValidator->validateCreation($values);
 
@@ -70,18 +70,19 @@ class ColumnController extends BaseController
                 $values['title'],
                 $values['task_limit'],
                 $values['description'],
-                isset($values['hide_in_dashboard']) ? $values['hide_in_dashboard'] : 0
+                $values['hide_in_dashboard']
             );
 
             if ($result !== false) {
                 $this->flash->success(t('Column created successfully.'));
-                return $this->response->redirect($this->helper->url->to('ColumnController', 'index', array('project_id' => $project['id'])), true);
+                $this->response->redirect($this->helper->url->to('ColumnController', 'index', array('project_id' => $project['id'])), true);
+                return;
             } else {
                 $errors['title'] = array(t('Another column with the same name exists in the project'));
             }
         }
 
-        return $this->create($values, $errors);
+        $this->create($values, $errors);
     }
 
     /**
@@ -112,7 +113,7 @@ class ColumnController extends BaseController
     public function update()
     {
         $project = $this->getProject();
-        $values = $this->request->getValues();
+        $values = $this->request->getValues() + array('hide_in_dashboard' => 0);
 
         list($valid, $errors) = $this->columnValidator->validateModification($values);
 
@@ -122,18 +123,19 @@ class ColumnController extends BaseController
                 $values['title'],
                 $values['task_limit'],
                 $values['description'],
-                isset($values['hide_in_dashboard']) ? $values['hide_in_dashboard'] : 0
+                $values['hide_in_dashboard']
             );
 
             if ($result) {
                 $this->flash->success(t('Board updated successfully.'));
-                return $this->response->redirect($this->helper->url->to('ColumnController', 'index', array('project_id' => $project['id'])));
+                $this->response->redirect($this->helper->url->to('ColumnController', 'index', array('project_id' => $project['id'])), true);
+                return;
             } else {
                 $this->flash->failure(t('Unable to update this board.'));
             }
         }
 
-        return $this->edit($values, $errors);
+        $this->edit($values, $errors);
     }
 
     /**
