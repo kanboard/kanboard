@@ -54,7 +54,7 @@ class UserCreationController extends BaseController
      *
      * @param array $values
      */
-    private function createUser(array $values)
+    protected function createUser(array $values)
     {
         $project_id = empty($values['project_id']) ? 0 : $values['project_id'];
         unset($values['project_id']);

@@ -29,12 +29,12 @@ class AppHelper extends Base
      *
      * @access public
      * @param  string $param
-     * @param  mixed  $default_value
+     * @param  mixed  $default
      * @return mixed
      */
-    public function config($param, $default_value = '')
+    public function config($param, $default = '')
     {
-        return $this->configModel->get($param, $default_value);
+        return $this->configModel->get($param, $default);
     }
 
     /**

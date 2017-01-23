@@ -6,6 +6,9 @@
                 <?= $this->modal->medium('plus', t('New user'), 'UserCreationController', 'show') ?>
             </li>
             <li>
+                <?= $this->modal->medium('paper-plane', t('Invite people'), 'UserInviteController', 'show') ?>
+            </li>
+            <li>
                 <?= $this->modal->medium('upload', t('Import'), 'UserImportController', 'show') ?>
             </li>
             <li>

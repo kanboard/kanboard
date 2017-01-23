@@ -94,6 +94,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\ProjectFileModel                        $projectFileModel
  * @property \Kanboard\Model\GroupModel                              $groupModel
  * @property \Kanboard\Model\GroupMemberModel                        $groupMemberModel
+ * @property \Kanboard\Model\InviteModel                             $inviteModel
  * @property \Kanboard\Model\LanguageModel                           $languageModel
  * @property \Kanboard\Model\LastLoginModel                          $lastLoginModel
  * @property \Kanboard\Model\LinkModel                               $linkModel

@@ -53,6 +53,7 @@
     >
 
     <?php if (isset($no_layout) && $no_layout): ?>
+        <?= $this->app->flashMessage() ?>
         <?= $content_for_layout ?>
     <?php else: ?>
         <?= $this->hook->render('template:layout:top') ?>

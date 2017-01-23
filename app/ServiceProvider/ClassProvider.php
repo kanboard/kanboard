@@ -42,6 +42,7 @@ class ClassProvider implements ServiceProviderInterface
             'CustomFilterModel',
             'GroupModel',
             'GroupMemberModel',
+            'InviteModel',
             'LanguageModel',
             'LastLoginModel',
             'LinkModel',

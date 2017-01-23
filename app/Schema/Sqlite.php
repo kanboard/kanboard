@@ -6,14 +6,24 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 109;
+const VERSION = 110;
+
+function version_110(PDO $pdo)
+{
+    $pdo->exec("
+        CREATE TABLE invites (
+            email TEXT NOT NULL,
+            project_id INTEGER NOT NULL,
+            token TEXT NOT NULL,
+            PRIMARY KEY(email, token)
+        )
+    ");
+}
 
 function version_109(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE comments ADD COLUMN date_modification INTEGER');
-    $pdo->exec('UPDATE comments
-        SET date_modification = date_creation
-        WHERE date_modification IS NULL;');
+    $pdo->exec('UPDATE comments SET date_modification = date_creation WHERE date_modification IS NULL;');
 }
 
 function version_108(PDO $pdo)
