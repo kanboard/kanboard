@@ -22,7 +22,7 @@
             'placeholder'  => t('Choose a project'),
             'replace'      => array(
                 'regex' => 'PROJECT_ID',
-                'url' => $this->url->href('TaskDuplicationController', 'copy', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'dst_project_id' => 'PROJECT_ID')),
+                'url' => $this->url->href('TaskDuplicationController', 'move', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'dst_project_id' => 'PROJECT_ID')),
             )
         )) ?>
 
