@@ -4,7 +4,7 @@ KB.component('confirm-buttons', function (containerElement, options) {
     function onSubmit() {
         isLoading = true;
         KB.find('#modal-confirm-button').replace(buildButton());
-        window.location.href = options.url;
+        KB.http.get(options.url);
     }
 
     function onCancel() {

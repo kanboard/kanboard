@@ -7,8 +7,9 @@ New features:
 
 Improvements:
 
-Bug fixes:
+Regressions:
 
+* Stay on the same page when a task is closed
 
 Version 1.0.37 (Jan 14, 2017)
 -----------------------------

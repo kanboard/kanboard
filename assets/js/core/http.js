@@ -4,6 +4,7 @@ KB.http.request = function (method, url, headers, body) {
 
     function parseResponse(request) {
         var redirect = request.getResponseHeader('X-Ajax-Redirect');
+        var location = request.getResponseHeader('Location');
 
         if (redirect === 'self') {
             window.location.reload();
@@ -11,6 +12,8 @@ KB.http.request = function (method, url, headers, body) {
             window.location = redirect.split('#')[0];
         } else if (redirect) {
             window.location = redirect;
+        } else if (location) {
+            window.location = location;
         } else if (request.getResponseHeader('Content-Type') === 'application/json') {
             try {
                 return JSON.parse(request.responseText);

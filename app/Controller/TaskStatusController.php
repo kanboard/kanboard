@@ -52,11 +52,11 @@ class TaskStatusController extends BaseController
                 $this->flash->failure($failure_message);
             }
 
-            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
+            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
+        } else {
+            $this->response->html($this->template->render($template, array(
+                'task' => $task,
+            )));
         }
-
-        return $this->response->html($this->template->render($template, array(
-            'task' => $task,
-        )));
     }
 }
