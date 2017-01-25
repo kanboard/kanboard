@@ -12,6 +12,10 @@ Regressions:
 * Stay on the same page when a task is closed
 * Wrong URL in modal to move task to another project
 
+Bug fixes:
+
+* Fix wrong datetime formatting when task form shows validation errors
+
 Version 1.0.37 (Jan 14, 2017)
 -----------------------------
 

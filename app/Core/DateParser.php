@@ -292,11 +292,9 @@ class DateParser extends Base
     {
         foreach ($fields as $field) {
             if (! empty($values[$field])) {
-                if (! ctype_digit($values[$field])) {
-                    $values[$field] = strtotime($values[$field]);
+                if (ctype_digit($values[$field])) {
+                    $values[$field] = date($format, $values[$field]);
                 }
-
-                $values[$field] = date($format, $values[$field]);
             } else {
                 $values[$field] = '';
             }
