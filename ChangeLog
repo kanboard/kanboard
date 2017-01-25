@@ -7,6 +7,8 @@ New features:
 
 Improvements:
 
+* Simplify date and time configuration to avoid potential validation issues
+
 Regressions:
 
 * Stay on the same page when a task is closed

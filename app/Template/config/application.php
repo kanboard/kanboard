@@ -23,9 +23,6 @@
         <?= $this->form->select('application_date_format', $date_formats, $values, $errors) ?>
         <p class="form-help"><?= t('ISO format is always accepted, example: "%s" and "%s"', date('Y-m-d'), date('Y_m_d')) ?></p>
 
-        <?= $this->form->label(t('Date and time format'), 'application_datetime_format') ?>
-        <?= $this->form->select('application_datetime_format', $datetime_formats, $values, $errors) ?>
-
         <?= $this->form->label(t('Time format'), 'application_time_format') ?>
         <?= $this->form->select('application_time_format', $time_formats, $values, $errors) ?>
     </fieldset>

@@ -54,7 +54,7 @@ class DateHelper extends Base
      */
     public function datetime($value)
     {
-        return date($this->configModel->get('application_datetime_format', 'm/d/Y H:i'), $value);
+        return date($this->dateParser->getUserDateTimeFormat(), $value);
     }
 
     /**

@@ -13,7 +13,6 @@ use DateTime;
 class DateParser extends Base
 {
     const DATE_FORMAT = 'm/d/Y';
-    const DATE_TIME_FORMAT = 'm/d/Y H:i';
     const TIME_FORMAT = 'H:i';
 
     /**
@@ -35,7 +34,7 @@ class DateParser extends Base
      */
     public function getUserDateTimeFormat()
     {
-        return $this->configModel->get('application_datetime_format', DateParser::DATE_TIME_FORMAT);
+        return $this->getUserDateFormat().' '.$this->getUserTimeFormat();
     }
 
     /**

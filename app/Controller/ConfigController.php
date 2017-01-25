@@ -76,7 +76,6 @@ class ConfigController extends BaseController
             'languages' => $this->languageModel->getLanguages(),
             'timezones' => $this->timezoneModel->getTimezones(),
             'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
-            'datetime_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateTimeFormats()),
             'time_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getTimeFormats()),
             'title' => t('Settings').' &gt; '.t('Application settings'),
         )));

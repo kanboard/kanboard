@@ -64,7 +64,7 @@ class DateParserTest extends Base
         $dates = $dateParser->getDateTimeFormats(true);
         $this->assertEquals('m/d/Y H:i', $dates[0]);
 
-        $this->container['configModel']->save(array('application_datetime_format' => 'd/m/Y g:i a'));
+        $this->container['configModel']->save(array('application_date_format' => 'd/m/Y', 'application_time_format' => 'g:i a'));
         $this->container['memoryCache']->flush();
 
         $dates = $dateParser->getDateTimeFormats();
@@ -121,7 +121,7 @@ class DateParserTest extends Base
     {
         $this->container['configModel']->save(array(
             'application_date_format' => 'd/m/Y',
-            'application_datetime_format' => 'd/m/Y g:i a',
+            'application_time_format' => 'g:i a',
         ));
 
         $dateParser = new DateParser($this->container);
