@@ -15,17 +15,17 @@ class ActionProcedure extends BaseProcedure
 {
     public function getAvailableActions()
     {
-        return $this->actionManager->getAvailableActions();
+        return (object) $this->actionManager->getAvailableActions();
     }
 
     public function getAvailableActionEvents()
     {
-        return $this->eventManager->getAll();
+        return (object) $this->eventManager->getAll();
     }
 
     public function getCompatibleActionEvents($action_name)
     {
-        return $this->actionManager->getCompatibleEvents($action_name);
+        return (object) $this->actionManager->getCompatibleEvents($action_name);
     }
 
     public function removeAction($action_id)

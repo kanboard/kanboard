@@ -15,7 +15,7 @@ class TaskMetadataProcedure extends BaseProcedure
     public function getTaskMetadata($task_id)
     {
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'getTask', $task_id);
-        return $this->taskMetadataModel->getAll($task_id);
+        return (object) $this->taskMetadataModel->getAll($task_id);
     }
 
     public function getTaskMetadataByName($task_id, $name)

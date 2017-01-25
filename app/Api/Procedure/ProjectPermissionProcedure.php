@@ -16,13 +16,13 @@ class ProjectPermissionProcedure extends BaseProcedure
     public function getProjectUsers($project_id)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectUsers', $project_id);
-        return $this->projectUserRoleModel->getAllUsers($project_id);
+        return (object) $this->projectUserRoleModel->getAllUsers($project_id);
     }
 
     public function getAssignableUsers($project_id, $prepend_unassigned = false)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getAssignableUsers', $project_id);
-        return $this->projectUserRoleModel->getAssignableUsersList($project_id, $prepend_unassigned);
+        return (object) $this->projectUserRoleModel->getAssignableUsersList($project_id, $prepend_unassigned);
     }
 
     public function addProjectUser($project_id, $user_id, $role = Role::PROJECT_MEMBER)

@@ -17,6 +17,7 @@ Regressions:
 Bug fixes:
 
 * Fix wrong datetime formatting when task form shows validation errors
+* Empty arrays are serialized to a list instead of a dict (Json API)
 
 Version 1.0.37 (Jan 14, 2017)
 -----------------------------

@@ -54,7 +54,7 @@ class MeProcedure extends BaseProcedure
 
     public function getMyProjectsList()
     {
-        return $this->projectUserRoleModel->getProjectsByUser($this->userSession->getId());
+        return (object) $this->projectUserRoleModel->getProjectsByUser($this->userSession->getId());
     }
 
     public function getMyOverdueTasks()
