@@ -106,6 +106,10 @@ Attribute: **description** or **desc**
 
 Example: `description:"text search"`
 
+### Search by completion
+
+Attribute: **completed**
+
 ### Search by external reference
 
 The task reference is an external id of your task, by example a ticket number from another software.

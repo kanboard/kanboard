@@ -14,6 +14,7 @@ use Kanboard\Filter\TaskCategoryFilter;
 use Kanboard\Filter\TaskColorFilter;
 use Kanboard\Filter\TaskColumnFilter;
 use Kanboard\Filter\TaskCommentFilter;
+use Kanboard\Filter\TaskCompletionDateFilter;
 use Kanboard\Filter\TaskCreationDateFilter;
 use Kanboard\Filter\TaskCreatorFilter;
 use Kanboard\Filter\TaskDescriptionFilter;
@@ -155,6 +156,9 @@ class FilterProvider implements ServiceProviderInterface
                 )
                 ->withFilter(TaskStartDateFilter::getInstance()
                     ->setDateParser($c['dateParser'])
+                )
+                ->withFilter(TaskCompletionDateFilter::getInstance()
+                    ->setDateparser($c['dateParser'])
                 )
                 ->withFilter(new TaskIdFilter())
                 ->withFilter(TaskLinkFilter::getInstance()
