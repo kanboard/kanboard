@@ -225,6 +225,7 @@ List of template hooks:
 | `template:project-user:sidebar`                           | Sidebar on project user overview page              |
 | `template:project-list:menu:before`                       | Project list: before menu entries                  |
 | `template:project-list:menu:after`                        | Project list: after menu entries                   |
+| `template:project-overview:before-description`            | Project overview: before description               |
 | `template:task:layout:top`                                | Task layout top (after page header)                |
 | `template:task:details:top`                               | Task summary top                                   |
 | `template:task:details:bottom`                            | Task summary bottom                                |
