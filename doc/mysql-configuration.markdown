@@ -1,23 +1,23 @@
-Mysql/MariaDB Configuration
+MySQL/MariaDB Configuration
 ===========================
 
 By default Kanboard use Sqlite to stores its data.
-However it's possible to use Mysql or MariaDB instead of Sqlite.
+However it's possible to use MySQL or MariaDB instead of Sqlite.
 
 Requirements
 ------------
 
-- Mysql server
+- MySQL server
 - The PHP extension `pdo_mysql` installed
 
-Note: Kanboard is tested with **Mysql >= 5.5 and MariaDB >= 10.0**
+Note: Kanboard is tested with **MySQL >= 5.5 and MariaDB >= 10.0**
 
-Mysql configuration
+MySQL configuration
 -------------------
 
 ### Create a database
 
-The first step is to create a database on your Mysql server.
+The first step is to create a database on your MySQL server.
 By example, you can do that with the command line mysql client:
 
 ```sql
@@ -31,10 +31,10 @@ The file `config.php` should contains those values:
 ```php
 <?php
 
-// We choose to use Mysql instead of Sqlite
+// We choose to use MySQL instead of Sqlite
 define('DB_DRIVER', 'mysql');
 
-// Mysql parameters
+// MySQL parameters
 define('DB_USERNAME', 'REPLACE_ME');
 define('DB_PASSWORD', 'REPLACE_ME');
 define('DB_HOSTNAME', 'REPLACE_ME');
@@ -58,15 +58,15 @@ The file `app/Schema/Sql/mysql.sql` is a SQL dump that represents the last versi
 SSL configuration
 -----------------
 
-These parameters have to be defined to enable the Mysql SSL connection:
+These parameters have to be defined to enable the MySQL SSL connection:
 
 ```php
-// Mysql SSL key
+// MySQL SSL key
 define('DB_SSL_KEY', '/path/to/client-key.pem');
 
-// Mysql SSL certificate
+// MySQL SSL certificate
 define('DB_SSL_CERT', '/path/to/client-cert.pem');
 
-// Mysql SSL CA
+// MySQL SSL CA
 define('DB_SSL_CA', '/path/to/ca-cert.pem');
 ```
