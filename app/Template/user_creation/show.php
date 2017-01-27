@@ -57,7 +57,7 @@
             <fieldset>
                 <legend><?= t('Projects') ?></legend>
 
-                <?= $this->form->label(t('Add this user to project'), 'project_id') ?>
+                <?= $this->form->label(t('Add this person to this project'), 'project_id') ?>
                 <?= $this->form->select('project_id', $projects, $values, $errors) ?>
             </fieldset>
         </div>
