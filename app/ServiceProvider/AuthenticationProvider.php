@@ -198,7 +198,8 @@ class AuthenticationProvider implements ServiceProviderInterface
 
         $acl->add('ActionProcedure', array('removeAction', 'getActions', 'createAction'), Role::PROJECT_MANAGER);
         $acl->add('CategoryProcedure', '*', Role::PROJECT_MANAGER);
-        $acl->add('ColumnProcedure', '*', Role::PROJECT_MANAGER);
+        $acl->add('ColumnProcedure', array('updateColumn', 'addColumn', 'removeColumn', 'changeColumnPosition'), Role::PROJECT_MANAGER);
+        $acl->add('ColumnProcedure', array('getColumns', 'getColumn'), Role::PROJECT_VIEWER);
         $acl->add('CommentProcedure', array('removeComment', 'createComment', 'updateComment'), Role::PROJECT_MEMBER);
         $acl->add('ProjectPermissionProcedure', '*', Role::PROJECT_MANAGER);
         $acl->add('ProjectProcedure', array('updateProject', 'removeProject', 'enableProject', 'disableProject', 'enableProjectPublicAccess', 'disableProjectPublicAccess'), Role::PROJECT_MANAGER);
