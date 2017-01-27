@@ -27,6 +27,16 @@ KB.trigger = function (eventType, eventData) {
     }
 };
 
+KB.removeListener = function (eventType, callback) {
+    if (this.listeners.internals.hasOwnProperty(eventType)) {
+        for (var i = 0; i < this.listeners.internals[eventType].length; i++) {
+            if (this.listeners.internals[eventType][i] === callback) {
+                this.listeners.internals[eventType].splice(i, 1);
+            }
+        }
+    }
+};
+
 KB.onClick = function (selector, callback) {
     this.listeners.clicks[selector] = callback;
 };

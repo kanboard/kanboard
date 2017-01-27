@@ -238,6 +238,11 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
         KB.on('select.dropdown.loading.start', onLoadingStart);
         KB.on('select.dropdown.loading.stop', onLoadingStop);
 
+        KB.on('modal.close', function () {
+            KB.removeListener('select.dropdown.loading.start', onLoadingStart);
+            KB.removeListener('select.dropdown.loading.stop', onLoadingStop);
+        });
+
         chevronIconElement = KB.dom('i')
             .attr('class', 'fa fa-chevron-down select-dropdown-chevron')
             .click(toggleDropdownMenu)

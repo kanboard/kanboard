@@ -1,4 +1,4 @@
-KB.onClick('.accordion-toggle', function(e) {
+KB.onClick('.accordion-toggle', function (e) {
     var sectionElement = KB.dom(e.target).parent('.accordion-section');
 
     if (sectionElement) {

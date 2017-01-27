@@ -2,7 +2,7 @@ KB.component('file-upload', function (containerElement, options) {
     var inputFileElement = null;
     var dropzoneElement = null;
     var files = [];
-    var currentFileIndex = null;
+    var currentFileIndex = 0;
 
     function onProgress(e) {
         if (e.lengthComputable) {
@@ -183,6 +183,9 @@ KB.component('file-upload', function (containerElement, options) {
 
     this.render = function () {
         KB.on('modal.submit', onSubmit);
+        KB.on('modal.close', function () {
+           KB.removeListener('modal.submit', onSubmit);
+        });
 
         inputFileElement = buildFileInputElement();
         dropzoneElement = buildDropzoneElement();

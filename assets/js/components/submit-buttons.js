@@ -78,6 +78,14 @@ KB.component('submit-buttons', function (containerElement, options) {
         KB.on('modal.hide', onHide);
         KB.on('modal.submit.label', onUpdateSubmitLabel);
 
+        KB.on('modal.close', function () {
+            KB.removeListener('modal.stop', onStop);
+            KB.removeListener('modal.disable', onDisable);
+            KB.removeListener('modal.enable', onEnable);
+            KB.removeListener('modal.hide', onHide);
+            KB.removeListener('modal.submit.label', onUpdateSubmitLabel);
+        });
+
         var formActionElementBuilder = KB.dom('div')
             .attr('class', 'form-actions')
             .add(buildButton());

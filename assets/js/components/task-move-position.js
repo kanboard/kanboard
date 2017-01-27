@@ -146,6 +146,9 @@ KB.component('task-move-position', function (containerElement, options) {
 
     this.render = function () {
         KB.on('modal.submit', onSubmit);
+        KB.on('modal.close', function () {
+            KB.removeListener('modal.submit', onSubmit);
+        });
 
         var form = KB.dom('div')
             .add(KB.dom('div').attr('id', 'message-container').build())
