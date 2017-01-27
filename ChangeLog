@@ -7,7 +7,7 @@ New features:
 
 Improvements:
 
-* Set API methods "getColumns" and "getColumn" accessible to project viewers
+* More API procedures are now available to project members and project viewers
 * Simplify date and time configuration to avoid potential validation issues
 
 Regressions:

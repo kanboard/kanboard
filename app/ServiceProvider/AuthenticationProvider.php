@@ -197,20 +197,19 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->setRoleHierarchy(Role::PROJECT_MEMBER, array(Role::PROJECT_VIEWER));
 
         $acl->add('ActionProcedure', array('removeAction', 'getActions', 'createAction'), Role::PROJECT_MANAGER);
-        $acl->add('CategoryProcedure', '*', Role::PROJECT_MANAGER);
+        $acl->add('CategoryProcedure', array('removeCategory', 'createCategory', 'updateCategory'), Role::PROJECT_MANAGER);
         $acl->add('ColumnProcedure', array('updateColumn', 'addColumn', 'removeColumn', 'changeColumnPosition'), Role::PROJECT_MANAGER);
-        $acl->add('ColumnProcedure', array('getColumns', 'getColumn'), Role::PROJECT_VIEWER);
         $acl->add('CommentProcedure', array('removeComment', 'createComment', 'updateComment'), Role::PROJECT_MEMBER);
-        $acl->add('ProjectPermissionProcedure', '*', Role::PROJECT_MANAGER);
+        $acl->add('ProjectPermissionProcedure', array('addProjectUser', 'addProjectGroup', 'removeProjectUser', 'removeProjectGroup', 'changeProjectUserRole', 'changeProjectGroupRole'), Role::PROJECT_MANAGER);
         $acl->add('ProjectProcedure', array('updateProject', 'removeProject', 'enableProject', 'disableProject', 'enableProjectPublicAccess', 'disableProjectPublicAccess'), Role::PROJECT_MANAGER);
-        $acl->add('SubtaskProcedure', '*', Role::PROJECT_MEMBER);
-        $acl->add('SubtaskTimeTrackingProcedure', '*', Role::PROJECT_MEMBER);
-        $acl->add('SwimlaneProcedure', '*', Role::PROJECT_MANAGER);
-        $acl->add('ProjectFileProcedure', '*', Role::PROJECT_MEMBER);
-        $acl->add('TaskFileProcedure', '*', Role::PROJECT_MEMBER);
-        $acl->add('TaskLinkProcedure', '*', Role::PROJECT_MEMBER);
+        $acl->add('SubtaskProcedure', array('removeSubtask', 'createSubtask', 'updateSubtask'), Role::PROJECT_MEMBER);
+        $acl->add('SubtaskTimeTrackingProcedure', array('setSubtaskStartTime', 'setSubtaskEndTime'), Role::PROJECT_MEMBER);
+        $acl->add('SwimlaneProcedure', array('addSwimlane', 'updateSwimlane', 'removeSwimlane', 'disableSwimlane', 'enableSwimlane', 'changeSwimlanePosition'), Role::PROJECT_MANAGER);
+        $acl->add('ProjectFileProcedure', array('createProjectFile', 'removeProjectFile', 'removeAllProjectFiles'), Role::PROJECT_MEMBER);
+        $acl->add('TaskFileProcedure', array('createTaskFile', 'removeTaskFile', 'removeAllTaskFiles'), Role::PROJECT_MEMBER);
+        $acl->add('TaskLinkProcedure', array('createTaskLink', 'updateTaskLink', 'removeTaskLink'), Role::PROJECT_MEMBER);
         $acl->add('TaskExternalLinkProcedure', array('createExternalTaskLink', 'updateExternalTaskLink', 'removeExternalTaskLink'), Role::PROJECT_MEMBER);
-        $acl->add('TaskProcedure', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskProcedure', array('openTask', 'closeTask', 'removeTask', 'moveTaskPosition', 'moveTaskToProject', 'duplicateTaskToProject', 'createTask', 'updateTask'), Role::PROJECT_MEMBER);
         $acl->add('TaskTagProcedure', array('setTaskTags'), Role::PROJECT_MEMBER);
         $acl->add('TagProcedure', array('createTag', 'updateTag', 'removeTag'), Role::PROJECT_MEMBER);
 
