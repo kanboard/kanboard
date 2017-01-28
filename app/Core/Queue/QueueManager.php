@@ -64,7 +64,7 @@ class QueueManager extends Base
     public function listen()
     {
         if ($this->queue === null) {
-            throw new LogicException('No queue driver defined!');
+            throw new LogicException('No queue driver defined or unable to connect to broker!');
         }
 
         while ($job = $this->queue->pull()) {

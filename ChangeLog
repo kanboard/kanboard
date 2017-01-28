@@ -4,6 +4,7 @@ Version 1.0.38 (unreleased)
 New features:
 
 * User invites
+* Add command to execute individual job (mostly for debugging)
 
 Improvements:
 

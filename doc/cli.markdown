@@ -30,6 +30,7 @@ Options:
 Available commands:
   cronjob                            Execute daily cronjob
   help                               Displays help for a command
+  job                                Execute individual job (read payload from stdin)
   list                               Lists commands
   worker                             Execute queue worker
  db
@@ -205,6 +206,12 @@ Note: Installed files will have the same permissions as the current user
 
 ```bash
 ./cli worker
+```
+
+### Execute individual job (mostly for debugging)
+
+```bash
+echo 'RAW_JOB_DATA' | ./cli job
 ```
 
 ### Execute database migrations
