@@ -138,7 +138,7 @@ class DateParserTest extends Base
     {
         $this->container['configModel']->save(array(
             'application_date_format' => 'd.m.Y',
-            'application_datetime_format' => 'd.m.Y H:i',
+            'application_time_format' => 'H:i',
         ));
 
         $dateParser = new DateParser($this->container);

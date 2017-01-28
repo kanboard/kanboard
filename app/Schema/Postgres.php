@@ -18,6 +18,8 @@ function version_99(PDO $pdo)
             PRIMARY KEY(email, token)
         )
     ");
+
+    $pdo->exec("DELETE FROM settings WHERE \"option\"='application_datetime_format'");
 }
 
 function version_98(PDO $pdo)

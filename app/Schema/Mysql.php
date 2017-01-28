@@ -18,6 +18,8 @@ function version_120(PDO $pdo)
             PRIMARY KEY(email, token)
         ) ENGINE=InnoDB CHARSET=utf8
     ");
+
+    $pdo->exec("DELETE FROM settings WHERE `option`='application_datetime_format'");
 }
 
 function version_119(PDO $pdo)
