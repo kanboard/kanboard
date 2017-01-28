@@ -167,6 +167,7 @@
                 replace(response);
             });
         },
-        getForm: getForm
+        getForm: getForm,
+        submitForm: submitForm
     };
 }());

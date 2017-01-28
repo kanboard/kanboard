@@ -10,15 +10,17 @@ KB.keyboardShortcuts = function () {
     }
 
     function submitForm() {
-        var forms = $("form");
+        if (KB.modal.isOpen()) {
+            KB.modal.submitForm();
+        } else {
+            var forms = $("form");
 
-        if (forms.length == 1) {
-            forms.submit();
-        } else if (forms.length > 1) {
-            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
-                $(document.activeElement).parents("form").submit();
-            } else if (KB.modal.isOpen()) {
-                KB.modal.getForm().submit();
+            if (forms.length == 1) {
+                forms.submit();
+            } else if (forms.length > 1) {
+                if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+                    $(document.activeElement).parents("form").submit();
+                }
             }
         }
     }
