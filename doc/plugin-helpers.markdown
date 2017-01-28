@@ -6,7 +6,7 @@ Helper skeleton:
 ```php
 <?php
 
-namespace Kanboard\Plugin\MyPlugin\Helper\MyHelper;
+namespace Kanboard\Plugin\MyPlugin\Helper;
 
 use Kanboard\Core\Base;
 
