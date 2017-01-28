@@ -1305,6 +1305,6 @@ return array(
     'Add this person to this project' => 'Adicione esta pessoa a este projeto',
     'Sign-up' => 'Registe-se',
     'Credentials' => 'Credenciais',
-    'New User' => 'Novo Utilizador',
+    'New user' => 'Novo utilizador',
     'This username is already taken' => 'Este nome de usuário já foi utilizado',
 );
