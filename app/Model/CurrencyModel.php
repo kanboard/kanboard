@@ -43,6 +43,7 @@ class CurrencyModel extends Base
             'BAM' => t('BAM - Konvertible Mark'),
             'RUB' => t('RUB - Russian Ruble'),
             'CNY' => t('CNY - Chinese Yuan'),
+            'TRL' => t('TRL - Turkish Lira'),
         );
     }
 
