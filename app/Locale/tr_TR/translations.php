@@ -1348,4 +1348,5 @@ return array(
     'Key' => 'Anahtar',
     'Value' => 'Değer',
     'Add Metadata' => 'Yeni Metadata Ekle',
+    'Add or change currency rate' => 'Kur Oranını ekle veya değiştir',
 );
