@@ -16,7 +16,7 @@ Official website: <https://kanboard.net>
 - Distributed under [MIT License](https://github.com/kanboard/kanboard/blob/master/LICENSE)
 - The complete [list of features are available on the website](https://kanboard.net/features)
 - [Change Log](https://github.com/kanboard/kanboard/blob/master/ChangeLog)
-- [Documentation](https://github.com/kanboard/kanboard/blob/master/doc/index.markdown)
+- [Documentation](https://kanboard.net/documentation)
 - IRC channel: [#kanboard](ircs://chat.freenode.net:6697/#kanboard) (Freenode)
 
 Authors
