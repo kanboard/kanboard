@@ -85,6 +85,51 @@ In your Kanboard `config.php`:
 define('ENABLE_URL_REWRITE', true);
 ```
 
+Another example with Kanboard in a subfolder:
+
+```
+server {
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+
+    root /var/www/html;
+    index index.php index.html index.htm;
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ^~ /kanboard {
+
+        location /kanboard {
+            try_files $uri $uri/ /kanboard/index.php$is_args$args;
+        }
+
+        location ~ ^/kanboard/(?:kanboard|config.php|config.default.php) {
+            deny all;
+        }
+
+        location ~* /kanboard/data {
+            deny all;
+        }
+
+        location ~ \.php(?:$|/) {
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param PATH_INFO $fastcgi_path_info;
+            fastcgi_param HTTPS on; # Use only if HTTPS is configured
+            include fastcgi_params;
+            fastcgi_pass unix:/var/run/php5-fpm.sock;
+        }
+
+        location ~ /kanboard/\.ht {
+            deny all;
+        }
+    }
+}
+```
+
 Adapt the example above according to your own configuration.
 
 IIS configuration example
