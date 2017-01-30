@@ -3,6 +3,7 @@ Version 1.0.39 (unreleased)
 
 Improvements:
 
+* Do not display current project in board selector
 * Do not set default task assignee for team projects
 * Comments are highlighted if hash (#comment-123) is present in URL
 * Documentation translated in Turkish
