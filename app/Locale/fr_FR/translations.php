@@ -1307,4 +1307,8 @@ return array(
     'Credentials' => 'Informations d\'identification',
     'New user' => 'Nouvel utilisateur',
     'This username is already taken' => 'Ce nom d\'utilisateur est déjà pris',
+    'A link to reset your password has been sent by email.' => 'Un lien pour réinitialiser votre mot de passe a été envoyé par email.',
+    'Your profile must have a valid email address.' => 'Votre profil doit avoir une adresse e-mail valide.',
+    'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => 'Malheureusement, nous ne pouvons pas réinitialiser votre mot de passe. Avez-vous saisi un nom d\'utilisateur valide ? Avez-vous une adresse e-mail dans votre profil ?',
+    'TRL - Turkish Lira' => 'TRL - Livre turque',
 );
