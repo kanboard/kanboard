@@ -1306,7 +1306,7 @@ return array(
     'Sign-up' => 'Registe-se',
     'Credentials' => 'Credenciais',
     'New user' => 'Novo utilizador',
-    'This username is already taken' => 'Este nome de usuário já está a ser utilizado',
+    'This username is already taken' => 'Este nome de utilizador já está a ser utilizado',
     'A link to reset your password has been sent by email.' => 'Um link para redefinir a sua password foi enviado por email.',
     'Your profile must have a valid email address.' => 'O seu perfil deve ter um endereço de email válido.',
     'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => 'Infelizmente, não conseguimos redefinir a sua password. Colocou um utilizador válido? Tem um endereço de email definido no seu perfil?',
