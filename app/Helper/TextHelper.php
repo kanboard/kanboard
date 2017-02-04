@@ -59,6 +59,10 @@ class TextHelper extends Base
      */
     public function bytes($size, $precision = 2)
     {
+        if ($size == 0) {
+            return 0;
+        }
+
         $base = log($size) / log(1024);
         $suffixes = array('', 'k', 'M', 'G', 'T');
 
