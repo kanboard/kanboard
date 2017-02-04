@@ -298,6 +298,39 @@ class ProjectModelTest extends Base
         $this->assertFalse($project);
     }
 
+    public function testEmail()
+    {
+        $projectModel = new ProjectModel($this->container);
+
+        // Creation
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest1', 'email' => 'test1@localhost')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'UnitTest2')));
+
+        $project = $projectModel->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals('test1@localhost', $project['email']);
+
+        $project = $projectModel->getById(2);
+        $this->assertNotEmpty($project);
+        $this->assertEquals('', $project['email']);
+
+        // Update
+        $this->assertTrue($projectModel->update(array('id' => '1', 'email' => 'test1@here')));
+
+        $project = $projectModel->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals('test1@here', $project['email']);
+
+        $project = $projectModel->getByEmail('test1@here');
+        $this->assertEquals(1, $project['id']);
+
+        $project = $projectModel->getByEmail('test1@localhost');
+        $this->assertEmpty($project);
+
+        $project = $projectModel->getByEmail('');
+        $this->assertFalse($project);
+    }
+
     public function testThatProjectCreatorAreAlsoOwner()
     {
         $projectModel = new ProjectModel($this->container);

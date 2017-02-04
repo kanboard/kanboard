@@ -106,6 +106,22 @@ class ProjectModel extends Base
     }
 
     /**
+     * Get a project by the email address
+     *
+     * @access public
+     * @param  string  $email
+     * @return array|boolean
+     */
+    public function getByEmail($email)
+    {
+        if (empty($email)) {
+            return false;
+        }
+
+        return $this->db->table(self::TABLE)->eq('email', $email)->findOne();
+    }
+
+    /**
      * Fetch project data by using the token
      *
      * @access public

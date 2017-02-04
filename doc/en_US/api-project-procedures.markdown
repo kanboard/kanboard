@@ -182,6 +182,56 @@ Response example:
 }
 ```
 
+## getProjectByEmail
+
+- Purpose: **Get project information**
+- Parameters:
+    - **email** (string, required)
+- Result on success: **project properties**
+- Result on failure: **null**
+
+Request example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "method": "getProjectByEmail",
+    "id": 1620253806,
+    "params": {
+        "email": "my_project@my_domain.tld"
+    }
+}
+```
+
+Response example:
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": 1620253806,
+    "result": {
+        "id": "1",
+        "name": "Test",
+        "is_active": "1",
+        "token": "",
+        "last_modified": "1436119135",
+        "is_public": "0",
+        "is_private": "0",
+        "is_everybody_allowed": "0",
+        "default_swimlane": "Default swimlane",
+        "show_default_swimlane": "1",
+        "description": "test",
+        "identifier": "",
+        "email": "my_project@my_domain.tld",
+        "url": {
+            "board": "http:\/\/127.0.0.1:8000\/?controller=board&action=show&project_id=1",
+            "calendar": "http:\/\/127.0.0.1:8000\/?controller=calendar&action=show&project_id=1",
+            "list": "http:\/\/127.0.0.1:8000\/?controller=listing&action=show&project_id=1"
+        }
+    }
+}
+```
+
 ## getAllProjects
 
 - Purpose: **Get all available projects**

@@ -1,6 +1,12 @@
-<div class="page-header">
-    <h2><?= $this->text->e($project['name']) ?> &gt; <?= t('Edit project') ?></h2>
-</div>
+<?php if ($this->app->isAjax()): ?>
+    <div class="page-header">
+        <h2><?= $this->text->e($project['name']) ?> &gt; <?= t('Edit project') ?></h2>
+    </div>
+<?php else: ?>
+    <div class="page-header">
+        <h2><?= t('Edit project') ?></h2>
+    </div>
+<?php endif ?>
 <form method="post" action="<?= $this->url->href('ProjectEditController', 'update', array('project_id' => $project['id'], 'redirect' => 'edit')) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('id', $values) ?>
@@ -11,12 +17,16 @@
         <?= $this->form->label(t('Name'), 'name') ?>
         <?= $this->form->text('name', $values, $errors, array('required', 'maxlength="50"', 'autofocus', 'tabindex="1"')) ?>
 
+        <?= $this->form->label(t('Email'), 'email') ?>
+        <?= $this->form->email('email', $values, $errors, array('maxlength="255"', 'tabindex="2"')) ?>
+        <p class="form-help"><?= t('The project email is optional and could be used by several plugins.') ?></p>
+
         <?= $this->form->label(t('Identifier'), 'identifier') ?>
-        <?= $this->form->text('identifier', $values, $errors, array('maxlength="50"', 'tabindex="2"')) ?>
+        <?= $this->form->text('identifier', $values, $errors, array('maxlength="50"', 'tabindex="3"')) ?>
         <p class="form-help"><?= t('The project identifier is optional and must be alphanumeric, example: MYPROJECT.') ?></p>
 
         <?= $this->form->label(t('Description'), 'description') ?>
-        <?= $this->form->textEditor('description', $values, $errors, array('tabindex' => 3)) ?>
+        <?= $this->form->textEditor('description', $values, $errors, array('tabindex' => 4)) ?>
     </fieldset>
 
     <fieldset>

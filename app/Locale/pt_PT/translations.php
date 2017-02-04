@@ -1311,4 +1311,6 @@ return array(
     'Your profile must have a valid email address.' => 'O seu perfil deve ter um endereço de email válido.',
     'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => 'Infelizmente, não conseguimos redefinir a sua password. Colocou um utilizador válido? Tem um endereço de email definido no seu perfil?',
     'TRL - Turkish Lira' => 'TRL - Lira Turca',
+    // 'The project email is optional and could be used by several plugins.' => '',
+    // 'The email project must be unique across all projects' => '',
 );
