@@ -40,8 +40,9 @@ class MailHelper extends Base
      */
     public function filterSubject($subject)
     {
-        $subject = str_replace('RE: ', '', $subject);
-        $subject = str_replace('FW: ', '', $subject);
+        $subject = str_ireplace('RE: ', '', $subject);
+        $subject = str_ireplace('FW: ', '', $subject);
+        $subject = str_ireplace('Fwd: ', '', $subject);
 
         return $subject;
     }

@@ -20,6 +20,7 @@ class MailHelperTest extends Base
         $this->assertEquals('Test', $helper->filterSubject('Test'));
         $this->assertEquals('Test', $helper->filterSubject('RE: Test'));
         $this->assertEquals('Test', $helper->filterSubject('FW: Test'));
+        $this->assertEquals('Test', $helper->filterSubject('Fwd: Test'));
     }
 
     public function testGetSenderAddress()
