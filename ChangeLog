@@ -11,6 +11,10 @@ Improvements:
 * Comments are highlighted if hash (#comment-123) is present in URL
 * Documentation translated in Turkish
 
+Bug fixes:
+
+* Search with multiple expressions with double quotes was not working
+
 Version 1.0.38 (Jan 28, 2017)
 -----------------------------
 
