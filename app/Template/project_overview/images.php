@@ -33,7 +33,11 @@
                     <span class="tooltip" title='<?= t('Uploaded: %s', $this->dt->datetime($file['date'])).'<br>'.t('Size: %s', $this->text->bytes($file['size'])) ?>'>
                         <i class="fa fa-info-circle"></i>
                     </span>
-                        <?= t('Uploaded by %s', $file['user_name'] ?: $file['username']) ?>
+                        <?php if (! empty($file['user_id'])): ?>
+                            <?= t('Uploaded by %s', $file['user_name'] ?: $file['username']) ?>
+                        <?php else: ?>
+                            <?= t('Uploaded: %s', $this->dt->datetime($file['date'])) ?>
+                        <?php endif ?>
                     </div>
                 </div>
             </div>
