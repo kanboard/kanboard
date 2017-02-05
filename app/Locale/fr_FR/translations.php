@@ -1313,4 +1313,5 @@ return array(
     'TRL - Turkish Lira' => 'TRL - Livre turque',
     'The project email is optional and could be used by several plugins.' => 'L\'adresse email d\'un projet est optionnel et pourrait être utilisé par plusieurs extensions.',
     'The email project must be unique across all projects' => 'L\'adresse email d\'un projet doit être unique pour tous les projets',
+    'The email configuration has been disabled by the administrator.' => 'La configuration des emails a été désactivée par l\'administrateur.',
 );

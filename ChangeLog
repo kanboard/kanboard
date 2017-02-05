@@ -3,6 +3,7 @@ Version 1.0.39 (unreleased)
 
 Improvements:
 
+* Add configuration parameter to disable email configuration from user interface
 * Add email address field for projects
 * Improve forget password behaviour (notify the user that an email has been sent or not)
 * Do not display current project in board selector

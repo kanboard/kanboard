@@ -65,7 +65,10 @@ Email configuration
 -------------------
 
 ```php
-// E-mail address for the "From" header (notifications)
+// Enable/disable email configuration from the user interface
+define('MAIL_CONFIGURATION', true);
+
+// E-mail address used for the "From" header (notifications)
 define('MAIL_FROM', 'notifications@kanboard.local');
 
 // Mail transport to use: "smtp", "sendmail" or "mail" (PHP mail function)
