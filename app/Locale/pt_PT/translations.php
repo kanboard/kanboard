@@ -1311,7 +1311,7 @@ return array(
     'Your profile must have a valid email address.' => 'O seu perfil deve ter um endereço de email válido.',
     'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => 'Infelizmente, não conseguimos redefinir a sua password. Colocou um utilizador válido? Tem um endereço de email definido no seu perfil?',
     'TRL - Turkish Lira' => 'TRL - Lira Turca',
-    // 'The project email is optional and could be used by several plugins.' => '',
-    // 'The email project must be unique across all projects' => '',
-    // 'The email configuration has been disabled by the administrator.' => '',
+    'The project email is optional and could be used by several plugins.' => 'O e-mail do projeto é opcional e pode ser usado por vários plugins.',
+    'The email project must be unique across all projects' => 'O e-mail do projeto tem de ser único em todos os projetos',
+    'The email configuration has been disabled by the administrator.' => 'A configuração de e-mail foi desativada pelo administrador.',
 );
