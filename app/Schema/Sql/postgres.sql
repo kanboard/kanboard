@@ -195,9 +195,9 @@ CREATE TABLE "comments" (
     "task_id" integer NOT NULL,
     "user_id" integer DEFAULT 0,
     "date_creation" bigint NOT NULL,
-    "date_modification" bigint NOT NULL,
     "comment" "text",
-    "reference" character varying(50) DEFAULT ''::character varying
+    "reference" character varying(50) DEFAULT ''::character varying,
+    "date_modification" bigint
 );
 
 
@@ -302,6 +302,17 @@ CREATE SEQUENCE "groups_id_seq"
 --
 
 ALTER SEQUENCE "groups_id_seq" OWNED BY "groups"."id";
+
+
+--
+-- Name: invites; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE "invites" (
+    "email" character varying(255) NOT NULL,
+    "project_id" integer NOT NULL,
+    "token" character varying(255) NOT NULL
+);
 
 
 --
@@ -1606,6 +1617,14 @@ ALTER TABLE ONLY "groups"
 
 
 --
+-- Name: invites invites_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "invites"
+    ADD CONSTRAINT "invites_pkey" PRIMARY KEY ("email", "token");
+
+
+--
 -- Name: last_logins last_logins_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2544,8 +2563,8 @@ INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_high
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_public_refresh_interval', '60', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_private_refresh_interval', '10', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_columns', '', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', 'b64911d9b61ea71adada348105281e16470e268fce7cb9bf1895958d4bbc', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', 'f63bd25c2e952d78b70f178fd96b4207ef29315ca73d308af37c02d8d51f', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', 'a41accd9dabc3d45a3d26de5edd5c43b3b0082cabebfbc7a175b8d6b2e5a', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', 'dbbf966938e4400746ebcb2337bb4a3cdce0bab2dd053d57dbbc243ccc9d', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_language', 'en_US', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_timezone', 'UTC', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_url', '', 0, 0);
@@ -2614,4 +2633,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$0.8BJyhOEBHGqfwD3nIJHuxObqTlZGJ/KRNDVHfSu7RGd42rEbSa.', 'app-admin');INSERT INTO schema_version VALUES ('98');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$R3.YibAi6H0ZzzrSHFa7qeaiEqep1X2TF/bKQX5jMQ7fZ9KIfzUte', 'app-admin');INSERT INTO schema_version VALUES ('99');

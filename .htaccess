@@ -3,6 +3,9 @@
 
     SetEnv HTTP_MOD_REWRITE On
 
+    # Uncomment this line depending of your Apache configuration
+    # RewriteBase /
+
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [QSA,L]

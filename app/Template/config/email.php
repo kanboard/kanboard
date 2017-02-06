@@ -6,11 +6,15 @@
 
     <fieldset>
         <legend><?= t('Outgoing Emails') ?></legend>
-        <?= $this->form->label(t('Email sender address'), 'mail_sender_address') ?>
-        <?= $this->form->text('mail_sender_address', $values, $errors, array('placeholder="'.MAIL_FROM.'"')) ?>
+        <?php if (MAIL_CONFIGURATION): ?>
+            <?= $this->form->label(t('Email sender address'), 'mail_sender_address') ?>
+            <?= $this->form->text('mail_sender_address', $values, $errors, array('placeholder="'.MAIL_FROM.'"')) ?>
 
-        <?= $this->form->label(t('Email transport'), 'mail_transport') ?>
-        <?= $this->form->select('mail_transport', $mail_transports, $values, $errors) ?>
+            <?= $this->form->label(t('Email transport'), 'mail_transport') ?>
+            <?= $this->form->select('mail_transport', $mail_transports, $values, $errors) ?>
+        <?php else: ?>
+            <p class="alert"><?= t('The email configuration has been disabled by the administrator.') ?></p>
+        <?php endif ?>
     </fieldset>
 
     <?= $this->hook->render('template:config:email', array('values' => $values, 'errors' => $errors)) ?>

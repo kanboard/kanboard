@@ -107,6 +107,7 @@ class TextHelperTest extends Base
     {
         $textHelper = new TextHelper($this->container);
 
+        $this->assertEquals('0', $textHelper->bytes(0));
         $this->assertEquals('1k', $textHelper->bytes(1024));
         $this->assertEquals('33.71k', $textHelper->bytes(34520));
     }

@@ -202,6 +202,7 @@ List of template hooks:
 | `template:board:task:footer`                              | Task in board: footer                              |
 | `template:board:task:icons`                               | Task in board: tooltip icon                        |
 | `template:board:column:dropdown`                          | Dropdown menu in board columns                     |
+| `template:board:column:header`                            | Board column header                                |
 | `template:board:tooltip:subtasks:header:before-assignee`  | Header of Subtask table on tootip before Assignee  |
 | `template:board:tooltip:subtasks:rows`                    | Column on row of Subtask table on tooltip          |
 | `template:config:sidebar`                                 | Sidebar on settings page                           |

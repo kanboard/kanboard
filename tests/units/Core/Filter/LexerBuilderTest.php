@@ -149,4 +149,29 @@ class LexerBuilderTest extends Base
         $this->assertEquals('Test 1', $tasks[0]['title']);
         $this->assertEquals('Test 2', $tasks[1]['title']);
     }
+
+    public function testWithMultipleExpressionsWithQuotes()
+    {
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $userModel = new UserModel($this->container);
+        $query = $taskFinder->getExtendedQuery();
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'foobar', 'name' => 'Foo Bar')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreation->create(array('title' => 'Test 1', 'project_id' => 1, 'owner_id' => 2)));
+        $this->assertEquals(2, $taskCreation->create(array('title' => 'Test 2', 'project_id' => 1, 'owner_id' => 1)));
+        $this->assertEquals(3, $taskCreation->create(array('title' => 'Test 3', 'project_id' => 1, 'owner_id' => 0)));
+
+        $builder = new LexerBuilder();
+        $builder->withFilter(new TaskAssigneeFilter());
+        $builder->withFilter(new TaskTitleFilter(), true);
+        $builder->withQuery($query);
+        $tasks = $builder->build('assignee:"admin" assignee:"foobar"')->toArray();
+
+        $this->assertCount(2, $tasks);
+        $this->assertEquals('Test 1', $tasks[0]['title']);
+        $this->assertEquals('Test 2', $tasks[1]['title']);
+    }
 }

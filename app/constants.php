@@ -98,6 +98,7 @@ defined('REVERSE_PROXY_DEFAULT_DOMAIN') or define('REVERSE_PROXY_DEFAULT_DOMAIN'
 defined('REMEMBER_ME_AUTH') or define('REMEMBER_ME_AUTH', true);
 
 // Mail configuration
+defined('MAIL_CONFIGURATION') or define('MAIL_CONFIGURATION', true);
 defined('MAIL_FROM') or define('MAIL_FROM', 'notifications@kanboard.local');
 defined('MAIL_TRANSPORT') or define('MAIL_TRANSPORT', 'mail');
 defined('MAIL_SMTP_HOSTNAME') or define('MAIL_SMTP_HOSTNAME', '');

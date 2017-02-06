@@ -307,31 +307,35 @@ abstract class FileModel extends Base
      * Handle file upload (base64 encoded content)
      *
      * @access public
-     * @param  integer  $id
-     * @param  string   $original_filename
-     * @param  string   $blob
-     * @return bool|integer
+     * @param  integer $id
+     * @param  string  $originalFilename
+     * @param  string  $data
+     * @param  bool    $isEncoded
+     * @return bool|int
      */
-    public function uploadContent($id, $original_filename, $blob)
+    public function uploadContent($id, $originalFilename, $data, $isEncoded = true)
     {
         try {
-            $data = base64_decode($blob);
+            if ($isEncoded) {
+                $data = base64_decode($data);
+            }
 
             if (empty($data)) {
+                $this->logger->error(__METHOD__.': Content upload with no data');
                 return false;
             }
 
-            $destination_filename = $this->generatePath($id, $original_filename);
-            $this->objectStorage->put($destination_filename, $data);
+            $destinationFilename = $this->generatePath($id, $originalFilename);
+            $this->objectStorage->put($destinationFilename, $data);
 
-            if ($this->isImage($original_filename)) {
-                $this->generateThumbnailFromData($destination_filename, $data);
+            if ($this->isImage($originalFilename)) {
+                $this->generateThumbnailFromData($destinationFilename, $data);
             }
 
             return $this->create(
                 $id,
-                $original_filename,
-                $destination_filename,
+                $originalFilename,
+                $destinationFilename,
                 strlen($data)
             );
         } catch (ObjectStorageException $e) {

@@ -34,6 +34,8 @@ class ProjectValidator extends BaseValidator
             new Validators\MaxLength('end_date', t('The maximum length is %d characters', 10), 10),
             new Validators\AlphaNumeric('identifier', t('This value must be alphanumeric')) ,
             new Validators\Unique('identifier', t('The identifier must be unique'), $this->db->getConnection(), ProjectModel::TABLE),
+            new Validators\Email('email', t('Email address invalid')) ,
+            new Validators\Unique('email', t('The email project must be unique across all projects'), $this->db->getConnection(), ProjectModel::TABLE),
         );
     }
 

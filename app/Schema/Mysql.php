@@ -6,7 +6,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 120;
+const VERSION = 121;
+
+function version_121(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE projects ADD COLUMN email VARCHAR(255)');
+}
 
 function version_120(PDO $pdo)
 {
@@ -18,6 +23,8 @@ function version_120(PDO $pdo)
             PRIMARY KEY(email, token)
         ) ENGINE=InnoDB CHARSET=utf8
     ");
+
+    $pdo->exec("DELETE FROM settings WHERE `option`='application_datetime_format'");
 }
 
 function version_119(PDO $pdo)

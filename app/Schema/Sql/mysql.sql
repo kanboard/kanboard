@@ -98,9 +98,9 @@ CREATE TABLE `comments` (
   `task_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT '0',
   `date_creation` bigint(20) DEFAULT NULL,
-  `date_modification` bigint(20) DEFAULT NULL,
   `comment` text,
   `reference` varchar(50) DEFAULT '',
+  `date_modification` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `comments_reference_idx` (`reference`),
@@ -156,6 +156,16 @@ CREATE TABLE `groups` (
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `invites`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `invites` (
+  `email` varchar(255) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  PRIMARY KEY (`email`,`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `last_logins`;
@@ -740,7 +750,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES ('api_token','f149956cb60c88d01123a28964fc035b1ce4513be454f2a85fe6b4ca3758',0,0),('application_currency','USD',0,0),('application_date_format','m/d/Y',0,0),('application_language','en_US',0,0),('application_stylesheet','',0,0),('application_timezone','UTC',0,0),('application_url','',0,0),('board_columns','',0,0),('board_highlight_period','172800',0,0),('board_private_refresh_interval','10',0,0),('board_public_refresh_interval','60',0,0),('calendar_project_tasks','date_started',0,0),('calendar_user_subtasks_time_tracking','0',0,0),('calendar_user_tasks','date_started',0,0),('cfd_include_closed_tasks','1',0,0),('default_color','yellow',0,0),('integration_gravatar','0',0,0),('password_reset','1',0,0),('project_categories','',0,0),('subtask_restriction','0',0,0),('subtask_time_tracking','1',0,0),('webhook_token','47d1d896b6612234c7543eb3f3a09a0a669f77a079d13ad3d810ccb79896',0,0),('webhook_url','',0,0);
+INSERT INTO `settings` VALUES ('api_token','b428b1088a5ee28730a8405774084f7a35f27f2a218cdb63582f99c008ee',0,0),('application_currency','USD',0,0),('application_date_format','m/d/Y',0,0),('application_language','en_US',0,0),('application_stylesheet','',0,0),('application_timezone','UTC',0,0),('application_url','',0,0),('board_columns','',0,0),('board_highlight_period','172800',0,0),('board_private_refresh_interval','10',0,0),('board_public_refresh_interval','60',0,0),('calendar_project_tasks','date_started',0,0),('calendar_user_subtasks_time_tracking','0',0,0),('calendar_user_tasks','date_started',0,0),('cfd_include_closed_tasks','1',0,0),('default_color','yellow',0,0),('integration_gravatar','0',0,0),('password_reset','1',0,0),('project_categories','',0,0),('subtask_restriction','0',0,0),('subtask_time_tracking','1',0,0),('webhook_token','e0d3e2613a79f1d751135f4a4d6c3e5b869348db229e57f706b5b54fc3c7',0,0),('webhook_url','',0,0);
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -769,4 +779,4 @@ UNLOCK TABLES;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$R1zYk04d96KcHRpd9.r5I.5I6mgKIgUdsaISZYmaDLPIJCUO0FFJG', 'app-admin');INSERT INTO schema_version VALUES ('119');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$R3.YibAi6H0ZzzrSHFa7qeaiEqep1X2TF/bKQX5jMQ7fZ9KIfzUte', 'app-admin');INSERT INTO schema_version VALUES ('120');

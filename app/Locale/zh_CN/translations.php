@@ -1307,4 +1307,11 @@ return array(
     // 'Credentials' => '',
     // 'New user' => '',
     // 'This username is already taken' => '',
+    // 'A link to reset your password has been sent by email.' => '',
+    // 'Your profile must have a valid email address.' => '',
+    // 'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => '',
+    // 'TRL - Turkish Lira' => '',
+    // 'The project email is optional and could be used by several plugins.' => '',
+    // 'The email project must be unique across all projects' => '',
+    // 'The email configuration has been disabled by the administrator.' => '',
 );

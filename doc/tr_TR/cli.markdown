@@ -1,16 +1,16 @@
-Command Line Interface
+Komut satırı arayüzü-CLI
 ======================
 
-Kanboard provides a simple command line interface that can be used from any Unix terminal.
-This tool can be used only on the local machine.
+Kanboard, herhangi bir Unix terminalinden kullanılabilen basit bir komut satırı arabirimi sağlar.
+Bu araç yalnızca yerel makinede kullanılabilir.
 
-This feature is useful to run commands outside of the web server processes.
+Bu özellik, komutları web sunucusu işlemleri dışında çalıştırmak için kullanışlıdır.
 
-Usage
+Kullanımı
 -----
 
-- Open a terminal and go to your Kanboard directory (example: `cd /var/www/kanboard`)
-- Run the command `./cli` or `php cli`
+- Bir terminal açın ve Kanboard dizinine gidin (örneğin: `cd /var/www/kanboard`)
+- `./cli` veya `php cli` komutunu çalıştırın
 
 ```bash
 Kanboard version master
@@ -58,82 +58,82 @@ Available commands:
   user:reset-password                Change user password
 ```
 
-Available commands
+Kullanılabilir komutlar
 ------------------
 
-### Tasks CSV export
+### Görevleri CSV olarak dışa aktarma
 
-Usage:
+Kullanımı:
 
 ```bash
 ./cli export:tasks <project_id> <start_date> <end_date>
 ```
 
-Example:
+Örnek:
 
 ```bash
 ./cli export:tasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
-CSV data are sent to `stdout`.
+CSV verileri şu adrese gönderilir; `stdout`.
 
-### Subtasks CSV export
+### Alt görevleri CSV olarak dışa aktarma
 
-Usage:
+Kullanımı:
 
 ```bash
 ./cli export:subtasks <project_id> <start_date> <end_date>
 ```
 
-Example:
+Örnek:
 
 ```bash
 ./cli export:subtasks 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
-### Task transitions CSV export
+### Görev geçişlerini CSV olarak dışa aktarma
 
-Usage:
+Kullanımı:
 
 ```bash
 ./cli export:transitions <project_id> <start_date> <end_date>
 ```
 
-Example:
+Örnek:
 
 ```bash
 ./cli export:transitions 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
-### Export daily summaries data in CSV
+### CSV'de günlük özet verilerini dışa aktar
 
-The exported data will be printed on the standard output:
+Dışa aktarılan veriler standart çıktıda bastırılacaktır:
 
 ```bash
 ./cli export:daily-project-column-stats <project_id> <start_date> <end_date>
 ```
 
-Example:
+Örnek:
 
 ```bash
 ./cli export:daily-project-column-stats 1 2014-10-01 2014-11-30 > /tmp/my_custom_export.csv
 ```
 
-### Send notifications for overdue tasks
+### Gecikmiş görevler için bildirim gönder
 
-Emails will be sent to all users with notifications enabled.
+E-postalar, bildirimlerin etkinleştirildiği tüm kullanıcılara gönderilecektir.
 
 ```bash
 ./cli notification:overdue-tasks
 ```
 
-Optional parameters:
+İsteğe bağlı parametreler:
 
-- `--show`: Display notifications sent
-- `--group`: Group all overdue tasks for one user (from all projects) in one email
-- `--manager`: Send all overdue tasks to project manager(s) in one email
+- `--show`: Ekran bildirimleri gönderin
+- `--group`: Bir kullanıcı için tüm gecikmiş görevleri tek bir e-postayla gruplandırın (tüm projelerden)
+- `--manager`: Gecikmiş tüm görevleri tek bir e-postayla proje yöneticisine gönderin
 
-You can also display the overdue tasks with the flag `--show`:
+Gecikmiş görevleri bayrağıyla da görüntüleyebilirsiniz `--show`:
 
 ```bash
 ./kanboard notification:overdue-tasks --show
@@ -145,9 +145,9 @@ You can also display the overdue tasks with the flag `--show`:
 +-----+---------+------------+------------+--------------+----------+
 ```
 
-### Run daily project stats calculation
+### Günlük proje istatistikleri hesaplamasını çalıştır
 
-This command calculate the statistics of each project:
+Bu komut, her projenin istatistiklerini hesaplar:
 
 ```bash
 ./cli projects:daily-stats
@@ -156,44 +156,44 @@ Run calculation for Project #1
 Run calculation for Project #10
 ```
 
-### Trigger for tasks
+### Görevler için tetikleyici
 
-This command send a "daily cronjob event" to all open tasks of each project.
+Bu komut, her projenin açık görevlerine "günlük cronjob etkinliği" gönderir.
 
 ```bash
 ./cli trigger:tasks
 Trigger task event: project_id=2, nb_tasks=1
 ```
 
-### Reset user password
+### Kullanıcı şifresini sıfırla
 
 ```bash
 ./cli user:reset-password my_user
 ```
 
-You will be prompted for a password and confirmation. Characters are not printed to the screen.
+Bir şifre ve onay istenir. Karakterler ekrana yazdırılmaz.
 
-### Remove two-factor authentication for a user
+### Bir kullanıcı için iki-kademeli kimlik doğrulamayı kaldırma
 
 ```bash
 ./cli user:reset-2fa my_user
 ```
 
-### Install a plugin
+### Bir eklenti kurma
 
 ```bash
 ./cli plugin:install https://github.com/kanboard/plugin-github-auth/releases/download/v1.0.1/GithubAuth-1.0.1.zip
 ```
 
-Note: Installed files will have the same permissions as the current user
+Not: Yüklü dosyalar, geçerli kullanıcıyla aynı izinlere sahip olacak
 
-### Remove a plugin
+### Eklentiyi kaldır
 
 ```bash
 ./cli plugin:uninstall Budget
 ```
 
-### Upgrade all plugins
+### Tüm eklentileri güncelle
 
 ```bash
 ./cli plugin:upgrade
@@ -201,21 +201,21 @@ Note: Installed files will have the same permissions as the current user
 * Plugin up to date: Github Authentication
 ```
 
-### Run Background worker
+### Arkaplan çalışanını çalıştır
 
 ```bash
 ./cli worker
 ```
 
-### Execute database migrations
+### Veritabanı geçişlerini yürütün
 
-If the parameter `DB_RUN_MIGRATIONS` is set to `false`, you have run the database migrations manually:
+`DB_RUN_MIGRATIONS` parametresi `false` olarak ayarlanırsa, veritabanı geçişlerini manuel olarak çalıştırmışsınızdır:
 
 ```bash
 ./cli db:migrate
 ```
 
-### Check database schema version
+### Veritabanı şema sürümünü denetle
 
 ```bash
 ./cli db:version

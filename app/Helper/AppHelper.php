@@ -12,6 +12,11 @@ use Kanboard\Core\Base;
  */
 class AppHelper extends Base
 {
+    public function isAjax()
+    {
+        return $this->request->isAjax();
+    }
+
     /**
      * Render Javascript component
      *

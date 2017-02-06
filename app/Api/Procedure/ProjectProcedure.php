@@ -32,6 +32,13 @@ class ProjectProcedure extends BaseProcedure
         return $this->formatProject($project);
     }
 
+    public function getProjectByEmail($email)
+    {
+        $project = $this->formatProject($this->projectModel->getByEmail($email));
+        ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectByEmail', $project['id']);
+        return $this->formatProject($project);
+    }
+
     public function getAllProjects()
     {
         return $this->formatProjects($this->projectModel->getAll());

@@ -34,7 +34,10 @@ define('CACHE_DIR', DATA_DIR.DIRECTORY_SEPARATOR.'cache');
 // Folder for uploaded files (must be writeable by the web server user)
 define('FILES_DIR', DATA_DIR.DIRECTORY_SEPARATOR.'files');
 
-// E-mail address for the "From" header (notifications)
+// Enable/disable email configuration from the user interface
+define('MAIL_CONFIGURATION', true);
+
+// E-mail address used for the "From" header (notifications)
 define('MAIL_FROM', 'replace-me@kanboard.local');
 
 // Mail transport available: "smtp", "sendmail", "mail" (PHP mail function), "postmark", "mailgun", "sendgrid"
