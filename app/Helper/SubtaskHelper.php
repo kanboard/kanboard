@@ -43,7 +43,7 @@ class SubtaskHelper extends Base
         $params = array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'refresh-table' => (int) $refresh_table);
 
         if ($subtask['status'] == 0 && isset($this->sessionStorage->hasSubtaskInProgress) && $this->sessionStorage->hasSubtaskInProgress) {
-            return $this->helper->url->link($this->getTitle($subtask), 'SubtaskRestrictionController', 'show', $params, false, 'popover');
+            return $this->helper->url->link($this->getTitle($subtask), 'SubtaskRestrictionController', 'show', $params, false, 'js-modal-confirm');
         }
 
         $class = 'subtask-toggle-status '.($refresh_table ? 'subtask-refresh-table' : '');
