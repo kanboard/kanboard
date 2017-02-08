@@ -73,7 +73,6 @@ return array(
     'Remove a column' => '移除一个栏目',
     'Unable to remove this column.' => '无法移除该栏目。',
     'Do you really want to remove this column: "%s"?' => '确定要移除栏目"%s"吗？',
-    'This action will REMOVE ALL TASKS associated to this column!' => '该动作将移除与该栏目相关的所有项目！',
     'Settings' => '设置',
     'Application settings' => '应用设置',
     'Language' => '语言',

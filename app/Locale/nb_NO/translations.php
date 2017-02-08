@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Fjern en kolonne',
     'Unable to remove this column.' => 'Ikke mulig ø fjerne denne kolonnen',
     'Do you really want to remove this column: "%s"?' => 'Vil du fjerne denne kolonnen: "%s"?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'Denne handlingen vil SLETTE ALLE OPPGAVER tilknyttet denne kolonnen',
     'Settings' => 'Innstillinger',
     'Application settings' => 'Applikasjonsinnstillinger',
     'Language' => 'Språk',

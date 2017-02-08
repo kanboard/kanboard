@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Poista sarake',
     'Unable to remove this column.' => 'Sarakkeen poistaminen ei onnistunut.',
     'Do you really want to remove this column: "%s"?' => 'Haluatko varmasti poistaa sarakkeen "%s"?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'Tämä toiminto POISTAA KAIKKI TEHTÄVÄT tästä sarakkeesta!',
     'Settings' => 'Asetukset',
     'Application settings' => 'Ohjelman asetukset',
     'Language' => 'Kieli',

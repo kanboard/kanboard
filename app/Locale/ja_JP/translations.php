@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'カラムの削除',
     'Unable to remove this column.' => 'カラムを削除できませんでした。',
     'Do you really want to remove this column: "%s"?' => 'カラム「%s」を削除しますか？',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'この操作はこのカラムに割当てられた『全てのタスクを削除』します！',
     'Settings' => '設定',
     'Application settings' => 'アプリケーションの設定',
     'Language' => '言語',

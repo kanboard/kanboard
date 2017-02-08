@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Oszlop törlése',
     'Unable to remove this column.' => 'Az oszlop törlése nem lehetséges.',
     'Do you really want to remove this column: "%s"?' => 'Valóban törölni akarja ezt az oszlopot: "%s"?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'Az oszlophoz rendelt ÖSSZES FELADAT TÖRLŐDNI FOG!',
     'Settings' => 'Beállítások',
     'Application settings' => 'Alkalmazás beállítások',
     'Language' => 'Nyelv',

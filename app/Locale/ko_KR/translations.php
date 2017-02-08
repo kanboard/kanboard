@@ -73,7 +73,6 @@ return array(
     'Remove a column' => '컬럼 삭제',
     'Unable to remove this column.' => '(※)컬럼을 삭제할 수 없었습니다.',
     'Do you really want to remove this column: "%s"?' => '컬럼을 삭제하시겠습니까: "%s"?',
-    'This action will REMOVE ALL TASKS associated to this column!' => '이 조작은 이 컬럼에 할당된 『 모든 할일을 삭제 』합니다!',
     'Settings' => '설정',
     'Application settings' => '애플리케이션의 설정',
     'Language' => '언어',

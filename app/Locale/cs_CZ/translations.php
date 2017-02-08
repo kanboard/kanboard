@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Vyjmout sloupec',
     'Unable to remove this column.' => 'Tento sloupec nelze odstranit',
     'Do you really want to remove this column: "%s"?' => 'Opravdu chcete vyjmout tento sloupec: "%s"?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'Tato akce vyjme všechny úkoly přiřazený k tomuto sloupci!',
     'Settings' => 'Nastavení',
     'Application settings' => 'Nastavení aplikace',
     'Language' => 'Čeština',

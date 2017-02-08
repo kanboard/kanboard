@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Αφαίρεση στήλης',
     'Unable to remove this column.' => 'Αδύνατη η αφαίρεση της στήλης',
     'Do you really want to remove this column: "%s"?' => 'Θέλετε να αφαιρέσετε τη στήλη: « %s » ?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'Αυτή η ενέργεια θα ΑΦΑΙΡΕΣΕΙ ΟΛΕΣ ΤΙΣ ΕΡΓΑΣΙΕΣ που είναι σχετικές με τη στήλη!!',
     'Settings' => 'Προτιμήσεις',
     'Application settings' => 'Παραμετροποίηση εφαρμογής',
     'Language' => 'Γλώσσα',

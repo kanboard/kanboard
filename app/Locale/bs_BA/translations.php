@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Ukloni kolonu',
     'Unable to remove this column.' => 'Nemoguće uklanjanje kolone.',
     'Do you really want to remove this column: "%s"?' => 'Da li zaista želiš da ukoniš ovu kolonu: "%s"?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'Ova akcija BRIŠE SVE ZADATKE vezane za ovu kolonu!',
     'Settings' => 'Podešavanja',
     'Application settings' => 'Podešavanja aplikacije',
     'Language' => 'Jezik',

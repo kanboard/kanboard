@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'ลบคอลัมน์',
     'Unable to remove this column.' => 'ไม่สามารถลบคอลัมน์นี้',
     'Do you really want to remove this column: "%s"?' => 'คุณต้องการลบคอลัมน์ « %s » ออกใช่หรือไม่?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'การกระทำนี้จะลบงานที่เกี่ยวข้องกับคอลัมน์นี้',
     'Settings' => 'ตั้งค่า',
     'Application settings' => 'ตั้งค่าการทำงาน',
     'Language' => 'ภาษา',

@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Usuń kolumnę',
     'Unable to remove this column.' => 'Nie udało się usunąć kolumny.',
     'Do you really want to remove this column: "%s"?' => 'Na pewno chcesz usunąć kolumnę: "%s"?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'Wszystkie zadania w kolumnie zostaną usunięte!',
     'Settings' => 'Ustawienia',
     'Application settings' => 'Ustawienia aplikacji',
     'Language' => 'Język',

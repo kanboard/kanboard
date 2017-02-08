@@ -15,10 +15,12 @@
         data-save-position-url="<?= $this->url->href('ColumnController', 'move', array('project_id' => $project['id'])) ?>">
         <thead>
         <tr>
-            <th class="column-70"><?= t('Column title') ?></th>
+            <th class="column-40"><?= t('Column title') ?></th>
             <th class="column-10"><?= t('Task limit') ?></th>
             <th class="column-20"><?= t('Visible on dashboard') ?></th>
-            <th class="column-5"><?= t('Actions') ?></th>
+            <th class="column-10"><?= t('Open tasks') ?></th>
+            <th class="column-10"><?= t('Closed tasks') ?></th>
+            <th><?= t('Actions') ?></th>
         </tr>
         </thead>
         <tbody>
@@ -40,15 +42,23 @@
                 <?= $column['hide_in_dashboard'] == 1 ? t('Yes') : t('No') ?>
             </td>
             <td>
+                <?= $column['nb_open_tasks'] ?>
+            </td>
+            <td>
+                <?= $column['nb_closed_tasks'] ?>
+            </td>
+            <td>
                 <div class="dropdown">
                 <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
                 <ul>
                     <li>
                         <?= $this->modal->medium('edit', t('Edit'), 'ColumnController', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
                     </li>
+                    <?php if ($column['nb_open_tasks'] == 0 && $column['nb_closed_tasks'] == 0): ?>
                     <li>
                         <?= $this->modal->confirm('trash-o', t('Remove'), 'ColumnController', 'confirm', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
                     </li>
+                    <?php endif ?>
                 </ul>
                 </div>
             </td>

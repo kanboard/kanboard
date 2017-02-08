@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Spalte löschen',
     'Unable to remove this column.' => 'Löschen dieser Spalte nicht möglich.',
     'Do you really want to remove this column: "%s"?' => 'Soll diese Spalte wirklich gelöscht werden: "%s"?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'ALLE AUFGABEN dieser Spalte werden GELÖSCHT!',
     'Settings' => 'Einstellungen',
     'Application settings' => 'Anwendungskonfiguration',
     'Language' => 'Sprache',

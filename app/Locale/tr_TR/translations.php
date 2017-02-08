@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Bir sütunu sil',
     'Unable to remove this column.' => 'Bu sütun silinemiyor.',
     'Do you really want to remove this column: "%s"?' => 'Bu sütunu gerçekten silmek istiyor musunuz: "%s"?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'Bu komut sütun içindeki TÜM GÖREVLERİ silecek!',
     'Settings' => 'Ayarlar',
     'Application settings' => 'Uygulama ayarları',
     'Language' => 'Dil',

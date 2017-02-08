@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Remover uma coluna',
     'Unable to remove this column.' => 'Não foi possível remover esta coluna.',
     'Do you really want to remove this column: "%s"?' => 'Tem a certeza que quer remover esta coluna: "%s"?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'Esta acção irá REMOVER TODAS AS TAREFAS associadas a esta coluna!',
     'Settings' => 'Configurações',
     'Application settings' => 'Configurações da aplicação',
     'Language' => 'Idioma',

@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Kolom verwijderen',
     'Unable to remove this column.' => 'Verwijderen van deze kolom niet mogelijk.',
     'Do you really want to remove this column: "%s"?' => 'Weet u zeker dat u deze kolom wil verwijderen : « %s » ?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'Deze actie zal ALLE TAKEN VERWIJDEREN die zijn geassocieerd met deze kolom!',
     'Settings' => 'Instellingen',
     'Application settings' => 'Applicatie instellingen',
     'Language' => 'Taal',

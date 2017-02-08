@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Hapus kolom',
     'Unable to remove this column.' => 'Tidak dapat menghapus kolom ini.',
     'Do you really want to remove this column: "%s"?' => 'Apakah anda yakin akan menghapus kolom ini : « %s » ?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'tindakan ini akan MENGHAPUS SEMUA TUGAS yang terkait dengan kolom ini!',
     'Settings' => 'Penetapan',
     'Application settings' => 'Penetapan aplikasi',
     'Language' => 'Bahasa',

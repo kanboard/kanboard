@@ -3,6 +3,7 @@ Version 1.0.39 (unreleased)
 
 Improvements:
 
+* Prevent people to remove columns that contains tasks
 * Improve LDAP error reporting
 * Add configuration parameter to disable email configuration from user interface
 * Add email address field for projects

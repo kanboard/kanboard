@@ -73,7 +73,6 @@ return array(
     'Remove a column' => 'Ta bort en kolumn',
     'Unable to remove this column.' => 'Kunde inte ta bort kolumnen.',
     'Do you really want to remove this column: "%s"?' => 'Vill du verkligen ta bort kolumnen: "%s"?',
-    'This action will REMOVE ALL TASKS associated to this column!' => 'Denna åtgärd kommer att TA BORT ALLA uppgifter kopplade till kolumnen!',
     'Settings' => 'Inställningar',
     'Application settings' => 'Applikationsinställningar',
     'Language' => 'Språk',
