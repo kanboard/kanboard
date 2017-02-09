@@ -19,7 +19,6 @@ class ProjectStatusController extends BaseController
 
         $this->response->html($this->template->render('project_status/enable', array(
             'project' => $project,
-            'title' => t('Project activation')
         )));
     }
 
@@ -49,7 +48,6 @@ class ProjectStatusController extends BaseController
 
         $this->response->html($this->template->render('project_status/disable', array(
             'project' => $project,
-            'title' => t('Project activation')
         )));
     }
 

@@ -2,7 +2,7 @@
     <h2><?= t('Summary') ?></h2>
 </div>
 <ul class="panel">
-    <li><strong><?= $project['is_active'] ? t('Active') : t('Inactive') ?></strong></li>
+    <li><strong><?= $project['is_active'] ? t('This project is open') : t('This project is closed') ?></strong></li>
 
     <?php if ($project['owner_id'] > 0): ?>
         <li><?= t('Project owner: ') ?><strong><?= $this->text->e($project['owner_name'] ?: $project['owner_username']) ?></strong></li>

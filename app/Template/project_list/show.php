@@ -48,9 +48,9 @@
                 </td>
                 <td>
                     <?php if ($project['is_active']): ?>
-                        <?= t('Active') ?>
+                        <?= t('Open') ?>
                     <?php else: ?>
-                        <?= t('Inactive') ?>
+                        <?= t('Closed') ?>
                     <?php endif ?>
                 </td>
                 <td>

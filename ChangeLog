@@ -3,6 +3,7 @@ Version 1.0.39 (unreleased)
 
 Improvements:
 
+* Change wording for project status (use "closed" instead of "inactive")
 * Prevent people to remove columns that contains tasks
 * Improve LDAP error reporting
 * Add configuration parameter to disable email configuration from user interface
