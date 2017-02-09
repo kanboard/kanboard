@@ -4,8 +4,9 @@ require_once __DIR__.'/../Base.php';
 
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ColumnModel;
+use Kanboard\Model\TaskCreationModel;
 
-class ColumnTest extends Base
+class ColumnModelTest extends Base
 {
     public function testGetColumn()
     {
@@ -92,6 +93,36 @@ class ColumnTest extends Base
         $this->assertEquals(4, $columns[3]['id']);
         $this->assertEquals(4, $columns[3]['position']);
         $this->assertEquals('Done', $columns[3]['title']);
+    }
+
+    public function testGetAllWithTasksCount()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'UnitTest', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $taskCreationModel->create(array('title' => 'UnitTest', 'project_id' => 1, 'column_id' => 2, 'is_active' => 0)));
+
+        $columns = $columnModel->getAllWithTasksCount(1);
+        $this->assertCount(4, $columns);
+
+        $this->assertEquals(1, $columns[0]['id']);
+        $this->assertEquals(1, $columns[0]['position']);
+        $this->assertEquals(1, $columns[0]['project_id']);
+        $this->assertEquals(0, $columns[0]['task_limit']);
+        $this->assertEquals(0, $columns[0]['hide_in_dashboard']);
+        $this->assertEquals('', $columns[0]['description']);
+        $this->assertEquals('Backlog', $columns[0]['title']);
+        $this->assertEquals(1, $columns[0]['nb_open_tasks']);
+        $this->assertEquals(0, $columns[0]['nb_closed_tasks']);
+
+        $this->assertEquals(2, $columns[1]['id']);
+        $this->assertEquals(2, $columns[1]['position']);
+        $this->assertEquals('Ready', $columns[1]['title']);
+        $this->assertEquals(0, $columns[1]['nb_open_tasks']);
+        $this->assertEquals(1, $columns[1]['nb_closed_tasks']);
     }
 
     public function testGetList()

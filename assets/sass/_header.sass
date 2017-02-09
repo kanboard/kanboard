@@ -12,15 +12,17 @@ header
     @include md-device
       @include grid_width(15/100)
     @include sm-device
-      @include grid_width(30/100)
+      @include grid_width(20/100)
       order: 2
+      .header-creation-menu
+        display: none
 
   .board-selector-container
     @include grid_width(25/100)
     @include md-device
       @include grid_width(20/100)
     @include sm-device
-      @include grid_width(70/100)
+      @include grid_width(80/100)
       order: 1
       margin-bottom: 5px
 
@@ -36,7 +38,7 @@ header
       opacity: 0.3
       font-size: size('tiny')
 
-.web-notification-icon
+a i.web-notification-icon
   color: link-color('primary')
   &:focus, &:hover
     color: color('dark')

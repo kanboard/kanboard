@@ -69,12 +69,14 @@ class Client
      * Establish server connection
      *
      * @access public
-     * @throws ClientException
-     * @param  string   $server  LDAP server hostname or IP
-     * @param  integer  $port    LDAP port
-     * @param  boolean  $tls     Start TLS
-     * @param  boolean  $verify  Skip SSL certificate verification
+     *
+     * @param  string $server LDAP server hostname or IP
+     * @param  int    $port   LDAP port
+     * @param  bool   $tls    Start TLS
+     * @param  bool   $verify Skip SSL certificate verification
      * @return Client
+     * @throws ClientException
+     * @throws ConnectionException
      */
     public function open($server, $port = LDAP_PORT, $tls = LDAP_START_TLS, $verify = LDAP_SSL_VERIFY)
     {
@@ -86,10 +88,10 @@ class Client
             putenv('LDAPTLS_REQCERT=never');
         }
 
-        $this->ldap = ldap_connect($server, $port);
+        $this->ldap = @ldap_connect($server, $port);
 
         if ($this->ldap === false) {
-            throw new ClientException('LDAP: Unable to connect to the LDAP server');
+            throw new ConnectionException('Malformed LDAP server hostname or LDAP server port');
         }
 
         ldap_set_option($this->ldap, LDAP_OPT_PROTOCOL_VERSION, 3);
@@ -98,7 +100,7 @@ class Client
         ldap_set_option($this->ldap, LDAP_OPT_TIMELIMIT, 1);
 
         if ($tls && ! @ldap_start_tls($this->ldap)) {
-            throw new ClientException('LDAP: Unable to start TLS');
+            throw new ConnectionException('Unable to start LDAP TLS (' . $this->getLdapError() . ')');
         }
 
         return $this;
@@ -114,7 +116,8 @@ class Client
     public function useAnonymousAuthentication()
     {
         if (! @ldap_bind($this->ldap)) {
-            throw new ClientException('Unable to perform anonymous binding');
+            $this->checkForServerConnectionError();
+            throw new ClientException('Unable to perform anonymous binding => '.$this->getLdapError());
         }
 
         return true;
@@ -132,7 +135,8 @@ class Client
     public function authenticate($bind_rdn, $bind_password)
     {
         if (! @ldap_bind($this->ldap, $bind_rdn, $bind_password)) {
-            throw new ClientException('LDAP authentication failure for "'.$bind_rdn.'"');
+            $this->checkForServerConnectionError();
+            throw new ClientException('LDAP authentication failure for "'.$bind_rdn.'" => '.$this->getLdapError());
         }
 
         return true;
@@ -208,5 +212,32 @@ class Client
     public function hasLogger()
     {
         return $this->logger !== null;
+    }
+
+    /**
+     * Raise ConnectionException if the application is not able to connect to LDAP server
+     *
+     * @access protected
+     * @throws ConnectionException
+     */
+    protected function checkForServerConnectionError()
+    {
+        if (ldap_errno($this->ldap) === -1) {
+            throw new ConnectionException('Unable to connect to LDAP server (' . $this->getLdapError() . ')');
+        }
+    }
+
+    /**
+     * Get extended LDAP error message
+     *
+     * @return string
+     */
+    protected function getLdapError()
+    {
+        ldap_get_option($this->ldap, LDAP_OPT_ERROR_STRING, $extendedErrorMessage);
+        $errorMessage = ldap_error($this->ldap);
+        $errorCode = ldap_errno($this->ldap);
+
+        return 'Code="'.$errorCode.'"; Error="'.$errorMessage.'"; ExtendedError="'.$extendedErrorMessage.'"';
     }
 }

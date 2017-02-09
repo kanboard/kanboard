@@ -3,6 +3,11 @@ Version 1.0.39 (unreleased)
 
 Improvements:
 
+* Adjust modal dialog width on mobile devices
+* Add priority column in list view
+* Change wording for project status (use "closed" instead of "inactive")
+* Prevent people to remove columns that contains tasks
+* Improve LDAP error reporting
 * Add configuration parameter to disable email configuration from user interface
 * Add email address field for projects
 * Improve forget password behaviour (notify the user that an email has been sent or not)
@@ -14,6 +19,7 @@ Improvements:
 Bug fixes:
 
 * Search with multiple expressions with double quotes was not working
+* Fix broken subtask restriction per user
 
 Version 1.0.38 (Jan 28, 2017)
 -----------------------------

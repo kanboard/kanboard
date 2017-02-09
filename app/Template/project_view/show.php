@@ -2,7 +2,7 @@
     <h2><?= t('Summary') ?></h2>
 </div>
 <ul class="panel">
-    <li><strong><?= $project['is_active'] ? t('Active') : t('Inactive') ?></strong></li>
+    <li><strong><?= $project['is_active'] ? t('This project is open') : t('This project is closed') ?></strong></li>
 
     <?php if ($project['owner_id'] > 0): ?>
         <li><?= t('Project owner: ') ?><strong><?= $this->text->e($project['owner_name'] ?: $project['owner_username']) ?></strong></li>
@@ -31,56 +31,7 @@
     <?php if ($project['end_date']): ?>
         <li><?= t('End date: ').$this->dt->date($project['end_date']) ?></li>
     <?php endif ?>
-
-    <?php if ($stats['nb_tasks'] > 0): ?>
-
-        <?php if ($stats['nb_active_tasks'] > 0): ?>
-            <li><?= $this->url->link(t('%d tasks on the board', $stats['nb_active_tasks']), 'BoardViewController', 'show', array('project_id' => $project['id'], 'search' => 'status:open')) ?></li>
-        <?php endif ?>
-
-        <?php if ($stats['nb_inactive_tasks'] > 0): ?>
-            <li><?= $this->url->link(t('%d closed tasks', $stats['nb_inactive_tasks']), 'TaskListController', 'show', array('project_id' => $project['id'], 'search' => 'status:closed')) ?></li>
-        <?php endif ?>
-
-        <li><?= t('%d tasks in total', $stats['nb_tasks']) ?></li>
-
-    <?php else: ?>
-        <li><?= t('No task for this project') ?></li>
-    <?php endif ?>
 </ul>
-
-<div class="page-header">
-    <h2><?= t('Board') ?></h2>
-</div>
-<table class="table-striped table-scrolling">
-    <tr>
-        <th class="column-40"><?= t('Column') ?></th>
-        <th class="column-20"><?= t('Task limit') ?></th>
-        <th class="column-20"><?= t('Active tasks') ?></th>
-        <th class="column-20"><?= t('Hide tasks in this column in the dashboard') ?></th>
-    </tr>
-    <?php foreach ($stats['columns'] as $column): ?>
-    <tr>
-        <td>
-            <?= $this->text->e($column['title']) ?>
-            <?php if (! empty($column['description'])): ?>
-                <span class="tooltip" title="<?= $this->text->markdownAttribute($column['description']) ?>">
-                    <i class="fa fa-info-circle"></i>
-                </span>
-            <?php endif ?>
-        </td>
-        <td><?= $column['task_limit'] ?: '∞' ?></td>
-        <td><?= $column['nb_active_tasks'] ?></td>
-        <td>
-        <?php if ($column['hide_in_dashboard'] == 1): ?>
-            <?= t('Yes') ?>
-        <?php else: ?>
-            <?= t('No') ?>
-        <?php endif ?>
-        </td>
-    </tr>
-    <?php endforeach ?>
-</table>
 
 <?php if (! empty($project['description'])): ?>
     <div class="page-header">
@@ -90,4 +41,49 @@
     <article class="markdown">
         <?= $this->text->markdown($project['description']) ?>
     </article>
+<?php endif ?>
+
+<div class="page-header">
+    <h2><?= t('Columns') ?></h2>
+</div>
+<?php if (empty($columns)): ?>
+    <p class="alert alert-error"><?= t('Your board doesn\'t have any columns!') ?></p>
+<?php else: ?>
+    <table class="table-striped table-scrolling"
+        <thead>
+        <tr>
+            <th class="column-40"><?= t('Column') ?></th>
+            <th class="column-10"><?= t('Task limit') ?></th>
+            <th class="column-20"><?= t('Visible on dashboard') ?></th>
+            <th class="column-15"><?= t('Open tasks') ?></th>
+            <th class="column-15"><?= t('Closed tasks') ?></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($columns as $column): ?>
+            <tr data-column-id="<?= $column['id'] ?>">
+                <td>
+                    <?= $this->text->e($column['title']) ?>
+                    <?php if (! empty($column['description'])): ?>
+                        <span class="tooltip" title="<?= $this->text->markdownAttribute($column['description']) ?>">
+                        <i class="fa fa-info-circle"></i>
+                    </span>
+                    <?php endif ?>
+                </td>
+                <td>
+                    <?= $column['task_limit'] ?: '∞' ?>
+                </td>
+                <td>
+                    <?= $column['hide_in_dashboard'] == 0 ? t('Yes') : t('No') ?>
+                </td>
+                <td>
+                    <?= $column['nb_open_tasks'] ?>
+                </td>
+                <td>
+                    <?= $column['nb_closed_tasks'] ?>
+                </td>
+            </tr>
+        <?php endforeach ?>
+        </tbody>
+    </table>
 <?php endif ?>

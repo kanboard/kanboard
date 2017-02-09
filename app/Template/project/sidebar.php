@@ -50,10 +50,10 @@
             </li>
                 <?php if ($project['is_active']): ?>
                     <li>
-                    <?= $this->modal->confirmLink(t('Disable'), 'ProjectStatusController', 'confirmDisable', array('project_id' => $project['id'])) ?>
+                    <?= $this->modal->confirmLink(t('Close this project'), 'ProjectStatusController', 'confirmDisable', array('project_id' => $project['id'])) ?>
                 <?php else: ?>
                     <li>
-                    <?= $this->modal->confirmLink(t('Enable'), 'ProjectStatusController', 'confirmEnable', array('project_id' => $project['id'])) ?>
+                    <?= $this->modal->confirmLink(t('Open this project'), 'ProjectStatusController', 'confirmEnable', array('project_id' => $project['id'])) ?>
                 <?php endif ?>
             </li>
             <?php if ($this->user->hasProjectAccess('ProjectStatusController', 'remove', $project['id'])): ?>

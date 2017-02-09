@@ -4,6 +4,7 @@ namespace Kanboard\Api\Procedure;
 
 use Kanboard\Api\Authorization\ColumnAuthorization;
 use Kanboard\Api\Authorization\ProjectAuthorization;
+use Kanboard\Model\TaskModel;
 
 /**
  * Column API controller
@@ -40,6 +41,15 @@ class ColumnProcedure extends BaseProcedure
     public function removeColumn($column_id)
     {
         ColumnAuthorization::getInstance($this->container)->check($this->getClassName(), 'removeColumn', $column_id);
+
+        $projectId = $this->columnModel->getProjectId($column_id);
+        $nbTasks = $this->taskFinderModel->countByColumnId($projectId, $column_id, array(TaskModel::STATUS_OPEN, TaskModel::STATUS_CLOSED));
+
+        if ($nbTasks > 0) {
+            $this->logger->error(__METHOD__.': This column cannot be removed because it contains '.$nbTasks.' tasks');
+            return false;
+        }
+
         return $this->columnModel->remove($column_id);
     }
 

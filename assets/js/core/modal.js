@@ -124,6 +124,10 @@
     function getWidth(size) {
         var viewport = KB.utils.getViewportSize();
 
+        if (viewport.width < 700) {
+            return '99%';
+        }
+
         switch (size) {
             case 'large':
                 return viewport.width < 1350 ? '98%' : '1350px';

@@ -92,24 +92,4 @@ class BoardModel extends Base
 
         return $this->boardModel->create($project_to, $columns);
     }
-
-    /**
-     * Get the total of tasks per column
-     *
-     * @access public
-     * @param  integer   $project_id
-     * @param  boolean   $prepend       Prepend default value
-     * @return array
-     */
-    public function getColumnStats($project_id, $prepend = false)
-    {
-        $listing = $this->db
-                        ->hashtable(TaskModel::TABLE)
-                        ->eq('project_id', $project_id)
-                        ->eq('is_active', 1)
-                        ->groupBy('column_id')
-                        ->getAll('column_id', 'COUNT(*) AS total');
-
-        return $prepend ? array(-1 => t('All columns')) + $listing : $listing;
-    }
 }

@@ -262,32 +262,6 @@ class ProjectModel extends Base
     }
 
     /**
-     * Gather some task metrics for a given project
-     *
-     * @access public
-     * @param  integer    $project_id    Project id
-     * @return array
-     */
-    public function getTaskStats($project_id)
-    {
-        $stats = array();
-        $stats['nb_active_tasks'] = 0;
-        $columns = $this->columnModel->getAll($project_id);
-        $column_stats = $this->boardModel->getColumnStats($project_id);
-
-        foreach ($columns as &$column) {
-            $column['nb_active_tasks'] = isset($column_stats[$column['id']]) ? $column_stats[$column['id']] : 0;
-            $stats['nb_active_tasks'] += $column['nb_active_tasks'];
-        }
-
-        $stats['columns'] = $columns;
-        $stats['nb_tasks'] = $this->taskFinderModel->countByProjectId($project_id);
-        $stats['nb_inactive_tasks'] = $stats['nb_tasks'] - $stats['nb_active_tasks'];
-
-        return $stats;
-    }
-
-    /**
      * Get stats for each column of a project
      *
      * @access public
@@ -296,13 +270,11 @@ class ProjectModel extends Base
      */
     public function getColumnStats(array &$project)
     {
-        $project['columns'] = $this->columnModel->getAll($project['id']);
+        $project['columns'] = $this->columnModel->getAllWithTasksCount($project['id']);
         $project['nb_active_tasks'] = 0;
-        $stats = $this->boardModel->getColumnStats($project['id']);
 
-        foreach ($project['columns'] as &$column) {
-            $column['nb_tasks'] = isset($stats[$column['id']]) ? $stats[$column['id']] : 0;
-            $project['nb_active_tasks'] += $column['nb_tasks'];
+        foreach ($project['columns'] as $column) {
+            $project['nb_active_tasks'] += $column['nb_open_tasks'];
         }
 
         return $project;

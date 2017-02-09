@@ -5,7 +5,6 @@
 <div class="confirm">
     <p class="alert alert-info">
         <?= t('Do you really want to remove this column: "%s"?', $column['title']) ?>
-        <?= t('This action will REMOVE ALL TASKS associated to this column!') ?>
     </p>
 
     <?= $this->modal->confirmButtons(

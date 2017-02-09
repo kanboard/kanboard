@@ -48,9 +48,9 @@
                 </td>
                 <td>
                     <?php if ($project['is_active']): ?>
-                        <?= t('Active') ?>
+                        <?= t('Open') ?>
                     <?php else: ?>
-                        <?= t('Inactive') ?>
+                        <?= t('Closed') ?>
                     <?php endif ?>
                 </td>
                 <td>
@@ -88,7 +88,7 @@
                 <?php endif ?>
                 <td class="dashboard-project-stats">
                     <?php foreach ($project['columns'] as $column): ?>
-                        <strong title="<?= t('Task count') ?>"><?= $column['nb_tasks'] ?></strong>
+                        <strong title="<?= t('Task count') ?>"><?= $column['nb_open_tasks'] ?></strong>
                         <small><?= $this->text->e($column['title']) ?></small>
                     <?php endforeach ?>
                 </td>

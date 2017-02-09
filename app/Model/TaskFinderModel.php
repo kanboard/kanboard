@@ -367,17 +367,18 @@ class TaskFinderModel extends Base
      * Count the number of tasks for a given column and status
      *
      * @access public
-     * @param  integer   $project_id   Project id
-     * @param  integer   $column_id    Column id
-     * @return integer
+     * @param  integer $project_id Project id
+     * @param  integer $column_id Column id
+     * @param  array   $status
+     * @return int
      */
-    public function countByColumnId($project_id, $column_id)
+    public function countByColumnId($project_id, $column_id, array $status = array(TaskModel::STATUS_OPEN))
     {
         return $this->db
                     ->table(TaskModel::TABLE)
                     ->eq('project_id', $project_id)
                     ->eq('column_id', $column_id)
-                    ->eq('is_active', 1)
+                    ->in('is_active', $status)
                     ->count();
     }
 

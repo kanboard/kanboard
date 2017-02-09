@@ -1,10 +1,10 @@
 <div class="page-header">
-    <h2><?= t('Project activation') ?></h2>
+    <h2><?= t('Reopen a project') ?></h2>
 </div>
 
 <div class="confirm">
     <p class="alert alert-info">
-        <?= t('Do you really want to enable this project: "%s"?', $project['name']) ?>
+        <?= t('Do you really want to reopen this project: "%s"?', $project['name']) ?>
     </p>
 
     <?= $this->modal->confirmButtons(

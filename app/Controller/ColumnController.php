@@ -20,7 +20,7 @@ class ColumnController extends BaseController
     public function index()
     {
         $project = $this->getProject();
-        $columns = $this->columnModel->getAll($project['id']);
+        $columns = $this->columnModel->getAllWithTasksCount($project['id']);
 
         $this->response->html($this->helper->layout->project('column/index', array(
             'columns' => $columns,
