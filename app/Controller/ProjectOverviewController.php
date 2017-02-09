@@ -16,17 +16,18 @@ class ProjectOverviewController extends BaseController
     public function show()
     {
         $project = $this->getProject();
-        $this->projectModel->getColumnStats($project);
+        $columns = $this->columnModel->getAllWithTasksCount($project['id']);
 
         $this->response->html($this->helper->layout->app('project_overview/show', array(
-            'project' => $project,
-            'title' => $project['name'],
+            'project'     => $project,
+            'columns'     => $columns,
+            'title'       => $project['name'],
             'description' => $this->helper->projectHeader->getDescription($project),
-            'users' => $this->projectUserRoleModel->getAllUsersGroupedByRole($project['id']),
-            'roles' => $this->projectRoleModel->getList($project['id']),
-            'events' => $this->helper->projectActivity->getProjectEvents($project['id'], 10),
-            'images' => $this->projectFileModel->getAllImages($project['id']),
-            'files' => $this->projectFileModel->getAllDocuments($project['id']),
+            'users'       => $this->projectUserRoleModel->getAllUsersGroupedByRole($project['id']),
+            'roles'       => $this->projectRoleModel->getList($project['id']),
+            'events'      => $this->helper->projectActivity->getProjectEvents($project['id'], 10),
+            'images'      => $this->projectFileModel->getAllImages($project['id']),
+            'files'       => $this->projectFileModel->getAllDocuments($project['id']),
         )));
     }
 }
