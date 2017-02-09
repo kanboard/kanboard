@@ -3,6 +3,7 @@ Version 1.0.39 (unreleased)
 
 Improvements:
 
+* Add priority column in list view
 * Change wording for project status (use "closed" instead of "inactive")
 * Prevent people to remove columns that contains tasks
 * Improve LDAP error reporting

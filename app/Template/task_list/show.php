@@ -10,6 +10,7 @@
                 <th class="column-10"><?= $paginator->order(t('Swimlane'), 'tasks.swimlane_id') ?></th>
                 <th class="column-10"><?= $paginator->order(t('Column'), 'tasks.column_id') ?></th>
                 <th class="column-10"><?= $paginator->order(t('Category'), 'tasks.category_id') ?></th>
+                <th class="column-6"><?= $paginator->order(t('Priority'), \Kanboard\Model\TaskModel::TABLE.'.priority') ?></th>
                 <th><?= $paginator->order(t('Title'), 'tasks.title') ?></th>
                 <th class="column-10"><?= $paginator->order(t('Assignee'), 'users.username') ?></th>
                 <th class="column-10"><?= $paginator->order(t('Due date'), 'tasks.date_due') ?></th>
@@ -32,6 +33,9 @@
                 </td>
                 <td>
                     <?= $this->text->e($task['category_name']) ?>
+                </td>
+                <td>
+                    P<?= $this->text->e($task['priority'])?>
                 </td>
                 <td>
                     <?= $this->url->link($this->text->e($task['title']), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
