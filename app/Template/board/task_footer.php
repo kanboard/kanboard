@@ -96,14 +96,18 @@
         <?php endif ?>
 
         <?php if ($task['nb_comments'] > 0): ?>
-            <?= $this->modal->medium(
-                'comments-o',
-                $task['nb_comments'],
-                'CommentListController',
-                'show',
-                array('task_id' => $task['id'], 'project_id' => $task['project_id']),
-                $task['nb_comments'] == 1 ? t('%d comment', $task['nb_comments']) : t('%d comments', $task['nb_comments'])
-            ) ?>
+            <?php if ($not_editable): ?>
+                <span title="<?= $task['nb_comments'] == 1 ? t('%d comment', $task['nb_comments']) : t('%d comments', $task['nb_comments']) ?>"><i class="fa fa-comments-o"></i>&nbsp;<?= $task['nb_comments'] ?></span>
+            <?php else: ?>
+                <?= $this->modal->medium(
+                    'comments-o',
+                    $task['nb_comments'],
+                    'CommentListController',
+                    'show',
+                    array('task_id' => $task['id'], 'project_id' => $task['project_id']),
+                    $task['nb_comments'] == 1 ? t('%d comment', $task['nb_comments']) : t('%d comments', $task['nb_comments'])
+                ) ?>
+            <?php endif ?>
         <?php endif ?>
 
         <?php if (! empty($task['description'])): ?>
