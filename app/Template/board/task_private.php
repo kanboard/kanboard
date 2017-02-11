@@ -32,26 +32,29 @@
         </div>
     <?php else: ?>
         <div class="task-board-expanded">
-            <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
-            <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
-                <?= $this->render('task/dropdown', array('task' => $task)) ?>
-            <?php else: ?>
-                <strong><?= '#'.$task['id'] ?></strong>
-            <?php endif ?>
+            <div class="task-board-header">
+                <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
+                    <?= $this->render('task/dropdown', array('task' => $task)) ?>
+                <?php else: ?>
+                    <strong><?= '#'.$task['id'] ?></strong>
+                <?php endif ?>
 
-            <?php if ($task['reference']): ?>
-            <span class="task-board-reference" title="<?= t('Reference') ?>">
-                (<?= $task['reference'] ?>)
-            </span>
-            <?php endif ?>
+                <?php if (! empty($task['owner_id'])): ?>
+                    <span class="task-board-assignee">
+                        <?= $this->text->e($task['assignee_name'] ?: $task['assignee_username']) ?>
+                    </span>
+                <?php endif ?>
 
-            <?= $this->render('board/task_avatar', array('task' => $task)) ?>
+                <?= $this->render('board/task_avatar', array('task' => $task)) ?>
+            </div>
 
             <?= $this->hook->render('template:board:private:task:before-title', array('task' => $task)) ?>
             <div class="task-board-title">
                 <?= $this->url->link($this->text->e($task['title']), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
             </div>
             <?= $this->hook->render('template:board:private:task:after-title', array('task' => $task)) ?>
+
+            <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
 
             <?= $this->render('board/task_footer', array(
                 'task' => $task,
