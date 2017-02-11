@@ -54,7 +54,7 @@
 
 <?php if (!empty($comments)): ?>
     <?= $this->hook->render('template:task:show:before-comments', array('task' => $task, 'project' => $project)) ?>
-    <?= $this->render('comments/show', array(
+    <?= $this->render('task_comments/show', array(
         'task' => $task,
         'comments' => $comments,
         'project' => $project,

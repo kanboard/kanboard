@@ -70,22 +70,6 @@ class BoardTooltipController extends BaseController
     }
 
     /**
-     * Display comments during a task mouseover
-     *
-     * @access public
-     */
-    public function comments()
-    {
-        $task = $this->getTask();
-        $commentSortingDirection = $this->userMetadataCacheDecorator->get(UserMetadataModel::KEY_COMMENT_SORTING_DIRECTION, 'ASC');
-
-        $this->response->html($this->template->render('board/tooltip_comments', array(
-            'task' => $task,
-            'comments' => $this->commentModel->getAll($task['id'], $commentSortingDirection)
-        )));
-    }
-
-    /**
      * Display task description
      *
      * @access public

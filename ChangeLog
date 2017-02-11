@@ -3,6 +3,7 @@ Version 1.0.39 (unreleased)
 
 Improvements:
 
+* Open comments in board view with a modal dialog instead of tooltip
 * Improve card icons alignment on board
 * Adjust modal dialog width on mobile devices
 * Add priority column in list view

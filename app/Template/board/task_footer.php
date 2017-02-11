@@ -95,8 +95,15 @@
             <span title="<?= t('Attachments') ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltipController', 'attachments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-paperclip"></i>&nbsp;<?= $task['nb_files'] ?></span>
         <?php endif ?>
 
-        <?php if (! empty($task['nb_comments'])): ?>
-            <span title="<?= $task['nb_comments'] == 1 ? t('%d comment', $task['nb_comments']) : t('%d comments', $task['nb_comments']) ?>" class="tooltip" data-href="<?= $this->url->href('BoardTooltipController', 'comments', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>"><i class="fa fa-comment-o"></i>&nbsp;<?= $task['nb_comments'] ?></span>
+        <?php if ($task['nb_comments'] > 0): ?>
+            <?= $this->modal->medium(
+                'comments-o',
+                $task['nb_comments'],
+                'CommentListController',
+                'show',
+                array('task_id' => $task['id'], 'project_id' => $task['project_id']),
+                $task['nb_comments'] == 1 ? t('%d comment', $task['nb_comments']) : t('%d comments', $task['nb_comments'])
+            ) ?>
         <?php endif ?>
 
         <?php if (! empty($task['description'])): ?>

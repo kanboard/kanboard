@@ -2,7 +2,7 @@
     <div class="accordion-title">
         <h3><a href="#" class="fa accordion-toggle"></a> <?= t('Comments') ?></h3>
     </div>
-    <div class="accordion-content" id="comments">
+    <div class="accordion-content comments" id="comments">
         <?php if (!isset($is_public) || !$is_public): ?>
             <div class="comment-sorting">
                 <small>
@@ -21,12 +21,8 @@
         <?php endforeach ?>
 
         <?php if ($editable): ?>
-            <?= $this->render('comments/create', array(
-                'values' => array(
-                    'user_id' => $this->user->getId(),
-                    'task_id' => $task['id'],
-                    'project_id' => $task['project_id'],
-                ),
+            <?= $this->render('task_comments/create', array(
+                'values' => array(),
                 'errors' => array(),
                 'task' => $task,
             )) ?>

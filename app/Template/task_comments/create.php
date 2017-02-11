@@ -4,8 +4,5 @@
     <?= $this->form->hidden('user_id', $values) ?>
 
     <?= $this->form->textEditor('comment', $values, $errors, array('required' => true)) ?>
-
-    <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-    </div>
+    <?= $this->modal->submitButtons() ?>
 </form>

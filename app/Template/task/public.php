@@ -26,7 +26,7 @@
         'is_public' => true,
     )) ?>
 
-    <?= $this->render('comments/show', array(
+    <?= $this->render('task_comments/show', array(
         'task' => $task,
         'comments' => $comments,
         'project' => $project,

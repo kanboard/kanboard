@@ -70,7 +70,7 @@ class CommentModel extends Base
                 UserModel::TABLE.'.avatar_path'
             )
             ->join(UserModel::TABLE, 'id', 'user_id')
-            ->orderBy(self::TABLE.'.date_modification', $sorting)
+            ->orderBy(self::TABLE.'.date_creation', $sorting)
             ->eq(self::TABLE.'.task_id', $task_id)
             ->findAll();
     }
