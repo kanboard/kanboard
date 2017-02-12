@@ -1,11 +1,11 @@
-Version 1.0.39 (unreleased)
----------------------------
+Version 1.0.39 (Feb 12, 2017)
+-----------------------------
 
 Improvements:
 
-* Add menu entry to add attachments in task dropdown
+* Add menu entry in task dropdown to add attachments
 * Improve error reporting when file upload is not configured properly
-* Open comments in board view with a modal dialog instead of tooltip
+* Open comments on board view with a modal dialog instead of tooltip
 * Improve card icons alignment on board
 * Adjust modal dialog width on mobile devices
 * Add priority column in list view
@@ -14,7 +14,7 @@ Improvements:
 * Improve LDAP error reporting
 * Add configuration parameter to disable email configuration from user interface
 * Add email address field for projects
-* Improve forget password behaviour (notify the user that an email has been sent or not)
+* Improve forget password behavior (notify the user that an email has been sent or not)
 * Do not display current project in board selector
 * Do not set default task assignee for team projects
 * Comments are highlighted if hash (#comment-123) is present in URL
