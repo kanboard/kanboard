@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'サブタスクの追加に失敗しました。',
     'Sub-task added successfully.' => 'サブタスクを追加しました。',
     'Maximum size: ' => '最大: ',
-    'Unable to upload the file.' => 'ファイルのアップロードに失敗しました。',
     'Display another project' => '別のプロジェクトを表示',
     'Created by %s' => '%s が作成',
     'Tasks Export' => 'タスクの出力',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

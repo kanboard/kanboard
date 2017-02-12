@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'ไม่สามารถสร้างงานย่อยได้',
     'Sub-task added successfully.' => 'เพิ่มงานย่อยเรียบร้อยแล้ว',
     'Maximum size: ' => 'ขนาดไฟล์สูงสุด:',
-    'Unable to upload the file.' => 'ไม่สามารถอัพโหลดไฟล์ได้',
     'Display another project' => 'แสดงโปรเจคอื่น',
     'Created by %s' => 'สร้างโดย %s',
     'Tasks Export' => 'ส่งออกงาน',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

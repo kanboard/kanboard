@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => '서브 할일의 추가에 실패했습니다.',
     'Sub-task added successfully.' => '서브 할일을 추가했습니다.',
     'Maximum size: ' => '최대: ',
-    'Unable to upload the file.' => '파일 업로드에 실패했습니다.',
     'Display another project' => '프로젝트 보기',
     'Created by %s' => '작성자 %s',
     'Tasks Export' => '할일 내보내기',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

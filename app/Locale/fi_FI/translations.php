@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Alitehtävän luonti epäonnistui.',
     'Sub-task added successfully.' => 'Alitehtävä luotiin onnistuneesti.',
     'Maximum size: ' => 'Maksimikoko: ',
-    'Unable to upload the file.' => 'Tiedoston lataus epäonnistui.',
     'Display another project' => 'Näytä toinen projekti',
     'Created by %s' => 'Luonut: %s',
     'Tasks Export' => 'Tehtävien vienti',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

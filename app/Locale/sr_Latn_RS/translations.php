@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Nie można utworzyć tego pod-zadania.',
     'Sub-task added successfully.' => 'Pod-zadatak utworzone pomyślnie',
     'Maximum size: ' => 'Maksimalna veličina: ',
-    'Unable to upload the file.' => 'Nije moguće snimiti fajl.',
     'Display another project' => 'Prikaži drugi projekat',
     'Created by %s' => 'Kreirao %s',
     'Tasks Export' => 'Izvoz zadataka',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

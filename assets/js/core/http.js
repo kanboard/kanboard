@@ -83,14 +83,25 @@ KB.http.postForm = function (url, formElement) {
     return (new KB.http.request('POST', url, {}, formData)).execute();
 };
 
-KB.http.uploadFile = function (url, file, onProgress, onComplete, onError) {
+KB.http.uploadFile = function (url, file, onProgress, onComplete, onError, onServerError) {
     var fd = new FormData();
     fd.append('files[]', file);
 
     var xhr = new XMLHttpRequest();
     xhr.upload.addEventListener('progress', onProgress);
-    xhr.upload.addEventListener('load', onComplete);
     xhr.upload.addEventListener('error', onError);
     xhr.open('POST', url, true);
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                onComplete();
+            } else if (typeof onServerError !== 'undefined') {
+                onServerError(JSON.parse(xhr.responseText));
+            }
+        }
+    };
+
     xhr.send(fd);
 };

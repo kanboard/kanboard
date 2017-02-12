@@ -4,7 +4,6 @@ namespace Kanboard\ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Kanboard\Core\ObjectStorage\FileStorage;
 use Kanboard\Core\Paginator;
 use Kanboard\Core\Http\OAuth2;
 use Kanboard\Core\Tool;
@@ -176,10 +175,6 @@ class ClassProvider implements ServiceProviderInterface
 
         $container['httpClient'] = function ($c) {
             return new HttpClient($c);
-        };
-
-        $container['objectStorage'] = function () {
-            return new FileStorage(FILES_DIR);
         };
 
         $container['cspRules'] = array(

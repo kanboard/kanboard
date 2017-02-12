@@ -19,11 +19,17 @@ KB.component('file-upload', function (containerElement, options) {
         KB.find('#file-item-' + currentFileIndex).add(errorElement);
     }
 
+    function onServerError(response) {
+        var errorElement = KB.dom('div').addClass('file-error').text(response.message).build();
+        KB.find('#file-item-' + currentFileIndex).add(errorElement);
+        KB.trigger('modal.stop');
+    }
+
     function onComplete() {
         currentFileIndex++;
 
         if (currentFileIndex < files.length) {
-            KB.http.uploadFile(options.url, files[currentFileIndex], onProgress, onComplete, onError);
+            KB.http.uploadFile(options.url, files[currentFileIndex], onProgress, onComplete, onError, onServerError);
         } else {
             KB.trigger('modal.stop');
             KB.trigger('modal.hide');
@@ -81,7 +87,7 @@ KB.component('file-upload', function (containerElement, options) {
 
     function uploadFiles() {
         if (files.length > 0) {
-            KB.http.uploadFile(options.url, files[currentFileIndex], onProgress, onComplete, onError);
+            KB.http.uploadFile(options.url, files[currentFileIndex], onProgress, onComplete, onError, onServerError);
         }
     }
 

@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Deloppgaven kunne ikke oprettes.',
     'Sub-task added successfully.' => 'Deloppgaven er lagt til.',
     'Maximum size: ' => 'Maksimum størrelse: ',
-    'Unable to upload the file.' => 'Filen kunne ikke lastes opp.',
     'Display another project' => 'Vis annet prosjekt...',
     'Created by %s' => 'Opprettet av %s',
     'Tasks Export' => 'Oppgave eksport',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

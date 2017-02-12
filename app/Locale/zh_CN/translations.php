@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => '无法创建子任务',
     'Sub-task added successfully.' => '成功添加子任务',
     'Maximum size: ' => '大小上限：',
-    'Unable to upload the file.' => '无法上传文件',
     'Display another project' => '显示其它项目',
     'Created by %s' => '创建者：%s',
     'Tasks Export' => '任务导出',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

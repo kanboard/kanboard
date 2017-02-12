@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Under-opgaven kunne ikke oprettes.',
     'Sub-task added successfully.' => 'Under-opgaven er tilføjet.',
     'Maximum size: ' => 'Maksimum størrelse: ',
-    'Unable to upload the file.' => 'Filen kunne ikke uploades.',
     'Display another project' => 'Vis et andet projekt...',
     'Created by %s' => 'Oprettet af %s',
     'Tasks Export' => 'Opgave eksport',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

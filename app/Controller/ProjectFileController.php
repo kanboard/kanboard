@@ -33,12 +33,21 @@ class ProjectFileController extends BaseController
     public function save()
     {
         $project = $this->getProject();
+        $result = $this->projectFileModel->uploadFiles($project['id'], $this->request->getFileInfo('files'));
 
-        if (! $this->projectFileModel->uploadFiles($project['id'], $this->request->getFileInfo('files'))) {
-            $this->flash->failure(t('Unable to upload the file.'));
+        if ($this->request->isAjax()) {
+            if (! $result) {
+                $this->response->json(array('message' => t('Unable to upload files, check the permissions of your data folder.')), 500);
+            } else {
+                $this->response->json(array('message' => 'OK'));
+            }
+        } else {
+            if (! $result) {
+                $this->flash->failure(t('Unable to upload files, check the permissions of your data folder.'));
+            }
+
+            $this->response->redirect($this->helper->url->to('ProjectOverviewController', 'show', array('project_id' => $project['id'])), true);
         }
-
-        $this->response->redirect($this->helper->url->to('ProjectOverviewController', 'show', array('project_id' => $project['id'])), true);
     }
 
     /**

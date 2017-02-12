@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Erstellen der Teilaufgabe nicht möglich.',
     'Sub-task added successfully.' => 'Teilaufgabe erfolgreich angelegt.',
     'Maximum size: ' => 'Maximalgröße: ',
-    'Unable to upload the file.' => 'Hochladen der Datei nicht möglich.',
     'Display another project' => 'Zu Projekt wechseln',
     'Created by %s' => 'Erstellt durch %s',
     'Tasks Export' => 'Aufgaben exportieren',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

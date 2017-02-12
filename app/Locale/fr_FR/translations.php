@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Impossible de créer votre sous-tâche.',
     'Sub-task added successfully.' => 'Sous-tâche ajoutée avec succès.',
     'Maximum size: ' => 'Taille maximum : ',
-    'Unable to upload the file.' => 'Impossible de transférer le fichier.',
     'Display another project' => 'Afficher un autre projet',
     'Created by %s' => 'Créé par %s',
     'Tasks Export' => 'Exportation des tâches',
@@ -1312,4 +1311,5 @@ return array(
     'Do you really want to reopen this project: "%s"?' => 'Voulez-vous vraiment réouvrir ce projet : « %s » ?',
     'This project is open' => 'Ce projet est ouvert',
     'This project is closed' => 'Ce projet est fermé',
+    'Unable to upload files, check the permissions of your data folder.' => 'Impossible de transférer le ou les fichiers, vérifiez les permissions du répertoire de données.',
 );

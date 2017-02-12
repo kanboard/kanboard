@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Αδύνατο να δημιουργηθεί η υπο-εργασία.',
     'Sub-task added successfully.' => 'Η υπο-εργασία προστέθηκε με επιτυχία.',
     'Maximum size: ' => 'Μέγιστο μέγεθος : ',
-    'Unable to upload the file.' => 'Δεν είναι δυνατή η μεταφόρτωση του αρχείου.',
     'Display another project' => 'Εμφάνιση άλλου έργου',
     'Created by %s' => 'Δημιουργήθηκε από %s',
     'Tasks Export' => 'Εξαγωγή εργασιών',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

@@ -53,4 +53,5 @@ $container->register(new Kanboard\ServiceProvider\JobProvider());
 $container->register(new Kanboard\ServiceProvider\QueueProvider());
 $container->register(new Kanboard\ServiceProvider\ApiProvider());
 $container->register(new Kanboard\ServiceProvider\CommandProvider());
+$container->register(new Kanboard\ServiceProvider\ObjectStorageProvider());
 $container->register(new Kanboard\ServiceProvider\PluginProvider());

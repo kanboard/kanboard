@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Não é possível criar a sua subtarefa.',
     'Sub-task added successfully.' => 'Subtarefa adicionada com sucesso.',
     'Maximum size: ' => 'Tamanho máximo: ',
-    'Unable to upload the file.' => 'Não foi possível carregar o arquivo.',
     'Display another project' => 'Exibir outro projeto',
     'Created by %s' => 'Criado por %s',
     'Tasks Export' => 'Exportar Tarefas',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

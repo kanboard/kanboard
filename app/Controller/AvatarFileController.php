@@ -33,7 +33,7 @@ class AvatarFileController extends BaseController
         $user = $this->getUser();
 
         if (! $this->avatarFileModel->uploadImageFile($user['id'], $this->request->getFileInfo('avatar'))) {
-            $this->flash->failure(t('Unable to upload the file.'));
+            $this->flash->failure(t('Unable to upload files, check the permissions of your data folder.'));
         }
 
         $this->response->redirect($this->helper->url->to('AvatarFileController', 'show', array('user_id' => $user['id'])));

@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Részfeladat létrehozása nem lehetséges.',
     'Sub-task added successfully.' => 'Részfeladat sikeresen létrehozva.',
     'Maximum size: ' => 'Maximális méret: ',
-    'Unable to upload the file.' => 'Fájl feltöltése nem lehetséges.',
     'Display another project' => 'Másik projekt megjelenítése',
     'Created by %s' => 'Készítette: %s',
     'Tasks Export' => 'Feladatok exportálása',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

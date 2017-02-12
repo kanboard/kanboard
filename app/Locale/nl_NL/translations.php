@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Subtaak aanmaken niet gelukt.',
     'Sub-task added successfully.' => 'Subtaak succesvol aangemaakt.',
     'Maximum size: ' => 'Maximale grootte : ',
-    'Unable to upload the file.' => 'Uploaden van bestand niet gelukt.',
     'Display another project' => 'Een ander project weergeven',
     'Created by %s' => 'Aangemaakt door %s',
     'Tasks Export' => 'Taken exporteren',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

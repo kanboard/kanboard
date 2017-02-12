@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Alt görev oluşturulamadı.',
     'Sub-task added successfully.' => 'Alt görev başarıyla eklendi.',
     'Maximum size: ' => 'Maksimum boyutu',
-    'Unable to upload the file.' => 'Dosya yüklenemiyor.',
     'Display another project' => 'Başka bir proje göster',
     'Created by %s' => '%s tarafından oluşturuldu',
     'Tasks Export' => 'Görevleri dışa aktar',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

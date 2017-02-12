@@ -52,12 +52,21 @@ class TaskFileController extends BaseController
     public function save()
     {
         $task = $this->getTask();
+        $result = $this->taskFileModel->uploadFiles($task['id'], $this->request->getFileInfo('files'));
 
-        if (! $this->taskFileModel->uploadFiles($task['id'], $this->request->getFileInfo('files'))) {
-            $this->flash->failure(t('Unable to upload the file.'));
+        if ($this->request->isAjax()) {
+            if (! $result) {
+                $this->response->json(array('message' => t('Unable to upload files, check the permissions of your data folder.')), 500);
+            } else {
+                $this->response->json(array('message' => 'OK'));
+            }
+        } else {
+            if (! $result) {
+                $this->flash->failure(t('Unable to upload files, check the permissions of your data folder.'));
+            }
+
+            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
         }
-
-        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
     }
 
     /**

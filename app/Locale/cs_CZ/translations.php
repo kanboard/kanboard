@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Nelze vytvořit dílčí úkol.',
     'Sub-task added successfully.' => 'Dílčí úkol byl úspěšně přidán.',
     'Maximum size: ' => 'Maximální velikost: ',
-    'Unable to upload the file.' => 'Soubor nelze nahrát.',
     'Display another project' => 'Zobrazit jiný projekt',
     'Created by %s' => 'Vytvořeno uživatelem %s',
     'Tasks Export' => 'Export úkolů',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

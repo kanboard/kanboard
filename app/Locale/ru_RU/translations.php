@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Не удалось создать подзадачу.',
     'Sub-task added successfully.' => 'Подзадача добавлена.',
     'Maximum size: ' => 'Максимальный размер: ',
-    'Unable to upload the file.' => 'Не удалось загрузить файл.',
     'Display another project' => 'Показать другой проект',
     'Created by %s' => 'Создано %s',
     'Tasks Export' => 'Экспорт задач',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );

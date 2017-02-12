@@ -282,7 +282,6 @@ return array(
     'Unable to create your sub-task.' => 'Tidak dapat membuat sub-tugas Anda.',
     'Sub-task added successfully.' => 'Sub-tugas berhasil dibuat.',
     'Maximum size: ' => 'Ukuran maksimum: ',
-    'Unable to upload the file.' => 'Tidak dapat mengunggah berkas.',
     'Display another project' => 'Lihat proyek lain',
     'Created by %s' => 'Dibuat oleh %s',
     'Tasks Export' => 'Ekspor Tugas',
@@ -1312,4 +1311,5 @@ return array(
     // 'Do you really want to reopen this project: "%s"?' => '',
     // 'This project is open' => '',
     // 'This project is closed' => '',
+    // 'Unable to upload files, check the permissions of your data folder.' => '',
 );
