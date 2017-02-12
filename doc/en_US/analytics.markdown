@@ -1,5 +1,5 @@
-Analytics
-=========
+Project Analytics
+=================
 
 Each project have an analytics section. Depending on how you are using Kanboard, you can see those reports:
 
@@ -23,7 +23,9 @@ Cumulative flow diagram
 ![Cumulative flow diagram](screenshots/cfd.png)
 
 - This chart shows the number of tasks cumulatively for each column over the time.
-- Every day, the total number of tasks is recorded for each column.
+- The legend order is the same as the stack in the chart.
+- The color of each column is determined automatically.
+- Every day, the number of tasks is recorded for each column.
 - If you would like to exclude closed tasks, change the [global project settings](project-configuration.markdown).
 
 Note: You need to have at least two days of data to see the graph.

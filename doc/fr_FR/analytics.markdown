@@ -1,35 +1,36 @@
-Analytique
-=========
+Statistiques pour les projets
+=============================
 
 Chaque projet dispose d'une section analytique. En fonction de la façon dont vous utilisez Kanboard, vous pourrez voir les rapports suivants :
 
 Répartition des utilisateurs
-----------------
+----------------------------
 
 ![Répartition des utilisateurs](screenshots/user-repartition.png)
 
 Ce graphique circulaire affiche le nombre de tâches assignées par utilisateur.
 
 Distribution des tâches
------------------
+-----------------------
 
 ![Distribution des tâches](screenshots/task-distribution.png)
 
 Ce graphique circulaire donne une vue d'ensemble du nombre de tâches ouvertes par colonne.
 
 Diagramme de flux cumulé
------------------------
+------------------------
 
 ![Diagramme de flux cumulé](screenshots/cfd.png)
 
 - Ce graphique affiche le nombre de tâches de façon cumulée pour chaque colonne en fonction du temps passé.
+- La légende montre l'ordre de la pile.
 - Chaque jour, le nombre total de tâches est enregistré pour chaque colonne.
 - Si vous souhaitez exclure les tâches terminées, modifiez les [paramètres du projet global](project-configuration.markdown).
 
 Remarque : il faut au moins deux jours de données pour que le graphique apparaisse.
 
 Graphique d'avancement
---------------
+----------------------
 
 ![Graphique d'avancement](screenshots/burndown-chart.png)
 
@@ -40,7 +41,7 @@ Un [graphique d'avancement](http://en.wikipedia.org/wiki/Burn_down_chart) est di
 - Chaque jour, la somme des estimations pour chaque colonne est calculée.
 
 Temps moyen passé pour chaque colonne
------------------------------------
+-------------------------------------
 
 ![Temps moyen passé pour chaque colonne](screenshots/average-time-spent-into-each-column.png)
 
@@ -50,7 +51,7 @@ Ce graphique affiche le temps moyen passé pour chaque colonne pour les 1000 der
 - Le temps passé est calculé jusqu'à la fin de la tâche.
 
 Temps moyen de Lead et Cycle
----------------------------
+----------------------------
 
 ![Temps moyen passé pour chaque colonne](screenshots/average-lead-cycle-time.png)
 
@@ -63,7 +64,7 @@ Ce graphique affiche le temps moyen de lead et cycle pour les 1000 dernières t�
 Ces métriques sont calculées et enregistrées chaque jour pour l'ensemble du projet.
 
 N'oubliez pas de lancer chaque jour le calcul statistique
--------------------------------------------------------
+---------------------------------------------------------
 
 Pour générer des données analytique précises, vous devriez lancer chaque jour le cronjob **statistiques quotidiennes du projet**.
 

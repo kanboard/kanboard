@@ -22,6 +22,7 @@ Bug fixes:
 
 * Search with multiple expressions with double quotes was not working
 * Fix broken subtask restriction per user
+* Fix CFD chart (stack wrongly ordered)
 
 Version 1.0.38 (Jan 28, 2017)
 -----------------------------

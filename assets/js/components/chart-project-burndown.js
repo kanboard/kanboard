@@ -8,25 +8,24 @@ KB.component('chart-project-burndown', function (containerElement, options) {
         var outputFormat = d3.time.format(options.dateFormat);
 
         for (var i = 0; i < metrics.length; i++) {
-
             for (var j = 0; j < metrics[i].length; j++) {
+                var currentValue = metrics[i][j];
 
                 if (i === 0) {
-                    columns.push([metrics[i][j]]);
-                } else {
-                    columns[j + 1].push(metrics[i][j]);
-
                     if (j > 0) {
+                        columns.push([currentValue]);
+                    }
+                } else {
+                    if (j > 0) {
+                        columns[j].push(currentValue);
 
-                        if (columns[0][i] === undefined) {
+                        if (typeof columns[0][i] === 'undefined') {
                             columns[0].push(0);
                         }
 
-                        columns[0][i] += metrics[i][j];
-                    }
-
-                    if (j === 0) {
-                        categories.push(outputFormat(inputFormat.parse(metrics[i][j])));
+                        columns[0][i] += currentValue;
+                    } else {
+                        categories.push(outputFormat(inputFormat.parse(currentValue)));
                     }
                 }
             }

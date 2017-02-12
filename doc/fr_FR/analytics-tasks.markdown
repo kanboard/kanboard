@@ -1,10 +1,10 @@
-Analytique des tâches
-===================
+Statistiques pour les tâches
+============================
 
 Chaque tâche possède une section analytique accessible à partir du menu à gauche dans la page des tâches
 
 Lead et cycle time
--------------------
+------------------
 
 ![Lead and cycle time](screenshots/task-lead-cycle-time.png)
 
@@ -16,7 +16,7 @@ Lead et cycle time
 Remarque : vous pouvez configurer une action pour définir automatiquement que la date de départ sera le moment où vous déplacez une tâche vers une colonne de votre choix
 
 Temps passé dans chaque colonne
----------------------------
+--------------------------------
 
 ![Temps passé dans chaque colonne](screenshots/time-into-each-column.png)
 

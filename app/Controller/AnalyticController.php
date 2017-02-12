@@ -143,17 +143,18 @@ class AnalyticController extends BaseController
         $project = $this->getProject();
         list($from, $to) = $this->getDates();
 
-        $display_graph = $this->projectDailyColumnStatsModel->countDays($project['id'], $from, $to) >= 2;
+        $displayGraph = $this->projectDailyColumnStatsModel->countDays($project['id'], $from, $to) >= 2;
+        $metrics = $displayGraph ? $this->projectDailyColumnStatsModel->getAggregatedMetrics($project['id'], $from, $to, $column) : array();
 
         $this->response->html($this->helper->layout->analytic($template, array(
-            'values' => array(
+            'values'        => array(
                 'from' => $from,
-                'to' => $to,
+                'to'   => $to,
             ),
-            'display_graph' => $display_graph,
-            'metrics' => $display_graph ? $this->projectDailyColumnStatsModel->getAggregatedMetrics($project['id'], $from, $to, $column) : array(),
-            'project' => $project,
-            'title' => $title,
+            'display_graph' => $displayGraph,
+            'metrics'       => $metrics,
+            'project'       => $project,
+            'title'         => $title,
         )));
     }
 
