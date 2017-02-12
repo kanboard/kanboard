@@ -3,6 +3,7 @@ Version 1.0.39 (unreleased)
 
 Improvements:
 
+* Add menu entry to add attachments in task dropdown
 * Improve error reporting when file upload is not configured properly
 * Open comments in board view with a modal dialog instead of tooltip
 * Improve card icons alignment on board
