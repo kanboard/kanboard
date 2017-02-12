@@ -1,10 +1,10 @@
 Plugin Reescritura
 ================
 
-Reesritura HTTP Contenido Política de Seguridad
+Reesritura HTTP Contenido PolÃ­tica de Seguridad
 -----------------------------------------------
 
-Si desea reemplazar el encabezado HTTP predeterminado de la directiva de seguridad del contenido, puede utilizar el método`setContentSecurityPolicy()`:
+Si desea reemplazar el encabezado HTTP predeterminado de la directiva de seguridad del contenido, puede utilizar el mÃ©todo`setContentSecurityPolicy()`:
 
 ```php
 <?php
@@ -25,7 +25,7 @@ class Plugin extends Base
 Plantillas de reescrituras 
 --------------------------
 
-Las plantillas definidas en el núcleo se pueden anular . Por ejemplo , se puede redefinir el diseño predeterminado o cambiar notificaciones por correo electrónico.
+Las plantillas definidas en el nÃºcleo se pueden anular . Por ejemplo , se puede redefinir el diseÃ±o predeterminado o cambiar notificaciones por correo electrÃ³nico.
 
 Ejemolo de plantilla de reescritura:
 

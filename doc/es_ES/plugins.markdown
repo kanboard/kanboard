@@ -3,14 +3,14 @@ Desarrollo de Plugin
 
 Nota : el plugin API es **considerado alpha** en estos momentos.
 
-Los plugins son 鷗iles para extender las funcionalidades b醩icas de Kanboard , la adici髇 de caracter韘ticas , la creaci髇 de temas o cambiar el comportamiento por defecto .
+Los plugins son 煤tiles para extender las funcionalidades b谩sicas de Kanboard , la adici贸n de caracter铆sticas , la creaci贸n de temas o cambiar el comportamiento por defecto .
 
-Los creadores de plugins deben especificar expl韈itamente las versiones compatibles de Kanboard . El c骴igo interno de Kanboard puede cambiar con el tiempo y su extensi髇 debe ser probado con nuevas versiones . Compruebe siempre el [ChangeLog](https://github.com/kanboard/kanboard/blob/master/ChangeLog) para realizar los cambios.
+Los creadores de plugins deben especificar expl铆citamente las versiones compatibles de Kanboard . El c贸digo interno de Kanboard puede cambiar con el tiempo y su extensi贸n debe ser probado con nuevas versiones . Compruebe siempre el [ChangeLog](https://github.com/kanboard/kanboard/blob/master/ChangeLog) para realizar los cambios.
 
 - [Crear tu plugin](plugin-registration.markdown)
 - [Usar plugins hooks](plugin-hooks.markdown)
 - [Eventos](plugin-events.markdown)
-- [Rescribir compartamientos por default en la aplicaci髇](plugin-overrides.markdown)
+- [Rescribir compartamientos por default en la aplicaci贸n](plugin-overrides.markdown)
 - [Agregar plugins para migrar esquemas](plugin-schema-migrations.markdown)
 - [Personalizar rutas](plugin-routes.markdown)
 - [Agregar helpers](plugin-helpers.markdown)
@@ -18,9 +18,9 @@ Los creadores de plugins deben especificar expl韈itamente las versiones compatib
 - [Agregar tipos de notificaciones](plugin-notifications.markdown)
 - [Agregar acciones automaticas](plugin-automatic-actions.markdown)
 - [Adjuntar metados para usuarios,tareas y proyectos](plugin-metadata.markdown)
-- [Arquitectura de autenticaci髇](plugin-authentication-architecture.markdown)
-- [Registraci髇 de plugins de autenticaci髇](plugin-authentication.markdown)
-- [Arquitectura de autorizaci髇](plugin-authorization-architecture.markdown)
+- [Arquitectura de autenticaci贸n](plugin-authentication-architecture.markdown)
+- [Registraci贸n de plugins de autenticaci贸n](plugin-authentication.markdown)
+- [Arquitectura de autorizaci贸n](plugin-authorization-architecture.markdown)
 - [Personlizar grupos de proveedores](plugin-group-provider.markdown)
 - [Links externos para proveedores](plugin-external-link.markdown)
 - [Agregar avatar a proveedores](plugin-avatar-provider.markdown)

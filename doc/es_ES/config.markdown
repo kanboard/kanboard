@@ -1,8 +1,8 @@
-Archivo de configuración
+Archivo de configuraciÃ³n
 ========================
 
-Puede personalizar la configuración predeterminada de Kanboard mediante la adición de un archivo ` config.php` en la raíz del proyecto o en la carpeta ` data` .
-También puede cambiar el nombre del archivo `config.default.php` a `config.php` y cambiar los valores deseados .
+Puede personalizar la configuraciÃ³n predeterminada de Kanboard mediante la adiciÃ³n de un archivo ` config.php` en la raÃ­z del proyecto o en la carpeta ` data` .
+TambiÃ©n puede cambiar el nombre del archivo `config.default.php` a `config.php` y cambiar los valores deseados .
 
 Habilitar/Deshabilitar el modo debug
 --------------------------------------
@@ -12,8 +12,8 @@ define('DEBUG', true);
 define('LOG_DRIVER', 'file'); // Otros drivers son: syslog, stdout, stderr or file
 ```
 
-El controlador de registro se debe definir si se habilita el modo de depuración .
-El modo de depuración registra todas las consultas SQL y el tiempo necesario para generar páginas .
+El controlador de registro se debe definir si se habilita el modo de depuraciÃ³n .
+El modo de depuraciÃ³n registra todas las consultas SQL y el tiempo necesario para generar pÃ¡ginas .
 
 Plugins
 -------
@@ -24,7 +24,7 @@ Folder de plugins:
 define('PLUGINS_DIR', 'data/plugins');
 ```
 
-Enable/disable plugin de instalación para la interface de usuario:
+Enable/disable plugin de instalaciÃ³n para la interface de usuario:
 
 ```php
 define('PLUGIN_INSTALLER', true); // Default es true
@@ -44,7 +44,7 @@ Enable/disable url rewrite
 define('ENABLE_URL_REWRITE', false);
 ```
 
-Configuración de Email
+ConfiguraciÃ³n de Email
 -------------------
 
 ```php
@@ -54,7 +54,7 @@ define('MAIL_FROM', 'notifications@kanboard.local');
 // Mail transport para uso: "smtp", "sendmail" or "mail" (Funcion PHP mail)
 define('MAIL_TRANSPORT', 'mail');
 
-// Configuración SMTP para usarse para elegir el trasporte de "smtp"
+// ConfiguraciÃ³n SMTP para usarse para elegir el trasporte de "smtp"
 define('MAIL_SMTP_HOSTNAME', '');
 define('MAIL_SMTP_PORT', 25);
 define('MAIL_SMTP_USERNAME', '');
@@ -65,7 +65,7 @@ define('MAIL_SMTP_ENCRYPTION', null); // Valid values are "null", "ssl" or "tls"
 define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
 ```
 
-Configuración de base de datos
+ConfiguraciÃ³n de base de datos
 ------------------------------
 
 ```php
@@ -101,7 +101,7 @@ Configuraciones LDAP
 ----------------------
 
 ```php
-// Habilitar la autenticación por  LDAP (false por default)
+// Habilitar la autenticaciÃ³n por  LDAP (false por default)
 define('LDAP_AUTH', false);
 
 // LDAP server hostname
@@ -116,7 +116,7 @@ define('LDAP_SSL_VERIFY', true);
 // Enable LDAP START_TLS
 define('LDAP_START_TLS', false);
 
-// Por defecto Kanboard tiene el nombre de usuario LDAP en minúscula  para evitar usuarios duplicados ( la base de datos entre mayúsculas y minúsculas )
+// Por defecto Kanboard tiene el nombre de usuario LDAP en minÃºscula  para evitar usuarios duplicados ( la base de datos entre mayÃºsculas y minÃºsculas )
 // Establece en true si desea conservar el caso
 define('LDAP_USERNAME_CASE_SENSITIVE', false);
 
@@ -124,7 +124,7 @@ define('LDAP_USERNAME_CASE_SENSITIVE', false);
 define('LDAP_BIND_TYPE', 'anonymous');
 
 // Nombre de usuario LDAP para utilizar con el modo de proxy
-// Patrón de nombre de usuario LDAP para utilizar con el modo de usuario
+// PatrÃ³n de nombre de usuario LDAP para utilizar con el modo de usuario
 define('LDAP_USERNAME', null);
 
 // password LDAP para usar en modo proxy
@@ -175,7 +175,7 @@ define('LDAP_GROUP_ADMIN_DN', '');
 define('LDAP_GROUP_MANAGER_DN', '');
 
 // Habilitiar proveedor LDAP de grupo para permisos de proyecto
-// El usuario final será capaz de navegar por los grupos LDAP desde la interfaz de usuario y permitir el acceso a proyectos específicos
+// El usuario final serÃ¡ capaz de navegar por los grupos LDAP desde la interfaz de usuario y permitir el acceso a proyectos especÃ­ficos
 define('LDAP_GROUP_PROVIDER', false);
 
 // LDAP Base DN for groups
@@ -186,7 +186,7 @@ define('LDAP_GROUP_BASE_DN', '');
 define('LDAP_GROUP_FILTER', '');
 
 // LDAP filtro por grupo de usuario
-// Si se configura este filtro , Kanboard buscará grupos de usuarios en LDAP_GROUP_BASE_DN
+// Si se configura este filtro , Kanboard buscarÃ¡ grupos de usuarios en LDAP_GROUP_BASE_DN
 // Example for OpenLDAP: (&(objectClass=posixGroup)(memberUid=%s))
 define('LDAP_GROUP_USER_FILTER', '');
 
@@ -194,11 +194,11 @@ define('LDAP_GROUP_USER_FILTER', '');
 define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 ```
 
-Reverse-Proxy configuración de autenticación
+Reverse-Proxy configuraciÃ³n de autenticaciÃ³n
 -------------------------------------
 
 ```php
-// Enable/disable la autenticación reverse proxy
+// Enable/disable la autenticaciÃ³n reverse proxy
 define('REVERSE_PROXY_AUTH', false);
 
 // Nombre del header a utilizar para el nombre de usuario
@@ -207,15 +207,15 @@ define('REVERSE_PROXY_USER_HEADER', 'REMOTE_USER');
 // Nombre de usuario del administrador , por defecto en blanco
 define('REVERSE_PROXY_DEFAULT_ADMIN', '');
 
-// Dominio por defecto a utilizar para configurar la dirección de correo electrónico
+// Dominio por defecto a utilizar para configurar la direcciÃ³n de correo electrÃ³nico
 define('REVERSE_PROXY_DEFAULT_DOMAIN', '');
 ```
 
-Configuración para la autenticacion RememberMe 
+ConfiguraciÃ³n para la autenticacion RememberMe 
 ----------------------------------------------
 
 ```php
-// Enable/disable recuerdame autenticación
+// Enable/disable recuerdame autenticaciÃ³n
 define('REMEMBER_ME_AUTH', true);
 ```
 
@@ -244,14 +244,14 @@ define('LOG_DRIVER', '');
 define('LOG_FILE', __DIR__.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'debug.log');
 ```
 
-Protección de Brute-force 
+ProtecciÃ³n de Brute-force 
 ---------------------
 
 ```php
 // Habilitar captcha despues de 3 autenticaciones fallidas
 define('BRUTEFORCE_CAPTCHA', 3);
 
-// Bloquear la cuenta después de 6 autenticaciones fallidas
+// Bloquear la cuenta despuÃ©s de 6 autenticaciones fallidas
 define('BRUTEFORCE_LOCKDOWN', 6);
 
 // Bloquear la cuenta durante un minute
@@ -270,7 +270,7 @@ define('SESSION_DURATION', 0);
 Clientes HTTP
 --------------
 
-Si las peticiones HTTP externas debe ser enviada a través de un proxy :
+Si las peticiones HTTP externas debe ser enviada a travÃ©s de un proxy :
 
 ```php
 define('HTTP_PROXY_HOSTNAME', '');
@@ -293,15 +293,15 @@ Varias configuraciones
 // Escapar de HTML dentro del texto de markdown
 define('MARKDOWN_ESCAPE_HTML', true);
 
-// Cabecera de autenticación alternativo API , el valor predeterminado es la autenticación básica HTTP definido en RFC2617
+// Cabecera de autenticaciÃ³n alternativo API , el valor predeterminado es la autenticaciÃ³n bÃ¡sica HTTP definido en RFC2617
 define('API_AUTHENTICATION_HEADER', '');
 
 // Oculatar el formulario de login, usarlo si todos tus usuarios usan Google/Github/ReverseProxy authentication
 define('HIDE_LOGIN_FORM', false);
 
-// Desactivación de cierre de sesión ( SSO para la autenticación externa )
+// DesactivaciÃ³n de cierre de sesiÃ³n ( SSO para la autenticaciÃ³n externa )
 define('DISABLE_LOGOUT', false);
 
-// Invalidar token de la API almacenada en la base de datos , útil para pruebas automatizadas
+// Invalidar token de la API almacenada en la base de datos , Ãºtil para pruebas automatizadas
 define('API_AUTHENTICATION_TOKEN', 'My unique API Token');
 ```

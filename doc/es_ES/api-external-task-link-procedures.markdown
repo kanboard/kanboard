@@ -3,9 +3,9 @@ API de Procedimientos de tarea de enlace externo
 
 ## getExternalTaskLinkTypes
 
-- Prop髎ito: **Obtener todos los proveedores registrados de enlaces externos**
-- Par醡etros: **ninguno**
-- Resultado en caso de 閤ito: **dict**
+- Prop贸sito: **Obtener todos los proveedores registrados de enlaces externos**
+- Par谩metros: **ninguno**
+- Resultado en caso de 茅xito: **dict**
 - Resultado en caso de falla: **false**
 
 Ejemplo de solicitud:
@@ -31,10 +31,10 @@ Ejemplo de respuesta:
 
 ## getExternalTaskLinkProviderDependencies
 
-- Prop髎ito: **Obtener las dependencias disponibles para un determinado proveedor**
+- Prop贸sito: **Obtener las dependencias disponibles para un determinado proveedor**
 - Parametros:
     - **providerName** (string, required)
-- Resultado en caso de 閤ito: **dict**
+- Resultado en caso de 茅xito: **dict**
 - Resultado en caso de falla: **false**
 
 Ejemplo de solicitud:
@@ -57,14 +57,14 @@ Ejemplo de respuesta:
 
 ## createExternalTaskLink
 
-- Prop髎ito: **Crear una nueva tarea de enlace externo**
+- Prop贸sito: **Crear una nueva tarea de enlace externo**
 - Parametros:
     - **task_id** (integer, required)
     - **url** (string, required)
     - **dependency** (string, required)
     - **type** (string, optional)
     - **title** (string, optional)
-- Resultado en caso de 閤ito: **link_id**
+- Resultado en caso de 茅xito: **link_id**
 - Resultado en caso de falla: **false**
 
 Ejemplo de solicitud:
@@ -85,14 +85,14 @@ Ejemplo de respuesta:
 
 ## updateExternalTaskLink
 
-- Prop髎ito: **Actualizar tarea de enlace externo**
+- Prop贸sito: **Actualizar tarea de enlace externo**
 - Parametros:
     - **task_id** (integer, required)
     - **link_id** (integer, required)
     - **title** (string, required)
     - **url** (string, required)
     - **dependency** (string, required)
-- Resultado en caso de 閤ito: **true**
+- Resultado en caso de 茅xito: **true**
 - Resultado en caso de falla: **false**
 
 Ejemplo de solicitud:
@@ -122,11 +122,11 @@ Ejemplo de respuesta:
 
 ## getExternalTaskLinkById
 
-- Prop髎ito: **Obtener un enlace de tarea externo**
+- Prop贸sito: **Obtener un enlace de tarea externo**
 - Parametros:
     - **task_id** (integer, required)
     - **link_id** (integer, required)
-- Resultado en caso de 閤ito: **dict**
+- Resultado en caso de 茅xito: **dict**
 - Resultado en caso de falla: **false**
 
 Ejemplo de solicitud:
@@ -157,10 +157,10 @@ Ejemplo de respuesta:
 
 ## getAllExternalTaskLinks
 
-- Prop髎ito: **Obtener todos los enlaces externos conectados a una tarea**
+- Prop贸sito: **Obtener todos los enlaces externos conectados a una tarea**
 - Parametros:
     - **task_id** (integer, required)
-- Resultado en caso de 閤ito: **list of external links**
+- Resultado en caso de 茅xito: **list of external links**
 - Resultado en caso de falla: **false**
 
 Ejemplo de solicitud:
@@ -197,11 +197,11 @@ Ejemplo de respuesta:
 
 ## removeExternalTaskLink
 
-- Prop髎ito: **Remover una tarea de enlace externo**
+- Prop贸sito: **Remover una tarea de enlace externo**
 - Parametros:
     - **task_id** (integer, required)
     - **link_id** (integer, required)
-- Resultado en caso de 閤ito: **true**
+- Resultado en caso de 茅xito: **true**
 - Resultado en caso de falla: **false**
 
 Ejemplo de solicitud:

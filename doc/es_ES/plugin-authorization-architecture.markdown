@@ -1,9 +1,9 @@
-Arquitecuta de autorizaciÛn
+Arquitecuta de autorizaci√≥n
 ===========================
 
-Kanboard [soporta multiples roles](roles.markdown) a nivel de aplicaciÛn y a nivel de proyecto.
+Kanboard [soporta multiples roles](roles.markdown) a nivel de aplicaci√≥n y a nivel de proyecto.
 
-Workflow de autorizaciÛn
+Workflow de autorizaci√≥n
 --------------------------
 
 Para cada solicitud HTTP:
@@ -16,15 +16,15 @@ Para cada solicitud HTTP:
 Extendiendo mapa de accesos
 ---------------------------
 
-Lista de accesos (ACL) se basa en el nombre de clase del controlador y el nombre del mÈtodo
-La lista de acceso est· a cargo de la clase `Kanboard\Core\Security\AccessMap`.
+Lista de accesos (ACL) se basa en el nombre de clase del controlador y el nombre del m√©todo
+La lista de acceso est√° a cargo de la clase `Kanboard\Core\Security\AccessMap`.
 
-Hay dos mapa de acceso: una para la aplicaciÛn y la otra para un proyecto.
+Hay dos mapa de acceso: una para la aplicaci√≥n y la otra para un proyecto.
 
-- Acceso al mapa de aplicaciÛn : `$this->applicationAccessMap`
+- Acceso al mapa de aplicaci√≥n : `$this->applicationAccessMap`
 - Acceso al mapa del proyecto: `$this->projectAccessMap`
 
-Ejemplos para definir una nueva polÌtica para tu plugin:
+Ejemplos para definir una nueva pol√≠tica para tu plugin:
 
 ```php
 // Todos los metodos de la clase  MyController:
@@ -36,4 +36,4 @@ $this->projectAccessMap->add('MyOtherController', array('create', 'save'), Role:
 
 Los roles estan defidos en la clase  `Kanboard\Core\Security\Role`.
 
-Clase de autorizaciÛn (`Kanboard\Core\Security\Authorization`) comprobar· el acceso de cada p·gina.
+Clase de autorizaci√≥n (`Kanboard\Core\Security\Authorization`) comprobar√° el acceso de cada p√°gina.

@@ -13,7 +13,7 @@ $this->on('app.bootstrap', function($container) {
 ```
 
 - El primer argumento es el nombre del evento (string)
-- El segundo argumento es una funcion PHP callable (finalizaciÛn o metodos de la clase)
+- El segundo argumento es una funcion PHP callable (finalizaci√≥n o metodos de la clase)
 
 Agregando un nuevo evento
 -------------------------
@@ -24,4 +24,4 @@ Para agregar un nuevo, tienes que llamar al metodo `register()` de la clase `Kan
 $this->eventManager->register('my.event.name', 'Mi descripcion del nuevo evento');
 ```
 
-Estos eventos pueden ser utilizados por otros componentes de Kanboard como acciones autom·ticas .
+Estos eventos pueden ser utilizados por otros componentes de Kanboard como acciones autom√°ticas .

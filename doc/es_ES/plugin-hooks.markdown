@@ -1,7 +1,7 @@
 Plugin Hooks
 ============
 
-Hooks de aplicaciÛn
+Hooks de aplicaci√≥n
 -----------------
 
 Los hooks pueden extender , reemplazar, filtar datos o cambiar los comportamientos por default, cad hook es identificado con unico nombre, ejemplo : `controller:calendar:user:events`
@@ -16,13 +16,13 @@ $this->hook->on('hook_name', $callable);
 
 El primer argumento es el nombre del hook y el segundo es un callable PHP
 
-### Hooks ejecutado sÛlo una vez
+### Hooks ejecutado s√≥lo una vez
 
 Algunos hooks solo tienen un  listener:
 
 #### model:subtask-time-tracking:calculate:time-spent
 
-- Anular el c·lculo del tiempo anterior cuando se detiene el temporizador de la subtarea
+- Anular el c√°lculo del tiempo anterior cuando se detiene el temporizador de la subtarea
 - Argumentos :
     - `$user_id` (integer)
     - `$start` (DateTime)
@@ -30,7 +30,7 @@ Algunos hooks solo tienen un  listener:
 
 ### Fusionar hooks
 
-"Fusionar hooks" actuar de la misma manera que la funciÛn de `array_merge`. el hook callback solo regresa un array. Este array se fusionar· con la que viene por defecto.
+"Fusionar hooks" actuar de la misma manera que la funci√≥n de `array_merge`. el hook callback solo regresa un array. Este array se fusionar√° con la que viene por defecto.
 
 Ejemplo para agregar eventos en el calendario del usuario:
 
@@ -63,7 +63,7 @@ class Plugin extends Base
 }
 ```
 
-Lista de fusiÛn de hooks:
+Lista de fusi√≥n de hooks:
 
 #### controller:task:form:default
 
@@ -129,22 +129,22 @@ $this->hook->on('formatter:board:query', function (\PicoDb\Table &query) {
 });
 ```
 
-El cÛdigo anterior mostrar· sÛlo las tareas en rojo en el tablero.
+El c√≥digo anterior mostrar√° s√≥lo las tareas en rojo en el tablero.
 
 Lista de referencias de hooks:
 
 | Hook                                       | Description                                                   |
 |--------------------------------------------|---------------------------------------------------------------|
 | `formatter:board:query`                    | Alterar consulta a la base antes de tablero de renderizado    |
-| `pagination:dashboard:task:query`          | Alterar consulta de base de datos para las tareas de la paginaciÛn en el dashboard  |
-| `pagination:dashboard:subtask:query`       | Alterar consulta a la base de la paginaciÛn en el subtareas del dashboard           |
+| `pagination:dashboard:task:query`          | Alterar consulta de base de datos para las tareas de la paginaci√≥n en el dashboard  |
+| `pagination:dashboard:subtask:query`       | Alterar consulta a la base de la paginaci√≥n en el subtareas del dashboard           |
 | `model:task:creation:prepare`              | Alterar los valores del formulario antes de guardar una tarea                       |
 | `model:task:modification:prepare`          | Alterar los valores del formulario antes de editar una tarea
 
 Template Hooks
 --------------
 
-Template hooks permitir· aÒadir nuevos contenidos en las plantillas existentes.
+Template hooks permitir√° a√±adir nuevos contenidos en las plantillas existentes.
 
 Ejemplo para agregar nuevos contenidos en el sidebar del dashboard:
 
@@ -171,7 +171,7 @@ $this->template->hook->attach('template:dashboard:sidebar', 'myplugin:dashboard/
 Este llamada es usualmente definida en el metodo `initialize()`
 El primer argumento es el nombre del hook y el segundo argumento es el nombre del template.
 
-Los nombres de plantillas con el prefijo del nombre del plugin y los dos puntos indican la ubicaciÛn de la plantilla.
+Los nombres de plantillas con el prefijo del nombre del plugin y los dos puntos indican la ubicaci√≥n de la plantilla.
 
 Ejemplo con `myplugin:dashboard/sidebar`:
 
@@ -180,11 +180,11 @@ Ejemplo con `myplugin:dashboard/sidebar`:
 - En el filesystem, El plugin esta localizado aqui: `plugins\Myplugin\Template\dashboard\sidebar.php`
 - Templates estan escritos en puro PHP (no se olvide de escapar los datos)
 
-Los nombres de plantillas sin prefijo son plantillas b·sicas.
+Los nombres de plantillas sin prefijo son plantillas b√°sicas.
 
 Lista de templates hooks:
 
-| Hook                                       | DescripciÛn                                      |
+| Hook                                       | Descripci√≥n                                      |
 |--------------------------------------------|----------------------------------------------------|
 | `template:analytic:sidebar`                | Sidebar en paginas analiticas                      |
 | `template:app:filters-helper:before`       | Filtro helper dropdown (top)                       |
@@ -198,8 +198,8 @@ Lista de templates hooks:
 | `template:board:task:footer`               | Tarea en el tablero : footer                       |
 | `template:board:task:icons`                | Tarea en el tablero: tooltip icon                  |
 | `template:board:column:dropdown`           | Menu Dropdown en las columnas del tablero          |
-| `template:config:sidebar`                  | Sidebar pagina de configuraciÛn                    |
-| `template:config:application `             | AplicaciÛn de configuraciÛn del formulario         |
+| `template:config:sidebar`                  | Sidebar pagina de configuraci√≥n                    |
+| `template:config:application `             | Aplicaci√≥n de configuraci√≥n del formulario         |
 | `template:config:email`                    | Email settings page                                |
 | `template:config:integrations`             | Integration page in global settings                |
 | `template:dashboard:sidebar`               | Sidebar en la pagina del dashboard                 |
@@ -214,9 +214,9 @@ Lista de templates hooks:
 | `template:project:dropdown`                | "Actions" menu a la izquierda vista para diferentes proyectos |
 | `template:project:header:before`           | Filtros de Proyectos  (antes)                           |
 | `template:project:header:after`            | Filtros de Proyectos (despues)                     |
-| `template:project:integrations`            | Pagina de integracion de configuraciÛn de proyectos|
-| `template:project:sidebar`                 | Sidebar configuraciÛn de proyectos                 |
-| `template:project-user:sidebar`            | Sidebar en la p·gina de la informaciÛn de usuario del proyecto            |
+| `template:project:integrations`            | Pagina de integracion de configuraci√≥n de proyectos|
+| `template:project:sidebar`                 | Sidebar configuraci√≥n de proyectos                 |
+| `template:project-user:sidebar`            | Sidebar en la p√°gina de la informaci√≥n de usuario del proyecto            |
 | `template:task:layout:top`                 | Task layout top (antes page header)                |
 | `template:task:details:top`                | Resumen de tarea top                               |
 | `template:task:details:bottom`             | Resumen de tarea bottom                            |
@@ -225,25 +225,25 @@ Lista de templates hooks:
 | `template:task:details:third-column`       | Resumen de tarea tres columnas                     |
 | `template:task:details:fourth-column`      | Resumen de tarea cuatro columnas                   |
 | `template:task:dropdown`                   | Task dropdown menu en listado de paginas           |
-| `template:task:sidebar:actions`            | Sidebar on task page (secciÛn de acciones)         |
-| `template:task:sidebar:information`        | Sidebar on task page (secciÛn de informaciÛn)         |
+| `template:task:sidebar:actions`            | Sidebar on task page (secci√≥n de acciones)         |
+| `template:task:sidebar:information`        | Sidebar on task page (secci√≥n de informaci√≥n)         |
 | `template:task:form:first-column`          | 1st columna en forma de tarea                           |
 | `template:task:form:second-column`         | 2nd columna en forma de tarea                            |
 | `template:task:form:third-column`          | 3nd columna en forma de tarea                            |
-| `template:task:show:top   `                | Mostrar p·gina de tareas : top                                |
-| `template:task:show:bottom`                | Mostrar p·gina de tareas : bottom                             |
-| `template:task:show:before-description`    | Mostrar p·gina de tareas : despues de la descripciÛn            |
-| `template:task:show:before-tasklinks`      | Mostrar p·gina de tareas : despues tasklinks                   |
-| `template:task:show:before-subtasks`       | Mostrar p·gina de tareas : despues subtareas                   |
-| `template:task:show:before-timetracking`   | Mostrar p·gina de tareas : despues timetracking                |
-| `template:task:show:before-attachments`    | Mostrar p·gina de tareas : despues archivos adjuntos                 |
-| `template:task:show:before-comments`       | Mostrar p·gina de tareas : despues comentarios                  |
-| `template:user:authentication:form`        | "Editar autenticaciÛn" formulario de perfil de usuario  |
+| `template:task:show:top   `                | Mostrar p√°gina de tareas : top                                |
+| `template:task:show:bottom`                | Mostrar p√°gina de tareas : bottom                             |
+| `template:task:show:before-description`    | Mostrar p√°gina de tareas : despues de la descripci√≥n            |
+| `template:task:show:before-tasklinks`      | Mostrar p√°gina de tareas : despues tasklinks                   |
+| `template:task:show:before-subtasks`       | Mostrar p√°gina de tareas : despues subtareas                   |
+| `template:task:show:before-timetracking`   | Mostrar p√°gina de tareas : despues timetracking                |
+| `template:task:show:before-attachments`    | Mostrar p√°gina de tareas : despues archivos adjuntos                 |
+| `template:task:show:before-comments`       | Mostrar p√°gina de tareas : despues comentarios                  |
+| `template:user:authentication:form`        | "Editar autenticaci√≥n" formulario de perfil de usuario  |
 | `template:user:create-remote:form`         | "Crear un usuario remoto" formulario                         |
-| `template:user:external`                   | "AutenticaciÛn externa" la p·gina de perfil de usuario   |
-| `template:user:integrations`               | IntegraciÛn en el perfil de usuario                  |
-| `template:user:sidebar:actions`            | Sidebar en el perfil de usuario (secciÛn de acciones)          |
-| `template:user:sidebar:information`        | Sidebar en el perfil de usuario (secciÛn de informaciÛn)      |
+| `template:user:external`                   | "Autenticaci√≥n externa" la p√°gina de perfil de usuario   |
+| `template:user:integrations`               | Integraci√≥n en el perfil de usuario                  |
+| `template:user:sidebar:actions`            | Sidebar en el perfil de usuario (secci√≥n de acciones)          |
+| `template:user:sidebar:information`        | Sidebar en el perfil de usuario (secci√≥n de informaci√≥n)      |
 
 
-Otro de los ganchos plantilla se pueden aÒadir en caso necesario , sÛlo hay que preguntar en el seguimiento de incidencias  ** issue tracking **. 
+Otro de los ganchos plantilla se pueden a√±adir en caso necesario , s√≥lo hay que preguntar en el seguimiento de incidencias  ** issue tracking **. 

@@ -1,22 +1,22 @@
 Personalizar Rutas
 ==================
 
-Cuando está habilitada la reescritura de URL, tu puedes definir rutas personalizadas desde tus plugins.
+Cuando estÃ¡ habilitada la reescritura de URL, tu puedes definir rutas personalizadas desde tus plugins.
 
 Definir nuevas rutas
 --------------------
 
 Las rutas son manejadas por la clase `Kanboard\Core\Http\Route`.
 
-Las nuevas rutas se pueden agregar mediante el uso del método `addRoute($path, $controller, $action, $plugin)`, here an example:
+Las nuevas rutas se pueden agregar mediante el uso del mÃ©todo `addRoute($path, $controller, $action, $plugin)`, here an example:
 
 ```php
 $this->route->addRoute('/my/custom/route', 'myController', 'myAction', 'myplugin');
 ```
 
-Cuando el usuario final **end-user** van a la URL `/my/custom/route`, el metodo `Kanboard\Plugin\Myplugin\Controller\MyController::myAction()` será ejecutado.
+Cuando el usuario final **end-user** van a la URL `/my/custom/route`, el metodo `Kanboard\Plugin\Myplugin\Controller\MyController::myAction()` serÃ¡ ejecutado.
 
-El primer caracter del contraldor y el nombre del plugin serán convertidos en mayusculas con la funcion `ucfirst()`.
+El primer caracter del contraldor y el nombre del plugin serÃ¡n convertidos en mayusculas con la funcion `ucfirst()`.
 
 Tu puedes ademas definir rutas con variables:
 
@@ -70,9 +70,9 @@ Salida HTML cuando la reescritura del URL no esta habilitada:
 ?controller=mycontroller&amp;action=myaction&amp;plugin=myplugin
 ```
 
-### Generar enlace de redirección:
+### Generar enlace de redirecciÃ³n:
 
-Desde un controlador, si tu necesitas para From a controller, si tu necesitas realizar una redirección:
+Desde un controlador, si tu necesitas para From a controller, si tu necesitas realizar una redirecciÃ³n:
 
 ```php
 $this->url->to('mycontroller', 'myaction', array('plugin' => 'myplugin'));

@@ -1,11 +1,11 @@
 Metadatos
 =========
 
-Tu piedes adjutnar metadatos para cada projecto,tarea , usuaio o para toda la aplicación
+Tu piedes adjutnar metadatos para cada projecto,tarea , usuaio o para toda la aplicaciÃ³n
 Los metadatos son campos personalisados, es una key/value de una tabla.
 
-Por ejemplo nuestro plugin puede almacenar información externa para una tarea o nuevas configuraciones para un proyecto.
-Básicamente le permiten ampliar los campos predeterminados sin tener que crear nuevas tablas .
+Por ejemplo nuestro plugin puede almacenar informaciÃ³n externa para una tarea o nuevas configuraciones para un proyecto.
+BÃ¡sicamente le permiten ampliar los campos predeterminados sin tener que crear nuevas tablas .
 
 Adjuntar y eliminar metadatos para tareas 
 --------------------------------------------

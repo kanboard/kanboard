@@ -1,9 +1,9 @@
-Autenticación por proxy inverso
+AutenticaciÃ³n por proxy inverso
 ============================
 
-Este metodo de autenticación a menudo es usado por [SSO](http://en.wikipedia.org/wiki/Single_sign-on) (Single Sign-On) especialmente para organizaciones mayores.
+Este metodo de autenticaciÃ³n a menudo es usado por [SSO](http://en.wikipedia.org/wiki/Single_sign-on) (Single Sign-On) especialmente para organizaciones mayores.
 
-La autenticación se realiza mediante otro sistema, Kanboard no conoce su contraseña y supongamos que ya está autenticado.
+La autenticaciÃ³n se realiza mediante otro sistema, Kanboard no conoce su contraseÃ±a y supongamos que ya estÃ¡ autenticado.
 
 Requerimentos
 ------------
@@ -15,49 +15,49 @@ o
 - Apache Auth en el mismo servidor
 
 
-¿Como funciona esto?
+Â¿Como funciona esto?
 -------------------
 
-1. Su proxy inverso autentica al usuario y envia el nombre de usuario a través de una cabecera HTTP.
+1. Su proxy inverso autentica al usuario y envia el nombre de usuario a travÃ©s de una cabecera HTTP.
 2. Kanboard recuperar el nombre de usuario de la solicitud
-    - El usuario se crea automáticamente si es necesario
-    - Abrir una nueva sesión Kanboard sin ningún símbolo asumiendo que es válida
+    - El usuario se crea automÃ¡ticamente si es necesario
+    - Abrir una nueva sesiÃ³n Kanboard sin ningÃºn sÃ­mbolo asumiendo que es vÃ¡lida
 
-Instrucciones de instalación
+Instrucciones de instalaciÃ³n
 ----------------------------
 
-### Configuración de su proxy inverso
+### ConfiguraciÃ³n de su proxy inverso
 
-Esto esta fuera del alcance de esta documentación.
-Debería comprobar la conexión del usuario ya que es enviado por el proxy inverso utilizando una cabecera HTTP.
+Esto esta fuera del alcance de esta documentaciÃ³n.
+DeberÃ­a comprobar la conexiÃ³n del usuario ya que es enviado por el proxy inverso utilizando una cabecera HTTP.
 
-### Configuración de Kanboard
+### ConfiguraciÃ³n de Kanboard
 
 Crear un archivo `config.php`  copiar el archivo` config.default.php`:
 
 ```php
 <?php
 
-// Activar / desactivar la autenticación del proxy inverso
+// Activar / desactivar la autenticaciÃ³n del proxy inverso
 define('REVERSE_PROXY_AUTH', true); // Set this value to true
 
 // La cabecera HTTP para recuperar. Si no se especifica, el valor por defecto es REMOTE_USER
 define('REVERSE_PROXY_USER_HEADER', 'REMOTE_USER');
 
-// El Kanboard predeterminado esta el administrador para su organización.
+// El Kanboard predeterminado esta el administrador para su organizaciÃ³n.
 // Ya que todo debe ser filtrada por el proxy inverso,
 // Debe tener un usuario administrador para el arranque.
 define('REVERSE_PROXY_DEFAULT_ADMIN', 'myadmin');
 
-// El dominio predeterminado para asumir la dirección de correo electrónico.
-// En caso de que el nombre de usuario no es una dirección de correo electrónico,
-// Se actualizará automáticamente como USER@mydomain.com
+// El dominio predeterminado para asumir la direcciÃ³n de correo electrÃ³nico.
+// En caso de que el nombre de usuario no es una direcciÃ³n de correo electrÃ³nico,
+// Se actualizarÃ¡ automÃ¡ticamente como USER@mydomain.com
 define('REVERSE_PROXY_DEFAULT_DOMAIN', 'mydomain.com');
 ```
 
 Notas:
 
-- Si el proxy esta en el mismo servidor Web que ejecuta Kanboard, según la [CGI protocol](http://www.ietf.org/rfc/rfc3875) el Header será `REMOTE_USER`. Por ejemplo, Apache añadir `REMOTE_USER` por defecto si` Require valid-usuario de la red se establece.
+- Si el proxy esta en el mismo servidor Web que ejecuta Kanboard, segÃºn la [CGI protocol](http://www.ietf.org/rfc/rfc3875) el Header serÃ¡ `REMOTE_USER`. Por ejemplo, Apache aÃ±adir `REMOTE_USER` por defecto si` Require valid-usuario de la red se establece.
 
 - Si Apache es un proxy inverso a otro Apache corriendo Kanboard, la cabecera `REMOTE_USER` no se establece (mismo comportamiento con IIS y Nginx)
 

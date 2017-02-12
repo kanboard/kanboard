@@ -1,7 +1,7 @@
-Estandares de codificaci髇
+Estandares de codificaci贸n
 ================
 
-C骴igo PHP
+C贸digo PHP
 ----------
 
 - Indentacion: 4 espacios
@@ -11,13 +11,13 @@ C骴igo PHP
 - Siempre escribe comentarios PHPdoc para metodos y propiedades de la clase
 - Codificar con estilo : [PSR-1](http://www.php-fig.org/psr/psr-1/) y [PSR-2](http://www.php-fig.org/psr/psr-2/)
 
-C骴igo JavaScript 
+C贸digo JavaScript 
 ---------------
 
 - Indentacion: 4 espacios
 - Linea de retorno: Unix => `\n`
 
-C骴igo CSS 
+C贸digo CSS 
 --------
 
 - Indentacion: 4 espacios

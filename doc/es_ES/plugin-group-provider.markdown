@@ -15,20 +15,20 @@ Flujo de trabajo del Grupo de Proveedores **Workflow**
 1. El usuario final **end-user** comienza a escribir el nombre del grupo y el campo se autocompleta
 2. EL `GroupManager` la clase ejecuta la consulta para todos los proveedores de grupo registrados
 3. Los resultados son fusionados y regresados a la interface de usuario
-4. Antes de seleccionar un grupo, a informaciÛn del grupo se sincronizan con la base de datos local si es necesario
+4. Antes de seleccionar un grupo, a informaci√≥n del grupo se sincronizan con la base de datos local si es necesario
 
 Interface del grupo de proveedores
 ----------------------------------
 
 interface a implementar: `Kanboard\Core\Group\GroupProviderInterface`.
 
-Las clases que implementa esta interface abstracta del grupo de informaciÛn, solo hay 3 metodos:
+Las clases que implementa esta interface abstracta del grupo de informaci√≥n, solo hay 3 metodos:
 
 - `getInternalId()`: Obtiene el id interno de la base de datos, de otra manera regresa 0
 - `getExternalId()`: Obtiene un id unico externo
 - `getName()`: Obtiene el nombre de grupo
 
-Kanboard utilizar· el ID externo para sincronizar con la base de datos local.
+Kanboard utilizar√° el ID externo para sincronizar con la base de datos local.
 
 Interface Backend del grupo de proveedores
 ------------------------------------------

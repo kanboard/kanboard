@@ -87,7 +87,7 @@ class DocumentationController extends BaseController
     private function getPageFilename($page)
     {
         return $this->getFileLocation($page . '.markdown') ?:
-            implode(DIRECTORY_SEPARATOR, array(ROOT_DIR, 'doc', 'index.markdown'));
+            implode(DIRECTORY_SEPARATOR, array(ROOT_DIR, 'doc', 'en_US', 'index.markdown'));
     }
 
     /**
@@ -122,7 +122,7 @@ class DocumentationController extends BaseController
     {
         $files = array(
             implode(DIRECTORY_SEPARATOR, array(ROOT_DIR, 'doc', $this->languageModel->getCurrentLanguage(), $filename)),
-            implode(DIRECTORY_SEPARATOR, array(ROOT_DIR, 'doc', $filename)),
+            implode(DIRECTORY_SEPARATOR, array(ROOT_DIR, 'doc', 'en_US', $filename)),
         );
 
         foreach ($files as $filename) {

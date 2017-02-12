@@ -1,4 +1,4 @@
-Configuración Mysql/MariaDB 
+ConfiguraciÃ³n Mysql/MariaDB 
 ===========================
 
 
@@ -9,25 +9,25 @@ Requirimientos
 ------------
 
 - Mysql server
-- Instalar la extensión `pdo_mysql` en PHP
+- Instalar la extensiÃ³n `pdo_mysql` en PHP
 
 Nota: Kanboard esta testeada con  **Mysql >= 5.5 y MariaDB >= 10.0**
 
-configuración Mysql 
+configuraciÃ³n Mysql 
 -------------------
 
 ### Crear una base de datos
 
 El primer paso es crear una base de datos en tu servidor MySQL
-Por ejemplo, se puede hacer eso con el cliente de línea de comandos mysql:
+Por ejemplo, se puede hacer eso con el cliente de lÃ­nea de comandos mysql:
 
 ```sql
 CREATE DATABASE kanboard;
 ```
 
-### Crear un archivo de configuración
+### Crear un archivo de configuraciÃ³n
 
-El archivo `config.php` debería contener estos valores:
+El archivo `config.php` deberÃ­a contener estos valores:
 
 ```php
 <?php
@@ -47,7 +47,7 @@ Nota: Se puede renombrar el archivo de plantilla `config.default.php` a `config.
 ### Importando SQL dump (metodo alternativo)
 
 
-Por primera vez, se ejecutará Kanboard uno por uno cada migración de base de datos y este proceso puede tardar algún tiempo de acuerdo a su configuración.
+Por primera vez, se ejecutarÃ¡ Kanboard uno por uno cada migraciÃ³n de base de datos y este proceso puede tardar algÃºn tiempo de acuerdo a su configuraciÃ³n.
 
 Para evitar cualquier tiempo de espera de potencial se puede inicializar la base de datos directamente importando el esquema de SQL:
 
@@ -55,12 +55,12 @@ Para evitar cualquier tiempo de espera de potencial se puede inicializar la base
 mysql -u root -p my_database < app/Schema/Sql/mysql.sql
 ```
 
-El archivo `app/Schema/Sql/mysql.sql` es un dump SQL  que representa la ultima versión de la base de datos
+El archivo `app/Schema/Sql/mysql.sql` es un dump SQL  que representa la ultima versiÃ³n de la base de datos
 
-SSL configuración
+SSL configuraciÃ³n
 -----------------
 
-Estos parámetros tienen que ser definidas para permitir la conexión SSL Mysql:
+Estos parÃ¡metros tienen que ser definidas para permitir la conexiÃ³n SSL Mysql:
 
 ```php
 // Mysql SSL key

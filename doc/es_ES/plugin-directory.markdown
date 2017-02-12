@@ -1,15 +1,15 @@
-Plugin de configuraci髇 del directorio
+Plugin de configuraci贸n del directorio
 ======================================
 
 Para instalar, actualizar y eliminar plugins dede la interface de usuario, debes tener estos requerimientos:
 
 - El directorio del plugin debe ser de escritura por el usuario del servidor web
-- La extensi髇 Zip debe estar disponible en tu server.
-- Los parametros de configuraci髇 `PLUGIN_INSTALLER` deben estar en `true`
+- La extensi贸n Zip debe estar disponible en tu server.
+- Los parametros de configuraci贸n `PLUGIN_INSTALLER` deben estar en `true`
 
-Para desactivar esta funci髇 , cambie el valor de `PLUGIN_INSTALLER` a `false` en tu archivo de configuraci髇.
-Tambi閚 puede cambiar los permisos de la carpeta Plugin en el filesystem.
+Para desactivar esta funci贸n , cambie el valor de `PLUGIN_INSTALLER` a `false` en tu archivo de configuraci贸n.
+Tambi茅n puede cambiar los permisos de la carpeta Plugin en el filesystem.
 
-S髄o los administradores pueden instalar plugins desde la interfaz de usuario.
+S贸lo los administradores pueden instalar plugins desde la interfaz de usuario.
 
-Por defecto, s髄o plug-in que aparece en la p醙ina web de Kanboard est醤 disponibles .
+Por defecto, s贸lo plug-in que aparece en la p谩gina web de Kanboard est谩n disponibles .

@@ -3,10 +3,10 @@ Group Member API Procedures
 
 ## getMemberGroups
 
-- PropÛsito: **Obtener todos los grupos de un usuario determinado**
-- Par·metros:
+- Prop√≥sito: **Obtener todos los grupos de un usuario determinado**
+- Par√°metros:
     - **user_id** (integer, required)
-- Resultado en caso de Èxito: **List of groups**
+- Resultado en caso de √©xito: **List of groups**
 - Resultado en caso de falla: **false**
 
 Ejemplo de solicitud:
@@ -39,10 +39,10 @@ Ejemplo de respuesta:
 
 ## getGroupMembers
 
-- PropÛsito: **Obtener todos los miembros de un grupo**
-- Par·metros:
+- Prop√≥sito: **Obtener todos los miembros de un grupo**
+- Par√°metros:
     - **group_id** (integer, required)
-- Resultado en caso de Èxito: **List of users**
+- Resultado en caso de √©xito: **List of users**
 - Resultado en caso de falla: **false**
 
 Ejemplo de solicitud:
@@ -90,11 +90,11 @@ Ejemplo de respuesta:
 
 ## addGroupMember
 
-- PropÛsito: **Agregar un usuario a un grupo**
-- Par·metros:
+- Prop√≥sito: **Agregar un usuario a un grupo**
+- Par√°metros:
     - **group_id** (integer, required)
     - **user_id** (integer, required)
-- Resultado en caso de Èxito: **true**
+- Resultado en caso de √©xito: **true**
 - Resultado en caso de falla: **false**
 
 Ejemplo de solicitud:
@@ -123,11 +123,11 @@ Ejemplo de respuesta:
 
 ## removeGroupMember
 
-- PropÛsito: **Quitar un usuario de un grupo**
-- Par·metros:
+- Prop√≥sito: **Quitar un usuario de un grupo**
+- Par√°metros:
     - **group_id** (integer, required)
     - **user_id** (integer, required)
-- Resultado en caso de Èxito: **true**
+- Resultado en caso de √©xito: **true**
 - Resultado en caso de falla: **false**
 
 Ejemplo de solicitud:
@@ -156,11 +156,11 @@ Ejemplo de respuesta:
 
 ## isGroupMember
 
-- PropÛsito: **Comprobar si un usuario es miembro de un grupo**
-- Par·metros:
+- Prop√≥sito: **Comprobar si un usuario es miembro de un grupo**
+- Par√°metros:
     - **group_id** (integer, required)
     - **user_id** (integer, required)
-- Resultado en caso de Èxito: **true**
+- Resultado en caso de √©xito: **true**
 - Resultado en caso de falla: **false**
 
 Ejemplo de solicitud:

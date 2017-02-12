@@ -28,12 +28,12 @@ Lado del servidor
 | MariaDB >= 10      |
 | Postgresql >= 9.3  |
 
-Qué base de datos para elegir?
+QuÃ© base de datos para elegir?
 
 | Tipo            | Uso                                              |
 |-----------------|-----------------------------------------------------|
-| Sqlite          | un solo usuario o equipo pequeño (casi no hay concurrencia)  |
-| Mysql/Postgres  | Equipo grande, configuración de alta disponibilidad       |
+| Sqlite          | un solo usuario o equipo pequeÃ±o (casi no hay concurrencia)  |
+| Mysql/Postgres  | Equipo grande, configuraciÃ³n de alta disponibilidad       |
 
 No usar Sqlite en montajes de NFS, use Sqlite solo cuando tengas un disco con Fast I/O
 
@@ -49,7 +49,7 @@ Kanboard esta pre configurado para trabajar con Apache (URL rewriting).
 
 ### Versiones de PHP
 
-| Versión de PHP |
+| VersiÃ³n de PHP |
 |----------------|
 | PHP >= 5.3.9   |
 | PHP 5.4        |
@@ -71,7 +71,7 @@ Kanboard esta pre configurado para trabajar con Apache (URL rewriting).
 | hash                       |                               |
 | ctype                      |                               |
 | session                    |                               |
-| ldap                       | Solamente para autenticación LDAP |
+| ldap                       | Solamente para autenticaciÃ³n LDAP |
 | Zend OPcache               | Recomendado                |
 
 ### Extensiones PHP opcionales
@@ -83,7 +83,7 @@ Kanboard esta pre configurado para trabajar con Apache (URL rewriting).
 ### Recomendaciones
 
 - Usar sistemas operativos modernos de Linux o Unix.
-- El mejor performace se obtienen con la última versión de PHP junto con la operación de OPcode esta activado.
+- El mejor performace se obtienen con la Ãºltima versiÃ³n de PHP junto con la operaciÃ³n de OPcode esta activado.
 
 
 Lado del cliente
@@ -91,7 +91,7 @@ Lado del cliente
 
 ### Browsers [Navegadores]
 
-Siempre usar el navegador mas moderno o la ultima versión posible:
+Siempre usar el navegador mas moderno o la ultima versiÃ³n posible:
 
 | Browser                               |
 |---------------------------------------|
@@ -103,9 +103,9 @@ Siempre usar el navegador mas moderno o la ultima versión posible:
 
 ### Dispositivos
 
-| Device            | Resolución de la pantalla |
+| Device            | ResoluciÃ³n de la pantalla |
 |-------------------|--------------------|
 | Laptop o desktop  | >= 1366 x 768      |
 | Tablet            | >= 1024 x 768      |
 
-Kanboard aún no está optimizado para smartphones. Está funcionando, pero la interfaz de usuario no es muy cómoda de usar.
+Kanboard aÃºn no estÃ¡ optimizado para smartphones. EstÃ¡ funcionando, pero la interfaz de usuario no es muy cÃ³moda de usar.

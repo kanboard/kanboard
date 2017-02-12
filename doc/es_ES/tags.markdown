@@ -10,16 +10,16 @@ Desde el formulario de tarea, tu puedes caputarar las tags deseadas:
 
 ![Tags form](screenshots/tags-task.png)
 
-La auto-completacion se forma para mostrar Û sugerir etiquetas disponibles.
+La auto-completacion se forma para mostrar √≥ sugerir etiquetas disponibles.
 
-TambiÈn puede crear etiquetas directamente desde el formulario de tareas .
-Por defecto , al crear etiquetas de un formulario de tarea que est·n asociados al proyecto actual :
+Tambi√©n puede crear etiquetas directamente desde el formulario de tareas .
+Por defecto , al crear etiquetas de un formulario de tarea que est√°n asociados al proyecto actual :
 
 ![Project Tags](screenshots/tags-projects.png)
 
-Todas las tags pueden ser manejadas en configuraciÛn del proyecto.
+Todas las tags pueden ser manejadas en configuraci√≥n del proyecto.
 
-Para definir tags globalmente para todos los proyectos, ve a la configuraciÛn de la aplicaciÛn :
+Para definir tags globalmente para todos los proyectos, ve a la configuraci√≥n de la aplicaci√≥n :
 
 ![Global Tags](screenshots/tags-global.png)
 

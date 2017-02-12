@@ -10,11 +10,11 @@ Por default Kanboard soporta 3 estadares de trasporte de email:
 Con la API del plugin tu puedes agregar un driver para cualquier proveedor de email.
 Por ejemplo, nuestro plugin puede agregar un trasporte de email para un proveedor que usa un API HTTP.
 
-Implementación
+ImplementaciÃ³n
 --------------
 
 Nuestro plugin dede implementgar la interface `Kanboard\Core\Mail\ClientInterface` y extiende desde `Kanboard\Core\Base`.
-El único método que necesita para implementar es `sendEmail()`:
+El Ãºnico mÃ©todo que necesita para implementar es `sendEmail()`:
 
 ```php
 interface ClientInterface

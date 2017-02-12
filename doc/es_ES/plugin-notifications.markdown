@@ -1,13 +1,13 @@
 Agregar notificaciones con los tipos de plugin
 ==============================================
 
-Puede enviar notificaciones a casi cualquier sistema mediante la adici髇 de un nuevo tipo .
+Puede enviar notificaciones a casi cualquier sistema mediante la adici贸n de un nuevo tipo .
 There are two kinds of notifications: project and user.
 
 - Project: Notificaciones configuradas a nivel de proyecto
 - Usuario: Notificaciones enviadas individualmente y configurada a cada perfil de usuario.
 
-Registra un nuevo tipo de notificaci髇
+Registra un nuevo tipo de notificaci贸n
 --------------------------------------
 
 En tu archivo de registro del plugin llama el metodo `setType()`:
@@ -17,19 +17,19 @@ $this->userNotificationTypeModel->setType('irc', t('IRC'), '\Kanboard\Plugin\IRC
 $this->projectNotificationTypeModel->setType('irc', t('IRC'), '\Kanboard\Plugin\IRC\Notification\IrcHandler');
 ```
 
-Su controlador puede ser registrado por el usuario o la notificaci髇 del proyecto. No necesariamente tienen que soportarlo .
-Cuando tu handler es registrdo, el usuario final **end-user** puede elegir recibir el nuevo tipo de notificaci髇 o no 
+Su controlador puede ser registrado por el usuario o la notificaci贸n del proyecto. No necesariamente tienen que soportarlo .
+Cuando tu handler es registrdo, el usuario final **end-user** puede elegir recibir el nuevo tipo de notificaci贸n o no 
 
-Notificaci髇 de Handler
+Notificaci贸n de Handler
 -----------------------
 
-Su controlador de notificaci髇 debe implementar la interfaz `Kanboard\Core\Notification\NotificationInterface`:
+Su controlador de notificaci贸n debe implementar la interfaz `Kanboard\Core\Notification\NotificationInterface`:
 
 ```php
 interface NotificationInterface
 {
     /**
-     * Envia notificaci髇 a un usuario
+     * Envia notificaci贸n a un usuario
      *
      * @access public
      * @param  array     $user
