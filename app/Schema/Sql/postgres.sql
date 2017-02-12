@@ -716,7 +716,8 @@ CREATE TABLE "projects" (
     "owner_id" integer DEFAULT 0,
     "priority_default" integer DEFAULT 0,
     "priority_start" integer DEFAULT 0,
-    "priority_end" integer DEFAULT 3
+    "priority_end" integer DEFAULT 3,
+    "email" character varying(255)
 );
 
 
@@ -2563,8 +2564,8 @@ INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_high
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_public_refresh_interval', '60', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_private_refresh_interval', '10', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_columns', '', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', 'a41accd9dabc3d45a3d26de5edd5c43b3b0082cabebfbc7a175b8d6b2e5a', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', 'dbbf966938e4400746ebcb2337bb4a3cdce0bab2dd053d57dbbc243ccc9d', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', 'caef28d453c52e4fdc0fd4ce4456698e242d839b496cc1fc580b291b7b47', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', 'ca7200b622dc8483622f83088ccc5c337fce75b6ce2d8f33f92e391a1348', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_language', 'en_US', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_timezone', 'UTC', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_url', '', 0, 0);
@@ -2633,4 +2634,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$R3.YibAi6H0ZzzrSHFa7qeaiEqep1X2TF/bKQX5jMQ7fZ9KIfzUte', 'app-admin');INSERT INTO schema_version VALUES ('99');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$Pq1KoC3G3bH/MUrwzwl3l.ZcAM4k99yLhGoX0XLXrTvcdySMisBC2', 'app-admin');INSERT INTO schema_version VALUES ('100');
