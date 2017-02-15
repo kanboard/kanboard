@@ -16,12 +16,12 @@
     background: #fafafa
 
 .comment-highlighted
-  background-color: #FFF8DC
-  border: 2px solid #FFF8DC
-  border-left: 2px solid #ffeb8e
+  background-color: map-get($highlight-colors, 'background')
+  border: 2px solid map-get($highlight-colors, 'background')
+  border-left: 2px solid map-get($highlight-colors, 'border')
   &:hover
-    background-color: #FFF8DC
-    border: 2px solid #ffeb8e
+    background-color: map-get($highlight-colors, 'background')
+    border: 2px solid map-get($highlight-colors, 'border')
 
 .comment-title
   border-bottom: 1px dotted #eee

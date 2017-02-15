@@ -8,7 +8,7 @@
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('There is no user in this group.') ?></p>
     <?php else: ?>
-        <table class="table-striped table-scrolling">
+        <table class="table-striped table-scrolling table-hover">
             <tr>
                 <th class="column-5"><?= $paginator->order(t('Id'), 'id') ?></th>
                 <th><?= $paginator->order(t('Username'), 'username') ?></th>
