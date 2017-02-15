@@ -1,3 +1,10 @@
+Version 1.0.40 (unreleased)
+---------------------------
+
+Improvements:
+
+* Use contextual menu instead of action column in users management
+
 Version 1.0.39 (Feb 12, 2017)
 -----------------------------
 

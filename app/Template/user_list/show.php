@@ -27,15 +27,14 @@
                 <th class="column-18"><?= $paginator->order(t('Name'), 'name') ?></th>
                 <th class="column-15"><?= $paginator->order(t('Email'), 'email') ?></th>
                 <th class="column-15"><?= $paginator->order(t('Role'), 'role') ?></th>
-                <th class="column-10"><?= $paginator->order(t('Two Factor'), 'twofactor_activated') ?></th>
+                <th class="column-12"><?= $paginator->order(t('Two Factor'), 'twofactor_activated') ?></th>
                 <th class="column-10"><?= $paginator->order(t('Account type'), 'is_ldap_user') ?></th>
-                <th class="column-10"><?= $paginator->order(t('Status'), 'is_active') ?></th>
-                <th class="column-5"><?= t('Actions') ?></th>
+                <th class="column-12"><?= $paginator->order(t('Status'), 'is_active') ?></th>
             </tr>
             <?php foreach ($paginator->getCollection() as $user): ?>
             <tr>
                 <td>
-                    <?= '#'.$user['id'] ?>
+                    <?= $this->render('user_list/dropdown', array('user' => $user)) ?>
                 </td>
                 <td>
                     <?= $this->url->link($this->text->e($user['username']), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
@@ -61,9 +60,6 @@
                     <?php else: ?>
                         <?= t('Inactive') ?>
                     <?php endif ?>
-                </td>
-                <td>
-                    <?= $this->render('user_list/dropdown', array('user' => $user)) ?>
                 </td>
             </tr>
             <?php endforeach ?>
