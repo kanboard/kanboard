@@ -5,6 +5,10 @@ Improvements:
 
 * Use contextual menu instead of action column in users management
 
+Bug fixes:
+
+* Hiding subtasks from hidden tasks in dashboard
+
 Version 1.0.39 (Feb 12, 2017)
 -----------------------------
 
