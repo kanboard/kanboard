@@ -42,7 +42,7 @@ class BoardModel extends Base
                     'title' => $column_name,
                     'task_limit' => 0,
                     'description' => '',
-                    'hide_in_dashboard' => false,
+                    'hide_in_dashboard' => 0,
                 );
             }
         }
