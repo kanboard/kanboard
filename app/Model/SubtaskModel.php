@@ -90,9 +90,11 @@ class SubtaskModel extends Base
             ->subquery($this->subtaskTimeTrackingModel->getTimerQuery($user_id), 'timer_start_date')
             ->eq('user_id', $user_id)
             ->eq(ProjectModel::TABLE.'.is_active', ProjectModel::ACTIVE)
+            ->eq(ColumnModel::TABLE.'.hide_in_dashboard', 0)
             ->in(SubtaskModel::TABLE.'.status', $status)
             ->join(TaskModel::TABLE, 'id', 'task_id')
             ->join(ProjectModel::TABLE, 'id', 'project_id', TaskModel::TABLE)
+            ->join(ColumnModel::TABLE, 'id', 'column_id', TaskModel::TABLE)
             ->callback(array($this, 'addStatusName'));
     }
 
