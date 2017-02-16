@@ -49,6 +49,7 @@ class SubtaskController extends BaseController
     {
         $values = array(
             'task_id' => $task['id'],
+            'user_id' => $task['owner_id'],
             'another_subtask' => $this->request->getIntegerParam('another_subtask', 0)
         );
 
@@ -76,7 +77,12 @@ class SubtaskController extends BaseController
             }
 
             if (isset($values['another_subtask']) && $values['another_subtask'] == 1) {
-                return $this->create(array('project_id' => $task['project_id'], 'task_id' => $task['id'], 'another_subtask' => 1));
+                return $this->create(array(
+                    'project_id' => $task['project_id'],
+                    'task_id' => $task['id'],
+                    'user_id' => $values['user_id'],
+                    'another_subtask' => 1
+                ));
             }
 
             return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'), true);
