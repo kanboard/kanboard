@@ -1,5 +1,6 @@
 <?php
 
+use Kanboard\Model\ColumnModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\SubtaskModel;
 use Kanboard\Model\TaskCreationModel;
@@ -32,5 +33,21 @@ class SubtaskPaginationTest extends Base
         $this->assertCount(3, $subtaskPagination->getDashboardPaginator(1, 'subtasks', 5)->setOrder('project_name')->getCollection());
         $this->assertCount(3, $subtaskPagination->getDashboardPaginator(1, 'subtasks', 5)->setOrder('task_name')->getCollection());
         $this->assertCount(3, $subtaskPagination->getDashboardPaginator(1, 'subtasks', 5)->setOrder(SubtaskModel::TABLE.'.title')->getCollection());
+    }
+
+    public function testWhenColumnIsHidden()
+    {
+        $columnModel = new ColumnModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $subtaskModel = new SubtaskModel($this->container);
+        $subtaskPagination = new SubtaskPagination($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
+        $this->assertTrue($columnModel->update(1, 'test', 0, '', 1));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task #1', 'project_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(1, $subtaskModel->create(array('task_id' => 1, 'title' => 'subtask #1', 'user_id' => 1)));
+
+        $this->assertCount(0, $subtaskPagination->getDashboardPaginator(1, 'subtasks', 5)->getCollection());
     }
 }
