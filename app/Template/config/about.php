@@ -69,6 +69,9 @@
                 <?= t('(Gzip compressed Sqlite file)') ?>
             </li>
             <li>
+                <?= $this->url->link(t('Upload the database'), 'ConfigController', 'uploadDb', array(), false, 'js-modal-medium') ?>
+            </li>
+            <li>
                 <?= $this->url->link(t('Optimize the database'), 'ConfigController', 'optimizeDb', array(), true) ?>&nbsp;
                 <?= t('(VACUUM command)') ?>
             </li>
