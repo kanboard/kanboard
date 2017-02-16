@@ -3,12 +3,12 @@
 </div>
 
 <div class="alert">
-    <ul>
-        <li><?= t('You can upload Gzip compressed Sqlite database you previously downloaded') ?></li>
-    </ul>
+    <p>
+        <?= t('You can upload the Gzip compressed Sqlite database previously downloaded.') ?>
+    </p>
 </div>
 
-<form action="<?= $this->url->href('ConfigController', 'uploadDbSave') ?>" method="post" enctype="multipart/form-data">
+<form action="<?= $this->url->href('ConfigController', 'saveUploadedDb') ?>" method="post" enctype="multipart/form-data">
     <?= $this->form->csrf() ?>
 
     <?= $this->form->label(t('Database file'), 'file') ?>

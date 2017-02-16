@@ -1,6 +1,10 @@
 Version 1.0.40 (unreleased)
 ---------------------------
 
+New features:
+
+* Upload Sqlite database from user interface
+
 Improvements:
 
 * Use contextual menu instead of action column in users management

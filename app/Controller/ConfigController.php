@@ -207,7 +207,7 @@ class ConfigController extends BaseController
      */
     public function uploadDb()
     {
-        $this->response->html($this->helper->layout->config('config/upload_db', array()));
+        $this->response->html($this->template->render('config/upload_db'));
     }
 
     /**
@@ -215,14 +215,16 @@ class ConfigController extends BaseController
      *
      * @access public
      */
-    public function uploadDbSave()
+    public function saveUploadedDb()
     {
         $filename = $this->request->getFilePath('file');
+
         if (!file_exists($filename) || !$this->configModel->uploadDatabase($filename)) {
-            $this->flash->failure(t('Unable to read your file'));
+            $this->flash->failure(t('Unable to read uploaded file.'));
         } else {
             $this->flash->success(t('Database upload done.'));
         }
+
         $this->response->redirect($this->helper->url->to('ConfigController', 'index'));
     }
 
