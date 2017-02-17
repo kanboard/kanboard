@@ -69,7 +69,7 @@ class BoardModel extends Base
                 'project_id' => $project_id,
                 'task_limit' => $column['task_limit'],
                 'description' => $column['description'],
-                'hide_in_dashboard' => $column['hide_in_dashboard'],
+                'hide_in_dashboard' => $column['hide_in_dashboard'] ?: 0, // Avoid SQL error with Postgres
             );
 
             if (! $this->db->table(ColumnModel::TABLE)->save($values)) {
