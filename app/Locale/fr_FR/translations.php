@@ -1301,7 +1301,7 @@ return array(
     'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => 'Malheureusement, nous ne pouvons pas réinitialiser votre mot de passe. Avez-vous saisi un nom d\'utilisateur valide ? Avez-vous une adresse e-mail dans votre profil ?',
     'TRL - Turkish Lira' => 'TRL - Livre turque',
     'The project email is optional and could be used by several plugins.' => 'L\'adresse email d\'un projet est optionnel et pourrait être utilisé par plusieurs extensions.',
-    'The email project must be unique across all projects' => 'L\'adresse email d\'un projet doit être unique pour tous les projets',
+    'The project email must be unique across all projects' => 'L\'adresse email d\'un projet doit être unique pour tous les projets',
     'The email configuration has been disabled by the administrator.' => 'La configuration des emails a été désactivée par l\'administrateur.',
     'Close this project' => 'Fermer ce projet',
     'Open this project' => 'Ouvrir ce projet',
