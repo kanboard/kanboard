@@ -49,15 +49,28 @@ class SwimlaneProcedure extends BaseProcedure
         return $this->swimlaneModel->create($project_id, $name, $description);
     }
 
-    public function updateSwimlane($swimlane_id, $name, $description = null)
+    public function updateSwimlane($project_id, $swimlane_id, $name, $description = null)
     {
-        $values = array('id' => $swimlane_id, 'name' => $name);
+        ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateSwimlane', $project_id);
 
-        if (!is_null($description)) {
+        $values = array(
+            'project_id' => $project_id,
+            'id'         => $swimlane_id,
+            'name'       => $name,
+        );
+
+        if (! is_null($description)) {
             $values['description'] = $description;
         }
 
-        return $this->swimlaneModel->update($values);
+        list($valid, $errors) = $this->swimlaneValidator->validateModification($values);
+
+        if (! $valid) {
+            $this->logger->debug(__METHOD__.': Validation error: '.var_export($errors, true));
+            return false;
+        }
+
+        return $this->swimlaneModel->update($swimlane_id, $values);
     }
 
     public function removeSwimlane($project_id, $swimlane_id)

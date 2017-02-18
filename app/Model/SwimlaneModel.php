@@ -216,14 +216,18 @@ class SwimlaneModel extends Base
      * Update a swimlane
      *
      * @access public
-     * @param  array    $values    Form values
+     * @param  integer $swimlaneId
+     * @param  array   $values
      * @return bool
      */
-    public function update(array $values)
+    public function update($swimlaneId, array $values)
     {
+        unset($values['id']);
+        unset($values['project_id']);
+
         return $this->db
             ->table(self::TABLE)
-            ->eq('id', $values['id'])
+            ->eq('id', $swimlaneId)
             ->update($values);
     }
 

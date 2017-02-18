@@ -239,6 +239,7 @@ Response example:
 
 - Purpose: **Update swimlane properties**
 - Parameters:
+    - **project_id** (integer, required)
     - **swimlane_id** (integer, required)
     - **name** (string, required)
     - **description** (string, optional)
@@ -253,6 +254,7 @@ Request example:
     "method": "updateSwimlane",
     "id": 87102426,
     "params": [
+        "1",
         "1",
         "Another swimlane"
     ]

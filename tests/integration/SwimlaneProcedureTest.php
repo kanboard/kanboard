@@ -37,7 +37,7 @@ class SwimlaneProcedureTest extends BaseProcedureTest
 
     public function assertUpdateSwimlane()
     {
-        $this->assertTrue($this->app->updateSwimlane($this->swimlaneId, 'Another swimlane'));
+        $this->assertTrue($this->app->updateSwimlane($this->projectId, $this->swimlaneId, 'Another swimlane'));
 
         $swimlane = $this->app->getSwimlaneById($this->swimlaneId);
         $this->assertEquals('Another swimlane', $swimlane['name']);

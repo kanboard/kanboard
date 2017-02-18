@@ -15,6 +15,7 @@ Breaking changes:
 * Previous default swimlanes are migrated to an independent swimlane
 * Columns "default_swimlane" and "show_default_swimlane" from "projects" table are not used anymore
 * Remove API method "getDefaultSwimlane()"
+* Add mandatory argument "project_id" to API method "updateSwimlane()"
 
 Bug fixes:
 

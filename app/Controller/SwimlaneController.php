@@ -125,7 +125,7 @@ class SwimlaneController extends BaseController
         list($valid, $errors) = $this->swimlaneValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->swimlaneModel->update($values)) {
+            if ($this->swimlaneModel->update($values['id'], $values)) {
                 $this->flash->success(t('Swimlane updated successfully.'));
                 return $this->response->redirect($this->helper->url->to('SwimlaneController', 'index', array('project_id' => $project['id'])));
             } else {

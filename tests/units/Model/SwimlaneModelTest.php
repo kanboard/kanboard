@@ -4,7 +4,6 @@ require_once __DIR__.'/../Base.php';
 
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
-use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\SwimlaneModel;
 
 class SwimlaneModelTest extends Base
@@ -86,7 +85,7 @@ class SwimlaneModelTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
         $this->assertEquals(2, $swimlaneModel->create(1, 'Swimlane #1'));
 
-        $this->assertTrue($swimlaneModel->update(array('id' => 2, 'name' => 'foobar')));
+        $this->assertTrue($swimlaneModel->update(2, array('name' => 'foobar')));
 
         $swimlane = $swimlaneModel->getById(2);
         $this->assertEquals('foobar', $swimlane['name']);
