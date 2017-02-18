@@ -31,6 +31,7 @@ class TaskValidator extends BaseValidator
             new Validators\Range('score', t('This value must be in the range %d to %d', -2147483647, 2147483647), -2147483647, 2147483647),
             new Validators\Integer('category_id', t('This value must be an integer')),
             new Validators\Integer('swimlane_id', t('This value must be an integer')),
+            new Validators\GreaterThan('swimlane_id', t('This value must be greater than %d', 0), 0),
             new Validators\Integer('recurrence_child', t('This value must be an integer')),
             new Validators\Integer('recurrence_parent', t('This value must be an integer')),
             new Validators\Integer('recurrence_factor', t('This value must be an integer')),

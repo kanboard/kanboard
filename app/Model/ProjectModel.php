@@ -321,19 +321,19 @@ class ProjectModel extends Base
      * Create a project
      *
      * @access public
-     * @param  array    $values     Form values
-     * @param  integer  $user_id    User who create the project
-     * @param  bool     $add_user   Automatically add the user
-     * @return integer              Project id
+     * @param  array   $values Form values
+     * @param  integer $userId User who create the project
+     * @param  bool    $addUser Automatically add the user
+     * @return int     Project id
      */
-    public function create(array $values, $user_id = 0, $add_user = false)
+    public function create(array $values, $userId = 0, $addUser = false)
     {
         $this->db->startTransaction();
 
         $values['token'] = '';
         $values['last_modified'] = time();
         $values['is_private'] = empty($values['is_private']) ? 0 : 1;
-        $values['owner_id'] = $user_id;
+        $values['owner_id'] = $userId;
 
         if (! empty($values['identifier'])) {
             $values['identifier'] = strtoupper($values['identifier']);
@@ -353,8 +353,13 @@ class ProjectModel extends Base
             return false;
         }
 
-        if ($add_user && $user_id) {
-            $this->projectUserRoleModel->addUser($project_id, $user_id, Role::PROJECT_MANAGER);
+        if (! $this->swimlaneModel->create($project_id, t('Default swimlane'))) {
+            $this->db->cancelTransaction();
+            return false;
+        }
+
+        if ($addUser && $userId) {
+            $this->projectUserRoleModel->addUser($project_id, $userId, Role::PROJECT_MANAGER);
         }
 
         $this->categoryModel->createDefaultCategories($project_id);

@@ -26,7 +26,7 @@
                     <?php endif ?>
                 </td>
                 <td>
-                    <?= $this->text->e($task['swimlane_name'] ?: $task['default_swimlane']) ?>
+                    <?= $this->text->e($task['swimlane_name']) ?>
                 </td>
                 <td>
                     <?= $this->text->e($task['column_name']) ?>

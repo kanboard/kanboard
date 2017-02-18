@@ -26,7 +26,6 @@ class ProjectDuplicationModel extends Base
             'categoryModel',
             'projectPermissionModel',
             'actionModel',
-            'swimlaneModel',
             'tagDuplicationModel',
             'projectMetadataModel',
             'projectTaskDuplicationModel',
@@ -42,6 +41,7 @@ class ProjectDuplicationModel extends Base
     public function getPossibleSelection()
     {
         return array(
+            'swimlaneModel',
             'boardModel',
             'categoryModel',
             'projectPermissionModel',
@@ -94,7 +94,7 @@ class ProjectDuplicationModel extends Base
             return false;
         }
 
-        // Clone Columns, Categories, Permissions and Actions
+        // Clone Swimlanes, Columns, Categories, Permissions and Actions
         foreach ($this->getPossibleSelection() as $model) {
 
             // Skip if optional part has not been selected
@@ -151,11 +151,7 @@ class ProjectDuplicationModel extends Base
             'priority_end' => $project['priority_end'],
         );
 
-        if (! $this->db->table(ProjectModel::TABLE)->save($values)) {
-            return false;
-        }
-
-        return $this->db->getLastId();
+        return $this->db->table(ProjectModel::TABLE)->persist($values);
     }
 
     /**

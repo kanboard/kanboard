@@ -123,7 +123,7 @@ class TaskHelper extends Base
         $attributes = array_merge(array('tabindex="5"'), $attributes);
         $html = '';
 
-        if (! (count($swimlanes) === 1 && key($swimlanes) == 0)) {
+        if (count($swimlanes) > 1) {
             $html .= $this->helper->form->label(t('Swimlane'), 'swimlane_id');
             $html .= $this->helper->form->select('swimlane_id', $swimlanes, $values, $errors, $attributes);
         }

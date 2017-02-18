@@ -58,28 +58,6 @@ class SwimlaneValidator extends BaseValidator
     }
 
     /**
-     * Validate default swimlane modification
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateDefaultModification(array $values)
-    {
-        $rules = array(
-            new Validators\Required('id', t('The id is required')),
-            new Validators\Required('default_swimlane', t('The name is required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
      * Common validation rules
      *
      * @access private

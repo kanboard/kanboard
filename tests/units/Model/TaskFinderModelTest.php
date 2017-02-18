@@ -51,7 +51,7 @@ class TaskFinderModelTest extends Base
         $this->assertEquals(0, $task['score']);
         $this->assertEquals(1, $task['category_id']);
         $this->assertEquals(0, $task['priority']);
-        $this->assertEquals(0, $task['swimlane_id']);
+        $this->assertEquals(1, $task['swimlane_id']);
         $this->assertEquals(TaskModel::RECURRING_STATUS_NONE, $task['recurrence_status']);
         $this->assertEquals(TaskModel::RECURRING_TRIGGER_FIRST_COLUMN, $task['recurrence_trigger']);
         $this->assertEquals(0, $task['recurrence_factor']);
@@ -60,8 +60,7 @@ class TaskFinderModelTest extends Base
         $this->assertEquals(0, $task['recurrence_parent']);
         $this->assertEquals(0, $task['recurrence_child']);
         $this->assertEquals('C1', $task['category_name']);
-        $this->assertNull($task['swimlane_name']);
-        $this->assertEquals('Default swimlane', $task['default_swimlane']);
+        $this->assertEquals('Default swimlane', $task['swimlane_name']);
         $this->assertEquals('Project #1', $task['project_name']);
         $this->assertEquals('Backlog', $task['column_title']);
         $this->assertEquals('admin', $task['assignee_username']);

@@ -68,7 +68,7 @@ class TaskProcedure extends BaseProcedure
         return $this->taskModel->remove($task_id);
     }
 
-    public function moveTaskPosition($project_id, $task_id, $column_id, $position, $swimlane_id = 0)
+    public function moveTaskPosition($project_id, $task_id, $column_id, $position, $swimlane_id)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'moveTaskPosition', $project_id);
         return $this->taskPositionModel->movePosition($project_id, $task_id, $column_id, $position, $swimlane_id);
@@ -87,7 +87,7 @@ class TaskProcedure extends BaseProcedure
     }
 
     public function createTask($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0,
-                               $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = 0, $priority = 0,
+                               $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = null, $priority = 0,
                                $recurrence_status = 0, $recurrence_trigger = 0, $recurrence_factor = 0, $recurrence_timeframe = 0,
                                $recurrence_basedate = 0, $reference = '', array $tags = array(), $date_started = '')
     {

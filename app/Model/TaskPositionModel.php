@@ -33,6 +33,10 @@ class TaskPositionModel extends Base
 
         $task = $this->taskFinderModel->getById($task_id);
 
+        if ($swimlane_id == 0) {
+            $swimlane_id = $task['swimlane_id'];
+        }
+
         if ($onlyOpen && $task['is_active'] == TaskModel::STATUS_CLOSED) {
             return true;
         }

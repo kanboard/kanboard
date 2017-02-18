@@ -36,12 +36,9 @@ class TaskSwimlaneFilter extends BaseFilter implements FilterInterface
     {
         if (is_int($this->value) || ctype_digit($this->value)) {
             $this->query->eq(TaskModel::TABLE.'.swimlane_id', $this->value);
-        } elseif ($this->value === 'default') {
-            $this->query->eq(TaskModel::TABLE.'.swimlane_id', 0);
         } else {
             $this->query->beginOr();
             $this->query->ilike(SwimlaneModel::TABLE.'.name', $this->value);
-            $this->query->ilike(ProjectModel::TABLE.'.default_swimlane', $this->value);
             $this->query->closeOr();
         }
 

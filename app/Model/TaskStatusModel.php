@@ -139,6 +139,6 @@ class TaskStatusModel extends Base
                     ->table(TaskModel::TABLE)
                     ->eq('id', $task_id)
                     ->eq('is_active', $status)
-                    ->count() === 1;
+                    ->exists();
     }
 }

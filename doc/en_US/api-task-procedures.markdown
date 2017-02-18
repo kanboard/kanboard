@@ -537,7 +537,7 @@ Response example:
     - **task_id** (integer, required)
     - **column_id** (integer, required)
     - **position** (integer, required)
-    - **swimlane_id** (integer, optional, default=0)
+    - **swimlane_id** (integer, required)
 - Result on success: **true**
 - Result on failure: **false**
 

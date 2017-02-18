@@ -62,7 +62,7 @@ class TaskCreationModel extends Base
         $values = $this->dateParser->convert($values, array('date_started'), true);
 
         $this->helper->model->removeFields($values, array('another_task', 'duplicate_multiple_projects'));
-        $this->helper->model->resetFields($values, array('creator_id', 'owner_id', 'swimlane_id', 'date_due', 'date_started', 'score', 'category_id', 'time_estimated', 'time_spent'));
+        $this->helper->model->resetFields($values, array('creator_id', 'owner_id', 'date_due', 'date_started', 'score', 'category_id', 'time_estimated', 'time_spent'));
 
         if (empty($values['column_id'])) {
             $values['column_id'] = $this->columnModel->getFirstColumnId($values['project_id']);
@@ -80,7 +80,7 @@ class TaskCreationModel extends Base
             $values['creator_id'] = $this->userSession->getId();
         }
 
-        $values['swimlane_id'] = empty($values['swimlane_id']) ? 0 : $values['swimlane_id'];
+        $values['swimlane_id'] = empty($values['swimlane_id']) ? $this->swimlaneModel->getFirstActiveSwimlaneId($values['project_id']) : $values['swimlane_id'];
         $values['date_creation'] = time();
         $values['date_modification'] = $values['date_creation'];
         $values['date_moved'] = $values['date_creation'];

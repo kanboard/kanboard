@@ -19,7 +19,7 @@
             <?= $this->url->link('#'.$this->text->e($task['id']), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', t('View this task')) ?>
         </td>
         <td>
-            <?= $this->text->e($task['swimlane_name'] ?: $task['default_swimlane']) ?>
+            <?= $this->text->e($task['swimlane_name']) ?>
         </td>
         <td>
             <?= $this->text->e($task['column_name']) ?>

@@ -142,7 +142,6 @@ class TaskFinderModel extends Base
                 ColumnModel::TABLE.'.title AS column_name',
                 ColumnModel::TABLE.'.position AS column_position',
                 SwimlaneModel::TABLE.'.name AS swimlane_name',
-                ProjectModel::TABLE.'.default_swimlane',
                 ProjectModel::TABLE.'.name AS project_name'
             )
             ->join(UserModel::TABLE, 'id', 'owner_id', TaskModel::TABLE)
@@ -304,15 +303,13 @@ class TaskFinderModel extends Base
                 CategoryModel::TABLE.'.name AS category_name',
                 SwimlaneModel::TABLE.'.name AS swimlane_name',
                 ProjectModel::TABLE.'.name AS project_name',
-                ProjectModel::TABLE.'.default_swimlane',
                 ColumnModel::TABLE.'.title AS column_title',
                 UserModel::TABLE.'.username AS assignee_username',
                 UserModel::TABLE.'.name AS assignee_name',
                 'uc.username AS creator_username',
                 'uc.name AS creator_name',
                 CategoryModel::TABLE.'.description AS category_description',
-                ColumnModel::TABLE.'.position AS column_position',
-                ProjectModel::TABLE.'.default_swimlane'
+                ColumnModel::TABLE.'.position AS column_position'
             )
             ->join(UserModel::TABLE, 'id', 'owner_id', TaskModel::TABLE)
             ->left(UserModel::TABLE, 'uc', 'id', TaskModel::TABLE, 'creator_id')

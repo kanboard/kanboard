@@ -9,6 +9,13 @@ Improvements:
 
 * Use contextual menu instead of action column in users management
 
+Breaking changes:
+
+* The concept of "default swimlane" is removed
+* Previous default swimlanes are migrated to an independent swimlane
+* Columns "default_swimlane" and "show_default_swimlane" from "projects" table are not used anymore
+* Remove API method "getDefaultSwimlane()"
+
 Bug fixes:
 
 * Hiding subtasks from hidden tasks in dashboard
