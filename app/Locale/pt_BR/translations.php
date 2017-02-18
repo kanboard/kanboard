@@ -844,7 +844,7 @@ return array(
     'Append' => 'Adicionar',
     'Replace' => 'Substituir',
     'Import' => 'Importar',
-    'change sorting' => 'alterar ordenação',
+    'Change sorting' => 'alterar ordenação',
     'Tasks Importation' => 'Importação de Tarefas',
     'Delimiter' => 'Separador',
     'Enclosure' => 'Delimitador de campos',

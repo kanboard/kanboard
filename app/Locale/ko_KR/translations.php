@@ -844,7 +844,7 @@ return array(
     'Append' => '추가',
     'Replace' => '변경',
     'Import' => '가져오기',
-    'change sorting' => '정렬 변경',
+    'Change sorting' => '정렬 변경',
     'Tasks Importation' => '할일 가져오기',
     'Delimiter' => '구분자',
     'Enclosure' => '동봉',

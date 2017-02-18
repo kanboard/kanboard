@@ -6,6 +6,40 @@ use Kanboard\Validator\CommentValidator;
 
 class CommentValidatorTest extends Base
 {
+    public function testValidateMailCreation()
+    {
+        $commentValidator = new CommentValidator($this->container);
+
+        $result = $commentValidator->validateEmailCreation(array(
+            'user_id' => 1,
+            'task_id' => 1,
+            'comment' => 'blah',
+            'email'   => 'test@localhost',
+            'subject' => 'something',
+        ));
+
+        $this->assertTrue($result[0]);
+
+        $result = $commentValidator->validateEmailCreation(array(
+            'user_id' => 1,
+            'task_id' => 1,
+            'comment' => 'blah',
+            'email'   => 'invalid',
+            'subject' => 'something',
+        ));
+
+        $this->assertFalse($result[0]);
+
+        $result = $commentValidator->validateEmailCreation(array(
+            'user_id' => 1,
+            'task_id' => 1,
+            'comment' => 'bla',
+            'email'   => 'test@localhost',
+        ));
+
+        $this->assertFalse($result[0]);
+    }
+
     public function testValidateCreation()
     {
         $commentValidator = new CommentValidator($this->container);

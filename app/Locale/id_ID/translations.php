@@ -844,7 +844,7 @@ return array(
     'Append' => 'Tambahkan',
     'Replace' => 'Ganti',
     'Import' => 'Impor',
-    'change sorting' => 'ubah pengurutan',
+    'Change sorting' => 'ubah pengurutan',
     'Tasks Importation' => 'Importasi Tugas',
     'Delimiter' => 'Pembatas',
     'Enclosure' => 'Lampiran',

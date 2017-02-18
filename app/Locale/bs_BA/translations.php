@@ -844,7 +844,7 @@ return array(
     'Append' => 'Dodaj',
     'Replace' => 'Zamijeni',
     'Import' => 'Uvoz',
-    'change sorting' => 'Promijeni sortiranje',
+    'Change sorting' => 'Promijeni sortiranje',
     'Tasks Importation' => 'Uvoz zadataka',
     'Delimiter' => 'Djelilac',
     'Enclosure' => 'Prilog',

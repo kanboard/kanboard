@@ -844,7 +844,7 @@ return array(
     'Append' => 'เพิ่มเติม',
     'Replace' => 'แทนที่',
     'Import' => 'นำเข้า',
-    'change sorting' => 'เปลี่ยนการเรียง',
+    'Change sorting' => 'เปลี่ยนการเรียง',
     'Tasks Importation' => 'การนำเข้างาน',
     'Delimiter' => 'คั่น',
     'Enclosure' => 'กำหนดข้อความ',

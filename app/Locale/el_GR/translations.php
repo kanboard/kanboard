@@ -844,7 +844,7 @@ return array(
     'Append' => 'Προσθήκη',
     'Replace' => 'Αντικατάσταση',
     'Import' => 'Εισαγωγή',
-    'change sorting' => 'Αλλαγή ταξινόμησης',
+    'Change sorting' => 'Αλλαγή ταξινόμησης',
     'Tasks Importation' => 'Εισαγωγή εργασιών',
     'Delimiter' => 'Delimiter',
     'Enclosure' => 'Enclosure',

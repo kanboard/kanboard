@@ -844,7 +844,7 @@ return array(
     'Append' => '追加',
     'Replace' => '替换',
     'Import' => '导入',
-    'change sorting' => '改变排序',
+    'Change sorting' => '改变排序',
     'Tasks Importation' => '任务重要性',
     'Delimiter' => '分隔符',
     'Enclosure' => '附件',

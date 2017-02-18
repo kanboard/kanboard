@@ -3,6 +3,7 @@ Version 1.0.40 (unreleased)
 
 New features:
 
+* Send comments by email
 * Upload Sqlite database from user interface
 
 Improvements:

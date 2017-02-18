@@ -844,7 +844,7 @@ return array(
     'Append' => 'Hozzáfűz',
     'Replace' => 'Helyettesít',
     'Import' => 'Importál',
-    'change sorting' => 'rendezési sorrend megváltoztatása',
+    'Change sorting' => 'rendezési sorrend megváltoztatása',
     'Tasks Importation' => 'Feladat importálás',
     // 'Delimiter' => '',
     // 'Enclosure' => '',

@@ -844,7 +844,7 @@ return array(
     'Append' => 'Anhängen',
     'Replace' => 'Ersetzen',
     'Import' => 'Import',
-    'change sorting' => 'Sortierung ändern',
+    'Change sorting' => 'Sortierung ändern',
     'Tasks Importation' => 'Aufgaben Import',
     'Delimiter' => 'Trennzeichen',
     'Enclosure' => 'Textbegrenzer',

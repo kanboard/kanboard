@@ -844,7 +844,7 @@ return array(
     'Append' => 'Добавление',
     'Replace' => 'Замена',
     'Import' => 'Импорт',
-    'change sorting' => 'изменить сортировку',
+    'Change sorting' => 'изменить сортировку',
     'Tasks Importation' => 'Импортирование задач',
     'Delimiter' => 'Разделитель',
     'Enclosure' => 'Тип кавычек',

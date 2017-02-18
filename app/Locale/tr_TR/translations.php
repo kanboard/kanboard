@@ -844,7 +844,7 @@ return array(
     'Append' => 'Ekle',
     'Replace' => 'Üzerine yaz',
     'Import' => 'İçeri aktar',
-    'change sorting' => 'sıralamayı değiştir',
+    'Change sorting' => 'sıralamayı değiştir',
     'Tasks Importation' => 'Görevleri içeri aktar',
     'Delimiter' => 'Ayırıcı',
     'Enclosure' => 'Enclosure',
