@@ -18,7 +18,7 @@
             </tr>
             <?php foreach ($paginator->getCollection() as $task): ?>
             <tr>
-                <td class="task-table color-<?= $task['color_id'] ?>">
+                <td class="color-<?= $task['color_id'] ?>">
                     <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
                         <?= $this->render('task/dropdown', array('task' => $task)) ?>
                     <?php else: ?>

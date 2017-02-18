@@ -59,7 +59,16 @@ ul.dropdown-submenu-open
 
 td
   a.dropdown-menu
-    i
-      color: #dedede
-    &:hover i
+    strong
       color: color('primary')
+      i
+        color: color('primary')
+    i
+      color: color('lighter')
+    &:hover
+      strong
+        color: color('medium')
+        i
+          color: color('medium')
+      i
+        color: color('primary')
