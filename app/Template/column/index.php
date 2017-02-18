@@ -28,7 +28,7 @@
             <td>
                 <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change column position') ?>"></i>&nbsp;
                 <div class="dropdown">
-                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
                         <li>
                             <?= $this->modal->medium('edit', t('Edit'), 'ColumnController', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>

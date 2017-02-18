@@ -12,15 +12,23 @@
 <?php else: ?>
     <table class="table-striped table-scrolling">
         <tr>
-            <th class="column-80"><?= t('Tag') ?></th>
-            <th><?= t('Action') ?></th>
+            <th><?= t('Tag') ?></th>
         </tr>
         <?php foreach ($tags as $tag): ?>
             <tr>
-                <td><?= $this->text->e($tag['name']) ?></td>
                 <td>
-                    <?= $this->modal->medium('edit', t('Edit'), 'ProjectTagController', 'edit', array('tag_id' => $tag['id'], 'project_id' => $project['id'])) ?>
-                    <?= $this->modal->confirm('trash-o', t('Remove'), 'ProjectTagController', 'confirm', array('tag_id' => $tag['id'], 'project_id' => $project['id'])) ?>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
+                        <ul>
+                            <li>
+                                <?= $this->modal->medium('edit', t('Edit'), 'ProjectTagController', 'edit', array('tag_id' => $tag['id'], 'project_id' => $project['id'])) ?>
+                            </li>
+                            <li>
+                                <?= $this->modal->confirm('trash-o', t('Remove'), 'ProjectTagController', 'confirm', array('tag_id' => $tag['id'], 'project_id' => $project['id'])) ?>
+                            </li>
+                        </ul>
+                    </div>
+                    <?= $this->text->e($tag['name']) ?>
                 </td>
             </tr>
         <?php endforeach ?>
