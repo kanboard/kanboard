@@ -1,45 +1,42 @@
-<?php if (! empty($categories)): ?>
 <div class="page-header">
     <h2><?= t('Categories') ?></h2>
+    <ul>
+        <li>
+            <?= $this->modal->medium('plus', t('Add a new category'), 'CategoryController', 'create', array('project_id' => $project['id'])) ?>
+        </li>
+    </ul>
 </div>
-<table class="table-striped">
-    <tr>
-        <th><?= t('Category Name') ?></th>
-        <th class="column-8"><?= t('Actions') ?></th>
-    </tr>
-    <?php foreach ($categories as $category_id => $category_name): ?>
-    <tr>
-        <td><?= $this->text->e($category_name) ?></td>
-        <td>
-            <div class="dropdown">
-            <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
-            <ul>
-                <li>
-                    <?= $this->modal->medium('edit', t('Edit'), 'CategoryController', 'edit', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
-                </li>
-                <li>
-                    <?= $this->modal->confirm('trash-o', t('Remove'), 'CategoryController', 'confirm', array('project_id' => $project['id'], 'category_id' => $category_id)) ?>
-                </li>
-            </ul>
-            </div>
-        </td>
-    </tr>
-    <?php endforeach ?>
-</table>
+<?php if (empty($categories)): ?>
+    <p class="alert"><?= t('There is no category in this project.') ?></p>
+<?php else: ?>
+    <table class="table-striped">
+        <tr>
+            <th><?= t('Category Name') ?></th>
+        </tr>
+        <?php foreach ($categories as $category): ?>
+        <tr>
+            <td>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
+                    <ul>
+                        <li>
+                            <?= $this->modal->medium('edit', t('Edit'), 'CategoryController', 'edit', array('project_id' => $project['id'], 'category_id' => $category['id'])) ?>
+                        </li>
+                        <li>
+                            <?= $this->modal->confirm('trash-o', t('Remove'), 'CategoryController', 'confirm', array('project_id' => $project['id'], 'category_id' => $category['id'])) ?>
+                        </li>
+                    </ul>
+                </div>
+
+                <?= $this->text->e($category['name']) ?>
+
+                <?php if (! empty($category['description'])): ?>
+                    <span class="tooltip" title="<?= $this->text->markdownAttribute($category['description']) ?>">
+                        <i class="fa fa-info-circle"></i>
+                    </span>
+                <?php endif ?>
+            </td>
+        </tr>
+        <?php endforeach ?>
+    </table>
 <?php endif ?>
-
-<div class="page-header">
-    <h2><?= t('Add a new category') ?></h2>
-</div>
-<form method="post" action="<?= $this->url->href('CategoryController', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
-
-    <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('project_id', $values) ?>
-
-    <?= $this->form->label(t('Category Name'), 'name') ?>
-    <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="50"')) ?>
-
-    <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-    </div>
-</form>

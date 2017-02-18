@@ -7,6 +7,8 @@ New features:
 
 Improvements:
 
+* Show category description in tooltip
+* Show category creation form in modal dialog
 * Prevent people to remove swimlanes that contains tasks
 * Show task count in swimlane table
 * Use contextual menu instead of action column in users management
