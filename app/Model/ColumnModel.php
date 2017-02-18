@@ -121,13 +121,13 @@ class ColumnModel extends Base
     }
 
     /**
-     * Get all columns with tasks count
+     * Get all columns with task count
      *
      * @access public
      * @param  integer  $project_id   Project id
      * @return array
      */
-    public function getAllWithTasksCount($project_id)
+    public function getAllWithTaskCount($project_id)
     {
         return $this->db->table(self::TABLE)
             ->columns('id', 'title', 'position', 'task_limit', 'description', 'hide_in_dashboard', 'project_id')

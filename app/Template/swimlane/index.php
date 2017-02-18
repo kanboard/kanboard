@@ -23,6 +23,6 @@
     <?= $this->render('swimlane/table', array(
         'swimlanes'       => $inactive_swimlanes,
         'project'         => $project,
-        'disable_handler' => true,
+        'disable_handle'  => true,
     )) ?>
 <?php endif ?>

@@ -40,10 +40,11 @@ class SwimlaneController extends BaseController
     public function index()
     {
         $project = $this->getProject();
+        $swimlanes = $this->swimlaneModel->getAllWithTaskCount($project['id']);
 
         $this->response->html($this->helper->layout->project('swimlane/index', array(
-            'active_swimlanes' => $this->swimlaneModel->getAllByStatus($project['id'], SwimlaneModel::ACTIVE),
-            'inactive_swimlanes' => $this->swimlaneModel->getAllByStatus($project['id'], SwimlaneModel::INACTIVE),
+            'active_swimlanes' => $swimlanes['active'],
+            'inactive_swimlanes' => $swimlanes['inactive'],
             'project' => $project,
             'title' => t('Swimlanes')
         )));

@@ -7,12 +7,14 @@ New features:
 
 Improvements:
 
+* Prevent people to remove swimlanes that contains tasks
+* Show task count in swimlane table
 * Use contextual menu instead of action column in users management
 
 Breaking changes:
 
-* The concept of "default swimlane" is removed
-* Previous default swimlanes are migrated to an independent swimlane
+* The concept of "default swimlane" has been removed
+* Previous default swimlanes are migrated to an independent swimlanes
 * Columns "default_swimlane" and "show_default_swimlane" from "projects" table are not used anymore
 * Remove API method "getDefaultSwimlane()"
 * Add mandatory argument "project_id" to API method "updateSwimlane()"

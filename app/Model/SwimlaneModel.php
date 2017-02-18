@@ -164,6 +164,40 @@ class SwimlaneModel extends Base
     }
 
     /**
+     * Get all swimlanes with task count
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return array
+     */
+    public function getAllWithTaskCount($project_id)
+    {
+        $result = array(
+            'active' => array(),
+            'inactive' => array(),
+        );
+
+        $swimlanes = $this->db->table(self::TABLE)
+            ->columns('id', 'name', 'description', 'project_id', 'position', 'is_active')
+            ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE swimlane_id=".self::TABLE.".id AND is_active='1'", 'nb_open_tasks')
+            ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE swimlane_id=".self::TABLE.".id AND is_active='0'", 'nb_closed_tasks')
+            ->eq('project_id', $project_id)
+            ->asc('position')
+            ->asc('name')
+            ->findAll();
+
+        foreach ($swimlanes as $swimlane) {
+            if ($swimlane['is_active']) {
+                $result['active'][] = $swimlane;
+            } else {
+                $result['inactive'][] = $swimlane;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Get list of all swimlanes
      *
      * @access public

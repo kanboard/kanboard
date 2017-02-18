@@ -324,4 +324,40 @@ class SwimlaneModelTest extends Base
         $this->assertEquals(2, $swimlanes[1]['position']);
         $this->assertEquals(1, $swimlanes[1]['id']);
     }
+
+    public function testGetAllWithTaskCount()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $swimlaneModel = new SwimlaneModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
+        $this->assertEquals(2, $swimlaneModel->create(1, 'Swimlane #1'));
+        $this->assertEquals(3, $swimlaneModel->create(1, 'Swimlane #2'));
+        $this->assertEquals(4, $swimlaneModel->create(1, 'Swimlane #3'));
+        $this->assertEquals(5, $swimlaneModel->create(1, 'Swimlane #4'));
+
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task #1', 'project_id' => 1, 'swimlane_id' => 2)));
+        $this->assertEquals(2, $taskCreationModel->create(array('title' => 'Task #1', 'project_id' => 1, 'swimlane_id' => 3, 'is_active' => 0)));
+
+        $this->assertTrue($swimlaneModel->disable(1, 2));
+        $this->assertTrue($swimlaneModel->disable(1, 4));
+
+        $swimlanes = $swimlaneModel->getAllWithTaskCount(1);
+        $this->assertCount(3, $swimlanes['active']);
+        $this->assertCount(2, $swimlanes['inactive']);
+
+        $this->assertEquals('Default swimlane', $swimlanes['active'][0]['name']);
+        $this->assertEquals('Swimlane #2', $swimlanes['active'][1]['name']);
+        $this->assertEquals('Swimlane #4', $swimlanes['active'][2]['name']);
+
+        $this->assertEquals(0, $swimlanes['active'][1]['nb_open_tasks']);
+        $this->assertEquals(1, $swimlanes['active'][1]['nb_closed_tasks']);
+
+        $this->assertEquals('Swimlane #1', $swimlanes['inactive'][0]['name']);
+        $this->assertEquals('Swimlane #3', $swimlanes['inactive'][1]['name']);
+
+        $this->assertEquals(1, $swimlanes['inactive'][0]['nb_open_tasks']);
+        $this->assertEquals(0, $swimlanes['inactive'][0]['nb_closed_tasks']);
+    }
 }

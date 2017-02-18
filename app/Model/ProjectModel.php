@@ -270,7 +270,7 @@ class ProjectModel extends Base
      */
     public function getColumnStats(array &$project)
     {
-        $project['columns'] = $this->columnModel->getAllWithTasksCount($project['id']);
+        $project['columns'] = $this->columnModel->getAllWithTaskCount($project['id']);
         $project['nb_active_tasks'] = 0;
 
         foreach ($project['columns'] as $column) {
