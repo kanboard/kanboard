@@ -24,6 +24,7 @@ Breaking changes:
 
 Bug fixes:
 
+* Upload files button stay disabled when there are other submit buttons on the same page
 * Hiding subtasks from hidden tasks in dashboard
 
 Version 1.0.39 (Feb 12, 2017)
