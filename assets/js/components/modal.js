@@ -12,7 +12,11 @@
     });
 
     KB.onClick('.js-modal-medium', function (e) {
-        KB.modal.open(getLink(e), 'medium', false);
+        if (KB.modal.isOpen()) {
+            KB.modal.replace(getLink(e));
+        } else {
+            KB.modal.open(getLink(e), 'medium', false);
+        }
     });
 
     KB.onClick('.js-modal-small', function (e) {
