@@ -8,4 +8,4 @@
     <li><?= t('Assignee:') ?> <?= $this->text->e($subtask['name'] ?: $subtask['username'] ?: '?') ?></li>
 </ul>
 
-<?= $this->render('notification/footer', array('task' => $task, 'application_url' => $application_url)) ?>
+<?= $this->render('notification/footer', array('task' => $task)) ?>

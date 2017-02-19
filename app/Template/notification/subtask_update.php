@@ -18,4 +18,4 @@
     </li>
 </ul>
 
-<?= $this->render('notification/footer', array('task' => $task, 'application_url' => $application_url)) ?>
+<?= $this->render('notification/footer', array('task' => $task)) ?>
