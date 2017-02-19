@@ -4,6 +4,7 @@ Version 1.0.40 (unreleased)
 New features:
 
 * Send comments by email
+* Send tasks by email
 * Add Reply-To header to emails sent from Kanboard
 * Upload Sqlite database from user interface
 
