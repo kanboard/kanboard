@@ -5,16 +5,16 @@
             <?= $paginator->order(t('Project ID'), \Kanboard\Model\ProjectModel::TABLE.'.id') ?>
         </li>
         <li>
-            <?= $paginator->order(t('Project Name'), \Kanboard\Model\ProjectModel::TABLE.'.name') ?>
+            <?= $paginator->order(t('Project name'), \Kanboard\Model\ProjectModel::TABLE.'.name') ?>
         </li>
         <li>
             <?= $paginator->order(t('Status'), \Kanboard\Model\ProjectModel::TABLE.'.is_active') ?>
         </li>
         <li>
-            <?= $paginator->order(t('Start Date'), \Kanboard\Model\ProjectModel::TABLE.'.start_date') ?>
+            <?= $paginator->order(t('Start date'), \Kanboard\Model\ProjectModel::TABLE.'.start_date') ?>
         </li>
         <li>
-            <?= $paginator->order(t('End Date'), \Kanboard\Model\ProjectModel::TABLE.'.end_date') ?>
+            <?= $paginator->order(t('End date'), \Kanboard\Model\ProjectModel::TABLE.'.end_date') ?>
         </li>
         <li>
             <?= $paginator->order(t('Public'), \Kanboard\Model\ProjectModel::TABLE.'.is_public') ?>
