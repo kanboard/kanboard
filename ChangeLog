@@ -4,6 +4,7 @@ Version 1.0.40 (unreleased)
 New features:
 
 * Send comments by email
+* Add Reply-To header to emails sent from Kanboard
 * Upload Sqlite database from user interface
 
 Improvements:
@@ -23,6 +24,7 @@ Breaking changes:
 * Columns "default_swimlane" and "show_default_swimlane" from "projects" table are not used anymore
 * Remove API method "getDefaultSwimlane()"
 * Add mandatory argument "project_id" to API method "updateSwimlane()"
+* Change interface for mail transports
 
 Bug fixes:
 

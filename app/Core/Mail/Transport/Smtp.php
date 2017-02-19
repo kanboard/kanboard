@@ -7,7 +7,7 @@ use Swift_SmtpTransport;
 /**
  * PHP Mail Handler
  *
- * @package  transport
+ * @package  Kanboard\Core\Mail\Transport
  * @author   Frederic Guillot
  */
 class Smtp extends Mail
@@ -16,7 +16,7 @@ class Smtp extends Mail
      * Get SwiftMailer transport
      *
      * @access protected
-     * @return \Swift_Transport|\Swift_MailTransport|\Swift_SmtpTransport|\Swift_SendmailTransport
+     * @return \Swift_Transport
      */
     protected function getTransport()
     {
@@ -29,8 +29,8 @@ class Smtp extends Mail
             $transport->setStreamOptions(array(
                 'ssl' => array(
                     'allow_self_signed' => true,
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false,
                 )
             ));
         }

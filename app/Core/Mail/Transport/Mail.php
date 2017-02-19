@@ -12,7 +12,7 @@ use Kanboard\Core\Mail\ClientInterface;
 /**
  * PHP Mail Handler
  *
- * @package  transport
+ * @package  Kanboard\Core\Mail\Transport
  * @author   Frederic Guillot
  */
 class Mail extends Base implements ClientInterface
@@ -21,20 +21,26 @@ class Mail extends Base implements ClientInterface
      * Send a HTML email
      *
      * @access public
-     * @param  string  $email
-     * @param  string  $name
-     * @param  string  $subject
-     * @param  string  $html
-     * @param  string  $author
+     * @param  string $recipientEmail
+     * @param  string $recipientName
+     * @param  string $subject
+     * @param  string $html
+     * @param  string $authorName
+     * @param  string $authorEmail
      */
-    public function sendEmail($email, $name, $subject, $html, $author)
+    public function sendEmail($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail = '')
     {
         try {
             $message = Swift_Message::newInstance()
                 ->setSubject($subject)
-                ->setFrom(array($this->helper->mail->getMailSenderAddress() => $author))
-                ->setTo(array($email => $name))
-                ->setBody($html, 'text/html');
+                ->setFrom($this->helper->mail->getMailSenderAddress(), $authorName)
+                ->setTo(array($recipientEmail => $recipientName));
+
+            if (! empty($authorEmail)) {
+                $message->setReplyTo($authorEmail);
+            }
+
+            $message->setBody($html, 'text/html');
 
             Swift_Mailer::newInstance($this->getTransport())->send($message);
         } catch (Swift_TransportException $e) {
@@ -46,7 +52,7 @@ class Mail extends Base implements ClientInterface
      * Get SwiftMailer transport
      *
      * @access protected
-     * @return \Swift_Transport|\Swift_MailTransport|\Swift_SmtpTransport|\Swift_SendmailTransport
+     * @return \Swift_Transport
      */
     protected function getTransport()
     {

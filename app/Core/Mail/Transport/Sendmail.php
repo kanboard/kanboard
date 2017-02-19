@@ -7,7 +7,7 @@ use Swift_SendmailTransport;
 /**
  * PHP Mail Handler
  *
- * @package  transport
+ * @package  Kanboard\Core\Mail\Transport
  * @author   Frederic Guillot
  */
 class Sendmail extends Mail
@@ -16,7 +16,7 @@ class Sendmail extends Mail
      * Get SwiftMailer transport
      *
      * @access protected
-     * @return \Swift_Transport|\Swift_MailTransport|\Swift_SmtpTransport|\Swift_SendmailTransport
+     * @return \Swift_Transport
      */
     protected function getTransport()
     {
