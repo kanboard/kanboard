@@ -5,7 +5,7 @@
         <strong><?= '#'.$task['id'] ?></strong>
     <?php endif ?>
 
-    <span class="task-list-title <?= $task['is_active'] == 0 ? 'task-closed' : '' ?>">
+    <span class="table-list-title <?= $task['is_active'] == 0 ? 'status-closed' : '' ?>">
         <?= $this->url->link($this->text->e($task['title']), 'TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])) ?>
     </span>
 </div>

@@ -1,0 +1,24 @@
+@import variables
+
+.task-board-avatars
+  text-align: right
+  float: right
+
+.task-board-change-assignee
+  &:hover
+    opacity: 0.6
+  cursor: pointer
+
+.task-list-avatars
+  display: inline-block
+  float: left
+  @include sm-device
+    float: none
+    display: block
+  .task-avatar-assignee
+    font-weight: 300
+    color: color('light')
+  &:hover
+    .task-avatar-assignee
+      font-weight:   400
+      color: color('dark')

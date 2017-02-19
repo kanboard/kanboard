@@ -1,4 +1,4 @@
-<div class="task-list-details">
+<div class="table-list-details">
     <?= $this->text->e($task['project_name']) ?> &gt;
     <?= $this->text->e($task['swimlane_name']) ?> &gt;
     <?= $this->text->e($task['column_name']) ?>

@@ -1,27 +1,31 @@
 @import variables
 
-.task-list
+.table-list
   font-size: size('compact')
+  margin-bottom: 20px
 
-.task-list-header
+.table-list-header
   background: bg-color('primary')
   border: 1px solid #e5e5e5
   border-radius: 5px 5px 0 0
   line-height: 35px
   padding-left: 3px
   padding-right: 3px
-  .task-list-header-count
+  .table-list-header-count
     color: #767676
     display: inline-block
     float: left
-  .task-list-header-menu
+  .table-list-header-menu
     text-align: right
 
-.task-list-row
+.table-list-row
   padding-left: 3px
   padding-right: 3px
   border-bottom: 1px solid #e5e5e5
   border-right: 1px solid #e5e5e5
+
+  &.table-border-left
+    border-left: 1px solid #e5e5e5
 
   &:nth-child(odd)
     background: bg-color('lighter')
@@ -34,10 +38,11 @@
     border-bottom: 1px solid map-get($highlight-colors, 'border')
     border-right: 1px solid map-get($highlight-colors, 'border')
 
-  .task-list-title
+  .table-list-title
     font-weight: 500
-    &.task-closed
+    &.status-closed
       text-decoration: line-through
+      margin-right: 10px
       a
         font-style: italic
     a
@@ -46,21 +51,14 @@
       &:hover, &:focus
         text-decoration: underline
 
-  .task-list-details
+  .table-list-details
     color: color('light')
     font-weight: 300
     line-height: 30px
-
-  .task-list-avatars
-    display: inline-block
-    float: left
-    @include sm-device
-      float: none
-      display: block
-    .task-avatar-assignee
-      font-weight: 300
-      color: color('light')
-    &:hover
-      .task-avatar-assignee
-        font-weight:   400
-        color: color('dark')
+    li
+      display: inline
+      list-style-type: none
+      &:after
+        content: ', '
+      &:last-child:after
+        content: ''

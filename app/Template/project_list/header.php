@@ -1,12 +1,12 @@
 <div class="table-list-header">
     <div class="table-list-header-count">
         <?php if ($paginator->getTotal() > 1): ?>
-            <?= t('%d tasks', $paginator->getTotal()) ?>
+            <?= t('%d projects', $paginator->getTotal()) ?>
         <?php else: ?>
-            <?= t('%d task', $paginator->getTotal()) ?>
+            <?= t('%d project', $paginator->getTotal()) ?>
         <?php endif ?>
     </div>
     <div class="table-list-header-menu">
-        <?= $this->render('task_list/sort_menu', array('paginator' => $paginator)) ?>
+        <?= $this->render('project_list/sort_menu', array('paginator' => $paginator)) ?>
     </div>
 </div>

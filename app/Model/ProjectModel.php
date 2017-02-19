@@ -318,6 +318,26 @@ class ProjectModel extends Base
     }
 
     /**
+     * Get query for list of project without column statistics
+     *
+     * @access public
+     * @param  array $projectIds
+     * @return \PicoDb\Table
+     */
+    public function getQueryByProjectIds(array $projectIds)
+    {
+        if (empty($projectIds)) {
+            return $this->db->table(ProjectModel::TABLE)->eq(ProjectModel::TABLE.'.id', 0);
+        }
+
+        return $this->db
+            ->table(ProjectModel::TABLE)
+            ->columns(self::TABLE.'.*', UserModel::TABLE.'.username AS owner_username', UserModel::TABLE.'.name AS owner_name')
+            ->join(UserModel::TABLE, 'id', 'owner_id')
+            ->in(self::TABLE.'.id', $projectIds);
+    }
+
+    /**
      * Create a project
      *
      * @access public

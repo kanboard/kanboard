@@ -10,7 +10,7 @@ New features:
 
 Improvements:
 
-* Redesign task list view
+* Redesign task list view and project list view
 * Allow people to remove missing automatic actions (installed from a removed plugins)
 * Improve task view tables
 * Simplify automatic actions table
