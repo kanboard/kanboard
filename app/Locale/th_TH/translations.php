@@ -1320,4 +1320,5 @@ return array(
     // 'Remove this user from group' => '',
     // 'Your project must have at least one active swimlane.' => '',
     // 'Project: %s' => '',
+    // 'Automatic action not found: "%s"' => '',
 );

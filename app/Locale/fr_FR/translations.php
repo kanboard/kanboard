@@ -1320,4 +1320,5 @@ return array(
     'Remove this user from group' => 'Enlever cet utilisateur du groupe',
     'Your project must have at least one active swimlane.' => 'Votre projet doit avoir au moins une swimlane active.',
     'Project: %s' => 'Projet : %s',
+    'Automatic action not found: "%s"' => 'Action automatique introuvable : « %s »',
 );

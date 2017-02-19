@@ -10,6 +10,7 @@ New features:
 
 Improvements:
 
+* Allow people to remove missing automatic actions (installed from a removed plugins)
 * Improve task view tables
 * Simplify automatic actions table
 * Show category description in tooltip

@@ -26,11 +26,18 @@
                     </ul>
                 </div>
 
-                <?= $this->text->in($action['action_name'], $available_actions) ?>
+                <?php if (! isset($available_params[$action['action_name']])): ?>
+                    <?= $this->text->e($action['action_name']) ?>
+                <?php else: ?>
+                    <?= $this->text->in($action['action_name'], $available_actions) ?>
+                <?php endif ?>
             </th>
         </tr>
         <tr>
             <td>
+                <?php if (! isset($available_params[$action['action_name']])): ?>
+                    <p class="alert alert-error"><?= t('Automatic action not found: "%s"', $action['action_name']) ?></p>
+                <?php else: ?>
                 <ul>
                     <li>
                         <?= t('Event name') ?> =
@@ -61,6 +68,7 @@
                         </li>
                     <?php endforeach ?>
                 </ul>
+                <?php endif ?>
             </td>
         </tr>
         <?php endforeach ?>
