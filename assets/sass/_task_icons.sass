@@ -1,0 +1,43 @@
+@import variables
+
+.task-board-icons, .task-list-icons
+  font-size: size('small')
+  text-align: right
+
+  a
+    text-decoration: none
+    &:hover
+      color: link-color('hover')
+      i
+        color: link-color('hover')
+
+  .task-score
+    font-weight: bold
+
+  .flag-milestone
+    color: green
+
+.task-board-icons
+  margin-top: 7px
+  a
+    opacity: 0.5
+  span
+    opacity: 0.5
+    margin-left: 4px
+  a
+    &:hover
+      opacity: 1.0
+      font-weight: bold
+
+  .task-board-icons-row
+    line-height: 22px
+
+.task-list-icons
+  line-height: 22px
+  a, span, i
+    color: color('light')
+    opacity: 1.0
+  span
+    margin-left: 5px
+  @include sm-device
+    text-align: left

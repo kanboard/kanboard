@@ -1,0 +1,61 @@
+@import variables
+
+.task-list
+  font-size: size('compact')
+
+.task-list-header
+  background: bg-color('primary')
+  border: 1px solid #e5e5e5
+  border-radius: 5px 5px 0 0
+  line-height: 35px
+  padding-left: 3px
+  padding-right: 3px
+  text-align: right
+
+.task-list-row
+  padding-left: 3px
+  padding-right: 3px
+  border-bottom: 1px solid #e5e5e5
+  border-right: 1px solid #e5e5e5
+
+  &:nth-child(odd)
+    background: bg-color('lighter')
+
+  &:last-child
+    border-radius: 0 0 5px 5px
+
+  &:hover
+    background: map-get($highlight-colors, 'background')
+    border-bottom: 1px solid map-get($highlight-colors, 'border')
+    border-right: 1px solid map-get($highlight-colors, 'border')
+
+  .task-list-title
+    font-weight: 500
+    &.task-closed
+      text-decoration: line-through
+      a
+        font-style: italic
+    a
+      color: color('primary')
+      text-decoration: none
+      &:hover, &:focus
+        text-decoration: underline
+
+  .task-list-details
+    color: color('light')
+    font-weight: 300
+    line-height: 30px
+
+  .task-list-avatars
+    display: inline-block
+    float: left
+    @include sm-device
+      float: none
+      display: block
+    .task-avatar-assignee
+      font-weight: 300
+      color: color('light')
+    &:hover
+      .task-avatar-assignee
+        font-weight:   400
+        color: color('dark')

@@ -1,0 +1,28 @@
+@import variables
+
+.task-board-category-container
+  text-align: right
+  margin-top: 8px
+  margin-bottom: 8px
+
+.task-board-category
+  border: 1px solid #555
+  a
+    &:hover
+      text-decoration: underline
+
+.task-list-category
+  background: bg-color('light')
+  border: 1px solid #ccc
+  a
+    text-decoration: none
+    color: color('dark')
+    &:hover
+      color: link-color('primary')
+
+.task-board-category, .task-list-category
+  font-size: size('compact')
+  font-weight: 500
+  color: color('dark')
+  padding: 1px 3px 1px 2px
+  border-radius: 3px

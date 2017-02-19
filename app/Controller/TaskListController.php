@@ -35,7 +35,7 @@ class TaskListController extends BaseController
             )
             ->calculate();
 
-        $this->response->html($this->helper->layout->app('task_list/show', array(
+        $this->response->html($this->helper->layout->app('task_list/listing', array(
             'project' => $project,
             'title' => $project['name'],
             'description' => $this->helper->projectHeader->getDescription($project),
