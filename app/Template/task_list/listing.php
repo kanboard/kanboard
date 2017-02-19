@@ -5,9 +5,7 @@
         <p class="alert"><?= t('No tasks found.') ?></p>
     <?php elseif (! $paginator->isEmpty()): ?>
         <div class="task-list">
-            <div class="task-list-header">
-                <?= $this->render('task_list/sort_menu', array('paginator' => $paginator)) ?>
-            </div>
+            <?= $this->render('task_list/header', array('paginator' => $paginator)) ?>
             <?php foreach ($paginator->getCollection() as $task): ?>
                 <div class="task-list-row color-<?= $task['color_id'] ?>">
                     <?= $this->render('task_list/task_title', array(
