@@ -222,7 +222,7 @@ class ConfigController extends BaseController
         if (!file_exists($filename) || !$this->configModel->uploadDatabase($filename)) {
             $this->flash->failure(t('Unable to read uploaded file.'));
         } else {
-            $this->flash->success(t('Database upload done.'));
+            $this->flash->success(t('Database uploaded successfully.'));
         }
 
         $this->response->redirect($this->helper->url->to('ConfigController', 'index'));

@@ -1,10 +1,10 @@
 <div class="page-header">
-    <h2><?= t('Upload the Sqlite database') ?></h2>
+    <h2><?= t('Upload the database') ?></h2>
 </div>
 
 <div class="alert">
     <p>
-        <?= t('You can upload the Gzip compressed Sqlite database previously downloaded.') ?>
+        <?= t('You could upload the previously downloaded Sqlite database (Gzip format).') ?>
     </p>
 </div>
 
