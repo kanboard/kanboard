@@ -707,8 +707,6 @@ CREATE TABLE "projects" (
     "is_public" boolean DEFAULT false,
     "is_private" boolean DEFAULT false,
     "is_everybody_allowed" boolean DEFAULT false,
-    "default_swimlane" character varying(200) DEFAULT 'Default swimlane'::character varying,
-    "show_default_swimlane" boolean DEFAULT true,
     "description" "text",
     "identifier" character varying(50) DEFAULT ''::character varying,
     "start_date" character varying(10) DEFAULT ''::character varying,
@@ -1077,7 +1075,7 @@ CREATE TABLE "tasks" (
     "date_started" bigint,
     "time_spent" double precision DEFAULT 0,
     "time_estimated" double precision DEFAULT 0,
-    "swimlane_id" integer DEFAULT 0,
+    "swimlane_id" integer NOT NULL,
     "date_moved" bigint DEFAULT 0,
     "recurrence_status" integer DEFAULT 0 NOT NULL,
     "recurrence_trigger" integer DEFAULT 0 NOT NULL,
@@ -2456,6 +2454,14 @@ ALTER TABLE ONLY "tasks"
 
 
 --
+-- Name: tasks tasks_swimlane_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "tasks"
+    ADD CONSTRAINT "tasks_swimlane_id_fkey" FOREIGN KEY ("swimlane_id") REFERENCES "swimlanes"("id") ON DELETE CASCADE;
+
+
+--
 -- Name: transitions transitions_dst_column_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2564,8 +2570,8 @@ INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_high
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_public_refresh_interval', '60', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_private_refresh_interval', '10', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_columns', '', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', 'caef28d453c52e4fdc0fd4ce4456698e242d839b496cc1fc580b291b7b47', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', 'ca7200b622dc8483622f83088ccc5c337fce75b6ce2d8f33f92e391a1348', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', 'eb478afd6da3ca2b1bda2e5ef2b47d83f0ebdeef5cdebc02e01d5b568835', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', '32cf0d4f136c1adffb9475b9a4c910f3231dcac5c44777eb467f0e714e51', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_language', 'en_US', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_timezone', 'UTC', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_url', '', 0, 0);
@@ -2634,4 +2640,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$Pq1KoC3G3bH/MUrwzwl3l.ZcAM4k99yLhGoX0XLXrTvcdySMisBC2', 'app-admin');INSERT INTO schema_version VALUES ('100');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$rArU1OPUgo7QhObLvFaq1.d7FlIaC4XEsBBWLxIfifNJapk9h71uO', 'app-admin');INSERT INTO schema_version VALUES ('101');
