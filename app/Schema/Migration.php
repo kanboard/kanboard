@@ -38,8 +38,15 @@ function migrate_default_swimlane(PDO $pdo)
         ));
 
         // Migrate automatic actions
-        $rq = $pdo->prepare("UPDATE action_has_params SET value=? WHERE id IN (SELECT action_has_params.id FROM action_has_params LEFT JOIN actions ON actions.id=action_has_params.action_id WHERE project_id=? AND name='swimlane_id' AND value='0')");
-        $rq->execute(array($swimlaneId, $project['id']));
+        $rq = $pdo->prepare("SELECT action_has_params.id FROM action_has_params LEFT JOIN actions ON actions.id=action_has_params.action_id WHERE project_id=? AND name='swimlane_id' AND value='0'");
+        $rq->execute(array($project['id']));
+        $ids = $rq->fetchAll(PDO::FETCH_COLUMN, 0);
+
+        $rq = $pdo->prepare("UPDATE action_has_params SET value=? WHERE id=?");
+
+        foreach ($ids as $id) {
+            $rq->execute(array($swimlaneId, $id));
+        }
     }
 }
 
