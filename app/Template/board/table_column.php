@@ -53,17 +53,26 @@
                 <?php endif ?>
             </span>
 
-            <?php if (! $not_editable && ! empty($column['description'])): ?>
-                <span class="tooltip pull-right" title="<?= $this->text->markdownAttribute($column['description']) ?>">
-                    &nbsp;<i class="fa fa-info-circle"></i>
-                </span>
-            <?php endif ?>
+            <span class="pull-right">
+                <?php if ($swimlane['nb_swimlanes'] > 1 && ! empty($column['column_score'])): ?>
+                    <span title="<?= t('Total score in this column across all swimlanes') ?>">
+                        (<span><?= $column['column_score'] ?></span>)
+                    </span>
+                <?php endif ?>
 
-            <?php if (! empty($column['score'])): ?>
-                <span class="pull-right" title="<?= t('Score') ?>">
-                    <?= $column['score'] ?>
-                </span>
-            <?php endif ?>
+                <?php if (! empty($column['score'])): ?>
+                    <span title="<?= t('Score') ?>">
+                        <?= $column['score'] ?>
+                    </span>
+                <?php endif ?>
+
+                <?php if (! $not_editable && ! empty($column['description'])): ?>
+                    <span class="tooltip" title="<?= $this->text->markdownAttribute($column['description']) ?>">
+                        &nbsp;<i class="fa fa-info-circle"></i>
+                    </span>
+                <?php endif ?>
+
+            </span>
 
             <?php if ($column['task_limit']): ?>
                 <span title="<?= t('Task limit') ?>">
