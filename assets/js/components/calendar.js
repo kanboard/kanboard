@@ -11,7 +11,7 @@ KB.component('calendar', function (containerElement, options) {
         if (window.location.hash) { // Check if hash contains mode
             var hashMode = window.location.hash.substr(1);
             mode = modeMapping[hashMode] || mode;
-        };
+        }
 
         calendar.fullCalendar({
             locale: $("body").data("js-lang"),
@@ -42,8 +42,8 @@ KB.component('calendar', function (containerElement, options) {
                     if (modeMapping[id] === view.name) { // Found
                         window.location.hash = id;
                         break;
-                    };
-                };
+                    }
+                }
                 var url = options.checkUrl;
                 var params = {
                     "start": calendar.fullCalendar('getView').start.format(),
