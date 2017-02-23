@@ -13,8 +13,8 @@
                     <?php foreach ($roles as $role => $role_name): ?>
                         <?php if (isset($users[$role])): ?>
                             <li>
-                                <?= $role_name ?>:
-                                <strong><?= implode(', ', $users[$role]) ?></strong>
+                                <?= $this->text->e($role_name) ?>:
+                                <strong><?= $this->text->implode(', ', $users[$role]) ?></strong>
                             </li>
                         <?php endif ?>
                     <?php endforeach ?>

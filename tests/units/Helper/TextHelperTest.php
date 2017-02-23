@@ -9,6 +9,13 @@ use Kanboard\Model\UserModel;
 
 class TextHelperTest extends Base
 {
+    public function testImplode()
+    {
+        $textHelper = new TextHelper($this->container);
+        $html = '&lt;img src=x onerror=alert(0)&gt;';
+        $this->assertEquals($html, $textHelper->implode(', ', array('<img src=x onerror=alert(0)>')));
+    }
+
     public function testMarkdownTaskLink()
     {
         $textHelper = new TextHelper($this->container);

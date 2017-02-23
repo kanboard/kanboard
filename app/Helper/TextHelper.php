@@ -25,6 +25,19 @@ class TextHelper extends Base
     }
 
     /**
+     * Join with HTML escaping
+     *
+     * @param  $glue
+     * @param  array $list
+     * @return string
+     */
+    public function implode($glue, array $list)
+    {
+        array_walk($list, function (&$value) { $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false); });
+        return implode($glue, $list);
+    }
+
+    /**
      * Markdown transformation
      *
      * @param  string    $text
