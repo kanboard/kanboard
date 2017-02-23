@@ -161,7 +161,7 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
         var hasActiveItem = false;
 
         for (var i = 0; i < items.length; i++) {
-            if (text.length === 0 || items[i]['data-label'].toLowerCase().indexOf(text.toLowerCase()) === 0) {
+            if (text.length === 0 || items[i]['data-label'].toLowerCase().indexOf(text.toLowerCase()) > -1) {
                 var item = items[i];
 
                 if (typeof options.defaultValue !== 'undefined' && String(options.defaultValue) === item['data-value']) {
