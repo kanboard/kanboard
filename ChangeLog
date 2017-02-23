@@ -7,6 +7,7 @@ New features:
 * Send tasks by email
 * Add Reply-To header to emails sent from Kanboard
 * Upload Sqlite database from user interface
+* Automatic action to change task color when due date is expired
 
 Improvements:
 
