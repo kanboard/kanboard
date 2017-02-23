@@ -71,6 +71,7 @@ Contributors:
 - [Kiswa](https://github.com/kiswa)
 - [Kralo](https://github.com/kralo)
 - [Kolesar](https://github.com/Kolesar)
+- [Konstantin](https://github.com/kvj)
 - [Lars Christian Schou](https://github.com/NegoZiatoR)
 - [Lesstat](https://github.com/Lesstat)
 - [Levlaz](https://github.com/levlaz)

@@ -11,6 +11,10 @@ New features:
 
 Improvements:
 
+* Make link to calendar view bookable
+* Reintroduce word search in board selector
+* Properly resize task list height on column toggle
+* Show total score across all swimlanes
 * Redesign task list view and project list view
 * Allow people to remove missing automatic actions (installed from a removed plugins)
 * Improve task view tables
