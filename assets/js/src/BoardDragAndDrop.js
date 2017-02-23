@@ -5,8 +5,8 @@ Kanboard.BoardDragAndDrop = function(app) {
 
 Kanboard.BoardDragAndDrop.prototype.execute = function() {
     if (this.app.hasId("board")) {
-        this.dragAndDrop();
         this.executeListeners();
+        this.dragAndDrop();
     }
 };
 
@@ -48,9 +48,13 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
         params.handle = ".task-board-sort-handle";
     }
 
-    // Set dropzone height to the height of the table cell
+    // Set visible dropzone height to the height of the table cell
     dropzone.each(function() {
-        $(this).css("min-height", $(this).parent().height());
+        if ($(this).filter(':visible').length) { // This drop zone is visible
+            $(this).css("min-height", $(this).parent().height());
+        } else { // Remove min-height
+            $(this).css("min-height", '');
+        }
     });
 
     dropzone.sortable(params);
@@ -101,8 +105,8 @@ Kanboard.BoardDragAndDrop.prototype.refresh = function(data) {
     $("#board-container").replaceWith(data);
 
     this.app.hideLoadingIcon();
-    this.dragAndDrop();
     this.executeListeners();
+    this.dragAndDrop();
 };
 
 Kanboard.BoardDragAndDrop.prototype.executeListeners = function() {
