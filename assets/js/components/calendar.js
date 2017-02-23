@@ -1,13 +1,23 @@
 KB.component('calendar', function (containerElement, options) {
+    var modeMapping = { // Let's have bookable pretty mode names
+        month: 'month',
+        week: 'agendaWeek',
+        day: 'agendaDay'
+    };
 
     this.render = function () {
         var calendar = $(containerElement);
+        var mode = 'month';
+        if (window.location.hash) { // Check if hash contains mode
+            var hashMode = window.location.hash.substr(1);
+            mode = modeMapping[hashMode] || mode;
+        }
 
         calendar.fullCalendar({
             locale: $("body").data("js-lang"),
             editable: true,
             eventLimit: true,
-            defaultView: "month",
+            defaultView: mode,
             header: {
                 left: 'prev,next today',
                 center: 'title',
@@ -26,7 +36,14 @@ KB.component('calendar', function (containerElement, options) {
                     })
                 });
             },
-            viewRender: function() {
+            viewRender: function(view) {
+                // Map view.name back and update location.hash
+                for (var id in modeMapping) {
+                    if (modeMapping[id] === view.name) { // Found
+                        window.location.hash = id;
+                        break;
+                    }
+                }
                 var url = options.checkUrl;
                 var params = {
                     "start": calendar.fullCalendar('getView').start.format(),
