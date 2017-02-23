@@ -38,6 +38,10 @@ Bug fixes:
 
 * Upload files button stay disabled when there are other submit buttons on the same page
 * Hiding subtasks from hidden tasks in dashboard
+
+Security:
+
+* Fix XSS in LetterAvatarProvider (render broken image)
 * Avoid potential XSS in project overview when listing users (was avoided by default CSP rules)
 
 Version 1.0.39 (Feb 12, 2017)

@@ -39,7 +39,7 @@ class LetterAvatarProvider extends Base implements AvatarProviderInterface
             $rgb[1],
             $rgb[2],
             $this->helper->text->e($user['name'] ?: $user['username']),
-            $initials
+            $this->helper->text->e($initials)
         );
     }
 
