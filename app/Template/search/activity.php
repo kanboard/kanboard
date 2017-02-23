@@ -37,7 +37,9 @@
     <?php elseif (! empty($values['search']) && $nb_events === 0): ?>
         <p class="alert"><?= t('Nothing found.') ?></p>
     <?php else: ?>
-        <?= $this->render('event/events', array('events' => $events)) ?>
+        <div class="margin-top">
+            <?= $this->render('event/events', array('events' => $events)) ?>
+        </div>
     <?php endif ?>
 
 </section>

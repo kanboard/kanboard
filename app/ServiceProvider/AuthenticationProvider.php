@@ -85,6 +85,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('ColumnController', '*', Role::PROJECT_MANAGER);
         $acl->add('CommentController', array('create', 'save', 'edit', 'update', 'confirm', 'remove'), Role::PROJECT_MEMBER);
         $acl->add('CommentListController', array('save'), Role::PROJECT_MEMBER);
+        $acl->add('CommentMailController', '*', Role::PROJECT_MEMBER);
         $acl->add('CustomFilterController', '*', Role::PROJECT_MEMBER);
         $acl->add('ExportController', '*', Role::PROJECT_MANAGER);
         $acl->add('TaskFileController', array('screenshot', 'create', 'save', 'remove', 'confirm'), Role::PROJECT_MEMBER);
@@ -110,6 +111,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('TaskExternalLinkController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskModificationController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskStatusController', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskMailController', '*', Role::PROJECT_MEMBER);
         $acl->add('UserAjaxController', array('mention'), Role::PROJECT_MEMBER);
 
         return $acl;

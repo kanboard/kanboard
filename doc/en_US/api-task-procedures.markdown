@@ -23,6 +23,7 @@ API Task Procedures
     - **recurrence_timeframe** (integer, optional)
     - **recurrence_basedate** (integer, optional)
     - **tags** ([]string, optional)
+    - **date_started**: d/m/Y H:i format (string, optional)
 - Result on success: **task_id**
 - Result on failure: **false**
 
@@ -407,6 +408,7 @@ Response example:
     - **recurrence_timeframe** (integer, optional)
     - **recurrence_basedate** (integer, optional)
     - **tags** ([]string, optional)
+    - **date_started**: ISO8601 format (string, optional)    
 - Result on success: **true**
 - Result on failure: **false**
 
@@ -535,7 +537,7 @@ Response example:
     - **task_id** (integer, required)
     - **column_id** (integer, required)
     - **position** (integer, required)
-    - **swimlane_id** (integer, optional, default=0)
+    - **swimlane_id** (integer, required)
 - Result on success: **true**
 - Result on failure: **false**
 

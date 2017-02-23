@@ -38,7 +38,12 @@ class BoardModel extends Base
             $column_name = trim($column_name);
 
             if (! empty($column_name)) {
-                $columns[] = array('title' => $column_name, 'task_limit' => 0, 'description' => '');
+                $columns[] = array(
+                    'title' => $column_name,
+                    'task_limit' => 0,
+                    'description' => '',
+                    'hide_in_dashboard' => 0,
+                );
             }
         }
 
@@ -64,6 +69,7 @@ class BoardModel extends Base
                 'project_id' => $project_id,
                 'task_limit' => $column['task_limit'],
                 'description' => $column['description'],
+                'hide_in_dashboard' => $column['hide_in_dashboard'] ?: 0, // Avoid SQL error with Postgres
             );
 
             if (! $this->db->table(ColumnModel::TABLE)->save($values)) {
@@ -85,7 +91,7 @@ class BoardModel extends Base
     public function duplicate($project_from, $project_to)
     {
         $columns = $this->db->table(ColumnModel::TABLE)
-                            ->columns('title', 'task_limit', 'description')
+                            ->columns('title', 'task_limit', 'description', 'hide_in_dashboard')
                             ->eq('project_id', $project_from)
                             ->asc('position')
                             ->findAll();

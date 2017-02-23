@@ -18,7 +18,7 @@ class ProjectViewController extends BaseController
     public function show()
     {
         $project = $this->getProject();
-        $columns = $this->columnModel->getAllWithTasksCount($project['id']);
+        $columns = $this->columnModel->getAllWithTaskCount($project['id']);
 
         $this->response->html($this->helper->layout->project('project_view/show', array(
             'project' => $project,

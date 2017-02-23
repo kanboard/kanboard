@@ -3,6 +3,7 @@
 namespace Kanboard\Api\Procedure;
 
 use Kanboard\Api\Authorization\ProjectAuthorization;
+use Kanboard\Model\SwimlaneModel;
 
 /**
  * Swimlane API controller
@@ -15,7 +16,7 @@ class SwimlaneProcedure extends BaseProcedure
     public function getActiveSwimlanes($project_id)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getActiveSwimlanes', $project_id);
-        return $this->swimlaneModel->getSwimlanes($project_id);
+        return $this->swimlaneModel->getAllByStatus($project_id, SwimlaneModel::ACTIVE);
     }
 
     public function getAllSwimlanes($project_id)
@@ -42,27 +43,34 @@ class SwimlaneProcedure extends BaseProcedure
         return $this->swimlaneModel->getById($swimlane_id);
     }
 
-    public function getDefaultSwimlane($project_id)
-    {
-        ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getDefaultSwimlane', $project_id);
-        return $this->swimlaneModel->getDefault($project_id);
-    }
-
     public function addSwimlane($project_id, $name, $description = '')
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'addSwimlane', $project_id);
-        return $this->swimlaneModel->create(array('project_id' => $project_id, 'name' => $name, 'description' => $description));
+        return $this->swimlaneModel->create($project_id, $name, $description);
     }
 
-    public function updateSwimlane($swimlane_id, $name, $description = null)
+    public function updateSwimlane($project_id, $swimlane_id, $name, $description = null)
     {
-        $values = array('id' => $swimlane_id, 'name' => $name);
+        ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateSwimlane', $project_id);
 
-        if (!is_null($description)) {
+        $values = array(
+            'project_id' => $project_id,
+            'id'         => $swimlane_id,
+            'name'       => $name,
+        );
+
+        if (! is_null($description)) {
             $values['description'] = $description;
         }
 
-        return $this->swimlaneModel->update($values);
+        list($valid, $errors) = $this->swimlaneValidator->validateModification($values);
+
+        if (! $valid) {
+            $this->logger->debug(__METHOD__.': Validation error: '.var_export($errors, true));
+            return false;
+        }
+
+        return $this->swimlaneModel->update($swimlane_id, $values);
     }
 
     public function removeSwimlane($project_id, $swimlane_id)

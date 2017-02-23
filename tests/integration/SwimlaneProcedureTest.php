@@ -10,13 +10,15 @@ class SwimlaneProcedureTest extends BaseProcedureTest
     public function testAll()
     {
         $this->assertCreateTeamProject();
-    }
-
-    public function assertGetDefaultSwimlane()
-    {
-        $swimlane = $this->app->getDefaultSwimlane($this->projectId);
-        $this->assertNotEmpty($swimlane);
-        $this->assertEquals('Default swimlane', $swimlane['default_swimlane']);
+        $this->assertAddSwimlane();
+        $this->assertGetSwimlane();
+        $this->assertUpdateSwimlane();
+        $this->assertDisableSwimlane();
+        $this->assertEnableSwimlane();
+        $this->assertGetAllSwimlanes();
+        $this->assertGetActiveSwimlane();
+        $this->assertRemoveSwimlane();
+        $this->assertChangePosition();
     }
 
     public function assertAddSwimlane()
@@ -35,7 +37,7 @@ class SwimlaneProcedureTest extends BaseProcedureTest
 
     public function assertUpdateSwimlane()
     {
-        $this->assertTrue($this->app->updateSwimlane($this->swimlaneId, 'Another swimlane'));
+        $this->assertTrue($this->app->updateSwimlane($this->projectId, $this->swimlaneId, 'Another swimlane'));
 
         $swimlane = $this->app->getSwimlaneById($this->swimlaneId);
         $this->assertEquals('Another swimlane', $swimlane['name']);
@@ -60,9 +62,10 @@ class SwimlaneProcedureTest extends BaseProcedureTest
     public function assertGetAllSwimlanes()
     {
         $swimlanes = $this->app->getAllSwimlanes($this->projectId);
-        $this->assertCount(2, $swimlanes);
-        $this->assertEquals('Another swimlane', $swimlanes[0]['name']);
+        $this->assertCount(3, $swimlanes);
+        $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
         $this->assertEquals('Swimlane 2', $swimlanes[1]['name']);
+        $this->assertEquals('Another swimlane', $swimlanes[2]['name']);
     }
 
     public function assertGetActiveSwimlane()
@@ -86,7 +89,7 @@ class SwimlaneProcedureTest extends BaseProcedureTest
         $this->assertNotFalse($this->app->addSwimlane($this->projectId, 'Swimlane B'));
 
         $swimlanes = $this->app->getAllSwimlanes($this->projectId);
-        $this->assertCount(3, $swimlanes);
+        $this->assertCount(4, $swimlanes);
 
         $this->assertTrue($this->app->changeSwimlanePosition($this->projectId, $swimlaneId1, 3));
     }

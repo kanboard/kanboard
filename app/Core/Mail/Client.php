@@ -9,7 +9,7 @@ use Kanboard\Core\Base;
 /**
  * Mail Client
  *
- * @package  mail
+ * @package  Kanboard\Core\Mail
  * @author   Frederic Guillot
  */
 class Client extends Base
@@ -38,30 +38,35 @@ class Client extends Base
      * Send a HTML email
      *
      * @access public
-     * @param  string  $email
-     * @param  string  $name
+     * @param  string  $recipientEmail
+     * @param  string  $recipientName
      * @param  string  $subject
      * @param  string  $html
      * @return Client
      */
-    public function send($email, $name, $subject, $html)
+    public function send($recipientEmail, $recipientName, $subject, $html)
     {
-        if (! empty($email)) {
-            $this->queueManager->push(EmailJob::getInstance($this->container)
-                ->withParams($email, $name, $subject, $html, $this->getAuthor())
-            );
+        if (! empty($recipientEmail)) {
+            $this->queueManager->push(EmailJob::getInstance($this->container)->withParams(
+                $recipientEmail,
+                $recipientName,
+                $subject,
+                $html,
+                $this->getAuthorName(),
+                $this->getAuthorEmail()
+            ));
         }
 
         return $this;
     }
 
     /**
-     * Get email author
+     * Get author name
      *
      * @access public
      * @return string
      */
-    public function getAuthor()
+    public function getAuthorName()
     {
         $author = 'Kanboard';
 
@@ -70,6 +75,22 @@ class Client extends Base
         }
 
         return $author;
+    }
+
+    /**
+     * Get author email
+     *
+     * @access public
+     * @return string
+     */
+    public function getAuthorEmail()
+    {
+        if ($this->userSession->isLogged()) {
+            $userData = $this->userSession->getAll();
+            return ! empty($userData['email']) ? $userData['email'] : '';
+        }
+
+        return '';
     }
 
     /**

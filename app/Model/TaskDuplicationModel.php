@@ -79,11 +79,13 @@ class TaskDuplicationModel extends Base
         }
 
         // Check if the swimlane exists for the destination project
-        if ($values['swimlane_id'] > 0) {
-            $values['swimlane_id'] = $this->swimlaneModel->getIdByName(
-                $values['project_id'],
-                $this->swimlaneModel->getNameById($values['swimlane_id'])
-            );
+        $values['swimlane_id'] = $this->swimlaneModel->getIdByName(
+            $values['project_id'],
+            $this->swimlaneModel->getNameById($values['swimlane_id'])
+        );
+
+        if ($values['swimlane_id'] == 0) {
+            $values['swimlane_id'] = $this->swimlaneModel->getFirstActiveSwimlaneId($values['project_id']);
         }
 
         // Check if the column exists for the destination project

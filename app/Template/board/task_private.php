@@ -32,6 +32,7 @@
         </div>
     <?php else: ?>
         <div class="task-board-expanded">
+            <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
             <div class="task-board-header">
                 <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
                     <?= $this->render('task/dropdown', array('task' => $task)) ?>
@@ -53,8 +54,6 @@
                 <?= $this->text->e($task['title']) ?>
             </div>
             <?= $this->hook->render('template:board:private:task:after-title', array('task' => $task)) ?>
-
-            <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
 
             <?= $this->render('board/task_footer', array(
                 'task' => $task,

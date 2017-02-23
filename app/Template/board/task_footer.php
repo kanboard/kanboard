@@ -57,11 +57,11 @@
         <?php endif ?>
 
         <?php if (! empty($task['date_due'])): ?>
-            <span class="task-board-date
+            <span class="task-date
                 <?php if (date('Y-m-d') == date('Y-m-d', $task['date_due'])): ?>
-                     task-board-date-today
+                     task-date-today
                 <?php elseif (time() > $task['date_due']): ?>
-                     task-board-date-overdue
+                     task-date-overdue
                 <?php endif ?>
                 ">
                 <i class="fa fa-calendar"></i>
@@ -117,9 +117,9 @@
         <?php endif ?>
 
         <?php if ($task['is_active'] == 1): ?>
-            <div class="task-board-age">
-                <span title="<?= t('Task age in days')?>" class="task-board-age-total"><?= $this->dt->age($task['date_creation']) ?></span>
-                <span title="<?= t('Days in this column')?>" class="task-board-age-column"><?= $this->dt->age($task['date_moved']) ?></span>
+            <div class="task-icon-age">
+                <span title="<?= t('Task age in days')?>" class="task-icon-age-total"><?= $this->dt->age($task['date_creation']) ?></span>
+                <span title="<?= t('Days in this column')?>" class="task-icon-age-column"><?= $this->dt->age($task['date_moved']) ?></span>
             </div>
         <?php else: ?>
             <span class="task-board-closed"><i class="fa fa-ban fa-fw"></i><?= t('Closed') ?></span>

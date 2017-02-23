@@ -201,6 +201,34 @@ class ConfigController extends BaseController
     }
 
     /**
+     * Display the Sqlite database upload page
+     *
+     * @access public
+     */
+    public function uploadDb()
+    {
+        $this->response->html($this->template->render('config/upload_db'));
+    }
+
+    /**
+     * Replace current Sqlite db with uploaded file
+     *
+     * @access public
+     */
+    public function saveUploadedDb()
+    {
+        $filename = $this->request->getFilePath('file');
+
+        if (!file_exists($filename) || !$this->configModel->uploadDatabase($filename)) {
+            $this->flash->failure(t('Unable to read uploaded file.'));
+        } else {
+            $this->flash->success(t('Database uploaded successfully.'));
+        }
+
+        $this->response->redirect($this->helper->url->to('ConfigController', 'index'));
+    }
+
+    /**
      * Regenerate webhook token
      *
      * @access public

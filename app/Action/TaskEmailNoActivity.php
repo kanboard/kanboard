@@ -116,7 +116,7 @@ class TaskEmailNoActivity extends Base
             $user['email'],
             $user['name'] ?: $user['username'],
             $this->getParam('subject'),
-            $this->template->render('notification/task_create', array('task' => $task, 'application_url' => $this->configModel->get('application_url')))
+            $this->template->render('notification/task_create', array('task' => $task))
         );
 
         return true;

@@ -5,7 +5,7 @@ require_once __DIR__.'/../Base.php';
 use Kanboard\Model\ColorModel;
 use Kanboard\Model\ConfigModel;
 
-class ColorTest extends Base
+class ColorModelTest extends Base
 {
     public function testFind()
     {
@@ -87,7 +87,6 @@ class ColorTest extends Base
         $colorModel = new ColorModel($this->container);
         $css = $colorModel->getCss();
 
-        $this->assertStringStartsWith('div.color-yellow {', $css);
-        $this->assertStringEndsWith('td.color-amber { background-color: #ffe082}', $css);
+        $this->assertStringStartsWith('.task-board.color-yellow', $css);
     }
 }

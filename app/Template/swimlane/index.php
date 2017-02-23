@@ -7,21 +7,22 @@
     </ul>
 </div>
 
-<?php if (! empty($active_swimlanes) || $default_swimlane['show_default_swimlane'] == 1): ?>
 <h3><?= t('Active swimlanes') ?></h3>
+
+<?php if (empty($active_swimlanes)): ?>
+    <p class="alert alert-error"><?= t('Your project must have at least one active swimlane.') ?></p>
+<?php else: ?>
     <?= $this->render('swimlane/table', array(
         'swimlanes' => $active_swimlanes,
-        'project' => $project,
-        'default_swimlane' => $default_swimlane['show_default_swimlane'] == 1 ? $default_swimlane : array()
+        'project'   => $project,
     )) ?>
 <?php endif ?>
 
-<?php if (! empty($inactive_swimlanes) || $default_swimlane['show_default_swimlane'] == 0): ?>
+<?php if (! empty($inactive_swimlanes)): ?>
     <h3><?= t('Inactive swimlanes') ?></h3>
     <?= $this->render('swimlane/table', array(
-        'swimlanes' => $inactive_swimlanes,
-        'project' => $project,
-        'default_swimlane' => $default_swimlane['show_default_swimlane'] == 0 ? $default_swimlane : array(),
-        'disable_handler' => true
+        'swimlanes'       => $inactive_swimlanes,
+        'project'         => $project,
+        'disable_handle'  => true,
     )) ?>
 <?php endif ?>

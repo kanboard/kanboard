@@ -105,7 +105,7 @@ class ColumnModelTest extends Base
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'UnitTest', 'project_id' => 1, 'column_id' => 1)));
         $this->assertEquals(2, $taskCreationModel->create(array('title' => 'UnitTest', 'project_id' => 1, 'column_id' => 2, 'is_active' => 0)));
 
-        $columns = $columnModel->getAllWithTasksCount(1);
+        $columns = $columnModel->getAllWithTaskCount(1);
         $this->assertCount(4, $columns);
 
         $this->assertEquals(1, $columns[0]['id']);

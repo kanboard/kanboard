@@ -14,56 +14,61 @@
     <p class="alert"><?= t('There is no action at the moment.') ?></p>
 <?php else: ?>
     <table class="table-scrolling">
-        <tr>
-            <th class="column-60"><?= t('Automatic actions') ?></th>
-            <th class="column-25"><?= t('Action parameters') ?></th>
-            <th><?= t('Action') ?></th>
-        </tr>
-
         <?php foreach ($actions as $action): ?>
         <tr>
+            <th>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
+                    <ul>
+                        <li>
+                            <?= $this->modal->confirm('trash-o', t('Remove'), 'ActionController', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id'])) ?>
+                        </li>
+                    </ul>
+                </div>
+
+                <?php if (! isset($available_params[$action['action_name']])): ?>
+                    <?= $this->text->e($action['action_name']) ?>
+                <?php else: ?>
+                    <?= $this->text->in($action['action_name'], $available_actions) ?>
+                <?php endif ?>
+            </th>
+        </tr>
+        <tr>
             <td>
+                <?php if (! isset($available_params[$action['action_name']])): ?>
+                    <p class="alert alert-error"><?= t('Automatic action not found: "%s"', $action['action_name']) ?></p>
+                <?php else: ?>
                 <ul>
                     <li>
                         <?= t('Event name') ?> =
                         <strong><?= $this->text->in($action['event_name'], $available_events) ?></strong>
                     </li>
-                    <li>
-                        <?= t('Action name') ?> =
-                        <strong><?= $this->text->in($action['action_name'], $available_actions) ?></strong>
-                    </li>
-                <ul>
-            </td>
-            <td>
-                <ul>
-                <?php foreach ($action['params'] as $param_name => $param_value): ?>
-                    <li>
-                        <?= $this->text->in($param_name, $available_params[$action['action_name']]) ?> =
-                        <strong>
-                        <?php if ($this->text->contains($param_name, 'column_id')): ?>
-                            <?= $this->text->in($param_value, $columns_list) ?>
-                        <?php elseif ($this->text->contains($param_name, 'user_id')): ?>
-                            <?= $this->text->in($param_value, $users_list) ?>
-                        <?php elseif ($this->text->contains($param_name, 'project_id')): ?>
-                            <?= $this->text->in($param_value, $projects_list) ?>
-                        <?php elseif ($this->text->contains($param_name, 'color_id')): ?>
-                            <?= $this->text->in($param_value, $colors_list) ?>
-                        <?php elseif ($this->text->contains($param_name, 'category_id')): ?>
-                            <?= $this->text->in($param_value, $categories_list) ?>
-                        <?php elseif ($this->text->contains($param_name, 'link_id')): ?>
-                            <?= $this->text->in($param_value, $links_list) ?>
-                        <?php elseif ($this->text->contains($param_name, 'swimlane_id')): ?>
-                            <?= $this->text->in($param_value, $swimlane_list) ?>
-                        <?php else: ?>
-                            <?= $this->text->e($param_value) ?>
-                        <?php endif ?>
-                        </strong>
-                    </li>
-                <?php endforeach ?>
+                    <?php foreach ($action['params'] as $param_name => $param_value): ?>
+                        <li>
+                            <?= $this->text->in($param_name, $available_params[$action['action_name']]) ?> =
+                            <strong>
+                                <?php if ($this->text->contains($param_name, 'column_id')): ?>
+                                    <?= $this->text->in($param_value, $columns_list) ?>
+                                <?php elseif ($this->text->contains($param_name, 'user_id')): ?>
+                                    <?= $this->text->in($param_value, $users_list) ?>
+                                <?php elseif ($this->text->contains($param_name, 'project_id')): ?>
+                                    <?= $this->text->in($param_value, $projects_list) ?>
+                                <?php elseif ($this->text->contains($param_name, 'color_id')): ?>
+                                    <?= $this->text->in($param_value, $colors_list) ?>
+                                <?php elseif ($this->text->contains($param_name, 'category_id')): ?>
+                                    <?= $this->text->in($param_value, $categories_list) ?>
+                                <?php elseif ($this->text->contains($param_name, 'link_id')): ?>
+                                    <?= $this->text->in($param_value, $links_list) ?>
+                                <?php elseif ($this->text->contains($param_name, 'swimlane_id')): ?>
+                                    <?= $this->text->in($param_value, $swimlane_list) ?>
+                                <?php else: ?>
+                                    <?= $this->text->e($param_value) ?>
+                                <?php endif ?>
+                            </strong>
+                        </li>
+                    <?php endforeach ?>
                 </ul>
-            </td>
-            <td>
-                <?= $this->modal->confirm('trash-o', t('Remove'), 'ActionController', 'confirm', array('project_id' => $project['id'], 'action_id' => $action['id'])) ?>
+                <?php endif ?>
             </td>
         </tr>
         <?php endforeach ?>

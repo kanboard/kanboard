@@ -1,3 +1,40 @@
+Version 1.0.40 (unreleased)
+---------------------------
+
+New features:
+
+* Send comments by email
+* Send tasks by email
+* Add Reply-To header to emails sent from Kanboard
+* Upload Sqlite database from user interface
+* Automatic action to change task color when due date is expired
+
+Improvements:
+
+* Redesign task list view and project list view
+* Allow people to remove missing automatic actions (installed from a removed plugins)
+* Improve task view tables
+* Simplify automatic actions table
+* Show category description in tooltip
+* Show category creation form in modal dialog
+* Prevent people to remove swimlanes that contains tasks
+* Show task count in swimlane table
+* Use contextual menu instead of action column in users management
+
+Breaking changes:
+
+* The concept of "default swimlane" has been removed
+* Previous default swimlanes are migrated to an independent swimlanes
+* Columns "default_swimlane" and "show_default_swimlane" from "projects" table are not used anymore
+* Remove API method "getDefaultSwimlane()"
+* Add mandatory argument "project_id" to API method "updateSwimlane()"
+* Change interface for mail transports
+
+Bug fixes:
+
+* Upload files button stay disabled when there are other submit buttons on the same page
+* Hiding subtasks from hidden tasks in dashboard
+
 Version 1.0.39 (Feb 12, 2017)
 -----------------------------
 

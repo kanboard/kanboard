@@ -49,6 +49,19 @@ class ConfigModel extends SettingModel
     }
 
     /**
+     * Replace database file with uploaded one
+     *
+     * @access public
+     * @param  string $file
+     * @return bool
+     */
+    public function uploadDatabase($file)
+    {
+        $this->db->closeConnection();
+        return file_put_contents(DB_FILENAME, gzdecode(file_get_contents($file))) !== false;
+    }
+
+    /**
      * Get the Sqlite database size in bytes
      *
      * @access public

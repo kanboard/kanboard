@@ -2,11 +2,18 @@
 
 namespace Schema;
 
+require_once __DIR__.'/Migration.php';
+
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 111;
+const VERSION = 112;
+
+function version_112(PDO $pdo)
+{
+    migrate_default_swimlane($pdo);
+}
 
 function version_111(PDO $pdo)
 {

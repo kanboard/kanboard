@@ -24,8 +24,8 @@ class ProjectDuplicationModelTest extends Base
     public function testGetSelections()
     {
         $projectDuplicationModel = new ProjectDuplicationModel($this->container);
-        $this->assertCount(7, $projectDuplicationModel->getOptionalSelection());
-        $this->assertCount(8, $projectDuplicationModel->getPossibleSelection());
+        $this->assertCount(6, $projectDuplicationModel->getOptionalSelection());
+        $this->assertCount(9, $projectDuplicationModel->getPossibleSelection());
     }
 
     public function testGetClonedProjectName()
@@ -405,32 +405,31 @@ class ProjectDuplicationModelTest extends Base
         $taskCreationModel = new TaskCreationModel($this->container);
         $taskFinderModel = new TaskFinderModel($this->container);
 
-        $this->assertEquals(1, $projectModel->create(array('name' => 'P1', 'default_swimlane' => 'New Default')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
 
         // create initial swimlanes
-        $this->assertEquals(1, $swimlaneModel->create(array('project_id' => 1, 'name' => 'S1')));
-        $this->assertEquals(2, $swimlaneModel->create(array('project_id' => 1, 'name' => 'S2')));
-        $this->assertEquals(3, $swimlaneModel->create(array('project_id' => 1, 'name' => 'S3')));
+        $this->assertEquals(2, $swimlaneModel->create(1, 'S1'));
+        $this->assertEquals(3, $swimlaneModel->create(1, 'S2'));
+        $this->assertEquals(4, $swimlaneModel->create(1, 'S3'));
 
         // create initial tasks
-        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'T0', 'project_id' => 1, 'swimlane_id' => 0)));
-        $this->assertEquals(2, $taskCreationModel->create(array('title' => 'T1', 'project_id' => 1, 'swimlane_id' => 1)));
-        $this->assertEquals(3, $taskCreationModel->create(array('title' => 'T2', 'project_id' => 1, 'swimlane_id' => 2)));
-        $this->assertEquals(4, $taskCreationModel->create(array('title' => 'T3', 'project_id' => 1, 'swimlane_id' => 3)));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'T0', 'project_id' => 1, 'swimlane_id' => 1)));
+        $this->assertEquals(2, $taskCreationModel->create(array('title' => 'T1', 'project_id' => 1, 'swimlane_id' => 2)));
+        $this->assertEquals(3, $taskCreationModel->create(array('title' => 'T2', 'project_id' => 1, 'swimlane_id' => 3)));
+        $this->assertEquals(4, $taskCreationModel->create(array('title' => 'T3', 'project_id' => 1, 'swimlane_id' => 4)));
 
         $this->assertEquals(2, $projectDuplicationModel->duplicate(1, array('categoryModel', 'swimlaneModel')));
 
         $swimlanes = $swimlaneModel->getAll(2);
-        $this->assertCount(3, $swimlanes);
-        $this->assertEquals(4, $swimlanes[0]['id']);
-        $this->assertEquals('S1', $swimlanes[0]['name']);
-        $this->assertEquals(5, $swimlanes[1]['id']);
-        $this->assertEquals('S2', $swimlanes[1]['name']);
-        $this->assertEquals(6, $swimlanes[2]['id']);
-        $this->assertEquals('S3', $swimlanes[2]['name']);
-
-        $swimlane = $swimlaneModel->getDefault(2);
-        $this->assertEquals('New Default', $swimlane['default_swimlane']);
+        $this->assertCount(4, $swimlanes);
+        $this->assertEquals(5, $swimlanes[0]['id']);
+        $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
+        $this->assertEquals(6, $swimlanes[1]['id']);
+        $this->assertEquals('S1', $swimlanes[1]['name']);
+        $this->assertEquals(7, $swimlanes[2]['id']);
+        $this->assertEquals('S2', $swimlanes[2]['name']);
+        $this->assertEquals(8, $swimlanes[3]['id']);
+        $this->assertEquals('S3', $swimlanes[3]['name']);
 
         // Check if tasks are NOT been duplicated
         $this->assertCount(0, $taskFinderModel->getAll(2));
@@ -445,7 +444,7 @@ class ProjectDuplicationModelTest extends Base
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
 
-        // create initial tasks
+        // Create initial tasks
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'T1', 'project_id' => 1, 'column_id' => 1)));
         $this->assertEquals(2, $taskCreationModel->create(array('title' => 'T2', 'project_id' => 1, 'column_id' => 2)));
         $this->assertEquals(3, $taskCreationModel->create(array('title' => 'T3', 'project_id' => 1, 'column_id' => 3)));
@@ -468,12 +467,12 @@ class ProjectDuplicationModelTest extends Base
         $taskCreationModel = new TaskCreationModel($this->container);
         $taskFinderModel = new TaskFinderModel($this->container);
 
-        $this->assertEquals(1, $projectModel->create(array('name' => 'P1', 'default_swimlane' => 'New Default')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
 
         // create initial swimlanes
-        $this->assertEquals(1, $swimlaneModel->create(array('project_id' => 1, 'name' => 'S1')));
-        $this->assertEquals(2, $swimlaneModel->create(array('project_id' => 1, 'name' => 'S2')));
-        $this->assertEquals(3, $swimlaneModel->create(array('project_id' => 1, 'name' => 'S3')));
+        $this->assertEquals(2, $swimlaneModel->create(1, 'S1'));
+        $this->assertEquals(3, $swimlaneModel->create(1, 'S2'));
+        $this->assertEquals(4, $swimlaneModel->create(1, 'S3'));
 
         // create initial tasks
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'T1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
@@ -484,16 +483,15 @@ class ProjectDuplicationModelTest extends Base
 
         // Check if Swimlanes have been duplicated
         $swimlanes = $swimlaneModel->getAll(2);
-        $this->assertCount(3, $swimlanes);
-        $this->assertEquals(4, $swimlanes[0]['id']);
-        $this->assertEquals('S1', $swimlanes[0]['name']);
-        $this->assertEquals(5, $swimlanes[1]['id']);
-        $this->assertEquals('S2', $swimlanes[1]['name']);
-        $this->assertEquals(6, $swimlanes[2]['id']);
-        $this->assertEquals('S3', $swimlanes[2]['name']);
-
-        $swimlane = $swimlaneModel->getDefault(2);
-        $this->assertEquals('New Default', $swimlane['default_swimlane']);
+        $this->assertCount(4, $swimlanes);
+        $this->assertEquals(5, $swimlanes[0]['id']);
+        $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
+        $this->assertEquals(6, $swimlanes[1]['id']);
+        $this->assertEquals('S1', $swimlanes[1]['name']);
+        $this->assertEquals(7, $swimlanes[2]['id']);
+        $this->assertEquals('S2', $swimlanes[2]['name']);
+        $this->assertEquals(8, $swimlanes[3]['id']);
+        $this->assertEquals('S3', $swimlanes[3]['name']);
 
         // Check if Tasks have been duplicated
         $tasks = $taskFinderModel->getAll(2);

@@ -1,0 +1,64 @@
+@import variables
+
+.table-list
+  font-size: size('compact')
+  margin-bottom: 20px
+
+.table-list-header
+  background: bg-color('primary')
+  border: 1px solid #e5e5e5
+  border-radius: 5px 5px 0 0
+  line-height: 35px
+  padding-left: 3px
+  padding-right: 3px
+  .table-list-header-count
+    color: #767676
+    display: inline-block
+    float: left
+  .table-list-header-menu
+    text-align: right
+
+.table-list-row
+  padding-left: 3px
+  padding-right: 3px
+  border-bottom: 1px solid #e5e5e5
+  border-right: 1px solid #e5e5e5
+
+  &.table-border-left
+    border-left: 1px solid #e5e5e5
+
+  &:nth-child(odd)
+    background: bg-color('lighter')
+
+  &:last-child
+    border-radius: 0 0 5px 5px
+
+  &:hover
+    background: map-get($highlight-colors, 'background')
+    border-bottom: 1px solid map-get($highlight-colors, 'border')
+    border-right: 1px solid map-get($highlight-colors, 'border')
+
+  .table-list-title
+    font-weight: 500
+    &.status-closed
+      text-decoration: line-through
+      margin-right: 10px
+      a
+        font-style: italic
+    a
+      color: color('primary')
+      text-decoration: none
+      &:hover, &:focus
+        text-decoration: underline
+
+  .table-list-details
+    color: color('light')
+    font-weight: 300
+    line-height: 30px
+    li
+      display: inline
+      list-style-type: none
+      &:after
+        content: ', '
+      &:last-child:after
+        content: ''

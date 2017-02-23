@@ -59,7 +59,8 @@ class ActionCreationController extends BaseController
         $values = $this->request->getValues();
 
         if (empty($values['action_name']) || empty($values['project_id']) || empty($values['event_name'])) {
-            return $this->create();
+            $this->create();
+            return;
         }
 
         $action = $this->actionManager->getAction($values['action_name']);
@@ -72,7 +73,7 @@ class ActionCreationController extends BaseController
         $projects_list = $this->projectUserRoleModel->getActiveProjectsByUser($this->userSession->getId());
         unset($projects_list[$project['id']]);
 
-        return $this->response->html($this->template->render('action_creation/params', array(
+        $this->response->html($this->template->render('action_creation/params', array(
             'values' => $values,
             'action_params' => $action_params,
             'columns_list' => $this->columnModel->getList($project['id']),

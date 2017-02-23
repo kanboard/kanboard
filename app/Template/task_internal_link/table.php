@@ -5,20 +5,16 @@
         <?php foreach ($grouped_links as $link): ?>
             <?php if (! $hide_td): ?>
                 <tr>
-                    <td class="column-40" colspan="2">
+                    <th class="column-45">
                         <?= t('This task') ?>
-                        <strong><?= t($label) ?></strong>
+                        <em><?= t($label) ?></em>
                         <span class="task-links-task-count">(<?= count($grouped_links) ?>)</span>
-                    </td>
-                    <th><?= t('Assignee') ?></th>
+                    </th>
+                    <th class="column-15"><?= t('Assignee') ?></th>
                     <th><?= t('Time tracking') ?></th>
-                    <?php if ($editable): ?>
-                        <th class="column-5"></th>
-                    <?php endif ?>
                 </tr>
                 <?php $hide_td = true ?>
             <?php endif ?>
-
         <tr>
             <td>
                 <?php if ($is_public): ?>
@@ -31,6 +27,20 @@
                         $link['is_active'] ? '' : 'task-link-closed'
                     ) ?>
                 <?php else: ?>
+                    <?php if ($editable && $this->user->hasProjectAccess('Tasklink', 'edit', $task['project_id'])): ?>
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
+                            <ul>
+                                <li>
+                                    <?= $this->modal->medium('edit', t('Edit'), 'TaskInternalLinkController', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                                </li>
+                                <li>
+                                    <?= $this->modal->confirm('trash-o', t('Remove'), 'TaskInternalLinkController', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                                </li>
+                            </ul>
+                        </div>
+                    <?php endif ?>
+
                     <?= $this->url->link(
                         $this->text->e('#'.$link['task_id'].' '.$link['title']),
                         'TaskViewController',
@@ -41,13 +51,7 @@
                     ) ?>
                 <?php endif ?>
 
-                <?php if ($link['project_id'] != $project['id']): ?>
-                    <br>
-                    <?= $this->text->e($link['project_name']) ?>
-                <?php endif ?>
-            </td>
-            <td>
-                <?= $this->text->e($link['column_title']) ?>
+                (<?php if ($link['project_id'] != $project['id']): ?><?= $this->text->e($link['project_name']) ?> - <?php endif ?><?= $this->text->e($link['column_title']) ?>)
             </td>
             <td>
                 <?php if (! empty($link['task_assignee_username'])): ?>
@@ -67,21 +71,6 @@
                     <strong><?= $this->text->e($link['task_time_estimated']).'h' ?></strong> <?= t('estimated') ?>
                 <?php endif ?>
             </td>
-            <?php if ($editable && $this->user->hasProjectAccess('Tasklink', 'edit', $task['project_id'])): ?>
-            <td>
-                <div class="dropdown">
-                <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
-                <ul>
-                    <li>
-                        <?= $this->modal->medium('edit', t('Edit'), 'TaskInternalLinkController', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-                    </li>
-                    <li>
-                        <?= $this->modal->confirm('trash-o', t('Remove'), 'TaskInternalLinkController', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-                    </li>
-                </ul>
-                </div>
-            </td>
-            <?php endif ?>
         </tr>
         <?php endforeach ?>
     <?php endforeach ?>

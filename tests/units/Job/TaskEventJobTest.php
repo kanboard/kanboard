@@ -162,9 +162,9 @@ class TaskEventJobTest extends Base
         $swimlaneModel = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
-        $this->assertEquals(1, $swimlaneModel->create(array('name' => 'S1', 'project_id' => 1)));
+        $this->assertEquals(2, $swimlaneModel->create(1, 'S1'));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
-        $this->assertTrue($taskPositionModel->movePosition(1, 1, 1, 1, 1));
+        $this->assertTrue($taskPositionModel->movePosition(1, 1, 1, 1, 2));
 
         $called = $this->container['dispatcher']->getCalledListeners();
         $this->assertArrayHasKey(TaskModel::EVENT_MOVE_SWIMLANE.'.closure', $called);

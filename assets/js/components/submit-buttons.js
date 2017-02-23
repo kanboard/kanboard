@@ -3,10 +3,11 @@ KB.component('submit-buttons', function (containerElement, options) {
     var isDisabled = options.disabled || false;
     var submitLabel = options.submitLabel;
     var formActionElement = null;
+    var submitButtonElement = null;
 
     function onSubmit() {
         isLoading = true;
-        KB.find('#modal-submit-button').replace(buildButton());
+        replaceButton();
         KB.trigger('modal.submit');
     }
 
@@ -16,19 +17,19 @@ KB.component('submit-buttons', function (containerElement, options) {
 
     function onStop() {
         isLoading = false;
-        KB.find('#modal-submit-button').replace(buildButton());
+        replaceButton();
     }
 
     function onDisable() {
         isLoading = false;
         isDisabled = true;
-        KB.find('#modal-submit-button').replace(buildButton());
+        replaceButton();
     }
 
     function onEnable() {
         isLoading = false;
         isDisabled = false;
-        KB.find('#modal-submit-button').replace(buildButton());
+        replaceButton();
     }
 
     function onHide() {
@@ -37,12 +38,11 @@ KB.component('submit-buttons', function (containerElement, options) {
 
     function onUpdateSubmitLabel(eventData) {
         submitLabel = eventData.submitLabel;
-        KB.find('#modal-submit-button').replace(buildButton());
+        replaceButton();
     }
 
     function buildButton() {
         var button = KB.dom('button')
-            .attr('id', 'modal-submit-button')
             .attr('type', 'submit')
             .attr('class', 'btn btn-' + (options.color || 'blue'));
 
@@ -71,6 +71,12 @@ KB.component('submit-buttons', function (containerElement, options) {
             .build();
     }
 
+    function replaceButton() {
+        var buttonElement = buildButton();
+        KB.dom(submitButtonElement).replace(buttonElement);
+        submitButtonElement = buttonElement;
+    }
+
     this.render = function () {
         KB.on('modal.stop', onStop);
         KB.on('modal.disable', onDisable);
@@ -86,9 +92,11 @@ KB.component('submit-buttons', function (containerElement, options) {
             KB.removeListener('modal.submit.label', onUpdateSubmitLabel);
         });
 
+        submitButtonElement = buildButton();
+
         var formActionElementBuilder = KB.dom('div')
             .attr('class', 'form-actions')
-            .add(buildButton());
+            .add(submitButtonElement);
 
         if (KB.modal.isOpen()) {
             formActionElementBuilder

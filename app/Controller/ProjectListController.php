@@ -18,24 +18,21 @@ class ProjectListController extends BaseController
     public function show()
     {
         if ($this->userSession->isAdmin()) {
-            $project_ids = $this->projectModel->getAllIds();
+            $projectIds = $this->projectModel->getAllIds();
         } else {
-            $project_ids = $this->projectPermissionModel->getProjectIds($this->userSession->getId());
+            $projectIds = $this->projectPermissionModel->getProjectIds($this->userSession->getId());
         }
-
-        $nb_projects = count($project_ids);
 
         $paginator = $this->paginator
             ->setUrl('ProjectListController', 'show')
             ->setMax(20)
             ->setOrder('name')
-            ->setQuery($this->projectModel->getQueryColumnStats($project_ids))
+            ->setQuery($this->projectModel->getQueryByProjectIds($projectIds))
             ->calculate();
 
-        $this->response->html($this->helper->layout->app('project_list/show', array(
-            'paginator' => $paginator,
-            'nb_projects' => $nb_projects,
-            'title' => t('Projects').' ('.$nb_projects.')'
+        $this->response->html($this->helper->layout->app('project_list/listing', array(
+            'paginator'   => $paginator,
+            'title'       => t('Projects') . ' (' . $paginator->getTotal() . ')',
         )));
     }
 }

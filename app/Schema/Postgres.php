@@ -2,11 +2,24 @@
 
 namespace Schema;
 
+require_once __DIR__.'/Migration.php';
+
 use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 100;
+const VERSION = 101;
+
+function version_101(PDO $pdo)
+{
+    migrate_default_swimlane($pdo);
+
+    $pdo->exec('ALTER TABLE "projects" DROP COLUMN "default_swimlane"');
+    $pdo->exec('ALTER TABLE "projects" DROP COLUMN "show_default_swimlane"');
+    $pdo->exec('ALTER TABLE "tasks" ALTER COLUMN "swimlane_id" SET NOT NULL');
+    $pdo->exec('ALTER TABLE "tasks" ALTER COLUMN "swimlane_id" DROP DEFAULT');
+    $pdo->exec('ALTER TABLE "tasks" ADD FOREIGN KEY (swimlane_id) REFERENCES swimlanes ON DELETE CASCADE');
+}
 
 function version_100(PDO $pdo)
 {

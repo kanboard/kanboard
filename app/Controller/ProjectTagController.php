@@ -18,8 +18,8 @@ class ProjectTagController extends BaseController
 
         $this->response->html($this->helper->layout->project('project_tag/index', array(
             'project' => $project,
-            'tags' => $this->tagModel->getAllByProject($project['id']),
-            'title' => t('Project tags management'),
+            'tags'    => $this->tagModel->getAllByProject($project['id']),
+            'title'   => t('Project tags management'),
         )));
     }
 
@@ -33,8 +33,8 @@ class ProjectTagController extends BaseController
 
         $this->response->html($this->template->render('project_tag/create', array(
             'project' => $project,
-            'values' => $values,
-            'errors' => $errors,
+            'values'  => $values,
+            'errors'  => $errors,
         )));
     }
 
@@ -69,9 +69,9 @@ class ProjectTagController extends BaseController
 
         $this->response->html($this->template->render('project_tag/edit', array(
             'project' => $project,
-            'tag' => $tag,
-            'values' => $values,
-            'errors' => $errors,
+            'tag'     => $tag,
+            'values'  => $values,
+            'errors'  => $errors,
         )));
     }
 
@@ -107,7 +107,7 @@ class ProjectTagController extends BaseController
         $tag = $this->tagModel->getById($tag_id);
 
         $this->response->html($this->template->render('project_tag/remove', array(
-            'tag' => $tag,
+            'tag'     => $tag,
             'project' => $project,
         )));
     }

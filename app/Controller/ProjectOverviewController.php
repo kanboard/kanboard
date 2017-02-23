@@ -16,7 +16,7 @@ class ProjectOverviewController extends BaseController
     public function show()
     {
         $project = $this->getProject();
-        $columns = $this->columnModel->getAllWithTasksCount($project['id']);
+        $columns = $this->columnModel->getAllWithTaskCount($project['id']);
 
         $this->response->html($this->helper->layout->app('project_overview/show', array(
             'project'     => $project,

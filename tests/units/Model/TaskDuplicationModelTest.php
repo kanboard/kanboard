@@ -90,7 +90,7 @@ class TaskDuplicationModelTest extends Base
         $this->assertEquals(1, $task['project_id']);
         $this->assertEquals(1, $task['owner_id']);
         $this->assertEquals(2, $task['category_id']);
-        $this->assertEquals(0, $task['swimlane_id']);
+        $this->assertEquals(1, $task['swimlane_id']);
         $this->assertEquals(3, $task['column_id']);
         $this->assertEquals(2, $task['position']);
         $this->assertEquals('test', $task['title']);

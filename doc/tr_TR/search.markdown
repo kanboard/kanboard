@@ -140,7 +140,6 @@ Görev referansı, görevinizin harici bir kimliği, örneğin başka bir yazıl
 Özellik: **swimlane**
 
 - Görevleri kulvarlara(swim-lane) göre ara: `swimlane:"Version 42"`
-- Görevleri default kulvarlar (swim-lane) göre ara: `swimlane:default`
 - Çeşitli kulvarlar (swim-lanes) için görev ara: `swimlane:"Version 1.2" swimlane:"Version 1.3"`
 
 ### Görev bağlantısı ile arama

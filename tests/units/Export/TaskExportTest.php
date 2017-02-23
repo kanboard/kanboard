@@ -19,7 +19,7 @@ class TaskExportTest extends Base
         $swimlaneModel = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Export Project')));
-        $this->assertEquals(1, $swimlaneModel->create(array('project_id' => 1, 'name' => 'S1')));
+        $this->assertEquals(2, $swimlaneModel->create(1, 'S1'));
         $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1)));
 
         $this->assertEquals(1, $taskCreationModel->create(array(
@@ -34,7 +34,7 @@ class TaskExportTest extends Base
 
         $this->assertEquals(2, $taskCreationModel->create(array(
             'project_id' => 1,
-            'swimlane_id' => 1,
+            'swimlane_id' => 2,
             'title' => 'Task 2',
             'date_due' => time(),
         )));

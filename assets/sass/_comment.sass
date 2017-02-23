@@ -12,16 +12,6 @@
 .comment
   padding: 5px
   margin-bottom: 15px
-  &:hover
-    background: #fafafa
-
-.comment-highlighted
-  background-color: #FFF8DC
-  border: 2px solid #FFF8DC
-  border-left: 2px solid #ffeb8e
-  &:hover
-    background-color: #FFF8DC
-    border: 2px solid #ffeb8e
 
 .comment-title
   border-bottom: 1px dotted #eee
@@ -32,17 +22,7 @@
   font-weight: 200
 
 .comment-actions
-  font-size: size('small')
-  margin-bottom: 10px
   text-align: right
-  li
-    display: inline
-  a
-    color: color('light')
-    text-decoration: none
-    &:focus, &:hover
-      color: color('primary')
-      text-decoration: underline
 
 .comment-content
   margin-left: 55px
@@ -53,3 +33,17 @@
       height: 90px
     .text-editor-preview-area
       height: 90px
+
+  .comment-highlighted
+    background-color: map-get($highlight-colors, 'background')
+    border: 2px solid map-get($highlight-colors, 'border')
+    &:hover
+      background-color: map-get($highlight-colors, 'background')
+
+  .comment
+    &:hover
+      background: map-get($highlight-colors, 'background')
+    &:nth-child(even):not(.comment-highlighted)
+      background: bg-color('primary')
+      &:hover
+        background: map-get($highlight-colors, 'background')

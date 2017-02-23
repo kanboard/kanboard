@@ -31,11 +31,10 @@ class TaskExport extends Base
     {
         $tasks = $this->getTasks($project_id, $from, $to);
         $colors = $this->colorModel->getList();
-        $defaultSwimlane = $this->swimlaneModel->getDefault($project_id);
         $results = array($this->getColumns());
 
         foreach ($tasks as &$task) {
-            $task = $this->format($task, $defaultSwimlane['default_swimlane'], $colors);
+            $task = $this->format($task, $colors);
             $results[] = array_values($task);
         }
 
@@ -104,16 +103,14 @@ class TaskExport extends Base
      *
      * @access protected
      * @param  array  $task
-     * @param  string $defaultSwimlaneName
      * @param  array   $colors
      * @return array
      */
-    protected function format(array &$task, $defaultSwimlaneName, array $colors)
+    protected function format(array &$task, array $colors)
     {
         $task['is_active'] = $task['is_active'] == TaskModel::STATUS_OPEN ? e('Open') : e('Closed');
         $task['color_id'] = $colors[$task['color_id']];
         $task['score'] = $task['score'] ?: 0;
-        $task['swimlane_name'] = $task['swimlane_name'] ?: $defaultSwimlaneName;
 
         $task = $this->dateParser->format(
             $task,

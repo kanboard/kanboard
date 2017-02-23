@@ -8,26 +8,28 @@
         <?php endif ?>
 
         <small class="comment-date"><?= t('Created at:') ?> <?= $this->dt->datetime($comment['date_creation']) ?></small>
-        <small class="comment-date"><?= t('Updated at:')?> <?= $this->dt->datetime($comment['date_modification']) ?></small>
+        <small class="comment-date"><?= t('Updated at:') ?> <?= $this->dt->datetime($comment['date_modification']) ?></small>
     </div>
 
     <?php if (! isset($hide_actions)): ?>
-        <div class="comment-actions">
+    <div class="comment-actions">
+        <div class="dropdown">
+            <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
             <ul>
                 <li>
-                    <i class="fa fa-link fa-fw"></i>
-                    <a href="#comment-<?= $comment['id'] ?>"><?= t('link') ?></a>
+                    <?= $this->url->icon('link', t('Link'), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, '', '', $this->app->isAjax(), 'comment-'.$comment['id']) ?>
                 </li>
                 <?php if ($editable && ($this->user->isAdmin() || $this->user->isCurrentUser($comment['user_id']))): ?>
                     <li>
-                        <?= $this->modal->medium('edit', t('edit'), 'CommentController', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
+                        <?= $this->modal->medium('edit', t('Edit'), 'CommentController', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
                     </li>
                     <li>
-                        <?= $this->modal->confirm('trash-o', t('remove'), 'CommentController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
+                        <?= $this->modal->confirm('trash-o', t('Remove'), 'CommentController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])) ?>
                     </li>
                 <?php endif ?>
             </ul>
         </div>
+    </div>
     <?php endif ?>
 
     <div class="comment-content">

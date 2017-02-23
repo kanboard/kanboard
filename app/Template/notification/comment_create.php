@@ -8,4 +8,4 @@
 
 <?= $this->text->markdown($comment['comment'], true) ?>
 
-<?= $this->render('notification/footer', array('task' => $task, 'application_url' => $application_url)) ?>
+<?= $this->render('notification/footer', array('task' => $task)) ?>

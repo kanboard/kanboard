@@ -1,41 +1,6 @@
 API Swimlane Procedures
 =======================
 
-## getDefaultSwimlane
-
-- Purpose: **Get the default swimlane for a project**
-- Parameters:
-    - **project_id** (integer, required)
-- Result on success: **true**
-- Result on failure: **false**
-
-Request example:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "method": "getDefaultSwimlane",
-    "id": 898774713,
-    "params": [
-        1
-    ]
-}
-```
-
-Response example:
-
-```json
-{
-    "jsonrpc": "2.0",
-    "id": 898774713,
-    "result": {
-        "id": "1",
-        "default_swimlane": "Default swimlane",
-        "show_default_swimlane": "1"
-    }
-}
-```
-
 ## getActiveSwimlanes
 
 - Purpose: **Get the list of enabled swimlanes of a project (include default swimlane if enabled)**
@@ -274,6 +239,7 @@ Response example:
 
 - Purpose: **Update swimlane properties**
 - Parameters:
+    - **project_id** (integer, required)
     - **swimlane_id** (integer, required)
     - **name** (string, required)
     - **description** (string, optional)
@@ -288,6 +254,7 @@ Request example:
     "method": "updateSwimlane",
     "id": 87102426,
     "params": [
+        "1",
         "1",
         "Another swimlane"
     ]

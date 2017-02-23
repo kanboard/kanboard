@@ -24,13 +24,14 @@ interface ClientInterface
      * Send a HTML email
      *
      * @access public
-     * @param  string  $email
-     * @param  string  $name
-     * @param  string  $subject
-     * @param  string  $html
-     * @param  string  $author
+     * @param  string $recipientEmail
+     * @param  string $recipientName
+     * @param  string $subject
+     * @param  string $html
+     * @param  string $authorName
+     * @param  string $authorEmail
      */
-    public function sendEmail($email, $name, $subject, $html, $author);
+    public function sendEmail($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail = '');
 }
 ```
 

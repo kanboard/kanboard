@@ -15,19 +15,31 @@
         data-save-position-url="<?= $this->url->href('ColumnController', 'move', array('project_id' => $project['id'])) ?>">
         <thead>
         <tr>
-            <th class="column-40"><?= t('Column') ?></th>
+            <th><?= t('Column') ?></th>
             <th class="column-10"><?= t('Task limit') ?></th>
-            <th class="column-20"><?= t('Visible on dashboard') ?></th>
-            <th class="column-10"><?= t('Open tasks') ?></th>
-            <th class="column-10"><?= t('Closed tasks') ?></th>
-            <th><?= t('Actions') ?></th>
+            <th class="column-15"><?= t('Visible on dashboard') ?></th>
+            <th class="column-12"><?= t('Open tasks') ?></th>
+            <th class="column-12"><?= t('Closed tasks') ?></th>
         </tr>
         </thead>
         <tbody>
         <?php foreach ($columns as $column): ?>
         <tr data-column-id="<?= $column['id'] ?>">
             <td>
-                <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change column position') ?>"></i>
+                <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change column position') ?>"></i>&nbsp;
+                <div class="dropdown">
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
+                    <ul>
+                        <li>
+                            <?= $this->modal->medium('edit', t('Edit'), 'ColumnController', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
+                        </li>
+                        <?php if ($column['nb_open_tasks'] == 0 && $column['nb_closed_tasks'] == 0): ?>
+                            <li>
+                                <?= $this->modal->confirm('trash-o', t('Remove'), 'ColumnController', 'confirm', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
+                            </li>
+                        <?php endif ?>
+                    </ul>
+                </div>
                 <?= $this->text->e($column['title']) ?>
                 <?php if (! empty($column['description'])): ?>
                     <span class="tooltip" title="<?= $this->text->markdownAttribute($column['description']) ?>">
@@ -46,21 +58,6 @@
             </td>
             <td>
                 <?= $column['nb_closed_tasks'] ?>
-            </td>
-            <td>
-                <div class="dropdown">
-                <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
-                <ul>
-                    <li>
-                        <?= $this->modal->medium('edit', t('Edit'), 'ColumnController', 'edit', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
-                    </li>
-                    <?php if ($column['nb_open_tasks'] == 0 && $column['nb_closed_tasks'] == 0): ?>
-                    <li>
-                        <?= $this->modal->confirm('trash-o', t('Remove'), 'ColumnController', 'confirm', array('project_id' => $project['id'], 'column_id' => $column['id'])) ?>
-                    </li>
-                    <?php endif ?>
-                </ul>
-                </div>
             </td>
         </tr>
         <?php endforeach ?>

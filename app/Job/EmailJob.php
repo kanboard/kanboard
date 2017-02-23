@@ -14,16 +14,17 @@ class EmailJob extends BaseJob
      * Set job parameters
      *
      * @access public
-     * @param  string $email
-     * @param  string $name
+     * @param  string $recipientEmail
+     * @param  string $recipientName
      * @param  string $subject
      * @param  string $html
-     * @param  string $author
+     * @param  string $authorName
+     * @param  string $authorEmail
      * @return $this
      */
-    public function withParams($email, $name, $subject, $html, $author)
+    public function withParams($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail)
     {
-        $this->jobParams = array($email, $name, $subject, $html, $author);
+        $this->jobParams = array($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail);
         return $this;
     }
 
@@ -31,25 +32,24 @@ class EmailJob extends BaseJob
      * Execute job
      *
      * @access public
-     * @param  string $email
-     * @param  string $name
+     * @param  string $recipientEmail
+     * @param  string $recipientName
      * @param  string $subject
      * @param  string $html
-     * @param  string $author
+     * @param  string $authorName
+     * @param  string $authorEmail
      */
-    public function execute($email, $name, $subject, $html, $author)
+    public function execute($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail)
     {
         $transport = $this->helper->mail->getMailTransport();
-        $this->logger->debug(__METHOD__.' Sending email to: '.$email.' using transport: '.$transport);
         $startTime = microtime(true);
+
+        $this->logger->debug(__METHOD__.' Sending email to: '.$recipientEmail.' using transport: '.$transport);
 
         $this->emailClient
             ->getTransport($transport)
-            ->sendEmail($email, $name, $subject, $html, $author)
-        ;
+            ->sendEmail($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail);
 
-        if (DEBUG) {
-            $this->logger->debug('Email sent in '.round(microtime(true) - $startTime, 6).' seconds');
-        }
+        $this->logger->debug(__METHOD__.' Email sent in '.round(microtime(true) - $startTime, 6).' seconds');
     }
 }

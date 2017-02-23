@@ -144,7 +144,6 @@ Attribute: **column**
 Attribute: **swimlane**
 
 - Find tasks by swim-lane: `swimlane:"Version 42"`
-- Find tasks in the default swim-lane: `swimlane:default`
 - Find tasks into several swim-lanes: `swimlane:"Version 1.2" swimlane:"Version 1.3"`
 
 ### Search by task link

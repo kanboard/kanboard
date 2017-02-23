@@ -8,18 +8,27 @@
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('There is no user in this group.') ?></p>
     <?php else: ?>
-        <table class="table-striped table-scrolling">
+        <table class="table-striped table-scrolling table-hover">
             <tr>
-                <th><?= $paginator->order(t('Id'), 'id') ?></th>
+                <th class="column-5"><?= $paginator->order(t('Id'), 'id') ?></th>
                 <th><?= $paginator->order(t('Username'), 'username') ?></th>
                 <th><?= $paginator->order(t('Name'), 'name') ?></th>
                 <th><?= $paginator->order(t('Email'), 'email') ?></th>
-                <th><?= t('Actions') ?></th>
             </tr>
             <?php foreach ($paginator->getCollection() as $user): ?>
             <tr>
                 <td>
-                    <?= $this->url->link('#'.$user['id'], 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong><?= '#'.$user['id'] ?> <i class="fa fa-caret-down"></i></strong></a>
+                        <ul>
+                            <li>
+                                <?= $this->url->icon('user', t('View profile'), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
+                            </li>
+                            <li>
+                                <?= $this->modal->confirm('trash-o', t('Remove this user from group'), 'GroupListController', 'dissociate', array('group_id' => $group['id'], 'user_id' => $user['id'])) ?>
+                            </li>
+                        </ul>
+                    </div>
                 </td>
                 <td>
                     <?= $this->url->link($this->text->e($user['username']), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
@@ -29,9 +38,6 @@
                 </td>
                 <td>
                     <a href="mailto:<?= $this->text->e($user['email']) ?>"><?= $this->text->e($user['email']) ?></a>
-                </td>
-                <td>
-                    <?= $this->modal->confirm('trash-o', t('Remove this user'), 'GroupListController', 'dissociate', array('group_id' => $group['id'], 'user_id' => $user['id'])) ?>
                 </td>
             </tr>
             <?php endforeach ?>
