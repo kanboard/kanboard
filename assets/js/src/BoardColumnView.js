@@ -38,6 +38,7 @@ Kanboard.BoardColumnView.prototype.toggle = function(columnId) {
     else {
         this.hideColumn(columnId);
     }
+    this.app.get("BoardDragAndDrop").dragAndDrop();
 };
 
 Kanboard.BoardColumnView.prototype.hideColumn = function(columnId) {

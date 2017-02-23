@@ -5,8 +5,8 @@ Kanboard.BoardDragAndDrop = function(app) {
 
 Kanboard.BoardDragAndDrop.prototype.execute = function() {
     if (this.app.hasId("board")) {
-        this.dragAndDrop();
         this.executeListeners();
+        this.dragAndDrop();
     }
 };
 
@@ -101,8 +101,8 @@ Kanboard.BoardDragAndDrop.prototype.refresh = function(data) {
     $("#board-container").replaceWith(data);
 
     this.app.hideLoadingIcon();
-    this.dragAndDrop();
     this.executeListeners();
+    this.dragAndDrop();
 };
 
 Kanboard.BoardDragAndDrop.prototype.executeListeners = function() {
