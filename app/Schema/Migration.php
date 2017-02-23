@@ -9,6 +9,9 @@ function migrate_default_swimlane(PDO $pdo)
     $projects = get_all_projects($pdo);
 
     foreach ($projects as $project) {
+        if (empty($project['default_swimlane'])) {
+            $project['default_swimlane'] = 'Default swimlane';
+        }
 
         // Create new default swimlane
         $rq = $pdo->prepare('INSERT INTO swimlanes (project_id, name, is_active, position) VALUES (?, ?, ?, ?)');
