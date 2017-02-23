@@ -48,13 +48,9 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
         params.handle = ".task-board-sort-handle";
     }
 
-    // Set visible dropzone height to the height of the table cell
+    // Set dropzone height to the height of the table cell
     dropzone.each(function() {
-        if ($(this).filter(':visible').length) { // This drop zone is visible
-            $(this).css("min-height", $(this).parent().height());
-        } else { // Remove min-height
-            $(this).css("min-height", '');
-        }
+        $(this).css("min-height", $(this).parent().height());
     });
 
     dropzone.sortable(params);
