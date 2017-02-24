@@ -77,7 +77,7 @@ Kanboard.Gantt.prototype.renderVerticalHeader = function() {
             .append("&nbsp;");
 
         if (this.data[i].type == "task") {
-            content.append(jQuery("<a>", {"href": this.data[i].link, "title": this.data[i].title}).append(this.data[i].title));
+            content.append(jQuery("<a>", {"href": this.data[i].link, "title": this.data[i].title}).text(this.data[i].title));
         }
         else {
             content
@@ -85,7 +85,7 @@ Kanboard.Gantt.prototype.renderVerticalHeader = function() {
                 .append("&nbsp;")
                 .append(jQuery("<a>", {"href": this.data[i].gantt_link, "title": $(this.options.container).data("label-gantt-link")}).append('<i class="fa fa-sliders"></i>'))
                 .append("&nbsp;")
-                .append(jQuery("<a>", {"href": this.data[i].link}).append(this.data[i].title));
+                .append(jQuery("<a>", {"href": this.data[i].link}).text(this.data[i].title));
         }
 
         seriesDiv.append(jQuery("<div>", {"class": "ganttview-vtheader-series-name"}).append(content));
@@ -215,7 +215,11 @@ Kanboard.Gantt.prototype.getVerticalHeaderTooltip = function(record) {
     var tooltip = "";
 
     if (record.type == "task") {
-        tooltip = "<strong>" + record.column_title + "</strong> (" + record.progress + ")<br/>" + record.title;
+        tooltip = jQuery("<span>")
+                .append(jQuery("<strong>").text(record.column_title))
+                .append(document.createTextNode(' (' + record.progress + ')'))
+                .append(jQuery("<br>"))
+                .append(document.createTextNode(record.title)).prop('outerHTML');
     }
     else {
         var types = ["project-manager", "project-member"];
@@ -227,11 +231,11 @@ Kanboard.Gantt.prototype.getVerticalHeaderTooltip = function(record) {
 
                 for (var user_id in record.users[type]) {
                     if (user_id) {
-                        list.append(jQuery("<li>").append(record.users[type][user_id]));
+                        list.append(jQuery("<li>").text(record.users[type][user_id]));
                     }
                 }
 
-                tooltip += "<p><strong>" + $(this.options.container).data("label-" + type) + "</strong></p>" + list[0].outerHTML;
+                tooltip += "<p><strong>" + $(this.options.container).data("label-" + type) + "</strong></p>" + list.prop('outerHTML');
             }
         }
     }
@@ -248,8 +252,11 @@ Kanboard.Gantt.prototype.getBarTooltip = function(record) {
     }
     else {
         if (record.type == "task") {
-            tooltip = "<strong>" + record.progress + "</strong><br/>" +
-                $(this.options.container).data("label-assignee") + " " + (record.assignee ? record.assignee : '') + "<br/>";
+            var assigneeLabel = $(this.options.container).data("label-assignee");
+            tooltip += jQuery("<strong>").text(record.progress).prop('outerHTML');
+            tooltip += "<br>";
+            tooltip += jQuery('<span>').append(document.createTextNode(assigneeLabel + " " + (record.assignee ? record.assignee : ''))).prop('outerHTML');
+            tooltip += "<br>";
         }
 
         tooltip += $(this.options.container).data("label-start-date") + " " + $.datepicker.formatDate('yy-mm-dd', record.start) + "<br/>";

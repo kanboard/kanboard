@@ -42,7 +42,11 @@ Bug fixes:
 Security:
 
 * Fix XSS in LetterAvatarProvider (render broken image)
-* Avoid potential XSS in project overview when listing users (was avoided by default CSP rules)
+
+Those issues are harmless if you use default Kanboard settings for CSP rules:
+
+* Avoid potential XSS in project overview when listing users
+* Avoid potential XSS in Gantt chart
 
 Version 1.0.39 (Feb 12, 2017)
 -----------------------------
