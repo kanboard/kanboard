@@ -4,7 +4,7 @@
     <table class="table-small">
     <?php foreach ($roles as $role => $role_name): ?>
         <?php if (isset($users[$role])): ?>
-        <tr><th><?= $role_name ?></th></tr>
+        <tr><th><?= $this->text->e($role_name) ?></th></tr>
             <?php foreach ($users[$role] as $user_id => $user): ?>
                 <tr><td>
                 <?= $this->url->link($this->text->e($user), 'ProjectUserOverviewController', 'opens', array('user_id' => $user_id)) ?>
