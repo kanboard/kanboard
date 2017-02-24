@@ -660,7 +660,7 @@ return array(
     // 'New assignee: %s' => '',
     // 'There is no category now' => '',
     // 'New category: %s' => '',
-    'New color: %s' => 'Ny farve',
+    'New color: %s' => 'Ny farve: %s',
     // 'New complexity: %d' => '',
     // 'The due date have been removed' => '',
     // 'There is no description anymore' => '',
