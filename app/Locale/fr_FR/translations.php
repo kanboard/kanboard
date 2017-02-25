@@ -1332,4 +1332,6 @@ return array(
     '%d tasks' => '%d tâches',
     '%d task' => '%d tâche',
     'Task ID' => 'ID de la tâche',
+    'Assign automatically a color when due date is expired' => 'Assigner automatiquement une couleur lorsque la date d\'échéance expire',
+    'Total score in this column across all swimlanes' => 'Score total dans cette colonne à travers toutes les swimlanes',
 );

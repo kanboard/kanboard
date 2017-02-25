@@ -1332,4 +1332,6 @@ return array(
     // '%d tasks' => '',
     // '%d task' => '',
     // 'Task ID' => '',
+    // 'Assign automatically a color when due date is expired' => '',
+    // 'Total score in this column across all swimlanes' => '',
 );
