@@ -1,4 +1,7 @@
 <!-- column titles -->
+
+<?= $this->hook->render('template:board:table:column:before-header-row', array('swimlane' => $swimlane)) ?>
+
 <tr class="board-swimlane-columns-<?= $swimlane['id'] ?>">
     <?php foreach ($swimlane['columns'] as $column): ?>
     <th class="board-column-header board-column-header-<?= $column['id'] ?>" data-column-id="<?= $column['id'] ?>">
@@ -89,3 +92,5 @@
     </th>
     <?php endforeach ?>
 </tr>
+
+<?= $this->hook->render('template:board:table:column:after-header-row', array('swimlane' => $swimlane)) ?>

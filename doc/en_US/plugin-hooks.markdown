@@ -201,6 +201,8 @@ List of template hooks:
 | `template:board:public:task:after-title`                  | Task in public board: after title                  |
 | `template:board:task:footer`                              | Task in board: footer                              |
 | `template:board:task:icons`                               | Task in board: tooltip icon                        |
+| `template:board:table:column:before-header-row`           | Row before board column header                     |
+| `template:board:table:column:after-header-row`            | Row after board column header                      |
 | `template:board:column:dropdown`                          | Dropdown menu in board columns                     |
 | `template:board:column:header`                            | Board column header                                |
 | `template:board:tooltip:subtasks:header:before-assignee`  | Header of Subtask table on tootip before Assignee  |
