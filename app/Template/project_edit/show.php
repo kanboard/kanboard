@@ -61,7 +61,6 @@
 
         <?= $this->form->label(t('Highest priority'), 'priority_end') ?>
         <?= $this->form->number('priority_end', $values, $errors, array('tabindex="10"')) ?>
-        <p class="form-help"><?= t('If you put zero to the low and high priority, this feature will be disabled.') ?></p>
     </fieldset>
 
     <?= $this->modal->submitButtons(array('tabindex' => 11)) ?>

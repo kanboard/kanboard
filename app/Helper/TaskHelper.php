@@ -143,16 +143,12 @@ class TaskHelper extends Base
 
     public function renderPriorityField(array $project, array $values)
     {
-        $html = '';
+        $range = range($project['priority_start'], $project['priority_end']);
+        $options = array_combine($range, $range);
+        $values += array('priority' => $project['priority_default']);
 
-        if ($project['priority_end'] != $project['priority_start']) {
-            $range = range($project['priority_start'], $project['priority_end']);
-            $options = array_combine($range, $range);
-            $values += array('priority' => $project['priority_default']);
-
-            $html .= $this->helper->form->label(t('Priority'), 'priority');
-            $html .= $this->helper->form->select('priority', $options, $values, array(), array('tabindex="7"'));
-        }
+        $html = $this->helper->form->label(t('Priority'), 'priority');
+        $html .= $this->helper->form->select('priority', $options, $values, array(), array('tabindex="7"'));
 
         return $html;
     }
@@ -211,15 +207,11 @@ class TaskHelper extends Base
         return $this->helper->form->date(t('Due Date'), 'date_due', $values, $errors, $attributes);
     }
 
-    public function formatPriority(array $project, array $task)
+    public function renderPriority($priority)
     {
-        $html = '';
-
-        if ($project['priority_end'] != $project['priority_start']) {
-            $html .= '<span class="task-board-priority" title="'.t('Task priority').'">';
-            $html .= $task['priority'] >= 0 ? 'P'.$task['priority'] : '-P'.abs($task['priority']);
-            $html .= '</span>';
-        }
+        $html = '<span class="task-priority" title="'.t('Task priority').'">';
+        $html .= $this->helper->text->e($priority >= 0 ? 'P'.$priority : '-P'.abs($priority));
+        $html .= '</span>';
 
         return $html;
     }

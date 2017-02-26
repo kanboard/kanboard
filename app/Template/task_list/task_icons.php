@@ -90,5 +90,5 @@
         <span class="task-board-closed"><i class="fa fa-ban fa-fw"></i><?= t('Closed') ?></span>
     <?php endif ?>
 
-    <?= $this->task->formatPriority($project, $task) ?>
+    <?= $this->task->renderPriority($task['priority']) ?>
 </div>
