@@ -28,6 +28,7 @@ class TaskListController extends BaseController
             ->setMax(30)
             ->setOrder(TaskModel::TABLE.'.id')
             ->setDirection('DESC')
+            ->setFormatter($this->taskListFormatter)
             ->setQuery($this->taskLexer
                 ->build($search)
                 ->withFilter(new TaskProjectFilter($project['id']))
@@ -36,10 +37,10 @@ class TaskListController extends BaseController
             ->calculate();
 
         $this->response->html($this->helper->layout->app('task_list/listing', array(
-            'project' => $project,
-            'title' => $project['name'],
+            'project'     => $project,
+            'title'       => $project['name'],
             'description' => $this->helper->projectHeader->getDescription($project),
-            'paginator' => $paginator,
+            'paginator'   => $paginator,
         )));
     }
 }

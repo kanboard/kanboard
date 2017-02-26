@@ -20,4 +20,10 @@
             <?php endif ?>
         </span>
     <?php endif ?>
+
+    <?php foreach ($task['tags'] as $tag): ?>
+        <span class="table-list-category task-list-tag">
+            <?= $this->text->e($tag['name']) ?>
+        </span>
+    <?php endforeach ?>
 </div>
