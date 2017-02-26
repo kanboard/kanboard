@@ -39,6 +39,10 @@
                 <?= $this->render('project_list/project_details', array(
                     'project' => $project,
                 )) ?>
+
+                <?= $this->render('project_list/project_icons', array(
+                    'project' => $project,
+                )) ?>
             </div>
         <?php endforeach ?>
     </div>

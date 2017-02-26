@@ -1,4 +1,4 @@
-<div class="table-list-details">
+<div class="table-list-details table-list-details-with-icons">
     <ul>
         <?php if ($project['owner_id'] > 0): ?>
             <li><?= $this->text->e($project['owner_name'] ?: $project['owner_username']) ?></li>
