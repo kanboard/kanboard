@@ -100,38 +100,6 @@ class SubtaskTimeTrackingModel extends Base
     }
 
     /**
-     * Get query for project timesheet (pagination)
-     *
-     * @access public
-     * @param  integer    $project_id   Project id
-     * @return \PicoDb\Table
-     */
-    public function getProjectQuery($project_id)
-    {
-        return $this->db
-                    ->table(self::TABLE)
-                    ->columns(
-                        self::TABLE.'.id',
-                        self::TABLE.'.subtask_id',
-                        self::TABLE.'.end',
-                        self::TABLE.'.start',
-                        self::TABLE.'.time_spent',
-                        self::TABLE.'.user_id',
-                        SubtaskModel::TABLE.'.task_id',
-                        SubtaskModel::TABLE.'.title AS subtask_title',
-                        TaskModel::TABLE.'.project_id',
-                        TaskModel::TABLE.'.color_id',
-                        UserModel::TABLE.'.username',
-                        UserModel::TABLE.'.name AS user_fullname'
-                    )
-                    ->join(SubtaskModel::TABLE, 'id', 'subtask_id')
-                    ->join(TaskModel::TABLE, 'id', 'task_id', SubtaskModel::TABLE)
-                    ->join(UserModel::TABLE, 'id', 'user_id', self::TABLE)
-                    ->eq(TaskModel::TABLE.'.project_id', $project_id)
-                    ->asc(self::TABLE.'.id');
-    }
-
-    /**
      * Get all recorded time slots for a given user
      *
      * @access public

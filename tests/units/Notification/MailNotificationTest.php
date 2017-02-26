@@ -36,7 +36,7 @@ class MailNotificationTest extends Base
         $this->assertEquals(1, $taskLinkModel->create(1, 2, 1));
 
         $task = $taskFinderModel->getDetails(1);
-        $subtask = $subtaskModel->getById(1, true);
+        $subtask = $subtaskModel->getByIdWithDetails(1);
         $comment = $commentModel->getById(1);
         $file = $commentModel->getById(1);
         $tasklink = $taskLinkModel->getById(1);

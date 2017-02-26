@@ -42,14 +42,14 @@ class SubtaskModel extends Base
      * Get projectId from subtaskId
      *
      * @access public
-     * @param  integer $subtask_id
+     * @param  integer $subtaskId
      * @return integer
      */
-    public function getProjectId($subtask_id)
+    public function getProjectId($subtaskId)
     {
         return $this->db
             ->table(self::TABLE)
-            ->eq(self::TABLE.'.id', $subtask_id)
+            ->eq(self::TABLE.'.id', $subtaskId)
             ->join(TaskModel::TABLE, 'id', 'task_id')
             ->findOneColumn(TaskModel::TABLE . '.project_id') ?: 0;
     }
@@ -63,9 +63,9 @@ class SubtaskModel extends Base
     public function getStatusList()
     {
         return array(
-            self::STATUS_TODO => t('Todo'),
+            self::STATUS_TODO       => t('Todo'),
             self::STATUS_INPROGRESS => t('In progress'),
-            self::STATUS_DONE => t('Done'),
+            self::STATUS_DONE       => t('Done'),
         );
     }
 
@@ -73,11 +73,11 @@ class SubtaskModel extends Base
      * Get the query to fetch subtasks assigned to a user
      *
      * @access public
-     * @param  integer    $user_id         User id
-     * @param  array      $status          List of status
+     * @param  integer    $userId
+     * @param  array      $status
      * @return \PicoDb\Table
      */
-    public function getUserQuery($user_id, array $status)
+    public function getUserQuery($userId, array $status)
     {
         return $this->db->table(SubtaskModel::TABLE)
             ->columns(
@@ -87,8 +87,8 @@ class SubtaskModel extends Base
                 TaskModel::TABLE.'.title AS task_name',
                 ProjectModel::TABLE.'.name AS project_name'
             )
-            ->subquery($this->subtaskTimeTrackingModel->getTimerQuery($user_id), 'timer_start_date')
-            ->eq('user_id', $user_id)
+            ->subquery($this->subtaskTimeTrackingModel->getTimerQuery($userId), 'timer_start_date')
+            ->eq('user_id', $userId)
             ->eq(ProjectModel::TABLE.'.is_active', ProjectModel::ACTIVE)
             ->eq(ColumnModel::TABLE.'.hide_in_dashboard', 0)
             ->in(SubtaskModel::TABLE.'.status', $status)
@@ -99,65 +99,81 @@ class SubtaskModel extends Base
     }
 
     /**
+     * Get common query
+     *
+     * @return \PicoDb\Table
+     */
+    public function getQuery()
+    {
+        return $this->db
+            ->table(self::TABLE)
+            ->columns(
+                self::TABLE.'.*',
+                UserModel::TABLE.'.username',
+                UserModel::TABLE.'.name'
+            )
+            ->subquery($this->subtaskTimeTrackingModel->getTimerQuery($this->userSession->getId()), 'timer_start_date')
+            ->join(UserModel::TABLE, 'id', 'user_id')
+            ->asc(self::TABLE.'.position');
+    }
+
+    /**
      * Get all subtasks for a given task
      *
      * @access public
-     * @param  integer   $task_id    Task id
+     * @param  integer   $taskId
      * @return array
      */
-    public function getAll($task_id)
+    public function getAll($taskId)
     {
-        return $this->db
-                    ->table(self::TABLE)
-                    ->eq('task_id', $task_id)
-                    ->columns(
-                        self::TABLE.'.*',
-                        UserModel::TABLE.'.username',
-                        UserModel::TABLE.'.name'
-                    )
-                    ->subquery($this->subtaskTimeTrackingModel->getTimerQuery($this->userSession->getId()), 'timer_start_date')
-                    ->join(UserModel::TABLE, 'id', 'user_id')
-                    ->asc(self::TABLE.'.position')
-                    ->callback(array($this, 'addStatusName'))
-                    ->findAll();
+        return $this->subtaskListFormatter
+            ->withQuery($this->getQuery()->eq('task_id', $taskId))
+            ->format();
     }
 
     /**
      * Get a subtask by the id
      *
      * @access public
-     * @param  integer   $subtask_id    Subtask id
-     * @param  bool      $more          Fetch more data
+     * @param  integer   $subtaskId
      * @return array
      */
-    public function getById($subtask_id, $more = false)
+    public function getById($subtaskId)
     {
-        if ($more) {
-            return $this->db
-                        ->table(self::TABLE)
-                        ->eq(self::TABLE.'.id', $subtask_id)
-                        ->columns(self::TABLE.'.*', UserModel::TABLE.'.username', UserModel::TABLE.'.name')
-                        ->subquery($this->subtaskTimeTrackingModel->getTimerQuery($this->userSession->getId()), 'timer_start_date')
-                        ->join(UserModel::TABLE, 'id', 'user_id')
-                        ->callback(array($this, 'addStatusName'))
-                        ->findOne();
+        return $this->db->table(self::TABLE)->eq('id', $subtaskId)->findOne();
+    }
+
+    /**
+     * Get subtask with additional information
+     *
+     * @param  integer $subtaskId
+     * @return array|null
+     */
+    public function getByIdWithDetails($subtaskId)
+    {
+        $subtasks = $this->subtaskListFormatter
+            ->withQuery($this->getQuery()->eq(self::TABLE.'.id', $subtaskId))
+            ->format();
+
+        if (! empty($subtasks)) {
+            return $subtasks[0];
         }
 
-        return $this->db->table(self::TABLE)->eq('id', $subtask_id)->findOne();
+        return null;
     }
 
     /**
      * Get the position of the last column for a given project
      *
      * @access public
-     * @param  integer  $task_id   Task id
+     * @param  integer  $taskId
      * @return integer
      */
-    public function getLastPosition($task_id)
+    public function getLastPosition($taskId)
     {
         return (int) $this->db
                         ->table(self::TABLE)
-                        ->eq('task_id', $task_id)
+                        ->eq('task_id', $taskId)
                         ->desc('position')
                         ->findOneColumn('position');
     }
@@ -172,25 +188,25 @@ class SubtaskModel extends Base
     public function create(array $values)
     {
         $this->prepareCreation($values);
-        $subtask_id = $this->db->table(self::TABLE)->persist($values);
+        $subtaskId = $this->db->table(self::TABLE)->persist($values);
 
-        if ($subtask_id !== false) {
+        if ($subtaskId !== false) {
             $this->subtaskTimeTrackingModel->updateTaskTimeTracking($values['task_id']);
-            $this->queueManager->push($this->subtaskEventJob->withParams($subtask_id, self::EVENT_CREATE));
+            $this->queueManager->push($this->subtaskEventJob->withParams($subtaskId, self::EVENT_CREATE));
         }
 
-        return $subtask_id;
+        return $subtaskId;
     }
 
     /**
-     * Update
+     * Update a subtask
      *
      * @access public
      * @param  array $values
-     * @param  bool  $fire_event
+     * @param  bool  $fireEvent
      * @return bool
      */
-    public function update(array $values, $fire_event = true)
+    public function update(array $values, $fireEvent = true)
     {
         $this->prepare($values);
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
@@ -198,7 +214,7 @@ class SubtaskModel extends Base
         if ($result) {
             $this->subtaskTimeTrackingModel->updateTaskTimeTracking($values['task_id']);
 
-            if ($fire_event) {
+            if ($fireEvent) {
                 $this->queueManager->push($this->subtaskEventJob->withParams($values['id'], self::EVENT_UPDATE, $values));
             }
         }
@@ -210,35 +226,35 @@ class SubtaskModel extends Base
      * Remove
      *
      * @access public
-     * @param  integer   $subtask_id    Subtask id
+     * @param  integer $subtaskId
      * @return bool
      */
-    public function remove($subtask_id)
+    public function remove($subtaskId)
     {
-        $this->subtaskEventJob->execute($subtask_id, self::EVENT_DELETE);
-        return $this->db->table(self::TABLE)->eq('id', $subtask_id)->remove();
+        $this->subtaskEventJob->execute($subtaskId, self::EVENT_DELETE);
+        return $this->db->table(self::TABLE)->eq('id', $subtaskId)->remove();
     }
 
     /**
      * Duplicate all subtasks to another task
      *
      * @access public
-     * @param  integer   $src_task_id    Source task id
-     * @param  integer   $dst_task_id    Destination task id
+     * @param  integer $srcTaskId
+     * @param  integer $dstTaskId
      * @return bool
      */
-    public function duplicate($src_task_id, $dst_task_id)
+    public function duplicate($srcTaskId, $dstTaskId)
     {
-        return $this->db->transaction(function (Database $db) use ($src_task_id, $dst_task_id) {
+        return $this->db->transaction(function (Database $db) use ($srcTaskId, $dstTaskId) {
 
             $subtasks = $db->table(SubtaskModel::TABLE)
                 ->columns('title', 'time_estimated', 'position')
-                ->eq('task_id', $src_task_id)
+                ->eq('task_id', $srcTaskId)
                 ->asc('position')
                 ->findAll();
 
             foreach ($subtasks as &$subtask) {
-                $subtask['task_id'] = $dst_task_id;
+                $subtask['task_id'] = $dstTaskId;
 
                 if (! $db->table(SubtaskModel::TABLE)->save($subtask)) {
                     return false;

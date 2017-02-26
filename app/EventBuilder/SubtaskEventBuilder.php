@@ -63,7 +63,7 @@ class SubtaskEventBuilder extends BaseEventBuilder
     public function buildEvent()
     {
         $eventData = array();
-        $eventData['subtask'] = $this->subtaskModel->getById($this->subtaskId, true);
+        $eventData['subtask'] = $this->subtaskModel->getByIdWithDetails($this->subtaskId);
 
         if (empty($eventData['subtask'])) {
             $this->logger->debug(__METHOD__.': Subtask not found');

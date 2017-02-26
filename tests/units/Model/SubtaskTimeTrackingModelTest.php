@@ -85,7 +85,7 @@ class SubtaskTimeTrackingModelTest extends Base
         $this->assertEquals(0, $subtasks[0]['timer_start_date']);
         $this->assertFalse($subtasks[0]['is_timer_started']);
 
-        $subtask = $subtaskModel->getById(1, true);
+        $subtask = $subtaskModel->getByIdWithDetails(1);
         $this->assertNotEmpty($subtask);
         $this->assertEquals(0, $subtask['timer_start_date']);
         $this->assertFalse($subtask['is_timer_started']);
@@ -98,7 +98,7 @@ class SubtaskTimeTrackingModelTest extends Base
         $this->assertEquals(time(), $subtasks[0]['timer_start_date'], '', 3);
         $this->assertTrue($subtasks[0]['is_timer_started']);
 
-        $subtask = $subtaskModel->getById(1, true);
+        $subtask = $subtaskModel->getByIdWithDetails(1);
         $this->assertNotEmpty($subtask);
         $this->assertEquals(time(), $subtask['timer_start_date'], '', 3);
         $this->assertTrue($subtask['is_timer_started']);
@@ -110,7 +110,7 @@ class SubtaskTimeTrackingModelTest extends Base
         $this->assertEquals(0, $subtasks[0]['timer_start_date']);
         $this->assertFalse($subtasks[0]['is_timer_started']);
 
-        $subtask = $subtaskModel->getById(1, true);
+        $subtask = $subtaskModel->getByIdWithDetails(1);
         $this->assertNotEmpty($subtask);
         $this->assertEquals(0, $subtask['timer_start_date']);
         $this->assertFalse($subtask['is_timer_started']);

@@ -23,6 +23,7 @@ class FormatterProvider implements ServiceProviderInterface
             'GroupAutoCompleteFormatter',
             'ProjectActivityEventFormatter',
             'ProjectGanttFormatter',
+            'SubtaskListFormatter',
             'SubtaskTimeTrackingCalendarFormatter',
             'TaskAutoCompleteFormatter',
             'TaskCalendarFormatter',
