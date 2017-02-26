@@ -44,6 +44,7 @@ class CurrencyModel extends Base
             'RUB' => t('RUB - Russian Ruble'),
             'CNY' => t('CNY - Chinese Yuan'),
             'TRL' => t('TRL - Turkish Lira'),
+            'HRK' => t('HRK - Kuna'),
         );
     }
 

@@ -28,6 +28,7 @@ Contributors:
 - [Cmer](https://github.com/chncsu)
 - [Colin Williams](https://github.com/crwilliams)
 - [Connor Bode](https://github.com/connorbode)
+- [Cose385](https://github.com/cose385)
 - [Crash5](https://github.com/crash5)
 - [Creador30](https://github.com/creador30)
 - [Cynthia Pereira](https://github.com/cynthiapereira)

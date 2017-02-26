@@ -1334,4 +1334,5 @@ return array(
     'Task ID' => 'ID da Tarefa',
     // 'Assign automatically a color when due date is expired' => '',
     // 'Total score in this column across all swimlanes' => '',
+    // 'HRK - Kuna' => '',
 );
