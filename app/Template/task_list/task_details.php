@@ -4,7 +4,7 @@
     <?= $this->text->e($task['column_name']) ?>
 
     <?php if (! empty($task['category_id'])): ?>
-        <span class="task-list-category">
+        <span class="table-list-category">
             <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
                 <?= $this->url->link(
                     $this->text->e($task['category_name']),

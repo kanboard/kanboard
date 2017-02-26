@@ -40,6 +40,7 @@
 
   .table-list-title
     font-weight: 500
+    line-height: 23px
     &.status-closed
       text-decoration: line-through
       margin-right: 10px
@@ -55,6 +56,10 @@
     color: color('light')
     font-weight: 300
     line-height: 30px
+    span
+      margin-left: 5px
+      &:first-child
+        margin-left: 0
     li
       display: inline
       list-style-type: none
@@ -62,3 +67,41 @@
         content: ', '
       &:last-child:after
         content: ''
+
+  .table-list-details-with-icons
+    float: left
+    @include sm-device
+      float: none
+
+  .table-list-icons
+    font-size: size('small')
+    text-align: right
+    line-height: 30px
+
+    @include sm-device
+      text-align: left
+      line-height: 20px
+
+    span
+      margin-left: 5px
+
+    a
+      text-decoration: none
+      &:hover
+        color: link-color('hover')
+        i
+          color: link-color('hover')
+
+.table-list-category
+  font-size: size('compact')
+  font-weight: 500
+  color: color('dark')
+  padding: 1px 3px 1px 2px
+  border-radius: 3px
+  background: bg-color('light')
+  border: 1px solid #ccc
+  a
+    text-decoration: none
+    color: color('dark')
+    &:hover
+      color: link-color('primary')

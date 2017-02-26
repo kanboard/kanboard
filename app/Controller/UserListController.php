@@ -19,7 +19,7 @@ class UserListController extends BaseController
     {
         $paginator = $this->userPagination->getListingPaginator();
 
-        $this->response->html($this->helper->layout->app('user_list/show', array(
+        $this->response->html($this->helper->layout->app('user_list/listing', array(
             'title' => t('Users').' ('.$paginator->getTotal().')',
             'paginator' => $paginator,
         )));
