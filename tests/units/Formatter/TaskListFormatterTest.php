@@ -4,6 +4,7 @@ use Kanboard\Formatter\TaskListFormatter;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\TaskModel;
 use Kanboard\Model\TaskTagModel;
 
 require_once __DIR__.'/../Base.php';
@@ -26,7 +27,7 @@ class TaskListFormatterTest extends Base
         $this->assertTrue($taskTagModel->save(1, 2, array('My tag 3')));
 
         $listing = TaskListFormatter::getInstance($this->container)
-            ->withQuery($taskFinderModel->getExtendedQuery())
+            ->withQuery($taskFinderModel->getExtendedQuery()->asc(TaskModel::TABLE.'.id'))
             ->format();
 
         $this->assertCount(3, $listing);
