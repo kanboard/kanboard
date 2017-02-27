@@ -16,7 +16,7 @@ class SubtaskListFormatter extends BaseFormatter implements FormatterInterface
      * Apply formatter
      *
      * @access public
-     * @return mixed
+     * @return array
      */
     public function format()
     {

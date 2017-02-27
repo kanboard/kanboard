@@ -18,7 +18,7 @@ namespace Kanboard\Core\Session;
  * @property string $commentSorting
  * @property bool   $hasSubtaskInProgress
  * @property bool   $hasRememberMe
- * @property bool   $boardCollapsed
+ * @property bool   $subtaskListToggle
  * @property string $scope
  * @property bool   $twoFactorBeforeCodeCalled
  * @property string $twoFactorSecret

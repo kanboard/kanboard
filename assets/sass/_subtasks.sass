@@ -1,5 +1,35 @@
 @import variables
+@import mixins
 
-.subtasks-table
-  td
-    vertical-align: middle
+.subtask-cell
+  padding: 4px 10px
+  border-top: 1px dotted #dedede
+  border-left: 1px dotted #dedede
+  display: table-cell
+  vertical-align: middle
+  a
+    color: color('primary')
+    text-decoration: none
+    &:hover, &:focus
+      color: link-color('primary')
+  &:first-child
+    border-left: none
+  @include sm-device
+    width: 90%
+    display: block
+    border-left: none
+
+.task-list-subtasks
+  display: table
+  width: 100%
+  @include sm-device
+    display: block
+
+.task-list-subtask
+  display: table-row
+  @include sm-device
+    display: block
+
+.subtask-assignee, .subtask-time-tracking-cell
+  @include sm-device
+    display: none

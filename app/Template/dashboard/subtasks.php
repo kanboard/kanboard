@@ -25,7 +25,7 @@
                 <?= $this->url->link($this->text->e($subtask['task_name']), 'TaskViewController', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
             </td>
             <td>
-                <?= $this->subtask->toggleStatus($subtask, $subtask['project_id']) ?>
+                <?= $this->subtask->renderToggleStatus(array('project_id' => $subtask['project_id']), $subtask) ?>
             </td>
             <?= $this->hook->render('template:dashboard:subtasks:rows', array('subtask' => $subtask)) ?>
             <td>

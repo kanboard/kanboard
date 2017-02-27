@@ -6,7 +6,7 @@ Kanboard.Subtask.prototype.listen = function() {
     var self = this;
     this.dragAndDrop();
 
-    $(document).on("click", ".subtask-toggle-status", function(e) {
+    $(document).on("click", ".js-subtask-toggle-status", function(e) {
         var el = $(this);
         e.preventDefault();
 
@@ -14,18 +14,12 @@ Kanboard.Subtask.prototype.listen = function() {
             cache: false,
             url: el.attr("href"),
             success: function(data) {
-                if (el.hasClass("subtask-refresh-table")) {
-                    $(".subtasks-table").replaceWith(data);
-                } else {
-                    el.replaceWith(data);
-                }
-
-                self.dragAndDrop();
+                $(el).closest('.subtask-title').replaceWith(data);
             }
         });
     });
 
-    $(document).on("click", ".subtask-toggle-timer", function(e) {
+    $(document).on("click", ".js-subtask-toggle-timer", function(e) {
         var el = $(this);
         e.preventDefault();
 
@@ -33,8 +27,7 @@ Kanboard.Subtask.prototype.listen = function() {
             cache: false,
             url: el.attr("href"),
             success: function(data) {
-                $(".subtasks-table").replaceWith(data);
-                self.dragAndDrop();
+                $(el).closest('.subtask-time-tracking').replaceWith(data);
             }
         });
     });

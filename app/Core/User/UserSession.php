@@ -146,6 +146,17 @@ class UserSession extends Base
     }
 
     /**
+     * Return true if subtask list toggle is active
+     *
+     * @access public
+     * @return string
+     */
+    public function hasSubtaskListActivated()
+    {
+        return isset($this->sessionStorage->subtaskListToggle) && ! empty($this->sessionStorage->subtaskListToggle);
+    }
+
+    /**
      * Check is the user is connected
      *
      * @access public

@@ -12,7 +12,23 @@ use Kanboard\Core\Base;
  */
 class SubtaskHelper extends Base
 {
-    public function getTitle(array $subtask)
+    /**
+     * Return if the current user has a subtask in progress
+     *
+     * @return bool
+     */
+    public function hasSubtaskInProgress()
+    {
+        return isset($this->sessionStorage->hasSubtaskInProgress) && $this->sessionStorage->hasSubtaskInProgress;
+    }
+
+    /**
+     * Render subtask title
+     *
+     * @param  array $subtask
+     * @return string
+     */
+    public function renderTitle(array $subtask)
     {
         if ($subtask['status'] == 0) {
             $html = '<i class="fa fa-square-o fa-fw"></i>';
@@ -29,25 +45,46 @@ class SubtaskHelper extends Base
      * Get the link to toggle subtask status
      *
      * @access public
+     * @param  array    $task
      * @param  array    $subtask
-     * @param  integer  $project_id
-     * @param  boolean  $refresh_table
      * @return string
      */
-    public function toggleStatus(array $subtask, $project_id, $refresh_table = false)
+    public function renderToggleStatus(array $task, array $subtask)
     {
-        if (! $this->helper->user->hasProjectAccess('SubtaskController', 'edit', $project_id)) {
-            return $this->getTitle($subtask);
+        if (! $this->helper->user->hasProjectAccess('SubtaskController', 'edit', $task['project_id'])) {
+            $html = $this->renderTitle($subtask);
+        } else {
+            $title = $this->renderTitle($subtask);
+            $params = array(
+                'project_id'    => $task['project_id'],
+                'task_id'       => $subtask['task_id'],
+                'subtask_id'    => $subtask['id'],
+            );
+
+            if ($subtask['status'] == 0 && $this->hasSubtaskInProgress()) {
+                $html = $this->helper->url->link($title, 'SubtaskRestrictionController', 'show', $params, false, 'js-modal-confirm');
+            } else {
+                $html = $this->helper->url->link($title, 'SubtaskStatusController', 'change', $params, false, 'js-subtask-toggle-status');
+            }
         }
 
-        $params = array('task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id'], 'refresh-table' => (int) $refresh_table);
+        return '<span class="subtask-title">'.$html.'</span>';
+    }
 
-        if ($subtask['status'] == 0 && isset($this->sessionStorage->hasSubtaskInProgress) && $this->sessionStorage->hasSubtaskInProgress) {
-            return $this->helper->url->link($this->getTitle($subtask), 'SubtaskRestrictionController', 'show', $params, false, 'js-modal-confirm');
+    public function renderTimer(array $task, array $subtask)
+    {
+        $html = '<span class="subtask-timer-toggle">';
+
+        if ($subtask['is_timer_started']) {
+            $html .= $this->helper->url->icon('pause', t('Stop timer'), 'SubtaskStatusController', 'timer', array('timer' => 'stop', 'project_id' => $task['project_id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id']), false, 'js-subtask-toggle-timer');
+            $html .= ' (' . $this->helper->dt->age($subtask['timer_start_date']) .')';
+        } else {
+            $html .= $this->helper->url->icon('play-circle-o', t('Start timer'), 'SubtaskStatusController', 'timer', array('timer' => 'start', 'project_id' => $task['project_id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id']), false, 'js-subtask-toggle-timer');
         }
 
-        $class = 'subtask-toggle-status '.($refresh_table ? 'subtask-refresh-table' : '');
-        return $this->helper->url->link($this->getTitle($subtask), 'SubtaskStatusController', 'change', $params, false, $class);
+        $html .= '</span>';
+
+        return $html;
     }
 
     public function renderTitleField(array $values, array $errors = array(), array $attributes = array())

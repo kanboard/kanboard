@@ -76,6 +76,7 @@ use Pimple\Container;
  * @property \Kanboard\Formatter\TaskGanttFormatter                  $taskGanttFormatter
  * @property \Kanboard\Formatter\TaskICalFormatter                   $taskICalFormatter
  * @property \Kanboard\Formatter\TaskListFormatter                   $taskListFormatter
+ * @property \Kanboard\Formatter\TaskListSubtaskFormatter            $taskListSubtaskFormatter
  * @property \Kanboard\Formatter\TaskSuggestMenuFormatter            $taskSuggestMenuFormatter
  * @property \Kanboard\Formatter\UserAutoCompleteFormatter           $userAutoCompleteFormatter
  * @property \Kanboard\Formatter\UserMentionFormatter                $userMentionFormatter

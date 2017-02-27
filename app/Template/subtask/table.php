@@ -21,9 +21,9 @@
                         'task' => $task,
                         'subtask' => $subtask,
                     )) ?>
-                    <?= $this->subtask->toggleStatus($subtask, $task['project_id'], true) ?>
+                    <?= $this->subtask->renderToggleStatus($task, $subtask, true) ?>
                 <?php else: ?>
-                    <?= $this->subtask->getTitle($subtask) ?>
+                    <?= $this->subtask->renderTitle($subtask) ?>
                 <?php endif ?>
             </td>
             <td>
@@ -33,22 +33,10 @@
             </td>
             <?= $this->hook->render('template:subtask:table:rows', array('subtask' => $subtask)) ?>
             <td>
-                <?php if (! empty($subtask['time_spent'])): ?>
-                    <strong><?= $this->text->e($subtask['time_spent']).'h' ?></strong> <?= t('spent') ?>
-                <?php endif ?>
-
-                <?php if (! empty($subtask['time_estimated'])): ?>
-                    <strong><?= $this->text->e($subtask['time_estimated']).'h' ?></strong> <?= t('estimated') ?>
-                <?php endif ?>
-
-                <?php if ($editable && $subtask['user_id'] == $this->user->getId()): ?>
-                    <?php if ($subtask['is_timer_started']): ?>
-                        <?= $this->url->icon('pause', t('Stop timer'), 'SubtaskStatusController', 'timer', array('timer' => 'stop', 'project_id' => $task['project_id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id']), false, 'subtask-toggle-timer') ?>
-                        (<?= $this->dt->age($subtask['timer_start_date']) ?>)
-                    <?php else: ?>
-                        <?= $this->url->icon('play-circle-o', t('Start timer'), 'SubtaskStatusController', 'timer', array('timer' => 'start', 'project_id' => $task['project_id'], 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id']), false, 'subtask-toggle-timer') ?>
-                    <?php endif ?>
-                <?php endif ?>
+                <?= $this->render('subtask/timer', array(
+                    'task'    => $task,
+                    'subtask' => $subtask,
+                )) ?>
             </td>
         </tr>
         <?php endforeach ?>

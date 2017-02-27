@@ -30,6 +30,7 @@ class FormatterProvider implements ServiceProviderInterface
             'TaskGanttFormatter',
             'TaskICalFormatter',
             'TaskListFormatter',
+            'TaskListSubtaskFormatter',
             'TaskSuggestMenuFormatter',
             'UserAutoCompleteFormatter',
             'UserMentionFormatter',

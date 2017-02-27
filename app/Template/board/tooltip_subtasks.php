@@ -8,7 +8,7 @@
         <?php foreach ($subtasks as $subtask): ?>
         <tr>
             <td>
-                <?= $this->subtask->toggleStatus($subtask, $task['project_id']) ?>
+                <?= $this->subtask->renderToggleStatus($task, $subtask) ?>
             </td>
             <?= $this->hook->render('template:board:tooltip:subtasks:rows', array('subtask' => $subtask)) ?>
             <td>

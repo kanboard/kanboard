@@ -23,12 +23,24 @@ class TaskListController extends BaseController
         $project = $this->getProject();
         $search = $this->helper->projectHeader->getSearchQuery($project);
 
+        if ($this->request->getIntegerParam('show_subtasks')) {
+            $this->sessionStorage->subtaskListToggle = true;
+        } elseif ($this->request->getIntegerParam('hide_subtasks')) {
+            $this->sessionStorage->subtaskListToggle = false;
+        }
+
+        if ($this->userSession->hasSubtaskListActivated()) {
+            $formatter = $this->taskListSubtaskFormatter;
+        } else {
+            $formatter = $this->taskListFormatter;
+        }
+
         $paginator = $this->paginator
             ->setUrl('TaskListController', 'show', array('project_id' => $project['id']))
             ->setMax(30)
             ->setOrder(TaskModel::TABLE.'.id')
             ->setDirection('DESC')
-            ->setFormatter($this->taskListFormatter)
+            ->setFormatter($formatter)
             ->setQuery($this->taskLexer
                 ->build($search)
                 ->withFilter(new TaskProjectFilter($project['id']))

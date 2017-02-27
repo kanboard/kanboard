@@ -13,7 +13,18 @@ use Kanboard\Core\Base;
 class UserHelper extends Base
 {
     /**
-     * Return true if the logged user as unread notifications
+     * Return subtask list toggle value
+     *
+     * @access public
+     * @return boolean
+     */
+    public function hasSubtaskListActivated()
+    {
+        return $this->userSession->hasSubtaskListActivated();
+    }
+
+    /**
+     * Return true if the logged user has unread notifications
      *
      * @access public
      * @return boolean

@@ -132,6 +132,23 @@ class SubtaskModel extends Base
     }
 
     /**
+     * Get subtasks for a list of tasks
+     *
+     * @param array $taskIds
+     * @return array
+     */
+    public function getAllByTaskIds(array $taskIds)
+    {
+        if (empty($taskIds)) {
+            return array();
+        }
+
+        return $this->subtaskListFormatter
+            ->withQuery($this->getQuery()->in('task_id', $taskIds))
+            ->format();
+    }
+
+    /**
      * Get a subtask by the id
      *
      * @access public

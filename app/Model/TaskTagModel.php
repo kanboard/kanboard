@@ -59,7 +59,7 @@ class TaskTagModel extends Base
      * @param  integer[] $task_ids
      * @return array
      */
-    public function getTagsByTasks($task_ids)
+    public function getTagsByTaskIds($task_ids)
     {
         if (empty($task_ids)) {
             return array();
@@ -69,6 +69,7 @@ class TaskTagModel extends Base
             ->columns(TagModel::TABLE.'.id', TagModel::TABLE.'.name', self::TABLE.'.task_id')
             ->in(self::TABLE.'.task_id', $task_ids)
             ->join(self::TABLE, 'tag_id', 'id')
+            ->asc(TagModel::TABLE.'.name')
             ->findAll();
 
         return array_column_index($tags, 'task_id');
