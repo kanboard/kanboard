@@ -1125,7 +1125,7 @@ return array(
     'Email settings' => 'Postavke email-a',
     'Email sender address' => 'Email adresa pošiljaoca',
     'Email transport' => 'Saobraćaj emil-a',
-    'Webhook token' => '',
+    //'Webhook token' => '',
     'Project tags management' => 'Upravljanje oznakama projekta',
     'Tag created successfully.' => 'Oznaka uspješno kreirana.',
     'Unable to create this tag.' => 'Nemoguće kreirati oznaku.',
