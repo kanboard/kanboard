@@ -3,6 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
+use PHPQRCode;
 
 /**
  * Two Factor Auth controller
@@ -65,9 +66,8 @@ class TwoFactorController extends UserViewController
         }
 
         $this->response->html($this->helper->layout->user('twofactor/show', array(
-            'user' => $user,
-            'secret' => $this->sessionStorage->twoFactorSecret,
-            'qrcode_url' => $provider->getQrCodeUrl($label),
+            'user'    => $user,
+            'secret'  => $this->sessionStorage->twoFactorSecret,
             'key_url' => $provider->getKeyUrl($label),
         )));
     }
@@ -192,11 +192,28 @@ class TwoFactorController extends UserViewController
                 'twofactor_secret' => '',
             ));
 
-            return $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])));
+            $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])));
+        } else {
+            $this->response->html($this->helper->layout->user('twofactor/disable', array(
+                'user' => $user,
+            )));
         }
+    }
 
-        return $this->response->html($this->helper->layout->user('twofactor/disable', array(
-            'user' => $user,
-        )));
+    /**
+     * Render QR Code image
+     */
+    public function qrcode()
+    {
+        if (isset($this->sessionStorage->twoFactorSecret)) {
+            $user = $this->getUser();
+            $provider = $this->authenticationManager->getPostAuthenticationProvider();
+            $provider->setSecret($this->sessionStorage->twoFactorSecret);
+            $url = $provider->getKeyUrl($user['email'] ?: $user['username']);
+
+            if (! empty($url)) {
+                PHPQRCode\QRcode::png($url, false, 'L', 6, 0);
+            }
+        }
     }
 }

@@ -7,10 +7,15 @@ New features:
 
 Improvements:
 
+* Render QR code for TwoFactor authentication without Google Chart API
 * Add toggle button to show/hide subtasks in task list view
 * Display tags in task list view
 * Change users list layout
 * Project priority is always rendered now
+
+Breaking Changes:
+
+* Remove method getQrCodeUrl() from PostAuthenticationProviderInterface
 
 Version 1.0.40 (Feb 24 2017)
 ----------------------------
