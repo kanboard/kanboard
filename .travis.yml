@@ -28,5 +28,5 @@ before_script:
 
 script:
   - ./node_modules/.bin/jshint assets/js/{core,components}
-  - phpunit -c tests/units.$DB.xml
-  - phpunit tests/configtest
+  - ./vendor/bin/phpunit -c tests/units.$DB.xml
+  - ./vendor/bin/phpunit tests/configtest
