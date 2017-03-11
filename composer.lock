@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9da4e56dd10c23d4c3ea7e4949d18b24",
-    "content-hash": "6fded72f90b9a69e404ea9a2410339ad",
+    "hash": "dc50383a3d1f75257044a2977c0c70af",
+    "content-hash": "811bd1ea5a2a0fed780794bc6ee7ea82",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -329,16 +329,16 @@
         },
         {
             "name": "fguillot/picofeed",
-            "version": "v0.1.24",
+            "version": "v0.1.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoFeed.git",
-                "reference": "25f9653ca663e098f51eabbdf495eb9a130c041b"
+                "reference": "b753961879d0b92c284971d902355e00cad1fd9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoFeed/zipball/25f9653ca663e098f51eabbdf495eb9a130c041b",
-                "reference": "25f9653ca663e098f51eabbdf495eb9a130c041b",
+                "url": "https://api.github.com/repos/fguillot/picoFeed/zipball/b753961879d0b92c284971d902355e00cad1fd9b",
+                "reference": "b753961879d0b92c284971d902355e00cad1fd9b",
                 "shasum": ""
             },
             "require": {
@@ -349,6 +349,11 @@
                 "ext-xml": "*",
                 "php": ">=5.3.0",
                 "zendframework/zendxml": "^1.0"
+            },
+            "require-dev": {
+                "phpdocumentor/reflection-docblock": "2.0.4",
+                "phpunit/phpunit": "4.8.26",
+                "symfony/yaml": "2.8.7"
             },
             "suggest": {
                 "ext-curl": "PicoFeed will use cURL if present"
@@ -373,7 +378,7 @@
             ],
             "description": "Modern library to handle RSS/Atom feeds",
             "homepage": "https://github.com/fguillot/picoFeed",
-            "time": "2016-07-03 00:02:03"
+            "time": "2017-01-16 03:10:21"
         },
         {
             "name": "fguillot/simple-queue",

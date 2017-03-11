@@ -28,7 +28,7 @@
         "erusev/parsedown" : "1.6.0",
         "fguillot/json-rpc" : "1.2.1",
         "fguillot/picodb" : "1.0.14",
-        "fguillot/picofeed": "0.1.24",
+        "fguillot/picofeed": "0.1.31",
         "fguillot/simpleLogger" : "1.0.1",
         "fguillot/simple-validator" : "1.0.1",
         "fguillot/simple-queue" : "1.0.1",
