@@ -37,6 +37,7 @@ class GroupModelTest extends Base
         $this->assertEquals('uuid', $groups[0]['external_id']);
         $this->assertEquals('B', $groups[1]['name']);
         $this->assertEquals('', $groups[1]['external_id']);
+        $this->assertEquals(0, $groups[1]['nb_users']);
     }
 
     public function testUpdate()
