@@ -94,3 +94,23 @@ KB.utils.getViewportSize = function () {
         height: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
     };
 };
+
+KB.utils.isVisible = function() {
+    var property = '';
+
+    if (typeof document.hidden !== 'undefined') {
+        property = 'visibilityState';
+    } else if (typeof document.mozHidden !== 'undefined') {
+        property = 'mozVisibilityState';
+    } else if (typeof document.msHidden !== 'undefined') {
+        property = 'msVisibilityState';
+    } else if (typeof document.webkitHidden !== 'undefined') {
+        property = 'webkitVisibilityState';
+    }
+
+    if (property !== '') {
+        return document[property] === 'visible';
+    }
+
+    return true;
+};
