@@ -13,7 +13,7 @@
 
     <?php if ($user['twofactor_activated'] == 1): ?>
         <span title="<?= t('Two factor authentication enabled') ?>">
-            <i class="fa fa-key" aria-hidden="true"></i>
+            <i class="fa fa-shield" aria-hidden="true"></i>
         </span>
     <?php endif ?>
 

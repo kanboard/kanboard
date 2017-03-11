@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Kullanıcı başarıyla oluşturuldu',
     'Unable to create your user.' => 'Kullanıcı oluşturulamıyor.',
     'User updated successfully.' => 'Kullanıcı başarıyla güncellendi.',
-    'Unable to update your user.' => 'Kullanıcı güncellenemiyor.',
     'User removed successfully.' => 'Kullanıcı silindi.',
     'Unable to remove this user.' => 'Bu kullanıcı silinemiyor.',
     'Board updated successfully.' => 'Pano başarıyla güncellendi.',

@@ -11,7 +11,7 @@
 </p>
 
 <?php if (! empty($user['api_access_token'])): ?>
-    <?= $this->url->link(t('Remove your token'), 'UserApiAccessController', 'remove', array('user_id' => $user['id']), true, 'btn btn-red') ?>
+    <?= $this->url->link(t('Remove your token'), 'UserApiAccessController', 'remove', array('user_id' => $user['id']), true, 'btn btn-red js-modal-replace') ?>
 <?php endif ?>
 
-<?= $this->url->link(t('Generate a new token'), 'UserApiAccessController', 'generate', array('user_id' => $user['id']), true, 'btn btn-blue') ?>
+<?= $this->url->link(t('Generate a new token'), 'UserApiAccessController', 'generate', array('user_id' => $user['id']), true, 'btn btn-blue js-modal-replace') ?>

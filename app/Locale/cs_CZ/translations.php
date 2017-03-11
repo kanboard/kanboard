@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Uživatel byl úspěšně vytvořen.',
     'Unable to create your user.' => 'Uživatele nebylo možné vytvořit.',
     'User updated successfully.' => 'Uživatel byl úspěšně aktualizován.',
-    'Unable to update your user.' => 'Uživatele nebylo možné aktualizovat.',
     'User removed successfully.' => 'Uživatel byl vymazán.',
     'Unable to remove this user.' => 'Uživatele nebylo možné odebrat.',
     'Board updated successfully.' => 'Nástěnka byla úspěšně aktualizována.',

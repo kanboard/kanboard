@@ -32,7 +32,7 @@ class UserApiAccessController extends BaseController
             'api_access_token' => Token::getToken(),
         ));
 
-        $this->response->redirect($this->helper->url->to('UserApiAccessController', 'show', array('user_id' => $user['id'])));
+        $this->renderResponse();
     }
 
     public function remove()
@@ -45,6 +45,15 @@ class UserApiAccessController extends BaseController
             'api_access_token' => null,
         ));
 
-        $this->response->redirect($this->helper->url->to('UserApiAccessController', 'show', array('user_id' => $user['id'])));
+        $this->renderResponse();
+    }
+
+    protected function renderResponse()
+    {
+        if ($this->request->isAjax()) {
+            $this->show();
+        } else {
+            $this->response->redirect($this->helper->url->to('UserApiAccessController', 'show', array('user_id' => $user['id'])));
+        }
     }
 }

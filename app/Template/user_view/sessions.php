@@ -19,7 +19,7 @@
         <td><?= $this->dt->datetime($session['expiration']) ?></td>
         <td><?= $this->text->e($session['ip']) ?></td>
         <td><?= $this->text->e($session['user_agent']) ?></td>
-        <td><?= $this->url->link(t('Remove'), 'UserViewController', 'removeSession', array('user_id' => $user['id'], 'id' => $session['id']), true) ?></td>
+        <td><?= $this->url->link(t('Remove'), 'UserViewController', 'removeSession', array('user_id' => $user['id'], 'id' => $session['id']), true, 'js-modal-replace') ?></td>
     </tr>
     <?php endforeach ?>
     </table>

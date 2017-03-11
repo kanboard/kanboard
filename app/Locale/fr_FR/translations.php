@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Utilisateur créé avec succès.',
     'Unable to create your user.' => 'Impossible de créer cet utilisateur.',
     'User updated successfully.' => 'Utilisateur mis à jour avec succès.',
-    'Unable to update your user.' => 'Impossible de mettre à jour cet utilisateur.',
     'User removed successfully.' => 'Utilisateur supprimé avec succès.',
     'Unable to remove this user.' => 'Impossible de supprimer cet utilisateur.',
     'Board updated successfully.' => 'Tableau mis à jour avec succès.',

@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Brukeren er opprettet.',
     'Unable to create your user.' => 'Brukeren kunne ikke opprettes.',
     'User updated successfully.' => 'Brukeren er oppdatert',
-    'Unable to update your user.' => 'Din bruker kunne ikke oppdateres.',
     'User removed successfully.' => 'Brukeren er fjernet.',
     'Unable to remove this user.' => 'Brukeren kunne ikke slettes.',
     'Board updated successfully.' => 'Hovedsiden er oppdatert.',

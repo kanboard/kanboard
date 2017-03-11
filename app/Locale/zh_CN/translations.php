@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => '成功创建用户。',
     'Unable to create your user.' => '无法创建用户。',
     'User updated successfully.' => '成功更新用户。',
-    'Unable to update your user.' => '无法为您更新用户。',
     'User removed successfully.' => '成功移除用户。',
     'Unable to remove this user.' => '无法移除该用户。',
     'Board updated successfully.' => '看板成功更新。',

@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Ο χρήστης δημιουργήθηκε με επιτυχία',
     'Unable to create your user.' => 'Δεν είναι δυνατή η δημιουργία χρήστη',
     'User updated successfully.' => 'Ο χρήστης ενημερωθηκε με επιτυχία',
-    'Unable to update your user.' => 'Δεν είναι δυνατή η ενημέρωση του χρήστη',
     'User removed successfully.' => 'Ο χρήστης αφαιρέθηκε με επιτυχία.',
     'Unable to remove this user.' => 'Δεν είναι δυνατή η αφαίρεση χρήστη.',
     'Board updated successfully.' => 'Ο πίνακας ενημερώθηκε με επιτυχία.',

@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'สร้างผู้ใช้เรียบร้อยแล้ว',
     'Unable to create your user.' => 'ไม่สามารถสร้างผู้ใช้ได้',
     'User updated successfully.' => 'ปรับปรุงผู้ใช้เรียบร้อยแล้ว',
-    'Unable to update your user.' => 'ไม่สามารถปรับปรุงผู้ใช้ได้',
     'User removed successfully.' => 'ลบผู้ใช้เรียบร้อยแล้ว',
     'Unable to remove this user.' => 'ไม่สามารถลบผู้ใช้ได้',
     'Board updated successfully.' => 'ปรับปรุงบอร์ดเรียบร้อยแล้ว',

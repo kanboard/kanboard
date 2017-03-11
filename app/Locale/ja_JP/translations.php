@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'ユーザを追加しました。',
     'Unable to create your user.' => 'ユーザの追加に失敗しました。',
     'User updated successfully.' => 'ユーザを更新しました。',
-    'Unable to update your user.' => 'ユーザの更新に失敗しました。',
     'User removed successfully.' => 'ユーザを削除しました。',
     'Unable to remove this user.' => 'ユーザの削除に失敗しました。',
     'Board updated successfully.' => 'ボードを更新しました。',

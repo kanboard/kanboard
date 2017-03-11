@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Felhasználó létrehozva.',
     'Unable to create your user.' => 'Felhasználó létrehozása sikertelen.',
     'User updated successfully.' => 'Felhasználó sikeresen frissítve.',
-    'Unable to update your user.' => 'Felhasználó frissítése sikertelen.',
     'User removed successfully.' => 'Felhasználó sikeresen törölve.',
     'Unable to remove this user.' => 'Felhasználó törlése sikertelen.',
     'Board updated successfully.' => 'Tábla sikeresen frissítve.',

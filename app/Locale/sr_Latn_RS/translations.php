@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Korisnik uspešno kreiran',
     'Unable to create your user.' => 'Nije uspelo kreiranje korisnika.',
     'User updated successfully.' => 'Korisnik uspešno ažuriran.',
-    'Unable to update your user.' => 'Nije moguće ažuriranje korisnika.',
     'User removed successfully.' => 'Korisnik uspešno uklonjen.',
     'Unable to remove this user.' => 'Nije moguće uklanjanje korisnika.',
     'Board updated successfully.' => 'Tabla uspešno ažurirana.',

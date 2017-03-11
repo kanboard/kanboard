@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Użytkownik dodany',
     'Unable to create your user.' => 'Nie udało się dodać użytkownika.',
     'User updated successfully.' => 'Profil użytkownika został zaaktualizowany.',
-    'Unable to update your user.' => 'Nie udało się zaktualizować użytkownika.',
     'User removed successfully.' => 'Użytkownik usunięty.',
     'Unable to remove this user.' => 'Nie udało się usunąć użytkownika.',
     'Board updated successfully.' => 'Tablica została zaktualizowana.',

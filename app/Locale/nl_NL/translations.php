@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Gebruiker succesvol aangemaakt.',
     'Unable to create your user.' => 'Aanmaken van gebruiker niet gelukt.',
     'User updated successfully.' => 'Gebruiker succesvol geupdate',
-    'Unable to update your user.' => 'Updaten van gebruiker niet gelukt.',
     'User removed successfully.' => 'Gebruiker succesvol verwijderd.',
     'Unable to remove this user.' => 'Verwijderen van gebruikers niet gelukt.',
     'Board updated successfully.' => 'Board succesvol geupdate.',

@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Användaren har skapats.',
     'Unable to create your user.' => 'Kunde inte skapa din användare.',
     'User updated successfully.' => 'Användaren har updaterats.',
-    'Unable to update your user.' => 'Kunde inte uppdatera din användare.',
     'User removed successfully.' => 'Användaren har tagits bort.',
     'Unable to remove this user.' => 'Kunde inte ta bort denna användare.',
     'Board updated successfully.' => 'Tavlan uppdaterad.',

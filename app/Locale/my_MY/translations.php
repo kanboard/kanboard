@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Pengguna berhasil dibuat.',
     'Unable to create your user.' => 'Tidak dapat membuat pengguna anda.',
     'User updated successfully.' => 'Pengguna berhasil diperbaharui.',
-    'Unable to update your user.' => 'Tidak dapat memperbaharui pengguna anda.',
     'User removed successfully.' => 'pengguna berhasil dihapus.',
     'Unable to remove this user.' => 'Tidak dapat menghapus pengguna ini.',
     'Board updated successfully.' => 'Papan berhasil diperbaharui.',

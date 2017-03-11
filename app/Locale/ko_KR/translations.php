@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => '사용자를 추가했습니다.',
     'Unable to create your user.' => '사용자의 추가에 실패했습니다.',
     'User updated successfully.' => '사용자를 갱신했습니다.',
-    'Unable to update your user.' => '사용자의 갱신에 실패했습니다.',
     'User removed successfully.' => '사용자를 삭제했습니다.',
     'Unable to remove this user.' => '사용자 삭제에 실패했습니다.',
     'Board updated successfully.' => '보드를 갱신했습니다.',

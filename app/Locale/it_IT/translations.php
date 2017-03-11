@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Utente creato con successo.',
     'Unable to create your user.' => 'Impossibile creare l\'utente.',
     'User updated successfully.' => 'Utente aggiornato con successo.',
-    'Unable to update your user.' => 'Impossibile aggiornare questo utente.',
     'User removed successfully.' => 'Utente cancellato con successo.',
     'Unable to remove this user.' => 'Impossibile cancellare questo utente.',
     'Board updated successfully.' => 'Bacheca aggiornata con successo.',

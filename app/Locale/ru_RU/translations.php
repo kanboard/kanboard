@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Пользователь создан.',
     'Unable to create your user.' => 'Не удалось создать пользователя.',
     'User updated successfully.' => 'Пользователь обновлён.',
-    'Unable to update your user.' => 'Не удалось обновить пользователя.',
     'User removed successfully.' => 'Пользователь удалён.',
     'Unable to remove this user.' => 'Не удалось удалить пользователя.',
     'Board updated successfully.' => 'Доска успешно обновлена.',

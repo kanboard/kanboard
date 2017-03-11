@@ -36,7 +36,7 @@ class AvatarFileController extends BaseController
             $this->flash->failure(t('Unable to upload files, check the permissions of your data folder.'));
         }
 
-        $this->response->redirect($this->helper->url->to('AvatarFileController', 'show', array('user_id' => $user['id'])));
+        $this->renderResponse($user['id']);
     }
 
     /**
@@ -48,7 +48,7 @@ class AvatarFileController extends BaseController
         $user = $this->getUser();
         $this->avatarFileModel->remove($user['id']);
         $this->userSession->refresh($user['id']);
-        $this->response->redirect($this->helper->url->to('AvatarFileController', 'show', array('user_id' => $user['id'])));
+        $this->renderResponse($user['id']);
     }
 
     /**
@@ -89,6 +89,15 @@ class AvatarFileController extends BaseController
                 ->toOutput();
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
+        }
+    }
+
+    protected function renderResponse($userId)
+    {
+        if ($this->request->isAjax()) {
+            $this->show();
+        } else {
+            $this->response->redirect($this->helper->url->to('AvatarFileController', 'show', array('user_id' => $userId)));
         }
     }
 }

@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Käyttäjä lisättiin onnistuneesti.',
     'Unable to create your user.' => 'Käyttäjän lisäys epäonnistui.',
     'User updated successfully.' => 'Käyttäjätietojen päivitys onnistui.',
-    'Unable to update your user.' => 'Käyttäjätietojen päivitys epäonnistui.',
     'User removed successfully.' => 'Käyttäjä poistettiin onnistuneesti.',
     'Unable to remove this user.' => 'Käyttäjän poistaminen epäonnistui.',
     'Board updated successfully.' => 'Taulu päivitettiin onnistuneesti.',

@@ -132,7 +132,6 @@ return array(
     'User created successfully.' => 'Benutzer erfolgreich erstellt.',
     'Unable to create your user.' => 'Erstellen des Benutzers nicht möglich.',
     'User updated successfully.' => 'Benutzer erfolgreich geändert.',
-    'Unable to update your user.' => 'Änderung des Benutzers nicht möglich.',
     'User removed successfully.' => 'Benutzer erfolgreich gelöscht.',
     'Unable to remove this user.' => 'Löschen des Benutzers nicht möglich.',
     'Board updated successfully.' => 'Pinnwand erfolgreich geändert.',
