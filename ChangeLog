@@ -9,6 +9,7 @@ Improvements:
 
 * Render QR code for TwoFactor authentication without Google Chart API
 * Add toggle button to show/hide subtasks in task list view
+* Use same layout as task listing for task search
 * Display tags in task list view
 * Make user actions available from contextual menu
 * Change users and groups list layout
