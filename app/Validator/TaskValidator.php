@@ -43,7 +43,7 @@ class TaskValidator extends BaseValidator
             new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
             new Validators\MaxLength('reference', t('The maximum length is %d characters', 50), 50),
             new Validators\Date('date_due', t('Invalid date'), $this->dateParser->getParserFormats()),
-            new Validators\Date('date_started', t('Invalid date'), array($this->dateParser->getUserDateTimeFormat())),
+            new Validators\Date('date_started', t('Invalid date'), $this->dateParser->getDateTimeFormats(true)),
             new Validators\Numeric('time_spent', t('This value must be numeric')),
             new Validators\Numeric('time_estimated', t('This value must be numeric')),
         );
