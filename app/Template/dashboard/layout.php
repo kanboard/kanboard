@@ -12,10 +12,13 @@
             </li>
             <?php endif ?>
             <li>
-                <?= $this->url->icon('search', t('Search'), 'SearchController', 'index') ?>
+                <?= $this->url->icon('folder', t('Project management'), 'ProjectListController', 'show') ?>
             </li>
             <li>
-                <?= $this->url->icon('folder', t('Project management'), 'ProjectListController', 'show') ?>
+                <?= $this->modal->medium('dashboard', t('My activity stream'), 'ActivityController', 'user') ?>
+            </li>
+            <li>
+                <?= $this->modal->medium('calendar', t('My calendar'), 'CalendarController', 'user') ?>
             </li>
         </ul>
     </div>

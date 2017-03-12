@@ -17,17 +17,31 @@ use Kanboard\Model\TaskModel;
 class CalendarController extends BaseController
 {
     /**
-     * Show calendar view for projects
+     * Show calendar view for a user
      *
      * @access public
      */
-    public function show()
+    public function user()
+    {
+        $user = $this->getUser();
+
+        $this->response->html($this->helper->layout->app('calendar/user', array(
+            'user' => $user,
+        )));
+    }
+
+    /**
+     * Show calendar view for a project
+     *
+     * @access public
+     */
+    public function project()
     {
         $project = $this->getProject();
 
-        $this->response->html($this->helper->layout->app('calendar/show', array(
-            'project' => $project,
-            'title' => $project['name'],
+        $this->response->html($this->helper->layout->app('calendar/project', array(
+            'project'     => $project,
+            'title'       => $project['name'],
             'description' => $this->helper->projectHeader->getDescription($project),
         )));
     }
@@ -37,7 +51,7 @@ class CalendarController extends BaseController
      *
      * @access public
      */
-    public function project()
+    public function projectEvents()
     {
         $project_id = $this->request->getIntegerParam('project_id');
         $start = $this->request->getStringParam('start');
@@ -62,7 +76,7 @@ class CalendarController extends BaseController
      *
      * @access public
      */
-    public function user()
+    public function userEvents()
     {
         $user_id = $this->request->getIntegerParam('user_id');
         $start = $this->request->getStringParam('start');

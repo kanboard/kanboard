@@ -75,35 +75,4 @@ class DashboardController extends BaseController
             'user' => $user,
         )));
     }
-
-    /**
-     * My activity stream
-     *
-     * @access public
-     */
-    public function activity()
-    {
-        $user = $this->getUser();
-
-        $this->response->html($this->helper->layout->dashboard('dashboard/activity', array(
-            'title' => t('Activity stream for %s', $this->helper->user->getFullname($user)),
-            'events' => $this->helper->projectActivity->getProjectsEvents($this->projectPermissionModel->getActiveProjectIds($user['id']), 100),
-            'user' => $user,
-        )));
-    }
-
-    /**
-     * My calendar
-     *
-     * @access public
-     */
-    public function calendar()
-    {
-        $user = $this->getUser();
-
-        $this->response->html($this->helper->layout->dashboard('dashboard/calendar', array(
-            'title' => t('Calendar for %s', $this->helper->user->getFullname($user)),
-            'user' => $user,
-        )));
-    }
 }
