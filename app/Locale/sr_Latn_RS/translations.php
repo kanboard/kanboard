@@ -808,7 +808,7 @@ return array(
     // 'Assignee changed on task #%d' => '',
     // '%d overdue tasks' => '',
     // 'Task #%d is overdue' => '',
-    // 'No new notifications.' => '',
+    // 'No notification.' => '',
     // 'Mark all as read' => '',
     // 'Mark as read' => '',
     // 'Total number of tasks in this column across all swimlanes' => '',

@@ -808,7 +808,7 @@ return array(
     'Assignee changed on task #%d' => 'Designação alterada na tarefa #%d',
     '%d overdue tasks' => '%d tarefas atrasadas',
     'Task #%d is overdue' => 'Tarefa #%d está atrasada',
-    'No new notifications.' => 'Nenhuma notificação nova.',
+    'No notification.' => 'Nenhuma notificação nova.',
     'Mark all as read' => 'Marcar todas como lidas',
     'Mark as read' => 'Marcar como lida',
     'Total number of tasks in this column across all swimlanes' => 'Número total de tarefas nesta coluna através de todas as swimlanes',

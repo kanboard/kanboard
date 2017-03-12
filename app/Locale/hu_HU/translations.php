@@ -808,7 +808,7 @@ return array(
     'Assignee changed on task #%d' => 'A #%d számú feladat felelőse megváltozott',
     '%d overdue tasks' => '%d db feladatnál van határidő túllépés',
     'Task #%d is overdue' => 'A #%d számú feladat határideje lejárt',
-    'No new notifications.' => 'Nincs új emlékeztető.',
+    'No notification.' => 'Nincs új emlékeztető.',
     'Mark all as read' => 'Az összes megjelölése olvasottként',
     'Mark as read' => 'Megjelölés olvasottként',
     'Total number of tasks in this column across all swimlanes' => 'Az ebben az oszlopban, az összes sávban lévő feladatok száma',

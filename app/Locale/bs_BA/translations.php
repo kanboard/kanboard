@@ -808,7 +808,7 @@ return array(
     'Assignee changed on task #%d' => 'Promijenjen izvršilac na zadatku #%d',
     '%d overdue tasks' => '%d zadataka kasni',
     'Task #%d is overdue' => 'Zadatak #%d kasni',
-    'No new notifications.' => 'Nema novih obavještenja.',
+    'No notification.' => 'Nema novih obavještenja.',
     'Mark all as read' => 'Označi sve kao pročitano',
     'Mark as read' => 'Označi kao pročitano',
     'Total number of tasks in this column across all swimlanes' => 'Ukupan broj zadataka u ovoj koloni u svim swimlane trakama',

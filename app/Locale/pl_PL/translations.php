@@ -808,7 +808,7 @@ return array(
     'Assignee changed on task #%d' => 'Zmieniono osobę odpowiedzialną dla zadania #%d',
     '%d overdue tasks' => '%d zaległych zadań',
     'Task #%d is overdue' => 'Zadanie #%d jest zaległe',
-    'No new notifications.' => 'Brak nowych powiadomień.',
+    'No notification.' => 'Brak nowych powiadomień.',
     'Mark all as read' => 'Oznacz wszystkie jako przeczytane',
     'Mark as read' => 'Oznacz jako przeczytane',
     'Total number of tasks in this column across all swimlanes' => 'Całkowita liczba zadań z tej kolumny z wszystkich torów',

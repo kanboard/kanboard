@@ -808,7 +808,7 @@ return array(
     'Assignee changed on task #%d' => 'Orang yang ditugaskan diganti pada tugas #%d',
     '%d overdue tasks' => '%d tugas kadaluarsa',
     'Task #%d is overdue' => 'Tugas #%d sudah kadaluarsa',
-    'No new notifications.' => 'Tidak ada notifikasi baru',
+    'No notification.' => 'Tidak ada notifikasi baru',
     'Mark all as read' => 'Tandai semua sebagai sudah dibaca',
     'Mark as read' => 'Tandai sebagai sudah dibaca',
     'Total number of tasks in this column across all swimlanes' => 'Total tugas di kolom ini untuk semua swimlane',

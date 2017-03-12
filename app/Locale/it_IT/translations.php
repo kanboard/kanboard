@@ -808,7 +808,7 @@ return array(
     'Assignee changed on task #%d' => 'Assegnatario modificato per il task #%d',
     '%d overdue tasks' => '%d task scaduti',
     'Task #%d is overdue' => 'Il task #%d è scaduto',
-    'No new notifications.' => 'Nessuna nuova notifica.',
+    'No notification.' => 'Nessuna nuova notifica.',
     'Mark all as read' => 'Segna tutti come letti',
     'Mark as read' => 'Segna come letto',
     'Total number of tasks in this column across all swimlanes' => 'Numero totale di task in questa colonna per tutte le corsie',

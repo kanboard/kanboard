@@ -808,7 +808,7 @@ return array(
     'Assignee changed on task #%d' => 'Изменён назначенный у задачи #%d',
     '%d overdue tasks' => '%d просроченных задач',
     'Task #%d is overdue' => 'Задача #%d просрочена',
-    'No new notifications.' => 'Нет новых уведомлений.',
+    'No notification.' => 'Нет новых уведомлений.',
     'Mark all as read' => 'Пометить все прочитанными',
     'Mark as read' => 'Пометить прочитанным',
     'Total number of tasks in this column across all swimlanes' => 'Общее число задач в этой колонке на всех дорожках',

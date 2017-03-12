@@ -106,20 +106,4 @@ class DashboardController extends BaseController
             'user' => $user,
         )));
     }
-
-    /**
-     * My notifications
-     *
-     * @access public
-     */
-    public function notifications()
-    {
-        $user = $this->getUser();
-
-        $this->response->html($this->helper->layout->dashboard('dashboard/notifications', array(
-            'title' => t('Notifications for %s', $this->helper->user->getFullname($user)),
-            'notifications' => $this->userUnreadNotificationModel->getAll($user['id']),
-            'user' => $user,
-        )));
-    }
 }

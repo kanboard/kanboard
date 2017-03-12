@@ -808,7 +808,7 @@ return array(
     'Assignee changed on task #%d' => '#%d 할일의 담당자가 변경됩니다',
     '%d overdue tasks' => '할일의 기한이 %d일 지났습니다',
     'Task #%d is overdue' => '#%d 할일의 기한이 지났습니다',
-    'No new notifications.' => '알림이 없습니다',
+    'No notification.' => '알림이 없습니다',
     'Mark all as read' => '모두 읽음',
     'Mark as read' => '읽음',
     'Total number of tasks in this column across all swimlanes' => '모든 스웜라인 칼럼의 할일 수',

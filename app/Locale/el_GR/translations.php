@@ -808,7 +808,7 @@ return array(
     'Assignee changed on task #%d' => 'Η ανάθεση άλλαξε για την εργασία n°%d',
     '%d overdue tasks' => '%d εκπρόθεσμες εργασίες',
     'Task #%d is overdue' => 'Η εργασία n°%d είναι εκπρόθεσμη',
-    'No new notifications.' => 'Χωρίς νέες ειδοποιήσεις.',
+    'No notification.' => 'Χωρίς νέες ειδοποιήσεις.',
     'Mark all as read' => 'Μαρκάρισμα όλων ως διαβασμένα',
     'Mark as read' => 'Μαρκάρισμα ως διαβασμένο',
     'Total number of tasks in this column across all swimlanes' => 'Συνολικός αριθμός εργασιών σε αυτήν τη στήλη σε όλες τις λωρίδες',

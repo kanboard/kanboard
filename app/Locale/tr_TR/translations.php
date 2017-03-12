@@ -808,7 +808,7 @@ return array(
     'Assignee changed on task #%d' => '#%d görevine atanan değişti',
     '%d overdue tasks' => '%d gecikmiş görev',
     'Task #%d is overdue' => '#%d görevi gecikti',
-    'No new notifications.' => 'Yeni bildirim yok.',
+    'No notification.' => 'Yeni bildirim yok.',
     'Mark all as read' => 'Tümünü okunmuş olarak işaretle',
     'Mark as read' => 'Okunmuş olarak işaretle',
     'Total number of tasks in this column across all swimlanes' => 'Bu sutündaki görev sayısının tüm kulvarlardaki toplamı',

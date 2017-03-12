@@ -808,7 +808,7 @@ return array(
     'Assignee changed on task #%d' => '任务#%d的指派人已改变',
     '%d overdue tasks' => '%d条超期任务',
     'Task #%d is overdue' => '任务#%d已超期',
-    'No new notifications.' => '没有新通知',
+    'No notification.' => '没有新通知',
     'Mark all as read' => '标记所有为已读',
     'Mark as read' => '标记为已读',
     'Total number of tasks in this column across all swimlanes' => '此任务栏下的任务数（跨里程碑）',

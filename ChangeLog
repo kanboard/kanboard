@@ -7,6 +7,7 @@ New features:
 
 Improvements:
 
+* Move notifications outside of dashboard
 * Render QR code for TwoFactor authentication without Google Chart API
 * Add toggle button to show/hide subtasks in task list view
 * Use same layout as task listing for task search

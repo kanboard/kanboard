@@ -808,7 +808,7 @@ return array(
     'Assignee changed on task #%d' => 'Neue Zuordnung für Aufgabe #%d ',
     '%d overdue tasks' => '%d überfällige Aufgaben',
     'Task #%d is overdue' => 'Aufgabe #%d ist überfällig',
-    'No new notifications.' => 'Keine neuen Benachrichtigungen',
+    'No notification.' => 'Keine neuen Benachrichtigungen',
     'Mark all as read' => 'Alles als gelesen markieren',
     'Mark as read' => 'Als gelesen markieren',
     'Total number of tasks in this column across all swimlanes' => 'Anzahl an Aufgaben in dieser Spalte über alle Swimlanes',
