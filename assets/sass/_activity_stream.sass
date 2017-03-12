@@ -4,8 +4,10 @@
 .activity-event
   margin-bottom: 15px
   padding: 10px
-  &:hover
+  &:nth-child(even)
     background: #fafafa
+  &:hover
+    background: map-get($highlight-colors, 'background')
 
 .activity-date
   margin-left: 10px
