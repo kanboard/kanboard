@@ -19,7 +19,7 @@ class ActivityController extends BaseController
     {
         $user = $this->getUser();
 
-        $this->response->html($this->helper->layout->dashboard('activity/user', array(
+        $this->response->html($this->template->render('activity/user', array(
             'title'  => t('Activity stream for %s', $this->helper->user->getFullname($user)),
             'events' => $this->helper->projectActivity->getProjectsEvents($this->projectPermissionModel->getActiveProjectIds($user['id']), 100),
             'user'   => $user,

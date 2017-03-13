@@ -77,6 +77,7 @@ use Pimple\Container;
  * @property \Kanboard\Formatter\TaskICalFormatter                   $taskICalFormatter
  * @property \Kanboard\Formatter\TaskListFormatter                   $taskListFormatter
  * @property \Kanboard\Formatter\TaskListSubtaskFormatter            $taskListSubtaskFormatter
+ * @property \Kanboard\Formatter\TaskListSubtaskAssigneeFormatter    $taskListSubtaskAssigneeFormatter
  * @property \Kanboard\Formatter\TaskSuggestMenuFormatter            $taskSuggestMenuFormatter
  * @property \Kanboard\Formatter\UserAutoCompleteFormatter           $userAutoCompleteFormatter
  * @property \Kanboard\Formatter\UserMentionFormatter                $userMentionFormatter
@@ -151,9 +152,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserNotificationFilterModel             $userNotificationFilterModel
  * @property \Kanboard\Model\UserUnreadNotificationModel             $userUnreadNotificationModel
  * @property \Kanboard\Model\UserMetadataModel                       $userMetadataModel
- * @property \Kanboard\Pagination\TaskPagination                     $taskPagination
- * @property \Kanboard\Pagination\SubtaskPagination                  $subtaskPagination
- * @property \Kanboard\Pagination\ProjectPagination                  $projectPagination
+ * @property \Kanboard\Pagination\DashboardPagination                $dashboardPagination
  * @property \Kanboard\Pagination\UserPagination                     $userPagination
  * @property \Kanboard\Validator\ActionValidator                     $actionValidator
  * @property \Kanboard\Validator\AuthValidator                       $authValidator

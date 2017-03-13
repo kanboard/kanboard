@@ -141,19 +141,6 @@ class LayoutHelper extends Base
     }
 
     /**
-     * Common layout for dashboard views
-     *
-     * @access public
-     * @param  string $template
-     * @param  array  $params
-     * @return string
-     */
-    public function dashboard($template, array $params)
-    {
-        return $this->subLayout('dashboard/layout', 'dashboard/sidebar', $template, $params);
-    }
-
-    /**
      * Common layout for analytic views
      *
      * @access public

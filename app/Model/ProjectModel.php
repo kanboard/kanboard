@@ -297,27 +297,6 @@ class ProjectModel extends Base
     }
 
     /**
-     * Get project summary for a list of project
-     *
-     * @access public
-     * @param  array      $project_ids     List of project id
-     * @return \PicoDb\Table
-     */
-    public function getQueryColumnStats(array $project_ids)
-    {
-        if (empty($project_ids)) {
-            return $this->db->table(ProjectModel::TABLE)->eq(ProjectModel::TABLE.'.id', 0);
-        }
-
-        return $this->db
-                    ->table(ProjectModel::TABLE)
-                    ->columns(self::TABLE.'.*', UserModel::TABLE.'.username AS owner_username', UserModel::TABLE.'.name AS owner_name')
-                    ->join(UserModel::TABLE, 'id', 'owner_id')
-                    ->in(self::TABLE.'.id', $project_ids)
-                    ->callback(array($this, 'applyColumnStats'));
-    }
-
-    /**
      * Get query for list of project without column statistics
      *
      * @access public
