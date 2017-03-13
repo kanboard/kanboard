@@ -95,6 +95,6 @@ class ProjectStatusController extends BaseController
             $this->flash->failure(t('Unable to remove this project.'));
         }
 
-        $this->response->redirect($this->helper->url->to('ProjectListController', 'show'), true);
+        $this->response->redirect($this->helper->url->to('ProjectListController', 'show'));
     }
 }
