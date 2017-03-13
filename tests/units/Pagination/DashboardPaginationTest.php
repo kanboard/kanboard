@@ -63,7 +63,7 @@ class DashboardPaginationTest extends Base
         $this->assertTrue($projectUserRoleModel->addUser(1, 2, Role::PROJECT_MEMBER));
         $this->assertTrue($projectUserRoleModel->addUser(2, 2, Role::PROJECT_MEMBER));
 
-        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task #1', 'project_id' => 2)));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task #1', 'project_id' => 2, 'priority' => 3)));
         $this->assertEquals(2, $taskCreationModel->create(array('title' => 'Task #2', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 2)));
         $this->assertEquals(3, $taskCreationModel->create(array('title' => 'Task #3', 'project_id' => 2, 'owner_id' => 2)));
 
