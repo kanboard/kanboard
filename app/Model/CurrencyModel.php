@@ -45,6 +45,8 @@ class CurrencyModel extends Base
             'CNY' => t('CNY - Chinese Yuan'),
             'TRL' => t('TRL - Turkish Lira'),
             'HRK' => t('HRK - Kuna'),
+            'ARS' => t('ARS - Argetinian Peso'),
+            'COP' => t('COP - Colombian Peso'),
         );
     }
 
