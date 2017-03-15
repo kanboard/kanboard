@@ -28,7 +28,7 @@
                     <?= $this->text->e($this->user->getInitials($task['assignee_name'] ?: $task['assignee_username'])) ?>
                 </span> -
             <?php endif ?>
-            <?= $this->text->e($task['title']) ?>
+            <span title="<?= $this->text->e($task['title']) ?>"><?= $this->text->e($task['title']) ?></span>
         </div>
     <?php else: ?>
         <div class="task-board-expanded">
