@@ -67,4 +67,56 @@ class TaskValidatorTest extends Base
         $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'swimlane_id' => 0));
         $this->assertFalse($result[0]);
     }
+
+    public function testDateField()
+    {
+        $taskValidator = new TaskValidator($this->container);
+
+        // date_due
+        // ISO dates
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '2017-02-01'));
+        $this->assertTrue($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '2017-02-01 13:15'));
+        $this->assertTrue($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '2017-02-01 1:15 pm'));
+        $this->assertFalse($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '2017_02_01'));
+        $this->assertTrue($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '2017_02_01 13:15'));
+        $this->assertTrue($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '2017_02_01 1:15 am'));
+        $this->assertFalse($result[0]);
+
+        // d/m/Y dates
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '02/01/2017'));
+        $this->assertTrue($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '02/01/2017 13:15'));
+        $this->assertTrue($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '02/01/2017 1:15 pm'));
+        $this->assertFalse($result[0]);
+
+
+        // date_started
+        // ISO dates
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_started' => '2017-02-01'));
+        $this->assertTrue($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_started' => '2017-02-01 13:15'));
+        $this->assertTrue($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_started' => '2017-02-01 1:15 pm'));
+        $this->assertFalse($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_started' => '2017_02_01'));
+        $this->assertTrue($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_started' => '2017_02_01 13:15'));
+        $this->assertTrue($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_started' => '2017_02_01 1:15 pm'));
+        $this->assertFalse($result[0]);
+
+        // d/m/Y dates
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_started' => '02/01/2017'));
+        $this->assertTrue($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_started' => '02/01/2017 13:15'));
+        $this->assertTrue($result[0]);
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_started' => '02/01/2017 1:15 pm'));
+        $this->assertFalse($result[0]);
+    }
 }
