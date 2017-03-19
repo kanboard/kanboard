@@ -1,4 +1,6 @@
 <div class="table-list-icons">
+    &nbsp;
+
     <?php if ($project['is_public']): ?>
         <i class="fa fa-share-alt fa-fw" title="<?= t('Shared project') ?>"></i>
     <?php endif ?>
@@ -18,6 +20,6 @@
     <?php endif ?>
 
     <?php if ($project['is_active'] == 0): ?>
-    <i class="fa fa-ban fa-fw" aria-hidden="true" title="<?= t('Closed') ?>"></i><?= t('Closed') ?>
+        <i class="fa fa-ban fa-fw" aria-hidden="true" title="<?= t('Closed') ?>"></i><?= t('Closed') ?>
     <?php endif ?>
 </div>
