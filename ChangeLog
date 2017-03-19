@@ -1,5 +1,5 @@
-Version 1.0.41 (unreleased)
----------------------------
+Version 1.0.41
+--------------
 
 New features:
 
@@ -16,6 +16,8 @@ Improvements:
 * Make user actions available from contextual menu
 * Change users and groups list layout
 * Project priority is always rendered now
+* Do not list private projects when adding a new user
+* Restore link for task title on board
 
 Breaking Changes:
 
