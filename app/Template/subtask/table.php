@@ -21,7 +21,7 @@
                         'task' => $task,
                         'subtask' => $subtask,
                     )) ?>
-                    <?= $this->subtask->renderToggleStatus($task, $subtask, true) ?>
+                    <?= $this->subtask->renderToggleStatus($task, $subtask, 'table') ?>
                 <?php else: ?>
                     <?= $this->subtask->renderTitle($subtask) ?>
                 <?php endif ?>

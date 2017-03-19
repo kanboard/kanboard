@@ -69,7 +69,8 @@
                         )) ?>
 
                         <?= $this->render('task_list/task_subtasks', array(
-                            'task' => $task,
+                            'task'    => $task,
+                            'user_id' => $user['id'],
                         )) ?>
                     </div>
                 <?php endforeach ?>

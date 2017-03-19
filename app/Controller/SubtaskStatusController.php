@@ -19,11 +19,20 @@ class SubtaskStatusController extends BaseController
     {
         $task = $this->getTask();
         $subtask = $this->getSubtask();
+        $fragment = $this->request->getStringParam('fragment');
 
         $status = $this->subtaskStatusModel->toggleStatus($subtask['id']);
         $subtask['status'] = $status;
 
-        $this->response->html($this->helper->subtask->renderToggleStatus($task, $subtask));
+        if ($fragment === 'table') {
+            $html = $this->renderTable($task);
+        } elseif ($fragment === 'rows') {
+            $html = $this->renderRows($task);
+        } else {
+            $html = $this->helper->subtask->renderToggleStatus($task, $subtask);
+        }
+
+        $this->response->html($html);
     }
 
     /**
@@ -48,5 +57,44 @@ class SubtaskStatusController extends BaseController
             'task'    => $task,
             'subtask' => $this->subtaskModel->getByIdWithDetails($subtaskId),
         )));
+    }
+
+    /**
+     * Render table
+     *
+     * @access protected
+     * @param  array  $task
+     * @return string
+     */
+    protected function renderTable(array $task)
+    {
+        return $this->template->render('subtask/table', array(
+            'task'     => $task,
+            'subtasks' => $this->subtaskModel->getAll($task['id']),
+            'editable' => true,
+        ));
+    }
+
+    /**
+     * Render task list rows
+     *
+     * @access protected
+     * @param  array  $task
+     * @return string
+     */
+    protected function renderRows(array $task)
+    {
+        $userId = $this->request->getIntegerParam('user_id');
+
+        if ($userId > 0) {
+            $task['subtasks'] = $this->subtaskModel->getAllByTaskIdsAndAssignee(array($task['id']), $userId);
+        } else {
+            $task['subtasks'] = $this->subtaskModel->getAll($task['id']);
+        }
+
+        return $this->template->render('task_list/task_subtasks', array(
+            'task'    => $task,
+            'user_id' => $userId,
+        ));
     }
 }
