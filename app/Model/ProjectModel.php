@@ -202,16 +202,23 @@ class ProjectModel extends Base
      * Return the list of all projects
      *
      * @access public
-     * @param  bool     $prepend   If true, prepend to the list the value 'None'
+     * @param  bool $prependNone
+     * @param  bool $noPrivateProjects
      * @return array
      */
-    public function getList($prepend = true)
+    public function getList($prependNone = true, $noPrivateProjects = true)
     {
-        if ($prepend) {
-            return array(t('None')) + $this->db->hashtable(self::TABLE)->asc('name')->getAll('id', 'name');
+        if ($noPrivateProjects) {
+            $projects = $this->db->hashtable(self::TABLE)->eq('is_private', 0)->asc('name')->getAll('id', 'name');
+        } else {
+            $projects = $this->db->hashtable(self::TABLE)->asc('name')->getAll('id', 'name');
         }
 
-        return $this->db->hashtable(self::TABLE)->asc('name')->getAll('id', 'name');
+        if ($prependNone) {
+            return array(t('None')) + $projects;
+        }
+
+        return $projects;
     }
 
     /**

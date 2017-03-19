@@ -354,4 +354,17 @@ class ProjectModelTest extends Base
         $this->assertEquals('', $project['owner_username']);
         $this->assertEquals(0, $project['owner_id']);
     }
+
+    public function testGetList()
+    {
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project B'), 1));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project A', 'is_private' => 1), 1));
+
+        $this->assertEquals(array(0 => 'None', 1 => 'Project B'), $projectModel->getList());
+        $this->assertEquals(array(1 => 'Project B'), $projectModel->getList(false));
+        $this->assertEquals(array(2 => 'Project A', 1 => 'Project B'), $projectModel->getList(false, false));
+        $this->assertEquals(array(0 => 'None', 2 => 'Project A', 1 => 'Project B'), $projectModel->getList(true, false));
+    }
 }
