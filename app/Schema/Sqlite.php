@@ -951,7 +951,7 @@ function version_33(PDO $pdo)
             id INTEGER PRIMARY KEY,
             date_creation INTEGER NOT NULL,
             event_name TEXT NOT NULL,
-            creator_id INTEGE NOT NULL,
+            creator_id INTEGER NOT NULL,
             project_id INTEGER NOT NULL,
             task_id INTEGER NOT NULL,
             data TEXT,
