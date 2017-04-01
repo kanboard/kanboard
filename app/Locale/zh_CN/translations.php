@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => '无法添加此汇率',
     'Webhook URL' => '网络钩子 URL',
     '%s removed the assignee of the task %s' => '%s删除了任务%s的负责人',
-    'Enable Gravatar images' => '启用 Gravatar 图像',
     'Information' => '信息',
     'Check two factor authentication code' => '检查双重认证码',
     'The two factor authentication code is not valid.' => '双重认证码不正确。',
@@ -625,7 +624,6 @@ return array(
     'Notification' => '通知',
     '%s moved the task #%d to the first swimlane' => '%s将任务#%d移动到了首个里程碑',
     'Swimlane' => '里程碑',
-    'Gravatar' => 'Gravatar头像',
     '%s moved the task %s to the first swimlane' => '%s将任务%s移动到了首个里程碑',
     '%s moved the task %s to the swimlane "%s"' => '%s将任务%s移动到了里程碑"%s"下',
     'This report contains all subtasks information for the given date range.' => '该报告包含了指定日期范围内的所有子任务信息。',
@@ -1320,4 +1318,5 @@ return array(
     // 'User disabled' => '',
     // '%d notifications' => '',
     // '%d notification' => '',
+    // 'There is no external integration installed.' => '',
 );

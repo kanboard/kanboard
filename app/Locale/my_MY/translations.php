@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => 'Tidak dapat menambahkan nilai tukar mata uang',
     'Webhook URL' => 'URL webhook',
     '%s removed the assignee of the task %s' => '%s menghapus penugasan dari tugas %s',
-    'Enable Gravatar images' => 'Mengaktifkan gambar Gravatar',
     'Information' => 'Informasi',
     'Check two factor authentication code' => 'Cek dua faktor kode otentifikasi',
     'The two factor authentication code is not valid.' => 'Kode dua faktor kode otentifikasi tidak valid.',
@@ -625,7 +624,6 @@ return array(
     'Notification' => 'Pemberitahuan',
     '%s moved the task #%d to the first swimlane' => '%s memindahkan tugas n°%d ke swimlane pertama',
     'Swimlane' => 'Swimlane',
-    'Gravatar' => 'Gravatar',
     '%s moved the task %s to the first swimlane' => '%s memindahkan tugas %s ke swimlane pertama',
     '%s moved the task %s to the swimlane "%s"' => '%s memindahkan tugas %s ke swimlane « %s »',
     'This report contains all subtasks information for the given date range.' => 'Laporan ini berisi semua informasi subtugas untuk rentang tanggal tertentu.',
@@ -1320,4 +1318,5 @@ return array(
     // 'User disabled' => '',
     // '%d notifications' => '',
     // '%d notification' => '',
+    // 'There is no external integration installed.' => '',
 );

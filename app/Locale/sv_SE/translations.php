@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => 'Kunde inte lägga till valutakursen.',
     'Webhook URL' => 'Webhook URL',
     '%s removed the assignee of the task %s' => '%s ta bort tilldelningen av uppgiften %s',
-    'Enable Gravatar images' => 'Aktivera Gravatar bilder',
     'Information' => 'Information',
     'Check two factor authentication code' => 'Kolla tvåfaktorsverifieringskod',
     'The two factor authentication code is not valid.' => 'Tvåfaktorsverifieringskoden är inte giltig.',
@@ -625,7 +624,6 @@ return array(
     'Notification' => 'Notis',
     '%s moved the task #%d to the first swimlane' => '%s flyttade uppgiften #%d till första swimlane',
     'Swimlane' => 'Swimlane',
-    'Gravatar' => 'Gravatar',
     '%s moved the task %s to the first swimlane' => '%s flyttade uppgiften %s till första swimlane',
     '%s moved the task %s to the swimlane "%s"' => '%s flyttade uppgiften %s till swimlane "%s"',
     'This report contains all subtasks information for the given date range.' => 'Denna rapport innehåller all deluppgiftsinformation för det givna datumintervallet.',
@@ -1320,4 +1318,5 @@ return array(
     // 'User disabled' => '',
     // '%d notifications' => '',
     // '%d notification' => '',
+    // 'There is no external integration installed.' => '',
 );

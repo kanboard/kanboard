@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => 'Impossibile aggiungere questo tasso di cambio.',
     'Webhook URL' => 'URL Webhook',
     '%s removed the assignee of the task %s' => '%s rimuove l\'assegnatario del task %s',
-    'Enable Gravatar images' => 'Abilita immagini Gravatar',
     'Information' => 'Informazioni',
     'Check two factor authentication code' => 'Controlla il codice di autenticazione "two-factor"',
     'The two factor authentication code is not valid.' => 'Il codice di autenticazione "two-factor" non è valido',
@@ -625,7 +624,6 @@ return array(
     'Notification' => 'Notifica',
     '%s moved the task #%d to the first swimlane' => '%s ha spostato il task #%d nella prima corsia',
     'Swimlane' => 'Corsia',
-    // 'Gravatar' => '',
     '%s moved the task %s to the first swimlane' => '%s ha spostato il task %s nella prima corsia',
     '%s moved the task %s to the swimlane "%s"' => '%s ha spostato il task %s nella corsia %s',
     'This report contains all subtasks information for the given date range.' => 'Questo report contiente tutte le informazioni sui sotto-task nell\'arco temporale indicato.',
@@ -1320,4 +1318,5 @@ return array(
     // 'User disabled' => '',
     // '%d notifications' => '',
     // '%d notification' => '',
+    // 'There is no external integration installed.' => '',
 );

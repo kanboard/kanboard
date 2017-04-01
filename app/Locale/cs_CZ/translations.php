@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => 'Nelze přidat tento směnný kurz',
     'Webhook URL' => 'Webhook URL',
     '%s removed the assignee of the task %s' => '%s odstranil přiřazení úkolu %s ',
-    'Enable Gravatar images' => 'Aktiviere Gravatar Bilder',
     'Information' => 'Informace',
     'Check two factor authentication code' => 'Zkontrolujte dvouúrovňový autentifikační klíč',
     'The two factor authentication code is not valid.' => 'Dvouúrovňový autentifikační klíč není platný.',
@@ -625,7 +624,6 @@ return array(
     'Notification' => 'Upozornění',
     '%s moved the task #%d to the first swimlane' => '%s přesunul úkol #%d do první dráhy',
     // 'Swimlane' => '',
-    // 'Gravatar' => '',
     '%s moved the task %s to the first swimlane' => '%s přesunul úkol %s do první dráhy',
     '%s moved the task %s to the swimlane "%s"' => '%s přesunul úkol %s do dráhy "%s"',
     'This report contains all subtasks information for the given date range.' => 'Report obsahuje všechny informace o dílčích úkolech pro daný časový úsek',
@@ -1320,4 +1318,5 @@ return array(
     // 'User disabled' => '',
     // '%d notifications' => '',
     // '%d notification' => '',
+    // 'There is no external integration installed.' => '',
 );

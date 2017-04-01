@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => 'ไม่สามารถเพิ่มค่าเงินนี้',
     // 'Webhook URL' => '',
     '%s removed the assignee of the task %s' => '%s เอาผู้รับผิดชอบออกจากงาน %s',
-    'Enable Gravatar images' => 'สามารถใช้งานภาพ Gravatar',
     'Information' => 'ข้อมูลสารสนเทศ',
     // 'Check two factor authentication code' => '',
     // 'The two factor authentication code is not valid.' => '',
@@ -625,7 +624,6 @@ return array(
     'Notification' => 'แจ้งเตือน',
     '%s moved the task #%d to the first swimlane' => '%s ย้ายงาน #%d ไปสวินเลนแรก',
     'Swimlane' => 'สวิมเลน',
-    'Gravatar' => 'รูปแทนตัว',
     '%s moved the task %s to the first swimlane' => '%s ย้ายงาน %s ไปสวินเลนแรก',
     '%s moved the task %s to the swimlane "%s"' => '%s ย้ายงาน %s ไปสวินเลนไปสวินเลน "%s"',
     'This report contains all subtasks information for the given date range.' => 'รายงานนี้มีข้อมูลงานย่อยทั้งหมดในช่วงวันที่กำหนด',
@@ -1320,4 +1318,5 @@ return array(
     // 'User disabled' => '',
     // '%d notifications' => '',
     // '%d notification' => '',
+    // 'There is no external integration installed.' => '',
 );

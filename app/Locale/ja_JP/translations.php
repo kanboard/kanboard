@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => 'この通貨レートを追加できません。',
     'Webhook URL' => 'Webhook URL',
     '%s removed the assignee of the task %s' => '%s がタスク「%s」の担当を解除しました。',
-    'Enable Gravatar images' => 'Gravatar イメージを有効化',
     'Information' => '情報　',
     'Check two factor authentication code' => '2 段認証をチェックする',
     'The two factor authentication code is not valid.' => '2 段認証コードは無効です。',
@@ -625,7 +624,6 @@ return array(
     // 'Notification' => '',
     // '%s moved the task #%d to the first swimlane' => '',
     // 'Swimlane' => '',
-    // 'Gravatar' => '',
     // '%s moved the task %s to the first swimlane' => '',
     // '%s moved the task %s to the swimlane "%s"' => '',
     // 'This report contains all subtasks information for the given date range.' => '',
@@ -1320,4 +1318,5 @@ return array(
     // 'User disabled' => '',
     // '%d notifications' => '',
     // '%d notification' => '',
+    // 'There is no external integration installed.' => '',
 );

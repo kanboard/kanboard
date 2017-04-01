@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => 'Αδύνατο να προστεθεί αυτή η ισοτιμία.',
     'Webhook URL' => 'Webhook URL',
     '%s removed the assignee of the task %s' => '%s αφαίρεσε τον εκδοχέα της εργασίας %s',
-    'Enable Gravatar images' => 'Ενεργοποίηση εικόνων Gravatar',
     'Information' => 'Πληροφορίες',
     'Check two factor authentication code' => 'Ελέγξτε δύο παράγοντες ελέγχου ταυτότητας κωδικού',
     'The two factor authentication code is not valid.' => 'Ο κωδικός ελέγχου ταυτότητας δύο παραγόντων δεν είναι σωστός.',
@@ -625,7 +624,6 @@ return array(
     'Notification' => 'Κοινοποίηση',
     '%s moved the task #%d to the first swimlane' => '%s μετέφερε την εργασία n°%d στην 1η λωρίδα',
     'Swimlane' => 'Λωρίδα',
-    'Gravatar' => 'Gravatar',
     '%s moved the task %s to the first swimlane' => '%s μετέφερε την εργασία %s στην 1η λωρίδα',
     '%s moved the task %s to the swimlane "%s"' => '%s μετέφερε την εργασία %s στη λωρίδα « %s »',
     'This report contains all subtasks information for the given date range.' => 'Η έκθεση αυτή περιέχει όλες τις υπο-εργασίες για το συγκεκριμένο εύρος ημερομηνιών.',
@@ -1320,4 +1318,5 @@ return array(
     // 'User disabled' => '',
     // '%d notifications' => '',
     // '%d notification' => '',
+    // 'There is no external integration installed.' => '',
 );

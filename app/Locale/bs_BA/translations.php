@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => 'Nemoguće dodati stopu valute.',
     'Webhook URL' => 'Webhook URL',
     '%s removed the assignee of the task %s' => '%s je uklonio izvršioca zadatka %s',
-    'Enable Gravatar images' => 'Omogući Gravatar slike',
     'Information' => 'Informacije',
     'Check two factor authentication code' => 'Provjera "Dva faktora" autentifikacionog koda',
     'The two factor authentication code is not valid.' => '"Dva faktora" autentifikacionog koda nije validan.',
@@ -625,7 +624,6 @@ return array(
     'Notification' => 'Obavještenja',
     '%s moved the task #%d to the first swimlane' => '%s je premjestio zadatak #%d u prvu swimlane traku',
     'Swimlane' => 'Swimlane traka',
-    'Gravatar' => 'Gravatar',
     '%s moved the task %s to the first swimlane' => '%s je premjestio zadatak %s u prvi swimlane traku',
     '%s moved the task %s to the swimlane "%s"' => '%s je premjestio zadatak %s u swimlane traku "%s"',
     'This report contains all subtasks information for the given date range.' => 'Ovaj izvještaj sadržava sve informacije o pod-zadacima za dati period',
@@ -1320,4 +1318,5 @@ return array(
     // 'User disabled' => '',
     // '%d notifications' => '',
     // '%d notification' => '',
+    // 'There is no external integration installed.' => '',
 );

@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => '이 통화 환율을 추가할 수 없습니다.',
     'Webhook URL' => 'Webhook URL',
     '%s removed the assignee of the task %s' => '%s이 할일 %s의 담당을 삭제했습니다',
-    'Enable Gravatar images' => 'Gravatar이미지를 활성화',
     'Information' => '정보',
     'Check two factor authentication code' => '2단 인증을 체크한다',
     'The two factor authentication code is not valid.' => '2단 인증 코드는 무효입니다.',
@@ -625,7 +624,6 @@ return array(
     'Notification' => '알림',
     '%s moved the task #%d to the first swimlane' => '%s가 할일 #%d를 첫번째 스웜레인으로 이동시켰습니다',
     'Swimlane' => '스윔레인',
-    'Gravatar' => 'Gravatar',
     '%s moved the task %s to the first swimlane' => '%s가 할일 %s를 첫번째 스웜레인으로 이동시켰습니다',
     '%s moved the task %s to the swimlane "%s"' => '%s가 할일 %s를 %s 스웜레인으로 이동시켰습니다',
     'This report contains all subtasks information for the given date range.' => '해당 기간의 모든 서브 할일 정보가 보고서에 포함됩니다',
@@ -1320,4 +1318,5 @@ return array(
     // 'User disabled' => '',
     // '%d notifications' => '',
     // '%d notification' => '',
+    // 'There is no external integration installed.' => '',
 );

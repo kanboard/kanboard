@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => 'Nem sikerült az átváltási árfolyam felvétele',
     'Webhook URL' => 'Webhook URL',
     '%s removed the assignee of the task %s' => '%s eltávolította a %s feladathoz rendelt személyt',
-    'Enable Gravatar images' => 'Gravatár képek engedélyezése',
     'Information' => 'Információ',
     'Check two factor authentication code' => 'Két fázisú beléptető kód ellenőrzése',
     'The two factor authentication code is not valid.' => 'A két fázisú beléptető kód érvénytelen',
@@ -625,7 +624,6 @@ return array(
     'Notification' => 'Értesítés',
     '%s moved the task #%d to the first swimlane' => '%s a #%d feladatot az első sávba mozgatta',
     'Swimlane' => 'Sáv',
-    'Gravatar' => 'Gravatár',
     '%s moved the task %s to the first swimlane' => '%s a %s feladatot az első sávba mozgatta',
     '%s moved the task %s to the swimlane "%s"' => '%s a %s feladatot a "%s" sávba mozgatta',
     'This report contains all subtasks information for the given date range.' => 'Ez a riport az adott dátumtartományra vonatkozón az összes részfeladatot tartalmazza',
@@ -1320,4 +1318,5 @@ return array(
     // 'User disabled' => '',
     // '%d notifications' => '',
     // '%d notification' => '',
+    // 'There is no external integration installed.' => '',
 );

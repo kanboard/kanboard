@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => 'Невозможно добавить этот курс валюты.',
     'Webhook URL' => 'Webhook URL',
     '%s removed the assignee of the task %s' => '%s удалить назначенную задачу %s',
-    'Enable Gravatar images' => 'Включить Gravatar изображения',
     'Information' => 'Информация',
     'Check two factor authentication code' => 'Проверка кода двухфакторной авторизации',
     'The two factor authentication code is not valid.' => 'Код двухфакторной авторизации не валиден',
@@ -625,7 +624,6 @@ return array(
     'Notification' => 'Уведомления',
     '%s moved the task #%d to the first swimlane' => '%s переместил задачу #%d на первую дорожку',
     'Swimlane' => 'Дорожки',
-    'Gravatar' => 'Граватар',
     '%s moved the task %s to the first swimlane' => '%s переместил задачу %s на первую дорожку',
     '%s moved the task %s to the swimlane "%s"' => '%s переместил задачу %s на дорожку "%s"',
     'This report contains all subtasks information for the given date range.' => 'Этот отчёт содержит всю информацию подзадач в заданном диапазоне дат.',
@@ -1320,4 +1318,5 @@ return array(
     'User disabled' => 'Пользователь выключен',
     '%d notifications' => '%d уведомлений',
     '%d notification' => '%d уведомление',
+    // 'There is no external integration installed.' => '',
 );

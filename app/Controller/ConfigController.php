@@ -46,9 +46,6 @@ class ConfigController extends BaseController
                     'disable_private_project' => 0,
                 );
                 break;
-            case 'integrations':
-                $values += array('integration_gravatar' => 0);
-                break;
         }
 
         if ($this->configModel->save($values)) {

@@ -552,7 +552,6 @@ return array(
     'Unable to add this currency rate.' => 'Bu kur eklenemedi',
     // 'Webhook URL' => '',
     '%s removed the assignee of the task %s' => '%s, %s görevinin atanan bilgisini kaldırdı',
-    'Enable Gravatar images' => 'Gravatar resimlerini kullanıma aç',
     'Information' => 'Bilgi',
     'Check two factor authentication code' => 'Çift-Kademeli doğrulama kodunu kontrol et',
     'The two factor authentication code is not valid.' => 'Çift-Kademeli doğrulama kodu geçersiz',
@@ -625,7 +624,6 @@ return array(
     'Notification' => 'Uyarılar',
     '%s moved the task #%d to the first swimlane' => '%s, #%d görevini birinci kulvara taşıdı',
     'Swimlane' => 'Kulvar',
-    'Gravatar' => 'Gravatar',
     '%s moved the task %s to the first swimlane' => '%s, %s görevini ilk kulvara taşıdı',
     '%s moved the task %s to the swimlane "%s"' => '%s, %s görevini "%s" kulvarına taşıdı',
     'This report contains all subtasks information for the given date range.' => 'Bu rapor belirtilen tarih aralığında tüm alt görev bilgilerini içerir.',
@@ -1320,4 +1318,5 @@ return array(
     // 'User disabled' => '',
     // '%d notifications' => '',
     // '%d notification' => '',
+    // 'There is no external integration installed.' => '',
 );
