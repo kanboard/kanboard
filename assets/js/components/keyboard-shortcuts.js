@@ -120,8 +120,4 @@ KB.keyboardShortcuts = function () {
     KB.onKey('v+l', function () {
         goToLink('a.view-listing');
     });
-
-    KB.onKey('v+g', function () {
-        goToLink('a.view-gantt');
-    });
 };

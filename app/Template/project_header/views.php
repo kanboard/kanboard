@@ -8,10 +8,6 @@
     <li <?= $this->app->checkMenuSelection('TaskListController') ?>>
         <?= $this->url->icon('list', t('List'), 'TaskListController', 'show', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-listing', t('Keyboard shortcut: "%s"', 'v l')) ?>
     </li>
-    <?php if ($this->user->hasProjectAccess('TaskGanttController', 'show', $project['id'])): ?>
-    <li <?= $this->app->checkMenuSelection('TaskGanttController') ?>>
-        <?= $this->url->icon('sliders', t('Gantt'), 'TaskGanttController', 'show', array('project_id' => $project['id'], 'search' => $filters['search']), false, 'view-gantt', t('Keyboard shortcut: "%s"', 'v g')) ?>
-    </li>
-    <?php endif ?>
+
     <?= $this->hook->render('template:project-header:view-switcher', array('project' => $project, 'filters' => $filters)) ?>
 </ul>

@@ -18,10 +18,6 @@
             <li><?= $this->url->icon('user', t('Users overview'), 'ProjectUserOverviewController', 'managers') ?></li>
         <?php endif ?>
 
-        <?php if ($this->user->hasAccess('ProjectGanttController', 'show')): ?>
-            <li><?= $this->url->icon('sliders', t('Projects Gantt chart'), 'ProjectGanttController', 'show') ?></li>
-        <?php endif ?>
-
         <?= $this->hook->render('template:project-list:menu:after') ?>
     </ul>
 </div>

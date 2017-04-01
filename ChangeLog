@@ -4,6 +4,7 @@ Version 1.0.42
 Breaking Changes:
 
 * Move calendar to external plugin: https://github.com/kanboard/plugin-calendar
+* Move Gantt charts to external plugin: https://github.com/kanboard/plugin-gantt
 
 Version 1.0.41
 --------------
