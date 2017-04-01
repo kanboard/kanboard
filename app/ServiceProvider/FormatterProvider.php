@@ -26,7 +26,6 @@ class FormatterProvider implements ServiceProviderInterface
             'SubtaskListFormatter',
             'SubtaskTimeTrackingCalendarFormatter',
             'TaskAutoCompleteFormatter',
-            'TaskCalendarFormatter',
             'TaskGanttFormatter',
             'TaskICalFormatter',
             'TaskListFormatter',

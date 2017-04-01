@@ -72,7 +72,6 @@ use Pimple\Container;
  * @property \Kanboard\Formatter\SubtaskListFormatter                $subtaskListFormatter
  * @property \Kanboard\Formatter\SubtaskTimeTrackingCalendarFormatter $subtaskTimeTrackingCalendarFormatter
  * @property \Kanboard\Formatter\TaskAutoCompleteFormatter           $taskAutoCompleteFormatter
- * @property \Kanboard\Formatter\TaskCalendarFormatter               $taskCalendarFormatter
  * @property \Kanboard\Formatter\TaskGanttFormatter                  $taskGanttFormatter
  * @property \Kanboard\Formatter\TaskICalFormatter                   $taskICalFormatter
  * @property \Kanboard\Formatter\TaskListFormatter                   $taskListFormatter

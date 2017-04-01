@@ -36,7 +36,6 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('dashboard/:user_id/projects', 'DashboardController', 'projects');
             $container['route']->addRoute('dashboard/:user_id/tasks', 'DashboardController', 'tasks');
             $container['route']->addRoute('dashboard/:user_id/subtasks', 'DashboardController', 'subtasks');
-            $container['route']->addRoute('dashboard/:user_id/calendar', 'DashboardController', 'calendar');
             $container['route']->addRoute('dashboard/:user_id/activity', 'DashboardController', 'activity');
             $container['route']->addRoute('dashboard/:user_id/notifications', 'DashboardController', 'notifications');
 
@@ -119,10 +118,6 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('b/:project_id', 'BoardViewController', 'show');
             $container['route']->addRoute('public/board/:token', 'BoardViewController', 'readonly');
 
-            // Calendar routes
-            $container['route']->addRoute('calendar/:project_id', 'CalendarController', 'show');
-            $container['route']->addRoute('c/:project_id', 'CalendarController', 'show');
-
             // Listing routes
             $container['route']->addRoute('list/:project_id', 'TaskListController', 'show');
             $container['route']->addRoute('l/:project_id', 'TaskListController', 'show');
@@ -167,7 +162,6 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('settings/project', 'ConfigController', 'project');
             $container['route']->addRoute('settings/project', 'ConfigController', 'project');
             $container['route']->addRoute('settings/board', 'ConfigController', 'board');
-            $container['route']->addRoute('settings/calendar', 'ConfigController', 'calendar');
             $container['route']->addRoute('settings/integrations', 'ConfigController', 'integrations');
             $container['route']->addRoute('settings/webhook', 'ConfigController', 'webhook');
             $container['route']->addRoute('settings/api', 'ConfigController', 'api');

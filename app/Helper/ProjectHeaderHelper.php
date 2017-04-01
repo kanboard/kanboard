@@ -34,15 +34,17 @@ class ProjectHeaderHelper extends Base
      * @param  string $controller
      * @param  string $action
      * @param  bool   $boardView
+     * @param  string $plugin
      * @return string
      */
-    public function render(array $project, $controller, $action, $boardView = false)
+    public function render(array $project, $controller, $action, $boardView = false, $plugin = '')
     {
         $filters = array(
             'controller' => $controller,
             'action' => $action,
             'project_id' => $project['id'],
             'search' => $this->getSearchQuery($project),
+            'plugin' => $plugin,
         );
 
         return $this->template->render('project_header/header', array(
