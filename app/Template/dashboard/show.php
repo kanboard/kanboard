@@ -16,9 +16,7 @@
         <li>
             <?= $this->modal->medium('dashboard', t('My activity stream'), 'ActivityController', 'user') ?>
         </li>
-        <li>
-            <?= $this->modal->medium('calendar', t('My calendar'), 'CalendarController', 'user') ?>
-        </li>
+        <?= $this->hook->render('template:dashboard:page-header:menu', array('user' => $user)) ?>
     </ul>
 </div>
 

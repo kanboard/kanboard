@@ -14,11 +14,6 @@
             <li>
                 <?= $this->url->icon('folder', t('Projects list'), 'ProjectListController', 'show') ?>
             </li>
-            <?php if ($this->user->hasAccess('ProjectGanttController', 'show')): ?>
-                <li>
-                    <?= $this->url->icon('sliders', t('Projects Gantt chart'), 'ProjectGanttController', 'show') ?>
-                </li>
-            <?php endif ?>
         </ul>
     </div>
     <section class="sidebar-container">

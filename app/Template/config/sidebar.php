@@ -15,9 +15,6 @@
         <li <?= $this->app->checkMenuSelection('ConfigController', 'board') ?>>
             <?= $this->url->link(t('Board settings'), 'ConfigController', 'board') ?>
         </li>
-        <li <?= $this->app->checkMenuSelection('ConfigController', 'calendar') ?>>
-            <?= $this->url->link(t('Calendar settings'), 'ConfigController', 'calendar') ?>
-        </li>
         <li <?= $this->app->checkMenuSelection('TagController', 'index') ?>>
             <?= $this->url->link(t('Tags management'), 'TagController', 'index') ?>
         </li>

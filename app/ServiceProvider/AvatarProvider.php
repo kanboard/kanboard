@@ -5,7 +5,6 @@ namespace Kanboard\ServiceProvider;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Kanboard\Core\User\Avatar\AvatarManager;
-use Kanboard\User\Avatar\GravatarProvider;
 use Kanboard\User\Avatar\AvatarFileProvider;
 use Kanboard\User\Avatar\LetterAvatarProvider;
 
@@ -28,7 +27,6 @@ class AvatarProvider implements ServiceProviderInterface
     {
         $container['avatarManager'] = new AvatarManager;
         $container['avatarManager']->register(new LetterAvatarProvider($container));
-        $container['avatarManager']->register(new GravatarProvider($container));
         $container['avatarManager']->register(new AvatarFileProvider($container));
         return $container;
     }

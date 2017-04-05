@@ -4,14 +4,11 @@
 
 <form method="post" action="<?= $this->url->href('ConfigController', 'save', array('redirect' => 'integrations')) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
-    <?= $this->hook->render('template:config:integrations', array('values' => $values)) ?>
+    <?php $contents = $this->hook->render('template:config:integrations', array('values' => $values)) ?>
 
-    <h3><img src="<?= $this->url->dir() ?>assets/img/gravatar-icon.png"/>&nbsp;<?= t('Gravatar') ?></h3>
-    <div class="panel">
-        <?= $this->form->checkbox('integration_gravatar', t('Enable Gravatar images'), 1, $values['integration_gravatar'] == 1) ?>
-        <div class="form-actions">
-            <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-        </div>
-    </div>
-
+    <?php if (empty($contents)): ?>
+        <p class="alert"><?= t('There is no external integration installed.') ?></p>
+    <?php else: ?>
+        <?= $contents ?>
+    <?php endif ?>
 </form>

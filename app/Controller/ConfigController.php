@@ -46,12 +46,6 @@ class ConfigController extends BaseController
                     'disable_private_project' => 0,
                 );
                 break;
-            case 'integrations':
-                $values += array('integration_gravatar' => 0);
-                break;
-            case 'calendar':
-                $values += array('calendar_user_subtasks_time_tracking' => 0);
-                break;
         }
 
         if ($this->configModel->save($values)) {
@@ -124,18 +118,6 @@ class ConfigController extends BaseController
     {
         $this->response->html($this->helper->layout->config('config/board', array(
             'title' => t('Settings').' &gt; '.t('Board settings'),
-        )));
-    }
-
-    /**
-     * Display the calendar settings page
-     *
-     * @access public
-     */
-    public function calendar()
-    {
-        $this->response->html($this->helper->layout->config('config/calendar', array(
-            'title' => t('Settings').' &gt; '.t('Calendar settings'),
         )));
     }
 
