@@ -93,6 +93,10 @@ class TaskHelper extends Base
 
     public function renderAssigneeField(array $users, array $values, array $errors = array(), array $attributes = array())
     {
+        if (isset($values['project_id']) && ! $this->helper->projectRole->canChangeAssignee($values)) {
+            return '';
+        }
+
         $attributes = array_merge(array('tabindex="3"'), $attributes);
 
         $html = $this->helper->form->label(t('Assignee'), 'owner_id');

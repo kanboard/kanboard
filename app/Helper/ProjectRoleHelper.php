@@ -172,6 +172,24 @@ class ProjectRoleHelper extends Base
     }
 
     /**
+     * Return true if the user can change assignee
+     *
+     * @public
+     * @param  array $task
+     * @return bool
+     */
+    public function canChangeAssignee(array $task)
+    {
+        $role = $this->getProjectUserRole($task['project_id']);
+
+        if ($this->hasRestriction($task['project_id'], $role, ProjectRoleRestrictionModel::RULE_TASK_CHANGE_ASSIGNEE)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Check project access
      *
      * @param  string  $controller

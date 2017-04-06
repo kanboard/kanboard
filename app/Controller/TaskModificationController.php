@@ -103,6 +103,10 @@ class TaskModificationController extends BaseController
 
     protected function updateTask(array &$task, array &$values, array &$errors)
     {
+        if (isset($values['owner_id']) && $values['owner_id'] != $task['owner_id'] && ! $this->helper->projectRole->canChangeAssignee($task)) {
+            throw new AccessForbiddenException(t('You are not allowed to change the assignee'));
+        }
+
         $result = $this->taskModificationModel->update($values);
 
         if ($result && ! empty($task['external_uri'])) {
