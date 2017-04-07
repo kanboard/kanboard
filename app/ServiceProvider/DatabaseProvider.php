@@ -56,6 +56,9 @@ class DatabaseProvider implements ServiceProviderInterface
             case 'mysql':
                 $db = $this->getMysqlInstance();
                 break;
+            case 'mysql2':
+                $db = $this->getMysqlInstance();
+                break;
             case 'postgres':
                 $db = $this->getPostgresInstance();
                 break;
