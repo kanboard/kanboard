@@ -1,0 +1,10 @@
+applications:
+- name: kanboard
+  instances: 1
+  memory: 256M
+  disk_quota: 512M
+  routes:
+  - route: kanboard.pcfdev.bigdata.intraorange
+  services:
+  - kandb
+  stack: cflinuxfs2
