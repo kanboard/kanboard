@@ -37,6 +37,12 @@
                     } else {
                         destroy();
                     }
+                }).error(function (response) {
+                    KB.trigger('modal.stop');
+
+                    if (response.hasOwnProperty('message')) {
+                        window.alert(response.message);
+                    }
                 });
             }
         }

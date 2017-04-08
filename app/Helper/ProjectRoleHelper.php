@@ -190,6 +190,24 @@ class ProjectRoleHelper extends Base
     }
 
     /**
+     * Return true if the user can update a task
+     *
+     * @public
+     * @param  array $task
+     * @return bool
+     */
+    public function canUpdateTask(array $task)
+    {
+        $role = $this->getProjectUserRole($task['project_id']);
+
+        if ($task['owner_id'] != $this->userSession->getId() && $this->hasRestriction($task['project_id'], $role, ProjectRoleRestrictionModel::RULE_TASK_UPDATE_ASSIGNED)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Check project access
      *
      * @param  string  $controller

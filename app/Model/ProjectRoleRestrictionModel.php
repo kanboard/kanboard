@@ -19,6 +19,7 @@ class ProjectRoleRestrictionModel extends Base
     const RULE_TASK_OPEN_CLOSE = 'task_open_close';
     const RULE_TASK_MOVE = 'task_move';
     const RULE_TASK_CHANGE_ASSIGNEE = 'task_change_assignee';
+    const RULE_TASK_UPDATE_ASSIGNED = 'task_update_assigned';
 
     /**
      * Get rules
@@ -33,6 +34,7 @@ class ProjectRoleRestrictionModel extends Base
             self::RULE_TASK_OPEN_CLOSE      => t('Closing or opening a task is not permitted'),
             self::RULE_TASK_MOVE            => t('Moving a task is not permitted'),
             self::RULE_TASK_CHANGE_ASSIGNEE => t('Changing assignee is not permitted'),
+            self::RULE_TASK_UPDATE_ASSIGNED => t('Update only assigned tasks'),
         );
     }
 
