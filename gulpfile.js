@@ -33,6 +33,7 @@ var vendor = {
         'bower_components/jquery-ui/ui/minified/core.min.js',
         'bower_components/jquery-ui/ui/minified/autocomplete.min.js',
         'bower_components/jquery-ui/ui/minified/datepicker.min.js',
+        'bower_components/jquery-ui/ui/minified/i18n/*.js',
         'bower_components/jquery-ui/ui/minified/draggable.min.js',
         'bower_components/jquery-ui/ui/minified/droppable.min.js',
         'bower_components/jquery-ui/ui/minified/resizable.min.js',
