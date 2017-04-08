@@ -11,6 +11,7 @@ namespace Kanboard\Formatter;
 class TaskListSubtaskAssigneeFormatter extends TaskListFormatter
 {
     protected $userId = 0;
+    protected $withoutEmptyTasks = false;
 
     /**
      * Set assignee
@@ -21,6 +22,12 @@ class TaskListSubtaskAssigneeFormatter extends TaskListFormatter
     public function withUserId($userId)
     {
         $this->userId = $userId;
+        return $this;
+    }
+
+    public function withoutEmptyTasks()
+    {
+        $this->withoutEmptyTasks = true;
         return $this;
     }
 
@@ -37,6 +44,12 @@ class TaskListSubtaskAssigneeFormatter extends TaskListFormatter
         $subtasks = $this->subtaskModel->getAllByTaskIdsAndAssignee($taskIds, $this->userId);
         $subtasks = array_column_index($subtasks, 'task_id');
         array_merge_relation($tasks, $subtasks, 'subtasks', 'id');
+
+        if ($this->withoutEmptyTasks) {
+            $tasks = array_filter($tasks, function (array $task) {
+                return count($task['subtasks']) > 0;
+            });
+        }
 
         return $tasks;
     }

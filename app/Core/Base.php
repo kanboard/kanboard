@@ -150,6 +150,9 @@ use Pimple\Container;
  * @property \Kanboard\Model\UserUnreadNotificationModel             $userUnreadNotificationModel
  * @property \Kanboard\Model\UserMetadataModel                       $userMetadataModel
  * @property \Kanboard\Pagination\DashboardPagination                $dashboardPagination
+ * @property \Kanboard\Pagination\ProjectPagination                  $projectPagination
+ * @property \Kanboard\Pagination\TaskPagination                     $taskPagination
+ * @property \Kanboard\Pagination\SubtaskPagination                  $subtaskPagination
  * @property \Kanboard\Pagination\UserPagination                     $userPagination
  * @property \Kanboard\Validator\ActionValidator                     $actionValidator
  * @property \Kanboard\Validator\AuthValidator                       $authValidator

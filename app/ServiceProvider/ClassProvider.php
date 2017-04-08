@@ -130,6 +130,9 @@ class ClassProvider implements ServiceProviderInterface
         ),
         'Pagination' => array(
             'DashboardPagination',
+            'ProjectPagination',
+            'SubtaskPagination',
+            'TaskPagination',
             'UserPagination',
         ),
         'Core' => array(
