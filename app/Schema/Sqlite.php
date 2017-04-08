@@ -8,7 +8,12 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 113;
+const VERSION = 114;
+
+function version_114(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE column_has_move_restrictions ADD COLUMN only_assigned INTEGER DEFAULT 0');
+}
 
 function version_113(PDO $pdo)
 {

@@ -49,7 +49,8 @@ class ColumnMoveRestrictionController extends BaseController
                 $project['id'],
                 $values['role_id'],
                 $values['src_column_id'],
-                $values['dst_column_id']
+                $values['dst_column_id'],
+                isset($values['only_assigned']) && $values['only_assigned'] == 1
             );
 
             if ($restriction_id !== false) {

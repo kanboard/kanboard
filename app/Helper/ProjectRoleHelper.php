@@ -36,7 +36,7 @@ class ProjectRoleHelper extends Base
     public function isDraggable(array &$task)
     {
         if ($task['is_active'] == 1 && $this->helper->user->hasProjectAccess('BoardAjaxController', 'save', $task['project_id'])) {
-            return $this->isSortableColumn($task['project_id'], $task['column_id']);
+            return $this->isSortableColumn($task['project_id'], $task['column_id'], $task['owner_id']);
         }
 
         return false;
@@ -47,9 +47,10 @@ class ProjectRoleHelper extends Base
      *
      * @param  int $projectId
      * @param  int $columnId
+     * @param  int $assigneeId
      * @return bool
      */
-    public function isSortableColumn($projectId, $columnId)
+    public function isSortableColumn($projectId, $columnId, $assigneeId = null)
     {
         $role = $this->getProjectUserRole($projectId);
 
@@ -58,6 +59,10 @@ class ProjectRoleHelper extends Base
 
             foreach ($sortableColumns as $column) {
                 if ($column['src_column_id'] == $columnId || $column['dst_column_id'] == $columnId) {
+                    if ($column['only_assigned'] == 1 && $assigneeId !== null && $assigneeId != $this->userSession->getId()) {
+                        return false;
+                    }
+
                     return true;
                 }
             }
@@ -182,7 +187,7 @@ class ProjectRoleHelper extends Base
     {
         $role = $this->getProjectUserRole($task['project_id']);
 
-        if ($this->hasRestriction($task['project_id'], $role, ProjectRoleRestrictionModel::RULE_TASK_CHANGE_ASSIGNEE)) {
+        if ($this->role->isCustomProjectRole($role) && $this->hasRestriction($task['project_id'], $role, ProjectRoleRestrictionModel::RULE_TASK_CHANGE_ASSIGNEE)) {
             return false;
         }
 
@@ -200,7 +205,7 @@ class ProjectRoleHelper extends Base
     {
         $role = $this->getProjectUserRole($task['project_id']);
 
-        if ($task['owner_id'] != $this->userSession->getId() && $this->hasRestriction($task['project_id'], $role, ProjectRoleRestrictionModel::RULE_TASK_UPDATE_ASSIGNED)) {
+        if ($this->role->isCustomProjectRole($role) && $task['owner_id'] != $this->userSession->getId() && $this->hasRestriction($task['project_id'], $role, ProjectRoleRestrictionModel::RULE_TASK_UPDATE_ASSIGNED)) {
             return false;
         }
 
