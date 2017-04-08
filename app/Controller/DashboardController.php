@@ -56,7 +56,7 @@ class DashboardController extends BaseController
             'title' => t('Subtasks overview for %s', $this->helper->user->getFullname($user)),
             'paginator' => $this->subtaskPagination->getDashboardPaginator($user['id']),
             'user' => $user,
-            'nb_subtasks' => $this->subtaskModel->countByAssigneeAndTaskStatus($this->userSession->getId()),
+            'nb_subtasks' => $this->subtaskModel->countByAssigneeAndTaskStatus($user['id']),
         )));
     }
 
