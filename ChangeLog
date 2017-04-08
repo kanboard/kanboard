@@ -1,5 +1,13 @@
-Version 1.0.42
---------------
+Version 1.0.42 (April 8, 2017)
+------------------------------
+
+New features:
+
+* New restrictions for custom project roles
+
+Improvements:
+
+* Improved dashboard
 
 Breaking Changes:
 
@@ -7,8 +15,12 @@ Breaking Changes:
 * Move Gantt charts to external plugin: https://github.com/kanboard/plugin-gantt
 * Move Gravatar to external plugin: https://github.com/kanboard/plugin-gravatar
 
-Version 1.0.41
---------------
+Bug fixes:
+
+* Fix typo in Sqlite schema
+
+Version 1.0.41 (March 19, 2017)
+-------------------------------
 
 New features:
 
