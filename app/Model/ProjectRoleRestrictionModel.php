@@ -34,7 +34,7 @@ class ProjectRoleRestrictionModel extends Base
             self::RULE_TASK_OPEN_CLOSE      => t('Closing or opening a task is not permitted'),
             self::RULE_TASK_MOVE            => t('Moving a task is not permitted'),
             self::RULE_TASK_CHANGE_ASSIGNEE => t('Changing assignee is not permitted'),
-            self::RULE_TASK_UPDATE_ASSIGNED => t('Update only assigned tasks'),
+            self::RULE_TASK_UPDATE_ASSIGNED => t('Update only assigned tasks is permitted'),
         );
     }
 
