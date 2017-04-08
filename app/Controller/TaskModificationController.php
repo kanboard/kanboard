@@ -40,6 +40,11 @@ class TaskModificationController extends BaseController
     public function edit(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
+
+        if (! $this->helper->projectRole->canUpdateTask($task)) {
+            throw new AccessForbiddenException(t('You are not allowed to update tasks assigned to someone else.'));
+        }
+
         $project = $this->projectModel->getById($task['project_id']);
 
         if (empty($values)) {
@@ -105,7 +110,14 @@ class TaskModificationController extends BaseController
 
     protected function updateTask(array &$task, array &$values, array &$errors)
     {
-        $this->checkPermission($task, $values);
+        if (isset($values['owner_id']) && $values['owner_id'] != $task['owner_id'] && !$this->helper->projectRole->canChangeAssignee($task)) {
+            throw new AccessForbiddenException(t('You are not allowed to change the assignee.'));
+        }
+
+        if (! $this->helper->projectRole->canUpdateTask($task)) {
+            throw new AccessForbiddenException(t('You are not allowed to update tasks assigned to someone else.'));
+        }
+
         $result = $this->taskModificationModel->update($values);
 
         if ($result && ! empty($task['external_uri'])) {
@@ -121,16 +133,5 @@ class TaskModificationController extends BaseController
         }
 
         return $result;
-    }
-
-    protected function checkPermission(array &$task, array &$values)
-    {
-        if (isset($values['owner_id']) && $values['owner_id'] != $task['owner_id'] && !$this->helper->projectRole->canChangeAssignee($task)) {
-            throw new AccessForbiddenException(t('You are not allowed to change the assignee.'));
-        }
-
-        if (! $this->helper->projectRole->canUpdateTask($task)) {
-            throw new AccessForbiddenException(t('You are not allowed to update tasks assigned to someone else.'));
-        }
     }
 }
