@@ -9,7 +9,15 @@
   @include grid_width(82/100)
   @include xs-device
     @include grid_width(1)
-
+      
+@media (min-width: 1px) {
+  .sidebar-content
+    width: 70%;
+    
+@media (min-width: 1000px) {
+  .sidebar-content
+    width: 75%;
+    
 .sidebar
   max-width: 240px
   min-width: 190px
