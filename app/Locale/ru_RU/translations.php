@@ -134,7 +134,7 @@ return array(
     'User removed successfully.' => 'Пользователь удалён.',
     'Unable to remove this user.' => 'Не удалось удалить пользователя.',
     'Board updated successfully.' => 'Доска успешно обновлена.',
-    'Ready' => 'Готовые',
+    'Ready' => 'Согласованные',
     'Backlog' => 'Ожидающие',
     'Work in progress' => 'В процессе',
     'Done' => 'Выполнено',
