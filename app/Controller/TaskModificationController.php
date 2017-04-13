@@ -23,7 +23,9 @@ class TaskModificationController extends BaseController
     {
         $task = $this->getTask();
         $values = array('id' => $task['id'], 'date_started' => time());
-        $this->checkPermission($task, $values);
+        if (! $this->helper->projectRole->canUpdateTask($task)) {
+            throw new AccessForbiddenException(t('You are not allowed to update tasks assigned to someone else.'));
+        }
         $this->taskModificationModel->update($values);
         $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])));
     }
