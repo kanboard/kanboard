@@ -1206,7 +1206,7 @@ return array(
     'API User Access' => 'API Benutzerzugriff',
     'Preview' => 'Vorschau',
     'Write' => 'Schreiben',
-    'Write your text in Markdown' => 'Schreiben Sie iHren Text in Markdown',
+    'Write your text in Markdown' => 'Schreiben Sie Ihren Text in Markdown',
     'New External Task: %s' => 'Neue externe Aufgabe: %s',
     'No personal API access token registered.' => 'Keine persönlichen API-Zugriffsinformationen registriert',
     'Your personal API access token is "%s"' => 'Ihre persönlichen API-Zugriffsinformationen: "%s"',
