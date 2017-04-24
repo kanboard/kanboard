@@ -27,7 +27,7 @@ class AppController extends Base
             $this->response->html($this->helper->layout->app('app/forbidden', array(
                 'title' => t('Access Forbidden'),
                 'no_layout' => $withoutLayout,
-            )));
+            )), 403);
         }
     }
 
