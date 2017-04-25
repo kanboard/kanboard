@@ -566,7 +566,7 @@ return array(
     '%s via Kanboard' => '%s via Kanboard',
     'Burndown chart' => 'Burndown-Diagramm',
     'This chart show the task complexity over the time (Work Remaining).' => 'Dieses Diagramm zeigt die Aufgabenkomplexität über den Faktor Zeit (Verbleibende Arbeit).',
-    'Screenshot taken %s' => 'Screenshot aufgenommen %s ',
+    'Screenshot taken %s' => 'Screenshot aufgenommen %s',
     'Add a screenshot' => 'Screenshot hinzufügen',
     'Take a screenshot and press CTRL+V or ⌘+V to paste here.' => 'Nimm einen Screenshot auf und drücke STRG+V oder ⌘+V um ihn hier einzufügen.',
     'Screenshot uploaded successfully.' => 'Screenshot erfolgreich hochgeladen.',
