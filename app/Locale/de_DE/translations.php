@@ -1275,7 +1275,7 @@ return array(
     'Database uploaded successfully.' => 'Die Datenbank wurde erfolgreich hochgeladen.',
     'Task sent by email successfully.' => 'Aufgabe wurde erfolgreich per E-Mail gesendet.',
     'There is no category in this project.' => 'Es gibt keine Kategorie in diesem Projekt',
-    'Send by email' => 'Per E-Mail gesendet',
+    'Send by email' => 'Per E-Mail senden',
     'Create and send a comment by email' => 'Erstellen und senden Sie einen Kommentar per E-Mail',
     'Subject' => 'Betreff',
     'Upload the database' => 'Datenbank hochladen',
