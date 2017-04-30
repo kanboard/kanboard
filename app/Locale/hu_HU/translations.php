@@ -1245,7 +1245,7 @@ return array(
     'Click here to join your team' => 'Válassza ezt, ha csatlakozni akar a csapatjához',
     'Invite people' => 'Emberek meghívása',
     'Emails' => 'E-mailek',
-     'Enter one email address by line.' => 'Soronként egy e-mailt adjon meg',
+    'Enter one email address by line.' => 'Soronként egy e-mailt adjon meg',
     'Add these people to this project' => 'Ezen személyek projekthez adása',
     'Add this person to this project' => 'Ezen személy projekthez adása',
     'Sign-up' => 'Feliratkozás',
@@ -1331,4 +1331,5 @@ return array(
     '%d subtasks' => '%d alfeladat',
     '%d subtask' => '%d alfeladat',
     'Only moving task between those columns is permitted for tasks assigned to the current user' => 'Az aktuális felhasználóhoz rendelt feladatok csak az engedélyezett oszlopok között mozgathatóak',
+    // '[DUPLICATE]' => '',
 );

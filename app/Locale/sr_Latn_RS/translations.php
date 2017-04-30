@@ -1331,4 +1331,5 @@ return array(
     // '%d subtasks' => '',
     // '%d subtask' => '',
     // 'Only moving task between those columns is permitted for tasks assigned to the current user' => '',
+    // '[DUPLICATE]' => '',
 );
