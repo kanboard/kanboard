@@ -47,7 +47,10 @@ class TaskDuplicationModel extends Base
      */
     public function duplicate($task_id)
     {
-        $new_task_id = $this->save($task_id, $this->copyFields($task_id));
+        $values = $this->copyFields($task_id);
+        $values['title'] = t('[DUPLICATE]').' '.$values['title'];
+
+        $new_task_id = $this->save($task_id, $values);
 
         if ($new_task_id !== false) {
             $this->tagDuplicationModel->duplicateTaskTags($task_id, $new_task_id);
