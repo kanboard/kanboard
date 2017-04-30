@@ -88,6 +88,8 @@
         </span>
     <?php endif ?>
 
+    <span title="<?= t('Position') ?>">(<?= $task['position'] ?>)</span>
+
     <?php if ($task['is_active'] == 1): ?>
         <div class="task-icon-age">
             <span title="<?= t('Task age in days')?>" class="task-icon-age-total"><?= $this->dt->age($task['date_creation']) ?></span>

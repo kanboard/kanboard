@@ -17,6 +17,9 @@
             <?= $paginator->order(t('Priority'), \Kanboard\Model\TaskModel::TABLE.'.priority') ?>
         </li>
         <li>
+            <?= $paginator->order(t('Position'), \Kanboard\Model\TaskModel::TABLE.'.position') ?>
+        </li>
+        <li>
             <?= $paginator->order(t('Title'), \Kanboard\Model\TaskModel::TABLE.'.title') ?>
         </li>
         <li>
