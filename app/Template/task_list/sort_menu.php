@@ -26,6 +26,9 @@
             <?= $paginator->order(t('Due date'), \Kanboard\Model\TaskModel::TABLE.'.date_due') ?>
         </li>
         <li>
+            <?= $paginator->order(t('Start date'), \Kanboard\Model\TaskModel::TABLE.'.date_started') ?>
+        </li>
+        <li>
             <?= $paginator->order(t('Status'), \Kanboard\Model\TaskModel::TABLE.'.is_active') ?>
         </li>
     </ul>
