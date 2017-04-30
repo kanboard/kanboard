@@ -1,3 +1,11 @@
+Version 1.0.43 (unreleased)
+---------------------------
+
+Bug fixes:
+
+* Add missing plugin parameter for search box (Gantt and calendar plugin)
+* Fix broken start date button
+
 Version 1.0.42 (April 8, 2017)
 ------------------------------
 
