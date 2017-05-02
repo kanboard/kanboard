@@ -1,7 +1,7 @@
 Installation
 ============
 
-Firstly, check the [requirements](requirements.markdown) before to go further.
+First, check the [requirements](requirements.markdown) before going further.
 
 From the archive (stable version)
 ---------------------------------
@@ -11,17 +11,17 @@ From the archive (stable version)
 3. Check if the directory `data` is writeable by the web server user
 4. With your browser go to <http://yourpersonalserver/kanboard>
 5. The default login and password is **admin/admin**
-6. Start to use the software
+6. Start using the software
 7. Don't forget to change your password!
 
 The `data` folder is used to store:
 
 - Sqlite database: `db.sqlite`
-- Debug file: `debug.log` (if debug mode enabled)
+- Debug file: `debug.log` (if debug mode is enabled)
 - Uploaded files: `files/*`
 - Image thumbnails: `files/thumbnails/*`
 
-People who are using a remote database (Mysql/Postgresql) and a remote object storage (Aws S3 or similar) don't necessarily need to have a persistent local data folder or to change the permission.
+People who are using a remote database (Mysql/Postgresql) and a remote object storage (Aws S3 or similar) don't necessarily need to have a persistent local data folder or to change the permissions for the folder.
 
 From the git repository (development version)
 ---------------------------------------------
@@ -67,10 +67,10 @@ Optional Installation
 ---------------------
 
 - Some features of Kanboard require that you run [a daily background job](cronjob.markdown) (Reports and analytics)
-- [Install the background worker](worker.markdown) to improve the performances
+- [Install the background worker](worker.markdown) to improve performance
 
 Security
 --------
 
 - Don't forget to change the default user/password
-- Don't allow everybody to access to the directory `data` from the URL. There is already a `.htaccess` for Apache and a `web.config` file for IIS but nothing for other web servers.
+- Don't allow everybody to access to the directory `data` from the URL. A `.htaccess` file for Apache and a `web.config` file for IIS is included but other web servers will have to be configured manually.

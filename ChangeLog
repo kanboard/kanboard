@@ -1,3 +1,17 @@
+Version 1.0.43 (April 30, 2017)
+-------------------------------
+
+Improvements:
+
+* Add "[DUPLICATE]" prefix to duplicated tasks title
+* Add sorting by position and start date in task list view
+* Update translations
+
+Bug fixes:
+
+* Add missing plugin parameter for search box (Gantt and calendar plugin)
+* Fix broken start date button
+
 Version 1.0.42 (April 8, 2017)
 ------------------------------
 

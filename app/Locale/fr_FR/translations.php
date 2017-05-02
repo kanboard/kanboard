@@ -1331,4 +1331,5 @@ return array(
     '%d subtasks' => '%d sous-tâches',
     '%d subtask' => '%d sous-tâche',
     'Only moving task between those columns is permitted for tasks assigned to the current user' => 'Seulement le déplacement des tâches entre ces colonnes est autorisé pour l\'utilisateur courant',
+    '[DUPLICATE]' => '[COPIE]',
 );
