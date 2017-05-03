@@ -345,7 +345,7 @@ return array(
 'Not assigned, estimate of %s h'=> 'No assignat, estimació del %s h',
 '%s updated a comment on the task %s '=> '%s actualitzat un comentari en la tasca %s ',
 '%s commented the task %s '=> '%s ha comentat la tasca %s ',
-'%s s activity'=> '%s s activitat',
+'%s\'s activity'=> 'L\'activitat de %s',
 'RSS feed'=> 'RSS feed',
 '%s updated a comment on the task #%d '=> '%s s\'actualitzen un comentari en la tasca #%d ',
 '%s commented on the task #%d '=> '%s comentat en la tasca #%d ',
