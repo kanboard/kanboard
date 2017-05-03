@@ -1,8 +1,8 @@
 <?php
 
 return array(
-'number.decimals_separator'=> '',
-'number.thousands_separator'=> '',
+'number.decimals_separator'=> ',',
+'number.thousands_separator'=> ' ',
 'None'=> 'Cap',
 'Edit'=> 'Edita',
 'Remove'=> 'Elimina',
