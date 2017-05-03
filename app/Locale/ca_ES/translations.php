@@ -691,7 +691,7 @@ return array(
 'Search by due date: '=> 'Cercar per data de venciment:',
 'Average time spent into each column'=> 'temps mitjà de permanència en cada columna',
 'Average time spent'=> 'temps mitjà de permanència',
-'This chart show the average time spent into each column for the last %d tasks.'=> 'Aquest gràfic mostra el temps mitjà de permanència en cada columna per a les tasques d última%.',
+'This chart show the average time spent into each column for the last %d tasks.'=> 'Aquest gràfic mostra el temps mitjà de permanència en cada columna per a les últimes %d tasques.',
 'Average Lead and Cycle time'=> 'El plom i la mitjana del temps de cicle',
 'Average lead time: '=> 'Mitjana de temps d\'espera:',
 'Average cycle time: '=> 'temps de cicle mitjà:',
