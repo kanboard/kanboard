@@ -701,7 +701,7 @@ return array(
     'Average time into each column' => 'Tempo médio de cada coluna',
     'Lead and cycle time' => 'Tempo de condução e tempo de ciclo',
     'Lead time: ' => 'Tempo de condução: ',
-    'Cycle time: ' => 'Tempo de ciclo: '
+    'Cycle time: ' => 'Tempo de ciclo: ',
     'Time spent into each column' => 'Tempo gasto em cada coluna',
     'The lead time is the duration between the task creation and the completion.' => 'O tempo de condução é o tempo gasto entre a criação da tarefa e a sua conclusão.',
     'The cycle time is the duration between the start date and the completion.' => 'O Tempo de ciclo é o tempo gasto entre a data de início e a sua conclusão.',
