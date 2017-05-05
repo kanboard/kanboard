@@ -1,4 +1,4 @@
-<?php
+Tempo de condução<?php
 
 return array(
     'number.decimals_separator' => ',',
@@ -1326,7 +1326,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Atualizar tomente tarefas designadas é permitda',
     'Only for tasks assigned to the current user' => 'Somente para tarefas designadas para o usuário atual',
     'My projects' => 'Meus projetos',
-    'Your are not member of any project.' => 'Você não é membro de nenhum projeto.',
+    'Your are not member of any project.' => 'Você não é membro de nenhum pr0ojeto.',
     'My subtasks' => 'Minhas subtarefas',
     '%d subtasks' => '%d subtarefas',
     '%d subtask' => '%d subtarefa',
