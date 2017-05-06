@@ -44,6 +44,7 @@ Do not use Sqlite on NFS mounts, only when you have a disk with fast I/O.
 | Apache HTTP Server |
 | Nginx              |
 | Microsoft IIS      |
+| Caddy Server       |
 
 Kanboard is pre-configured to work with Apache (URL rewriting).
 
