@@ -1331,6 +1331,6 @@ return array(
     '%d subtasks' => '%d alfeladat',
     '%d subtask' => '%d alfeladat',
     'Only moving task between those columns is permitted for tasks assigned to the current user' => 'Az aktuális felhasználóhoz rendelt feladatok csak az engedélyezett oszlopok között mozgathatóak',
-    // '[DUPLICATE]' => '',
-    // 'DKK - Danish Krona' => '',
+    '[DUPLICATE]' => '[Duplikál]',
+    'DKK - Danish Krona' => 'Dán korona',
 );
