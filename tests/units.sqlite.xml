@@ -1,4 +1,4 @@
-<phpunit stopOnError="true" stopOnFailure="true" colors="true">
+<phpunit stopOnError="true" stopOnFailure="false" colors="true">
     <testsuites>
         <testsuite name="Kanboard">
             <directory>units</directory>
