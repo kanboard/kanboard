@@ -907,7 +907,7 @@ return array(
     'Password reset history' => 'Histórico da redefinição da senha',
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Todas as tarefas da coluna "%s" e da raia "%s" foram finalizadas com sucesso.',
     'Do you really want to close all tasks of this column?' => 'Você realmente deseja finalizar todas as tarefas desta coluna?',
-    '%d task(s) in the column "%s" and the raia "%s" will be closed.' => '%d tarefa(s) na coluna "%s" e na raia "%s" serão finalizadas.',
+    // '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '',
     'Close all tasks of this column' => 'Finalizar todas as tarefas desta coluna',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Nenhuma extensão tem registado um método de notificação de projecto. Você ainda pode definir notificações individuais em seu perfil de usuário.',
     'My dashboard' => 'Meu Painel',
@@ -1332,4 +1332,5 @@ return array(
     '%d subtask' => '%d subtarefa',
     'Only moving task between those columns is permitted for tasks assigned to the current user' => 'Somente movimentação de tarefas entre aquelas colunas são permitidas para tarefas designadas para o usuário atual',
     '[DUPLICATE]' => '[DUPLICADO]',
+    // 'DKK - Danish Krona' => '',
 );

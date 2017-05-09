@@ -1332,4 +1332,5 @@ return array(
     '%d subtask' => '%d subtarefa',
     'Only moving task between those columns is permitted for tasks assigned to the current user' => 'Apenas é permitido mover a tarefa entre essas colunas para tarefas atribuídas ao utilizador atual',
     // '[DUPLICATE]' => '',
+    // 'DKK - Danish Krona' => '',
 );

@@ -1332,4 +1332,5 @@ return array(
     '%d subtask' => '%d подзадача',
     'Only moving task between those columns is permitted for tasks assigned to the current user' => 'Текущий пользователь может перемещать назначенные ему задачи только между этими колонками',
     // '[DUPLICATE]' => '',
+    // 'DKK - Danish Krona' => '',
 );
