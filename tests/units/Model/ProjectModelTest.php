@@ -269,7 +269,8 @@ class ProjectModelTest extends Base
         $permissionProcedure = new ProjectPermissionProcedure($this->container);
 
         $this->assertNotFalse($userModel->create(array('username' => 'user1')));
-        $userId = $userModel->getByUsername('user1')['id'];
+        $user = $userModel->getByUsername('user1');
+        $userId = $user['id'];
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
         $permissionProcedure->addProjectUser(1,$userId,Role::PROJECT_MEMBER);
