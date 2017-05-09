@@ -95,7 +95,7 @@
                     <?php if ($task['date_due']): ?>
                     <li>
                         <strong><?= t('Due date:') ?></strong>
-                        <span><?= $this->dt->date($task['date_due']) ?></span>
+                        <span><?= $this->dt->date($task['date_due']) ?> <?= $this->dt->time($task['date_due']) ?></span>
                     </li>
                     <?php endif ?>
                     <?php if ($task['time_estimated']): ?>
