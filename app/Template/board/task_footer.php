@@ -65,7 +65,7 @@
                 <?php endif ?>
                 ">
                 <i class="fa fa-calendar"></i>
-                <?= $this->dt->date($task['date_due']) ?> <?= $this->dt->time($task['date_due']) ?>
+                <?= $this->dt->datetime($task['date_due']) ?>
             </span>
         <?php endif ?>
     </div>
