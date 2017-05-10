@@ -31,7 +31,7 @@
                     if (empty($task['date_due'])) {
                         echo '<li>'.t('The due date have been removed').'</li>';
                     } else {
-                        echo '<li>'.t('New due date: ').$this->dt->date($task['date_due']).'</li>';
+                        echo '<li>'.t('New due date: ').$this->dt->datetime($task['date_due']).'</li>';
                     }
                     break;
                 case 'description':

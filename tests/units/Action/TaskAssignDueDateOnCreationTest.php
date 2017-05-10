@@ -32,6 +32,6 @@ class TaskAssignDueDateOnCreationTest extends Base
 
         $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEquals(date('Y-m-d', strtotime('+4days')), date('Y-m-d', $task['date_due']));
+        $this->assertEquals(date('Y-m-d H:i', strtotime('+4days')), date('Y-m-d H:i', $task['date_due']));
     }
 }

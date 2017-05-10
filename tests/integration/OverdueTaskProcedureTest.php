@@ -19,7 +19,7 @@ class OverdueTaskProcedureTest extends BaseProcedureTest
         $this->assertNotFalse($this->app->createTask(array(
             'title' => 'overdue task',
             'project_id' => $this->projectId,
-            'date_due' => date('Y-m-d', strtotime('-2days')),
+            'date_due' => date('Y-m-d H:i', strtotime('-2days')),
         )));
     }
 
