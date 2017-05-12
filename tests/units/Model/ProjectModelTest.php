@@ -2,7 +2,13 @@
 
 require_once __DIR__.'/../Base.php';
 
+use Kanboard\Api\Procedure\ProjectPermissionProcedure;
+use Kanboard\Core\Security\Role;
 use Kanboard\Core\Translator;
+use Kanboard\Model\ColumnModel;
+use Kanboard\Model\ProjectPermissionModel;
+use Kanboard\Model\SwimlaneModel;
+use Kanboard\Model\TagModel;
 use Kanboard\Subscriber\ProjectModificationDateSubscriber;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\UserModel;
@@ -205,6 +211,75 @@ class ProjectModelTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
         $this->assertTrue($projectModel->remove(1));
         $this->assertFalse($projectModel->remove(1234));
+    }
+
+    public function testRemoveTagsOnProjectRemove()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $tagModel = new TagModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
+
+        $this->assertNotFalse($tagModel->create(1,'TestTag'));
+        $this->assertTrue($projectModel->remove(1));
+
+        // We are not testing the project ID here, sqlite creates the same id again (source of some issues)
+        $newProjectId = $projectModel->create(array('name' => 'UnitTest2'));
+        $this->assertFalse($tagModel->getIdByName($newProjectId,'TestTag'));
+
+    }
+
+    public function testRemoveSwimlaneOnProjectRemove()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $swimlaneModel = new SwimlaneModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
+
+        $this->assertNotFalse($swimlaneModel->create(1,'TestSwimlane'));
+        $this->assertTrue($projectModel->remove(1));
+
+        // We are not testing the project ID here, sqlite creates the same id again (source of some issues)
+        $newProjectId = $projectModel->create(array('name' => 'UnitTest2'));
+
+        $this->assertSame(0, $swimlaneModel->getIdByName($newProjectId,'TestSwimlane'));
+    }
+
+    public function testRemoveColumnOnProjectRemove()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $columnModel = new ColumnModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
+
+        $this->assertNotFalse($columnModel->create(1,'TestColumn'));
+        $this->assertTrue($projectModel->remove(1));
+
+        // We are not testing the project ID here, sqlite creates the same id again (source of some issues)
+        $newProjectId = $projectModel->create(array('name' => 'UnitTest2'));
+        $this->assertSame(0, $columnModel->getColumnIdByTitle($newProjectId,'TestColumn'));
+    }
+
+    public function testRemovePermissionOnProjectRemove()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $userModel = new UserModel($this->container);
+
+        $permissionModel = new ProjectPermissionModel($this->container);
+        $permissionProcedure = new ProjectPermissionProcedure($this->container);
+
+        $this->assertNotFalse($userModel->create(array('username' => 'user1')));
+        $user = $userModel->getByUsername('user1');
+        $userId = $user['id'];
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
+        $permissionProcedure->addProjectUser(1,$userId,Role::PROJECT_MEMBER);
+
+        $this->assertTrue($projectModel->remove(1));
+
+        // We are not testing the project ID here, sqlite creates the same id again (source of some issues)
+        $newProjectId = $projectModel->create(array('name' => 'UnitTest2'));
+        $this->assertFalse($permissionModel->isMember($newProjectId,$userId));
     }
 
     public function testEnable()
