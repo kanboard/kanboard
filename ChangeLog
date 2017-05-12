@@ -12,6 +12,7 @@ Bug fixes:
 
 * Ensure project tags are removed when the project is removed
 * Avoid PHP notice when regenerating API token for a user
+* Fix wrong dropdown menu in group members list
 
 Version 1.0.43 (April 30, 2017)
 -------------------------------

@@ -1333,4 +1333,5 @@ return array(
     'Only moving task between those columns is permitted for tasks assigned to the current user' => 'Somente movimentação de tarefas entre aquelas colunas são permitidas para tarefas designadas para o usuário atual',
     '[DUPLICATE]' => '[DUPLICADO]',
     // 'DKK - Danish Krona' => '',
+    // 'Remove user from group' => '',
 );
