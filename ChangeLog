@@ -1,3 +1,10 @@
+Version 1.0.44 (unreleased)
+---------------------------
+
+Improvements:
+
+* Improve automated action TaskAssignColorOnDueDate to update task only when necessary
+
 Version 1.0.43 (April 30, 2017)
 -------------------------------
 
