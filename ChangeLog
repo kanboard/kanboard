@@ -3,6 +3,8 @@ Version 1.0.44 (unreleased)
 
 Improvements:
 
+* Update Docker image to Alpine Linux 3.5
+* Add the possibility to pass API token as environment variable for Docker container
 * Add wildcard search for task reference field
 * Improve automated action TaskAssignColorOnDueDate to update task only when necessary
 
