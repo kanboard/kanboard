@@ -462,7 +462,13 @@ class ProjectModel extends Base
      */
     public function remove($project_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $project_id)->remove();
+        $this->db->startTransaction();
+
+        $this->db->table(TagModel::TABLE)->eq('project_id', $project_id)->remove();
+        $result = $this->db->table(self::TABLE)->eq('id', $project_id)->remove();
+
+        $this->db->closeTransaction();
+        return $result;
     }
 
     /**
