@@ -1,4 +1,4 @@
-<div>
+<div class="table-list-row-header">
     <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
         <?= $this->render('task/dropdown', array('task' => $task)) ?>
     <?php else: ?>
@@ -8,4 +8,12 @@
     <span class="table-list-title <?= $task['is_active'] == 0 ? 'status-closed' : '' ?>">
         <?= $this->url->link($this->text->e($task['title']), 'TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])) ?>
     </span>
+    <div class="task-list-avatars">
+        <?php // fixes task board date plugin
+        if (! isset($users_list)) { 
+            $users_list = array();
+        } // endif (!empty($users_list)) {
+        ?>
+        <?= $this->render('board/task_avatar', array('task' => $task, 'users_list' => $users_list)) ?>
+    </div>
 </div>

@@ -256,4 +256,16 @@ class TaskHelper extends Base
         $html .= '</ul></div></small>';
         return $html;
     }
+
+   /**
+     * Get list of users that can be assigned to a task (only Manager and Member) for assignee dropdown
+     *
+     * @access public
+     * @param  integer $project_id
+     * @var array
+     */
+    public function getAssignableUsersList($project_id)
+    {
+        return $this->projectUserRoleModel->getAssignableUsersList($project_id, false);
+    }
 }

@@ -2,13 +2,15 @@
     <div class="task-board-header">
         <?= $this->url->link('#'.$task['id'], 'TaskViewController', 'readonly', array('task_id' => $task['id'], 'token' => $project['token'])) ?>
 
-        <?php if (! empty($task['owner_id'])): ?>
-            <span class="task-board-assignee">
-                <?= $this->text->e($task['assignee_name'] ?: $task['assignee_username']) ?>
-            </span>
-        <?php endif ?>
-
-        <?= $this->render('board/task_avatar', array('task' => $task)) ?>
+        <?php // IMPORTANT: must come first to make float: right work ?>
+        <div class="task-board-avatars">
+            <?php 
+            if (! isset($users_list)) { 
+                $users_list = array();
+            } // endif (!empty($users_list)) {
+            ?>
+            <?= $this->render('board/task_avatar', array('task' => $task, 'users_list' => $users_list)) ?>
+        </div>
     </div>
 
     <?= $this->hook->render('template:board:public:task:before-title', array('task' => $task)) ?>
