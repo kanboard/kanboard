@@ -164,8 +164,6 @@ class UserHelper extends Base
      */
     public function getUserDataById($user_id)
     {
-        // return $this->subtaskTimeTrackingModel->getTimerQuery($this->userSession->getId());
-     
         return $this->db
             ->table(UserModel::TABLE)
             ->columns(
