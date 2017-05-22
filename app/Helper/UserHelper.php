@@ -3,6 +3,7 @@
 namespace Kanboard\Helper;
 
 use Kanboard\Core\Base;
+use Kanboard\Model\UserModel;
 
 /**
  * User helpers
@@ -152,5 +153,28 @@ class UserHelper extends Base
         }
 
         return $result;
+    }
+
+    /**
+     * Return userdata 
+     *
+     * @access public
+     * @param  integer $user_id
+     * @return array
+     */
+    public function getUserDataById($user_id)
+    {
+        return $this->db
+            ->table(UserModel::TABLE)
+            ->columns(
+                UserModel::TABLE.'.id',
+                UserModel::TABLE.'.username',
+                UserModel::TABLE.'.name',
+                UserModel::TABLE.'.email',
+                UserModel::TABLE.'.avatar_path'
+            )
+            ->eq('id', $user_id)
+            ->eq(UserModel::TABLE.'.is_active', 1)
+            ->findOne();
     }
 }

@@ -1334,4 +1334,6 @@ return array(
     '[DUPLICATE]' => '[COPIE]',
     'DKK - Danish Krona' => 'DKK - Couronne danoise',
     'Remove user from group' => 'Supprimer cet utilisateur du groupe',
+    // 'Change assignee' => '',
+    // 'Type to filter...' => '',
 );

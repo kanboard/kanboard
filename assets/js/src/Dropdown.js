@@ -30,9 +30,11 @@ Kanboard.Dropdown.prototype.listen = function() {
 
         if (offset.top + submenuHeight - $(window).scrollTop() < $(window).height() || $(window).scrollTop() + offset.top < submenuHeight) {
             clone.css('top', offset.top + $(this).height());
+            clone.addClass('dropdown-submenu-open--below');
         }
         else {
             clone.css('top', offset.top - submenuHeight - 5);
+            clone.addClass('dropdown-submenu-open--above');
         }
 
         if (offset.left + submenuWidth > $(window).width()) {

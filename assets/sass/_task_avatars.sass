@@ -3,22 +3,61 @@
 .task-board-avatars
   text-align: right
   float: right
+  position: relative
+  top: -1px
+
+.task-board-avatars 
+  a.dropdown-menu i
+    color: color('primary')
 
 .task-board-change-assignee
   &:hover
     opacity: 0.6
   cursor: pointer
 
+.task-board-collapsed 
+  .task-avatar-assignee
+    display: none
+
 .task-list-avatars
   display: inline-block
-  float: left
-  @include sm-device
+  float: right
+  position: relative
+  top: 2px
+  @include xs-device
     float: none
     display: block
   .task-avatar-assignee
-    font-weight: 300
+    font-weight: 400
     color: color('light')
   &:hover
     .task-avatar-assignee
       font-weight:   400
       color: color('dark')
+
+.task-change-assignee
+  &:hover
+    opacity: 0.6
+  cursor: pointer
+
+.task-change-assignee
+  a
+    text-decoration: none
+    &:hover
+      opacity: 0.6
+  .avatar-inline
+    margin-right: 0
+
+.task-board-avatars, .task-list-avatar
+  white-space: nowrap
+  max-width: 66%
+  a.task-assignee, span.task-assignee 
+    > *
+     vertical-align: middle
+  span.task-avatar-assignee
+    white-space: nowrap
+    max-width: calc(100% - 20px - 15px)
+    text-overflow: ellipsis
+    display: inline-block
+    overflow: hidden
+    text-overflow: ellipsis
