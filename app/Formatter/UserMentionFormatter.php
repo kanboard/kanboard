@@ -2,13 +2,15 @@
 
 namespace Kanboard\Formatter;
 
+use Kanboard\Core\Filter\FormatterInterface;
+
 /**
  * Class UserMentionFormatter
  *
  * @package Kanboard\Formatter
  * @author  Frederic Guillot
  */
-class UserMentionFormatter extends BaseFormatter
+class UserMentionFormatter extends BaseFormatter implements FormatterInterface
 {
     protected $users = array();
 

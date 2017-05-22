@@ -28,6 +28,8 @@ class ProjectProcedureTest extends BaseProcedureTest
         $this->assertNotNull($project);
         $this->assertEquals($this->projectName, $project['name']);
         $this->assertEquals('Description', $project['description']);
+        $this->assertArrayHasKey('board', $project['url']);
+        $this->assertArrayHasKey('list', $project['url']);
     }
 
     public function assertGetProjectByName()
@@ -43,6 +45,9 @@ class ProjectProcedureTest extends BaseProcedureTest
     {
         $projects = $this->app->getAllProjects();
         $this->assertNotEmpty($projects);
+        $this->assertInternalType('array', $projects);
+        $this->assertArrayHasKey('board', $projects[0]['url']);
+        $this->assertArrayHasKey('list', $projects[0]['url']);
     }
 
     public function assertGetProjectActivity()
