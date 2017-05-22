@@ -11,6 +11,7 @@ Improvements:
 
 Bug fixes:
 
+* Fix broken user mentions in comment form at the bottom of the task view page
 * Ensure project tags are removed when the project is removed
 * Avoid PHP notice when regenerating API token for a user
 * Fix wrong dropdown menu in group members list
