@@ -19,7 +19,7 @@
                     <?= $this->text->e($task['title']) ?>
                 <?php endif ?>
             </td>
-            <td style="border: 1px solid #eee;"><?= $this->dt->date($task['date_due']) ?></td>
+            <td style="border: 1px solid #eee;"><?= $this->dt->datetime($task['date_due']) ?></td>
             <td style="border: 1px solid #eee;"><?= $this->text->e($task['project_name']) ?></td>
             <td style="border: 1px solid #eee;">
                 <?php if (! empty($task['assignee_username'])): ?>

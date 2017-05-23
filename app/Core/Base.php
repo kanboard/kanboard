@@ -68,8 +68,12 @@ use Pimple\Container;
  * @property \Kanboard\Formatter\BoardTaskFormatter                  $boardTaskFormatter
  * @property \Kanboard\Formatter\GroupAutoCompleteFormatter          $groupAutoCompleteFormatter
  * @property \Kanboard\Formatter\ProjectActivityEventFormatter       $projectActivityEventFormatter
+ * @property \Kanboard\Formatter\ProjectApiFormatter                 $projectApiFormatter
+ * @property \Kanboard\Formatter\ProjectsApiFormatter                $projectsApiFormatter
  * @property \Kanboard\Formatter\SubtaskListFormatter                $subtaskListFormatter
  * @property \Kanboard\Formatter\SubtaskTimeTrackingCalendarFormatter $subtaskTimeTrackingCalendarFormatter
+ * @property \Kanboard\Formatter\TaskApiFormatter                    $taskApiFormatter
+ * @property \Kanboard\Formatter\TasksApiFormatter                   $tasksApiFormatter
  * @property \Kanboard\Formatter\TaskAutoCompleteFormatter           $taskAutoCompleteFormatter
  * @property \Kanboard\Formatter\TaskICalFormatter                   $taskICalFormatter
  * @property \Kanboard\Formatter\TaskListFormatter                   $taskListFormatter

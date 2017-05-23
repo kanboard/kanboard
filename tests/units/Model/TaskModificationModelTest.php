@@ -195,15 +195,15 @@ class TaskModificationModelTest extends Base
         $task = $taskFinderModel->getById(1);
         $this->assertEquals(0, $task['date_due']);
 
-        $this->assertTrue($taskModificationModel->update(array('id' => 1, 'date_due' => '2014-11-24')));
+        $this->assertTrue($taskModificationModel->update(array('id' => 1, 'date_due' => '2014-11-24 14:30')));
 
         $task = $taskFinderModel->getById(1);
-        $this->assertEquals('2014-11-24', date('Y-m-d', $task['date_due']));
+        $this->assertEquals('2014-11-24 14:30', date('Y-m-d H:i', $task['date_due']));
 
         $this->assertTrue($taskModificationModel->update(array('id' => 1, 'date_due' => time())));
 
         $task = $taskFinderModel->getById(1);
-        $this->assertEquals(date('Y-m-d'), date('Y-m-d', $task['date_due']));
+        $this->assertEquals(date('Y-m-d H:i'), date('Y-m-d H:i', $task['date_due']));
     }
 
     public function testChangeStartedDate()

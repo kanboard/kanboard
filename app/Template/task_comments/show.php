@@ -25,7 +25,11 @@
 
         <?php if ($editable): ?>
             <?= $this->render('task_comments/create', array(
-                'values'   => array(),
+                'values'   => array(
+                    'user_id' => $this->user->getId(),
+                    'task_id' => $task['id'],
+                    'project_id' => $task['project_id'],
+                ),
                 'errors'   => array(),
                 'task'     => $task,
             )) ?>

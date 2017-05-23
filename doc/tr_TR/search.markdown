@@ -111,6 +111,7 @@ Değiştirme tarihi sorguları aynı şekilde çalışır.
 Görev referansı, görevinizin harici bir kimliği, örneğin başka bir yazılımdan gelen bir bilet numarasıdır.
 
 - Görevleri referans ile bulun: `ref:1234` veya `reference:TICKET-1234`
+- Wildcard search: `ref:TICKET-*`
 
 ### Kategoriye göre ara
 

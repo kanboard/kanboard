@@ -3,6 +3,6 @@
 </div>
 <form method="post" action="<?= $this->url->href('CommentListController', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
-    <?= $this->form->textEditor('comment', array(), array(), array('required' => true)) ?>
+    <?= $this->form->textEditor('comment', array('project_id' => $task['project_id']), array(), array('required' => true)) ?>
     <?= $this->modal->submitButtons() ?>
 </form>

@@ -115,6 +115,7 @@ Attribute: **completed**
 The task reference is an external id of your task, by example a ticket number from another software.
 
 - Find tasks with a reference: `ref:1234` or `reference:TICKET-1234`
+- Wildcard search: `ref:TICKET-*`
 
 ### Search by category
 

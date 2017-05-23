@@ -62,6 +62,6 @@ class MeProcedure extends BaseProcedure
         $project_ids = $this->projectPermissionModel->getActiveProjectIds($this->userSession->getId());
         $projects = $this->projectModel->getAllByIds($project_ids);
 
-        return $this->formatProjects($projects);
+        return $this->projectsApiFormatter->withProjects($projects)->format();
     }
 }

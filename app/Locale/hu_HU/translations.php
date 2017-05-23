@@ -1333,4 +1333,8 @@ return array(
     'Only moving task between those columns is permitted for tasks assigned to the current user' => 'Az aktuális felhasználóhoz rendelt feladatok csak az engedélyezett oszlopok között mozgathatóak',
     '[DUPLICATE]' => '[Duplikált]',
     'DKK - Danish Krona' => 'Dán korona',
+<<<<<<< HEAD
+=======
+    // 'Remove user from group' => '',
+>>>>>>> b0537e644948804ab62c06ac73d512243287c1ae
 );
