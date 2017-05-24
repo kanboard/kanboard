@@ -23,6 +23,7 @@ class BoardViewController extends BaseController
     {
         $token = $this->request->getStringParam('token');
         $project = $this->projectModel->getByToken($token);
+        $taskStats = $this->projectModel->getTaskStats($project['id']);
 
         if (empty($project)) {
             throw AccessForbiddenException::getInstance()->withoutLayout();
@@ -46,6 +47,7 @@ class BoardViewController extends BaseController
             'board_public_refresh_interval' => $this->configModel->get('board_public_refresh_interval'),
             'board_private_refresh_interval' => $this->configModel->get('board_private_refresh_interval'),
             'board_highlight_period' => $this->configModel->get('board_highlight_period'),
+            'nb_active_tasks' => $taskStats['nb_active_tasks'],
         )));
     }
 
