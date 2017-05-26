@@ -745,7 +745,7 @@ return array(
     'Change task color when using a specific task link' => 'Změnit barvu úkolu při použití konkrétního odkazu na úkol',
     'Task link creation or modification' => 'Vytvoření, nebo změna odkazu na úkol',
     'Milestone' => 'Milník',
-    // 'Documentation: %s' => '',
+    'Documentation: %s' => 'Dokumentace',
     'Reset the search/filter box' => 'Vyresetovat pole pro vyhledávání/filtrování',
     'Documentation' => 'Dokumentace',
     'Table of contents' => 'Obsah',
