@@ -16,6 +16,7 @@ Bug fixes:
 * Avoid PHP notice when regenerating API token for a user
 * Fix wrong dropdown menu in group members list
 * Show only active users in auto-complete forms (project permissions)
+* Check owner existence before to create project
 
 Version 1.0.43 (April 30, 2017)
 -------------------------------

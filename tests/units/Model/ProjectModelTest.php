@@ -49,6 +49,21 @@ class ProjectModelTest extends Base
         $this->assertEmpty($project['end_date']);
     }
 
+    public function testCreationWithUserId()
+    {
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertFalse($projectModel->create(array('name' => 'UnitTest'), 3));
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest'), 1));
+        $project = $projectModel->getById(1);
+        $this->assertEquals(1, $project['owner_id']);
+
+        $this->assertEquals(2, $projectModel->create(array('name' => 'UnitTest'), 0));
+        $project = $projectModel->getById(2);
+        $this->assertEquals(0, $project['owner_id']);
+    }
+
     public function testProjectDate()
     {
         $projectModel = new ProjectModel($this->container);
@@ -163,6 +178,26 @@ class ProjectModelTest extends Base
         $project = $projectModel->getById(1);
         $this->assertNotEmpty($project);
         $this->assertGreaterThan($now, $project['last_modified']);
+    }
+
+    public function testUpdateOwnerId()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
+
+        $this->assertFalse($projectModel->update(array('id'=> 1, 'name' => 'test', 'owner_id' => 2)));
+
+        $this->assertTrue($projectModel->update(array('id'=> 1, 'name' => 'test', 'owner_id' => 1)));
+
+        $project = $projectModel->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals(1, $project['owner_id']);
+
+        $this->assertTrue($projectModel->update(array('id'=> 1, 'name' => 'test', 'owner_id' => 0)));
+
+        $project = $projectModel->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals(0, $project['owner_id']);
     }
 
     public function testGetAllIds()
