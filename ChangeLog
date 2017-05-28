@@ -1,13 +1,15 @@
-Version 1.0.44 (unreleased)
----------------------------
+Version 1.0.44 (May 28, 2017)
+-----------------------------
 
 Improvements:
 
+* Use datetime field for due date
 * Update Docker image to Alpine Linux 3.6
 * Add the possibility to pass API token as environment variable for Docker container
 * Add wildcard search for task reference field
 * Improve automated action TaskAssignColorOnDueDate to update task only when necessary
 * Add task and project API formatters
+* Update translations
 
 Bug fixes:
 
