@@ -1,0 +1,3 @@
+{
+    "PHP_EXTENSIONS": ["gd","openssl","pdo", "pdo_mysql","pdo_sqlite","mbstring","mysql"]
+}
