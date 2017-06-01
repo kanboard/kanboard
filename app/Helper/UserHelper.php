@@ -96,7 +96,16 @@ class UserHelper extends Base
     {
         return $this->userSession->isAdmin();
     }
-
+ /**
+     * Return if the logged user is anyuser
+     *Kasun Fernando
+     * @access public
+     * @return boolean
+     */
+public function isUser()
+    {
+        return $this->userSession->isUser();
+    }
     /**
      * Get role name
      *
