@@ -1,3 +1,10 @@
+Version 1.0.45 (unreleased)
+---------------------------
+
+New features:
+
+* Automatic action to assign tasks to its creator
+
 Version 1.0.44 (May 28, 2017)
 -----------------------------
 

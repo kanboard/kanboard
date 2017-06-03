@@ -1334,4 +1334,5 @@ return array(
     '[DUPLICATE]' => '[COPIE]',
     'DKK - Danish Krona' => 'DKK - Couronne danoise',
     'Remove user from group' => 'Supprimer cet utilisateur du groupe',
+    'Assign the task to its creator' => 'Assigner une tâche à son créateur',
 );

@@ -1334,4 +1334,5 @@ return array(
     '[DUPLICATE]' => '[DUPLICADO]',
     'DKK - Danish Krona' => 'DKK - Coroa Dinamarquesa',
     'Remove user from group' => 'Remover usuário do grupo',
+    // 'Assign the task to its creator' => '',
 );

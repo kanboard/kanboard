@@ -1334,4 +1334,5 @@ return array(
     '[DUPLICATE]' => '[Duplikált]',
     'DKK - Danish Krona' => 'Dán korona',
     'Remove user from group' => 'Felhasználó eltávolítása a csoportból',
+    // 'Assign the task to its creator' => '',
 );
