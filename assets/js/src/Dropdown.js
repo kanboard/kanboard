@@ -52,7 +52,11 @@ Kanboard.Dropdown.prototype.listen = function() {
         if ($(e.target).is('li')) {
             KB.trigger('dropdown.clicked');
 
-            $(this).find('a:visible')[0].click(); // Calling native click() not the jQuery one
+            var element = $(this).find('a:visible');
+
+            if (element.length > 0) {
+                element[0].click(); // Calling native click() not the jQuery one
+            }
         }
     });
 };
