@@ -6,7 +6,7 @@ KB.onClick('.js-autocomplete-email', function (e) {
         emailField.build().value = email;
     }
 
-    _KB.controllers['Dropdown'].close();
+    _KB.controllers.Dropdown.close();
 });
 
 KB.onClick('.js-autocomplete-subject', function (e) {
@@ -17,5 +17,5 @@ KB.onClick('.js-autocomplete-subject', function (e) {
         subjectField.build().value = subject;
     }
 
-    _KB.controllers['Dropdown'].close();
+    _KB.controllers.Dropdown.close();
 });
