@@ -5,6 +5,7 @@ New features:
 
 * Automatic action to assign tasks to its creator
 * Add the possibility to create a comment when a task is sent by email
+* Add dropdown menu to autocomplete email field from project members
 
 Version 1.0.44 (May 28, 2017)
 -----------------------------

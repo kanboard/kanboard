@@ -20,6 +20,7 @@ class TaskMailController extends BaseController
             'errors'  => $errors,
             'task'    => $task,
             'project' => $project,
+            'members' => $this->projectPermissionModel->getMembersWithEmail($project['id']),
         )));
     }
 
