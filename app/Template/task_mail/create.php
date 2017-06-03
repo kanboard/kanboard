@@ -22,6 +22,22 @@
 
     <?= $this->form->label(t('Subject'), 'subject') ?>
     <?= $this->form->text('subject', $values, $errors, array('required', 'tabindex="2"')) ?>
+    <?php if (! empty($project['predefined_email_subjects'])): ?>
+        <div class="dropdown">
+            <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-archive"></i><i class="fa fa-caret-down"></i></a>
+            <ul>
+                <?php foreach (explode("\r\n", trim($project['predefined_email_subjects'])) as $subject): ?>
+                    <?php $subject = trim($subject); ?>
+
+                    <?php if (! empty($subject)): ?>
+                    <li data-subject="<?= $this->text->e($subject) ?>" class="js-autocomplete-subject">
+                        <?= $this->text->e($subject) ?>
+                    </li>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </ul>
+        </div>
+    <?php endif ?>
 
     <?= $this->form->checkbox('add_comment', t('Log this action in a comment'), 1) ?>
 

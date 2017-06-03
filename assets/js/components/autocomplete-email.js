@@ -10,3 +10,16 @@ KB.onClick('.js-autocomplete-email', function (e) {
         }
     }
 });
+
+KB.onClick('.js-autocomplete-subject', function (e) {
+    var subject = KB.dom(e.target).data('subject');
+
+    if (subject) {
+        var subjectField = KB.find('.js-task-mail-form input[name="subject"]');
+
+        if (subjectField) {
+            subjectField.attr('value', subject);
+            _KB.controllers['Dropdown'].close();
+        }
+    }
+});
