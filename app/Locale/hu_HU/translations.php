@@ -1335,4 +1335,6 @@ return array(
     'DKK - Danish Krona' => 'Dán korona',
     'Remove user from group' => 'Felhasználó eltávolítása a csoportból',
     // 'Assign the task to its creator' => '',
+    // 'This task was sent by email to "%s" with subject "%s".' => '',
+    // 'Log this action in a comment' => '',
 );

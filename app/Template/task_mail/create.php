@@ -10,6 +10,8 @@
     <?= $this->form->label(t('Subject'), 'subject') ?>
     <?= $this->form->text('subject', $values, $errors, array('required', 'tabindex="2"')) ?>
 
+    <?= $this->form->checkbox('add_comment', t('Log this action in a comment'), 1) ?>
+
     <?= $this->modal->submitButtons(array(
         'submitLabel' => t('Send by email'),
         'tabindex'    => 3,
