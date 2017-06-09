@@ -1336,7 +1336,6 @@ return array(
     // 'Remove user from group' => '',
     // 'Assign the task to its creator' => '',
     // 'This task was sent by email to "%s" with subject "%s".' => '',
-    // 'Log this action in a comment' => '',
     // 'Predefined Email Subjects' => '',
     // 'Write one subject by line.' => '',
 );

@@ -1336,7 +1336,6 @@ return array(
     'Remove user from group' => 'Supprimer cet utilisateur du groupe',
     'Assign the task to its creator' => 'Assigner une tâche à son créateur',
     'This task was sent by email to "%s" with subject "%s".' => 'Cette tâche a été envoyée par courrier électronique à « %s » avec le sujet « %s ».',
-    'Log this action in a comment' => 'Enregistrez cette action dans un commentaire',
     'Predefined Email Subjects' => 'Sujets de courrier électronique prédéfinis',
     'Write one subject by line.' => 'Écrivez un sujet par ligne.',
 );
