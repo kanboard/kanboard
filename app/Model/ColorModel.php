@@ -21,7 +21,7 @@ class ColorModel extends Base
     private $default_colors = array(
         'yellow' => array(
             'name' => 'Yellow',
-            'background' => 'rgb(245, 247, 196)',
+            'background' => 'rgb(255, 255, 204)',
             'border' => 'rgb(223, 227, 45)',
         ),
         'blue' => array(

@@ -2,16 +2,18 @@
 
 .task-board
   position: relative
-  margin-bottom: 4px
-  border: 1px solid #000
-  padding: 2px
+  margin-bottom: 6px
+  padding: 5px
   word-wrap: break-word
   font-size: size('compact')
-  border-radius: 6px
+  box-shadow: 2px 2px 2px 0px rgba(160,160,160,1);
+
+.task-board:hover
+  box-shadow: 4px 4px 2px 0px rgba(160,160,160,1);
 
 div
   &.task-board-recent
-    border-width: 2px
+    box-shadow: 4px 4px 2px 0px rgba(160,160,160,1);
   &.task-board-status-closed
     user-select: none
     border: 1px dotted #555
