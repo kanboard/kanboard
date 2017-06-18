@@ -2,6 +2,7 @@
 @import mixins
 
 #modal-overlay
+  text-align: center
   position: fixed
   top: 0
   left: 0
@@ -12,11 +13,9 @@
   z-index: 100
 
 #modal-box
-  position: fixed
-  max-height: calc(100% - 30px)
-  top: 2%
-  left: 50%
-  transform: translateX(-50%)
+  display: inline-block
+  text-align: left
+  margin-top: 1%
   background: #fff
   overflow: auto
   border-radius: 5px
