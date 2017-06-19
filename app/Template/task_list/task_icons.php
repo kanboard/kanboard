@@ -32,10 +32,10 @@
 
     <?php if (! empty($task['date_due'])): ?>
         <span title="<?= t('Due date') ?>" class="task-date
-            <?php if (date('Y-m-d') == date('Y-m-d', $task['date_due'])): ?>
-                 task-date-today
-            <?php elseif (time() > $task['date_due']): ?>
+            <?php if (time() > $task['date_due']): ?>
                  task-date-overdue
+            <?php elseif (date('Y-m-d') == date('Y-m-d', $task['date_due'])): ?>
+                 task-date-today
             <?php endif ?>
             ">
             <i class="fa fa-calendar"></i>
