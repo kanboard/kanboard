@@ -9,6 +9,10 @@ New features:
 * Add configurable list of predefined subjects when sending a task or a a comment by email
 * Add command line argument to filter overdue notification for a given project
 
+Bug fixes:
+
+* Add missing subtask permissions for project viewer role
+
 Version 1.0.44 (May 28, 2017)
 -----------------------------
 
