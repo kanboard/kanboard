@@ -1,5 +1,5 @@
-Version 1.0.45 (unreleased)
----------------------------
+Version 1.0.45 (June 23, 2017)
+------------------------------
 
 New features:
 
@@ -16,6 +16,7 @@ Improvements:
 Bug fixes:
 
 * Add missing subtask permissions for project viewer role
+* Fix Javascript language mapping
 
 Version 1.0.44 (May 28, 2017)
 -----------------------------
