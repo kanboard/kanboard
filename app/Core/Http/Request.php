@@ -260,6 +260,28 @@ class Request extends Base
     }
 
     /**
+     * Get remote full name
+     *
+     * @access public
+     * @return string
+     */
+    public function getRemoteFullname()
+    {
+        return $this->getServerVariable(REVERSE_PROXY_FULLNAME_HEADER);
+    }
+
+    /**
+     * Get remote email address
+     *
+     * @access public
+     * @return string
+     */
+    public function getRemoteEmail()
+    {
+        return $this->getServerVariable(REVERSE_PROXY_EMAIL_HEADER);
+    }
+
+    /**
      * Returns query string
      *
      * @access public
