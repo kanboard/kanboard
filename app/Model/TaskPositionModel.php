@@ -138,16 +138,22 @@ class TaskPositionModel extends Base
      */
     private function saveTaskPositions($project_id, $task_id, $position, $column_id, $swimlane_id)
     {
-        $tasks_ids = $this->db->table(TaskModel::TABLE)
-            ->eq('is_active', 1)
-            ->eq('swimlane_id', $swimlane_id)
-            ->eq('project_id', $project_id)
-            ->eq('column_id', $column_id)
-            ->neq('id', $task_id)
-            ->asc('position')
-            ->asc('id')
-            ->findAllByColumn('id');
+        $search = $this->userSession->getFilters($project_id); // get the current filters
+        $LB=$this->taskLexer->withQuery(
+            $this->db->table(TaskModel::TABLE)
+                ->eq('tasks.is_active', 1)
+                ->eq('swimlane_id', $swimlane_id)
+                ->eq('tasks.project_id', $project_id)
+                ->eq('column_id', $column_id)
+                ->neq('tasks.id', $task_id)
+                ->asc('position')
+                ->asc('tasks.id'))
+                ->build($search)
+                ->getQuery(); // Get the table with the filters
+        $LB -> join("users","id","owner_id"); // Join with users
+        $LB -> join("project_has_categories","id","category_id"); // Join with users
 
+        $tasks_ids = $LB -> findAllByColumn('tasks.id');
         $offset = 1;
 
         foreach ($tasks_ids as $current_task_id) {
@@ -172,7 +178,7 @@ class TaskPositionModel extends Base
         if ($position >= $offset && ! $this->saveTaskPosition($task_id, $offset, $column_id, $swimlane_id)) {
             return false;
         }
-
+        
         return true;
     }
 
