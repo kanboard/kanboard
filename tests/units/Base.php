@@ -101,5 +101,6 @@ abstract class Base extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $this->container['db']->closeConnection();
+        unset ($this->container);
     }
 }
