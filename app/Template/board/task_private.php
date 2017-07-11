@@ -19,6 +19,7 @@
             <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse"></i></div>
             <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
                 <?= $this->render('task/dropdown', array('task' => $task)) ?>
+                <?= $this->modal->large('edit', '', 'TaskModificationController', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             <?php else: ?>
                 <strong><?= '#'.$task['id'] ?></strong>
             <?php endif ?>
@@ -36,6 +37,7 @@
             <div class="task-board-header">
                 <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
                     <?= $this->render('task/dropdown', array('task' => $task)) ?>
+                    <?= $this->modal->large('edit', '', 'TaskModificationController', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
                 <?php else: ?>
                     <strong><?= '#'.$task['id'] ?></strong>
                 <?php endif ?>
