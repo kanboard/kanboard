@@ -23,11 +23,6 @@ table
   &.table-striped tr:nth-child(odd)
     background: bg-color('lighter')
 
-  &.table-hover tr:hover
-    background: map-get($highlight-colors, 'background')
-    td
-      border: 2px solid map-get($highlight-colors, 'border')
-
   &.table-scrolling
     @include sm-device
       overflow-x: auto

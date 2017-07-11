@@ -255,7 +255,15 @@ Response example:
             "recurrence_basedate": "0",
             "recurrence_parent": null,
             "recurrence_child": null,
-            "url": "http:\/\/127.0.0.1:8000\/?controller=task&action=show&task_id=1&project_id=1"
+            "priority": "0",
+            "external_provider": null,
+            "external_uri": null,
+            "url": "http:\/\/127.0.0.1:8000\/?controller=task&action=show&task_id=1&project_id=1",
+            "color": {
+                "name": "Blue",
+                "background": "rgb(219, 235, 255)",
+                "border": "rgb(168, 207, 255)"
+            }
         },
         {
             "id": "2",
@@ -287,7 +295,15 @@ Response example:
             "recurrence_basedate": "0",
             "recurrence_parent": null,
             "recurrence_child": null,
-            "url": "http:\/\/127.0.0.1:8000\/?controller=task&action=show&task_id=2&project_id=1"
+            "priority": "0",
+            "external_provider": null,
+            "external_uri": null,
+            "url": "http:\/\/127.0.0.1:8000\/?controller=task&action=show&task_id=2&project_id=1",
+            "color": {
+                "name": "Green",
+                "background": "rgb(189, 244, 203)",
+                "border": "rgb(74, 227, 113)"
+            }
         },
         ...
     ]

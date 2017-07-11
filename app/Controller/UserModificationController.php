@@ -57,13 +57,13 @@ class UserModificationController extends BaseController
         if ($valid) {
             if ($this->userModel->update($values)) {
                 $this->flash->success(t('User updated successfully.'));
+                $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])), true);
+                return;
             } else {
-                $this->flash->failure(t('Unable to update your user.'));
+                $this->flash->failure(t('Unable to update this user.'));
             }
-
-            return $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])));
         }
 
-        return $this->show($values, $errors);
+        $this->show($values, $errors);
     }
 }

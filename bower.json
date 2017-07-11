@@ -9,7 +9,6 @@
   ],
   "dependencies": {
     "jquery": "^2.2.3",
-    "fullcalendar": "^3.0.1",
     "c3": "^0.4.11",
     "jquery-ui": "^1.11.4",
     "jqueryui-touch-punch": "*",

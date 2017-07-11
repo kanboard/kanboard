@@ -18,21 +18,22 @@ class TaskPagination extends Base
      * Get dashboard pagination
      *
      * @access public
-     * @param  integer $user_id
+     * @param  integer $userId
      * @param  string  $method
      * @param  integer $max
      * @return Paginator
      */
-    public function getDashboardPaginator($user_id, $method, $max)
+    public function getDashboardPaginator($userId, $method, $max)
     {
-        $query = $this->taskFinderModel->getUserQuery($user_id);
+        $query = $this->taskFinderModel->getUserQuery($userId);
         $this->hook->reference('pagination:dashboard:task:query', $query);
 
         return $this->paginator
-            ->setUrl('DashboardController', $method, array('pagination' => 'tasks', 'user_id' => $user_id))
+            ->setUrl('DashboardController', $method, array('pagination' => 'tasks', 'user_id' => $userId))
             ->setMax($max)
             ->setOrder(TaskModel::TABLE.'.id')
             ->setQuery($query)
+            ->setFormatter($this->taskListFormatter)
             ->calculateOnlyIf($this->request->getStringParam('pagination') === 'tasks');
     }
 }

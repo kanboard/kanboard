@@ -117,15 +117,7 @@ KB.keyboardShortcuts = function () {
         goToLink('a.view-board');
     });
 
-    KB.onKey('v+c', function () {
-        goToLink('a.view-calendar');
-    });
-
     KB.onKey('v+l', function () {
         goToLink('a.view-listing');
-    });
-
-    KB.onKey('v+g', function () {
-        goToLink('a.view-gantt');
     });
 };

@@ -70,35 +70,6 @@ class SubtaskModel extends Base
     }
 
     /**
-     * Get the query to fetch subtasks assigned to a user
-     *
-     * @access public
-     * @param  integer    $userId
-     * @param  array      $status
-     * @return \PicoDb\Table
-     */
-    public function getUserQuery($userId, array $status)
-    {
-        return $this->db->table(SubtaskModel::TABLE)
-            ->columns(
-                SubtaskModel::TABLE.'.*',
-                TaskModel::TABLE.'.project_id',
-                TaskModel::TABLE.'.color_id',
-                TaskModel::TABLE.'.title AS task_name',
-                ProjectModel::TABLE.'.name AS project_name'
-            )
-            ->subquery($this->subtaskTimeTrackingModel->getTimerQuery($userId), 'timer_start_date')
-            ->eq('user_id', $userId)
-            ->eq(ProjectModel::TABLE.'.is_active', ProjectModel::ACTIVE)
-            ->eq(ColumnModel::TABLE.'.hide_in_dashboard', 0)
-            ->in(SubtaskModel::TABLE.'.status', $status)
-            ->join(TaskModel::TABLE, 'id', 'task_id')
-            ->join(ProjectModel::TABLE, 'id', 'project_id', TaskModel::TABLE)
-            ->join(ColumnModel::TABLE, 'id', 'column_id', TaskModel::TABLE)
-            ->callback(array($this, 'addStatusName'));
-    }
-
-    /**
      * Get common query
      *
      * @return \PicoDb\Table
@@ -115,6 +86,15 @@ class SubtaskModel extends Base
             ->subquery($this->subtaskTimeTrackingModel->getTimerQuery($this->userSession->getId()), 'timer_start_date')
             ->join(UserModel::TABLE, 'id', 'user_id')
             ->asc(self::TABLE.'.position');
+    }
+
+    public function countByAssigneeAndTaskStatus($userId)
+    {
+        return $this->db->table(self::TABLE)
+            ->eq('user_id', $userId)
+            ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
+            ->join(Taskmodel::TABLE, 'id', 'task_id')
+            ->count();
     }
 
     /**
@@ -145,6 +125,24 @@ class SubtaskModel extends Base
 
         return $this->subtaskListFormatter
             ->withQuery($this->getQuery()->in('task_id', $taskIds))
+            ->format();
+    }
+
+    /**
+     * Get subtasks for a list of tasks and a given assignee
+     *
+     * @param  array   $taskIds
+     * @param  integer $userId
+     * @return array
+     */
+    public function getAllByTaskIdsAndAssignee(array $taskIds, $userId)
+    {
+        if (empty($taskIds)) {
+            return array();
+        }
+
+        return $this->subtaskListFormatter
+            ->withQuery($this->getQuery()->in('task_id', $taskIds)->eq(self::TABLE.'.user_id', $userId))
             ->format();
     }
 
@@ -229,10 +227,11 @@ class SubtaskModel extends Base
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
 
         if ($result) {
-            $this->subtaskTimeTrackingModel->updateTaskTimeTracking($values['task_id']);
+            $subtask = $this->getById($values['id']);
+            $this->subtaskTimeTrackingModel->updateTaskTimeTracking($subtask['task_id']);
 
             if ($fireEvent) {
-                $this->queueManager->push($this->subtaskEventJob->withParams($values['id'], self::EVENT_UPDATE, $values));
+                $this->queueManager->push($this->subtaskEventJob->withParams($subtask['id'], self::EVENT_UPDATE, $values));
             }
         }
 
@@ -309,25 +308,5 @@ class SubtaskModel extends Base
         $values['time_spent'] = isset($values['time_spent']) ? $values['time_spent'] : 0;
         $values['user_id'] = isset($values['user_id']) ? $values['user_id'] : 0;
         $this->hook->reference('model:subtask:creation:prepare', $values);
-    }
-
-    /**
-     * Add subtask status status to the resultset
-     *
-     * @access public
-     * @param  array    $subtasks   Subtasks
-     * @return array
-     */
-    public function addStatusName(array $subtasks)
-    {
-        $status = $this->getStatusList();
-
-        foreach ($subtasks as &$subtask) {
-            $subtask['status_name'] = $status[$subtask['status']];
-            $subtask['timer_start_date'] = isset($subtask['timer_start_date']) ? $subtask['timer_start_date'] : 0;
-            $subtask['is_timer_started'] = ! empty($subtask['timer_start_date']);
-        }
-
-        return $subtasks;
     }
 }

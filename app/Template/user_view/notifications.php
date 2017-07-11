@@ -18,9 +18,5 @@
         <?= $this->form->checkboxes('notification_projects', $projects, $notifications) ?>
     <?php endif ?>
 
-    <div class="form-actions">
-        <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
-        <?= t('or') ?>
-        <?= $this->url->link(t('cancel'), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
-    </div>
+    <?= $this->modal->submitButtons() ?>
 </form>

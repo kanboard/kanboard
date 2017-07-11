@@ -1,5 +1,7 @@
+<span class="notification">
 <?php if ($this->user->hasNotifications()): ?>
-    <span class="notification">
-        <?= $this->url->link('<i class="fa fa-bell web-notification-icon"></i>', 'DashboardController', 'notifications', array('user_id' => $this->user->getId()), false, '', t('Unread notifications')) ?>
-    </span>
+    <?= $this->modal->mediumIcon('bell web-notification-icon', t('Unread notifications'), 'WebNotificationController', 'show', array('user_id' => $this->user->getId())) ?>
+<?php else: ?>
+    <?= $this->modal->mediumIcon('bell', t('My notifications'), 'WebNotificationController', 'show', array('user_id' => $this->user->getId())) ?>
 <?php endif ?>
+</span>

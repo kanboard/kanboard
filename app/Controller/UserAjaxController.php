@@ -22,7 +22,11 @@ class UserAjaxController extends BaseController
     {
         $search = $this->request->getStringParam('term');
         $filter = $this->userQuery->withFilter(new UserNameFilter($search));
-        $filter->getQuery()->asc(UserModel::TABLE.'.name')->asc(UserModel::TABLE.'.username');
+        $filter->getQuery()
+            ->eq(UserModel::TABLE.'.is_active', 1)
+            ->asc(UserModel::TABLE.'.name')
+            ->asc(UserModel::TABLE.'.username');
+
         $this->response->json($filter->format($this->userAutoCompleteFormatter));
     }
 

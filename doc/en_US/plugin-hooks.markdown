@@ -211,10 +211,8 @@ List of template hooks:
 | `template:config:application `                            | Application settings form                          |
 | `template:config:email`                                   | Email settings page                                |
 | `template:config:integrations`                            | Integration page in global settings                |
-| `template:dashboard:sidebar`                              | Sidebar on dashboard page                          |
 | `template:dashboard:show`                                 | Main page of the dashboard                         |
-| `template:dashboard:subtasks:header:before-timetracking`  | Header of Subtask table before Time Tracking       |
-| `template:dashboard:subtasks:rows`                        | Column on row of Subtask table of the dashboard    |
+| `template:dashboard:page-header:menu`                     | Dashboard submenu                                  |
 | `template:header:dropdown`                                | Page header dropdown menu (user avatar icon)       |
 | `template:header:creation-dropdown`                       | Page header dropdown menu (plus icon)              |
 | `template:layout:head`                                    | Page layout `<head/>` tag                          |
@@ -229,6 +227,7 @@ List of template hooks:
 | `template:project-list:menu:before`                       | Project list: before menu entries                  |
 | `template:project-list:menu:after`                        | Project list: after menu entries                   |
 | `template:project-overview:before-description`            | Project overview: before description               |
+| `template:project-header:view-switcher`                   | Project view switcher                              |
 | `template:task:layout:top`                                | Task layout top (after page header)                |
 | `template:task:details:top`                               | Task summary top                                   |
 | `template:task:details:bottom`                            | Task summary bottom                                |

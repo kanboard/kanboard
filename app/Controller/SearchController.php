@@ -3,6 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Filter\TaskProjectsFilter;
+use Kanboard\Model\TaskModel;
 
 /**
  * Search Controller
@@ -21,11 +22,12 @@ class SearchController extends BaseController
         $paginator = $this->paginator
                 ->setUrl('SearchController', 'index', array('search' => $search))
                 ->setMax(30)
-                ->setOrder('tasks.id')
+                ->setOrder(TaskModel::TABLE.'.id')
                 ->setDirection('DESC');
 
         if ($search !== '' && ! empty($projects)) {
             $paginator
+                ->setFormatter($this->taskListFormatter)
                 ->setQuery($this->taskLexer
                     ->build($search)
                     ->withFilter(new TaskProjectsFilter(array_keys($projects)))

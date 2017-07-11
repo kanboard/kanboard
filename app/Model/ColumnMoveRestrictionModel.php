@@ -31,6 +31,7 @@ class ColumnMoveRestrictionModel extends Base
                 self::TABLE.'.role_id',
                 self::TABLE.'.src_column_id',
                 self::TABLE.'.dst_column_id',
+                self::TABLE.'.only_assigned',
                 'pr.role',
                 'sc.title as src_column_title',
                 'dc.title as dst_column_title'
@@ -59,6 +60,7 @@ class ColumnMoveRestrictionModel extends Base
                 self::TABLE.'.role_id',
                 self::TABLE.'.src_column_id',
                 self::TABLE.'.dst_column_id',
+                self::TABLE.'.only_assigned',
                 'pr.role',
                 'sc.title as src_column_title',
                 'dc.title as dst_column_title'
@@ -81,7 +83,7 @@ class ColumnMoveRestrictionModel extends Base
     {
         return $this->db
             ->table(self::TABLE)
-            ->columns(self::TABLE.'.src_column_id', self::TABLE.'.dst_column_id')
+            ->columns(self::TABLE.'.src_column_id', self::TABLE.'.dst_column_id', self::TABLE.'.only_assigned')
             ->left(ProjectRoleModel::TABLE, 'pr', 'role_id', self::TABLE, 'role_id')
             ->eq(self::TABLE.'.project_id', $project_id)
             ->eq('pr.role', $role)
@@ -95,9 +97,10 @@ class ColumnMoveRestrictionModel extends Base
      * @param  int    $role_id
      * @param  int    $src_column_id
      * @param  int    $dst_column_id
+     * @param  bool   $only_assigned
      * @return bool|int
      */
-    public function create($project_id, $role_id, $src_column_id, $dst_column_id)
+    public function create($project_id, $role_id, $src_column_id, $dst_column_id, $only_assigned = false)
     {
         return $this->db
             ->table(self::TABLE)
@@ -106,6 +109,7 @@ class ColumnMoveRestrictionModel extends Base
                 'role_id' => $role_id,
                 'src_column_id' => $src_column_id,
                 'dst_column_id' => $dst_column_id,
+                'only_assigned' => (int) $only_assigned,
             ));
     }
 

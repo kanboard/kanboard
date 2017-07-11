@@ -47,14 +47,14 @@ class UserCredentialController extends BaseController
             if ($this->userModel->update($values)) {
                 $this->flash->success(t('Password modified successfully.'));
                 $this->userLockingModel->resetFailedLogin($user['username']);
+                $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])), true);
+                return;
             } else {
                 $this->flash->failure(t('Unable to change the password.'));
             }
-
-            return $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])));
         }
 
-        return $this->changePassword($values, $errors);
+        $this->changePassword($values, $errors);
     }
 
     /**
@@ -97,14 +97,14 @@ class UserCredentialController extends BaseController
         if ($valid) {
             if ($this->userModel->update($values)) {
                 $this->flash->success(t('User updated successfully.'));
+                $this->response->redirect($this->helper->url->to('UserCredentialController', 'changeAuthentication', array('user_id' => $user['id'])), true);
+                return;
             } else {
-                $this->flash->failure(t('Unable to update your user.'));
+                $this->flash->failure(t('Unable to update this user.'));
             }
-
-            return $this->response->redirect($this->helper->url->to('UserCredentialController', 'changeAuthentication', array('user_id' => $user['id'])));
         }
 
-        return $this->changeAuthentication($values, $errors);
+        $this->changeAuthentication($values, $errors);
     }
 
     /**

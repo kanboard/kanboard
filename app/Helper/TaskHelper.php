@@ -93,6 +93,10 @@ class TaskHelper extends Base
 
     public function renderAssigneeField(array $users, array $values, array $errors = array(), array $attributes = array())
     {
+        if (isset($values['project_id']) && ! $this->helper->projectRole->canChangeAssignee($values)) {
+            return '';
+        }
+
         $attributes = array_merge(array('tabindex="3"'), $attributes);
 
         $html = $this->helper->form->label(t('Assignee'), 'owner_id');
@@ -204,7 +208,7 @@ class TaskHelper extends Base
     public function renderDueDateField(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="9"'), $attributes);
-        return $this->helper->form->date(t('Due Date'), 'date_due', $values, $errors, $attributes);
+        return $this->helper->form->datetime(t('Due Date'), 'date_due', $values, $errors, $attributes);
     }
 
     public function renderPriority($priority)

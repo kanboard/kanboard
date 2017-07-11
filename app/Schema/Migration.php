@@ -13,6 +13,13 @@ function migrate_default_swimlane(PDO $pdo)
             $project['default_swimlane'] = 'Default swimlane';
         }
 
+        $rq = $pdo->prepare('SELECT 1 FROM swimlanes WHERE name=? AND project_id=?');
+        $rq->execute(array($project['default_swimlane'], $project['id']));
+
+        if ($rq->fetchColumn()) {
+            $project['default_swimlane'] = $project['default_swimlane'].' (Default swimlane)';
+        }
+
         // Create new default swimlane
         $rq = $pdo->prepare('INSERT INTO swimlanes (project_id, name, is_active, position) VALUES (?, ?, ?, ?)');
         $rq->execute(array(

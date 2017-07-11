@@ -129,9 +129,10 @@ class ClassProvider implements ServiceProviderInterface
             'TransitionExport',
         ),
         'Pagination' => array(
-            'TaskPagination',
-            'SubtaskPagination',
+            'DashboardPagination',
             'ProjectPagination',
+            'SubtaskPagination',
+            'TaskPagination',
             'UserPagination',
         ),
         'Core' => array(

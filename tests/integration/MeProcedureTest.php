@@ -53,11 +53,7 @@ class MeProcedureTest extends BaseProcedureTest
     {
         $dashboard = $this->user->getMyDashboard();
         $this->assertNotEmpty($dashboard);
-        $this->assertArrayHasKey('projects', $dashboard);
-        $this->assertArrayHasKey('tasks', $dashboard);
-        $this->assertArrayHasKey('subtasks', $dashboard);
-        $this->assertNotEmpty($dashboard['projects']);
-        $this->assertNotEmpty($dashboard['tasks']);
+        $this->assertEquals('My task', $dashboard[0]['title']);
     }
 
     public function assertGetMyActivityStream()

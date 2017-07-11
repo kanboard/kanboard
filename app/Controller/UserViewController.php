@@ -123,7 +123,12 @@ class UserViewController extends BaseController
         $this->checkCSRFParam();
         $user = $this->getUser();
         $this->rememberMeSessionModel->remove($this->request->getIntegerParam('id'));
-        $this->response->redirect($this->helper->url->to('UserViewController', 'sessions', array('user_id' => $user['id'])));
+
+        if ($this->request->isAjax()) {
+            $this->sessions();
+        } else {
+            $this->response->redirect($this->helper->url->to('UserViewController', 'sessions', array('user_id' => $user['id'])), true);
+        }
     }
 
     /**
@@ -139,10 +144,11 @@ class UserViewController extends BaseController
             $values = $this->request->getValues();
             $this->userNotificationModel->saveSettings($user['id'], $values);
             $this->flash->success(t('User updated successfully.'));
-            return $this->response->redirect($this->helper->url->to('UserViewController', 'notifications', array('user_id' => $user['id'])));
+            $this->response->redirect($this->helper->url->to('UserViewController', 'notifications', array('user_id' => $user['id'])), true);
+            return;
         }
 
-        return $this->response->html($this->helper->layout->user('user_view/notifications', array(
+        $this->response->html($this->helper->layout->user('user_view/notifications', array(
             'projects'      => $this->projectUserRoleModel->getProjectsByUser($user['id'], array(ProjectModel::ACTIVE)),
             'notifications' => $this->userNotificationModel->readSettings($user['id']),
             'types'         => $this->userNotificationTypeModel->getTypes(),
@@ -164,7 +170,8 @@ class UserViewController extends BaseController
             $values = $this->request->getValues();
             $this->userMetadataModel->save($user['id'], $values);
             $this->flash->success(t('User updated successfully.'));
-            $this->response->redirect($this->helper->url->to('UserViewController', 'integrations', array('user_id' => $user['id'])));
+            $this->response->redirect($this->helper->url->to('UserViewController', 'integrations', array('user_id' => $user['id'])), true);
+            return;
         }
 
         $this->response->html($this->helper->layout->user('user_view/integrations', array(
@@ -206,10 +213,15 @@ class UserViewController extends BaseController
                 $this->flash->failure(t('Unable to update this user.'));
             }
 
-            return $this->response->redirect($this->helper->url->to('UserViewController', 'share', array('user_id' => $user['id'])));
+            if (! $this->request->isAjax()) {
+                $this->response->redirect($this->helper->url->to('UserViewController', 'share', array('user_id' => $user['id'])), true);
+                return;
+            }
+
+            $user = $this->getUser();
         }
 
-        return $this->response->html($this->helper->layout->user('user_view/share', array(
+        $this->response->html($this->helper->layout->user('user_view/share', array(
             'user'  => $user,
             'title' => t('Public access'),
         )));

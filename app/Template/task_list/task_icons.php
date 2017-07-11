@@ -23,16 +23,23 @@
         </span>
     <?php endif ?>
 
+    <?php if (! empty($task['date_started'])): ?>
+        <span title="<?= t('Start date') ?>" class="task-date">
+            <i class="fa fa-clock-o"></i>
+            <?= $this->dt->date($task['date_started']) ?>
+        </span>
+    <?php endif ?>
+
     <?php if (! empty($task['date_due'])): ?>
-        <span class="task-date
-            <?php if (date('Y-m-d') == date('Y-m-d', $task['date_due'])): ?>
-                 task-date-today
-            <?php elseif (time() > $task['date_due']): ?>
+        <span title="<?= t('Due date') ?>" class="task-date
+            <?php if (time() > $task['date_due']): ?>
                  task-date-overdue
+            <?php elseif (date('Y-m-d') == date('Y-m-d', $task['date_due'])): ?>
+                 task-date-today
             <?php endif ?>
             ">
             <i class="fa fa-calendar"></i>
-        <?= $this->dt->date($task['date_due']) ?>
+            <?= $this->dt->datetime($task['date_due']) ?>
         </span>
     <?php endif ?>
 
@@ -80,6 +87,8 @@
             <i class="fa fa-file-text-o"></i>
         </span>
     <?php endif ?>
+
+    <span title="<?= t('Position') ?>">(<?= $task['position'] ?>)</span>
 
     <?php if ($task['is_active'] == 1): ?>
         <div class="task-icon-age">

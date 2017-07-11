@@ -20,6 +20,7 @@ class ProjectProcedureTest extends BaseProcedureTest
         $this->assertEnableDisableProject();
         $this->assertEnableDisablePublicAccess();
         $this->assertRemoveProject();
+        $this->assertCreateProjectWithOwnerId();
     }
 
     public function assertGetProjectById()
@@ -28,6 +29,8 @@ class ProjectProcedureTest extends BaseProcedureTest
         $this->assertNotNull($project);
         $this->assertEquals($this->projectName, $project['name']);
         $this->assertEquals('Description', $project['description']);
+        $this->assertArrayHasKey('board', $project['url']);
+        $this->assertArrayHasKey('list', $project['url']);
     }
 
     public function assertGetProjectByName()
@@ -43,6 +46,9 @@ class ProjectProcedureTest extends BaseProcedureTest
     {
         $projects = $this->app->getAllProjects();
         $this->assertNotEmpty($projects);
+        $this->assertInternalType('array', $projects);
+        $this->assertArrayHasKey('board', $projects[0]['url']);
+        $this->assertArrayHasKey('list', $projects[0]['url']);
     }
 
     public function assertGetProjectActivity()
@@ -115,5 +121,24 @@ class ProjectProcedureTest extends BaseProcedureTest
     {
         $this->assertTrue($this->app->removeProject($this->projectId));
         $this->assertNull($this->app->getProjectById($this->projectId));
+    }
+
+    public function assertCreateProjectWithOwnerId()
+    {
+        $this->assertFalse($this->app->createProject(array(
+            'name' => 'My project with an owner',
+            'owner_id' => 999,
+        )));
+
+        $projectId = $this->app->createProject(array(
+            'name' => 'My project with an owner',
+            'owner_id' => 1,
+        ));
+
+        $this->assertNotFalse($projectId);
+
+        $project = $this->app->getProjectById($projectId);
+        $this->assertEquals($projectId, $project['id']);
+        $this->assertEquals(1, $project['owner_id']);
     }
 }

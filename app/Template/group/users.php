@@ -1,6 +1,7 @@
 <section id="main">
     <div class="page-header">
         <ul>
+            <li><?= $this->url->icon('user', t('All users'), 'UserListController', 'show') ?></li>
             <li><?= $this->url->icon('users', t('View all groups'), 'GroupListController', 'index') ?></li>
             <li><?= $this->modal->medium('plus', t('Add group member'), 'GroupListController', 'associate', array('group_id' => $group['id'])) ?></li>
         </ul>
@@ -8,40 +9,35 @@
     <?php if ($paginator->isEmpty()): ?>
         <p class="alert"><?= t('There is no user in this group.') ?></p>
     <?php else: ?>
-        <table class="table-striped table-scrolling table-hover">
-            <tr>
-                <th class="column-5"><?= $paginator->order(t('Id'), 'id') ?></th>
-                <th><?= $paginator->order(t('Username'), 'username') ?></th>
-                <th><?= $paginator->order(t('Name'), 'name') ?></th>
-                <th><?= $paginator->order(t('Email'), 'email') ?></th>
-            </tr>
+        <div class="table-list">
+            <?= $this->render('user_list/header', array('paginator' => $paginator)) ?>
             <?php foreach ($paginator->getCollection() as $user): ?>
-            <tr>
-                <td>
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong><?= '#'.$user['id'] ?> <i class="fa fa-caret-down"></i></strong></a>
-                        <ul>
-                            <li>
-                                <?= $this->url->icon('user', t('View profile'), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
-                            </li>
-                            <li>
-                                <?= $this->modal->confirm('trash-o', t('Remove this user from group'), 'GroupListController', 'dissociate', array('group_id' => $group['id'], 'user_id' => $user['id'])) ?>
-                            </li>
-                        </ul>
+                <div class="table-list-row table-border-left">
+                    <div>
+                        <?= $this->render('group/user_dropdown', array('user' => $user)) ?>
+                        <span class="table-list-title <?= $user['is_active'] == 0 ? 'status-closed' : '' ?>">
+                            <?= $this->avatar->small(
+                                $user['id'],
+                                $user['username'],
+                                $user['name'],
+                                $user['email'],
+                                $user['avatar_path'],
+                                'avatar-inline'
+                            ) ?>
+                            <?= $this->url->link($this->text->e($user['name'] ?: $user['username']), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
+                        </span>
                     </div>
-                </td>
-                <td>
-                    <?= $this->url->link($this->text->e($user['username']), 'UserViewController', 'show', array('user_id' => $user['id'])) ?>
-                </td>
-                <td>
-                    <?= $this->text->e($user['name']) ?>
-                </td>
-                <td>
-                    <a href="mailto:<?= $this->text->e($user['email']) ?>"><?= $this->text->e($user['email']) ?></a>
-                </td>
-            </tr>
+
+                    <?= $this->render('user_list/user_details', array(
+                        'user' => $user,
+                    )) ?>
+
+                    <?= $this->render('user_list/user_icons', array(
+                        'user' => $user,
+                    )) ?>
+                </div>
             <?php endforeach ?>
-        </table>
+        </div>
 
         <?= $paginator ?>
     <?php endif ?>

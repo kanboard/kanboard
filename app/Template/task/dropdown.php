@@ -1,14 +1,16 @@
 <div class="dropdown">
     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong>#<?= $task['id'] ?> <i class="fa fa-caret-down"></i></strong></a>
     <ul>
-        <?php if (array_key_exists('date_started', $task) && empty($task['date_started'])): ?>
-        <li>
-            <?= $this->url->icon('play', t('Set automatically the start date'), 'TaskModificationController', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
+        <?php if ($this->projectRole->canUpdateTask($task)): ?>
+            <?php if (array_key_exists('date_started', $task) && empty($task['date_started'])): ?>
+            <li>
+                <?= $this->url->icon('play', t('Set automatically the start date'), 'TaskModificationController', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            </li>
+            <?php endif ?>
+            <li>
+                <?= $this->modal->large('edit', t('Edit the task'), 'TaskModificationController', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+            </li>
         <?php endif ?>
-        <li>
-            <?= $this->modal->large('edit', t('Edit the task'), 'TaskModificationController', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
-        </li>
         <li>
             <?= $this->modal->medium('plus', t('Add a sub-task'), 'SubtaskController', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
         </li>

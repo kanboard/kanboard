@@ -15,7 +15,7 @@ use Kanboard\Model\UserModel;
 class UserPagination extends Base
 {
     /**
-     * Get user listing paginator
+     * Get user listing pagination
      *
      * @access public
      * @return Paginator

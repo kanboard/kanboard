@@ -106,6 +106,116 @@ class ProjectRoleHelperTest extends Base
         $this->assertFalse($projectRoleHelper->canCreateTaskInColumn(1, 2));
     }
 
+    public function testCanRemoveTaskWithCustomProjectRoleAndRestriction()
+    {
+        $projectRoleHelper = new ProjectRoleHelper($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectUserRole = new ProjectUserRoleModel($this->container);
+        $userModel = new UserModel($this->container);
+        $projectRoleModel = new ProjectRoleModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+        $projectRoleRestrictionModel = new ProjectRoleRestrictionModel($this->container);
+
+        $this->container['sessionStorage']->user = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+        );
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1 , 'title' => 'test')));
+
+        $this->assertEquals(1, $projectRoleModel->create(1, 'Custom Role'));
+        $this->assertTrue($projectUserRole->addUser(1, 2, 'Custom Role'));
+
+        $this->assertEquals(1, $projectRoleRestrictionModel->create(1, 1, ProjectRoleRestrictionModel::RULE_TASK_SUPPRESSION));
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertFalse($projectRoleHelper->canRemoveTask($task));
+    }
+
+    public function testCanRemoveTaskWithCustomProjectRole()
+    {
+        $projectRoleHelper = new ProjectRoleHelper($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectUserRole = new ProjectUserRoleModel($this->container);
+        $userModel = new UserModel($this->container);
+        $projectRoleModel = new ProjectRoleModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+
+        $this->container['sessionStorage']->user = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+        );
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1 , 'title' => 'test')));
+
+        $this->assertEquals(1, $projectRoleModel->create(1, 'Custom Role'));
+        $this->assertTrue($projectUserRole->addUser(1, 2, 'Custom Role'));
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertTrue($projectRoleHelper->canRemoveTask($task));
+    }
+
+    public function testCanChangeAssigneeWithCustomProjectRoleAndRestriction()
+    {
+        $projectRoleHelper = new ProjectRoleHelper($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectUserRole = new ProjectUserRoleModel($this->container);
+        $userModel = new UserModel($this->container);
+        $projectRoleModel = new ProjectRoleModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+        $projectRoleRestrictionModel = new ProjectRoleRestrictionModel($this->container);
+
+        $this->container['sessionStorage']->user = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+        );
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1 , 'title' => 'test')));
+
+        $this->assertEquals(1, $projectRoleModel->create(1, 'Custom Role'));
+        $this->assertTrue($projectUserRole->addUser(1, 2, 'Custom Role'));
+
+        $this->assertEquals(1, $projectRoleRestrictionModel->create(1, 1, ProjectRoleRestrictionModel::RULE_TASK_CHANGE_ASSIGNEE));
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertFalse($projectRoleHelper->canChangeAssignee($task));
+    }
+
+    public function testCanChangeAssigneeWithCustomProjectRole()
+    {
+        $projectRoleHelper = new ProjectRoleHelper($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectUserRole = new ProjectUserRoleModel($this->container);
+        $userModel = new UserModel($this->container);
+        $projectRoleModel = new ProjectRoleModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+
+        $this->container['sessionStorage']->user = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+        );
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1 , 'title' => 'test')));
+
+        $this->assertEquals(1, $projectRoleModel->create(1, 'Custom Role'));
+        $this->assertTrue($projectUserRole->addUser(1, 2, 'Custom Role'));
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertTrue($projectRoleHelper->canChangeAssignee($task));
+    }
+
     public function testCanChangeTaskStatusInColumnWithProjectViewer()
     {
         $projectRoleHelper = new ProjectRoleHelper($this->container);

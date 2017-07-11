@@ -6,7 +6,7 @@
 
 <div class="form-actions">
 <?php if (! empty($user['avatar_path'])): ?>
-    <?= $this->url->link(t('Remove my image'), 'AvatarFileController', 'remove', array('user_id' => $user['id']), true, 'btn btn-red') ?>
+    <?= $this->url->link(t('Remove my image'), 'AvatarFileController', 'remove', array('user_id' => $user['id']), true, 'btn btn-red js-modal-replace') ?>
 <?php endif ?>
 </div>
 

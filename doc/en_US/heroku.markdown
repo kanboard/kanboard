@@ -35,5 +35,9 @@ heroku open
 Limitations
 -----------
 
-- The storage of Heroku is ephemeral, that means uploaded files through Kanboard are not persistent after a restart. You may want to install a plugin to store your files in a cloud storage provider like [Amazon S3](https://github.com/kanboard/plugin-s3).
-- Some features of Kanboard require that you run [a daily background job](cronjob.markdown).
+Local disk storage on Heroku is ephemeral:
+
+- Uploaded files are not persistent after a restart. You may want to install a plugin to store your files in a cloud storage provider like [Amazon S3](https://github.com/kanboard/plugin-s3).
+- Plugins installed via the web interface are stored on the local filesystem. You should include and deploy plugins with your own copy of Kanboard.
+
+Some features of Kanboard require that you run [a daily background job](cronjob.markdown).

@@ -50,15 +50,6 @@ interface PostAuthenticationProviderInterface extends AuthenticationProviderInte
     public function getSecret();
 
     /**
-     * Get QR code url (empty if no QR can be provided)
-     *
-     * @access public
-     * @param  string $label
-     * @return string
-     */
-    public function getQrCodeUrl($label);
-
-    /**
      * Get key url (empty if no url can be provided)
      *
      * @access public

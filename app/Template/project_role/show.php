@@ -80,7 +80,11 @@
                         <i class="fa fa-check-circle-o fa-fw" aria-hidden="true"></i>
                         <strong><?= $this->text->e($restriction['src_column_title']) ?> / <?= $this->text->e($restriction['dst_column_title']) ?></strong>
                         <i class="fa fa-arrow-right fa-fw" aria-hidden="true"></i>
-                        <?= t('Only moving task between those columns is permitted') ?>
+                        <?php if ($restriction['only_assigned'] == 1): ?>
+                            <?= t('Only moving task between those columns is permitted for tasks assigned to the current user') ?>
+                        <?php else: ?>
+                            <?= t('Only moving task between those columns is permitted') ?>
+                        <?php endif ?>
                     </td>
                     <td>
                         <?= $this->modal->confirm('trash-o', t('Remove'), 'ColumnMoveRestrictionController', 'confirm', array('project_id' => $project['id'], 'restriction_id' => $restriction['restriction_id'])) ?>

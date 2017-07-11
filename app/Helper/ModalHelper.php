@@ -65,6 +65,12 @@ class ModalHelper extends Base
         return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-medium btn');
     }
 
+    public function mediumIcon($icon, $label, $controller, $action, array $params = array())
+    {
+        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-medium" aria-hidden="true"></i>';
+        return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-medium', $label);
+    }
+
     public function confirm($icon, $label, $controller, $action, array $params = array())
     {
         $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-confirm" aria-hidden="true"></i>'.$label;
@@ -79,5 +85,11 @@ class ModalHelper extends Base
     public function replaceLink($label, $controller, $action, array $params = array())
     {
         return $this->helper->url->link($label, $controller, $action, $params, false, 'js-modal-replace');
+    }
+
+    public function replaceIconLink($icon, $label, $controller, $action, array $params = array())
+    {
+        $html = '<i class="fa fa-'.$icon.' fa-fw" aria-hidden="true"></i>'.$label;
+        return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-replace');
     }
 }

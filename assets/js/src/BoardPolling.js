@@ -13,7 +13,7 @@ Kanboard.BoardPolling.prototype.execute = function() {
 };
 
 Kanboard.BoardPolling.prototype.check = function() {
-    if (this.app.isVisible() && !this.app.get("BoardDragAndDrop").savingInProgress) {
+    if (KB.utils.isVisible() && !this.app.get("BoardDragAndDrop").savingInProgress) {
         var self = this;
         this.app.showLoadingIcon();
 

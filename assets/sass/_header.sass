@@ -12,8 +12,9 @@ header
     @include md-device
       @include grid_width(15/100)
     @include sm-device
-      @include grid_width(20/100)
-      order: 2
+      @include grid_width(1)
+      order: 1
+      margin-bottom: 5px
       .header-creation-menu
         display: none
 
@@ -22,9 +23,8 @@ header
     @include md-device
       @include grid_width(20/100)
     @include sm-device
-      @include grid_width(80/100)
-      order: 1
-      margin-bottom: 5px
+      @include grid_width(1)
+      order: 2
 
   .title-container
     @include grid_width(65/100)

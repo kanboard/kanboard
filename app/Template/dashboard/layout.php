@@ -7,16 +7,17 @@
                 </li>
             <?php endif ?>
             <?php if ($this->app->config('disable_private_project', 0) == 0): ?>
-            <li>
-                <?= $this->modal->medium('lock', t('New private project'), 'ProjectCreationController', 'createPrivate') ?>
-            </li>
+                <li>
+                    <?= $this->modal->medium('lock', t('New private project'), 'ProjectCreationController', 'createPrivate') ?>
+                </li>
             <?php endif ?>
-            <li>
-                <?= $this->url->icon('search', t('Search'), 'SearchController', 'index') ?>
-            </li>
             <li>
                 <?= $this->url->icon('folder', t('Project management'), 'ProjectListController', 'show') ?>
             </li>
+            <li>
+                <?= $this->modal->medium('dashboard', t('My activity stream'), 'ActivityController', 'user') ?>
+            </li>
+            <?= $this->hook->render('template:dashboard:page-header:menu', array('user' => $user)) ?>
         </ul>
     </div>
     <section class="sidebar-container" id="dashboard">

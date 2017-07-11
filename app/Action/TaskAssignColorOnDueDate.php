@@ -74,14 +74,14 @@ class TaskAssignColorOnDueDate extends Base
     public function doAction(array $data)
     {
         $results = array();
-            foreach ($data['tasks'] as $task) {
-                if (($task['date_due'] <= time() AND $task['date_due']>0) and $task['color_id']!=$this->getParam('color_id')) {
-	        $values = array(
-        	    'id' => $task['id'],
-		    'color_id' => $this->getParam('color_id'),
-	        );
-		$results[]=$this->taskModificationModel->update($values, false);
-                }
+
+        foreach ($data['tasks'] as $task) {
+            if ($task['date_due'] <= time() && $task['date_due'] > 0 && $task['color_id'] != $this->getParam('color_id')) {
+                $values = array(
+                    'id'       => $task['id'],
+                    'color_id' => $this->getParam('color_id'),
+                );
+                $results[] = $this->taskModificationModel->update($values, false);
             }
 
         return in_array(true, $results, true);

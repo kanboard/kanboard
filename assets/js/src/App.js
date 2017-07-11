@@ -112,23 +112,3 @@ Kanboard.App.prototype.showLoadingIcon = function() {
 Kanboard.App.prototype.hideLoadingIcon = function() {
     $("#app-loading-icon").remove();
 };
-
-Kanboard.App.prototype.isVisible = function() {
-    var property = "";
-
-    if (typeof document.hidden !== "undefined") {
-        property = "visibilityState";
-    } else if (typeof document.mozHidden !== "undefined") {
-        property = "mozVisibilityState";
-    } else if (typeof document.msHidden !== "undefined") {
-        property = "msVisibilityState";
-    } else if (typeof document.webkitHidden !== "undefined") {
-        property = "webkitVisibilityState";
-    }
-
-    if (property !== "") {
-        return document[property] == "visible";
-    }
-
-    return true;
-};

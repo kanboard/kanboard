@@ -45,20 +45,24 @@ class SubtaskHelper extends Base
      * Get the link to toggle subtask status
      *
      * @access public
-     * @param  array    $task
-     * @param  array    $subtask
+     * @param  array  $task
+     * @param  array  $subtask
+     * @param  string $fragment
+     * @param  int    $userId
      * @return string
      */
-    public function renderToggleStatus(array $task, array $subtask)
+    public function renderToggleStatus(array $task, array $subtask, $fragment = '', $userId = 0)
     {
         if (! $this->helper->user->hasProjectAccess('SubtaskController', 'edit', $task['project_id'])) {
             $html = $this->renderTitle($subtask);
         } else {
             $title = $this->renderTitle($subtask);
             $params = array(
-                'project_id'    => $task['project_id'],
-                'task_id'       => $subtask['task_id'],
-                'subtask_id'    => $subtask['id'],
+                'project_id' => $task['project_id'],
+                'task_id'    => $subtask['task_id'],
+                'subtask_id' => $subtask['id'],
+                'user_id'    => $userId,
+                'fragment'   => $fragment,
             );
 
             if ($subtask['status'] == 0 && $this->hasSubtaskInProgress()) {

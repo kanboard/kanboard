@@ -59,27 +59,11 @@ class TaskFinderModel extends Base
      */
     public function getUserQuery($user_id)
     {
-        return $this->db
-                    ->table(TaskModel::TABLE)
-                    ->columns(
-                        TaskModel::TABLE.'.id',
-                        TaskModel::TABLE.'.title',
-                        TaskModel::TABLE.'.date_due',
-                        TaskModel::TABLE.'.date_creation',
-                        TaskModel::TABLE.'.project_id',
-                        TaskModel::TABLE.'.column_id',
-                        TaskModel::TABLE.'.color_id',
-                        TaskModel::TABLE.'.priority',
-                        TaskModel::TABLE.'.time_spent',
-                        TaskModel::TABLE.'.time_estimated',
-                        TaskModel::TABLE.'.is_active',
-                        TaskModel::TABLE.'.creator_id',
-                        ProjectModel::TABLE.'.name AS project_name',
-                        ColumnModel::TABLE.'.title AS column_title'
-                    )
-                    ->join(ProjectModel::TABLE, 'id', 'project_id')
-                    ->join(ColumnModel::TABLE, 'id', 'column_id')
+        return $this->getExtendedQuery()
+                    ->beginOr()
                     ->eq(TaskModel::TABLE.'.owner_id', $user_id)
+                    ->addCondition(TaskModel::TABLE.".id IN (SELECT task_id FROM ".SubtaskModel::TABLE." WHERE ".SubtaskModel::TABLE.".user_id='$user_id')")
+                    ->closeOr()
                     ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
                     ->eq(ProjectModel::TABLE.'.is_active', ProjectModel::ACTIVE)
                     ->eq(ColumnModel::TABLE.'.hide_in_dashboard', 0);
@@ -213,7 +197,7 @@ class TaskFinderModel extends Base
                     ->eq(ProjectModel::TABLE.'.is_active', 1)
                     ->eq(TaskModel::TABLE.'.is_active', 1)
                     ->neq(TaskModel::TABLE.'.date_due', 0)
-                    ->lte(TaskModel::TABLE.'.date_due', mktime(23, 59, 59));
+                    ->lte(TaskModel::TABLE.'.date_due', time());
     }
 
     /**

@@ -2,6 +2,9 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Model\GroupModel;
+use Kanboard\Model\UserModel;
+
 /**
  * Group Controller
  *
@@ -20,7 +23,7 @@ class GroupListController extends BaseController
         $paginator = $this->paginator
             ->setUrl('GroupListController', 'index')
             ->setMax(30)
-            ->setOrder('name')
+            ->setOrder(GroupModel::TABLE.'.name')
             ->setQuery($this->groupModel->getQuery())
             ->calculate();
 
@@ -43,7 +46,7 @@ class GroupListController extends BaseController
         $paginator = $this->paginator
             ->setUrl('GroupListController', 'users', array('group_id' => $group_id))
             ->setMax(30)
-            ->setOrder('username')
+            ->setOrder(UserModel::TABLE.'.username')
             ->setQuery($this->groupMemberModel->getQuery($group_id))
             ->calculate();
 

@@ -12,6 +12,8 @@
     <?= $this->form->label(t('Destination column'), 'dst_column_id') ?>
     <?= $this->form->select('dst_column_id', $columns, $values, $errors) ?>
 
+    <?= $this->form->checkbox('only_assigned', t('Only for tasks assigned to the current user'), 1, isset($values['only_assigned']) && $values['only_assigned'] == 1) ?>
+
     <?= $this->modal->submitButtons() ?>
 
     <p class="alert alert-info"><?= t('People belonging to this role will be able to move tasks only between the source and the destination column.') ?></p>

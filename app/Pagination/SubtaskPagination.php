@@ -4,7 +4,6 @@ namespace Kanboard\Pagination;
 
 use Kanboard\Core\Base;
 use Kanboard\Core\Paginator;
-use Kanboard\Model\SubtaskModel;
 use Kanboard\Model\TaskModel;
 
 /**
@@ -19,21 +18,18 @@ class SubtaskPagination extends Base
      * Get dashboard pagination
      *
      * @access public
-     * @param  integer $user_id
-     * @param  string  $method
-     * @param  integer $max
+     * @param  integer $userId
      * @return Paginator
      */
-    public function getDashboardPaginator($user_id, $method, $max)
+    public function getDashboardPaginator($userId)
     {
-        $query = $this->subtaskModel->getUserQuery($user_id, array(SubtaskModel::STATUS_TODO, SubtaskModel::STATUS_INPROGRESS));
-        $this->hook->reference('pagination:dashboard:subtask:query', $query);
-
         return $this->paginator
-            ->setUrl('DashboardController', $method, array('pagination' => 'subtasks', 'user_id' => $user_id))
-            ->setMax($max)
-            ->setOrder(TaskModel::TABLE.'.id')
-            ->setQuery($query)
-            ->calculateOnlyIf($this->request->getStringParam('pagination') === 'subtasks');
+            ->setUrl('DashboardController', 'subtasks', array('user_id' => $userId))
+            ->setMax(50)
+            ->setOrder(TaskModel::TABLE.'.priority')
+            ->setDirection('DESC')
+            ->setFormatter($this->taskListSubtaskAssigneeFormatter->withUserId($userId)->withoutEmptyTasks())
+            ->setQuery($this->taskFinderModel->getUserQuery($userId))
+            ->calculate();
     }
 }

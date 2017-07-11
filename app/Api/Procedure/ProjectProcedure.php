@@ -15,33 +15,34 @@ class ProjectProcedure extends BaseProcedure
     public function getProjectById($project_id)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectById', $project_id);
-        return $this->formatProject($this->projectModel->getById($project_id));
+        $project = $this->projectModel->getById($project_id);
+        return $this->projectApiFormatter->withProject($project)->format();
     }
 
     public function getProjectByName($name)
     {
         $project = $this->projectModel->getByName($name);
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectByName', $project['id']);
-        return $this->formatProject($project);
+        return $this->projectApiFormatter->withProject($project)->format();
     }
 
     public function getProjectByIdentifier($identifier)
     {
-        $project = $this->formatProject($this->projectModel->getByIdentifier($identifier));
+        $project = $this->projectModel->getByIdentifier($identifier);
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectByIdentifier', $project['id']);
-        return $this->formatProject($project);
+        return $this->projectApiFormatter->withProject($project)->format();
     }
 
     public function getProjectByEmail($email)
     {
-        $project = $this->formatProject($this->projectModel->getByEmail($email));
+        $project = $this->projectModel->getByEmail($email);
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectByEmail', $project['id']);
-        return $this->formatProject($project);
+        return $this->projectApiFormatter->withProject($project)->format();
     }
 
     public function getAllProjects()
     {
-        return $this->formatProjects($this->projectModel->getAll());
+        return $this->projectsApiFormatter->withProjects($this->projectModel->getAll())->format();
     }
 
     public function removeProject($project_id)

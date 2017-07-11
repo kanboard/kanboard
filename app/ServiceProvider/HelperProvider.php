@@ -19,7 +19,6 @@ class HelperProvider implements ServiceProviderInterface
     {
         $container['helper'] = new Helper($container);
         $container['helper']->register('app', '\Kanboard\Helper\AppHelper');
-        $container['helper']->register('calendar', '\Kanboard\Helper\CalendarHelper');
         $container['helper']->register('asset', '\Kanboard\Helper\AssetHelper');
         $container['helper']->register('board', '\Kanboard\Helper\BoardHelper');
         $container['helper']->register('comment', '\Kanboard\Helper\CommentHelper');

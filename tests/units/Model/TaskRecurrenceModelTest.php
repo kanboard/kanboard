@@ -106,7 +106,7 @@ class TaskRecurrenceModelTest extends Base
         $this->assertNotEmpty($task);
         $this->assertEquals(TaskModel::RECURRING_STATUS_PROCESSED, $task['recurrence_status']);
         $this->assertEquals(2, $task['recurrence_child']);
-        $this->assertEquals(1436486400, $task['date_due'], '', 2);
+        $this->assertEquals(1436561776, $task['date_due'], '', 2);
 
         $task = $taskFinderModel->getById(2);
         $this->assertNotEmpty($task);
@@ -116,7 +116,7 @@ class TaskRecurrenceModelTest extends Base
         $this->assertEquals(TaskModel::RECURRING_BASEDATE_TRIGGERDATE, $task['recurrence_basedate']);
         $this->assertEquals(1, $task['recurrence_parent']);
         $this->assertEquals(2, $task['recurrence_factor']);
-        $this->assertEquals($dateParser->removeTimeFromTimestamp(strtotime('+2 days')), $task['date_due'], '', 2);
+        $this->assertEquals(strtotime('+2 days'), $task['date_due'], '', 2);
 
         $tags = $taskTagModel->getList(2);
         $this->assertCount(2, $tags);

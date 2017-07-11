@@ -172,4 +172,33 @@ class SubtaskModelTest extends Base
         $this->assertEquals(1, $subtaskModel->getProjectId(1));
         $this->assertEquals(0, $subtaskModel->getProjectId(2));
     }
+
+    public function testGetAllByTaskIds()
+    {
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $subtaskModel = new SubtaskModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
+        $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #1', 'task_id' => 1)));
+
+        $this->assertCount(0, $subtaskModel->getAllByTaskIds(array()));
+        $this->assertCount(1, $subtaskModel->getAllByTaskIds(array(1)));
+    }
+
+    public function testGetAllByTaskIdsAndAssignee()
+    {
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $subtaskModel = new SubtaskModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
+        $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #1', 'task_id' => 1, 'user_id' => 1)));
+
+        $this->assertCount(0, $subtaskModel->getAllByTaskIdsAndAssignee(array(), 1));
+        $this->assertCount(0, $subtaskModel->getAllByTaskIdsAndAssignee(array(1), 2));
+        $this->assertCount(1, $subtaskModel->getAllByTaskIdsAndAssignee(array(1), 1));
+    }
 }

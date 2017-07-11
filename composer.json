@@ -28,7 +28,7 @@
         "erusev/parsedown" : "1.6.0",
         "fguillot/json-rpc" : "1.2.1",
         "fguillot/picodb" : "1.0.14",
-        "fguillot/picofeed": "0.1.24",
+        "miniflux/picofeed": "0.1.34",
         "fguillot/simpleLogger" : "1.0.1",
         "fguillot/simple-validator" : "1.0.1",
         "fguillot/simple-queue" : "1.0.1",
@@ -38,7 +38,8 @@
         "swiftmailer/swiftmailer" : "5.4.5",
         "symfony/console" : "2.8.7",
         "symfony/event-dispatcher" : "2.7.14",
-        "gregwar/captcha": "1.1.1"
+        "gregwar/captcha": "1.1.1",
+        "aferrandini/phpqrcode": "1.0.1"
     },
     "autoload" : {
         "classmap" : ["app/"],

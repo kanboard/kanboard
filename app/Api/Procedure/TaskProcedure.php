@@ -24,19 +24,22 @@ class TaskProcedure extends BaseProcedure
     public function getTask($task_id)
     {
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'getTask', $task_id);
-        return $this->formatTask($this->taskFinderModel->getById($task_id));
+        $task = $this->taskFinderModel->getById($task_id);
+        return $this->taskApiFormatter->withTask($task)->format();
     }
 
     public function getTaskByReference($project_id, $reference)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getTaskByReference', $project_id);
-        return $this->formatTask($this->taskFinderModel->getByReference($project_id, $reference));
+        $task = $this->taskFinderModel->getByReference($project_id, $reference);
+        return $this->taskApiFormatter->withTask($task)->format();
     }
 
     public function getAllTasks($project_id, $status_id = TaskModel::STATUS_OPEN)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getAllTasks', $project_id);
-        return $this->formatTasks($this->taskFinderModel->getAll($project_id, $status_id));
+        $tasks = $this->taskFinderModel->getAll($project_id, $status_id);
+        return $this->tasksApiFormatter->withTasks($tasks)->format();
     }
 
     public function getOverdueTasks()

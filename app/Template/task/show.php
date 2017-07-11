@@ -18,7 +18,7 @@
         'task' => $task,
         'subtasks' => $subtasks,
         'project' => $project,
-        'editable' => true,
+        'editable' => $this->user->hasProjectAccess('SubtaskController', 'edit', $project['id']),
     )) ?>
 <?php endif ?>
 
@@ -29,7 +29,7 @@
         'links' => $internal_links,
         'project' => $project,
         'link_label_list' => $link_label_list,
-        'editable' => true,
+        'editable' => $this->user->hasProjectAccess('TaskInternalLinkController', 'edit', $project['id']),
         'is_public' => false,
     )) ?>
 <?php endif ?>

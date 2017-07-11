@@ -11,16 +11,32 @@ namespace Kanboard\Controller;
 class WebNotificationController extends BaseController
 {
     /**
+     * My notifications
+     *
+     * @access public
+     */
+    public function show()
+    {
+        $user = $this->getUser();
+        $notifications = $this->userUnreadNotificationModel->getAll($user['id']);
+
+        $this->response->html($this->template->render('web_notification/show', array(
+            'notifications'    => $notifications,
+            'nb_notifications' => count($notifications),
+            'user'             => $user,
+        )));
+    }
+
+    /**
      * Mark all notifications as read
      *
      * @access public
      */
     public function flush()
     {
-        $user_id = $this->getUserId();
-
-        $this->userUnreadNotificationModel->markAllAsRead($user_id);
-        $this->response->redirect($this->helper->url->to('DashboardController', 'notifications', array('user_id' => $user_id)));
+        $userId = $this->getUserId();
+        $this->userUnreadNotificationModel->markAllAsRead($userId);
+        $this->show();
     }
 
     /**
@@ -32,9 +48,8 @@ class WebNotificationController extends BaseController
     {
         $user_id = $this->getUserId();
         $notification_id = $this->request->getIntegerParam('notification_id');
-
         $this->userUnreadNotificationModel->markAsRead($user_id, $notification_id);
-        $this->response->redirect($this->helper->url->to('DashboardController', 'notifications', array('user_id' => $user_id)));
+        $this->show();
     }
 
     /**
@@ -49,7 +64,7 @@ class WebNotificationController extends BaseController
         $this->userUnreadNotificationModel->markAsRead($user_id, $notification_id);
 
         if (empty($notification)) {
-            $this->response->redirect($this->helper->url->to('DashboardController', 'notifications', array('user_id' => $user_id)));
+            $this->show();
         } elseif ($this->helper->text->contains($notification['event_name'], 'comment')) {
             $this->response->redirect($this->helper->url->to(
                 'TaskViewController',

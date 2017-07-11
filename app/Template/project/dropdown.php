@@ -5,17 +5,8 @@
             <?= $this->url->icon('th', t('Board'), 'BoardViewController', 'show', array('project_id' => $project['id'])) ?>
         </li>
         <li>
-            <?= $this->url->icon('calendar', t('Calendar'), 'CalendarController', 'show', array('project_id' => $project['id'])) ?>
-        </li>
-        <li>
             <?= $this->url->icon('list', t('Listing'), 'TaskListController', 'show', array('project_id' => $project['id'])) ?>
         </li>
-        <?php if ($this->user->hasProjectAccess('TaskGanttController', 'show', $project['id'])): ?>
-        <li>
-            <?= $this->url->icon('sliders', t('Gantt'), 'TaskGanttController', 'show', array('project_id' => $project['id'])) ?>
-        </li>
-        <?php endif ?>
-
         <li>
             <?= $this->modal->medium('dashboard', t('Activity'), 'ActivityController', 'project', array('project_id' => $project['id'])) ?>
         </li>

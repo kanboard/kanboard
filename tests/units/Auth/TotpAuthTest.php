@@ -40,11 +40,6 @@ class TotpAuthTest extends Base
         $this->assertEmpty($provider->getKeyUrl('me'));
 
         $provider->setSecret('mySecret');
-        $this->assertEquals(
-            'https://chart.googleapis.com/chart?chs=200x200&cht=qr&chld=M|0&chl=otpauth%3A%2F%2Ftotp%2Fme%3Fsecret%3DmySecret%26issuer%3DKanboard',
-            $provider->getQrCodeUrl('me')
-        );
-
         $this->assertEquals('otpauth://totp/me?secret=mySecret&issuer=Kanboard', $provider->getKeyUrl('me'));
     }
 

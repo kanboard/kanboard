@@ -1,45 +1,49 @@
 <div class="page-header">
-    <h2><?= $this->url->link(t('My subtasks'), 'DashboardController', 'subtasks', array('user_id' => $user['id'])) ?> (<?= $paginator->getTotal() ?>)</h2>
+    <h2><?= $this->url->link(t('My subtasks'), 'DashboardController', 'subtasks', array('user_id' => $user['id'])) ?> (<?= $nb_subtasks ?>)</h2>
 </div>
-<?php if ($paginator->isEmpty()): ?>
+<?php if ($nb_subtasks == 0): ?>
     <p class="alert"><?= t('There is nothing assigned to you.') ?></p>
 <?php else: ?>
-    <table class="table-striped table-small table-scrolling">
-        <tr>
-            <th class="column-5"><?= $paginator->order('Id', \Kanboard\Model\TaskModel::TABLE.'.id') ?></th>
-            <th class="column-20"><?= $paginator->order(t('Project'), 'project_name') ?></th>
-            <th><?= $paginator->order(t('Task'), 'task_name') ?></th>
-            <th><?= $paginator->order(t('Subtask'), \Kanboard\Model\SubtaskModel::TABLE.'.title') ?></th>
-            <?= $this->hook->render('template:dashboard:subtasks:header:before-timetracking', array('paginator' => $paginator)) ?>
-            <th class="column-20"><?= t('Time tracking') ?></th>
-        </tr>
-        <?php foreach ($paginator->getCollection() as $subtask): ?>
-        <tr>
-            <td class="task-table color-<?= $subtask['color_id'] ?>">
-                <?= $this->render('task/dropdown', array('task' => array('id' => $subtask['task_id'], 'project_id' => $subtask['project_id']))) ?>
-            </td>
-            <td>
-                <?= $this->url->link($this->text->e($subtask['project_name']), 'BoardViewController', 'show', array('project_id' => $subtask['project_id'])) ?>
-            </td>
-            <td>
-                <?= $this->url->link($this->text->e($subtask['task_name']), 'TaskViewController', 'show', array('task_id' => $subtask['task_id'], 'project_id' => $subtask['project_id'])) ?>
-            </td>
-            <td>
-                <?= $this->subtask->renderToggleStatus(array('project_id' => $subtask['project_id']), $subtask) ?>
-            </td>
-            <?= $this->hook->render('template:dashboard:subtasks:rows', array('subtask' => $subtask)) ?>
-            <td>
-                <?php if (! empty($subtask['time_spent'])): ?>
-                    <strong><?= $this->text->e($subtask['time_spent']).'h' ?></strong> <?= t('spent') ?>
+    <div class="table-list">
+        <div class="table-list-header">
+            <div class="table-list-header-count">
+                <?php if ($nb_subtasks > 1): ?>
+                    <?= t('%d subtasks', $nb_subtasks) ?>
+                <?php else: ?>
+                    <?= t('%d subtask', $nb_subtasks) ?>
                 <?php endif ?>
+            </div>
+            <div class="table-list-header-menu">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong><?= t('Sort') ?> <i class="fa fa-caret-down"></i></strong></a>
+                    <ul>
+                        <li>
+                            <?= $paginator->order(t('Task ID'), \Kanboard\Model\TaskModel::TABLE.'.id') ?>
+                        </li>
+                        <li>
+                            <?= $paginator->order(t('Title'), \Kanboard\Model\TaskModel::TABLE.'.title') ?>
+                        </li>
+                        <li>
+                            <?= $paginator->order(t('Priority'), \Kanboard\Model\TaskModel::TABLE.'.priority') ?>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-                <?php if (! empty($subtask['time_estimated'])): ?>
-                    <strong><?= $this->text->e($subtask['time_estimated']).'h' ?></strong> <?= t('estimated') ?>
-                <?php endif ?>
-            </td>
-        </tr>
+        <?php foreach ($paginator->getCollection() as $task): ?>
+            <div class="table-list-row color-<?= $task['color_id'] ?>">
+                <?= $this->render('task_list/task_title', array(
+                    'task' => $task,
+                )) ?>
+
+                <?= $this->render('task_list/task_subtasks', array(
+                    'task' => $task,
+                    'user_id' => $user['id'],
+                )) ?>
+            </div>
         <?php endforeach ?>
-    </table>
+    </div>
 
     <?= $paginator ?>
 <?php endif ?>

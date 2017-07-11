@@ -28,6 +28,7 @@ class TaskProcedureTest extends BaseProcedureTest
         $this->assertNotNull($task);
         $this->assertEquals('red', $task['color_id']);
         $this->assertEquals($this->taskTitle, $task['title']);
+        $this->assertArrayHasKey('url', $task);
     }
 
     public function assertGetTaskByReference()
@@ -45,6 +46,7 @@ class TaskProcedureTest extends BaseProcedureTest
         $tasks = $this->app->getAllTasks($this->projectId);
         $this->assertInternalType('array', $tasks);
         $this->assertNotEmpty($tasks);
+        $this->assertArrayHasKey('url', $tasks[0]);
     }
 
     public function assertOpenCloseTask()

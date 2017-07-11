@@ -2,8 +2,6 @@
 
 namespace Kanboard\Api\Procedure;
 
-use Kanboard\Model\SubtaskModel;
-
 /**
  * Me API controller
  *
@@ -19,15 +17,12 @@ class MeProcedure extends BaseProcedure
 
     public function getMyDashboard()
     {
-        $user_id = $this->userSession->getId();
-        $projects = $this->projectModel->getQueryColumnStats($this->projectPermissionModel->getActiveProjectIds($user_id))->findAll();
-        $tasks = $this->taskFinderModel->getUserQuery($user_id)->findAll();
+        $userId = $this->userSession->getId();
 
-        return array(
-            'projects' => $this->formatProjects($projects),
-            'tasks' => $this->formatTasks($tasks),
-            'subtasks' => $this->subtaskModel->getUserQuery($user_id, array(SubtaskModel::STATUS_TODO, SubtaskModel::STATUS_INPROGRESS))->findAll(),
-        );
+        return $this->taskListSubtaskAssigneeFormatter
+            ->withQuery($this->taskFinderModel->getUserQuery($userId))
+            ->withUserId($userId)
+            ->format();
     }
 
     public function getMyActivityStream()
@@ -67,6 +62,6 @@ class MeProcedure extends BaseProcedure
         $project_ids = $this->projectPermissionModel->getActiveProjectIds($this->userSession->getId());
         $projects = $this->projectModel->getAllByIds($project_ids);
 
-        return $this->formatProjects($projects);
+        return $this->projectsApiFormatter->withProjects($projects)->format();
     }
 }

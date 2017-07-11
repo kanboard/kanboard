@@ -19,12 +19,11 @@ class DashboardController extends BaseController
     {
         $user = $this->getUser();
 
-        $this->response->html($this->helper->layout->dashboard('dashboard/show', array(
-            'title' => t('Dashboard for %s', $this->helper->user->getFullname($user)),
-            'project_paginator' => $this->projectPagination->getDashboardPaginator($user['id'], 'show', 10),
-            'task_paginator' => $this->taskPagination->getDashboardPaginator($user['id'], 'show', 10),
-            'subtask_paginator' => $this->subtaskPagination->getDashboardPaginator($user['id'], 'show', 10),
-            'user' => $user,
+        $this->response->html($this->helper->layout->dashboard('dashboard/overview', array(
+            'title'              => t('Dashboard for %s', $this->helper->user->getFullname($user)),
+            'user'               => $user,
+            'overview_paginator' => $this->dashboardPagination->getOverview($user['id']),
+            'project_paginator'  => $this->projectPagination->getDashboardPaginator($user['id'], 'show', 10),
         )));
     }
 
@@ -55,8 +54,9 @@ class DashboardController extends BaseController
 
         $this->response->html($this->helper->layout->dashboard('dashboard/subtasks', array(
             'title' => t('Subtasks overview for %s', $this->helper->user->getFullname($user)),
-            'paginator' => $this->subtaskPagination->getDashboardPaginator($user['id'], 'subtasks', 50),
+            'paginator' => $this->subtaskPagination->getDashboardPaginator($user['id']),
             'user' => $user,
+            'nb_subtasks' => $this->subtaskModel->countByAssigneeAndTaskStatus($user['id']),
         )));
     }
 
@@ -72,53 +72,6 @@ class DashboardController extends BaseController
         $this->response->html($this->helper->layout->dashboard('dashboard/projects', array(
             'title' => t('Projects overview for %s', $this->helper->user->getFullname($user)),
             'paginator' => $this->projectPagination->getDashboardPaginator($user['id'], 'projects', 25),
-            'user' => $user,
-        )));
-    }
-
-    /**
-     * My activity stream
-     *
-     * @access public
-     */
-    public function activity()
-    {
-        $user = $this->getUser();
-
-        $this->response->html($this->helper->layout->dashboard('dashboard/activity', array(
-            'title' => t('Activity stream for %s', $this->helper->user->getFullname($user)),
-            'events' => $this->helper->projectActivity->getProjectsEvents($this->projectPermissionModel->getActiveProjectIds($user['id']), 100),
-            'user' => $user,
-        )));
-    }
-
-    /**
-     * My calendar
-     *
-     * @access public
-     */
-    public function calendar()
-    {
-        $user = $this->getUser();
-
-        $this->response->html($this->helper->layout->dashboard('dashboard/calendar', array(
-            'title' => t('Calendar for %s', $this->helper->user->getFullname($user)),
-            'user' => $user,
-        )));
-    }
-
-    /**
-     * My notifications
-     *
-     * @access public
-     */
-    public function notifications()
-    {
-        $user = $this->getUser();
-
-        $this->response->html($this->helper->layout->dashboard('dashboard/notifications', array(
-            'title' => t('Notifications for %s', $this->helper->user->getFullname($user)),
-            'notifications' => $this->userUnreadNotificationModel->getAll($user['id']),
             'user' => $user,
         )));
     }

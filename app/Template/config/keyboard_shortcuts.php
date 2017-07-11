@@ -6,9 +6,7 @@
     <ul>
         <li><?= t('Switch to the project overview') ?> = <strong>v o</strong></li>
         <li><?= t('Switch to the board view') ?> = <strong>v b</strong></li>
-        <li><?= t('Switch to the calendar view') ?> = <strong>v c</strong></li>
         <li><?= t('Switch to the list view') ?> = <strong>v l</strong></li>
-        <li><?= t('Switch to the Gantt chart view') ?> = <strong>v g</strong></li>
     </ul>
     <h3><?= t('Board view') ?></h3>
     <ul>

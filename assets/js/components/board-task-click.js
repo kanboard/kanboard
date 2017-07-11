@@ -24,6 +24,6 @@
         }
     }
 
-    KB.onClick('.task-board *', redirectToTaskView);
-    KB.onClick('.task-board-change-assignee *', openEditTask);
+    KB.onClick('.task-board *', redirectToTaskView, true);
+    KB.onClick('.task-board-change-assignee *', openEditTask, true);
 }());

@@ -32,6 +32,11 @@ class TaskReferenceFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
+        if (strpos($this->value, '*') >= 0) {
+            $this->query->like(TaskModel::TABLE.'.reference', str_replace('*', '%', $this->value));
+            return $this;
+        }
+
         $this->query->eq(TaskModel::TABLE.'.reference', $this->value);
         return $this;
     }
