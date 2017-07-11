@@ -1338,4 +1338,5 @@ return array(
     'This task was sent by email to "%s" with subject "%s".' => 'Cette tâche a été envoyée par courrier électronique à « %s » avec le sujet « %s ».',
     'Predefined Email Subjects' => 'Sujets de courrier électronique prédéfinis',
     'Write one subject by line.' => 'Écrivez un sujet par ligne.',
+    'Create another link' => 'Créer un autre lien',
 );
