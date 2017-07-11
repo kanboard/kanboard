@@ -25,5 +25,7 @@
         ),
         'autocomplete') ?>
 
+    <?= $this->form->checkbox('another_tasklink', t('Create another link'), 1, isset($values['another_tasklink']) && $values['another_tasklink'] == 1) ?>
+
     <?= $this->modal->submitButtons() ?>
 </form>
