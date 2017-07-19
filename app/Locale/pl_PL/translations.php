@@ -1332,4 +1332,10 @@ return array(
     // '%d subtask' => '',
     // 'Only moving task between those columns is permitted for tasks assigned to the current user' => '',
     // '[DUPLICATE]' => '',
+    // 'DKK - Danish Krona' => '',
+    // 'Remove user from group' => '',
+    // 'Assign the task to its creator' => '',
+    // 'This task was sent by email to "%s" with subject "%s".' => '',
+    // 'Predefined Email Subjects' => '',
+    // 'Write one subject by line.' => '',
 );

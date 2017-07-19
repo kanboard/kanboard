@@ -1331,5 +1331,11 @@ return array(
     '%d subtasks' => '%d Teilaufgaben',
     '%d subtask' => '%d Teilaufgabe',
     'Only moving task between those columns is permitted for tasks assigned to the current user' => 'Das Bewegen einer Aufgabe zwischen diesen Spalten ist nur für Aufgaben zulässig, die dem aktuellen Benutzer zugewiesen sind',
-    // '[DUPLICATE]' => '',
+    '[DUPLICATE]' => '[DUPLIKAT]',
+    'DKK - Danish Krona' => 'DKK - Dänische Krone',
+    'Remove user from group' => 'Benutzer aus Gruppe löschen',
+    'Assign the task to its creator' => 'Aufgabe dem Ersteller zuordnen',
+    'This task was sent by email to "%s" with subject "%s".' => 'Diese Aufgabe wurde per Mail an "%s" mit dem Betreff "%s" gesendet.',
+    'Predefined Email Subjects' => 'Vordefinierte E-Mail Betreffzeilen',
+    'Write one subject by line.' => 'Schreibe ein Betreff pro Zeile.',
 );

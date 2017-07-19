@@ -19,6 +19,7 @@ use Kanboard\Action\TaskAssignColorCategory;
 use Kanboard\Action\TaskAssignColorColumn;
 use Kanboard\Action\TaskAssignColorLink;
 use Kanboard\Action\TaskAssignColorUser;
+use Kanboard\Action\TaskAssignCreator;
 use Kanboard\Action\TaskAssignCurrentUser;
 use Kanboard\Action\TaskAssignCurrentUserColumn;
 use Kanboard\Action\TaskAssignSpecificUser;
@@ -69,6 +70,7 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskAssignColorLink($container));
         $container['actionManager']->register(new TaskAssignColorUser($container));
         $container['actionManager']->register(new TaskAssignColorPriority($container));
+        $container['actionManager']->register(new TaskAssignCreator($container));
         $container['actionManager']->register(new TaskAssignCurrentUser($container));
         $container['actionManager']->register(new TaskAssignCurrentUserColumn($container));
         $container['actionManager']->register(new TaskAssignSpecificUser($container));

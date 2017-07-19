@@ -2,7 +2,6 @@
 
 require_once __DIR__.'/../Base.php';
 
-use Kanboard\Event\GenericEvent;
 use Kanboard\Event\TaskEvent;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;

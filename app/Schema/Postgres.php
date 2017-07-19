@@ -8,7 +8,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 102;
+const VERSION = 103;
+
+function version_103(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE projects ADD COLUMN predefined_email_subjects TEXT');
+}
 
 function version_102(PDO $pdo)
 {

@@ -4,6 +4,7 @@
 .project
 /.settings/
 .idea
+/nbproject/
 .DS_Store
 ehthumbs.db
 Icon?

@@ -6,7 +6,7 @@
     </li>
     <?php if ($task['date_due']): ?>
     <li>
-        <strong><?= t('Due date:').' '.$this->dt->date($task['date_due']) ?></strong>
+        <strong><?= t('Due date:').' '.$this->dt->datetime($task['date_due']) ?></strong>
     </li>
     <?php endif ?>
     <?php if (! empty($task['creator_username'])): ?>

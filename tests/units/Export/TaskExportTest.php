@@ -70,7 +70,7 @@ class TaskExportTest extends Base
         $this->assertEquals('Yellow', $report[2][8]);
 
         $this->assertEquals('', $report[1][9]);
-        $this->assertEquals(date('m/d/Y').' 00:00', $report[2][9]);
+        $this->assertEquals(date('m/d/Y H:i'), $report[2][9]);
 
         $this->assertEquals(3, $report[1][21]);
         $this->assertEquals(0, $report[2][21]);

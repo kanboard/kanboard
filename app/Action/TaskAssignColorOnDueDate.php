@@ -74,7 +74,7 @@ class TaskAssignColorOnDueDate extends Base
         $results = array();
 
         foreach ($data['tasks'] as $task) {
-            if ($task['date_due'] <= time() && $task['date_due'] > 0) {
+            if ($task['date_due'] <= time() && $task['date_due'] > 0 && $task['color_id'] != $this->getParam('color_id')) {
                 $values = array(
                     'id'       => $task['id'],
                     'color_id' => $this->getParam('color_id'),

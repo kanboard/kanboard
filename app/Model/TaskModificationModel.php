@@ -98,7 +98,7 @@ class TaskModificationModel extends Base
      */
     protected function prepare(array &$values)
     {
-        $values = $this->dateParser->convert($values, array('date_due'));
+        $values = $this->dateParser->convert($values, array('date_due'), true);
         $values = $this->dateParser->convert($values, array('date_started'), true);
 
         $this->helper->model->removeFields($values, array('id'));

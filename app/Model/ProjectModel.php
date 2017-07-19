@@ -355,6 +355,10 @@ class ProjectModel extends Base
      */
     public function create(array $values, $userId = 0, $addUser = false)
     {
+        if (! empty($userId) && ! $this->userModel->exists($userId)) {
+            return false;
+        }
+
         $this->db->startTransaction();
 
         $values['token'] = '';
@@ -447,6 +451,10 @@ class ProjectModel extends Base
             $values['end_date'] = $this->dateParser->getIsoDate($values['end_date']);
         }
 
+        if (! empty($values['owner_id']) && ! $this->userModel->exists($values['owner_id'])) {
+            return false;
+        }
+
         $this->helper->model->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end'));
 
         return $this->exists($values['id']) &&
@@ -462,7 +470,13 @@ class ProjectModel extends Base
      */
     public function remove($project_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $project_id)->remove();
+        $this->db->startTransaction();
+
+        $this->db->table(TagModel::TABLE)->eq('project_id', $project_id)->remove();
+        $result = $this->db->table(self::TABLE)->eq('id', $project_id)->remove();
+
+        $this->db->closeTransaction();
+        return $result;
     }
 
     /**

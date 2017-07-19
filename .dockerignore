@@ -15,6 +15,5 @@ bower.json
 package.json
 Vagrantfile
 web.config
-Makefile
 bower_components
 node_modules

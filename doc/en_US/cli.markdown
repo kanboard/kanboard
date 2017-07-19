@@ -133,17 +133,30 @@ Optional parameters:
 - `--show`: Display notifications sent
 - `--group`: Group all overdue tasks for one user (from all projects) in one email
 - `--manager`: Send all overdue tasks to project manager(s) in one email
+- `-p|--project project_id|identifier`: Send notifications only for the given project
 
 You can also display the overdue tasks with the flag `--show`:
 
 ```bash
-./kanboard notification:overdue-tasks --show
+./cli notification:overdue-tasks --show
 +-----+---------+------------+------------+--------------+----------+
 | Id  | Title   | Due date   | Project Id | Project name | Assignee |
 +-----+---------+------------+------------+--------------+----------+
 | 201 | Test    | 2014-10-26 | 1          | Project #0   | admin    |
 | 202 | My task | 2014-10-28 | 1          | Project #0   |          |
 +-----+---------+------------+------------+--------------+----------+
+```
+
+Example to filter by project:
+
+```bash
+./cli notification:overdue-tasks --project 123
+```
+
+Or if you have defined a project identifier:
+
+```bash
+./cli notification:overdue-tasks --project MY_PROJECT
 ```
 
 ### Run daily project stats calculation

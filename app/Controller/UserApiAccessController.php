@@ -32,7 +32,7 @@ class UserApiAccessController extends BaseController
             'api_access_token' => Token::getToken(),
         ));
 
-        $this->renderResponse();
+        $this->renderResponse($user);
     }
 
     public function remove()
@@ -45,10 +45,10 @@ class UserApiAccessController extends BaseController
             'api_access_token' => null,
         ));
 
-        $this->renderResponse();
+        $this->renderResponse($user);
     }
 
-    protected function renderResponse()
+    protected function renderResponse(array $user)
     {
         if ($this->request->isAjax()) {
             $this->show();
