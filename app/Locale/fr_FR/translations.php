@@ -1339,4 +1339,5 @@ return array(
     'Predefined Email Subjects' => 'Sujets de courrier électronique prédéfinis',
     'Write one subject by line.' => 'Écrivez un sujet par ligne.',
     'Create another link' => 'Créer un autre lien',
+    'BRL - Brazilian Real' => 'BRL - Real brésilien',
 );

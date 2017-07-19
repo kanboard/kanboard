@@ -48,6 +48,7 @@ class CurrencyModel extends Base
             'HRK' => t('HRK - Kuna'),
             'ARS' => t('ARS - Argentine Peso'),
             'COP' => t('COP - Colombian Peso'),
+            'BRL' => t('BRL - Brazilian Real'),
         );
     }
 
