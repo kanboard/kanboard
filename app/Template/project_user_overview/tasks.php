@@ -36,7 +36,7 @@
                 <?= $this->dt->date($task['date_started']) ?>
             </td>
             <td>
-                <?= $this->dt->date($task['date_due']) ?>
+                <?= $this->dt->datetime($task['date_due']) ?>
             </td>
         </tr>
         <?php endforeach ?>

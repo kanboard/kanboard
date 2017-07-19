@@ -38,6 +38,7 @@ class CurrencyModel extends Base
             'INR' => t('INR - Indian Rupee'),
             'JPY' => t('JPY - Japanese Yen'),
             'RSD' => t('RSD - Serbian dinar'),
+            'DKK' => t('DKK - Danish Krona'),
             'SEK' => t('SEK - Swedish Krona'),
             'NOK' => t('NOK - Norwegian Krone'),
             'BAM' => t('BAM - Konvertible Mark'),
@@ -47,6 +48,7 @@ class CurrencyModel extends Base
             'HRK' => t('HRK - Kuna'),
             'ARS' => t('ARS - Argentine Peso'),
             'COP' => t('COP - Colombian Peso'),
+            'BRL' => t('BRL - Brazilian Real'),
         );
     }
 

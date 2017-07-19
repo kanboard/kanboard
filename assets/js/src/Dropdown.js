@@ -41,15 +41,30 @@ Kanboard.Dropdown.prototype.listen = function() {
         else {
             clone.css('left', offset.left);
         }
+
+        if (document.getElementById('dropdown') !== null) {
+            KB.trigger('dropdown.afterRender');
+        }
     });
 
     $(document).on('click', '.dropdown-submenu-open li', function(e) {
+    	
         if ($(e.target).is('li')) {
-            $(this).find('a:visible')[0].click(); // Calling native click() not the jQuery one
+            KB.trigger('dropdown.clicked');
+
+            var element = $(this).find('a:visible');
+
+            if (element.length > 0) {
+                element[0].click(); // Calling native click() not the jQuery one
+            }
         }
     });
 };
 
 Kanboard.Dropdown.prototype.close = function() {
+    if (document.getElementById('dropdown') !== null) {
+        KB.trigger('dropdown.beforeDestroy');
+    }
+
     $("#dropdown").remove();
 };

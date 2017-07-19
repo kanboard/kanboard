@@ -124,7 +124,7 @@ class TaskImport extends Base
         }
 
         if (! empty($row['date_due'])) {
-            $values['date_due'] = $this->dateParser->getTimestampFromIsoFormat($row['date_due']);
+            $values['date_due'] = $this->dateParser->getTimestamp($row['date_due']);
         }
 
         $this->helper->model->removeEmptyFields(

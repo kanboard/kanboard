@@ -197,7 +197,7 @@ class TaskFinderModel extends Base
                     ->eq(ProjectModel::TABLE.'.is_active', 1)
                     ->eq(TaskModel::TABLE.'.is_active', 1)
                     ->neq(TaskModel::TABLE.'.date_due', 0)
-                    ->lte(TaskModel::TABLE.'.date_due', mktime(23, 59, 59));
+                    ->lte(TaskModel::TABLE.'.date_due', time());
     }
 
     /**

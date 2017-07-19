@@ -93,6 +93,24 @@ class ProjectPermissionModel extends Base
         return $members;
     }
 
+    public function getMembers($project_id)
+    {
+        $userMembers = $this->projectUserRoleModel->getUsers($project_id);
+        $groupMembers = $this->projectGroupRoleModel->getUsers($project_id);
+
+        $userMembers = array_column_index_unique($userMembers, 'username');
+        $groupMembers = array_column_index_unique($groupMembers, 'username');
+        return array_merge($userMembers, $groupMembers);
+    }
+
+    public function getMembersWithEmail($project_id)
+    {
+        $members = $this->getMembers($project_id);
+        return array_filter($members, function (array $user) {
+            return ! empty($user['email']);
+        });
+    }
+
     /**
      * Return true if everybody is allowed for the project
      *

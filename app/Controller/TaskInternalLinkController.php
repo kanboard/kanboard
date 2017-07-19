@@ -44,6 +44,13 @@ class TaskInternalLinkController extends BaseController
     {
         $task = $this->getTask();
 
+        if (empty($values)) {
+          $values = array(
+              'another_tasklink' => $this->request->getIntegerParam('another_tasklink', 0)
+          );
+          $values = $this->hook->merge('controller:tasklink:form:default', $values, array('default_values' => $values));
+        }
+
         $this->response->html($this->template->render('task_internal_link/create', array(
             'values' => $values,
             'errors' => $errors,
@@ -65,8 +72,18 @@ class TaskInternalLinkController extends BaseController
         list($valid, $errors) = $this->taskLinkValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->taskLinkModel->create($values['task_id'], $values['opposite_task_id'], $values['link_id'])) {
+            if ($this->taskLinkModel->create($values['task_id'], $values['opposite_task_id'], $values['link_id']) !== false) {
                 $this->flash->success(t('Link added successfully.'));
+
+                if (isset($values['another_tasklink']) && $values['another_tasklink'] == 1) {
+                    return $this->create(array(
+                        'project_id' => $task['project_id'],
+                        'task_id' => $task['id'],
+                        'link_id' => $values['link_id'],
+                        'another_tasklink' => 1
+                    ));
+                }
+
                 return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
             }
 

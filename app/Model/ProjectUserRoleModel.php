@@ -98,7 +98,13 @@ class ProjectUserRoleModel extends Base
     public function getUsers($project_id)
     {
         return $this->db->table(self::TABLE)
-            ->columns(UserModel::TABLE.'.id', UserModel::TABLE.'.username', UserModel::TABLE.'.name', self::TABLE.'.role')
+            ->columns(
+                UserModel::TABLE.'.id',
+                UserModel::TABLE.'.username',
+                UserModel::TABLE.'.name',
+                UserModel::TABLE.'.email',
+                self::TABLE.'.role'
+            )
             ->join(UserModel::TABLE, 'id', 'user_id')
             ->eq('project_id', $project_id)
             ->asc(UserModel::TABLE.'.username')

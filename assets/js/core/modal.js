@@ -64,6 +64,8 @@
         _KB.autoComplete();
         _KB.tagAutoComplete();
         _KB.get('Task').onPopoverOpened();
+
+        KB.trigger('modal.afterRender');
     }
 
     function replace(html) {
@@ -123,6 +125,8 @@
         var overlayElement = KB.find('#modal-overlay');
 
         if (overlayElement) {
+            KB.trigger('modal.beforeDestroy');
+
             overlayElement.remove();
         }
     }
@@ -154,6 +158,8 @@
 
     KB.modal = {
         open: function (url, size, overlayClickDestroy) {
+            KB.trigger('modal.open');
+
             _KB.get('Dropdown').close();
             destroy();
 

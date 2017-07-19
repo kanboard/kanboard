@@ -78,6 +78,10 @@ class AuthenticationMiddleware extends Base implements MiddlewareInterface
             return API_AUTHENTICATION_TOKEN;
         }
 
+        if (getenv('API_AUTHENTICATION_TOKEN')) {
+            return getenv('API_AUTHENTICATION_TOKEN');
+        }
+
         return $this->configModel->get('api_token');
     }
 }

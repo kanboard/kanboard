@@ -20,6 +20,7 @@ class TaskMailController extends BaseController
             'errors'  => $errors,
             'task'    => $task,
             'project' => $project,
+            'members' => $this->projectPermissionModel->getMembersWithEmail($project['id']),
         )));
     }
 
@@ -33,6 +34,13 @@ class TaskMailController extends BaseController
         if ($valid) {
             $this->sendByEmail($values, $task);
             $this->flash->success(t('Task sent by email successfully.'));
+
+            $this->commentModel->create(array(
+                'comment' => t('This task was sent by email to "%s" with subject "%s".', $values['email'], $values['subject']),
+                'user_id' => $this->userSession->getId(),
+                'task_id' => $task['id'],
+            ));
+
             $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'), true);
         } else {
             $this->create($values, $errors);
