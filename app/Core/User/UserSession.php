@@ -176,7 +176,7 @@ class UserSession extends Base
      */
     public function getFilters($project_id)
     {
-        return ! empty($this->sessionStorage->filters[$project_id]) ? $this->sessionStorage->filters[$project_id] : 'status:open';
+        return ! empty($this->sessionStorage->filters[$project_id]) ? $this->sessionStorage->filters[$project_id] : DEFAULT_FILTER." ".ADDITIONAL_FILTER;
     }
 
     /**

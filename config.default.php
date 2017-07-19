@@ -237,3 +237,10 @@ define('HTTP_VERIFY_SSL_CERTIFICATE', true);
 
 // TOTP (2FA) issuer name
 define('TOTP_ISSUER', 'Kanboard');
+
+// default filter expression
+define('DEFAULT_FILTER', 'status:open');
+
+// an expression that will be added to the predefined filters
+// define('ADDITIONAL_FILTER', 'board_date:<=today');  // use this when plugin TaskBoardDate is installed
+define('ADDITIONAL_FILTER', '');  // use this otherwise
