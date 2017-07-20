@@ -236,7 +236,7 @@ class ProjectRoleHelper extends Base
 
         $role = $this->getProjectUserRole($projectId);
 
-        if ($this->role->isCustomProjectRole($role)) {
+        if (! $this->role->isCustomProjectRole($role)) {
             $result = $this->projectAuthorization->isAllowed($controller, $action, Role::PROJECT_MEMBER);
         } else {
             $result = $this->projectAuthorization->isAllowed($controller, $action, $role);
