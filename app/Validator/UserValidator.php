@@ -116,6 +116,10 @@ class UserValidator extends BaseValidator
         $v = new Validator($values, array_merge($rules, $this->commonPasswordValidationRules()));
 
         if ($v->execute()) {
+            if (! $this->userSession->isAdmin() && $values['id'] != $this->userSession->getId()) {
+                return array(false, array('current_password' => array('Invalid User ID')));
+            }
+
             if ($this->authenticationManager->passwordAuthentication($this->userSession->getUsername(), $values['current_password'], false)) {
                 return array(true, array());
             } else {
