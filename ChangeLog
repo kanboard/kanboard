@@ -1,3 +1,20 @@
+Version 1.0.46 (August 13, 2017)
+--------------------------------
+
+Security Issues:
+
+* Fix two privilege escalation issues: a standard user could reset the password 
+of another user by altering form data.
+
+Improvements:
+
+* Add "Create another link" checkbox for internal link as in sub-task creation
+* Updated translations
+
+Bug fixes:
+
+* Fix parsing issue in phpToBytes() method
+
 Version 1.0.45 (June 23, 2017)
 ------------------------------
 
