@@ -4,7 +4,8 @@ Version 1.0.46 (August 13, 2017)
 Security Issues:
 
 * Fix two privilege escalation issues: a standard user could reset the password 
-of another user by altering form data.
+of another user (including admin) by altering form data.
+(CVE-2017-12850 and CVE-2017-12851, discovered by "chbi").
 
 Improvements:
 
