@@ -153,6 +153,33 @@ define('LDAP_USER_BASE_DN', 'ou=People,dc=example,dc=com');
 define('LDAP_USER_FILTER', 'uid=%s');
 ```
 
+Example for LDAPS (SSL-encryption)
+----------------------------------
+
+Some LDAP servers are configured for "LDAPS" connectivity only (on port 636). This is different to TLS, which starts off in cleartext (port 389 by default) and then sets up encryption over the same channel.
+
+To tell PHP to use LDAPS, you need to prefix the name of your LDAP server with "ldaps://", as in the example below:
+
+Our LDAP server is `myserver.example.com` and is only accessible via LDAPS. Most likely we won't want to validate the server cert, and we DON'T want TLS.
+
+For this example we use the anonymous binding.
+
+```php
+<?php
+
+// Enable LDAP authentication (false by default)
+define('LDAP_AUTH', true);
+
+// LDAP server hostname
+define('LDAP_SERVER', 'ldaps://myserver.example.com');
+
+// By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification
+define('LDAP_SSL_VERIFY', false);
+
+// Enable LDAP START_TLS
+define('LDAP_START_TLS', false);;
+```
+
 Disable automatic account creation
 -----------------------------------
 
