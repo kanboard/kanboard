@@ -99,12 +99,26 @@ class TaskHelper extends Base
 
         $attributes = array_merge(array('tabindex="3"'), $attributes);
 
-        $html = $this->helper->form->label(t('Assignee'), 'owner_id');
+        $html = $this->helper->form->label(t('Owner'), 'owner_id');
         $html .= $this->helper->form->select('owner_id', $users, $values, $errors, $attributes);
         $html .= '&nbsp;';
         $html .= '<small>';
         $html .= '<a href="#" class="assign-me" data-target-id="form-owner_id" data-current-id="'.$this->userSession->getId().'" title="'.t('Assign to me').'">'.t('Me').'</a>';
         $html .= '</small>';
+
+        return $html;
+    }
+
+public function renderAssigneesField(array $users, array $values, array $errors = array(), array $attributes = array())
+    {
+        if (isset($values['project_id']) && ! $this->helper->projectRole->canChangeAssignee($values)) {
+            return '';
+        }
+
+        $attributes = array_merge(array('tabindex="3"', 'multiple="multiple"'), $attributes);
+
+        $html = $this->helper->form->label(t('Assignees'), 'assignees_id');
+        $html .= $this->helper->form->select('assignees_id', $users, $values, $errors, $attributes);
 
         return $html;
     }
