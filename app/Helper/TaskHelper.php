@@ -115,10 +115,10 @@ public function renderAssigneesField(array $users, array $values, array $errors 
             return '';
         }
 
-        $attributes = array_merge(array('tabindex="3"', 'multiple="multiple"'), $attributes);
+        $attributes = array_merge(array('multiple="multiple"'), $attributes);
 
-        $html = $this->helper->form->label(t('Assignees'), 'assignees_id');
-        $html .= $this->helper->form->select('assignees_id', $users, $values, $errors, $attributes);
+        $html = $this->helper->form->label(t('Assignees'), 'assignees[]');
+        $html .= $this->helper->form->select('assignees[]', $users, $values, $errors, $attributes);
 
         return $html;
     }

@@ -131,6 +131,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\TagModel                                $tagModel
  * @property \Kanboard\Model\TaskModel                               $taskModel
  * @property \Kanboard\Model\TaskAnalyticModel                       $taskAnalyticModel
+ * @property \Kanboard\Model\TaskAssigneesModel                      $taskAssigneesModel
  * @property \Kanboard\Model\TaskCreationModel                       $taskCreationModel
  * @property \Kanboard\Model\TaskDuplicationModel                    $taskDuplicationModel
  * @property \Kanboard\Model\TaskProjectDuplicationModel             $taskProjectDuplicationModel

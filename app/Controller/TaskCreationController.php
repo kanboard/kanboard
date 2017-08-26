@@ -51,7 +51,6 @@ class TaskCreationController extends BaseController
         $values = $this->request->getValues();
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
-
         if (! $valid) {
             $this->flash->failure(t('Unable to create your task.'));
             $this->show($values, $errors);
