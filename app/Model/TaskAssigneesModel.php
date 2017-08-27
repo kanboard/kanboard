@@ -78,11 +78,12 @@ class TaskAssigneesModel extends Base
      */
     public function save($task_id, array $assignee_ids)
     {
-        $task_assignee_ids = array_column($this->getList($task_id), 'id');
+        $task_assignees = $this->getList($task_id);
         $assignee_ids = array_filter($assignee_ids);
 
-        return $this->associateAssignees($task_id, $task_assignee_ids, $assignee_ids) &&
-            $this->dissociateAssignees($task_id, $task_assignee_ids, $assignee_ids);
+        $ret = $this->associateAssignees($task_id, $task_assignees, $assignee_ids) &
+               $this->dissociateAssignees($task_id, $task_assignees, $assignee_ids);
+        return $ret;
     }
 
     /**
@@ -93,16 +94,15 @@ class TaskAssigneesModel extends Base
      * @param  array    $task_assignees
      * @return bool
      */
-    protected function associateAssignees($task_id, $task_assignees, array $assignees)
+    protected function associateAssignees($task_id, $task_assignees, array $assignees_ids)
     {
-        foreach ($assignees as $user_id ) {
-            if (! in_array($user_id, $task_assignees)) {
+        foreach ($assignee_ids as $user_id ) {
+            if (! isset($task_assignees[$user_id])) {
                 if (! $this->associateAssignee($task_id, $user_id)) {
                     return false;
                 }
             }
         }
-
         return true;
     }
 
@@ -115,16 +115,15 @@ class TaskAssigneesModel extends Base
      * @param  string[] $tags
      * @return bool
      */
-    protected function dissociateAssignees($task_id, $task_assignees, $assignees)
+    protected function dissociateAssignees($task_id, $task_assignees, $assignees_ids)
     {
-        foreach ($task_assignees as $user_id) {
-            if (! in_array($user_id, $assignees)) {
+        foreach ($task_assignees as $user_id => $task_assignee) {
+            if (! in_array($user_id, $assignees_ids)) {
                 if (! $this->dissociateAssignee($task_id, $user_id)) {
                     return false;
                 }
             }
         }
-
         return true;
     }
 
