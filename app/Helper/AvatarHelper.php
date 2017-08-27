@@ -65,4 +65,17 @@ class AvatarHelper extends Base
         $user = $this->userSession->getAll();
         return $this->small($user['id'], $user['username'], $user['name'], $user['email'], $user['avatar_path'], $css);
     }
+
+    public function renderMultipleAssigneesAvatars($task_id, $user_id, $username, $name, $email, $avatar_path, $css = '') {
+        $assignees = $this->taskAssigneesModel->getList($task_id);
+
+error_log(json_encode($assignees));
+
+        $html = "";
+        foreach ($assignees as $id => $assignee) {
+            $html .= $this->render($id, $assignee, $assignee, $email, $avatar_path, $css, 20);
+            error_log(json_encode($html));
+        }
+        return $html;
+    }
 }
