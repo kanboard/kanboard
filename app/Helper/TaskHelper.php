@@ -98,7 +98,6 @@ class TaskHelper extends Base
         }
 
         $attributes = array_merge(array('tabindex="3"'), $attributes);
-
         $html = $this->helper->form->label(t('Owner'), 'owner_id');
         $html .= $this->helper->form->select('owner_id', $users, $values, $errors, $attributes);
         $html .= '&nbsp;';
@@ -109,7 +108,7 @@ class TaskHelper extends Base
         return $html;
     }
 
-public function renderAssigneesField(array $users, array $values, array $errors = array(), array $attributes = array())
+    public function renderAssigneesField(array $users, array $values, array $assignees = array(), array $errors = array(), array $attributes = array())
     {
         if (isset($values['project_id']) && ! $this->helper->projectRole->canChangeAssignee($values)) {
             return '';
@@ -118,7 +117,7 @@ public function renderAssigneesField(array $users, array $values, array $errors 
         $attributes = array_merge(array('multiple="multiple"'), $attributes);
 
         $html = $this->helper->form->label(t('Assignees'), 'assignees[]');
-        $html .= $this->helper->form->select('assignees[]', $users, $values, $errors, $attributes);
+        $html .= $this->helper->form->select('assignees[]', $users, $assignees, $errors, $attributes);
 
         return $html;
     }

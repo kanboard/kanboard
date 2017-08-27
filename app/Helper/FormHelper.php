@@ -61,6 +61,9 @@ class FormHelper extends Base
             if (isset($values[$name]) && $id == $values[$name]) {
                 $html .= ' selected="selected"';
             }
+            if (in_array('multiple="multiple"', $attributes) && in_array($value, $values)) {
+                $html .= ' selected="selected"';
+            }
 
             $html .= '>'.$this->helper->text->e($value).'</option>';
         }
