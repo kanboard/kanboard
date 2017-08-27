@@ -78,7 +78,7 @@ class TaskAssigneesModel extends Base
      */
     public function save($task_id, array $assignee_ids)
     {
-        $task_assignee_ids = $this->getAssigneeIdsByTask($task_id);
+        $task_assignee_ids = array_column($this->getList($task_id), 'id');
         $assignee_ids = array_filter($assignee_ids);
 
         return $this->associateAssignees($task_id, $task_assignee_ids, $assignee_ids) &&
@@ -93,12 +93,13 @@ class TaskAssigneesModel extends Base
      * @param  array    $task_assignees
      * @return bool
      */
-    protected function associateAssignees($task_id, $task_assignee_ids, array $assignee_ids)
+    protected function associateAssignees($task_id, $task_assignees, array $assignees)
     {
-        foreach ($assignee_ids as $assignee_id) {
-
-            if (! isset($task_assignee_ids[$assignee_id]) && ! $this->associateAssignee($task_id, $assignee_id)) {
-                return false;
+        foreach ($assignees as $user_id ) {
+            if (! in_array($user_id, $task_assignees)) {
+                if (! $this->associateAssignee($task_id, $user_id)) {
+                    return false;
+                }
             }
         }
 
@@ -114,11 +115,11 @@ class TaskAssigneesModel extends Base
      * @param  string[] $tags
      * @return bool
      */
-    protected function dissociateAssignees($task_id, $task_assignee_ids, $assignee_ids)
+    protected function dissociateAssignees($task_id, $task_assignees, $assignees)
     {
-        foreach ($task_assignee_ids as $task_assignee_id) {
-            if (! in_array($task_assignee_id, $assignee_ids)) {
-                if (! $this->dissociateTag($task_id, $assignee_id)) {
+        foreach ($task_assignees as $user_id) {
+            if (! in_array($user_id, $assignees)) {
+                if (! $this->dissociateAssignee($task_id, $user_id)) {
                     return false;
                 }
             }
