@@ -54,14 +54,10 @@ class FormHelper extends Base
 
         foreach ($options as $id => $value) {
             $html .= '<option value="'.$this->helper->text->e($id).'"';
-
             if (isset($values->$name) && $id == $values->$name) {
                 $html .= ' selected="selected"';
             }
             if (isset($values[$name]) && $id == $values[$name]) {
-                $html .= ' selected="selected"';
-            }
-            if (in_array('multiple="multiple"', $attributes) && in_array($value, $values)) {
                 $html .= ' selected="selected"';
             }
 

@@ -114,10 +114,19 @@ class TaskHelper extends Base
             return '';
         }
 
-        $attributes = array_merge(array('multiple="multiple"'), $attributes);
-
         $html = $this->helper->form->label(t('Assignees'), 'assignees[]');
-        $html .= $this->helper->form->select('assignees[]', $users, $assignees, $errors, $attributes);
+        $html .= '<select name=assignees[] id=form-assignees multiple="multiple">';
+        
+        foreach ($users as $id => $user) {
+            $html .= sprintf(
+                '<option value="%s" %s>%s</option>',
+                $id,
+                isset($assignees[$id]) ? 'selected="selected"' : '',
+                $user
+            );
+        }
+
+        $html .= '</select>';
 
         return $html;
     }
