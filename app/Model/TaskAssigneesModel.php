@@ -94,10 +94,10 @@ class TaskAssigneesModel extends Base
      * @param  array    $task_assignees
      * @return bool
      */
-    protected function associateAssignees($task_id, $task_assignees, array $assignees_ids)
+    protected function associateAssignees($task_id, $task_assignees, array $assignee_ids)
     {
         foreach ($assignee_ids as $user_id ) {
-            if (! isset($task_assignees[$user_id])) {
+            if (! in_array($user_id, array_keys($task_assignees))) {
                 if (! $this->associateAssignee($task_id, $user_id)) {
                     return false;
                 }
