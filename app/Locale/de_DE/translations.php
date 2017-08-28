@@ -359,7 +359,7 @@ return array(
     'Default values are "%s"' => 'Die Standardwerte sind "%s"',
     'Default columns for new projects (Comma-separated)' => 'Standardspalten für neue Projekte (komma-getrennt)',
     'Task assignee change' => 'Zuständigkeit geändert',
-    '%s changed the assignee of the task #%d to %s' => '%s hat die Zusständigkeit der Aufgabe #%d geändert zu %s',
+    '%s changed the assignee of the task #%d to %s' => '%s hat die Zuständigkeit der Aufgabe #%d geändert zu %s',
     '%s changed the assignee of the task %s to %s' => '%s hat die Zuständigkeit der Aufgabe %s geändert zu %s',
     'New password for the user "%s"' => 'Neues Passwort des Benutzers "%s"',
     'Choose an event' => 'Aktion wählen',
