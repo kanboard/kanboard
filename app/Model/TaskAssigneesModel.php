@@ -45,13 +45,20 @@ class TaskAssigneesModel extends Base
      * @param  integer $task_id
      * @return array
      */
-    public function getAssigneeIdsByTask($task_id)
+    public function getAssigneesByTaskIds($task_ids)
     {
-        return $this->db->table(UserModel::TABLE)
-            ->columns(UserModel::TABLE.'.id')
-            ->eq(self::TABLE.'.task_id', $task_id)
+        if (empty($task_ids)) {
+            return array();
+        }
+
+        $assignees = $this->db->table(UserModel::TABLE)
+            ->columns(UserModel::TABLE.'.id', UserModel::TABLE.'.name', self::TABLE.'.task_id')
+            ->in(self::TABLE.'.task_id', $task_ids)
             ->join(self::TABLE, 'user_id', 'id')
+            ->asc(UserModel::TABLE.'.name')
             ->findAll();
+
+        return array_column_index($assignees, 'task_id');
     }
 
     /**
