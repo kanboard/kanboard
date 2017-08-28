@@ -1,4 +1,4 @@
-<?php if (! empty($task['owner_id'])): ?>
+<?php if (! empty($task['owner_id']) || (! empty($task['assignees']))): ?>
 <div class="task-board-avatars">
     <span
         <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
