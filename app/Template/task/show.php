@@ -5,6 +5,7 @@
     'tags' => $tags,
     'project' => $project,
     'editable' => $this->user->hasProjectAccess('TaskModificationController', 'edit', $project['id']),
+    'assignees' => $assignees
 )) ?>
 
 <?php if (!empty($task['description'])): ?>
