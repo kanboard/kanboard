@@ -1,4 +1,4 @@
-<?php if (! empty($task['owner_id'])): ?>
+<?php if (! empty($task['owner_id']) || (! empty($task['assignees']))): ?>
     <div class="task-list-avatars">
         <span
             <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
@@ -7,7 +7,8 @@
         <?php else: ?>
             class="task-board-assignee">
         <?php endif ?>
-            <?= $this->avatar->small(
+            <?= $this->avatar->renderMultipleAssigneesAvatars(
+                $task['id'],
                 $task['owner_id'],
                 $task['assignee_username'],
                 $task['assignee_name'],
