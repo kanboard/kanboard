@@ -125,7 +125,12 @@ class TaskModificationModel extends Base
             unset($values['tags']);
         }
     }
-
+    /**
+      * Update assignees
+      * @access protected
+      * @param  array  $values
+      * @param  array  $original_task
+      */
     protected function updateAssignees(array &$values, $task) {
         if (isset($values['assignees'])) {
             $this->taskAssigneesModel->save($values['id'], $values['assignees']);
