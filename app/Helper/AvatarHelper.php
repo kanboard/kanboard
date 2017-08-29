@@ -80,7 +80,7 @@ class AvatarHelper extends Base
      * @return string
      
     */
-    public function renderMultipleAssigneesAvatars($task_id, $user_id, $username, $name, $email, $avatar_path, $css = '') {
+    public function smallMultiple($task_id, $user_id, $username, $name, $email, $avatar_path, $css = '') {
         $assignees = $this->taskAssigneesModel->getList($task_id);
         $html = "";
         foreach ($assignees as $id => $assignee) {
