@@ -2,16 +2,13 @@
 
 namespace Kanboard\Model;
 
-use PicoDb\Database;
 use Kanboard\Core\Base;
-use Kanboard\Core\Security\Token;
-use Kanboard\Core\Security\Role;
 
 /**
- * User model
+ * Class TaskAssigneesModel 
  *
  * @package  Kanboard\Model
- * @author   Frederic Guillot
+ * @author   Florian Wernert
  */
 class TaskAssigneesModel extends Base
 {
@@ -39,10 +36,10 @@ class TaskAssigneesModel extends Base
     }
 
     /**
-     * Get all assignees ids associated to a task
+     * Get all assignees associated to a list of tasks
      *
      * @access public
-     * @param  integer $task_id
+     * @param  integer[] $task_ids
      * @return array
      */
     public function getAssigneesByTaskIds($task_ids)
@@ -62,7 +59,7 @@ class TaskAssigneesModel extends Base
     }
 
     /**
-     * Get dictionary of tags
+     * Get dictionary of Assignees
      *
      * @access public
      * @param  integer $task_id
@@ -75,12 +72,11 @@ class TaskAssigneesModel extends Base
     }
 
     /**
-     * Add or update a list of tags to a task
+     * Add or update a list of assignees to a task
      *
      * @access public
-     * @param  integer  $project_id
-     * @param  integer  $task_id
-     * @param  string[] $tags
+     * @param  integer   $task_id
+     * @param  integer[] $assignees_ids
      * @return boolean
      */
     public function save($task_id, array $assignee_ids)
@@ -97,8 +93,9 @@ class TaskAssigneesModel extends Base
      * Associate additional assignees to a task
      *
      * @access protected
-     * @param  integer  $task_id
-     * @param  array    $task_assignees
+     * @param  integer   $task_id
+     * @param  array     $task_assignees
+     * @param  integer[] $assignees_ids
      * @return bool
      */
     protected function associateAssignees($task_id, $task_assignees, array $assignee_ids)
@@ -110,16 +107,17 @@ class TaskAssigneesModel extends Base
                 }
             }
         }
+
         return true;
     }
 
     /**
-     * Dissociate removed assignees from a task 
+     * Dissociate assignees from a task 
      *
      * @access protected
      * @param  integer  $task_id
-     * @param  array    $task_tags
-     * @param  string[] $tags
+     * @param  array    $task_assignees
+     * @param  string[] $assignees_ids 
      * @return bool
      */
     protected function dissociateAssignees($task_id, $task_assignees, $assignees_ids)
@@ -131,11 +129,12 @@ class TaskAssigneesModel extends Base
                 }
             }
         }
+
         return true;
     }
 
     /**
-     * Associate a user from a task
+     * Associate a user  a task
      *
      * @access public
      * @param  integer  $task_id  

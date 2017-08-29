@@ -69,7 +69,14 @@ class BoardColumnFormatter extends BaseFormatter implements FormatterInterface
         $this->tags = $tags;
         return $this;
     }
-
+ 
+   /**
+     * Set assignees
+     *
+     * @access public
+     * @param  array $assignees
+     * @return $this
+     */
     public function withAssignees (array $assignees)
     {
         $this->assignees = $assignees;

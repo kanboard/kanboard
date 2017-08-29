@@ -70,6 +70,14 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
         return $this;
     }
 
+    /**
+     * Set assignees
+     *
+     * @access public
+     * @param  array $assignees
+     * @return $this
+     */
+ 
     public function withAssignees(array $assignees)
     {
         $this->assignees = $assignees;
