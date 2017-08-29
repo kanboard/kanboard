@@ -7,7 +7,7 @@
     <?php else: ?>
         class="task-board-assignee">
     <?php endif ?>
-        <?= $this->avatar->renderMultipleAssigneesAvatars(
+        <?= $this->avatar->smallMultiple(
             $task['id'],
             $task['owner_id'],
             $task['assignee_username'],
