@@ -100,7 +100,7 @@ class Installer extends \Kanboard\Core\Base
     {
         $zip = new ZipArchive();
         $archiveData = $this->httpClient->get($archiveUrl);
-        $archiveFile = tempnam(sys_get_temp_dir(), 'kb_plugin');
+        $archiveFile = tempnam(ini_get('upload_tmp_dir') ? ini_get('upload_tmp_dir') : sys_get_temp_dir(), 'kb_plugin');
 
         if (empty($archiveData)) {
             unlink($archiveFile);
