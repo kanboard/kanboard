@@ -86,7 +86,7 @@ class TaskAssigneesModel extends Base
 
         $ret = $this->associateAssignees($task_id, $task_assignees, $assignee_ids) &
                $this->dissociateAssignees($task_id, $task_assignees, $assignee_ids);
-        return $ret;
+        return $ret == 1 ? True : False;
     }
 
     /**
