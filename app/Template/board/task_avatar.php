@@ -9,11 +9,6 @@
     <?php endif ?>
         <?= $this->avatar->smallMultiple(
             $task['id'],
-            $task['owner_id'],
-            $task['assignee_username'],
-            $task['assignee_name'],
-            $task['assignee_email'],
-            $task['assignee_avatar_path'],
             'avatar-inline'
         ) ?>
     </span>
