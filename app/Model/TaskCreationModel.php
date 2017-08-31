@@ -23,10 +23,16 @@ class TaskCreationModel extends Base
     {
         $position = empty($values['position']) ? 0 : $values['position'];
         $tags = array();
+        $assignees_ids = array();
 
         if (isset($values['tags'])) {
             $tags = $values['tags'];
             unset($values['tags']);
+        }
+
+        if (isset($values['assignees'])) {
+           $assignee_ids = $values['assignees'];
+           unset($values['assignees']);
         }
 
         $this->prepare($values);
@@ -39,6 +45,10 @@ class TaskCreationModel extends Base
 
             if (! empty($tags)) {
                 $this->taskTagModel->save($values['project_id'], $task_id, $tags);
+            }
+            
+            if (! empty($assignee_ids)) {
+                $this->taskAssigneesModel->save($task_id, $assignee_ids);
             }
 
             $this->queueManager->push($this->taskEventJob->withParams(

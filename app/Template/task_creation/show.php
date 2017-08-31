@@ -17,6 +17,7 @@
         <div class="task-form-secondary-column">
             <?= $this->task->renderColorField($values) ?>
             <?= $this->task->renderAssigneeField($users_list, $values, $errors) ?>
+            <?= $this->task->renderAssigneesField($users_list, $values, array(), $errors) ?>
             <?= $this->task->renderCategoryField($categories_list, $values, $errors) ?>
             <?= $this->task->renderSwimlaneField($swimlanes_list, $values, $errors) ?>
             <?= $this->task->renderColumnField($columns_list, $values, $errors) ?>

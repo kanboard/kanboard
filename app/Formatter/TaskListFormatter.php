@@ -23,7 +23,9 @@ class TaskListFormatter extends BaseFormatter implements FormatterInterface
         $tasks = $this->query->findAll();
         $taskIds = array_column($tasks, 'id');
         $tags = $this->taskTagModel->getTagsByTaskIds($taskIds);
+        $assignees = $this->taskAssigneesModel->GetAssigneesByTaskIds($taskIds);
         array_merge_relation($tasks, $tags, 'tags', 'id');
+        array_merge_relation($tasks, $assignees, 'assignees', 'id');
 
         return $tasks;
     }

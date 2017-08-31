@@ -3,6 +3,7 @@
     'tags' => $tags,
     'project' => $project,
     'editable' => false,
+    'assignees' => $assignees,
 )) ?>
 
 <div class="page-header">

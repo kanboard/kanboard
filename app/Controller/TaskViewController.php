@@ -46,6 +46,7 @@ class TaskViewController extends BaseController
             'columns_list' => $this->columnModel->getList($task['project_id']),
             'colors_list' => $this->colorModel->getList(),
             'tags' => $this->taskTagModel->getList($task['id']),
+            'assignees' => $this->taskAssigneesModel->getList($task['id']),
             'title' => $task['title'],
             'no_layout' => true,
             'auto_refresh' => true,
@@ -64,6 +65,8 @@ class TaskViewController extends BaseController
         $subtasks = $this->subtaskModel->getAll($task['id']);
         $commentSortingDirection = $this->userMetadataCacheDecorator->get(UserMetadataModel::KEY_COMMENT_SORTING_DIRECTION, 'ASC');
 
+        $assignees = $this->taskAssigneesModel->getList($task['id']);
+
         $this->response->html($this->helper->layout->task('task/show', array(
             'task' => $task,
             'project' => $this->projectModel->getById($task['project_id']),
@@ -75,6 +78,7 @@ class TaskViewController extends BaseController
             'external_links' => $this->taskExternalLinkModel->getAll($task['id']),
             'link_label_list' => $this->linkModel->getList(0, false),
             'tags' => $this->taskTagModel->getList($task['id']),
+            'assignees' => $assignees
         )));
     }
 
@@ -94,6 +98,7 @@ class TaskViewController extends BaseController
             'cycle_time' => $this->taskAnalyticModel->getCycleTime($task),
             'time_spent_columns' => $this->taskAnalyticModel->getTimeSpentByColumn($task),
             'tags' => $this->taskTagModel->getList($task['id']),
+            'assignees' => $this->taskAssigneesModel->getList($task['id']),
         )));
     }
 
@@ -119,6 +124,7 @@ class TaskViewController extends BaseController
             'project' => $this->projectModel->getById($task['project_id']),
             'subtask_paginator' => $subtask_paginator,
             'tags' => $this->taskTagModel->getList($task['id']),
+            'assignees' => $this->taskAssigneesModel->getList($task['id']),
         )));
     }
 
@@ -136,6 +142,7 @@ class TaskViewController extends BaseController
             'project' => $this->projectModel->getById($task['project_id']),
             'transitions' => $this->transitionModel->getAllByTask($task['id']),
             'tags' => $this->taskTagModel->getList($task['id']),
+            'assignees' => $this->taskAssigneesModel->getList($task['id']),
         )));
     }
 }
