@@ -32,7 +32,7 @@
                     <?= $this->text->e($column['title']) ?>
                 <?php else: ?>
                     <span class="dropdown">
-                        <a href="#" class="dropdown-menu"><?= $this->text->e($column['title']) ?> <i class="fa fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-menu"><?= t($column['title']) ?> <i class="fa fa-caret-down"></i></a>
                         <ul>
                             <li>
                                 <i class="fa fa-minus-square fa-fw"></i>
