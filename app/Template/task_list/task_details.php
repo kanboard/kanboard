@@ -1,7 +1,7 @@
 <div class="table-list-details">
     <?= $this->text->e($task['project_name']) ?> &gt;
     <?= $this->text->e($task['swimlane_name']) ?> &gt;
-    <?= $this->text->e($task['column_name']) ?>
+    <?= t($task['column_name']) ?>
 
     <?php if (! empty($task['category_id'])): ?>
         <span class="table-list-category">
