@@ -34,7 +34,7 @@
 
     <div class="comment-content">
         <div class="markdown">
-            <?= $this->text->markdown($comment['comment'], isset($is_public) && $is_public) ?>
+            <?= nl2br($this->text->markdown($comment['comment'], isset($is_public) && $is_public)) ?>
         </div>
     </div>
 </div>

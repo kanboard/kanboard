@@ -2,6 +2,7 @@
 
 namespace Kanboard\Action;
 
+use Kanboard\Action\Base;
 use Kanboard\Model\TaskModel;
 
 
@@ -48,6 +49,7 @@ class TaskAssignColorOnDueDate extends Base
         return array(
             'color_id' => t('Color'),
         );
+
     }
 
     /**
@@ -81,7 +83,6 @@ class TaskAssignColorOnDueDate extends Base
                 );
                 $results[] = $this->taskModificationModel->update($values, false);
             }
-        }
 
         return in_array(true, $results, true);
     }
@@ -97,4 +98,5 @@ class TaskAssignColorOnDueDate extends Base
     {
         return count($data['tasks']) > 0;
     }
+
 }
