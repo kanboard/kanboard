@@ -2,7 +2,6 @@ Kanboard
 ========
 
 [![Build Status](https://travis-ci.org/kanboard/kanboard.svg?branch=master)](https://travis-ci.org/kanboard/kanboard)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kanboard/kanboard/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/kanboard/kanboard/?branch=master)
 
 Kanboard is project management software that focuses on the Kanban methodology.
 

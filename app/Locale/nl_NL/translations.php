@@ -1261,7 +1261,7 @@ return array(
     // 'The email configuration has been disabled by the administrator.' => '',
     'Close this project' => 'Dit project sluiten',
     'Open this project' => 'Dit project openen',
-    // 'Close a project' => 'Sluit een project',
+    // 'Close a project' => '',
     'Do you really want to close this project: "%s"?' => 'Weet u zeker dat u dit project wilt sluiten: "%s"?',
     'Reopen a project' => 'Heropen dit project',
     'Do you really want to reopen this project: "%s"?' => 'Weet u zeker dat u dit project wilt heropenen: "%s"?',
@@ -1338,4 +1338,6 @@ return array(
     // 'This task was sent by email to "%s" with subject "%s".' => '',
     // 'Predefined Email Subjects' => '',
     // 'Write one subject by line.' => '',
+    // 'Create another link' => '',
+    // 'BRL - Brazilian Real' => '',
 );

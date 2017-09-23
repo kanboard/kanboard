@@ -1338,4 +1338,6 @@ return array(
     // 'This task was sent by email to "%s" with subject "%s".' => '',
     // 'Predefined Email Subjects' => '',
     // 'Write one subject by line.' => '',
+    // 'Create another link' => '',
+    // 'BRL - Brazilian Real' => '',
 );
