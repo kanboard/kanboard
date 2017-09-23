@@ -1338,4 +1338,6 @@ return array(
     'This task was sent by email to "%s" with subject "%s".' => 'Эта задача была отправлена по e-mail на "%s" с темой "%s".',
     'Predefined Email Subjects' => 'Предустановленные темы для e-mail',
     'Write one subject by line.' => 'Записываются по одной теме на строку.',
+    // 'Create another link' => '',
+    // 'BRL - Brazilian Real' => '',
 );

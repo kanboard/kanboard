@@ -51,6 +51,7 @@ class LanguageModel extends Base
             'zh_CN',
             'ja_JP',
             'th_TH',
+            'vi_VN',
         );
     }
 
@@ -107,6 +108,7 @@ class LanguageModel extends Base
             'zh_CN' => '中文(简体)',
             'ja_JP' => '日本語',
             'th_TH' => 'ไทย',
+            'vi_VN' => 'Tiếng Việt',
         );
 
         if ($prepend) {

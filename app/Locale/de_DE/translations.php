@@ -1338,4 +1338,6 @@ return array(
     'This task was sent by email to "%s" with subject "%s".' => 'Diese Aufgabe wurde per Mail an "%s" mit dem Betreff "%s" gesendet.',
     'Predefined Email Subjects' => 'Vordefinierte E-Mail Betreffzeilen',
     'Write one subject by line.' => 'Schreibe ein Betreff pro Zeile.',
+    // 'Create another link' => '',
+    // 'BRL - Brazilian Real' => '',
 );

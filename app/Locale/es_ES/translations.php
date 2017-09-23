@@ -1338,4 +1338,6 @@ return array(
     'This task was sent by email to "%s" with subject "%s".' => 'Esta tarea fue enviada por correo a "%s" con el asunto "%s".',
     'Predefined Email Subjects' => 'Asuntos de correo predefinidos',
     'Write one subject by line.' => 'Escriba un asunto por línea.',
+    // 'Create another link' => '',
+    // 'BRL - Brazilian Real' => '',
 );
