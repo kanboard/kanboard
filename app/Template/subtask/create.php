@@ -3,9 +3,8 @@
 </div>
 
 <form method="post" action="<?= $this->url->href('SubtaskController', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
-
     <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('task_id', $values) ?>
+
     <?= $this->subtask->renderTitleField($values, $errors, array('autofocus')) ?>
     <?= $this->subtask->renderAssigneeField($users_list, $values, $errors) ?>
     <?= $this->subtask->renderTimeEstimatedField($values, $errors) ?>

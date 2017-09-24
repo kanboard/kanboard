@@ -3,8 +3,6 @@
 </div>
 <form method="post" action="<?= $this->url->href('TaskModificationController', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('id', $values) ?>
-    <?= $this->form->hidden('project_id', $values) ?>
 
     <div class="task-form-container">
         <div class="task-form-main-column">

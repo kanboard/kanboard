@@ -98,6 +98,8 @@ class TaskModificationController extends BaseController
     {
         $task = $this->getTask();
         $values = $this->request->getValues();
+        $values['id'] = $task['id'];
+        $values['project_id'] = $task['project_id'];
 
         list($valid, $errors) = $this->taskValidator->validateModification($values);
 

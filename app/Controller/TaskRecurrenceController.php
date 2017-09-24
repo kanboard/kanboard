@@ -47,6 +47,7 @@ class TaskRecurrenceController extends BaseController
     {
         $task = $this->getTask();
         $values = $this->request->getValues();
+        $values['id'] = $task['id'];
 
         list($valid, $errors) = $this->taskValidator->validateEditRecurrence($values);
 

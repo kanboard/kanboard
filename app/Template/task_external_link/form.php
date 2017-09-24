@@ -1,6 +1,4 @@
 <?= $this->form->csrf() ?>
-<?= $this->form->hidden('task_id', array('task_id' => $task['id'])) ?>
-<?= $this->form->hidden('id', $values) ?>
 <?= $this->form->hidden('link_type', $values) ?>
 
 <?= $this->form->label(t('URL'), 'url') ?>

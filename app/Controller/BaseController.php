@@ -138,14 +138,7 @@ abstract class BaseController extends Base
         return $user;
     }
 
-    /**
-     * Get the current subtask
-     *
-     * @access protected
-     * @return array
-     * @throws PageNotFoundException
-     */
-    protected function getSubtask()
+    protected function getSubtask(array $task)
     {
         $subtask = $this->subtaskModel->getById($this->request->getIntegerParam('subtask_id'));
 
@@ -153,7 +146,60 @@ abstract class BaseController extends Base
             throw new PageNotFoundException();
         }
 
+        if ($subtask['task_id'] != $task['id']) {
+            throw new AccessForbiddenException();
+        }
+
         return $subtask;
+    }
+
+    protected function getComment(array $task)
+    {
+        $comment = $this->commentModel->getById($this->request->getIntegerParam('comment_id'));
+
+        if (empty($comment)) {
+            throw new PageNotFoundException();
+        }
+
+        if (! $this->userSession->isAdmin() && $comment['user_id'] != $this->userSession->getId()) {
+            throw new AccessForbiddenException();
+        }
+
+        if ($comment['task_id'] != $task['id']) {
+            throw new AccessForbiddenException();
+        }
+
+        return $comment;
+    }
+
+    protected function getExternalTaskLink(array $task)
+    {
+        $link = $this->taskExternalLinkModel->getById($this->request->getIntegerParam('link_id'));
+
+        if (empty($link)) {
+            throw new PageNotFoundException();
+        }
+
+        if ($link['task_id'] != $task['id']) {
+            throw new AccessForbiddenException();
+        }
+
+        return $link;
+    }
+
+    protected function getInternalTaskLink(array $task)
+    {
+        $link = $this->taskLinkModel->getById($this->request->getIntegerParam('link_id'));
+
+        if (empty($link)) {
+            throw new PageNotFoundException();
+        }
+
+        if ($link['task_id'] != $task['id']) {
+            throw new AccessForbiddenException();
+        }
+
+        return $link;
     }
 
     protected function getColumn(array $project)

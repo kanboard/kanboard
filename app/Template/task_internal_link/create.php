@@ -5,7 +5,6 @@
 <form action="<?= $this->url->href('TaskInternalLinkController', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" method="post" autocomplete="off">
 
     <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('task_id', array('task_id' => $task['id'])) ?>
     <?= $this->form->hidden('opposite_task_id', $values) ?>
 
     <?= $this->form->label(t('Label'), 'link_id') ?>

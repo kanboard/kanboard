@@ -18,7 +18,7 @@ class SubtaskStatusController extends BaseController
     public function change()
     {
         $task = $this->getTask();
-        $subtask = $this->getSubtask();
+        $subtask = $this->getSubtask($task);
         $fragment = $this->request->getStringParam('fragment');
 
         $status = $this->subtaskStatusModel->toggleStatus($subtask['id']);
@@ -43,19 +43,19 @@ class SubtaskStatusController extends BaseController
     public function timer()
     {
         $task = $this->getTask();
-        $subtaskId = $this->request->getIntegerParam('subtask_id');
+        $subtask = $this->getSubtask($task);
         $timer = $this->request->getStringParam('timer');
 
         if ($timer === 'start') {
-            $this->subtaskTimeTrackingModel->logStartTime($subtaskId, $this->userSession->getId());
+            $this->subtaskTimeTrackingModel->logStartTime($subtask['id'], $this->userSession->getId());
         } elseif ($timer === 'stop') {
-            $this->subtaskTimeTrackingModel->logEndTime($subtaskId, $this->userSession->getId());
+            $this->subtaskTimeTrackingModel->logEndTime($subtask['id'], $this->userSession->getId());
             $this->subtaskTimeTrackingModel->updateTaskTimeTracking($task['id']);
         }
 
         $this->response->html($this->template->render('subtask/timer', array(
             'task'    => $task,
-            'subtask' => $this->subtaskModel->getByIdWithDetails($subtaskId),
+            'subtask' => $this->subtaskModel->getByIdWithDetails($subtask['id']),
         )));
     }
 

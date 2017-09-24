@@ -4,7 +4,6 @@
 
 <form action="<?= $this->url->href('TaskExternalLinkController', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" method="post" autocomplete="off">
     <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('task_id', array('task_id' => $task['id'])) ?>
 
     <?= $this->form->label(t('External link'), 'text') ?>
     <?= $this->form->text(

@@ -20,7 +20,7 @@ class SubtaskRestrictionController extends BaseController
     public function show()
     {
         $task = $this->getTask();
-        $subtask = $this->getSubtask();
+        $subtask = $this->getSubtask($task);
 
         $this->response->html($this->template->render('subtask_restriction/show', array(
             'status_list' => array(
@@ -41,7 +41,7 @@ class SubtaskRestrictionController extends BaseController
     public function save()
     {
         $task = $this->getTask();
-        $subtask = $this->getSubtask();
+        $subtask = $this->getSubtask($task);
         $values = $this->request->getValues();
 
         // Change status of the previous "in progress" subtask

@@ -14,29 +14,6 @@ use Kanboard\Core\Controller\PageNotFoundException;
 class CommentController extends BaseController
 {
     /**
-     * Get the current comment
-     *
-     * @access protected
-     * @return array
-     * @throws PageNotFoundException
-     * @throws AccessForbiddenException
-     */
-    protected function getComment()
-    {
-        $comment = $this->commentModel->getById($this->request->getIntegerParam('comment_id'));
-
-        if (empty($comment)) {
-            throw new PageNotFoundException();
-        }
-
-        if (! $this->userSession->isAdmin() && $comment['user_id'] != $this->userSession->getId()) {
-            throw new AccessForbiddenException();
-        }
-
-        return $comment;
-    }
-
-    /**
      * Add comment form
      *
      * @access public
@@ -49,14 +26,6 @@ class CommentController extends BaseController
     {
         $project = $this->getProject();
         $task = $this->getTask();
-
-        if (empty($values)) {
-            $values = array(
-                'user_id' => $this->userSession->getId(),
-                'task_id' => $task['id'],
-            );
-        }
-
         $values['project_id'] = $task['project_id'];
 
         $this->response->html($this->helper->layout->task('comment/create', array(
@@ -106,7 +75,7 @@ class CommentController extends BaseController
     public function edit(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $comment = $this->getComment();
+        $comment = $this->getComment($task);
 
         if (empty($values)) {
             $values = $comment;
@@ -130,9 +99,13 @@ class CommentController extends BaseController
     public function update()
     {
         $task = $this->getTask();
-        $this->getComment();
+        $comment = $this->getComment($task);
 
         $values = $this->request->getValues();
+        $values['id'] = $comment['id'];
+        $values['task_id'] = $task['id'];
+        $values['user_id'] = $comment['user_id'];
+
         list($valid, $errors) = $this->commentValidator->validateModification($values);
 
         if ($valid) {
@@ -157,7 +130,7 @@ class CommentController extends BaseController
     public function confirm()
     {
         $task = $this->getTask();
-        $comment = $this->getComment();
+        $comment = $this->getComment($task);
 
         $this->response->html($this->template->render('comment/remove', array(
             'comment' => $comment,
@@ -175,7 +148,7 @@ class CommentController extends BaseController
     {
         $this->checkCSRFParam();
         $task = $this->getTask();
-        $comment = $this->getComment();
+        $comment = $this->getComment($task);
 
         if ($this->commentModel->remove($comment['id'])) {
             $this->flash->success(t('Comment removed successfully.'));

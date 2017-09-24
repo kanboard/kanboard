@@ -66,6 +66,7 @@ class SubtaskController extends BaseController
     {
         $task = $this->getTask();
         $values = $this->request->getValues();
+        $values['task_id'] = $task['id'];
 
         list($valid, $errors) = $this->subtaskValidator->validateCreation($values);
 
@@ -103,7 +104,7 @@ class SubtaskController extends BaseController
     public function edit(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $subtask = $this->getSubtask();
+        $subtask = $this->getSubtask($task);
 
         $this->response->html($this->template->render('subtask/edit', array(
             'values' => empty($values) ? $subtask : $values,
@@ -123,9 +124,12 @@ class SubtaskController extends BaseController
     public function update()
     {
         $task = $this->getTask();
-        $this->getSubtask();
+        $subtask = $this->getSubtask($task);
 
         $values = $this->request->getValues();
+        $values['id'] = $subtask['id'];
+        $values['task_id'] = $task['id'];
+
         list($valid, $errors) = $this->subtaskValidator->validateModification($values);
 
         if ($valid) {
@@ -149,7 +153,7 @@ class SubtaskController extends BaseController
     public function confirm()
     {
         $task = $this->getTask();
-        $subtask = $this->getSubtask();
+        $subtask = $this->getSubtask($task);
 
         $this->response->html($this->template->render('subtask/remove', array(
             'subtask' => $subtask,
@@ -166,7 +170,7 @@ class SubtaskController extends BaseController
     {
         $this->checkCSRFParam();
         $task = $this->getTask();
-        $subtask = $this->getSubtask();
+        $subtask = $this->getSubtask($task);
 
         if ($this->subtaskModel->remove($subtask['id'])) {
             $this->flash->success(t('Sub-task removed successfully.'));

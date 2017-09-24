@@ -4,8 +4,6 @@
 
 <form method="post" action="<?= $this->url->href('SubtaskController', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('id', $values) ?>
-    <?= $this->form->hidden('task_id', $values) ?>
 
     <?= $this->subtask->renderTitleField($values, $errors, array('autofocus')) ?>
     <?= $this->subtask->renderAssigneeField($users_list, $values, $errors) ?>

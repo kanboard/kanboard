@@ -13,7 +13,7 @@ class SubtaskConverterController extends BaseController
     public function show()
     {
         $task = $this->getTask();
-        $subtask = $this->getSubtask();
+        $subtask = $this->getSubtask($task);
 
         $this->response->html($this->template->render('subtask_converter/show', array(
             'subtask' => $subtask,
@@ -24,7 +24,8 @@ class SubtaskConverterController extends BaseController
     public function save()
     {
         $project = $this->getProject();
-        $subtask = $this->getSubtask();
+        $task = $this->getTask();
+        $subtask = $this->getSubtask($task);
 
         $task_id = $this->subtaskTaskConversionModel->convertToTask($project['id'], $subtask['id']);
 

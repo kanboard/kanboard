@@ -14,24 +14,6 @@ use Kanboard\Core\Controller\PageNotFoundException;
 class TaskInternalLinkController extends BaseController
 {
     /**
-     * Get the current link
-     *
-     * @access private
-     * @return array
-     * @throws PageNotFoundException
-     */
-    private function getTaskLink()
-    {
-        $link = $this->taskLinkModel->getById($this->request->getIntegerParam('link_id'));
-
-        if (empty($link)) {
-            throw new PageNotFoundException();
-        }
-
-        return $link;
-    }
-
-    /**
      * Creation form
      *
      * @access public
@@ -45,9 +27,7 @@ class TaskInternalLinkController extends BaseController
         $task = $this->getTask();
 
         if (empty($values)) {
-          $values = array(
-              'another_tasklink' => $this->request->getIntegerParam('another_tasklink', 0)
-          );
+          $values['another_tasklink'] = $this->request->getIntegerParam('another_tasklink', 0);
           $values = $this->hook->merge('controller:tasklink:form:default', $values, array('default_values' => $values));
         }
 
@@ -68,6 +48,7 @@ class TaskInternalLinkController extends BaseController
     {
         $task = $this->getTask();
         $values = $this->request->getValues();
+        $values['task_id'] = $task['id'];
 
         list($valid, $errors) = $this->taskLinkValidator->validateCreation($values);
 
@@ -106,7 +87,7 @@ class TaskInternalLinkController extends BaseController
     public function edit(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
-        $task_link = $this->getTaskLink();
+        $task_link = $this->getInternalTaskLink($task);
 
         if (empty($values)) {
             $opposite_task = $this->taskFinderModel->getById($task_link['opposite_task_id']);
@@ -131,7 +112,11 @@ class TaskInternalLinkController extends BaseController
     public function update()
     {
         $task = $this->getTask();
+        $task_link = $this->getInternalTaskLink($task);
+
         $values = $this->request->getValues();
+        $values['task_id'] = $task['id'];
+        $values['id'] = $task_link['id'];
 
         list($valid, $errors) = $this->taskLinkValidator->validateModification($values);
 
@@ -155,7 +140,7 @@ class TaskInternalLinkController extends BaseController
     public function confirm()
     {
         $task = $this->getTask();
-        $link = $this->getTaskLink();
+        $link = $this->getInternalTaskLink($task);
 
         $this->response->html($this->template->render('task_internal_link/remove', array(
             'link' => $link,
@@ -172,8 +157,9 @@ class TaskInternalLinkController extends BaseController
     {
         $this->checkCSRFParam();
         $task = $this->getTask();
+        $link = $this->getInternalTaskLink($task);
 
-        if ($this->taskLinkModel->remove($this->request->getIntegerParam('link_id'))) {
+        if ($this->taskLinkModel->remove($link['id'])) {
             $this->flash->success(t('Link removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this link.'));
