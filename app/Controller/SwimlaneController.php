@@ -3,8 +3,6 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
-use Kanboard\Core\Controller\PageNotFoundException;
-use Kanboard\Model\SwimlaneModel;
 
 /**
  * Swimlanes Controller
@@ -14,24 +12,6 @@ use Kanboard\Model\SwimlaneModel;
  */
 class SwimlaneController extends BaseController
 {
-    /**
-     * Get the swimlane (common method between actions)
-     *
-     * @access private
-     * @return array
-     * @throws PageNotFoundException
-     */
-    private function getSwimlane()
-    {
-        $swimlane = $this->swimlaneModel->getById($this->request->getIntegerParam('swimlane_id'));
-
-        if (empty($swimlane)) {
-            throw new PageNotFoundException();
-        }
-
-        return $swimlane;
-    }
-
     /**
      * List of swimlanes for a given project
      *
@@ -78,6 +58,8 @@ class SwimlaneController extends BaseController
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
+        $values['project_id'] = $project['id'];
+
         list($valid, $errors) = $this->swimlaneValidator->validateCreation($values);
 
         if ($valid) {
@@ -104,7 +86,7 @@ class SwimlaneController extends BaseController
     public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $swimlane = $this->getSwimlane();
+        $swimlane = $this->getSwimlane($project);
 
         $this->response->html($this->helper->layout->project('swimlane/edit', array(
             'values' => empty($values) ? $swimlane : $values,
@@ -121,8 +103,11 @@ class SwimlaneController extends BaseController
     public function update()
     {
         $project = $this->getProject();
-
+        $swimlane = $this->getSwimlane($project);
         $values = $this->request->getValues();
+        $values['project_id'] = $project['id'];
+        $values['id'] = $swimlane['id'];
+
         list($valid, $errors) = $this->swimlaneValidator->validateModification($values);
 
         if ($valid) {
@@ -145,7 +130,7 @@ class SwimlaneController extends BaseController
     public function confirm()
     {
         $project = $this->getProject();
-        $swimlane = $this->getSwimlane();
+        $swimlane = $this->getSwimlane($project);
 
         $this->response->html($this->helper->layout->project('swimlane/remove', array(
             'project' => $project,
@@ -162,9 +147,9 @@ class SwimlaneController extends BaseController
     {
         $this->checkCSRFParam();
         $project = $this->getProject();
-        $swimlane_id = $this->request->getIntegerParam('swimlane_id');
+        $swimlane = $this->getSwimlane($project);
 
-        if ($this->swimlaneModel->remove($project['id'], $swimlane_id)) {
+        if ($this->swimlaneModel->remove($project['id'], $swimlane['id'])) {
             $this->flash->success(t('Swimlane removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this swimlane.'));
@@ -182,9 +167,9 @@ class SwimlaneController extends BaseController
     {
         $this->checkCSRFParam();
         $project = $this->getProject();
-        $swimlane_id = $this->request->getIntegerParam('swimlane_id');
+        $swimlane = $this->getSwimlane($project);
 
-        if ($this->swimlaneModel->disable($project['id'], $swimlane_id)) {
+        if ($this->swimlaneModel->disable($project['id'], $swimlane['id'])) {
             $this->flash->success(t('Swimlane updated successfully.'));
         } else {
             $this->flash->failure(t('Unable to update this swimlane.'));
@@ -202,9 +187,9 @@ class SwimlaneController extends BaseController
     {
         $this->checkCSRFParam();
         $project = $this->getProject();
-        $swimlane_id = $this->request->getIntegerParam('swimlane_id');
+        $swimlane = $this->getSwimlane($project);
 
-        if ($this->swimlaneModel->enable($project['id'], $swimlane_id)) {
+        if ($this->swimlaneModel->enable($project['id'], $swimlane['id'])) {
             $this->flash->success(t('Swimlane updated successfully.'));
         } else {
             $this->flash->failure(t('Unable to update this swimlane.'));

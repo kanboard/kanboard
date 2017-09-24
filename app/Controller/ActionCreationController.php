@@ -35,8 +35,9 @@ class ActionCreationController extends BaseController
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
+        $values['project_id'] = $project['id'];
 
-        if (empty($values['action_name']) || empty($values['project_id'])) {
+        if (empty($values['action_name'])) {
             return $this->create();
         }
 
@@ -57,8 +58,9 @@ class ActionCreationController extends BaseController
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
+        $values['project_id'] = $project['id'];
 
-        if (empty($values['action_name']) || empty($values['project_id']) || empty($values['event_name'])) {
+        if (empty($values['action_name']) || empty($values['event_name'])) {
             $this->create();
             return;
         }
@@ -109,6 +111,7 @@ class ActionCreationController extends BaseController
      */
     private function doCreation(array $project, array $values)
     {
+        $values['project_id'] = $project['id'];
         list($valid, ) = $this->actionValidator->validateCreation($values);
 
         if ($valid) {

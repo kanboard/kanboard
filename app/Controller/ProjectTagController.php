@@ -2,8 +2,6 @@
 
 namespace Kanboard\Controller;
 
-use Kanboard\Core\Controller\AccessForbiddenException;
-
 /**
  * Class ProjectTagController
  *
@@ -27,10 +25,6 @@ class ProjectTagController extends BaseController
     {
         $project = $this->getProject();
 
-        if (empty($values)) {
-            $values['project_id'] = $project['id'];
-        }
-
         $this->response->html($this->template->render('project_tag/create', array(
             'project' => $project,
             'values'  => $values,
@@ -42,6 +36,8 @@ class ProjectTagController extends BaseController
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
+        $values['project_id'] = $project['id'];
+
         list($valid, $errors) = $this->tagValidator->validateCreation($values);
 
         if ($valid) {
@@ -60,8 +56,7 @@ class ProjectTagController extends BaseController
     public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $tag_id = $this->request->getIntegerParam('tag_id');
-        $tag = $this->tagModel->getById($tag_id);
+        $tag = $this->getProjectTag($project);
 
         if (empty($values)) {
             $values = $tag;
@@ -78,14 +73,12 @@ class ProjectTagController extends BaseController
     public function update()
     {
         $project = $this->getProject();
-        $tag_id = $this->request->getIntegerParam('tag_id');
-        $tag = $this->tagModel->getById($tag_id);
+        $tag = $this->getProjectTag($project);
         $values = $this->request->getValues();
-        list($valid, $errors) = $this->tagValidator->validateModification($values);
+        $values['project_id'] = $project['id'];
+        $values['id'] = $tag['id'];
 
-        if ($tag['project_id'] != $project['id']) {
-            throw new AccessForbiddenException();
-        }
+        list($valid, $errors) = $this->tagValidator->validateModification($values);
 
         if ($valid) {
             if ($this->tagModel->update($values['id'], $values['name'])) {
@@ -103,8 +96,7 @@ class ProjectTagController extends BaseController
     public function confirm()
     {
         $project = $this->getProject();
-        $tag_id = $this->request->getIntegerParam('tag_id');
-        $tag = $this->tagModel->getById($tag_id);
+        $tag = $this->getProjectTag($project);
 
         $this->response->html($this->template->render('project_tag/remove', array(
             'tag'     => $tag,
@@ -116,14 +108,9 @@ class ProjectTagController extends BaseController
     {
         $this->checkCSRFParam();
         $project = $this->getProject();
-        $tag_id = $this->request->getIntegerParam('tag_id');
-        $tag = $this->tagModel->getById($tag_id);
+        $tag = $this->getProjectTag($project);
 
-        if ($tag['project_id'] != $project['id']) {
-            throw new AccessForbiddenException();
-        }
-
-        if ($this->tagModel->remove($tag_id)) {
+        if ($this->tagModel->remove($tag['id'])) {
             $this->flash->success(t('Tag removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this tag.'));

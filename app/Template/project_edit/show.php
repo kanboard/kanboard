@@ -9,7 +9,6 @@
 <?php endif ?>
 <form method="post" action="<?= $this->url->href('ProjectEditController', 'update', array('project_id' => $project['id'], 'redirect' => 'edit')) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('id', $values) ?>
 
     <fieldset>
         <legend><?= t('General') ?></legend>

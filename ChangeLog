@@ -5,6 +5,10 @@ New features:
 
 * Vietnamese translation
 
+Security Issues:
+
+* Avoid people to alter other project resources by changing form data
+
 Version 1.0.46 (August 13, 2017)
 --------------------------------
 

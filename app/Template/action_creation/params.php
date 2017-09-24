@@ -5,7 +5,6 @@
 <form method="post" action="<?= $this->url->href('ActionCreationController', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
 
-    <?= $this->form->hidden('project_id', $values) ?>
     <?= $this->form->hidden('event_name', $values) ?>
     <?= $this->form->hidden('action_name', $values) ?>
 

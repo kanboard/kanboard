@@ -13,24 +13,6 @@ use Kanboard\Core\Controller\PageNotFoundException;
 class CategoryController extends BaseController
 {
     /**
-     * Get the category (common method between actions)
-     *
-     * @access private
-     * @return array
-     * @throws PageNotFoundException
-     */
-    private function getCategory()
-    {
-        $category = $this->categoryModel->getById($this->request->getIntegerParam('category_id'));
-
-        if (empty($category)) {
-            throw new PageNotFoundException();
-        }
-
-        return $category;
-    }
-
-    /**
      * List of categories for a given project
      *
      * @access public
@@ -72,8 +54,9 @@ class CategoryController extends BaseController
     public function save()
     {
         $project = $this->getProject();
-
         $values = $this->request->getValues();
+        $values['project_id'] = $project['id'];
+
         list($valid, $errors) = $this->categoryValidator->validateCreation($values);
 
         if ($valid) {
@@ -100,7 +83,7 @@ class CategoryController extends BaseController
     public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $category = $this->getCategory();
+        $category = $this->getCategory($project);
 
         $this->response->html($this->template->render('category/edit', array(
             'values'  => empty($values) ? $category : $values,
@@ -117,8 +100,12 @@ class CategoryController extends BaseController
     public function update()
     {
         $project = $this->getProject();
+        $category = $this->getCategory($project);
 
         $values = $this->request->getValues();
+        $values['project_id'] = $project['id'];
+        $values['id'] = $category['id'];
+
         list($valid, $errors) = $this->categoryValidator->validateModification($values);
 
         if ($valid) {
@@ -141,7 +128,7 @@ class CategoryController extends BaseController
     public function confirm()
     {
         $project = $this->getProject();
-        $category = $this->getCategory();
+        $category = $this->getCategory($project);
 
         $this->response->html($this->helper->layout->project('category/remove', array(
             'project'  => $project,
@@ -158,7 +145,7 @@ class CategoryController extends BaseController
     {
         $this->checkCSRFParam();
         $project = $this->getProject();
-        $category = $this->getCategory();
+        $category = $this->getCategory($project);
 
         if ($this->categoryModel->remove($category['id'])) {
             $this->flash->success(t('Category removed successfully.'));

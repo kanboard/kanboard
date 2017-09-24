@@ -3,8 +3,6 @@
 </div>
 <form method="post" action="<?= $this->url->href('ProjectTagController', 'update', array('tag_id' => $tag['id'], 'project_id' => $project['id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('id', $values) ?>
-    <?= $this->form->hidden('project_id', $values) ?>
 
     <?= $this->form->label(t('Name'), 'name') ?>
     <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="255"')) ?>

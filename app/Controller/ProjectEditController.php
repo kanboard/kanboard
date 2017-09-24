@@ -65,6 +65,8 @@ class ProjectEditController extends BaseController
      */
     private function prepareValues(array $project, array $values)
     {
+        $values['id'] = $project['id'];
+
         if (isset($values['is_private'])) {
             if (! $this->helper->user->hasProjectAccess('ProjectCreationController', 'create', $project['id'])) {
                 unset($values['is_private']);

@@ -61,6 +61,7 @@ class ColumnController extends BaseController
     {
         $project = $this->getProject();
         $values = $this->request->getValues() + array('hide_in_dashboard' => 0);
+        $values['project_id'] = $project['id'];
 
         list($valid, $errors) = $this->columnValidator->validateCreation($values);
 
@@ -95,7 +96,7 @@ class ColumnController extends BaseController
     public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $column = $this->columnModel->getById($this->request->getIntegerParam('column_id'));
+        $column = $this->getColumn($project);
 
         $this->response->html($this->helper->layout->project('column/edit', array(
             'errors' => $errors,
@@ -113,7 +114,11 @@ class ColumnController extends BaseController
     public function update()
     {
         $project = $this->getProject();
+        $column = $this->getColumn($project);
+
         $values = $this->request->getValues() + array('hide_in_dashboard' => 0);
+        $values['project_id'] = $project['id'];
+        $values['id'] = $column['id'];
 
         list($valid, $errors) = $this->columnValidator->validateModification($values);
 
@@ -164,9 +169,10 @@ class ColumnController extends BaseController
     public function confirm()
     {
         $project = $this->getProject();
+        $column = $this->getColumn($project);
 
         $this->response->html($this->helper->layout->project('column/remove', array(
-            'column' => $this->columnModel->getById($this->request->getIntegerParam('column_id')),
+            'column' => $column,
             'project' => $project,
         )));
     }
@@ -178,11 +184,11 @@ class ColumnController extends BaseController
      */
     public function remove()
     {
-        $project = $this->getProject();
         $this->checkCSRFParam();
-        $column_id = $this->request->getIntegerParam('column_id');
+        $project = $this->getProject();
+        $column = $this->getColumn($project);
 
-        if ($this->columnModel->remove($column_id)) {
+        if ($this->columnModel->remove($column['id'])) {
             $this->flash->success(t('Column removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this column.'));

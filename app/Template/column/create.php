@@ -4,8 +4,6 @@
 <form method="post" action="<?= $this->url->href('ColumnController', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
 
-    <?= $this->form->hidden('project_id', $values) ?>
-
     <?= $this->form->label(t('Title'), 'title') ?>
     <?= $this->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="50"', 'tabindex="1"')) ?>
 

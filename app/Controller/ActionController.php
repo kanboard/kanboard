@@ -46,9 +46,10 @@ class ActionController extends BaseController
     public function confirm()
     {
         $project = $this->getProject();
+        $action = $this->getAction($project);
 
         $this->response->html($this->helper->layout->project('action/remove', array(
-            'action' => $this->actionModel->getById($this->request->getIntegerParam('action_id')),
+            'action' => $action,
             'available_events' => $this->eventManager->getAll(),
             'available_actions' => $this->actionManager->getAvailableActions(),
             'project' => $project,
@@ -65,7 +66,7 @@ class ActionController extends BaseController
     {
         $this->checkCSRFParam();
         $project = $this->getProject();
-        $action = $this->actionModel->getById($this->request->getIntegerParam('action_id'));
+        $action = $this->getAction($project);
 
         if (! empty($action) && $this->actionModel->remove($action['id'])) {
             $this->flash->success(t('Action removed successfully.'));

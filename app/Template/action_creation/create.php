@@ -3,7 +3,6 @@
 </div>
 <form method="post" action="<?= $this->url->href('ActionCreationController', 'event', array('project_id' => $project['id'])) ?>">
     <?= $this->form->csrf() ?>
-    <?= $this->form->hidden('project_id', $values) ?>
 
     <?= $this->form->label(t('Action'), 'action_name') ?>
     <?= $this->form->select('action_name', $available_actions, $values) ?>

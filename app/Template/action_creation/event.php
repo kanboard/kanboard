@@ -5,7 +5,6 @@
 <form method="post" action="<?= $this->url->href('ActionCreationController', 'params', array('project_id' => $project['id'])) ?>">
     <?= $this->form->csrf() ?>
 
-    <?= $this->form->hidden('project_id', $values) ?>
     <?= $this->form->hidden('action_name', $values) ?>
 
     <?= $this->form->label(t('Action'), 'action_name') ?>
