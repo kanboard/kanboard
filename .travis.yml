@@ -13,7 +13,6 @@ php:
 
 env:
   - DB=sqlite
-  - DB=mysql
   - DB=postgres
 
 matrix:
