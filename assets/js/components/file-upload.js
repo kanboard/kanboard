@@ -81,8 +81,8 @@ KB.component('file-upload', function (containerElement, options) {
         e.stopPropagation();
         e.preventDefault();
 
-        for(var i = 0, file; file = e.dataTransfer.files[i]; i++) {
-            files.push(file);
+        for (var i = 0; i < e.dataTransfer.files.length; i++) {
+            files.push(e.dataTransfer.files[i]);
         }
 
         showFiles();
