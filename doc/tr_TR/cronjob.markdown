@@ -39,7 +39,7 @@ Yinelenen görevi yapılandırmadan önce, Kanboard CLI komut dosyasını çalı
 İşte bir örnek (`C:\kanboard.bat`):
 
 ```
-"C:\php\php.exe" -f "C:\inetpub\wwwroot\kanboard\kanboard" cronjob
+"C:\php\php.exe" -f "C:\inetpub\wwwroot\kanboard\cli" cronjob
 ```
 
 **Kurulumunuza göre PHP yürütülebilir dosyanın yolunu ve Kanboard'un komut dosyasının yolunu değiştirmelisiniz.**
