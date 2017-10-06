@@ -39,7 +39,7 @@ Before to configure the recurring task, create a batch file (*.bat or *.cmd) tha
 Here an example (`C:\kanboard.bat`):
 
 ```
-"C:\php\php.exe" -f "C:\inetpub\wwwroot\kanboard\kanboard" cronjob
+"C:\php\php.exe" -f "C:\inetpub\wwwroot\kanboard\cli" cronjob
 ```
 
 **You must change the path of the PHP executable and the path of the Kanboard's script according to your installation.**
