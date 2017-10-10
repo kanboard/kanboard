@@ -138,15 +138,23 @@ class TaskPositionModel extends Base
      */
     private function saveTaskPositions($project_id, $task_id, $position, $column_id, $swimlane_id)
     {
-        $tasks_ids = $this->db->table(TaskModel::TABLE)
-            ->eq('is_active', 1)
-            ->eq('swimlane_id', $swimlane_id)
-            ->eq('project_id', $project_id)
-            ->eq('column_id', $column_id)
-            ->neq('id', $task_id)
-            ->asc('position')
-            ->asc('id')
-            ->findAllByColumn('id');
+        $query = $this->db->table(TaskModel::TABLE)
+            ->eq(TaskModel::TABLE.'.is_active', 1)
+            ->eq(TaskModel::TABLE.'.swimlane_id', $swimlane_id)
+            ->eq(TaskModel::TABLE.'.project_id', $project_id)
+            ->eq(TaskModel::TABLE.'.column_id', $column_id)
+            ->neq(TaskModel::TABLE.'.id', $task_id)
+            ->asc(TaskModel::TABLE.'.position')
+            ->asc(TaskModel::TABLE.'.id');
+        $search = $this->userSession->getFilters($project_id);
+
+        $tasks_ids = $this->taskLexer
+            ->withQuery($query)
+            ->build($search)
+            ->getQuery()
+            ->join(UserModel::TABLE, "id", "owner_id")
+            ->join(CategoryModel::TABLE, "id", "category_id")
+            ->findAllByColumn(TaskModel::TABLE.'.id');
 
         $offset = 1;
 
