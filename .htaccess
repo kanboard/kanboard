@@ -1,3 +1,10 @@
+# Pass HTTP Authorization header via environment variable to PHP backend
+# to make HTTP Basic Authentication work for Apache/FastCGI/php-fpm
+# setups (required to authenticate over the API)
+<IfModule mod_setenvif.c>
+    SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
+</IfModule>
+
 <IfModule mod_rewrite.c>
     Options -MultiViews
 
