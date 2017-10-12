@@ -1340,4 +1340,5 @@ return array(
     'Write one subject by line.' => 'Her satıra bir konu yazınız',
     'Create another link' => 'Başka bağlantı oluştur',
     'BRL - Brazilian Real' => 'BRL - Brezilya Reali',
+    // 'Add a new Kanboard task' => '',
 );

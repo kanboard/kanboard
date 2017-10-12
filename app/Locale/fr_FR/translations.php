@@ -1340,4 +1340,5 @@ return array(
     'Write one subject by line.' => 'Écrivez un sujet par ligne.',
     'Create another link' => 'Créer un autre lien',
     'BRL - Brazilian Real' => 'BRL - Real brésilien',
+    'Add a new Kanboard task' => 'Ajouter une nouvelle tâche Kanboard',
 );
