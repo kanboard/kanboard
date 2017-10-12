@@ -220,6 +220,21 @@ class TaskHelper extends Base
         return $html;
     }
 
+    public function renderReference(array $task)
+    {
+        if (! empty($task['reference'])) {
+            $reference = $this->helper->text->e($task['reference']);
+
+            if (filter_var($task['reference'], FILTER_VALIDATE_URL) !== false) {
+                return sprintf('<a href="%s" target=_blank">%s</a>', $reference, $reference);
+            }
+
+            return $reference;
+        }
+
+        return '';
+    }
+
     public function getProgress($task)
     {
         if (! isset($this->columns[$task['project_id']])) {

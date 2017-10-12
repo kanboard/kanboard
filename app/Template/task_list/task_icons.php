@@ -1,7 +1,7 @@
 <div class="task-list-icons">
     <?php if ($task['reference']): ?>
         <span class="task-board-reference" title="<?= t('Reference') ?>">
-            <?= $this->text->e($task['reference']) ?>
+            <?= $this->task->renderReference($task) ?>
         </span>
     <?php endif ?>
     <?php if ($task['is_milestone'] == 1): ?>
