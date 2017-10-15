@@ -1346,4 +1346,5 @@ return array(
     'Write one subject by line.' => 'Viết một chủ đề theo dòng.',
     'Create another link' => 'Tạo liên kết khác',
     'BRL - Brazilian Real' => 'BRL - Brazilian Real',
+    // 'Add a new Kanboard task' => '',
 );

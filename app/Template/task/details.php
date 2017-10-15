@@ -22,7 +22,7 @@
                     </li>
                     <?php if (! empty($task['reference'])): ?>
                         <li>
-                            <strong><?= t('Reference:') ?></strong> <span><?= $this->text->e($task['reference']) ?></span>
+                            <strong><?= t('Reference:') ?></strong> <span><?= $this->task->renderReference($task) ?></span>
                         </li>
                     <?php endif ?>
                     <?php if (! empty($task['score'])): ?>

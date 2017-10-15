@@ -220,6 +220,21 @@ class TaskHelper extends Base
         return $html;
     }
 
+    public function renderReference(array $task)
+    {
+        if (! empty($task['reference'])) {
+            $reference = $this->helper->text->e($task['reference']);
+
+            if (filter_var($task['reference'], FILTER_VALIDATE_URL) !== false) {
+                return sprintf('<a href="%s" target=_blank">%s</a>', $reference, $reference);
+            }
+
+            return $reference;
+        }
+
+        return '';
+    }
+
     public function getProgress($task)
     {
         if (! isset($this->columns[$task['project_id']])) {
@@ -254,6 +269,60 @@ class TaskHelper extends Base
         }
 
         $html .= '</ul></div></small>';
+        return $html;
+    }
+
+    public function getNewBoardTaskButton(array $swimlane, array $column)
+    {
+        $html = '<div class="board-add-icon">';
+        $providers = $this->externalTaskManager->getProviders();
+
+        if (empty($providers)) {
+            $html .= $this->helper->modal->largeIcon(
+                'plus',
+                t('Add a new task'),
+                'TaskCreationController',
+                'show', array(
+                    'project_id'  => $column['project_id'],
+                    'column_id'   => $column['id'],
+                    'swimlane_id' => $swimlane['id'],
+                )
+            );
+        } else {
+            $html .= '<div class="dropdown">';
+            $html .= '<a href="#" class="dropdown-menu"><i class="fa fa-plus" aria-hidden="true"></i></a><ul>';
+
+            $link = $this->helper->modal->large(
+                'plus',
+                t('Add a new Kanboard task'),
+                'TaskCreationController',
+                'show', array(
+                    'project_id'  => $column['project_id'],
+                    'column_id'   => $column['id'],
+                    'swimlane_id' => $swimlane['id'],
+                )
+            );
+
+            $html .= '<li>'.$link.'</li>';
+
+            foreach ($providers as $provider) {
+                $link = $this->helper->url->link(
+                    $provider->getMenuAddLabel(),
+                    'ExternalTaskCreationController',
+                    'step1',
+                    array('project_id' => $column['project_id'], 'swimlane_id' => $swimlane['id'], 'column_id' => $column['id'], 'provider_name' => $provider->getName()),
+                    false,
+                    'js-modal-large'
+                );
+
+                $html .= '<li>'.$provider->getIcon().' '.$link.'</li>';
+            }
+
+            $html .= '</ul></div>';
+        }
+
+        $html .= '</div>';
+
         return $html;
     }
 }

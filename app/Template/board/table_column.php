@@ -16,9 +16,7 @@
         <!-- column in expanded mode -->
         <div class="board-column-expanded">
             <?php if (! $not_editable && $this->projectRole->canCreateTaskInColumn($column['project_id'], $column['id'])): ?>
-                <div class="board-add-icon">
-                    <?= $this->modal->largeIcon('plus', t('Add a new task'), 'TaskCreationController', 'show', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id'])) ?>
-                </div>
+                <?= $this->task->getNewBoardTaskButton($swimlane, $column) ?>
             <?php endif ?>
 
             <?php if ($swimlane['nb_swimlanes'] > 1 && ! empty($column['column_nb_tasks'])): ?>

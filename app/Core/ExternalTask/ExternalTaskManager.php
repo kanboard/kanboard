@@ -55,4 +55,14 @@ class ExternalTaskManager
 
         return array();
     }
+
+    /**
+     * Get all providers
+     *
+     * @return ExternalTaskProviderInterface[]
+     */
+    public function getProviders()
+    {
+        return $this->providers;
+    }
 }

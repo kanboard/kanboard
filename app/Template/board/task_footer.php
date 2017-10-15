@@ -32,7 +32,7 @@
     <div class="task-board-icons-row">
         <?php if ($task['reference']): ?>
             <span class="task-board-reference" title="<?= t('Reference') ?>">
-                <?= $this->text->e($task['reference']) ?>
+                <?= $this->task->renderReference($task) ?>
             </span>
         <?php endif ?>
     </div>
