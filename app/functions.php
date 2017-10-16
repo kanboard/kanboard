@@ -186,3 +186,12 @@ function n($value)
 {
     return Translator::getInstance()->number($value);
 }
+
+/**
+ * Get an identifier from the translations or return the default
+ * @return string
+ */
+function t_get()
+{
+    return call_user_func_array(array(Translator::getInstance(), 'get'), func_get_args());
+}
