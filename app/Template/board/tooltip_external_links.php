@@ -11,7 +11,7 @@
                     <?= $link['type'] ?>
                 </td>
                 <td>
-                    <a href="<?= $link['url'] ?>" target="_blank"><?= $this->text->e($link['title']) ?></a>
+                    <a href="<?= $link['url'] ?>" title="<?= $this->text->e($link['url']) ?>" target="_blank"><?= $this->text->e($link['title']) ?></a>
                 </td>
                 <td>
                     <?= $this->text->e($link['dependency_label']) ?>
