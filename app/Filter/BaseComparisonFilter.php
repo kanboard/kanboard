@@ -43,7 +43,6 @@ abstract class BaseComparisonFilter extends BaseFilter
     protected function applyComparisonFilter($field)
     {
         $method = $this->parseOperator();
-
         $this->query->$method($field, $this->value);
     }
 }

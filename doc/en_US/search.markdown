@@ -166,6 +166,13 @@ Attribute: **tag**
 
 - Example: `tag:"My tag"`
 
+### Search by score/complexity
+
+Attribute: **score** or **complexity**
+
+- `score:>=21`
+- `complexity:8`
+
 Activity stream search
 ----------------------
 
