@@ -22,7 +22,7 @@ Authors
 -------
 
 - Main developer: [Frédéric Guillot](https://github.com/fguillot)
-- [List of contributors](https://github.com/kanboard/kanboard/blob/master/CONTRIBUTORS.md)
+- [List of contributors](https://github.com/kanboard/kanboard/graphs/contributors)
 
 Installation and Upgrade
 ------------------------
