@@ -28,5 +28,5 @@ Installation and Upgrade
 ------------------------
 
 - [Requirements](https://kanboard.net/documentation/requirements)
-- [Installation instructions](https://kanboard.net/documentation/installation)
+- [Installation instructions](https://kanboard.net/documentation/docker)
 - [Upgrade to a new version](https://kanboard.net/documentation/update)
