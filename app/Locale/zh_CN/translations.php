@@ -1338,5 +1338,10 @@ return array(
     // 'This task was sent by email to "%s" with subject "%s".' => '',
     'Predefined Email Subjects' => '预定义的邮件主题',
     // 'Write one subject by line.' => '',
-    '%a days, %h hours, %i minutes and %s seconds' => '%a 天, %h 小时, %i 分, %s 秒',
+    // 'Create another link' => '',
+    // 'BRL - Brazilian Real' => '',
+    // 'Add a new Kanboard task' => '',
+    // 'Subtask not started' => '',
+    // 'Subtask currently in progress' => '',
+    // 'Subtask completed' => '',
 );

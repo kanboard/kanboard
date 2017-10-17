@@ -1347,4 +1347,7 @@ return array(
     'Create another link' => 'Tạo liên kết khác',
     'BRL - Brazilian Real' => 'BRL - Brazilian Real',
     // 'Add a new Kanboard task' => '',
+    // 'Subtask not started' => '',
+    // 'Subtask currently in progress' => '',
+    // 'Subtask completed' => '',
 );

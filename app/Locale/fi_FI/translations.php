@@ -1341,4 +1341,7 @@ return array(
     // 'Create another link' => '',
     // 'BRL - Brazilian Real' => '',
     // 'Add a new Kanboard task' => '',
+    // 'Subtask not started' => '',
+    // 'Subtask currently in progress' => '',
+    // 'Subtask completed' => '',
 );
