@@ -42,6 +42,9 @@
         <?php elseif ($this->text->contains($param_name, 'swimlane_id')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->select('params['.$param_name.']', $swimlane_list, $values) ?>
+        <?php elseif (is_array($param_desc)): ?>
+            <?= $this->form->label(ucfirst($param_name), $param_name) ?>
+            <?= $this->form->select('params['.$param_name.']', $param_desc, $values) ?>
         <?php else: ?>
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->text('params['.$param_name.']', $values) ?>

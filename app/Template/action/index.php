@@ -45,7 +45,11 @@
                     </li>
                     <?php foreach ($action['params'] as $param_name => $param_value): ?>
                         <li>
-                            <?= $this->text->in($param_name, $available_params[$action['action_name']]) ?> =
+                            <?php if (isset($available_params[$action['action_name']][$param_name]) && is_array($available_params[$action['action_name']][$param_name])): ?>
+                                <?= $this->text->e(ucfirst($param_name)) ?> =
+                            <?php else: ?>
+                                <?= $this->text->in($param_name, $available_params[$action['action_name']]) ?> =
+                            <?php endif ?>
                             <strong>
                                 <?php if ($this->text->contains($param_name, 'column_id')): ?>
                                     <?= $this->text->in($param_value, $columns_list) ?>
