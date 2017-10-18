@@ -244,34 +244,6 @@ class TaskHelper extends Base
         return $this->taskModel->getProgress($task, $this->columns[$task['project_id']]);
     }
 
-    public function getNewTaskDropdown($projectId, $swimlaneId, $columnId)
-    {
-        $providers = $this->externalTaskManager->getProvidersList();
-
-        if (empty($providers)) {
-            return '';
-        }
-
-        $html = '<small class="pull-right"><div class="dropdown">';
-        $html .= '<a href="#" class="dropdown-menu"><i class="fa fa-cloud-download" aria-hidden="true"></i> <i class="fa fa-caret-down"></i></a><ul>';
-
-        foreach ($providers as $providerName) {
-            $link = $this->helper->url->link(
-                t('New External Task: %s', $providerName),
-                'ExternalTaskCreationController',
-                'step1',
-                array('project_id' => $projectId, 'swimlane_id' => $swimlaneId, 'column_id' => $columnId, 'provider_name' => $providerName),
-                false,
-                'js-modal-replace'
-            );
-
-            $html .= '<li><i class="fa fa-fw fa-plus-square" aria-hidden="true"></i> '.$link.'</li>';
-        }
-
-        $html .= '</ul></div></small>';
-        return $html;
-    }
-
     public function getNewBoardTaskButton(array $swimlane, array $column)
     {
         $html = '<div class="board-add-icon">';

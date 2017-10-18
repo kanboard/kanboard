@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= $this->text->e($project['name']) ?> &gt; <?= t('New task') ?><?= $this->task->getNewTaskDropdown($project['id'], $values['swimlane_id'], $values['column_id']) ?></h2>
+    <h2><?= $this->text->e($project['name']) ?> &gt; <?= t('New task') ?></h2>
 </div>
 <form method="post" action="<?= $this->url->href('TaskCreationController', 'save', array('project_id' => $project['id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
