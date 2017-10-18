@@ -34,7 +34,6 @@ class HttpAsyncJob extends BaseJob
      * @param string $url
      * @param string $content
      * @param array  $headers
-     * @return $this
      */
     public function execute($method, $url, $content, array $headers)
     {

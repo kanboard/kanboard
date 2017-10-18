@@ -38,7 +38,6 @@ class TaskEventJob extends BaseJob
      * @param  array  $changes
      * @param  array  $values
      * @param  array  $task
-     * @return $this
      */
     public function execute($taskId, array $eventNames, array $changes = array(), array $values = array(), array $task = array())
     {

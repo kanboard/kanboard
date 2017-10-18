@@ -30,7 +30,6 @@ class TaskFileEventJob extends BaseJob
      *
      * @param  int    $fileId
      * @param  string $eventName
-     * @return $this
      */
     public function execute($fileId, $eventName)
     {

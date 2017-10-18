@@ -32,7 +32,6 @@ class SubtaskEventJob extends BaseJob
      * @param  int    $subtaskId
      * @param  string $eventName
      * @param  array  $values
-     * @return $this
      */
     public function execute($subtaskId, $eventName, array $values = array())
     {
