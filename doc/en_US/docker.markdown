@@ -86,6 +86,7 @@ Config files
 
 - The container already include a custom config file located at `/var/www/app/config.php`.
 - You can store your own config file on the data volume: `/var/www/app/data/config.php`.
+- If you change your config file values, you must restart the container to take into account the new parameters.
 
 References
 ----------

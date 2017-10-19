@@ -48,7 +48,8 @@ Do not use Sqlite on NFS mounts, only when you have a disk with fast I/O.
 
 Kanboard is pre-configured to work with Apache (URL rewriting).
 
-Note: Kanboard is not compatible with Apache `mod_security`.
+- Note: Kanboard is not compatible with Apache `mod_security`.
+- If you use Apache, you must have the module `mod_version`.
 
 ### PHP Versions
 
