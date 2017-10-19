@@ -21,13 +21,6 @@ class ProjectActivityModel extends Base
     const TABLE = 'project_activities';
 
     /**
-     * Maximum number of events
-     *
-     * @var integer
-     */
-    const MAX_EVENTS = 1000;
-
-    /**
      * Add a new event for the project
      *
      * @access public
@@ -49,7 +42,7 @@ class ProjectActivityModel extends Base
             'data' => json_encode($data),
         );
 
-        $this->cleanup(self::MAX_EVENTS - 1);
+        $this->cleanup(PROJECT_ACTIVITIES_MAX_EVENTS - 1);
         return $this->db->table(self::TABLE)->insert($values);
     }
 

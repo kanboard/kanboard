@@ -10,6 +10,9 @@ Enable/Disable debug mode
 ```php
 define('DEBUG', true);
 define('LOG_DRIVER', 'file'); // Other drivers are: syslog, stdout, stderr or file
+
+// By default, the log file is in data/debug.log but you can change the path:
+define('LOG_FILE', '/path/to/debug.log');
 ```
 
 The log driver must be defined if you enable the debug mode.
@@ -332,4 +335,7 @@ define('API_AUTHENTICATION_TOKEN', 'My unique API Token');
 
 // TOTP (2FA) issuer name
 define('TOTP_ISSUER', 'Kanboard');
+
+// Maximum number of events stored in the table "project_activities"
+define('PROJECT_ACTIVITIES_MAX_EVENTS', 10000);
 ```

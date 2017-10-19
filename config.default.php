@@ -237,3 +237,6 @@ define('HTTP_VERIFY_SSL_CERTIFICATE', true);
 
 // TOTP (2FA) issuer name
 define('TOTP_ISSUER', 'Kanboard');
+
+// Maximum number of events stored in the table "project_activities"
+define('PROJECT_ACTIVITIES_MAX_EVENTS', 10000);
