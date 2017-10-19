@@ -23,10 +23,16 @@ class TaskCreationModel extends Base
     {
         $position = empty($values['position']) ? 0 : $values['position'];
         $tags = array();
+        $external_links = [];
 
         if (isset($values['tags'])) {
             $tags = $values['tags'];
             unset($values['tags']);
+        }
+
+        if (isset($values['links'])) {
+            $external_links = $values['links'];
+            unset($values['links']);
         }
 
         $this->prepare($values);
@@ -39,6 +45,18 @@ class TaskCreationModel extends Base
 
             if (! empty($tags)) {
                 $this->taskTagModel->save($values['project_id'], $task_id, $tags);
+            }
+
+            if (! empty($external_links)) {
+                foreach ($external_links as $external_link) {
+                    $this->taskExternalLinkModel->create([
+                        'task_id'       =>  $task_id,
+                        'link_type'     =>  'weblink',
+                        'dependency'    =>  'related',
+                        'title'         =>  $external_link['title'],
+                        'url'           =>  $external_link['url']
+                    ]);
+                }
             }
 
             $this->queueManager->push($this->taskEventJob->withParams(
