@@ -30,11 +30,13 @@ class TaskExport extends Base
     public function export($project_id, $from, $to)
     {
         $tasks = $this->getTasks($project_id, $from, $to);
+        $taskIds = array_column($tasks, 'id');
+        $tags = $this->taskTagModel->getTagsByTaskIds($taskIds);
         $colors = $this->colorModel->getList();
         $results = array($this->getColumns());
 
         foreach ($tasks as &$task) {
-            $task = $this->format($task, $colors);
+            $task = $this->format($task, $colors, $tags);
             $results[] = array_values($task);
         }
 
@@ -104,20 +106,27 @@ class TaskExport extends Base
      *
      * @access protected
      * @param  array  $task
-     * @param  array   $colors
+     * @param  array  $colors
+     * @param  array  $tags
      * @return array
      */
-    protected function format(array &$task, array $colors)
+    protected function format(array &$task, array $colors, array &$tags)
     {
         $task['is_active'] = $task['is_active'] == TaskModel::STATUS_OPEN ? e('Open') : e('Closed');
         $task['color_id'] = $colors[$task['color_id']];
         $task['score'] = $task['score'] ?: 0;
+        $task['tags'] = '';
 
         $task = $this->dateParser->format(
             $task,
             array('date_due', 'date_modification', 'date_creation', 'date_started', 'date_completed'),
             $this->dateParser->getUserDateTimeFormat()
         );
+
+        if (isset($tags[$task['id']])) {
+            $taskTags = array_column($tags[$task['id']], 'name');
+            $task['tags'] = implode(', ', $taskTags);
+        }
 
         return $task;
     }
@@ -154,6 +163,7 @@ class TaskExport extends Base
             e('Time estimated'),
             e('Time spent'),
             e('Priority'),
+            e('Tags'),
         );
     }
 }
