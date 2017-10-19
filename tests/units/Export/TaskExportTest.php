@@ -42,7 +42,7 @@ class TaskExportTest extends Base
         $report = $taskExport->export(1, date('Y-m-d'), date('Y-m-d'));
 
         $this->assertCount(3, $report);
-        $this->assertCount(22, $report[0]);
+        $this->assertCount(23, $report[0]);
         $this->assertEquals('Task Id', $report[0][0]);
 
         $this->assertEquals(1, $report[1][0]);

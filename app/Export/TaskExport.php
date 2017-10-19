@@ -83,7 +83,8 @@ class TaskExport extends Base
                 TaskModel::TABLE . '.date_completed',
                 TaskModel::TABLE . '.date_started',
                 TaskModel::TABLE . '.time_estimated',
-                TaskModel::TABLE . '.time_spent'
+                TaskModel::TABLE . '.time_spent',
+                TaskModel::TABLE . '.priority'
             )
             ->join(UserModel::TABLE, 'id', 'owner_id', TaskModel::TABLE)
             ->left(UserModel::TABLE, 'uc', 'id', TaskModel::TABLE, 'creator_id')
@@ -152,6 +153,7 @@ class TaskExport extends Base
             e('Start date'),
             e('Time estimated'),
             e('Time spent'),
+            e('Priority'),
         );
     }
 }
