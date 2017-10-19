@@ -20,7 +20,7 @@
             <?= $this->render('header/board_selector', array('board_selector' => $board_selector)) ?>
         <?php endif ?>
     </div>
-    <div class="menus-container pull-right">
+    <div class="menus-container">
         <?= $_top_right_corner ?>
     </div>
 </header>
