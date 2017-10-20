@@ -11,18 +11,26 @@ header
 
   .title-container
     flex: 1
-    min-width: 320px
+    min-width: 300px
+    @include sm-device
+      order: 3
 
   .board-selector-container
     min-width: 320px
     display: flex
     align-items: center
+    @include sm-device
+      order: 2
 
   .menus-container
     min-width: 120px
     display: flex
     align-items: center
     justify-content: flex-end
+    @include sm-device
+      order: 1
+      margin-bottom: 5px
+      margin-left: auto
 
   h1
     font-size: size('title')
