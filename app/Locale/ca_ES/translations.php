@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Subtasca actualitzat correctament.',
     'Unable to update your sub-task.' => 'No es pot actualitzar el seu sub-tasques.',
     'Unable to create your sub-task.' => 'No es pot crear el sub-tasques.',
-    'Sub-task added successfully.' => 'Subtasca afegit correctament.',
     'Maximum size: ' => 'Mida màxima: ',
     'Display another project' => 'Mostra un altre projecte',
     'Created by %s' => 'Creat per %s',
@@ -1207,7 +1206,6 @@ return array(
     'Preview' => 'Vista prèvia',
     'Write' => 'escriure',
     'Write your text in Markdown' => 'Escriure el text en Markdown',
-    'New External Task: %s' => 'Nova tasca externa: %s',
     'No personal API access token registered.' => 'Sense accés a l\'API personals símbol registrat.',
     // 'Your personal API access token is "%s"' => '',
     'Remove your token' => 'Traieu el testimoni',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

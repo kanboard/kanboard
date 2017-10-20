@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'ปรับปรุงงานย่อย่่เรียบร้อยแล้ว',
     'Unable to update your sub-task.' => 'ไม่สามารถปรับปรุงานย่อยได้',
     'Unable to create your sub-task.' => 'ไม่สามารถสร้างงานย่อยได้',
-    'Sub-task added successfully.' => 'เพิ่มงานย่อยเรียบร้อยแล้ว',
     'Maximum size: ' => 'ขนาดไฟล์สูงสุด:',
     'Display another project' => 'แสดงโปรเจคอื่น',
     'Created by %s' => 'สร้างโดย %s',
@@ -1207,7 +1206,6 @@ return array(
     // 'Preview' => '',
     // 'Write' => '',
     // 'Write your text in Markdown' => '',
-    // 'New External Task: %s' => '',
     // 'No personal API access token registered.' => '',
     // 'Your personal API access token is "%s"' => '',
     // 'Remove your token' => '',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

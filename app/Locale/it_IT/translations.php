@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Sotto-task aggiornato con successo.',
     'Unable to update your sub-task.' => 'Impossibile aggiornare il tuo sotto-task.',
     'Unable to create your sub-task.' => 'Impossibile creare il tuo sotto-task.',
-    'Sub-task added successfully.' => 'Sotto-task aggiunto con successo.',
     'Maximum size: ' => 'Dimensioni massime: ',
     'Display another project' => 'Mostra un altro progetto',
     'Created by %s' => 'Creato da %s',
@@ -1207,7 +1206,6 @@ return array(
     // 'Preview' => '',
     // 'Write' => '',
     // 'Write your text in Markdown' => '',
-    // 'New External Task: %s' => '',
     // 'No personal API access token registered.' => '',
     // 'Your personal API access token is "%s"' => '',
     // 'Remove your token' => '',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

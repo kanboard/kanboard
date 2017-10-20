@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Deluppgiften har uppdaterats.',
     'Unable to update your sub-task.' => 'Kunde inte uppdatera din deluppgift.',
     'Unable to create your sub-task.' => 'Kunde inte skapa din deluppgift.',
-    'Sub-task added successfully.' => 'Deluppgiften har lagts till.',
     'Maximum size: ' => 'Maxstorlek: ',
     'Display another project' => 'Visa ett annat projekt',
     'Created by %s' => 'Skapad av %s',
@@ -1207,7 +1206,6 @@ return array(
     // 'Preview' => '',
     // 'Write' => '',
     // 'Write your text in Markdown' => '',
-    // 'New External Task: %s' => '',
     // 'No personal API access token registered.' => '',
     // 'Your personal API access token is "%s"' => '',
     // 'Remove your token' => '',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

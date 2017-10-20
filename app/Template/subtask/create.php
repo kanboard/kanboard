@@ -2,10 +2,20 @@
     <h2><?= t('Add a sub-task') ?></h2>
 </div>
 
+<?php if (isset($values['subtasks_added']) && $values['subtasks_added'] > 0): ?>
+    <p class="alert alert-success">
+    <?php if ($values['subtasks_added'] == 1): ?>
+        <?= t('Subtask added successfully.') ?>
+    <?php else: ?>
+        <?= t('%d subtasks added successfully.', $values['subtasks_added']) ?>
+    <?php endif ?>
+    </p>
+<?php endif ?>
+
 <form method="post" action="<?= $this->url->href('SubtaskController', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
 
-    <?= $this->subtask->renderTitleField($values, $errors, array('autofocus')) ?>
+    <?= $this->subtask->renderBulkTitleField($values, $errors, array('autofocus')) ?>
     <?= $this->subtask->renderAssigneeField($users_list, $values, $errors) ?>
     <?= $this->subtask->renderTimeEstimatedField($values, $errors) ?>
 

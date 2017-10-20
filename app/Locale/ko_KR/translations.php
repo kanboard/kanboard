@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => '서브 할일을 갱신했습니다.',
     'Unable to update your sub-task.' => '서브 할일의 경신에 실패했습니다.',
     'Unable to create your sub-task.' => '서브 할일의 추가에 실패했습니다.',
-    'Sub-task added successfully.' => '서브 할일을 추가했습니다.',
     'Maximum size: ' => '최대: ',
     'Display another project' => '프로젝트 보기',
     'Created by %s' => '작성자 %s',
@@ -1207,7 +1206,6 @@ return array(
     // 'Preview' => '',
     // 'Write' => '',
     // 'Write your text in Markdown' => '',
-    // 'New External Task: %s' => '',
     // 'No personal API access token registered.' => '',
     // 'Your personal API access token is "%s"' => '',
     // 'Remove your token' => '',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

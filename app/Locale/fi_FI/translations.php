@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Alitehtävä päivitettiin onnistuneesti.',
     'Unable to update your sub-task.' => 'Alitehtävän päivitys epäonnistui.',
     'Unable to create your sub-task.' => 'Alitehtävän luonti epäonnistui.',
-    'Sub-task added successfully.' => 'Alitehtävä luotiin onnistuneesti.',
     'Maximum size: ' => 'Maksimikoko: ',
     'Display another project' => 'Näytä toinen projekti',
     'Created by %s' => 'Luonut: %s',
@@ -1207,7 +1206,6 @@ return array(
     // 'Preview' => '',
     // 'Write' => '',
     // 'Write your text in Markdown' => '',
-    // 'New External Task: %s' => '',
     // 'No personal API access token registered.' => '',
     // 'Your personal API access token is "%s"' => '',
     // 'Remove your token' => '',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

@@ -92,6 +92,17 @@ class SubtaskHelper extends Base
         return $html;
     }
 
+    public function renderBulkTitleField(array $values, array $errors = array(), array $attributes = array())
+    {
+        $attributes = array_merge(array('tabindex="1"', 'required'), $attributes);
+
+        $html = $this->helper->form->label(t('Title'), 'title');
+        $html .= $this->helper->form->textarea('title', $values, $errors, $attributes);
+        $html .= '<p class="form-help">'.t('Enter one subtask by line.').'</p>';
+
+        return $html;
+    }
+
     public function renderTitleField(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="1"', 'required', 'maxlength="255"'), $attributes);

@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'サブタスクを更新しました',
     'Unable to update your sub-task.' => 'サブタスクの更新に失敗しました',
     'Unable to create your sub-task.' => 'サブタスクの追加に失敗しました',
-    'Sub-task added successfully.' => 'サブタスクを追加しました',
     'Maximum size: ' => '最大：',
     'Display another project' => '別のプロジェクトを表示',
     'Created by %s' => '%s が作成',
@@ -1207,7 +1206,6 @@ return array(
     'Preview' => 'プレビュー',
     'Write' => '書込み',
     'Write your text in Markdown' => 'Markdownで入力',
-    'New External Task: %s' => '新しい外部タスク：%s',
     'No personal API access token registered.' => '個人APIアクセストークンは登録されていません',
     'Your personal API access token is "%s"' => 'あなたのパーソナルAPIアクセストークン "%s"',
     'Remove your token' => 'あなたのトークンを削除する',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

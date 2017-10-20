@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Подзадача обновлена.',
     'Unable to update your sub-task.' => 'Не удалось обновить подзадачу.',
     'Unable to create your sub-task.' => 'Не удалось создать подзадачу.',
-    'Sub-task added successfully.' => 'Подзадача добавлена.',
     'Maximum size: ' => 'Максимальный размер: ',
     'Display another project' => 'Показать другой проект',
     'Created by %s' => 'Создано %s',
@@ -1207,7 +1206,6 @@ return array(
     'Preview' => 'Предпросмотр',
     'Write' => 'Редактирование',
     'Write your text in Markdown' => 'Добавьте Ваше описание в формате Markdown',
-    'New External Task: %s' => 'Новая внешняя задача: %s',
     'No personal API access token registered.' => 'Персональные токены доступа к API не созданы.',
     'Your personal API access token is "%s"' => 'Ваш персональный токен доступа к API: "%s"',
     'Remove your token' => 'Удалить токен',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

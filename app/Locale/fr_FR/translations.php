@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Sous-tâche mise à jour avec succès.',
     'Unable to update your sub-task.' => 'Impossible de mettre à jour votre sous-tâche.',
     'Unable to create your sub-task.' => 'Impossible de créer votre sous-tâche.',
-    'Sub-task added successfully.' => 'Sous-tâche ajoutée avec succès.',
     'Maximum size: ' => 'Taille maximum : ',
     'Display another project' => 'Afficher un autre projet',
     'Created by %s' => 'Créé par %s',
@@ -1207,7 +1206,6 @@ return array(
     'Preview' => 'Aperçu',
     'Write' => 'Écrire',
     'Write your text in Markdown' => 'Écrivez votre texte en Markdown',
-    'New External Task: %s' => 'Nouvelle tâche externe : %s',
     'No personal API access token registered.' => 'Aucun jeton d\'accès personnel à l\'API enregistré.',
     'Your personal API access token is "%s"' => 'Votre jeton d\'accès personnel à l\'API est « %s »',
     'Remove your token' => 'Supprimer votre jeton',
@@ -1344,4 +1342,7 @@ return array(
     'Subtask not started' => 'Sous-tâche pas encore commencé',
     'Subtask currently in progress' => 'Sous-tâche actuellement en progrès',
     'Subtask completed' => 'Sous-tâche terminée',
+    'Subtask added successfully.' => 'Sous-tâche ajoutée avec succès.',
+    '%d subtasks added successfully.' => '%d sous-tâches ajoutées avec succès.',
+    'Enter one subtask by line.' => 'Entrez une sous-tâche par ligne.',
 );

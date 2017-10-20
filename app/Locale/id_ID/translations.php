@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Sub-tugas berhasil diperbarui.',
     'Unable to update your sub-task.' => 'Tidak dapat memperbarui sub-tugas Anda.',
     'Unable to create your sub-task.' => 'Tidak dapat membuat sub-tugas Anda.',
-    'Sub-task added successfully.' => 'Sub-tugas berhasil dibuat.',
     'Maximum size: ' => 'Ukuran maksimum: ',
     'Display another project' => 'Lihat proyek lain',
     'Created by %s' => 'Dibuat oleh %s',
@@ -1207,7 +1206,6 @@ return array(
     'Preview' => 'Pratinjau',
     'Write' => 'Tulis',
     'Write your text in Markdown' => 'Tuliskan teks Anda di Markdown',
-    'New External Task: %s' => 'Tugas Eksternal Baru: %s',
     'No personal API access token registered.' => 'Tidak ada token akses API personal yang terdaftar.',
     'Your personal API access token is "%s"' => 'Token akses API personal Anda adalah "%s"',
     'Remove your token' => 'Hapus token Anda',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

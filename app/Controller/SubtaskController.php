@@ -67,29 +67,50 @@ class SubtaskController extends BaseController
         $task = $this->getTask();
         $values = $this->request->getValues();
         $values['task_id'] = $task['id'];
+        $subtasks = explode("\r\n", isset($values['title']) ? $values['title'] : '');
+        $subtasksAdded = 0;
 
-        list($valid, $errors) = $this->subtaskValidator->validateCreation($values);
+        foreach ($subtasks as $subtask) {
+            $subtask = trim($subtask);
 
-        if ($valid) {
-            if ($this->subtaskModel->create($values) !== false) {
-                $this->flash->success(t('Sub-task added successfully.'));
-            } else {
-                $this->flash->failure(t('Unable to create your sub-task.'));
+            if (! empty($subtask)) {
+                $subtaskValues = $values;
+                $subtaskValues['title'] = $subtask;
+
+                list($valid, $errors) = $this->subtaskValidator->validateCreation($subtaskValues);
+
+                if (! $valid) {
+                    $this->create($values, $errors);
+                    return false;
+                }
+
+                if (! $this->subtaskModel->create($subtaskValues)) {
+                    $this->flash->failure(t('Unable to create your sub-task.'));
+                    $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'), true);
+                    return false;
+                }
+
+                $subtasksAdded++;
             }
-
-            if (isset($values['another_subtask']) && $values['another_subtask'] == 1) {
-                return $this->create(array(
-                    'project_id' => $task['project_id'],
-                    'task_id' => $task['id'],
-                    'user_id' => $values['user_id'],
-                    'another_subtask' => 1
-                ));
-            }
-
-            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'), true);
         }
 
-        return $this->create($values, $errors);
+        if (isset($values['another_subtask']) && $values['another_subtask'] == 1) {
+            return $this->create(array(
+                'project_id' => $task['project_id'],
+                'task_id' => $task['id'],
+                'user_id' => $values['user_id'],
+                'another_subtask' => 1,
+                'subtasks_added' => $subtasksAdded,
+            ));
+        } else if ($subtasksAdded > 0) {
+            if ($subtasksAdded === 1) {
+                $this->flash->success(t('Subtask added successfully.'));
+            } else {
+                $this->flash->success(t('%d subtasks added successfully.', $subtasksAdded));
+            }
+        }
+
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'), true);
     }
 
     /**

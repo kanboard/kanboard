@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Alt görev güncellendi.',
     'Unable to update your sub-task.' => 'Alt görev güncellenemiyor.',
     'Unable to create your sub-task.' => 'Alt görev oluşturulamadı.',
-    'Sub-task added successfully.' => 'Alt görev başarıyla eklendi.',
     'Maximum size: ' => 'Maksimum boyutu',
     'Display another project' => 'Başka bir proje göster',
     'Created by %s' => '%s tarafından oluşturuldu',
@@ -1207,7 +1206,6 @@ return array(
     'Preview' => 'Öngörünüm',
     'Write' => 'Yaz',
     'Write your text in Markdown' => 'Metninizi Markdown a yazın',
-    'New External Task: %s' => 'Yeni Harici Görev: %s',
     'No personal API access token registered.' => 'Kişisel API erişim anahtarınız kaydedilmedi.',
     'Your personal API access token is "%s"' => 'Kişisel API erişim anahtarınız "%s"',
     'Remove your token' => 'Anahtarı kaldır',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

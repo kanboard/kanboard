@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Dílčí úkol byl aktualizován.',
     'Unable to update your sub-task.' => 'Nelze aktualizovat dílčí úkol.',
     'Unable to create your sub-task.' => 'Nelze vytvořit dílčí úkol.',
-    'Sub-task added successfully.' => 'Dílčí úkol byl úspěšně přidán.',
     'Maximum size: ' => 'Maximální velikost: ',
     'Display another project' => 'Zobrazit jiný projekt',
     'Created by %s' => 'Vytvořeno uživatelem %s',
@@ -1207,7 +1206,6 @@ return array(
     // 'Preview' => '',
     // 'Write' => '',
     // 'Write your text in Markdown' => '',
-    // 'New External Task: %s' => '',
     // 'No personal API access token registered.' => '',
     // 'Your personal API access token is "%s"' => '',
     // 'Remove your token' => '',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

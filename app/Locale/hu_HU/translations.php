@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Részfeladat sikeresen frissítve.',
     'Unable to update your sub-task.' => 'Részfeladat frissítése nem lehetséges.',
     'Unable to create your sub-task.' => 'Részfeladat létrehozása nem lehetséges.',
-    'Sub-task added successfully.' => 'Részfeladat sikeresen létrehozva.',
     'Maximum size: ' => 'Maximális méret: ',
     'Display another project' => 'Másik projekt megjelenítése',
     'Created by %s' => 'Készítette: %s',
@@ -1207,7 +1206,6 @@ return array(
     'Preview' => 'Előnézet',
     'Write' => 'Írás',
     'Write your text in Markdown' => 'Markdown-ban írja a szöveget',
-    'New External Task: %s' => 'Új, külső feladat: %s',
     'No personal API access token registered.' => 'Nincs személyes API access token regisztrálva.',
     'Your personal API access token is "%s"' => 'Személyes API access token: "%s"',
     'Remove your token' => 'Személyes token eltávolítása',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

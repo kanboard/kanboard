@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Pod-zadatak uspješno ažuriran.',
     'Unable to update your sub-task.' => 'Nemoguće ažurirati pod-zadatak.',
     'Unable to create your sub-task.' => 'Nemoguće dodati pod-zadatak.',
-    'Sub-task added successfully.' => 'Pod-zadatak uspješno dodan.',
     'Maximum size: ' => 'Maksimalna veličina: ',
     'Display another project' => 'Prikaži drugi projekat',
     'Created by %s' => 'Kreirao %s',
@@ -1207,7 +1206,6 @@ return array(
     'Preview' => 'Pregled',
     'Write' => 'Piši',
     'Write your text in Markdown' => 'Upiši tekst u Markdown',
-    'New External Task: %s' => 'Novi vanjski zadatak: %s',
     'No personal API access token registered.' => 'Nema registrovanog ličnog pristupnog API tokena',
     'Your personal API access token is "%s"' => 'Tvoj lični pristupni API token je: "%s"',
     'Remove your token' => 'Ukloni svoj token',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

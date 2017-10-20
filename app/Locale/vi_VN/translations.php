@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Tiểu nhiệm vụ được cập nhật thành công.',
     'Unable to update your sub-task.' => 'Không thể cập nhật tiểu nhiệm vụ của bạn.',
     'Unable to create your sub-task.' => 'Không thể tạo ra nhiệm vụ phụ của bạn.',
-    'Sub-task added successfully.' => 'Thêm nhiệm vụ thành công.',
     'Maximum size: ' => 'Kích thước tối đa: ',
     'Display another project' => 'Hiển thị một dự án khác',
     'Created by %s' => 'Đã tạo bởi %s',
@@ -1213,7 +1212,6 @@ return array(
     'Preview' => 'Xem trước',
     'Write' => 'Viết',
     'Write your text in Markdown' => 'Viết văn bản của bạn trong Markdown',
-    'New External Task: %s' => 'Nhiệm vụ bên ngoài mới: %s',
     'No personal API access token registered.' => 'Không có đăng nhập truy cập API cá nhân.',
     'Your personal API access token is "%s"' => 'Mã thông báo truy cập API cá nhân của bạn là "%s"',
     'Remove your token' => 'Hủy bỏ mã thông báo của bạn',
@@ -1350,4 +1348,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

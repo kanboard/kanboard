@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => '成功创建子任务',
     'Unable to update your sub-task.' => '无法更新子任务',
     'Unable to create your sub-task.' => '无法创建子任务',
-    'Sub-task added successfully.' => '成功添加子任务',
     'Maximum size: ' => '大小上限：',
     'Display another project' => '显示其它项目',
     'Created by %s' => '创建者：%s',
@@ -1207,7 +1206,6 @@ return array(
     'Preview' => '预览',
     'Write' => '写入',
     'Write your text in Markdown' => '用markdown格式写入文本',
-    'New External Task: %s' => '新的外部任务：%s',
     'No personal API access token registered.' => '没有API access token 注册。',
     'Your personal API access token is "%s"' => '你的API access token 是 “%s”',
     'Remove your token' => '移除token',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );

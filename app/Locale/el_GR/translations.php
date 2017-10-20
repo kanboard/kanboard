@@ -273,7 +273,6 @@ return array(
     'Sub-task updated successfully.' => 'Η υπο-εργασία ενημερώθηκε με επιτυχία.',
     'Unable to update your sub-task.' => 'Αδύνατο να ενημερωθεί η υπο-εργασία.',
     'Unable to create your sub-task.' => 'Αδύνατο να δημιουργηθεί η υπο-εργασία.',
-    'Sub-task added successfully.' => 'Η υπο-εργασία προστέθηκε με επιτυχία.',
     'Maximum size: ' => 'Μέγιστο μέγεθος : ',
     'Display another project' => 'Εμφάνιση άλλου έργου',
     'Created by %s' => 'Δημιουργήθηκε από %s',
@@ -1207,7 +1206,6 @@ return array(
     // 'Preview' => '',
     // 'Write' => '',
     // 'Write your text in Markdown' => '',
-    // 'New External Task: %s' => '',
     // 'No personal API access token registered.' => '',
     // 'Your personal API access token is "%s"' => '',
     // 'Remove your token' => '',
@@ -1344,4 +1342,7 @@ return array(
     // 'Subtask not started' => '',
     // 'Subtask currently in progress' => '',
     // 'Subtask completed' => '',
+    // 'Subtask added successfully.' => '',
+    // '%d subtasks added successfully.' => '',
+    // 'Enter one subtask by line.' => '',
 );
