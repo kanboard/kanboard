@@ -1,3 +1,26 @@
+Version 1.0.48 (October 23, 2017)
+---------------------------------
+
+Improvements:
+
+* Add bulk subtasks creation
+* Add filter by score/complexity
+* Improved display of the header bar
+* Displays bullets from lists in tooltips
+* Updated translations
+* Add tags and priority to task export
+* Make the number of events stored in project activities configurable
+* Do not use jQuery tooltip for task title in collapsed mode
+* Remove dependency on Yarn
+* Improve external task integration
+* Add support for array parameters in automatic actions
+* Add tooltip to subtask icons
+* Add attribute title to external links
+* Render a link if the reference is a URL
+* Add icon to edit a task quickly on the board
+* Improve .htaccess when using HTTP Basic Authentication for Apache/FastCGI
+* Add note to specify incompatibility with mod_security
+
 Version 1.0.47 (October 3, 2017)
 --------------------------------
 
