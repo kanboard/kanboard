@@ -1,5 +1,3 @@
-BUILD_DIR = /tmp
-
 all: static
 
 clean:
@@ -16,40 +14,7 @@ jshint:
 
 archive:
 	@ echo "Build archive: version=${version}, destination=${dst}"
-	@ rm -rf ${BUILD_DIR}/kanboard ${BUILD_DIR}/kanboard-*.zip
-	@ cd ${BUILD_DIR} && git clone --depth 1 -q https://github.com/kanboard/kanboard.git
-	@ cd ${BUILD_DIR}/kanboard
-	@ rm -rf ${BUILD_DIR}/kanboard/data/*.sqlite
-	@ rm -rf ${BUILD_DIR}/kanboard/data/*.log
-	@ rm -rf ${BUILD_DIR}/kanboard/data/files
-	@ rm -rf ${BUILD_DIR}/kanboard/.git*
-	@ rm -rf ${BUILD_DIR}/kanboard/tests
-	@ rm -rf ${BUILD_DIR}/kanboard/Makefile
-	@ rm -rf ${BUILD_DIR}/kanboard/Vagrantfile
-	@ rm -rf ${BUILD_DIR}/kanboard/Dockerfile
-	@ rm -rf ${BUILD_DIR}/kanboard/docker-compose.yml
-	@ rm -rf ${BUILD_DIR}/kanboard/.*.yml
-	@ rm -rf ${BUILD_DIR}/kanboard/*.md
-	@ rm -rf ${BUILD_DIR}/kanboard/*.markdown
-	@ rm -rf ${BUILD_DIR}/kanboard/*.lock
-	@ rm -rf ${BUILD_DIR}/kanboard/*.json
-	@ rm -rf ${BUILD_DIR}/kanboard/*.js
-	@ rm -rf ${BUILD_DIR}/kanboard/.dockerignore
-	@ rm -rf ${BUILD_DIR}/kanboard/docker
-	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name doc -type d -exec rm -rf {} +;
-	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name notes -type d -exec rm -rf {} +;
-	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name test -type d -exec rm -rf {} +;
-	@ cd ${BUILD_DIR}/kanboard && find ./vendor -name tests -type d -exec rm -rf {} +;
-	@ find ${BUILD_DIR}/kanboard/vendor -name composer.json -delete
-	@ find ${BUILD_DIR}/kanboard/vendor -name phpunit.xml -delete
-	@ find ${BUILD_DIR}/kanboard/vendor -name .travis.yml -delete
-	@ find ${BUILD_DIR}/kanboard/vendor -name README.* -delete
-	@ find ${BUILD_DIR}/kanboard/vendor -name .gitignore -delete
-	@ cd ${BUILD_DIR}/kanboard && sed -i.bak 11s/.*/"define('APP_VERSION', '${version}');"/g app/constants.php && rm -f app/*.bak
-	@ cd ${BUILD_DIR} && zip -r kanboard-${version}.zip kanboard > /dev/null
-	@ cd ${BUILD_DIR} && mv kanboard-${version}.zip ${dst}
-	@ cd ${dst} && if [ -L kanboard-latest.zip ]; then unlink kanboard-latest.zip; ln -s kanboard-${version}.zip kanboard-latest.zip; fi
-	@ rm -rf ${BUILD_DIR}/kanboard
+	@ git archive --format=zip --prefix=kanboard/ ${version} -o ${dst}/kanboard-${version}.zip
 
 test-sqlite-coverage:
 	@ ./vendor/bin/phpunit --coverage-html /tmp/coverage --whitelist app/ -c tests/units.sqlite.xml
