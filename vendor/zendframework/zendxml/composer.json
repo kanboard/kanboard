@@ -1,0 +1,40 @@
+{
+    "name": "zendframework/zendxml",
+    "description": "Utility library for XML usage, best practices, and security in PHP",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "zf2",
+        "xml",
+        "security"
+    ],
+    "homepage": "http://packages.zendframework.com/",
+    "autoload": {
+        "psr-0": {
+            "ZendXml\\": "library/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ZendTest\\Xml\\": "tests/ZendXmlTest/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.zendframework.com/"
+        }
+    ],
+    "require": {
+        "php": "^5.3.3 || ^7.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^3.7 || ^4.0",
+        "squizlabs/php_codesniffer": "^1.5"
+    }
+}

@@ -30,8 +30,7 @@ Depodan-repository (geliştirme versiyonu)
 -----------------------------------------
 
 1. `git pull`
-2. `composer install --no-dev`
-3. Giriş yapın ve her şeyin yolunda olduğunu kontrol edin
+2. Giriş yapın ve her şeyin yolunda olduğunu kontrol edin
 
 Not: Bu yöntem, **mevcut geliştirme sürümünü** yükleyecektir, bu versiyonu kullanmanız kendi sorumluluğunuzdadır.
 

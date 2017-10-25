@@ -28,7 +28,6 @@ Desde el repositorio (development version)
 -----------------------------------------
 
 1. `git pull`
-2. `composer install --no-dev`
-3. Inicia la sesión y comprobar si todo está bien
+2. Inicia la sesión y comprobar si todo está bien
 
 Nota: Este método se instalará la **versión de desarrollo actual**, utilice a su propio riesgo.

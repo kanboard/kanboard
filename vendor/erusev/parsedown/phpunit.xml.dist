@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="test/bootstrap.php" colors="true">
+	<testsuites>
+		<testsuite>
+			<file>test/ParsedownTest.php</file>
+		</testsuite>
+	</testsuites>
+</phpunit>

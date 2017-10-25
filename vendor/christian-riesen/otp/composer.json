@@ -1,0 +1,28 @@
+{
+    "name": "christian-riesen/otp",
+    "type": "library",
+    "description": "One Time Passwords, hotp and totp according to RFC4226 and RFC6238",
+    "keywords": ["otp","hotp","totp","googleauthenticator","rfc4226","rfc6238"],
+    "homepage": "https://github.com/ChristianRiesen/otp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christian Riesen",
+            "email": "chris.riesen@gmail.com",
+            "homepage": "http://christianriesen.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "christian-riesen/base32": ">=1.0"
+    },
+    "suggest": {
+        "paragonie/random_compat": "Optional polyfill for a more secure random generator for pre PHP7 versions"
+    },
+    "autoload": {
+        "psr-0": {
+            "Otp": "src"
+        }
+    }
+}

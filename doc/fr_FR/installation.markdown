@@ -26,11 +26,8 @@ Les gens qui utilisent une base de données distante (Mysql/Postgresql) ou un sy
 Depuis le dépôt git (version de développement)
 ----------------------------------------------
 
-Vous devez installer [composer](https://getcomposer.org/) pour utiliser cette méthode.
-
 1. `git clone https://github.com/kanboard/kanboard.git`
-2. `composer install --no-dev`
-3. Allez à l'étape 3) juste au-dessus
+2. Allez à l'étape 3) juste au-dessus
 
 Cette méthode va installer **la version en cours de développement**, utilisez là à vos risques.
 

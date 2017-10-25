@@ -1,0 +1,27 @@
+<phpunit bootstrap="./Bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="ZendXml Test Suite">
+            <directory>./ZendXmlTest</directory>
+            <exclude>./ZendXmlTest/TestAsset</exclude>
+        </testsuite>
+    </testsuites>
+
+    <groups>
+        <exclude>
+        </exclude>
+    </groups>
+
+    <listeners>
+    </listeners>
+
+    <filter>
+        <blacklist>
+            <directory suffix=".php">./ZendXmlTest</directory>
+            <directory>../vendor</directory>
+        </blacklist>
+    </filter>
+
+    <php>
+    </php>
+
+</phpunit>

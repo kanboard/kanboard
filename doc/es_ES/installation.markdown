@@ -27,12 +27,8 @@ Las personas que están utilizando una base de datos remota (MySQL / PostgreSQL)
 Desde el repositorio (versión de desarrollo)
 -----------------------------------------
 
-
-Debe instalar [compositora] (https://getcomposer.org/)para utilizar este método.
-
 1. ` git clone https: // github.com / kanboard / kanboard.git`
-2. ` composer instalar --no- dev`
-3. Ir a la tercera etapa justo por encima
+2. Ir a la tercera etapa justo por encima
 
 Nota: Este método se instalará la versión de **desarrollo actual** , utilice a su propio riesgo .
 

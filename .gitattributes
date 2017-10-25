@@ -1,15 +1,30 @@
 app/constants.php export-subst
 
+.github export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
-.docker export-ignore
-.scrutinizer.yml export-ignore
+.dockerignore export-ignore
 .travis.yml export-ignore
+
+docker export-ignore
 Dockerfile export-ignore
 docker-compose.yml export-ignore
 Makefile export-ignore
 README.md export-ignore
 Vagrantfile export-ignore
-issue_template.md export-ignore
 data/*.sqlite export-ignore
 tests export-ignore
+CONTRIBUTING export-ignore
+app.json export-ignore
+bower.json export-ignore
+composer.json export-ignore
+composer.lock export-ignore
+gulpfile.js export-ignore
+package.json export-ignore
+
+assets/sass export-ignore
+assets/js/components export-ignore
+assets/js/core export-ignore
+assets/js/polyfills export-ignore
+assets/js/src export-ignore
+assets/sass export-ignore

@@ -30,8 +30,7 @@ Depuis le dépôt git (version de développement)
 ---------------------------------------------
 
 1. `git pull`
-2. `composer install --no-dev`
-3. Testez que tout fonctionne correctement
+2. Testez que tout fonctionne correctement
 
 Cette méthode va installer **la version en cours de développement**, utilisez là à vos risques.
 

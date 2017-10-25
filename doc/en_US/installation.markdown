@@ -26,11 +26,8 @@ People who are using a remote database (Mysql/Postgresql) and a remote object st
 From the git repository (development version)
 ---------------------------------------------
 
-You must install [composer](https://getcomposer.org/) to use this method.
-
 1. `git clone https://github.com/kanboard/kanboard.git`
-2. `composer install --no-dev`
-3. Go to the third step just above
+2. Go to the third step just above
 
 Note: This method will install the **current development version**, use at your own risk.
 

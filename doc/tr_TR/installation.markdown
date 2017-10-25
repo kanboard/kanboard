@@ -26,11 +26,8 @@ Uzak bir veritabanı (Mysql/Postgresql) ve uzak nesne depolama birimi (Aws S3 ve
 Git deposundan (geliştirme versiyonu)
 ---------------------------------------------
 
-Bu yöntemi kullanmak için [composer](https://getcomposer.org/) yüklemelisiniz.
-
 1. `git clone https://github.com/kanboard/kanboard.git`
-2. `composer install --no-dev`
-3. Yukarıdaki üçüncü adıma geçin
+2. Yukarıdaki üçüncü adıma geçin
 
 Not: Bu yöntem, **mevcut geliştirme sürümünü** yükleyecektir, kendi sorumluluğunuzdadır.
 

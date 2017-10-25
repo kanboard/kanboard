@@ -47,16 +47,8 @@
 Инсталяция из репозитория (разрабатываемая версия)[¶](#from-the-repository-development-version "Ссылка на этот заголовок")
 --------------------------------------------------------------------------------------------------------------------------
 
-
-
-Вы можете установить [composer](https://getcomposer.org/) для этого метода инсталяции.
-
-
 1.  `git clone https://github.com/fguillot/kanboard.git`
-
-2.  `composer install --no-dev`
-
-3.  Далее, перейдите к третьему шагу [Инсталяция из архива](installation.html#from-the-archive-stable-version)
+2.  Далее, перейдите к третьему шагу [Инсталяция из архива](installation.html#from-the-archive-stable-version)
 
 
 
