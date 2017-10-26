@@ -153,7 +153,7 @@ class LdapAuth extends Base implements PasswordAuthenticationProviderInterface
             case 'proxy':
                 return LDAP_PASSWORD;
             case 'user':
-                return $this->password;
+                return sprintf(LDAP_PASSWORD, $this->password);
             default:
                 return null;
         }
