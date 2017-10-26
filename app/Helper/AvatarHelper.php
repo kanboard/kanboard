@@ -65,4 +65,28 @@ class AvatarHelper extends Base
         $user = $this->userSession->getAll();
         return $this->small($user['id'], $user['username'], $user['name'], $user['email'], $user['avatar_path'], $css);
     }
+
+
+    /**
+     * Render a small avatar for each assignee to a task
+     * @access public
+     * @param  integer $task_id
+     * @param  string  $user_id
+     * @param  string  $username
+     * @param  string  $name
+     * @param  string  $email
+     * @param  string  $avatar_path
+     * @param  string  $css
+     * @return string
+     
+    */
+    public function smallMultiple($task_id, $css = '') {
+        $assignees = $this->taskAssigneesModel->getList($task_id);
+        $html = "";
+        foreach ($assignees as $id => $assignee) {
+            $user = $this->userModel->getById($id);
+            $html .= $this->render($id, $user['username'], $user['name'], $user['email'], $user['avatar_path'], $css, 20);
+        }
+        return $html;
+    }
 }

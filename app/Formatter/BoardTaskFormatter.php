@@ -14,6 +14,7 @@ class BoardTaskFormatter extends BaseFormatter implements FormatterInterface
 {
     protected $tasks = array();
     protected $tags = array();
+    protected $assignees = array();
     protected $columnId = 0;
     protected $swimlaneId = 0;
 
@@ -27,6 +28,19 @@ class BoardTaskFormatter extends BaseFormatter implements FormatterInterface
     public function withTags(array $tags)
     {
         $this->tags = $tags;
+        return $this;
+    }
+
+   /**
+     * Set assignees
+     *
+     * @access public
+     * @param  array $assignees
+     * @return $this
+     */
+    public function withAssignees(array $assignees)
+    {
+        $this->assignees = $assignees;
         return $this;
     }
 
@@ -79,6 +93,7 @@ class BoardTaskFormatter extends BaseFormatter implements FormatterInterface
     {
         $tasks = array_values(array_filter($this->tasks, array($this, 'filterTasks')));
         array_merge_relation($tasks, $this->tags, 'tags', 'id');
+        array_merge_relation($tasks, $this->assignees, 'assignees', 'id');
 
         foreach ($tasks as &$task) {
             $task['is_draggable'] = $this->helper->projectRole->isDraggable($task);

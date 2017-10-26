@@ -98,13 +98,35 @@ class TaskHelper extends Base
         }
 
         $attributes = array_merge(array('tabindex="3"'), $attributes);
-
-        $html = $this->helper->form->label(t('Assignee'), 'owner_id');
+        $html = $this->helper->form->label(t('Owner'), 'owner_id');
         $html .= $this->helper->form->select('owner_id', $users, $values, $errors, $attributes);
         $html .= '&nbsp;';
         $html .= '<small>';
         $html .= '<a href="#" class="assign-me" data-target-id="form-owner_id" data-current-id="'.$this->userSession->getId().'" title="'.t('Assign to me').'">'.t('Me').'</a>';
         $html .= '</small>';
+
+        return $html;
+    }
+
+    public function renderAssigneesField(array $users, array $values, array $assignees = array(), array $errors = array(), array $attributes = array())
+    {
+        if (isset($values['project_id']) && ! $this->helper->projectRole->canChangeAssignee($values)) {
+            return '';
+        }
+
+        $html = $this->helper->form->label(t('Assignees'), 'assignees[]');
+        $html .= '<select name=assignees[] id=form-assignees multiple="multiple">';
+        
+        foreach ($users as $id => $user) {
+            $html .= sprintf(
+                '<option value="%s" %s>%s</option>',
+                $id,
+                isset($assignees[$id]) ? 'selected="selected"' : '',
+                $user
+            );
+        }
+
+        $html .= '</select>';
 
         return $html;
     }

@@ -73,6 +73,7 @@ class ClassProvider implements ServiceProviderInterface
             'TagModel',
             'TaskModel',
             'TaskAnalyticModel',
+            'TaskAssigneesModel',
             'TaskCreationModel',
             'TaskDuplicationModel',
             'TaskProjectDuplicationModel',

@@ -77,13 +77,21 @@
             <div class="task-summary-column">
                 <ul class="no-bullet">
                     <li>
-                        <strong><?= t('Assignee:') ?></strong>
+                        <strong><?= t('Owner:') ?></strong>
                         <span>
                         <?php if ($task['assignee_username']): ?>
                             <?= $this->text->e($task['assignee_name'] ?: $task['assignee_username']) ?>
                         <?php else: ?>
                             <?= t('not assigned') ?>
                         <?php endif ?>
+                        </span>
+                    </li>
+                    <li>
+                        <strong><?= t('Assignees:') ?></strong>
+                        <span>
+                            <?php foreach ($assignees as $id => $assignee): ?>
+                                <?= $this->text->e($assignee)." " ?>
+                            <?php endforeach ?>
                         </span>
                     </li>
                     <?php if ($task['creator_username']): ?>
