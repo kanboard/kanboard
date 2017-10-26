@@ -7,7 +7,6 @@
 .table-list-header
   background: bg-color('primary')
   border: 1px solid #e5e5e5
-  border-radius: 5px 5px 0 0
   line-height: 35px
   padding-left: 3px
   padding-right: 3px
@@ -36,9 +35,6 @@
 
   &:nth-child(odd)
     background: bg-color('lighter')
-
-  &:last-child
-    border-radius: 0 0 5px 5px
 
   &:hover
     background: map-get($highlight-colors, 'background')
@@ -107,7 +103,6 @@
   font-weight: 500
   color: color('dark')
   padding: 1px 2px 1px 2px
-  border-radius: 3px
   background: bg-color('light')
   border: 1px solid #ccc
   a
