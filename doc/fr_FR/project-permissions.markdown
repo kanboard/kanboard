@@ -15,8 +15,4 @@ L'assignation des rôles est disponible depuis **Paramètres du projet > Permiss
 
 ![Permissions du projet](screenshots/project-permissions.png)
 
-Si vous choisissez d'autoriser tout le monde, tous les utilisateurs de Kanboard seront considérés comme **Membre du projet**.
-Ce qui signifie qu'il n'y a plus des gestion de rôles.
-Les permissions par utilisateur ou par groupe ne peuvent plus être appliquées.
-
 Les projets privés ne peuvent pas définir de permissions.

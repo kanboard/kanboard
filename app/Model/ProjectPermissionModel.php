@@ -112,22 +112,6 @@ class ProjectPermissionModel extends Base
     }
 
     /**
-     * Return true if everybody is allowed for the project
-     *
-     * @access public
-     * @param  integer   $project_id   Project id
-     * @return bool
-     */
-    public function isEverybodyAllowed($project_id)
-    {
-        return $this->db
-                    ->table(ProjectModel::TABLE)
-                    ->eq('id', $project_id)
-                    ->eq('is_everybody_allowed', 1)
-                    ->exists();
-    }
-
-    /**
      * Return true if the user is allowed to access a project
      *
      * @param integer $project_id

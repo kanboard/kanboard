@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Текущая активность',
     'Dashboard' => 'Панель управления',
     'Confirmation' => 'Подтверждение пароля',
-    'Allow everybody to access to this project' => 'Разрешить любому',
-    'Everybody have access to this project.' => 'Любой может получить доступ к этому проекту.',
     'Webhooks' => 'Webhooks',
     'API' => 'API',
     'Create a comment from an external provider' => 'Создать комментарий из внешнего источника',

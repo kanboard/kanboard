@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Letzte Aktivitäten',
     'Dashboard' => 'Dashboard',
     'Confirmation' => 'Wiederholung',
-    'Allow everybody to access to this project' => 'Jedem Zugriff zu diesem Projekt gewähren',
-    'Everybody have access to this project.' => 'Jeder hat Zugriff zu diesem Projekt',
     'Webhooks' => 'Webhooks',
     'API' => 'API',
     'Create a comment from an external provider' => 'Kommentar eines externen Providers hinzufügen',

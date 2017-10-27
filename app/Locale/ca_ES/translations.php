@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Fluxe d\'activitat',
     'Dashboard' => 'Panell',
     'Confirmation' => 'Confirmació',
-    'Allow everybody to access to this project' => 'Deixa que tothom per accedir a aquest projecte',
-    'Everybody have access to this project.' => 'Tothom té accés a aquest projecte.',
     'Webhooks' => 'WebHooks',
     'API' => 'API',
     'Create a comment from an external provider' => 'Crear un comentari d\'un proveïdor extern',

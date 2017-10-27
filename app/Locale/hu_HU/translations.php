@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Legutóbbi tevékenységek',
     'Dashboard' => 'Vezérlőpult',
     'Confirmation' => 'Megerősítés',
-    'Allow everybody to access to this project' => 'A projekt elérése mindenkinek engedélyezett',
-    'Everybody have access to this project.' => 'Mindenki elérheti a projektet',
     'Webhooks' => 'Webhook',
     'API' => 'API',
     'Create a comment from an external provider' => 'Megjegyzés létrehozása külső felhasználótól',

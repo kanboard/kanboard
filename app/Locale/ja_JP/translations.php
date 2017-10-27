@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'アクティビティストリーム',
     'Dashboard' => 'ダッシュボード',
     'Confirmation' => '確認',
-    'Allow everybody to access to this project' => '全員にプロジェクトへのアクセスを許す',
-    'Everybody have access to this project.' => '誰でもこのプロジェクトにアクセスできます',
     'Webhooks' => 'Webhook',
     'API' => 'API',
     'Create a comment from an external provider' => '外部サービスからコメントを作成する',

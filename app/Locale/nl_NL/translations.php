@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Activiteiten',
     'Dashboard' => 'Dashboard',
     // 'Confirmation' => '',
-    'Allow everybody to access to this project' => 'Geef iedereen toegang tot dit project',
-    'Everybody have access to this project.' => 'Iedereen heeft toegang tot dit project.',
     'Webhooks' => 'Webhooks',
     'API' => 'API',
     'Create a comment from an external provider' => 'Voeg een commentaar toe van een externe provider',

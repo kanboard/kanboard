@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Ροή δραστηριότητας',
     'Dashboard' => 'Κεντρικό ταμπλό',
     'Confirmation' => 'Επιβεβαίωση',
-    'Allow everybody to access to this project' => 'Να επιτρέπετε σε όλους να έχουν πρόσβαση σε αυτό το έργο',
-    'Everybody have access to this project.' => 'Όλοι έχουν πρόσβαση σε αυτό το έργο.',
     'Webhooks' => 'Webhooks',
     'API' => 'API',
     'Create a comment from an external provider' => 'Δημιουργήστε ένα σχόλιο από έναν εξωτερικό πάροχο',

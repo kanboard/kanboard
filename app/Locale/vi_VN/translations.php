@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Luồng hoạt động',
     'Dashboard' => 'Bảng điều khiển',
     'Confirmation' => 'Xác nhận',
-    'Allow everybody to access to this project' => 'Cho phép mọi người truy cập vào dự án này',
-    'Everybody have access to this project.' => 'Mọi người đều có quyền truy cập vào dự án này.',
     'Webhooks' => 'Webhooks',
     'API' => 'API',
     'Create a comment from an external provider' => 'Tạo một bình luận từ một nhà cung cấp bên ngoài',

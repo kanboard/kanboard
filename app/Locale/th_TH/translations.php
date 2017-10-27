@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'กิจกรรมที่เกิดขึ้น',
     'Dashboard' => 'แดชบอร์ด',
     'Confirmation' => 'ยืนยันรหัสผ่าน',
-    'Allow everybody to access to this project' => 'อนุญาตให้ทุกคนเข้าถึงโปรเจคนี้',
-    'Everybody have access to this project.' => 'ทุกคนสามารถเข้าถึงโปรเจคนี้',
     // 'Webhooks' => '',
     // 'API' => '',
     'Create a comment from an external provider' => 'สร้างความคิดเห็นจากบริการภายนอก',

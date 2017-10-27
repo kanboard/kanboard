@@ -32,21 +32,21 @@ test-browser:
 	@ ./vendor/bin/phpunit -c tests/acceptance.xml
 
 integration-test-mysql:
-	@ composer install
+	@ composer install --dev
 	@ docker-compose -f tests/docker/compose.integration.mysql.yaml build
 	@ docker-compose -f tests/docker/compose.integration.mysql.yaml up -d mysql app
 	@ docker-compose -f tests/docker/compose.integration.mysql.yaml up tests
 	@ docker-compose -f tests/docker/compose.integration.mysql.yaml down
 
 integration-test-postgres:
-	@ composer install
+	@ composer install --dev
 	@ docker-compose -f tests/docker/compose.integration.postgres.yaml build
 	@ docker-compose -f tests/docker/compose.integration.postgres.yaml up -d postgres app
 	@ docker-compose -f tests/docker/compose.integration.postgres.yaml up tests
 	@ docker-compose -f tests/docker/compose.integration.postgres.yaml down
 
 integration-test-sqlite:
-	@ composer install
+	@ composer install --dev
 	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml build
 	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml up -d app
 	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml up tests

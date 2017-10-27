@@ -120,18 +120,6 @@ class ProjectPermissionModelTest extends Base
         $this->assertEquals('Project 3', $users[0]['project_name']);
     }
 
-    public function testEverybodyAllowed()
-    {
-        $projectModel = new ProjectModel($this->container);
-        $projectPermission = new ProjectPermissionModel($this->container);
-
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1')));
-        $this->assertEquals(2, $projectModel->create(array('name' => 'Project 2', 'is_everybody_allowed' => 1)));
-
-        $this->assertFalse($projectPermission->isEverybodyAllowed(1));
-        $this->assertTrue($projectPermission->isEverybodyAllowed(2));
-    }
-
     public function testIsUserAllowed()
     {
         $userModel = new UserModel($this->container);

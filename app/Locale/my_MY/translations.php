@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Arus aktifitas',
     'Dashboard' => 'Dasbor',
     'Confirmation' => 'Konfirmasi',
-    'Allow everybody to access to this project' => 'Memungkinkan semua orang untuk mengakses projek ini',
-    'Everybody have access to this project.' => 'Semua orang mendapat akses untuk projek ini.',
     'Webhooks' => 'Webhooks',
     'API' => 'API',
     'Create a comment from an external provider' => 'Buat komentar dari pemasok eksternal',

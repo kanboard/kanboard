@@ -60,25 +60,6 @@ class ProjectPermissionController extends BaseController
     }
 
     /**
-     * Allow everybody
-     *
-     * @access public
-     */
-    public function allowEverybody()
-    {
-        $project = $this->getProject();
-        $values = $this->request->getValues() + array('is_everybody_allowed' => 0);
-
-        if ($this->projectModel->update($values)) {
-            $this->flash->success(t('Project updated successfully.'));
-        } else {
-            $this->flash->failure(t('Unable to update this project.'));
-        }
-
-        $this->response->redirect($this->helper->url->to('ProjectPermissionController', 'index', array('project_id' => $project['id'])));
-    }
-
-    /**
      * Add user to the project
      *
      * @access public

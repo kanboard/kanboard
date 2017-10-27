@@ -1,3 +1,15 @@
+Version 1.x (unreleased)
+------------------------
+
+Breaking changes:
+
+* Remove feature "Allow everybody to access to this project" (You must define members and groups)
+* Composer dependencies are now included in the repository (except development dependencies)
+
+Improvements:
+
+* You can get an archive of Kanboard by using the download button in Github or the command git archive
+
 Version 1.0.48 (October 23, 2017)
 ---------------------------------
 

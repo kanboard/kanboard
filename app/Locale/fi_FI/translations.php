@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Toiminta',
     'Dashboard' => 'Työpöytä',
     'Confirmation' => 'Vahvistus',
-    'Allow everybody to access to this project' => 'Anna kaikille käyttöoikeus tähän projektiin',
-    'Everybody have access to this project.' => 'Kaikilla on käyttöoikeus projektiin.',
     // 'Webhooks' => '',
     // 'API' => '',
     // 'Create a comment from an external provider' => '',

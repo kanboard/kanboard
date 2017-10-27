@@ -394,8 +394,6 @@ return array(
     'Activity stream' => '활동기록',
     'Dashboard' => '대시보드',
     'Confirmation' => '확인',
-    'Allow everybody to access to this project' => '모든 사람이 이 프로젝트에 접근할 수 있도록 합니다',
-    'Everybody have access to this project.' => '누구나 이 프로젝트에 액세스 할 수 있습니다',
     'Webhooks' => 'Webhook',
     'API' => 'API',
     'Create a comment from an external provider' => '외부 서비스로부터 의견을 작성한다',

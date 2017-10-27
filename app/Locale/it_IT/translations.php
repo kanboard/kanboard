@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Flusso attività',
     'Dashboard' => 'Bacheca',
     'Confirmation' => 'Conferma',
-    'Allow everybody to access to this project' => 'Abilita tutti ad accedere a questo progetto',
-    'Everybody have access to this project.' => 'Tutti hanno accesso a questo progetto.',
     // 'Webhooks' => '',
     // 'API' => '',
     'Create a comment from an external provider' => 'Crea un commit da un provider esterno',

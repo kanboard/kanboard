@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Přehled aktivit',
     'Dashboard' => 'Nástěnka',
     'Confirmation' => 'Potvrzení',
-    'Allow everybody to access to this project' => 'Umožní přístup komukoliv k tomuto projektu',
-    'Everybody have access to this project.' => 'Přístup k tomuto projektu má kdokoliv.',
     'Webhooks' => 'Webhooks',
     'API' => 'API',
     'Create a comment from an external provider' => 'Vytvořit komentář pomocí externího poskytovatele',

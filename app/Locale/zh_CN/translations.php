@@ -394,8 +394,6 @@ return array(
     'Activity stream' => '动态记录',
     'Dashboard' => '面板',
     'Confirmation' => '确认',
-    'Allow everybody to access to this project' => '允许所有人访问此项目',
-    'Everybody have access to this project.' => '所有人都可以访问此项目',
     'Webhooks' => '网络钩子',
     'API' => '应用程序接口',
     'Create a comment from an external provider' => '从外部创建一个评论',

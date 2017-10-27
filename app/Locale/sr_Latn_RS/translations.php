@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Spisak aktinosti',
     'Dashboard' => 'Panel',
     'Confirmation' => 'Potvrda',
-    'Allow everybody to access to this project' => 'Dozvoli svima pristup projektu',
-    'Everybody have access to this project.' => 'Svima je dozvoljen pristup.',
     // 'Webhooks' => '',
     // 'API' => '',
     // 'Create a comment from an external provider' => '',

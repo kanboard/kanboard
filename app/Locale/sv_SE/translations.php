@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Aktivitetsström',
     'Dashboard' => 'Instrumentpanel',
     'Confirmation' => 'Bekräftelse',
-    'Allow everybody to access to this project' => 'Ge alla tillgång till projektet',
-    'Everybody have access to this project.' => 'Alla har tillgång till projektet',
     'Webhooks' => 'Webhooks',
     'API' => 'API',
     'Create a comment from an external provider' => 'Skapa en kommentar från en extern leverantör',

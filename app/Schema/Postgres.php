@@ -8,7 +8,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 103;
+const VERSION = 104;
+
+function version_104(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE projects DROP COLUMN is_everybody_allowed');
+}
 
 function version_103(PDO $pdo)
 {

@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Atividades Recentes',
     'Dashboard' => 'Painel de Controlo',
     'Confirmation' => 'Confirmação',
-    'Allow everybody to access to this project' => 'Permitir a todos os acesso a este projeto',
-    'Everybody have access to this project.' => 'Todos possuem acesso a este projeto.',
     'Webhooks' => 'Webhooks',
     'API' => 'API',
     'Create a comment from an external provider' => 'Criar um comentário por meio de um serviço externo',

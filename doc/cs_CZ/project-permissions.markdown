@@ -17,7 +17,4 @@ Přiřazení rolí je viditelné v **Nastavení projektu > Oprávnění**:
 
 ![Oprávnění projektu](screenshots/project-permissions.png)
 
-Pokud se rozhodnete povolit přístup všem, budou všichni uživatelé Kanboard považováni za členy projektu.
-Tímto nastavením nebude mít správa rolí žádný vliv. Oprávnění na uživatele nebo skupinu nelze použít.
-
 U soukromých projektů nelze definovat oprávnění.

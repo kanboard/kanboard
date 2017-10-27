@@ -68,10 +68,6 @@ class UserNotificationModel extends Base
      */
     public function getUsersWithNotificationEnabled($project_id, $exclude_user_id = 0)
     {
-        if ($this->projectPermissionModel->isEverybodyAllowed($project_id)) {
-            return $this->getEverybodyWithNotificationEnabled($exclude_user_id);
-        }
-
         $users = array();
         $members = $this->getProjectUserMembersWithNotificationEnabled($project_id, $exclude_user_id);
         $groups = $this->getProjectGroupMembersWithNotificationEnabled($project_id, $exclude_user_id);
@@ -179,24 +175,6 @@ class UserNotificationModel extends Base
             ->join(UserModel::TABLE, 'id', 'user_id', GroupMemberModel::TABLE)
             ->eq(ProjectGroupRoleModel::TABLE.'.project_id', $project_id)
             ->eq(UserModel::TABLE.'.notifications_enabled', '1')
-            ->neq(UserModel::TABLE.'.id', $exclude_user_id)
-            ->eq(UserModel::TABLE.'.is_active', 1)
-            ->findAll();
-    }
-
-    /**
-     * Get a list of project members with notification enabled
-     *
-     * @access private
-     * @param  integer   $exclude_user_id   User id to exclude
-     * @return array
-     */
-    private function getEverybodyWithNotificationEnabled($exclude_user_id)
-    {
-        return $this->db
-            ->table(UserModel::TABLE)
-            ->columns(UserModel::TABLE.'.id', UserModel::TABLE.'.username', UserModel::TABLE.'.name', UserModel::TABLE.'.email', UserModel::TABLE.'.language', UserModel::TABLE.'.notifications_filter')
-            ->eq('notifications_enabled', '1')
             ->neq(UserModel::TABLE.'.id', $exclude_user_id)
             ->eq(UserModel::TABLE.'.is_active', 1)
             ->findAll();

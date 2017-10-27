@@ -179,55 +179,21 @@ class UserNotificationTest extends Base
         $this->assertEquals('user3@here', $users[2]['email']);
     }
 
-    public function testGetUsersWithNotificationsWhenEverybodyAllowed()
-    {
-        $u = new UserModel($this->container);
-        $p = new ProjectModel($this->container);
-        $n = new UserNotificationModel($this->container);
-        $pp = new ProjectPermissionModel($this->container);
-
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1', 'is_everybody_allowed' => 1)));
-        $this->assertTrue($pp->isEverybodyAllowed(1));
-
-        // Email + Notifications enabled
-        $this->assertEquals(2, $u->create(array('username' => 'user1', 'email' => 'user1@here', 'notifications_enabled' => 1)));
-
-        // No email + Notifications enabled
-        $this->assertEquals(3, $u->create(array('username' => 'user2', 'email' => '', 'notifications_enabled' => 1)));
-
-        // Email + Notifications enabled
-        $this->assertEquals(4, $u->create(array('username' => 'user3', 'email' => 'user3@here', 'notifications_enabled' => 1)));
-
-        // User disabled
-        $this->assertEquals(5, $u->create(array('username' => 'user4', 'email' => 'user3@here', 'notifications_enabled' => 1, 'is_active' => 0)));
-
-        // No email + notifications disabled
-        $this->assertEquals(6, $u->create(array('username' => 'user5')));
-
-        $users = $n->getUsersWithNotificationEnabled(1);
-
-        $this->assertNotEmpty($users);
-        $this->assertCount(3, $users);
-        $this->assertEquals('user1@here', $users[0]['email']);
-        $this->assertEquals('', $users[1]['email']);
-        $this->assertEquals('user3@here', $users[2]['email']);
-    }
-
     public function testSendNotifications()
     {
-        $u = new UserModel($this->container);
-        $n = new UserNotificationModel($this->container);
-        $p = new ProjectModel($this->container);
-        $tc = new TaskCreationModel($this->container);
-        $tf = new TaskFinderModel($this->container);
-        $pp = new ProjectPermissionModel($this->container);
+        $userModel = new UserModel($this->container);
+        $userNotificationModel = new UserNotificationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
 
-        $this->assertEquals(1, $p->create(array('name' => 'UnitTest1', 'is_everybody_allowed' => 1)));
-        $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
-        $this->assertTrue($u->update(array('id' => 1, 'email' => 'test@localhost')));
-        $this->assertTrue($pp->isEverybodyAllowed(1));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1)));
+        $this->assertTrue($userModel->update(array('id' => 1, 'email' => 'test@localhost')));
+        $this->assertTrue($projectUserRoleModel->addUser(1, 1, Role::PROJECT_MANAGER));
 
-        $n->saveSettings(1, array(
+        $userNotificationModel->saveSettings(1, array(
             'notifications_enabled' => 1,
             'notifications_filter' => UserNotificationFilterModel::FILTER_NONE,
             'notification_types' => array('web' => 1, 'email' => 1),
@@ -259,6 +225,6 @@ class UserNotificationTest extends Base
             ->with($this->equalTo('web'))
             ->will($this->returnValue($notifier));
 
-        $n->sendNotifications(TaskModel::EVENT_CREATE, array('task' => $tf->getDetails(1)));
+        $userNotificationModel->sendNotifications(TaskModel::EVENT_CREATE, array('task' => $taskFinderModel->getDetails(1)));
     }
 }

@@ -101,26 +101,6 @@ class ProjectUserRoleTest extends Base
         $this->assertEquals('', $userRoleModel->getUserRole(1, 2));
     }
 
-    public function testGetRoleWithPublicProject()
-    {
-        $projectModel = new ProjectModel($this->container);
-        $userRoleModel = new ProjectUserRoleModel($this->container);
-        $userModel = new UserModel($this->container);
-
-        $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'User1')));
-        $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'name' => 'User2')));
-
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Test'), 2, true));
-
-        $this->assertEquals(Role::PROJECT_MANAGER, $userRoleModel->getUserRole(1, 2));
-        $this->assertEquals(null, $userRoleModel->getUserRole(1, 3));
-
-        $this->assertTrue($projectModel->update(array('id' => 1, 'is_everybody_allowed' => 1)));
-
-        $this->assertEquals(Role::PROJECT_MANAGER, $userRoleModel->getUserRole(1, 2));
-        $this->assertEquals(Role::PROJECT_MEMBER, $userRoleModel->getUserRole(1, 3));
-    }
-
     public function testGetAssignableUsersWithDisabledUsers()
     {
         $projectModel = new ProjectModel($this->container);
@@ -245,59 +225,6 @@ class ProjectUserRoleTest extends Base
         $this->assertCount(1, $users);
 
         $this->assertEquals('admin', $users[1]);
-    }
-
-    public function testGetAssignableUsersWithEverybodyAllowed()
-    {
-        $projectModel = new ProjectModel($this->container);
-        $userModel = new UserModel($this->container);
-        $userRoleModel = new ProjectUserRoleModel($this->container);
-
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Test', 'is_everybody_allowed' => 1)));
-
-        $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'User1')));
-        $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'name' => 'User2')));
-        $this->assertEquals(4, $userModel->create(array('username' => 'user3', 'name' => 'User3')));
-        $this->assertEquals(5, $userModel->create(array('username' => 'user4', 'name' => 'User4')));
-
-        $users = $userRoleModel->getAssignableUsers(1);
-        $this->assertCount(5, $users);
-
-        $this->assertEquals('admin', $users[1]);
-        $this->assertEquals('User1', $users[2]);
-        $this->assertEquals('User2', $users[3]);
-        $this->assertEquals('User3', $users[4]);
-        $this->assertEquals('User4', $users[5]);
-    }
-
-    public function testGetAssignableUsersWithDisabledUsersAndEverybodyAllowed()
-    {
-        $projectModel = new ProjectModel($this->container);
-        $projectPermission = new ProjectPermissionModel($this->container);
-        $userModel = new UserModel($this->container);
-        $userRoleModel = new ProjectUserRoleModel($this->container);
-
-        $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'User1')));
-        $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'name' => 'User2')));
-
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Project 1', 'is_everybody_allowed' => 1)));
-
-        $this->assertTrue($projectPermission->isEverybodyAllowed(1));
-
-        $users = $userRoleModel->getAssignableUsers(1);
-        $this->assertCount(3, $users);
-
-        $this->assertEquals('admin', $users[1]);
-        $this->assertEquals('User1', $users[2]);
-        $this->assertEquals('User2', $users[3]);
-
-        $this->assertTrue($userModel->disable(2));
-
-        $users = $userRoleModel->getAssignableUsers(1);
-        $this->assertCount(2, $users);
-
-        $this->assertEquals('admin', $users[1]);
-        $this->assertEquals('User2', $users[3]);
     }
 
     public function testGetProjectsByUser()

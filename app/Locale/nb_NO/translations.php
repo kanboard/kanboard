@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Aktivitetslogg',
     'Dashboard' => 'Hovedsiden',
     'Confirmation' => 'Bekreftelse',
-    'Allow everybody to access to this project' => 'Gi alle tilgang til dette prosjektet',
-    'Everybody have access to this project.' => 'Alle har tilgang til dette prosjektet',
     // 'Webhooks' => '',
     // 'API' => '',
     'Create a comment from an external provider' => 'Opprett en kommentar fra en ekstern tilbyder',

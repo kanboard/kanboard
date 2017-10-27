@@ -394,8 +394,6 @@ return array(
     'Activity stream' => 'Güncel olay akışı',
     'Dashboard' => 'Pano',
     'Confirmation' => 'Onay',
-    'Allow everybody to access to this project' => 'Bu projeye herkesin erişimine izin ver',
-    'Everybody have access to this project.' => 'Bu projeye herkesin erişimi var.',
     'Webhooks' => 'Web Kancaları',
     'API' => 'API',
     'Create a comment from an external provider' => 'Dış sağlayıcı ile bir yorum oluştur',
