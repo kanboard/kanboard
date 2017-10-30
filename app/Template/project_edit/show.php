@@ -62,11 +62,5 @@
         <?= $this->form->number('priority_end', $values, $errors, array('tabindex="10"')) ?>
     </fieldset>
 
-    <fieldset>
-        <legend><?= t('Predefined Email Subjects') ?></legend>
-        <?= $this->form->textarea('predefined_email_subjects', $values, $errors, array('tabindex="11"')) ?>
-        <p class="form-help"><?= t('Write one subject by line.') ?></p>
-    </fieldset>
-
     <?= $this->modal->submitButtons(array('tabindex' => 11)) ?>
 </form>

@@ -1343,4 +1343,6 @@ return array(
     'Subtask added successfully.' => 'Подзадача успешно добавлена.',
     '%d subtasks added successfully.' => '%d подзадач(а) успешно добавлено.',
     'Enter one subtask by line.' => 'Записывайте по одной подзадаче на строку.',
+    // 'Predefined Contents' => '',
+    // 'Predefined contents' => '',
 );

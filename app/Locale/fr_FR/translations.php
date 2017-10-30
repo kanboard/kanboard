@@ -1343,4 +1343,6 @@ return array(
     'Subtask added successfully.' => 'Sous-tâche ajoutée avec succès.',
     '%d subtasks added successfully.' => '%d sous-tâches ajoutées avec succès.',
     'Enter one subtask by line.' => 'Entrez une sous-tâche par ligne.',
+    'Predefined Contents' => 'Contenus prédéfini',
+    'Predefined contents' => 'Contenus prédéfini',
 );

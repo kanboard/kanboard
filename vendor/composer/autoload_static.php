@@ -346,6 +346,7 @@ class ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b
         'Kanboard\\Controller\\ProjectListController' => __DIR__ . '/../..' . '/app/Controller/ProjectListController.php',
         'Kanboard\\Controller\\ProjectOverviewController' => __DIR__ . '/../..' . '/app/Controller/ProjectOverviewController.php',
         'Kanboard\\Controller\\ProjectPermissionController' => __DIR__ . '/../..' . '/app/Controller/ProjectPermissionController.php',
+        'Kanboard\\Controller\\ProjectPredefinedContentController' => __DIR__ . '/../..' . '/app/Controller/ProjectPredefinedContentController.php',
         'Kanboard\\Controller\\ProjectRoleController' => __DIR__ . '/../..' . '/app/Controller/ProjectRoleController.php',
         'Kanboard\\Controller\\ProjectRoleRestrictionController' => __DIR__ . '/../..' . '/app/Controller/ProjectRoleRestrictionController.php',
         'Kanboard\\Controller\\ProjectStatusController' => __DIR__ . '/../..' . '/app/Controller/ProjectStatusController.php',

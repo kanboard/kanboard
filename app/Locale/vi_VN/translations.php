@@ -1349,4 +1349,6 @@ return array(
     // 'Subtask added successfully.' => '',
     // '%d subtasks added successfully.' => '',
     // 'Enter one subtask by line.' => '',
+    // 'Predefined Contents' => '',
+    // 'Predefined contents' => '',
 );

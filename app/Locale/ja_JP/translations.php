@@ -1343,4 +1343,6 @@ return array(
     'Subtask added successfully.' => 'サブタスクを追加しました',
     '%d subtasks added successfully.' => '%d 件のサブタスクを追加しました',
     'Enter one subtask by line.' => '1行に1件のサブタスクを入力',
+    // 'Predefined Contents' => '',
+    // 'Predefined contents' => '',
 );

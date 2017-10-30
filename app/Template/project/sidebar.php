@@ -13,6 +13,9 @@
             <li <?= $this->app->checkMenuSelection('ProjectEditController') ?>>
                 <?= $this->url->link(t('Edit project'), 'ProjectEditController', 'show', array('project_id' => $project['id'])) ?>
             </li>
+            <li <?= $this->app->checkMenuSelection('ProjectPredefinedContentController') ?>>
+                <?= $this->url->link(t('Predefined contents'), 'ProjectPredefinedContentController', 'show', array('project_id' => $project['id'])) ?>
+            </li>
             <li <?= $this->app->checkMenuSelection('ProjectViewController', 'share') ?>>
                 <?= $this->url->link(t('Public access'), 'ProjectViewController', 'share', array('project_id' => $project['id'])) ?>
             </li>

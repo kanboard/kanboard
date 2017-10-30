@@ -210,6 +210,7 @@ return array(
     'Kanboard\\Controller\\ProjectListController' => $baseDir . '/app/Controller/ProjectListController.php',
     'Kanboard\\Controller\\ProjectOverviewController' => $baseDir . '/app/Controller/ProjectOverviewController.php',
     'Kanboard\\Controller\\ProjectPermissionController' => $baseDir . '/app/Controller/ProjectPermissionController.php',
+    'Kanboard\\Controller\\ProjectPredefinedContentController' => $baseDir . '/app/Controller/ProjectPredefinedContentController.php',
     'Kanboard\\Controller\\ProjectRoleController' => $baseDir . '/app/Controller/ProjectRoleController.php',
     'Kanboard\\Controller\\ProjectRoleRestrictionController' => $baseDir . '/app/Controller/ProjectRoleRestrictionController.php',
     'Kanboard\\Controller\\ProjectStatusController' => $baseDir . '/app/Controller/ProjectStatusController.php',
