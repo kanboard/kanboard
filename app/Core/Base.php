@@ -105,6 +105,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\LinkModel                               $linkModel
  * @property \Kanboard\Model\NotificationModel                       $notificationModel
  * @property \Kanboard\Model\PasswordResetModel                      $passwordResetModel
+ * @property \Kanboard\Model\PredefinedTaskDescriptionModel          $predefinedTaskDescriptionModel
  * @property \Kanboard\Model\ProjectModel                            $projectModel
  * @property \Kanboard\Model\ProjectActivityModel                    $projectActivityModel
  * @property \Kanboard\Model\ProjectDuplicationModel                 $projectDuplicationModel
@@ -179,6 +180,7 @@ use Pimple\Container;
  * @property \Kanboard\Validator\TaskLinkValidator                   $taskLinkValidator
  * @property \Kanboard\Validator\TaskValidator                       $taskValidator
  * @property \Kanboard\Validator\UserValidator                       $userValidator
+ * @property \Kanboard\Validator\PredefinedTaskDescriptionValidator  $predefinedTaskDescriptionValidator
  * @property \Kanboard\Import\TaskImport                             $taskImport
  * @property \Kanboard\Import\UserImport                             $userImport
  * @property \Kanboard\Export\SubtaskExport                          $subtaskExport

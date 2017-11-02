@@ -6,6 +6,10 @@ Breaking changes:
 * Remove feature "Allow everybody to access to this project" (You must define members and groups)
 * Composer dependencies are now included in the repository (except development dependencies)
 
+New features:
+
+* Add predefined templates for task descriptions
+
 Improvements:
 
 * You can get an archive of Kanboard by using the download button in Github or the command git archive

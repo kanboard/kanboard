@@ -61,6 +61,30 @@ class TaskHelper extends Base
         return $this->helper->form->textEditor('description', $values, $errors, array('tabindex' => 2));
     }
 
+    public function renderDescriptionTemplateDropdown($projectId)
+    {
+        $templates = $this->predefinedTaskDescriptionModel->getAll($projectId);
+
+        if (! empty($templates)) {
+            $html = '<div class="dropdown">';
+            $html .= '<a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-floppy-o fa-fw" aria-hidden="true"></i>'.t('Description Templates').' <i class="fa fa-caret-down" aria-hidden="true"></i></a>';
+            $html .= '<ul>';
+
+            foreach ($templates as  $template) {
+                $html .= '<li>';
+                $html .= '<a href="#" data-template-target="textarea[name=description]" data-template="'.$this->helper->text->e($template['description']).'" class="js-template">';
+                $html .= $this->helper->text->e($template['title']);
+                $html .= '</a>';
+                $html .= '</li>';
+            }
+
+            $html .= '</ul></div>';
+            return $html;
+        }
+
+        return '';
+    }
+
     public function renderTagField(array $project, array $tags = array())
     {
         $options = $this->tagModel->getAssignableList($project['id']);

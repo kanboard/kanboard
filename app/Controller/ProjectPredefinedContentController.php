@@ -10,13 +10,6 @@ namespace Kanboard\Controller;
  */
 class ProjectPredefinedContentController extends BaseController
 {
-    /**
-     * Edit project
-     *
-     * @access public
-     * @param array $values
-     * @param array $errors
-     */
     public function show(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
@@ -25,15 +18,11 @@ class ProjectPredefinedContentController extends BaseController
             'values' => empty($values) ? $project : $values,
             'errors' => $errors,
             'project' => $project,
-            'title' => t('Predefined Contents')
+            'predefined_task_descriptions' => $this->predefinedTaskDescriptionModel->getAll($project['id']),
+            'title' => t('Predefined Contents'),
         )));
     }
 
-    /**
-     * Validate and update a project
-     *
-     * @access public
-     */
     public function update()
     {
         $project = $this->getProject();
