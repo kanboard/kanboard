@@ -66,8 +66,8 @@ class TaskHelper extends Base
         $templates = $this->predefinedTaskDescriptionModel->getAll($projectId);
 
         if (! empty($templates)) {
-            $html = '<div class="dropdown">';
-            $html .= '<a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-floppy-o fa-fw" aria-hidden="true"></i>'.t('Description Templates').' <i class="fa fa-caret-down" aria-hidden="true"></i></a>';
+            $html = '<div class="dropdown dropdown-smaller">';
+            $html .= '<a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-floppy-o fa-fw" aria-hidden="true"></i>'.t('Template for the task description').' <i class="fa fa-caret-down" aria-hidden="true"></i></a>';
             $html .= '<ul>';
 
             foreach ($templates as  $template) {

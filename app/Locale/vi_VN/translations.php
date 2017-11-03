@@ -1361,6 +1361,5 @@ return array(
     // 'Unable to update this template.' => '',
     // 'Template removed successfully.' => '',
     // 'Unable to remove this template.' => '',
-    // 'Description Templates' => '',
     // 'Template for the task description' => '',
 );
