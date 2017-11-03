@@ -443,7 +443,7 @@ return array(
     'Kanboard\\Formatter\\BoardTaskFormatter' => $baseDir . '/app/Formatter/BoardTaskFormatter.php',
     'Kanboard\\Formatter\\GroupAutoCompleteFormatter' => $baseDir . '/app/Formatter/GroupAutoCompleteFormatter.php',
     'Kanboard\\Formatter\\ProjectActivityEventFormatter' => $baseDir . '/app/Formatter/ProjectActivityEventFormatter.php',
-    'Kanboard\\Formatter\\ProjectApiFormatter' => $baseDir . '/app/Formatter/ProjectApiApiFormatter.php',
+    'Kanboard\\Formatter\\ProjectApiFormatter' => $baseDir . '/app/Formatter/ProjectApiFormatter.php',
     'Kanboard\\Formatter\\ProjectsApiFormatter' => $baseDir . '/app/Formatter/ProjectsApiFormatter.php',
     'Kanboard\\Formatter\\SubtaskListFormatter' => $baseDir . '/app/Formatter/SubtaskListFormatter.php',
     'Kanboard\\Formatter\\SubtaskTimeTrackingCalendarFormatter' => $baseDir . '/app/Formatter/SubtaskTimeTrackingCalendarFormatter.php',

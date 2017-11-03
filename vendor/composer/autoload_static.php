@@ -579,7 +579,7 @@ class ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b
         'Kanboard\\Formatter\\BoardTaskFormatter' => __DIR__ . '/../..' . '/app/Formatter/BoardTaskFormatter.php',
         'Kanboard\\Formatter\\GroupAutoCompleteFormatter' => __DIR__ . '/../..' . '/app/Formatter/GroupAutoCompleteFormatter.php',
         'Kanboard\\Formatter\\ProjectActivityEventFormatter' => __DIR__ . '/../..' . '/app/Formatter/ProjectActivityEventFormatter.php',
-        'Kanboard\\Formatter\\ProjectApiFormatter' => __DIR__ . '/../..' . '/app/Formatter/ProjectApiApiFormatter.php',
+        'Kanboard\\Formatter\\ProjectApiFormatter' => __DIR__ . '/../..' . '/app/Formatter/ProjectApiFormatter.php',
         'Kanboard\\Formatter\\ProjectsApiFormatter' => __DIR__ . '/../..' . '/app/Formatter/ProjectsApiFormatter.php',
         'Kanboard\\Formatter\\SubtaskListFormatter' => __DIR__ . '/../..' . '/app/Formatter/SubtaskListFormatter.php',
         'Kanboard\\Formatter\\SubtaskTimeTrackingCalendarFormatter' => __DIR__ . '/../..' . '/app/Formatter/SubtaskTimeTrackingCalendarFormatter.php',
