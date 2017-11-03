@@ -81,7 +81,6 @@ class TaskValidator extends BaseValidator
     public function validateBulkCreation(array $values)
     {
         $rules = array(
-            new Validators\Required('project_id', t('The project is required')),
             new Validators\Required('tasks', t('Field required')),
             new Validators\Required('column_id', t('Field required')),
             new Validators\Required('swimlane_id', t('Field required')),

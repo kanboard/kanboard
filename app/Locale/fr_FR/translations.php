@@ -1356,4 +1356,5 @@ return array(
     'Template removed successfully.' => 'Modèle supprimé avec succès.',
     'Unable to remove this template.' => 'Impossible de supprimer ce modèle.',
     'Description Templates' => 'Modèles de description',
+    'Template for the task description' => 'Modèle pour la description des tâches',
 );
