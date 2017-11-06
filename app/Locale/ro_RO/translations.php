@@ -614,7 +614,7 @@ return array(
     'User that will receive the email' => 'Utilizatorul care va primi e-mail-ul',
     'Email subject' => 'Subiectul e-mail-ului',
     'Date' => 'Data',
-    'Add a comment log when moving the task between columns' => 'Inregistrează un comentariu în jurnal când se mută sarcina între coloane',
+    'Add a comment log when moving the task between columns' => 'Înregistrează un comentariu în jurnal când se mută sarcina între coloane',
     'Move the task to another column when the category is changed' => 'Mută sarcina în altă coloană când se schimbă categoria',
     'Send a task by email to someone' => 'Trimite o sarcină prin e-mail cuiva',
     'Reopen a task' => 'Redeschide o sarcină',
