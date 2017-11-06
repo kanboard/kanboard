@@ -25,7 +25,7 @@ class LanguageModel extends Base
         return array(
             'id_ID',
             'bs_BA',
-			'ca_ES',
+            'ca_ES',
             'cs_CZ',
             'da_DK',
             'de_DE',
@@ -42,6 +42,7 @@ class LanguageModel extends Base
             'pl_PL',
             'pt_PT',
             'pt_BR',
+            'ro_RO',
             'ru_RU',
             'sr_Latn_RS',
             'fi_FI',
@@ -82,7 +83,7 @@ class LanguageModel extends Base
         $languages = array(
             'id_ID' => 'Bahasa Indonesia',
             'bs_BA' => 'Bosanski',
-			'ca_ES' => 'Català',
+            'ca_ES' => 'Català',
             'cs_CZ' => 'Čeština',
             'da_DK' => 'Dansk',
             'de_DE' => 'Deutsch',
@@ -99,6 +100,7 @@ class LanguageModel extends Base
             'pl_PL' => 'Polski',
             'pt_PT' => 'Português',
             'pt_BR' => 'Português (Brasil)',
+            'ro_RO' => 'Română',
             'ru_RU' => 'Русский',
             'sr_Latn_RS' => 'Srpski',
             'fi_FI' => 'Suomi',
@@ -128,7 +130,7 @@ class LanguageModel extends Base
     {
         $languages = array(
             'cs_CZ' => 'cs',
-			'ca_ES' => 'ca',
+            'ca_ES' => 'ca',
             'da_DK' => 'da',
             'de_DE' => 'de',
             'en_US' => 'en',
@@ -142,6 +144,7 @@ class LanguageModel extends Base
             'pl_PL' => 'pl',
             'pt_PT' => 'pt',
             'pt_BR' => 'pt-BR',
+            'ro_RO' => 'ro',
             'ru_RU' => 'ru',
             'sr_Latn_RS' => 'sr',
             'fi_FI' => 'fi',
