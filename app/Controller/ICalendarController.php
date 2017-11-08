@@ -28,8 +28,8 @@ class ICalendarController extends BaseController
             throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
-        $startRange = $this->request->getStringParam('start', strtotime('-2 months'));
-        $endRange = $this->request->getStringParam('end', strtotime('+6 months'));
+        $startRange = strtotime('-2 months');
+        $endRange = strtotime('+6 months');
 
         $startColumn = $this->configModel->get('calendar_project_tasks', 'date_started');
 
@@ -68,8 +68,8 @@ class ICalendarController extends BaseController
             throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
-        $startRange = $this->request->getStringParam('start', strtotime('-2 months'));
-        $endRange = $this->request->getStringParam('end', strtotime('+6 months'));
+        $startRange = strtotime('-2 months');
+        $endRange = strtotime('+6 months');
 
         $startColumn = $this->configModel->get('calendar_project_tasks', 'date_started');
 
