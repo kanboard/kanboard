@@ -141,4 +141,26 @@ class TaskStatusModel extends Base
                     ->eq('is_active', $status)
                     ->exists();
     }
+
+    /**
+     * Remove (delete) all tasks within a column/swimlane
+     *
+     * @access public
+     * @param  integer $swimlane_id
+     * @param  integer $column_id
+     */
+    public function removeTasksBySwimlaneAndColumn($swimlane_id, $column_id)
+    {
+        $task_ids = $this->db
+            ->table(TaskModel::TABLE)
+            ->eq('swimlane_id', $swimlane_id)
+            ->eq('column_id', $column_id)
+            ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
+            ->findAllByColumn('id');
+
+        foreach ($task_ids as $task_id) {
+            $this->subtaskStatusModel->remove($task_id);
+        }
+    }
+
 }

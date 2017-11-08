@@ -46,6 +46,9 @@
                                 <li>
                                     <?= $this->modal->confirm('close', t('Close all tasks of this column'), 'BoardPopoverController', 'confirmCloseColumnTasks', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id'])) ?>
                                 </li>
+                                <li>
+                                    <?= $this->modal->confirm('trash', t('Remove all tasks of this column'), 'BoardPopoverController', 'confirmRemoveColumnTasks', array('project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id'])) ?>
+                                </li>
                             <?php endif ?>
 
                             <?= $this->hook->render('template:board:column:dropdown', array('swimlane' => $swimlane, 'column' => $column)) ?>
