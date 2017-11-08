@@ -19,7 +19,6 @@ use Pimple\Container;
  * @property \Kanboard\Helper\FileHelper              $file
  * @property \Kanboard\Helper\FormHelper              $form
  * @property \Kanboard\Helper\HookHelper              $hook
- * @property \Kanboard\Helper\ICalHelper              $ical
  * @property \Kanboard\Helper\ModalHelper             $modal
  * @property \Kanboard\Helper\ModelHelper             $model
  * @property \Kanboard\Helper\SubtaskHelper           $subtask

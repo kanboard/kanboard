@@ -5,6 +5,7 @@ namespace Kanboard\Controller;
 use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Filter\QueryBuilder;
 use Kanboard\Filter\TaskAssigneeFilter;
+use Kanboard\Filter\TaskDueDateRangeFilter;
 use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Filter\TaskStatusFilter;
 use Kanboard\Model\TaskModel;
@@ -18,81 +19,97 @@ use Eluceo\iCal\Component\Calendar as iCalendar;
  */
 class ICalendarController extends BaseController
 {
-    /**
-     * Get user iCalendar
-     *
-     * @access public
-     */
     public function user()
     {
         $token = $this->request->getStringParam('token');
         $user = $this->userModel->getByToken($token);
 
-        // Token verification
         if (empty($user)) {
             throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
-        // Common filter
-        $queryBuilder = new QueryBuilder();
-        $queryBuilder
-            ->withQuery($this->taskFinderModel->getICalQuery())
-            ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
-            ->withFilter(new TaskAssigneeFilter($user['id']));
+        $startRange = $this->request->getStringParam('start', strtotime('-2 months'));
+        $endRange = $this->request->getStringParam('end', strtotime('+6 months'));
 
-        // Calendar properties
+        $startColumn = $this->configModel->get('calendar_project_tasks', 'date_started');
+
         $calendar = new iCalendar('Kanboard');
         $calendar->setName($user['name'] ?: $user['username']);
         $calendar->setDescription($user['name'] ?: $user['username']);
         $calendar->setPublishedTTL('PT1H');
 
-        $this->renderCalendar($queryBuilder, $calendar);
+        $queryDueDateOnly = QueryBuilder::create()
+            ->withQuery($this->taskFinderModel->getICalQuery())
+            ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
+            ->withFilter(new TaskDueDateRangeFilter(array($startRange, $endRange)))
+            ->withFilter(new TaskAssigneeFilter($user['id']))
+            ->getQuery();
+
+        $queryStartAndDueDate = QueryBuilder::create()
+            ->withQuery($this->taskFinderModel->getICalQuery())
+            ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
+            ->withFilter(new TaskAssigneeFilter($user['id']))
+            ->getQuery()
+            ->addCondition($this->getConditionForTasksWithStartAndDueDate($startRange, $endRange, $startColumn, 'date_due'));
+
+        $this->response->ical($this->taskICalFormatter
+            ->setCalendar($calendar)
+            ->addTasksWithDueDateOnly($queryDueDateOnly)
+            ->addTasksWithStartAndDueDate($queryStartAndDueDate, $startColumn, 'date_due')
+            ->format());
     }
 
-    /**
-     * Get project iCalendar
-     *
-     * @access public
-     */
     public function project()
     {
         $token = $this->request->getStringParam('token');
         $project = $this->projectModel->getByToken($token);
 
-        // Token verification
         if (empty($project)) {
             throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
-        // Common filter
-        $queryBuilder = new QueryBuilder();
-        $queryBuilder
-            ->withQuery($this->taskFinderModel->getICalQuery())
-            ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
-            ->withFilter(new TaskProjectFilter($project['id']));
+        $startRange = $this->request->getStringParam('start', strtotime('-2 months'));
+        $endRange = $this->request->getStringParam('end', strtotime('+6 months'));
 
-        // Calendar properties
+        $startColumn = $this->configModel->get('calendar_project_tasks', 'date_started');
+
         $calendar = new iCalendar('Kanboard');
         $calendar->setName($project['name']);
         $calendar->setDescription($project['name']);
         $calendar->setPublishedTTL('PT1H');
 
-        $this->renderCalendar($queryBuilder, $calendar);
+        $queryDueDateOnly = QueryBuilder::create()
+            ->withQuery($this->taskFinderModel->getICalQuery())
+            ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
+            ->withFilter(new TaskProjectFilter($project['id']))
+            ->withFilter(new TaskDueDateRangeFilter(array($startRange, $endRange)))
+            ->getQuery();
+
+        $queryStartAndDueDate = QueryBuilder::create()
+            ->withQuery($this->taskFinderModel->getICalQuery())
+            ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
+            ->withFilter(new TaskProjectFilter($project['id']))
+            ->getQuery()
+            ->addCondition($this->getConditionForTasksWithStartAndDueDate($startRange, $endRange, $startColumn, 'date_due'));
+
+        $this->response->ical($this->taskICalFormatter
+            ->setCalendar($calendar)
+            ->addTasksWithDueDateOnly($queryDueDateOnly)
+            ->addTasksWithStartAndDueDate($queryStartAndDueDate, $startColumn, 'date_due')
+            ->format());
     }
 
-    /**
-     * Common method to render iCal events
-     *
-     * @access private
-     * @param QueryBuilder $queryBuilder
-     * @param iCalendar    $calendar
-     */
-    private function renderCalendar(QueryBuilder $queryBuilder, iCalendar $calendar)
+    protected function getConditionForTasksWithStartAndDueDate($start_time, $end_time, $start_column, $end_column)
     {
-        $start = $this->request->getStringParam('start', strtotime('-2 month'));
-        $end = $this->request->getStringParam('end', strtotime('+6 months'));
+        $start_column = $this->db->escapeIdentifier($start_column);
+        $end_column = $this->db->escapeIdentifier($end_column);
 
-        $this->helper->ical->addTaskDateDueEvents($queryBuilder, $calendar, $start, $end);
-        $this->response->ical($this->taskICalFormatter->setCalendar($calendar)->format());
+        $conditions = array(
+            "($start_column >= '$start_time' AND $start_column <= '$end_time')",
+            "($start_column <= '$start_time' AND $end_column >= '$start_time')",
+            "($start_column <= '$start_time' AND ($end_column = '0' OR $end_column IS NULL))",
+        );
+
+        return $start_column.' IS NOT NULL AND '.$start_column.' > 0 AND ('.implode(' OR ', $conditions).')';
     }
 }

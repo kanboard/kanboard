@@ -21,6 +21,18 @@ class QueryBuilder
     protected $query;
 
     /**
+     * Create a new class instance
+     *
+     * @static
+     * @access public
+     * @return static
+     */
+    public static function create()
+    {
+        return new static();
+    }
+
+    /**
      * Set the query
      *
      * @access public

@@ -12,6 +12,7 @@ New features:
 
 Improvements:
 
+* Improve iCalendar feed to include tasks with start/end date and due date with a time
 * You can get an archive of Kanboard by using the download button in Github or the command git archive
 
 Version 1.0.48 (October 23, 2017)

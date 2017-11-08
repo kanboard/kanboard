@@ -26,7 +26,6 @@ class HelperProvider implements ServiceProviderInterface
         $container['helper']->register('file', '\Kanboard\Helper\FileHelper');
         $container['helper']->register('form', '\Kanboard\Helper\FormHelper');
         $container['helper']->register('hook', '\Kanboard\Helper\HookHelper');
-        $container['helper']->register('ical', '\Kanboard\Helper\ICalHelper');
         $container['helper']->register('layout', '\Kanboard\Helper\LayoutHelper');
         $container['helper']->register('model', '\Kanboard\Helper\ModelHelper');
         $container['helper']->register('subtask', '\Kanboard\Helper\SubtaskHelper');
