@@ -62,7 +62,9 @@ KB.component('file-upload', function (containerElement, options) {
     }
 
     function onFileChange() {
-        files = inputFileElement.files;
+        for (var i = 0; i < inputFileElement.files.length; i++) {
+            files.push(inputFileElement.files[i]);
+        }
         showFiles();
     }
 
@@ -81,7 +83,10 @@ KB.component('file-upload', function (containerElement, options) {
         e.stopPropagation();
         e.preventDefault();
 
-        files = e.dataTransfer.files;
+        for (var i = 0; i < e.dataTransfer.files.length; i++) {
+            files.push(e.dataTransfer.files[i]);
+        }
+
         showFiles();
     }
 
@@ -157,8 +162,19 @@ KB.component('file-upload', function (containerElement, options) {
             .text('(0%)')
             .build();
 
+        var deleteElement = KB.dom('span')
+            .attr('id', 'file-delete-' + index)
+            .html('<a href="#"><i class="fa fa-trash fa-fw"></i></a>')
+            .on('click', function () {
+                files.splice(index, 1);
+                KB.find('#file-item-' + index).remove();
+                showFiles();
+            })
+            .build();
+
         var itemElement = KB.dom('li')
             .attr('id', 'file-item-' + index)
+            .add(deleteElement)
             .add(progressElement)
             .text(' ' + files[index].name + ' ')
             .add(percentageElement);
