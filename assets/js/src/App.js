@@ -79,7 +79,7 @@ Kanboard.App.prototype.autoComplete = function() {
     $(".autocomplete").each(function() {
         var input = $(this);
         var field = input.data("dst-field");
-        var extraField = input.data("dst-extra-field");
+        var extraFields = input.data("dst-extra-fields");
 
         if ($('#form-' + field).val() === '') {
             input.parent().find("button[type=submit]").attr('disabled','disabled');
@@ -91,8 +91,13 @@ Kanboard.App.prototype.autoComplete = function() {
             select: function(event, ui) {
                 $("input[name=" + field + "]").val(ui.item.id);
 
-                if (extraField) {
-                    $("input[name=" + extraField + "]").val(ui.item[extraField]);
+                if (extraFields) {
+                    var fields = extraFields.split(',');
+
+                    for (var i = 0; i < fields.length; i++) {
+                        var fieldName = fields[i].trim();
+                        $("input[name=" + fieldName + "]").val(ui.item[fieldName]);
+                    }
                 }
 
                 input.parent().find("button[type=submit]").removeAttr('disabled');

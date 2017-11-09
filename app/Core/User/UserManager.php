@@ -1,14 +1,14 @@
 <?php
 
-namespace Kanboard\Core\Group;
+namespace Kanboard\Core\User;
 
 /**
- * Group Manager
+ * User Manager
  *
- * @package  Kanboard\Core\Group
+ * @package  Kanboard\Core\User
  * @author   Frederic Guillot
  */
-class GroupManager
+class UserManager
 {
     /**
      * List of backend providers
@@ -22,10 +22,10 @@ class GroupManager
      * Register a new group backend provider
      *
      * @access public
-     * @param  GroupBackendProviderInterface $provider
-     * @return GroupManager
+     * @param  UserBackendProviderInterface $provider
+     * @return $this
      */
-    public function register(GroupBackendProviderInterface $provider)
+    public function register(UserBackendProviderInterface $provider)
     {
         $this->providers[] = $provider;
         return $this;
@@ -36,7 +36,7 @@ class GroupManager
      *
      * @access public
      * @param  string $input
-     * @return GroupProviderInterface[]
+     * @return UserProviderInterface[]
      */
     public function find($input)
     {
@@ -50,19 +50,19 @@ class GroupManager
     }
 
     /**
-     * Remove duplicated groups
+     * Remove duplicated users
      *
      * @access protected
-     * @param  array $groups
-     * @return GroupProviderInterface[]
+     * @param  array $users
+     * @return UserProviderInterface[]
      */
-    protected function removeDuplicates(array $groups)
+    protected function removeDuplicates(array $users)
     {
         $result = array();
 
-        foreach ($groups as $group) {
-            if (! isset($result[$group->getName()])) {
-                $result[$group->getName()] = $group;
+        foreach ($users as $user) {
+            if (! isset($result[$user->getUsername()])) {
+                $result[$user->getUsername()] = $user;
             }
         }
 

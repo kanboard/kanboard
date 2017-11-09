@@ -83,7 +83,7 @@ class DatabaseUserProvider implements UserProviderInterface
      */
     public function getRole()
     {
-        return '';
+        return empty($this->user['role']) ? '' : $this->user['role'];
     }
 
     /**
@@ -94,7 +94,7 @@ class DatabaseUserProvider implements UserProviderInterface
      */
     public function getUsername()
     {
-        return '';
+        return empty($this->user['username']) ? '' : $this->user['username'];
     }
 
     /**
@@ -105,7 +105,7 @@ class DatabaseUserProvider implements UserProviderInterface
      */
     public function getName()
     {
-        return '';
+        return empty($this->user['name']) ? '' : $this->user['name'];
     }
 
     /**
@@ -116,7 +116,7 @@ class DatabaseUserProvider implements UserProviderInterface
      */
     public function getEmail()
     {
-        return '';
+        return empty($this->user['email']) ? '' : $this->user['email'];
     }
 
     /**

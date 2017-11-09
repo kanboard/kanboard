@@ -5,7 +5,7 @@ namespace Kanboard\Core\Group;
 /**
  * Group Backend Provider Interface
  *
- * @package  group
+ * @package  Kanboard\Core\Group
  * @author   Frederic Guillot
  */
 interface GroupBackendProviderInterface

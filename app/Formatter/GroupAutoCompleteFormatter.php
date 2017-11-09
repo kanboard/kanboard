@@ -4,12 +4,11 @@ namespace Kanboard\Formatter;
 
 use Kanboard\Core\Filter\FormatterInterface;
 use Kanboard\Core\Group\GroupProviderInterface;
-use PicoDb\Table;
 
 /**
  * Auto-complete formatter for groups
  *
- * @package  formatter
+ * @package  Kanboard\Formatter
  * @author   Frederic Guillot
  */
 class GroupAutoCompleteFormatter extends BaseFormatter implements FormatterInterface

@@ -56,6 +56,7 @@ defined('DB_SSL_CA') or define('DB_SSL_CA', null);
 
 // Database backend group provider
 defined('DB_GROUP_PROVIDER') or define('DB_GROUP_PROVIDER', true);
+defined('DB_USER_PROVIDER') or define('DB_USER_PROVIDER', true);
 
 // LDAP configuration
 defined('LDAP_AUTH') or define('LDAP_AUTH', false);

@@ -69,6 +69,10 @@ class ProjectPermissionController extends BaseController
         $project = $this->getProject();
         $values = $this->request->getValues();
 
+        if (empty($values['user_id']) && ! empty($values['external_id']) && ! empty($values['external_id_column'])) {
+            $values['user_id'] = $this->userModel->getOrCreateExternalUserId($values['username'], $values['name'], $values['external_id_column'], $values['external_id']);
+        }
+
         if (empty($values['user_id'])) {
             $this->flash->failure(t('User not found.'));
         } elseif ($this->projectUserRoleModel->addUser($values['project_id'], $values['user_id'], $values['role'])) {

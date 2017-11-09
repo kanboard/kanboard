@@ -2,9 +2,6 @@
 
 namespace Kanboard\Controller;
 
-use Kanboard\Filter\UserNameFilter;
-use Kanboard\Model\UserModel;
-
 /**
  * User Ajax Controller
  *
@@ -21,13 +18,8 @@ class UserAjaxController extends BaseController
     public function autocomplete()
     {
         $search = $this->request->getStringParam('term');
-        $filter = $this->userQuery->withFilter(new UserNameFilter($search));
-        $filter->getQuery()
-            ->eq(UserModel::TABLE.'.is_active', 1)
-            ->asc(UserModel::TABLE.'.name')
-            ->asc(UserModel::TABLE.'.username');
-
-        $this->response->json($filter->format($this->userAutoCompleteFormatter));
+        $users = $this->userManager->find($search);
+        $this->response->json($this->userAutoCompleteFormatter->withUsers($users)->format());
     }
 
     /**

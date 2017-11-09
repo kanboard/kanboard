@@ -376,4 +376,20 @@ class UserModel extends Base
                     ->eq('id', $user_id)
                     ->save(array('token' => ''));
     }
+
+    public function getOrCreateExternalUserId($username, $name, $externalIdColumn, $externalId)
+    {
+        $userId = $this->db->table(self::TABLE)->eq($externalIdColumn, $externalId)->findOneColumn('id');
+
+        if (empty($userId)) {
+            $userId = $this->create(array(
+                'username' => $username,
+                'name' => $name,
+                'is_ldap_user' => 1,
+                $externalIdColumn => $externalId,
+            ));
+        }
+
+        return $userId;
+    }
 }

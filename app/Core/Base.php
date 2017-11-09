@@ -7,7 +7,7 @@ use Pimple\Container;
 /**
  * Base Class
  *
- * @package core
+ * @package Kanboard\Core
  * @author  Frederic Guillot
  *
  * @property \Kanboard\Analytic\TaskDistributionAnalytic             $taskDistributionAnalytic
@@ -22,6 +22,7 @@ use Pimple\Container;
  * @property \Kanboard\Core\Cache\BaseCache                          $cacheDriver
  * @property \Kanboard\Core\Event\EventManager                       $eventManager
  * @property \Kanboard\Core\Group\GroupManager                       $groupManager
+ * @property \Kanboard\Core\User\UserManager                         $userManager
  * @property \Kanboard\Core\Http\Client                              $httpClient
  * @property \Kanboard\Core\Http\OAuth2                              $oauth
  * @property \Kanboard\Core\Http\RememberMeCookie                    $rememberMeCookie

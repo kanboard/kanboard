@@ -25,7 +25,7 @@ class GroupProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
-        $container['groupManager'] = new GroupManager;
+        $container['groupManager'] = new GroupManager();
 
         if (DB_GROUP_PROVIDER) {
             $container['groupManager']->register(new DatabaseBackendGroupProvider($container));
