@@ -1356,4 +1356,5 @@ return array(
     'Template removed successfully.' => 'Modèle supprimé avec succès.',
     'Unable to remove this template.' => 'Impossible de supprimer ce modèle.',
     'Template for the task description' => 'Modèle pour la description des tâches',
+    'The start date is greater than the end date' => 'La date de début est plus grande que la date d\'échéance',
 );

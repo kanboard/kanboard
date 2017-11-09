@@ -67,4 +67,18 @@ class TaskValidatorTest extends Base
         $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'swimlane_id' => 0));
         $this->assertFalse($result[0]);
     }
+
+    public function testStartAndDueDateFields()
+    {
+        $taskValidator = new TaskValidator($this->container);
+
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '09/11/2017 10:50', 'date_started' => '09/11/2017 9:50'));
+        $this->assertTrue($result[0]);
+
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '09/11/2017 10:50', 'date_started' => '09/11/2017 10:50'));
+        $this->assertTrue($result[0]);
+
+        $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '09/11/2017 10:50', 'date_started' => '09/11/2017 11:50'));
+        $this->assertFalse($result[0]);
+    }
 }

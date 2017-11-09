@@ -1356,4 +1356,5 @@ return array(
     // 'Template removed successfully.' => '',
     // 'Unable to remove this template.' => '',
     // 'Template for the task description' => '',
+    // 'The start date is greater than the end date' => '',
 );

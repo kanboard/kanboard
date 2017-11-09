@@ -49,6 +49,20 @@ class TaskValidator extends BaseValidator
         );
     }
 
+    public function validateStartAndDueDate(array $values)
+    {
+        if (!empty($values['date_started']) && !empty($values['date_due'])) {
+            $startDate = $this->dateParser->getTimestamp($values['date_started']);
+            $endDate = $this->dateParser->getTimestamp($values['date_due']);
+
+            if ($startDate > $endDate) {
+                return array(false, array('date_started' => array(t('The start date is greater than the end date'))));
+            }
+        }
+
+        return array(true, array());
+    }
+
     /**
      * Validate task creation
      *
@@ -64,11 +78,14 @@ class TaskValidator extends BaseValidator
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+        $result = $v->execute();
+        $errors = $v->getErrors();
 
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
+        if ($result) {
+            list($result, $errors) = $this->validateStartAndDueDate($values);
+        }
+
+        return array($result, $errors);
     }
 
     /**
@@ -133,11 +150,14 @@ class TaskValidator extends BaseValidator
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+        $result = $v->execute();
+        $errors = $v->getErrors();
 
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
+        if ($result) {
+            list($result, $errors) = $this->validateStartAndDueDate($values);
+        }
+
+        return array($result, $errors);
     }
 
     /**
@@ -154,11 +174,14 @@ class TaskValidator extends BaseValidator
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+        $result = $v->execute();
+        $errors = $v->getErrors();
 
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
+        if ($result) {
+            list($result, $errors) = $this->validateStartAndDueDate($values);
+        }
+
+        return array($result, $errors);
     }
 
     /**
@@ -173,27 +196,6 @@ class TaskValidator extends BaseValidator
         $rules = array(
             new Validators\Required('id', t('The id is required')),
             new Validators\Required('project_id', t('The project is required')),
-        );
-
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
-    }
-
-    /**
-     * Validate time tracking modification (form)
-     *
-     * @access public
-     * @param  array   $values           Form values
-     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
-     */
-    public function validateTimeModification(array $values)
-    {
-        $rules = array(
-            new Validators\Required('id', t('The id is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
