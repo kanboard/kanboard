@@ -55,6 +55,12 @@ mysql -u root -p my_database < app/Schema/Sql/mysql.sql
 
 The file `app/Schema/Sql/mysql.sql` is a SQL dump that represents the last version of the database.
 
+If you would like to use Unix socket connection, try this:
+
+```php
+define('DB_HOSTNAME', '127.0.0.1;unix_socket=/var/run/mysqld/mysqld.sock');
+```
+
 SSL configuration
 -----------------
 
