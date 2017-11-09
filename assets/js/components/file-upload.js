@@ -161,6 +161,16 @@ KB.component('file-upload', function (containerElement, options) {
             .attr('id', 'file-percentage-' + index)
             .text('(0%)')
             .build();
+        
+        var deleteElement = KB.dom('span')
+        		.attr('id', 'file-delete-' +index)
+        		.html('<i class="fa fa-trash fa-fw"></i>')
+        		.on('click', function(){
+        			files.splice(index,1);
+        			KB.find('#file-item-' + index).remove();
+        			showFiles();
+        		})
+        		.build();
 
         var deleteElement = KB.dom('span')
             .attr('id', 'file-delete-' + index)
