@@ -44,9 +44,10 @@ class Query
      * @param  string    $baseDn
      * @param  string    $filter
      * @param  array     $attributes
-     * @return Query
+     * @param  integer   $limit
+     * @return $this
      */
-    public function execute($baseDn, $filter, array $attributes)
+    public function execute($baseDn, $filter, array $attributes, $limit = 0)
     {
         if (DEBUG && $this->client->hasLogger()) {
             $this->client->getLogger()->debug('BaseDN='.$baseDn);
@@ -54,7 +55,7 @@ class Query
             $this->client->getLogger()->debug('Attributes='.implode(', ', $attributes));
         }
 
-        $sr = ldap_search($this->client->getConnection(), $baseDn, $filter, $attributes);
+        $sr = @ldap_search($this->client->getConnection(), $baseDn, $filter, $attributes, null, $limit);
         if ($sr === false) {
             return $this;
         }
