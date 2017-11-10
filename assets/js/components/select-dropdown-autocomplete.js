@@ -183,6 +183,7 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
     function buildDropdownMenu() {
         var itemElements = filterItems(inputElement.value, buildItems(options.items));
         var componentPosition = componentElement.getBoundingClientRect();
+        var windowPosition = document.body.scrollTop || document.documentElement.scrollTop;
 
         if (itemElements.length === 0) {
             return null;
@@ -190,7 +191,7 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
 
         return KB.dom('ul')
             .attr('id', 'select-dropdown-menu')
-            .style('top', (document.body.scrollTop + componentPosition.bottom) + 'px')
+            .style('top', (windowPosition + componentPosition.bottom) + 'px')
             .style('left', componentPosition.left + 'px')
             .style('width', componentPosition.width + 'px')
             .style('maxHeight', (window.innerHeight - componentPosition.bottom - 20) + 'px')
