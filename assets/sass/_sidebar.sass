@@ -2,23 +2,28 @@
 @import mixins
 
 .sidebar-container
-  @include grid(100)
+  height: 100%
+  display: flex
+  flex-flow: row
+
+  @include sm-device
+    flex-flow: wrap
 
 .sidebar-content
   padding-left: 10px
-  @include grid_width(82/100)
-  @include xs-device
-    @include grid_width(1)
+  flex: 1 100%
+
+  @include sm-device
     padding-left: 0
+    order: 1
 
 .sidebar
-  max-width: 240px
-  min-width: 190px
-  @include grid_width(18/100)
-  @include xs-device
-    @include grid_width(1)
-    max-width: 99%
-    min-width: 0
+  width: 230px
+
+  @include sm-device
+    flex: 1 auto
+    order: 2
+
   h2
     margin-top: 0
   > ul
