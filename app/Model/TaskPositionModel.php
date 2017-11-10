@@ -243,26 +243,26 @@ class TaskPositionModel extends Base
         );
 
         if ($task['swimlane_id'] != $new_swimlane_id) {
-            $this->queueManager->push($this->taskEventJob->withParams(
+            $this->taskEventJob->execute(
                 $task['id'],
                 array(TaskModel::EVENT_MOVE_SWIMLANE),
                 $changes,
                 $changes
-            ));
+            );
         } elseif ($task['column_id'] != $new_column_id) {
-            $this->queueManager->push($this->taskEventJob->withParams(
+            $this->taskEventJob->execute(
                 $task['id'],
                 array(TaskModel::EVENT_MOVE_COLUMN),
                 $changes,
                 $changes
-            ));
+            );
         } elseif ($task['position'] != $new_position) {
-            $this->queueManager->push($this->taskEventJob->withParams(
+            $this->taskEventJob->execute(
                 $task['id'],
                 array(TaskModel::EVENT_MOVE_POSITION),
                 $changes,
                 $changes
-            ));
+            );
         }
     }
 }
