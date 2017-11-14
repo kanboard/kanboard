@@ -1357,4 +1357,13 @@ return array(
     'Unable to remove this template.' => 'Nem lehet eltávolítani a sablont.',
     'Template for the task description' => 'Sablon a feladatleíráshoz',
     'The start date is greater than the end date' => 'A kezdési dátum nagyobb mint a befejezési dátum',
+    // 'Tags must be separated by a comma' => '',
+    // 'Only the task title is required' => '',
+    // 'Creator Username' => '',
+    // 'Color Name' => '',
+    // 'Column Name' => '',
+    // 'Swimlane Name' => '',
+    // 'Time Estimated' => '',
+    // 'Time Spent' => '',
+    // 'External Link' => '',
 );

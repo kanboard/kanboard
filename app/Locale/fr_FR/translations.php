@@ -1357,4 +1357,13 @@ return array(
     'Unable to remove this template.' => 'Impossible de supprimer ce modèle.',
     'Template for the task description' => 'Modèle pour la description des tâches',
     'The start date is greater than the end date' => 'La date de début est plus grande que la date d\'échéance',
+    'Tags must be separated by a comma' => 'Les labels doivent être séparé par une virgule',
+    'Only the task title is required' => 'Seulement le titre est obligatoire',
+    'Creator Username' => 'Identifiant du créateur',
+    'Color Name' => 'Nom de la couleur',
+    'Column Name' => 'Nom de la colonne',
+    'Swimlane Name' => 'Nom de la swimlane',
+    'Time Estimated' => 'Durée estimée',
+    'Time Spent' => 'Temps passé',
+    'External Link' => 'Lien externe',
 );

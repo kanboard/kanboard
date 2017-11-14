@@ -26,6 +26,8 @@
         <li><?= t('The first row must be the header') ?></li>
         <li><?= t('Duplicates are not verified for you') ?></li>
         <li><?= t('The due date must use the ISO format: YYYY-MM-DD') ?></li>
+        <li><?= t('Tags must be separated by a comma') ?></li>
+        <li><?= t('Only the task title is required') ?></li>
     </ul>
     <p class="margin-top">
         <?= $this->url->icon('download', t('Download CSV template'), 'TaskImportController', 'template', array('project_id' => $project['id'])) ?>

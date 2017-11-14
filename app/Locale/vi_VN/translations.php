@@ -1363,4 +1363,13 @@ return array(
     // 'Unable to remove this template.' => '',
     // 'Template for the task description' => '',
     // 'The start date is greater than the end date' => '',
+    // 'Tags must be separated by a comma' => '',
+    // 'Only the task title is required' => '',
+    // 'Creator Username' => '',
+    // 'Color Name' => '',
+    // 'Column Name' => '',
+    // 'Swimlane Name' => '',
+    // 'Time Estimated' => '',
+    // 'Time Spent' => '',
+    // 'External Link' => '',
 );

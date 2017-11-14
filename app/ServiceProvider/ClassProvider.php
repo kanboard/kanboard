@@ -122,7 +122,6 @@ class ClassProvider implements ServiceProviderInterface
             'PredefinedTaskDescriptionValidator',
         ),
         'Import' => array(
-            'TaskImport',
             'UserImport',
         ),
         'Export' => array(

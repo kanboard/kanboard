@@ -3,6 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\Csv;
+use Kanboard\Import\TaskImport;
 
 /**
  * Task Import controller
@@ -45,14 +46,15 @@ class TaskImportController extends BaseController
         if (! file_exists($filename)) {
             $this->show($values, array('file' => array(t('Unable to read your file'))));
         } else {
-            $this->taskImport->projectId = $project['id'];
+            $taskImport = new TaskImport($this->container);
+            $taskImport->setProjectId($project['id']);
 
             $csv = new Csv($values['delimiter'], $values['enclosure']);
-            $csv->setColumnMapping($this->taskImport->getColumnMapping());
-            $csv->read($filename, array($this->taskImport, 'import'));
+            $csv->setColumnMapping($taskImport->getColumnMapping());
+            $csv->read($filename, array($taskImport, 'importTask'));
 
-            if ($this->taskImport->counter > 0) {
-                $this->flash->success(t('%d task(s) have been imported successfully.', $this->taskImport->counter));
+            if ($taskImport->getNumberOfImportedTasks() > 0) {
+                $this->flash->success(t('%d task(s) have been imported successfully.', $taskImport->getNumberOfImportedTasks()));
             } else {
                 $this->flash->failure(t('Nothing have been imported!'));
             }
@@ -67,7 +69,8 @@ class TaskImportController extends BaseController
      */
     public function template()
     {
+        $taskImport = new TaskImport($this->container);
         $this->response->withFileDownload('tasks.csv');
-        $this->response->csv(array($this->taskImport->getColumnMapping()));
+        $this->response->csv(array($taskImport->getColumnMapping()));
     }
 }

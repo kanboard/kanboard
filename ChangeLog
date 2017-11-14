@@ -4,7 +4,7 @@ Version 1.x (unreleased)
 Breaking changes:
 
 * Remove feature "Allow everybody to access to this project" (You must define members and groups)
-* Composer dependencies are now included in the repository (except development dependencies)
+* Composer dependencies are now included in the repository to be able to use git-archive (except development dependencies)
 
 New features:
 
@@ -13,6 +13,7 @@ New features:
 
 Improvements:
 
+* Task CSV import is now able to handle the priority, start date, tags and one external link
 * Improve iCalendar feed to include tasks with start/end date and due date with a time
 * Check if the start date is before due date
 * You can get an archive of Kanboard by using the download button in Github or the command git archive

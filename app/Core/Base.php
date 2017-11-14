@@ -182,7 +182,6 @@ use Pimple\Container;
  * @property \Kanboard\Validator\TaskValidator                       $taskValidator
  * @property \Kanboard\Validator\UserValidator                       $userValidator
  * @property \Kanboard\Validator\PredefinedTaskDescriptionValidator  $predefinedTaskDescriptionValidator
- * @property \Kanboard\Import\TaskImport                             $taskImport
  * @property \Kanboard\Import\UserImport                             $userImport
  * @property \Kanboard\Export\SubtaskExport                          $subtaskExport
  * @property \Kanboard\Export\TaskExport                             $taskExport

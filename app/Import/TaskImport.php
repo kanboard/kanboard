@@ -4,90 +4,86 @@ namespace Kanboard\Import;
 
 use Kanboard\Core\Base;
 use Kanboard\Core\Csv;
+use Kanboard\Core\ExternalLink\ExternalLinkManager;
+use Kanboard\Core\ExternalLink\ExternalLinkProviderNotFound;
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
 
 /**
- * Task Import
+ * Task CSV Import
  *
- * @package  import
+ * @package  Kanboard\Import
  * @author   Frederic Guillot
  */
 class TaskImport extends Base
 {
-    /**
-     * Number of successful import
-     *
-     * @access public
-     * @var integer
-     */
-    public $counter = 0;
+    protected $nbImportedTasks = 0;
+    protected $projectId = 0;
 
-    /**
-     * Project id to import tasks
-     *
-     * @access public
-     * @var integer
-     */
-    public $projectId;
+    public function setProjectId($projectId)
+    {
+        $this->projectId = $projectId;
+        return $this;
+    }
 
-    /**
-     * Get mapping between CSV header and SQL columns
-     *
-     * @access public
-     * @return array
-     */
+    public function getNumberOfImportedTasks()
+    {
+        return $this->nbImportedTasks;
+    }
+
     public function getColumnMapping()
     {
         return array(
-            'reference'         => 'Reference',
-            'title'             => 'Title',
-            'description'       => 'Description',
-            'assignee'          => 'Assignee Username',
-            'creator'           => 'Creator Username',
-            'color'             => 'Color Name',
-            'column'            => 'Column Name',
-            'category'          => 'Category Name',
-            'swimlane'          => 'Swimlane Name',
-            'score'             => 'Complexity',
-            'time_estimated'    => 'Time Estimated',
-            'time_spent'        => 'Time Spent',
-            'date_due'          => 'Due Date',
-            'is_active'         => 'Closed',
+            'reference'         => e('Reference'),
+            'title'             => e('Title'),
+            'description'       => e('Description'),
+            'assignee'          => e('Assignee Username'),
+            'creator'           => e('Creator Username'),
+            'color'             => e('Color Name'),
+            'column'            => e('Column Name'),
+            'category'          => e('Category Name'),
+            'swimlane'          => e('Swimlane Name'),
+            'score'             => e('Complexity'),
+            'time_estimated'    => e('Time Estimated'),
+            'time_spent'        => e('Time Spent'),
+            'date_started'      => e('Start Date'),
+            'date_due'          => e('Due Date'),
+            'priority'          => e('Priority'),
+            'is_active'         => e('Status'),
+            'tags'              => e('Tags'),
+            'external_link'     => e('External Link'),
         );
     }
 
-    /**
-     * Import a single row
-     *
-     * @access public
-     * @param  array   $row
-     * @param  integer $line_number
-     */
-    public function import(array $row, $line_number)
+    public function importTask(array $row, $lineNumber)
     {
-        $row = $this->prepare($row);
+        $task = $this->prepareTask($row);
 
-        if ($this->validateCreation($row)) {
-            if ($this->taskCreationModel->create($row) > 0) {
-                $this->logger->debug('TaskImport: imported successfully line '.$line_number);
-                $this->counter++;
+        if ($this->validateCreation($task)) {
+            $taskId = $this->taskCreationModel->create($task);
+
+            if ($taskId > 0) {
+                $this->logger->debug(__METHOD__.': imported successfully line '.$lineNumber);
+                $this->nbImportedTasks++;
+
+                if (! empty($row['tags'])) {
+                    $tagsList = explode(',', $row['tags']);
+                    array_walk($tagsList, function (&$value) { $value = trim($value); });
+                    $this->taskTagModel->save($this->projectId, $taskId, $tagsList);
+                }
+
+                if (! empty($row['external_link'])) {
+                    $this->createExternalLink($taskId, $row['external_link']);
+                }
             } else {
-                $this->logger->error('TaskImport: creation error at line '.$line_number);
+                $this->logger->error(__METHOD__.': creation error at line '.$lineNumber);
             }
         } else {
-            $this->logger->error('TaskImport: validation error at line '.$line_number);
+            $this->logger->error(__METHOD__.': validation error at line '.$lineNumber);
         }
     }
 
-    /**
-     * Format row before validation
-     *
-     * @access public
-     * @param  array   $row
-     * @return array
-     */
-    public function prepare(array $row)
+    public function prepareTask(array $row)
     {
         $values = array();
         $values['project_id'] = $this->projectId;
@@ -96,6 +92,7 @@ class TaskImport extends Base
         $values['description'] = $row['description'];
         $values['is_active'] = Csv::getBooleanValue($row['is_active']) == 1 ? 0 : 1;
         $values['score'] = (int) $row['score'];
+        $values['priority'] = (int) $row['priority'];
         $values['time_estimated'] = (float) $row['time_estimated'];
         $values['time_spent'] = (float) $row['time_spent'];
 
@@ -127,22 +124,19 @@ class TaskImport extends Base
             $values['date_due'] = $this->dateParser->getTimestamp($row['date_due']);
         }
 
+        if (! empty($row['date_started'])) {
+            $values['date_started'] = $this->dateParser->getTimestamp($row['date_started']);
+        }
+
         $this->helper->model->removeEmptyFields(
             $values,
-            array('owner_id', 'creator_id', 'color_id', 'column_id', 'category_id', 'swimlane_id', 'date_due')
+            array('owner_id', 'creator_id', 'color_id', 'column_id', 'category_id', 'swimlane_id', 'date_due', 'date_started', 'priority')
         );
 
         return $values;
     }
 
-    /**
-     * Validate user creation
-     *
-     * @access public
-     * @param  array   $values
-     * @return boolean
-     */
-    public function validateCreation(array $values)
+    protected function validateCreation(array $values)
     {
         $v = new Validator($values, array(
             new Validators\Integer('project_id', t('This value must be an integer')),
@@ -153,5 +147,35 @@ class TaskImport extends Base
         ));
 
         return $v->execute();
+    }
+
+    protected function createExternalLink($taskId, $externalLink)
+    {
+        try {
+            $provider = $this->externalLinkManager
+                ->setUserInputText($externalLink)
+                ->setUserInputType(ExternalLinkManager::TYPE_AUTO)
+                ->find();
+
+            $link = $provider->getLink();
+            $dependencies = $provider->getDependencies();
+            $values = array(
+                'task_id' => $taskId,
+                'title' => $link->getTitle(),
+                'url' => $link->getUrl(),
+                'link_type' => $provider->getType(),
+                'dependency' => key($dependencies),
+            );
+
+            list($valid, $errors) = $this->externalLinkValidator->validateCreation($values);
+
+            if ($valid) {
+                $this->taskExternalLinkModel->create($values);
+            } else {
+                $this->logger->error(__METHOD__.': '.var_export($errors, true));
+            }
+        } catch (ExternalLinkProviderNotFound $e) {
+            $this->logger->error(__METHOD__.': '.$e->getMessage());
+        }
     }
 }

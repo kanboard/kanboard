@@ -1357,4 +1357,13 @@ return array(
     'Unable to remove this template.' => 'テンプレートを削除できません',
     'Template for the task description' => 'タスク説明のテンプレート',
     'The start date is greater than the end date' => '開始日が終了日を超えています',
+    // 'Tags must be separated by a comma' => '',
+    // 'Only the task title is required' => '',
+    // 'Creator Username' => '',
+    // 'Color Name' => '',
+    // 'Column Name' => '',
+    // 'Swimlane Name' => '',
+    // 'Time Estimated' => '',
+    // 'Time Spent' => '',
+    // 'External Link' => '',
 );
