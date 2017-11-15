@@ -8,7 +8,41 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 116;
+const VERSION = 117;
+
+/** Makes username case insensitive */
+function version_117(PDO $pdo)
+{
+    $pdo->exec("CREATE TABLE _users_new (
+        id INTEGER PRIMARY KEY,
+        username TEXT NOT NULL COLLATE NOCASE UNIQUE,
+        password TEXT,
+        is_admin INTEGER DEFAULT 0,
+        is_ldap_user INTEGER DEFAULT 0,
+        name TEXT, email TEXT,
+        google_id TEXT,
+        github_id TEXT,
+        notifications_enabled INTEGER DEFAULT '0',
+        timezone TEXT,
+        language TEXT,
+        disable_login_form INTEGER DEFAULT 0,
+        twofactor_activated INTEGER DEFAULT 0,
+        twofactor_secret TEXT,
+        token TEXT DEFAULT '',
+        notifications_filter INTEGER DEFAULT 4,
+        nb_failed_login INTEGER DEFAULT 0,
+        lock_expiration_date INTEGER DEFAULT 0,
+        is_project_admin INTEGER DEFAULT 0,
+        gitlab_id INTEGER,
+        role TEXT NOT NULL DEFAULT 'app-user',
+        is_active INTEGER DEFAULT 1,
+        avatar_path TEXT,
+        api_access_token VARCHAR(255) DEFAULT NULL
+    )");
+    $pdo->exec('INSERT INTO _users_new SELECT * FROM users');
+    $pdo->exec('DROP TABLE users');
+    $pdo->exec('ALTER TABLE _users_new RENAME TO users');
+}
 
 function version_116(PDO $pdo)
 {
