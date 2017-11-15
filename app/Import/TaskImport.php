@@ -161,7 +161,7 @@ class TaskImport extends Base
             $dependencies = $provider->getDependencies();
             $values = array(
                 'task_id' => $taskId,
-                'title' => $link->getTitle(),
+                'title' => $link->getTitle() ?: $link->getUrl(),
                 'url' => $link->getUrl(),
                 'link_type' => $provider->getType(),
                 'dependency' => key($dependencies),
