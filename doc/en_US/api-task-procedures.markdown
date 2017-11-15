@@ -23,7 +23,7 @@ API Task Procedures
     - **recurrence_timeframe** (integer, optional)
     - **recurrence_basedate** (integer, optional)
     - **tags** ([]string, optional)
-    - **date_started**: d/m/Y H:i format (string, optional)
+    - **date_started**: ISO8601 format (string, optional)
 - Result on success: **task_id**
 - Result on failure: **false**
 
