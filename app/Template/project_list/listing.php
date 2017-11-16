@@ -21,6 +21,15 @@
         <?= $this->hook->render('template:project-list:menu:after') ?>
     </ul>
 </div>
+
+<div class="margin-bottom">
+    <form method="get" action="<?= $this->url->dir() ?>" class="search">
+        <?= $this->form->hidden('controller', array('controller' => 'ProjectListController')) ?>
+        <?= $this->form->hidden('action', array('action' => 'show')) ?>
+        <?= $this->form->text('search', $values, array(), array('placeholder="'.t('Search').'"')) ?>
+    </form>
+</div>
+
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('There is no project.') ?></p>
 <?php else: ?>

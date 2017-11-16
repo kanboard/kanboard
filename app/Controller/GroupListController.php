@@ -24,7 +24,7 @@ class GroupListController extends BaseController
         $query = $this->groupModel->getQuery();
 
         if ($search !== '') {
-            $query->ilike('name', '%'.$search.'%');
+            $query->ilike('groups.name', '%'.$search.'%');
         }
 
         $paginator = $this->paginator

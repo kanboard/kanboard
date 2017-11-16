@@ -23,16 +23,24 @@ class ProjectListController extends BaseController
             $projectIds = $this->projectPermissionModel->getProjectIds($this->userSession->getId());
         }
 
+        $query = $this->projectModel->getQueryByProjectIds($projectIds);
+        $search = $this->request->getStringParam('search');
+
+        if ($search !== '') {
+            $query->ilike('projects.name', '%' . $search . '%');
+        }
+
         $paginator = $this->paginator
             ->setUrl('ProjectListController', 'show')
             ->setMax(20)
             ->setOrder('name')
-            ->setQuery($this->projectModel->getQueryByProjectIds($projectIds))
+            ->setQuery($query)
             ->calculate();
 
         $this->response->html($this->helper->layout->app('project_list/listing', array(
             'paginator'   => $paginator,
             'title'       => t('Projects') . ' (' . $paginator->getTotal() . ')',
+            'values'      => array('search' => $search),
         )));
     }
 }
