@@ -2,6 +2,7 @@
     <h2><?= t('Public access') ?></h2>
 </div>
 
+
 <?php if ($project['is_public']): ?>
 
     <div class="panel">
@@ -14,5 +15,6 @@
 
     <?= $this->url->link(t('Disable public access'), 'ProjectViewController', 'updateSharing', array('project_id' => $project['id'], 'switch' => 'disable'), true, 'btn btn-red') ?>
 <?php else: ?>
+    <p class="alert alert-info"><?= t('This feature enable the iCal feed, RSS feed and the public board view.') ?></p>
     <?= $this->url->link(t('Enable public access'), 'ProjectViewController', 'updateSharing', array('project_id' => $project['id'], 'switch' => 'enable'), true, 'btn btn-blue') ?>
 <?php endif ?>

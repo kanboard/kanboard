@@ -1366,4 +1366,5 @@ return array(
     'Time Estimated' => 'Durée estimée',
     'Time Spent' => 'Temps passé',
     'External Link' => 'Lien externe',
+    'This feature enable the iCal feed, RSS feed and the public board view.' => 'Cette fonctionalité active l\'abonnement iCal, le flux RSS et la vue publique du tableau.',
 );
