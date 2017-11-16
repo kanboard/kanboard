@@ -35,7 +35,7 @@ class UserListController extends BaseController
      */
     public function search()
     {
-        $search = urldecode($this->request->getStringParam('search'));
+        $search = $this->request->getStringParam('search');
         $paginator = $this->userPagination->getListingPaginator();
 
         if ($search !== '' && ! $paginator->isEmpty()) {
@@ -56,5 +56,4 @@ class UserListController extends BaseController
             'paginator' => $paginator
         )));
     }
-
 }

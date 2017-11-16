@@ -17,15 +17,11 @@
     <?php endif ?>
 </div>
 
-
-<div class="filter-box margin-bottom">
+<div class="margin-bottom">
     <form method="get" action="<?= $this->url->dir() ?>" class="search">
         <?= $this->form->hidden('controller', array('controller' => 'UserListController')) ?>
         <?= $this->form->hidden('action', array('action' => 'search')) ?>
-
-        <div class="input-addon">
-            <?= $this->form->text('search', $values, array(), array('placeholder="'.t('Search').'"'), 'input-addon-field') ?>
-        </div>
+        <?= $this->form->text('search', $values, array(), array('placeholder="'.t('Search').'"')) ?>
     </form>
 </div>
 

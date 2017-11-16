@@ -20,16 +20,26 @@ class GroupListController extends BaseController
      */
     public function index()
     {
+        $search = $this->request->getStringParam('search');
+        $query = $this->groupModel->getQuery();
+
+        if ($search !== '') {
+            $query->ilike('name', '%'.$search.'%');
+        }
+
         $paginator = $this->paginator
             ->setUrl('GroupListController', 'index')
             ->setMax(30)
             ->setOrder(GroupModel::TABLE.'.name')
-            ->setQuery($this->groupModel->getQuery())
+            ->setQuery($query)
             ->calculate();
 
         $this->response->html($this->helper->layout->app('group/index', array(
             'title' => t('Groups').' ('.$paginator->getTotal().')',
             'paginator' => $paginator,
+            'values' => array(
+                'search' => $search
+            ),
         )));
     }
 

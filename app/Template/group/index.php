@@ -4,6 +4,15 @@
         <li><?= $this->modal->medium('user-plus', t('New group'), 'GroupCreationController', 'show') ?></li>
     </ul>
 </div>
+
+<div class="margin-bottom">
+    <form method="get" action="<?= $this->url->dir() ?>" class="search">
+        <?= $this->form->hidden('controller', array('controller' => 'GroupListController')) ?>
+        <?= $this->form->hidden('action', array('action' => 'index')) ?>
+        <?= $this->form->text('search', $values, array(), array('placeholder="'.t('Search').'"')) ?>
+    </form>
+</div>
+
 <?php if ($paginator->isEmpty()): ?>
     <p class="alert"><?= t('There is no group.') ?></p>
 <?php else: ?>
