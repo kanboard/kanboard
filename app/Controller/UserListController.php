@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Filter\UserNameFilter;
+
 /**
  * Class User List Controller
  *
@@ -24,4 +26,35 @@ class UserListController extends BaseController
             'paginator' => $paginator,
         )));
     }
+
+    /**
+     * Search in users
+     *
+     * @access public
+     */
+    public function search()
+    {
+        $search = urldecode($this->request->getStringParam('search'));
+        $paginator = $this->userPagination->getListingPaginator();
+
+        if ($search !== '' && ! $paginator->isEmpty()) {
+
+            $paginator = $paginator
+                ->setUrl('UserListController', 'search', array('search' => $search))
+                ->setQuery($this->userQuery
+                    ->withFilter(new UserNameFilter($search))
+                    ->getQuery()
+                )
+                ->calculate();
+        }
+
+        $this->response->html($this->helper->layout->app('user_list/listing', array(
+            'title' => t('Users').' ('.$paginator->getTotal().')',
+            'values' => array(
+                'search' => $search,
+            ),
+            'paginator' => $paginator
+        )));
+    }
+
 }
