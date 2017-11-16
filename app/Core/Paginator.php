@@ -342,7 +342,7 @@ class Paginator
     }
 
     /**
-     * Calculate the offset value accoring to url params and the page number
+     * Calculate the offset value according to url params and the page number
      *
      * @access public
      * @return $this

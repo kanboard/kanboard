@@ -24,6 +24,7 @@ class UserListController extends BaseController
         $this->response->html($this->helper->layout->app('user_list/listing', array(
             'title' => t('Users').' ('.$paginator->getTotal().')',
             'paginator' => $paginator,
+            'values' => array(),
         )));
     }
 
@@ -38,7 +39,6 @@ class UserListController extends BaseController
         $paginator = $this->userPagination->getListingPaginator();
 
         if ($search !== '' && ! $paginator->isEmpty()) {
-
             $paginator = $paginator
                 ->setUrl('UserListController', 'search', array('search' => $search))
                 ->setQuery($this->userQuery
