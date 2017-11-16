@@ -20,6 +20,7 @@ use Kanboard\Console\TaskExportCommand;
 use Kanboard\Console\TaskOverdueNotificationCommand;
 use Kanboard\Console\TaskTriggerCommand;
 use Kanboard\Console\TransitionExportCommand;
+use Kanboard\Console\VersionCommand;
 use Kanboard\Console\WorkerCommand;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -61,6 +62,7 @@ class CommandProvider implements ServiceProviderInterface
         $application->add(new PluginUninstallCommand($container));
         $application->add(new DatabaseMigrationCommand($container));
         $application->add(new DatabaseVersionCommand($container));
+        $application->add(new VersionCommand($container));
 
         $container['cli'] = $application;
         return $container;

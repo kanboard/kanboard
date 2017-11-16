@@ -32,6 +32,7 @@ Available commands:
   help                               Displays help for a command
   job                                Execute individual job (read payload from stdin)
   list                               Lists commands
+  version                            Display Kanboard version
   worker                             Execute queue worker
  db
   db:migrate                         Execute SQL migrations
