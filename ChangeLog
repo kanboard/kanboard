@@ -3,21 +3,33 @@ Version 1.x (unreleased)
 
 Breaking changes:
 
-* Remove feature "Allow everybody to access to this project" (You must define members and groups)
+* Remove feature "Allow everybody to access to this project" (You must define project members and groups)
 * Composer dependencies are now included in the repository to be able to use git-archive (except development dependencies)
 
 New features:
 
 * Add predefined templates for task descriptions
 * Add users, groups and projects search
+* Add command line argument to display Kanboard version
+* Add user backend provider system (to be used by external plugins)
 * Romanian translation
 
 Improvements:
 
+* Improve docs
+* Minor CSS improvements
+* Add help message on project sharing page
 * Task CSV import is now able to handle the priority, start date, tags and one external link
 * Improve iCalendar feed to include tasks with start/end date and due date with a time
 * Check if the start date is before due date
 * You can get an archive of Kanboard by using the download button in Github or the command git archive
+* Translation updates
+
+Bug fixes:
+
+* Fix project dropdown visibility when page is scrolled down
+* Task move events must be executed synchronously
+* Handle CSV files with only "\r" line endings
 
 Version 1.0.48 (October 23, 2017)
 ---------------------------------
