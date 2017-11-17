@@ -15,10 +15,10 @@ class ColorModel extends Base
     /**
      * Default colors
      *
-     * @access private
+     * @access protected
      * @var array
      */
-    private $default_colors = array(
+    protected $default_colors = array(
         'yellow' => array(
             'name' => 'Yellow',
             'background' => 'rgb(245, 247, 196)',
