@@ -1266,7 +1266,7 @@ return array(
     'Unable to upload files, check the permissions of your data folder.' => 'Невозможно загрузить файлы, проверьте права доступа на папку "data".',
     'Another category with the same name exists in this project' => 'Другая категория с таким же именем уже существует в этом проекте',
     'Comment sent by email successfully.' => 'Комментарий успешно отправлен по e-mail.',
-    'Sent by email to [%s](mailto:%s) (%s)' => 'Отправлен по e-mail для [%s](mailto:%s) (%s)',
+    'Sent by email to "%s" (%s)' => 'Отправлен по e-mail для "%s" (%s)',
     'Unable to read uploaded file.' => 'Не удаётся прочитать загруженный файл.',
     'Database uploaded successfully.' => 'База данных успешно импортирована.',
     'Task sent by email successfully.' => 'Задача успешно отправлена по e-mail.',

@@ -1266,7 +1266,7 @@ return array(
     'Unable to upload files, check the permissions of your data folder.' => 'No se pueden cargar archivos, verifique los permisos de su carpeta de datos (data)',
     'Another category with the same name exists in this project' => 'Ya existe otra categoría con el mismo nombre en este proyecto',
     'Comment sent by email successfully.' => 'Comentario enviado exitosamente por email',
-    'Sent by email to [%s](mailto:%s) (%s)' => 'Enviado por email a [%s](mailto:%s) (%s)',
+    'Sent by email to "%s" (%s)' => 'Enviado por email a "%s" (%s)',
     'Unable to read uploaded file.' => 'No se pudo leer el archivo cargado',
     'Database uploaded successfully.' => 'Base de datos cargada exitosamente',
     'Task sent by email successfully.' => 'Tarea enviada exitosamente por email',

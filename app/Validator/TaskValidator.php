@@ -217,8 +217,7 @@ class TaskValidator extends BaseValidator
     {
         $rules = array(
             new Validators\Required('subject', t('This field is required')),
-            new Validators\Required('email', t('This field is required')),
-            new Validators\Email('email', t('Email address invalid')),
+            new Validators\Required('emails', t('This field is required')),
         );
 
         $v = new Validator($values, $rules);

@@ -6,8 +6,8 @@
     <?= $this->form->hidden('task_id', $values) ?>
     <?= $this->form->hidden('user_id', $values) ?>
 
-    <?= $this->form->label(t('Email'), 'email') ?>
-    <?= $this->form->email('email', $values, $errors, array('autofocus', 'required', 'tabindex="1"')) ?>
+    <?= $this->form->label(t('Email'), 'emails') ?>
+    <?= $this->form->text('emails', $values, $errors, array('autofocus', 'required', 'tabindex="1"')) ?>
 
     <?php if (! empty($members)): ?>
         <div class="dropdown">

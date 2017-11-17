@@ -36,7 +36,7 @@ class TaskMailController extends BaseController
             $this->flash->success(t('Task sent by email successfully.'));
 
             $this->commentModel->create(array(
-                'comment' => t('This task was sent by email to "%s" with subject "%s".', $values['email'], $values['subject']),
+                'comment' => t('This task was sent by email to "%s" with subject "%s".', $values['emails'], $values['subject']),
                 'user_id' => $this->userSession->getId(),
                 'task_id' => $task['id'],
             ));
@@ -49,15 +49,16 @@ class TaskMailController extends BaseController
 
     protected function sendByEmail(array $values, array $task)
     {
-        $html = $this->template->render('task_mail/email', array(
-            'task' => $task,
-        ));
+        $emails = explode_csv_field($values['emails']);
+        $html = $this->template->render('task_mail/email', array('task' => $task));
 
-        $this->emailClient->send(
-            $values['email'],
-            $values['email'],
-            $values['subject'],
-            $html
-        );
+        foreach ($emails as $email) {
+            $this->emailClient->send(
+                $email,
+                $email,
+                $values['subject'],
+                $html
+            );
+        }
     }
 }

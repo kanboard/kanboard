@@ -26,8 +26,7 @@ class CommentValidator extends BaseValidator
             new Validators\Required('task_id', t('This value is required')),
             new Validators\Required('user_id', t('This value is required')),
             new Validators\Required('subject', t('This field is required')),
-            new Validators\Required('email', t('This field is required')),
-            new Validators\Email('email', t('Email address invalid')),
+            new Validators\Required('emails', t('This field is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));

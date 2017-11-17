@@ -67,9 +67,7 @@ class TaskImport extends Base
                 $this->nbImportedTasks++;
 
                 if (! empty($row['tags'])) {
-                    $tagsList = explode(',', $row['tags']);
-                    array_walk($tagsList, function (&$value) { $value = trim($value); });
-                    $this->taskTagModel->save($this->projectId, $taskId, $tagsList);
+                    $this->taskTagModel->save($this->projectId, $taskId, explode_csv_field($row['tags']));
                 }
 
                 if (! empty($row['external_link'])) {

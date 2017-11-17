@@ -163,6 +163,7 @@ return array(
     'Kanboard\\Console\\TaskOverdueNotificationCommand' => $baseDir . '/app/Console/TaskOverdueNotificationCommand.php',
     'Kanboard\\Console\\TaskTriggerCommand' => $baseDir . '/app/Console/TaskTriggerCommand.php',
     'Kanboard\\Console\\TransitionExportCommand' => $baseDir . '/app/Console/TransitionExportCommand.php',
+    'Kanboard\\Console\\VersionCommand' => $baseDir . '/app/Console/VersionCommand.php',
     'Kanboard\\Console\\WorkerCommand' => $baseDir . '/app/Console/WorkerCommand.php',
     'Kanboard\\Controller\\ActionController' => $baseDir . '/app/Controller/ActionController.php',
     'Kanboard\\Controller\\ActionCreationController' => $baseDir . '/app/Controller/ActionCreationController.php',

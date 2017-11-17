@@ -1266,7 +1266,7 @@ return array(
     'Unable to upload files, check the permissions of your data folder.' => 'Nu am putut încărca fișierele, verifică permisiunile directorului de date.',
     'Another category with the same name exists in this project' => 'Altă categorie cu același nume există deja în proiect',
     'Comment sent by email successfully.' => 'Comentariul a fost trimis prin e-mail.',
-    'Sent by email to [%s](mailto:%s) (%s)' => 'Trimite prin e-mail la [%s](mailto:%s) (%s)',
+    'Sent by email to "%s" (%s)' => 'Trimite prin e-mail la "%s" (%s)',
     'Unable to read uploaded file.' => 'Nu pot citi fișierul încărcat.',
     'Database uploaded successfully.' => 'Baza de date a fost încărcată cu succes.',
     'Task sent by email successfully.' => 'Sarcina a fost trimisă prin e-mail.',

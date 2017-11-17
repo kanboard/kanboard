@@ -1266,7 +1266,7 @@ return array(
     'Unable to upload files, check the permissions of your data folder.' => 'Dosya yüklenemedi. Lütfen yükleme dizine yazma izninizi kontrol ediniz.',
     'Another category with the same name exists in this project' => 'Bu projede aynı ada sahip başka bir kategori var',
     'Comment sent by email successfully.' => 'Yorum ePosta ile başarıyla gönderildi.',
-    'Sent by email to [%s](mailto:%s) (%s)' => 'ePostayı gönder [%s](mailto:%s) (%s)',
+    'Sent by email to "%s" (%s)' => 'ePostayı gönder "%s" (%s)',
     'Unable to read uploaded file.' => 'Yüklenen dosya okunamadı.',
     'Database uploaded successfully.' => 'Veritabanı başarıyla yüklendi.',
     'Task sent by email successfully.' => 'Görev ePosta ile başarıyla gönderildi.',

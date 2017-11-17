@@ -14,7 +14,7 @@ class CommentValidatorTest extends Base
             'user_id' => 1,
             'task_id' => 1,
             'comment' => 'blah',
-            'email'   => 'test@localhost',
+            'emails'  => 'test@localhost, another@localhost',
             'subject' => 'something',
         ));
 
@@ -24,17 +24,7 @@ class CommentValidatorTest extends Base
             'user_id' => 1,
             'task_id' => 1,
             'comment' => 'blah',
-            'email'   => 'invalid',
             'subject' => 'something',
-        ));
-
-        $this->assertFalse($result[0]);
-
-        $result = $commentValidator->validateEmailCreation(array(
-            'user_id' => 1,
-            'task_id' => 1,
-            'comment' => 'bla',
-            'email'   => 'test@localhost',
         ));
 
         $this->assertFalse($result[0]);

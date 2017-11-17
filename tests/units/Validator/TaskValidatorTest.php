@@ -10,16 +10,13 @@ class TaskValidatorTest extends Base
     {
         $taskValidator = new TaskValidator($this->container);
 
-        $result = $taskValidator->validateEmailCreation(array('email' => 'test@localhost', 'subject' => 'test'));
+        $result = $taskValidator->validateEmailCreation(array('emails' => 'test@localhost', 'subject' => 'test'));
         $this->assertTrue($result[0]);
-
-        $result = $taskValidator->validateEmailCreation(array('email' => 'test', 'subject' => 'test'));
-        $this->assertFalse($result[0]);
 
         $result = $taskValidator->validateEmailCreation(array('subject' => 'test'));
         $this->assertFalse($result[0]);
 
-        $result = $taskValidator->validateEmailCreation(array('email' => 'test@localhost'));
+        $result = $taskValidator->validateEmailCreation(array('emails' => 'test@localhost, test@localhost'));
         $this->assertFalse($result[0]);
     }
 
@@ -103,7 +100,6 @@ class TaskValidatorTest extends Base
         $this->assertTrue($result[0]);
         $result = $taskValidator->validateCreation(array('project_id' => 1, 'title' => 'test', 'date_due' => '02/01/2017 1:15 pm'));
         $this->assertFalse($result[0]);
-
 
         // date_started
         // ISO dates

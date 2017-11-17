@@ -1266,7 +1266,7 @@ return array(
     'Unable to upload files, check the permissions of your data folder.' => 'Nem lehet feltölteni fájlokat. Ellenőrizze az adatkönyvtár jogosultságait.',
     'Another category with the same name exists in this project' => 'Már létezik egy ugyanilyen nevű kategória ebben a projektben',
     'Comment sent by email successfully.' => 'A megjegyzés sikeresen elküldve e-mailben.',
-    'Sent by email to [%s](mailto:%s) (%s)' => 'E-mail küldve neki: [%s](mailto:%s) (%s)',
+    'Sent by email to "%s" (%s)' => 'E-mail küldve neki: "%s" (%s)',
     'Unable to read uploaded file.' => 'Nem lehet beolvasni a feltöltött fájlt.',
     'Database uploaded successfully.' => 'Az adatbázis sikeresen feltöltve.',
     'Task sent by email successfully.' => 'A feladat sikeresen elküldve e-mailben.',

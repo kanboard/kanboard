@@ -9,6 +9,7 @@ Breaking changes:
 New features:
 
 * Add predefined templates for task descriptions
+* Add the possibility to send tasks and comments to multiple recipients
 * Add users, groups and projects search
 * Add command line argument to display Kanboard version
 * Add user backend provider system (to be used by external plugins)
@@ -16,7 +17,6 @@ New features:
 
 Improvements:
 
-* Improve docs
 * Minor CSS improvements
 * Add help message on project sharing page
 * Task CSV import is now able to handle the priority, start date, tags and one external link

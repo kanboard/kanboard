@@ -1266,7 +1266,7 @@ return array(
     'Unable to upload files, check the permissions of your data folder.' => 'Nemoguće priložiti datoteke, provjeri prava na "data" direktoriju na serveru.',
     'Another category with the same name exists in this project' => 'Kategorija sa ovim imenom već postoji na ovom projektu',
     'Comment sent by email successfully.' => 'Komentar je uspješno poslan email-om.',
-    'Sent by email to [%s](mailto:%s) (%s)' => 'Pošalji email-om [%s](mailto:%s) (%s)',
+    'Sent by email to "%s" (%s)' => 'Pošalji email-om "%s" (%s)',
     'Unable to read uploaded file.' => 'Nemoguće pročitati dodanu datoteku.',
     'Database uploaded successfully.' => 'Baza podataka je uspješno dodana.',
     'Task sent by email successfully.' => 'Zadatak je uspješno poslan email-om.',

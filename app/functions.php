@@ -2,6 +2,13 @@
 
 use Kanboard\Core\Translator;
 
+function explode_csv_field($field)
+{
+    $fields = explode(',', $field);
+    array_walk($fields, function (&$value) { $value = trim($value); });
+    return array_filter($fields);
+}
+
 /**
  * Associate another dict to a dict based on a common key
  *

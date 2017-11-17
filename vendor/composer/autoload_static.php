@@ -299,6 +299,7 @@ class ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b
         'Kanboard\\Console\\TaskOverdueNotificationCommand' => __DIR__ . '/../..' . '/app/Console/TaskOverdueNotificationCommand.php',
         'Kanboard\\Console\\TaskTriggerCommand' => __DIR__ . '/../..' . '/app/Console/TaskTriggerCommand.php',
         'Kanboard\\Console\\TransitionExportCommand' => __DIR__ . '/../..' . '/app/Console/TransitionExportCommand.php',
+        'Kanboard\\Console\\VersionCommand' => __DIR__ . '/../..' . '/app/Console/VersionCommand.php',
         'Kanboard\\Console\\WorkerCommand' => __DIR__ . '/../..' . '/app/Console/WorkerCommand.php',
         'Kanboard\\Controller\\ActionController' => __DIR__ . '/../..' . '/app/Controller/ActionController.php',
         'Kanboard\\Controller\\ActionCreationController' => __DIR__ . '/../..' . '/app/Controller/ActionCreationController.php',

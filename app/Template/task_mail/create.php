@@ -4,8 +4,8 @@
 <form method="post" action="<?= $this->url->href('TaskMailController', 'send', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off" class="js-mail-form">
     <?= $this->form->csrf() ?>
 
-    <?= $this->form->label(t('Email'), 'email') ?>
-    <?= $this->form->email('email', $values, $errors, array('autofocus', 'required', 'tabindex="1"')) ?>
+    <?= $this->form->label(t('Email'), 'emails') ?>
+    <?= $this->form->text('emails', $values, $errors, array('autofocus', 'required', 'tabindex="1"')) ?>
 
     <?php if (! empty($members)): ?>
     <div class="dropdown">

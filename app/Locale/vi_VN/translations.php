@@ -1272,7 +1272,7 @@ return array(
     'Unable to upload files, check the permissions of your data folder.' => 'Không thể tải tệp lên, hãy kiểm tra quyền của thư mục dữ liệu của bạn.',
     'Another category with the same name exists in this project' => 'Một thể loại khác có cùng tên tồn tại trong dự án này',
     'Comment sent by email successfully.' => 'Thảo luận gửi qua email thành công.',
-    'Sent by email to [%s](mailto:%s) (%s)' => 'Gửi qua email tới [ %s] (mailto: %s) ( %s)',
+    'Sent by email to "%s" (%s)' => 'Gửi qua email tới "%s" ( %s)',
     'Unable to read uploaded file.' => 'Không thể đọc tập tin được tải lên.',
     'Database uploaded successfully.' => 'Cơ sở dữ liệu được tải lên thành công.',
     'Task sent by email successfully.' => 'Nhiệm vụ gửi qua email thành công.',

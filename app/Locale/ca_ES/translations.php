@@ -1266,7 +1266,7 @@ return array(
     'Unable to upload files, check the permissions of your data folder.' => 'No es pot pujar arxius, comprovar els permisos de la carpeta de dades.',
     'Another category with the same name exists in this project' => 'Una altra categoria amb el mateix nom existeix en aquest projecte',
     'Comment sent by email successfully.' => 'Comentar enviat per correu electrònic amb èxit.',
-    // 'Sent by email to [%s](mailto:%s) (%s)' => '',
+    // 'Sent by email to "%s" (%s)' => '',
     'Unable to read uploaded file.' => 'No es pot llegir el fitxer pujat.',
     'Database uploaded successfully.' => 'Base de dades carregat correctament.',
     'Task sent by email successfully.' => 'Tasca enviat per correu electrònic amb èxit.',

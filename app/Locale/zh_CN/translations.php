@@ -1266,7 +1266,7 @@ return array(
     'Unable to upload files, check the permissions of your data folder.' => '无法上传文件，请检查你的data目录权限。',
     // 'Another category with the same name exists in this project' => '',
     // 'Comment sent by email successfully.' => '',
-    // 'Sent by email to [%s](mailto:%s) (%s)' => '',
+    // 'Sent by email to "%s" (%s)' => '',
     // 'Unable to read uploaded file.' => '',
     // 'Database uploaded successfully.' => '',
     // 'Task sent by email successfully.' => '',

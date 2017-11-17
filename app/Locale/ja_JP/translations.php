@@ -1266,7 +1266,7 @@ return array(
     'Unable to upload files, check the permissions of your data folder.' => 'ファイルをアップロードできません。データフォルダのアクセス権を確認してください。',
     'Another category with the same name exists in this project' => '同じ名前の別のカテゴリがプロジェクトに存在します',
     'Comment sent by email successfully.' => 'メールでコメントを送信しました',
-    'Sent by email to [%s](mailto:%s) (%s)' => '%s をメールで送信しました(mailto:%s) (%s)',
+    'Sent by email to "%s" (%s)' => '%s をメールで送信しました "%s"',
     'Unable to read uploaded file.' => 'アップロードされたファイルを読み込めません',
     'Database uploaded successfully.' => 'データベースをアップロードしました',
     'Task sent by email successfully.' => 'タスクをメールで送信しました',

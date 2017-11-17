@@ -1,9 +1,15 @@
 KB.onClick('.js-autocomplete-email', function (e) {
-    var email = KB.dom(e.target).data('email');
-    var emailField = KB.find('.js-mail-form input[type="email"]');
+    var email = e.target.dataset.email;
+    var emailField = document.querySelector('.js-mail-form input[name="emails"]');
 
-    if (email && emailField) {
-        emailField.build().value = email;
+    if (!email || !emailField) {
+        return;
+    }
+
+    if (emailField.value !== '') {
+        emailField.value += ', ' + email;
+    } else {
+        emailField.value = email;
     }
 
     _KB.controllers.Dropdown.close();
