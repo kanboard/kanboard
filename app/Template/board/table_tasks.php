@@ -3,7 +3,7 @@
     <?php foreach ($swimlane['columns'] as $column): ?>
         <td class="
             board-column-<?= $column['id'] ?>
-            <?= $column['task_limit'] > 0 && $column['nb_tasks'] > $column['task_limit'] ? 'board-task-list-limit' : '' ?>
+            <?= $column['task_limit'] > 0 && $column['column_nb_tasks'] > $column['task_limit'] ? 'board-task-list-limit' : '' ?>
             "
         >
 
