@@ -1,5 +1,5 @@
-Version 1.x (unreleased)
-------------------------
+Version 1.1.0 (November 20, 2017)
+---------------------------------
 
 Breaking changes:
 
@@ -13,7 +13,7 @@ New features:
 * Add users, groups and projects search
 * Add command line argument to display Kanboard version
 * Add user backend provider system (to be used by external plugins)
-* Romanian translation
+* Add Romanian and Chinese (Taiwan) translation
 
 Improvements:
 
