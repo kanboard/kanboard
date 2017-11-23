@@ -259,6 +259,7 @@ List of template hooks:
 | `template:user:integrations`                              | Integration page in user profile                   |
 | `template:user:sidebar:actions`                           | Sidebar in user profile (section actions)          |
 | `template:user:sidebar:information`                       | Sidebar in user profile (section information)      |
+| `template:user:show:profile:info`                         | User profile information                           |
 
 
 Another template hooks can be added if necessary, just ask on the issue tracker.
