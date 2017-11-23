@@ -1,3 +1,6 @@
+notifications:
+  email: false
+
 git:
   depth: 3
 
