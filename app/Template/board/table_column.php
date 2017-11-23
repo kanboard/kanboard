@@ -19,10 +19,11 @@
                 <?= $this->task->getNewBoardTaskButton($swimlane, $column) ?>
             <?php endif ?>
 
-
+            <?php if ($column['nb_tasks'] > 0): ?>
             <span title="<?= t('Task count') ?>">
                 (<span id="task-number-column-<?= $column['id'] ?>"><?= $column['nb_tasks'] ?></span>)
             </span>
+            <?php endif ?>
 
             <span class="board-column-title">
                 <?php if ($not_editable): ?>
@@ -76,14 +77,13 @@
 
             <?php if (! empty($column['column_nb_tasks'])): ?>
             <span title="<?= t('Total number of tasks in this column across all swimlanes') ?>" class="board-column-header-task-count">
-                (
-                <span><?= $column['column_nb_tasks'] ?></span>
-                <?php if ($column['task_limit']): ?>
-                    /<span title="<?= t('Task limit') ?>"><?= $this->text->e($column['task_limit']) ?></span>
+                <?php if ($column['task_limit'] > 0): ?>
+                    (<span><?= $column['column_nb_tasks'] ?></span> / <span title="<?= t('Task limit') ?>"><?= $this->text->e($column['task_limit']) ?></span>)
+                <?php else: ?>
+                    (<span><?= $column['column_nb_tasks'] ?></span>)
                 <?php endif ?>
-                )
             </span>
-            <?php endif; ?>
+            <?php endif ?>
 	    <?= $this->hook->render('template:board:column:header', array('swimlane' => $swimlane, 'column' => $column)) ?>
         </div>
 
