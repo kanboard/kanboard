@@ -20,9 +20,12 @@
     order: 1
     max-width: 100%
 
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1)
+    max-width: 75%
+
 .sidebar
-  width: 25%
-  max-width: 250px
+  max-width: 25%
+  min-width: 230px
 
   @include sm-device
     flex: 1 auto

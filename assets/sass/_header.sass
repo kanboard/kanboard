@@ -12,22 +12,25 @@ header
   .title-container
     flex: 1
     min-width: 300px
-    @include sm-device
+    @include xs-device
       order: 3
 
   .board-selector-container
     min-width: 320px
     display: flex
     align-items: center
-    @include sm-device
+    @include xs-device
       order: 2
+      min-width: 300px
+      input[type=text]
+        max-width: 280px
 
   .menus-container
     min-width: 120px
     display: flex
     align-items: center
     justify-content: flex-end
-    @include sm-device
+    @include xs-device
       order: 1
       margin-bottom: 5px
       margin-left: auto
