@@ -12,13 +12,17 @@
 .sidebar-content
   padding-left: 10px
   flex: 1 100%
+  max-width: 85%
+  overflow-wrap: break-word
 
   @include sm-device
     padding-left: 0
     order: 1
+    max-width: 100%
 
 .sidebar
-  width: 250px
+  width: 25%
+  max-width: 250px
 
   @include sm-device
     flex: 1 auto
