@@ -18,10 +18,13 @@ Instalar Kanboard
 
 ```bash
 cd /var/www/html
-wget https://kanboard.net/kanboard-latest.zip
-unzip kanboard-latest.zip
-chown -R www-data:www-data kanboard/data
-rm kanboard-latest.zip
+
+# Download the latest release from https://github.com/kanboard/kanboard/releases
+wget https://github.com/kanboard/kanboard/archive/v<version>.zip
+
+unzip kanboard-<version>.zip
+chown -R www-data:www-data kanboard-<version>/data
+rm kanboard-<version>.zip
 ```
 
 Debian 7 (Wheezy)
@@ -38,10 +41,13 @@ Instalar Kanboard
 
 ```bash
 cd /var/www
-wget https://kanboard.net/kanboard-latest.zip
-unzip kanboard-latest.zip
-chown -R www-data:www-data kanboard/data
-rm kanboard-latest.zip
+
+# Download the latest release from https://github.com/kanboard/kanboard/releases
+wget https://github.com/kanboard/kanboard/archive/v<version>.zip
+
+unzip kanboard-<version>.zip
+chown -R www-data:www-data kanboard-<version>/data
+rm kanboard-<version>.zip
 ```
 
 Debian 6 (Squeeze)
@@ -58,8 +64,11 @@ Instalar Kanboard:
 
 ```bash
 cd /var/www
-wget https://kanboard.net/kanboard-latest.zip
-unzip kanboard-latest.zip
-chown -R www-data:www-data kanboard/data
-rm kanboard-latest.zip
+
+# Download the latest release from https://github.com/kanboard/kanboard/releases
+wget https://github.com/kanboard/kanboard/archive/v<version>.zip
+
+unzip kanboard-<version>.zip
+chown -R www-data:www-data kanboard-<version>/data
+rm kanboard-<version>.zip
 ```

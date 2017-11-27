@@ -37,7 +37,7 @@ I want to translate Kanboard
 ----------------------------
 
 Kanboard is translated in many languages.
-However, translations are not complete, take look at the [translation guide to contribute](https://kanboard.net/documentation/translations).
+However, translations are not complete, take look at the [translation guide to contribute](translations.markdown).
 
 I want to improve the documentation
 -----------------------------------

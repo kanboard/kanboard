@@ -1009,7 +1009,7 @@ return array(
     'Change subtask position' => 'Αλλαγή θέσης υπο-εργασίας',
     'This value must be greater than %d' => 'Η τιμή πρέπει να είναι μεγαλύτερη από %d',
     'Another swimlane with the same name exists in the project' => 'Μια άλλη λωρίδα, με το ίδιο όνομα υπάρχει στο έργο',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => 'Παράδειγμα: http://example.kanboard.net/ (χρησιμοποιείται για τη δημιουργία απόλυτων URLs)',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => 'Παράδειγμα: https://example.kanboard.org/ (χρησιμοποιείται για τη δημιουργία απόλυτων URLs)',
     // 'Actions duplicated successfully.' => '',
     // 'Unable to duplicate actions.' => '',
     // 'Add a new action' => '',

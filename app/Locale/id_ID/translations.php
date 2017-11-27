@@ -1009,7 +1009,7 @@ return array(
     'Change subtask position' => 'Ganti posisi sub-tugas',
     'This value must be greater than %d' => 'Nilai ini harus lebih besar dari %d',
     'Another swimlane with the same name exists in the project' => 'Swimlane lain dengan nama yang sama sudah ada di proyek ini',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => 'Contoh: http://contoh.kanboard.net/ (digunakan untuk menghasilkan URL yang absolut',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => 'Contoh: https://contoh.kanboard.org/ (digunakan untuk menghasilkan URL yang absolut',
     'Actions duplicated successfully.' => 'Tindakan berhasil di duplikasi.',
     'Unable to duplicate actions.' => 'Tidak bisa menduplikasi tindakan.',
     'Add a new action' => 'Tambahkan tindakan baru',

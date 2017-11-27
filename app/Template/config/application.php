@@ -6,8 +6,8 @@
 
     <fieldset>
         <?= $this->form->label(t('Application URL'), 'application_url') ?>
-        <?= $this->form->text('application_url', $values, $errors, array('placeholder="http://example.kanboard.net/"')) ?>
-        <p class="form-help"><?= t('Example: http://example.kanboard.net/ (used to generate absolute URLs)') ?></p>
+        <?= $this->form->text('application_url', $values, $errors, array('placeholder="https://example.kanboard.org/"')) ?>
+        <p class="form-help"><?= t('Example: https://example.kanboard.org/ (used to generate absolute URLs)') ?></p>
 
         <?= $this->form->label(t('Language'), 'application_language') ?>
         <?= $this->form->select('application_language', $languages, $values, $errors) ?>

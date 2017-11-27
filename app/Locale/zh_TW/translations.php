@@ -1009,7 +1009,7 @@ return array(
     'Change subtask position' => '更改子任務位置',
     'This value must be greater than %d' => '目前輸入值必須大於%d',
     'Another swimlane with the same name exists in the project' => '目前專案中相同名稱里程碑已存在',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '例如： http://example.kanboard.net/（通常用於產生永久網址）',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => '例如： https://example.kanboard.org/（通常用於產生永久網址）',
     'Actions duplicated successfully.' => '動作複製成功。',
     'Unable to duplicate actions.' => '無法複製動作。',
     'Add a new action' => '增加新動作',

@@ -28,13 +28,13 @@ class WebLinkProviderTest extends Base
     {
         $webLinkProvider = new WebLinkProvider($this->container);
 
-        $webLinkProvider->setUserTextInput('https://kanboard.net/');
+        $webLinkProvider->setUserTextInput('https://kanboard.org/');
         $this->assertTrue($webLinkProvider->match());
 
-        $webLinkProvider->setUserTextInput('https://kanboard.net/mypage');
+        $webLinkProvider->setUserTextInput('https://kanboard.org/mypage');
         $this->assertTrue($webLinkProvider->match());
 
-        $webLinkProvider->setUserTextInput('  https://kanboard.net/ ');
+        $webLinkProvider->setUserTextInput('  https://kanboard.org/ ');
         $this->assertTrue($webLinkProvider->match());
 
         $webLinkProvider->setUserTextInput('http:// invalid url');

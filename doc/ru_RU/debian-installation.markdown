@@ -24,13 +24,12 @@ Debian 8 (Jessie)[¶](#debian-8-jessie "Ссылка на этот заголо�
 
     cd /var/www/html
 
-    wget https://kanboard.net/kanboard-latest.zip
+    # Download the latest release from https://github.com/kanboard/kanboard/releases
+    wget https://github.com/kanboard/kanboard/archive/v<version>.zip
 
-    unzip kanboard-latest.zip
-
-    chown -R www-data:www-data kanboard/data
-
-    rm kanboard-latest.zip
+    unzip kanboard-<version>.zip
+    chown -R www-data:www-data kanboard-<version>/data
+    rm kanboard-<version>.zip
 
 
 
@@ -55,13 +54,12 @@ Debian 7 (Wheezy)[¶](#debian-7-wheezy "Ссылка на этот заголо�
 
     cd /var/www
 
-    wget https://kanboard.net/kanboard-latest.zip
+    # Download the latest release from https://github.com/kanboard/kanboard/releases
+    wget https://github.com/kanboard/kanboard/archive/v<version>.zip
 
-    unzip kanboard-latest.zip
-
-    chown -R www-data:www-data kanboard/data
-
-    rm kanboard-latest.zip
+    unzip kanboard-<version>.zip
+    chown -R www-data:www-data kanboard-<version>/data
+    rm kanboard-<version>.zip
 
 
 
@@ -86,13 +84,12 @@ Debian 6 (Squeeze)[¶](#debian-6-squeeze "Ссылка на этот загол�
 
     cd /var/www
 
-    wget https://kanboard.net/kanboard-latest.zip
+    # Download the latest release from https://github.com/kanboard/kanboard/releases
+    wget https://github.com/kanboard/kanboard/archive/v<version>.zip
 
-    unzip kanboard-latest.zip
-
-    chown -R www-data:www-data kanboard/data
-
-    rm kanboard-latest.zip
+    unzip kanboard-<version>.zip
+    chown -R www-data:www-data kanboard-<version>/data
+    rm kanboard-<version>.zip
 
 
 

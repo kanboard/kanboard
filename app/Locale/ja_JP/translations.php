@@ -1009,7 +1009,7 @@ return array(
     'Change subtask position' => 'サブタスクの位置を変更',
     'This value must be greater than %d' => '%dより大きくなければなりません',
     'Another swimlane with the same name exists in the project' => '同じ名前の別のスイムレーンがプロジェクトにあります',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '例：http://example.kanboard.net/（絶対URLの生成に使用）',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => '例：https://example.kanboard.org/（絶対URLの生成に使用）',
     'Actions duplicated successfully.' => 'アクションを複製しました',
     'Unable to duplicate actions.' => 'アクションを複製できません',
     'Add a new action' => '新しいアクションを追加',

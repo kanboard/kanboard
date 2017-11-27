@@ -129,11 +129,11 @@ And here, an *italic* word with one *underscore*.
 
 
 
-    [My link title](https://kanboard.net/)
+    [My link title](https://kanboard.org/)
 
 
 
-    <https://kanboard.net>
+    <https://kanboard.org>
 
 
 
@@ -141,11 +141,11 @@ And here, an *italic* word with one *underscore*.
 
 
 
-[My link title](https://kanboard.net/)
+[My link title](https://kanboard.org/)
 
 
 
-[https://kanboard.net](https://kanboard.net)
+[https://kanboard.org](https://kanboard.org)
 
 
 

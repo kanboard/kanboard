@@ -1009,7 +1009,7 @@ return array(
     'Change subtask position' => '서브 할일 위치 변경',
     'This value must be greater than %d' => '이 값은 %d보다 커야 합니다',
     'Another swimlane with the same name exists in the project' => '프로젝트에 같은 이름의 스웜라인이 존재합니다',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => '예: http://example.kanboard.net/ (절대적 URLs을 생성하는데 사용됨)',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => '예: https://example.kanboard.org/ (절대적 URLs을 생성하는데 사용됨)',
     'Actions duplicated successfully.' => '행동이 성공적으로 복제되었습니다',
     'Unable to duplicate actions.' => '행동 복제 비활성화',
     'Add a new action' => '새로운 행동 추가',

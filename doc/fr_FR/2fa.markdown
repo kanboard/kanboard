@@ -1,5 +1,5 @@
 Authentification à deux facteurs
-=========================
+================================
 
 Chaque utilisateur peut activer [l'authentification à deux facteurs](http://en.wikipedia.org/wiki/Two_factor_authentication).
 Après s’être connecté, un code à usage unique (6 caractères) est demandé à l'utilisateur pour lui autoriser l’accès à Kanboard.
@@ -12,13 +12,13 @@ Il existe de nombreux logiciels compatibles avec le standard TOTP system.
 Par exemple, vous pouvez utilisez ces applications libres et open source :
 
 - [Google Authenticator](https://github.com/google/google-authenticator/) (Android, iOS, Blackberry)
-- [FreeOTP](https://fedorahosted.org/freeotp/) (Android, iOS)
+- [FreeOTP](https://freeotp.github.io/) (Android, iOS)
 - [OATH Toolkit](http://www.nongnu.org/oath-toolkit/) (utilitaire en ligne de commande sur Unix/Linux)
 
 Ce système peut fonctionner hors ligne et vous n'avez pas l'obligation d'avoir un téléphone portable.
 
 Paramétrage
------
+-----------
 
 1. Allez dans le profil utilisateur.
 2. Sur la gauche, cliquez sur **Authentification à deux facteurs** et cochez la case.

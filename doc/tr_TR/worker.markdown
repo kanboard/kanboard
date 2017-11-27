@@ -18,7 +18,7 @@ Bu özellik isteğe bağlıdır ve sunucunuza bir sıra arka plan programının 
 [Beanstalk](http://kr.github.io/beanstalkd/) basit, hızlı bir iş kuyruğu.
 
 - Beanstalk'u kurmak için, Linux dağıtımınızın paket yöneticisini kullanabilirsiniz
-- [Beanstalk için Kanboard eklentisi](https://kanboard.net/plugin/beanstalk)
+- [Beanstalk için Kanboard eklentisi](https://github.com/kanboard/plugin-beanstalk)
 - Çalışanı Kanboard komut satırı aracıyla çalıştırın: `./cli worker`
 
 ### RabbitMQ
@@ -26,7 +26,7 @@ Bu özellik isteğe bağlıdır ve sunucunuza bir sıra arka plan programının 
 [RabbitMQ](https://www.rabbitmq.com/), yüksek kullanılabilirlikli altyapı için daha uygun olan sağlam bir mesajlaşma sistemidir.
 
 - Kurulum ve yapılandırma için RabbitMQ'nun resmi belgelerini takip edin
-- [RabboardMQ için Kanboard eklentisi](https://kanboard.net/plugin/rabbitmq)
+- [RabboardMQ için Kanboard eklentisi](https://github.com/kanboard/plugin-rabbitmq)
 - Çalışanı Kanboard komut satırı aracıyla çalıştırın: `./cli worker`
 
 ### Notlar

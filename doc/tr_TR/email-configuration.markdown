@@ -90,12 +90,11 @@ SMTP sunucusu yapılandırmanız varsayılan adresi kabul etmiyorsa bu yararlı 
 
 ### Bildirimlerdeki göreve bir bağlantı nasıl görüntülenir?
 
-Bunu yapmak için, [Uygulama Ayarları](https://kanboard.net/documentation/application-configuration) bölümünde Kanboard kurulumunuzun URL'sini belirtmeniz gerekir. 
+Bunu yapmak için, [Uygulama Ayarları](application-configuration.markdown) bölümünde Kanboard kurulumunuzun URL'sini belirtmeniz gerekir.
 Varsayılan olarak, hiçbir şey tanımlanmadığından hiçbir bağlantı görüntülenmez.
 
 Örnekler:
 
-- http://demo.kanboard.net/
 - http://myserver/kanboard/
 - http://kanboard.mydomain.com/
 

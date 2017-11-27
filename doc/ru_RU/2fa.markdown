@@ -10,7 +10,7 @@
 Имеется много программ совместимых со стандартной системой TOTP. Например, вы можете использовать эти приложения, бесплатные и с открытым исходным кодом:
 
 -   [Google Authenticator](https://github.com/google/google-authenticator/) (Android, iOS, Blackberry)
--   [FreeOTP](https://fedorahosted.org/freeotp/) (Android, iOS)
+-   [FreeOTP](https://freeotp.github.io/) (Android, iOS)
 -   [OATH Toolkit](http://www.nongnu.org/oath-toolkit/) (Command line utility on Unix/Linux)
 
 Эти системы могут работать офлайн и вам не нужно иметь мобильную связь.

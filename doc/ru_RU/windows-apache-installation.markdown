@@ -207,7 +207,7 @@ PHP и Apache скомпилированы с Visual Studio, поэтому ва
 
 
 
--   [Скачайте zip файл](https://kanboard.net/downloads)
+-   [Скачайте zip файл](https://github.com/kanboard/kanboard/releases)
 
 
 

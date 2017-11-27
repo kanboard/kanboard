@@ -73,17 +73,17 @@ Links
 ### Source
 
 ```
-[My link title](https://kanboard.net/)
+[My link title](https://kanboard.org/)
 
-<https://kanboard.net>
+<https://kanboard.org>
 
 ```
 
 ### Result
 
-[My link title](https://kanboard.net/)
+[My link title](https://kanboard.org/)
 
-<https://kanboard.net>
+<https://kanboard.org>
 
 Source code
 -----------

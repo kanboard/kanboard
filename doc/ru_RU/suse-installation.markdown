@@ -12,13 +12,12 @@ OpenSuse Leap 42.1[¶](#opensuse-leap-42-1 "Ссылка на этот заго�
 
     cd /srv/www/htdocs
 
-    sudo wget https://kanboard.net/kanboard-latest.zip
+    # Download the latest release from https://github.com/kanboard/kanboard/releases
+    sudo wget https://github.com/kanboard/kanboard/archive/v<VERSION>.zip
 
-    sudo unzip kanboard-latest.zip
-
-    sudo chmod -R 777 kanboard
-
-    sudo rm kanboard-latest.zip
+    sudo unzip kanboard-<version>.zip
+    sudo chown -R wwwrun /srv/www/htdocs/kanboard-<version>/data
+    sudo rm kanboard-<version>.zip
 
  
 

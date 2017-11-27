@@ -1009,7 +1009,7 @@ return array(
     'Change subtask position' => 'Alt görev sırasını değiştir',
     'This value must be greater than %d' => 'Bu değer %d den büyük olmalı',
     'Another swimlane with the same name exists in the project' => 'Projede aynı isimli başka bir kulvar var',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => 'Örneğin: http://ornek.kanboard.net/ (sabit URLler oluşturmak için)',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => 'Örneğin: https://ornek.kanboard.org/ (sabit URLler oluşturmak için)',
     'Actions duplicated successfully.' => 'İşlemler başarıyla çoklandı.',
     'Unable to duplicate actions.' => 'İşlemler çoklanamıyor.',
     'Add a new action' => 'Yeni bir işlem ekle',

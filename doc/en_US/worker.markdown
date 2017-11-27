@@ -18,7 +18,7 @@ This feature is optional and require the installation of a queue daemon on your 
 [Beanstalk](http://kr.github.io/beanstalkd/) is a simple, fast work queue.
 
 - To install Beanstalk, you can simply use the package manager of your Linux distribution
-- Install the [Kanboard plugin for Beanstalk](https://kanboard.net/plugin/beanstalk)
+- Install the [Kanboard plugin for Beanstalk](https://github.com/kanboard/plugin-beanstalk)
 - Start the worker with the Kanboard command line tool: `./cli worker`
 
 ### RabbitMQ
@@ -26,7 +26,7 @@ This feature is optional and require the installation of a queue daemon on your 
 [RabbitMQ](https://www.rabbitmq.com/) is a robust messaging system that is more suitable for high-availability infrastructure.
 
 - Follow the official documentation of RabbitMQ for the installation and the configuration
-- Install the [Kanboard plugin for RabbitMQ](https://kanboard.net/plugin/rabbitmq)
+- Install the [Kanboard plugin for RabbitMQ](https://github.com/kanboard/plugin-rabbitmq)
 - Start the worker with the Kanboard command line tool: `./cli worker`
 
 ### Notes

@@ -1009,7 +1009,7 @@ return array(
     'Change subtask position' => 'Смена позиции подзадачи',
     'This value must be greater than %d' => 'Это значение должно быть больше чем  %d',
     'Another swimlane with the same name exists in the project' => 'Другая дорожка с таким же именем уже существует в этом проекте',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => 'Пример: http://example.kanboard.net/ (используется для генерации абсолютных URLs)',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => 'Пример: https://example.kanboard.org/ (используется для генерации абсолютных URLs)',
     'Actions duplicated successfully.' => 'Дублирование действий прошло успешно',
     'Unable to duplicate actions.' => 'Дублирование действий закончилось неудачно',
     'Add a new action' => 'Добавить новое действие',

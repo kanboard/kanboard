@@ -90,13 +90,12 @@ Esto puede ser útil si su configuracion del servidor SMTP no acepta una direcci
 
 ### Cómo mostrar un enlace a la tarea en las notificaciones ?
 
-Para hacer eso, tu tienes que especificar la URL de tu instalación de tu kanboard [Application Settings](https://kanboard.net/documentation/application-configuration).
+Para hacer eso, tu tienes que especificar la URL de tu instalación de tu kanboard [Application Settings](application-configuration.markdown).
 
 De manera predeterminada, no se define nada, por lo que no se mostrará los enlaces.
 
 Ejemplos :
 
-- http://demo.kanboard.net/
 - http://myserver/kanboard/
 - http://kanboard.mydomain.com/
 

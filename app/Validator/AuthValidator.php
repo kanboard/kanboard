@@ -93,7 +93,7 @@ class AuthValidator extends BaseValidator
      *
      * @access protected
      * @param  array   $values           Form values
-     * @return boolean
+     * @return array
      */
     protected function validateCaptcha(array $values)
     {

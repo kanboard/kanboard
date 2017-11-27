@@ -1,13 +1,13 @@
 Créer des tâches par email
-=====================
+==========================
 
 Vous pouvez créer des tâches directement en envoyant un message.
 
 Pour le moment, Kanboard fonctionne avec 3 services externes :
 
-- [Mailgun](https://kanboard.net/documentation/mailgun)
-- [Sendgrid](https://kanboard.net/documentation/sendgrid)
-- [Postmark](https://kanboard.net/documentation/postmark)
+- [Mailgun](https://github.com/kanboard/plugin-mailgun)
+- [Sendgrid](https://github.com/kanboard/plugin-sendgrid)
+- [Postmark](https://github.com/kanboard/plugin-postmark)
 
 Ces services gèrent le courrier entrant sans qu'on ait à configurer un serveur SMTP.
 
@@ -15,7 +15,7 @@ Ces services gèrent le courrier entrant sans qu'on ait à configurer un serveur
 Toutes les opérations complexes sont prises en charge par ces services.
 
 Processus de réception du courrier entrant
-------------------------
+------------------------------------------
 
 1. Vous envoyez un mail à une adresse spécifique, par exemple **quelquechose+monprojet@inbound.mondomaine.tld**
 2. Votre mail est envoyé sur les serveurs tiers SMTP
@@ -25,7 +25,7 @@ Processus de réception du courrier entrant
 Remarque : les nouvelles tâches sont automatiquement créées dans la première colonne.
 
 Format du mail
-------------
+--------------
 
 - La partie locale de l'adresse mail doit utiliser le signe + comme séparateur, par exemple **kanboard+projet123**
 - La chaîne de caractères définie après le signe + doit correspondre à l'identifiant d'un projet, par exemple **projet123** est l'identifiant du projet **Projet 123**
@@ -36,7 +36,7 @@ Les courriers entrants peuvent être écrits aux formats .txt ou .HTML.
 **Kanboard peut convertir en Markdown les messages écrits en simple HTML**.
 
 Sécurité et prérequis
--------------------------
+---------------------
 
 - Le webhook de Kanboard est protégé par un jeton aléatoire
 - L'adresse de l'expéditeur doit correspondre à celle d'un utilisateur de Kanboard

@@ -36,7 +36,7 @@ Deseo traducir Kanboard
 ----------------------------
 Kanboard se traduce en muchos idiomas.
 
-Sin embargo, las traducciones no están completas, observe la [guía de traducción para contribuir] (https://kanboard.net/documentation/translations).
+Sin embargo, las traducciones no están completas, observe la [guía de traducción para contribuir](translations.markdown).
 
 
 Quiero mejorar la documentación

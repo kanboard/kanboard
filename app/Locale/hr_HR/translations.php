@@ -1009,7 +1009,7 @@ return array(
     // 'Change subtask position' => '',
     // 'This value must be greater than %d' => '',
     // 'Another swimlane with the same name exists in the project' => '',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => 'Primjer: http://primjer.kanboard.net/ (koristi se za konstrukciju apsolutnih URL adresa)',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => 'Primjer: https://primjer.kanboard.org/ (koristi se za konstrukciju apsolutnih URL adresa)',
     // 'Actions duplicated successfully.' => '',
     // 'Unable to duplicate actions.' => '',
     // 'Add a new action' => '',

@@ -12,7 +12,7 @@ Standart TOTP sistemi ile uyumlu birçok yazılım bulunmaktadır.
 Örneğin, şu uygulamaları kullanabilirsiniz:
 
 - [Google Authenticator](https://github.com/google/google-authenticator/) (Android, iOS, Blackberry)
-- [FreeOTP](https://fedorahosted.org/freeotp/) (Android, iOS)
+- [FreeOTP](https://freeotp.github.io/) (Android, iOS)
 - [OATH Toolkit Araç Seti](http://www.nongnu.org/oath-toolkit/) (Unix/Linux'da Komut satırı yardımcı programı)
 
 Bu sistem çevrimdışı çalışabilir ve mutlaka cep telefonunuz olması gerekmez.

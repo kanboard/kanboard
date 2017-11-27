@@ -33,7 +33,7 @@ define('PLUGIN_INSTALLER', true); // Default is true
 Varsayılan eklenti dizini URL'sini değiştirin:
 
 ```php
-define('PLUGIN_API_URL', 'https://kanboard.net/plugins.json');
+define('PLUGIN_API_URL', 'https://kanboard.org/plugins.json');
 ```
 
 Yüklenen dosyalar için klasör

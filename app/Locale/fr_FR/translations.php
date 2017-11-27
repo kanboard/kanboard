@@ -1009,7 +1009,7 @@ return array(
     'Change subtask position' => 'Changer la position de la sous-tâche',
     'This value must be greater than %d' => 'Cette valeur doit être plus grande que %d',
     'Another swimlane with the same name exists in the project' => 'Une autre swimlane existe avec le même nom dans le projet',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => 'Exemple : http://exemple.kanboard.net/ (utilisé pour générer les URL absolues)',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => 'Exemple : https://exemple.kanboard.org/ (utilisé pour générer les URL absolues)',
     'Actions duplicated successfully.' => 'Actions dupliquées avec succès.',
     'Unable to duplicate actions.' => 'Impossible de dupliquer les actions.',
     'Add a new action' => 'Ajouter une nouvelle action',

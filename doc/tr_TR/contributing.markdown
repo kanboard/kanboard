@@ -37,7 +37,7 @@ Kanboard'u tercüme etmek istiyorum
 ----------------------------
 
 Kanboard birçok dile çevrildi.
-Bununla birlikte, çeviriler tam değil, [katkıda bulunmak için çeviri rehberine](https://kanboard.net/documentation/translations) göz atın.
+Bununla birlikte, çeviriler tam değil, [katkıda bulunmak için çeviri rehberine](translations.markdown) göz atın.
 
 Belgeleri iyileştirmek istiyorum
 -----------------------------------

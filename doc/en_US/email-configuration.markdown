@@ -90,12 +90,11 @@ That can be useful if your SMTP server configuration doesn't accept the default 
 
 ### How to display a link to the task in notifications?
 
-To do that, you have to specify the URL of your Kanboard installation in your [Application Settings](https://kanboard.net/documentation/application-configuration).
+To do that, you have to specify the URL of your Kanboard installation in your [Application Settings](application-configuration.markdown).
 By default, nothing is defined, so no links will be displayed.
 
 Examples:
 
-- http://demo.kanboard.net/
 - http://myserver/kanboard/
 - http://kanboard.mydomain.com/
 

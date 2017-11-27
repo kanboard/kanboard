@@ -32,13 +32,12 @@ Centos 7[¶](#centos-7 "Ссылка на этот заголовок")
 
     cd /var/www/html
 
-    wget https://kanboard.net/kanboard-latest.zip
+    # Download the latest release from https://github.com/kanboard/kanboard/releases
+    wget https://github.com/kanboard/kanboard/archive/v<version>.zip
 
-    unzip kanboard-latest.zip
-
-    chown -R apache:apache kanboard/data
-
-    rm kanboard-latest.zip
+    unzip kanboard-<version>.zip
+    chown -R apache:apache kanboard-<version>/data
+    rm kanboard-<version>.zip
 
 
 
@@ -105,13 +104,12 @@ Centos 6.x[¶](#centos-6-x "Ссылка на этот заголовок")
 
     cd /var/www/html
 
-    wget https://kanboard.net/kanboard-latest.zip
+    # Download the latest release from https://github.com/kanboard/kanboard/releases
+    wget https://github.com/kanboard/kanboard/archive/v<version>.zip
 
-    unzip kanboard-latest.zip
-
-    chown -R apache:apache kanboard/data
-
-    rm kanboard-latest.zip
+    unzip kanboard-<version>.zip
+    chown -R apache:apache kanboard-<version>/data
+    rm kanboard-<version>.zip
 
 
 

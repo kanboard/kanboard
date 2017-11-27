@@ -1009,7 +1009,7 @@ return array(
     'Change subtask position' => 'Schimbă poziția sub-sarcinii',
     'This value must be greater than %d' => 'Valoarea aceasta trebuie să fie mai mare decât %d',
     'Another swimlane with the same name exists in the project' => 'Există un culoar cu același nume în proiect',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => 'Exemplu : http://exemplu.kanboard.net/ (utilizat în generarea URL-urilor absolute)',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => 'Exemplu : https://exemplu.kanboard.org/ (utilizat în generarea URL-urilor absolute)',
     'Actions duplicated successfully.' => 'Acțiuni duplicate cu succes.',
     'Unable to duplicate actions.' => 'Nu am putut duplica acțiunile.',
     'Add a new action' => 'Adaugă o nouă acțiune',

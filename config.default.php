@@ -20,7 +20,7 @@ define('LOG_FILE', DATA_DIR.DIRECTORY_SEPARATOR.'debug.log');
 define('PLUGINS_DIR', 'plugins');
 
 // Plugins directory URL
-define('PLUGIN_API_URL', 'https://kanboard.net/plugins.json');
+define('PLUGIN_API_URL', 'https://kanboard.org/plugins.json');
 
 // Enable/Disable plugin installer
 define('PLUGIN_INSTALLER', true);

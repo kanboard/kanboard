@@ -73,17 +73,17 @@ Bağlantılar
 ### Kaynak
 
 ```
-[Bağlantı başlığım](https://kanboard.net/)
+[Bağlantı başlığım](https://kanboard.org/)
 
-<https://kanboard.net>
+<https://kanboard.org>
 
 ```
 
 ### Sonuç
 
-[Bağlantı başlığım](https://kanboard.net/)
+[Bağlantı başlığım](https://kanboard.org/)
 
-<https://kanboard.net>
+<https://kanboard.org>
 
 Kaynak kod
 -----------

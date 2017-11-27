@@ -16,10 +16,13 @@ Kanboard'u kurun:
 
 ```bash
 cd /var/www/html
-sudo wget https://kanboard.net/kanboard-latest.zip
-sudo unzip kanboard-latest.zip
-sudo chown -R www-data:www-data kanboard/data
-sudo rm kanboard-latest.zip
+
+# Download the latest release from https://github.com/kanboard/kanboard/releases
+wget https://github.com/kanboard/kanboard/archive/v<version>.zip
+
+unzip kanboard-<version>.zip
+chown -R www-data:www-data kanboard-<version>/data
+rm kanboard-<version>.zip
 ```
 
 Ubuntu Trusty 14.04 LTS
@@ -36,10 +39,13 @@ Kanboard'u kurun:
 
 ```bash
 cd /var/www/html
-sudo wget https://kanboard.net/kanboard-latest.zip
-sudo unzip kanboard-latest.zip
-sudo chown -R www-data:www-data kanboard/data
-sudo rm kanboard-latest.zip
+
+# Download the latest release from https://github.com/kanboard/kanboard/releases
+wget https://github.com/kanboard/kanboard/archive/v<version>.zip
+
+unzip kanboard-<version>.zip
+chown -R www-data:www-data kanboard-<version>/data
+rm kanboard-<version>.zip
 ```
 
 Ubuntu Precise 12.04 LTS
@@ -56,10 +62,13 @@ Kanboard'u kurun:
 
 ```bash
 cd /var/www
-sudo wget https://kanboard.net/kanboard-latest.zip
-sudo unzip kanboard-latest.zip
-sudo chown -R www-data:www-data kanboard/data
-sudo rm kanboard-latest.zip
+
+# Download the latest release from https://github.com/kanboard/kanboard/releases
+wget https://github.com/kanboard/kanboard/archive/v<version>.zip
+
+unzip kanboard-<version>.zip
+chown -R www-data:www-data kanboard-<version>/data
+rm kanboard-<version>.zip
 ```
 
 Kanboard'un bazı özellikleri, [günlük arka plan işi-cronjob](cronjob.markdown) çalıştırmanızı gerektirir.

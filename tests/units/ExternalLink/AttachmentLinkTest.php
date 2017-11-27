@@ -8,7 +8,7 @@ class AttachmentLinkTest extends Base
 {
     public function testGetTitleFromUrl()
     {
-        $url = 'https://kanboard.net/folder/document.pdf';
+        $url = 'https://kanboard.org/folder/document.pdf';
 
         $link = new AttachmentLink($this->container);
         $link->setUrl($url);

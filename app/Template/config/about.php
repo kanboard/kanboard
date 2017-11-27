@@ -5,7 +5,7 @@
     <ul>
         <li>
             <?= t('Official website:') ?>
-            <a href="https://kanboard.net/" target="_blank" rel="noreferer">https://kanboard.net/</a>
+            <a href="https://kanboard.org/" target="_blank" rel="noreferer">https://kanboard.org/</a>
         </li>
         <li>
             <?= t('Author:') ?>

@@ -1009,7 +1009,7 @@ return array(
     'Change subtask position' => 'Subtasca posició de canvi',
     'This value must be greater than %d' => 'Aquest valor ha de ser més gran que %d',
     'Another swimlane with the same name exists in the project' => 'Una altra swimlane amb el mateix nom existeix en el projecte',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => 'Exemple: http://example.kanboard.net/ (utilitzat per generar URL absoluta)',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => 'Exemple: https://example.kanboard.org/ (utilitzat per generar URL absoluta)',
     'Actions duplicated successfully.' => 'Accions dupliquen amb èxit.',
     'Unable to duplicate actions.' => 'No s\'ha pogut duplicar accions.',
     'Add a new action' => 'Afegeix una nova acció',

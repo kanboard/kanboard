@@ -18,12 +18,12 @@ class TaskExternalLinkTest extends Base
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
-        $this->assertEquals(1, $taskExternalLinkModel->create(array('task_id' => 1, 'id' => '', 'url' => 'https://kanboard.net/', 'title' => 'My website', 'link_type' => 'weblink', 'dependency' => 'related')));
+        $this->assertEquals(1, $taskExternalLinkModel->create(array('task_id' => 1, 'id' => '', 'url' => 'https://kanboard.org/', 'title' => 'My website', 'link_type' => 'weblink', 'dependency' => 'related')));
 
         $link = $taskExternalLinkModel->getById(1);
         $this->assertNotEmpty($link);
         $this->assertEquals('My website', $link['title']);
-        $this->assertEquals('https://kanboard.net/', $link['url']);
+        $this->assertEquals('https://kanboard.org/', $link['url']);
         $this->assertEquals('related', $link['dependency']);
         $this->assertEquals('weblink', $link['link_type']);
         $this->assertEquals(0, $link['creator_id']);
@@ -41,12 +41,12 @@ class TaskExternalLinkTest extends Base
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
-        $this->assertEquals(1, $taskExternalLinkModel->create(array('task_id' => 1, 'id' => '', 'url' => 'https://kanboard.net/', 'title' => 'My website', 'link_type' => 'weblink', 'dependency' => 'related')));
+        $this->assertEquals(1, $taskExternalLinkModel->create(array('task_id' => 1, 'id' => '', 'url' => 'https://kanboard.org/', 'title' => 'My website', 'link_type' => 'weblink', 'dependency' => 'related')));
 
         $link = $taskExternalLinkModel->getById(1);
         $this->assertNotEmpty($link);
         $this->assertEquals('My website', $link['title']);
-        $this->assertEquals('https://kanboard.net/', $link['url']);
+        $this->assertEquals('https://kanboard.org/', $link['url']);
         $this->assertEquals('related', $link['dependency']);
         $this->assertEquals('weblink', $link['link_type']);
         $this->assertEquals(1, $link['creator_id']);
@@ -62,15 +62,15 @@ class TaskExternalLinkTest extends Base
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
-        $this->assertEquals(1, $taskExternalLinkModel->create(array('task_id' => 1, 'id' => '', 'url' => 'https://kanboard.net/', 'title' => 'My website', 'link_type' => 'weblink', 'dependency' => 'related')));
+        $this->assertEquals(1, $taskExternalLinkModel->create(array('task_id' => 1, 'id' => '', 'url' => 'https://kanboard.org/', 'title' => 'My website', 'link_type' => 'weblink', 'dependency' => 'related')));
 
         sleep(1);
 
-        $this->assertTrue($taskExternalLinkModel->update(array('id' => 1, 'url' => 'https://kanboard.net/')));
+        $this->assertTrue($taskExternalLinkModel->update(array('id' => 1, 'url' => 'https://kanboard.org/')));
 
         $link = $taskExternalLinkModel->getById(1);
         $this->assertNotEmpty($link);
-        $this->assertEquals('https://kanboard.net/', $link['url']);
+        $this->assertEquals('https://kanboard.org/', $link['url']);
         $this->assertEquals(time(), $link['date_modification'], '', 2);
     }
 
@@ -82,7 +82,7 @@ class TaskExternalLinkTest extends Base
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
-        $this->assertEquals(1, $taskExternalLinkModel->create(array('task_id' => 1, 'id' => '', 'url' => 'https://kanboard.net/', 'title' => 'My website', 'link_type' => 'weblink', 'dependency' => 'related')));
+        $this->assertEquals(1, $taskExternalLinkModel->create(array('task_id' => 1, 'id' => '', 'url' => 'https://kanboard.org/', 'title' => 'My website', 'link_type' => 'weblink', 'dependency' => 'related')));
 
         $this->assertTrue($taskExternalLinkModel->remove(1));
         $this->assertFalse($taskExternalLinkModel->remove(1));
@@ -105,7 +105,7 @@ class TaskExternalLinkTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Test', 'project_id' => 1)));
         $this->assertEquals(1, $taskExternalLinkModel->create(array('task_id' => 1, 'url' => 'https://miniflux.net/', 'title' => 'MX', 'link_type' => 'weblink', 'dependency' => 'related')));
-        $this->assertEquals(2, $taskExternalLinkModel->create(array('task_id' => 1, 'url' => 'https://kanboard.net/', 'title' => 'KB', 'link_type' => 'weblink', 'dependency' => 'related')));
+        $this->assertEquals(2, $taskExternalLinkModel->create(array('task_id' => 1, 'url' => 'https://kanboard.org/', 'title' => 'KB', 'link_type' => 'weblink', 'dependency' => 'related')));
 
         $links = $taskExternalLinkModel->getAll(1);
         $this->assertCount(2, $links);

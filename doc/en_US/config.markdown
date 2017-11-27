@@ -36,7 +36,7 @@ define('PLUGIN_INSTALLER', true); // Default is true
 Change default plugin directory URL:
 
 ```php
-define('PLUGIN_API_URL', 'https://kanboard.net/plugins.json');
+define('PLUGIN_API_URL', 'https://kanboard.org/plugins.json');
 ```
 
 Folder for uploaded files

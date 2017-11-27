@@ -1009,7 +1009,7 @@ return array(
     'Change subtask position' => 'Promijeni poziciju pod-zadatka',
     'This value must be greater than %d' => 'Ova vrijednost mora biti veća od %d',
     'Another swimlane with the same name exists in the project' => 'Već postoji swimlane sa istim imenom u ovom projektu',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => 'Na primjer: http://example.kanboard.net/ (koristi se za pravljenje apsolutnog URL-a)',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => 'Na primjer: https://example.kanboard.org/ (koristi se za pravljenje apsolutnog URL-a)',
     'Actions duplicated successfully.' => 'Akcije uspješno duplicirane.',
     'Unable to duplicate actions.' => 'Nemoguće duplicirati akcije.',
     'Add a new action' => 'Dodaj novu akciju',

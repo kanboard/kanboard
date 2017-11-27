@@ -8,7 +8,7 @@ class WebLinkTest extends Base
 {
     public function testGetTitleFromHtml()
     {
-        $url = 'https://kanboard.net/something';
+        $url = 'https://kanboard.org/something';
         $title = 'My title';
         $html = '<!DOCTYPE html><html><head><title>  '.$title.'  </title></head><body>Test</body></html>';
 
@@ -27,7 +27,7 @@ class WebLinkTest extends Base
 
     public function testGetTitleFromUrl()
     {
-        $url = 'https://kanboard.net/something';
+        $url = 'https://kanboard.org/something';
         $html = '<!DOCTYPE html><html><head></head><body>Test</body></html>';
 
         $webLink = new WebLink($this->container);
@@ -40,6 +40,6 @@ class WebLinkTest extends Base
             ->with($url)
             ->will($this->returnValue($html));
 
-        $this->assertEquals('kanboard.net/something', $webLink->getTitle());
+        $this->assertEquals('kanboard.org/something', $webLink->getTitle());
     }
 }

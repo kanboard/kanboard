@@ -1009,7 +1009,7 @@ return array(
     'Change subtask position' => 'Részfeladat helyzetének megváltoztatása',
     'This value must be greater than %d' => 'Ennek az értéknek nagyobbnak kell lennie mint %d',
     'Another swimlane with the same name exists in the project' => 'Létezik egy ugyanilyen nevű sáv a projektben',
-    'Example: http://example.kanboard.net/ (used to generate absolute URLs)' => 'Példa: http://example.kanboard.net/ (abszolút URL-ek előállításához használható)',
+    'Example: https://example.kanboard.org/ (used to generate absolute URLs)' => 'Példa: https://example.kanboard.org/ (abszolút URL-ek előállításához használható)',
     'Actions duplicated successfully.' => 'A műveletek sikeresen megkettőzve.',
     'Unable to duplicate actions.' => 'Nem lehet megkettőzni a műveleteket.',
     'Add a new action' => 'Új művelet hozzáadása',

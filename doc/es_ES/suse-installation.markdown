@@ -7,8 +7,11 @@ OpenSuse Leap 42.1
 ```bash---terminal
 sudo zypper install php5 php5-sqlite php5-gd php5-json php5-mcrypt php5-mbstring php5-openssl
 cd /srv/www/htdocs
-sudo wgethttps://kanboard.net/kanboard-latest.zip
-sudo unzip kanboard-latest.zip
-sudo chmod -R 777 kanboard
-sudo rm kanboard-latest.zip
+
+# Download the latest release from https://github.com/kanboard/kanboard/releases
+sudo wget https://github.com/kanboard/kanboard/archive/v<VERSION>.zip
+
+sudo unzip kanboard-<version>.zip
+sudo chown -R wwwrun /srv/www/htdocs/kanboard-<version>/data
+sudo rm kanboard-<version>.zip
 
