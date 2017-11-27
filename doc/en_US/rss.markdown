@@ -13,7 +13,7 @@ Enable/disable project RSS feeds
 
 Go to **Project settings > Public access**.
 
-![Disable public access](screenshots/project-disable-sharing.png)
+![Disable public access](../screenshots/project-disable-sharing.png)
 
 Enable/disable user RSS feeds
 --------------------------------

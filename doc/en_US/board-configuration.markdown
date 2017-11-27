@@ -3,7 +3,7 @@ Board settings
 
 Go to the menu **Settings**, then choose **Board settings** on the left.
 
-![Board settings](screenshots/board-settings.png)
+![Board settings](../screenshots/board-settings.png)
 
 ### Task highlighting
 

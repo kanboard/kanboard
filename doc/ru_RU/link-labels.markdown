@@ -4,14 +4,14 @@
 
 Связи в задачах могут быть изменены в настройках приложения (**Настройки** -\> **Настройки ссылки**)
 
-![Link Labels](screenshots/link-labels.png)
+![Link Labels](../screenshots/link-labels.png)
 
 Метки для ссылок.
 
 
 Каждая метка может иметь противоположное опеределение. Если нет противоположного значения, метка считается двунаправленная.
 
-![Link Label Creation](screenshots/link-label-creation.png)
+![Link Label Creation](../screenshots/link-label-creation.png)
 
 Создание ссылки.
 

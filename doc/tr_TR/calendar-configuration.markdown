@@ -3,7 +3,7 @@ Takvim ayarları
 
 **Ayarlar** menüsüne gidin, ardından soldaki **Takvim ayarları** seçeneğini seçin.
 
-![Calendar settings](screenshots/calendar-settings.png)
+![Calendar settings](../screenshots/calendar-settings.png)
 
 Kanboard'da iki farklı takvim vardır:
 

@@ -3,7 +3,7 @@ Configuración de calendarios
 
 Ir al menu de configuraciones, despues elegir cofiguracion de calendarios que se encuentra al lado izquierdo 
 
-![Configuración de calendarios](screenshots/calendar-settings.png)
+![Configuración de calendarios](../screenshots/calendar-settings.png)
 
 Existe dos diferentes calendarios en kanboard :
 

@@ -7,7 +7,7 @@ El cambio entre el desplazamiento horizontal y la vista compacta se puede hacer 
 Modo de colapsado
 --------------
 
-![Tareas colapsadas](screenshots/board-collapsed-mode.png)
+![Tareas colapsadas](../screenshots/board-collapsed-mode.png)
 
 - Si la tarea es asignada a alguien, las iniciales de la persona se muestran junto al número de tareas
 - Si el titulo de la tarea es demasiado largo, tu puedes poner el puntero del ratón sobre la tarea de mostrar una información sobre herramientas con el título completo
@@ -15,4 +15,4 @@ Modo de colapsado
 Modo expansivo
 --------------
 
-![Tasks expanded](screenshots/board-expanded-mode.png)
+![Tasks expanded](../screenshots/board-expanded-mode.png)

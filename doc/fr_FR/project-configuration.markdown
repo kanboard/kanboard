@@ -4,7 +4,7 @@ Paramètres du projet
 
 Aller dans le menu **Préférences**; puis choisissez **Paramètres du projet** sur la gauche
 
-![Paramètres du projet](screenshots/project-settings.png)
+![Paramètres du projet](../screenshots/project-settings.png)
 
 ###Colonnes par défaut pour les nouveaux projets
 
@@ -28,7 +28,7 @@ Lorsque cette option est sélectionnée, un utilisateur ne peut travailler que s
 
 Si une autre sous-tâche possède le statut « en cours », l'utilisateur verra cette boite de dialogue :
     
-![Limite des sous-tâches pour l'utilisateur](screenshots/subtask-user-restriction.png)
+![Limite des sous-tâches pour l'utilisateur](../screenshots/subtask-user-restriction.png)
 
 ### Déclencher automatiquement le suivi du temps pour les sous-tâches
 

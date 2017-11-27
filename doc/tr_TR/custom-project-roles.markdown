@@ -29,7 +29,7 @@ Yapılandırma
 
 Proje ayarlarından, **Özel Roller** menüsünde soldaki simgesini tıklayın ve sayfanın üst kısmında **Yeni özel rol ekleyin** seçeneğini tıklayın.
  
-![New custom role](screenshots/new_custom_role.png)
+![New custom role](../screenshots/new_custom_role.png)
 
 Rol için bir isim verin ve formu gönderin.
 
@@ -43,11 +43,11 @@ Burada farklı kısıtlamalar vardır:
 
 Yeni bir kısıtlama eklemek için tabloda açılır menüye tıklayabilirsiniz:
 
-![Add a new restriction](screenshots/add_new_restriction.png)
+![Add a new restriction](../screenshots/add_new_restriction.png)
 
 ### 3) Kısıtlamalar listesi
 
-![List of restrictions](screenshots/example-restrictions.png)
+![List of restrictions](../screenshots/example-restrictions.png)
 
 Örneğin, bu rol yalnızca "Geri Kayıt-Backlog" sütununda görevler oluşturabilir ve görevleri "Hazır" ve "Devam etmekte olan" sütunları arasında taşımak mümkündür.
 
@@ -55,34 +55,34 @@ Yeni bir kısıtlama eklemek için tabloda açılır menüye tıklayabilirsiniz:
 
 Sol menüdeki "izinler" bölümüne gidin ve istenen rolü kullanıcıya atayın. 
 
-![Custom project role](screenshots/custom_roles.png)
+![Custom project role](../screenshots/custom_roles.png)
 
 Örnekler
 --------
 
 ### Kullanıcıların yalnızca belirli sütunlarda görev oluşturmasına izin ver
 
-![Example restriction task creation](screenshots/example-restriction-task-creation.png)
+![Example restriction task creation](../screenshots/example-restriction-task-creation.png)
 
 - Bu role ait kullanıcılar, yalnızca "Geri Kayıt-Backlog" sütununda yeni görevler oluşturabilir.
 - 2 kuralın kombinasyonu önemlidir, aksi takdirde bu işe yaramaz.
 
 ### Kullanıcıların görev durumunu yalnızca belirli sütunlarda değiştirmelerine izin ver
 
-![Example restriction task status](screenshots/example-restriction-task-status.png)
+![Example restriction task status](../screenshots/example-restriction-task-status.png)
 
 - Bu role ait olan kullanıcılar, "Geri Kayıt-Backlog" sütunundaki görev durumunu değiştirebilecek.
 - Durum açık olan görevler tahta üzerinde görünür ve durum kapalı olan görevler varsayılan olarak tahtada gizlidir.
 
 ### Kullanıcıların belirli bir sütundaki görev durumunu değiştirmesine izin verme
 
-![Example column restriction](screenshots/example-restriction-task-status-blocked.png)
+![Example column restriction](../screenshots/example-restriction-task-status-blocked.png)
 
 Bu role ait kullanıcılar, "Tamamlandı" sütunundaki görev durumunu değiştiremez.
 Ancak diğer sütunlarda da mümkün olacaktır.
 
 ### Kullanıcıların görevleri yalnızca belirli sütunlar arasında taşımasına izin ver
 
-![Example restriction task drag and drop](screenshots/example-restriction-task-drag-and-drop.png)
+![Example restriction task drag and drop](../screenshots/example-restriction-task-drag-and-drop.png)
 
 Bu role ait kullanıcılar, görevleri yalnızca "Hazır" ve "Devam etmekte olan" sütunları arasında taşıyabilir.

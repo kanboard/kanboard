@@ -6,7 +6,7 @@ Seuls les administrateurs peuvent modifier ces paramètres.
 
 Allez au menu **Paramètres**, puis choisissez **Paramètres de l'application** sur la gauche.
 
-![Paramètres de l'application](screenshots/application-settings.png)
+![Paramètres de l'application](../screenshots/application-settings.png)
 
 ### URL de l'application
 

@@ -8,11 +8,11 @@ This is especially useful for taking screenshots to describe an issue for exampl
 
 You can add screenshots directly from the board by clicking on the dropdown menu or in the task view page.
 
-![Drop-down screenshot menu](screenshots/dropdown-screenshot.png)
+![Drop-down screenshot menu](../screenshots/dropdown-screenshot.png)
 
 To add a new image, take your screenshot and paste with CTRL+V or Command+V:
 
-![Screenshot page](screenshots/task-screenshot.png)
+![Screenshot page](../screenshots/task-screenshot.png)
 
 On Mac OS X, you can use those shortcuts to take screenshots:
 

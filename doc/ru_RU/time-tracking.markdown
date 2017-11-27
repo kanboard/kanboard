@@ -12,7 +12,7 @@
 
 
 
-![Task time tracking](screenshots/task-time-tracking.png)
+![Task time tracking](../screenshots/task-time-tracking.png)
 
 Отслеживание времени исполнения задач
 
@@ -39,7 +39,7 @@
 
 
 
-![Subtask time tracking](screenshots/subtask-time-tracking.png)
+![Subtask time tracking](../screenshots/subtask-time-tracking.png)
 
 Отслеживание времени подзадач
 
@@ -69,7 +69,7 @@
 
 
 
-![Task timesheet](screenshots/task-timesheet.png)
+![Task timesheet](../screenshots/task-timesheet.png)
 
 Таблица учета времени.
 
@@ -79,7 +79,7 @@
 
 
 
-![Subtask timer](screenshots/subtask-timer.png)
+![Subtask timer](../screenshots/subtask-timer.png)
 
 Таймер подзадач.
 

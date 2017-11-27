@@ -7,10 +7,10 @@ Vždy však můžete získat přístup k seznamu uzavřených úkolů pomocí do
 
 Existují dva různé způsoby jak zavřít úkol z rozbalovací nabídky úloh na nástěnce:
 
-![Uzavřít úkol z rozbalovací nabídky](screenshots/menu-close-task.png)
+![Uzavřít úkol z rozbalovací nabídky](../screenshots/menu-close-task.png)
 
 Nebo z nabídky postranního panelu úloh v detailním zobrazení úkolu:
 
-![Uzavřít úkol](screenshots/closing-tasks.png)
+![Uzavřít úkol](../screenshots/closing-tasks.png)
 
 Poznámka: Když zavřete úkol, všechny dílčí úkoly, které nebyly dokončeny, budou změněny na stav "Dokončeno".

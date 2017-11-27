@@ -6,7 +6,7 @@ Duplicate a task into the same project
 
 Go to the task view and choose **Duplicate** on the left.
 
-![Task Duplication](screenshots/task-duplication.png)
+![Task Duplication](../screenshots/task-duplication.png)
 
 A new task will be created with the same properties as the original.
 
@@ -15,7 +15,7 @@ Duplicate a task to another project
 
 Go to the task view and choose **Duplicate to another project**.
 
-![Task Duplication Another Project](screenshots/task-duplication-another-project.png)
+![Task Duplication Another Project](../screenshots/task-duplication-another-project.png)
 
 Only projects where you are members will be shown in the drop-down.
 

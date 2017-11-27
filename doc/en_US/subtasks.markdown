@@ -15,22 +15,22 @@ Creating subtasks
 
 From the task view, on left sidebar click on **Add a subtask**:
 
-![Add a subtask](screenshots/add-subtask.png)
+![Add a subtask](../screenshots/add-subtask.png)
 
 You can also add a subtask quickly by entering only the title:
 
-![Add a subtask from the task view](screenshots/add-subtask-shortcut.png)
+![Add a subtask from the task view](../screenshots/add-subtask-shortcut.png)
 
 Change subtask status
 ---------------------
 
 When you click on the subtask title the status change:
 
-![Subtask in progress](screenshots/subtask-status-inprogress.png)
+![Subtask in progress](../screenshots/subtask-status-inprogress.png)
 
 The icon before the title is updated according to the status.
 
-![Subtask done](screenshots/subtask-status-done.png)
+![Subtask done](../screenshots/subtask-status-done.png)
 
 Note: When the task is closed, all subtasks are changed to the status **Done**.
 

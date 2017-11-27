@@ -9,7 +9,7 @@ Yalnızca yöneticiler yeni gruplar oluşturabilir ve kullanıcıları atayabili
 Gruplar **Kullanıcı yönetimi>Tüm Grupları Görüntüle** 'den yönetilebilir.
 Buradan, gruplar oluşturabilir ve kullanıcıları atayabilirsiniz.
 
-![Group Management](screenshots/groups-management.png)
+![Group Management](../screenshots/groups-management.png)
 
 Her proje yöneticisi, [proje izinleri sayfası](project-permissions.markdown) 'dan bir grup gruba erişimi yetkilendirir.
 

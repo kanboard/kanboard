@@ -3,7 +3,7 @@ Task Transitions
 
 Each movement of a task between columns is recorded in the database.
 
-![Task Transitions](screenshots/task-transitions.png)
+![Task Transitions](../screenshots/task-transitions.png)
 
 Available from the task view, you can see that information:
 

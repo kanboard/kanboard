@@ -16,7 +16,7 @@ Ajouter une nouvelle action
 
 Cliquez sur le lien **Ajouter une nouvelle action**.
 
-![Action automatique](screenshots/automatic-action-creation.png)
+![Action automatique](../screenshots/automatic-action-creation.png)
 
 - Commencez par choisir une action
 - Ensuite, sélectionnez un évènement

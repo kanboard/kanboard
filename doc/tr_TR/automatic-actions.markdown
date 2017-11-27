@@ -16,7 +16,7 @@ Yeni bir eylem ekle
 
 **Yeni bir otomatik işlem ekle** bağlantısını tıklayın.
 
-![Automatique action](screenshots/automatic-action-creation.png)
+![Automatique action](../screenshots/automatic-action-creation.png)
 
 - Bir eylem seçin
 - Sonra bir etkinlik seçin

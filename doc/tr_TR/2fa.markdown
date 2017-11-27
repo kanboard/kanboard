@@ -24,7 +24,7 @@ Kurmak
 2. Sol tarafta **İki faktörlü kimlik doğrulama** seçeneğini tıklayın ve kutuyu işaretleyin
 3. Sizin için gizli bir anahtar oluşturulur.
 
-![2FA](screenshots/2fa.png)
+![2FA](../screenshots/2fa.png)
 
 - TOTP yazılımında gizli anahtarı kaydetmeniz gerekir. Akıllı telefon kullanıyorsanız, en kolay çözüm QR kodunu FreeOTP veya Google Authenticator ile taramaktır.
 - Her sefer yeni bir oturum açtığınızda, yeni bir kod sorulur

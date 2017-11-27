@@ -10,7 +10,7 @@ To add a new user, you must be an administrator.
 2. On the top, you have a link **New local user** or **New remote user**
 3. Fill the form and save
 
-![New user](screenshots/new-user.png)
+![New user](../screenshots/new-user.png)
 
 When you create a **local user**, you have to specify at least those values:
 

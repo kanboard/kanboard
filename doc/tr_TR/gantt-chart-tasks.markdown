@@ -6,7 +6,7 @@ Bu Gantt grafiğinin amacı, belirli bir projenin görevleri için zamana dayal�
 - Gantt tablosu "görüntü değiştirici" alanındadır.
 - Sadece proje yöneticileri bu bölüme erişebilir
 
-![Gantt Chart](screenshots/gantt-chart-project.png)
+![Gantt Chart](../screenshots/gantt-chart-project.png)
 
 - Görevlerin **başlangıç tarihi** ve **son tarihi** grafik çizmek için kullanılır
 - Görevler, farenizle yatay olarak yeniden boyutlandırılabilir ve taşınabilir
@@ -17,4 +17,4 @@ Bu Gantt grafiğinin amacı, belirli bir projenin görevleri için zamana dayal�
 - Bu görünümden yaratılan yeni görevler, ilk sütundaki 1 numaralı sayfada tahtada görüntülenir
 - Görevler, başlangıç veya bitiş tarihi tanımlanmadığında siyah olarak görüntülenir
 
-![Task not defined](screenshots/gantt-chart-not-defined.png)
+![Task not defined](../screenshots/gantt-chart-not-defined.png)

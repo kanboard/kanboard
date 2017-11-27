@@ -6,21 +6,21 @@ Her projenin bir analiz bölümü vardır. Kanboard'u nasıl kullandığınıza 
 Kullanıcı yeniden bölümlendirme
 ----------------
 
-![User repartition](screenshots/user-repartition.png)
+![User repartition](../screenshots/user-repartition.png)
 
 Bu pasta grafik kullanıcı başına atanan açık görev sayısını gösterir.
 
 Görev dağıtımı
 -----------------
 
-![Task distribution](screenshots/task-distribution.png)
+![Task distribution](../screenshots/task-distribution.png)
 
 Bu pasta grafiği, sütun başına açık görev sayısına genel bir bakış sunar.
 
 Kümülatif akış diyagramı
 -----------------------
 
-![Cumulative flow diagram](screenshots/cfd.png)
+![Cumulative flow diagram](../screenshots/cfd.png)
 
 - Bu grafik, zaman içindeki her bir sütun için toplu olarak görev sayısını gösterir.
 - Her gün, her bir sütun için toplam görev sayısı kaydedilir.
@@ -31,7 +31,7 @@ Not: Grafiği görmek için en az iki güne kadar veri içermeniz gerekir.
 Geribildirim (Burndown) tablosu
 ---------------
 
-![Burndown chart](screenshots/burndown-chart.png)
+![Burndown chart](../screenshots/burndown-chart.png)
 
 Her proje için [geribildirim (Burndown) tablosu] (http://en.wikipedia.org/wiki/Burn_down_chart) mevcuttur.
 
@@ -42,7 +42,7 @@ Her proje için [geribildirim (Burndown) tablosu] (http://en.wikipedia.org/wiki/
 Her sütuna harcanan ortalama süre
 -----------------------------------
 
-![Average time spent into each column](screenshots/average-time-spent-into-each-column.png)
+![Average time spent into each column](../screenshots/average-time-spent-into-each-column.png)
 
 Bu grafik, son 1000 görev için her bir sütuna harcanan ortalama süreyi gösterir.
 
@@ -52,7 +52,7 @@ Bu grafik, son 1000 görev için her bir sütuna harcanan ortalama süreyi göst
 Ortalama Teslim ve Döngü Süresi
 ---------------------------
 
-![Average time spent into each column](screenshots/average-lead-cycle-time.png)
+![Average time spent into each column](../screenshots/average-lead-cycle-time.png)
 
 Bu grafik, son 1000 görevin zaman içindeki ortalama teslim ve döngü süresini göstermektedir.
 

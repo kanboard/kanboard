@@ -6,7 +6,7 @@ Kanboard, birinden bahsedildiğinde bildirim gönderme olanağı sunar.
 Bir yorumda veya bir görevde birinin dikkatini çekmeniz gerekiyorsa, @ simgesini ve ardından kullanıcı adını kullanın.
 Kanboard otomatik olarak bir kullanıcı listesi önerecektir:
 
-![User Mention](screenshots/user-mentions.png)
+![User Mention](../screenshots/user-mentions.png)
 
 - Şu anda yalnızca görev açıklaması ve açıklama metin alanı bu özelliği etkinleştirmiştir.
 - Kullanıcı, yalnızca görevler ve yorumlar oluşturma sırasında bahsediyor.

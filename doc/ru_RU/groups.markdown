@@ -15,7 +15,7 @@
 
 
 
-![Group Management](screenshots/groups-management.png)
+![Group Management](../screenshots/groups-management.png)
 
 Управление группами.
 

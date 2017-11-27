@@ -8,7 +8,7 @@ Bu Gantt tablosunun amacı, başlangıç ve bitiş tarihlerine dayanan tüm proj
 - Proje yöneticileri yalnızca üyelerinin bulunduğu yerdeki projeleri görür
 - Özel projeler bu tabloda gösterilmiyor
 
-![Gantt Chart for all projects](screenshots/gantt-chart-all-projects.png)
+![Gantt Chart for all projects](../screenshots/gantt-chart-all-projects.png)
 
 - Projelerin **başlangıç tarihi** ve **bitiş tarihi** grafik çizmek için kullanılır
 - Yatay çubuklar yeniden boyutlandırılabilir ve farenizle yatay olarak hareket ettirilebilir

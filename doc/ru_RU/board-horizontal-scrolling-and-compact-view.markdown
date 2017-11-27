@@ -6,7 +6,7 @@
 Однако, можно переключится на компактный вид доски для отображения всех колонок на вашем экране.
 
 
-![Switch to compact mode](screenshots/board-compact-mode.png)
+![Switch to compact mode](../screenshots/board-compact-mode.png)
 
 Переключение на компактное представление.
 

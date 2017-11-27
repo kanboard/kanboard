@@ -8,13 +8,13 @@ Arama motoru[gelişmiş sözdizimini-syntax](search.markdown) kullanır.
 Pano Görünümü
 ----------
 
-![Pano Görünümü](screenshots/board-view.png)
+![Pano Görünümü](../screenshots/board-view.png)
 
 - Bu görünümle, sütunlar arasında görevleri sürükleyip bırakabilirsiniz.
 - Pano görünümüne geçmek için klavye kısayolunu da kullanabilirsiniz: **"v b"**.
 - Bir gölge Görevler son anlarda değiştirilir.
 
-![Pano Görev Sınırı](screenshots/board-task-limit.png)
+![Pano Görev Sınırı](../screenshots/board-task-limit.png)
 
 Bir sütun için görev sınırına ulaşıldığında arka plan kırmızı olur. Yani, aynı anda çok fazla görev devam ediyor demektir.
 
@@ -23,7 +23,7 @@ Bir sütun için görev sınırına ulaşıldığında arka plan kırmızı olur
 Takvim Görünümü
 --------------
 
-![Takvim görünümü](screenshots/calendar-view.png)
+![Takvim görünümü](../screenshots/calendar-view.png)
 
 - Bu görünümle, görevleri vade tarihleriyle görselleştirebilirsiniz.
 - Ayarlara bağlı olarak, devam eden görevleri de görebilirsiniz.
@@ -33,7 +33,7 @@ Takvim Görünümü
 Liste Görünümü
 ---------
 
-![Liste görünümü](screenshots/list-view.png)
+![Liste görünümü](../screenshots/list-view.png)
 
 - Bu görünümde, aramanızın tüm sonuçları bir tabloda gösterilir.
 - Liste görünümüne geçmek için klavye kısayolunu da kullanabilirsiniz:  **"v l"**.
@@ -41,7 +41,7 @@ Liste Görünümü
 Gantt Görünümü
 ----------
 
-![Gantt görünümü](screenshots/gantt-view.png)
+![Gantt görünümü](../screenshots/gantt-view.png)
 
 - Gantt görünümü görevleri yatay bir zaman çizelgesinde görüntüler
 - Grafiği görüntülemek için başlangıç tarihi ve bitiş tarihi kullanılır
@@ -50,7 +50,7 @@ Gantt Görünümü
 Proje Görünümü
 ----------------
 
-![Proje görünümü](screenshots/project-view.png)
+![Proje görünümü](../screenshots/project-view.png)
 
 - Projenin açıklamasını görüntüleyin
 - Belgelerin projeye eklenmesi ve yüklenmesi

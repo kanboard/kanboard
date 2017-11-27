@@ -13,7 +13,7 @@
 
 Перейдите в **Меню** -\> **Пользовательские фильтры** или **Меню** -\> **Настройки** -\> **Пользовательские фильтры**
 
-![Custom Filter Creation](screenshots/custom-filter-creation.png)
+![Custom Filter Creation](../screenshots/custom-filter-creation.png)
 
 Создание пользовательского фильтра.
 
@@ -21,7 +21,7 @@
 
 Созданый фильтр появится на Доске рядом со стандартными фильтрами
 
-![Custom Filter Dropdown](screenshots/custom-filter-dropdown.png)
+![Custom Filter Dropdown](../screenshots/custom-filter-dropdown.png)
 
 Выпадающий список - Пользовательский фильтр.
 

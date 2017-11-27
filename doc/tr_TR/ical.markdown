@@ -30,23 +30,23 @@ Kanboard takviminizi Apple Takvim(Calendar)'e ekleme
 - **Dosya>Yeni Takvim Aboneliği** seçeneğini seçin.
 - Kanboard'dan iCal özet akışı (besleme-feed) URL'sini kopyalayıp yapıştırın
 
-! [iCal aboneliğini ekleyin] (screenshots / apple-calendar-add-subscription.png)
+! [iCal aboneliğini ekleyin] (../screenshots / apple-calendar-add-subscription.png)
 
 - Takvimi iCloud ile senkronize etmeyi tüm cihazlarınızda mevcut olacak şekilde seçebilirsiniz
 - Yenileme sıklığını seçmeyi unutmayın
 
-![Edit iCal subscription](screenshots/apple-calendar-edit-subscription.png)
+![Edit iCal subscription](../screenshots/apple-calendar-edit-subscription.png)
 
 Kanboard takviminizi Microsoft Outlook'a ekleme
 --------------------------------------------------
 
-![Outlook Add Internet Calendar](screenshots/outlook-add-subscription.png)
+![Outlook Add Internet Calendar](../screenshots/outlook-add-subscription.png)
 
 - Outlook'u açın
 - ** Takvimi aç>İnternet'ten** i seçin
 - Kanboard'dan iCal özet akışı (besleme-feed) URL'sini kopyalayıp yapıştırın
 
-![Outlook Edit Internet Calendar](screenshots/outlook-edit-subscription.png)
+![Outlook Edit Internet Calendar](../screenshots/outlook-edit-subscription.png)
 
 Mozilla Thunderbird'e Kanboard takviminizi ekleme
 ----------------------------------------------------
@@ -55,12 +55,12 @@ Mozilla Thunderbird'e Kanboard takviminizi ekleme
 - **Dosya>Yeni Takvim** 'i tıklayın
 - İletişim kutusunda **Ağda** seçeneğini belirleyin
 
-![Thunderbird Step 1](screenshots/thunderbird-new-calendar-step1.png)
+![Thunderbird Step 1](../screenshots/thunderbird-new-calendar-step1.png)
 
 - iCalendar biçimini seçin
 - Kanboard'dan iCal özet akışı (besleme-feed) URL'sini kopyalayıp yapıştırın
 
-![Thunderbird Step 2](screenshots/thunderbird-new-calendar-step2.png)
+![Thunderbird Step 2](../screenshots/thunderbird-new-calendar-step2.png)
 
 - Renkleri ve diğer ayarları seçin ve sonunda kaydedin
 
@@ -71,7 +71,7 @@ Kanboard takviminizi Google Takvim'e ekleme
 - Menüden **Link ekle-Add URL** seçeneğini seçin.
 - Kanboard'dan iCal özet akışı (besleme-feed) URL'sini kopyalayıp yapıştırın
 
-![Google Calendar](screenshots/google-calendar-add-subscription.png)
+![Google Calendar](../screenshots/google-calendar-add-subscription.png)
 
 Senkronizasyonunu etkinleştirirseniz, Kanboard takviminiz Android cihazınızdan da kullanılabilir.
 

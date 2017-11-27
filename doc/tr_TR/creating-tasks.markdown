@@ -3,11 +3,11 @@ Görevler Oluşturma
 
 Panodan, sütun adının yanındaki artı işaretini tıklayın:
 
-![Task creation from the board](screenshots/task-creation-board.png)
+![Task creation from the board](../screenshots/task-creation-board.png)
 
 Sonra görev oluşturma formu görünür:
 
-![Task creation form](screenshots/task-creation-form.png)
+![Task creation form](../screenshots/task-creation-form.png)
 
 Alan açıklamaları:
 

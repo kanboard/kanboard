@@ -15,7 +15,7 @@
 
 
 
-![Gantt Chart](screenshots/gantt-chart-project.png)
+![Gantt Chart](../screenshots/gantt-chart-project.png)
 
 Диаграмма Ганта.
 
@@ -53,7 +53,7 @@
 
 
 
-![Task not defined](screenshots/gantt-chart-not-defined.png)
+![Task not defined](../screenshots/gantt-chart-not-defined.png)
 
 Задача без указанных дат начала или завершения
 

@@ -3,14 +3,14 @@
 
 Вы можете показать и скрыть колонки на Доске очень просто:
 
-![Hide a column](screenshots/hide-column.png)
+![Hide a column](../screenshots/hide-column.png)
 
 Спрятать колонку.
 
 
 Чтобы скрыть (спрятать) колонку , откройте выпадающее меню колонки.
 
-![Show a column](screenshots/show-column.png)
+![Show a column](../screenshots/show-column.png)
 
 Показать колонку.
 

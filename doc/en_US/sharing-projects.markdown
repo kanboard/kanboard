@@ -19,7 +19,7 @@ Enable public access
 
 Select your project, then click on "Public access" and finally click on the button "Enable public access".
 
-![Enable public access](screenshots/project-enable-sharing.png)
+![Enable public access](../screenshots/project-enable-sharing.png)
 
 When public access is enabled, a couple of links are generated:
 
@@ -27,7 +27,7 @@ When public access is enabled, a couple of links are generated:
 - RSS feed subscription link
 - iCalendar subscription link
 
-![Disable public access](screenshots/project-disable-sharing.png)
+![Disable public access](../screenshots/project-disable-sharing.png)
 
 You can also disable public access whenever you want.
 

@@ -19,7 +19,7 @@ Herkese açık erişimi etkinleştir
 
 Projenizi seçin, ardından "Herkese açık erişim" i tıklayın ve "Herkese açık erişimi etkinleştir" düğmesini tıklayın.
 
-![Enable public access](screenshots/project-enable-sharing.png)
+![Enable public access](../screenshots/project-enable-sharing.png)
 
 Genel erişim etkinleştirildiğinde, birkaç bağlantı oluşturulur:
 
@@ -27,7 +27,7 @@ Genel erişim etkinleştirildiğinde, birkaç bağlantı oluşturulur:
 - RSS beslemesi abonelik bağlantısı
 - iCalendar abonelik bağlantısı
 
-![Disable public access](screenshots/project-disable-sharing.png)
+![Disable public access](../screenshots/project-disable-sharing.png)
 
 Ayrıca, herkese açık erişimi istediğiniz zaman devre dışı bırakabilirsiniz.
 

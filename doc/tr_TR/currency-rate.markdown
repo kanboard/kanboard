@@ -6,6 +6,6 @@ Birden çok para birimini işlemek zorundaysanız, burada referans para birimine
 
 Bu özellik, proje bütçesi hesaplamasında kullanılır.
 
-![Currency Rate](screenshots/currency-rate.png)
+![Currency Rate](../screenshots/currency-rate.png)
 
 Para birimi oranı ayarları ** Ayarlar> Para birimi oranları ** 'da bulunur.

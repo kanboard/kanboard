@@ -12,7 +12,7 @@
 
 
 
-![Board view](screenshots/board-view.png)
+![Board view](../screenshots/board-view.png)
 
 Представление задач в виде доски
 
@@ -30,7 +30,7 @@
 
 
 
-![Board Task Limit](screenshots/board-task-limit.png)
+![Board Task Limit](../screenshots/board-task-limit.png)
 
 Лимит задач на Доске
 
@@ -49,7 +49,7 @@
 
 
 
-![Calendar view](screenshots/calendar-view.png)
+![Calendar view](../screenshots/calendar-view.png)
 
 Представление в виде календаря
 
@@ -76,7 +76,7 @@
 
 
 
-![List view](screenshots/list-view.png)
+![List view](../screenshots/list-view.png)
 
 Представление списком.
 
@@ -95,7 +95,7 @@
 
 
 
-![Gantt view](screenshots/gantt-view.png)
+![Gantt view](../screenshots/gantt-view.png)
 
 Представление диаграммой Ганта.
 
@@ -118,7 +118,7 @@
 
 
 
-![Project overview](screenshots/project-view.png)
+![Project overview](../screenshots/project-view.png)
 
 Представление проекта
 

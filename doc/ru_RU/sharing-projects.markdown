@@ -36,7 +36,7 @@
 
 
 
-![Enable public access](screenshots/project-enable-sharing.png)
+![Enable public access](../screenshots/project-enable-sharing.png)
 
 Включение общего доступа
 
@@ -58,7 +58,7 @@
 
 
 
-![Disable public access](screenshots/project-disable-sharing.png)
+![Disable public access](../screenshots/project-disable-sharing.png)
 
 Отключить общий доступ.
 

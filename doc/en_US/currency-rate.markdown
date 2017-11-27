@@ -6,6 +6,6 @@ If you have to handle multiple currencies, you define here the rate according to
 
 This feature is used for project budget calculation.
 
-![Currency Rate](screenshots/currency-rate.png)
+![Currency Rate](../screenshots/currency-rate.png)
 
 Currency rate settings are located in **Settings > Currency rates**.

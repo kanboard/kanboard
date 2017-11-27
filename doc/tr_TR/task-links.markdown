@@ -3,7 +3,7 @@
 
 Görevler önceden tanımlanmış ilişkilerle birlikte birbirine bağlanabilir:
 
-![Task Links](screenshots/internal-task-links.png)
+![Task Links](../screenshots/internal-task-links.png)
 
 Bu görevler projeler arasında bağlamak için de mümkündür.
 

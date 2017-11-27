@@ -7,7 +7,7 @@
 
 Имеется два пути для закрытия задачи: - На Доске выбрать задачу и выпадающем меню выбрать **Закрыть задачу**
 
-![Close a task from drop-down menu](screenshots/menu-close-task.png)
+![Close a task from drop-down menu](../screenshots/menu-close-task.png)
 
 Закрытие задачи, используя выпадающее меню.
 
@@ -15,7 +15,7 @@
 или - Используя детальное представление задачи, выбрать **Закрыть задачу** в меню боковой панели (слева)
 
 
-![Close task](screenshots/closing-tasks.png)
+![Close task](../screenshots/closing-tasks.png)
 
 Закрытие задачи.
 

@@ -15,22 +15,22 @@ Créer des sous-tâches
 
 Depuis la vue par tâche, cliquez sur **Ajouter une sous-tâche** dans le panneau latéral.
 
-![Ajouter une sous-tâche](screenshots/add-subtask.png)
+![Ajouter une sous-tâche](../screenshots/add-subtask.png)
 
 Vous pouvez aussi ajouter rapidement une sous-tâche en saisissant seulement son titre :
 
-![Add a subtask from the task view](screenshots/add-subtask-shortcut.png)
+![Add a subtask from the task view](../screenshots/add-subtask-shortcut.png)
 
 Modifier le statut d'une sous-tâche
 ---------------------
 
 Quand vous cliquez sur le titre d'une sous-tâche son statut change :
 
-![Sous-tâche en cours](screenshots/subtask-status-inprogress.png)
+![Sous-tâche en cours](../screenshots/subtask-status-inprogress.png)
 
 L'icône devant le titre est mise à jour en fonction du statut.
 
-![Sous-tâche effectuée](screenshots/subtask-status-done.png)
+![Sous-tâche effectuée](../screenshots/subtask-status-done.png)
 
 Remarque : quand la tâche est fermée, toutes les sous-tâches voient leur statut passer à **Terminé**.
 

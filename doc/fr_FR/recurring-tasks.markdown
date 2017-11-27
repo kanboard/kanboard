@@ -12,7 +12,7 @@ Configuration
 
 Allez à la page de vue par tâches ou utilisez le menu déroulant du tableau, puis choisissez **Modifier la récurrence**.
 
-![Tâche récurrente](screenshots/recurring-tasks.png)
+![Tâche récurrente](../screenshots/recurring-tasks.png)
 
 il existe trois façons de déclencher la création d'une nouvelle tâche récurrente :
 

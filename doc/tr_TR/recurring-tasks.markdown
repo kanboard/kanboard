@@ -13,7 +13,7 @@ Yapılandırma
 
 Görev görünüm sayfasına gidin veya panodaki açılır menüyü kullanın, ardından ** Tekrarı düzenleyin** seçeneğini belirleyin.
 
-![Recurring task](screenshots/recurring-tasks.png)
+![Recurring task](../screenshots/recurring-tasks.png)
 
 Halen yeni tekrar eden bir görev oluşturan 3 tetikleyici vardır:
 

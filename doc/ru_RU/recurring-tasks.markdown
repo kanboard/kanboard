@@ -28,7 +28,7 @@
 
 
 
-![Recurring task](screenshots/recurring-tasks.png)
+![Recurring task](../screenshots/recurring-tasks.png)
 
 Редактировать повторы.
 

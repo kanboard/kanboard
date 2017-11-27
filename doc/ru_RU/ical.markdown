@@ -32,7 +32,7 @@
 -   Выберите **Файл** -\> **Новая подписка на календарь**
 -   Скопируйте в Канборд URL ссылку на iCal транслятор и вставьте
 
-![Add iCal subscription](screenshots/apple-calendar-add-subscription.png)
+![Add iCal subscription](../screenshots/apple-calendar-add-subscription.png)
 
 Добавление подписки на календарь.
 
@@ -41,7 +41,7 @@
 -   Не забудьте указать частоту синхронизации
 
 
-![Edit iCal subscription](screenshots/apple-calendar-edit-subscription.png)
+![Edit iCal subscription](../screenshots/apple-calendar-edit-subscription.png)
 
 Редактирование подписки на календарь.
 
@@ -49,7 +49,7 @@
 Добавление вашего календаря из Канборд в Microsoft Outlook[¶](#adding-your-kanboard-calendar-to-microsoft-outlook "Ссылка на этот заголовок")
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
-![Outlook Add Internet Calendar](screenshots/outlook-add-subscription.png)
+![Outlook Add Internet Calendar](../screenshots/outlook-add-subscription.png)
 
 Добавление в Outlook календаря из интернет
 
@@ -58,7 +58,7 @@
 -   Скопируйте в Канборд URL ссылку на iCal транслятор и вставьте
 
 
-![Outlook Edit Internet Calendar](screenshots/outlook-edit-subscription.png)
+![Outlook Edit Internet Calendar](../screenshots/outlook-edit-subscription.png)
 
 Настройка интернет календаря в Outlook.
 
@@ -71,7 +71,7 @@
 -   Выберите **Файл** -\> **Новый календарь**
 -   В диалоговом окне, выберите **Из сети**
 
-![Thunderbird Step 1](screenshots/thunderbird-new-calendar-step1.png)
+![Thunderbird Step 1](../screenshots/thunderbird-new-calendar-step1.png)
 
 Создание календаря в Thunderbird, шаг 1.
 
@@ -80,7 +80,7 @@
 -   Выберите формат iCalendar
 -   Скопируйте в Канборд URL ссылку на iCal транслятор и вставьте
 
-![Thunderbird Step 2](screenshots/thunderbird-new-calendar-step2.png)
+![Thunderbird Step 2](../screenshots/thunderbird-new-calendar-step2.png)
 
 Создание календаря в Thunderbird, шаг 2.
 
@@ -95,7 +95,7 @@
 -   Скопируйте в Канборд URL ссылку на iCal транслятор и вставьте
 
 
-![Google Calendar](screenshots/google-calendar-add-subscription.png)
+![Google Calendar](../screenshots/google-calendar-add-subscription.png)
 
 Календарь Google.
 

@@ -30,7 +30,7 @@
 
 
 
-![Notifications](screenshots/notifications.png)
+![Notifications](../screenshots/notifications.png)
 
 Уведомления
 
@@ -81,7 +81,7 @@
 
 
 
-![Web Notifications Icon](screenshots/web-notifications-icon.png)
+![Web Notifications Icon](../screenshots/web-notifications-icon.png)
 
 Иконка веб уведомления.
 
@@ -91,7 +91,7 @@
 
 
 
-![Web Notifications](screenshots/web-notifications.png)
+![Web Notifications](../screenshots/web-notifications.png)
 
 Веб уведомления.
 

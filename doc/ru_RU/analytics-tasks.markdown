@@ -6,7 +6,7 @@
 Затраченное время и время цикла
 -------------------------------
 
-![Lead and cycle time](screenshots/task-lead-cycle-time.png)
+![Lead and cycle time](../screenshots/task-lead-cycle-time.png)
 
 Затраченное время и время цикла
 
@@ -23,7 +23,7 @@
 Время затраченное в каждой колонке
 ----------------------------------
 
-![Time spent into each column](screenshots/time-into-each-column.png)
+![Time spent into each column](../screenshots/time-into-each-column.png)
 
 Время затраченное в каждой колонке
 

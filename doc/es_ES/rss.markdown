@@ -13,7 +13,7 @@ Habilitar/Deshabilitar Feeds RSS de proyectos
 
 Ir a **Configuraci�n de proyecto > Acceso publico**.
 
-![Disable public access](screenshots/project-disable-sharing.png)
+![Disable public access](../screenshots/project-disable-sharing.png)
 
 Habilitar/Deshabilitar Feeds RSS de usuarios
 --------------------------------------------

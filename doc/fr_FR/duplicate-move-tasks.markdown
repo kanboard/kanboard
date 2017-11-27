@@ -1,12 +1,12 @@
 Dupliquer et déplacer des tâches
-========================
+================================
 
 Dupliquer une tâche dans le même projet
---------------------------------------
+---------------------------------------
 
 Allez à la vue par tâche et choisissez **Dupliquer** sur la gauche.
 
-![Duplication de tâche](screenshots/task-duplication.png)
+![Duplication de tâche](../screenshots/task-duplication.png)
 
 Une nouvelle tâche sera créée avec les mêmes propriétés que celles de la tâche originale.
 
@@ -15,7 +15,7 @@ Dupliquer une tâche vers un autre projet
 
 Allez à la vue par tâches et choisissez **Dupliquer dans un autre projet**.
 
-![Duplication d'une tâche dans un autre projet](screenshots/task-duplication-another-project.png)
+![Duplication d'une tâche dans un autre projet](../screenshots/task-duplication-another-project.png)
 
 Seuls les projets dont vous êtes membre apparaîtront dans le menu déroulant.
 

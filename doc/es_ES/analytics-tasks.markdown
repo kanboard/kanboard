@@ -6,7 +6,7 @@ Cada tarea tiene una sección de análisis disponible en el menu izquierdo en la
 Espera y tiempo de ciclo
 -------------------
 
-![Lead and cycle time](screenshots/task-lead-cycle-time.png)
+![Lead and cycle time](../screenshots/task-lead-cycle-time.png)
 
 - El tiempo de espera es el tiempo entre la creacion de la tarea y la fecha de finalización (Tarea cerrada).
 - El tiempo de ciclo es el tiempo entre la fecha de inicio y la fecha de finalización.
@@ -18,7 +18,7 @@ Nota: Puede configurar una accion automatica para definir la fecha de inicio aut
 El tiempo invertido en cada columna
 ---------------------------
 
-![Time spent into each column](screenshots/time-into-each-column.png)
+![Time spent into each column](../screenshots/time-into-each-column.png)
 
 - Esta gráfico muestra el total de tiempo invertido en cada columna para la tarea.
 - El tiempo invertido es calculado hasta que la tarea es cerrada.

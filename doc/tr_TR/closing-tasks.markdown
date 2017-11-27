@@ -7,10 +7,10 @@ Bununla birlikte, her zaman arama durumundaki **status:closed** sorgusunu kullan
 
 Bir görevi kapatmak için panodaki görev açılır menüsünden iki farklı yol vardır:
 
-![Close a task from drop-down menu](screenshots/menu-close-task.png)
+![Close a task from drop-down menu](../screenshots/menu-close-task.png)
 
 Veya görev ayrıntı görünümündeki görev yan çubuğu menüsünden:
 
-![Close task](screenshots/closing-tasks.png)
+![Close task](../screenshots/closing-tasks.png)
 
 Not: Bir görevi kapattığınızda, tamamlanmayan alt görevlerin tamamı "Bitti" durumuna değiştirilir.

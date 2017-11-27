@@ -3,11 +3,11 @@ Creación de tarea
 
 Desde el tablero, haga clic en el signo más **plus** al lado del nombre de la columna 
 
-![Creación de tarea desde el tablero](screenshots/task-creation-board.png)
+![Creación de tarea desde el tablero](../screenshots/task-creation-board.png)
 
 A continuación, aparece el formulario de creación de tareas:
 
-![Formulario de creación de tareas](screenshots/task-creation-form.png)
+![Formulario de creación de tareas](../screenshots/task-creation-form.png)
 
 Descripción de campos:
 

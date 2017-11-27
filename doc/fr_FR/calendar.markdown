@@ -13,7 +13,7 @@ Pour l'instant le calendrier permet d'afficher les informations suivantes :
 - Le suivi dans le temps de sous-tâches, tous les segments temporels sont affichés dans le calendrier.
 - Les estimations pour les sous-tâches, les prévisions et le travail restant
 
-![Calendrier](screenshots/calendar.png)
+![Calendrier](../screenshots/calendar.png)
 
 La configuration du calendrier peut être modifiée dans la page des paramètres.
 

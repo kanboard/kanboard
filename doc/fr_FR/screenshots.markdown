@@ -8,11 +8,11 @@ Ceci est particulièrement utile pour prendre des captures d'écran, quand il fa
 
 Vous pouvez ajouter directement des captures depuis le tableau en cliquant sur le menu déroulant ou sur la page de visualisation des tâches.
 
-![La capture d'écran dans le menu déroulant](screenshots/dropdown-screenshot.png)
+![La capture d'écran dans le menu déroulant](../screenshots/dropdown-screenshot.png)
 
 Pour ajouter une nouvelle image, prenez votre capture et collez-la avec CTRL+V ou Command+V:
 
-![Page de capture](screenshots/task-screenshot.png)
+![Page de capture](../screenshots/task-screenshot.png)
 
 Avec Mac OS X, vous pouvez utiliser les raccourcis suivants pour prendre des captures d'écran :
 

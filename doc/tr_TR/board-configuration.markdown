@@ -3,7 +3,7 @@ Pano ayarları
 
 Sağ Üst menüden **Ayarlar** menüsüne gidin, ardından soldaki **Pano ayarları** seçimini yapın.
 
-![Board settings](screenshots/board-settings.png)
+![Board settings](../screenshots/board-settings.png)
 
 ### Görev öne çıkarma
 

@@ -15,7 +15,7 @@ Each user must enable the notifications in their profile: **User Profile > Notif
 
 To receive email notifications you need a valid email address in your profile and the application must be configured to send emails.
 
-![Notifications](screenshots/notifications.png)
+![Notifications](../screenshots/notifications.png)
 
 You can choose your favorite notification method:
 
@@ -36,11 +36,11 @@ Web notifications
 
 Web notifications are available from the dashboard or from the icon at the top:
 
-![Web Notifications Icon](screenshots/web-notifications-icon.png)
+![Web Notifications Icon](../screenshots/web-notifications-icon.png)
 
 Notifications are shown in a list, so you can mark individual notification as read or everything.
 
-![Web Notifications](screenshots/web-notifications.png)
+![Web Notifications](../screenshots/web-notifications.png)
 
 In this way you can still get notified without having to receive emails.
 

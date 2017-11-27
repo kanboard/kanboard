@@ -8,7 +8,7 @@ Le but de ce diagramme de Gantt est d'afficher une vue d'ensemble de tous les pr
 - Les administrateurs de projet ne verront que les projets dans lesquels il y a des membres
 - Les objets privés ne sont pas affichés dans ce graphique
 
-![Diagramme de Gantt pour tous les projets](screenshots/gantt-chart-all-projects.png)
+![Diagramme de Gantt pour tous les projets](../screenshots/gantt-chart-all-projects.png)
 
 - La **date de début** et la **date de fin** des projets est utilisée pour construire le graphique
 - Les barres horizontales peuvent être redimensionnées et déplacées latéralement avec votre souris

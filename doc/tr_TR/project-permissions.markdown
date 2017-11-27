@@ -15,6 +15,6 @@ Yalnızca yöneticilerin her şeye erişimi vardır.
 
 Rol atamaları ** Proje Ayarları> İzinler ** 'den ulaşılabilir:
 
-![Project Permissions](screenshots/project-permissions.png)
+![Project Permissions](../screenshots/project-permissions.png)
 
 Özel projeler izin tanımlayamaz.

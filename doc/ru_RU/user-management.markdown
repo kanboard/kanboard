@@ -24,7 +24,7 @@
 
 
 
-![New user](screenshots/new-user.png)
+![New user](../screenshots/new-user.png)
 
 Форма создания нового пользователя.
 

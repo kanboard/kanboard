@@ -4,7 +4,7 @@
 В правом верхнем выпадающем меню выберите **Настройки**, затем, слева, выберите **Настройки календаря**.
 
 
-![Calendar settings](screenshots/calendar-settings.png)
+![Calendar settings](../screenshots/calendar-settings.png)
 
 Настройки календаря
 

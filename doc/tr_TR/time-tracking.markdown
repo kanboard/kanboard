@@ -6,7 +6,7 @@ Zaman izleme bilgileri, görev seviyesinde veya alt görev seviyesinde tanımlan
 Görev zamanı izleme
 ------------------
 
-![Task time tracking](screenshots/task-time-tracking.png)
+![Task time tracking](../screenshots/task-time-tracking.png)
 
 Görevlerin iki alanı vardır:
 
@@ -18,7 +18,7 @@ Bu değerler çalışma saatlerini temsil eder ve manuel olarak ayarlanması ger
 Alt görev zaman izleme
 ---------------------
 
-![Subtask time tracking](screenshots/subtask-time-tracking.png)
+![Subtask time tracking](../screenshots/subtask-time-tracking.png)
 
 Alt görevlerin "geçen süre" ve "zaman tahmini" alanları da vardır.
 
@@ -31,11 +31,11 @@ Kanboard, her bir alt görev durumu değişikliği arasındaki zamanı ayrı bir
 
 Tüm kayıtların dökümü görev görünümü sayfasında görünür:
 
-![Task timesheet](screenshots/task-timesheet.png)
+![Task timesheet](../screenshots/task-timesheet.png)
 
 Her bir alt görev için zamanlayıcı, istediği zaman durdurulabilir / başlatılabilir:
 
-![Subtask timer](screenshots/subtask-timer.png)
+![Subtask timer](../screenshots/subtask-timer.png)
 
 - Zamanlayıcı, alt görev durumuna bağlı değildir
 - Zamanlayıcıyı her başlatışınızda, zaman takibi tablosunda yeni bir kayıt oluşturulur

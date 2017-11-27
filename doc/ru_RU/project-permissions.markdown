@@ -31,7 +31,7 @@
 
 
 
-![Project Permissions](screenshots/project-permissions.png)
+![Project Permissions](../screenshots/project-permissions.png)
 
 Права доступа к проекту
 

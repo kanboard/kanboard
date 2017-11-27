@@ -15,22 +15,22 @@ Crear subtareas
 
 Desde la vista de la tarea en la barra lateral izquierda haga clic en **Agregar una subtarea**:
 
-![Añadir una subtarea](screenshots/add-subtask.png)
+![Añadir una subtarea](../screenshots/add-subtask.png)
 
 Tambien puede agregar una subtarea rápidamente introduciendo solamente el titulo:
 
-![Añadir una subtarea desde la vista de la subtarea](screenshots/add-subtask-shortcut.png)
+![Añadir una subtarea desde la vista de la subtarea](../screenshots/add-subtask-shortcut.png)
 
 Cambiar estado de subtarea
 -------------------------
 
 Al hacer clic en el título de la subtarea, se hace el cambio de estado :
 
-![Subtask en progreso](screenshots/subtask-status-inprogress.png)
+![Subtask en progreso](../screenshots/subtask-status-inprogress.png)
 
 El icono antes de que el titulo se actualice el estatus.
 
-![Subtarea realizada](screenshots/subtask-status-done.png)
+![Subtarea realizada](../screenshots/subtask-status-done.png)
 
 Nota: cuando la tarea se cierra todas las subtareas se cambian al estado **Hecho**.
 

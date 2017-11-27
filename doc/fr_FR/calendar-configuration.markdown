@@ -1,9 +1,9 @@
 Paramètres du calendrier
-=================
+========================
 
 Allez au menu **Paramètres**, puis choisissez **Paramètres du calendrier** sur la gauche.
 
-![Paramètres du calendrier](screenshots/calendar-settings.png)
+![Paramètres du calendrier](../screenshots/calendar-settings.png)
 
 il existe deux calendriers distincts dans Kanboard :
 
@@ -11,7 +11,7 @@ il existe deux calendriers distincts dans Kanboard :
 - le calendrier de l'utilisateur, disponible dans le tableau de bord
 
 Le calendrier du projet
-----------------
+-----------------------
 
 Ce calendrier affiche les tâches avec les dates d'échéance et les tâches selon leur date de création ou de début.
 
@@ -28,7 +28,7 @@ Ce calendrier affiche les tâches avec les dates d'échéance et les tâches sel
 - S'il n'existe pas de date de début la tâche ne figurera pas sur le calendrier .
 
 Calendrier de l'utilisateur
--------------
+---------------------------
 
 Ce calendrier n'affiche que les tâches assignées à l'utilisateur et de façon facultative des informations sur les sous-tâches.
 

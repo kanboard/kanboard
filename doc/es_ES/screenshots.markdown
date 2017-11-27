@@ -8,11 +8,11 @@ Esto es especialmente �til para tomar capturas de pantalla para describir un p
 
 Puede a�adir im�genes directamente desde el tablero haciendo clic en el men� desplegable o en la p�gina de vista de tareas .
 
-![Drop-down screenshot menu](screenshots/dropdown-screenshot.png)
+![Drop-down screenshot menu](../screenshots/dropdown-screenshot.png)
 
 Para a�adir una nueva imagen , coloque su captura de pantalla y pegar CTRL+V or Command+V:
 
-![Screenshot page](screenshots/task-screenshot.png)
+![Screenshot page](../screenshots/task-screenshot.png)
 
 En Mac OS X, puede utilizar los atajos para tomar screenshots:
 

@@ -3,7 +3,7 @@ Görev Geçişleri
 
 Bir görevin sütunlar arasındaki her hareketi veritabanına kaydedilir.
 
-![Task Transitions](screenshots/task-transitions.png)
+![Task Transitions](../screenshots/task-transitions.png)
 
 Görev görünümünden ulaşılabilir, şu bilgileri görebilirsiniz:
 

@@ -14,7 +14,7 @@ Birden fazla kullanıcı için proje oluşturma
 
 Gösterge tablosundan **Yeni proje** bağlantısını tıklayın:
 
-![Project creation form](screenshots/new-project.png)
+![Project creation form](../screenshots/new-project.png)
 
 Çok kolay, sadece projeniz için bir isim bulmanız gerekiyor!
 

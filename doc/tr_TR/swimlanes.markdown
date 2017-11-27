@@ -7,7 +7,7 @@ Kulvarlar tahtada yatay ayrımlardır.
 Kulvarlar ile pano
 --------------------
 
-![Swimlanes](screenshots/swimlanes.png)
+![Swimlanes](../screenshots/swimlanes.png)
 
 - Soldaki ikonuna tıklayarak kulvar(swimlanes) daraltabilirsiniz
 - Varsayılan kulvar her zaman üst kısmında gösterilir
@@ -21,7 +21,7 @@ Kulvarları yönetmek
 
 Kulvarları yapılandırmak için **proje yapılandırma sayfasına** gidin ve **Kulvarlar** bölümünü seçin.
 
-![Swimlanes Configuration](screenshots/swimlane-configuration.png)
+![Swimlanes Configuration](../screenshots/swimlane-configuration.png)
 
 Oradan, yeni bir kulvar ekleyebilir veya varsayılan bir yeniden adlandırabilirsiniz.
 Farklı yüzücülerin yerlerini de devre dışı bırakabilir ve değiştirebilirsiniz.

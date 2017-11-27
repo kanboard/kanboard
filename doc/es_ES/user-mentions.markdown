@@ -6,7 +6,7 @@ Kanboard ofrece la posibilidad de enviar notificaciones cuando alguien es mencio
 Si usted necesita obtener la atención de alguien en un comentario o una tarea, use el simbolo @ seguido por el usuario. 
 Kanboard automaticamente desplegara una lista de usuarios:                                              
 
-![User Mention](screenshots/mention-autocomplete.png)
+![User Mention](../screenshots/mention-autocomplete.png)
 
 - Por el momento, solo las descripciones de la tarea y la area de comentarios la función esta activada.
 - El usuario mencionado sólo funciona durante las tareas y comentarios creados

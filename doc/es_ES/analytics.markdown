@@ -6,21 +6,21 @@ Cada proyecto tiene una sección de análisis . Dependiendo de cómo se está ut
 Repartición de usuarios
 -----------------------
 
-![User repartition](screenshots/user-repartition.png)
+![User repartition](../screenshots/user-repartition.png)
 
 Esta gráfico de sectores muestra el numero de tareas abiertas asignadas por usuario.
 
 Distribución de tareas
 ----------------------
 
-![Task distribution](screenshots/task-distribution.png)
+![Task distribution](../screenshots/task-distribution.png)
 
 Este gráfico de sectores da una visión general del numero de tareas abiertas por columnas.
 
 Diagrama de flujo acumulado
 ---------------------------
 
-![Cumulative flow diagram](screenshots/cfd.png)
+![Cumulative flow diagram](../screenshots/cfd.png)
 
 - Este gráfico muesta el numerto de tareas acumuladas por cada columna a través del tiempo.
 - Cada día , el número total de tareas se registra para cada columna.

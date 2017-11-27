@@ -7,7 +7,7 @@
 
 
 
-![Project settings](screenshots/project-settings.png)
+![Project settings](../screenshots/project-settings.png)
 
 Настройки проекта.
 
@@ -56,7 +56,7 @@
 
 
 
-![Subtask user restriction](screenshots/subtask-user-restriction.png)
+![Subtask user restriction](../screenshots/subtask-user-restriction.png)
 
 Ограничение пользовательских подзадач.
 

@@ -7,7 +7,7 @@ For example, it's useful to separate software releases, divide your tasks in dif
 Board with swimlanes
 --------------------
 
-![Swimlanes](screenshots/swimlanes.png)
+![Swimlanes](../screenshots/swimlanes.png)
 
 - You can collapse swimlanes by clicking on the icon on the left
 - The default swimlane is always shown at the top
@@ -21,7 +21,7 @@ Managing swimlanes
 
 To configure swimlanes go to the **project configuration page** and choose the section **Swimlanes**.
 
-![Swimlanes Configuration](screenshots/swimlane-configuration.png)
+![Swimlanes Configuration](../screenshots/swimlane-configuration.png)
 
 From there, you can add a new swimlane or rename the default one.
 You can also disable and change the position of the different swimlanes.

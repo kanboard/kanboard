@@ -4,7 +4,7 @@
 
 В правом верхнем выпадающем меню выберите **Настройки**, затем, слева, выберите **Настройки Доски**.
 
-![Board settings](screenshots/board-settings.png)
+![Board settings](../screenshots/board-settings.png)
 
 Настройка Доски
 

@@ -12,7 +12,7 @@ Configuration
 
 Go to the task view page or use the drop-down menu on the board, then select **Edit recurrence**.
 
-![Recurring task](screenshots/recurring-tasks.png)
+![Recurring task](../screenshots/recurring-tasks.png)
 
 There are 3 triggers that currently create a new recurring task:
 

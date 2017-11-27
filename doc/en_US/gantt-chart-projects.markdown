@@ -8,7 +8,7 @@ The goal of this Gantt chart is to display an overview of all projects based on 
 - Project administrators will see only projects where they are members
 - Private projects are not shown on this chart
 
-![Gantt Chart for all projects](screenshots/gantt-chart-all-projects.png)
+![Gantt Chart for all projects](../screenshots/gantt-chart-all-projects.png)
 
 - The **start date** and the **end date** of projects are used to draw the chart
 - Horizontal bars can be resized and moved horizontally with your mouse

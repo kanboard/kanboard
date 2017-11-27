@@ -3,7 +3,7 @@ Nastavení projektu
 
 Přejděte do nabídky **Nastavení** a poté vlevo vyberte možnost **Nastavení projektu**.
 
-![Nastavení projektu](screenshots/project-settings.png)
+![Nastavení projektu](../screenshots/project-settings.png)
 
 ### Výchozí sloupce pro nové projekty
 
@@ -27,7 +27,7 @@ Je-li tato volba povolena, může uživatel pracovat pouze s jednou dílčí úl
 
 Pokud má další dílčí úloha stav "probíhající", zobrazí se toto dialogové okno:
 
-![Omezení uživatele dílčího úkolu](screenshots/subtask-user-restriction.png)
+![Omezení uživatele dílčího úkolu](../screenshots/subtask-user-restriction.png)
 
 ### Spustit automaticky sledování času
 

@@ -11,7 +11,7 @@
 
 
 
-![User Mention](screenshots/mention-autocomplete.png)
+![User Mention](../screenshots/mention-autocomplete.png)
 
 Ссылка на пользователя.
 

@@ -9,7 +9,7 @@ Only administrators can create new groups and assign users.
 Groups can be managed from **User management > View All Groups**.
 From there, you can create groups and assign users.
 
-![Group Management](screenshots/groups-management.png)
+![Group Management](../screenshots/groups-management.png)
 
 Each project manager can authorize the access to a set of groups from the [project permissions page](project-permissions.markdown).
 

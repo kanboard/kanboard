@@ -3,11 +3,11 @@ Vytváření úkolů
 
 Na nástěnce klikněte na znaménko plus vedle názvu sloupce:
 
-![Vytváření úkolů z nástěnky](screenshots/task-creation-board.png)
+![Vytváření úkolů z nástěnky](../screenshots/task-creation-board.png)
 
 Poté se zobrazí formulář vytvoření úkolu:
 
-![Formulář pro tvorbu úkolů](screenshots/task-creation-form.png)
+![Formulář pro tvorbu úkolů](../screenshots/task-creation-form.png)
 
 Popis pole:
 

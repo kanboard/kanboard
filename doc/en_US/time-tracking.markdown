@@ -6,7 +6,7 @@ Time tracking information can be defined at the task level or at the subtask lev
 Task time tracking
 ------------------
 
-![Task time tracking](screenshots/task-time-tracking.png)
+![Task time tracking](../screenshots/task-time-tracking.png)
 
 Tasks have two fields:
 
@@ -18,7 +18,7 @@ These values represent hours of work and have to be set manually.
 Subtask time tracking
 ---------------------
 
-![Subtask time tracking](screenshots/subtask-time-tracking.png)
+![Subtask time tracking](../screenshots/subtask-time-tracking.png)
 
 Subtasks also have the fields "time spent" and "time estimated".
 
@@ -31,11 +31,11 @@ Kanboard records the time between each subtask status change in a separate table
 
 The breakdown of all records is visible in the task view page:
 
-![Task timesheet](screenshots/task-timesheet.png)
+![Task timesheet](../screenshots/task-timesheet.png)
 
 For each subtask, the timer can be stopped/started at any time:
 
-![Subtask timer](screenshots/subtask-timer.png)
+![Subtask timer](../screenshots/subtask-timer.png)
 
 - The timer doesn't depend of the subtask status
 - Each time you start the timer a new record is created in the time tracking table

@@ -6,7 +6,7 @@ Bir görevi aynı projeye çoğalt
 
 Görev görünümüne gidin ve soldaki **Çoğalt** seçeneğini belirleyin.
 
-![Task Duplication](screenshots/task-duplication.png)
+![Task Duplication](../screenshots/task-duplication.png)
 
 Orijinalle aynı özelliklere sahip yeni bir görev oluşturulur.
 
@@ -15,7 +15,7 @@ Görevi başka bir projeye çoğalt
 
 Görev görünümüne gidin ve **Başka bir projeye çoğalt** seçeneğini seçin.
 
-![Task Duplication Another Project](screenshots/task-duplication-another-project.png)
+![Task Duplication Another Project](../screenshots/task-duplication-another-project.png)
 
 Açılır menüde yalnızca üye olduğunuz projeler gösterilecektir.
 

@@ -7,7 +7,7 @@ Přechod z jednoho pohledu na druhý lze provést pomocí klávesové zkratky **
 Sbalený režim
 --------------
 
-![Sbalené úkoly](screenshots/board-collapsed-mode.png)
+![Sbalené úkoly](../screenshots/board-collapsed-mode.png)
 
 - Pokud je úkol někomu přiřazen, zobrazí se vedle čísla úlohy iniciály osoby.
 - Pokud je název úlohy příliš dlouhý, můžete svou myš umístit přes úkol, aby se zobrazil popis s celým názvem.
@@ -15,4 +15,4 @@ Sbalený režim
 Rozbalený režim
 -------------
 
-![Rozbalené úkoly](screenshots/board-expanded-mode.png)
+![Rozbalené úkoly](../screenshots/board-expanded-mode.png)

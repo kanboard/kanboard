@@ -23,7 +23,7 @@
 
 
 
-![Gantt Chart for all projects](screenshots/gantt-chart-all-projects.png)
+![Gantt Chart for all projects](../screenshots/gantt-chart-all-projects.png)
 
 Диаграмма Ганта для всех проектов
 

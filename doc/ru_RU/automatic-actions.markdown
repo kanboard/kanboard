@@ -19,7 +19,7 @@
 
 Нажмите на ссылку **Добавить новое действие**.
 
-![Automatique action](screenshots/automatic-action-creation.png)
+![Automatique action](../screenshots/automatic-action-creation.png)
 
 Автоматическое действие.
 

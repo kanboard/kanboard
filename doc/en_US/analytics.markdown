@@ -6,21 +6,21 @@ Each project have an analytics section. Depending on how you are using Kanboard,
 User repartition
 ----------------
 
-![User repartition](screenshots/user-repartition.png)
+![User repartition](../screenshots/user-repartition.png)
 
 This pie chart show the number of open tasks assigned per user.
 
 Task distribution
 -----------------
 
-![Task distribution](screenshots/task-distribution.png)
+![Task distribution](../screenshots/task-distribution.png)
 
 This pie chart gives an overview of the number of open tasks per column.
 
 Cumulative flow diagram
 -----------------------
 
-![Cumulative flow diagram](screenshots/cfd.png)
+![Cumulative flow diagram](../screenshots/cfd.png)
 
 - This chart shows the number of tasks cumulatively for each column over the time.
 - The legend order is the same as the stack in the chart.
@@ -33,7 +33,7 @@ Note: You need to have at least two days of data to see the graph.
 Burn down chart
 ---------------
 
-![Burndown chart](screenshots/burndown-chart.png)
+![Burndown chart](../screenshots/burndown-chart.png)
 
 The [burn down chart](http://en.wikipedia.org/wiki/Burn_down_chart) is available for each project.
 
@@ -44,7 +44,7 @@ The [burn down chart](http://en.wikipedia.org/wiki/Burn_down_chart) is available
 Average time spent into each column
 -----------------------------------
 
-![Average time spent into each column](screenshots/average-time-spent-into-each-column.png)
+![Average time spent into each column](../screenshots/average-time-spent-into-each-column.png)
 
 This chart shows the average time spent into each column for the last 1000 tasks.
 
@@ -54,7 +54,7 @@ This chart shows the average time spent into each column for the last 1000 tasks
 Average Lead and Cycle time
 ---------------------------
 
-![Average time spent into each column](screenshots/average-lead-cycle-time.png)
+![Average time spent into each column](../screenshots/average-lead-cycle-time.png)
 
 This chart show the average lead and cycle time for the last 1000 tasks over time.
 

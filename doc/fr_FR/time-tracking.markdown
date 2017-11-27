@@ -6,7 +6,7 @@ Les informations de la feuille de suivi du temps peuvent être définies au nive
 Suivi de temps des tâches 
 ------------------
 
-![Suivi de temps des tâches ](screenshots/task-time-tracking.png)
+![Suivi de temps des tâches ](../screenshots/task-time-tracking.png)
 
 Les tâches ont deux champs:
     
@@ -19,7 +19,7 @@ Ces valeurs représentent des heures de travail et doivent être entrées manuel
 Suivi de temps des sous-tâches
 ---------------------
 
-![Suivi de temps des sous-tâches](screenshots/subtask-time-tracking.png)
+![Suivi de temps des sous-tâches](../screenshots/subtask-time-tracking.png)
 
 Les sous-tâches ont aussi les champs "temps passé" et "temps estimé"
 
@@ -32,11 +32,11 @@ Kanboard enregistre le temps entre chaque changement de statut des sous-tâches 
 
 La répartition de tous les enregistrements est visible sur la page de la tâche
 
-![Feuille de suivi du temps pour les tâches](screenshots/task-timesheet.png)
+![Feuille de suivi du temps pour les tâches](../screenshots/task-timesheet.png)
 
 Pour chaque sous-tâche, le chrono peut être à tout moment arrêté/démarré
 
-![Chrono des sous-tâches](screenshots/subtask-timer.png)
+![Chrono des sous-tâches](../screenshots/subtask-timer.png)
 
 - Le chrono ne dépend pas du statut de la sous-tâche
 - Chaque fois que vous démarrez le chrono, un nouvel enregistrement est créé dans la table de suivi des temps

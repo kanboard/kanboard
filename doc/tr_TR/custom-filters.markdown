@@ -12,8 +12,8 @@ Filtre oluşturma
 
 İşlem açılır menüsüne veya proje ayarlarına gidin ve **özel filtreler** öğesini seçin:
 
-![Custom Filter Creation](screenshots/custom-filter-creation.png)
+![Custom Filter Creation](../screenshots/custom-filter-creation.png)
 
 Filtrenizi oluşturduktan sonra, panoda varsayılan filtrelerin yanında görünecektir:
 
-![Custom Filter Dropdown](screenshots/custom-filter-dropdown.png)
+![Custom Filter Dropdown](../screenshots/custom-filter-dropdown.png)

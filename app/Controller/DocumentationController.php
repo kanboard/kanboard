@@ -44,6 +44,7 @@ class DocumentationController extends BaseController
         $data = file_get_contents($filename);
         $content = preg_replace_callback('/\((.*.markdown)\)/', array($this, 'replaceMarkdownUrl'), $data);
         $content = preg_replace_callback('/\((screenshots.*\.png)\)/', array($this, 'replaceImageUrl'), $content);
+        $content = preg_replace_callback('/\((\.\.\/screenshots.*\.png)\)/', array($this, 'replaceImageUrl'), $content);
 
         list($title, ) = explode("\n", $data, 2);
 

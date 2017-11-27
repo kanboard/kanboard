@@ -3,11 +3,11 @@ Creating Tasks
 
 From the board, click on the plus sign next to the column name:
 
-![Task creation from the board](screenshots/task-creation-board.png)
+![Task creation from the board](../screenshots/task-creation-board.png)
 
 Then the task creation form appears:
 
-![Task creation form](screenshots/task-creation-form.png)
+![Task creation form](../screenshots/task-creation-form.png)
 
 Field description:
 

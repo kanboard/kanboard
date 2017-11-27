@@ -7,7 +7,7 @@
 
 
 
-![Task Links](screenshots/task-links.png)
+![Task Links](../screenshots/task-links.png)
 
 Ссылки на задачи
 

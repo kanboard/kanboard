@@ -3,7 +3,7 @@ Project Settings
 
 Go to the menu **Settings**, then choose **Project settings** on the left.
 
-![Project settings](screenshots/project-settings.png)
+![Project settings](../screenshots/project-settings.png)
 
 ### Default columns for new projects
 
@@ -27,7 +27,7 @@ When this option is enabled, a user can work with only one subtask at the time.
 
 If another subtask have the status "in progress", the user will see this dialog box:
 
-![Subtask user restriction](screenshots/subtask-user-restriction.png)
+![Subtask user restriction](../screenshots/subtask-user-restriction.png)
 
 ### Trigger automatically subtask time tracking
 

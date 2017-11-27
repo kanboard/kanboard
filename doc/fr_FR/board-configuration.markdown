@@ -3,7 +3,7 @@ Paramètres du tableau
 
 Allez dans le menu **Paramètres** puis choisissez *Paramètres du tableau** sur la gauche
 
-![Paramètres du tableau](screenshots/board-settings.png)
+![Paramètres du tableau](../screenshots/board-settings.png)
 
 ### Mise en avant d'une tâche
 

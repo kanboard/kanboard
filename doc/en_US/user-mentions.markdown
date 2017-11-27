@@ -6,7 +6,7 @@ Kanboard offers the possibility to send notifications when someone is mentioned.
 If you need to get the attention of someone in a comment or in a task, use the @ symbol followed by their username.
 Kanboard will automatically suggest a list of users:
 
-![User Mention](screenshots/user-mentions.png)
+![User Mention](../screenshots/user-mentions.png)
 
 - At the moment, only the task description and the comment text area have this feature enabled.
 - The user mentions works only during tasks and comments creation.

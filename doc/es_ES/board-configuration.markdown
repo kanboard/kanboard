@@ -3,7 +3,7 @@ Configuraci�n del tablero
 
 Ir al menu **Configuraciones **, elije **Ajustes de tablero ** a la izquierda.
 
-![Board settings](screenshots/board-settings.png)
+![Board settings](../screenshots/board-settings.png)
 
 ### Resaltado de tarea
 

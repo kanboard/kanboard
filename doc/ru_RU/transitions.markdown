@@ -7,7 +7,7 @@
 
 
 
-![Transitions](screenshots/transitions.png)
+![Transitions](../screenshots/transitions.png)
 
 Перемещения.
 
@@ -41,7 +41,7 @@
 
 
 
-![Transitions Export](screenshots/transitions-export.png)
+![Transitions Export](../screenshots/transitions-export.png)
 
 Экспорт перемещений задач.
 

@@ -6,7 +6,7 @@
 Перераспределение(загрузка) пользователей
 -----------------------------------------
 
-![User repartition](screenshots/user-repartition.png)
+![User repartition](../screenshots/user-repartition.png)
 
 Перераспределение(загрузка) пользователей
 
@@ -17,7 +17,7 @@
 Распределение задач
 -------------------
 
-![Task distribution](screenshots/task-distribution.png)
+![Task distribution](../screenshots/task-distribution.png)
 
 Распределение задач
 
@@ -30,7 +30,7 @@
 Накопительная диаграмма
 -----------------------
 
-![Cumulative flow diagram](screenshots/cfd.png)
+![Cumulative flow diagram](../screenshots/cfd.png)
 
 Накопительная диаграмма
 
@@ -46,7 +46,7 @@
 Диаграмма сгорания
 ------------------
 
-![Burndown chart](screenshots/burndown-chart.png)
+![Burndown chart](../screenshots/burndown-chart.png)
 
 Диаграмма сгорания
 
@@ -62,7 +62,7 @@
 Среднее время затраченное в каждой колонке
 ------------------------------------------
 
-![Average time spent into each column](screenshots/average-time-spent-into-each-column.png)
+![Average time spent into each column](../screenshots/average-time-spent-into-each-column.png)
 
 Среднее время затраченное в каждой колонке
 
@@ -75,7 +75,7 @@
 Среднее время выполнения и время цикла
 --------------------------------------
 
-![Average time spent into each column](screenshots/average-lead-cycle-time.png)
+![Average time spent into each column](../screenshots/average-lead-cycle-time.png)
 
 Среднее время затраченное в каждой колонке
 

@@ -15,7 +15,7 @@ Kanboard может содержать одновременно нескольк
 
 На рабочей панели нажмите ссылку **Новый проект**:
 
-![Project creation form](screenshots/new-project.png)
+![Project creation form](../screenshots/new-project.png)
 
 Форма создания проекта.
 

@@ -28,7 +28,7 @@ RSS/Atom подписки
 
 
 
-![Disable public access](screenshots/project-disable-sharing.png)
+![Disable public access](../screenshots/project-disable-sharing.png)
 
 Выключение общего доступа.
 

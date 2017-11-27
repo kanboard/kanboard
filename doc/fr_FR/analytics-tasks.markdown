@@ -6,7 +6,7 @@ Chaque tâche possède une section analytique accessible à partir du menu à ga
 Lead et cycle time
 ------------------
 
-![Lead and cycle time](screenshots/task-lead-cycle-time.png)
+![Lead and cycle time](../screenshots/task-lead-cycle-time.png)
 
 - Le lead time est la durée entre la création de la tâche et son achèvement (tâche fermée).
 - Le cycle time est la durée entre la date de début et l'achèvement.
@@ -18,7 +18,7 @@ Remarque : vous pouvez configurer une action pour définir automatiquement que l
 Temps passé dans chaque colonne
 --------------------------------
 
-![Temps passé dans chaque colonne](screenshots/time-into-each-column.png)
+![Temps passé dans chaque colonne](../screenshots/time-into-each-column.png)
 
 - Ce graphique montre le temps total passé dans chaque colonne pour la tâche
 - Le temps passé est calculé jusqu’à ce que la tâche soit fermée

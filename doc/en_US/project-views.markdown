@@ -8,13 +8,13 @@ The search engine uses the [advanced syntax](search.markdown).
 Board View
 ----------
 
-![Board view](screenshots/board-view.png)
+![Board view](../screenshots/board-view.png)
 
 - With this view, you can drag and drop tasks between columns easily.
 - You can also use the keyboard shortcut **"v b"** to switch to the board view.
 - Tasks with a shadow are recently modified.
 
-![Board Task Limit](screenshots/board-task-limit.png)
+![Board Task Limit](../screenshots/board-task-limit.png)
 
 When the task limit is reached for a column, the background becomes red. That means there are too many tasks in progress at the same time.
 
@@ -23,7 +23,7 @@ When the task limit is reached for a column, the background becomes red. That me
 Calendar View
 --------------
 
-![Calendar view](screenshots/calendar-view.png)
+![Calendar view](../screenshots/calendar-view.png)
 
 - With this view, you can visualize tasks with a due date.
 - Depending of the settings, you can also see tasks in progress.
@@ -33,7 +33,7 @@ Calendar View
 List View
 ---------
 
-![List view](screenshots/list-view.png)
+![List view](../screenshots/list-view.png)
 
 - With this view, all results of your search are displayed in a table.
 - You can also use the keyboard shortcut **"v l"** to switch to the list view.
@@ -41,7 +41,7 @@ List View
 Gantt View
 ----------
 
-![Gantt view](screenshots/gantt-view.png)
+![Gantt view](../screenshots/gantt-view.png)
 
 - The Gantt view displays tasks on a horizontal timeline.
 - The start date and the due date are used to display the chart.
@@ -50,7 +50,7 @@ Gantt View
 Project Overview
 ----------------
 
-![Project overview](screenshots/project-view.png)
+![Project overview](../screenshots/project-view.png)
 
 - View the description of the project.
 - Attach and upload documents to the project.

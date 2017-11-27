@@ -13,7 +13,7 @@ Proje RSS yayınlarını etkinleştir / devre dışı bırak
 
 **Proje ayarları> Herkese açık erişim** 'e gidin.
 
-![Disable public access](screenshots/project-disable-sharing.png)
+![Disable public access](../screenshots/project-disable-sharing.png)
 
 Kullanıcı RSS yayınlarını etkinleştir / devre dışı bırak
 --------------------------------

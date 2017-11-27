@@ -30,23 +30,23 @@ Adding your Kanboard calendar to Apple Calendar
 - Select **File > New Calendar Subscription**
 - Copy and paste the iCal feed URL from Kanboard
 
-![Add iCal subscription](screenshots/apple-calendar-add-subscription.png)
+![Add iCal subscription](../screenshots/apple-calendar-add-subscription.png)
 
 - You can choose to synchronize the calendar with iCloud to be available across all your devices
 - Don't forget to select the refresh frequency
 
-![Edit iCal subscription](screenshots/apple-calendar-edit-subscription.png)
+![Edit iCal subscription](../screenshots/apple-calendar-edit-subscription.png)
 
 Adding your Kanboard calendar to Microsoft Outlook
 --------------------------------------------------
 
-![Outlook Add Internet Calendar](screenshots/outlook-add-subscription.png)
+![Outlook Add Internet Calendar](../screenshots/outlook-add-subscription.png)
 
 - Open Outlook
 - Select **Open Calendar > From Internet**
 - Copy and paste the iCal feed URL from Kanboard
 
-![Outlook Edit Internet Calendar](screenshots/outlook-edit-subscription.png)
+![Outlook Edit Internet Calendar](../screenshots/outlook-edit-subscription.png)
 
 Adding your Kanboard calendar to Mozilla Thunderbird
 ----------------------------------------------------
@@ -55,12 +55,12 @@ Adding your Kanboard calendar to Mozilla Thunderbird
 - Click on **File > New Calendar**
 - In the dialog box, choose **On the Network**
 
-![Thunderbird Step 1](screenshots/thunderbird-new-calendar-step1.png)
+![Thunderbird Step 1](../screenshots/thunderbird-new-calendar-step1.png)
 
 - Choose the format iCalendar
 - Copy and paste the iCal feed URL from Kanboard
 
-![Thunderbird Step 2](screenshots/thunderbird-new-calendar-step2.png)
+![Thunderbird Step 2](../screenshots/thunderbird-new-calendar-step2.png)
 
 - Choose the colors and other settings and finally save
 
@@ -71,7 +71,7 @@ Adding your Kanboard calendar to Google Calendar
 - Select **Add by URL** from the menu.
 - Copy and paste the iCal feed URL from Kanboard
 
-![Google Calendar](screenshots/google-calendar-add-subscription.png)
+![Google Calendar](../screenshots/google-calendar-add-subscription.png)
 
 Your Kanboard calendar can also be available from your Android device if you enable the synchronization.
 

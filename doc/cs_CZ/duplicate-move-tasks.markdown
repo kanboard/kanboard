@@ -6,7 +6,7 @@ Kopírovat úkol do stejného projektu
 
 Přejděte do zobrazení úkolů a vlevo vyberte položku **Vytvořit kopii**.
 
-![Kopírování úloh](screenshots/task-duplication.png)
+![Kopírování úloh](../screenshots/task-duplication.png)
 
 Nový úkol bude vytvořen se stejnými vlastnostmi jako originál.
 
@@ -15,7 +15,7 @@ Kopírovat úkol do jiného projektu
 
 Přejděte do zobrazení úkolů a vyberte možnost **Vytvořit kopii v jiném projektu **.
 
-![Kopírování úkolů do jiného projektu](screenshots/task-duplication-another-project.png)
+![Kopírování úkolů do jiného projektu](../screenshots/task-duplication-another-project.png)
 
 V rozbalovací nabídce se zobrazí pouze projekty, ve kterých jste členem.
 

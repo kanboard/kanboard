@@ -10,7 +10,7 @@ Yeni bir kullanıcı eklemek için bir yönetici olmalısınız.
 2. Üst kısımda bir bağlantı var **Yeni yerel kullanıcı** veya **Yeni uzak kullanıcı**
 3. Formu doldurun ve kaydedin.
 
-![New user](screenshots/new-user.png)
+![New user](../screenshots/new-user.png)
 
 Bir **yerel kullanıcı** oluşturduğunuzda, en azından bu değerleri belirtmeniz gerekir:
 

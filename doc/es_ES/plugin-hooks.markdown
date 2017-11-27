@@ -65,13 +65,13 @@ class Plugin extends Base
 
 Lista de fusión de hooks:
 
-#### controller:task:form:default
+`controller:task:form:default`
 
 - sobrescribir los valores por default de las tareas
 - Argumentos:
     - `$default_values`: actual default values (array)
 
-#### controller:calendar:project:events
+`controller:calendar:project:events`
 
 - Agregar mas eventos a el calendario del projecto
 - Argumentos:
@@ -79,7 +79,7 @@ Lista de fusión de hooks:
     - `$start` Calendar start date (string, ISO-8601 format)
     - `$end` Calendar` end date (string, ISO-8601 format)
 
-#### controller:calendar:user:events
+`controller:calendar:user:events`
 
 - Agregar mas eventos a el calendario de usuario
 - Argumentos:

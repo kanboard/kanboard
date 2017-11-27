@@ -13,7 +13,7 @@ Takvim için iki farklı görünüm vardır:
 - Alt görev zaman takibi, kaydedilen tüm zaman aralığı takvimde gösterilecektir.
 - Alt iş tahminleri, sol iş tahminleri
 
-![Calendar](screenshots/calendar.png)
+![Calendar](../screenshots/calendar.png)
 
 Takvim yapılandırması ayarlar sayfasından değiştirilebilir.
 

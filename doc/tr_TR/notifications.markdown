@@ -15,7 +15,7 @@ Her kullanıcının profilindeki bildirimleri etkinleştirmesi gerekir: **Kullan
 
 E-posta bildirimlerini almak için profilinizde geçerli bir e-posta adresine ihtiyacınız vardır ve uygulama, e-posta göndermek üzere yapılandırılmalıdır.
 
-![Notifications](screenshots/notifications.png)
+![Notifications](../screenshots/notifications.png)
 
 Favori bildirim yönteminizi seçebilirsiniz:
 
@@ -36,11 +36,11 @@ Web bildirimleri
 
 Web bildirimleri, gösterge tablosundan veya üstteki simgeden edinilebilir:
 
-![Web Notifications Icon](screenshots/web-notifications-icon.png)
+![Web Notifications Icon](../screenshots/web-notifications-icon.png)
 
 Bildirimler bir listede gösterilir, böylece tek tek bildirimi okundu olarak veya her şey olarak işaretleyebilirsiniz.
 
-![Web Notifications](screenshots/web-notifications.png)
+![Web Notifications](../screenshots/web-notifications.png)
 
 Bu şekilde e-postalar almadan bildirim alabilirsiniz.
 

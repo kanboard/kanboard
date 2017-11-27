@@ -5,7 +5,7 @@ Projekty lze kdykoli přejmenovat nebo zakázat.
 
 Chcete-li projekt přejmenovat, klikněte na odkaz "Upravit projekt" vlevo.
 
-![Úprava projektu](screenshots/project-edition.png)
+![Úprava projektu](../screenshots/project-edition.png)
 
 - Datum zahájení a datum ukončení se používají k vygenerování Ganttova grafu projektu.
 - Popis je viditelný jako nápověda na nástěnce a na stránce výpisů projektů.

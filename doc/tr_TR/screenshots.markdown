@@ -8,11 +8,11 @@ Bu, örneğin, bir sorunu tarif etmek için ekran görüntülerinin alınması i
 
 Açılır menüye tıklayarak veya görev görünümü sayfasında doğrudan ekran görüntüleri ekleyebilirsiniz.
 
-![Drop-down screenshot menu](screenshots/dropdown-screenshot.png)
+![Drop-down screenshot menu](../screenshots/dropdown-screenshot.png)
 
 Yeni bir görüntü eklemek için ekran görüntüsünü alın ve CTRL+V veya Command+V ile yapıştırın:
 
-![Screenshot page](screenshots/task-screenshot.png)
+![Screenshot page](../screenshots/task-screenshot.png)
 
 Mac OS X'te ekran görüntüleri almak için şu klavye kısayolları kullanabilirsiniz:
 

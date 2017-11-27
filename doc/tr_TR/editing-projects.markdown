@@ -5,7 +5,7 @@ Projeler yeniden adlandırılabilir ve istediğiniz zaman devre dışı bırakı
 
 Bir projeyi yeniden adlandırmak için soldaki "Projeyi düzenle" bağlantısına tıklamanız yeterlidir.
 
-![Project edition](screenshots/project-edition.png)
+![Project edition](../screenshots/project-edition.png)
 
 - Başlangıç tarihi ve bitiş tarihi proje Gantt grafiğini oluşturmak için kullanılır
 - Tanım, panoda ve proje listeleme sayfasında araç ipucu olarak görünür

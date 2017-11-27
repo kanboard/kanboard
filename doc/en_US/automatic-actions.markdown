@@ -16,7 +16,7 @@ Add a new action
 
 Click on the link **Add a new automatic action**.
 
-![Automatique action](screenshots/automatic-action-creation.png)
+![Automatique action](../screenshots/automatic-action-creation.png)
 
 1. Choose an action
 2. Select an event

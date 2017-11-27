@@ -6,7 +6,7 @@ Bu ayarları yalnızca yöneticiler değiştirebilir.
 
 Sağ üstteki **Ayarlar** menüsüne gidin, ardından soldaki **Uygulama ayarları** seçeneğini seçin.
 
-![Uygulama ayarları](screenshots/application-settings.png)
+![Uygulama ayarları](../screenshots/application-settings.png)
 
 
 ### Uygulama URL

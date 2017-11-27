@@ -6,7 +6,7 @@ Her görev, görev görünümünde sol menüden erişilebilen bir analiz bölüm
 Teslim ve döngü süresi
 -------------------
 
-![Lead and cycle time](screenshots/task-lead-cycle-time.png)
+![Lead and cycle time](../screenshots/task-lead-cycle-time.png)
 
 - Teslim zamanı, görev yaratma ve tamamlanma tarihi arasındaki zamandır (görev kapatıldı).
 - Döngü süresi, başlangıç tarihi ile tamamlanma tarihi arasındaki zamandır.
@@ -18,7 +18,7 @@ Not: Görevi seçtiğiniz kolona taşıdığınızda başlangıç tarihini otoma
 Her bir kolonda geçen süre
 ---------------------------
 
-![Time spent into each column](screenshots/time-into-each-column.png)
+![Time spent into each column](../screenshots/time-into-each-column.png)
 
 - Bu grafik, görev için her bir kolonda geçen toplam süreyi gösterir.
 - Geçen süre, görev kapanıncaya kadar hesaplanır.

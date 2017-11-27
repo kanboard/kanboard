@@ -14,7 +14,7 @@ Creating projects for multiple users
 
 From the dashboard, click on the link **New project**:
 
-![Project creation form](screenshots/new-project.png)
+![Project creation form](../screenshots/new-project.png)
 
 It's very easy: you just have to find a name for your project!
 

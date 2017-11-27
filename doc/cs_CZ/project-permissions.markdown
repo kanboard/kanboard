@@ -15,6 +15,6 @@ Pouze správci mají přístup ke všemu.
 
 Přiřazení rolí je viditelné v **Nastavení projektu > Oprávnění**:
 
-![Oprávnění projektu](screenshots/project-permissions.png)
+![Oprávnění projektu](../screenshots/project-permissions.png)
 
 U soukromých projektů nelze definovat oprávnění.

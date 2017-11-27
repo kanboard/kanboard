@@ -65,13 +65,13 @@ class Plugin extends Base
 
 List of merging hooks:
 
-#### controller:task:form:default
+`controller:task:form:default`
 
 - Override default values for task forms
 - Arguments:
     - `$default_values`: actual default values (array)
 
-#### controller:calendar:project:events
+`controller:calendar:project:events`
 
 - Add more events to the project calendar
 - Arguments:
@@ -79,7 +79,7 @@ List of merging hooks:
     - `$start` Calendar start date (string, ISO-8601 format)
     - `$end` Calendar` end date (string, ISO-8601 format)
 
-#### controller:calendar:user:events
+`controller:calendar:user:events`
 
 - Add more events to the user calendar
 - Arguments:

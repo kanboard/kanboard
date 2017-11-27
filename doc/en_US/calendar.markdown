@@ -13,7 +13,7 @@ At this time the calendar is able to display this information:
 - Sub-task time tracking, all recorded time slot will be shown in the calendar.
 - Sub-task estimates, forecasts of work left
 
-![Calendar](screenshots/calendar.png)
+![Calendar](../screenshots/calendar.png)
 
 The calendar configuration can be changed in the settings page.
 

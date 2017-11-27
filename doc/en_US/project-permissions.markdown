@@ -15,6 +15,6 @@ Only administrators have access to everything.
 
 Role assignments are visible in **Project Settings > Permissions**:
 
-![Project Permissions](screenshots/project-permissions.png)
+![Project Permissions](../screenshots/project-permissions.png)
 
 Private projects cannot define permissions.

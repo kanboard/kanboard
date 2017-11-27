@@ -8,7 +8,7 @@
 -------------------------------------------------------------
 
 
-![Tasks collapsed](screenshots/board-collapsed-mode.png)
+![Tasks collapsed](../screenshots/board-collapsed-mode.png)
 
 Задачи представлены в компактном виде
 
@@ -21,7 +21,7 @@
 -------------------------------------------------------------
 
 
-![Tasks expanded](screenshots/board-expanded-mode.png)
+![Tasks expanded](../screenshots/board-expanded-mode.png)
 Развёрнутый вид
 
 

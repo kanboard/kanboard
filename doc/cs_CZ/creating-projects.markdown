@@ -14,7 +14,7 @@ Vytváření projektů pro více uživatelů
 
 Na nástěnce klikněte na odkaz **Nový projekt**:
 
-![Formulář pro tvorbu projektu](screenshots/new-project.png)
+![Formulář pro tvorbu projektu](../screenshots/new-project.png)
 
 Je to velmi snadné: stačí najít jméno pro svůj projekt!
 

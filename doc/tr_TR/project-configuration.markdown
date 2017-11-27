@@ -3,7 +3,7 @@ Proje Ayarları
 
 Sağ üstte bulunan **Ayarlar** menüsüne gidin, ardından soldaki **Proje ayarları** seçeneğini seçin.
 
-![Project settings](screenshots/project-settings.png)
+![Project settings](../screenshots/project-settings.png)
 
 ### Yeni projeler için varsayılan sütunlar
 
@@ -27,7 +27,7 @@ Bu seçenek etkinleştirildiğinde, bir kullanıcı o anda yalnızca bir alt gö
 
 Başka bir alt görev "devam ediyor" durumuna sahipse, kullanıcı bu iletişim kutusunu görür:
 
-![Subtask user restriction](screenshots/subtask-user-restriction.png)
+![Subtask user restriction](../screenshots/subtask-user-restriction.png)
 
 ### Tetikleme otomatik olarak alt görev zamanı izleme
 

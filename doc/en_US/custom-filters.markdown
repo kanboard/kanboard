@@ -12,8 +12,8 @@ Filter creation
 
 Go to the action drop-down or in the project settings and choose **custom filters**:
 
-![Custom Filter Creation](screenshots/custom-filter-creation.png)
+![Custom Filter Creation](../screenshots/custom-filter-creation.png)
 
 After creating your filter, it will appear on the board next to the default filters:
 
-![Custom Filter Dropdown](screenshots/custom-filter-dropdown.png)
+![Custom Filter Dropdown](../screenshots/custom-filter-dropdown.png)

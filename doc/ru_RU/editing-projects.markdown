@@ -7,7 +7,7 @@
 Для переименования проекта нажмите на ссылку **“Изменить проект”** (для перехода выберите **Меню** -\> **Настройки**)
 
 
-![Project edition](screenshots/project-edition.png)
+![Project edition](../screenshots/project-edition.png)
 
 Изменение проекта.
 
