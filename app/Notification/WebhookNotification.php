@@ -35,6 +35,10 @@ class WebhookNotification extends Base implements NotificationInterface
      */
     public function notifyProject(array $project, $event_name, array $event_data)
     {
+        if(!empty($_SERVER['HTTP_X_SKIP_WEBHOOKS']) && $_SERVER['HTTP_X_SKIP_WEBHOOKS']) {
+            return;
+        }
+
         $url = $this->configModel->get('webhook_url');
         $token = $this->configModel->get('webhook_token');
 
