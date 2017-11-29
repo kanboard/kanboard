@@ -33,9 +33,9 @@ if (DB_DRIVER === 'postgres' && ! extension_loaded('pdo_pgsql')) {
 }
 
 // Check other extensions
-foreach (array('gd', 'mbstring', 'hash', 'openssl', 'json', 'hash', 'ctype', 'filter', 'session') as $ext) {
+foreach (array('gd', 'mbstring', 'hash', 'openssl', 'json', 'hash', 'ctype', 'filter', 'session', 'dom', 'filter', 'SimpleXML', 'xml') as $ext) {
     if (! extension_loaded($ext)) {
-        throw new Exception('PHP extension required: "'.$ext.'"');
+        throw new Exception('This PHP extension is required: "'.$ext.'"');
     }
 }
 

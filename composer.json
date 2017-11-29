@@ -15,6 +15,9 @@
     },
     "require" : {
         "php" : ">=5.3.9",
+        "ext-simplexml" : "*",
+        "ext-dom" : "*",
+        "ext-xml" : "*",
         "ext-gd" : "*",
         "ext-mbstring" : "*",
         "ext-hash" : "*",
