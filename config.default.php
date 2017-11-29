@@ -240,3 +240,6 @@ define('TOTP_ISSUER', 'Kanboard');
 
 // Maximum number of events stored in the table "project_activities"
 define('PROJECT_ACTIVITIES_MAX_EVENTS', 10000);
+
+// Comma separated list of fields to not synchronize when using external authentication providers
+define('EXTERNAL_AUTH_EXCLUDE_FIELDS', 'username');

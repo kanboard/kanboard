@@ -194,6 +194,18 @@ Just change the value of `LDAP_ACCOUNT_CREATION` to `false`:
 define('LDAP_ACCOUNT_CREATION', false);
 ```
 
+Synchronization
+---------------
+
+By default, Kanboard will synchronize all fields (role, name, email...) except the username.
+
+If you would like to change this behavior, use this config parameter:
+
+```bash
+// This example will not synchronize the fields "username" and "role" from LDAP to Kanboard.
+define('EXTERNAL_AUTH_EXCLUDE_FIELDS', 'username,role');
+```
+
 Troubleshooting
 ---------------
 

@@ -44,7 +44,7 @@ class UserProperty
      */
     public static function filterProperties(array $profile, array $properties)
     {
-        $excludedProperties = array('username');
+        $excludedProperties = explode_csv_field(EXTERNAL_AUTH_EXCLUDE_FIELDS);
         $values = array();
 
         foreach ($properties as $property => $value) {
