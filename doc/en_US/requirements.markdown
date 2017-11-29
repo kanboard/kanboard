@@ -79,14 +79,13 @@ Kanboard is pre-configured to work with Apache (URL rewriting).
 | xml                        |                               |
 | SimpleXML                  |                               |
 | dom                        |                               |
-| ldap                       | Only for LDAP authentication  |
-| Zend OPcache               | Recommended                   |
 
 ### Optional PHP extensions
 
 | PHP Extension              | Note                                       |
 |----------------------------|--------------------------------------------|
 | zip                        | Used to install plugins from Kanboard      |
+| ldap                       | Only for LDAP authentication               |
 
 ### Recommendations
 

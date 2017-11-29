@@ -10,10 +10,9 @@ Important things to do before updating
 
 - **Always make a backup of your data before upgrading**
 - **Check that your backup is valid!**
-- Check again
-- Always read the [change history](https://github.com/kanboard/kanboard/blob/master/ChangeLog) to check for breaking changes
+- Always read the [ChangeLog](https://github.com/kanboard/kanboard/blob/master/ChangeLog) for breaking changes
 - Stop the worker if you use it
-- Put the web server in maintenance mode to avoid people use the software while upgrading
+- Put the web server in maintenance mode to avoid people to use the software while upgrading
 
 From the archive (stable version)
 ---------------------------------
@@ -32,16 +31,18 @@ From the repository (development version)
 1. `git pull`
 2. Login and check if everything is ok
 
-Note: This method will install the **current development version**, use at your own risk.
+- This method will install the **current development version**, use at your own risk.
+- Do not update the software blindly without checking the [ChangeLog](https://github.com/kanboard/kanboard/blob/master/ChangeLog).
 
 Running SQL migrations manually
 -------------------------------
 
 By default, SQL migrations are executed automatically. The schema version is checked at each request.
 In this way, when you upgrade Kanboard to another version, the database schema is updated for you.
+This method **is not perfect**.
 
-You may want to disable this behaviour is case you have a specific configuration.
-For example, if multiple processes try to apply the migrations in the same time you might have some concurrency problems even if each operation is executed inside a transaction.
+- **When you run the migrations, make sure only one process is accessing to the database**
+- Put your Kanboard instance in "maintenance mode" to avoid people using the software while you are altering the database schema
 
 To disable this feature, set the parameter `DB_RUN_MIGRATIONS` at `false` in your [config file](config.markdown).
 
