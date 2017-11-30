@@ -11,6 +11,7 @@ use Symfony\Component\Console\Command\Command;
  * @package  console
  * @author   Frederic Guillot
  *
+ * @property \PicoDb\Database                                   $db
  * @property \Kanboard\Validator\PasswordResetValidator         $passwordResetValidator
  * @property \Kanboard\Export\SubtaskExport                     $subtaskExport
  * @property \Kanboard\Export\TaskExport                        $taskExport

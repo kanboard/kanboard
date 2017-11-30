@@ -47,6 +47,7 @@ Available commands:
   plugin:uninstall                   Eliminar plugin
   plugin:upgrade                     Actualizar todos los plugins instalados
  projects
+  projects:archive                   Disable projects not touched during one year
   projects:daily-stats               Calcular diariamente las estadisticas para todos los proyectos
  trigger
   trigger:tasks                      Disparadores de eventos calendarizados para todas las tareas
