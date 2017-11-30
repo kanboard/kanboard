@@ -286,7 +286,11 @@ class UserModel extends Base
      */
     public function disable($user_id)
     {
-        return $this->db->table(self::TABLE)->eq('id', $user_id)->update(array('is_active' => 0));
+        $this->db->startTransaction();
+        $result1 = $this->db->table(self::TABLE)->eq('id', $user_id)->update(array('is_active' => 0));
+        $result2 = $this->db->table(ProjectModel::TABLE)->eq('is_private', 1)->eq('owner_id', $user_id)->update(array('is_active' => 0));
+        $this->db->closeTransaction();
+        return $result1 && $result2;
     }
 
     /**
