@@ -182,10 +182,12 @@ class CustomFilterController extends BaseController
 
     private function checkPermission(array $project, array $filter)
     {
-        $user_id = $this->userSession->getId();
+        $userID = $this->userSession->getId();
 
-        if ($filter['user_id'] != $user_id && ($this->projectUserRoleModel->getUserRole($project['id'], $user_id) === Role::PROJECT_MANAGER || ! $this->userSession->isAdmin())) {
-            throw new AccessForbiddenException();
+        if ($filter['user_id'] != $userID) {
+            if ($this->projectUserRoleModel->getUserRole($project['id'], $userID) !== Role::PROJECT_MANAGER && ! $this->userSession->isAdmin()) {
+                throw new AccessForbiddenException();
+            }
         }
     }
 }

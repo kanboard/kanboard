@@ -18,9 +18,9 @@
     <?php foreach ($custom_filters as $filter): ?>
          <tr>
             <td>
-                <?php if ($filter['user_id'] == $this->user->getId() || $this->user->hasProjectAccess('CustomFilterController', 'edit', $project['id'])): ?>
+                <?php if (($filter['user_id'] == $this->user->getId() || $this->user->isAdmin() || $this->projectRole->getProjectUserRole($project['id']) == \Kanboard\Core\Security\Role::PROJECT_MANAGER) && $this->user->hasProjectAccess('CustomFilterController', 'edit', $project['id'])): ?>
                     <div class="dropdown">
-                        <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
                         <ul>
                             <li><?= $this->modal->medium('edit', t('Edit'), 'CustomFilterController', 'edit', array('project_id' => $filter['project_id'], 'filter_id' => $filter['id'])) ?></li>
                             <li><?= $this->modal->confirm('trash-o', t('Remove'), 'CustomFilterController', 'confirm', array('project_id' => $filter['project_id'], 'filter_id' => $filter['id'])) ?></li>
