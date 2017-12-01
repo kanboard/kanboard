@@ -89,7 +89,7 @@ class ModalHelper extends Base
 
     public function replaceIconLink($icon, $label, $controller, $action, array $params = array())
     {
-        $html = '<i class="fa fa-'.$icon.' fa-fw" aria-hidden="true"></i>'.$label;
+        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-replace" aria-hidden="true"></i>'.$label;
         return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-replace');
     }
 }
