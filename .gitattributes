@@ -21,6 +21,7 @@ composer.json export-ignore
 composer.lock export-ignore
 gulpfile.js export-ignore
 package.json export-ignore
+hooks export-ignore
 
 assets/sass export-ignore
 assets/js/components export-ignore
