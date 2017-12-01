@@ -154,6 +154,8 @@ return array(
     'Kanboard\\Console\\PluginInstallCommand' => $baseDir . '/app/Console/PluginInstallCommand.php',
     'Kanboard\\Console\\PluginUninstallCommand' => $baseDir . '/app/Console/PluginUninstallCommand.php',
     'Kanboard\\Console\\PluginUpgradeCommand' => $baseDir . '/app/Console/PluginUpgradeCommand.php',
+    'Kanboard\\Console\\ProjectActivityArchiveCommand' => $baseDir . '/app/Console/ProjectActivityArchiveCommand.php',
+    'Kanboard\\Console\\ProjectArchiveCommand' => $baseDir . '/app/Console/ProjectArchiveCommand.php',
     'Kanboard\\Console\\ProjectDailyColumnStatsExportCommand' => $baseDir . '/app/Console/ProjectDailyColumnStatsExportCommand.php',
     'Kanboard\\Console\\ProjectDailyStatsCalculationCommand' => $baseDir . '/app/Console/ProjectDailyStatsCalculationCommand.php',
     'Kanboard\\Console\\ResetPasswordCommand' => $baseDir . '/app/Console/ResetPasswordCommand.php',

@@ -53,6 +53,7 @@ Available commands:
   plugin:upgrade                     Update all installed plugins
  projects
   projects:archive                   Disable projects not touched during one year
+  projects:archive-activities        Remove project activities after one year
   projects:daily-stats               Calculate daily statistics for all projects
  trigger
   trigger:tasks                      Trigger scheduler event for all tasks

@@ -290,6 +290,8 @@ class ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b
         'Kanboard\\Console\\PluginInstallCommand' => __DIR__ . '/../..' . '/app/Console/PluginInstallCommand.php',
         'Kanboard\\Console\\PluginUninstallCommand' => __DIR__ . '/../..' . '/app/Console/PluginUninstallCommand.php',
         'Kanboard\\Console\\PluginUpgradeCommand' => __DIR__ . '/../..' . '/app/Console/PluginUpgradeCommand.php',
+        'Kanboard\\Console\\ProjectActivityArchiveCommand' => __DIR__ . '/../..' . '/app/Console/ProjectActivityArchiveCommand.php',
+        'Kanboard\\Console\\ProjectArchiveCommand' => __DIR__ . '/../..' . '/app/Console/ProjectArchiveCommand.php',
         'Kanboard\\Console\\ProjectDailyColumnStatsExportCommand' => __DIR__ . '/../..' . '/app/Console/ProjectDailyColumnStatsExportCommand.php',
         'Kanboard\\Console\\ProjectDailyStatsCalculationCommand' => __DIR__ . '/../..' . '/app/Console/ProjectDailyStatsCalculationCommand.php',
         'Kanboard\\Console\\ResetPasswordCommand' => __DIR__ . '/../..' . '/app/Console/ResetPasswordCommand.php',

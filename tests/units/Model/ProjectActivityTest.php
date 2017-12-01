@@ -43,23 +43,23 @@ class ProjectActivityTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertEquals(1, $taskCreation->create(array('title' => 'Task #1', 'project_id' => 1)));
 
-        $max = 15;
-        $nb_events = 100;
+        $nbEvents = 100;
         $task = $taskFinder->getById(1);
 
-        for ($i = 0; $i < $nb_events; $i++) {
+        for ($i = 0; $i < $nbEvents; $i++) {
             $this->assertTrue($projectActivity->createEvent(1, 1, 1, TaskModel::EVENT_CLOSE, array('task' => $task)));
         }
 
-        $this->assertEquals($nb_events, $this->container['db']->table('project_activities')->count());
-        $projectActivity->cleanup($max);
+        $this->assertEquals($nbEvents, $this->container['db']->table('project_activities')->count());
+        $projectActivity->cleanup(strtotime('-12 months'));
+        $this->assertEquals($nbEvents, $this->container['db']->table('project_activities')->count());
 
-        $events = $projectActivity->getQuery()->desc('id')->findAll();
+        $this->container['db']->table('project_activities')->in('id', array(1, 2, 3))->update(array(
+            'date_creation' => strtotime('-13 months')
+        ));
 
-        $this->assertNotEmpty($events);
-        $this->assertCount($max, $events);
-        $this->assertEquals(100, $events[0]['id']);
-        $this->assertEquals(99, $events[1]['id']);
-        $this->assertEquals(86, $events[14]['id']);
+
+        $projectActivity->cleanup(strtotime('-12 months'));
+        $this->assertEquals($nbEvents - 3, $this->container['db']->table('project_activities')->count());
     }
 }

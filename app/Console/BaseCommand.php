@@ -18,6 +18,7 @@ use Symfony\Component\Console\Command\Command;
  * @property \Kanboard\Export\TransitionExport                  $transitionExport
  * @property \Kanboard\Model\NotificationModel                  $notificationModel
  * @property \Kanboard\Model\ProjectModel                       $projectModel
+ * @property \Kanboard\Model\ProjectActivityModel               $projectActivityModel
  * @property \Kanboard\Model\ProjectPermissionModel             $projectPermissionModel
  * @property \Kanboard\Model\ProjectDailyColumnStatsModel       $projectDailyColumnStatsModel
  * @property \Kanboard\Model\ProjectDailyStatsModel             $projectDailyStatsModel
