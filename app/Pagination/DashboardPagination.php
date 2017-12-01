@@ -27,13 +27,17 @@ class DashboardPagination extends Base
         $projects = $this->projectUserRoleModel->getActiveProjectsByUser($userId);
 
         foreach ($projects as $projectId => $projectName) {
+
+            $query = $this->taskFinderModel->getUserQuery($userId)->eq(ProjectModel::TABLE.'.id', $projectId);
+            $this->hook->reference('pagination:dashboard:task:query', $query);
+
             $paginator = $this->paginator
                 ->setUrl('DashboardController', 'show', array('user_id' => $userId))
                 ->setMax(50)
                 ->setOrder(TaskModel::TABLE.'.priority')
                 ->setDirection('DESC')
                 ->setFormatter($this->taskListSubtaskAssigneeFormatter->withUserId($userId))
-                ->setQuery($this->taskFinderModel->getUserQuery($userId)->eq(ProjectModel::TABLE.'.id', $projectId))
+                ->setQuery($query)
                 ->calculate();
 
             if ($paginator->getTotal() > 0) {
