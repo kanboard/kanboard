@@ -15,10 +15,10 @@ Thumbs.db
 *.out
 *.log
 .vagrant
-config.php
 data/files
 data/cache
 *.bak
-!docker/kanboard/config.php
+/config.php
+!docker/var/wwww/app/config.php
 node_modules
 bower_components
