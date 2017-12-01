@@ -30,3 +30,4 @@ Installation and Upgrade
 - [Requirements](https://github.com/kanboard/kanboard/blob/master/doc/en_US/requirements.markdown)
 - [Installation instructions](https://github.com/kanboard/kanboard/blob/master/doc/en_US/installation.markdown)
 - [Upgrade to a new version](https://github.com/kanboard/kanboard/blob/master/doc/en_US/update.markdown)
+- [Use Kanboard with Docker](https://github.com/kanboard/kanboard/blob/master/doc/en_US/docker.markdown)
