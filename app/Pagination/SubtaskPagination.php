@@ -23,13 +23,16 @@ class SubtaskPagination extends Base
      */
     public function getDashboardPaginator($userId)
     {
+        $query = $this->taskFinderModel->getUserQuery($userId);
+        $this->hook->reference('pagination:dashboard:subtask:query', $query);
+
         return $this->paginator
             ->setUrl('DashboardController', 'subtasks', array('user_id' => $userId))
             ->setMax(50)
             ->setOrder(TaskModel::TABLE.'.priority')
             ->setDirection('DESC')
             ->setFormatter($this->taskListSubtaskAssigneeFormatter->withUserId($userId)->withoutEmptyTasks())
-            ->setQuery($this->taskFinderModel->getUserQuery($userId))
+            ->setQuery($query)
             ->calculate();
     }
 }
