@@ -136,6 +136,7 @@ List of reference hooks:
 | Hook                                       | Description                                                   |
 |--------------------------------------------|---------------------------------------------------------------|
 | `formatter:board:query`                    | Alter database query before rendering board                   |
+| `pagination:dashboard:project:query`       | Alter database query for projects pagination on the dashboard |
 | `pagination:dashboard:task:query`          | Alter database query for tasks pagination on the dashboard    |
 | `pagination:dashboard:subtask:query`       | Alter database query for subtasks pagination on the dashboard |
 | `model:task:creation:prepare`              | Alter form values before to save a task                       |
