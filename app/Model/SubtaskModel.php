@@ -88,13 +88,22 @@ class SubtaskModel extends Base
             ->asc(self::TABLE.'.position');
     }
 
+    /**
+     * Count by assignee and task status.
+     *
+     * @param integer $userId
+     * @return integer
+     */
     public function countByAssigneeAndTaskStatus($userId)
     {
-        return $this->db->table(self::TABLE)
+        $query = $this->db->table(self::TABLE)
             ->eq('user_id', $userId)
             ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
-            ->join(Taskmodel::TABLE, 'id', 'task_id')
-            ->count();
+            ->join(Taskmodel::TABLE, 'id', 'task_id');
+
+        $this->hook->reference('model:subtask:count:query', $query);
+
+        return $query->count();
     }
 
     /**

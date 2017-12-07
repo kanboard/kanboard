@@ -144,6 +144,7 @@ List of reference hooks:
 | `model:color:get-list`                     | Alter default_colors values                                   |
 | `model:subtask:modification:prepare`       | Alter form values before to save a subtask                    |
 | `model:subtask:creation:prepare`           | Alter form values before to edit a subtask                    |
+| `model:subtask:count:query`                | Alter database query for subtask count                        |
 
 
 Template Hooks
