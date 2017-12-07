@@ -20,7 +20,7 @@ sudo unzip kanboard-<version>.zip
 
 sudo chown -R wwwrun /srv/www/htdocs/kanboard-<version>
 # restart apache
-sudo rcapache22 restart
+sudo rcapache2 restart
 
 # cleanup
 sudo rm kanboard-<version>.zip
