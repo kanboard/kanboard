@@ -1367,4 +1367,7 @@ return array(
     'Time Spent' => 'Zeitaufwand',
     'External Link' => 'externer Link',
     'This feature enable the iCal feed, RSS feed and the public board view.' => 'Diese Funktion aktiviert den iCal Feed, RSS Feed und die öffentliche Board-Ansicht',
+    // 'Stop the timer of all subtasks when moving a task to another column' => '',
+    // 'Subtask Title' => '',
+    // 'Add a subtask and activate the timer when moving a task to another column' => '',
 );

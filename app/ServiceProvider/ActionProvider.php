@@ -41,6 +41,8 @@ use Kanboard\Action\TaskCloseNoActivityColumn;
 use Kanboard\Action\TaskCloseNotMovedColumn;
 use Kanboard\Action\TaskAssignColorSwimlane;
 use Kanboard\Action\TaskAssignPrioritySwimlane;
+use Kanboard\Action\SubtaskTimerMoveTaskColumn;
+use Kanboard\Action\StopSubtaskTimerMoveTaskColumn;
 
 /**
  * Action Provider
@@ -96,6 +98,8 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskAssignColorSwimlane($container));
         $container['actionManager']->register(new TaskAssignPrioritySwimlane($container));
         $container['actionManager']->register(new TaskAssignColorOnDueDate($container));
+        $container['actionManager']->register(new SubtaskTimerMoveTaskColumn($container));
+        $container['actionManager']->register(new StopSubtaskTimerMoveTaskColumn($container));
 
         return $container;
     }
