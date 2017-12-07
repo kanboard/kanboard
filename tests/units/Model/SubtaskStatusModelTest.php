@@ -71,7 +71,7 @@ class SubtaskStatusModelTest extends Base
         $this->assertEquals(1, $subtask['task_id']);
 
         // Set the current logged user
-        $this->container['sessionStorage']->user = array('id' => 1);
+        $_SESSION['user'] = array('id' => 1);
 
         $this->assertEquals(SubtaskModel::STATUS_INPROGRESS, $subtaskStatusModel->toggleStatus(1));
 

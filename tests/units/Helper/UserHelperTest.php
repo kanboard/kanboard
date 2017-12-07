@@ -57,7 +57,7 @@ class UserHelperTest extends Base
     {
         $helper = new UserHelper($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_ADMIN,
         );
@@ -71,7 +71,7 @@ class UserHelperTest extends Base
     {
         $helper = new UserHelper($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_MANAGER,
         );
@@ -85,7 +85,7 @@ class UserHelperTest extends Base
     {
         $helper = new UserHelper($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -109,7 +109,7 @@ class UserHelperTest extends Base
         $helper = new UserHelper($this->container);
         $project = new ProjectModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_ADMIN,
         );
@@ -125,7 +125,7 @@ class UserHelperTest extends Base
         $helper = new UserHelper($this->container);
         $project = new ProjectModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_MANAGER,
         );
@@ -141,7 +141,7 @@ class UserHelperTest extends Base
         $helper = new UserHelper($this->container);
         $project = new ProjectModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -159,7 +159,7 @@ class UserHelperTest extends Base
         $project = new ProjectModel($this->container);
         $projectUserRole = new ProjectUserRoleModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_MANAGER,
         );
@@ -187,7 +187,7 @@ class UserHelperTest extends Base
         $project = new ProjectModel($this->container);
         $projectUserRole = new ProjectUserRoleModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -215,7 +215,7 @@ class UserHelperTest extends Base
         $project = new ProjectModel($this->container);
         $projectUserRole = new ProjectUserRoleModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -243,7 +243,7 @@ class UserHelperTest extends Base
         $project = new ProjectModel($this->container);
         $projectUserRole = new ProjectUserRoleModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -272,7 +272,7 @@ class UserHelperTest extends Base
         $projectUserRole = new ProjectUserRoleModel($this->container);
         $projectRole = new ProjectRoleModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );

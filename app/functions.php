@@ -2,9 +2,50 @@
 
 use Kanboard\Core\Translator;
 
-function explode_csv_field($field)
+function session_get($key)
 {
-    $fields = explode(',', $field);
+    return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
+}
+
+function session_set($key, $value)
+{
+    $_SESSION[$key] = $value;
+}
+
+function session_remove($key)
+{
+    unset($_SESSION[$key]);
+}
+
+function session_exists($key)
+{
+    return isset($_SESSION[$key]);
+}
+
+function session_is_true($key)
+{
+    return isset($_SESSION[$key]) && $_SESSION[$key] === true;
+}
+
+function session_merge($key, array $value)
+{
+    $_SESSION[$key] = array_merge($_SESSION[$key], $value);
+}
+
+function session_flush()
+{
+    $_SESSION = [];
+}
+
+/**
+ * Split CSV string
+ *
+ * @param  string $str
+ * @return string[]
+ */
+function explode_csv_field($str)
+{
+    $fields = explode(',', $str);
     array_walk($fields, function (&$value) { $value = trim($value); });
     return array_filter($fields);
 }

@@ -7,7 +7,7 @@ use Kanboard\Core\Base;
 /**
  * Session Manager
  *
- * @package  session
+ * @package  Kanboard\Core\Session
  * @author   Frederic Guillot
  */
 class SessionManager extends Base
@@ -38,6 +38,8 @@ class SessionManager extends Base
      */
     public function open()
     {
+        session_set_save_handler(new SessionHandler($this->db), true);
+
         $this->configure();
 
         if (ini_get('session.auto_start') == 1) {
@@ -46,8 +48,6 @@ class SessionManager extends Base
 
         session_name('KB_SID');
         session_start();
-
-        $this->sessionStorage->setStorage($_SESSION);
     }
 
     /**

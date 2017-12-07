@@ -32,12 +32,12 @@ class Token extends Base
      */
     public function getCSRFToken()
     {
-        if (! isset($this->sessionStorage->csrf)) {
-            $this->sessionStorage->csrf = array();
+        if (! session_exists('csrf')) {
+            session_set('csrf', []);
         }
 
         $nonce = self::getToken();
-        $this->sessionStorage->csrf[$nonce] = true;
+        session_merge('csrf', [$nonce => true]);
 
         return $nonce;
     }
@@ -51,8 +51,10 @@ class Token extends Base
      */
     public function validateCSRFToken($token)
     {
-        if (isset($this->sessionStorage->csrf[$token])) {
-            unset($this->sessionStorage->csrf[$token]);
+        $tokens = session_get('csrf');
+        if (isset($tokens[$token])) {
+            unset($tokens[$token]);
+            session_set('csrf', $tokens);
             return true;
         }
 

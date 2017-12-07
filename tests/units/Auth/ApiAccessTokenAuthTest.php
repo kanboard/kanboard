@@ -49,7 +49,7 @@ class ApiAccessTokenAuthTest extends Base
 
     public function testAuthenticateWithToken()
     {
-        $this->container['sessionStorage']->scope = 'API';
+        $_SESSION['scope'] = 'API';
 
         $provider = new ApiAccessTokenAuth($this->container);
         $userModel = new UserModel($this->container);

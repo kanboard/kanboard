@@ -25,7 +25,7 @@ class ProjectRoleHelperTest extends Base
         $projectUserRole = new ProjectUserRoleModel($this->container);
         $userModel = new UserModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -44,7 +44,7 @@ class ProjectRoleHelperTest extends Base
         $projectUserRole = new ProjectUserRoleModel($this->container);
         $userModel = new UserModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -64,7 +64,7 @@ class ProjectRoleHelperTest extends Base
         $userModel = new UserModel($this->container);
         $projectRoleModel = new ProjectRoleModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -88,7 +88,7 @@ class ProjectRoleHelperTest extends Base
         $projectRoleRestrictionModel = new ProjectRoleRestrictionModel($this->container);
         $columnRestrictionModel = new ColumnRestrictionModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -117,7 +117,7 @@ class ProjectRoleHelperTest extends Base
         $taskFinderModel = new TaskFinderModel($this->container);
         $projectRoleRestrictionModel = new ProjectRoleRestrictionModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -145,7 +145,7 @@ class ProjectRoleHelperTest extends Base
         $taskCreationModel = new TaskCreationModel($this->container);
         $taskFinderModel = new TaskFinderModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -172,7 +172,7 @@ class ProjectRoleHelperTest extends Base
         $taskFinderModel = new TaskFinderModel($this->container);
         $projectRoleRestrictionModel = new ProjectRoleRestrictionModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -200,7 +200,7 @@ class ProjectRoleHelperTest extends Base
         $taskCreationModel = new TaskCreationModel($this->container);
         $taskFinderModel = new TaskFinderModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -223,7 +223,7 @@ class ProjectRoleHelperTest extends Base
         $projectUserRole = new ProjectUserRoleModel($this->container);
         $userModel = new UserModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -242,7 +242,7 @@ class ProjectRoleHelperTest extends Base
         $projectUserRole = new ProjectUserRoleModel($this->container);
         $userModel = new UserModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -262,7 +262,7 @@ class ProjectRoleHelperTest extends Base
         $userModel = new UserModel($this->container);
         $projectRoleModel = new ProjectRoleModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -286,7 +286,7 @@ class ProjectRoleHelperTest extends Base
         $projectRoleRestrictionModel = new ProjectRoleRestrictionModel($this->container);
         $columnRestrictionModel = new ColumnRestrictionModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -313,7 +313,7 @@ class ProjectRoleHelperTest extends Base
         $projectUserRole = new ProjectUserRoleModel($this->container);
         $userModel = new UserModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -337,7 +337,7 @@ class ProjectRoleHelperTest extends Base
         $projectUserRole = new ProjectUserRoleModel($this->container);
         $userModel = new UserModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );
@@ -363,7 +363,7 @@ class ProjectRoleHelperTest extends Base
         $projectRoleModel = new ProjectRoleModel($this->container);
         $columnMoveRestrictionModel = new ColumnMoveRestrictionModel($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 2,
             'role' => Role::APP_USER,
         );

@@ -159,7 +159,7 @@ class TaskCreationModelTest extends Base
         $taskCreationModel = new TaskCreationModel($this->container);
         $taskFinderModel = new TaskFinderModel($this->container);
 
-        $this->container['sessionStorage']->user = array('id' => 1);
+        $_SESSION['user'] = array('id' => 1);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));

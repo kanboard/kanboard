@@ -33,7 +33,7 @@ class TaskExternalLinkTest extends Base
 
     public function testCreateWithUserSession()
     {
-        $this->container['sessionStorage']->user = array('id' => 1);
+        $_SESSION['user'] = array('id' => 1);
 
         $projectModel = new ProjectModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);
@@ -92,7 +92,7 @@ class TaskExternalLinkTest extends Base
 
     public function testGetAll()
     {
-        $this->container['sessionStorage']->user = array('id' => 1);
+        $_SESSION['user'] = array('id' => 1);
         $this->container['externalLinkManager'] = new ExternalLinkManager($this->container);
 
         $projectModel = new ProjectModel($this->container);

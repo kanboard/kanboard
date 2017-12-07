@@ -48,7 +48,6 @@ use Pimple\Container;
  * @property \Kanboard\Core\Security\Token                           $token
  * @property \Kanboard\Core\Session\FlashMessage                     $flash
  * @property \Kanboard\Core\Session\SessionManager                   $sessionManager
- * @property \Kanboard\Core\Session\SessionStorage                   $sessionStorage
  * @property \Kanboard\Core\User\Avatar\AvatarManager                $avatarManager
  * @property \Kanboard\Core\User\GroupSync                           $groupSync
  * @property \Kanboard\Core\User\UserProfile                         $userProfile

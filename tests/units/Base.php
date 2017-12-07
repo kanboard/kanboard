@@ -9,7 +9,6 @@ use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
 use Symfony\Component\Stopwatch\Stopwatch;
 use SimpleLogger\Logger;
 use Kanboard\Core\Session\FlashMessage;
-use Kanboard\Core\Session\SessionStorage;
 use Kanboard\ServiceProvider\ActionProvider;
 
 abstract class Base extends PHPUnit_Framework_TestCase
@@ -24,6 +23,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         date_default_timezone_set('UTC');
+        $_SESSION = array();
 
         if (DB_DRIVER === 'mysql') {
             $pdo = new PDO('mysql:host='.DB_HOSTNAME, DB_USERNAME, DB_PASSWORD);
@@ -86,7 +86,6 @@ abstract class Base extends PHPUnit_Framework_TestCase
             ->setMethods(array('put', 'moveFile', 'remove', 'moveUploadedFile'))
             ->getMock();
 
-        $this->container['sessionStorage'] = new SessionStorage;
         $this->container->register(new ActionProvider);
 
         $this->container['flash'] = function ($c) {

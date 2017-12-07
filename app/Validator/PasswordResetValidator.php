@@ -69,17 +69,17 @@ class PasswordResetValidator extends BaseValidator
      *
      * @access protected
      * @param  array   $values           Form values
-     * @return boolean
+     * @return array
      */
     protected function validateCaptcha(array $values)
     {
         $errors = array();
 
-        if (! isset($this->sessionStorage->captcha)) {
+        if (! session_exists('captcha')) {
             $result = false;
         } else {
             $builder = new CaptchaBuilder;
-            $builder->setPhrase($this->sessionStorage->captcha);
+            $builder->setPhrase(session_get('captcha'));
             $result = $builder->testPhrase(isset($values['captcha']) ? $values['captcha'] : '');
 
             if (! $result) {

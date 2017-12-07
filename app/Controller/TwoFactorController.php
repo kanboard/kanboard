@@ -36,7 +36,7 @@ class TwoFactorController extends UserViewController
     {
         $user = $this->getUser();
         $this->checkCurrentUser($user);
-        unset($this->sessionStorage->twoFactorSecret);
+        session_remove('twoFactorSecret');
 
         $this->response->html($this->helper->layout->user('twofactor/index', array(
             'user' => $user,
@@ -57,17 +57,17 @@ class TwoFactorController extends UserViewController
         $label = $user['email'] ?: $user['username'];
         $provider = $this->authenticationManager->getPostAuthenticationProvider();
 
-        if (! isset($this->sessionStorage->twoFactorSecret)) {
+        if (! session_exists('twoFactorSecret')) {
             $provider->generateSecret();
             $provider->beforeCode();
-            $this->sessionStorage->twoFactorSecret = $provider->getSecret();
+            session_set('twoFactorSecret', $provider->getSecret());
         } else {
-            $provider->setSecret($this->sessionStorage->twoFactorSecret);
+            $provider->setSecret(session_get('twoFactorSecret'));
         }
 
         $this->response->html($this->helper->layout->user('twofactor/show', array(
             'user'    => $user,
-            'secret'  => $this->sessionStorage->twoFactorSecret,
+            'secret'  => session_get('twoFactorSecret'),
             'key_url' => $provider->getKeyUrl($label),
         )));
     }
@@ -86,7 +86,7 @@ class TwoFactorController extends UserViewController
 
         $provider = $this->authenticationManager->getPostAuthenticationProvider();
         $provider->setCode(empty($values['code']) ? '' : $values['code']);
-        $provider->setSecret($this->sessionStorage->twoFactorSecret);
+        $provider->setSecret(session_get('twoFactorSecret'));
 
         if ($provider->authenticate()) {
             $this->flash->success(t('The two factor authentication code is valid.'));
@@ -97,7 +97,7 @@ class TwoFactorController extends UserViewController
                 'twofactor_secret' => $this->authenticationManager->getPostAuthenticationProvider()->getSecret(),
             ));
 
-            unset($this->sessionStorage->twoFactorSecret);
+            session_remove('twoFactorSecret');
             $this->userSession->disablePostAuthentication();
 
             $this->response->redirect($this->helper->url->to('TwoFactorController', 'index', array('user_id' => $user['id'])), true);
@@ -168,10 +168,10 @@ class TwoFactorController extends UserViewController
      */
     public function code()
     {
-        if (! isset($this->sessionStorage->twoFactorBeforeCodeCalled)) {
+        if (! session_exists('twoFactorBeforeCodeCalled')) {
             $provider = $this->authenticationManager->getPostAuthenticationProvider();
             $provider->beforeCode();
-            $this->sessionStorage->twoFactorBeforeCodeCalled = true;
+            session_set('twoFactorBeforeCodeCalled', true);
         }
 
         $this->response->html($this->helper->layout->app('twofactor/check', array(
@@ -210,10 +210,10 @@ class TwoFactorController extends UserViewController
      */
     public function qrcode()
     {
-        if (isset($this->sessionStorage->twoFactorSecret)) {
+        if (session_exists('twoFactorSecret')) {
             $user = $this->getUser();
             $provider = $this->authenticationManager->getPostAuthenticationProvider();
-            $provider->setSecret($this->sessionStorage->twoFactorSecret);
+            $provider->setSecret(session_get('twoFactorSecret'));
             $url = $provider->getKeyUrl($user['email'] ?: $user['username']);
 
             if (! empty($url)) {

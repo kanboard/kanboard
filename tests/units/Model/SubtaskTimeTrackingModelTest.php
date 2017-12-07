@@ -73,7 +73,7 @@ class SubtaskTimeTrackingModelTest extends Base
         $subtaskTimeTrackingModel = new SubtaskTimeTrackingModel($this->container);
         $projectModel = new ProjectModel($this->container);
 
-        $this->container['sessionStorage']->user = array('id' => 1);
+        $_SESSION['user'] = array('id' => 1);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
