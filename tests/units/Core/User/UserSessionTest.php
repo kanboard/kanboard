@@ -9,8 +9,7 @@ class UserSessionTest extends Base
 {
     public function testInitialize()
     {
-        $us = new UserSession($this->container);
-
+        $userSession = new UserSession($this->container);
         $user = array(
             'id' => '123',
             'username' => 'john',
@@ -23,101 +22,97 @@ class UserSessionTest extends Base
             'role' => Role::APP_MANAGER,
         );
 
-        $us->initialize($user);
+        $userSession->initialize($user);
 
-        $session = $this->container['sessionStorage']->getAll();
+        $this->assertNotEmpty($_SESSION);
+        $this->assertEquals(123, $_SESSION['user']['id']);
+        $this->assertEquals('john', $_SESSION['user']['username']);
+        $this->assertEquals(Role::APP_MANAGER, $_SESSION['user']['role']);
+        $this->assertFalse($_SESSION['user']['is_ldap_user']);
+        $this->assertFalse($_SESSION['user']['twofactor_activated']);
+        $this->assertArrayNotHasKey('password', $_SESSION['user']);
+        $this->assertArrayNotHasKey('twofactor_secret', $_SESSION['user']);
+        $this->assertArrayNotHasKey('is_admin', $_SESSION['user']);
+        $this->assertArrayNotHasKey('is_project_admin', $_SESSION['user']);
 
-        $this->assertNotEmpty($session);
-        $this->assertEquals(123, $session['user']['id']);
-        $this->assertEquals('john', $session['user']['username']);
-        $this->assertEquals(Role::APP_MANAGER, $session['user']['role']);
-        $this->assertFalse($session['user']['is_ldap_user']);
-        $this->assertFalse($session['user']['twofactor_activated']);
-        $this->assertArrayNotHasKey('password', $session['user']);
-        $this->assertArrayNotHasKey('twofactor_secret', $session['user']);
-        $this->assertArrayNotHasKey('is_admin', $session['user']);
-        $this->assertArrayNotHasKey('is_project_admin', $session['user']);
-
-        $this->assertEquals('john', $us->getUsername());
+        $this->assertEquals('john', $userSession->getUsername());
     }
 
     public function testGetId()
     {
-        $us = new UserSession($this->container);
+        $userSession = new UserSession($this->container);
 
-        $this->assertEquals(0, $us->getId());
+        $this->assertEquals(0, $userSession->getId());
 
-        $this->container['sessionStorage']->user = array('id' => 2);
-        $this->assertEquals(2, $us->getId());
+        $_SESSION['user'] = array('id' => 2);
+        $this->assertEquals(2, $userSession->getId());
 
-        $this->container['sessionStorage']->user = array('id' => '2');
-        $this->assertEquals(2, $us->getId());
+        $_SESSION['user'] = array('id' => '2');
+        $this->assertEquals(2, $userSession->getId());
     }
 
     public function testIsLogged()
     {
-        $us = new UserSession($this->container);
+        $userSession = new UserSession($this->container);
+        $this->assertFalse($userSession->isLogged());
 
-        $this->assertFalse($us->isLogged());
+        $_SESSION['user'] = array();
+        $this->assertFalse($userSession->isLogged());
 
-        $this->container['sessionStorage']->user = array();
-        $this->assertFalse($us->isLogged());
-
-        $this->container['sessionStorage']->user = array('id' => 1);
-        $this->assertTrue($us->isLogged());
+        $_SESSION['user'] = array('id' => 1);
+        $this->assertTrue($userSession->isLogged());
     }
 
     public function testIsAdmin()
     {
-        $us = new UserSession($this->container);
+        $userSession = new UserSession($this->container);
+        $this->assertFalse($userSession->isAdmin());
 
-        $this->assertFalse($us->isAdmin());
+        $_SESSION['user'] = array('role' => Role::APP_ADMIN);
+        $this->assertTrue($userSession->isAdmin());
 
-        $this->container['sessionStorage']->user = array('role' => Role::APP_ADMIN);
-        $this->assertTrue($us->isAdmin());
+        $_SESSION['user'] = array('role' => Role::APP_USER);
+        $this->assertFalse($userSession->isAdmin());
 
-        $this->container['sessionStorage']->user = array('role' => Role::APP_USER);
-        $this->assertFalse($us->isAdmin());
-
-        $this->container['sessionStorage']->user = array('role' => '');
-        $this->assertFalse($us->isAdmin());
+        $_SESSION['user'] = array('role' => '');
+        $this->assertFalse($userSession->isAdmin());
     }
 
     public function testFilters()
     {
-        $us = new UserSession($this->container);
-        $this->assertEquals('status:open', $us->getFilters(1));
+        $userSession = new UserSession($this->container);
+        $this->assertEquals('status:open', $userSession->getFilters(1));
 
-        $us->setFilters(1, 'assignee:me');
-        $this->assertEquals('assignee:me', $us->getFilters(1));
+        $userSession->setFilters(1, 'assignee:me');
+        $this->assertEquals('assignee:me', $userSession->getFilters(1));
 
-        $this->assertEquals('status:open', $us->getFilters(2));
+        $this->assertEquals('status:open', $userSession->getFilters(2));
 
-        $us->setFilters(2, 'assignee:bob');
-        $this->assertEquals('assignee:bob', $us->getFilters(2));
+        $userSession->setFilters(2, 'assignee:bob');
+        $this->assertEquals('assignee:bob', $userSession->getFilters(2));
     }
 
     public function testPostAuthentication()
     {
-        $us = new UserSession($this->container);
-        $this->assertFalse($us->isPostAuthenticationValidated());
+        $userSession = new UserSession($this->container);
+        $this->assertFalse($userSession->isPostAuthenticationValidated());
 
-        $this->container['sessionStorage']->postAuthenticationValidated = false;
-        $this->assertFalse($us->isPostAuthenticationValidated());
+        $_SESSION['postAuthenticationValidated'] = false;
+        $this->assertFalse($userSession->isPostAuthenticationValidated());
 
-        $us->validatePostAuthentication();
-        $this->assertTrue($us->isPostAuthenticationValidated());
+        $userSession->validatePostAuthentication();
+        $this->assertTrue($userSession->isPostAuthenticationValidated());
 
-        $this->container['sessionStorage']->user = array();
-        $this->assertFalse($us->hasPostAuthentication());
+        $_SESSION['user'] = array();
+        $this->assertFalse($userSession->hasPostAuthentication());
 
-        $this->container['sessionStorage']->user = array('twofactor_activated' => false);
-        $this->assertFalse($us->hasPostAuthentication());
+        $_SESSION['user'] = array('twofactor_activated' => false);
+        $this->assertFalse($userSession->hasPostAuthentication());
 
-        $this->container['sessionStorage']->user = array('twofactor_activated' => true);
-        $this->assertTrue($us->hasPostAuthentication());
+        $_SESSION['user'] = array('twofactor_activated' => true);
+        $this->assertTrue($userSession->hasPostAuthentication());
 
-        $us->disablePostAuthentication();
-        $this->assertFalse($us->hasPostAuthentication());
+        $userSession->disablePostAuthentication();
+        $this->assertFalse($userSession->hasPostAuthentication());
     }
 }

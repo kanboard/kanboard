@@ -11,7 +11,7 @@ class UserValidatorTest extends Base
     {
         $userValidator = new UserValidator($this->container);
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'id' => 1,
             'role' => Role::APP_ADMIN,
             'username' => 'admin',

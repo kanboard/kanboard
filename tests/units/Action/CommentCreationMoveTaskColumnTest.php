@@ -13,7 +13,7 @@ class CommentCreationMoveTaskColumnTest extends Base
 {
     public function testSuccess()
     {
-        $this->container['sessionStorage']->user = array('id' => 1);
+        $_SESSION['user'] = array('id' => 1);
 
         $projectModel = new ProjectModel($this->container);
         $commentModel = new CommentModel($this->container);

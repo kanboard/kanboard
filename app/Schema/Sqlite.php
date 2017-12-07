@@ -8,7 +8,16 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 116;
+const VERSION = 117;
+
+function version_117(PDO $pdo)
+{
+    $pdo->exec("CREATE TABLE sessions (
+        id TEXT PRIMARY KEY,
+        expire_at INTEGER NOT NULL,
+        data TEXT DEFAULT ''
+    )");
+}
 
 function version_116(PDO $pdo)
 {

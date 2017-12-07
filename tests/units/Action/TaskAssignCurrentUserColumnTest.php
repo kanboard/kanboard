@@ -13,7 +13,7 @@ class TaskAssignCurrentUserColumnTest extends Base
 {
     public function testChangeUser()
     {
-        $this->container['sessionStorage']->user = array('id' => 1);
+        $_SESSION['user'] = array('id' => 1);
 
         $projectModel = new ProjectModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);
@@ -43,7 +43,7 @@ class TaskAssignCurrentUserColumnTest extends Base
 
     public function testWithWrongColumn()
     {
-        $this->container['sessionStorage']->user = array('id' => 1);
+        $_SESSION['user'] = array('id' => 1);
 
         $projectModel = new ProjectModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);

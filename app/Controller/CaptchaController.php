@@ -23,7 +23,7 @@ class CaptchaController extends BaseController
 
         $builder = new CaptchaBuilder;
         $builder->build();
-        $this->sessionStorage->captcha = $builder->getPhrase();
+        session_set('captcha', $builder->getPhrase());
         $builder->output();
     }
 }

@@ -44,8 +44,8 @@ class UserSession extends Base
         $user['is_ldap_user'] = isset($user['is_ldap_user']) ? (bool) $user['is_ldap_user'] : false;
         $user['twofactor_activated'] = isset($user['twofactor_activated']) ? (bool) $user['twofactor_activated'] : false;
 
-        $this->sessionStorage->user = $user;
-        $this->sessionStorage->postAuthenticationValidated = false;
+        session_set('user', $user);
+        session_set('postAuthenticationValidated', false);
     }
 
     /**
@@ -56,7 +56,7 @@ class UserSession extends Base
      */
     public function getAll()
     {
-        return $this->sessionStorage->user;
+        return session_get('user');
     }
 
     /**
@@ -67,7 +67,11 @@ class UserSession extends Base
      */
     public function getRole()
     {
-        return $this->sessionStorage->user['role'];
+        if (! $this->isLogged()) {
+            return '';
+        }
+
+        return session_get('user')['role'];
     }
 
     /**
@@ -78,7 +82,7 @@ class UserSession extends Base
      */
     public function isPostAuthenticationValidated()
     {
-        return isset($this->sessionStorage->postAuthenticationValidated) && $this->sessionStorage->postAuthenticationValidated === true;
+        return session_is_true('postAuthenticationValidated');
     }
 
     /**
@@ -88,7 +92,7 @@ class UserSession extends Base
      */
     public function validatePostAuthentication()
     {
-        $this->sessionStorage->postAuthenticationValidated = true;
+        session_set('postAuthenticationValidated', true);
     }
 
     /**
@@ -99,7 +103,11 @@ class UserSession extends Base
      */
     public function hasPostAuthentication()
     {
-        return isset($this->sessionStorage->user['twofactor_activated']) && $this->sessionStorage->user['twofactor_activated'] === true;
+        if (! $this->isLogged()) {
+            return false;
+        }
+
+        return session_get('user')['twofactor_activated'] === true;
     }
 
     /**
@@ -109,7 +117,7 @@ class UserSession extends Base
      */
     public function disablePostAuthentication()
     {
-        $this->sessionStorage->user['twofactor_activated'] = false;
+        session_merge('user', ['twofactor_activated' => false]);
     }
 
     /**
@@ -120,7 +128,7 @@ class UserSession extends Base
      */
     public function isAdmin()
     {
-        return isset($this->sessionStorage->user['role']) && $this->sessionStorage->user['role'] === Role::APP_ADMIN;
+        return $this->getRole() === Role::APP_ADMIN;
     }
 
     /**
@@ -131,7 +139,11 @@ class UserSession extends Base
      */
     public function getId()
     {
-        return isset($this->sessionStorage->user['id']) ? (int) $this->sessionStorage->user['id'] : 0;
+        if (! $this->isLogged()) {
+            return 0;
+        }
+
+        return session_get('user')['id'];
     }
 
     /**
@@ -142,7 +154,41 @@ class UserSession extends Base
      */
     public function getUsername()
     {
-        return isset($this->sessionStorage->user['username']) ? $this->sessionStorage->user['username'] : '';
+        if (! $this->isLogged()) {
+            return '';
+        }
+
+        return session_get('user')['username'];
+    }
+
+    /**
+     * Get user language
+     *
+     * @access public
+     * @return string
+     */
+    public function getLanguage()
+    {
+        if (! $this->isLogged()) {
+            return '';
+        }
+
+        return session_get('user')['language'];
+    }
+
+    /**
+     * Get user timezone
+     *
+     * @access public
+     * @return string
+     */
+    public function getTimezone()
+    {
+        if (! $this->isLogged()) {
+            return '';
+        }
+
+        return session_get('user')['timezone'];
     }
 
     /**
@@ -153,7 +199,7 @@ class UserSession extends Base
      */
     public function hasSubtaskListActivated()
     {
-        return isset($this->sessionStorage->subtaskListToggle) && ! empty($this->sessionStorage->subtaskListToggle);
+        return session_is_true('subtaskListToggle');
     }
 
     /**
@@ -164,30 +210,34 @@ class UserSession extends Base
      */
     public function isLogged()
     {
-        return isset($this->sessionStorage->user) && ! empty($this->sessionStorage->user);
+        return session_exists('user') && session_get('user') !== [];
     }
 
     /**
      * Get project filters from the session
      *
      * @access public
-     * @param  integer  $project_id
+     * @param  integer  $projectID
      * @return string
      */
-    public function getFilters($project_id)
+    public function getFilters($projectID)
     {
-        return ! empty($this->sessionStorage->filters[$project_id]) ? $this->sessionStorage->filters[$project_id] : 'status:open';
+        if (! session_exists('filters:'.$projectID)) {
+            return 'status:open';
+        }
+
+        return session_get('filters:'.$projectID);
     }
 
     /**
      * Save project filters in the session
      *
      * @access public
-     * @param  integer  $project_id
+     * @param  integer  $projectID
      * @param  string   $filters
      */
-    public function setFilters($project_id, $filters)
+    public function setFilters($projectID, $filters)
     {
-        $this->sessionStorage->filters[$project_id] = $filters;
+        session_set('filters:'.$projectID, $filters);
     }
 }

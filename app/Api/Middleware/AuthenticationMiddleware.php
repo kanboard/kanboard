@@ -28,7 +28,7 @@ class AuthenticationMiddleware extends Base implements MiddlewareInterface
     public function execute($username, $password, $procedureName)
     {
         $this->dispatcher->dispatch('app.bootstrap');
-        $this->sessionStorage->scope = 'API';
+        session_set('scope', 'API');
 
         if ($this->isUserAuthenticated($username, $password)) {
             $this->userSession->initialize($this->userCacheDecorator->getByUsername($username));

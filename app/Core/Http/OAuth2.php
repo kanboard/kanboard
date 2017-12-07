@@ -53,11 +53,11 @@ class OAuth2 extends Base
      */
     public function getState()
     {
-        if (! isset($this->sessionStorage->oauthState) || empty($this->sessionStorage->oauthState)) {
-            $this->sessionStorage->oauthState = $this->token->getToken();
+        if (! session_exists('oauthState')) {
+            session_set('oauthState', $this->token->getToken());
         }
 
-        return $this->sessionStorage->oauthState;
+        return session_get('oauthState');
     }
 
     /**
@@ -140,11 +140,12 @@ class OAuth2 extends Base
      * @access public
      * @param  string  $token
      * @param  string  $type
-     * @return string
+     * @return $this
      */
     public function setAccessToken($token, $type = 'bearer')
     {
         $this->accessToken = $token;
         $this->tokenType = $type;
+        return $this;
     }
 }

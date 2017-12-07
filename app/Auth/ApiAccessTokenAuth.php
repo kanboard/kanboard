@@ -58,8 +58,7 @@ class ApiAccessTokenAuth extends Base implements PasswordAuthenticationProviderI
      */
     public function authenticate()
     {
-        if (! isset($this->sessionStorage->scope) ||  $this->sessionStorage->scope !== 'API') {
-            $this->logger->debug(__METHOD__.': Authentication provider skipped because invalid scope');
+        if (session_get('scope') !== 'API') {
             return false;
         }
 

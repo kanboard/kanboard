@@ -20,7 +20,7 @@ class SubtaskHelper extends Base
      */
     public function hasSubtaskInProgress()
     {
-        return isset($this->sessionStorage->hasSubtaskInProgress) && $this->sessionStorage->hasSubtaskInProgress;
+        return session_is_true('hasSubtaskInProgress');
     }
 
     /**
