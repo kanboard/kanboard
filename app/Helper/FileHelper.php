@@ -113,6 +113,8 @@ class FileHelper extends Base
         switch (get_file_extension($filename)) {
             case 'pdf':
                 return 'application/pdf';
+            case 'mp3':
+                return 'audio/mpeg';
         }
 
         return null;
