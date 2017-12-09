@@ -15,12 +15,11 @@ cd /srv/www/htdocs
 
 # Download the latest release from https://github.com/kanboard/kanboard/releases
 
-sudo wget https://github.com/kanboard/kanboard/releases/download/<version>/kanboard-<version>.zip
+sudo wget https://github.com/kanboard/kanboard/archive/v<version>.zip
 sudo unzip kanboard-<version>.zip
 
 # Add permissions
-sudo chown -R wwwrun /srv/www/htdocs/kanboard-<version>
-sudo chmod -R ugo+w /srv/www/htdocs/kanboard/app/../data
+sudo chown -R wwwrun /srv/www/htdocs/kanboard-<version>/app/data
 
 # restart apache
 sudo rcapache2 restart
@@ -28,3 +27,4 @@ sudo rcapache2 restart
 # cleanup
 sudo rm kanboard-<version>.zip
 ```
+

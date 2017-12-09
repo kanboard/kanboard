@@ -1,3 +1,39 @@
+Version 1.1.1 (December 9, 2017)
+--------------------------------
+
+Breaking changes:
+
+* The Docker tag "stable" is not used anymore, instead use a specific version tag
+* Task limit apply across all swimlanes
+* Kanboard is now using the domain kanboard.org
+
+New features:
+
+* New automatic action to create a subtask assigned to the creator and start the timer
+* New automatic action to stop the timer of subtasks
+* Add command line tool to remove project activities after one year
+* Add command line tool to disable projects not touched during one year
+* Add config option to exclude fields from auth providers sync
+* Add new plugin hooks
+
+Improvements:
+
+* Open audio files in a new tab
+* Upgrade Docker image to Alpine Linux 3.7
+* Improve Docker build to use Docker Hub hooks
+* The application version is now included into the Docker image
+* Disable private projects when disabling a user
+* Allow administrators to update username of remote users
+* Improve layout on mobile/tablet devices
+* Changed board column headings to show swimlane-column total in bold
+* Enable dragging to collapsed columns
+* Add missing checks for requirements
+
+Bug fixes:
+
+* Add class "js-modal-replace" to icons to make it clickable
+* Improve permission checks on custom filters page to avoid forbidden access
+
 Version 1.1.0 (November 20, 2017)
 ---------------------------------
 
