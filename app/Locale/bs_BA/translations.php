@@ -1366,7 +1366,7 @@ return array(
     // 'Time Estimated' => '',
     // 'Time Spent' => '',
     // 'External Link' => '',
-    // 'This feature enable the iCal feed, RSS feed and the public board view.' => '',
+    // 'This feature enables the iCal feed, RSS feed and the public board view.' => '',
     // 'Stop the timer of all subtasks when moving a task to another column' => '',
     // 'Subtask Title' => '',
     // 'Add a subtask and activate the timer when moving a task to another column' => '',
