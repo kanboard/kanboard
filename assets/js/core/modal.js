@@ -102,7 +102,7 @@
 
         var boxElement = KB.dom('div')
             .attr('id', 'modal-box')
-            .style('width', width)
+            .style('min-width', width)
             .add(headerElement)
             .add(contentElement)
             .build();
