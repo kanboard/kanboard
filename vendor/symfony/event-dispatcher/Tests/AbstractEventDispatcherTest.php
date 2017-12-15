@@ -11,11 +11,12 @@
 
 namespace Symfony\Component\EventDispatcher\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-abstract class AbstractEventDispatcherTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractEventDispatcherTest extends TestCase
 {
     /* Some pseudo events */
     const preFoo = 'pre.foo';
@@ -55,6 +56,7 @@ abstract class AbstractEventDispatcherTest extends \PHPUnit_Framework_TestCase
     {
         $this->dispatcher->addListener('pre.foo', array($this->listener, 'preFoo'));
         $this->dispatcher->addListener('post.foo', array($this->listener, 'postFoo'));
+        $this->assertTrue($this->dispatcher->hasListeners());
         $this->assertTrue($this->dispatcher->hasListeners(self::preFoo));
         $this->assertTrue($this->dispatcher->hasListeners(self::postFoo));
         $this->assertCount(1, $this->dispatcher->getListeners(self::preFoo));
@@ -108,6 +110,20 @@ abstract class AbstractEventDispatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $this->dispatcher->getListeners());
     }
 
+    public function testGetListenerPriority()
+    {
+        $listener1 = new TestEventListener();
+        $listener2 = new TestEventListener();
+
+        $this->dispatcher->addListener('pre.foo', $listener1, -10);
+        $this->dispatcher->addListener('pre.foo', $listener2);
+
+        $this->assertSame(-10, $this->dispatcher->getListenerPriority('pre.foo', $listener1));
+        $this->assertSame(0, $this->dispatcher->getListenerPriority('pre.foo', $listener2));
+        $this->assertNull($this->dispatcher->getListenerPriority('pre.bar', $listener2));
+        $this->assertNull($this->dispatcher->getListenerPriority('pre.foo', function () {}));
+    }
+
     public function testDispatch()
     {
         $this->dispatcher->addListener('pre.foo', array($this->listener, 'preFoo'));
@@ -120,16 +136,6 @@ abstract class AbstractEventDispatcherTest extends \PHPUnit_Framework_TestCase
         $event = new Event();
         $return = $this->dispatcher->dispatch(self::preFoo, $event);
         $this->assertSame($event, $return);
-    }
-
-    /**
-     * @group legacy
-     */
-    public function testLegacyDispatch()
-    {
-        $event = new Event();
-        $return = $this->dispatcher->dispatch(self::preFoo, $event);
-        $this->assertEquals('pre.foo', $event->getName());
     }
 
     public function testDispatchForClosure()
@@ -249,19 +255,6 @@ abstract class AbstractEventDispatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->dispatcher->hasListeners(self::preFoo));
     }
 
-    /**
-     * @group legacy
-     */
-    public function testLegacyEventReceivesTheDispatcherInstance()
-    {
-        $dispatcher = null;
-        $this->dispatcher->addListener('test', function ($event) use (&$dispatcher) {
-            $dispatcher = $event->getDispatcher();
-        });
-        $this->dispatcher->dispatch('test');
-        $this->assertSame($this->dispatcher, $dispatcher);
-    }
-
     public function testEventReceivesTheDispatcherInstanceAsArgument()
     {
         $listener = new TestWithDispatcher();
@@ -309,6 +302,73 @@ abstract class AbstractEventDispatcherTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->dispatcher->hasListeners('foo'));
         $this->assertFalse($this->dispatcher->hasListeners());
+    }
+
+    public function testHasListenersIsLazy()
+    {
+        $called = 0;
+        $listener = array(function () use (&$called) { ++$called; }, 'onFoo');
+        $this->dispatcher->addListener('foo', $listener);
+        $this->assertTrue($this->dispatcher->hasListeners());
+        $this->assertTrue($this->dispatcher->hasListeners('foo'));
+        $this->assertSame(0, $called);
+    }
+
+    public function testDispatchLazyListener()
+    {
+        $called = 0;
+        $factory = function () use (&$called) {
+            ++$called;
+
+            return new TestWithDispatcher();
+        };
+        $this->dispatcher->addListener('foo', array($factory, 'foo'));
+        $this->assertSame(0, $called);
+        $this->dispatcher->dispatch('foo', new Event());
+        $this->dispatcher->dispatch('foo', new Event());
+        $this->assertSame(1, $called);
+    }
+
+    public function testRemoveFindsLazyListeners()
+    {
+        $test = new TestWithDispatcher();
+        $factory = function () use ($test) { return $test; };
+
+        $this->dispatcher->addListener('foo', array($factory, 'foo'));
+        $this->assertTrue($this->dispatcher->hasListeners('foo'));
+        $this->dispatcher->removeListener('foo', array($test, 'foo'));
+        $this->assertFalse($this->dispatcher->hasListeners('foo'));
+
+        $this->dispatcher->addListener('foo', array($test, 'foo'));
+        $this->assertTrue($this->dispatcher->hasListeners('foo'));
+        $this->dispatcher->removeListener('foo', array($factory, 'foo'));
+        $this->assertFalse($this->dispatcher->hasListeners('foo'));
+    }
+
+    public function testPriorityFindsLazyListeners()
+    {
+        $test = new TestWithDispatcher();
+        $factory = function () use ($test) { return $test; };
+
+        $this->dispatcher->addListener('foo', array($factory, 'foo'), 3);
+        $this->assertSame(3, $this->dispatcher->getListenerPriority('foo', array($test, 'foo')));
+        $this->dispatcher->removeListener('foo', array($factory, 'foo'));
+
+        $this->dispatcher->addListener('foo', array($test, 'foo'), 5);
+        $this->assertSame(5, $this->dispatcher->getListenerPriority('foo', array($factory, 'foo')));
+    }
+
+    public function testGetLazyListeners()
+    {
+        $test = new TestWithDispatcher();
+        $factory = function () use ($test) { return $test; };
+
+        $this->dispatcher->addListener('foo', array($factory, 'foo'), 3);
+        $this->assertSame(array(array($test, 'foo')), $this->dispatcher->getListeners('foo'));
+
+        $this->dispatcher->removeListener('foo', array($test, 'foo'));
+        $this->dispatcher->addListener('bar', array($factory, 'foo'), 3);
+        $this->assertSame(array('bar' => array(array($test, 'foo'))), $this->dispatcher->getListeners());
     }
 }
 

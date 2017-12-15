@@ -21,19 +21,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Eases the testing of console commands.
  *
  * @author Fabien Potencier <fabien@symfony.com>
+ * @author Robin Chalas <robin.chalas@gmail.com>
  */
 class CommandTester
 {
     private $command;
     private $input;
     private $output;
+    private $inputs = array();
     private $statusCode;
 
-    /**
-     * Constructor.
-     *
-     * @param Command $command A Command instance to test.
-     */
     public function __construct(Command $command)
     {
         $this->command = $command;
@@ -65,14 +62,16 @@ class CommandTester
         }
 
         $this->input = new ArrayInput($input);
+        if ($this->inputs) {
+            $this->input->setStream(self::createStream($this->inputs));
+        }
+
         if (isset($options['interactive'])) {
             $this->input->setInteractive($options['interactive']);
         }
 
         $this->output = new StreamOutput(fopen('php://memory', 'w', false));
-        if (isset($options['decorated'])) {
-            $this->output->setDecorated($options['decorated']);
-        }
+        $this->output->setDecorated(isset($options['decorated']) ? $options['decorated'] : false);
         if (isset($options['verbosity'])) {
             $this->output->setVerbosity($options['verbosity']);
         }
@@ -128,5 +127,30 @@ class CommandTester
     public function getStatusCode()
     {
         return $this->statusCode;
+    }
+
+    /**
+     * Sets the user inputs.
+     *
+     * @param array $inputs An array of strings representing each input
+     *                      passed to the command input stream
+     *
+     * @return CommandTester
+     */
+    public function setInputs(array $inputs)
+    {
+        $this->inputs = $inputs;
+
+        return $this;
+    }
+
+    private static function createStream(array $inputs)
+    {
+        $stream = fopen('php://memory', 'r+', false);
+
+        fwrite($stream, implode(PHP_EOL, $inputs));
+        rewind($stream);
+
+        return $stream;
     }
 }

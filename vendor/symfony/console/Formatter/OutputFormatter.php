@@ -35,10 +35,25 @@ class OutputFormatter implements OutputFormatterInterface
     {
         $text = preg_replace('/([^\\\\]?)</', '$1\\<', $text);
 
+        return self::escapeTrailingBackslash($text);
+    }
+
+    /**
+     * Escapes trailing "\" in given text.
+     *
+     * @param string $text Text to escape
+     *
+     * @return string Escaped text
+     *
+     * @internal
+     */
+    public static function escapeTrailingBackslash($text)
+    {
         if ('\\' === substr($text, -1)) {
             $len = strlen($text);
             $text = rtrim($text, '\\');
-            $text .= str_repeat('<<', $len - strlen($text));
+            $text = str_replace("\0", '', $text);
+            $text .= str_repeat("\0", $len - strlen($text));
         }
 
         return $text;
@@ -67,9 +82,7 @@ class OutputFormatter implements OutputFormatterInterface
     }
 
     /**
-     * Sets the decorated flag.
-     *
-     * @param bool $decorated Whether to decorate the messages or not
+     * {@inheritdoc}
      */
     public function setDecorated($decorated)
     {
@@ -77,9 +90,7 @@ class OutputFormatter implements OutputFormatterInterface
     }
 
     /**
-     * Gets the decorated flag.
-     *
-     * @return bool true if the output will decorate messages, false otherwise
+     * {@inheritdoc}
      */
     public function isDecorated()
     {
@@ -87,10 +98,7 @@ class OutputFormatter implements OutputFormatterInterface
     }
 
     /**
-     * Sets a new style.
-     *
-     * @param string                        $name  The style name
-     * @param OutputFormatterStyleInterface $style The style instance
+     * {@inheritdoc}
      */
     public function setStyle($name, OutputFormatterStyleInterface $style)
     {
@@ -98,11 +106,7 @@ class OutputFormatter implements OutputFormatterInterface
     }
 
     /**
-     * Checks if output formatter has style with specified name.
-     *
-     * @param string $name
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasStyle($name)
     {
@@ -110,13 +114,7 @@ class OutputFormatter implements OutputFormatterInterface
     }
 
     /**
-     * Gets style options from style with specified name.
-     *
-     * @param string $name
-     *
-     * @return OutputFormatterStyleInterface
-     *
-     * @throws InvalidArgumentException When style isn't defined
+     * {@inheritdoc}
      */
     public function getStyle($name)
     {
@@ -128,18 +126,14 @@ class OutputFormatter implements OutputFormatterInterface
     }
 
     /**
-     * Formats a message according to the given styles.
-     *
-     * @param string $message The message to style
-     *
-     * @return string The styled message
+     * {@inheritdoc}
      */
     public function format($message)
     {
         $message = (string) $message;
         $offset = 0;
         $output = '';
-        $tagRegex = '[a-z][a-z0-9_=;-]*+';
+        $tagRegex = '[a-z][a-z0-9,_=;-]*+';
         preg_match_all("#<(($tagRegex) | /($tagRegex)?)>#ix", $message, $matches, PREG_OFFSET_CAPTURE);
         foreach ($matches[0] as $i => $match) {
             $pos = $match[1];
@@ -174,8 +168,8 @@ class OutputFormatter implements OutputFormatterInterface
 
         $output .= $this->applyCurrentStyle(substr($message, $offset));
 
-        if (false !== strpos($output, '<<')) {
-            return strtr($output, array('\\<' => '<', '<<' => '\\'));
+        if (false !== strpos($output, "\0")) {
+            return strtr($output, array("\0" => '\\', '\\<' => '<'));
         }
 
         return str_replace('\\<', '<', $output);
@@ -194,7 +188,7 @@ class OutputFormatter implements OutputFormatterInterface
      *
      * @param string $string
      *
-     * @return OutputFormatterStyle|bool false if string is not format string
+     * @return OutputFormatterStyle|false false if string is not format string
      */
     private function createStyleFromString($string)
     {
@@ -202,7 +196,7 @@ class OutputFormatter implements OutputFormatterInterface
             return $this->styles[$string];
         }
 
-        if (!preg_match_all('/([^=]+)=([^;]+)(;|$)/', strtolower($string), $matches, PREG_SET_ORDER)) {
+        if (!preg_match_all('/([^=]+)=([^;]+)(;|$)/', $string, $matches, PREG_SET_ORDER)) {
             return false;
         }
 
@@ -214,12 +208,20 @@ class OutputFormatter implements OutputFormatterInterface
                 $style->setForeground($match[1]);
             } elseif ('bg' == $match[0]) {
                 $style->setBackground($match[1]);
-            } else {
-                try {
-                    $style->setOption($match[1]);
-                } catch (\InvalidArgumentException $e) {
-                    return false;
+            } elseif ('options' === $match[0]) {
+                preg_match_all('([^,;]+)', $match[1], $options);
+                $options = array_shift($options);
+                foreach ($options as $option) {
+                    try {
+                        $style->setOption($option);
+                    } catch (\InvalidArgumentException $e) {
+                        @trigger_error(sprintf('Unknown style options are deprecated since version 3.2 and will be removed in 4.0. Exception "%s".', $e->getMessage()), E_USER_DEPRECATED);
+
+                        return false;
+                    }
                 }
+            } else {
+                return false;
             }
         }
 

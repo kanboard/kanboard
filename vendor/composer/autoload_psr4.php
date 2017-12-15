@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Component\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher'),
+    'Symfony\\Component\\Debug\\' => array($vendorDir . '/symfony/debug'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'SimpleQueue\\' => array($vendorDir . '/fguillot/simple-queue/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),

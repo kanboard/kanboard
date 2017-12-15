@@ -9,21 +9,18 @@ Lado del servidor
 | Sistemas operativos                  |
 |--------------------------------------|
 | Linux Ubuntu Xenial Xerus 16.04 LTS  |
-| Linux Ubuntu Trusty 14.04 LTS        |
-| Linux Centos 6.x                     |
 | Linux Centos 7.x                     |
-| Linux Redhat 6.x                     |
 | Linux Redhat 7.x                     |
-| Linux Debian 8                       |
+| Linux Debian 9                       |
 | FreeBSD 10.x                         |
+| Microsoft Windows 2016               |
 | Microsoft Windows 2012 R2            |
-| Microsoft Windows 2008               |
 
 ### Base de datos compatibles
 
 | Base de datos      |
 |--------------------|
-| Sqlite 3.x         |
+| Sqlite >= 3.7      |
 | Mysql >= 5.5       |
 | MariaDB >= 10      |
 | Postgresql >= 9.3  |
@@ -51,11 +48,7 @@ Kanboard esta pre configurado para trabajar con Apache (URL rewriting).
 
 | Versión de PHP |
 |----------------|
-| PHP >= 5.3.9   |
-| PHP 5.4        |
-| PHP 5.5        |
-| PHP 5.6        |
-| PHP 7.x        |
+| PHP >= 5.6     |
 
 ### PHP Extensiones Requeridas
 

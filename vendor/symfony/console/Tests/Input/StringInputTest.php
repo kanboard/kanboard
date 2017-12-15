@@ -11,11 +11,12 @@
 
 namespace Symfony\Component\Console\Tests\Input;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\StringInput;
 
-class StringInputTest extends \PHPUnit_Framework_TestCase
+class StringInputTest extends TestCase
 {
     /**
      * @dataProvider getTokenizeData
@@ -38,19 +39,6 @@ class StringInputTest extends \PHPUnit_Framework_TestCase
         // call to bind
         $input = new StringInput('--foo=bar');
         $input->bind($definition);
-        $this->assertEquals('bar', $input->getOption('foo'));
-    }
-
-    /**
-     * @group legacy
-     */
-    public function testLegacyInputOptionDefinitionInConstructor()
-    {
-        $definition = new InputDefinition(
-            array(new InputOption('foo', null, InputOption::VALUE_REQUIRED))
-        );
-
-        $input = new StringInput('--foo=bar', $definition);
         $this->assertEquals('bar', $input->getOption('foo'));
     }
 

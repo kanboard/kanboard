@@ -27,12 +27,6 @@ class ArrayInput extends Input
 {
     private $parameters;
 
-    /**
-     * Constructor.
-     *
-     * @param array           $parameters An array of parameters
-     * @param InputDefinition $definition A InputDefinition instance
-     */
     public function __construct(array $parameters, InputDefinition $definition = null)
     {
         $this->parameters = $parameters;
@@ -41,9 +35,7 @@ class ArrayInput extends Input
     }
 
     /**
-     * Returns the first argument from the raw parameters (not parsed).
-     *
-     * @return string The value of the first argument or null otherwise
+     * {@inheritdoc}
      */
     public function getFirstArgument()
     {
@@ -57,22 +49,19 @@ class ArrayInput extends Input
     }
 
     /**
-     * Returns true if the raw parameters (not parsed) contain a value.
-     *
-     * This method is to be used to introspect the input parameters
-     * before they have been validated. It must be used carefully.
-     *
-     * @param string|array $values The values to look for in the raw parameters (can be an array)
-     *
-     * @return bool true if the value is contained in the raw parameters
+     * {@inheritdoc}
      */
-    public function hasParameterOption($values)
+    public function hasParameterOption($values, $onlyParams = false)
     {
         $values = (array) $values;
 
         foreach ($this->parameters as $k => $v) {
             if (!is_int($k)) {
                 $v = $k;
+            }
+
+            if ($onlyParams && '--' === $v) {
+                return false;
             }
 
             if (in_array($v, $values)) {
@@ -84,21 +73,17 @@ class ArrayInput extends Input
     }
 
     /**
-     * Returns the value of a raw option (not parsed).
-     *
-     * This method is to be used to introspect the input parameters
-     * before they have been validated. It must be used carefully.
-     *
-     * @param string|array $values  The value(s) to look for in the raw parameters (can be an array)
-     * @param mixed        $default The default value to return if no result is found
-     *
-     * @return mixed The option value
+     * {@inheritdoc}
      */
-    public function getParameterOption($values, $default = false)
+    public function getParameterOption($values, $default = false, $onlyParams = false)
     {
         $values = (array) $values;
 
         foreach ($this->parameters as $k => $v) {
+            if ($onlyParams && ('--' === $k || (is_int($k) && '--' === $v))) {
+                return false;
+            }
+
             if (is_int($k)) {
                 if (in_array($v, $values)) {
                     return true;
@@ -121,9 +106,15 @@ class ArrayInput extends Input
         $params = array();
         foreach ($this->parameters as $param => $val) {
             if ($param && '-' === $param[0]) {
-                $params[] = $param.('' != $val ? '='.$this->escapeToken($val) : '');
+                if (is_array($val)) {
+                    foreach ($val as $v) {
+                        $params[] = $param.('' != $v ? '='.$this->escapeToken($v) : '');
+                    }
+                } else {
+                    $params[] = $param.('' != $val ? '='.$this->escapeToken($val) : '');
+                }
             } else {
-                $params[] = $this->escapeToken($val);
+                $params[] = is_array($val) ? array_map(array($this, 'escapeToken'), $val) : $this->escapeToken($val);
             }
         }
 
@@ -131,11 +122,14 @@ class ArrayInput extends Input
     }
 
     /**
-     * Processes command line arguments.
+     * {@inheritdoc}
      */
     protected function parse()
     {
         foreach ($this->parameters as $key => $value) {
+            if ('--' === $key) {
+                return;
+            }
             if (0 === strpos($key, '--')) {
                 $this->addLongOption(substr($key, 2), $value);
             } elseif ('-' === $key[0]) {
@@ -185,7 +179,9 @@ class ArrayInput extends Input
                 throw new InvalidOptionException(sprintf('The "--%s" option requires a value.', $name));
             }
 
-            $value = $option->isValueOptional() ? $option->getDefault() : true;
+            if (!$option->isValueOptional()) {
+                $value = true;
+            }
         }
 
         $this->options[$name] = $value;

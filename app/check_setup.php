@@ -1,17 +1,8 @@
 <?php
 
-// PHP 5.3.3 minimum
-if (version_compare(PHP_VERSION, '5.3.3', '<')) {
-    throw new Exception('This software require PHP 5.3.3 minimum');
-}
-
-// Checks for PHP < 5.4
-if (version_compare(PHP_VERSION, '5.4.0', '<')) {
-
-    // Short tags must be enabled for PHP < 5.4
-    if (! ini_get('short_open_tag')) {
-        throw new Exception('This software require to have short tags enabled if you have PHP < 5.4 ("short_open_tag = On")');
-    }
+// PHP 5.6.0 minimum
+if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+    throw new Exception('This software requires PHP 5.6.0 minimum');
 }
 
 // Check data folder if sqlite
