@@ -1,10 +1,36 @@
 Changelog
 =========
 
-5.4.5 (2016-XX-XX)
+5.4.8 (2017-05-01)
 ------------------
 
- * fixed CVE-2016-10033 and CVE-2016-10045
+ * fixed encoding inheritance in addPart()
+ * fixed sorting MIME children when their types are equal
+
+5.4.7 (2017-04-20)
+------------------
+
+ * fixed NTLMAuthenticator clobbering bcmath scale
+
+5.4.6 (2017-02-13)
+------------------
+
+ * removed exceptions thrown in destructors as they lead to fatal errors
+ * switched to use sha256 by default in DKIM as per the RFC
+ * fixed an 'Undefined variable: pipes' PHP notice
+ * fixed long To headers when using the mail transport
+ * fixed NTLMAuthenticator when no domain is passed with the username
+ * prevented fatal error during unserialization of a message
+ * fixed a PHP warning when sending a message that has a length of a multiple of 8192
+
+5.4.5 (2016-12-29)
+------------------
+
+ * SECURITY FIX:  fixed CVE-2016-10074 by disallowing potentially unsafe shell characters
+
+   Prior to 5.4.5, the mail transport (Swift_Transport_MailTransport) was vulnerable to passing
+   arbitrary shell arguments if the "From", "ReturnPath" or "Sender" header came
+   from a non-trusted source, potentially allowing Remote Code Execution
  * deprecated the mail transport
 
 5.4.4 (2016-11-23)

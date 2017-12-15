@@ -35,12 +35,12 @@
         "fguillot/simpleLogger" : "1.0.1",
         "fguillot/simple-validator" : "1.0.1",
         "fguillot/simple-queue" : "1.0.1",
-        "paragonie/random_compat": "2.0.2",
-        "pimple/pimple" : "3.0.2",
-        "swiftmailer/swiftmailer" : "5.4.5",
+        "paragonie/random_compat": "2.0.11",
+        "pimple/pimple" : "3.2.2",
+        "swiftmailer/swiftmailer" : "5.4.8",
         "symfony/console" : "3.4.2",
         "symfony/event-dispatcher" : "3.4.2",
-        "gregwar/captcha": "1.1.1",
+        "gregwar/captcha": "1.1.4",
         "aferrandini/phpqrcode": "1.0.1"
     },
     "autoload" : {

@@ -1,9 +1,6 @@
 <?php
 
-include(__DIR__.'/../CaptchaBuilderInterface.php');
-include(__DIR__.'/../PhraseBuilderInterface.php');
-include(__DIR__.'/../CaptchaBuilder.php');
-include(__DIR__.'/../PhraseBuilder.php');
+require_once __DIR__.'/../vendor/autoload.php';
 
 use Gregwar\Captcha\CaptchaBuilder;
 
