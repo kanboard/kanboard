@@ -1367,4 +1367,7 @@ return array(
     // 'Time Spent' => '',
     // 'External Link' => '',
     // 'This feature enables the iCal feed, RSS feed and the public board view.' => '',
+    // 'days' => '',
+    // 'minutes' => '',
+    // 'seconds' => '',
 );

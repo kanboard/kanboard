@@ -1370,4 +1370,7 @@ return array(
     'Stop the timer of all subtasks when moving a task to another column' => 'Beenden des Timers für alle Unteraufgaben, wenn die Aufgabe in eine andere Spalte verschoben wird',
     'Subtask Title' => 'Titel der Teilaufgabe',
     'Add a subtask and activate the timer when moving a task to another column' => 'Teilaufgabe hinzufügen und den Timer aktivieren, wenn die Aufgabe in eine andere Spalte verschoben wird',
+    'days' => 'Tage',
+    'minutes' => 'Minuten',
+    'seconds' => 'Sekunden',
 );
