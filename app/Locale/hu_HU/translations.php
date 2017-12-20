@@ -1370,4 +1370,7 @@ return array(
     'Stop the timer of all subtasks when moving a task to another column' => 'Az összes részfeladat időmérőjének leállítása, amikor a feladatot és másik oszlopba helyezik át',
     'Subtask Title' => 'Részfeladat címe',
     'Add a subtask and activate the timer when moving a task to another column' => 'Részfeladat hozzáadása és az időmérő bekapcsolása, amikor a feladatot egy másik oszlopba helyezik át',
+    // 'days' => '',
+    // 'minutes' => '',
+    // 'seconds' => '',
 );

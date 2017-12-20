@@ -1370,4 +1370,7 @@ return array(
     // 'Stop the timer of all subtasks when moving a task to another column' => '',
     // 'Subtask Title' => '',
     // 'Add a subtask and activate the timer when moving a task to another column' => '',
+    // 'days' => '',
+    // 'minutes' => '',
+    // 'seconds' => '',
 );
