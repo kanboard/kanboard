@@ -11,8 +11,8 @@
 
 <div class="panel">
     <ul>
-        <li><?= t('Lead time: ').'<strong>'.$this->dt->duration($lead_time) ?></strong></li>
-        <li><?= t('Cycle time: ').'<strong>'.$this->dt->duration($cycle_time) ?></strong></li>
+        <li><?= t('Lead time') ?>: <strong><?= $this->dt->duration($lead_time) ?></strong></li>
+        <li><?= t('Cycle time') ?>: <strong><?= $this->dt->duration($cycle_time) ?></strong></li>
     </ul>
 </div>
 

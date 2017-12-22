@@ -4,11 +4,11 @@
 <div class="panel">
     <ul>
         <li>
-            <?= t('API token:') ?>
+            <?= t('API token') ?>:
             <strong><?= $this->text->e($values['api_token']) ?></strong>
         </li>
         <li>
-            <?= t('API endpoint:') ?>
+            <?= t('API endpoint') ?>:
             <strong><?= $this->url->base().'jsonrpc.php' ?></strong>
         </li>
     </ul>

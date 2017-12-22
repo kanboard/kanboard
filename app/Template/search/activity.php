@@ -23,13 +23,13 @@
 <?php if (empty($values['search'])): ?>
     <div class="panel">
         <h3><?= t('Advanced search') ?></h3>
-        <p><?= t('Example of query: ') ?><strong>project:"My project" creator:me</strong></p>
+        <p><?= t('Example of query') ?>: <strong>project:"My project" creator:me</strong></p>
         <ul>
-            <li><?= t('Search by project: ') ?><strong>project:"My project"</strong></li>
-            <li><?= t('Search by creator: ') ?><strong>creator:admin</strong></li>
-            <li><?= t('Search by creation date: ') ?><strong>created:today</strong></li>
-            <li><?= t('Search by task status: ') ?><strong>status:open</strong></li>
-            <li><?= t('Search by task title: ') ?><strong>title:"My task"</strong></li>
+            <li><?= t('Search by project') ?>: <strong>project:"My project"</strong></li>
+            <li><?= t('Search by creator') ?>: <strong>creator:admin</strong></li>
+            <li><?= t('Search by creation date') ?>: <strong>created:today</strong></li>
+            <li><?= t('Search by task status') ?>: <strong>status:open</strong></li>
+            <li><?= t('Search by task title') ?>: <strong>title:"My task"</strong></li>
         </ul>
         <p><i class="fa fa-external-link fa-fw"></i><?= $this->url->doc(t('View advanced search syntax'), 'search') ?></p>
     </div>

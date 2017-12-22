@@ -6,8 +6,8 @@
 
 <div class="panel">
     <ul>
-        <li><?= t('Average lead time: ').'<strong>'.$this->dt->duration($average['avg_lead_time']) ?></strong></li>
-        <li><?= t('Average cycle time: ').'<strong>'.$this->dt->duration($average['avg_cycle_time']) ?></strong></li>
+        <li><?= t('Average lead time') ?>: <strong><?= $this->dt->duration($average['avg_lead_time']) ?></strong></li>
+        <li><?= t('Average cycle time') ?>: <strong><?= $this->dt->duration($average['avg_cycle_time']) ?></strong></li>
     </ul>
 </div>
 

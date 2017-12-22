@@ -5,11 +5,11 @@
         <?php endif ?>
 
         <?php if ($project['start_date']): ?>
-            <li><?= t('Start date:').' '.$this->dt->date($project['start_date']) ?></li>
+            <li><?= t('Start date').': '.$this->dt->date($project['start_date']) ?></li>
         <?php endif ?>
 
         <?php if ($project['end_date']): ?>
-            <li><?= t('End date:').' '.$this->dt->date($project['end_date']) ?></li>
+            <li><?= t('End date').': '.$this->dt->date($project['end_date']) ?></li>
         <?php endif ?>
     </ul>
 </div>
