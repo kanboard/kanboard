@@ -1373,4 +1373,9 @@ return array(
     'days' => '天',
     'minutes' => '分钟',
     'seconds' => '秒',
+    // 'Email subject' => '',
+    // 'Duration in days' => '',
+    // 'Send a task by email to creator' => '',
+    // 'Send a task by email to assignee' => '',
+    // 'Send email notification of impending due date' => '',
 );

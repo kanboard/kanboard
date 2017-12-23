@@ -923,7 +923,7 @@ return array(
     'Highest priority' => 'Höchste Priorität',
     'Close a task when there is no activity' => 'Schliesse eine Aufgabe, wenn keine Aktivitäten vorhanden sind',
     'Duration in days' => 'Dauer in Tagen',
-    'Send email when there is no activity on a task' => 'Versende eine Email, wenn keine Aktivitäten an einer Aufgabe vorhanden sind',
+    'Send email when there is no activity on a task' => 'Versende eine E-Mail, wenn keine Aktivitäten an einer Aufgabe vorhanden sind',
     'Unable to fetch link information.' => 'Kann keine Informationen über Verbindungen holen',
     'Daily background job for tasks' => 'Tägliche Hintergrundarbeit für Aufgaben',
     'Auto' => 'Auto',
@@ -1373,4 +1373,9 @@ return array(
     'days' => 'Tage',
     'minutes' => 'Minuten',
     'seconds' => 'Sekunden',
+    'Email subject' => 'E-Mail Betreff',
+    'Duration in days' => 'Laufzeit in Tagen',
+    'Send a task by email to creator' => 'Sende eine Aufgabe per E-Mail an den Ersteller',
+    'Send a task by email to assignee' => 'Sende eine Aufgabe per E-Mail an den Zuständigen',
+    'Send email notification of impending due date' => 'Sende eine E-Mail Benachrichtigung wenn es fällig wird',
 );
