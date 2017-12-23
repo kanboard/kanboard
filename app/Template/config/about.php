@@ -4,15 +4,15 @@
 <div class="panel">
     <ul>
         <li>
-            <?= t('Official website:') ?>
+            <?= t('Official website') ?>:
             <a href="https://kanboard.org/" target="_blank" rel="noreferer">https://kanboard.org/</a>
         </li>
         <li>
-            <?= t('Author:') ?>
+            <?= t('Author') ?>:
             <strong>Frédéric Guillot</strong> (<a href="https://github.com/kanboard/kanboard/blob/master/CONTRIBUTORS.md" target="_blank"><?= t('contributors') ?></a>)
         </li>
         <li>
-            <?= t('License:') ?>
+            <?= t('License') ?>:
             <strong>MIT</strong>
         </li>
     </ul>
@@ -24,31 +24,31 @@
 <div class="panel">
     <ul>
         <li>
-            <?= t('Application version:') ?>
+            <?= t('Application version') ?>:
             <strong><?= APP_VERSION ?></strong>
         </li>
         <li>
-            <?= t('PHP version:') ?>
+            <?= t('PHP version') ?>:
             <strong><?= PHP_VERSION ?></strong>
         </li>
         <li>
-            <?= t('PHP SAPI:') ?>
+            <?= t('PHP SAPI') ?>:
             <strong><?= PHP_SAPI ?></strong>
         </li>
         <li>
-            <?= t('OS version:') ?>
+            <?= t('OS version') ?>:
             <strong><?= php_uname('s').' '.php_uname('r') ?></strong>
         </li>
         <li>
-            <?= t('Database driver:') ?>
+            <?= t('Database driver') ?>:
             <strong><?= DB_DRIVER ?></strong>
         </li>
         <li>
-            <?= t('Database version:') ?>
+            <?= t('Database version') ?>:
             <strong><?= $this->text->e($db_version) ?></strong>
         </li>
         <li>
-            <?= t('Browser:') ?>
+            <?= t('Browser') ?>:
             <strong><?= $this->text->e($user_agent) ?></strong>
         </li>
     </ul>
@@ -61,7 +61,7 @@
     <div class="panel">
         <ul>
             <li>
-                <?= t('Database size:') ?>
+                <?= t('Database size') ?>:
                 <strong><?= $this->text->bytes($db_size) ?></strong>
             </li>
             <li>

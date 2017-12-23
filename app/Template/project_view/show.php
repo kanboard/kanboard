@@ -5,7 +5,7 @@
     <li><strong><?= $project['is_active'] ? t('This project is open') : t('This project is closed') ?></strong></li>
 
     <?php if ($project['owner_id'] > 0): ?>
-        <li><?= t('Project owner: ') ?><strong><?= $this->text->e($project['owner_name'] ?: $project['owner_username']) ?></strong></li>
+        <li><?= t('Project owner') ?>: <strong><?= $this->text->e($project['owner_name'] ?: $project['owner_username']) ?></strong></li>
     <?php endif ?>
 
     <?php if ($project['is_private']): ?>
@@ -21,15 +21,15 @@
     <?php endif ?>
 
     <?php if ($project['last_modified']): ?>
-        <li><?= t('Modified:').' '.$this->dt->datetime($project['last_modified']) ?></li>
+        <li><?= t('Modified').': '.$this->dt->datetime($project['last_modified']) ?></li>
     <?php endif ?>
 
     <?php if ($project['start_date']): ?>
-        <li><?= t('Start date: ').$this->dt->date($project['start_date']) ?></li>
+        <li><?= t('Start date').': '.$this->dt->date($project['start_date']) ?></li>
     <?php endif ?>
 
     <?php if ($project['end_date']): ?>
-        <li><?= t('End date: ').$this->dt->date($project['end_date']) ?></li>
+        <li><?= t('End date').': '.$this->dt->date($project['end_date']) ?></li>
     <?php endif ?>
 </ul>
 

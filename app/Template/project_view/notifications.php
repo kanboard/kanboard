@@ -8,7 +8,7 @@
 
         <?= $this->form->csrf() ?>
 
-        <h4><?= t('Notification methods:') ?></h4>
+        <h4><?= t('Notification methods') ?>:</h4>
         <?= $this->form->checkboxes('notification_types', $types, $notifications) ?>
 
         <div class="form-actions">

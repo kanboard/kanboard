@@ -3,11 +3,11 @@
 <h3><?= t('Sub-task updated') ?></h3>
 
 <ul>
-    <li><?= t('Title:') ?> <?= $this->text->e($subtask['title']) ?></li>
-    <li><?= t('Status:') ?> <?= $this->text->e($subtask['status_name']) ?></li>
-    <li><?= t('Assignee:') ?> <?= $this->text->e($subtask['name'] ?: $subtask['username'] ?: '?') ?></li>
+    <li><?= t('Title') ?>: <?= $this->text->e($subtask['title']) ?></li>
+    <li><?= t('Status') ?>: <?= $this->text->e($subtask['status_name']) ?></li>
+    <li><?= t('Assignee') ?>: <?= $this->text->e($subtask['name'] ?: $subtask['username'] ?: '?') ?></li>
     <li>
-        <?= t('Time tracking:') ?>
+        <?= t('Time tracking') ?>:
         <?php if (! empty($subtask['time_spent'])): ?>
             <strong><?= $this->text->e($subtask['time_spent']).'h' ?></strong> <?= t('spent') ?>
         <?php endif ?>

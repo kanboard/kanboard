@@ -6,8 +6,8 @@
 
 <div class="panel">
     <ul>
-        <li><?= t('Estimated hours: ').'<strong>'.$this->text->e($metrics['open']['time_estimated'] + $metrics['closed']['time_estimated']) ?></strong></li>
-        <li><?= t('Actual hours: ').'<strong>'.$this->text->e($metrics['open']['time_spent'] + $metrics['closed']['time_spent']) ?></strong></li>
+        <li><?= t('Estimated hours') ?>: <strong><?= $this->text->e($metrics['open']['time_estimated'] + $metrics['closed']['time_estimated']) ?></strong></li>
+        <li><?= t('Actual hours') ?>: <strong><?= $this->text->e($metrics['open']['time_spent'] + $metrics['closed']['time_spent']) ?></strong></li>
     </ul>
 </div>
 

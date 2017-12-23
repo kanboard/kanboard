@@ -16,7 +16,7 @@
     <h2><?= t('Webhook token') ?></h2>
 </div>
 <div class="panel">
-    <?= t('Webhook token:') ?>
+    <?= t('Webhook token') ?>:
     <strong><?= $this->text->e($values['webhook_token']) ?></strong>
 </div>
 

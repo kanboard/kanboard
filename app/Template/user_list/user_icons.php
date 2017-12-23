@@ -24,7 +24,7 @@
     <?php endif ?>
 
     <?php if ($user['lock_expiration_date'] != 0): ?>
-        <span title="<?= t('Account locked until:') ?> <?= $this->dt->datetime($user['lock_expiration_date']) ?>">
+        <span title="<?= t('Account locked until') ?>: <?= $this->dt->datetime($user['lock_expiration_date']) ?>">
             <i class="fa fa-lock" aria-hidden="true"></i>
         </span>
     <?php endif ?>
