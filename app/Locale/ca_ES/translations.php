@@ -1369,7 +1369,7 @@ return array(
     // 'This feature enables the iCal feed, RSS feed and the public board view.' => '',
     // 'Stop the timer of all subtasks when moving a task to another column' => '',
     // 'Subtask Title' => '',
-    // 'Add a subtask and activate the timer when moving a task to another column' => '',D
+    // 'Add a subtask and activate the timer when moving a task to another column' => '',
     // 'Email subject' => '',
     // 'Duration in days' => '',
     // 'Send a task by email to creator' => '',
