@@ -1,3 +1,20 @@
+Version 1.2.0 (December 27, 2017)
+---------------------------------
+
+Breaking changes:
+
+* Kanboard supports only PHP >= 5.6 (PHP 5.3, 5.4 and 5.5 are not supported anymore)
+
+New features:
+
+* PHP sessions are now stored into the database,
+  In this way, it's easier to run Kanboard behind a load-balancer
+
+Improvements:
+
+* Copy category from parent task when creating a task from a subtask
+* Translation updates and improvements
+
 Version 1.1.1 (December 9, 2017)
 --------------------------------
 
@@ -110,7 +127,7 @@ Version 1.0.46 (August 13, 2017)
 
 Security Issues:
 
-* Fix two privilege escalation issues: a standard user could reset the password 
+* Fix two privilege escalation issues: a standard user could reset the password
 of another user (including admin) by altering form data.
 (CVE-2017-12850 and CVE-2017-12851, discovered by "chbi").
 
