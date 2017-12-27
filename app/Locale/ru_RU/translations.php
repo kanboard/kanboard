@@ -1343,9 +1343,6 @@ return array(
     'Subtask added successfully.' => 'Подзадача успешно добавлена.',
     '%d subtasks added successfully.' => '%d подзадач(а) успешно добавлено.',
     'Enter one subtask by line.' => 'Записывайте по одной подзадаче на строку.',
-    'days' => 'дней',
-    'minutes' => 'минут',
-    'seconds' => 'секунд',
     // 'Predefined Contents' => '',
     // 'Predefined contents' => '',
     // 'Predefined Task Description' => '',
@@ -1373,4 +1370,7 @@ return array(
     // 'Stop the timer of all subtasks when moving a task to another column' => '',
     // 'Subtask Title' => '',
     // 'Add a subtask and activate the timer when moving a task to another column' => '',
+    'days' => 'дней',
+    'minutes' => 'минут',
+    'seconds' => 'секунд',
 );
