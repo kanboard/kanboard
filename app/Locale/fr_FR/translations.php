@@ -1370,7 +1370,7 @@ return array(
     'Stop the timer of all subtasks when moving a task to another column' => 'Arrêter le minuteur de toutes les sous-tâches lorsque la tâche est déplaçée dans une autre colonne',
     'Subtask Title' => 'Titre de la sous-tâche',
     'Add a subtask and activate the timer when moving a task to another column' => 'Ajouter une sous-tâche et activer le minuteur lorsque la tâche est déplaçé dans une autre colonne',
-    // 'days' => '',
-    // 'minutes' => '',
-    // 'seconds' => '',
+    'days' => 'jours',
+    'minutes' => 'minutes',
+    'seconds' => 'secondes',
 );
