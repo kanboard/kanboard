@@ -38,6 +38,7 @@ return array(
     'Password' => 'Heslo',
     'Administrator' => 'Administrátor',
     'Sign in' => 'Přihlásit',
+	// 'Sign up' => '',
     'Users' => 'Uživatelé',
     'Forbidden' => 'Zakázat projekt',
     'Access Forbidden' => 'Přístup zakázán',

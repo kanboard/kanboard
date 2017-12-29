@@ -38,6 +38,7 @@ return array(
     'Password' => 'Parolă',
     'Administrator' => 'Administrator',
     'Sign in' => 'Conectare',
+	// 'Sign up' => '',
     'Users' => 'Utilizatori',
     'Forbidden' => 'Interzis',
     'Access Forbidden' => 'Acces interzis',

@@ -38,6 +38,7 @@ return array(
     'Password' => 'Salasana',
     'Administrator' => 'Ylläpitäjä',
     'Sign in' => 'Kirjaudu sisään',
+	// 'Sign up' => '',
     'Users' => 'Käyttäjät',
     'Forbidden' => 'Estetty',
     'Access Forbidden' => 'Pääsy estetty',

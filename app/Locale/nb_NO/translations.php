@@ -38,6 +38,7 @@ return array(
     'Password' => 'Passord',
     'Administrator' => 'Administrator',
     'Sign in' => 'Logg inn',
+	// 'Sign up' => '',
     'Users' => 'Brukere',
     'Forbidden' => 'Ikke tillatt',
     'Access Forbidden' => 'Adgang ikke tillatt',

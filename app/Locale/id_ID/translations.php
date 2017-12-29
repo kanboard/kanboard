@@ -38,6 +38,7 @@ return array(
     'Password' => 'Kata sandi',
     'Administrator' => 'Administrator',
     'Sign in' => 'Masuk',
+	// 'Sign up' => '',
     'Users' => 'Pengguna',
     'Forbidden' => 'Terlarang',
     'Access Forbidden' => 'Akses Dilarang',

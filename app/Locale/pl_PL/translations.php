@@ -38,6 +38,7 @@ return array(
     'Password' => 'Hasło',
     'Administrator' => 'Administrator',
     'Sign in' => 'Zaloguj',
+	// 'Sign up' => '',
     'Users' => 'Użytkownicy',
     'Forbidden' => 'Zabroniony',
     'Access Forbidden' => 'Dostęp zabroniony',

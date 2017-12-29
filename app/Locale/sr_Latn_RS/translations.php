@@ -38,6 +38,7 @@ return array(
     'Password' => 'Lozinka',
     'Administrator' => 'Administrator',
     'Sign in' => 'Odjava',
+	// 'Sign up' => '',
     'Users' => 'Korisnik',
     'Forbidden' => 'Zabranjeno',
     'Access Forbidden' => 'Zabranjen prostup',

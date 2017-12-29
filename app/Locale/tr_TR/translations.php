@@ -38,6 +38,7 @@ return array(
     'Password' => 'Şifre',
     'Administrator' => 'Yönetici',
     'Sign in' => 'Giriş yap',
+	// 'Sign up' => '',
     'Users' => 'Kullanıcılar',
     'Forbidden' => 'Yasak',
     'Access Forbidden' => 'Erişim yasak',

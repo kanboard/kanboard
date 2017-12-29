@@ -38,6 +38,7 @@ return array(
     'Password' => 'Κωδικός',
     'Administrator' => 'Διαχειριστής',
     'Sign in' => 'Είσοδος',
+	// 'Sign up' => '',
     'Users' => 'Χρήστες',
     'Forbidden' => 'Δεν επιτρέπεται η πρόσβαση',
     'Access Forbidden' => 'Δεν επιτρέπεται η πρόσβαση',

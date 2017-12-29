@@ -38,6 +38,7 @@ return array(
     'Password' => 'Mật khẩu',
     'Administrator' => 'Người quản lý',
     'Sign in' => 'Đăng nhập',
+	// 'Sign up' => '',
     'Users' => 'Người dùng',
     'Forbidden' => 'Forbidden',
     'Access Forbidden' => 'Truy cập bị cấm',

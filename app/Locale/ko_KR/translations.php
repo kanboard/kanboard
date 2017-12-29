@@ -38,6 +38,7 @@ return array(
     'Password' => '패스워드',
     'Administrator' => '관리자',
     'Sign in' => '로그인',
+	// 'Sign up' => '',
     'Users' => '사용자',
     'Forbidden' => '접근 거부',
     'Access Forbidden' => '접속이 거부되었습니다',

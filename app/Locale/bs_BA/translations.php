@@ -38,6 +38,7 @@ return array(
     'Password' => 'Šifra',
     'Administrator' => 'Administrator',
     'Sign in' => 'Prijava',
+	// 'Sign up' => '',
     'Users' => 'Korisnici',
     'Forbidden' => 'Zabranjeno',
     'Access Forbidden' => 'Pristup zabranjen',
