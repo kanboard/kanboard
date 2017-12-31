@@ -26,4 +26,4 @@ Für den Text-Inhalt
   color: white!important;  font-size:11px;
 }
 ```
-![CAT](../screenshots/kanboard_patch_category.PNG)
+![CAT](./screenshots/kanboard_patch_category.PNG)
