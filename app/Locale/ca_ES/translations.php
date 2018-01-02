@@ -38,6 +38,7 @@ return array(
     'Password' => 'Contrasenya',
     'Administrator' => 'Administrador',
     'Sign in' => 'Accedeix',
+	// 'Sign up' => '',
     'Users' => 'Usuaris',
     'Forbidden' => 'Prohibit',
     'Access Forbidden' => 'Accés prohibit',

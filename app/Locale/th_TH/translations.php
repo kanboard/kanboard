@@ -38,6 +38,7 @@ return array(
     'Password' => 'รหัสผ่าน',
     'Administrator' => 'ผู้ดูแลระบบ',
     'Sign in' => 'เข้าสู่ระบบ',
+	// 'Sign up' => '',
     'Users' => 'ผู้ใช้',
     'Forbidden' => 'ไม่อนุญาต',
     'Access Forbidden' => 'ไม่อนุญาตให้เข้า',

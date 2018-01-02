@@ -38,6 +38,7 @@ return array(
     'Password' => 'Kata laluan',
     'Administrator' => 'Pentadbir',
     'Sign in' => 'Masuk',
+	// 'Sign up' => '',
     'Users' => 'Para Pengguna',
     'Forbidden' => 'Larangan',
     'Access Forbidden' => 'Akses Dilarang',

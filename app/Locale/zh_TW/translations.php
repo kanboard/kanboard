@@ -38,6 +38,7 @@ return array(
     'Password' => '密碼',
     'Administrator' => '管理者',
     'Sign in' => '登入',
+	// 'Sign up' => '',
     'Users' => '帳號',
     'Forbidden' => '禁止',
     'Access Forbidden' => '禁止進入',

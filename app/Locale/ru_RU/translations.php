@@ -38,6 +38,7 @@ return array(
     'Password' => 'Пароль',
     'Administrator' => 'Администратор',
     'Sign in' => 'Войти',
+	// 'Sign up' => '',
     'Users' => 'Пользователи',
     'Forbidden' => 'Запрещено',
     'Access Forbidden' => 'Доступ запрещён',

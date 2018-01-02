@@ -38,6 +38,7 @@ return array(
     'Password' => 'パスワード',
     'Administrator' => 'システム管理者',
     'Sign in' => 'ログイン',
+	// 'Sign up' => '',
     'Users' => 'ユーザー',
     'Forbidden' => 'アクセス拒否',
     'Access Forbidden' => 'アクセスが拒否されました',

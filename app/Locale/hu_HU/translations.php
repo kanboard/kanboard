@@ -38,6 +38,7 @@ return array(
     'Password' => 'Jelszó',
     'Administrator' => 'Adminisztrátor',
     'Sign in' => 'Bejelentkezés',
+	// 'Sign up' => '',
     'Users' => 'Felhasználók',
     'Forbidden' => 'Tiltott',
     'Access Forbidden' => 'Hozzáférés megtagadva',

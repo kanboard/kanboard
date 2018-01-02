@@ -38,6 +38,7 @@ return array(
     'Password' => '密码',
     'Administrator' => '超级管理员',
     'Sign in' => '登录',
+	// 'Sign up' => '',
     'Users' => '用户',
     'Forbidden' => '禁止',
     'Access Forbidden' => '禁止进入',
