@@ -48,6 +48,7 @@ class WebhookNotification extends Base implements NotificationInterface
             $payload = array(
                 'event_name' => $event_name,
                 'event_data' => $event_data,
+                'event_author' => ($this->userSession->isLogged() ? $this->userSession->getUsername() : NULL),
             );
 
             $this->httpClient->postJson($url, $payload);
