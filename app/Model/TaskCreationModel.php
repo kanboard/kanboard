@@ -47,7 +47,7 @@ class TaskCreationModel extends Base
             ));
         }
 
-        $this->hook->reference('model:task:creation:aftersave', (int) $task_id);
+        $this->hook->reference('model:task:creation:aftersave', $task_id);
 
         return (int) $task_id;
     }
