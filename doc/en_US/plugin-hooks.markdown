@@ -140,6 +140,7 @@ List of reference hooks:
 | `pagination:dashboard:task:query`          | Alter database query for tasks pagination on the dashboard    |
 | `pagination:dashboard:subtask:query`       | Alter database query for subtasks pagination on the dashboard |
 | `model:task:creation:prepare`              | Alter form values before to save a task                       |
+| `model:task:creation:aftersave`            | Retrieve Task ID after creating a task                        |
 | `model:task:modification:prepare`          | Alter form values before to edit a task                       |
 | `model:color:get-list`                     | Alter default_colors values                                   |
 | `model:subtask:modification:prepare`       | Alter form values before to save a subtask                    |
