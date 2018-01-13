@@ -21,9 +21,11 @@ Für den Text-Inhalt
 [class*="tag-Patchkanditat"] {
   background-color: rgba(255, 0, 0, 0.50);
   border: none!important;
-  font-weight: bold;  font-style: italic;
+  font-weight: bold;
+  font-style: italic;
   box-shadow: 0 1px 1px rgba(186, 186, 186, 0.55);
-  color: white!important;  font-size:11px;
+  color: white!important;
+  font-size:11px;
 }
 ```
 ![CAT](./screenshots/kanboard_patch_category.PNG)
