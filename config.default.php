@@ -85,6 +85,9 @@ define('DB_SSL_CERT', null);
 // Mysql SSL CA
 define('DB_SSL_CA', null);
 
+// Mysql SSL server verification, set to false if you don't want the Mysql driver to validate the certificate CN
+define('DB_VERIFY_SERVER_CERT', null);
+
 // Enable LDAP authentication (false by default)
 define('LDAP_AUTH', false);
 

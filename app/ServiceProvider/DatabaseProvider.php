@@ -135,6 +135,7 @@ class DatabaseProvider implements ServiceProviderInterface
             'ssl_key'  => DB_SSL_KEY,
             'ssl_ca'   => DB_SSL_CA,
             'ssl_cert' => DB_SSL_CERT,
+            'verify_server_cert' => DB_VERIFY_SERVER_CERT,
         ));
     }
 
