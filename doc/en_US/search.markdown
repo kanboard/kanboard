@@ -68,6 +68,7 @@ Attribute: **due**
 - Search tasks due tomorrow: `due:tomorrow`
 - Search tasks due yesterday: `due:yesterday`
 - Search tasks due with the exact date: `due:2015-06-29`
+- Search tasks without a due date: `due:none`
 
 The date must use the ISO 8601 format: **YYYY-MM-DD**.
 
