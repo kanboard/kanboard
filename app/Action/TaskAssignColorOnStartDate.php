@@ -6,10 +6,10 @@ use Kanboard\Model\TaskModel;
 
 
 /**
- * Assign a color to a priority
+ * Assign a color when preset start date is reached
  *
  * @package Kanboard\Action
- * @author  Julien Buratto
+ * @author  Christian Wolter
  */
 class TaskAssignColorOnStartDate extends Base
 {
@@ -21,7 +21,7 @@ class TaskAssignColorOnStartDate extends Base
      */
     public function getDescription()
     {
-        return t('Assign automatically a color when start date is reached');
+        return t('Assign automatically a color when preset start date is reached');
     }
 
     /**
