@@ -5,12 +5,12 @@ namespace Kanboard\Action;
 use Kanboard\Model\TaskModel;
 
 /**
- * Move a task to another column when not moved during a given period
+ * Move a task to another column once a predefined start date is reached
  *
  * @package Kanboard\Action
- * @author  Frederic Guillot
+ * @author  Christian Wolter
  */
-class TaskMoveColumnstarted extends Base
+class TaskMoveColumnOnStartDate extends Base
 {
     /**
      * Get automatic action description
@@ -20,8 +20,7 @@ class TaskMoveColumnstarted extends Base
      */
     public function getDescription()
     {
-        return t(//'Move the task to another column when not moved during a given period');
-        'movestarted');
+        return t('Move the task to another column once a predefined start date is reached');
     }
 
     /**
