@@ -42,6 +42,8 @@ use Kanboard\Action\TaskCloseNoActivityColumn;
 use Kanboard\Action\TaskCloseNotMovedColumn;
 use Kanboard\Action\TaskAssignColorSwimlane;
 use Kanboard\Action\TaskAssignPrioritySwimlane;
+use Kanboard\Action\SubtaskTimerMoveTaskColumn;
+use Kanboard\Action\StopSubtaskTimerMoveTaskColumn;
 use Kanboard\Action\TaskMoveColumnOnStartDate;
 
 /**
