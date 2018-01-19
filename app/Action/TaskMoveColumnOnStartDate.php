@@ -44,7 +44,6 @@ class TaskMoveColumnstarted extends Base
     public function getActionRequiredParameters()
     {
         return array(
-          //  'duration' => t('Duration in days'),
             'src_column_id' => t('Source column'),
             'dest_column_id' => t('Destination column'),
         );
@@ -71,10 +70,8 @@ class TaskMoveColumnstarted extends Base
     public function doAction(array $data)
     {
         $results = array();
-        //$max = $this->getParam('duration') * 86400;
 
         foreach ($data['tasks'] as $task) {
-           // $duration = time() - $task['date_moved'];
 
             if ($task['date_started'] <= time() && $task['date_started'] > 0 && $task['column_id'] == $this->getParam('src_column_id')) {
                 $results[] = $this->taskPositionModel->movePosition(
