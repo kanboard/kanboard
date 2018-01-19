@@ -46,8 +46,6 @@ use Kanboard\Action\TaskAssignPrioritySwimlane;
 use Kanboard\Action\SubtaskTimerMoveTaskColumn;
 use Kanboard\Action\StopSubtaskTimerMoveTaskColumn;
 
-
-
 /**
  * Action Provider
  *
