@@ -6,7 +6,6 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Kanboard\Action\TaskAssignColorOnDueDate;
 use Kanboard\Action\TaskAssignColorOnStartDate;
-use Kanboard\Action\TaskAssignColumnOnStartDate;
 use Kanboard\Action\TaskAssignColorPriority;
 use Kanboard\Action\TaskAssignDueDateOnCreation;
 use Kanboard\Action\TaskMoveColumnClosed;
@@ -100,8 +99,7 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskAssignPrioritySwimlane($container));
         $container['actionManager']->register(new TaskAssignColorOnDueDate($container));
         $container['actionManager']->register(new TaskAssignColorOnStartDate($container));
-        $container['actionManager']->register(new TaskAssignColumnOnStartDate($container));
-        $container['actionManager']->register(new TaskMoveColumniOnStartDate($container));
+        $container['actionManager']->register(new TaskMoveColumnOnStartDate($container));
         return $container;
     }
 }
