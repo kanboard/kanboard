@@ -6,7 +6,6 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Kanboard\Action\TaskAssignColorOnDueDate;
 use Kanboard\Action\TaskAssignColorOnStartDate;
-use Kanboard\Action\TaskAssignColumnOnStartDate;
 use Kanboard\Action\TaskAssignColorPriority;
 use Kanboard\Action\TaskAssignDueDateOnCreation;
 use Kanboard\Action\TaskMoveColumnClosed;
