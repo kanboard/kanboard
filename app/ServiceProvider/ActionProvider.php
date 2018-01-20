@@ -100,6 +100,8 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskAssignColorSwimlane($container));
         $container['actionManager']->register(new TaskAssignPrioritySwimlane($container));
         $container['actionManager']->register(new TaskAssignColorOnDueDate($container));
+        $container['actionManager']->register(new SubtaskTimerMoveTaskColumn($container));
+        $container['actionManager']->register(new StopSubtaskTimerMoveTaskColumn($container));
         $container['actionManager']->register(new TaskAssignColorOnStartDate($container));
 
         return $container;
