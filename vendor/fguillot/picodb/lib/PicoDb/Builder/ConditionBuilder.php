@@ -85,7 +85,10 @@ class ConditionBuilder
     {
         return $this->values;
     }
-
+    public function getConditions()
+    {
+        return $this->conditions;
+    }
     /**
      * Returns true if there is some conditions
      *

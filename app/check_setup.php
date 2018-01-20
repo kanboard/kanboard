@@ -23,6 +23,10 @@ if (DB_DRIVER === 'postgres' && ! extension_loaded('pdo_pgsql')) {
     throw new Exception('PHP extension required: "pdo_pgsql"');
 }
 
+if (DB_DRIVER === 'mmsq' && ! extension_loaded('pdo_mssql')) {
+    throw new Exception('PHP extension required: "pdo_mssql"');
+}
+
 // Check other extensions
 foreach (array('gd', 'mbstring', 'hash', 'openssl', 'json', 'hash', 'ctype', 'filter', 'session', 'dom', 'filter', 'SimpleXML', 'xml') as $ext) {
     if (! extension_loaded($ext)) {

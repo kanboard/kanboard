@@ -61,7 +61,7 @@ class Mssql extends Base
      */
     public function enableForeignKeys()
     {
-        $this->pdo->exec('EXEC sp_MSforeachtable @command1="ALTER TABLE ? CHECK CONSTRAINT ALL"; GO;');
+        $this->pdo->exec('EXEC sp_MSforeachtable @command1="ALTER TABLE ? CHECK CONSTRAINT ALL";');
     }
 
     /**
@@ -71,7 +71,7 @@ class Mssql extends Base
      */
     public function disableForeignKeys()
     {
-        $this->pdo->exec('EXEC sp_MSforeachtable @command1="ALTER TABLE ? NOCHECK CONSTRAINT ALL"; GO;');
+        $this->pdo->exec('EXEC sp_MSforeachtable @command1="ALTER TABLE ? NOCHECK CONSTRAINT ALL";');
     }
 
     /**
@@ -135,7 +135,7 @@ class Mssql extends Base
      */
     public function getSchemaVersion()
     {
-        $this->pdo->exec("CREATE TABLE IF NOT EXISTS [".$this->schemaTable."] ([version] INT DEFAULT '0')");
+        $this->pdo->exec("IF OBJECT_ID(N'dbo.".$this->schemaTable."', N'U') IS NULL BEGIN CREATE TABLE dbo.".$this->schemaTable." ([version] INT NULL); END;");
 
         $rq = $this->pdo->prepare('SELECT [version] FROM ['.$this->schemaTable.']');
         $rq->execute();
@@ -174,5 +174,17 @@ class Mssql extends Base
     {
         $this->getConnection()->exec('SET SHOWPLAN_ALL ON');
         return $this->getConnection()->query($this->getSqlFromPreparedStatement($sql, $values))->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    
+     /**
+     * Get database version
+     *
+     * @access public
+     * @return array
+     */
+    public function getDatabaseVersion()
+    {
+        return $this->pdo->query('SELECT @@VERSION')->fetchColumn();
     }
 }

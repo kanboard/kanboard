@@ -50,7 +50,7 @@ class ColumnRestrictionModel extends Base
                 self::TABLE.'.project_id',
                 self::TABLE.'.role_id',
                 self::TABLE.'.column_id',
-                self::TABLE.'.rule',
+                self::TABLE.'.'.$this->db->escapeIdentifier('rule'),
                 'pr.role',
                 'c.title as column_title'
             )
@@ -77,7 +77,7 @@ class ColumnRestrictionModel extends Base
                 self::TABLE.'.project_id',
                 self::TABLE.'.role_id',
                 self::TABLE.'.column_id',
-                self::TABLE.'.rule',
+                self::TABLE.'.'.$this->db->escapeIdentifier('rule'),
                 'pr.role',
                 'c.title as column_title'
             )
@@ -109,7 +109,7 @@ class ColumnRestrictionModel extends Base
                 self::TABLE.'.project_id',
                 self::TABLE.'.role_id',
                 self::TABLE.'.column_id',
-                self::TABLE.'.rule',
+                self::TABLE.'.'.$this->db->escapeIdentifier('rule'),
                 'pr.role'
             )
             ->eq(self::TABLE.'.project_id', $project_id)

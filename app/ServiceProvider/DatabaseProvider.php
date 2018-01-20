@@ -59,6 +59,9 @@ class DatabaseProvider implements ServiceProviderInterface
             case 'postgres':
                 $db = $this->getPostgresInstance();
                 break;
+            case 'mssql':
+                $db = $this->getMSSqlInstance();
+                break;
             default:
                 throw new LogicException('Database driver not supported');
         }
@@ -151,6 +154,27 @@ class DatabaseProvider implements ServiceProviderInterface
 
         return new Database(array(
             'driver'   => 'postgres',
+            'hostname' => DB_HOSTNAME,
+            'username' => DB_USERNAME,
+            'password' => DB_PASSWORD,
+            'database' => DB_NAME,
+            'port'     => DB_PORT,
+        ));
+    }
+    
+    
+     /**
+     * Setup the Mssql database driver
+     *
+     * @access private
+     * @return \PicoDb\Database
+     */
+    private function getMSSqlInstance()
+    {
+        require_once __DIR__.'/../Schema/Mssql.php';
+
+        return new Database(array(
+            'driver'   => 'mssql',
             'hostname' => DB_HOSTNAME,
             'username' => DB_USERNAME,
             'password' => DB_PASSWORD,

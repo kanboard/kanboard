@@ -30,7 +30,9 @@ class SubtaskTimeTrackingModel extends Base
     public function getTimerQuery($user_id)
     {
         return sprintf(
-            "SELECT %s FROM %s WHERE %s='%d' AND %s='0' AND %s=%s LIMIT 1",
+            get_class($this->db->getDriver())=='PicoDb\Driver\Mssql' ? 
+                "SELECT TOP 1 %s FROM %s WHERE %s='%d' AND %s='0' AND %s=%s" :
+                "SELECT %s FROM %s WHERE %s='%d' AND %s='0' AND %s=%s LIMIT 1",
             $this->db->escapeIdentifier('start'),
             $this->db->escapeIdentifier(self::TABLE),
             $this->db->escapeIdentifier('user_id'),
