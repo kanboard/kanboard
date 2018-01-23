@@ -85,7 +85,11 @@ KB.component('task-move-position', function (containerElement, options) {
         var swimlanes = [];
 
         options.board.forEach(function(swimlane) {
-            swimlanes.push({'value': swimlane.id, 'text': swimlane.name});
+            var option = {'value': swimlane.id, 'text': swimlane.name};
+            if(swimlane.id == options.task.swimlane_id) {
+                option.selected = "";
+            }
+            swimlanes.push(option);
         });
 
         return KB.dom('select')
@@ -102,7 +106,11 @@ KB.component('task-move-position', function (containerElement, options) {
         options.board.forEach(function(swimlane) {
             if (swimlaneId === swimlane.id) {
                 swimlane.columns.forEach(function(column) {
-                    columns.push({'value': column.id, 'text': column.title});
+                    var option = {'value': column.id, 'text': column.title};
+                    if(column.id == options.task.column_id) {
+                        option.selected = "";
+                    }
+                    columns.push(option);
                 });
             }
         });
