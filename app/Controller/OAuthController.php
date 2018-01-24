@@ -106,7 +106,13 @@ class OAuthController extends BaseController
     protected function authenticate($providerName)
     {
         if ($this->authenticationManager->oauthAuthentication($providerName)) {
-            $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
+            if (isset($this->sessionStorage->redirectAfterLogin) && ! empty($this->sessionStorage->redirectAfterLogin) && ! filter_var($this->sessionStorage->redirectAfterLogin, FILTER_VALIDATE_URL)) {
+                $redirect = $this->sessionStorage->redirectAfterLogin;
+                unset($this->sessionStorage->redirectAfterLogin);
+                $this->response->redirect($redirect);
+            } else {
+                $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
+            }
         } else {
             $this->authenticationFailure(t('External authentication failed'));
         }
