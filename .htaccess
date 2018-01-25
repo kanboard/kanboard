@@ -14,6 +14,19 @@
     # RewriteBase /
 
     RewriteEngine On
+
+    # Deny access
+    RewriteRule "^config(?:.default)?\.php" "-" [NC,F]
+    RewriteRule "^web\.config" "-" [NC,F]
+    RewriteRule "^(?:cli|ChangeLog|LICENSE)" "-" [NC,F]
+
+    # Skip the deny rule for js, css and png
+    RewriteCond "%{REQUEST_URI}" "^/(?:vendor|plugins)/.*\.(?:js|css|png)$"
+    RewriteRule ".?" "-" [S=1]
+
+    # Deny access to any non assets plugin files
+    RewriteRule "^(?:vendor|plugins)/" "-" [NC,F]
+
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [QSA,L]
     
