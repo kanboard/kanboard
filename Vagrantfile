@@ -1,7 +1,9 @@
 
 $script = <<SCRIPT
+sudo add-apt-repository ppa:ondrej/php
+#sudo add-apt-repository ppa:ondrej/apache2
 apt-get update
-apt-get install -y apache2 php5 php5-sqlite php5-mysql php5-pgsql php5-gd curl unzip php5-curl php5-ldap && \
+apt-get install -y apache2 php5.6 php5.6-sqlite php5.6-mysql php5.6-pgsql php5.6-gd curl unzip php5.6-curl php5.6-ldap php5.6-mbstring php5.6-dom php5.6-simplexml php5.6-xml && \
 apt-get clean && \
 echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
 sed -ri 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf && \
@@ -25,7 +27,7 @@ SCRIPT
 Vagrant.configure("2") do |config|
 
   config.vm.define "ubuntu" do |m|
-    m.vm.box = "ubuntu/trusty64"
+    m.vm.box = "ubuntu/xenial64"
     m.vm.provision "shell", inline: $script
     m.vm.synced_folder ".", "/var/www/html", owner: "www-data", group: "www-data"
     m.vm.network :forwarded_port, guest: 80, host: 8001
