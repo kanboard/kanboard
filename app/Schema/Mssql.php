@@ -9,7 +9,7 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
 const VERSION = 1;
-const SQLFILE = __DIR__.'/sql/mssql_version_1.sql';
+const SQLFILE = __DIR__.'/Sql/mssql_version_1.sql';
 
 function strip_sqlcomment ($string = '') {
     $RXSQLComments = '@(--[^\r\n]*)|(\#[^\r\n]*)|(/\*[\w\W]*?(?=\*/)\*/)@ms';
