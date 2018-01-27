@@ -7,4 +7,4 @@ Kanboard with Vagrant'ı çok kolay deneyebilirsiniz:
 - `vagrant up` yapın
 - Uygulamaya, `http://localhost:8001/` URL'sini kullanarak erişebilirsiniz.
 
-Sanal makine PHP 5.5 ile Ubuntu 14.04 üzerine kurulmuştur.
+Sanal makine PHP 7 ile Ubuntu 16.04 üzerine kurulmuştur.
