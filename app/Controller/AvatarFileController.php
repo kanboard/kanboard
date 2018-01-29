@@ -30,6 +30,7 @@ class AvatarFileController extends BaseController
      */
     public function upload()
     {
+        $this->checkCSRFParam();
         $user = $this->getUser();
 
         if (! $this->avatarFileModel->uploadImageFile($user['id'], $this->request->getFileInfo('avatar'))) {
