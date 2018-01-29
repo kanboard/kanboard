@@ -83,9 +83,10 @@ KB.http.postForm = function (url, formElement) {
     return (new KB.http.request('POST', url, {}, formData)).execute();
 };
 
-KB.http.uploadFile = function (url, file, onProgress, onComplete, onError, onServerError) {
+KB.http.uploadFile = function (url, file, csrf, onProgress, onComplete, onError, onServerError) {
     var fd = new FormData();
     fd.append('files[]', file);
+    fd.append('csrf_token', csrf);
 
     var xhr = new XMLHttpRequest();
     xhr.upload.addEventListener('progress', onProgress);

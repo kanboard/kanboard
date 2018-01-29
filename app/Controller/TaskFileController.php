@@ -51,6 +51,7 @@ class TaskFileController extends BaseController
      */
     public function save()
     {
+        $this->checkReusableCSRFParam();
         $task = $this->getTask();
         $result = $this->taskFileModel->uploadFiles($task['id'], $this->request->getFileInfo('files'));
 

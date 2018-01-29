@@ -26,6 +26,13 @@ abstract class BaseController extends Base
         }
     }
 
+    protected function checkReusableCSRFParam()
+    {
+        if (! $this->token->validateReusableCSRFToken($this->request->getRawValue('csrf_token'))) {
+            throw new AccessForbiddenException();
+        }
+    }
+
     /**
      * Check webhook token
      *
