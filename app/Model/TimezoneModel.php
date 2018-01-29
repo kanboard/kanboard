@@ -39,11 +39,7 @@ class TimezoneModel extends Base
      */
     public function getCurrentTimezone()
     {
-        if ($this->userSession->isLogged() && ! empty($this->sessionStorage->user['timezone'])) {
-            return $this->sessionStorage->user['timezone'];
-        }
-
-        return $this->configModel->get('application_timezone', 'UTC');
+        return $this->userSession->getTimezone() ?: $this->configModel->get('application_timezone', 'UTC');
     }
 
     /**

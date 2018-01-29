@@ -2,6 +2,7 @@ Captcha
 =======
 
 ![Captchas examples](http://gregwar.com/captchas.png)
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YUXRLWHQSWS6L)
 
 Installation
 ============
@@ -96,11 +97,42 @@ You can use theses functions :
 * **setMaxBehindLines($lines)**, sets the maximum number of lines behind the code
 * **setMaxFrontLines($lines)**, sets the maximum number of lines on the front of the code
 
-Symfony 2 Bundle
+If you want to change the number of character, you can call the phrase builder directly using
+extra parameters:
+
+```php
+use Gregwar\Captcha\CaptchaBuilder;
+use Gregwar\Captcha\PhraseBuilder;
+
+// Will build phrases of 3 characters
+$phraseBuilder = new PhraseBuilder(4)
+
+// Will build phrases of 5 characters, only digits
+$phraseBuilder = new PhraseBuilder(5, '0123456789');
+
+// Pass it as first argument of CaptchaBuilder, passing it the phrase
+// builder
+$captcha = new CaptchaBuilder(null, $phraseBuilder);
+```
+
+You can also pass directly the wanted phrase to the builder:
+
+```php
+// Building a Captcha with the "hello" phrase
+$captcha = new CaptchaBuilder('hello');
+```
+
+Symfony Bundle
 ================
 
 You can have a look at the following repository to enjoy the Symfony 2 bundle packaging this captcha generator :
 https://github.com/Gregwar/CaptchaBundle
+
+Yii2 Extension
+===============
+
+You can use the following extension for integrating with Yii2 Framework :
+https://github.com/juliardi/yii2-captcha
 
 License
 =======

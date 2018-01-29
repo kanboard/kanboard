@@ -815,6 +815,17 @@ CREATE TABLE "schema_version" (
 
 
 --
+-- Name: sessions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE "sessions" (
+    "id" "text" NOT NULL,
+    "expire_at" integer NOT NULL,
+    "data" "text" DEFAULT ''::"text"
+);
+
+
+--
 -- Name: settings; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1847,6 +1858,14 @@ ALTER TABLE ONLY "remember_me"
 
 
 --
+-- Name: sessions sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY "sessions"
+    ADD CONSTRAINT "sessions_pkey" PRIMARY KEY ("id");
+
+
+--
 -- Name: settings settings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2625,8 +2644,8 @@ INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_high
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_public_refresh_interval', '60', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_private_refresh_interval', '10', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('board_columns', '', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', '4068b2e47aafbe0d16602d53b1a9f02466b4f9ff89a94858af9e9f959b92', 0, 0);
-INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', '0f9e776201c7e58f8b3c3867af69e91548e4eb887563c053e76162b9464e', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('webhook_token', '1ff45d3f47d1dc00a9bd51a335d2fe705714e4c4073d486c2c8e6e161c28', 0, 0);
+INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('api_token', '261e6e871a415183978e3a25f65ddb63c93e680931bef4c6b1728ed1a07c', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_language', 'en_US', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_timezone', 'UTC', 0, 0);
 INSERT INTO settings (option, value, changed_by, changed_on) VALUES ('application_url', '', 0, 0);
@@ -2695,4 +2714,4 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$6sRRMAp4Iu4UQiH.4aIAC.ExaWKfF0192hke5JheV.4hLIhhrbW1C', 'app-admin');INSERT INTO schema_version VALUES ('105');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$j/bvk6WblIHAyAJEBXLgBeoOjJ1oHsuA0VTUf85lRYOJ4czssCuI6', 'app-admin');INSERT INTO schema_version VALUES ('106');

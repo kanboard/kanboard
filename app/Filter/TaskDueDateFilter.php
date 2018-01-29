@@ -32,9 +32,13 @@ class TaskDueDateFilter extends BaseDateFilter implements FilterInterface
      */
     public function apply()
     {
-        $this->query->neq(TaskModel::TABLE.'.date_due', 0);
-        $this->query->notNull(TaskModel::TABLE.'.date_due');
-        $this->applyDateFilter(TaskModel::TABLE.'.date_due');
+        if ($this->value == "none") {
+            $this->query->eq(TaskModel::TABLE.'.date_due', 0);
+        } else {
+            $this->query->neq(TaskModel::TABLE.'.date_due', 0);
+            $this->query->notNull(TaskModel::TABLE.'.date_due');
+            $this->applyDateFilter(TaskModel::TABLE.'.date_due');
+        }
 
         return $this;
     }

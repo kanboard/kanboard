@@ -16,7 +16,7 @@ class ExternalTaskManagerTest extends Base
 
     public function testRegister()
     {
-        $provider = $this->getMock('Kanboard\Core\ExternalTask\ExternalTaskProviderInterface');
+        $provider = $this->getMockBuilder('Kanboard\Core\ExternalTask\ExternalTaskProviderInterface')->getMock();
         $provider->expects($this->any())->method('getName')->willReturn('MyProvider');
 
         $manager = new ExternalTaskManager();
@@ -27,10 +27,10 @@ class ExternalTaskManagerTest extends Base
 
     public function testGetList()
     {
-        $provider1 = $this->getMock('Kanboard\Core\ExternalTask\ExternalTaskProviderInterface');
+        $provider1 = $this->getMockBuilder('Kanboard\Core\ExternalTask\ExternalTaskProviderInterface')->getMock();
         $provider1->expects($this->any())->method('getName')->willReturn('MyProvider1');
 
-        $provider2 = $this->getMock('Kanboard\Core\ExternalTask\ExternalTaskProviderInterface');
+        $provider2 = $this->getMockBuilder('Kanboard\Core\ExternalTask\ExternalTaskProviderInterface')->getMock();
         $provider2->expects($this->any())->method('getName')->willReturn('MyProvider2');
 
         $manager = new ExternalTaskManager();

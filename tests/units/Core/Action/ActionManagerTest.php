@@ -116,7 +116,7 @@ class ActionManagerTest extends Base
 
     public function testAttachEventsWithLoggedUser()
     {
-        $this->container['sessionStorage']->user = array('id' => 1);
+        $_SESSION['user'] = array('id' => 1);
 
         $projectModel = new ProjectModel($this->container);
         $projectUserRoleModel = new ProjectUserRoleModel($this->container);

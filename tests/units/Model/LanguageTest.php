@@ -25,10 +25,10 @@ class LanguageTest extends Base
         $languageModel = new LanguageModel($this->container);
         $this->assertEquals('en', $languageModel->getJsLanguageCode());
 
-        $this->container['sessionStorage']->user = array('language' => 'fr_FR');
+        $_SESSION['user'] = array('language' => 'fr_FR');
         $this->assertEquals('fr', $languageModel->getJsLanguageCode());
 
-        $this->container['sessionStorage']->user = array('language' => 'xx_XX');
+        $_SESSION['user'] = array('language' => 'xx_XX');
         $this->assertEquals('en', $languageModel->getJsLanguageCode());
     }
 
@@ -37,10 +37,10 @@ class LanguageTest extends Base
         $languageModel = new LanguageModel($this->container);
         $this->assertEquals('en_US', $languageModel->getCurrentLanguage());
 
-        $this->container['sessionStorage']->user = array('language' => 'fr_FR');
+        $_SESSION['user'] = array('language' => 'fr_FR');
         $this->assertEquals('fr_FR', $languageModel->getCurrentLanguage());
 
-        $this->container['sessionStorage']->user = array('language' => 'xx_XX');
+        $_SESSION['user'] = array('language' => 'xx_XX');
         $this->assertEquals('xx_XX', $languageModel->getCurrentLanguage());
     }
 

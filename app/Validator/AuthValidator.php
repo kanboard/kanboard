@@ -101,11 +101,11 @@ class AuthValidator extends BaseValidator
         $errors = array();
 
         if ($this->userLockingModel->hasCaptcha($values['username'])) {
-            if (! isset($this->sessionStorage->captcha)) {
+            if (! session_exists('captcha')) {
                 $result = false;
             } else {
                 $builder = new CaptchaBuilder;
-                $builder->setPhrase($this->sessionStorage->captcha);
+                $builder->setPhrase(session_get('captcha'));
                 $result = $builder->testPhrase(isset($values['captcha']) ? $values['captcha'] : '');
 
                 if (! $result) {

@@ -24,9 +24,9 @@ class TaskListController extends BaseController
         $search = $this->helper->projectHeader->getSearchQuery($project);
 
         if ($this->request->getIntegerParam('show_subtasks')) {
-            $this->sessionStorage->subtaskListToggle = true;
+            session_set('subtaskListToggle', true);
         } elseif ($this->request->getIntegerParam('hide_subtasks')) {
-            $this->sessionStorage->subtaskListToggle = false;
+            session_set('subtaskListToggle', false);
         }
 
         if ($this->userSession->hasSubtaskListActivated()) {

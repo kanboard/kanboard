@@ -9,21 +9,18 @@ Server side
 | Operating System                     |
 |--------------------------------------|
 | Linux Ubuntu Xenial Xerus 16.04 LTS  |
-| Linux Ubuntu Trusty 14.04 LTS        |
-| Linux Centos 6.x                     |
 | Linux Centos 7.x                     |
-| Linux Redhat 6.x                     |
 | Linux Redhat 7.x                     |
-| Linux Debian 8                       |
+| Linux Debian 9                       |
 | FreeBSD 10.x                         |
+| Microsoft Windows 2016               |
 | Microsoft Windows 2012 R2            |
-| Microsoft Windows 2008               |
 
 ### Compatible Databases
 
 | Database           |
 |--------------------|
-| Sqlite 3.x         |
+| Sqlite >= 3.7      |
 | Mysql >= 5.5       |
 | MariaDB >= 10      |
 | Postgresql >= 9.3  |
@@ -48,18 +45,16 @@ Do not use Sqlite on NFS mounts, only when you have a disk with fast I/O.
 
 Kanboard is pre-configured to work with Apache (URL rewriting).
 
-- Note: Kanboard is not compatible with Apache `mod_security`.
+- Kanboard is NOT compatible with Apache `mod_security`.
 - If you use Apache, you must have the module `mod_version`.
 
 ### PHP Versions
 
 | PHP Version    |
 |----------------|
-| PHP >= 5.3.9   |
-| PHP 5.4        |
-| PHP 5.5        |
-| PHP 5.6        |
-| PHP 7.x        |
+| PHP >= 5.6.0   |
+
+Since the version 1.2, Kanboard requires at least PHP 5.6.
 
 ### PHP Extensions Required
 
@@ -89,8 +84,8 @@ Kanboard is pre-configured to work with Apache (URL rewriting).
 
 ### Recommendations
 
-- Modern Linux or Unix operating system.
-- Best performances are obtained with the latest version of PHP with OPcode caching activated.
+- Modern Linux or Unix operating system with the latest version of PHP.
+- Best performances are obtained with the latest version of PHP with OpCode caching activated.
 
 Client side
 -----------

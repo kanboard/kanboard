@@ -23,6 +23,7 @@ class SubtaskTaskConversionModel extends Base
     public function convertToTask($project_id, $subtask_id)
     {
         $subtask = $this->subtaskModel->getById($subtask_id);
+        $parent_task = $this->taskFinderModel->getById($subtask['task_id']);
 
         $task_id = $this->taskCreationModel->create(array(
             'project_id' => $project_id,
@@ -30,6 +31,7 @@ class SubtaskTaskConversionModel extends Base
             'time_estimated' => $subtask['time_estimated'],
             'time_spent' => $subtask['time_spent'],
             'owner_id' => $subtask['user_id'],
+            'category_id' => $parent_task['category_id']
         ));
 
         if ($task_id !== false) {

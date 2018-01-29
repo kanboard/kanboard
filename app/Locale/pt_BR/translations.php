@@ -1366,8 +1366,11 @@ return array(
     'Time Estimated' => 'Tempo estimado',
     'Time Spent' => 'Tempo gasto',
     'External Link' => 'Link externo',
-    'This feature enable the iCal feed, RSS feed and the public board view.' => 'Essa funcionalidade habilita o alimentador de iCal, RSS e visualização pública do quadro.',
+    'This feature enables the iCal feed, RSS feed and the public board view.' => 'Essa funcionalidade habilita o alimentador de iCal, RSS e visualização pública do quadro.',
     'Stop the timer of all subtasks when moving a task to another column' => 'Parar o temporizador de todas as subtarefas quando mover a tarefa para outra coluna',
     'Subtask Title' => 'Título da subtarefa',
     'Add a subtask and activate the timer when moving a task to another column' => 'Adicionar uma subtarefa e ativar o temporizador quando mover a tarefa para outra coluna',
+    'days' => 'dias',
+    'minutes' => 'minutos',
+    'seconds' => 'segundos',
 );

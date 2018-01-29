@@ -67,8 +67,7 @@ class JobHandler extends Base
      */
     protected function prepareJobSession($user_id)
     {
-        $session = array();
-        $this->sessionStorage->setStorage($session);
+        session_flush();
 
         if ($user_id > 0) {
             $user = $this->userModel->getById($user_id);

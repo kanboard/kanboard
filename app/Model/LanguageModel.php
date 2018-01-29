@@ -174,11 +174,7 @@ class LanguageModel extends Base
      */
     public function getCurrentLanguage()
     {
-        if ($this->userSession->isLogged() && ! empty($this->sessionStorage->user['language'])) {
-            return $this->sessionStorage->user['language'];
-        }
-
-        return $this->configModel->get('application_language', 'en_US');
+        return $this->userSession->getLanguage() ?: $this->configModel->get('application_language', 'en_US');
     }
 
     /**

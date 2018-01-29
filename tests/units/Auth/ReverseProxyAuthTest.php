@@ -54,7 +54,7 @@ class ReverseProxyAuthTest extends Base
             ->method('getRemoteUser')
             ->will($this->returnValue('admin'));
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'username' => 'admin'
         );
 
@@ -69,7 +69,7 @@ class ReverseProxyAuthTest extends Base
             ->method('getRemoteUser')
             ->will($this->returnValue('foobar'));
 
-        $this->container['sessionStorage']->user = array(
+        $_SESSION['user'] = array(
             'username' => 'admin'
         );
 

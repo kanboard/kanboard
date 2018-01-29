@@ -718,4 +718,12 @@ class Table
         call_user_func_array(array($this->conditionBuilder, $name), $arguments);
         return $this;
     }
+
+    /**
+     * Clone function ensures that cloned objects are really clones
+     */
+     public function __clone()
+     {
+         $this->conditionBuilder = clone $this->conditionBuilder;
+     }
 }

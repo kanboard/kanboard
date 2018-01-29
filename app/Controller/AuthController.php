@@ -40,7 +40,7 @@ class AuthController extends BaseController
     public function check()
     {
         $values = $this->request->getValues();
-        $this->sessionStorage->hasRememberMe = ! empty($values['remember_me']);
+        session_set('hasRememberMe', ! empty($values['remember_me']));
         list($valid, $errors) = $this->authValidator->validateForm($values);
 
         if ($valid) {
@@ -72,9 +72,9 @@ class AuthController extends BaseController
      */
     private function redirectAfterLogin()
     {
-        if (isset($this->sessionStorage->redirectAfterLogin) && ! empty($this->sessionStorage->redirectAfterLogin) && ! filter_var($this->sessionStorage->redirectAfterLogin, FILTER_VALIDATE_URL)) {
-            $redirect = $this->sessionStorage->redirectAfterLogin;
-            unset($this->sessionStorage->redirectAfterLogin);
+        if (session_exists('redirectAfterLogin') && ! filter_var(session_get('redirectAfterLogin'), FILTER_VALIDATE_URL)) {
+            $redirect = session_get('redirectAfterLogin');
+            session_remove('redirectAfterLogin');
             $this->response->redirect($redirect);
         } else {
             $this->response->redirect($this->helper->url->to('DashboardController', 'show'));

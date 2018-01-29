@@ -70,7 +70,7 @@ class UserMentionJobTest extends Base
 
     public function testGetMentionedUsersWithNotficationEnabledAndUserLoggedIn()
     {
-        $this->container['sessionStorage']->user = array('id' => 3);
+        $_SESSION['user'] = array('id' => 3);
         $userModel = new UserModel($this->container);
         $userMentionJob = new UserMentionJob($this->container);
 

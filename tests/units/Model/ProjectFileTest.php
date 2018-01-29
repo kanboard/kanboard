@@ -52,7 +52,7 @@ class ProjectFileTest extends Base
 
     public function testCreationWithSessionOpen()
     {
-        $this->container['sessionStorage']->user = array('id' => 1);
+        $_SESSION['user'] = array('id' => 1);
 
         $projectModel = new ProjectModel($this->container);
         $fileModel = new ProjectFileModel($this->container);

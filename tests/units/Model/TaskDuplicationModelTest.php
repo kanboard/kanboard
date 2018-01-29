@@ -28,7 +28,7 @@ class TaskDuplicationModelTest extends Base
         $this->assertEquals(1, $task['project_id']);
         $this->assertEquals(0, $task['creator_id']);
 
-        $this->container['sessionStorage']->user = array('id' => 1);
+        $_SESSION['user'] = array('id' => 1);
 
         // We duplicate our task
         $this->assertEquals(2, $taskDuplicationModel->duplicate(1));

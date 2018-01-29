@@ -12,7 +12,7 @@ class MeProcedure extends BaseProcedure
 {
     public function getMe()
     {
-        return $this->sessionStorage->user;
+        return session_get('user');
     }
 
     public function getMyDashboard()

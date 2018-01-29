@@ -72,7 +72,7 @@ class AuthenticationManager extends Base
             foreach ($this->filterProviders('SessionCheckProviderInterface') as $provider) {
                 if (! $provider->isValidSession()) {
                     $this->logger->debug('Invalidate session for '.$this->userSession->getUsername());
-                    $this->sessionStorage->flush();
+                    session_flush();
                     $this->preAuthentication();
                     return false;
                 }

@@ -15,8 +15,8 @@ class UserProfileTest extends Base
         $user = new DatabaseUserProvider(array('id' => 1));
 
         $this->assertTrue($userProfile->initialize($user));
-        $this->assertNotEmpty($this->container['sessionStorage']->user);
-        $this->assertEquals('admin', $this->container['sessionStorage']->user['username']);
+        $this->assertNotEmpty($_SESSION['user']);
+        $this->assertEquals('admin', $_SESSION['user']['username']);
     }
 
     public function testInitializeLocalUserNotFound()
@@ -25,7 +25,7 @@ class UserProfileTest extends Base
         $user = new DatabaseUserProvider(array('id' => 2));
 
         $this->assertFalse($userProfile->initialize($user));
-        $this->assertFalse(isset($this->container['sessionStorage']->user));
+        $this->assertFalse(isset($_SESSION['user']));
     }
 
     public function testInitializeRemoteUser()
@@ -34,17 +34,17 @@ class UserProfileTest extends Base
         $user = new LdapUserProvider('ldapId', 'bob', 'Bob', '', Role::APP_MANAGER, array());
 
         $this->assertTrue($userProfile->initialize($user));
-        $this->assertNotEmpty($this->container['sessionStorage']->user);
-        $this->assertEquals(2, $this->container['sessionStorage']->user['id']);
-        $this->assertEquals('bob', $this->container['sessionStorage']->user['username']);
-        $this->assertEquals(Role::APP_MANAGER, $this->container['sessionStorage']->user['role']);
+        $this->assertNotEmpty($_SESSION['user']);
+        $this->assertEquals(2, $_SESSION['user']['id']);
+        $this->assertEquals('bob', $_SESSION['user']['username']);
+        $this->assertEquals(Role::APP_MANAGER, $_SESSION['user']['role']);
 
         $user = new LdapUserProvider('ldapId', 'bob', 'Bob', '', Role::APP_MANAGER, array());
 
         $this->assertTrue($userProfile->initialize($user));
-        $this->assertNotEmpty($this->container['sessionStorage']->user);
-        $this->assertEquals(2, $this->container['sessionStorage']->user['id']);
-        $this->assertEquals('bob', $this->container['sessionStorage']->user['username']);
+        $this->assertNotEmpty($_SESSION['user']);
+        $this->assertEquals(2, $_SESSION['user']['id']);
+        $this->assertEquals('bob', $_SESSION['user']['username']);
     }
 
     public function testAssignRemoteUser()
@@ -53,11 +53,11 @@ class UserProfileTest extends Base
         $user = new LdapUserProvider('ldapId', 'bob', 'Bob', '', Role::APP_MANAGER, array());
 
         $this->assertTrue($userProfile->assign(1, $user));
-        $this->assertNotEmpty($this->container['sessionStorage']->user);
-        $this->assertEquals(1, $this->container['sessionStorage']->user['id']);
-        $this->assertEquals('admin', $this->container['sessionStorage']->user['username']);
-        $this->assertEquals('Bob', $this->container['sessionStorage']->user['name']);
-        $this->assertEquals('', $this->container['sessionStorage']->user['email']);
-        $this->assertEquals(Role::APP_MANAGER, $this->container['sessionStorage']->user['role']);
+        $this->assertNotEmpty($_SESSION['user']);
+        $this->assertEquals(1, $_SESSION['user']['id']);
+        $this->assertEquals('admin', $_SESSION['user']['username']);
+        $this->assertEquals('Bob', $_SESSION['user']['name']);
+        $this->assertEquals('', $_SESSION['user']['email']);
+        $this->assertEquals(Role::APP_MANAGER, $_SESSION['user']['role']);
     }
 }

@@ -29,7 +29,7 @@ class PasswordResetValidatorTest extends Base
 
     public function testValidateCreation()
     {
-        $this->container['sessionStorage']->captcha = 'test';
+        $_SESSION['captcha'] = 'test';
 
         $passwordResetValidator = new PasswordResetValidator($this->container);
         list($valid,) = $passwordResetValidator->validateCreation(array('username' => 'foobar', 'captcha' => 'test'));
@@ -38,7 +38,7 @@ class PasswordResetValidatorTest extends Base
 
     public function testValidateCreationWithNoUsername()
     {
-        $this->container['sessionStorage']->captcha = 'test';
+        $_SESSION['captcha'] = 'test';
 
         $passwordResetValidator = new PasswordResetValidator($this->container);
         list($valid,) = $passwordResetValidator->validateCreation(array('captcha' => 'test'));
@@ -47,7 +47,7 @@ class PasswordResetValidatorTest extends Base
 
     public function testValidateCreationWithWrongCaptcha()
     {
-        $this->container['sessionStorage']->captcha = 'test123';
+        $_SESSION['captcha'] = 'test123';
 
         $passwordResetValidator = new PasswordResetValidator($this->container);
         list($valid,) = $passwordResetValidator->validateCreation(array('username' => 'foobar', 'captcha' => 'test'));

@@ -7,7 +7,7 @@ use Kanboard\Core\Base;
 /**
  * Session Flash Message
  *
- * @package  session
+ * @package  Kanboard\Core\Session
  * @author   Frederic Guillot
  */
 class FlashMessage extends Base
@@ -43,11 +43,11 @@ class FlashMessage extends Base
      */
     public function setMessage($key, $message)
     {
-        if (! isset($this->sessionStorage->flash)) {
-            $this->sessionStorage->flash = array();
+        if (! session_exists('flash')) {
+            session_set('flash', []);
         }
 
-        $this->sessionStorage->flash[$key] = $message;
+        session_merge('flash', [$key => $message]);
     }
 
     /**
@@ -61,9 +61,14 @@ class FlashMessage extends Base
     {
         $message = '';
 
-        if (isset($this->sessionStorage->flash[$key])) {
-            $message = $this->sessionStorage->flash[$key];
-            unset($this->sessionStorage->flash[$key]);
+        if (session_exists('flash')) {
+            $messages = session_get('flash');
+
+            if (isset($messages[$key])) {
+                $message = $messages[$key];
+                unset($messages[$key]);
+                session_set('flash', $messages);
+            }
         }
 
         return $message;
