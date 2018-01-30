@@ -40,13 +40,15 @@ class Postgres extends Base
     public function createConnection(array $settings)
     {
         $dsn = 'pgsql:dbname='.$settings['database'];
+        $username = null;
+        $password = null;
 
         if (! empty($settings['username'])) {
-            $dsn .= ';user='.$settings['username'];
+            $username = $settings['username'];
         }
 
         if (! empty($settings['password'])) {
-            $dsn .= ';password='.$settings['password'];
+            $password = $settings['password'];
         }
 
         if (! empty($settings['hostname'])) {
@@ -57,7 +59,7 @@ class Postgres extends Base
             $dsn .= ';port='.$settings['port'];
         }
 
-        $this->pdo = new PDO($dsn);
+        $this->pdo = new PDO($dsn, $username, $password);
 
         if (isset($settings['schema_table'])) {
             $this->schemaTable = $settings['schema_table'];
