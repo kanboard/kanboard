@@ -1,5 +1,51 @@
 [
     {
+        "name": "aferrandini/phpqrcode",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/aferrandini/PHPQRCode.git",
+            "reference": "3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/aferrandini/PHPQRCode/zipball/3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46",
+            "reference": "3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2013-07-08T09:39:08+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "PHPQRCode": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ariel Ferrandini",
+                "email": "arielferrandini@gmail.com",
+                "homepage": "http://www.ferrandini.com/",
+                "role": "Developer"
+            }
+        ],
+        "description": "PHPQRCode porting and changed for PHP 5.3 compatibility",
+        "homepage": "https://github.com/aferrandini/PHPQRCode",
+        "keywords": [
+            "barcode",
+            "php",
+            "qrcode"
+        ]
+    },
+    {
         "name": "christian-riesen/base32",
         "version": "1.3.1",
         "version_normalized": "1.3.1.0",
@@ -288,93 +334,42 @@
         "homepage": "https://github.com/fguillot/picoDb"
     },
     {
-        "name": "zendframework/zendxml",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "name": "fguillot/simple-queue",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/zendframework/ZendXml.git",
-            "reference": "7b64507bc35d841c9c5802d67f6f87ef8e1a58c9"
+            "url": "https://github.com/fguillot/simple-queue.git",
+            "reference": "ce7801c507f9501bcca455129fb04c3d2107d5ff"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/ZendXml/zipball/7b64507bc35d841c9c5802d67f6f87ef8e1a58c9",
-            "reference": "7b64507bc35d841c9c5802d67f6f87ef8e1a58c9",
+            "url": "https://api.github.com/repos/fguillot/simple-queue/zipball/ce7801c507f9501bcca455129fb04c3d2107d5ff",
+            "reference": "ce7801c507f9501bcca455129fb04c3d2107d5ff",
             "shasum": ""
         },
         "require": {
-            "php": "^5.3.3 || ^7.0"
+            "php": ">=5.3.3"
         },
         "require-dev": {
-            "phpunit/phpunit": "^3.7 || ^4.0",
-            "squizlabs/php_codesniffer": "^1.5"
-        },
-        "time": "2016-02-04T21:02:08+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "ZendXml\\": "library/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "description": "Utility library for XML usage, best practices, and security in PHP",
-        "homepage": "http://packages.zendframework.com/",
-        "keywords": [
-            "security",
-            "xml",
-            "zf2"
-        ]
-    },
-    {
-        "name": "miniflux/picofeed",
-        "version": "v0.1.34",
-        "version_normalized": "0.1.34.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/miniflux/picoFeed.git",
-            "reference": "5c8a731d4e7a3589e562e4fdaa98bcb57fa8a2ea"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/miniflux/picoFeed/zipball/5c8a731d4e7a3589e562e4fdaa98bcb57fa8a2ea",
-            "reference": "5c8a731d4e7a3589e562e4fdaa98bcb57fa8a2ea",
-            "shasum": ""
-        },
-        "require": {
-            "ext-dom": "*",
-            "ext-iconv": "*",
-            "ext-libxml": "*",
-            "ext-simplexml": "*",
-            "ext-xml": "*",
-            "php": ">=5.3.0",
-            "zendframework/zendxml": "^1.0"
-        },
-        "require-dev": {
-            "phpdocumentor/reflection-docblock": "2.0.4",
-            "phpunit/phpunit": "4.8.26",
-            "symfony/yaml": "2.8.7"
+            "aws/aws-sdk-php": "~3.0",
+            "mariano/disque-php": "~2.0",
+            "pda/pheanstalk": "~3.0",
+            "php-amqplib/php-amqplib": "2.6.*",
+            "phpunit/phpunit": "5.3.*"
         },
         "suggest": {
-            "ext-curl": "PicoFeed will use cURL if present"
+            "aws/aws-sdk-php": "Required to use the AWS SQS queue driver (~3.0).",
+            "mariano/disque-php": "Required to use the Disque queue driver (~2.0).",
+            "pda/pheanstalk": "Required to use the Beanstalk queue driver (~3.0).",
+            "php-amqplib/php-amqplib": "Required to use the RabbitMQ queue driver (2.6.*)."
         },
-        "time": "2017-06-12T00:22:06+00:00",
-        "bin": [
-            "picofeed"
-        ],
+        "time": "2016-06-05T21:34:56+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "PicoFeed": "lib/"
+            "psr-4": {
+                "SimpleQueue\\": "src/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -386,8 +381,46 @@
                 "name": "Frédéric Guillot"
             }
         ],
-        "description": "Modern library to handle RSS/Atom feeds",
-        "homepage": "https://github.com/miniflux/picoFeed"
+        "description": "Abstraction layer for multiple queue systems",
+        "homepage": "https://github.com/fguillot/simple-queue"
+    },
+    {
+        "name": "fguillot/simple-validator",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fguillot/simpleValidator.git",
+            "reference": "23b0a99c5f11ad74d05f8845feaafbcfd9223eda"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/23b0a99c5f11ad74d05f8845feaafbcfd9223eda",
+            "reference": "23b0a99c5f11ad74d05f8845feaafbcfd9223eda",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-06-26T15:09:26+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "SimpleValidator": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Frédéric Guillot"
+            }
+        ],
+        "description": "Simple validator library",
+        "homepage": "https://github.com/fguillot/simpleValidator"
     },
     {
         "name": "psr/log",
@@ -478,80 +511,86 @@
         "homepage": "https://github.com/fguillot/simpleLogger"
     },
     {
-        "name": "fguillot/simple-validator",
-        "version": "v1.0.1",
-        "version_normalized": "1.0.1.0",
+        "name": "symfony/finder",
+        "version": "v3.4.4",
+        "version_normalized": "3.4.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/fguillot/simpleValidator.git",
-            "reference": "23b0a99c5f11ad74d05f8845feaafbcfd9223eda"
+            "url": "https://github.com/symfony/finder.git",
+            "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/23b0a99c5f11ad74d05f8845feaafbcfd9223eda",
-            "reference": "23b0a99c5f11ad74d05f8845feaafbcfd9223eda",
+            "url": "https://api.github.com/repos/symfony/finder/zipball/613e26310776f49a1773b6737c6bd554b8bc8c6f",
+            "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.0"
+            "php": "^5.5.9|>=7.0.8"
         },
-        "time": "2016-06-26T15:09:26+00:00",
+        "time": "2018-01-03T07:37:34+00:00",
         "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "SimpleValidator": "src/"
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.4-dev"
             }
         },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Frédéric Guillot"
-            }
-        ],
-        "description": "Simple validator library",
-        "homepage": "https://github.com/fguillot/simpleValidator"
-    },
-    {
-        "name": "fguillot/simple-queue",
-        "version": "v1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fguillot/simple-queue.git",
-            "reference": "ce7801c507f9501bcca455129fb04c3d2107d5ff"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fguillot/simple-queue/zipball/ce7801c507f9501bcca455129fb04c3d2107d5ff",
-            "reference": "ce7801c507f9501bcca455129fb04c3d2107d5ff",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "aws/aws-sdk-php": "~3.0",
-            "mariano/disque-php": "~2.0",
-            "pda/pheanstalk": "~3.0",
-            "php-amqplib/php-amqplib": "2.6.*",
-            "phpunit/phpunit": "5.3.*"
-        },
-        "suggest": {
-            "aws/aws-sdk-php": "Required to use the AWS SQS queue driver (~3.0).",
-            "mariano/disque-php": "Required to use the Disque queue driver (~2.0).",
-            "pda/pheanstalk": "Required to use the Beanstalk queue driver (~3.0).",
-            "php-amqplib/php-amqplib": "Required to use the RabbitMQ queue driver (2.6.*)."
-        },
-        "time": "2016-06-05T21:34:56+00:00",
-        "type": "library",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "SimpleQueue\\": "src/"
+                "Symfony\\Component\\Finder\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Finder Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "gregwar/captcha",
+        "version": "v1.1.4",
+        "version_normalized": "1.1.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Gregwar/Captcha.git",
+            "reference": "0185f4a64faef65612792f0d9a48dbe8d70c585c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/0185f4a64faef65612792f0d9a48dbe8d70c585c",
+            "reference": "0185f4a64faef65612792f0d9a48dbe8d70c585c",
+            "shasum": ""
+        },
+        "require": {
+            "ext-gd": "*",
+            "ext-mbstring": "*",
+            "php": ">=5.3.0",
+            "symfony/finder": "~3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^6.4"
+        },
+        "time": "2017-12-01T13:59:36+00:00",
+        "type": "captcha",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Gregwar\\": "src/Gregwar"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -560,11 +599,22 @@
         ],
         "authors": [
             {
-                "name": "Frédéric Guillot"
+                "name": "Grégoire Passault",
+                "email": "g.passault@gmail.com",
+                "homepage": "http://www.gregwar.com/"
+            },
+            {
+                "name": "Jeremy Livingston",
+                "email": "jeremy.j.livingston@gmail.com"
             }
         ],
-        "description": "Abstraction layer for multiple queue systems",
-        "homepage": "https://github.com/fguillot/simple-queue"
+        "description": "Captcha generator",
+        "homepage": "https://github.com/Gregwar/Captcha",
+        "keywords": [
+            "bot",
+            "captcha",
+            "spam"
+        ]
     },
     {
         "name": "paragonie/random_compat",
@@ -776,6 +826,67 @@
         ]
     },
     {
+        "name": "symfony/polyfill-mbstring",
+        "version": "v1.7.0",
+        "version_normalized": "1.7.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-mbstring.git",
+            "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+            "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "suggest": {
+            "ext-mbstring": "For best performance"
+        },
+        "time": "2018-01-30T19:27:44+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Mbstring\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill for the Mbstring extension",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "mbstring",
+            "polyfill",
+            "portable",
+            "shim"
+        ]
+    },
+    {
         "name": "symfony/debug",
         "version": "v3.4.2",
         "version_normalized": "3.4.2.0",
@@ -832,67 +943,6 @@
         ],
         "description": "Symfony Debug Component",
         "homepage": "https://symfony.com"
-    },
-    {
-        "name": "symfony/polyfill-mbstring",
-        "version": "v1.6.0",
-        "version_normalized": "1.6.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
-            "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "suggest": {
-            "ext-mbstring": "For best performance"
-        },
-        "time": "2017-10-11T12:05:26+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.6-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Polyfill\\Mbstring\\": ""
-            },
-            "files": [
-                "bootstrap.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony polyfill for the Mbstring extension",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "compatibility",
-            "mbstring",
-            "polyfill",
-            "portable",
-            "shim"
-        ]
     },
     {
         "name": "symfony/console",
@@ -1029,157 +1079,5 @@
         ],
         "description": "Symfony EventDispatcher Component",
         "homepage": "https://symfony.com"
-    },
-    {
-        "name": "symfony/finder",
-        "version": "v3.4.4",
-        "version_normalized": "3.4.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/finder.git",
-            "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/finder/zipball/613e26310776f49a1773b6737c6bd554b8bc8c6f",
-            "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.5.9|>=7.0.8"
-        },
-        "time": "2018-01-03T07:37:34+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\Finder\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Finder Component",
-        "homepage": "https://symfony.com"
-    },
-    {
-        "name": "gregwar/captcha",
-        "version": "v1.1.4",
-        "version_normalized": "1.1.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Gregwar/Captcha.git",
-            "reference": "0185f4a64faef65612792f0d9a48dbe8d70c585c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/0185f4a64faef65612792f0d9a48dbe8d70c585c",
-            "reference": "0185f4a64faef65612792f0d9a48dbe8d70c585c",
-            "shasum": ""
-        },
-        "require": {
-            "ext-gd": "*",
-            "ext-mbstring": "*",
-            "php": ">=5.3.0",
-            "symfony/finder": "~3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^6.4"
-        },
-        "time": "2017-12-01T13:59:36+00:00",
-        "type": "captcha",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Gregwar\\": "src/Gregwar"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Grégoire Passault",
-                "email": "g.passault@gmail.com",
-                "homepage": "http://www.gregwar.com/"
-            },
-            {
-                "name": "Jeremy Livingston",
-                "email": "jeremy.j.livingston@gmail.com"
-            }
-        ],
-        "description": "Captcha generator",
-        "homepage": "https://github.com/Gregwar/Captcha",
-        "keywords": [
-            "bot",
-            "captcha",
-            "spam"
-        ]
-    },
-    {
-        "name": "aferrandini/phpqrcode",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/aferrandini/PHPQRCode.git",
-            "reference": "3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/aferrandini/PHPQRCode/zipball/3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46",
-            "reference": "3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2013-07-08T09:39:08+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "PHPQRCode": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Ariel Ferrandini",
-                "email": "arielferrandini@gmail.com",
-                "homepage": "http://www.ferrandini.com/",
-                "role": "Developer"
-            }
-        ],
-        "description": "PHPQRCode porting and changed for PHP 5.3 compatibility",
-        "homepage": "https://github.com/aferrandini/PHPQRCode",
-        "keywords": [
-            "barcode",
-            "php",
-            "qrcode"
-        ]
     }
 ]
