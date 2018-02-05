@@ -9,7 +9,7 @@
     <?php foreach ($events as $event): ?>
         <entry>
             <id><?= $this->url->href('TaskViewController', 'show', ['task_id' => $event['task_id']], false, 'event-'.$event['id'], true) ?></id>
-            <link rel="alternate" type="text/html" href="<?= $this->url->href('TaskViewController', 'show', ['task_id' => $event['task_id']], false, 'event-'.$event['id'], true) ?>"/>
+            <link rel="alternate" type="text/html" href="<?= $this->url->href('TaskViewController', 'show', ['task_id' => $event['task_id']], false, '', true) ?>"/>
             <updated><?= date(DATE_ATOM, $event['date_creation']) ?></updated>
             <published><?= date(DATE_ATOM, $event['date_creation']) ?></published>
             <author>
