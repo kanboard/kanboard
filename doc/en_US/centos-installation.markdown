@@ -7,7 +7,7 @@ Centos 7
 Install PHP and Apache:
 
 ```bash
-yum install -y php php-mbstring php-pdo php-gd unzip wget
+yum install -y php php-xml php-mbstring php-pdo php-gd unzip wget
 ```
 
 By default, Centos 7 use PHP 5.4.16 and Apache 2.4.6.
@@ -37,7 +37,7 @@ Centos 6.x
 Install PHP and Apache:
 
 ```bash
-yum install -y php php-mbstring php-pdo php-gd unzip wget
+yum install -y php php-xml php-mbstring php-pdo php-gd unzip wget
 ```
 
 By default, Centos 6.5 use PHP 5.3.3 and Apache 2.2.15.
