@@ -42,6 +42,7 @@ class Postgres extends Base
         $dsn = 'pgsql:dbname='.$settings['database'];
         $username = null;
         $password = null;
+        $options = array();
 
         if (! empty($settings['username'])) {
             $username = $settings['username'];
@@ -59,7 +60,11 @@ class Postgres extends Base
             $dsn .= ';port='.$settings['port'];
         }
 
-        $this->pdo = new PDO($dsn, $username, $password);
+        if (! empty($settings['timeout'])) {
+            $options[PDO::ATTR_TIMEOUT] = $settings['timeout'];
+        }
+
+        $this->pdo = new PDO($dsn, $username, $password, $options);
 
         if (isset($settings['schema_table'])) {
             $this->schemaTable = $settings['schema_table'];
