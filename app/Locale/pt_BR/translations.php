@@ -372,7 +372,7 @@ return array(
     'Database driver:' => 'Driver do banco de dados:',
     'Board settings' => 'Configurações do quadro',
     'Webhook settings' => 'Configurações do Webhook',
-    'Reset token' => 'Resetar token',
+    'Reset token' => 'Reiniciar token',
     'API endpoint:' => 'API endpoint:',
     'Refresh interval for private board' => 'Intervalo de atualização para um quadro privado',
     'Refresh interval for public board' => 'Intervalo de atualização para um quadro público',
