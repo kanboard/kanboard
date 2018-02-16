@@ -29,7 +29,13 @@ class Sqlite extends Base
      */
     public function createConnection(array $settings)
     {
-        $this->pdo = new PDO('sqlite:'.$settings['filename']);
+        $options = array();
+
+        if (! empty($settings['timeout'])) {
+            $options[PDO::ATTR_TIMEOUT] = $settings['timeout'];
+        }
+
+        $this->pdo = new PDO('sqlite:'.$settings['filename'], null, null, $options);
         $this->enableForeignKeys();
     }
 

@@ -112,6 +112,17 @@ class Request extends Base
     }
 
     /**
+     * Get POST value without modification
+     *
+     * @param  $name
+     * @return mixed|null
+     */
+    public function getRawValue($name)
+    {
+        return isset($this->post[$name]) ? $this->post[$name] : null;
+    }
+
+    /**
      * Get the raw body of the HTTP request
      *
      * @access public

@@ -1252,7 +1252,7 @@ return array(
     'Your profile must have a valid email address.' => 'Votre profil doit avoir une adresse e-mail valide.',
     'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => 'Malheureusement, nous ne pouvons pas réinitialiser votre mot de passe. Avez-vous saisi un nom d\'utilisateur valide ? Avez-vous une adresse e-mail dans votre profil ?',
     'TRL - Turkish Lira' => 'TRL - Livre turque',
-    'The project email is optional and could be used by several plugins.' => 'L\'adresse email d\'un projet est optionnel et pourrait être utilisé par plusieurs extensions.',
+    'The project email is optional and could be used by several plugins.' => 'L\'adresse email d\'un projet est optionnelle et pourrait être utilisée par plusieurs extensions.',
     'The project email must be unique across all projects' => 'L\'adresse email d\'un projet doit être unique pour tous les projets',
     'The email configuration has been disabled by the administrator.' => 'La configuration des emails a été désactivée par l\'administrateur.',
     'Close this project' => 'Fermer ce projet',
@@ -1373,4 +1373,6 @@ return array(
     'days' => 'jours',
     'minutes' => 'minutes',
     'seconds' => 'secondes',
+    'Assign automatically a color when preset start date is reached' => 'Assigner automatiquement une couleur lorsque la date de début est passée',
+    'Move the task to another column once a predefined start date is reached' => 'Déplaçer la tâche vers une autre colonne lorsque la date de début est passée',
 );

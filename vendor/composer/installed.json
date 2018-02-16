@@ -469,272 +469,24 @@
         "homepage": "https://github.com/fguillot/simpleLogger"
     },
     {
-        "name": "zendframework/zendxml",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "name": "symfony/finder",
+        "version": "v3.4.4",
+        "version_normalized": "3.4.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/zendframework/ZendXml.git",
-            "reference": "7b64507bc35d841c9c5802d67f6f87ef8e1a58c9"
+            "url": "https://github.com/symfony/finder.git",
+            "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/ZendXml/zipball/7b64507bc35d841c9c5802d67f6f87ef8e1a58c9",
-            "reference": "7b64507bc35d841c9c5802d67f6f87ef8e1a58c9",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.3.3 || ^7.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^3.7 || ^4.0",
-            "squizlabs/php_codesniffer": "^1.5"
-        },
-        "time": "2016-02-04T21:02:08+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "ZendXml\\": "library/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "description": "Utility library for XML usage, best practices, and security in PHP",
-        "homepage": "http://packages.zendframework.com/",
-        "keywords": [
-            "security",
-            "xml",
-            "zf2"
-        ]
-    },
-    {
-        "name": "miniflux/picofeed",
-        "version": "v0.1.34",
-        "version_normalized": "0.1.34.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/miniflux/picoFeed.git",
-            "reference": "5c8a731d4e7a3589e562e4fdaa98bcb57fa8a2ea"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/miniflux/picoFeed/zipball/5c8a731d4e7a3589e562e4fdaa98bcb57fa8a2ea",
-            "reference": "5c8a731d4e7a3589e562e4fdaa98bcb57fa8a2ea",
-            "shasum": ""
-        },
-        "require": {
-            "ext-dom": "*",
-            "ext-iconv": "*",
-            "ext-libxml": "*",
-            "ext-simplexml": "*",
-            "ext-xml": "*",
-            "php": ">=5.3.0",
-            "zendframework/zendxml": "^1.0"
-        },
-        "require-dev": {
-            "phpdocumentor/reflection-docblock": "2.0.4",
-            "phpunit/phpunit": "4.8.26",
-            "symfony/yaml": "2.8.7"
-        },
-        "suggest": {
-            "ext-curl": "PicoFeed will use cURL if present"
-        },
-        "time": "2017-06-12T00:22:06+00:00",
-        "bin": [
-            "picofeed"
-        ],
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "PicoFeed": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Frédéric Guillot"
-            }
-        ],
-        "description": "Modern library to handle RSS/Atom feeds",
-        "homepage": "https://github.com/miniflux/picoFeed"
-    },
-    {
-        "name": "symfony/polyfill-mbstring",
-        "version": "v1.6.0",
-        "version_normalized": "1.6.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
-            "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "suggest": {
-            "ext-mbstring": "For best performance"
-        },
-        "time": "2017-10-11T12:05:26+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.6-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Polyfill\\Mbstring\\": ""
-            },
-            "files": [
-                "bootstrap.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony polyfill for the Mbstring extension",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "compatibility",
-            "mbstring",
-            "polyfill",
-            "portable",
-            "shim"
-        ]
-    },
-    {
-        "name": "symfony/console",
-        "version": "v3.4.2",
-        "version_normalized": "3.4.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/console.git",
-            "reference": "9f21adfb92a9315b73ae2ed43138988ee4913d4e"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/console/zipball/9f21adfb92a9315b73ae2ed43138988ee4913d4e",
-            "reference": "9f21adfb92a9315b73ae2ed43138988ee4913d4e",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.5.9|>=7.0.8",
-            "symfony/debug": "~2.8|~3.0|~4.0",
-            "symfony/polyfill-mbstring": "~1.0"
-        },
-        "conflict": {
-            "symfony/dependency-injection": "<3.4",
-            "symfony/process": "<3.3"
-        },
-        "require-dev": {
-            "psr/log": "~1.0",
-            "symfony/config": "~3.3|~4.0",
-            "symfony/dependency-injection": "~3.4|~4.0",
-            "symfony/event-dispatcher": "~2.8|~3.0|~4.0",
-            "symfony/lock": "~3.4|~4.0",
-            "symfony/process": "~3.3|~4.0"
-        },
-        "suggest": {
-            "psr/log": "For using the console logger",
-            "symfony/event-dispatcher": "",
-            "symfony/lock": "",
-            "symfony/process": ""
-        },
-        "time": "2017-12-14T19:40:10+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\Console\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Console Component",
-        "homepage": "https://symfony.com"
-    },
-    {
-        "name": "symfony/event-dispatcher",
-        "version": "v3.4.2",
-        "version_normalized": "3.4.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/event-dispatcher.git",
-            "reference": "b869cbf8a15ca6261689de2c28a7d7f2d0706835"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/b869cbf8a15ca6261689de2c28a7d7f2d0706835",
-            "reference": "b869cbf8a15ca6261689de2c28a7d7f2d0706835",
+            "url": "https://api.github.com/repos/symfony/finder/zipball/613e26310776f49a1773b6737c6bd554b8bc8c6f",
+            "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f",
             "shasum": ""
         },
         "require": {
             "php": "^5.5.9|>=7.0.8"
         },
-        "conflict": {
-            "symfony/dependency-injection": "<3.3"
-        },
-        "require-dev": {
-            "psr/log": "~1.0",
-            "symfony/config": "~2.8|~3.0|~4.0",
-            "symfony/dependency-injection": "~3.3|~4.0",
-            "symfony/expression-language": "~2.8|~3.0|~4.0",
-            "symfony/stopwatch": "~2.8|~3.0|~4.0"
-        },
-        "suggest": {
-            "symfony/dependency-injection": "",
-            "symfony/http-kernel": ""
-        },
-        "time": "2017-12-14T19:40:10+00:00",
+        "time": "2018-01-03T07:37:34+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -744,7 +496,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Symfony\\Component\\EventDispatcher\\": ""
+                "Symfony\\Component\\Finder\\": ""
             },
             "exclude-from-classmap": [
                 "/Tests/"
@@ -764,49 +516,40 @@
                 "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "Symfony EventDispatcher Component",
+        "description": "Symfony Finder Component",
         "homepage": "https://symfony.com"
     },
     {
-        "name": "symfony/debug",
-        "version": "v3.4.2",
-        "version_normalized": "3.4.2.0",
+        "name": "gregwar/captcha",
+        "version": "v1.1.4",
+        "version_normalized": "1.1.4.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/symfony/debug.git",
-            "reference": "543deab3ffff94402440b326fc94153bae2dfa7a"
+            "url": "https://github.com/Gregwar/Captcha.git",
+            "reference": "0185f4a64faef65612792f0d9a48dbe8d70c585c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/debug/zipball/543deab3ffff94402440b326fc94153bae2dfa7a",
-            "reference": "543deab3ffff94402440b326fc94153bae2dfa7a",
+            "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/0185f4a64faef65612792f0d9a48dbe8d70c585c",
+            "reference": "0185f4a64faef65612792f0d9a48dbe8d70c585c",
             "shasum": ""
         },
         "require": {
-            "php": "^5.5.9|>=7.0.8",
-            "psr/log": "~1.0"
-        },
-        "conflict": {
-            "symfony/http-kernel": ">=2.3,<2.3.24|~2.4.0|>=2.5,<2.5.9|>=2.6,<2.6.2"
+            "ext-gd": "*",
+            "ext-mbstring": "*",
+            "php": ">=5.3.0",
+            "symfony/finder": "~3.0"
         },
         "require-dev": {
-            "symfony/http-kernel": "~2.8|~3.0|~4.0"
+            "phpunit/phpunit": "^6.4"
         },
-        "time": "2017-12-12T08:27:14+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.4-dev"
-            }
-        },
+        "time": "2017-12-01T13:59:36+00:00",
+        "type": "captcha",
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Symfony\\Component\\Debug\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
+                "Gregwar\\": "src/Gregwar"
+            }
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -814,16 +557,22 @@
         ],
         "authors": [
             {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "name": "Grégoire Passault",
+                "email": "g.passault@gmail.com",
+                "homepage": "http://www.gregwar.com/"
             },
             {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
+                "name": "Jeremy Livingston",
+                "email": "jeremy.j.livingston@gmail.com"
             }
         ],
-        "description": "Symfony Debug Component",
-        "homepage": "https://symfony.com"
+        "description": "Captcha generator",
+        "homepage": "https://github.com/Gregwar/Captcha",
+        "keywords": [
+            "bot",
+            "captcha",
+            "spam"
+        ]
     },
     {
         "name": "paragonie/random_compat",
@@ -1035,36 +784,41 @@
         ]
     },
     {
-        "name": "gregwar/captcha",
-        "version": "v1.1.4",
-        "version_normalized": "1.1.4.0",
+        "name": "symfony/polyfill-mbstring",
+        "version": "v1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/Gregwar/Captcha.git",
-            "reference": "0185f4a64faef65612792f0d9a48dbe8d70c585c"
+            "url": "https://github.com/symfony/polyfill-mbstring.git",
+            "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/0185f4a64faef65612792f0d9a48dbe8d70c585c",
-            "reference": "0185f4a64faef65612792f0d9a48dbe8d70c585c",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+            "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
             "shasum": ""
         },
         "require": {
-            "ext-gd": "*",
-            "ext-mbstring": "*",
-            "php": ">=5.3.0",
-            "symfony/finder": "~3.0"
+            "php": ">=5.3.3"
         },
-        "require-dev": {
-            "phpunit/phpunit": "^6.4"
+        "suggest": {
+            "ext-mbstring": "For best performance"
         },
-        "time": "2017-12-01T13:59:36+00:00",
-        "type": "captcha",
+        "time": "2018-01-30T19:27:44+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.7-dev"
+            }
+        },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Gregwar\\": "src/Gregwar"
-            }
+                "Symfony\\Polyfill\\Mbstring\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
@@ -1072,84 +826,50 @@
         ],
         "authors": [
             {
-                "name": "Grégoire Passault",
-                "email": "g.passault@gmail.com",
-                "homepage": "http://www.gregwar.com/"
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
             },
             {
-                "name": "Jeremy Livingston",
-                "email": "jeremy.j.livingston@gmail.com"
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "Captcha generator",
-        "homepage": "https://github.com/Gregwar/Captcha",
+        "description": "Symfony polyfill for the Mbstring extension",
+        "homepage": "https://symfony.com",
         "keywords": [
-            "bot",
-            "captcha",
-            "spam"
+            "compatibility",
+            "mbstring",
+            "polyfill",
+            "portable",
+            "shim"
         ]
     },
     {
-        "name": "fguillot/picodb",
-        "version": "v1.0.15",
-        "version_normalized": "1.0.15.0",
+        "name": "symfony/debug",
+        "version": "v3.4.2",
+        "version_normalized": "3.4.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/fguillot/picoDb.git",
-            "reference": "1dccdf9e1309545e68d7161668cfcb084f0f5e09"
+            "url": "https://github.com/symfony/debug.git",
+            "reference": "543deab3ffff94402440b326fc94153bae2dfa7a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fguillot/picoDb/zipball/1dccdf9e1309545e68d7161668cfcb084f0f5e09",
-            "reference": "1dccdf9e1309545e68d7161668cfcb084f0f5e09",
+            "url": "https://api.github.com/repos/symfony/debug/zipball/543deab3ffff94402440b326fc94153bae2dfa7a",
+            "reference": "543deab3ffff94402440b326fc94153bae2dfa7a",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.0"
+            "php": "^5.5.9|>=7.0.8",
+            "psr/log": "~1.0"
+        },
+        "conflict": {
+            "symfony/http-kernel": ">=2.3,<2.3.24|~2.4.0|>=2.5,<2.5.9|>=2.6,<2.6.2"
         },
         "require-dev": {
-            "phpunit/phpunit": "4.8.*"
+            "symfony/http-kernel": "~2.8|~3.0|~4.0"
         },
-        "time": "2018-01-11T21:47:49+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "PicoDb": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Frédéric Guillot",
-                "homepage": "https://github.com/fguillot/"
-            }
-        ],
-        "description": "Minimalist database query builder",
-        "homepage": "https://github.com/fguillot/picoDb"
-    },
-    {
-        "name": "symfony/finder",
-        "version": "v3.4.3",
-        "version_normalized": "3.4.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/finder.git",
-            "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/finder/zipball/613e26310776f49a1773b6737c6bd554b8bc8c6f",
-            "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.5.9|>=7.0.8"
-        },
-        "time": "2018-01-03T07:37:34+00:00",
+        "time": "2017-12-12T08:27:14+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1159,7 +879,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-                "Symfony\\Component\\Finder\\": ""
+                "Symfony\\Component\\Debug\\": ""
             },
             "exclude-from-classmap": [
                 "/Tests/"
@@ -1179,7 +899,185 @@
                 "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "Symfony Finder Component",
+        "description": "Symfony Debug Component",
         "homepage": "https://symfony.com"
+    },
+    {
+        "name": "symfony/console",
+        "version": "v3.4.2",
+        "version_normalized": "3.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/console.git",
+            "reference": "9f21adfb92a9315b73ae2ed43138988ee4913d4e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/console/zipball/9f21adfb92a9315b73ae2ed43138988ee4913d4e",
+            "reference": "9f21adfb92a9315b73ae2ed43138988ee4913d4e",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.5.9|>=7.0.8",
+            "symfony/debug": "~2.8|~3.0|~4.0",
+            "symfony/polyfill-mbstring": "~1.0"
+        },
+        "conflict": {
+            "symfony/dependency-injection": "<3.4",
+            "symfony/process": "<3.3"
+        },
+        "require-dev": {
+            "psr/log": "~1.0",
+            "symfony/config": "~3.3|~4.0",
+            "symfony/dependency-injection": "~3.4|~4.0",
+            "symfony/event-dispatcher": "~2.8|~3.0|~4.0",
+            "symfony/lock": "~3.4|~4.0",
+            "symfony/process": "~3.3|~4.0"
+        },
+        "suggest": {
+            "psr/log": "For using the console logger",
+            "symfony/event-dispatcher": "",
+            "symfony/lock": "",
+            "symfony/process": ""
+        },
+        "time": "2017-12-14T19:40:10+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Console\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Console Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "symfony/event-dispatcher",
+        "version": "v3.4.2",
+        "version_normalized": "3.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/event-dispatcher.git",
+            "reference": "b869cbf8a15ca6261689de2c28a7d7f2d0706835"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/b869cbf8a15ca6261689de2c28a7d7f2d0706835",
+            "reference": "b869cbf8a15ca6261689de2c28a7d7f2d0706835",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.5.9|>=7.0.8"
+        },
+        "conflict": {
+            "symfony/dependency-injection": "<3.3"
+        },
+        "require-dev": {
+            "psr/log": "~1.0",
+            "symfony/config": "~2.8|~3.0|~4.0",
+            "symfony/dependency-injection": "~3.3|~4.0",
+            "symfony/expression-language": "~2.8|~3.0|~4.0",
+            "symfony/stopwatch": "~2.8|~3.0|~4.0"
+        },
+        "suggest": {
+            "symfony/dependency-injection": "",
+            "symfony/http-kernel": ""
+        },
+        "time": "2017-12-14T19:40:10+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\EventDispatcher\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony EventDispatcher Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "fguillot/picodb",
+        "version": "v1.0.17",
+        "version_normalized": "1.0.17.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fguillot/picoDb.git",
+            "reference": "1699864992c40ad02395e95d7fbf44a571a116f3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/fguillot/picoDb/zipball/1699864992c40ad02395e95d7fbf44a571a116f3",
+            "reference": "1699864992c40ad02395e95d7fbf44a571a116f3",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.8.*"
+        },
+        "time": "2018-02-14T00:51:01+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "PicoDb": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Frédéric Guillot",
+                "homepage": "https://github.com/fguillot/"
+            }
+        ],
+        "description": "Minimalist database query builder",
+        "homepage": "https://github.com/fguillot/picoDb"
     }
 ]

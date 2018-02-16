@@ -199,6 +199,7 @@ class ConfigController extends BaseController
      */
     public function saveUploadedDb()
     {
+        $this->checkCSRFParam();
         $filename = $this->request->getFilePath('file');
 
         if (!file_exists($filename) || !$this->configModel->uploadDatabase($filename)) {
