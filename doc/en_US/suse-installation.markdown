@@ -19,7 +19,7 @@ sudo wget https://github.com/kanboard/kanboard/archive/v<version>.zip
 sudo unzip kanboard-<version>.zip
 
 # Add permissions
-sudo chown -R wwwrun /srv/www/htdocs/kanboard-<version>/app/data
+sudo chown -R wwwrun /srv/www/htdocs/kanboard-<version>/data
 
 # restart apache
 sudo rcapache2 restart
