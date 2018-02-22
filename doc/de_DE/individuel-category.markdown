@@ -18,7 +18,7 @@ Für den Kategorien-Container allgemeine Darstellung
 
 Für den Text-Inhalt
 ```css
-[class*="tag-Patchkanditat"] {
+[class*="category-Patchkanditat"] {
   background-color: rgba(255, 0, 0, 0.50);
   border: none!important;
   font-weight: bold;
