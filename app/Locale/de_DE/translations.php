@@ -1373,6 +1373,6 @@ return array(
     'days' => 'Tage',
     'minutes' => 'Minuten',
     'seconds' => 'Sekunden',
-    // 'Assign automatically a color when preset start date is reached' => '',
-    // 'Move the task to another column once a predefined start date is reached' => '',
+    'Assign automatically a color when preset start date is reached' => 'Automatisch eine Farbe zuweisen, wenn das Startdatum erreicht ist',
+    'Move the task to another column once a predefined start date is reached' => 'Verschieben des Tasks in eine andere Spalte, wenn das definierte Startdatum erreicht ist',
 );
