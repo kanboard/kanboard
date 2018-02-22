@@ -17,7 +17,7 @@ For the category container:
 ```
 Custom css values for one category - this is an example for displaying the text: 
 ```css
-[class*="tag-Patchkanditat"] {
+[class*="category-Patchkanditat"] {
   background-color: rgba(255, 0, 0, 0.50);
   border: none!important;
   font-weight: bold;
