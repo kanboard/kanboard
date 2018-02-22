@@ -32,10 +32,10 @@ interface ExternalLinkProviderInterface
      * Example:
      *
      * [
-     *     'related' => t('Related'),
-     *     'child' => t('Child'),
-     *     'parent' => t('Parent'),
-     *     'self' => t('Self'),
+     *     'related' => 'Related',
+     *     'child' => 'Child',
+     *     'parent' => 'Parent',
+     *     'self' => 'Self',
      * ]
      *
      * The dictionary key is saved in the database.

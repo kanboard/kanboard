@@ -3,6 +3,7 @@
 </div>
 
 <?= $this->app->component('file-upload', array(
+    'csrf'              => $this->app->getToken()->getReusableCSRFToken(),
     'maxSize'           => $max_size,
     'url'               => $this->url->to('ProjectFileController', 'save', array('project_id' => $project['id'])),
     'labelDropzone'     => t('Drag and drop your files here'),

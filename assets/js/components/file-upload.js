@@ -29,7 +29,7 @@ KB.component('file-upload', function (containerElement, options) {
         currentFileIndex++;
 
         if (currentFileIndex < files.length) {
-            KB.http.uploadFile(options.url, files[currentFileIndex], onProgress, onComplete, onError, onServerError);
+            KB.http.uploadFile(options.url, files[currentFileIndex], options.csrf, onProgress, onComplete, onError, onServerError);
         } else {
             KB.trigger('modal.stop');
             KB.trigger('modal.hide');
@@ -92,7 +92,7 @@ KB.component('file-upload', function (containerElement, options) {
 
     function uploadFiles() {
         if (files.length > 0) {
-            KB.http.uploadFile(options.url, files[currentFileIndex], onProgress, onComplete, onError, onServerError);
+            KB.http.uploadFile(options.url, files[currentFileIndex], options.csrf, onProgress, onComplete, onError, onServerError);
         }
     }
 

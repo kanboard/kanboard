@@ -1373,4 +1373,6 @@ return array(
     // 'days' => '',
     // 'minutes' => '',
     // 'seconds' => '',
+    // 'Assign automatically a color when preset start date is reached' => '',
+    // 'Move the task to another column once a predefined start date is reached' => '',
 );

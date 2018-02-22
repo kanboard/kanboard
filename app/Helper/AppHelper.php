@@ -12,6 +12,11 @@ use Kanboard\Core\Base;
  */
 class AppHelper extends Base
 {
+    public function getToken()
+    {
+        return $this->token;
+    }
+
     public function isAjax()
     {
         return $this->request->isAjax();

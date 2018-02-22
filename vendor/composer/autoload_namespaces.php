@@ -6,11 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'ZendXml\\' => array($vendorDir . '/zendframework/zendxml/library'),
     'SimpleValidator' => array($vendorDir . '/fguillot/simple-validator/src'),
     'SimpleLogger' => array($vendorDir . '/fguillot/simpleLogger/src'),
     'Pimple' => array($vendorDir . '/pimple/pimple/src'),
-    'PicoFeed' => array($vendorDir . '/miniflux/picofeed/lib'),
     'PicoDb' => array($vendorDir . '/fguillot/picodb/lib'),
     'Parsedown' => array($vendorDir . '/erusev/parsedown'),
     'PHPQRCode' => array($vendorDir . '/aferrandini/phpqrcode/lib'),

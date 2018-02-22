@@ -409,7 +409,7 @@ return array(
     'Clone this project' => 'Clona questo progetto',
     'Column removed successfully.' => 'Colonna rimossa con successo',
     'Not enough data to show the graph.' => 'Non ci sono abbastanza dati per visualizzare il grafico.',
-    'Previous' => 'Precendete',
+    'Previous' => 'Precedente',
     'The id must be an integer' => 'L\'id deve essere un intero',
     'The project id must be an integer' => 'L\'id del progetto deve essere un intero',
     'The status must be an integer' => 'Lo status deve essere un intero',
@@ -1373,4 +1373,6 @@ return array(
     // 'days' => '',
     // 'minutes' => '',
     // 'seconds' => '',
+    // 'Assign automatically a color when preset start date is reached' => '',
+    // 'Move the task to another column once a predefined start date is reached' => '',
 );

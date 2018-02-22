@@ -7,4 +7,4 @@ You can try Kanboard with Vagrant very easily:
 - Execute `vagrant up`
 - You can access to the application by using the URL `http://localhost:8001/`
 
-The virtual machine is based on Ubuntu 14.04 with PHP 5.5.
+The virtual machine is based on Ubuntu 16.04 with PHP 7.

@@ -24,6 +24,12 @@ By example, you can do that with the command line mysql client:
 CREATE DATABASE kanboard;
 ```
 
+You can then assign the required permissions on the database:
+
+```sql
+GRANT ALTER, CREATE, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON kanboard.* TO 'USERNAME'@'HOST' IDENTIFIED BY 'PASSWORD';
+```
+
 ### Create a config file
 
 The file `config.php` should contains those values:

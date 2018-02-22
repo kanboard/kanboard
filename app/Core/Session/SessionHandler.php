@@ -54,17 +54,23 @@ class SessionHandler implements SessionHandlerInterface
     {
         $lifetime = time() + (ini_get('session.gc_maxlifetime') ?: 1440);
 
+        $this->db->startTransaction();
+
         if ($this->db->table(self::TABLE)->eq('id', $sessionID)->exists()) {
-            return $this->db->table(self::TABLE)->eq('id', $sessionID)->update(array(
+            $this->db->table(self::TABLE)->eq('id', $sessionID)->update([
                 'expire_at' => $lifetime,
                 'data'      => $data,
-            ));
+            ]);
+        } else {
+            $this->db->table(self::TABLE)->insert([
+                'id'        => $sessionID,
+                'expire_at' => $lifetime,
+                'data'      => $data,
+            ]);
         }
 
-        return $this->db->table(self::TABLE)->insert(array(
-            'id'        => $sessionID,
-            'expire_at' => $lifetime,
-            'data'      => $data,
-        ));
+        $this->db->closeTransaction();
+
+        return true;
     }
 }

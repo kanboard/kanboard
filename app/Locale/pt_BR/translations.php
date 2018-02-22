@@ -1370,7 +1370,9 @@ return array(
     'Stop the timer of all subtasks when moving a task to another column' => 'Parar o temporizador de todas as subtarefas quando mover a tarefa para outra coluna',
     'Subtask Title' => 'Título da subtarefa',
     'Add a subtask and activate the timer when moving a task to another column' => 'Adicionar uma subtarefa e ativar o temporizador quando mover a tarefa para outra coluna',
-    // 'days' => '',
-    // 'minutes' => '',
-    // 'seconds' => '',
+    'days' => 'dias',
+    'minutes' => 'minutos',
+    'seconds' => 'segundos',
+    'Assign automatically a color when preset start date is reached' => 'Atribuir automaticamente uma cor quando a data de início for atingida',
+    'Move the task to another column once a predefined start date is reached' => 'Mover a tarefa para outra coluna quando a data de início for atingida',
 );

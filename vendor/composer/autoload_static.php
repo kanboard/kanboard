@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b
+class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -90,13 +90,6 @@ class ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b
     );
 
     public static $prefixesPsr0 = array (
-        'Z' => 
-        array (
-            'ZendXml\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/zendframework/zendxml/library',
-            ),
-        ),
         'S' => 
         array (
             'SimpleValidator' => 
@@ -113,10 +106,6 @@ class ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b
             'Pimple' => 
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
-            ),
-            'PicoFeed' => 
-            array (
-                0 => __DIR__ . '/..' . '/miniflux/picofeed/lib',
             ),
             'PicoDb' => 
             array (
@@ -219,6 +208,7 @@ class ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b
         'Kanboard\\Action\\TaskAssignColorColumn' => __DIR__ . '/../..' . '/app/Action/TaskAssignColorColumn.php',
         'Kanboard\\Action\\TaskAssignColorLink' => __DIR__ . '/../..' . '/app/Action/TaskAssignColorLink.php',
         'Kanboard\\Action\\TaskAssignColorOnDueDate' => __DIR__ . '/../..' . '/app/Action/TaskAssignColorOnDueDate.php',
+        'Kanboard\\Action\\TaskAssignColorOnStartDate' => __DIR__ . '/../..' . '/app/Action/TaskAssignColorOnStartDate.php',
         'Kanboard\\Action\\TaskAssignColorPriority' => __DIR__ . '/../..' . '/app/Action/TaskAssignColorPriority.php',
         'Kanboard\\Action\\TaskAssignColorSwimlane' => __DIR__ . '/../..' . '/app/Action/TaskAssignColorSwimlane.php',
         'Kanboard\\Action\\TaskAssignColorUser' => __DIR__ . '/../..' . '/app/Action/TaskAssignColorUser.php',
@@ -243,6 +233,7 @@ class ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b
         'Kanboard\\Action\\TaskMoveColumnCategoryChange' => __DIR__ . '/../..' . '/app/Action/TaskMoveColumnCategoryChange.php',
         'Kanboard\\Action\\TaskMoveColumnClosed' => __DIR__ . '/../..' . '/app/Action/TaskMoveColumnClosed.php',
         'Kanboard\\Action\\TaskMoveColumnNotMovedPeriod' => __DIR__ . '/../..' . '/app/Action/TaskMoveColumnNotMovedPeriod.php',
+        'Kanboard\\Action\\TaskMoveColumnOnStartDate' => __DIR__ . '/../..' . '/app/Action/TaskMoveColumnOnStartDate.php',
         'Kanboard\\Action\\TaskMoveColumnUnAssigned' => __DIR__ . '/../..' . '/app/Action/TaskMoveColumnUnAssigned.php',
         'Kanboard\\Action\\TaskOpen' => __DIR__ . '/../..' . '/app/Action/TaskOpen.php',
         'Kanboard\\Action\\TaskUpdateStartDate' => __DIR__ . '/../..' . '/app/Action/TaskUpdateStartDate.php',
@@ -848,73 +839,6 @@ class ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b
         'PicoDb\\StatementHandler' => __DIR__ . '/..' . '/fguillot/picodb/lib/PicoDb/StatementHandler.php',
         'PicoDb\\Table' => __DIR__ . '/..' . '/fguillot/picodb/lib/PicoDb/Table.php',
         'PicoDb\\UrlParser' => __DIR__ . '/..' . '/fguillot/picodb/lib/PicoDb/UrlParser.php',
-        'PicoFeed\\Base' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Base.php',
-        'PicoFeed\\Client\\Client' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/Client.php',
-        'PicoFeed\\Client\\ClientException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/ClientException.php',
-        'PicoFeed\\Client\\Curl' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/Curl.php',
-        'PicoFeed\\Client\\ForbiddenException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/ForbiddenException.php',
-        'PicoFeed\\Client\\HttpHeaders' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/HttpHeaders.php',
-        'PicoFeed\\Client\\InvalidCertificateException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/InvalidCertificateException.php',
-        'PicoFeed\\Client\\InvalidUrlException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/InvalidUrlException.php',
-        'PicoFeed\\Client\\MaxRedirectException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/MaxRedirectException.php',
-        'PicoFeed\\Client\\MaxSizeException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/MaxSizeException.php',
-        'PicoFeed\\Client\\Stream' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/Stream.php',
-        'PicoFeed\\Client\\TimeoutException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/TimeoutException.php',
-        'PicoFeed\\Client\\UnauthorizedException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/UnauthorizedException.php',
-        'PicoFeed\\Client\\Url' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Client/Url.php',
-        'PicoFeed\\Config\\Config' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Config/Config.php',
-        'PicoFeed\\Encoding\\Encoding' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Encoding/Encoding.php',
-        'PicoFeed\\Filter\\Attribute' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Filter/Attribute.php',
-        'PicoFeed\\Filter\\Filter' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Filter/Filter.php',
-        'PicoFeed\\Filter\\Html' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Filter/Html.php',
-        'PicoFeed\\Filter\\Tag' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Filter/Tag.php',
-        'PicoFeed\\Generator\\ContentGeneratorInterface' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Generator/ContentGeneratorInterface.php',
-        'PicoFeed\\Generator\\FileContentGenerator' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Generator/FileContentGenerator.php',
-        'PicoFeed\\Generator\\YoutubeContentGenerator' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Generator/YoutubeContentGenerator.php',
-        'PicoFeed\\Logging\\Logger' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Logging/Logger.php',
-        'PicoFeed\\Parser\\Atom' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/Atom.php',
-        'PicoFeed\\Parser\\DateParser' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/DateParser.php',
-        'PicoFeed\\Parser\\Feed' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/Feed.php',
-        'PicoFeed\\Parser\\Item' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/Item.php',
-        'PicoFeed\\Parser\\MalformedXmlException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/MalformedXmlException.php',
-        'PicoFeed\\Parser\\Parser' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/Parser.php',
-        'PicoFeed\\Parser\\ParserException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/ParserException.php',
-        'PicoFeed\\Parser\\ParserInterface' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/ParserInterface.php',
-        'PicoFeed\\Parser\\Rss10' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/Rss10.php',
-        'PicoFeed\\Parser\\Rss20' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/Rss20.php',
-        'PicoFeed\\Parser\\Rss91' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/Rss91.php',
-        'PicoFeed\\Parser\\Rss92' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/Rss92.php',
-        'PicoFeed\\Parser\\XmlEntityException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/XmlEntityException.php',
-        'PicoFeed\\Parser\\XmlParser' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Parser/XmlParser.php',
-        'PicoFeed\\PicoFeedException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/PicoFeedException.php',
-        'PicoFeed\\Processor\\ContentFilterProcessor' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Processor/ContentFilterProcessor.php',
-        'PicoFeed\\Processor\\ContentGeneratorProcessor' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Processor/ContentGeneratorProcessor.php',
-        'PicoFeed\\Processor\\ItemPostProcessor' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Processor/ItemPostProcessor.php',
-        'PicoFeed\\Processor\\ItemProcessorInterface' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Processor/ItemProcessorInterface.php',
-        'PicoFeed\\Processor\\ScraperProcessor' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Processor/ScraperProcessor.php',
-        'PicoFeed\\Reader\\Favicon' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Reader/Favicon.php',
-        'PicoFeed\\Reader\\Reader' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Reader/Reader.php',
-        'PicoFeed\\Reader\\ReaderException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Reader/ReaderException.php',
-        'PicoFeed\\Reader\\SubscriptionNotFoundException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Reader/SubscriptionNotFoundException.php',
-        'PicoFeed\\Reader\\UnsupportedFeedFormatException' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Reader/UnsupportedFeedFormatException.php',
-        'PicoFeed\\Scraper\\CandidateParser' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Scraper/CandidateParser.php',
-        'PicoFeed\\Scraper\\ParserInterface' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Scraper/ParserInterface.php',
-        'PicoFeed\\Scraper\\RuleLoader' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Scraper/RuleLoader.php',
-        'PicoFeed\\Scraper\\RuleParser' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Scraper/RuleParser.php',
-        'PicoFeed\\Scraper\\Scraper' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Scraper/Scraper.php',
-        'PicoFeed\\Serialization\\Subscription' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Serialization/Subscription.php',
-        'PicoFeed\\Serialization\\SubscriptionList' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Serialization/SubscriptionList.php',
-        'PicoFeed\\Serialization\\SubscriptionListBuilder' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Serialization/SubscriptionListBuilder.php',
-        'PicoFeed\\Serialization\\SubscriptionListParser' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Serialization/SubscriptionListParser.php',
-        'PicoFeed\\Serialization\\SubscriptionParser' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Serialization/SubscriptionParser.php',
-        'PicoFeed\\Syndication\\AtomFeedBuilder' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Syndication/AtomFeedBuilder.php',
-        'PicoFeed\\Syndication\\AtomHelper' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Syndication/AtomHelper.php',
-        'PicoFeed\\Syndication\\AtomItemBuilder' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Syndication/AtomItemBuilder.php',
-        'PicoFeed\\Syndication\\FeedBuilder' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Syndication/FeedBuilder.php',
-        'PicoFeed\\Syndication\\ItemBuilder' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Syndication/ItemBuilder.php',
-        'PicoFeed\\Syndication\\Rss20FeedBuilder' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Syndication/Rss20FeedBuilder.php',
-        'PicoFeed\\Syndication\\Rss20Helper' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Syndication/Rss20Helper.php',
-        'PicoFeed\\Syndication\\Rss20ItemBuilder' => __DIR__ . '/..' . '/miniflux/picofeed/lib/PicoFeed/Syndication/Rss20ItemBuilder.php',
         'Pimple\\Container' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Container.php',
         'Pimple\\Exception\\ExpectedInvokableException' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Exception/ExpectedInvokableException.php',
         'Pimple\\Exception\\FrozenServiceException' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Exception/FrozenServiceException.php',
@@ -1112,19 +1036,15 @@ class ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b
         'Symfony\\Component\\Finder\\Iterator\\SortableIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/SortableIterator.php',
         'Symfony\\Component\\Finder\\SplFileInfo' => __DIR__ . '/..' . '/symfony/finder/SplFileInfo.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
-        'ZendXml\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/zendframework/zendxml/library/ZendXml/Exception/ExceptionInterface.php',
-        'ZendXml\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/zendframework/zendxml/library/ZendXml/Exception/InvalidArgumentException.php',
-        'ZendXml\\Exception\\RuntimeException' => __DIR__ . '/..' . '/zendframework/zendxml/library/ZendXml/Exception/RuntimeException.php',
-        'ZendXml\\Security' => __DIR__ . '/..' . '/zendframework/zendxml/library/ZendXml/Security.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit6edea6294a88689e3f5c56484bb70c9b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$classMap;
 
         }, null, ClassLoader::class);
     }

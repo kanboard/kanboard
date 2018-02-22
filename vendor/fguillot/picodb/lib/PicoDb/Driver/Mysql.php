@@ -102,6 +102,10 @@ class Mysql extends Base
             $options[PDO::ATTR_PERSISTENT] = $settings['persistent'];
         }
 
+        if (! empty($settings['timeout'])) {
+            $options[PDO::ATTR_TIMEOUT] = $settings['timeout'];
+        }
+
         if (isset($settings['verify_server_cert'])) {
             $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = $settings['verify_server_cert'];
         }

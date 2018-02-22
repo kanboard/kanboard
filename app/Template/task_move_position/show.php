@@ -7,6 +7,7 @@
 <?= $this->app->component('task-move-position', array(
     'saveUrl' => $this->url->href('TaskMovePositionController', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])),
     'board' => $board,
+    'task' => $task,
     'swimlaneLabel' => t('Swimlane'),
     'columnLabel' => t('Column'),
     'positionLabel' => t('Position'),

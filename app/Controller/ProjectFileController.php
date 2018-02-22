@@ -32,6 +32,7 @@ class ProjectFileController extends BaseController
      */
     public function save()
     {
+        $this->checkReusableCSRFParam();
         $project = $this->getProject();
         $result = $this->projectFileModel->uploadFiles($project['id'], $this->request->getFileInfo('files'));
 
