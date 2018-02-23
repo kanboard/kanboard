@@ -120,17 +120,19 @@ class User
             return null;
         }
 
+        $role = Role::APP_USER ;
+
         foreach ($groupIds as $groupId) {
             $groupId = strtolower($groupId);
 
             if ($groupId === strtolower($this->getGroupAdminDn())) {
                 return Role::APP_ADMIN;
             } elseif ($groupId === strtolower($this->getGroupManagerDn())) {
-                return Role::APP_MANAGER;
+                if($role != Role::APP_USER) $role = Role::APP_MANAGER;
             }
         }
 
-        return Role::APP_USER;
+        return $role;
     }
 
     /**
