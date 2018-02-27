@@ -1,21 +1,22 @@
-Individual category markup
-===========================
+Custom CSS
+==========
 
+Einstellung > Anwendungskonfiguration > benutzerdefiniertes Stylesheet
 
-Setup
------
+Inviduelle Kategorien Darstellung
+---------------------------------
 
-1: Settings > Application settings > Custom Stylesheet
+Für den Kategorien-Container allgemeine Darstellung:
 
-For the category container:
 ```css
 .task-board-category-container-color span {
   border: solid 0.5px grey;
   color: black;
 }
-
 ```
-Custom css values for one category - this is an example for displaying the text: 
+
+Für den Text-Inhalt:
+
 ```css
 [class*="category-Patchkanditat"] {
   background-color: rgba(255, 0, 0, 0.50);
@@ -27,4 +28,3 @@ Custom css values for one category - this is an example for displaying the text:
   font-size:11px;
 }
 ```
-![CAT](../de_DE/screenshots/kanboard_patch_category.PNG)

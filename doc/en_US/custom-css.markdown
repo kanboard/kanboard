@@ -1,22 +1,21 @@
-Inviduelle Kategorien Darstellung
-=================================
+Custom CSS
+==========
 
+Go to Settings > Application settings > Custom Stylesheet
 
+Example to change color of category labels
+------------------------------------------
 
-Setup
------
+For the category container:
 
-1: Einstellung > Anwendungskonfiguration > benutzerdefiniertes Stylesheet
-
-Für den Kategorien-Container allgemeine Darstellung
 ```css
 .task-board-category-container-color span {
   border: solid 0.5px grey;
   color: black;
 }
 ```
+Custom css values for one category - this is an example for displaying the text: 
 
-Für den Text-Inhalt
 ```css
 [class*="category-Patchkanditat"] {
   background-color: rgba(255, 0, 0, 0.50);
@@ -28,4 +27,3 @@ Für den Text-Inhalt
   font-size:11px;
 }
 ```
-![CAT](./screenshots/kanboard_patch_category.PNG)

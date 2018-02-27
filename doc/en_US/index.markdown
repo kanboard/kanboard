@@ -83,6 +83,7 @@ Using Kanboard
 - [Command line interface](cli.markdown)
 - [Syntax guide](syntax-guide.markdown)
 - [Brute force protection](bruteforce-protection.markdown)
+- [Custom CSS](custom-css.markdown)
 - [Frequently asked questions](faq.markdown)
 
 ### Troubleshooting
