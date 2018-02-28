@@ -89,7 +89,7 @@
 
 
 
-Используйте опцию `-v` для монтирования тома на удаленной машине как описано в [официальной документации Docker](https://docs.docker.com/engine/userguide/containers/dockervolumes/).
+Используйте опцию `-v` для монтирования тома на удаленной машине как описано в [официальной документации Docker](https://docs.docker.com/storage/volumes/).
 
 
 

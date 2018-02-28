@@ -67,7 +67,7 @@ Kapsayıcınıza-konyetner 2 cilt bağlayabilirsiniz:
 - Veri klasörü: `/var/www/app/data`
 - Eklentiler-Plugins klasörü: `/var/www/app/plugins`
 
-[Resmi Docker belgeleri](https://docs.docker.com/engine/userguide/containers/dockervolumes/) 'da açıklandığı gibi, ana makineye bir hacim bağlamak için  `-v` parametresi-bayrağını kullanın.
+[Resmi Docker belgeleri](https://docs.docker.com/storage/volumes/) 'da açıklandığı gibi, ana makineye bir hacim bağlamak için  `-v` parametresi-bayrağını kullanın.
 
 Kapsayıcınızı-Konteyner Yükseltme
 ----------------------
