@@ -70,7 +70,7 @@ Usted puede adjuntar dos volúmenes de su contenedor:
 - Complementos de carpeta: `/var/www/app/plugins`
 
 
-Use el indicador `-v` par montar un volumen en el ordenador central como se describe en [official Docker documentation](https://docs.docker.com/engine/userguide/containers/dockervolumes/).
+Use el indicador `-v` par montar un volumen en el ordenador central como se describe en [official Docker documentation](https://docs.docker.com/storage/volumes/).
 
 
 Actualizar contenedor

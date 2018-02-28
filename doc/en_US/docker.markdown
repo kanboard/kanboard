@@ -56,7 +56,7 @@ You can attach 2 volumes to your container:
 - Data folder: `/var/www/app/data`
 - Plugins folder: `/var/www/app/plugins`
 
-Use the flag `-v` to mount a volume on the host machine like described in [official Docker documentation](https://docs.docker.com/engine/userguide/containers/dockervolumes/).
+Use the flag `-v` to mount a volume on the host machine like described in [official Docker documentation](https://docs.docker.com/storage/volumes/).
 
 There is also a `docker-compose.yml` file in the repository.
 
