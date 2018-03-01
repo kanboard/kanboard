@@ -1,3 +1,30 @@
+Version 1.2.1 (February 28, 2018)
+---------------------------------
+
+New features:
+
+* Add automatic action to change column once a start date is reached
+* Add automatic action to change color once start date is reached
+* Add CSS class to categories to allow custom styling
+* Add option to disable Mysql SSL server verification
+* Add timeout parameter for database connection
+* Add error log for authentication failure to allow fail2ban integration
+
+Improvements:
+
+* Set the correct swimlane/column ID when moving a task via its internal dialog
+* Allow filtering for tasks without due date
+* Add plugin hook 'aftersave' after creating Task
+* Run SessionHandler::write() into a transaction
+* Remove dependency on PicoFeed
+* Add CSRF check for task and project files upload
+* Add missing CSRF check on avatar upload form
+* Add missing CSRF check in saveUploadDB() method
+* Update Vagrantfile to use Ubuntu Xenial
+* Send event author in webhook notification
+* Update translations
+* Update documentation
+
 Version 1.2.0 (December 27, 2017)
 ---------------------------------
 
