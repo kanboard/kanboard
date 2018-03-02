@@ -164,7 +164,6 @@ class Client extends Base
 
         $startTime = microtime(true);
         $stream = @fopen(trim($url), 'r', false, stream_context_create($this->getContext($method, $content, $headers, $raiseForErrors)));
-        $response = '';
 
         if (! is_resource($stream)) {
             $this->logger->error('HttpClient: request failed ('.$url.')');
@@ -176,14 +175,14 @@ class Client extends Base
             return '';
         }
 
-        $response = stream_get_contents($stream);
+        $body = stream_get_contents($stream);
         $metadata = stream_get_meta_data($stream);
 
         if ($raiseForErrors && array_key_exists('wrapper_data', $metadata)) {
             $statusCode = $this->getStatusCode($metadata['wrapper_data']);
 
             if ($statusCode >= 400) {
-                throw new InvalidStatusException('Request failed with status code '.$statusCode, $statusCode);
+                throw new InvalidStatusException('Request failed with status code '.$statusCode, $statusCode, $body);
             }
         }
 
@@ -192,11 +191,11 @@ class Client extends Base
             $this->logger->debug('HttpClient: headers='.var_export($headers, true));
             $this->logger->debug('HttpClient: payload='.$content);
             $this->logger->debug('HttpClient: metadata='.var_export($metadata, true));
-            $this->logger->debug('HttpClient: response='.$response);
+            $this->logger->debug('HttpClient: body='.$body);
             $this->logger->debug('HttpClient: executionTime='.(microtime(true) - $startTime));
         }
 
-        return $response;
+        return $body;
     }
 
     /**
