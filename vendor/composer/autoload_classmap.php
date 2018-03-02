@@ -298,6 +298,8 @@ return array(
     'Kanboard\\Core\\Group\\GroupProviderInterface' => $baseDir . '/app/Core/Group/GroupProviderInterface.php',
     'Kanboard\\Core\\Helper' => $baseDir . '/app/Core/Helper.php',
     'Kanboard\\Core\\Http\\Client' => $baseDir . '/app/Core/Http/Client.php',
+    'Kanboard\\Core\\Http\\ClientException' => $baseDir . '/app/Core/Http/ClientException.php',
+    'Kanboard\\Core\\Http\\InvalidStatusException' => $baseDir . '/app/Core/Http/InvalidStatusException.php',
     'Kanboard\\Core\\Http\\OAuth2' => $baseDir . '/app/Core/Http/OAuth2.php',
     'Kanboard\\Core\\Http\\RememberMeCookie' => $baseDir . '/app/Core/Http/RememberMeCookie.php',
     'Kanboard\\Core\\Http\\Request' => $baseDir . '/app/Core/Http/Request.php',

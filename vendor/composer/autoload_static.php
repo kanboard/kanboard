@@ -436,6 +436,8 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Core\\Group\\GroupProviderInterface' => __DIR__ . '/../..' . '/app/Core/Group/GroupProviderInterface.php',
         'Kanboard\\Core\\Helper' => __DIR__ . '/../..' . '/app/Core/Helper.php',
         'Kanboard\\Core\\Http\\Client' => __DIR__ . '/../..' . '/app/Core/Http/Client.php',
+        'Kanboard\\Core\\Http\\ClientException' => __DIR__ . '/../..' . '/app/Core/Http/ClientException.php',
+        'Kanboard\\Core\\Http\\InvalidStatusException' => __DIR__ . '/../..' . '/app/Core/Http/InvalidStatusException.php',
         'Kanboard\\Core\\Http\\OAuth2' => __DIR__ . '/../..' . '/app/Core/Http/OAuth2.php',
         'Kanboard\\Core\\Http\\RememberMeCookie' => __DIR__ . '/../..' . '/app/Core/Http/RememberMeCookie.php',
         'Kanboard\\Core\\Http\\Request' => __DIR__ . '/../..' . '/app/Core/Http/Request.php',
