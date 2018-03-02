@@ -106,7 +106,7 @@ class OAuthController extends BaseController
     protected function authenticate($providerName)
     {
         if ($this->authenticationManager->oauthAuthentication($providerName)) {
-            $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
+            $this->redirectAfterLogin();
         } else {
             $this->authenticationFailure(t('External authentication failed'));
         }
@@ -126,5 +126,21 @@ class OAuthController extends BaseController
             'no_layout' => true,
             'title' => t('Login')
         )));
+    }
+
+    /**
+     * Redirect the user after the authentication
+     *
+     * @access private
+     */
+    private function redirectAfterLogin()
+    {
+        if (session_exists('redirectAfterLogin') && ! filter_var(session_get('redirectAfterLogin'), FILTER_VALIDATE_URL)) {
+            $redirect = session_get('redirectAfterLogin');
+            session_remove('redirectAfterLogin');
+            $this->response->redirect($redirect);
+        } else {
+            $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
+        }
     }
 }
