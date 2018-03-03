@@ -231,8 +231,10 @@ class LdapUserTest extends Base
                     0 => 'my_ldap_user',
                 ),
                 'memberof' => array(
-                    'count' => 1,
-                    0 => 'CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local',
+                    'count' => 3,
+                    0 => 'CN=Kanboard-Users,CN=Users,DC=kanboard,DC=local',
+                    1 => 'CN=Kanboard-Managers,CN=Users,DC=kanboard,DC=local',
+                    2 => 'CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local',
                 ),
                 0 => 'displayname',
                 1 => 'mail',
