@@ -128,7 +128,9 @@ class User
             if ($groupId === strtolower($this->getGroupAdminDn())) {
                 return Role::APP_ADMIN;
             } elseif ($groupId === strtolower($this->getGroupManagerDn())) {
-                if($role == Role::APP_USER) $role = Role::APP_MANAGER;
+                if($role == Role::APP_USER) {
+                    $role = Role::APP_MANAGER;
+		}
             }
         }
 
