@@ -305,9 +305,9 @@ class LdapUserTest extends Base
         $this->assertEquals(Role::APP_ADMIN, $user->getRole());
         $this->assertEquals(
             array(
-                'CN=Kanboard-Users,OU=Users,DC=kanboard,DC=local',
-                'CN=Kanboard-Managers,OU=Users,DC=kanboard,DC=local',
-                'CN=Kanboard-Admins,OU=Users,DC=kanboard,DC=local',
+                'CN=Kanboard-Users,CN=Users,DC=kanboard,DC=local',
+                'CN=Kanboard-Managers,CN=Users,DC=kanboard,DC=local',
+                'CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local',
             ),
             $user->getExternalGroupIds()
         );
