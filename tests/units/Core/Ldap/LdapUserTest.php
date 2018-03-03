@@ -303,7 +303,7 @@ class LdapUserTest extends Base
         $this->assertEquals('My LDAP user', $user->getName());
         $this->assertEquals('user1@localhost', $user->getEmail());
         $this->assertEquals(Role::APP_ADMIN, $user->getRole());
-        $this->assertEquals(array('CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local'), $user->getExternalGroupIds());
+        $this->assertArraySubset(array('CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local'), $user->getExternalGroupIds());
         $this->assertEquals(array('is_ldap_user' => 1), $user->getExtraAttributes());
     }
 
