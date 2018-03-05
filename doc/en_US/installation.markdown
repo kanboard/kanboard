@@ -17,7 +17,7 @@ From the archive (stable version)
 The `data` folder is used to store:
 
 - Sqlite database: `db.sqlite`
-- Debug file: `debug.log` (if debug mode is enabled)
+- Debug file: `debug.log` (if debug mode is enabled with the `file` driver)
 - Uploaded files: `files/*`
 - Image thumbnails: `files/thumbnails/*`
 

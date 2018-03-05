@@ -26,8 +26,8 @@ defined('PLUGIN_INSTALLER') or define('PLUGIN_INSTALLER', true);
 // Enable/disable debug
 defined('DEBUG') or define('DEBUG', strtolower(getenv('DEBUG')) === 'true');
 
-// Logging drivers: syslog, stdout, stderr or file
-defined('LOG_DRIVER') or define('LOG_DRIVER', '');
+// Logging drivers: syslog, stdout, stderr, system or file
+defined('LOG_DRIVER') or define('LOG_DRIVER', 'system');
 
 // Logging file
 defined('LOG_FILE') or define('LOG_FILE', DATA_DIR.DIRECTORY_SEPARATOR.'debug.log');

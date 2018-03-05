@@ -10,6 +10,7 @@ use Kanboard\Core\Log\Stderr;
 use Kanboard\Core\Log\Stdout;
 use Kanboard\Core\Log\Syslog;
 use Kanboard\Core\Log\File;
+use Kanboard\Core\Log\System;
 
 /**
  * Class LoggingProvider
@@ -36,6 +37,9 @@ class LoggingProvider implements ServiceProviderInterface
                 break;
             case 'file':
                 $driver = new File(LOG_FILE);
+                break;
+            case 'system':
+                $driver = new System();
                 break;
         }
 

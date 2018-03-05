@@ -9,14 +9,15 @@ Enable/Disable debug mode
 
 ```php
 define('DEBUG', true);
-define('LOG_DRIVER', 'file'); // Other drivers are: syslog, stdout, stderr or file
+define('LOG_DRIVER', 'file'); // Other drivers are: syslog, stdout, stderr, system or file
 
 // By default, the log file is in data/debug.log but you can change the path:
 define('LOG_FILE', '/path/to/debug.log');
 ```
 
-The log driver must be defined if you enable the debug mode.
-The debug mode logs all SQL queries and the time taken to generate pages.
+- The log driver must be defined if you enable the debug mode.
+- The debug mode logs all SQL queries and the time taken to generate pages.
+- The `system` driver use the built-in PHP logger which could be configured in the [php.ini](http://php.net/manual/en/errorfunc.configuration.php#ini.error-log). By default, log messages are sent to the web server logs.
 
 Plugins
 -------
