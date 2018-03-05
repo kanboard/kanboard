@@ -320,6 +320,7 @@ return array(
     'Kanboard\\Core\\Log\\Stderr' => $baseDir . '/app/Core/Log/Stderr.php',
     'Kanboard\\Core\\Log\\Stdout' => $baseDir . '/app/Core/Log/Stdout.php',
     'Kanboard\\Core\\Log\\Syslog' => $baseDir . '/app/Core/Log/Syslog.php',
+    'Kanboard\\Core\\Log\\System' => $baseDir . '/app/Core/Log/System.php',
     'Kanboard\\Core\\Mail\\Client' => $baseDir . '/app/Core/Mail/Client.php',
     'Kanboard\\Core\\Mail\\ClientInterface' => $baseDir . '/app/Core/Mail/ClientInterface.php',
     'Kanboard\\Core\\Mail\\Transport\\Mail' => $baseDir . '/app/Core/Mail/Transport/Mail.php',

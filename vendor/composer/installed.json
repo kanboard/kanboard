@@ -950,17 +950,17 @@
     },
     {
         "name": "fguillot/picodb",
-        "version": "v1.0.17",
-        "version_normalized": "1.0.17.0",
+        "version": "v1.0.18",
+        "version_normalized": "1.0.18.0",
         "source": {
             "type": "git",
             "url": "https://github.com/fguillot/picoDb.git",
-            "reference": "1699864992c40ad02395e95d7fbf44a571a116f3"
+            "reference": "4df08a3cc3c4a39e6bb329872f5d020fe135f805"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fguillot/picoDb/zipball/1699864992c40ad02395e95d7fbf44a571a116f3",
-            "reference": "1699864992c40ad02395e95d7fbf44a571a116f3",
+            "url": "https://api.github.com/repos/fguillot/picoDb/zipball/4df08a3cc3c4a39e6bb329872f5d020fe135f805",
+            "reference": "4df08a3cc3c4a39e6bb329872f5d020fe135f805",
             "shasum": ""
         },
         "require": {
@@ -969,7 +969,7 @@
         "require-dev": {
             "phpunit/phpunit": "4.8.*"
         },
-        "time": "2018-02-14T00:51:01+00:00",
+        "time": "2018-03-05T22:39:16+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -992,23 +992,23 @@
     },
     {
         "name": "symfony/finder",
-        "version": "v3.4.5",
-        "version_normalized": "3.4.5.0",
+        "version": "v3.4.6",
+        "version_normalized": "3.4.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/finder.git",
-            "reference": "6a615613745cef820d807443f32076bb9f5d0a38"
+            "reference": "a479817ce0a9e4adfd7d39c6407c95d97c254625"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/finder/zipball/6a615613745cef820d807443f32076bb9f5d0a38",
-            "reference": "6a615613745cef820d807443f32076bb9f5d0a38",
+            "url": "https://api.github.com/repos/symfony/finder/zipball/a479817ce0a9e4adfd7d39c6407c95d97c254625",
+            "reference": "a479817ce0a9e4adfd7d39c6407c95d97c254625",
             "shasum": ""
         },
         "require": {
             "php": "^5.5.9|>=7.0.8"
         },
-        "time": "2018-02-11T17:15:12+00:00",
+        "time": "2018-03-05T18:28:11+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

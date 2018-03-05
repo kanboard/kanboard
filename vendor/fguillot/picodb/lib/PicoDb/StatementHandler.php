@@ -348,6 +348,6 @@ class StatementHandler
             return false;
         }
 
-        throw new SQLException('SQL error'.($this->logQueries ? ': '.$e->getMessage() : ''));
+        throw new SQLException('SQL Error: '.$e->getMessage());
     }
 }

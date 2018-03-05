@@ -454,6 +454,7 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Core\\Log\\Stderr' => __DIR__ . '/../..' . '/app/Core/Log/Stderr.php',
         'Kanboard\\Core\\Log\\Stdout' => __DIR__ . '/../..' . '/app/Core/Log/Stdout.php',
         'Kanboard\\Core\\Log\\Syslog' => __DIR__ . '/../..' . '/app/Core/Log/Syslog.php',
+        'Kanboard\\Core\\Log\\System' => __DIR__ . '/../..' . '/app/Core/Log/System.php',
         'Kanboard\\Core\\Mail\\Client' => __DIR__ . '/../..' . '/app/Core/Mail/Client.php',
         'Kanboard\\Core\\Mail\\ClientInterface' => __DIR__ . '/../..' . '/app/Core/Mail/ClientInterface.php',
         'Kanboard\\Core\\Mail\\Transport\\Mail' => __DIR__ . '/../..' . '/app/Core/Mail/Transport/Mail.php',

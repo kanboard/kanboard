@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1a8ea1e7b369d6eeb6c97085da64faf",
+    "content-hash": "f8d9d35adda9c522defa8e3c519f5a23",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -288,16 +288,16 @@
         },
         {
             "name": "fguillot/picodb",
-            "version": "v1.0.17",
+            "version": "v1.0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "1699864992c40ad02395e95d7fbf44a571a116f3"
+                "reference": "4df08a3cc3c4a39e6bb329872f5d020fe135f805"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/1699864992c40ad02395e95d7fbf44a571a116f3",
-                "reference": "1699864992c40ad02395e95d7fbf44a571a116f3",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/4df08a3cc3c4a39e6bb329872f5d020fe135f805",
+                "reference": "4df08a3cc3c4a39e6bb329872f5d020fe135f805",
                 "shasum": ""
             },
             "require": {
@@ -324,7 +324,7 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2018-02-14T00:51:01+00:00"
+            "time": "2018-03-05T22:39:16+00:00"
         },
         {
             "name": "fguillot/simple-queue",
@@ -902,16 +902,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v3.4.5",
+            "version": "v3.4.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "6a615613745cef820d807443f32076bb9f5d0a38"
+                "reference": "a479817ce0a9e4adfd7d39c6407c95d97c254625"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/6a615613745cef820d807443f32076bb9f5d0a38",
-                "reference": "6a615613745cef820d807443f32076bb9f5d0a38",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/a479817ce0a9e4adfd7d39c6407c95d97c254625",
+                "reference": "a479817ce0a9e4adfd7d39c6407c95d97c254625",
                 "shasum": ""
             },
             "require": {
@@ -947,7 +947,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2018-02-11T17:15:12+00:00"
+            "time": "2018-03-05T18:28:11+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
