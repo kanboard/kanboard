@@ -127,20 +127,4 @@ class OAuthController extends BaseController
             'title' => t('Login')
         )));
     }
-
-    /**
-     * Redirect the user after the authentication
-     *
-     * @access private
-     */
-    private function redirectAfterLogin()
-    {
-        if (session_exists('redirectAfterLogin') && ! filter_var(session_get('redirectAfterLogin'), FILTER_VALIDATE_URL)) {
-            $redirect = session_get('redirectAfterLogin');
-            session_remove('redirectAfterLogin');
-            $this->response->redirect($redirect);
-        } else {
-            $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
-        }
-    }
 }

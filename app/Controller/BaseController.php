@@ -305,4 +305,20 @@ abstract class BaseController extends Base
 
         return $filter;
     }
+    
+    /**
+     * Redirect the user after the authentication
+     *
+     * @access protected
+     */
+    protected function redirectAfterLogin()
+    {
+        if (session_exists('redirectAfterLogin') && ! filter_var(session_get('redirectAfterLogin'), FILTER_VALIDATE_URL)) {
+            $redirect = session_get('redirectAfterLogin');
+            session_remove('redirectAfterLogin');
+            $this->response->redirect($redirect);
+        } else {
+            $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
+        }
+    }
 }
