@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'SimpleValidator' => array($vendorDir . '/fguillot/simple-validator/src'),
-    'SimpleLogger' => array($vendorDir . '/fguillot/simpleLogger/src'),
     'Pimple' => array($vendorDir . '/pimple/pimple/src'),
     'PicoDb' => array($vendorDir . '/fguillot/picodb/lib'),
     'Parsedown' => array($vendorDir . '/erusev/parsedown'),

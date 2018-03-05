@@ -5,11 +5,11 @@ namespace Kanboard\ServiceProvider;
 use Psr\Log\LogLevel;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use SimpleLogger\Logger;
-use SimpleLogger\Stderr;
-use SimpleLogger\Stdout;
-use SimpleLogger\Syslog;
-use SimpleLogger\File;
+use Kanboard\Core\Log\Logger;
+use Kanboard\Core\Log\Stderr;
+use Kanboard\Core\Log\Stdout;
+use Kanboard\Core\Log\Syslog;
+use Kanboard\Core\Log\File;
 
 /**
  * Class LoggingProvider
@@ -21,7 +21,7 @@ class LoggingProvider implements ServiceProviderInterface
 {
     public function register(Container $container)
     {
-        $logger = new Logger;
+        $logger = new Logger();
         $driver = null;
 
         switch (LOG_DRIVER) {

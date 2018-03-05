@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleLogger;
+namespace Kanboard\Core\Log;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\LoggerAwareInterface;
@@ -10,7 +10,7 @@ use Psr\Log\LogLevel;
 /**
  * Handler for multiple loggers
  *
- * @package SimpleLogger
+ * @package Kanboard\Core\Log
  * @author  Frédéric Guillot
  */
 class Logger extends AbstractLogger implements LoggerAwareInterface

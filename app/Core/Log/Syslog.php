@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleLogger;
+namespace Kanboard\Core\Log;
 
 use RuntimeException;
 use Psr\Log\LogLevel;
@@ -8,7 +8,7 @@ use Psr\Log\LogLevel;
 /**
  * Syslog Logger
  *
- * @package SimpleLogger
+ * @package Kanboard\Core\Log
  * @author  Frédéric Guillot
  */
 class Syslog extends Base

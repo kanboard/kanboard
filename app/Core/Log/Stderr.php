@@ -1,14 +1,14 @@
 <?php
 
-namespace SimpleLogger;
+namespace Kanboard\Core\Log;
 
 /**
- * Stdout logger
+ * Stderr logger
  *
- * @package SimpleLogger
+ * @package Kanboard\Core\Log
  * @author  Frédéric Guillot
  */
-class Stdout extends Base
+class Stderr extends Base
 {
     /**
      * Logs with an arbitrary level.
@@ -20,6 +20,6 @@ class Stdout extends Base
      */
     public function log($level, $message, array $context = array())
     {
-        file_put_contents('php://stdout', $this->formatMessage($level, $message, $context), FILE_APPEND);
+        file_put_contents('php://stderr', $this->formatMessage($level, $message, $context), FILE_APPEND);
     }
 }

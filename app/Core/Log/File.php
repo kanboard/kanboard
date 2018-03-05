@@ -1,13 +1,13 @@
 <?php
 
-namespace SimpleLogger;
+namespace Kanboard\Core\Log;
 
 use RuntimeException;
 
 /**
- * File logger
+ * File Logger
  *
- * @package SimpleLogger
+ * @package Kanboard\Core\Log
  * @author  Frédéric Guillot
  */
 class File extends Base

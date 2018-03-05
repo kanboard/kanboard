@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleLogger;
+namespace Kanboard\Core\Log;
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
@@ -8,7 +8,7 @@ use Psr\Log\LogLevel;
 /**
  * Base class for loggers
  *
- * @package SimpleLogger
+ * @package Kanboard\Core\Log
  * @author  Frédéric Guillot
  */
 abstract class Base extends AbstractLogger

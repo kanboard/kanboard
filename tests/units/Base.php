@@ -7,7 +7,7 @@ use Composer\Autoload\ClassLoader;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
 use Symfony\Component\Stopwatch\Stopwatch;
-use SimpleLogger\Logger;
+use Kanboard\Core\Log\Logger;
 use Kanboard\Core\Session\FlashMessage;
 use Kanboard\ServiceProvider\ActionProvider;
 
