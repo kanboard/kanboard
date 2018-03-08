@@ -120,17 +120,25 @@ class User
             return null;
         }
 
+        // Init with smallest role
+        $role = Role::APP_USER ;
+
         foreach ($groupIds as $groupId) {
             $groupId = strtolower($groupId);
 
             if ($groupId === strtolower($this->getGroupAdminDn())) {
-                return Role::APP_ADMIN;
-            } elseif ($groupId === strtolower($this->getGroupManagerDn())) {
-                return Role::APP_MANAGER;
+                // Highest role found : we can and we must exit the loop
+                $role = Role::APP_ADMIN;
+                break;
+            }
+
+            if ($groupId === strtolower($this->getGroupManagerDn())) {
+                // Intermediate role found : we must continue to loop, maybe admin role after ?
+	        $role = Role::APP_MANAGER;
             }
         }
 
-        return Role::APP_USER;
+        return $role;
     }
 
     /**

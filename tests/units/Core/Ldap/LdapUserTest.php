@@ -231,8 +231,10 @@ class LdapUserTest extends Base
                     0 => 'my_ldap_user',
                 ),
                 'memberof' => array(
-                    'count' => 1,
-                    0 => 'CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local',
+                    'count' => 3,
+                    0 => 'CN=Kanboard-Users,CN=Users,DC=kanboard,DC=local',
+                    1 => 'CN=Kanboard-Managers,CN=Users,DC=kanboard,DC=local',
+                    2 => 'CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local',
                 ),
                 0 => 'displayname',
                 1 => 'mail',
@@ -301,7 +303,14 @@ class LdapUserTest extends Base
         $this->assertEquals('My LDAP user', $user->getName());
         $this->assertEquals('user1@localhost', $user->getEmail());
         $this->assertEquals(Role::APP_ADMIN, $user->getRole());
-        $this->assertEquals(array('CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local'), $user->getExternalGroupIds());
+        $this->assertEquals(
+            array(
+                'CN=Kanboard-Users,CN=Users,DC=kanboard,DC=local',
+                'CN=Kanboard-Managers,CN=Users,DC=kanboard,DC=local',
+                'CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local',
+            ),
+            $user->getExternalGroupIds()
+        );
         $this->assertEquals(array('is_ldap_user' => 1), $user->getExtraAttributes());
     }
 
