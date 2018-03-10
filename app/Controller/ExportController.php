@@ -26,15 +26,13 @@ class ExportController extends BaseController
         $project = $this->getProject();
 
         if ($this->request->isPost()) {
-            $values = $this->request->getValues();
-            $from = empty($values['from']) ? '' : $values['from'];
-            $to = empty($values['to']) ? '' : $values['to'];
+            $from = $this->request->getRawValue('from');
+            $to = $this->request->getRawValue('to');
 
             if ($from && $to) {
                 $data = $this->$model->$method($project['id'], $from, $to);
                 $this->response->withFileDownload($filename.'.csv');
                 $this->response->csv($data);
-                return;
             }
         } else {
             $this->response->html($this->template->render('export/'.$action, array(
@@ -77,7 +75,31 @@ class ExportController extends BaseController
      */
     public function summary()
     {
-        $this->common('projectDailyColumnStatsModel', 'getAggregatedMetrics', t('Summary'), 'summary', t('Daily project summary export'));
+        $project = $this->getProject();
+
+        if ($this->request->isPost()) {
+            $from = $this->request->getRawValue('from');
+            $to = $this->request->getRawValue('to');
+
+            if ($from && $to) {
+                $from = $this->dateParser->getIsoDate($from);
+                $to = $this->dateParser->getIsoDate($to);
+                $data = $this->projectDailyColumnStatsModel->getAggregatedMetrics($project['id'], $from, $to);
+                $this->response->withFileDownload(t('Summary').'.csv');
+                $this->response->csv($data);
+            }
+        } else {
+            $this->response->html($this->template->render('export/summary', array(
+                'values'  => array(
+                    'project_id' => $project['id'],
+                    'from'       => '',
+                    'to'         => '',
+                ),
+                'errors'  => array(),
+                'project' => $project,
+                'title'   => t('Daily project summary export'),
+            )));
+        }
     }
 
     /**
