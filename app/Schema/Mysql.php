@@ -8,7 +8,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 127;
+const VERSION = 128;
+
+function version_188(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `users` ADD COLUMN `filter` VARCHAR(255) DEFAULT NULL');
+}
 
 function version_127(PDO $pdo)
 {

@@ -1299,7 +1299,8 @@ CREATE TABLE "users" (
     "role" character varying(25) DEFAULT 'app-user'::character varying NOT NULL,
     "is_active" boolean DEFAULT true,
     "avatar_path" character varying(255),
-    "api_access_token" character varying(255) DEFAULT NULL::character varying
+    "api_access_token" character varying(255) DEFAULT NULL::character varying,
+    "filter" character varying(255) DEFAULT NULL::character varying
 );
 
 
