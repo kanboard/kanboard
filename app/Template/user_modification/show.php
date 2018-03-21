@@ -26,7 +26,7 @@
         <?= $this->form->select('language', $languages, $values, $errors, array($this->user->hasAccess('UserModificationController', 'show/edit_language') ? '' : 'disabled')) ?>
         
         <?= $this->form->label(t('Filter'), 'filter') ?>
-        <?= $this->form->text('filter', $values, $errors, array($this->user->hasAccess('UserModificationController', 'show/edit_name') ? '' : 'readonly')) ?>
+        <?= $this->form->text('filter', $values, $errors, array($this->user->hasAccess('UserModificationController', 'show/edit_filter') ? '' : 'readonly')) ?>
     </fieldset>
 
     <?php if ($this->user->isAdmin()): ?>
