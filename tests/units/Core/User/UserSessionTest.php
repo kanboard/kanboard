@@ -62,7 +62,7 @@ class UserSessionTest extends Base
         $this->assertFalse($userSession->isLogged());
 
         $_SESSION['user'] = array('id' => 1);
-        $this->assertTrue($userSessiusernameon->isLogged());
+        $this->assertTrue($userSession->isLogged());
     }
 
     public function testIsAdmin()
