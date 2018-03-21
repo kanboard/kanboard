@@ -62,7 +62,7 @@ class UserSessionTest extends Base
         $this->assertFalse($userSession->isLogged());
 
         $_SESSION['user'] = array('id' => 1);
-        $this->assertTrue($userSession->isLogged());
+        $this->assertTrue($userSessiusernameon->isLogged());
     }
 
     public function testIsAdmin()
@@ -85,10 +85,13 @@ class UserSessionTest extends Base
         $userSession = new UserSession($this->container);
         $this->assertEquals('', $userSession->getFilters(1));
 
+        $_SESSION['user'] = array('filter' => 'status:open');
+        $this->assertEquals('status:open', $userSession->getFilters(1));
+
         $userSession->setFilters(1, 'assignee:me');
         $this->assertEquals('assignee:me', $userSession->getFilters(1));
 
-        $this->assertEquals('status:open', $userSession->getFilters(2));
+        $this->assertEquals('', $userSession->getFilters(2));
 
         $userSession->setFilters(2, 'assignee:bob');
         $this->assertEquals('assignee:bob', $userSession->getFilters(2));
