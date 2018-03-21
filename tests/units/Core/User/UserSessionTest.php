@@ -20,6 +20,7 @@ class UserSessionTest extends Base
             'is_ldap_user' => '0',
             'twofactor_activated' => '0',
             'role' => Role::APP_MANAGER,
+            'filter' => 'status:close',
         );
 
         $userSession->initialize($user);
@@ -81,7 +82,7 @@ class UserSessionTest extends Base
     public function testFilters()
     {
         $userSession = new UserSession($this->container);
-        $this->assertEquals('status:open', $userSession->getFilters(1));
+        $this->assertEquals('status:close', $userSession->getFilters(1));
 
         $userSession->setFilters(1, 'assignee:me');
         $this->assertEquals('assignee:me', $userSession->getFilters(1));
