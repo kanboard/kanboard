@@ -91,7 +91,7 @@ class UserSessionTest extends Base
         $userSession->setFilters(1, 'assignee:me');
         $this->assertEquals('assignee:me', $userSession->getFilters(1));
 
-        $this->assertEquals('', $userSession->getFilters(2));
+        $this->assertEquals('status:open', $userSession->getFilters(2));
 
         $userSession->setFilters(2, 'assignee:bob');
         $this->assertEquals('assignee:bob', $userSession->getFilters(2));
