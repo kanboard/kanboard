@@ -29,6 +29,7 @@ class UserSessionTest extends Base
         $this->assertEquals(123, $_SESSION['user']['id']);
         $this->assertEquals('john', $_SESSION['user']['username']);
         $this->assertEquals(Role::APP_MANAGER, $_SESSION['user']['role']);
+        $this->assertEquals('status:close', $_SESSION['user']['filter']);
         $this->assertFalse($_SESSION['user']['is_ldap_user']);
         $this->assertFalse($_SESSION['user']['twofactor_activated']);
         $this->assertArrayNotHasKey('password', $_SESSION['user']);
@@ -82,7 +83,7 @@ class UserSessionTest extends Base
     public function testFilters()
     {
         $userSession = new UserSession($this->container);
-        $this->assertEquals('status:close', $userSession->getFilters(1));
+        $this->assertEquals('', $userSession->getFilters(1));
 
         $userSession->setFilters(1, 'assignee:me');
         $this->assertEquals('assignee:me', $userSession->getFilters(1));
