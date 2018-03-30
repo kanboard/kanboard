@@ -61,6 +61,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
 
         $this->container['db']->getStatementHandler()->withLogging();
         $this->container['logger'] = new Logger();
+        $this->container['cli'] = new \Symfony\Component\Console\Application('Kanboard', 'test');
 
         $this->container['httpClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Http\Client')
