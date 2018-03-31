@@ -1,3 +1,23 @@
+Version 1.2.2 (March 30, 2018)
+------------------------------
+
+Improvements:
+
+* Add thumbnail quality parameter (default to 95)
+* Always display SQL errors
+* Move SimpleLogger lib into app source tree
+* Add system log driver and use it by default
+* Display exceptions from plugins while refreshing board
+* Redirect to original URL after OAuth login
+* Add author name and email arguments to mail client
+* Improve HTTP client to raise exceptions
+* Update translations
+
+Bug fixes:
+
+* Fix broken daily summary export
+* Fix role precedence in LDAP integration
+
 Version 1.2.1 (February 28, 2018)
 ---------------------------------
 
