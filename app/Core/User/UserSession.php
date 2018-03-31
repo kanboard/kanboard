@@ -223,7 +223,6 @@ class UserSession extends Base
     public function getFilters($projectID)
     {
         if (! session_exists('filters:'.$projectID)) {
-            // return 'status:open';
             return session_get('user')['filter'];
         }
 
