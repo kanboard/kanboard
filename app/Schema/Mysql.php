@@ -10,7 +10,7 @@ use Kanboard\Core\Security\Role;
 
 const VERSION = 128;
 
-function version_188(PDO $pdo)
+function version_128(PDO $pdo)
 {
     $pdo->exec('ALTER TABLE `users` ADD COLUMN `filter` VARCHAR(255) DEFAULT NULL');
 }
