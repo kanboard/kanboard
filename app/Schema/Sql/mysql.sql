@@ -752,6 +752,7 @@ CREATE TABLE `users` (
   `is_active` tinyint(1) DEFAULT '1',
   `avatar_path` varchar(255) DEFAULT NULL,
   `api_access_token` varchar(255) DEFAULT NULL,
+  `filter` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_username_idx` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
