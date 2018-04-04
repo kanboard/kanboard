@@ -292,95 +292,6 @@
         "homepage": "https://github.com/fguillot/JsonRPC"
     },
     {
-        "name": "fguillot/simple-queue",
-        "version": "v1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fguillot/simple-queue.git",
-            "reference": "ce7801c507f9501bcca455129fb04c3d2107d5ff"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fguillot/simple-queue/zipball/ce7801c507f9501bcca455129fb04c3d2107d5ff",
-            "reference": "ce7801c507f9501bcca455129fb04c3d2107d5ff",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "aws/aws-sdk-php": "~3.0",
-            "mariano/disque-php": "~2.0",
-            "pda/pheanstalk": "~3.0",
-            "php-amqplib/php-amqplib": "2.6.*",
-            "phpunit/phpunit": "5.3.*"
-        },
-        "suggest": {
-            "aws/aws-sdk-php": "Required to use the AWS SQS queue driver (~3.0).",
-            "mariano/disque-php": "Required to use the Disque queue driver (~2.0).",
-            "pda/pheanstalk": "Required to use the Beanstalk queue driver (~3.0).",
-            "php-amqplib/php-amqplib": "Required to use the RabbitMQ queue driver (2.6.*)."
-        },
-        "time": "2016-06-05T21:34:56+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "SimpleQueue\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Frédéric Guillot"
-            }
-        ],
-        "description": "Abstraction layer for multiple queue systems",
-        "homepage": "https://github.com/fguillot/simple-queue"
-    },
-    {
-        "name": "fguillot/simple-validator",
-        "version": "v1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fguillot/simpleValidator.git",
-            "reference": "23b0a99c5f11ad74d05f8845feaafbcfd9223eda"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/23b0a99c5f11ad74d05f8845feaafbcfd9223eda",
-            "reference": "23b0a99c5f11ad74d05f8845feaafbcfd9223eda",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2016-06-26T15:09:26+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "SimpleValidator": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Frédéric Guillot"
-            }
-        ],
-        "description": "Simple validator library",
-        "homepage": "https://github.com/fguillot/simpleValidator"
-    },
-    {
         "name": "psr/log",
         "version": "1.0.2",
         "version_normalized": "1.0.2.0",
@@ -992,23 +903,23 @@
     },
     {
         "name": "symfony/finder",
-        "version": "v3.4.6",
-        "version_normalized": "3.4.6.0",
+        "version": "v3.4.7",
+        "version_normalized": "3.4.7.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/finder.git",
-            "reference": "a479817ce0a9e4adfd7d39c6407c95d97c254625"
+            "reference": "7a2e1299cc0c4162996f18e347b6356729a55317"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/finder/zipball/a479817ce0a9e4adfd7d39c6407c95d97c254625",
-            "reference": "a479817ce0a9e4adfd7d39c6407c95d97c254625",
+            "url": "https://api.github.com/repos/symfony/finder/zipball/7a2e1299cc0c4162996f18e347b6356729a55317",
+            "reference": "7a2e1299cc0c4162996f18e347b6356729a55317",
             "shasum": ""
         },
         "require": {
             "php": "^5.5.9|>=7.0.8"
         },
-        "time": "2018-03-05T18:28:11+00:00",
+        "time": "2018-03-28T18:23:39+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

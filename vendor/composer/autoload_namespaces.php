@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'SimpleValidator' => array($vendorDir . '/fguillot/simple-validator/src'),
     'Pimple' => array($vendorDir . '/pimple/pimple/src'),
     'PicoDb' => array($vendorDir . '/fguillot/picodb/lib'),
     'Parsedown' => array($vendorDir . '/erusev/parsedown'),
@@ -14,4 +13,5 @@ return array(
     'Otp' => array($vendorDir . '/christian-riesen/otp/src'),
     'JsonRPC' => array($vendorDir . '/fguillot/json-rpc/src'),
     'Eluceo\\iCal' => array($vendorDir . '/eluceo/ical/src'),
+    '' => array($baseDir . '/libs'),
 );

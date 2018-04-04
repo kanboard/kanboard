@@ -31,8 +31,6 @@
         "erusev/parsedown" : "1.6.0",
         "fguillot/json-rpc" : "1.2.1",
         "fguillot/picodb" : "v1.0.18",
-        "fguillot/simple-validator" : "1.0.1",
-        "fguillot/simple-queue" : "1.0.1",
         "paragonie/random_compat": "2.0.11",
         "pimple/pimple" : "3.2.2",
         "psr/log": "~1.0",
@@ -46,6 +44,9 @@
         "classmap" : ["app/"],
         "psr-4" : {
             "Kanboard\\" : "app/"
+        },
+        "psr-0" : {
+            "": "libs/"
         },
         "files" : [
             "app/functions.php"
