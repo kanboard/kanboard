@@ -564,12 +564,13 @@ Request example:
     "jsonrpc": "2.0",
     "method": "moveTaskPosition",
     "id": 117211800,
-    "params": {
-        "project_id": 1,
-        "task_id": 1,
-        "column_id": 2,
-        "position": 1
-    }
+    "params": [
+        1,
+        1,
+        2,
+        1
+        1
+    ]
 }
 ```
 
