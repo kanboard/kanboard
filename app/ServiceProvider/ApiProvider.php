@@ -10,6 +10,7 @@ use Kanboard\Api\Procedure\CategoryProcedure;
 use Kanboard\Api\Procedure\ColumnProcedure;
 use Kanboard\Api\Procedure\CommentProcedure;
 use Kanboard\Api\Procedure\ProjectFileProcedure;
+use Kanboard\Api\Procedure\ProjectMetadataProcedure;
 use Kanboard\Api\Procedure\TagProcedure;
 use Kanboard\Api\Procedure\TaskExternalLinkProcedure;
 use Kanboard\Api\Procedure\TaskFileProcedure;
@@ -66,6 +67,7 @@ class ApiProvider implements ServiceProviderInterface
             ->withObject(new LinkProcedure($container))
             ->withObject(new ProjectProcedure($container))
             ->withObject(new ProjectPermissionProcedure($container))
+            ->withObject(new ProjectMetadataProcedure($container))
             ->withObject(new SubtaskProcedure($container))
             ->withObject(new SubtaskTimeTrackingProcedure($container))
             ->withObject(new SwimlaneProcedure($container))
