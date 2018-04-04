@@ -1375,4 +1375,7 @@ return array(
     'seconds' => '秒',
     'Assign automatically a color when preset start date is reached' => '当到达预设起始日期时自动指派颜色',
     'Move the task to another column once a predefined start date is reached' => '当到达预定起始日期时移动任务到另一栏目',
+    // 'This task is now linked to the task %s with the relation "%s"' => '',
+    // 'The link with the relation "%s" to the task %s has been removed' => '',
+    // 'Custom Filter:' => '',
 );

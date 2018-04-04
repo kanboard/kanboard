@@ -1375,4 +1375,7 @@ return array(
     // 'seconds' => '',
     // 'Assign automatically a color when preset start date is reached' => '',
     // 'Move the task to another column once a predefined start date is reached' => '',
+    // 'This task is now linked to the task %s with the relation "%s"' => '',
+    // 'The link with the relation "%s" to the task %s has been removed' => '',
+    // 'Custom Filter:' => '',
 );

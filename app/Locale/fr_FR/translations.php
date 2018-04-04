@@ -1375,4 +1375,7 @@ return array(
     'seconds' => 'secondes',
     'Assign automatically a color when preset start date is reached' => 'Assigner automatiquement une couleur lorsque la date de début est passée',
     'Move the task to another column once a predefined start date is reached' => 'Déplaçer la tâche vers une autre colonne lorsque la date de début est passée',
+    'This task is now linked to the task %s with the relation "%s"' => 'Cette tâche est maintenant liée à la tâche %s avec la relation « %s »',
+    'The link with the relation "%s" to the task %s has been removed' => 'Le lien avec la relation « %s » de la tâche %s a été supprimé',
+    'Custom Filter:' => 'Filtre personalisé :',
 );

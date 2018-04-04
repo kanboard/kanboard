@@ -594,7 +594,7 @@ return array(
     'Factor to calculate new due date: ' => 'Faktor til beregning af ny forfaldsdato: ',
     'Month(s)' => 'Måned(er)',
     'Recurrence' => 'Gentagelse',
-    'This task has been created by:' => 'Opgave oprettet af:',
+    'This task has been created by: ' => 'Opgave oprettet af: ',
     'Recurrent task has been generated:' => 'Gentagende opgave oprettet:',
     'Timeframe to calculate new due date: ' => 'Tidsramme til beregning af ny forfaldsdato: ',
     'Trigger to generate recurrent task: ' => 'Udløser for at generere gentagende opgave: ',
@@ -1375,4 +1375,7 @@ return array(
     'seconds' => 'sekunder',
     'Assign automatically a color when preset start date is reached' => 'Tildele automatisk farve når forudindstillet startdato er nået',
     'Move the task to another column once a predefined start date is reached' => 'Flytte opgave til anden kolonne når forudbestemt startdato er nået',
+    // 'This task is now linked to the task %s with the relation "%s"' => '',
+    // 'The link with the relation "%s" to the task %s has been removed' => '',
+    // 'Custom Filter:' => '',
 );
