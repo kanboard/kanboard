@@ -1,8 +1,11 @@
 This issue is:
 
-[] Bug report
-[] Feature request
-[] Improvement
+- [ ] Bug report
+- [ ] Feature request
+- [ ] Improvement
+
+- Please, read the [Frequently Asked Questions](https://docs.kanboard.org/en/latest/developer_guide/faq.html).
+- Ask questions on the [Forum](https://github.com/kanboard/forum/issues).
 
 ### Actual behaviour
 
@@ -26,6 +29,3 @@ This issue is:
 - PHP version:
 - OS:
 - Browser:
-
-[Frequently Asked Questions](https://docs.kanboard.org/en/latest/developer_guide/faq.html)
-
