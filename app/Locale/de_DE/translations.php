@@ -1376,4 +1376,5 @@ return array(
     'This task is now linked to the task %s with the relation "%s"' => 'Diese Aufgabe ist jetzt verknüpft mit der Aufgabe %s mit der Relation "%s"',
     'The link with the relation "%s" to the task %s has been removed' => 'Die Verknüpfung mit der Relation "%s" zur Aufgabe %s wurde entfernt',
     'Custom Filter:' => 'Benutzerdefinierter Filter:',
+    // 'Unable to find this group.' => '',
 );

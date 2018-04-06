@@ -1376,4 +1376,5 @@ return array(
     // 'This task is now linked to the task %s with the relation "%s"' => '',
     // 'The link with the relation "%s" to the task %s has been removed' => '',
     // 'Custom Filter:' => '',
+    // 'Unable to find this group.' => '',
 );
