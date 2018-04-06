@@ -25,7 +25,16 @@ class UrlHelper extends Base
      */
     public function doc($label, $file)
     {
-        return $this->link($label, 'DocumentationController', 'show', array('file' => $file), false, '', '', true);
+        $version = 'latest';
+
+        if (substr(APP_VERSION, 0, 1) === 'v') {
+            $version = substr(APP_VERSION, 1);
+        } else if (ctype_digit(substr(APP_VERSION, 0, 1))) {
+            $version = APP_VERSION;
+        }
+
+        $url = sprintf(DOCUMENTATION_URL_PATTERN, $version, $file);
+        return sprintf('<a href="%s" target="_blank">%s</a>', $url, $label);
     }
 
     /**

@@ -152,3 +152,6 @@ defined('TOTP_ISSUER') or define('TOTP_ISSUER', 'Kanboard');
 
 // Comma separated list of fields to not synchronize when using external authentication providers
 defined('EXTERNAL_AUTH_EXCLUDE_FIELDS') or define('EXTERNAL_AUTH_EXCLUDE_FIELDS', 'username');
+
+// Documentation URL
+defined('DOCUMENTATION_URL_PATTERN') or define('DOCUMENTATION_URL_PATTERN', 'https://docs.kanboard.org/en/%s/user_guide/%s.html');
