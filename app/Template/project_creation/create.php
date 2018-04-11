@@ -8,7 +8,7 @@
         <?= $this->form->hidden('is_private', $values) ?>
 
         <?= $this->form->label(t('Name'), 'name') ?>
-        <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="50"')) ?>
+        <?= $this->form->text('name', $values, $errors, array('autofocus', 'required')) ?>
 
         <?php if (count($projects_list) > 1): ?>
             <?= $this->form->label(t('Create from another project'), 'src_project_id') ?>

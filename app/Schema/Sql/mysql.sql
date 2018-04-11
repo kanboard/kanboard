@@ -15,8 +15,8 @@ DROP TABLE IF EXISTS `action_has_params`;
 CREATE TABLE `action_has_params` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `action_id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `value` varchar(50) NOT NULL,
+  `name` text NOT NULL,
+  `value` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `action_id` (`action_id`),
   CONSTRAINT `action_has_params_ibfk_1` FOREIGN KEY (`action_id`) REFERENCES `actions` (`id`) ON DELETE CASCADE
@@ -28,8 +28,8 @@ DROP TABLE IF EXISTS `actions`;
 CREATE TABLE `actions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
-  `event_name` varchar(50) NOT NULL,
-  `action_name` varchar(255) DEFAULT NULL,
+  `event_name` text NOT NULL,
+  `action_name` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `project_id` (`project_id`),
   CONSTRAINT `actions_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE
@@ -100,7 +100,7 @@ CREATE TABLE `comments` (
   `user_id` int(11) DEFAULT '0',
   `date_creation` bigint(20) DEFAULT NULL,
   `comment` text,
-  `reference` varchar(50) DEFAULT '',
+  `reference` varchar(255) DEFAULT '',
   `date_modification` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
@@ -123,10 +123,10 @@ DROP TABLE IF EXISTS `custom_filters`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `custom_filters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `filter` varchar(100) NOT NULL,
+  `filter` text NOT NULL,
   `project_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `name` text NOT NULL,
   `is_shared` tinyint(1) DEFAULT '0',
   `append` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
@@ -154,7 +154,7 @@ DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `external_id` varchar(255) DEFAULT '',
-  `name` varchar(100) NOT NULL,
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -239,7 +239,7 @@ DROP TABLE IF EXISTS `project_activities`;
 CREATE TABLE `project_activities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date_creation` bigint(20) DEFAULT NULL,
-  `event_name` varchar(50) NOT NULL,
+  `event_name` text NOT NULL,
   `creator_id` int(11) DEFAULT NULL,
   `project_id` int(11) DEFAULT NULL,
   `task_id` int(11) DEFAULT NULL,
@@ -306,8 +306,8 @@ DROP TABLE IF EXISTS `project_has_files`;
 CREATE TABLE `project_has_files` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `path` varchar(255) NOT NULL,
+  `name` text NOT NULL,
+  `path` text NOT NULL,
   `is_image` tinyint(1) DEFAULT '0',
   `size` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL DEFAULT '0',
@@ -400,7 +400,7 @@ DROP TABLE IF EXISTS `projects`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` text NOT NULL,
   `is_active` tinyint(4) DEFAULT '1',
   `token` varchar(255) DEFAULT NULL,
   `last_modified` bigint(20) DEFAULT NULL,
@@ -414,7 +414,7 @@ CREATE TABLE `projects` (
   `priority_default` int(11) DEFAULT '0',
   `priority_start` int(11) DEFAULT '0',
   `priority_end` int(11) DEFAULT '3',
-  `email` varchar(255) DEFAULT NULL,
+  `email` text,
   `predefined_email_subjects` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -486,7 +486,7 @@ DROP TABLE IF EXISTS `subtasks`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `subtasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
+  `title` text NOT NULL,
   `status` int(11) DEFAULT '0',
   `time_estimated` float DEFAULT NULL,
   `time_spent` float DEFAULT NULL,
@@ -503,7 +503,7 @@ DROP TABLE IF EXISTS `swimlanes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `swimlanes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `position` int(11) DEFAULT '1',
   `is_active` int(11) DEFAULT '1',
   `project_id` int(11) DEFAULT NULL,
@@ -532,8 +532,8 @@ CREATE TABLE `task_has_external_links` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `link_type` varchar(100) NOT NULL,
   `dependency` varchar(100) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `url` varchar(255) NOT NULL,
+  `title` text NOT NULL,
+  `url` text NOT NULL,
   `date_creation` int(11) NOT NULL,
   `date_modification` int(11) NOT NULL,
   `task_id` int(11) NOT NULL,
@@ -548,8 +548,8 @@ DROP TABLE IF EXISTS `task_has_files`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `task_has_files` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `path` varchar(255) DEFAULT NULL,
+  `name` text NOT NULL,
+  `path` text NOT NULL,
   `is_image` tinyint(1) DEFAULT '0',
   `task_id` int(11) NOT NULL,
   `date` bigint(20) DEFAULT NULL,
@@ -607,7 +607,7 @@ DROP TABLE IF EXISTS `tasks`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
+  `title` text NOT NULL,
   `description` text,
   `date_creation` bigint(20) DEFAULT NULL,
   `date_completed` bigint(20) DEFAULT NULL,
@@ -622,7 +622,7 @@ CREATE TABLE `tasks` (
   `category_id` int(11) DEFAULT '0',
   `creator_id` int(11) DEFAULT '0',
   `date_modification` int(11) DEFAULT '0',
-  `reference` varchar(50) DEFAULT '',
+  `reference` varchar(255) DEFAULT '',
   `date_started` bigint(20) DEFAULT NULL,
   `time_spent` float DEFAULT '0',
   `time_estimated` float DEFAULT '0',
@@ -718,7 +718,7 @@ CREATE TABLE `user_has_unread_notifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `date_creation` bigint(20) NOT NULL,
-  `event_name` varchar(50) NOT NULL,
+  `event_name` text NOT NULL,
   `event_data` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
@@ -730,7 +730,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `password` varchar(255) DEFAULT NULL,
   `is_ldap_user` tinyint(1) DEFAULT '0',
   `name` varchar(255) DEFAULT NULL,
@@ -752,7 +752,7 @@ CREATE TABLE `users` (
   `is_active` tinyint(1) DEFAULT '1',
   `avatar_path` varchar(255) DEFAULT NULL,
   `api_access_token` varchar(255) DEFAULT NULL,
-  `filter` varchar(255) DEFAULT NULL,
+  `filter` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_username_idx` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -776,7 +776,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `settings` WRITE;
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-INSERT INTO `settings` VALUES ('api_token','36e88ee4ad58bc71a7879d8cadac15142fdd25550f4910b8ec8c7525730c',0,0),('application_currency','USD',0,0),('application_date_format','m/d/Y',0,0),('application_language','en_US',0,0),('application_stylesheet','',0,0),('application_timezone','UTC',0,0),('application_url','',0,0),('board_columns','',0,0),('board_highlight_period','172800',0,0),('board_private_refresh_interval','10',0,0),('board_public_refresh_interval','60',0,0),('calendar_project_tasks','date_started',0,0),('calendar_user_subtasks_time_tracking','0',0,0),('calendar_user_tasks','date_started',0,0),('cfd_include_closed_tasks','1',0,0),('default_color','yellow',0,0),('integration_gravatar','0',0,0),('password_reset','1',0,0),('project_categories','',0,0),('subtask_restriction','0',0,0),('subtask_time_tracking','1',0,0),('webhook_token','99225408c1094eead14b25dbe9f7254ec233bd54aea02b8dff7e7d25ae50',0,0),('webhook_url','',0,0);
+INSERT INTO `settings` VALUES ('api_token','5e51f5e81b816fe52594c692abc6ab51c53024048953e0a312d378ebda7e',0,0),('application_currency','USD',0,0),('application_date_format','m/d/Y',0,0),('application_language','en_US',0,0),('application_stylesheet','',0,0),('application_timezone','UTC',0,0),('application_url','',0,0),('board_columns','',0,0),('board_highlight_period','172800',0,0),('board_private_refresh_interval','10',0,0),('board_public_refresh_interval','60',0,0),('calendar_project_tasks','date_started',0,0),('calendar_user_subtasks_time_tracking','0',0,0),('calendar_user_tasks','date_started',0,0),('cfd_include_closed_tasks','1',0,0),('default_color','yellow',0,0),('integration_gravatar','0',0,0),('password_reset','1',0,0),('project_categories','',0,0),('subtask_restriction','0',0,0),('subtask_time_tracking','1',0,0),('webhook_token','5739f13ff6db190c5983328d7bed8aff703b7e78236890e9030888194121',0,0),('webhook_url','',0,0);
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -805,4 +805,4 @@ UNLOCK TABLES;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$j/bvk6WblIHAyAJEBXLgBeoOjJ1oHsuA0VTUf85lRYOJ4czssCuI6', 'app-admin');INSERT INTO schema_version VALUES ('127');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$eu5txjAlmBRZYmAcWjHAx.BSCIYL6RMTIyrIWG4eqWFtf62DCJPWy', 'app-admin');INSERT INTO schema_version VALUES ('129');

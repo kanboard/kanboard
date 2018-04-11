@@ -14,10 +14,10 @@
         <legend><?= t('General') ?></legend>
 
         <?= $this->form->label(t('Name'), 'name') ?>
-        <?= $this->form->text('name', $values, $errors, array('required', 'maxlength="50"', 'autofocus', 'tabindex="1"')) ?>
+        <?= $this->form->text('name', $values, $errors, array('required', 'autofocus', 'tabindex="1"')) ?>
 
         <?= $this->form->label(t('Email'), 'email') ?>
-        <?= $this->form->email('email', $values, $errors, array('maxlength="255"', 'tabindex="2"')) ?>
+        <?= $this->form->email('email', $values, $errors, array('tabindex="2"')) ?>
         <p class="form-help"><?= t('The project email is optional and could be used by several plugins.') ?></p>
 
         <?= $this->form->label(t('Identifier'), 'identifier') ?>

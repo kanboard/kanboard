@@ -28,8 +28,8 @@ class CustomFilterValidator extends BaseValidator
             new Validators\Required('filter', t('Field required')),
             new Validators\Integer('user_id', t('This value must be an integer')),
             new Validators\Integer('project_id', t('This value must be an integer')),
-            new Validators\MaxLength('name', t('The maximum length is %d characters', 100), 100),
-            new Validators\MaxLength('filter', t('The maximum length is %d characters', 100), 100)
+            new Validators\MaxLength('name', t('The maximum length is %d characters', 65535), 65535),
+            new Validators\MaxLength('filter', t('The maximum length is %d characters', 65535), 65535)
         );
     }
 

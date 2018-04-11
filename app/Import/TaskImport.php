@@ -140,8 +140,8 @@ class TaskImport extends Base
             new Validators\Integer('project_id', t('This value must be an integer')),
             new Validators\Required('project_id', t('The project is required')),
             new Validators\Required('title', t('The title is required')),
-            new Validators\MaxLength('title', t('The maximum length is %d characters', 200), 200),
-            new Validators\MaxLength('reference', t('The maximum length is %d characters', 50), 50),
+            new Validators\MaxLength('title', t('The maximum length is %d characters', 65535), 65535),
+            new Validators\MaxLength('reference', t('The maximum length is %d characters', 255), 255),
         ));
 
         return $v->execute();

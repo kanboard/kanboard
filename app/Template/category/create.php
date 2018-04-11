@@ -5,7 +5,7 @@
     <?= $this->form->csrf() ?>
 
     <?= $this->form->label(t('Category Name'), 'name') ?>
-    <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="50"')) ?>
+    <?= $this->form->text('name', $values, $errors, array('autofocus', 'required')) ?>
 
     <?= $this->modal->submitButtons() ?>
 </form>

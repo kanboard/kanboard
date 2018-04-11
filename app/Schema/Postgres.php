@@ -8,7 +8,35 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 107;
+const VERSION = 108;
+
+function version_108(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE "projects" ALTER COLUMN "name" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "projects" ALTER COLUMN "email" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "action_has_params" ALTER COLUMN "name" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "action_has_params" ALTER COLUMN "value" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "actions" ALTER COLUMN "event_name" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "actions" ALTER COLUMN "action_name" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "comments" ALTER COLUMN "reference" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "custom_filters" ALTER COLUMN "filter" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "custom_filters" ALTER COLUMN "name" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "groups" ALTER COLUMN "name" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "project_activities" ALTER COLUMN "event_name" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "project_has_files" ALTER COLUMN "name" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "project_has_files" ALTER COLUMN "path" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "subtasks" ALTER COLUMN "title" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "swimlanes" ALTER COLUMN "name" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "task_has_external_links" ALTER COLUMN "title" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "task_has_external_links" ALTER COLUMN "url" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "task_has_files" ALTER COLUMN "name" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "task_has_files" ALTER COLUMN "path" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "tasks" ALTER COLUMN "title" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "tasks" ALTER COLUMN "reference" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "user_has_unread_notifications" ALTER COLUMN "event_name" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "users" ALTER COLUMN "username" TYPE TEXT');
+    $pdo->exec('ALTER TABLE "users" ALTER COLUMN "filter" TYPE TEXT');
+}
 
 function version_107(PDO $pdo)
 {

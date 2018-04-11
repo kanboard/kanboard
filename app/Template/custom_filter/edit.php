@@ -8,10 +8,10 @@
     <?= $this->form->hidden('user_id', $values) ?>
 
     <?= $this->form->label(t('Name'), 'name') ?>
-    <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="100"')) ?>
+    <?= $this->form->text('name', $values, $errors, array('autofocus', 'required')) ?>
 
     <?= $this->form->label(t('Filter'), 'filter') ?>
-    <?= $this->form->text('filter', $values, $errors, array('required', 'maxlength="100"')) ?>
+    <?= $this->form->text('filter', $values, $errors, array('required')) ?>
 
     <?php if ($this->user->hasProjectAccess('ProjectEditController', 'show', $project['id'])): ?>
         <?= $this->form->checkbox('is_shared', t('Share with all project members'), 1, $values['is_shared'] == 1) ?>

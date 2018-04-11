@@ -8,7 +8,35 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 128;
+const VERSION = 129;
+
+function version_129(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `projects` MODIFY `name` TEXT NOT NULL');
+    $pdo->exec('ALTER TABLE `projects` MODIFY `email` TEXT');
+    $pdo->exec('ALTER TABLE `action_has_params` MODIFY `name` TEXT NOT NULL');
+    $pdo->exec('ALTER TABLE `action_has_params` MODIFY `value` TEXT NOT NULL');
+    $pdo->exec('ALTER TABLE `actions` MODIFY `event_name` TEXT NOT NULL');
+    $pdo->exec('ALTER TABLE `actions` MODIFY `action_name` TEXT NOT NULL');
+    $pdo->exec("ALTER TABLE `comments` MODIFY `reference` VARCHAR(255) DEFAULT ''");
+    $pdo->exec("ALTER TABLE `custom_filters` MODIFY `filter` TEXT NOT NULL");
+    $pdo->exec("ALTER TABLE `custom_filters` MODIFY `name` TEXT NOT NULL");
+    $pdo->exec("ALTER TABLE `groups` MODIFY `name` VARCHAR(255) NOT NULL");
+    $pdo->exec("ALTER TABLE `project_activities` MODIFY `event_name` TEXT NOT NULL");
+    $pdo->exec("ALTER TABLE `project_has_files` MODIFY `name` TEXT NOT NULL");
+    $pdo->exec("ALTER TABLE `project_has_files` MODIFY `path` TEXT NOT NULL");
+    $pdo->exec("ALTER TABLE `subtasks` MODIFY `title` TEXT NOT NULL");
+    $pdo->exec("ALTER TABLE `swimlanes` MODIFY `name` VARCHAR(255) NOT NULL");
+    $pdo->exec("ALTER TABLE `task_has_external_links` MODIFY `title` TEXT NOT NULL");
+    $pdo->exec("ALTER TABLE `task_has_external_links` MODIFY `url` TEXT NOT NULL");
+    $pdo->exec("ALTER TABLE `task_has_files` MODIFY `name` TEXT NOT NULL");
+    $pdo->exec("ALTER TABLE `task_has_files` MODIFY `path` TEXT NOT NULL");
+    $pdo->exec("ALTER TABLE `tasks` MODIFY `title` TEXT NOT NULL");
+    $pdo->exec("ALTER TABLE `tasks` MODIFY `reference` VARCHAR(255) DEFAULT ''");
+    $pdo->exec("ALTER TABLE `user_has_unread_notifications` MODIFY `event_name` TEXT NOT NULL");
+    $pdo->exec("ALTER TABLE `users` MODIFY `username` VARCHAR(255) NOT NULL");
+    $pdo->exec("ALTER TABLE `users` MODIFY `filter` TEXT");
+}
 
 function version_128(PDO $pdo)
 {

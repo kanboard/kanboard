@@ -12,7 +12,7 @@ const VERSION = 118;
 
 function version_118(PDO $pdo)
 {
-    $pdo->exec('ALTER TABLE users ADD COLUMN filter VARCHAR(255) DEFAULT NULL');
+    $pdo->exec('ALTER TABLE users ADD COLUMN filter TEXT');
 }
 
 function version_117(PDO $pdo)
