@@ -64,7 +64,7 @@ CREATE TABLE `column_has_restrictions` (
   `project_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `column_id` int(11) NOT NULL,
-  `rule` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rule` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`restriction_id`),
   UNIQUE KEY `role_id` (`role_id`,`column_id`,`rule`),
   KEY `project_id` (`project_id`),
@@ -79,7 +79,7 @@ DROP TABLE IF EXISTS `columns`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `columns` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `position` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
   `task_limit` int(11) DEFAULT '0',
@@ -100,7 +100,7 @@ CREATE TABLE `comments` (
   `user_id` int(11) DEFAULT '0',
   `date_creation` bigint(20) DEFAULT NULL,
   `comment` mediumtext COLLATE utf8mb4_unicode_ci,
-  `reference` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `reference` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `date_modification` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
@@ -154,7 +154,7 @@ DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `external_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '',
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -163,9 +163,9 @@ DROP TABLE IF EXISTS `invites`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `invites` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `project_id` int(11) NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`email`,`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -189,7 +189,7 @@ DROP TABLE IF EXISTS `links`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `links` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `label` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `opposite_id` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `label` (`label`)
@@ -291,7 +291,7 @@ DROP TABLE IF EXISTS `project_has_categories`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `project_has_categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `project_id` int(11) NOT NULL,
   `description` mediumtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`),
@@ -360,7 +360,7 @@ DROP TABLE IF EXISTS `project_has_roles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `project_has_roles` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `project_id` int(11) NOT NULL,
   PRIMARY KEY (`role_id`),
   UNIQUE KEY `project_id` (`project_id`,`role`),
@@ -387,7 +387,7 @@ CREATE TABLE `project_role_has_restrictions` (
   `restriction_id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
-  `rule` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rule` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`restriction_id`),
   UNIQUE KEY `role_id` (`role_id`,`rule`),
   KEY `project_id` (`project_id`),
@@ -447,7 +447,7 @@ DROP TABLE IF EXISTS `sessions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `expire_at` int(11) NOT NULL,
   `data` longtext COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
@@ -503,7 +503,7 @@ DROP TABLE IF EXISTS `swimlanes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `swimlanes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `position` int(11) DEFAULT '1',
   `is_active` int(11) DEFAULT '1',
   `project_id` int(11) DEFAULT NULL,
@@ -519,7 +519,7 @@ DROP TABLE IF EXISTS `tags`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `project_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `project_id` (`project_id`,`name`)
@@ -622,7 +622,7 @@ CREATE TABLE `tasks` (
   `category_id` int(11) DEFAULT '0',
   `creator_id` int(11) DEFAULT '0',
   `date_modification` int(11) DEFAULT '0',
-  `reference` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `reference` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `date_started` bigint(20) DEFAULT NULL,
   `time_spent` float DEFAULT '0',
   `time_estimated` float DEFAULT '0',
@@ -730,7 +730,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_ldap_user` tinyint(1) DEFAULT '0',
   `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

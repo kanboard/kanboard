@@ -70,7 +70,7 @@ class TagValidator extends BaseValidator
         return array(
             new Validators\Required('project_id', t('Field required')),
             new Validators\Required('name', t('Field required')),
-            new Validators\MaxLength('name', t('The maximum length is %d characters', 255), 255),
+            new Validators\MaxLength('name', t('The maximum length is %d characters', 191), 191),
         );
     }
 }

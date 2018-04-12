@@ -9,7 +9,7 @@
             <legend><?= t('Profile') ?></legend>
 
             <?= $this->form->label(t('Username'), 'username') ?>
-            <?= $this->form->text('username', $values, $errors, array('autofocus', 'required', 'maxlength="255"')) ?>
+            <?= $this->form->text('username', $values, $errors, array('autofocus', 'required', 'maxlength="191"')) ?>
 
             <?= $this->form->label(t('Name'), 'name') ?>
             <?= $this->form->text('name', $values, $errors) ?>

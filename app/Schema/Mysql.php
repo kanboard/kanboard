@@ -22,9 +22,28 @@ You might need to run:
 REPAIR TABLE table_name;
 OPTIMIZE TABLE table_name;
 
+The max length for Mysql 5.6 is 191 for varchar unique keys in utf8mb4
+
 */
 function version_130(PDO $pdo)
 {
+    $pdo->exec("ALTER TABLE `swimlanes` MODIFY `name` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `users` MODIFY `username` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `groups` MODIFY `name` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `links` MODIFY `label` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `tags` MODIFY `name` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `sessions` MODIFY `id` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `project_role_has_restrictions` MODIFY `rule` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `project_has_roles` MODIFY `role` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `project_has_categories` MODIFY `name` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `invites` MODIFY `email` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `invites` MODIFY `token` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `groups` MODIFY `name` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `columns` MODIFY `title` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `column_has_restrictions` MODIFY `rule` VARCHAR(191) NOT NULL");
+    $pdo->exec("ALTER TABLE `comments` MODIFY `reference` VARCHAR(191) DEFAULT ''");
+    $pdo->exec("ALTER TABLE `tasks` MODIFY `reference` VARCHAR(191) DEFAULT ''");
+
     $tables = [
         'action_has_params',
         'actions',
