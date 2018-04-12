@@ -8,7 +8,77 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 129;
+const VERSION = 130;
+
+/*
+
+This migration convert table encoding to utf8mb4.
+You should also convert the database encoding:
+
+ALTER DATABASE kanboard CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
+You might need to run:
+
+REPAIR TABLE table_name;
+OPTIMIZE TABLE table_name;
+
+*/
+function version_130(PDO $pdo)
+{
+    $tables = [
+        'action_has_params',
+        'actions',
+        'column_has_move_restrictions',
+        'column_has_restrictions',
+        'columns',
+        'comments',
+        'currencies',
+        'custom_filters',
+        'group_has_users',
+        'groups',
+        'invites',
+        'last_logins',
+        'links',
+        'password_reset',
+        'plugin_schema_versions',
+        'predefined_task_descriptions',
+        'project_activities',
+        'project_daily_column_stats',
+        'project_daily_stats',
+        'project_has_categories',
+        'project_has_files',
+        'project_has_groups',
+        'project_has_metadata',
+        'project_has_notification_types',
+        'project_has_roles',
+        'project_has_users',
+        'project_role_has_restrictions',
+        'projects',
+        'remember_me',
+        'sessions',
+        'settings',
+        'subtask_time_tracking',
+        'subtasks',
+        'swimlanes',
+        'tags',
+        'task_has_external_links',
+        'task_has_files',
+        'task_has_links',
+        'task_has_metadata',
+        'task_has_tags',
+        'tasks',
+        'transitions',
+        'user_has_metadata',
+        'user_has_notification_types',
+        'user_has_notifications',
+        'user_has_unread_notifications',
+        'users',
+    ];
+
+    foreach ($tables as $table) {
+        $pdo->exec('ALTER TABLE `'.$table.'` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci');
+    }
+}
 
 function version_129(PDO $pdo)
 {
