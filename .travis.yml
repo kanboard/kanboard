@@ -16,7 +16,6 @@ php:
 env:
   - DB=sqlite
   - DB=postgres
-  - DB=mysql
 
 matrix:
   fast_finish: true
