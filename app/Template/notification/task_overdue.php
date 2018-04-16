@@ -35,5 +35,3 @@
         </tr>
     <?php endforeach ?>
 </table>
-
-<?= $this->render('notification/footer', array('task' => array('project_id' => $project_id))) ?>
