@@ -2,7 +2,7 @@
 
 <p>
     <?= e('The link with the relation "%s" to the task %s has been removed',
-          t($this->text->e($task_link['label'])),
+          t($task_link['label']),
           $this->url->absoluteLink(t('#%d', $task_link['opposite_task_id']), 'TaskViewController', 'show', array('task_id' => $task_link['opposite_task_id']))) ?>
 </p>
 
