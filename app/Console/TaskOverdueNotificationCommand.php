@@ -180,7 +180,7 @@ class TaskOverdueNotificationCommand extends BaseCommand
         $this->userNotificationModel->sendUserNotification(
             $manager,
             TaskModel::EVENT_OVERDUE,
-            array('tasks' => $tasks, 'project_name' => $tasks[0]['project_name'])
+            array('tasks' => $tasks, 'project_name' => $tasks[0]['project_name'], 'project_id' => $tasks[0]['project_id'])
         );
     }
 
