@@ -1,0 +1,135 @@
+#!/usr/bin/env php
+<?php
+
+require_once 'vendor/autoload.php';
+
+use PicoFeed\Config\Config;
+use PicoFeed\Reader\Favicon;
+use PicoFeed\Scraper\Scraper;
+use PicoFeed\Reader\Reader;
+use PicoFeed\Logging\Logger;
+use PicoFeed\PicoFeedException;
+
+Logger::enable();
+
+function get_feed($url, $disable_filtering = false)
+{
+    try {
+
+        $reader = new Reader;
+        $resource = $reader->discover($url);
+
+        $parser = $reader->getParser(
+            $resource->getUrl(),
+            $resource->getContent(),
+            $resource->getEncoding()
+        );
+
+        if ($disable_filtering) {
+            $parser->disableContentFiltering();
+        }
+
+        return $parser->execute();
+    }
+    catch (PicoFeedException $e) {
+        echo 'Exception thrown ===> "'.$e->getMessage().'"'.PHP_EOL;
+        return false;
+    }
+}
+
+function get_item($feed, $item_id)
+{
+    foreach ($feed->items as $item) {
+        if ($item->getId() === $item_id) {
+            echo $item;
+            echo "============= CONTENT ================\n";
+            echo $item->getContent();
+            echo "\n============= CONTENT ================\n";
+            break;
+        }
+    }
+}
+
+function dump_feed($url)
+{
+    $feed = get_feed($url);
+    echo $feed;
+}
+
+function debug_feed($url)
+{
+    get_feed($url);
+    print_r(Logger::getMessages());
+}
+
+function dump_item($url, $item_id)
+{
+    $feed = get_feed($url);
+
+    if ($feed !== false) {
+        get_item($feed, $item_id);
+    }
+}
+
+function nofilter_item($url, $item_id)
+{
+    $feed = get_feed($url, true);
+
+    if ($feed !== false) {
+        get_item($feed, $item_id);
+    }
+}
+
+function grabber($url)
+{
+    $grabber = new Scraper(new Config);
+    $grabber->setUrl($url);
+    $grabber->execute();
+
+    print_r(Logger::getMessages());
+    echo "============= CONTENT ================\n";
+    echo $grabber->getRelevantContent().PHP_EOL;
+    echo "============= FILTERED ================\n";
+    echo $grabber->getFilteredContent().PHP_EOL;
+}
+
+function fetch_favicon($url)
+{
+    $favicon = new Favicon();
+    echo $favicon->find($url) . PHP_EOL;
+}
+
+// Parse command line arguments
+if ($argc === 4) {
+    switch ($argv[1]) {
+        case 'item':
+            dump_item($argv[2], $argv[3]);
+            die;
+        case 'nofilter':
+            nofilter_item($argv[2], $argv[3]);
+            die;
+    }
+} else if ($argc === 3) {
+    switch ($argv[1]) {
+        case 'feed':
+            dump_feed($argv[2]);
+            die;
+        case 'debug':
+            debug_feed($argv[2]);
+            die;
+        case 'grabber':
+            grabber($argv[2]);
+            die;
+        case 'favicon':
+            fetch_favicon($argv[2]);
+            die;
+    }
+}
+
+printf("Usage:\n");
+printf("%s feed <feed-url>\n", $argv[0]);
+printf("%s debug <feed-url>\n", $argv[0]);
+printf("%s item <feed-url> <item-id>\n", $argv[0]);
+printf("%s nofilter <feed-url> <item-id>\n", $argv[0]);
+printf("%s grabber <url>\n", $argv[0]);
+printf("%s favicon <url>\n", $argv[0]);
