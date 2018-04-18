@@ -1,3 +1,4 @@
+<div class="markdown">
 <ul>
     <?php if ($task['recurrence_status'] == \Kanboard\Model\TaskModel::RECURRING_STATUS_PENDING): ?>
         <li><?= t('Recurrent task is scheduled to be generated') ?></li>
@@ -35,3 +36,4 @@
         <?php endif ?>
     <?php endif ?>
 </ul>
+</div>
