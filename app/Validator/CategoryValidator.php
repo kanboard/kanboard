@@ -68,7 +68,7 @@ class CategoryValidator extends BaseValidator
         return array(
             new Validators\Integer('id', t('The id must be an integer')),
             new Validators\Integer('project_id', t('The project id must be an integer')),
-            new Validators\MaxLength('name', t('The maximum length is %d characters', 50), 50)
+            new Validators\MaxLength('name', t('The maximum length is %d characters', 191), 191)
         );
     }
 }

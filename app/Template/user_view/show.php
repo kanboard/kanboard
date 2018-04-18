@@ -33,6 +33,7 @@
 <ul class="panel">
     <li><?= t('Timezone:') ?> <strong><?= $this->text->in($user['timezone'], $timezones) ?></strong></li>
     <li><?= t('Language:') ?> <strong><?= $this->text->in($user['language'], $languages) ?></strong></li>
+    <li><?= t('Custom Filter:') ?> <strong><?= $this->text->e($user['filter']) ?></strong></li>
     <li><?= t('Notifications:') ?> <strong><?= $user['notifications_enabled'] == 1 ? t('Enabled') : t('Disabled') ?></strong></li>
 </ul>
 

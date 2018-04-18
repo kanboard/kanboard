@@ -37,7 +37,7 @@ class AuthValidator extends BaseValidator
     {
         $v = new Validator($values, array(
             new Validators\Required('username', t('The username is required')),
-            new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
+            new Validators\MaxLength('username', t('The maximum length is %d characters', 191), 191),
             new Validators\Required('password', t('The password is required')),
         ));
 

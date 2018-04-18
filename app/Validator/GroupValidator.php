@@ -62,7 +62,7 @@ class GroupValidator extends BaseValidator
     {
         return array(
             new Validators\Required('name', t('The name is required')),
-            new Validators\MaxLength('name', t('The maximum length is %d characters', 100), 100),
+            new Validators\MaxLength('name', t('The maximum length is %d characters', 191), 191),
             new Validators\Unique('name', t('The name must be unique'), $this->db->getConnection(), GroupModel::TABLE, 'id'),
             new Validators\MaxLength('external_id', t('The maximum length is %d characters', 255), 255),
             new Validators\Integer('id', t('This value must be an integer')),

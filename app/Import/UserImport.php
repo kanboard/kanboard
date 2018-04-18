@@ -108,7 +108,7 @@ class UserImport extends Base
     public function validateCreation(array $values)
     {
         $v = new Validator($values, array(
-            new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
+            new Validators\MaxLength('username', t('The maximum length is %d characters', 255), 255),
             new Validators\Unique('username', t('The username must be unique'), $this->db->getConnection(), UserModel::TABLE, 'id'),
             new Validators\MinLength('password', t('The minimum length is %d characters', 6), 6),
             new Validators\Email('email', t('Email address invalid')),

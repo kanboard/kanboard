@@ -130,7 +130,7 @@ class DatabaseProvider implements ServiceProviderInterface
             'username' => DB_USERNAME,
             'password' => DB_PASSWORD,
             'database' => DB_NAME,
-            'charset'  => 'utf8',
+            'charset'  => 'utf8mb4',
             'port'     => DB_PORT,
             'ssl_key'  => DB_SSL_KEY,
             'ssl_ca'   => DB_SSL_CA,

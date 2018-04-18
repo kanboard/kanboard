@@ -292,95 +292,6 @@
         "homepage": "https://github.com/fguillot/JsonRPC"
     },
     {
-        "name": "fguillot/simple-queue",
-        "version": "v1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fguillot/simple-queue.git",
-            "reference": "ce7801c507f9501bcca455129fb04c3d2107d5ff"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fguillot/simple-queue/zipball/ce7801c507f9501bcca455129fb04c3d2107d5ff",
-            "reference": "ce7801c507f9501bcca455129fb04c3d2107d5ff",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "aws/aws-sdk-php": "~3.0",
-            "mariano/disque-php": "~2.0",
-            "pda/pheanstalk": "~3.0",
-            "php-amqplib/php-amqplib": "2.6.*",
-            "phpunit/phpunit": "5.3.*"
-        },
-        "suggest": {
-            "aws/aws-sdk-php": "Required to use the AWS SQS queue driver (~3.0).",
-            "mariano/disque-php": "Required to use the Disque queue driver (~2.0).",
-            "pda/pheanstalk": "Required to use the Beanstalk queue driver (~3.0).",
-            "php-amqplib/php-amqplib": "Required to use the RabbitMQ queue driver (2.6.*)."
-        },
-        "time": "2016-06-05T21:34:56+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "SimpleQueue\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Frédéric Guillot"
-            }
-        ],
-        "description": "Abstraction layer for multiple queue systems",
-        "homepage": "https://github.com/fguillot/simple-queue"
-    },
-    {
-        "name": "fguillot/simple-validator",
-        "version": "v1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fguillot/simpleValidator.git",
-            "reference": "23b0a99c5f11ad74d05f8845feaafbcfd9223eda"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/23b0a99c5f11ad74d05f8845feaafbcfd9223eda",
-            "reference": "23b0a99c5f11ad74d05f8845feaafbcfd9223eda",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2016-06-26T15:09:26+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "SimpleValidator": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Frédéric Guillot"
-            }
-        ],
-        "description": "Simple validator library",
-        "homepage": "https://github.com/fguillot/simpleValidator"
-    },
-    {
         "name": "psr/log",
         "version": "1.0.2",
         "version_normalized": "1.0.2.0",
@@ -428,96 +339,6 @@
             "psr",
             "psr-3"
         ]
-    },
-    {
-        "name": "fguillot/simpleLogger",
-        "version": "v1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/fguillot/simpleLogger.git",
-            "reference": "c6831841193bb265b7900ecc8b6a8918371a7c98"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/fguillot/simpleLogger/zipball/c6831841193bb265b7900ecc8b6a8918371a7c98",
-            "reference": "c6831841193bb265b7900ecc8b6a8918371a7c98",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0",
-            "psr/log": "~1.0"
-        },
-        "time": "2016-05-07T18:01:57+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "SimpleLogger": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Frédéric Guillot"
-            }
-        ],
-        "description": "PHP library to write logs (compatible with PSR-3)",
-        "homepage": "https://github.com/fguillot/simpleLogger"
-    },
-    {
-        "name": "symfony/finder",
-        "version": "v3.4.4",
-        "version_normalized": "3.4.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/finder.git",
-            "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/finder/zipball/613e26310776f49a1773b6737c6bd554b8bc8c6f",
-            "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.5.9|>=7.0.8"
-        },
-        "time": "2018-01-03T07:37:34+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\Finder\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Finder Component",
-        "homepage": "https://symfony.com"
     },
     {
         "name": "gregwar/captcha",
@@ -1040,17 +861,17 @@
     },
     {
         "name": "fguillot/picodb",
-        "version": "v1.0.17",
-        "version_normalized": "1.0.17.0",
+        "version": "v1.0.18",
+        "version_normalized": "1.0.18.0",
         "source": {
             "type": "git",
             "url": "https://github.com/fguillot/picoDb.git",
-            "reference": "1699864992c40ad02395e95d7fbf44a571a116f3"
+            "reference": "4df08a3cc3c4a39e6bb329872f5d020fe135f805"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/fguillot/picoDb/zipball/1699864992c40ad02395e95d7fbf44a571a116f3",
-            "reference": "1699864992c40ad02395e95d7fbf44a571a116f3",
+            "url": "https://api.github.com/repos/fguillot/picoDb/zipball/4df08a3cc3c4a39e6bb329872f5d020fe135f805",
+            "reference": "4df08a3cc3c4a39e6bb329872f5d020fe135f805",
             "shasum": ""
         },
         "require": {
@@ -1059,7 +880,7 @@
         "require-dev": {
             "phpunit/phpunit": "4.8.*"
         },
-        "time": "2018-02-14T00:51:01+00:00",
+        "time": "2018-03-05T22:39:16+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1079,5 +900,56 @@
         ],
         "description": "Minimalist database query builder",
         "homepage": "https://github.com/fguillot/picoDb"
+    },
+    {
+        "name": "symfony/finder",
+        "version": "v3.4.7",
+        "version_normalized": "3.4.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/finder.git",
+            "reference": "7a2e1299cc0c4162996f18e347b6356729a55317"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/finder/zipball/7a2e1299cc0c4162996f18e347b6356729a55317",
+            "reference": "7a2e1299cc0c4162996f18e347b6356729a55317",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.5.9|>=7.0.8"
+        },
+        "time": "2018-03-28T18:23:39+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Finder\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Finder Component",
+        "homepage": "https://symfony.com"
     }
 ]

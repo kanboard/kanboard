@@ -135,10 +135,14 @@ class ProjectPermissionController extends BaseController
             $values['group_id'] = $this->groupModel->getOrCreateExternalGroupId($values['name'], $values['external_id']);
         }
 
-        if ($this->projectGroupRoleModel->addGroup($project['id'], $values['group_id'], $values['role'])) {
-            $this->flash->success(t('Project updated successfully.'));
+        if (empty($values['group_id'])) {
+            $this->flash->failure(t('Unable to find this group.'));
         } else {
-            $this->flash->failure(t('Unable to update this project.'));
+            if ($this->projectGroupRoleModel->addGroup($project['id'], $values['group_id'], $values['role'])) {
+                $this->flash->success(t('Project updated successfully.'));
+            } else {
+                $this->flash->failure(t('Unable to update this project.'));
+            }
         }
 
         $this->response->redirect($this->helper->url->to('ProjectPermissionController', 'index', array('project_id' => $project['id'])));

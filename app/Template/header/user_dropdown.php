@@ -29,7 +29,8 @@
         <?= $this->hook->render('template:header:dropdown') ?>
 
         <li>
-            <?= $this->url->icon('life-ring', t('Documentation'), 'DocumentationController', 'show') ?>
+            <i class="fa fa-fw fa-life-ring" aria-hidden="true"></i>
+            <?= $this->url->doc(t('Documentation'), 'index') ?>
         </li>
         <?php if (! DISABLE_LOGOUT): ?>
             <li>

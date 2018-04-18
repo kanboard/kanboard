@@ -1,6 +1,6 @@
 <?php if (! empty($task['category_id'])): ?>
-<div class="task-board-category-container">
-    <span class="task-board-category">
+<div class="task-board-category-container task-board-category-container-color">
+    <span class="task-board-category category-<?= $this->text->e($task['category_name']) ?>">
         <?php if ($not_editable): ?>
             <?= $this->text->e($task['category_name']) ?>
         <?php else: ?>

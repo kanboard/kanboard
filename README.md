@@ -5,29 +5,18 @@ Kanboard
 
 Kanboard is project management software that focuses on the Kanban methodology.
 
-Official website: <https://kanboard.org/>
-
-- Get a clear visual overview of your project
-- Multiple boards with the ability to drag and drop tasks
-- Open source and self-hosted
-- Super simple installation
-- Translated into many languages
-- Distributed under [MIT License](https://github.com/kanboard/kanboard/blob/master/LICENSE)
+- Official website: <https://kanboard.org/>
 - [List of features](https://kanboard.org/#features)
 - [Change Log](https://github.com/kanboard/kanboard/blob/master/ChangeLog)
-- [Documentation](https://github.com/kanboard/kanboard/blob/master/doc/en_US/index.markdown)
-- IRC channel: [#kanboard](ircs://chat.freenode.net:6697/#kanboard) (Freenode)
+- Official documentation: <https://docs.kanboard.org/>
+    - [Requirements](https://docs.kanboard.org/en/latest/admin_guide/requirements.html)
+    - [Installation instructions](https://docs.kanboard.org/en/latest/admin_guide/installation.html)
+    - [Upgrade to a new version](https://docs.kanboard.org/en/latest/admin_guide/upgrade.html)
+    - [Use Kanboard with Docker](https://docs.kanboard.org/en/latest/admin_guide/docker.html)
 
 Credits
 -------
 
 - Main developer: Frédéric Guillot
 - [Contributors](https://github.com/kanboard/kanboard/graphs/contributors)
-
-Installation and Upgrade
-------------------------
-
-- [Requirements](https://github.com/kanboard/kanboard/blob/master/doc/en_US/requirements.markdown)
-- [Installation instructions](https://github.com/kanboard/kanboard/blob/master/doc/en_US/installation.markdown)
-- [Upgrade to a new version](https://github.com/kanboard/kanboard/blob/master/doc/en_US/update.markdown)
-- [Use Kanboard with Docker](https://github.com/kanboard/kanboard/blob/master/doc/en_US/docker.markdown)
+- Distributed under [MIT License](https://github.com/kanboard/kanboard/blob/master/LICENSE)

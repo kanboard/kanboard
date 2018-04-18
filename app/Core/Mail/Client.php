@@ -44,7 +44,7 @@ class Client extends Base
      * @param  string  $html
      * @return Client
      */
-    public function send($recipientEmail, $recipientName, $subject, $html)
+    public function send($recipientEmail, $recipientName, $subject, $html, $authorName = null, $authorEmail = null)
     {
         if (! empty($recipientEmail)) {
             $this->queueManager->push(EmailJob::getInstance($this->container)->withParams(
@@ -52,8 +52,8 @@ class Client extends Base
                 $recipientName,
                 $subject,
                 $html,
-                $this->getAuthorName(),
-                $this->getAuthorEmail()
+                is_null($authorName) ? $this->getAuthorName() : $authorName,
+                is_null($authorEmail) ? $this->getAuthorEmail() : $authorEmail
             ));
         }
 

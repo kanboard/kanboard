@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6d59b34b5598ac4a46c73dce19772b9b",
+    "content-hash": "bc94bc536e82cb9a522675ff6bed4dad",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -288,16 +288,16 @@
         },
         {
             "name": "fguillot/picodb",
-            "version": "v1.0.17",
+            "version": "v1.0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fguillot/picoDb.git",
-                "reference": "1699864992c40ad02395e95d7fbf44a571a116f3"
+                "reference": "4df08a3cc3c4a39e6bb329872f5d020fe135f805"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/1699864992c40ad02395e95d7fbf44a571a116f3",
-                "reference": "1699864992c40ad02395e95d7fbf44a571a116f3",
+                "url": "https://api.github.com/repos/fguillot/picoDb/zipball/4df08a3cc3c4a39e6bb329872f5d020fe135f805",
+                "reference": "4df08a3cc3c4a39e6bb329872f5d020fe135f805",
                 "shasum": ""
             },
             "require": {
@@ -324,129 +324,7 @@
             ],
             "description": "Minimalist database query builder",
             "homepage": "https://github.com/fguillot/picoDb",
-            "time": "2018-02-14T00:51:01+00:00"
-        },
-        {
-            "name": "fguillot/simple-queue",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fguillot/simple-queue.git",
-                "reference": "ce7801c507f9501bcca455129fb04c3d2107d5ff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/simple-queue/zipball/ce7801c507f9501bcca455129fb04c3d2107d5ff",
-                "reference": "ce7801c507f9501bcca455129fb04c3d2107d5ff",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "aws/aws-sdk-php": "~3.0",
-                "mariano/disque-php": "~2.0",
-                "pda/pheanstalk": "~3.0",
-                "php-amqplib/php-amqplib": "2.6.*",
-                "phpunit/phpunit": "5.3.*"
-            },
-            "suggest": {
-                "aws/aws-sdk-php": "Required to use the AWS SQS queue driver (~3.0).",
-                "mariano/disque-php": "Required to use the Disque queue driver (~2.0).",
-                "pda/pheanstalk": "Required to use the Beanstalk queue driver (~3.0).",
-                "php-amqplib/php-amqplib": "Required to use the RabbitMQ queue driver (2.6.*)."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SimpleQueue\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Frédéric Guillot"
-                }
-            ],
-            "description": "Abstraction layer for multiple queue systems",
-            "homepage": "https://github.com/fguillot/simple-queue",
-            "time": "2016-06-05T21:34:56+00:00"
-        },
-        {
-            "name": "fguillot/simple-validator",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fguillot/simpleValidator.git",
-                "reference": "23b0a99c5f11ad74d05f8845feaafbcfd9223eda"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/simpleValidator/zipball/23b0a99c5f11ad74d05f8845feaafbcfd9223eda",
-                "reference": "23b0a99c5f11ad74d05f8845feaafbcfd9223eda",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "SimpleValidator": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Frédéric Guillot"
-                }
-            ],
-            "description": "Simple validator library",
-            "homepage": "https://github.com/fguillot/simpleValidator",
-            "time": "2016-06-26T15:09:26+00:00"
-        },
-        {
-            "name": "fguillot/simpleLogger",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fguillot/simpleLogger.git",
-                "reference": "c6831841193bb265b7900ecc8b6a8918371a7c98"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fguillot/simpleLogger/zipball/c6831841193bb265b7900ecc8b6a8918371a7c98",
-                "reference": "c6831841193bb265b7900ecc8b6a8918371a7c98",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "psr/log": "~1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "SimpleLogger": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Frédéric Guillot"
-                }
-            ],
-            "description": "PHP library to write logs (compatible with PSR-3)",
-            "homepage": "https://github.com/fguillot/simpleLogger",
-            "time": "2016-05-07T18:01:57+00:00"
+            "time": "2018-03-05T22:39:16+00:00"
         },
         {
             "name": "gregwar/captcha",
@@ -939,16 +817,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v3.4.4",
+            "version": "v3.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f"
+                "reference": "7a2e1299cc0c4162996f18e347b6356729a55317"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/613e26310776f49a1773b6737c6bd554b8bc8c6f",
-                "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/7a2e1299cc0c4162996f18e347b6356729a55317",
+                "reference": "7a2e1299cc0c4162996f18e347b6356729a55317",
                 "shasum": ""
             },
             "require": {
@@ -984,7 +862,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:37:34+00:00"
+            "time": "2018-03-28T18:23:39+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1294,16 +1172,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "1.7.4",
+            "version": "1.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be"
+                "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
-                "reference": "9f901e29c93dae4aa77c0bb161df4276f9c9a1be",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/dfd6be44111a7c41c2e884a336cc4f461b3b2401",
+                "reference": "dfd6be44111a7c41c2e884a336cc4f461b3b2401",
                 "shasum": ""
             },
             "require": {
@@ -1353,7 +1231,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2018-02-11T18:49:29+00:00"
+            "time": "2018-02-19T10:16:54+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

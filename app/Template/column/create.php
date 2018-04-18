@@ -5,7 +5,7 @@
     <?= $this->form->csrf() ?>
 
     <?= $this->form->label(t('Title'), 'title') ?>
-    <?= $this->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="50"', 'tabindex="1"')) ?>
+    <?= $this->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="191"', 'tabindex="1"')) ?>
 
     <?= $this->form->label(t('Task limit'), 'task_limit') ?>
     <?= $this->form->number('task_limit', $values, $errors, array('tabindex="2"')) ?>

@@ -8,7 +8,7 @@
     <fieldset>
         <legend><?= t('Profile') ?></legend>
         <?= $this->form->label(t('Username'), 'username') ?>
-        <?= $this->form->text('username', $values, $errors, array('autofocus', 'required', isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1 && !$this->user->isAdmin() ? 'readonly' : '', 'maxlength="50"')) ?>
+        <?= $this->form->text('username', $values, $errors, array('autofocus', 'required', isset($values['is_ldap_user']) && $values['is_ldap_user'] == 1 && !$this->user->isAdmin() ? 'readonly' : '', 'maxlength="191"')) ?>
 
         <?= $this->form->label(t('Name'), 'name') ?>
         <?= $this->form->text('name', $values, $errors, array($this->user->hasAccess('UserModificationController', 'show/edit_name') ? '' : 'readonly')) ?>
@@ -24,6 +24,9 @@
 
         <?= $this->form->label(t('Language'), 'language') ?>
         <?= $this->form->select('language', $languages, $values, $errors, array($this->user->hasAccess('UserModificationController', 'show/edit_language') ? '' : 'disabled')) ?>
+        
+        <?= $this->form->label(t('Filter'), 'filter') ?>
+        <?= $this->form->text('filter', $values, $errors, array($this->user->hasAccess('UserModificationController', 'show/edit_filter') ? '' : 'readonly')) ?>
     </fieldset>
 
     <?php if ($this->user->isAdmin()): ?>

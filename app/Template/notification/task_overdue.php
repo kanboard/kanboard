@@ -13,14 +13,20 @@
         <tr style="overflow: hidden; background: #fff; text-align: left; padding-top: .5em; padding-bottom: .5em; padding-left: 3px; padding-right: 3px;">
             <td style="border: 1px solid #eee;">#<?= $task['id'] ?></td>
             <td style="border: 1px solid #eee;">
-                <?php if (! empty($application_url)): ?>
+                <?php if ($this->app->config('application_url') !== ''): ?>
                     <?= $this->url->absoluteLink($this->text->e($task['title']), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
                 <?php else: ?>
                     <?= $this->text->e($task['title']) ?>
                 <?php endif ?>
             </td>
             <td style="border: 1px solid #eee;"><?= $this->dt->datetime($task['date_due']) ?></td>
-            <td style="border: 1px solid #eee;"><?= $this->text->e($task['project_name']) ?></td>
+            <td style="border: 1px solid #eee;">
+                <?php if ($this->app->config('application_url') !== ''): ?>
+                    <?= $this->url->absoluteLink($this->text->e($task['project_name']), 'BoardViewController', 'show', array('project_id' => $task['project_id'])) ?>
+                <?php else: ?>
+                    <?= $this->text->e($task['project_name']) ?>
+                <?php endif ?>
+            </td>
             <td style="border: 1px solid #eee;">
                 <?php if (! empty($task['assignee_username'])): ?>
                     <?= $this->text->e($task['assignee_name'] ?: $task['assignee_username']) ?>

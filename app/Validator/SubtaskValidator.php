@@ -91,7 +91,7 @@ class SubtaskValidator extends BaseValidator
         return array(
             new Validators\Integer('id', t('The subtask id must be an integer')),
             new Validators\Integer('task_id', t('The task id must be an integer')),
-            new Validators\MaxLength('title', t('The maximum length is %d characters', 255), 255),
+            new Validators\MaxLength('title', t('The maximum length is %d characters', 65535), 65535),
             new Validators\Integer('user_id', t('The user id must be an integer')),
             new Validators\Integer('status', t('The status must be an integer')),
             new Validators\Numeric('time_estimated', t('The time must be a numeric value')),

@@ -8,7 +8,7 @@
     <?= $this->form->hidden('external_id', $values) ?>
 
     <?= $this->form->label(t('Name'), 'name') ?>
-    <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="100"')) ?>
+    <?= $this->form->text('name', $values, $errors, array('autofocus', 'required', 'maxlength="191"')) ?>
 
     <?= $this->modal->submitButtons() ?>
 </form>

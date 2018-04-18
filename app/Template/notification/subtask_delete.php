@@ -4,7 +4,7 @@
 
 <ul>
     <li><?= t('Title:') ?> <?= $this->text->e($subtask['title']) ?></li>
-    <li><?= t('Status:') ?> <?= $this->text->e($subtask['status_name']) ?></li>
+    <li><?= t('Status:') ?> <?= t($subtask['status_name']) ?></li>
     <li><?= t('Assignee:') ?> <?= $this->text->e($subtask['name'] ?: $subtask['username'] ?: '?') ?></li>
 </ul>
 

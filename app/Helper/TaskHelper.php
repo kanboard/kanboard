@@ -49,7 +49,6 @@ class TaskHelper extends Base
             array(
                 'autofocus',
                 'required',
-                'maxlength="200"',
                 'tabindex="1"',
                 'placeholder="'.t('Title').'"'
             )

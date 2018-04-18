@@ -1,5 +1,11 @@
-This software focus on simplicity, the number of features is voluntary limited.
+This issue is:
 
+- [ ] Bug report
+- [ ] Feature request
+- [ ] Improvement
+
+- Please, read the [Frequently Asked Questions](https://docs.kanboard.org/en/latest/developer_guide/faq.html).
+- Ask questions on the [Forum](https://github.com/kanboard/forum/issues).
 
 ### Actual behaviour
 
@@ -11,6 +17,9 @@ This software focus on simplicity, the number of features is voluntary limited.
 
 
 ### Screenshots
+
+
+### Logs
 
 
 ### Configuration

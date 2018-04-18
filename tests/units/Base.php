@@ -7,7 +7,7 @@ use Composer\Autoload\ClassLoader;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
 use Symfony\Component\Stopwatch\Stopwatch;
-use SimpleLogger\Logger;
+use Kanboard\Core\Log\Logger;
 use Kanboard\Core\Session\FlashMessage;
 use Kanboard\ServiceProvider\ActionProvider;
 
@@ -61,6 +61,7 @@ abstract class Base extends PHPUnit_Framework_TestCase
 
         $this->container['db']->getStatementHandler()->withLogging();
         $this->container['logger'] = new Logger();
+        $this->container['cli'] = new \Symfony\Component\Console\Application('Kanboard', 'test');
 
         $this->container['httpClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Http\Client')

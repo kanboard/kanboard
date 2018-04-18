@@ -26,8 +26,8 @@ defined('PLUGIN_INSTALLER') or define('PLUGIN_INSTALLER', true);
 // Enable/disable debug
 defined('DEBUG') or define('DEBUG', strtolower(getenv('DEBUG')) === 'true');
 
-// Logging drivers: syslog, stdout, stderr or file
-defined('LOG_DRIVER') or define('LOG_DRIVER', '');
+// Logging drivers: syslog, stdout, stderr, system or file
+defined('LOG_DRIVER') or define('LOG_DRIVER', 'system');
 
 // Logging file
 defined('LOG_FILE') or define('LOG_FILE', DATA_DIR.DIRECTORY_SEPARATOR.'debug.log');
@@ -152,3 +152,6 @@ defined('TOTP_ISSUER') or define('TOTP_ISSUER', 'Kanboard');
 
 // Comma separated list of fields to not synchronize when using external authentication providers
 defined('EXTERNAL_AUTH_EXCLUDE_FIELDS') or define('EXTERNAL_AUTH_EXCLUDE_FIELDS', 'username');
+
+// Documentation URL
+defined('DOCUMENTATION_URL_PATTERN') or define('DOCUMENTATION_URL_PATTERN', 'https://docs.kanboard.org/en/%s/user_guide/%s.html');

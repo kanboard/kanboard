@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Exception;
 use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Model\UserMetadataModel;
 
@@ -32,18 +33,22 @@ class BoardAjaxController extends BaseController
             throw new AccessForbiddenException(e("You don't have the permission to move this task"));
         }
 
-        $result =$this->taskPositionModel->movePosition(
-            $project_id,
-            $values['task_id'],
-            $values['dst_column_id'],
-            $values['position'],
-            $values['swimlane_id']
-        );
+        try {
+            $result =$this->taskPositionModel->movePosition(
+                $project_id,
+                $values['task_id'],
+                $values['dst_column_id'],
+                $values['position'],
+                $values['swimlane_id']
+            );
 
-        if (! $result) {
-            $this->response->status(400);
-        } else {
-            $this->response->html($this->renderBoard($project_id), 201);
+            if (! $result) {
+                $this->response->status(400);
+            } else {
+                $this->response->html($this->renderBoard($project_id), 201);
+            }
+        } catch (Exception $e) {
+            $this->response->html('<div class="alert alert-error">'.$e->getMessage().'</div>');
         }
     }
 

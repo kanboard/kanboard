@@ -10,7 +10,7 @@
                 <legend><?= t('Profile') ?></legend>
 
                 <?= $this->form->label(t('Username'), 'username') ?>
-                <?= $this->form->text('username', $values, $errors, array('autofocus', 'required', 'maxlength="50"')) ?>
+                <?= $this->form->text('username', $values, $errors, array('autofocus', 'required', 'maxlength="191"')) ?>
 
                 <?= $this->form->label(t('Name'), 'name') ?>
                 <?= $this->form->text('name', $values, $errors) ?>
@@ -50,6 +50,9 @@
 
                 <?= $this->form->label(t('Language'), 'language') ?>
                 <?= $this->form->select('language', $languages, $values, $errors) ?>
+                
+                <?= $this->form->label(t('Filter'), 'filter') ?>
+                <?= $this->form->text('filter', $values, $errors) ?>
 
                 <?= $this->form->checkbox('notifications_enabled', t('Enable email notifications'), 1, isset($values['notifications_enabled']) && $values['notifications_enabled'] == 1 ? true : false) ?>
             </fieldset>

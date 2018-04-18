@@ -55,7 +55,7 @@ class PasswordResetValidator extends BaseValidator
         $v = new Validator($values, array(
             new Validators\Required('captcha', t('This value is required')),
             new Validators\Required('username', t('The username is required')),
-            new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
+            new Validators\MaxLength('username', t('The maximum length is %d characters', 191), 191),
         ));
 
         return array(

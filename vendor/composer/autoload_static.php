@@ -21,7 +21,6 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\Console\\' => 26,
-            'SimpleQueue\\' => 12,
         ),
         'P' => 
         array (
@@ -63,10 +62,6 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
-        'SimpleQueue\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/fguillot/simple-queue/src',
-        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
@@ -90,17 +85,6 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
     );
 
     public static $prefixesPsr0 = array (
-        'S' => 
-        array (
-            'SimpleValidator' => 
-            array (
-                0 => __DIR__ . '/..' . '/fguillot/simple-validator/src',
-            ),
-            'SimpleLogger' => 
-            array (
-                0 => __DIR__ . '/..' . '/fguillot/simpleLogger/src',
-            ),
-        ),
         'P' => 
         array (
             'Pimple' => 
@@ -141,6 +125,10 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
                 0 => __DIR__ . '/..' . '/eluceo/ical/src',
             ),
         ),
+    );
+
+    public static $fallbackDirsPsr0 = array (
+        0 => __DIR__ . '/../..' . '/libs',
     );
 
     public static $classMap = array (
@@ -267,6 +255,7 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Api\\Procedure\\LinkProcedure' => __DIR__ . '/../..' . '/app/Api/Procedure/LinkProcedure.php',
         'Kanboard\\Api\\Procedure\\MeProcedure' => __DIR__ . '/../..' . '/app/Api/Procedure/MeProcedure.php',
         'Kanboard\\Api\\Procedure\\ProjectFileProcedure' => __DIR__ . '/../..' . '/app/Api/Procedure/ProjectFileProcedure.php',
+        'Kanboard\\Api\\Procedure\\ProjectMetadataProcedure' => __DIR__ . '/../..' . '/app/Api/Procedure/ProjectMetaDataProcedure.php',
         'Kanboard\\Api\\Procedure\\ProjectPermissionProcedure' => __DIR__ . '/../..' . '/app/Api/Procedure/ProjectPermissionProcedure.php',
         'Kanboard\\Api\\Procedure\\ProjectProcedure' => __DIR__ . '/../..' . '/app/Api/Procedure/ProjectProcedure.php',
         'Kanboard\\Api\\Procedure\\SubtaskProcedure' => __DIR__ . '/../..' . '/app/Api/Procedure/SubtaskProcedure.php',
@@ -436,6 +425,8 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Core\\Group\\GroupProviderInterface' => __DIR__ . '/../..' . '/app/Core/Group/GroupProviderInterface.php',
         'Kanboard\\Core\\Helper' => __DIR__ . '/../..' . '/app/Core/Helper.php',
         'Kanboard\\Core\\Http\\Client' => __DIR__ . '/../..' . '/app/Core/Http/Client.php',
+        'Kanboard\\Core\\Http\\ClientException' => __DIR__ . '/../..' . '/app/Core/Http/ClientException.php',
+        'Kanboard\\Core\\Http\\InvalidStatusException' => __DIR__ . '/../..' . '/app/Core/Http/InvalidStatusException.php',
         'Kanboard\\Core\\Http\\OAuth2' => __DIR__ . '/../..' . '/app/Core/Http/OAuth2.php',
         'Kanboard\\Core\\Http\\RememberMeCookie' => __DIR__ . '/../..' . '/app/Core/Http/RememberMeCookie.php',
         'Kanboard\\Core\\Http\\Request' => __DIR__ . '/../..' . '/app/Core/Http/Request.php',
@@ -450,6 +441,13 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Core\\Ldap\\Group' => __DIR__ . '/../..' . '/app/Core/Ldap/Group.php',
         'Kanboard\\Core\\Ldap\\Query' => __DIR__ . '/../..' . '/app/Core/Ldap/Query.php',
         'Kanboard\\Core\\Ldap\\User' => __DIR__ . '/../..' . '/app/Core/Ldap/User.php',
+        'Kanboard\\Core\\Log\\Base' => __DIR__ . '/../..' . '/app/Core/Log/Base.php',
+        'Kanboard\\Core\\Log\\File' => __DIR__ . '/../..' . '/app/Core/Log/File.php',
+        'Kanboard\\Core\\Log\\Logger' => __DIR__ . '/../..' . '/app/Core/Log/Logger.php',
+        'Kanboard\\Core\\Log\\Stderr' => __DIR__ . '/../..' . '/app/Core/Log/Stderr.php',
+        'Kanboard\\Core\\Log\\Stdout' => __DIR__ . '/../..' . '/app/Core/Log/Stdout.php',
+        'Kanboard\\Core\\Log\\Syslog' => __DIR__ . '/../..' . '/app/Core/Log/Syslog.php',
+        'Kanboard\\Core\\Log\\System' => __DIR__ . '/../..' . '/app/Core/Log/System.php',
         'Kanboard\\Core\\Mail\\Client' => __DIR__ . '/../..' . '/app/Core/Mail/Client.php',
         'Kanboard\\Core\\Mail\\ClientInterface' => __DIR__ . '/../..' . '/app/Core/Mail/ClientInterface.php',
         'Kanboard\\Core\\Mail\\Transport\\Mail' => __DIR__ . '/../..' . '/app/Core/Mail/Transport/Mail.php',
@@ -870,43 +868,34 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
-        'SimpleLogger\\Base' => __DIR__ . '/..' . '/fguillot/simpleLogger/src/SimpleLogger/Base.php',
-        'SimpleLogger\\File' => __DIR__ . '/..' . '/fguillot/simpleLogger/src/SimpleLogger/File.php',
-        'SimpleLogger\\Logger' => __DIR__ . '/..' . '/fguillot/simpleLogger/src/SimpleLogger/Logger.php',
-        'SimpleLogger\\Stderr' => __DIR__ . '/..' . '/fguillot/simpleLogger/src/SimpleLogger/Stderr.php',
-        'SimpleLogger\\Stdout' => __DIR__ . '/..' . '/fguillot/simpleLogger/src/SimpleLogger/Stdout.php',
-        'SimpleLogger\\Syslog' => __DIR__ . '/..' . '/fguillot/simpleLogger/src/SimpleLogger/Syslog.php',
-        'SimpleQueue\\Adapter\\AmqpQueueAdapter' => __DIR__ . '/..' . '/fguillot/simple-queue/src/Adapter/AmqpQueueAdapter.php',
-        'SimpleQueue\\Adapter\\AwsSqsQueueAdapter' => __DIR__ . '/..' . '/fguillot/simple-queue/src/Adapter/AwsSqsQueueAdapter.php',
-        'SimpleQueue\\Adapter\\BeanstalkQueueAdapter' => __DIR__ . '/..' . '/fguillot/simple-queue/src/Adapter/BeanstalkQueueAdapter.php',
-        'SimpleQueue\\Adapter\\DisqueQueueAdapter' => __DIR__ . '/..' . '/fguillot/simple-queue/src/Adapter/DisqueQueueAdapter.php',
-        'SimpleQueue\\Adapter\\MemoryQueueAdapter' => __DIR__ . '/..' . '/fguillot/simple-queue/src/Adapter/MemoryQueueAdapter.php',
-        'SimpleQueue\\Exception\\NotSupportedException' => __DIR__ . '/..' . '/fguillot/simple-queue/src/Exception/NotSupportedException.php',
-        'SimpleQueue\\Job' => __DIR__ . '/..' . '/fguillot/simple-queue/src/Job.php',
-        'SimpleQueue\\Queue' => __DIR__ . '/..' . '/fguillot/simple-queue/src/Queue.php',
-        'SimpleQueue\\QueueAdapterInterface' => __DIR__ . '/..' . '/fguillot/simple-queue/src/QueueAdapterInterface.php',
-        'SimpleValidator\\Validator' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validator.php',
-        'SimpleValidator\\Validators\\Alpha' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Alpha.php',
-        'SimpleValidator\\Validators\\AlphaNumeric' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/AlphaNumeric.php',
-        'SimpleValidator\\Validators\\Base' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Base.php',
-        'SimpleValidator\\Validators\\Date' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Date.php',
-        'SimpleValidator\\Validators\\Email' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Email.php',
-        'SimpleValidator\\Validators\\Equals' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Equals.php',
-        'SimpleValidator\\Validators\\Exists' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Exists.php',
-        'SimpleValidator\\Validators\\GreaterThan' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/GreaterThan.php',
-        'SimpleValidator\\Validators\\InArray' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/InArray.php',
-        'SimpleValidator\\Validators\\Integer' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Integer.php',
-        'SimpleValidator\\Validators\\Ip' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Ip.php',
-        'SimpleValidator\\Validators\\Length' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Length.php',
-        'SimpleValidator\\Validators\\MaxLength' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/MaxLength.php',
-        'SimpleValidator\\Validators\\MinLength' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/MinLength.php',
-        'SimpleValidator\\Validators\\NotEmpty' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/NotEmpty.php',
-        'SimpleValidator\\Validators\\NotEquals' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/NotEquals.php',
-        'SimpleValidator\\Validators\\NotInArray' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/NotInArray.php',
-        'SimpleValidator\\Validators\\Numeric' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Numeric.php',
-        'SimpleValidator\\Validators\\Range' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Range.php',
-        'SimpleValidator\\Validators\\Required' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Required.php',
-        'SimpleValidator\\Validators\\Unique' => __DIR__ . '/..' . '/fguillot/simple-validator/src/SimpleValidator/Validators/Unique.php',
+        'SimpleQueue\\Adapter\\AmqpQueueAdapter' => __DIR__ . '/../..' . '/libs/SimpleQueue/Adapter/AmqpQueueAdapter.php',
+        'SimpleQueue\\Adapter\\BeanstalkQueueAdapter' => __DIR__ . '/../..' . '/libs/SimpleQueue/Adapter/BeanstalkQueueAdapter.php',
+        'SimpleQueue\\Exception\\NotSupportedException' => __DIR__ . '/../..' . '/libs/SimpleQueue/Exception/NotSupportedException.php',
+        'SimpleQueue\\Job' => __DIR__ . '/../..' . '/libs/SimpleQueue/Job.php',
+        'SimpleQueue\\Queue' => __DIR__ . '/../..' . '/libs/SimpleQueue/Queue.php',
+        'SimpleQueue\\QueueAdapterInterface' => __DIR__ . '/../..' . '/libs/SimpleQueue/QueueAdapterInterface.php',
+        'SimpleValidator\\Validator' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validator.php',
+        'SimpleValidator\\Validators\\Alpha' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Alpha.php',
+        'SimpleValidator\\Validators\\AlphaNumeric' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/AlphaNumeric.php',
+        'SimpleValidator\\Validators\\Base' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Base.php',
+        'SimpleValidator\\Validators\\Date' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Date.php',
+        'SimpleValidator\\Validators\\Email' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Email.php',
+        'SimpleValidator\\Validators\\Equals' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Equals.php',
+        'SimpleValidator\\Validators\\Exists' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Exists.php',
+        'SimpleValidator\\Validators\\GreaterThan' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/GreaterThan.php',
+        'SimpleValidator\\Validators\\InArray' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/InArray.php',
+        'SimpleValidator\\Validators\\Integer' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Integer.php',
+        'SimpleValidator\\Validators\\Ip' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Ip.php',
+        'SimpleValidator\\Validators\\Length' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Length.php',
+        'SimpleValidator\\Validators\\MaxLength' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/MaxLength.php',
+        'SimpleValidator\\Validators\\MinLength' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/MinLength.php',
+        'SimpleValidator\\Validators\\NotEmpty' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/NotEmpty.php',
+        'SimpleValidator\\Validators\\NotEquals' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/NotEquals.php',
+        'SimpleValidator\\Validators\\NotInArray' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/NotInArray.php',
+        'SimpleValidator\\Validators\\Numeric' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Numeric.php',
+        'SimpleValidator\\Validators\\Range' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Range.php',
+        'SimpleValidator\\Validators\\Required' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Required.php',
+        'SimpleValidator\\Validators\\Unique' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Unique.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',
         'Symfony\\Component\\Console\\CommandLoader\\ContainerCommandLoader' => __DIR__ . '/..' . '/symfony/console/CommandLoader/ContainerCommandLoader.php',
@@ -1044,6 +1033,7 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
             $loader->prefixLengthsPsr4 = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$prefixesPsr0;
+            $loader->fallbackDirsPsr0 = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$fallbackDirsPsr0;
             $loader->classMap = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$classMap;
 
         }, null, ClassLoader::class);

@@ -69,7 +69,7 @@ class ColumnValidator extends BaseValidator
             new Validators\Integer('task_limit', t('This value must be an integer')),
             new Validators\GreaterThan('task_limit', t('This value must be greater than %d', -1), -1),
             new Validators\Required('title', t('The title is required')),
-            new Validators\MaxLength('title', t('The maximum length is %d characters', 50), 50),
+            new Validators\MaxLength('title', t('The maximum length is %d characters', 191), 191),
         );
     }
 }

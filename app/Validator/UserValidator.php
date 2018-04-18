@@ -24,7 +24,7 @@ class UserValidator extends BaseValidator
     {
         return array(
             new Validators\MaxLength('role', t('The maximum length is %d characters', 25), 25),
-            new Validators\MaxLength('username', t('The maximum length is %d characters', 50), 50),
+            new Validators\MaxLength('username', t('The maximum length is %d characters', 191), 191),
             new Validators\Unique('username', t('This username is already taken'), $this->db->getConnection(), UserModel::TABLE, 'id'),
             new Validators\Email('email', t('Email address invalid')),
             new Validators\Integer('is_ldap_user', t('This value must be an integer')),
