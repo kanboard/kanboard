@@ -1,3 +1,26 @@
+Version 1.2.3 (April 18, 2018)
+------------------------------
+
+New features:
+
+* Add Project MetaData API calls
+* Add default filter per user
+
+Improvements:
+
+* Use utf8mb4 encoding for MySQL instead of utf8 (Emoji support)
+* Increase text fields length in several tables
+* Move documentation to https://docs.kanboard.org/
+* Make sure no empty group is submitted on project permissions page
+* Translate subtasks status and internal links labels in notifications
+* Add link to tasks and projects in overdue notifications
+* Add missing translations
+* Move custom libs to the source tree
+
+Bug fixes:
+
+* Fix margin for task recurrence tooltip
+
 Version 1.2.2 (March 30, 2018)
 ------------------------------
 
