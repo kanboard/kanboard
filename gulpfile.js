@@ -38,7 +38,6 @@ var vendor = {
         'bower_components/jquery-ui/ui/minified/droppable.min.js',
         'bower_components/jquery-ui/ui/minified/resizable.min.js',
         'bower_components/jquery-ui/ui/minified/sortable.min.js',
-        'bower_components/jquery-ui/ui/minified/tooltip.min.js',
         'bower_components/jquery-ui/ui/minified/i18n/datepicker-*.min.js',
         'bower_components/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.min.js',
         'bower_components/jqueryui-timepicker-addon/dist/i18n/jquery-ui-timepicker-addon-i18n.min.js',
