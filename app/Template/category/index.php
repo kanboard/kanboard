@@ -31,9 +31,7 @@
                 <?= $this->text->e($category['name']) ?>
 
                 <?php if (! empty($category['description'])): ?>
-                    <span class="tooltip" title="<?= $this->text->markdownAttribute($category['description']) ?>">
-                        <i class="fa fa-info-circle"></i>
-                    </span>
+                    <?= $this->app->tooltipMarkdown($category['description']) ?>
                 <?php endif ?>
             </td>
         </tr>

@@ -42,9 +42,7 @@
                 </div>
                 <?= $this->text->e($column['title']) ?>
                 <?php if (! empty($column['description'])): ?>
-                    <span class="tooltip" title="<?= $this->text->markdownAttribute($column['description']) ?>">
-                        <i class="fa fa-info-circle"></i>
-                    </span>
+                    <?= $this->app->tooltipMarkdown($column['description']) ?>
                 <?php endif ?>
             </td>
             <td>

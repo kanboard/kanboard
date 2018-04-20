@@ -103,6 +103,7 @@ Kanboard.BoardDragAndDrop.prototype.refresh = function(data) {
     this.app.hideLoadingIcon();
     this.executeListeners();
     this.dragAndDrop();
+    KB.tooltip();
 };
 
 Kanboard.BoardDragAndDrop.prototype.executeListeners = function() {

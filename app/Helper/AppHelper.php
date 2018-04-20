@@ -12,6 +12,16 @@ use Kanboard\Core\Base;
  */
 class AppHelper extends Base
 {
+    public function tooltipMarkdown($markdownText, $icon = 'fa-info-circle')
+    {
+        return '<span class="tooltip"><i class="fa '.$icon.'"></i><script type="text/template"><div class="markdown">'.$this->helper->text->markdown($markdownText).'</div></script></span>';
+    }
+
+    public function tooltipLink($label, $link)
+    {
+        return '<span class="tooltip" data-href="'.$link.'">'.$label.'</span>';
+    }
+
     public function getToken()
     {
         return $this->token;

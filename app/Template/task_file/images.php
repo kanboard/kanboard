@@ -30,9 +30,7 @@
                         </div>
                     </div>
                     <div class="file-thumbnail-description">
-                            <span class="tooltip" title='<?= t('Uploaded: %s', $this->dt->datetime($file['date'])).'<br>'.t('Size: %s', $this->text->bytes($file['size'])) ?>'>
-                                <i class="fa fa-info-circle"></i>
-                            </span>
+                        <?= $this->app->tooltipMarkdown(t('Uploaded: %s', $this->dt->datetime($file['date']))."\n\n".t('Size: %s', $this->text->bytes($file['size']))) ?>
                         <?php if (! empty($file['user_id'])): ?>
                             <?= t('Uploaded by %s', $file['user_name'] ?: $file['username']) ?>
                         <?php else: ?>

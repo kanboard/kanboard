@@ -40,9 +40,7 @@
                 <?= $this->text->e($swimlane['name']) ?>
 
                 <?php if (! empty($swimlane['description'])): ?>
-                    <span class="tooltip" title="<?= $this->text->markdownAttribute($swimlane['description']) ?>">
-                        <i class="fa fa-info-circle"></i>
-                    </span>
+                    <?= $this->app->tooltipMarkdown($swimlane['description']) ?>
                 <?php endif ?>
             </td>
             <td>

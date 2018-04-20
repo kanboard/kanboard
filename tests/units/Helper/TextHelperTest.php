@@ -102,14 +102,6 @@ class TextHelperTest extends Base
         $this->assertEquals('<p>Text @admin @notfound</p>', $textHelper->markdown('Text @admin @notfound', true));
     }
 
-    public function testMarkdownAttribute()
-    {
-        $textHelper = new TextHelper($this->container);
-        $this->assertEquals('&lt;p&gt;&Ccedil;a marche&lt;/p&gt;', $textHelper->markdownAttribute('Ça marche'));
-        $this->assertEquals('&lt;p&gt;Test with &amp;quot;double quotes&amp;quot;&lt;/p&gt;', $textHelper->markdownAttribute('Test with "double quotes"'));
-        $this->assertEquals('&lt;p&gt;Test with &#039;single quotes&#039;&lt;/p&gt;', $textHelper->markdownAttribute("Test with 'single quotes'"));
-    }
-
     public function testFormatBytes()
     {
         $textHelper = new TextHelper($this->container);
