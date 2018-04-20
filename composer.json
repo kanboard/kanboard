@@ -28,7 +28,7 @@
         "ext-session" : "*",
         "christian-riesen/otp" : "1.4.3",
         "eluceo/ical": "0.10.1",
-        "erusev/parsedown" : "1.6.0",
+        "erusev/parsedown" : "1.7.1",
         "fguillot/json-rpc" : "1.2.1",
         "fguillot/picodb" : "v1.0.18",
         "paragonie/random_compat": "2.0.11",

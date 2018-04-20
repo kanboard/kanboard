@@ -817,7 +817,6 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'PHPQRCode\\QRstr' => __DIR__ . '/..' . '/aferrandini/phpqrcode/lib/PHPQRCode/QRstr.php',
         'PHPQRCode\\QRtools' => __DIR__ . '/..' . '/aferrandini/phpqrcode/lib/PHPQRCode/QRtools.php',
         'Parsedown' => __DIR__ . '/..' . '/erusev/parsedown/Parsedown.php',
-        'ParsedownTest' => __DIR__ . '/..' . '/erusev/parsedown/test/ParsedownTest.php',
         'PicoDb\\Builder\\BaseBuilder' => __DIR__ . '/..' . '/fguillot/picodb/lib/PicoDb/Builder/BaseBuilder.php',
         'PicoDb\\Builder\\ConditionBuilder' => __DIR__ . '/..' . '/fguillot/picodb/lib/PicoDb/Builder/ConditionBuilder.php',
         'PicoDb\\Builder\\InsertBuilder' => __DIR__ . '/..' . '/fguillot/picodb/lib/PicoDb/Builder/InsertBuilder.php',

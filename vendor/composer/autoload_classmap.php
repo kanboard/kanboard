@@ -691,7 +691,6 @@ return array(
     'PHPQRCode\\QRstr' => $vendorDir . '/aferrandini/phpqrcode/lib/PHPQRCode/QRstr.php',
     'PHPQRCode\\QRtools' => $vendorDir . '/aferrandini/phpqrcode/lib/PHPQRCode/QRtools.php',
     'Parsedown' => $vendorDir . '/erusev/parsedown/Parsedown.php',
-    'ParsedownTest' => $vendorDir . '/erusev/parsedown/test/ParsedownTest.php',
     'PicoDb\\Builder\\BaseBuilder' => $vendorDir . '/fguillot/picodb/lib/PicoDb/Builder/BaseBuilder.php',
     'PicoDb\\Builder\\ConditionBuilder' => $vendorDir . '/fguillot/picodb/lib/PicoDb/Builder/ConditionBuilder.php',
     'PicoDb\\Builder\\InsertBuilder' => $vendorDir . '/fguillot/picodb/lib/PicoDb/Builder/InsertBuilder.php',
