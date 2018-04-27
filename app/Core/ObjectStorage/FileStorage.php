@@ -128,12 +128,21 @@ class FileStorage implements ObjectStorageInterface
     public function remove($key)
     {
         $filename = $this->path.DIRECTORY_SEPARATOR.$key;
+        $result = false;
 
         if (file_exists($filename)) {
-            return unlink($filename);
+            $result = unlink($filename);
+
+            // Remove parent folder if empty
+            $parentFolder = dirname($filename);
+            $files = glob($parentFolder.DIRECTORY_SEPARATOR.'*');
+
+            if ($files !== false && is_dir($parentFolder) && count($files) === 0) {
+                rmdir($parentFolder);
+            }
         }
 
-        return false;
+        return $result;
     }
 
     /**
