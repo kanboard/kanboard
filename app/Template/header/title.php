@@ -10,6 +10,6 @@
         <?php endif ?>
     </span>
     <?php if (! empty($description)): ?>
-        <?= $this->app->tooltipMarkdown($description) ?>
+        <?= $this->app->tooltipHTML($description) ?>
     <?php endif ?>
 </h1>
