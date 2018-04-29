@@ -67,14 +67,14 @@ class ProjectHeaderHelper extends Base
     public function getDescription(array &$project)
     {
         if ($project['owner_id'] > 0) {
-            $description = t('Project owner: ').'**'.$this->helper->text->e($project['owner_name'] ?: $project['owner_username']).'**'.PHP_EOL.PHP_EOL;
+            $description = t('Project owner: ').'<strong>'.$this->helper->text->e($project['owner_name'] ?: $project['owner_username']).'</strong>'.PHP_EOL.PHP_EOL;
 
             if (! empty($project['description'])) {
-                $description .= '***'.PHP_EOL.PHP_EOL;
-                $description .= $project['description'];
+                $description .= '<hr>'.PHP_EOL.PHP_EOL;
+                $description .= $this->helper->text->markdown($project['description']);
             }
         } else {
-            $description = $project['description'];
+            $description = $this->helper->text->markdown($project['description']);
         }
 
         return $description;
