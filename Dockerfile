@@ -3,8 +3,8 @@ FROM alpine:3.7
 VOLUME /var/www/app/data
 VOLUME /var/www/app/plugins
 VOLUME /etc/nginx/ssl
-EXPOSE 80 443
 
+EXPOSE 80 443
 
 ARG VERSION
 
@@ -26,9 +26,6 @@ RUN cd /tmp \
     && rm -rf /tmp/kanboard-* /tmp/*.zip
 
 ADD docker/ /
-
-
-
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD []
