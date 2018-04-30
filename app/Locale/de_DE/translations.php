@@ -1377,4 +1377,7 @@ return array(
     'The link with the relation "%s" to the task %s has been removed' => 'Die Verknüpfung mit der Relation "%s" zur Aufgabe %s wurde entfernt',
     'Custom Filter:' => 'Benutzerdefinierter Filter:',
     'Unable to find this group.' => 'Diese Gruppe konnte nicht gefunden werden',
+    // '%s moved the task #%d to the column "%s"' => '',
+    // '%s moved the task #%d to the position %d in the column "%s"' => '',
+    // '%s moved the task #%d to the swimlane "%s"' => '',
 );

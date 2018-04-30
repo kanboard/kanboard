@@ -1377,4 +1377,7 @@ return array(
     'The link with the relation "%s" to the task %s has been removed' => '该任务与任务：%s 已解除"%s"关联',
     'Custom Filter:' => '自定义过滤器：',
     'Unable to find this group.' => '无法找到该用户组。',
+    // '%s moved the task #%d to the column "%s"' => '',
+    // '%s moved the task #%d to the position %d in the column "%s"' => '',
+    // '%s moved the task #%d to the swimlane "%s"' => '',
 );
