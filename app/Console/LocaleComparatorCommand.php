@@ -63,11 +63,11 @@ class LocaleComparatorCommand extends BaseCommand
         $content = file_get_contents($filename);
         $strings = array();
 
-        if (preg_match_all('/\b[et]\((\'\K.*?\') *[\)\,]/', $content, $matches) && isset($matches[1])) {
+        if (preg_match_all('/\b[et]\s*\(\s*(\'\K.*?\')\s*[\)\,]/', $content, $matches) && isset($matches[1])) {
             $strings = $matches[1];
         }
 
-        if (preg_match_all('/\bdt\((\'\K.*?\') *[\)\,]/', $content, $matches) && isset($matches[1])) {
+        if (preg_match_all('/\bdt\s*\(\s*(\'\K.*?\')\s*[\)\,]/', $content, $matches) && isset($matches[1])) {
             $strings = array_merge($strings, $matches[1]);
         }
 
