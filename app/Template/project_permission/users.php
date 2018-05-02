@@ -21,7 +21,9 @@
                     )) ?>
                 </td>
                 <td>
-                    <?= $this->url->icon('trash-o', t('Remove'), 'ProjectPermissionController', 'removeUser', array('project_id' => $project['id'], 'user_id' => $user['id']), true) ?>
+                    <?php if (! $this->user->isCurrentUser($user['id'])): ?>
+                        <?= $this->url->icon('trash-o', t('Remove'), 'ProjectPermissionController', 'removeUser', array('project_id' => $project['id'], 'user_id' => $user['id']), true) ?>
+                    <?php endif ?>
                 </td>
             </tr>
         <?php endforeach ?>
