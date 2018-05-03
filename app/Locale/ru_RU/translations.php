@@ -1377,7 +1377,7 @@ return array(
     'The link with the relation "%s" to the task %s has been removed' => 'Удалена связь с отношением "%s" к задаче %s',
     'Custom Filter:' => 'Настраиваемый фильтр:',
     'Unable to find this group.' => 'Невозможно найти эту группу.',
-    // '%s moved the task #%d to the column "%s"' => '',
-    // '%s moved the task #%d to the position %d in the column "%s"' => '',
-    // '%s moved the task #%d to the swimlane "%s"' => '',
+    '%s moved the task #%d to the column "%s"' => '%s перенёс задачу #%d в колонку "%s"',
+    '%s moved the task #%d to the position %d in the column "%s"' => '%s перенёс задачу #%d на позицию %d в колонку "%s"',
+    '%s moved the task #%d to the swimlane "%s"' => '%s перенёс задачу #%d на дорожку "%s"',
 );
