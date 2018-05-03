@@ -62,7 +62,8 @@ KB.component('text-editor', function (containerElement, options) {
         }
 
         // Order is important for IE11 (especially for the placeholder)
-        textareaElement.text(options.text);
+        var textWrapper = KB.dom(containerElement).find('script');
+        textareaElement.text(textWrapper.innerText);
 
         if (options.placeholder) {
             textareaElement.attr('placeholder', options.placeholder);
