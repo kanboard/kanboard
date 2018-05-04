@@ -17,6 +17,7 @@ Thumbs.db
 .vagrant
 data/files
 data/cache
+data/config.php
 *.bak
 /config.php
 !docker/var/wwww/app/config.php
