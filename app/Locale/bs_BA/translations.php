@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'Sve zadatke',
     'Only for tasks assigned to me' => 'Samo za zadatke na kojima sam izvršilac',
     'Only for tasks created by me' => 'Samo za zadatke koje sam ja napravio',
-    'Only for tasks created by me and assigned to me' => 'Samo za zadatke koje sam ja napravio i na kojima sam izvršilac',
+    'Only for tasks created by me and tasks assigned to me' => 'Samo za zadatke koje sam ja napravio i na kojima sam izvršilac',
     '%%Y-%%m-%%d' => '%%Y-%%m-%%d',
     'Total for all columns' => 'Ukupno za sve kolone',
     'You need at least 2 days of data to show the chart.' => 'Da bi se prikazao ovaj grafik potrebni su podaci iz najmanje posljednja dva dana.',

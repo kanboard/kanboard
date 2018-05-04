@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'すべてのタスク',
     'Only for tasks assigned to me' => '自分のタスクのみ',
     'Only for tasks created by me' => '自分が作成したタスクのみ',
-    'Only for tasks created by me and assigned to me' => '自分が作成した自分のタスクのみ',
+    'Only for tasks created by me and tasks assigned to me' => '自分が作成した自分のタスクのみ',
     // '%%Y-%%m-%%d' => '',
     'Total for all columns' => 'すべてのカラムの合計',
     'You need at least 2 days of data to show the chart.' => 'グラフを表示するには最低2日間のデータが必要です',

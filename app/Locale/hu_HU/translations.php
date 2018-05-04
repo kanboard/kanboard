@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'Összes feladat',
     'Only for tasks assigned to me' => 'Csak a hozzám rendelt feladatok',
     'Only for tasks created by me' => 'Csak az általam létrehozott feladatok',
-    'Only for tasks created by me and assigned to me' => 'Csak az általam létrehozott és a hozzám rendelt feladatok',
+    'Only for tasks created by me and tasks assigned to me' => 'Csak az általam létrehozott és a hozzám rendelt feladatok',
     '%%Y-%%m-%%d' => '%%Y-%%m-%%d',
     'Total for all columns' => 'Az összes oszlop összege',
     'You need at least 2 days of data to show the chart.' => 'Legalább 2 nap adatára van szükség a diagram megjelenítéséhez.',

@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'Toate Sarcinile',
     'Only for tasks assigned to me' => 'Numai sarcinile atribuite mie',
     'Only for tasks created by me' => 'Numai sarcinile create de mine',
-    'Only for tasks created by me and assigned to me' => 'Numai sarcinile create de mine si atribuite mie.',
+    'Only for tasks created by me and tasks assigned to me' => 'Numai sarcinile create de mine si atribuite mie.',
     '%%Y-%%m-%%d' => '%%d/%%m/%%Y',
     'Total for all columns' => 'Totalul tuturor coloanelor',
     'You need at least 2 days of data to show the chart.' => 'Ai nevoie de cel putin 2 zile de date pentru afișarea graficului.',

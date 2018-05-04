@@ -648,7 +648,7 @@ return array(
     // 'All tasks' => '',
     // 'Only for tasks assigned to me' => '',
     // 'Only for tasks created by me' => '',
-    // 'Only for tasks created by me and assigned to me' => '',
+    // 'Only for tasks created by me and tasks assigned to me' => '',
     // '%%Y-%%m-%%d' => '',
     // 'Total for all columns' => '',
     // 'You need at least 2 days of data to show the chart.' => '',

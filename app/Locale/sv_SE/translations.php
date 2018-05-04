@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'Alla uppgifter',
     'Only for tasks assigned to me' => 'Bara för uppgifter tilldelade mig',
     'Only for tasks created by me' => 'Bara för uppgifter skapade av mig',
-    'Only for tasks created by me and assigned to me' => 'Bara för uppgifter skapade av mig och tilldelade till mig',
+    'Only for tasks created by me and tasks assigned to me' => 'Bara för uppgifter skapade av mig och tilldelade till mig',
     '%%Y-%%m-%%d' => '%%Y-%%m-%%d',
     'Total for all columns' => 'Totalt för alla kolumner',
     'You need at least 2 days of data to show the chart.' => 'Du behöver minst två dagars data för att visa diagrammet.',
