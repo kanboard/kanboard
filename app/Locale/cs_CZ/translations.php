@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'Všechny úkoly',
     'Only for tasks assigned to me' => 'pouze pro moje úkoly',
     'Only for tasks created by me' => 'pouze pro mnou vytvořené úkoly',
-    'Only for tasks created by me and assigned to me' => 'pouze pro mnou vytvořené a mě přiřazené úkoly',
+    'Only for tasks created by me tasks and assigned to me' => 'pouze pro mnou vytvořené a mě přiřazené úkoly',
     // '%%Y-%%m-%%d' => '',
     'Total for all columns' => 'S',
     'You need at least 2 days of data to show the chart.' => 'Potřebujete nejméně data ze dvou dnů pro zobrazení grafu',

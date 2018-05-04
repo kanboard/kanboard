@@ -41,7 +41,7 @@ class UserNotificationFilterModel extends Base
             self::FILTER_NONE => t('All tasks'),
             self::FILTER_ASSIGNEE => t('Only for tasks assigned to me'),
             self::FILTER_CREATOR => t('Only for tasks created by me'),
-            self::FILTER_BOTH => t('Only for tasks created by me and assigned to me'),
+            self::FILTER_BOTH => t('Only for tasks created by me and tasks assigned to me'),
         );
     }
 

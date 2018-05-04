@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'Semua tugas',
     'Only for tasks assigned to me' => 'Hanya untuk tugas yang ditugaskan ke saya',
     'Only for tasks created by me' => 'Hanya untuk tugas yang dibuat oleh saya',
-    'Only for tasks created by me and assigned to me' => 'Hanya untuk tugas yang dibuat oleh saya dan ditugaskan ke saya',
+    'Only for tasks created by me tasks and assigned to me' => 'Hanya untuk tugas yang dibuat oleh saya dan ditugaskan ke saya',
     '%%Y-%%m-%%d' => '%%d/%%m/%%Y',
     'Total for all columns' => 'Total untuk semua kolom',
     'You need at least 2 days of data to show the chart.' => 'Anda memerlukan setidaknya 2 hari dari data yang menunjukkan grafik.',
