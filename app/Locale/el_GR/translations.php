@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'Όλες οι εργασίες',
     'Only for tasks assigned to me' => 'Μόνο σε εργασίες που μου έχουν ανατεθεί',
     'Only for tasks created by me' => 'Μόνο σε εργασίες που έχουν δημιουργηθεί από εμένα',
-    'Only for tasks created by me and assigned to me' => 'Μόνο σε εργασίες που έχουν δημιουργηθεί από εμένα και μου έχουν ανατεθεί',
+    'Only for tasks created by me tasks and assigned to me' => 'Μόνο σε εργασίες που έχουν δημιουργηθεί από εμένα και μου έχουν ανατεθεί',
     '%%Y-%%m-%%d' => '%%d/%%m/%%Y',
     'Total for all columns' => 'Σύνολο για όλες τις στήλες',
     'You need at least 2 days of data to show the chart.' => 'Έχετε τουλάχιστον 2 ημέρες δεδομένων για να εμφανιστούν στο διάγραμμα.',

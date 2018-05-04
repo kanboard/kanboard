@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'Todas as tarefas',
     'Only for tasks assigned to me' => 'Somente as tarefas atribuídas a mim',
     'Only for tasks created by me' => 'Apenas as tarefas que eu criei',
-    'Only for tasks created by me and assigned to me' => 'Apenas as tarefas que eu criei e aquelas atribuídas a mim',
+    'Only for tasks created by me tasks and assigned to me' => 'Apenas as tarefas que eu criei e aquelas atribuídas a mim',
     '%%Y-%%m-%%d' => '%%d/%%m/%%Y',
     'Total for all columns' => 'Total para todas as colunas',
     'You need at least 2 days of data to show the chart.' => 'Precisa de pelo menos 2 dias de dados para visualizar o gráfico.',

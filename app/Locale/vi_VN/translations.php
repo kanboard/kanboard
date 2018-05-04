@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'Tất cả các nhiệm vụ',
     'Only for tasks assigned to me' => 'Chỉ đối với những nhiệm vụ được giao cho tôi',
     'Only for tasks created by me' => 'Chỉ cho những công việc do tôi tạo ra',
-    'Only for tasks created by me and assigned to me' => 'Chỉ cho những công việc mà tôi tạo ra và được giao cho tôi',
+    'Only for tasks created by me tasks and assigned to me' => 'Chỉ cho những công việc mà tôi tạo ra và được giao cho tôi',
     '%%Y-%%m-%%d' => '%%Y - %%m - %%d',
     'Total for all columns' => 'Tổng cho tất cả các cột',
     'You need at least 2 days of data to show the chart.' => 'Bạn cần ít nhất 2 ngày dữ liệu để hiển thị biểu đồ.',

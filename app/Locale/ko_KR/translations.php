@@ -648,7 +648,7 @@ return array(
     'All tasks' => '모든 할일',
     'Only for tasks assigned to me' => '내가 담당자인 일',
     'Only for tasks created by me' => '내가 만든 일',
-    'Only for tasks created by me and assigned to me' => '내가 만들었거나 내가 담당자인 일',
+    'Only for tasks created by me tasks and assigned to me' => '내가 만들었거나 내가 담당자인 일',
     '%%Y-%%m-%%d' => '%%Y-%%m-%%d',
     'Total for all columns' => '모든 컬럼',
     'You need at least 2 days of data to show the chart.' => '차트를 보기 위하여 최소 2일의 데이터가 필요합니다',
