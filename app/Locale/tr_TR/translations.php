@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'Tüm görevler',
     'Only for tasks assigned to me' => 'Yalnızca bana atanmış görevler için',
     'Only for tasks created by me' => 'Yalnızca benim oluşturduğum görevler için',
-    'Only for tasks created by me and assigned to me' => 'Yalnızca benim oluşturduğum ve bana atanmış görevler için',
+    'Only for tasks created by me and tasks assigned to me' => 'Yalnızca benim oluşturduğum ve bana atanmış görevler için',
     '%%Y-%%m-%%d' => '%%Y-%%m-%%d',
     'Total for all columns' => 'Tüm sütunlar için toplam',
     'You need at least 2 days of data to show the chart.' => 'Grafiği göstermek için en az iki günlük veriye ihtiyaç var.',

@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'totes les tasques',
     'Only for tasks assigned to me' => 'Només per a les tasques que se m\'ha s\'assignin',
     'Only for tasks created by me' => 'Només per a les tasques creades per mi',
-    'Only for tasks created by me and assigned to me' => 'Només per a tasques creades per mi i em assignin',
+    'Only for tasks created by me and tasks assigned to me' => 'Només per a tasques creades per mi i em assignin',
     // '%%Y-%%m-%%d' => '',
     'Total for all columns' => 'Total per a totes les columnes',
     'You need at least 2 days of data to show the chart.' => 'Es necessita com a mínim 2 dies de dades per mostrar el gràfic.',

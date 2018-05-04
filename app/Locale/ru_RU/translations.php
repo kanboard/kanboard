@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'Все задачи',
     'Only for tasks assigned to me' => 'Только для задач, назначенных мне',
     'Only for tasks created by me' => 'Только для задач, созданных мной',
-    'Only for tasks created by me and assigned to me' => 'Только для задач, созданных мной и назначенных мне',
+    'Only for tasks created by me and tasks assigned to me' => 'Только для задач, созданных мной и назначенных мне',
     '%%Y-%%m-%%d' => '%%Y-%%m-%%d',
     'Total for all columns' => 'Суммарно для всех колонок',
     'You need at least 2 days of data to show the chart.' => 'Для отображения диаграммы нужно по крайней мере 2 дня.',

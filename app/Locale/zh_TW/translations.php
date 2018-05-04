@@ -648,7 +648,7 @@ return array(
     'All tasks' => '所有任務',
     'Only for tasks assigned to me' => '所有指派给我的任務',
     'Only for tasks created by me' => '所有我建立的任務',
-    'Only for tasks created by me and assigned to me' => '所有我建立的並且指派给我的任務',
+    'Only for tasks created by me and tasks assigned to me' => '所有我建立的並且指派给我的任務',
     // '%%Y-%%m-%%d' => '',
     'Total for all columns' => '所有欄位下的',
     'You need at least 2 days of data to show the chart.' => '目前柱狀圖至少需要2天的資料。',

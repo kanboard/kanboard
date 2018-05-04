@@ -648,7 +648,7 @@ return array(
     'All tasks' => 'Alle opgaver',
     'Only for tasks assigned to me' => 'Kun tildelte opgaver',
     'Only for tasks created by me' => 'Kun opgaver oprettet af bruger',
-    'Only for tasks created by me and assigned to me' => 'Kun opgaver oprettet og tildelt bruger',
+    'Only for tasks created by me and tasks assigned to me' => 'Kun opgaver oprettet og tildelt bruger',
     '%%Y-%%m-%%d' => '%%Y-%%m-%%d',
     'Total for all columns' => 'Total for alle kolonner',
     'You need at least 2 days of data to show the chart.' => 'Der skal mindst 2 dages data for at vise diagram.',
