@@ -60,6 +60,7 @@ class GroupMemberModel extends Base
 
         return $this->db->table(UserModel::TABLE)
             ->notInSubquery('id', $subquery)
+            ->eq('is_active', 1)
             ->findAll();
     }
 
