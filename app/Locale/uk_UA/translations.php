@@ -3,7 +3,7 @@
 return array(
     'number.decimals_separator' => ',',
     'number.thousands_separator' => ' ',
-    'None' => 'Відсутній', // FIXME too different usages for really generic translation
+    'None' => 'Відсутній',
     'Edit' => 'Редагувати',
     'Remove' => 'Видалити',
     'Yes' => 'Так',
@@ -22,7 +22,7 @@ return array(
     'Dark Grey' => 'Темно-сірий',
     'Pink' => 'Рожевий',
     'Teal' => 'Бірюзовий',
-    'Cyan'=> 'Синьо-зелений',
+    'Cyan' => 'Синьо-зелений',
     'Lime' => 'Лайм',
     'Light Green' => 'Світло-зелений',
     'Amber' => 'Бурштиновий',
@@ -34,7 +34,7 @@ return array(
     'Remove user' => 'Видалити користувача',
     'Do you really want to remove this user: "%s"?' => 'Дійсно видалити користувача "%s"?',
     'All users' => 'Всі користувачі',
-    'Username' => 'Логін', // Ім'я|ідентифікатор користувача?
+    'Username' => 'Логін',
     'Password' => 'Пароль',
     'Administrator' => 'Адміністратор',
     'Sign in' => 'Увійти',
@@ -45,7 +45,7 @@ return array(
     'Logout' => 'Вийти',
     'Bad username or password' => 'Неправильний логін або пароль',
     'Edit project' => 'Редагувати проект',
-    'Name' => 'Ім\'я', // FIXME God damn it! It's too generic and broad (ім'я + назва)
+    'Name' => 'Ім\'я',
     'Projects' => 'Проекти',
     'No project' => 'Проекти відсутні',
     'Project' => 'Проект',
@@ -170,7 +170,7 @@ return array(
     'Define action parameters' => 'Вкажіть параметри події',
     'Do you really want to remove this action: "%s"?' => 'Дійсно видалити дію "%s"?',
     'Remove an automatic action' => 'Видалення автоматичної дії',
-    'Assign the task to a specific user' => 'Призначити певного користувача виконавцем задачі', // Призначити задачу певному користувачу ?
+    'Assign the task to a specific user' => 'Призначити певного користувача виконавцем задачі',
     'Assign the task to the person who does the action' => 'Призначити виконавцем задачі користувача, що виконав дію',
     'Duplicate the task to another project' => 'Додати дублікат задачі до іншого проекту',
     'Move a task to another column' => 'Перемістити задачу до іншої колонки',
@@ -207,7 +207,7 @@ return array(
     'Closed' => 'Закритий',
     'Search' => 'Пошук',
     'Nothing found.' => 'Нічого не знайдено.',
-    'Due date' => 'Термін виконання', // Duplicate?
+    'Due date' => 'Термін виконання',
     'Description' => 'Опис',
     '%d comments' => '%d коментарів',
     '%d comment' => '%d коментар',
@@ -249,15 +249,14 @@ return array(
     'Edit the task' => 'Редагувати задачу',
     'Add a comment' => 'Додати коментар',
     'Edit a comment' => 'Редагувати коментар',
-    'Summary' => 'Відомості', // FIXME used in more than one place
+    'Summary' => 'Відомості',
     'Time tracking' => 'Облік часу',
     'Estimate:' => 'Оцінка:',
     'Spent:' => 'Витрачено:',
     'Do you really want to remove this sub-task?' => 'Дійсно видалити цю підзадачу?',
     'Remaining:' => 'Залишилося:',
     'hours' => 'годин',
-    'spent' => 'витрачено',
-    'estimated' => 'оцінено', // "за оцінкою"?
+    'estimated' => 'оцінено',
     'Sub-Tasks' => 'Підзадачі',
     'Add a sub-task' => 'Додати підзадачу',
     'Original estimate' => 'Початкова оцінка',
@@ -365,7 +364,7 @@ return array(
     'Create a task from an external provider' => 'Створити задачу із зовнішнього джерела',
     'Change the assignee based on an external username' => 'Змінити відповідального виходячи з зовнішнього логіна',
     'Change the category based on an external label' => 'Змінити категорію на основі мітки зв\'язку',
-    'Reference' => 'Зовнішній ID', // External ID for the task, for example it can be ticket number that come from another system
+    'Reference' => 'Зовнішній ID',
     'Label' => 'Мітка',
     'Database' => 'База даних',
     'About' => 'Про додаток',
@@ -448,7 +447,7 @@ return array(
     'Subtasks Export' => 'Експорт підзадач',
     'Task Title' => 'Заголовок задачі',
     'Untitled' => 'Без назви',
-    'Application default' => 'Стандартно з додатку', // шось нє то
+    'Application default' => 'Стандартно з додатку',
     'Language:' => 'Мова:',
     'Timezone:' => 'Часовий пояс:',
     'All columns' => 'Всі колонки',
@@ -471,7 +470,7 @@ return array(
     'End' => 'Завершення',
     'Task age in days' => 'Вік задачі в днях',
     'Days in this column' => 'Днів у поточній колонці',
-    '%dd' => '%d д', // не впевнений, що варто перекладати
+    '%dd' => '%d д',
     'Add a new link' => 'Додати нове посилання',
     'Do you really want to remove this link: "%s"?' => 'Дійсно видалити посилання "%s"?',
     'Do you really want to remove this link with task #%d?' => 'Дійсно видалити зв\'язок із задачею № %d ?',
@@ -481,15 +480,14 @@ return array(
     'Link removed successfully.' => 'Посилання успішно видалено.',
     'Link labels' => 'Мітки зв\'язків',
     'Link modification' => 'Змінити мітку зв\'язку',
-    'Links' => 'Зв\'язки',
     'Opposite label' => 'Протилежна мітка',
-    'Remove a link' => 'Видалити посилання', // FIXME used in 3 different contexts!
+    'Remove a link' => 'Видалити посилання',
     'The labels must be different' => 'Мітки повинні бути різними',
     'There is no link.' => 'Мітки зв\'язків відсутні.',
     'This label must be unique' => 'Мітка має бути унікальною',
-    'Unable to create your link.' => 'Не вдалося створити посилання.', // FIXME used in 3 different contexts!
-    'Unable to update your link.' => 'Не вдалося змінити посилання.', // FIXME used in 3 different contexts!
-    'Unable to remove this link.' => 'Не вдалося видалити посилання.', // FIXME used in 3 different contexts!
+    'Unable to create your link.' => 'Не вдалося створити посилання.',
+    'Unable to update your link.' => 'Не вдалося змінити посилання.',
+    'Unable to remove this link.' => 'Не вдалося видалити посилання.',
     'relates to' => 'пов\'язана з',
     'blocks' => 'блокує',
     'is blocked by' => 'заблокована',
@@ -516,13 +514,12 @@ return array(
     'Compact view' => 'Стислий вигляд',
     'Horizontal scrolling' => 'Горизонтальна прокрутка',
     'Compact/wide view' => 'Стислий/широкий вигляд',
-    'Currency' => 'Валюта', // Грошові одиниці ?
+    'Currency' => 'Валюта',
     'Private project' => 'Приватний проект',
     'AUD - Australian Dollar' => 'AUD - Австралійський долар',
     'CAD - Canadian Dollar' => 'CAD - Канадський долар',
     'CHF - Swiss Francs' => 'CHF - Швейцарський франк',
     'Custom Stylesheet' => 'Додаткові стилі',
-    'download' => 'завантажити',
     'EUR - Euro' => 'EUR - Євро',
     'GBP - British Pound' => 'GBP - Фунт стерлінгів',
     'INR - Indian Rupee' => 'INR - Індійська рупія',
@@ -593,7 +590,6 @@ return array(
     'Existing due date' => 'Наявний термін виконання',
     'Factor to calculate new due date: ' => 'Коефіцієнт для розрахунку нового терміну виконання: ',
     'Month(s)' => 'Місяці',
-    'Recurrence' => 'Повторення',
     'This task has been created by: ' => 'Ця задача створена:',
     'Recurrent task has been generated:' => 'Була створена повторювана задача:',
     'Timeframe to calculate new due date: ' => 'Період часу для розрахунку нового терміну виконання: ',
@@ -649,7 +645,7 @@ return array(
     'Only for tasks assigned to me' => 'Задачі призначені мені',
     'Only for tasks created by me' => 'Задачі створені мною',
     'Only for tasks created by me and tasks assigned to me' => 'Задачі створені мною або призначені мені',
-    '%%Y-%%m-%%d' => '%%d.%%m.%%Y', // 16.12.2000
+    '%%Y-%%m-%%d' => '%%d.%%m.%%Y',
     'Total for all columns' => 'Загалом для всіх колонок',
     'You need at least 2 days of data to show the chart.' => 'Для відображення графіка необхідні дані щонайменше за 2 дні.',
     '<15m' => '< 15 хв',
@@ -731,7 +727,6 @@ return array(
     'NOK - Norwegian Krone' => 'NOK - Норвезька крона',
     'Show this column' => 'Показувати цю колонку',
     'Hide this column' => 'Приховати цю колонку',
-    'open file' => 'відкрити файл',
     'End date' => 'Дата завершення',
     'Users overview' => 'Користувачі в проектах',
     'Members' => 'Учасники',
@@ -849,7 +844,7 @@ return array(
     'Project Viewer' => 'Спостерігач проекту',
     'Your account is locked for %d minutes' => 'Ваш обліковий запис заблоковано на %d хвилин(и)',
     'Invalid captcha' => 'Неправильний код перевірки',
-    'The name must be unique' => 'Назва має бути унікальною', // TODO check if this string matches all contexts
+    'The name must be unique' => 'Назва має бути унікальною',
     'View all groups' => 'Переглянути всі групи',
     'There is no user available.' => 'Немає доступних користувачів.',
     'Do you really want to remove the user "%s" from the group "%s"?' => 'Дійсно вилучити користувача "%s" із групи "%s"?',
@@ -942,7 +937,7 @@ return array(
     'Internal links' => 'Внутрішні зв\'язки',
     'Assign to me' => 'Призначити собі',
     'Me' => 'Мені',
-    'Do not duplicate anything' => 'З жодного', // 'Не копіювати' ?
+    'Do not duplicate anything' => 'З жодного',
     'Projects management' => 'Управління проектами',
     'Users management' => 'Управління користувачами',
     'Groups management' => 'Управління групами',
@@ -950,7 +945,7 @@ return array(
     'open' => 'відкрита',
     'closed' => 'закрита',
     'Priority:' => 'Пріорітет:',
-    'Reference:' => 'Зовнішній ID:', // External ID for the task, for example it can be ticket number that come from another system
+    'Reference:' => 'Зовнішній ID:',
     'Complexity:' => 'Складність:',
     'Swimlane:' => 'Доріжка:',
     'Column:' => 'Колонка:',
@@ -1064,7 +1059,7 @@ return array(
     'Unable to write temporary file for plugin.' => 'Не вдалося створити тимчасовий файл для розширення.',
     'Unable to open plugin archive.' => 'Не вдалося відкрити архів розширення.',
     'There is no file in the plugin archive.' => 'В архіві розширення відсутній файл.',
-    'Create tasks in bulk' => 'Створити багато задач одразу', // "масове створення" звучить не дуже
+    'Create tasks in bulk' => 'Створити багато задач одразу',
     'Your Kanboard instance is not configured to install plugins from the user interface.' => 'Ваш Kanboard не налаштований для встановлення розширень з користувацького інтерфейсу.',
     'There is no plugin available.' => 'Відсутні доступні розширення.',
     'Install' => 'Встановити',
@@ -1380,4 +1375,6 @@ return array(
     '%s moved the task #%d to the column "%s"' => '%s перемістив задачу #%d до колонки "%s"',
     '%s moved the task #%d to the position %d in the column "%s"' => '%s перемістив задачу #%d на позицію %d в колонці "%s"',
     '%s moved the task #%d to the swimlane "%s"' => '%s перемістив задачу #%d на доріжку "%s"',
+    // '%sh spent' => '',
+    // '%sh estimated' => '',
 );
