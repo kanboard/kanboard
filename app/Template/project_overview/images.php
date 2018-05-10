@@ -19,6 +19,9 @@
                             <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->text->e($file['name']) ?> <i class="fa fa-caret-down"></i></a>
                             <ul>
                                 <li>
+                                    <?= $this->url->icon('external-link', t('View file'), 'FileViewerController', 'image', array('project_id' => $project['id'], 'file_id' => $file['id']), false, '', '', true) ?>
+                                </li>
+                                <li>
                                     <?= $this->url->icon('download', t('Download'), 'FileViewerController', 'download', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
                                 </li>
                                 <?php if ($this->user->hasProjectAccess('ProjectFileController', 'remove', $project['id'])): ?>
