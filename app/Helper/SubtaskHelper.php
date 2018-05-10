@@ -108,7 +108,7 @@ class SubtaskHelper extends Base
         $attributes = array_merge(array('tabindex="1"', 'required'), $attributes);
 
         $html = $this->helper->form->label(t('Title'), 'title');
-        $html .= $this->helper->form->text('title', $values, $errors, $attributes);
+        $html .= $this->helper->form->text('title', $values, $errors, $attributes, 'form-max-width');
 
         return $html;
     }
