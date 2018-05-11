@@ -9,7 +9,7 @@
     <?php if (! empty($subtask['time_estimated'])): ?>
         <li>
             <?= t('Time tracking:') ?>
-            <strong><?= $this->text->e($subtask['time_estimated']).'h' ?></strong> <?= t('estimated') ?>
+            <?= t('%sh estimated', n($subtask['time_estimated'])) ?>
         </li>
     <?php endif ?>
 </ul>
