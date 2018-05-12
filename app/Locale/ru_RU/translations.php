@@ -1375,6 +1375,6 @@ return array(
     '%s moved the task #%d to the column "%s"' => '%s перенёс задачу #%d в колонку "%s"',
     '%s moved the task #%d to the position %d in the column "%s"' => '%s перенёс задачу #%d на позицию %d в колонку "%s"',
     '%s moved the task #%d to the swimlane "%s"' => '%s перенёс задачу #%d на дорожку "%s"',
-    // '%sh spent' => '',
-    // '%sh estimated' => '',
+    '%sh spent' => '%sч затрачено',
+    '%sh estimated' => '%sч запланировано',
 );
