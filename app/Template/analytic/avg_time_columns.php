@@ -26,6 +26,6 @@
     </table>
 
     <p class="alert alert-info">
-        <?= t('This chart show the average time spent into each column for the last %d tasks.', 1000) ?>
+        <?= t('This chart shows the average time spent into each column for the last %d tasks.', 1000) ?>
     </p>
 <?php endif ?>
