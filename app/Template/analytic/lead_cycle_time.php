@@ -28,6 +28,6 @@
     </form>
 
     <p class="alert alert-info">
-        <?= t('This chart show the average lead and cycle time for the last %d tasks over the time.', 1000) ?>
+        <?= t('This chart shows the average lead and cycle time for the last %d tasks over the time.', 1000) ?>
     </p>
 <?php endif ?>
