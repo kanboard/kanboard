@@ -141,4 +141,18 @@ class BaseActionTest extends Base
         $this->assertTrue($dummyAction->execute($event, 'foobar'));
         $this->assertFalse($dummyAction->execute($event, 'foobar'));
     }
+
+    public function testExecuteSameActionSeveralTimesWithDifferentEvents()
+    {
+        $dummyAction = new DummyAction($this->container);
+        $dummyAction->setProjectId(1234);
+        $dummyAction->setParam('p1', 'something');
+        $dummyAction->addEvent('foobar', 'FooBar');
+
+        $event1 = new GenericEvent(array('project_id' => 1234, 'p1' => 'something', 'p2' => 'abc', 'p3' => array('p4' => 'a')));
+        $event2 = new GenericEvent(array('project_id' => 1234, 'p1' => 'something', 'p2' => 'abc', 'p3' => array('p4' => 'b')));
+
+        $this->assertTrue($dummyAction->execute($event1, 'foobar'));
+        $this->assertTrue($dummyAction->execute($event2, 'foobar'));
+    }
 }
