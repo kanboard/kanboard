@@ -1377,4 +1377,8 @@ return array(
     '%s moved the task #%d to the swimlane "%s"' => '%s , #%d görevini "%s" kulvarına taşıdı',
     '%sh spent' => '%sh harcandı',
     '%sh estimated' => '%sh tahmin edildi',
+    // 'Select All' => '',
+    // 'Unselect All' => '',
+    // 'Apply action' => '',
+    // 'Move selected tasks to another column' => '',
 );

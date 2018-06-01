@@ -1377,4 +1377,8 @@ return array(
     '%s moved the task #%d to the swimlane "%s"' => '%s перемістив задачу #%d на доріжку "%s"',
     // '%sh spent' => '',
     // '%sh estimated' => '',
+    // 'Select All' => '',
+    // 'Unselect All' => '',
+    // 'Apply action' => '',
+    // 'Move selected tasks to another column' => '',
 );
