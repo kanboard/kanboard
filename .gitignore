@@ -23,3 +23,8 @@ data/config.php
 !docker/var/wwww/app/config.php
 node_modules
 bower_components
+
+composer
+vendor/composer
+vendor
+package-lock.json
