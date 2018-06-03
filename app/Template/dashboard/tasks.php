@@ -30,6 +30,8 @@
                 <?= $this->render('task_list/task_subtasks', array(
                     'task' => $task,
                 )) ?>
+
+                <?= $this->hook->render('template:dashboard:task:footer', array('task' => $task)) ?>
             </div>
         <?php endforeach ?>
     </div>
