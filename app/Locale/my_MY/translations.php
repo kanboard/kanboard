@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Lead time adalah durasi antara pembuatan tugas dan penyelesaian.',
     'The cycle time is the duration between the start date and the completion.' => 'Siklus waktu adalah durasi antara tanggal mulai dan tanggal penyelesaian.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Jika tugas tidak ditutup waktu saat ini yang digunakan sebagai pengganti tanggal penyelesaian.',
-    'Set automatically the start date' => 'Secara otomatis mengatur tanggal mulai',
+    'Automatically set the start date' => 'Secara otomatis mengatur tanggal mulai',
     'Edit Authentication' => 'Modifikasi Otentifikasi',
     'Remote user' => 'Pengguna jauh',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Pengguna jauh tidak menyimpan kata laluan mereka dalam basis data Kanboard, contoh: Akaun LDAP, Google dan Github.',
@@ -1377,8 +1377,4 @@ return array(
     // '%s moved the task #%d to the swimlane "%s"' => '',
     // '%sh spent' => '',
     // '%sh estimated' => '',
-    // 'Select All' => '',
-    // 'Unselect All' => '',
-    // 'Apply action' => '',
-    // 'Move selected tasks to another column' => '',
 );

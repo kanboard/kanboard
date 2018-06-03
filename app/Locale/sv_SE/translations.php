@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Ledtiden är varaktigheten mellan uppgiftens skapande och slutförande.',
     'The cycle time is the duration between the start date and the completion.' => 'Cykeltiden är varaktigheten mellan uppgiftens startdatum och slut.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Om uppgiften inte är stängd används nuvarande tid istället för slutförandedatum.',
-    'Set automatically the start date' => 'Sätt startdatum automatiskt',
+    'Automatically set the start date' => 'Sätt startdatum automatiskt',
     'Edit Authentication' => 'Ändra autentisering',
     'Remote user' => 'Extern användare',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Externa användares lösenord lagras inte i Kanboard-databasen, exempel: LDAP, Google och Github-konton.',
@@ -1377,8 +1377,4 @@ return array(
     // '%s moved the task #%d to the swimlane "%s"' => '',
     // '%sh spent' => '',
     // '%sh estimated' => '',
-    // 'Select All' => '',
-    // 'Unselect All' => '',
-    // 'Apply action' => '',
-    // 'Move selected tasks to another column' => '',
 );

@@ -699,7 +699,7 @@ return array(
     // 'The lead time is the duration between the task creation and the completion.' => '',
     // 'The cycle time is the duration between the start date and the completion.' => '',
     // 'If the task is not closed the current time is used instead of the completion date.' => '',
-    // 'Set automatically the start date' => '',
+    // 'Automatically set the start date' => '',
     // 'Edit Authentication' => '',
     // 'Remote user' => '',
     // 'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => '',
@@ -1377,8 +1377,4 @@ return array(
     // '%s moved the task #%d to the swimlane "%s"' => '',
     // '%sh spent' => '',
     // '%sh estimated' => '',
-    // 'Select All' => '',
-    // 'Unselect All' => '',
-    // 'Apply action' => '',
-    // 'Move selected tasks to another column' => '',
 );

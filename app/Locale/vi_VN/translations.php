@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Thời gian dẫn là khoảng thời gian giữa nhiệm vụ sáng tạo và hoàn thành.',
     'The cycle time is the duration between the start date and the completion.' => 'Thời gian chu kỳ là khoảng thời gian giữa ngày bắt đầu và ngày hoàn thành.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Nếu nhiệm vụ không đóng thì thời gian hiện tại được sử dụng thay vì ngày hoàn thành.',
-    'Set automatically the start date' => 'Đặt tự động ngày bắt đầu',
+    'Automatically set the start date' => 'Đặt tự động ngày bắt đầu',
     'Edit Authentication' => 'Chỉnh sửa Xác thực',
     'Remote user' => 'Người dùng từ xa',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Người dùng từ xa không lưu mật khẩu của họ trong cơ sở dữ liệu Kanboard, ví dụ: LDAP, Google và Github.',
@@ -1377,8 +1377,4 @@ return array(
     // '%s moved the task #%d to the swimlane "%s"' => '',
     // '%sh spent' => '',
     // '%sh estimated' => '',
-    // 'Select All' => '',
-    // 'Unselect All' => '',
-    // 'Apply action' => '',
-    // 'Move selected tasks to another column' => '',
 );
