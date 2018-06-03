@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => '리드 시간은 할일의 생성부터 완료까지의 기간입니다',
     'The cycle time is the duration between the start date and the completion.' => '사이클 시간은 할일의 시작일부터 완료까지의 기간입니다',
     'If the task is not closed the current time is used instead of the completion date.' => '할일이 종료되지 않았다면, 완료 시간 대신 현재 시간이 사용됩니다',
-    'Automatically set the start date' => '자동으로 시작 날짜를 설정합니다',
+    'Set automatically the start date' => '자동으로 시작 날짜를 설정합니다',
     'Edit Authentication' => '계정 수정',
     'Remote user' => '원격 담당자',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => '예를 들어 LDAP, Google, Github 계정같은 원격 담당자의 비밀번호는 칸반보드 데이터베이스에 저장하지 않습니다',
@@ -1377,4 +1377,8 @@ return array(
     // '%s moved the task #%d to the swimlane "%s"' => '',
     // '%sh spent' => '',
     // '%sh estimated' => '',
+    // 'Select All' => '',
+    // 'Unselect All' => '',
+    // 'Apply action' => '',
+    // 'Move selected tasks to another column' => '',
 );

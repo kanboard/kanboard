@@ -15,7 +15,7 @@ use Kanboard\Core\ExternalTask\ExternalTaskException;
 class TaskModificationController extends BaseController
 {
     /**
-     * Automatically set the start date
+     * Set automatically the start date
      *
      * @access public
      */

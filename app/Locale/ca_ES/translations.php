@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'El termini d\'execució és la durada entre la creació de la tasca i la finalització.',
     'The cycle time is the duration between the start date and the completion.' => 'El temps de cicle és la durada entre la data d\'inici i la finalització.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Si la tasca no està tancat el moment actual s\'utilitza en lloc de la data de finalització.',
-    'Automatically set the start date' => 'S\'ajusta automàticament la data d\'inici',
+    'Set automatically the start date' => 'S\'ajusta automàticament la data d\'inici',
     'Edit Authentication' => 'Edita autenticació',
     'Remote user' => 'Usuari remot',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Els usuaris remots no emmagatzemen la contrasenya a la base de dades Kanboard, exemples: els comptes LDAP, Google i Github.',
@@ -1377,4 +1377,8 @@ return array(
     // '%s moved the task #%d to the swimlane "%s"' => '',
     // '%sh spent' => '',
     // '%sh estimated' => '',
+    // 'Select All' => '',
+    // 'Unselect All' => '',
+    // 'Apply action' => '',
+    // 'Move selected tasks to another column' => '',
 );

@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => '工作是任務建立和完成之間的持續時間。',
     'The cycle time is the duration between the start date and the completion.' => '周期時間是開始日期和完成時間之間的持續時間。',
     'If the task is not closed the current time is used instead of the completion date.' => '如果目前任務未關閉時用目前時間代替完成時間',
-    'Automatically set the start date' => '設定自動開始日期',
+    'Set automatically the start date' => '設定自動開始日期',
     'Edit Authentication' => '編輯認證訊息',
     'Remote user' => '遠端使用者',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => '遠端使用者不會在看板資料庫保存密碼，例如：LDAP,GOOGLE,GitHub。',
@@ -1377,4 +1377,8 @@ return array(
     // '%s moved the task #%d to the swimlane "%s"' => '',
     // '%sh spent' => '',
     // '%sh estimated' => '',
+    // 'Select All' => '',
+    // 'Unselect All' => '',
+    // 'Apply action' => '',
+    // 'Move selected tasks to another column' => '',
 );

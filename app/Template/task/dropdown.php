@@ -4,7 +4,7 @@
         <?php if ($this->projectRole->canUpdateTask($task)): ?>
             <?php if (array_key_exists('date_started', $task) && empty($task['date_started'])): ?>
             <li>
-                <?= $this->url->icon('play', t('Automatically set the start date'), 'TaskModificationController', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                <?= $this->url->icon('play', t('Set automatically the start date'), 'TaskModificationController', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
             </li>
             <?php endif ?>
             <li>

@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Lead time (dodací lhůta) je čas od založení úkolu do jeho dokončení.',
     'The cycle time is the duration between the start date and the completion.' => 'Doba cyklu je doba trvání mezi zahájením a dokončením úkolu.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Jestliže není úkol uzavřen, místo termínu dokončení je použit aktuální čas.',
-    'Automatically set the start date' => 'Nastavit automaticky počáteční datum',
+    'Set automatically the start date' => 'Nastavit automaticky počáteční datum',
     'Edit Authentication' => 'Upravit ověřování',
     'Remote user' => 'Vzdálený uživatel',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Hesla vzdáleným uživatelům se neukládají do databáze Kanboard. Naříklad: LDAP, Google a Github účty.',
@@ -1377,4 +1377,8 @@ return array(
     // '%s moved the task #%d to the swimlane "%s"' => '',
     // '%sh spent' => '',
     // '%sh estimated' => '',
+    // 'Select All' => '',
+    // 'Unselect All' => '',
+    // 'Apply action' => '',
+    // 'Move selected tasks to another column' => '',
 );

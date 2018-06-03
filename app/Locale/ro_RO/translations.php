@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Timpul de avans este durata între crearea sarcinii și finalizarea.',
     'The cycle time is the duration between the start date and the completion.' => 'Timpul de ciclu este durata între data de pornire și finalizare.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Dacă sarcina nu este închisă data curentă este folosită în locul dății de finalizare.',
-    'Automatically set the start date' => 'Setează automat data pornirii.',
+    'Set automatically the start date' => 'Setează automat data pornirii.',
     'Edit Authentication' => 'Modifică autentificarea',
     'Remote user' => 'Utilizator la distanță',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Utilizatorii la distanță nu păstrează parola în baza de date locală, de exemplu : conturi LDAP, GitHub sau Google.',
@@ -1377,4 +1377,8 @@ return array(
     // '%s moved the task #%d to the swimlane "%s"' => '',
     // '%sh spent' => '',
     // '%sh estimated' => '',
+    // 'Select All' => '',
+    // 'Unselect All' => '',
+    // 'Apply action' => '',
+    // 'Move selected tasks to another column' => '',
 );

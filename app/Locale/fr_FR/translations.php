@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Le lead time est la durée entre la création de la tâche et sa complétion.',
     'The cycle time is the duration between the start date and the completion.' => 'Le cycle time est la durée entre la date de début et la complétion.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Si la tâche n\'est pas fermée, l\'heure courante est utilisée à la place de la date de complétion.',
-    'Automatically set the start date' => 'Définir automatiquement la date de début',
+    'Set automatically the start date' => 'Définir automatiquement la date de début',
     'Edit Authentication' => 'Modifier l\'authentification',
     'Remote user' => 'Utilisateur distant',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Les utilisateurs distants ne stockent pas leur mot de passe dans la base de données de  Kanboard, exemples : comptes LDAP, GitHub ou Google.',
@@ -1377,4 +1377,8 @@ return array(
     '%s moved the task #%d to the swimlane "%s"' => '%s a déplacé la tâche #%d vers la swimlane « %s »',
     '%sh spent' => '%sh passé',
     '%sh estimated' => '%sh estimé',
+    'Select All' => 'Tout sélectionner',
+    'Unselect All' => 'Tout désélectionner',
+    'Apply action' => 'Appliquer une action',
+    'Move selected tasks to another column' => 'Déplaçer les tâches sélectionnées vers une autre colonne',
 );
