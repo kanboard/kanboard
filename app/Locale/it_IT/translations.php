@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Il tempo di consegna (Lead Time) è la durata tra la creazione di un task ed il suo completamento.',
     'The cycle time is the duration between the start date and the completion.' => 'Il tempo di lavorazione (Cycle Time) è la durata tra la data di inizio della lavorazione di un task ed il suo completamento.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Se il task non è chiuso sarà usata la data attuale invece della data di completamento.',
-    'Set automatically the start date' => 'Imposta automaticamente la data di inizio',
+    'Set the start date automatically' => 'Imposta automaticamente la data di inizio',
     'Edit Authentication' => 'Modifica Autenticazione',
     'Remote user' => 'Utente remoto',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'La password degli utenti remoti (ad esempio: LDAP, account Google e Github) non è salvata nel database di Kanboard',

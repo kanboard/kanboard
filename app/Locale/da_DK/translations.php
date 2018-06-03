@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Hoved tid er varighed mellem opgaveoprettelse og færdiggørelse.',
     'The cycle time is the duration between the start date and the completion.' => 'Gennemløbstid er varighed mellem startdato og færdiggørelse.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Hvis opgave ikke er lukket bruges nuværende tid i stedet for færdiggørelses-dato.',
-    'Set automatically the start date' => 'Angive automatisk startdato',
+    'Set the start date automatically' => 'Angive automatisk startdato',
     'Edit Authentication' => 'Redigere godkendelse',
     'Remote user' => 'Fjern bruger',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Fjern brugere gemmer ikke adgangskode i Kanboard databasen; eksempler: LDAP, Google og Github konti.',

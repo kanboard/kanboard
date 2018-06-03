@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Час виконання є проміжком часу між створенням задачі та її завершенням.',
     'The cycle time is the duration between the start date and the completion.' => 'Час циклу є проміжком між датою початку та завершення задачі.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Якщо задача не закрита, замість дати завершення використовується поточна.',
-    'Set automatically the start date' => 'Автоматично встановити дату початку',
+    'Set the start date automatically' => 'Автоматично встановити дату початку',
     'Edit Authentication' => 'Змінити автентифікацію',
     'Remote user' => 'Віддалений користувач',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Віддалені користувачі не зберігають свої паролі в базі даних Kanboard. Приклади: облікові записи LDAP, GitHub та Google.',

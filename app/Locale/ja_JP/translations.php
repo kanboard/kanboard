@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'リードタイムはタスクの作成〜完了まで時間です',
     'The cycle time is the duration between the start date and the completion.' => 'サイクルタイムは着手〜完了までの期間です',
     'If the task is not closed the current time is used instead of the completion date.' => 'タスクが終了していない場合は完了日の代わりに現在時刻を使用します',
-    'Set automatically the start date' => '開始日を自動的に設定',
+    'Set the start date automatically' => '開始日を自動的に設定',
     'Edit Authentication' => '認証の編集',
     'Remote user' => 'リモートユーザー',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'リモートユーザーはパスワードをKanboardデータベースに保存しません（例：LDAP、Google、Githubのアカウント）',

@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'เวลานำคือระหว่างสร้างงานและจบงาน',
     'The cycle time is the duration between the start date and the completion.' => 'รอบเวลาคือระหว่างวันที่เริ่มและจบงาน',
     // 'If the task is not closed the current time is used instead of the completion date.' => '',
-    'Set automatically the start date' => 'ตั้งค่าวันที่เริ่มต้นอัตโนมัติ',
+    'Set the start date automatically' => 'ตั้งค่าวันที่เริ่มต้นอัตโนมัติ',
     'Edit Authentication' => 'แก้ไขการตรวจสอบ',
     'Remote user' => 'ผู้ใช้รีโมท',
     // 'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => '',
