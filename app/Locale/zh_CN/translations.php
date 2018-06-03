@@ -1377,4 +1377,8 @@ return array(
     '%s moved the task #%d to the swimlane "%s"' => '%s将任务 #%d 移动到了里程碑 "%s" 下',
     '%sh spent' => '花费%s小时',
     '%sh estimated' => '预估%s小时',
+    // 'Select All' => '',
+    // 'Unselect All' => '',
+    // 'Apply action' => '',
+    // 'Move selected tasks to another column' => '',
 );

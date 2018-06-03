@@ -361,6 +361,7 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Controller\\TagController' => __DIR__ . '/../..' . '/app/Controller/TagController.php',
         'Kanboard\\Controller\\TaskAjaxController' => __DIR__ . '/../..' . '/app/Controller/TaskAjaxController.php',
         'Kanboard\\Controller\\TaskBulkController' => __DIR__ . '/../..' . '/app/Controller/TaskBulkController.php',
+        'Kanboard\\Controller\\TaskBulkMoveColumnController' => __DIR__ . '/../..' . '/app/Controller/TaskBulkMoveColumnController.php',
         'Kanboard\\Controller\\TaskCreationController' => __DIR__ . '/../..' . '/app/Controller/TaskCreationController.php',
         'Kanboard\\Controller\\TaskDuplicationController' => __DIR__ . '/../..' . '/app/Controller/TaskDuplicationController.php',
         'Kanboard\\Controller\\TaskExternalLinkController' => __DIR__ . '/../..' . '/app/Controller/TaskExternalLinkController.php',

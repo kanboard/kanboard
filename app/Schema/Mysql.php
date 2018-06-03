@@ -8,7 +8,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 130;
+const VERSION = 131;
+
+function version_131(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE `users` MODIFY `language` VARCHAR(11) DEFAULT NULL");
+}
 
 /*
 

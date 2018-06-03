@@ -21,12 +21,12 @@ abstract class Base extends \Kanboard\Core\Base
     private $compatibleEvents = array();
 
     /**
-     * Flag for called listener
+     * Keep history of executed events
      *
      * @access private
-     * @var boolean
+     * @var array
      */
-    private $called = false;
+    private $callStack = [];
 
     /**
      * Project id
@@ -252,17 +252,20 @@ abstract class Base extends \Kanboard\Core\Base
      */
     public function execute(GenericEvent $event, $eventName)
     {
-        // Avoid infinite loop, a listener instance can be called only one time
-        if ($this->called) {
+        $data = $event->getAll();
+        $hash = md5(serialize($data).$eventName);
+
+        // Do not call twice the same action with the same arguments.
+        if (isset($this->callStack[$hash])) {
             return false;
+        } else {
+            $this->callStack[$hash] = true;
         }
 
-        $data = $event->getAll();
         $executable = $this->isExecutable($data, $eventName);
         $executed = false;
 
         if ($executable) {
-            $this->called = true;
             $executed = $this->doAction($data);
         }
 

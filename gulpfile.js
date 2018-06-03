@@ -88,10 +88,17 @@ gulp.task('js', function() {
 });
 
 gulp.task('css', function() {
-    gulp.src('assets/sass/*.sass')
+    gulp.src(['assets/sass/*.sass','!assets/sass/*_print.sass'])
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(concat('app.min.css'))
         .pipe(gulp.dest(dist.css));
 });
 
-gulp.task('default', ['bower', 'vendor', 'js', 'css']);
+gulp.task('css:print', function() {
+    gulp.src('assets/sass/*_print.sass')
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(concat('print.min.css'))
+        .pipe(gulp.dest(dist.css));
+});
+
+gulp.task('default', ['bower', 'vendor', 'js', 'css', 'css:print']);

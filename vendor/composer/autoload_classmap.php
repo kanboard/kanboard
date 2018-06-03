@@ -235,6 +235,7 @@ return array(
     'Kanboard\\Controller\\TagController' => $baseDir . '/app/Controller/TagController.php',
     'Kanboard\\Controller\\TaskAjaxController' => $baseDir . '/app/Controller/TaskAjaxController.php',
     'Kanboard\\Controller\\TaskBulkController' => $baseDir . '/app/Controller/TaskBulkController.php',
+    'Kanboard\\Controller\\TaskBulkMoveColumnController' => $baseDir . '/app/Controller/TaskBulkMoveColumnController.php',
     'Kanboard\\Controller\\TaskCreationController' => $baseDir . '/app/Controller/TaskCreationController.php',
     'Kanboard\\Controller\\TaskDuplicationController' => $baseDir . '/app/Controller/TaskDuplicationController.php',
     'Kanboard\\Controller\\TaskExternalLinkController' => $baseDir . '/app/Controller/TaskExternalLinkController.php',

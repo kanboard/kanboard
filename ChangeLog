@@ -1,3 +1,10 @@
+Unreleased
+----------
+
+Bug fixes:
+
+* Fix the "users.language" column size
+
 Version 1.2.4 (May 16, 2018)
 ----------------------------
 

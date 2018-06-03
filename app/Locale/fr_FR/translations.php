@@ -1377,4 +1377,8 @@ return array(
     '%s moved the task #%d to the swimlane "%s"' => '%s a déplacé la tâche #%d vers la swimlane « %s »',
     '%sh spent' => '%sh passé',
     '%sh estimated' => '%sh estimé',
+    'Select All' => 'Tout sélectionner',
+    'Unselect All' => 'Tout désélectionner',
+    'Apply action' => 'Appliquer une action',
+    'Move selected tasks to another column' => 'Déplaçer les tâches sélectionnées vers une autre colonne',
 );
