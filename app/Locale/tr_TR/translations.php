@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Teslim süresi, görevin oluşturulması ile tamamlanması arasında geçen süredir.',
     'The cycle time is the duration between the start date and the completion.' => 'Çevrim süresi, görevin başlangıç tarihi ile tamamlanması arasında geçen süredir.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Eğer görev henüz kapatılmamışsa, tamamlanma tarihi yerine şu anki tarih kullanılır.',
-    'Set automatically the start date' => 'Başlangıç tarihini otomatik olarak belirle',
+    'Set the start date automatically' => 'Başlangıç tarihini otomatik olarak belirle',
     'Edit Authentication' => 'Doğrulamayı düzenle',
     'Remote user' => 'Uzak kullanıcı',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Uzak kullanıcıların şifreleri Kanboard veritabanında saklanmaz, örnek: LDAP, Google ve Github hesapları',

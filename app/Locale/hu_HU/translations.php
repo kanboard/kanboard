@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Az átfutási idő a feladat létrehozása és befejezése közötti időtartam.',
     'The cycle time is the duration between the start date and the completion.' => 'A ciklusidő a kezdési dátum és a befejezés közötti időtartam.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Ha a feladat nincs lezárva, akkor az aktuális idő lesz használva a befejezés dátuma helyett.',
-    'Set automatically the start date' => 'A kezdési idő automatikus beállítása',
+    'Set the start date automatically' => 'A kezdési idő automatikus beállítása',
     'Edit Authentication' => 'Hitelesítés szerkesztése',
     'Remote user' => 'Távoli felhasználó',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'A távoli felhasználók jelszava nem a Kanboard adatbázisban van tárolva. Példák: LDAP, Google és GitHub fiókok.',

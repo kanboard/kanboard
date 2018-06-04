@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Το <lead time> είναι η διάρκεια μεταξύ της δημιουργίας του έργου και της ολοκλήρωσης του.',
     'The cycle time is the duration between the start date and the completion.' => 'Το <cycle time> είναι η διάρκεια μεταξύ της ημερομηνίας εκκίνησης και της ολοκλήρωσης του.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Εάν η εργασία δεν έχει κλείσει η τρέχουσα ώρα χρησιμοποιείται αντί της ημερομηνίας ολοκλήρωσης.',
-    'Set automatically the start date' => 'Ρυθμίστε αυτόματα την ημερομηνία έναρξης',
+    'Set the start date automatically' => 'Ρυθμίστε αυτόματα την ημερομηνία έναρξης',
     'Edit Authentication' => 'Επεξεργασία ταυτοποίησης',
     'Remote user' => 'Απομακρυσμένος χρήστης',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Στους απομακρυσμένους χρήστες δεν αποθηκεύονται οι κωδικοί πρόσβασης εντός της βάσης δεδομένων της τρέχουσας εφαρμογής, Παραδείγματα: LDAP, Google and Github accounts.',

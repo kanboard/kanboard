@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Vrijeme vođenja je vrijeme koje je proteklo između otvaranja i zatvaranja zadatka.',
     'The cycle time is the duration between the start date and the completion.' => 'Vremenski ciklus je vrijeme koje je proteklo između početka i završetka rada na zadatku.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Ako zadatak nije zatvoren trenutno vrijeme je iskorišteno umjesto datuma završetka.',
-    'Set automatically the start date' => 'Automatski postavi početno vrijeme',
+    'Set the start date automatically' => 'Automatski postavi početno vrijeme',
     'Edit Authentication' => 'Uredi autentifikaciju',
     'Remote user' => 'Vanjski korisnik',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Vanjski korisnik ne čuva šifru u Kanboard bazi, npr: LDAP, Google i Github korisnički računi.',

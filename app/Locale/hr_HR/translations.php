@@ -699,7 +699,7 @@ return array(
     // 'The lead time is the duration between the task creation and the completion.' => '',
     // 'The cycle time is the duration between the start date and the completion.' => '',
     // 'If the task is not closed the current time is used instead of the completion date.' => '',
-    // 'Set automatically the start date' => '',
+    // 'Set the start date automatically' => '',
     // 'Edit Authentication' => '',
     // 'Remote user' => '',
     // 'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => '',

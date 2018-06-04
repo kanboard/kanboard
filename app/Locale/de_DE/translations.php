@@ -699,7 +699,7 @@ return array(
     'The lead time is the duration between the task creation and the completion.' => 'Die Durchlaufzeit ist die Dauer zwischen Erstellung und Fertigstellung.',
     'The cycle time is the duration between the start date and the completion.' => 'Die Zykluszeit ist die Dauer zwischen Start und Fertigstellung.',
     'If the task is not closed the current time is used instead of the completion date.' => 'Wenn die Aufgabe nicht geschlossen ist, wird die aktuelle Zeit statt der Fertigstellung verwendet.',
-    'Set automatically the start date' => 'Setze Startdatum automatisch',
+    'Set the start date automatically' => 'Setze Startdatum automatisch',
     'Edit Authentication' => 'Authentifizierung bearbeiten',
     'Remote user' => 'Remote-Benutzer',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'Remote-Benutzer haben kein Passwort in der Kanboard Datenbank, Beispiel: LDAP, Google und Github Accounts',
