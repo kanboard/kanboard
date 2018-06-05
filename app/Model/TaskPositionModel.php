@@ -36,7 +36,9 @@ class TaskPositionModel extends Base
             ->update([
                 'swimlane_id' => $swimlane_id,
                 'column_id' => $column_id,
-                'position' => $position
+                'position' => $position,
+                'date_moved' => time(),
+                'date_modification' => time(),
             ]);
 
         $this->db->closeTransaction();
