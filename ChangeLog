@@ -1,6 +1,10 @@
 Unreleased
 ----------
 
+New features:
+
+* Ability to run cron jobs by calling URL
+
 Bug fixes:
 
 * Fix the "users.language" column size
