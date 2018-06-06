@@ -1381,4 +1381,6 @@ return array(
     'Unselect All' => 'Tout désélectionner',
     'Apply action' => 'Appliquer une action',
     'Move selected tasks to another column' => 'Déplaçer les tâches sélectionnées vers une autre colonne',
+    'Edit tasks in bulk' => 'Modifier les tâches en masse',
+    'Choose the properties that you would to change for the selected tasks.' => 'Choisissez les propriétés que vous souhaitez changer pour les tâches sélectionnées.',
 );

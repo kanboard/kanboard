@@ -1381,4 +1381,6 @@ return array(
     'Unselect All' => 'Снять выделение со всех',
     'Apply action' => 'Применить действие',
     'Move selected tasks to another column' => 'Переместить выбранные задачи в другую колонку',
+    // 'Edit tasks in bulk' => '',
+    // 'Choose the properties that you would to change for the selected tasks.' => '',
 );
