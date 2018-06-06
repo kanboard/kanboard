@@ -1382,5 +1382,5 @@ return array(
     // 'Apply action' => '',
     // 'Move selected tasks to another column' => '',
     // 'Edit tasks in bulk' => '',
-    // 'Choose the properties that you would to change for the selected tasks.' => '',
+    // 'Choose the properties that you would like to change for the selected tasks.' => '',
 );

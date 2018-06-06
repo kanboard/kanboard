@@ -6,7 +6,7 @@
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('task_ids', $values) ?>
 
-    <p class="form-help"><?= t('Choose the properties that you would to change for the selected tasks.') ?></p>
+    <p class="form-help"><?= t('Choose the properties that you would like to change for the selected tasks.') ?></p>
 
     <fieldset class="bulk-change-block">
         <div class="bulk-change-checkbox">
