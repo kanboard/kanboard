@@ -1377,8 +1377,8 @@ return array(
     '%s moved the task #%d to the swimlane "%s"' => '%s flyttet opgave #%d til spor "%s"',
     '%sh spent' => '%sh brugt',
     '%sh estimated' => '%sh anslået',
-    // 'Select All' => '',
-    // 'Unselect All' => '',
-    // 'Apply action' => '',
-    // 'Move selected tasks to another column' => '',
+    'Select All' => 'Vælge alle',
+    'Unselect All' => 'Fravælge alle',
+    'Apply action' => 'Anvende handling',
+    'Move selected tasks to another column' => 'Flytte valgte opgaver til anden kolonne',
 );
