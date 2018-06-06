@@ -64,11 +64,11 @@
             </td>
             <td>
                 <?php if (! empty($link['task_time_spent'])): ?>
-                    <?= t('%sh spent', n($subtask['time_spent'])) ?>
+                    <?= t('%sh spent', n($link['task_time_spent'])) ?>
                 <?php endif ?>
-                <?php if (! empty($subtask['time_spent']) && ! empty($subtask['time_estimated'])): ?>/<?php endif ?>
+                <?php if (! empty($link['task_time_spent']) && ! empty($link['task_time_estimated'])): ?>/<?php endif ?>
                 <?php if (! empty($link['task_time_estimated'])): ?>
-                    <?= t('%sh estimated', n($subtask['time_estimated'])) ?>
+                    <?= t('%sh estimated', n($link['task_time_estimated'])) ?>
                 <?php endif ?>
             </td>
         </tr>
