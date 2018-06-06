@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => '설명 수정',
     'New internal link' => '새로운 내부 링크',
     'Display list of keyboard shortcuts' => '키보드 숏컷 리스트 보여주기',
-    'Menu' => '메뉴',
     'Set start date' => '시작일 설정',
     'Avatar' => '아바타',
     'Upload my avatar image' => '아바타 이미지 올리기',
@@ -1383,4 +1382,5 @@ return array(
     // 'Move selected tasks to another column' => '',
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
+    // 'Configure this project' => '',
 );

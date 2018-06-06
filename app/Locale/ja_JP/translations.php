@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => '説明を編集',
     'New internal link' => '新しい内部リンク',
     'Display list of keyboard shortcuts' => 'キーボードショートカットのリストを表示',
-    // 'Menu' => '',
     'Set start date' => '開始する',
     'Avatar' => 'アバター',
     'Upload my avatar image' => '自分のアバター画像をアップロード',
@@ -1383,4 +1382,5 @@ return array(
     // 'Move selected tasks to another column' => '',
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
+    // 'Configure this project' => '',
 );

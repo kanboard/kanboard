@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => 'Uredi opis',
     'New internal link' => 'Nova unutrašnja veza',
     'Display list of keyboard shortcuts' => 'Prikaži listu prečica na tastaturi',
-    'Menu' => 'Meni',
     'Set start date' => 'Postavi početni datum',
     'Avatar' => 'Avatar',
     'Upload my avatar image' => 'Dodaj sliku za moj avatar',
@@ -1383,4 +1382,5 @@ return array(
     // 'Move selected tasks to another column' => '',
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
+    // 'Configure this project' => '',
 );

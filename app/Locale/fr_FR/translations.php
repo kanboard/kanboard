@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => 'Modifier la description',
     'New internal link' => 'Nouveau lien interne',
     'Display list of keyboard shortcuts' => 'Afficher la liste des raccourcis claviers',
-    'Menu' => 'Menu',
     'Set start date' => 'Définir la date de début',
     'Avatar' => 'Avatar',
     'Upload my avatar image' => 'Uploader mon image d\'avatar',
@@ -1383,4 +1382,5 @@ return array(
     'Move selected tasks to another column' => 'Déplaçer les tâches sélectionnées vers une autre colonne',
     'Edit tasks in bulk' => 'Modifier les tâches en masse',
     'Choose the properties that you would like to change for the selected tasks.' => 'Choisissez les propriétés que vous souhaitez changer pour les tâches sélectionnées.',
+    'Configure this project' => 'Configurer ce projet',
 );

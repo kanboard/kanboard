@@ -21,7 +21,7 @@
 
         <?php if ($this->user->hasProjectAccess('ProjectEditController', 'show', $project['id'])): ?>
             <li>
-                <?= $this->url->icon('cog', t('Settings'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->icon('cog', t('Configure this project'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
     </ul>

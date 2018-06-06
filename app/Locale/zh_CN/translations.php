@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => '编辑描述',
     'New internal link' => '新建内部链接',
     'Display list of keyboard shortcuts' => '显示快捷键列表',
-    'Menu' => '菜单',
     'Set start date' => '开始任务',
     'Avatar' => '我的头像',
     'Upload my avatar image' => '上传我的头像',
@@ -1383,4 +1382,5 @@ return array(
     // 'Move selected tasks to another column' => '',
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
+    // 'Configure this project' => '',
 );

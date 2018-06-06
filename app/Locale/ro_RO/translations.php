@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => 'Modifică descrierea',
     'New internal link' => 'Legătură internă nouă',
     'Display list of keyboard shortcuts' => 'Afișează lista de scurtături pe tastatură',
-    'Menu' => 'Meniu',
     'Set start date' => 'Definește data pornirii',
     'Avatar' => 'Avatar',
     'Upload my avatar image' => 'Încarcă o imagine de avatar',
@@ -1383,4 +1382,5 @@ return array(
     // 'Move selected tasks to another column' => '',
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
+    // 'Configure this project' => '',
 );

@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => 'Изменение описания',
     'New internal link' => 'Новая внутренняя ссылка',
     'Display list of keyboard shortcuts' => 'Показать список клавиатурных сокращений',
-    'Menu' => 'Меню',
     'Set start date' => 'Установить дату начала',
     'Avatar' => 'Аватар',
     'Upload my avatar image' => 'Загрузить моё изображение для аватара',
@@ -1383,4 +1382,5 @@ return array(
     'Move selected tasks to another column' => 'Переместить выбранные задачи в другую колонку',
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
+    // 'Configure this project' => '',
 );

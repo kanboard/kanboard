@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => 'Leírás szerkesztése',
     'New internal link' => 'Új belső hivatkozás',
     'Display list of keyboard shortcuts' => 'Gyorsbillentyűk listájának megjelenítése',
-    'Menu' => 'Menü',
     'Set start date' => 'Kezdési dátum beállítása',
     'Avatar' => 'Avatár',
     'Upload my avatar image' => 'Saját avatárkép feltöltése',
@@ -1383,4 +1382,5 @@ return array(
     // 'Move selected tasks to another column' => '',
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
+    // 'Configure this project' => '',
 );
