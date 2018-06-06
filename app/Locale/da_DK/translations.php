@@ -1381,4 +1381,6 @@ return array(
     'Unselect All' => 'Fravælge alle',
     'Apply action' => 'Anvende handling',
     'Move selected tasks to another column' => 'Flytte valgte opgaver til anden kolonne',
+    // 'Edit tasks in bulk' => '',
+    // 'Choose the properties that you would to change for the selected tasks.' => '',
 );

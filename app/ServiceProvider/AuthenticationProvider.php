@@ -107,6 +107,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('TaskCreationController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskBulkController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskBulkMoveColumnController', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskBulkChangePropertyController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskDuplicationController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskRecurrenceController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskImportController', '*', Role::PROJECT_MANAGER);
