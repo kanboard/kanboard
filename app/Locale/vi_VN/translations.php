@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => 'Chỉnh sửa mô tả',
     'New internal link' => 'Liên kết nội bộ mới',
     'Display list of keyboard shortcuts' => 'Hiển thị danh sách các phím tắt',
-    'Set start date' => 'Đặt ngày bắt đầu',
     'Avatar' => 'Hình đại diện',
     'Upload my avatar image' => 'Tải lên hình ảnh đại diện của tôi',
     'Remove my image' => 'Hủy bỏ hình ảnh của tôi',
@@ -1383,4 +1382,5 @@ return array(
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
     // 'Configure this project' => '',
+    // 'Start now' => '',
 );

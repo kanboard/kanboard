@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => 'Редагувати опис',
     'New internal link' => 'Новий зв\'язок',
     'Display list of keyboard shortcuts' => 'Показати перелік клавіатурних комбінацій',
-    'Set start date' => 'Задати дату початку',
     'Avatar' => 'Аватар',
     'Upload my avatar image' => 'Завантажити зображення аватара',
     'Remove my image' => 'Видалити зображення',
@@ -1383,4 +1382,5 @@ return array(
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
     // 'Configure this project' => '',
+    // 'Start now' => '',
 );

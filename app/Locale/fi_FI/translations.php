@@ -1022,7 +1022,6 @@ return array(
     // 'Edit description' => '',
     // 'New internal link' => '',
     // 'Display list of keyboard shortcuts' => '',
-    // 'Set start date' => '',
     // 'Avatar' => '',
     // 'Upload my avatar image' => '',
     // 'Remove my image' => '',
@@ -1383,4 +1382,5 @@ return array(
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
     // 'Configure this project' => '',
+    // 'Start now' => '',
 );

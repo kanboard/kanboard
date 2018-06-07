@@ -3,7 +3,7 @@
         <?php if (isset($show_items_selection)): ?>
             <input type="checkbox" data-list-item="selectable" name="tasks[]" value="<?= $task['id'] ?>">
         <?php endif ?>
-        <?= $this->render('task/dropdown', array('task' => $task)) ?>
+        <?= $this->render('task/dropdown', array('task' => $task, 'redirect' => isset($redirect) ? $redirect : '')) ?>
     <?php else: ?>
         <strong><?= '#'.$task['id'] ?></strong>
     <?php endif ?>

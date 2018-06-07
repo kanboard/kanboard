@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => 'Açıklamayı güncelle',
     'New internal link' => 'Yeni iç link',
     'Display list of keyboard shortcuts' => 'Kısayol tuşları listesini göster',
-    'Set start date' => 'Başlangıç tarihi belirle',
     'Avatar' => 'Simge',
     'Upload my avatar image' => 'Avatar resmimi yükle',
     'Remove my image' => 'Resmimi kaldır',
@@ -1383,4 +1382,5 @@ return array(
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
     // 'Configure this project' => '',
+    // 'Start now' => '',
 );

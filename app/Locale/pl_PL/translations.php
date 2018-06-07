@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => 'Edytuj opis',
     'New internal link' => 'Nowy wewnętrzny link',
     'Display list of keyboard shortcuts' => 'Wyświetl skróty klawiszowe',
-    'Set start date' => 'Ustaw datę rozpoczęcia',
     // 'Avatar' => '',
     'Upload my avatar image' => 'Prześlij avatar',
     'Remove my image' => 'Usuń',
@@ -1383,4 +1382,5 @@ return array(
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
     // 'Configure this project' => '',
+    // 'Start now' => '',
 );

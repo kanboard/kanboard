@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => 'Edit deskripsi',
     'New internal link' => 'Tautan internal baru',
     'Display list of keyboard shortcuts' => 'Tampilkan daftar pintasan keyboard',
-    'Set start date' => 'Atur tanggal mulai',
     'Avatar' => 'Avatar',
     'Upload my avatar image' => 'Unggah foto avatar saya',
     'Remove my image' => 'Hapus foto saya',
@@ -1383,4 +1382,5 @@ return array(
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
     // 'Configure this project' => '',
+    // 'Start now' => '',
 );

@@ -1022,7 +1022,6 @@ return array(
     'Edit description' => 'Redigere beskrivelse',
     'New internal link' => 'Ny intern henvisning',
     'Display list of keyboard shortcuts' => 'Vise liste over tastaturgenveje',
-    'Set start date' => 'Angive startdato',
     'Avatar' => 'Ikon',
     'Upload my avatar image' => 'Overføre ikon billede',
     'Remove my image' => 'Fjerne billede',
@@ -1383,4 +1382,5 @@ return array(
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
     // 'Configure this project' => '',
+    // 'Start now' => '',
 );
