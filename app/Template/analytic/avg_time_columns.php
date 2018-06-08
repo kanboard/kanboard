@@ -1,6 +1,6 @@
 <?php if (! $is_ajax): ?>
     <div class="page-header">
-        <h2><?= t('Average time spent into each column') ?></h2>
+        <h2><?= t('Average time spent in each column') ?></h2>
     </div>
 <?php endif ?>
 
@@ -26,6 +26,6 @@
     </table>
 
     <p class="alert alert-info">
-        <?= t('This chart show the average time spent into each column for the last %d tasks.', 1000) ?>
+        <?= t('This chart shows the average time spent in each column for the last %d tasks.', 1000) ?>
     </p>
 <?php endif ?>

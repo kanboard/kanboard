@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <a href="#" class="dropdown-menu action-menu"><?= t('Menu') ?> <i class="fa fa-caret-down"></i></a>
+    <a href="#" class="dropdown-menu action-menu" title="<?= t('Configure this project') ?>"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
     <ul>
         <?php if ($board_view): ?>
         <li>
@@ -64,7 +64,7 @@
 
         <?php if ($this->user->hasProjectAccess('ProjectEditController', 'show', $project['id'])): ?>
             <li>
-                <?= $this->url->icon('cog', t('Settings'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>
+                <?= $this->url->icon('cog', t('Configure this project'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>
             </li>
         <?php endif ?>
 

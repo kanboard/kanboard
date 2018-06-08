@@ -91,7 +91,7 @@ class Markdown extends Parsedown
             $user = $this->container['userCacheDecorator']->getByUsername($username);
 
             if (! empty($user)) {
-                $url = $this->container['helper']->url->href('UserViewController', 'profile', array('user_id' => $user['id']));
+                $url = $this->container['helper']->url->to('UserViewController', 'profile', array('user_id' => $user['id']));
 
                 return array(
                     'extent'  => strlen($username) + 1,
@@ -124,14 +124,13 @@ class Markdown extends Parsedown
             $token = $this->container['memoryCache']->proxy($this->container['taskFinderModel'], 'getProjectToken', $task_id);
 
             if (! empty($token)) {
-                return $this->container['helper']->url->href(
+                return $this->container['helper']->url->to(
                     'TaskViewController',
                     'readonly',
                     array(
                         'token' => $token,
                         'task_id' => $task_id,
                     ),
-                    false,
                     '',
                     true
                 );
@@ -140,7 +139,7 @@ class Markdown extends Parsedown
             return '';
         }
 
-        return $this->container['helper']->url->href(
+        return $this->container['helper']->url->to(
             'TaskViewController',
             'show',
             array('task_id' => $task_id)

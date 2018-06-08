@@ -16,7 +16,7 @@
     </ul>
 </div>
 
-<h3><?= t('Time spent into each column') ?></h3>
+<h3><?= t('Time spent in each column') ?></h3>
 
 <?= $this->app->component('chart-task-time-column', array(
     'metrics' => $time_spent_columns,

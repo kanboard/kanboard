@@ -1,3 +1,61 @@
+Unreleased
+----------
+
+New features:
+
+* Ability to run cron jobs by calling URL
+
+Bug fixes:
+
+* Fix the "users.language" column size
+
+Version 1.2.4 (May 16, 2018)
+----------------------------
+
+* Rewrite tooltip code without jQuery
+* Update Parsedown library
+* Remove all attachments when removing a project
+* Improve whitespace handling in "cli locale:compare" command
+* Don't markdown project owner's name in header tooltip
+* Add SSL to Docker image
+* Avoid people to remove themselves from project permissions
+* Fix escaping issue in Markdown editor
+* Add data/config.php to .gitignore
+* Clarified text label for notification settings
+* Add Ukrainian translation
+* Do not show inactive users in group members dropdown
+* Improve dashboard pagination
+* Make list view more compact
+* Hide private projects checkbox if the feature is disabled
+* Make cli locale commands working outside of source tree
+* Make subtask title text field wider when editing subtasks
+* Add link to open images in a new tab
+* Make hardcoded hours string translatable
+* Translation updates
+
+Version 1.2.3 (April 18, 2018)
+------------------------------
+
+New features:
+
+* Add Project MetaData API calls
+* Add default filter per user
+
+Improvements:
+
+* Use utf8mb4 encoding for MySQL instead of utf8 (Emoji support)
+* Increase text fields length in several tables
+* Move documentation to https://docs.kanboard.org/
+* Make sure no empty group is submitted on project permissions page
+* Translate subtasks status and internal links labels in notifications
+* Add link to tasks and projects in overdue notifications
+* Add missing translations
+* Move custom libs to the source tree
+
+Bug fixes:
+
+* Fix margin for task recurrence tooltip
+
 Version 1.2.2 (March 30, 2018)
 ------------------------------
 

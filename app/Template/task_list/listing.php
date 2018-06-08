@@ -7,12 +7,15 @@
         <?= $this->render('task_list/header', array(
             'paginator' => $paginator,
             'project'   => $project,
+            'show_items_selection' => true,
         )) ?>
 
         <?php foreach ($paginator->getCollection() as $task): ?>
             <div class="table-list-row color-<?= $task['color_id'] ?>">
                 <?= $this->render('task_list/task_title', array(
                     'task' => $task,
+                    'show_items_selection' => true,
+                    'redirect' => 'list',
                 )) ?>
 
                 <?= $this->render('task_list/task_details', array(

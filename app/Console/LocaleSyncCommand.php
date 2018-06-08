@@ -19,12 +19,12 @@ class LocaleSyncCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $reference_file = 'app/Locale/'.self::REF_LOCALE.'/translations.php';
+        $reference_file = APP_DIR.DIRECTORY_SEPARATOR.'Locale'.DIRECTORY_SEPARATOR.self::REF_LOCALE.DIRECTORY_SEPARATOR.'translations.php';
         $reference = include $reference_file;
 
-        foreach (new DirectoryIterator('app/Locale') as $fileInfo) {
+        foreach (new DirectoryIterator(APP_DIR.DIRECTORY_SEPARATOR.'Locale') as $fileInfo) {
             if (! $fileInfo->isDot() && $fileInfo->isDir() && $fileInfo->getFilename() !== self::REF_LOCALE) {
-                $filename = 'app/Locale/'.$fileInfo->getFilename().'/translations.php';
+                $filename = APP_DIR.DIRECTORY_SEPARATOR.'Locale'.DIRECTORY_SEPARATOR.$fileInfo->getFilename().DIRECTORY_SEPARATOR.'translations.php';
                 echo $fileInfo->getFilename().' ('.$filename.')'.PHP_EOL;
 
                 file_put_contents($filename, $this->updateFile($reference, $filename));

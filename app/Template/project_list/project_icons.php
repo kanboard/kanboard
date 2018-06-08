@@ -10,13 +10,11 @@
     <?php endif ?>
 
     <?php if ($this->user->hasAccess('ProjectUserOverviewController', 'managers')): ?>
-        <span class="tooltip" title="<?= t('Members') ?>" data-href="<?= $this->url->href('ProjectUserOverviewController', 'users', array('project_id' => $project['id'])) ?>"><i class="fa fa-users"></i></span>&nbsp;
+        <?= $this->app->tooltipLink('<i class="fa fa-users"></i>', $this->url->href('ProjectUserOverviewController', 'users', array('project_id' => $project['id']))) ?>
     <?php endif ?>
 
     <?php if (! empty($project['description'])): ?>
-        <span class="tooltip" title="<?= $this->text->markdownAttribute($project['description']) ?>">
-            <i class="fa fa-info-circle"></i>
-        </span>
+        <?= $this->app->tooltipMarkdown($project['description']) ?>
     <?php endif ?>
 
     <?php if ($project['is_active'] == 0): ?>

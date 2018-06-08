@@ -1,49 +1,23 @@
 @import variables
 
-.tooltip-arrow:after
+.tooltip
+  i.fa
+    cursor: pointer
+
+  .fa-info-circle
+    color: color('light')
+
+#tooltip-container
+  padding: 5px
   background: #fff
-  border: 1px solid #aaaaaa
-  box-shadow: 0 0 5px #aaa
-
-div.ui-tooltip
-  min-width: 200px
-  max-width: 600px
-
-.tooltip-arrow
-  width: 20px
-  height: 10px
-  overflow: hidden
+  border: 1px solid #ddd
+  border-radius: 4px
+  box-shadow: 0 6px 12px #aaa
   position: absolute
-  &.top
-    top: -10px
-  &.bottom
-    bottom: -10px
-  &.align-left
-    left: 10px
-  &.align-right
-    right: 10px
-  &:after
-    content: ""
-    position: absolute
-    width: 14px
-    height: 14px
-    -webkit-transform: rotate(45deg)
-    -ms-transform: rotate(45deg)
-    transform: rotate(45deg)
-  &.bottom:after
-    top: -10px
-  &.top:after
-    bottom: -10px
-  &.align-left:after
-    left: 0
-  &.align-right:after
-    right: 0
+  min-width: 350px
 
-.tooltip-large
-  width: 600px
+  .markdown p
+    margin-bottom: 0
 
-.ui-tooltip-content .markdown p
-  margin-bottom: 0
-
-.tooltip .fa-info-circle
-  color: color('light')
+  .tooltip-large
+    width: 600px

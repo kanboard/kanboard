@@ -10,7 +10,7 @@ use Kanboard\Model\UserMetadataModel;
  * Class BoardAjaxController
  *
  * @package Kanboard\Controller
- * @author  Fredric Guillot
+ * @author  Frederic Guillot
  */
 class BoardAjaxController extends BaseController
 {

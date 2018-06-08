@@ -11,12 +11,7 @@
         <?= $this->text->e($swimlane['name']) ?>
 
         <?php if (! $not_editable && ! empty($swimlane['description'])): ?>
-            <span
-                title="<?= t('Description') ?>"
-                class="tooltip"
-                data-href="<?= $this->url->href('BoardTooltipController', 'swimlane', array('swimlane_id' => $swimlane['id'], 'project_id' => $project['id'])) ?>">
-                <i class="fa fa-info-circle"></i>
-            </span>
+            <?= $this->app->tooltipLink('<i class="fa fa-info-circle"></i>', $this->url->href('BoardTooltipController', 'swimlane', array('swimlane_id' => $swimlane['id'], 'project_id' => $project['id']))) ?>
         <?php endif ?>
 
         <span title="<?= t('Task count') ?>" class="board-column-header-task-count swimlane-task-count-<?= $swimlane['id'] ?>">

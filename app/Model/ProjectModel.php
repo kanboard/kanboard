@@ -5,6 +5,8 @@ namespace Kanboard\Model;
 use Kanboard\Core\Base;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
+use Kanboard\Model\TaskModel;
+use Kanboard\Model\TaskFileModel;
 
 /**
  * Project model
@@ -470,13 +472,23 @@ class ProjectModel extends Base
      */
     public function remove($project_id)
     {
-        $this->db->startTransaction();
+        // Remove all project attachments
+        $this->projectFileModel->removeAll($project_id);
 
+        // Remove all task attachments
+        $file_ids = $this->db
+            ->table(TaskFileModel::TABLE)
+            ->eq(TaskModel::TABLE.'.project_id', $project_id)
+            ->join(TaskModel::TABLE, 'id', 'task_id', TaskFileModel::TABLE)
+            ->findAllByColumn(TaskFileModel::TABLE.'.id');
+
+        foreach ($file_ids as $file_id) {
+            $this->taskFileModel->remove($file_id);
+        }
+
+        // Remove project
         $this->db->table(TagModel::TABLE)->eq('project_id', $project_id)->remove();
-        $result = $this->db->table(self::TABLE)->eq('id', $project_id)->remove();
-
-        $this->db->closeTransaction();
-        return $result;
+        return $this->db->table(self::TABLE)->eq('id', $project_id)->remove();
     }
 
     /**

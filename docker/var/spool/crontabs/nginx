@@ -1,1 +1,0 @@
-1 0 * * * cd /var/www/app && ./cli cronjob

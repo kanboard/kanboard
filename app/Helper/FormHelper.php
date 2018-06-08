@@ -213,7 +213,6 @@ class FormHelper extends Base
     {
         $params = array(
             'name' => $name,
-            'text' => isset($values[$name]) ? $values[$name] : '',
             'css' => $this->errorClass($errors, $name),
             'required' => isset($attributes['required']) && $attributes['required'],
             'tabindex' => isset($attributes['tabindex']) ? $attributes['tabindex'] : '-1',
@@ -232,7 +231,9 @@ class FormHelper extends Base
             $params['suggestOptions']['triggers']['@'] = $this->helper->url->to('UserAjaxController', 'mention', array('project_id' => $values['project_id'], 'search' => 'SEARCH_TERM'));
         }
 
-        $html = '<div class="js-text-editor" data-params=\''.json_encode($params, JSON_HEX_APOS).'\'></div>';
+        $html = '<div class="js-text-editor" data-params=\''.json_encode($params, JSON_HEX_APOS).'\'>';
+        $html .= '<script type="text/template">'.(isset($values[$name]) ? $values[$name] : '').'</script>';
+        $html .= '</div>';
         $html .= $this->errorList($errors, $name);
 
         return $html;

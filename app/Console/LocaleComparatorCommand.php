@@ -21,7 +21,7 @@ class LocaleComparatorCommand extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $strings = array();
-        $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator('app'));
+        $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(APP_DIR));
         $it->rewind();
 
         while ($it->valid()) {
@@ -44,7 +44,7 @@ class LocaleComparatorCommand extends BaseCommand
 
     public function compare(array $strings)
     {
-        $reference_file = 'app/Locale/'.self::REF_LOCALE.'/translations.php';
+        $reference_file = APP_DIR.DIRECTORY_SEPARATOR.'Locale'.DIRECTORY_SEPARATOR.self::REF_LOCALE.DIRECTORY_SEPARATOR.'translations.php';
         $reference = include $reference_file;
 
         echo str_repeat('#', 70).PHP_EOL;
@@ -63,11 +63,11 @@ class LocaleComparatorCommand extends BaseCommand
         $content = file_get_contents($filename);
         $strings = array();
 
-        if (preg_match_all('/\b[et]\((\'\K.*?\') *[\)\,]/', $content, $matches) && isset($matches[1])) {
+        if (preg_match_all('/\b[et]\s*\(\s*(\'\K.*?\')\s*[\)\,]/', $content, $matches) && isset($matches[1])) {
             $strings = $matches[1];
         }
 
-        if (preg_match_all('/\bdt\((\'\K.*?\') *[\)\,]/', $content, $matches) && isset($matches[1])) {
+        if (preg_match_all('/\bdt\s*\(\s*(\'\K.*?\')\s*[\)\,]/', $content, $matches) && isset($matches[1])) {
             $strings = array_merge($strings, $matches[1]);
         }
 

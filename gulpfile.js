@@ -38,7 +38,6 @@ var vendor = {
         'bower_components/jquery-ui/ui/minified/droppable.min.js',
         'bower_components/jquery-ui/ui/minified/resizable.min.js',
         'bower_components/jquery-ui/ui/minified/sortable.min.js',
-        'bower_components/jquery-ui/ui/minified/tooltip.min.js',
         'bower_components/jquery-ui/ui/minified/i18n/datepicker-*.min.js',
         'bower_components/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.min.js',
         'bower_components/jqueryui-timepicker-addon/dist/i18n/jquery-ui-timepicker-addon-i18n.min.js',
@@ -89,10 +88,17 @@ gulp.task('js', function() {
 });
 
 gulp.task('css', function() {
-    gulp.src('assets/sass/*.sass')
+    gulp.src(['assets/sass/*.sass','!assets/sass/*_print.sass'])
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(concat('app.min.css'))
         .pipe(gulp.dest(dist.css));
 });
 
-gulp.task('default', ['bower', 'vendor', 'js', 'css']);
+gulp.task('css:print', function() {
+    gulp.src('assets/sass/*_print.sass')
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(concat('print.min.css'))
+        .pipe(gulp.dest(dist.css));
+});
+
+gulp.task('default', ['bower', 'vendor', 'js', 'css', 'css:print']);

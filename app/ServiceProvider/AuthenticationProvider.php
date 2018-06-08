@@ -106,6 +106,8 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('TaskSuppressionController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskCreationController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskBulkController', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskBulkMoveColumnController', '*', Role::PROJECT_MEMBER);
+        $acl->add('TaskBulkChangePropertyController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskDuplicationController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskRecurrenceController', '*', Role::PROJECT_MEMBER);
         $acl->add('TaskImportController', '*', Role::PROJECT_MANAGER);
@@ -142,6 +144,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('FeedController', '*', Role::APP_PUBLIC);
         $acl->add('AvatarFileController', array('show', 'image'), Role::APP_PUBLIC);
         $acl->add('UserInviteController', array('signup', 'register'), Role::APP_PUBLIC);
+        $acl->add('CronjobController', array('run'), Role::APP_PUBLIC);
 
         $acl->add('ConfigController', '*', Role::APP_ADMIN);
         $acl->add('TagController', '*', Role::APP_ADMIN);

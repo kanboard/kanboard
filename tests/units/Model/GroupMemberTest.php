@@ -43,6 +43,8 @@ class GroupMemberTest extends Base
         $this->assertEquals(3, $userModel->create(array('username' => 'user2')));
         $this->assertEquals(4, $userModel->create(array('username' => 'user3')));
         $this->assertEquals(5, $userModel->create(array('username' => 'user4')));
+        $this->assertEquals(6, $userModel->create(array('username' => 'user5')));
+        $this->assertTrue($userModel->disable(6));
 
         $this->assertTrue($groupMemberModel->addUser(1, 1));
         $this->assertTrue($groupMemberModel->addUser(1, 2));

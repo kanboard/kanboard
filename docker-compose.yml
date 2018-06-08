@@ -4,11 +4,15 @@ services:
     image: kanboard/kanboard:latest
     ports:
      - "80:80"
+     - "443:443"
     volumes:
      - kanboard_data:/var/www/app/data
      - kanboard_plugins:/var/www/app/plugins
+     - kanboard_ssl:/etc/nginx/ssl
 volumes:
   kanboard_data:
     driver: local
   kanboard_plugins:
+    driver: local
+  kanboard_ssl:
     driver: local

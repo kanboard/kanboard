@@ -2,9 +2,14 @@
     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong>#<?= $task['id'] ?> <i class="fa fa-caret-down"></i></strong></a>
     <ul>
         <?php if ($this->projectRole->canUpdateTask($task)): ?>
+            <?php if (array_key_exists('owner_id', $task) && $task['owner_id'] != $this->user->getId()): ?>
+            <li>
+                <?= $this->url->icon('hand-o-right', t('Assign to me'), 'TaskModificationController', 'assignToMe', ['task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => isset($redirect) ? $redirect : '']) ?>
+            </li>
+            <?php endif ?>
             <?php if (array_key_exists('date_started', $task) && empty($task['date_started'])): ?>
             <li>
-                <?= $this->url->icon('play', t('Set automatically the start date'), 'TaskModificationController', 'start', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                <?= $this->url->icon('play', t('Set the start date automatically'), 'TaskModificationController', 'start', ['task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => isset($redirect) ? $redirect : '']) ?>
             </li>
             <?php endif ?>
             <li>

@@ -13,6 +13,7 @@
             <div class="table-list-row color-<?= $task['color_id'] ?>">
                 <?= $this->render('task_list/task_title', array(
                     'task' => $task,
+                    'redirect' => 'dashboard-tasks',
                 )) ?>
 
                 <?= $this->render('task_list/task_details', array(
@@ -30,6 +31,8 @@
                 <?= $this->render('task_list/task_subtasks', array(
                     'task' => $task,
                 )) ?>
+
+                <?= $this->hook->render('template:dashboard:task:footer', array('task' => $task)) ?>
             </div>
         <?php endforeach ?>
     </div>

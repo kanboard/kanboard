@@ -25,9 +25,7 @@
                     </ul>
                 </div>
                 <?= $this->text->e($template['title']) ?>
-                <span class="tooltip" title="<?= $this->text->markdownAttribute($template['description']) ?>">
-                    <i class="fa fa-info-circle"></i>
-                </span>
+                <?= $this->app->tooltipMarkdown($template['description']) ?>
             </td>
         </tr>
         <?php endforeach ?>

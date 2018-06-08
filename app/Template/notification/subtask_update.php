@@ -10,10 +10,11 @@
     <li>
         <?= t('Time tracking:') ?>
         <?php if (! empty($subtask['time_spent'])): ?>
-            <strong><?= $this->text->e($subtask['time_spent']).'h' ?></strong> <?= t('spent') ?>
+            <?= t('%sh spent', n($subtask['time_spent'])) ?>
         <?php endif ?>
+        <?php if (! empty($subtask['time_spent']) && ! empty($subtask['time_estimated'])): ?>/<?php endif ?>
         <?php if (! empty($subtask['time_estimated'])): ?>
-            <strong><?= $this->text->e($subtask['time_estimated']).'h' ?></strong> <?= t('estimated') ?>
+            <?= t('%sh estimated', n($subtask['time_estimated'])) ?>
         <?php endif ?>
     </li>
     <?php endif ?>

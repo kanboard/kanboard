@@ -12,6 +12,44 @@ use Kanboard\Core\Base;
  */
 class TaskPositionModel extends Base
 {
+    public function moveBottom($project_id, $task_id, $swimlane_id, $column_id)
+    {
+        $this->db->startTransaction();
+
+        $task = $this->taskFinderModel->getById($task_id);
+
+        $result = $this->db->table(TaskModel::TABLE)
+            ->eq('project_id', $project_id)
+            ->eq('swimlane_id', $swimlane_id)
+            ->eq('column_id', $column_id)
+            ->columns('MAX(position) AS pos')
+            ->findOne();
+
+        $position = 1;
+        if (! empty($result)) {
+            $position = $result['pos'] + 1;
+        }
+
+        $result = $this->db->table(TaskModel::TABLE)
+            ->eq('id', $task_id)
+            ->eq('project_id', $project_id)
+            ->update([
+                'swimlane_id' => $swimlane_id,
+                'column_id' => $column_id,
+                'position' => $position,
+                'date_moved' => time(),
+                'date_modification' => time(),
+            ]);
+
+        $this->db->closeTransaction();
+
+        if ($result) {
+            $this->fireEvents($task, $column_id, $position, $swimlane_id);
+        }
+
+        return $result;
+    }
+
     /**
      * Move a task to another column or to another position
      *
