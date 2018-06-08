@@ -87,6 +87,11 @@ class TaskBulkController extends BaseController
                     'color_id' => $values['color_id'],
                     'project_id' => $project['id'],
                     'description' => $this->getTaskDescription($project, $values),
+                    'tags' => $values['tags'],
+                    'priority' => $values['priority'],
+                    'score' => $values['score'],
+                    'time_estimated' => $values['time_estimated'],
+                    'date_due' => $values['date_due'],
                 ));
             }
         }
