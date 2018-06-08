@@ -1379,8 +1379,8 @@ return array(
     'Unselect All' => 'Fravælge alle',
     'Apply action' => 'Anvende handling',
     'Move selected tasks to another column' => 'Flytte valgte opgaver til anden kolonne',
-    // 'Edit tasks in bulk' => '',
-    // 'Choose the properties that you would like to change for the selected tasks.' => '',
-    // 'Configure this project' => '',
-    // 'Start now' => '',
+    'Edit tasks in bulk' => 'Masse redigere opgaver',
+    'Choose the properties that you would like to change for the selected tasks.' => 'Vælge egenskaber som skal ændres for de valgte opgaver.',
+    'Configure this project' => 'Indstille projekt',
+    'Start now' => 'Start nu',
 );
