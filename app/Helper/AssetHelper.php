@@ -21,7 +21,7 @@ class AssetHelper extends Base
      */
     public function js($filename, $async = false)
     {
-        return '<script '.($async ? 'async' : '').' type="text/javascript" src="'.$this->helper->url->dir().$filename.'?'.filemtime($filename).'"></script>';
+        return '<script '.($async ? 'async' : '').' defer type="text/javascript" src="'.$this->helper->url->dir().$filename.'?'.filemtime($filename).'"></script>';
     }
 
     /**
