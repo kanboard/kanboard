@@ -8,14 +8,14 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^2.2.3",
+    "jquery": "3.3.1",
     "c3": "^0.4.11",
-    "jquery-ui": "^1.11.4",
+    "jquery-ui": "1.12.1",
     "jqueryui-touch-punch": "*",
     "jqueryui-timepicker-addon": "^1.6.3",
     "font-awesome": "fontawesome#^4.7.0",
     "d3": "~3.5.0",
-    "isMobile": "0.4.0",
+    "isMobile": "0.4.1",
     "select2": "4.0.2",
     "marked": "^0.3.6"
   }
