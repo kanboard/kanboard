@@ -1,13 +1,21 @@
-Unreleased
-----------
+Version 1.2.5 (June 15, 2018)
+-----------------------------
 
-New features:
-
-* Ability to run cron jobs by calling URL
-
-Bug fixes:
-
-* Fix the "users.language" column size
+* Update jQuery to latest version
+* Defer javascript files loading by default
+* Add quick link "assign me" in different views
+* Add bulk task operations in list view
+* Add checkboxes in list view to move tasks to another column at once
+* Make sure automatic actions are applied to all tasks when using bulk operations
+* Add ability to run cron jobs by calling URL
+* Add basic print stylesheet
+* Add dashboard and search task footer hooks
+* Reword project settings label
+* Improve Docker image config overrides
+* Fix cronjob in Docker image
+* Increase Nginx fastcgi buffers for Docker image
+* Increase size of the "users.language" column
+* Update translations and improve English texts
 
 Version 1.2.4 (May 16, 2018)
 ----------------------------
