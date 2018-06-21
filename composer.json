@@ -29,16 +29,13 @@
         "christian-riesen/otp" : "1.4.3",
         "eluceo/ical": "0.10.1",
         "erusev/parsedown" : "1.7.1",
-        "fguillot/json-rpc" : "1.2.1",
-        "fguillot/picodb" : "v1.0.18",
         "paragonie/random_compat": "2.0.11",
         "pimple/pimple" : "3.2.2",
         "psr/log": "~1.0",
         "swiftmailer/swiftmailer" : "5.4.8",
         "symfony/console" : "3.4.2",
         "symfony/event-dispatcher" : "3.4.2",
-        "gregwar/captcha": "1.1.4",
-        "aferrandini/phpqrcode": "1.0.1"
+        "gregwar/captcha": "1.1.4"
     },
     "autoload" : {
         "classmap" : ["app/"],
@@ -59,7 +56,9 @@
         "phpdocumentor/reflection-docblock": "3.3.2",
         "symfony/debug": "3.4.2",
         "symfony/yaml": "3.4.2",
+        "symfony/finder": "3.4.8",
         "symfony/stopwatch" : "3.4.2",
+        "myclabs/deep-copy": "1.7.0",
         "phpunit/phpunit" : "5.7.24",
         "phpunit/phpunit-selenium": "3.0.3"
     }
