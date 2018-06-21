@@ -208,6 +208,19 @@ class Table
      */
     public function update(array $data = array())
     {
+              
+       if (get_class($this->db->getDriver())=='PicoDb\Driver\Mssql') {
+        for ($i = 0; $i < count($this->conditionBuilder->getConditions()); $i++) {
+             $kn=$this->conditionBuilder->getConditions()[$i];
+             $kn=substr($kn, 1, strpos($kn, ']')-1);
+             if (array_key_exists($kn, $data)) {
+                    if ($data[$kn]==$this->conditionBuilder->getValues()[$i]) {
+                      unset($data[$kn]);
+               }
+             }
+          } 
+       }
+        
         $values = array_merge(array_values($data), array_values($this->sumColumns), $this->conditionBuilder->getValues());
         $sql = UpdateBuilder::getInstance($this->db, $this->conditionBuilder)
             ->withTable($this->name)
@@ -578,7 +591,7 @@ class Table
     public function limit($value)
     {
         if (! is_null($value)) {
-            $this->sqlLimit = ' LIMIT '.(int) $value;
+          get_class($this->db->getDriver())=='PicoDb\Driver\Mssql' ?  $this->sqlLimit = ' TOP '.(int) $value: $this->sqlLimit = ' LIMIT '.(int) $value;
         }
 
         return $this;
@@ -594,7 +607,7 @@ class Table
     public function offset($value)
     {
         if (! is_null($value)) {
-            $this->sqlOffset = ' OFFSET '.(int) $value;
+          get_class($this->db->getDriver())=='PicoDb\Driver\Mssql' ? $this->sqlOffset = ' OFFSET '.(int) $value.' ROWS':$this->sqlOffset = ' OFFSET '.(int) $value;
         }
 
         return $this;
@@ -692,6 +705,20 @@ class Table
 
         $this->groupBy = $this->db->escapeIdentifierList($this->groupBy);
 
+        if (get_class($this->db->getDriver())=='PicoDb\Driver\Mssql') {
+            return trim(sprintf(
+            'SELECT %s %s FROM %s %s %s %s %s %s %s',
+            empty($this->sqlOffset) ? $this->sqlLimit:'',    
+            $this->sqlSelect,
+            $this->db->escapeIdentifier($this->name),
+            implode(' ', $this->joins),
+            $this->conditionBuilder->build(),
+            empty($this->groupBy) ? '' : 'GROUP BY '.implode(', ', $this->groupBy),
+            $this->sqlOrder,
+            $this->sqlOffset,
+            !empty($this->sqlLimit)&&!empty($this->sqlOffset) ? str_replace('TOP','FETCH NEXT',$this->sqlLimit).' ROWS ONLY' : ''
+            ));       
+          } 
         return trim(sprintf(
             'SELECT %s FROM %s %s %s %s %s %s %s',
             $this->sqlSelect,

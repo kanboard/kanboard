@@ -38,7 +38,9 @@ class AuthenticationMiddleware extends BaseMiddleware
             if ($this->request->isAjax()) {
                 $this->response->text('Not Authorized', 401);
             } else {
-                session_set('redirectAfterLogin', $this->request->getUri());
+                if (strpos($this->request->getUri(),'?')!==false) {
+                    session_set('redirectAfterLogin', $this->request->getUri());
+                }
                 $this->response->redirect($this->helper->url->to('AuthController', 'login'));
             }
         }

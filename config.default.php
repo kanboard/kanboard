@@ -58,7 +58,7 @@ define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
 // Do not run the migrations from multiple processes at the same time (example: web page + background worker)
 define('DB_RUN_MIGRATIONS', true);
 
-// Database driver: sqlite, mysql or postgres (sqlite by default)
+// Database driver: sqlite, mysql, postgres or mssql (sqlite by default)
 define('DB_DRIVER', 'sqlite');
 
 // Mysql/Postgres username
