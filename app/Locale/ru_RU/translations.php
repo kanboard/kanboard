@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    // 'number.decimals_separator' => '',
-    // 'number.thousands_separator' => '',
+    'number.decimals_separator' => ',',
+    'number.thousands_separator' => ' ',
     'None' => 'Отсутствует',
     'Edit' => 'Изменить',
     'Remove' => 'Удалить',
@@ -1379,8 +1379,8 @@ return array(
     'Unselect All' => 'Снять выделение со всех',
     'Apply action' => 'Применить действие',
     'Move selected tasks to another column' => 'Переместить выбранные задачи в другую колонку',
-    // 'Edit tasks in bulk' => '',
-    // 'Choose the properties that you would like to change for the selected tasks.' => '',
-    // 'Configure this project' => '',
-    // 'Start now' => '',
+    'Edit tasks in bulk' => 'Пакетное редактирование задач',
+    'Choose the properties that you would like to change for the selected tasks.' => 'Выберите свойства, которые вы хотите изменить для выбранных задач',
+    'Configure this project' => 'Настроить текущий проект',
+    'Start now' => 'Начать сейчас',
 );
