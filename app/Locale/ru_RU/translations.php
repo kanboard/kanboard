@@ -56,8 +56,8 @@ return array(
     'Inactive' => 'Неактивен',
     'Active' => 'Активен',
     'Unable to update this board.' => 'Не удалось обновить эту доску.',
-    'Disable' => 'Выключить проект',
-    'Enable' => 'Включить проект',
+    'Disable' => 'Отключить',
+    'Enable' => 'Включить',
     'New project' => 'Новый проект',
     'Do you really want to remove this project: "%s"?' => 'Вы точно хотите удалить проект: "%s"?',
     'Remove project' => 'Удалить проект',
@@ -1381,6 +1381,6 @@ return array(
     'Move selected tasks to another column' => 'Переместить выбранные задачи в другую колонку',
     'Edit tasks in bulk' => 'Пакетное редактирование задач',
     'Choose the properties that you would like to change for the selected tasks.' => 'Выберите свойства, которые вы хотите изменить для выбранных задач',
-    'Configure this project' => 'Настроить текущий проект',
+    'Configure this project' => 'Настроить этот проект',
     'Start now' => 'Начать сейчас',
 );
