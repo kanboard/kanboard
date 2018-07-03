@@ -63,8 +63,7 @@ class Mysql extends Base
      */
     protected function buildDsn(array $settings)
     {
-        $charset = empty($settings['charset']) ? 'utf8' : $settings['charset'];
-        $dsn = 'mysql:host='.$settings['hostname'].';dbname='.$settings['database'].';charset='.$charset;
+        $dsn = 'mysql:host='.$settings['hostname'].';dbname='.$settings['database'];
 
         if (! empty($settings['port'])) {
             $dsn .= ';port='.$settings['port'];
@@ -82,8 +81,9 @@ class Mysql extends Base
      */
     protected function buildOptions(array $settings)
     {
+        $charset = empty($settings['charset']) ? 'utf8' : $settings['charset'];
         $options = array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET sql_mode = STRICT_ALL_TABLES',
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET sql_mode = STRICT_ALL_TABLES, NAMES ' . $charset,
         );
 
         if (! empty($settings['ssl_key'])) {
