@@ -13,6 +13,11 @@ Kanboard is project management software that focuses on the Kanban methodology.
     - [Installation instructions](https://docs.kanboard.org/en/latest/admin_guide/installation.html)
     - [Upgrade to a new version](https://docs.kanboard.org/en/latest/admin_guide/upgrade.html)
     - [Use Kanboard with Docker](https://docs.kanboard.org/en/latest/admin_guide/docker.html)
+ 
+ ## Run on YunoHost
+[![Install Kanboard with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=kanboard)
+
+Kanboard app for [YunoHost](https://yunohost.org). See [here](https://github.com/YunoHost-Apps/kanboard_ynh)
 
 Credits
 -------
