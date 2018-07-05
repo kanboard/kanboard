@@ -135,7 +135,8 @@ class TaskProcedure extends BaseProcedure
     public function updateTask($id, $title = null, $color_id = null, $owner_id = null,
                                $date_due = null, $description = null, $category_id = null, $score = null, $priority = null,
                                $recurrence_status = null, $recurrence_trigger = null, $recurrence_factor = null,
-                               $recurrence_timeframe = null, $recurrence_basedate = null, $reference = null, $tags = null, $date_started = null)
+                               $recurrence_timeframe = null, $recurrence_basedate = null, $reference = null, $tags = null, $date_started = null,
+                               $time_estimated = null, $time_spent = null)
     {
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateTask', $id);
         $project_id = $this->taskFinderModel->getProjectId($id);
@@ -166,6 +167,8 @@ class TaskProcedure extends BaseProcedure
             'priority' => $priority,
             'tags' => $tags,
             'date_started' => $date_started,
+			'time_estimated' => $time_estimated,
+            'time_spent' => $time_spent,
         ));
 
         list($valid) = $this->taskValidator->validateApiModification($values);
