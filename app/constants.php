@@ -142,6 +142,8 @@ defined('BRUTEFORCE_LOCKDOWN_DURATION') or define('BRUTEFORCE_LOCKDOWN_DURATION'
 defined('SESSION_DURATION') or define('SESSION_DURATION', 0);
 
 // HTTP Client
+defined('HTTP_TIMEOUT') or define('HTTP_TIMEOUT', 10);
+defined('HTTP_MAX_REDIRECTS') or define('HTTP_MAX_REDIRECTS', 3);
 defined('HTTP_PROXY_HOSTNAME') or define('HTTP_PROXY_HOSTNAME', '');
 defined('HTTP_PROXY_PORT') or define('HTTP_PROXY_PORT', '3128');
 defined('HTTP_PROXY_USERNAME') or define('HTTP_PROXY_USERNAME', '');

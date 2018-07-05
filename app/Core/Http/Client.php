@@ -14,20 +14,6 @@ use Kanboard\Job\HttpAsyncJob;
 class Client extends Base
 {
     /**
-     * HTTP connection timeout in seconds
-     *
-     * @var integer
-     */
-    const HTTP_TIMEOUT = 10;
-
-    /**
-     * Number of maximum redirections for the HTTP client
-     *
-     * @var integer
-     */
-    const HTTP_MAX_REDIRECTS = 2;
-
-    /**
      * HTTP client user agent
      *
      * @var string
@@ -225,8 +211,8 @@ class Client extends Base
             'http' => [
                 'method' => $method,
                 'protocol_version' => 1.1,
-                'timeout' => self::HTTP_TIMEOUT,
-                'max_redirects' => self::HTTP_MAX_REDIRECTS,
+                'timeout' => HTTP_TIMEOUT,
+                'max_redirects' => HTTP_MAX_REDIRECTS,
                 'header' => implode("\r\n", $headers),
                 'content' => $content,
                 'ignore_errors' => $raiseForErrors,
