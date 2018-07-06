@@ -8,7 +8,11 @@
 <IfModule mod_rewrite.c>
     Options -MultiViews
 
-    SetEnv HTTP_MOD_REWRITE On
+
+    <IfModule mod_env.c>
+        SetEnv HTTP_MOD_REWRITE On
+    </IfModule>
+    
 
     # Uncomment this line depending of your Apache configuration
     # RewriteBase /
