@@ -41,7 +41,7 @@ abstract class BaseDateRangeFilter extends BaseFilter
      */
     protected function applyDateFilter($field)
     {
-        $dates = explode('@', $this->value);
+        $dates = explode(':', $this->value);
         
         if(count($dates)=== 2){          
             $timestampFrom = $this->dateParser->getTimestampFromIsoFormat($dates[0]);
