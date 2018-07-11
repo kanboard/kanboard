@@ -43,12 +43,12 @@ abstract class BaseDateRangeFilter extends BaseFilter
     {
         $dates = explode(':', $this->value);
         
-        
-        $method = $this->parseOperator();
-        $timestampFrom = $this->dateParser->getTimestampFromIsoFormat($dates[0]);
-        $timestampTo = $this->dateParser->getTimestampFromIsoFormat($dates[1]);
+        if(count($dates)=== 2){          
+            $timestampFrom = $this->dateParser->getTimestampFromIsoFormat($dates[0]);
+            $timestampTo = $this->dateParser->getTimestampFromIsoFormat($dates[1]);
 
-        $this->query->gte($field, $timestampFrom);
-        $this->query->lte($field, $timestampTo + 86399);        
+            $this->query->gte($field, $timestampFrom);
+            $this->query->lte($field, $timestampTo + 86399);
+        }
     }
 }
