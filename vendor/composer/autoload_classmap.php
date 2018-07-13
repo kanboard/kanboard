@@ -459,6 +459,7 @@ return array(
     'Kanboard\\Filter\\TaskLinkFilter' => $baseDir . '/app/Filter/TaskLinkFilter.php',
     'Kanboard\\Filter\\TaskModificationDateFilter' => $baseDir . '/app/Filter/TaskModificationDateFilter.php',
     'Kanboard\\Filter\\TaskMovedDateFilter' => $baseDir . '/app/Filter/TaskMovedDateFilter.php',
+    'Kanboard\\Filter\\TaskMovedDateRangeFilter' => $baseDir . '/app/Filter/TaskMovedDateRangeFilter.php',
     'Kanboard\\Filter\\TaskPriorityFilter' => $baseDir . '/app/Filter/TaskPriorityFilter.php',
     'Kanboard\\Filter\\TaskProjectFilter' => $baseDir . '/app/Filter/TaskProjectFilter.php',
     'Kanboard\\Filter\\TaskProjectsFilter' => $baseDir . '/app/Filter/TaskProjectsFilter.php',

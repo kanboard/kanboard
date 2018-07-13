@@ -570,6 +570,7 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Filter\\TaskLinkFilter' => __DIR__ . '/../..' . '/app/Filter/TaskLinkFilter.php',
         'Kanboard\\Filter\\TaskModificationDateFilter' => __DIR__ . '/../..' . '/app/Filter/TaskModificationDateFilter.php',
         'Kanboard\\Filter\\TaskMovedDateFilter' => __DIR__ . '/../..' . '/app/Filter/TaskMovedDateFilter.php',
+        'Kanboard\\Filter\\TaskMovedDateRangeFilter' => __DIR__ . '/../..' . '/app/Filter/TaskMovedDateRangeFilter.php',
         'Kanboard\\Filter\\TaskPriorityFilter' => __DIR__ . '/../..' . '/app/Filter/TaskPriorityFilter.php',
         'Kanboard\\Filter\\TaskProjectFilter' => __DIR__ . '/../..' . '/app/Filter/TaskProjectFilter.php',
         'Kanboard\\Filter\\TaskProjectsFilter' => __DIR__ . '/../..' . '/app/Filter/TaskProjectsFilter.php',
