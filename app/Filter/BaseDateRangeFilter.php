@@ -44,8 +44,8 @@ abstract class BaseDateRangeFilter extends BaseFilter
         $dates = explode('..', $this->value);
         
         if(count($dates)=== 2){          
-            $timestampFrom = $this->dateParser->getTimestampFromIsoFormat($dates[0]);
-            $timestampTo = $this->dateParser->getTimestampFromIsoFormat($dates[1]);
+            $timestampFrom = $this->dateParser->getTimestamp($dates[0]);
+            $timestampTo = $this->dateParser->getTimestamp($dates[1]);
 
             $this->query->gte($field, $timestampFrom);
             $this->query->lte($field, $timestampTo + 86399);
