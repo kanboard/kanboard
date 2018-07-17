@@ -11,7 +11,7 @@ use Kanboard\Model\TaskModel;
  * @package filter
  * @author  Kamil Ściana
  */
-class TaskModificationDateRangeFilter extends BaseDateFilter implements FilterInterface
+class TaskModificationDateRangeFilter extends BaseDateRangeFilter implements FilterInterface
 {
     /**
      * Get search attribute
