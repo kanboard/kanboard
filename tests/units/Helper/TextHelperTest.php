@@ -50,6 +50,13 @@ class TextHelperTest extends Base
                 'Check that: http://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454#1732454'
             )
         );
+
+        $this->assertEquals(
+            '<p><a href="http://localhost">item #123 is here</a></p>',
+            $textHelper->markdown(
+                '[item #123 is here](http://localhost)'
+            )
+        );
     }
 
     public function testMarkdownUserLink()
@@ -100,6 +107,13 @@ class TextHelperTest extends Base
         );
 
         $this->assertEquals('<p>Text @admin @notfound</p>', $textHelper->markdown('Text @admin @notfound', true));
+
+        $this->assertEquals(
+            '<p><a href="http://localhost">mention @admin at localhost</a></p>',
+            $textHelper->markdown(
+                '[mention @admin at localhost](http://localhost)'
+            )
+        );
     }
 
     public function testFormatBytes()
