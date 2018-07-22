@@ -26,7 +26,7 @@
     ############################
     
     # RewriteCond %{HTTPS} !=on 
-    # RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
 </IfModule>
 
 <IfModule pagespeed_module>
