@@ -1241,7 +1241,7 @@ return array(
     'This username is already taken' => 'Dieser Benutzername ist bereits vergeben',
     'A link to reset your password has been sent by email.' => 'Ein Link zum Zurücksetzen Ihres Passworts wurde per E-Mail gesendet.',
     'Your profile must have a valid email address.' => 'Ihr Profil muss eine gültige E-Mail-Adresse haben.',
-    'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => 'Leider können wir Ihr Passwort nicht zurücksetzen. Haben Sie einen gültigen Benutzernamen eingegeben? Haben Sie eine E-Mail-Adresse in Ihrem Profil?',
+    'Unfortunately, we are unable to reset your password. Did you enter a valid username? Do you have an email address in your profile?' => 'Leider können wir Ihr Passwort nicht zurücksetzen. Haben Sie einen gültigen Benutzernamen eingegeben? Haben Sie eine E-Mail-Adresse in Ihrem Profil?',
     'TRL - Turkish Lira' => 'TRL - Türkische Lira',
     'The project email is optional and could be used by several plugins.' => 'Die Projekt-E-Mail ist optional und kann von mehreren Plugins verwendet werden.',
     'The project email must be unique across all projects' => 'Die Projekt-E-Mail muss für alle Projekte eindeutig sein',
