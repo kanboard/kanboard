@@ -1241,7 +1241,7 @@ return array(
     'This username is already taken' => 'このユーザー名はすでに使用されています',
     'A link to reset your password has been sent by email.' => 'パスワードをリセットするリンクをメールで送信しました',
     'Your profile must have a valid email address.' => 'プロフィールには有効なメールアドレスが必要です',
-    'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => 'パスワードをリセットできません。有効なユーザー名を入力しましたか？または、あなたのプロフィールにメールアドレスを登録していますか？',
+    'Unfortunately, we are unable to reset your password. Did you enter a valid username? Do you have an email address in your profile?' => 'パスワードをリセットできません。有効なユーザー名を入力しましたか？または、あなたのプロフィールにメールアドレスを登録していますか？',
     // 'TRL - Turkish Lira' => '',
     'The project email is optional and could be used by several plugins.' => 'プロジェクトのEメールはオプション／複数のプラグインで使用可能',
     'The project email must be unique across all projects' => 'プロジェクトのEメールはすべてのプロジェクトでユ一意である必要があります',

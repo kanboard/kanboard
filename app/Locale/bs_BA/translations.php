@@ -1241,7 +1241,7 @@ return array(
     'This username is already taken' => 'Ovo korisničko ime je zauzeto',
     'A link to reset your password has been sent by email.' => 'Veza za obnovu šifre je poslana email-om.',
     'Your profile must have a valid email address.' => 'Profil mora imati validnu email adresu.',
-    'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => 'Nažalost, nismo u mogćnosti obnoviti vašu šifru. Da li si upisao ispravno korisničko ime? Da li imaš email adresu u profilu?',
+    'Unfortunately, we are unable to reset your password. Did you enter a valid username? Do you have an email address in your profile?' => 'Nažalost, nismo u mogćnosti obnoviti vašu šifru. Da li si upisao ispravno korisničko ime? Da li imaš email adresu u profilu?',
     'TRL - Turkish Lira' => 'TRL - Turska Lira',
     'The project email is optional and could be used by several plugins.' => 'Email projekta je prizvoljan i može biti korišten od strane dodataka.',
     'The project email must be unique across all projects' => 'Email projekta mora biti jedinstven za svaki projekat',

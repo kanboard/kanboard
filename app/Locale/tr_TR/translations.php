@@ -1241,7 +1241,7 @@ return array(
     'This username is already taken' => 'Bu kullanıcı adı zaten alınmış',
     'A link to reset your password has been sent by email.' => 'Parola sıfırlama linkini içeren mesaj ePosta adresinize gönderildi.',
     'Your profile must have a valid email address.' => 'Profiliniz için geçerli bir ePosta adresi gerekiyor.',
-    'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => 'Malesef parolanızı sıfırlayamıyoruz. Kullanıcı adınızı doğru girdiniz mi? Profilinize kayıtlı ePosta adresiniz var mı?',
+    'Unfortunately, we are unable to reset your password. Did you enter a valid username? Do you have an email address in your profile?' => 'Malesef parolanızı sıfırlayamıyoruz. Kullanıcı adınızı doğru girdiniz mi? Profilinize kayıtlı ePosta adresiniz var mı?',
     'TRL - Turkish Lira' => 'TRL - Türk Lirası',
     'The project email is optional and could be used by several plugins.' => 'Proje ePostası isteğe bağlıdır ve eklentiler tarafından kullanılabilir',
     'The project email must be unique across all projects' => 'Proje e-postası tüm projelerde benzersiz olmalıdır.',

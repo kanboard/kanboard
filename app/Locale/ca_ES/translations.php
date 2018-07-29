@@ -1241,7 +1241,7 @@ return array(
     'This username is already taken' => 'Aquest nom d\'usuari ja està en ús',
     'A link to reset your password has been sent by email.' => 'S\'ha enviat per correu eletrònic un enllaç per restablir la contrasenya.',
     'Your profile must have a valid email address.' => 'El teu perfil ha de tenir una adreça de correu electrònic vàlida.',
-    'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => 'Per desgràcia, no som capaços de restablir la contrasenya. ¿S\'ha introduït un nom d\'usuari vàlid? Té una adreça de correu electrònic en el seu perfil?',
+    'Unfortunately, we are unable to reset your password. Did you enter a valid username? Do you have an email address in your profile?' => 'Per desgràcia, no som capaços de restablir la contrasenya. ¿S\'ha introduït un nom d\'usuari vàlid? Té una adreça de correu electrònic en el seu perfil?',
     'TRL - Turkish Lira' => 'TRL - Lira turca',
     'The project email is optional and could be used by several plugins.' => 'El correu electrònic del projecte és opcional i pot ser utilitzat per diversos connectors.',
     'The project email must be unique across all projects' => 'El correu electrònic del projecte ha de ser únic en tots els projectes',

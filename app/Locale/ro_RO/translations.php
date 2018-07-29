@@ -1241,7 +1241,7 @@ return array(
     'This username is already taken' => 'Acest nume de utilizator a fost luat deja',
     'A link to reset your password has been sent by email.' => 'Un link pentru resetarea parolei a fost trimis prin e-mail.',
     'Your profile must have a valid email address.' => 'Profilul tău trebuie să aibă o adresă de e-mail validă.',
-    'Unfortunately, we are unable to reset your password. Did you entered a valid username? Do you have an email address in your profile?' => 'Din păcate nu am putut reseta parola ta. Ai introdus un nume de utilizator valid? Ai o adresă de e-mail în profil?',
+    'Unfortunately, we are unable to reset your password. Did you enter a valid username? Do you have an email address in your profile?' => 'Din păcate nu am putut reseta parola ta. Ai introdus un nume de utilizator valid? Ai o adresă de e-mail în profil?',
     'TRL - Turkish Lira' => 'TRL - Liră turcească',
     'The project email is optional and could be used by several plugins.' => 'E-mail-ul proiectului este opțional si ar putea fi folosit de mai multe extensii.',
     'The project email must be unique across all projects' => 'E-mail-ul proiectului trebuie să fie diferit de toate celelalte proiecte.',
