@@ -28,6 +28,7 @@ class TagController extends BaseController
 
         $this->response->html($this->template->render('tag/create', array(
             'values' => $values,
+            'colors'  => $this->colorModel->getList(),
             'errors' => $errors,
         )));
     }
@@ -38,7 +39,7 @@ class TagController extends BaseController
         list($valid, $errors) = $this->tagValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->tagModel->create(0, $values['name']) > 0) {
+            if ($this->tagModel->create(0, $values['name'], $values['color_id']) > 0) {
                 $this->flash->success(t('Tag created successfully.'));
             } else {
                 $this->flash->failure(t('Unable to create this tag.'));
@@ -62,6 +63,7 @@ class TagController extends BaseController
         $this->response->html($this->template->render('tag/edit', array(
             'tag' => $tag,
             'values' => $values,
+            'colors'  => $this->colorModel->getList(),
             'errors' => $errors,
         )));
     }
@@ -78,7 +80,7 @@ class TagController extends BaseController
         }
 
         if ($valid) {
-            if ($this->tagModel->update($values['id'], $values['name'])) {
+            if ($this->tagModel->update($values['id'], $values['name'], $values['color_id'])) {
                 $this->flash->success(t('Tag updated successfully.'));
             } else {
                 $this->flash->failure(t('Unable to update this tag.'));

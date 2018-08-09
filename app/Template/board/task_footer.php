@@ -25,7 +25,7 @@
     <div class="task-tags">
         <ul>
         <?php foreach ($task['tags'] as $tag): ?>
-            <li><?= $this->text->e($tag['name']) ?></li>
+            <li class="task-tag <?= $tag['color_id'] ? "color-{$tag['color_id']}" : '' ?>"><?= $this->text->e($tag['name']) ?></li>
         <?php endforeach ?>
         </ul>
     </div>

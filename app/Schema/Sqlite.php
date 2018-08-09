@@ -8,7 +8,12 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 119;
+const VERSION = 120;
+
+function version_120(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE tags ADD COLUMN color_id TEXT DEFAULT NULL');
+}
 
 function version_119(PDO $pdo)
 {

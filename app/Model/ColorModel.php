@@ -218,7 +218,7 @@ class ColorModel extends Base
         $buffer = '';
 
         foreach ($this->default_colors as $color => $values) {
-            $buffer .= '.task-board.color-'.$color.', .task-summary-container.color-'.$color.', .color-picker-square.color-'.$color.', .task-board-category.color-'.$color.', .table-list-category.color-'.$color.' {';
+            $buffer .= '.task-board.color-'.$color.', .task-summary-container.color-'.$color.', .color-picker-square.color-'.$color.', .task-board-category.color-'.$color.', .table-list-category.color-'.$color.', .task-tag.color-'.$color.' {';
             $buffer .= 'background-color: '.$values['background'].';';
             $buffer .= 'border-color: '.$values['border'];
             $buffer .= '}';

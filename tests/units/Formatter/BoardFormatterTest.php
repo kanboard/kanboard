@@ -375,11 +375,13 @@ class BoardFormatterTest extends Base
                 'id' => 1,
                 'name' => 'My tag 1',
                 'task_id' => 1,
+                'color_id' => null,
             ),
             array(
                 'id' => 2,
                 'name' => 'My tag 2',
                 'task_id' => 1,
+                'color_id' => null,
             ),
         );
 
@@ -391,6 +393,7 @@ class BoardFormatterTest extends Base
                 'id' => 3,
                 'name' => 'My tag 3',
                 'task_id' => 2,
+                'color_id' => null,
             ),
         );
 

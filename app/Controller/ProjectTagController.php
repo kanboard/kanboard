@@ -28,6 +28,7 @@ class ProjectTagController extends BaseController
         $this->response->html($this->template->render('project_tag/create', array(
             'project' => $project,
             'values'  => $values,
+            'colors'  => $this->colorModel->getList(),
             'errors'  => $errors,
         )));
     }
@@ -41,7 +42,7 @@ class ProjectTagController extends BaseController
         list($valid, $errors) = $this->tagValidator->validateCreation($values);
 
         if ($valid) {
-            if ($this->tagModel->create($project['id'], $values['name']) > 0) {
+            if ($this->tagModel->create($project['id'], $values['name'], $values['color_id']) > 0) {
                 $this->flash->success(t('Tag created successfully.'));
             } else {
                 $this->flash->failure(t('Unable to create this tag.'));
@@ -66,6 +67,7 @@ class ProjectTagController extends BaseController
             'project' => $project,
             'tag'     => $tag,
             'values'  => $values,
+            'colors'  => $this->colorModel->getList(),
             'errors'  => $errors,
         )));
     }
@@ -81,7 +83,7 @@ class ProjectTagController extends BaseController
         list($valid, $errors) = $this->tagValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->tagModel->update($values['id'], $values['name'])) {
+            if ($this->tagModel->update($values['id'], $values['name'], $values['color_id'])) {
                 $this->flash->success(t('Tag updated successfully.'));
             } else {
                 $this->flash->failure(t('Unable to update this tag.'));

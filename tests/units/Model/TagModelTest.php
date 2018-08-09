@@ -111,10 +111,11 @@ class TagModelTest extends Base
     {
         $tagModel = new TagModel($this->container);
         $this->assertEquals(1, $tagModel->create(0, 'Tag 1'));
-        $this->assertTrue($tagModel->update(1, 'Tag Updated'));
+        $this->assertTrue($tagModel->update(1, 'Tag Updated', 'purple'));
 
         $tag = $tagModel->getById(1);
         $this->assertEquals(0, $tag['project_id']);
         $this->assertEquals('Tag Updated', $tag['name']);
+        $this->assertEquals('purple', $tag['color_id']);
     }
 }

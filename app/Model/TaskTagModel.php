@@ -46,7 +46,7 @@ class TaskTagModel extends Base
     public function getTagsByTask($task_id)
     {
         return $this->db->table(TagModel::TABLE)
-            ->columns(TagModel::TABLE.'.id', TagModel::TABLE.'.name')
+            ->columns(TagModel::TABLE.'.id', TagModel::TABLE.'.name', TagModel::TABLE.'.color_id')
             ->eq(self::TABLE.'.task_id', $task_id)
             ->join(self::TABLE, 'tag_id', 'id')
             ->findAll();
@@ -66,7 +66,7 @@ class TaskTagModel extends Base
         }
 
         $tags = $this->db->table(TagModel::TABLE)
-            ->columns(TagModel::TABLE.'.id', TagModel::TABLE.'.name', self::TABLE.'.task_id')
+            ->columns(TagModel::TABLE.'.id', TagModel::TABLE.'.name', TagModel::TABLE.'.color_id', self::TABLE.'.task_id')
             ->in(self::TABLE.'.task_id', $task_ids)
             ->join(self::TABLE, 'tag_id', 'id')
             ->asc(TagModel::TABLE.'.name')

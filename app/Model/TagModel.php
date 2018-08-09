@@ -143,11 +143,12 @@ class TagModel extends Base
      * @param  string $tag
      * @return bool|int
      */
-    public function create($project_id, $tag)
+    public function create($project_id, $tag, $color_id = null)
     {
         return $this->db->table(self::TABLE)->persist(array(
             'project_id' => $project_id,
             'name' => $tag,
+            'color_id' => $color_id,
         ));
     }
 
@@ -159,10 +160,11 @@ class TagModel extends Base
      * @param  string  $tag
      * @return bool
      */
-    public function update($tag_id, $tag)
+    public function update($tag_id, $tag, $color_id)
     {
         return $this->db->table(self::TABLE)->eq('id', $tag_id)->update(array(
             'name' => $tag,
+            'color_id' => $color_id,
         ));
     }
 

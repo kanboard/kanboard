@@ -927,7 +927,8 @@ ALTER SEQUENCE "swimlanes_id_seq" OWNED BY "swimlanes"."id";
 CREATE TABLE "tags" (
     "id" integer NOT NULL,
     "name" character varying(255) NOT NULL,
-    "project_id" integer NOT NULL
+    "project_id" integer NOT NULL,
+    "color_id" character varying(255)
 );
 
 
