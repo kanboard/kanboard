@@ -123,6 +123,7 @@ class TaskFinderModel extends Base
                 UserModel::TABLE.'.avatar_path AS assignee_avatar_path',
                 CategoryModel::TABLE.'.name AS category_name',
                 CategoryModel::TABLE.'.description AS category_description',
+                CategoryModel::TABLE.'.color_id AS category_color_id',
                 ColumnModel::TABLE.'.title AS column_name',
                 ColumnModel::TABLE.'.position AS column_position',
                 SwimlaneModel::TABLE.'.name AS swimlane_name',

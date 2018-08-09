@@ -542,7 +542,8 @@ CREATE TABLE "project_has_categories" (
     "id" integer NOT NULL,
     "name" character varying(255) NOT NULL,
     "project_id" integer NOT NULL,
-    "description" "text"
+    "description" "text",
+    "color_id" character varying(255)
 );
 
 

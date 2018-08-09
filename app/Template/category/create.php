@@ -7,5 +7,8 @@
     <?= $this->form->label(t('Category Name'), 'name') ?>
     <?= $this->form->text('name', $values, $errors, array('autofocus', 'required')) ?>
 
+    <?= $this->form->label(t('Color'), 'color_id') ?>
+    <?= $this->form->select('color_id', array('' => t('No color')) + $colors, $values, $errors, array(), 'color-picker') ?>
+
     <?= $this->modal->submitButtons() ?>
 </form>

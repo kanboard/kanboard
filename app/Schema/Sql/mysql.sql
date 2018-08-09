@@ -294,6 +294,7 @@ CREATE TABLE `project_has_categories` (
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `project_id` int(11) NOT NULL,
   `description` mediumtext COLLATE utf8mb4_unicode_ci,
+  `color_id` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_project_category` (`project_id`,`name`),
   KEY `categories_project_idx` (`project_id`),

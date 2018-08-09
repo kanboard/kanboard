@@ -41,6 +41,7 @@ class CategoryController extends BaseController
 
         $this->response->html($this->template->render('category/create', array(
             'values'  => $values + array('project_id' => $project['id']),
+            'colors'  => $this->colorModel->getList(),
             'errors'  => $errors,
             'project' => $project,
         )));
@@ -87,6 +88,7 @@ class CategoryController extends BaseController
 
         $this->response->html($this->template->render('category/edit', array(
             'values'  => empty($values) ? $category : $values,
+            'colors'  => $this->colorModel->getList(),
             'errors'  => $errors,
             'project' => $project,
         )));
