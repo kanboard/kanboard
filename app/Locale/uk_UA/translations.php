@@ -1241,7 +1241,7 @@ return array(
     'This username is already taken' => 'Цей логін вже зайнято',
     'A link to reset your password has been sent by email.' => 'Посилання для скидання пароля було надіслано на ваш E-mail.',
     'Your profile must have a valid email address.' => 'Ваш профіль повинен мати правильний E-mail.',
-    'Unfortunately, we are unable to reset your password. Did you enter a valid username? Do you have an email address in your profile?' => 'На жаль, не вдалося ',
+    'Unfortunately, we are unable to reset your password. Did you enter a valid username? Do you have an email address in your profile?' => 'На жаль, не вдалося скинути пароль. Ви вказали дійсне ім\'я користувача? У вашому профілі задано E-mail?',
     'TRL - Turkish Lira' => 'TRL - Турецька ліра',
     'The project email is optional and could be used by several plugins.' => 'E-mail проекту не є обов\'язковим і може використовуватися розширеннями.',
     'The project email must be unique across all projects' => 'E-mail проекту має бути унікальним для всіх проектів',
