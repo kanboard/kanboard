@@ -155,7 +155,9 @@ class Markdown extends Parsedown
     protected function inlineLink($Excerpt)
     {
         $Inline = parent::inlineLink($Excerpt);
-        array_push($Inline['element']['nonNestables'], 'TaskLink', 'UserLink');
+        if (is_array($Inline)) {
+            array_push($Inline['element']['nonNestables'], 'TaskLink', 'UserLink');
+        }
         return $Inline;
     }
 }
