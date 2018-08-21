@@ -12,6 +12,7 @@
 
         <?php if ($project['is_private'] == 0): ?>
             <?= $this->form->checkbox('projectPermissionModel', t('Permissions'), 1, true) ?>
+            <?= $this->form->checkbox('projectRoleModel', t('Custom roles'), 1, true) ?>
         <?php endif ?>
 
         <?= $this->form->checkbox('categoryModel', t('Categories'), 1, true) ?>

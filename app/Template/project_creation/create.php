@@ -20,6 +20,7 @@
 
             <?php if (! $is_private): ?>
                 <?= $this->form->checkbox('projectPermissionModel', t('Permissions'), 1, true) ?>
+                <?= $this->form->checkbox('projectRoleModel', t('Custom roles'), 1, true) ?>
             <?php endif ?>
 
             <?= $this->form->checkbox('categoryModel', t('Categories'), 1, true) ?>
