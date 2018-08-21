@@ -630,7 +630,7 @@ return array(
     'New assignee: %s' => 'Nuovo assegnatario: %s',
     'There is no category now' => 'Non è presente più nessuna categoria',
     'New category: %s' => 'Nuova categoria: %s',
-    'New color: %s' => 'Nuovo colorei: %s',
+    'New color: %s' => 'Nuovo colore: %s',
     'New complexity: %d' => 'Nuova complessità: %d',
     'The due date have been removed' => 'La data di scadenza è stata rimossa',
     'There is no description anymore' => 'Non è presente più alcuna descrizione.',
