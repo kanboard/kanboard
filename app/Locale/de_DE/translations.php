@@ -957,7 +957,7 @@ return array(
     'Created:' => 'Erstellt:',
     'Modified:' => 'Geändert:',
     'Completed:' => 'Abgeschlossen:',
-    'Started:' => 'Gestarted:',
+    'Started:' => 'Gestartet:',
     'Moved:' => 'Verschoben:',
     'Task #%d' => 'Aufgabe #%d',
     'Time format' => 'Zeitformat',
