@@ -133,4 +133,35 @@ class ProjectRoleRestrictionModel extends Base
     {
         return $this->db->table(self::TABLE)->eq('restriction_id', $restriction_id)->remove();
     }
+
+    /**
+     * Copy role restriction models from a custome_role in the src project to the dst custom_role of the dst project 
+     *
+     * @param  integer $project_src_id
+     * @param  integer $project_dst_id
+     * @param  integer $role_src_id
+     * @param  integer $role_dst_id
+     * @return boolean
+     */
+    public function duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)
+    {
+        $rows = $this->db->table(self::TABLE)
+            ->eq('project_id', $project_src_id)
+            ->eq('role_id', $role_src_id)
+            ->findAll();
+
+        foreach ($rows as $row) {
+            $result = $this->db->table(self::TABLE)->persist(array(
+                'project_id' => $project_dst_id,
+                'role_id' => $role_dst_id,
+                'rule' => $row['rule'],
+            ));
+            
+            if (! $result) {
+                return false;
+            }
+        }
+            
+        return true;
+    }
 }

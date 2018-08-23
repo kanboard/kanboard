@@ -123,4 +123,52 @@ class ColumnMoveRestrictionModel extends Base
     {
         return $this->db->table(self::TABLE)->eq('restriction_id', $restriction_id)->remove();
     }
+
+    /**
+     * Copy column_move_restriction models from a custome_role in the src project to the dst custom_role of the dst project 
+     *
+     * @param  integer $project_src_id
+     * @param  integer $project_dst_id
+     * @param  integer $role_src_id
+     * @param  integer $role_dst_id
+     * @return boolean
+     */
+    public function duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)
+    {
+        $rows = $this->db->table(self::TABLE)
+            ->eq('project_id', $project_src_id)
+            ->eq('role_id', $role_src_id)
+            ->findAll();
+
+        foreach ($rows as $row) {
+            $src_column_title = $this->columnModel->getColumnTitleById($row['src_column_id']);
+            $dst_column_title = $this->columnModel->getColumnTitleById($row['dst_column_id']);
+            $src_column_id = $this->columnModel->getColumnIdByTitle($project_dst_id, $src_column_title);
+            $dst_column_id = $this->columnModel->getColumnIdByTitle($project_dst_id, $dst_column_title);
+
+            if (! $dst_column_id) {
+                $this->logger->error("The column $dst_column_title is not present in project $project_dst_id");
+                return false;
+            }
+
+            if (! $src_column_id) {
+                $this->logger->error("The column $src_column_title is not present in project $project_dst_id");
+                return false;
+            }
+
+            $result = $this->db->table(self::TABLE)->persist(array(
+                'project_id' => $project_dst_id,
+                'role_id' => $role_dst_id,
+                'src_column_id' => $row['src_column_id'],
+                'dst_column_id' => $row['dst_column_id'],
+                'only_assigned' => (int) $row['only_assigned'],
+            ));
+            
+            if (! $result) {
+                return false;
+            }
+        }
+            
+        return true;
+    }
 }

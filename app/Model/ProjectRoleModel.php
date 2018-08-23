@@ -193,4 +193,42 @@ class ProjectRoleModel extends Base
         $this->db->cancelTransaction();
         return false;
     }
+
+    /**
+     * Copy project custom_roles from a project to another one
+     *
+     * @param  integer $project_src_id
+     * @param  integer $project_dst_id
+     * @return boolean
+     */
+    public function duplicate($project_src_id, $project_dst_id)
+    {
+        $rows = $this->db->table(self::TABLE)->eq('project_id', $project_src_id)->findAll();
+
+        foreach ($rows as $row) {
+            $role_src_id = $row['role_id'];
+            $role_dst_id = $this->db->table(self::TABLE)->persist(array(
+                'project_id' => $project_dst_id,
+                'role' => $row['role'],
+            ));
+
+            if (! $role_dst_id) {
+                return false;
+            }
+
+            if (! $this->columnRestrictionModel->duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)) {
+                return false;
+            }
+
+            if (! $this->columnMoveRestrictionModel->duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)) {
+                return false;
+            }
+            
+            if (! $this->projectRoleRestrictionModel->duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

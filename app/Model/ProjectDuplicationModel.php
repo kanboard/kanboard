@@ -24,6 +24,7 @@ class ProjectDuplicationModel extends Base
     {
         return array(
             'categoryModel',
+            'projectRoleModel',
             'projectPermissionModel',
             'actionModel',
             'tagDuplicationModel',
@@ -44,6 +45,7 @@ class ProjectDuplicationModel extends Base
             'swimlaneModel',
             'boardModel',
             'categoryModel',
+            'projectRoleModel',
             'projectPermissionModel',
             'actionModel',
             'swimlaneModel',
