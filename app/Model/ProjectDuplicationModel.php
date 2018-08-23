@@ -95,7 +95,7 @@ class ProjectDuplicationModel extends Base
             $this->db->cancelTransaction();
             return false;
         }
-        
+
         // Clone Swimlanes, Columns, Categories, Permissions and Actions
         foreach ($this->getPossibleSelection() as $model) {
 
@@ -108,7 +108,7 @@ class ProjectDuplicationModel extends Base
             if ($private && $model === 'projectPermissionModel') {
                 continue;
             }
-            
+
             if (! $this->$model->duplicate($src_project_id, $dst_project_id)) {
                 $this->db->cancelTransaction();
                 return false;
