@@ -135,9 +135,10 @@ class ColumnMoveRestrictionModel extends Base
      */
     public function duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)
     {
-        $rows = $this->db->table(self::TABLE)->
-            eq('project_id', $project_src_id)->
-            eq('role_id', $role_src_id)->findAll();
+        $rows = $this->db->table(self::TABLE)
+            ->eq('project_id', $project_src_id)
+            ->eq('role_id', $role_src_id)
+            ->findAll();
 
         foreach ($rows as $row) {
             $src_column_title = $this->columnModel->getColumnTitleById($row['src_column_id']);
@@ -145,13 +146,13 @@ class ColumnMoveRestrictionModel extends Base
             $src_column_id = $this->columnModel->getColumnIdByTitle($project_dst_id, $src_column_title);
             $dst_column_id = $this->columnModel->getColumnIdByTitle($project_dst_id, $dst_column_title);
 
-            if(! $dst_column_id){
-                $this->logger->error("the column $dst_column_title is not present in project $project_dst_id");
+            if (! $dst_column_id){
+                $this->logger->error("The column $dst_column_title is not present in project $project_dst_id");
                 return false;
             }
 
-            if(! $src_column_id){
-                $this->logger->error("the column $src_column_title is not present in project $project_dst_id");
+            if (! $src_column_id){
+                $this->logger->error("The column $src_column_title is not present in project $project_dst_id");
                 return false;
             }
 
@@ -166,7 +167,6 @@ class ColumnMoveRestrictionModel extends Base
             if (! $result) {
                 return false;
             }
-            
         }
             
         return true;
