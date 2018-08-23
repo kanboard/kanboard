@@ -145,12 +145,12 @@ class ProjectRoleRestrictionModel extends Base
      */
     public function duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)
     {
-        $rows = $this->db->table(self::TABLE)->
-            eq('project_id', $project_src_id)->
-            eq('role_id', $role_src_id)->findAll();
+        $rows = $this->db->table(self::TABLE)
+            ->eq('project_id', $project_src_id)
+            ->eq('role_id', $role_src_id)
+            ->findAll();
 
         foreach ($rows as $row) {
-
             $result = $this->db->table(self::TABLE)->persist(array(
                 'project_id' => $project_dst_id,
                 'role_id' => $role_dst_id,
@@ -160,7 +160,6 @@ class ProjectRoleRestrictionModel extends Base
             if (! $result) {
                 return false;
             }
-            
         }
             
         return true;
