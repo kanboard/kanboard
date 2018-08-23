@@ -161,16 +161,17 @@ class ColumnRestrictionModel extends Base
      */
     public function duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)
     {
-        $rows = $this->db->table(self::TABLE)->
-            eq('project_id', $project_src_id)->
-            eq('role_id', $role_src_id)->findAll();
+        $rows = $this->db->table(self::TABLE)
+            ->eq('project_id', $project_src_id)
+            ->eq('role_id', $role_src_id)
+            ->findAll();
 
         foreach ($rows as $row) {
             $column_title = $this->columnModel->getColumnTitleById($row['column_id']);
             $dst_column_id = $this->columnModel->getColumnIdByTitle($project_dst_id, $column_title);
 
-            if(! $dst_column_id){
-                $this->logger->error("the column $column_title is not present in project $project_dst_id");
+            if (! $dst_column_id) {
+                $this->logger->error("The column $column_title is not present in project $project_dst_id");
                 return false;
             }
 
@@ -184,7 +185,6 @@ class ColumnRestrictionModel extends Base
             if (! $result) {
                 return false;
             }
-            
         }
             
         return true;
