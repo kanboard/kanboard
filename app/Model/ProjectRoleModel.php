@@ -216,18 +216,19 @@ class ProjectRoleModel extends Base
                 return false;
             }
 
-            if(! $this->columnRestrictionModel->duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)) {
+            if (! $this->columnRestrictionModel->duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)) {
                 return false;
             }
 
-            if(! $this->columnMoveRestrictionModel->duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)) {
+            if (! $this->columnMoveRestrictionModel->duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)) {
                 return false;
             }
             
-            if(! $this->projectRoleRestrictionModel->duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)) {
+            if (! $this->projectRoleRestrictionModel->duplicate($project_src_id, $project_dst_id, $role_src_id, $role_dst_id)) {
                 return false;
             }
         }
+
         return true;
     }
 }
