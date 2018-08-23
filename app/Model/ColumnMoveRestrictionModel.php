@@ -146,12 +146,12 @@ class ColumnMoveRestrictionModel extends Base
             $src_column_id = $this->columnModel->getColumnIdByTitle($project_dst_id, $src_column_title);
             $dst_column_id = $this->columnModel->getColumnIdByTitle($project_dst_id, $dst_column_title);
 
-            if (! $dst_column_id){
+            if (! $dst_column_id) {
                 $this->logger->error("The column $dst_column_title is not present in project $project_dst_id");
                 return false;
             }
 
-            if (! $src_column_id){
+            if (! $src_column_id) {
                 $this->logger->error("The column $src_column_title is not present in project $project_dst_id");
                 return false;
             }
