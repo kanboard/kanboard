@@ -9,6 +9,7 @@ if (php_sapi_name() !== 'cli') {
 }
 
 try {
+    chdir(__DIR__);
     require __DIR__.'/app/common.php';
     $container['dispatcher']->dispatch('app.bootstrap', new Event);
     $container['cli']->run();
