@@ -2,6 +2,8 @@
 
 /*******************************************************************/
 /* Rename this file to config.php if you want to change the values */
+/*                                                                 */
+/* Make sure all paths are absolute by using __DIR__ where needed  */
 /*******************************************************************/
 
 // Data folder (must be writeable by the web server user and absolute)
@@ -17,7 +19,7 @@ define('LOG_DRIVER', 'system');
 define('LOG_FILE', DATA_DIR.DIRECTORY_SEPARATOR.'debug.log');
 
 // Plugins directory
-define('PLUGINS_DIR', 'plugins');
+define('PLUGINS_DIR', __DIR__.DIRECTORY_SEPARATOR.'plugins');
 
 // Plugins directory URL
 define('PLUGIN_API_URL', 'https://kanboard.org/plugins.json');
