@@ -1347,7 +1347,7 @@ return array(
     'Template removed successfully.' => 'Vorlage erfolgreich gelöscht.',
     'Unable to remove this template.' => 'Löschen der Vorlage nicht möglich.',
     'Template for the task description' => 'Vorlage für die Aufgabenbeschreibung',
-    'The start date is greater than the end date' => 'Das Startdatum ist größer als dass Enddatum',
+    'The start date is greater than the end date' => 'Das Startdatum ist größer als das Enddatum',
     'Tags must be separated by a comma' => 'Schlagworte müssen per Komma getrennt werden',
     'Only the task title is required' => 'Nur der Aufgaben-Titel wird benötigt',
     'Creator Username' => 'Ersteller Benutzername',
