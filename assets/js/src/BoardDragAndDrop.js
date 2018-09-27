@@ -16,7 +16,7 @@ Kanboard.BoardDragAndDrop.prototype.dragAndDrop = function() {
     var params = {
         forcePlaceholderSize: true,
         tolerance: "pointer",
-        connectWith: ".sortable-column",
+        connectWith: ".sortable-column:visible",
         placeholder: "draggable-placeholder",
         items: ".draggable-item",
         stop: function(event, ui) {
