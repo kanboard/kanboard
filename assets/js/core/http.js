@@ -1,5 +1,7 @@
 KB.http.request = function (method, url, headers, body) {
     var successCallback = function() {};
+    var authErrorCallback = function() {};
+    var netErrorCallback = function() {};
     var errorCallback = function() {};
 
     function parseResponse(request) {
@@ -42,10 +44,22 @@ KB.http.request = function (method, url, headers, body) {
             if (request.readyState === XMLHttpRequest.DONE) {
                 var response = parseResponse(request);
 
-                if (request.status === 200) {
-                    successCallback(response);
-                } else {
-                    errorCallback(response);
+                // errorCallback still gets called for compatibility
+                switch (request.status) {
+                    case 200:
+                        successCallback(response);
+                        return;
+                    case 401:
+                        authErrorCallback(response);
+                        errorCallback(response);
+                        break;
+                    case 0:
+                        netErrorCallback(response);
+                        errorCallback(response);
+                        break;
+                    default:
+                        errorCallback(response);
+                        break;
                 }
             }
         };
@@ -59,6 +73,17 @@ KB.http.request = function (method, url, headers, body) {
         return this;
     };
 
+    this.authError = function (callback) {
+        authErrorCallback = callback;
+        return this;
+    };
+
+    this.netError = function (callback) {
+        netErrorCallback = callback;
+        return this;
+    };
+
+    // deprecated
     this.error = function (callback) {
         errorCallback = callback;
         return this;
