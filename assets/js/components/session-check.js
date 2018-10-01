@@ -3,7 +3,7 @@ KB.interval(60, function () {
     var loginUrl = KB.find('body').data('loginUrl');
 
     if (KB.find('.form-login') === null) {
-        KB.http.get(statusUrl).error(function () {
+        KB.http.get(statusUrl).authError(function () {
             window.location = loginUrl;
         });
     }
