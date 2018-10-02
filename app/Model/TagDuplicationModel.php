@@ -26,7 +26,7 @@ class TagDuplicationModel extends Base
         $results = array();
 
         foreach ($tags as $tag) {
-            $results[] = $this->tagModel->create($dst_project_id, $tag['name']);
+            $results[] = $this->tagModel->create($dst_project_id, $tag['name'], $tag['color_id']);
         }
 
         return ! in_array(false, $results, true);
