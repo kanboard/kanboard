@@ -16,8 +16,8 @@ class GroupSync extends Base
      * Synchronize group membership
      *
      * @access public
-     * @param  integer $userId
-     * @param  array   $externalGroupIds
+     * @param  integer  $userId
+     * @param  string[] $externalGroupIds
      */
     public function synchronize($userId, array $externalGroupIds)
     {
@@ -30,21 +30,18 @@ class GroupSync extends Base
      * Add missing groups to the user
      *
      * @access protected
-     * @param integer $userId
-     * @param array   $userGroups
-     * @param array   $externalGroupIds
+     * @param integer  $userId
+     * @param array    $userGroups
+     * @param string[] $externalGroupIds
      */
     protected function addGroups($userId, array $userGroups, array $externalGroupIds)
     {
         $userGroupIds = array_column($userGroups, 'external_id', 'external_id');
+        $externalGroups = $this->groupModel->getByExternalIds($externalGroupIds);
 
-        foreach ($externalGroupIds as $externalGroupId) {
-            if (! isset($userGroupIds[$externalGroupId])) {
-                $group = $this->groupModel->getByExternalId($externalGroupId);
-
-                if (! empty($group)) {
-                    $this->groupMemberModel->addUser($group['id'], $userId);
-                }
+        foreach ($externalGroups as $externalGroup) {
+            if (! isset($userGroupIds[$externalGroup['external_id']])) {
+                $this->groupMemberModel->addUser($externalGroup['id'], $userId);
             }
         }
     }
@@ -53,9 +50,9 @@ class GroupSync extends Base
      * Remove groups from the user
      *
      * @access protected
-     * @param integer $userId
-     * @param array   $userGroups
-     * @param array   $externalGroupIds
+     * @param integer  $userId
+     * @param array    $userGroups
+     * @param string[] $externalGroupIds
      */
     protected function removeGroups($userId, array $userGroups, array $externalGroupIds)
     {

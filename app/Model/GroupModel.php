@@ -45,15 +45,31 @@ class GroupModel extends Base
     }
 
     /**
-     * Get a specific group by external id
+     * Get a specific group by externalID
      *
      * @access public
-     * @param  integer $external_id
+     * @param  string $external_id
      * @return array
      */
     public function getByExternalId($external_id)
     {
         return $this->db->table(self::TABLE)->eq('external_id', $external_id)->findOne();
+    }
+
+    /**
+     * Get specific groups by externalIDs
+     *
+     * @access public
+     * @param  string[] $external_ids
+     * @return array
+     */
+    public function getByExternalIds(array $external_ids)
+    {
+        if (empty($external_ids)) {
+            return [];
+        }
+
+        return $this->db->table(self::TABLE)->in('external_id', $external_ids)->findAll();
     }
 
     /**
