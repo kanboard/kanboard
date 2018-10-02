@@ -212,7 +212,7 @@ class CategoryModel extends Base
     {
         $categories = $this->db
             ->table(self::TABLE)
-            ->columns('name', 'description')
+            ->columns('name', 'description', 'color_id')
             ->eq('project_id', $src_project_id)
             ->asc('name')
             ->findAll();

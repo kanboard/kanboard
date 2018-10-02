@@ -212,7 +212,7 @@ class CategoryModelTest extends Base
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertEquals(2, $projectModel->create(array('name' => 'Project #2')));
-        $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1, 'description' => 'test')));
+        $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1, 'description' => 'test', 'color_id' => 'blue')));
 
         $this->assertTrue($categoryModel->duplicate(1, 2));
 
@@ -220,10 +220,12 @@ class CategoryModelTest extends Base
         $this->assertEquals('Category #1', $category['name']);
         $this->assertEquals(1, $category['project_id']);
         $this->assertEquals('test', $category['description']);
+        $this->assertEquals('blue', $category['color_id']);
 
         $category = $categoryModel->getById(2);
         $this->assertEquals('Category #1', $category['name']);
         $this->assertEquals(2, $category['project_id']);
         $this->assertEquals('test', $category['description']);
+        $this->assertEquals('blue', $category['color_id']);
     }
 }
