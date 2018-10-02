@@ -265,7 +265,6 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
             .attr('type', 'text')
             .attr('placeholder', getPlaceholderValue())
             .addClass('select-dropdown-input')
-            .style('width', (containerElement.offsetWidth - 30) + 'px')
             .on('focus', toggleDropdownMenu)
             .on('input', onInputChanged, true)
             .build();
