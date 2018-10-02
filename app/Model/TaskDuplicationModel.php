@@ -36,6 +36,9 @@ class TaskDuplicationModel extends Base
         'recurrence_factor',
         'recurrence_timeframe',
         'recurrence_basedate',
+        'external_provider',
+        'external_uri',
+        'reference',
     );
 
     /**
