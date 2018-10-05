@@ -507,7 +507,7 @@ function version_96(PDO $pdo)
             `group_id` INT NOT NULL,
             `project_id` INT NOT NULL,
             `role` VARCHAR(25) NOT NULL,
-            FOREIGN KEY(group_id) REFERENCES groups(id) ON DELETE CASCADE,
+            FOREIGN KEY(group_id) REFERENCES `groups`(id) ON DELETE CASCADE,
             FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
             UNIQUE(group_id, project_id)
         ) ENGINE=InnoDB CHARSET=utf8
@@ -535,7 +535,7 @@ function version_96(PDO $pdo)
 function version_95(PDO $pdo)
 {
     $pdo->exec("
-        CREATE TABLE groups (
+        CREATE TABLE `groups` (
             id INT NOT NULL AUTO_INCREMENT,
             external_id VARCHAR(255) DEFAULT '',
             name VARCHAR(100) NOT NULL UNIQUE,
@@ -547,7 +547,7 @@ function version_95(PDO $pdo)
         CREATE TABLE group_has_users (
             group_id INT NOT NULL,
             user_id INT NOT NULL,
-            FOREIGN KEY(group_id) REFERENCES groups(id) ON DELETE CASCADE,
+            FOREIGN KEY(group_id) REFERENCES `groups`(id) ON DELETE CASCADE,
             FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
             UNIQUE(group_id, user_id)
         ) ENGINE=InnoDB CHARSET=utf8
