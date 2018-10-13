@@ -77,6 +77,7 @@
         if (formElement) {
             formElement.on('change', onFormChange, false);
             formElement.on('submit', onFormSubmit, false);
+            $('.form-datetime').datepicker('option', 'onSelect', onFormChange);
         }
 
         var autoFocusElement = document.querySelector('#modal-content input[autofocus]');
