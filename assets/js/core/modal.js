@@ -1,16 +1,40 @@
 (function () {
     var isOpen = false;
+    var isFormDirty = false;
+
+    function closeIfDirty() {
+        if (isFormDirty == false) {
+            return true;
+        }
+
+        return window.confirm($("body").data("js-modal-close-msg").replace(/\\n/g,"\n"));
+    }
 
     function onOverlayClick(e) {
         if (e.target.matches('#modal-overlay')) {
-            e.stopPropagation();
-            e.preventDefault();
-            destroy();
+            if (closeIfDirty()) {
+                e.stopPropagation();
+                e.preventDefault();
+                destroy();
+            }
         }
+    }
+
+    function onBeforeUnload(e) {
+        // Cancel the event as stated by the standard.
+        e.preventDefault();
+
+        // Chrome requires returnValue to be set.
+        e.returnValue = '';
     }
 
     function onCloseButtonClick() {
         KB.trigger('modal.close');
+    }
+
+    function onFormChange() {
+        isFormDirty = true;
+        window.addEventListener('beforeunload', onBeforeUnload, false);
     }
 
     function onFormSubmit() {
@@ -51,6 +75,7 @@
     function afterRendering() {
         var formElement = KB.find('#modal-content form');
         if (formElement) {
+            formElement.on('change', onFormChange, false);
             formElement.on('submit', onFormSubmit, false);
         }
 
@@ -122,6 +147,7 @@
 
     function destroy() {
         isOpen = false;
+        window.removeEventListener('beforeunload', onBeforeUnload, false);
         var overlayElement = KB.find('#modal-overlay');
 
         if (overlayElement) {
