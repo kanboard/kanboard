@@ -52,6 +52,15 @@ abstract class FileModel extends Base
     abstract protected function fireCreationEvent($file_id);
 
     /**
+     * Fire file destruction event
+     *
+     * @abstract
+     * @access protected
+     * @param  integer $file_id
+     */
+    abstract protected function fireDestructionEvent($file_id);
+
+    /**
      * Get PicoDb query to get all files
      *
      * @access protected
@@ -187,6 +196,8 @@ abstract class FileModel extends Base
     public function remove($file_id)
     {
         try {
+            $this->fireDestructionEvent($file_id);
+
             $file = $this->getById($file_id);
             $this->objectStorage->remove($file['path']);
 

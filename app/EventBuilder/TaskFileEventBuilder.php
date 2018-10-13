@@ -64,6 +64,10 @@ class TaskFileEventBuilder extends BaseEventBuilder
             return e('%s attached a file to the task #%d', $author, $eventData['task']['id']);
         }
 
+        if ($eventName === TaskFileModel::EVENT_DESTROY) {
+            return e('%s removed a file from the task #%d', $author, $eventData['task']['id']);
+        }
+
         return '';
     }
 
@@ -79,6 +83,10 @@ class TaskFileEventBuilder extends BaseEventBuilder
     {
         if ($eventName === TaskFileModel::EVENT_CREATE) {
             return e('New attachment on task #%d: %s', $eventData['file']['task_id'], $eventData['file']['name']);
+        }
+
+        if ($eventName === TaskFileModel::EVENT_DESTROY) {
+            return e('Attachment removed from task #%d: %s', $eventData['file']['task_id'], $eventData['file']['name']);
         }
 
         return '';
