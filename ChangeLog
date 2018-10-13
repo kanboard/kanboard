@@ -1,3 +1,27 @@
+Version 1.2.6 (October 10, 2018)
+--------------------------------
+
+* Escape table name 'groups' because groups is a reserved word as of MySql 8.0.2
+* Reduce number of SQL queries when doing groups sync
+* Make swimlane filter compatible with numeric title
+* Duplicate reference fields when duplicating a task
+* Do not try to redirect to login page when offline
+* Define fixed width for auto-complete dropdown
+* Fix task drag and drop slowdown when a column is hidden
+* Make PLUGINS_DIR absolute in config.default.php
+* Add custom roles project duplication
+* Allow 'No assignee' for external task on single user public boards
+* Add tag and category colors
+* Exclude task links and user mentions from nesting (Markdown parser)
+* When forcing HTTPS, handle subfolder URLs properly
+* Add search within a range of dates for completion, modification, creation, and moved fields
+* Update Docker image to Alpine Linux 3.8
+* Make sure the presense of mod_env is checked in .htaccess
+* Make HTTP client timeout configurable
+* Use SET NAMES instead of charset for MySQL connection
+* Vendoring deprecated Composer libs
+* Update translations and fix typos
+
 Version 1.2.5 (June 15, 2018)
 -----------------------------
 
