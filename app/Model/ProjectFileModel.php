@@ -23,6 +23,7 @@ class ProjectFileModel extends FileModel
      * @var string
      */
     const EVENT_CREATE = 'project.file.create';
+    const EVENT_DESTROY = 'project.file.destroy';
 
     /**
      * Get the table
@@ -69,5 +70,16 @@ class ProjectFileModel extends FileModel
     protected function fireCreationEvent($file_id)
     {
         $this->queueManager->push($this->projectFileEventJob->withParams($file_id, self::EVENT_CREATE));
+    }
+
+    /**
+     * Fire file destruction event
+     *
+     * @access protected
+     * @param  integer $file_id
+     */
+    protected function fireDestructionEvent($file_id)
+    {
+        $this->queueManager->push($this->projectFileEventJob->withParams($file_id, self::EVENT_DESTROY));
     }
 }
