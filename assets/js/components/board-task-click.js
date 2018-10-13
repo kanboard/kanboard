@@ -20,7 +20,7 @@
         var url = KB.dom(baseElement).data('url');
 
         if (url) {
-            KB.modal.open(url, 'medium', false);
+            KB.modal.open(url, 'medium', true);
         }
     }
 
