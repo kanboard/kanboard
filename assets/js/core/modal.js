@@ -77,6 +77,7 @@
         if (formElement) {
             formElement.on('change', onFormChange, false);
             formElement.on('submit', onFormSubmit, false);
+            $('.form-date').datepicker('option', 'onSelect', onFormChange);
             $('.form-datetime').datepicker('option', 'onSelect', onFormChange);
         }
 
