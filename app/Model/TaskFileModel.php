@@ -103,7 +103,7 @@ class TaskFileModel extends FileModel
     }
 
     /**
-     * Fire file creation event
+     * Fire file destruction event
      *
      * @access protected
      * @param  integer $file_id
