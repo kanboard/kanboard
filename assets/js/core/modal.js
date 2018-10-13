@@ -77,8 +77,6 @@
         if (formElement) {
             formElement.on('change', onFormChange, false);
             formElement.on('submit', onFormSubmit, false);
-            $('.form-date').datepicker('option', 'onSelect', onFormChange);
-            $('.form-datetime').datepicker('option', 'onSelect', onFormChange);
         }
 
         var autoFocusElement = document.querySelector('#modal-content input[autofocus]');
@@ -92,8 +90,12 @@
         _KB.tagAutoComplete();
         _KB.get('Task').onPopoverOpened();
 
-        $(".color-picker").on('change', onFormChange);
-        $(".tag-autocomplete").on('change', onFormChange);
+        if (formElement) {
+            $('.form-date').datepicker('option', 'onSelect', onFormChange);
+            $('.form-datetime').datepicker('option', 'onSelect', onFormChange);
+            $(".color-picker").on('change', onFormChange);
+            $(".tag-autocomplete").on('change', onFormChange);
+        }
 
         KB.trigger('modal.afterRender');
     }
