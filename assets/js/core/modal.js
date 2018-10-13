@@ -154,6 +154,7 @@
 
     function destroy() {
         isOpen = false;
+        isFormDirty = false;
         window.removeEventListener('beforeunload', onBeforeUnload, false);
         var overlayElement = KB.find('#modal-overlay');
 
