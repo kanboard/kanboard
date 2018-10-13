@@ -91,6 +91,9 @@
         _KB.tagAutoComplete();
         _KB.get('Task').onPopoverOpened();
 
+        $(".color-picker").on('change', onFormChange);
+        $(".tag-autocomplete").on('change', onFormChange);
+
         KB.trigger('modal.afterRender');
     }
 
