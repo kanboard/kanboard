@@ -35,6 +35,7 @@ class SubtaskTaskConversionModel extends Base
         ));
 
         if ($task_id !== false) {
+            $this->taskLinkModel->create($task_id, $subtask['task_id'], 6);
             $this->subtaskModel->remove($subtask_id);
         }
 
