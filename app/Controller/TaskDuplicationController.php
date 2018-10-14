@@ -87,7 +87,7 @@ class TaskDuplicationController extends BaseController
 
                 if ($task_id > 0) {
                     $this->flash->success(t('Task created successfully.'));
-                    return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $values['project_id'], 'task_id' => $task_id)));
+                    return $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $task['project_id'])), true);
                 }
             }
 
