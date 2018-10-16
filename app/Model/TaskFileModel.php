@@ -23,6 +23,7 @@ class TaskFileModel extends FileModel
      * @var string
      */
     const EVENT_CREATE = 'task.file.create';
+    const EVENT_DESTROY = 'task.file.destroy';
 
     /**
      * Get the table
@@ -99,5 +100,16 @@ class TaskFileModel extends FileModel
     protected function fireCreationEvent($file_id)
     {
         $this->queueManager->push($this->taskFileEventJob->withParams($file_id, self::EVENT_CREATE));
+    }
+
+    /**
+     * Fire file destruction event
+     *
+     * @access protected
+     * @param  integer $file_id
+     */
+    protected function fireDestructionEvent($file_id)
+    {
+        $this->queueManager->push($this->taskFileEventJob->withParams($file_id, self::EVENT_DESTROY));
     }
 }
