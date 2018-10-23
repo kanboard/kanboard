@@ -27,7 +27,7 @@ KB.keyboardShortcuts = function () {
 
     KB.onKey('?', function () {
         if (! KB.modal.isOpen()) {
-            KB.modal.open(KB.find('body').data('keyboardShortcutUrl'), '', true);
+            KB.modal.open(KB.find('body').data('keyboardShortcutUrl'));
         }
     });
 
@@ -62,7 +62,7 @@ KB.keyboardShortcuts = function () {
 
         KB.onKey('n', function () {
             if (! KB.modal.isOpen()) {
-                KB.modal.open(KB.find('#board').data('taskCreationUrl'), 'large', true);
+                KB.modal.open(KB.find('#board').data('taskCreationUrl'), 'large', false);
             }
         });
     }
@@ -70,25 +70,25 @@ KB.keyboardShortcuts = function () {
     if (KB.exists('#task-view')) {
         KB.onKey('e', function () {
             if (! KB.modal.isOpen()) {
-                KB.modal.open(KB.find('#task-view').data('editUrl'), 'large', true);
+                KB.modal.open(KB.find('#task-view').data('editUrl'), 'large', false);
             }
         });
 
         KB.onKey('c', function () {
             if (! KB.modal.isOpen()) {
-                KB.modal.open(KB.find('#task-view').data('commentUrl'), 'medium', true);
+                KB.modal.open(KB.find('#task-view').data('commentUrl'), 'medium', false);
             }
         });
 
         KB.onKey('s', function () {
             if (! KB.modal.isOpen()) {
-                KB.modal.open(KB.find('#task-view').data('subtaskUrl'), 'medium', true);
+                KB.modal.open(KB.find('#task-view').data('subtaskUrl'), 'medium', false);
             }
         });
 
         KB.onKey('l', function () {
             if (! KB.modal.isOpen()) {
-                KB.modal.open(KB.find('#task-view').data('internalLinkUrl'), 'medium', true);
+                KB.modal.open(KB.find('#task-view').data('internalLinkUrl'), 'medium', false);
             }
         });
     }

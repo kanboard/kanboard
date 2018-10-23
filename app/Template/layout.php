@@ -51,7 +51,6 @@
           data-js-lang="<?= $this->app->jsLang() ?>"
           data-js-date-format="<?= $this->app->getJsDateFormat() ?>"
           data-js-time-format="<?= $this->app->getJsTimeFormat() ?>"
-          data-js-modal-close-msg="<?= t('Close window?\\n\\nChanges that you made have not been saved.') ?>"
     >
 
     <?php if (isset($no_layout) && $no_layout): ?>
