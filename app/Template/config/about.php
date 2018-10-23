@@ -9,7 +9,7 @@
         </li>
         <li>
             <?= t('Author:') ?>
-            <strong>Frédéric Guillot</strong> (<a href="https://github.com/kanboard/kanboard/blob/master/CONTRIBUTORS.md" target="_blank"><?= t('contributors') ?></a>)
+            <strong>Frédéric Guillot</strong> (<a href="https://github.com/kanboard/kanboard/graphs/contributors" target="_blank"><?= t('contributors') ?></a>)
         </li>
         <li>
             <?= t('License:') ?>
