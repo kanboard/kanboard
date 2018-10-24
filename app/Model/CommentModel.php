@@ -71,6 +71,7 @@ class CommentModel extends Base
             )
             ->join(UserModel::TABLE, 'id', 'user_id')
             ->orderBy(self::TABLE.'.date_creation', $sorting)
+            ->orderBy(self::TABLE.'.id', $sorting)
             ->eq(self::TABLE.'.task_id', $task_id)
             ->findAll();
     }
