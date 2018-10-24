@@ -4,6 +4,7 @@ namespace Kanboard\ServiceProvider;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Kanboard\Action\TaskAssignCategorySwimlaneChange;
 use Kanboard\Action\TaskAssignColorOnDueDate;
 use Kanboard\Action\TaskAssignColorOnStartDate;
 use Kanboard\Action\TaskAssignColorPriority;
@@ -67,6 +68,7 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager'] = new ActionManager($container);
         $container['actionManager']->register(new CommentCreation($container));
         $container['actionManager']->register(new CommentCreationMoveTaskColumn($container));
+        $container['actionManager']->register(new TaskAssignCategorySwimlaneChange($container));
         $container['actionManager']->register(new TaskAssignCategoryColor($container));
         $container['actionManager']->register(new TaskAssignCategoryLabel($container));
         $container['actionManager']->register(new TaskAssignCategoryLink($container));
