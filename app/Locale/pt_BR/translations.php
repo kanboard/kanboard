@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Etiquetas globais',
     'There is no global tag at the moment.' => 'Atualmente não existe nenhuma etiqueta global.',
     'This field cannot be empty' => 'Este campo não pode ficar vazio',
-    'Close a task when there is no activity in an specific column' => 'Fechar a tarefa quando não houver atividade numa coluna especifica',
+    'Close a task when there is no activity in a specific column' => 'Fechar a tarefa quando não houver atividade numa coluna especifica',
     '%s removed a subtask for the task #%d' => '%s removeu uma subtarefa da tarefa #%d',
     '%s removed a comment on the task #%d' => '%s removeu um comentário da tarefa #%d ',
     'Comment removed on task #%d' => 'Comentário removido da tarefa #%d',

@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Спільні мітки',
     'There is no global tag at the moment.' => 'Спільні мітки відсутні.',
     'This field cannot be empty' => 'Це поле не може бути пустим',
-    'Close a task when there is no activity in an specific column' => 'Закрити задачу, коли відсутня діяльність в певній колонці',
+    'Close a task when there is no activity in a specific column' => 'Закрити задачу, коли відсутня діяльність в певній колонці',
     '%s removed a subtask for the task #%d' => '%s видалив підзадачу задачі #%d',
     '%s removed a comment on the task #%d' => '%s видалив коментар до задачі #%d',
     'Comment removed on task #%d' => 'Коментар до задачі #%d видалено',

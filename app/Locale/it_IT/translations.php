@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Tag globali',
     'There is no global tag at the moment.' => 'Non sono definiti tag globali al momento.',
     'This field cannot be empty' => 'Questo campo non può essere vuoto',
-    'Close a task when there is no activity in an specific column' => 'Chiudi un task quando non vi è alcuna attività in una specifica colonna',
+    'Close a task when there is no activity in a specific column' => 'Chiudi un task quando non vi è alcuna attività in una specifica colonna',
     '%s removed a subtask for the task #%d' => '%s rimosso un subtask per il task #%d',
     '%s removed a comment on the task #%d' => '%s rimosso un commento nel task #%d',
     'Comment removed on task #%d' => 'Commento rimosso nel task #%d',

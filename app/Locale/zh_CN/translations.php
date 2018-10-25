@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => '全局标签',
     'There is no global tag at the moment.' => '当前没有全局标签。',
     'This field cannot be empty' => '此栏不能为空',
-    'Close a task when there is no activity in an specific column' => '当指定栏目没有更新时关闭任务',
+    'Close a task when there is no activity in a specific column' => '当指定栏目没有更新时关闭任务',
     '%s removed a subtask for the task #%d' => '"%s"从任务#%d删除了子任务',
     '%s removed a comment on the task #%d' => '"%s"从任务#%d删除了评论',
     'Comment removed on task #%d' => '任务#%d上的评论已删除',

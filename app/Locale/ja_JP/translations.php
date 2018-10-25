@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'グローバルタグ',
     'There is no global tag at the moment.' => 'グローバルタグはありません',
     'This field cannot be empty' => 'このフィールドは必須です',
-    'Close a task when there is no activity in an specific column' => '特定のカラムに活動がない場合にタスクを終了',
+    'Close a task when there is no activity in a specific column' => '特定のカラムに活動がない場合にタスクを終了',
     '%s removed a subtask for the task #%d' => 'タスク＃%dからサブタスク%s件を削除しました',
     '%s removed a comment on the task #%d' => 'タスク＃%dからコメント%s件を削除しました',
     'Comment removed on task #%d' => 'タスク＃%dからコメントを削除しました',

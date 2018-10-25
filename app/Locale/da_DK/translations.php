@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Globale mærker',
     'There is no global tag at the moment.' => 'Ingen global mærke i øjeblikket.',
     'This field cannot be empty' => 'Feltet kan ikke være tomt',
-    'Close a task when there is no activity in an specific column' => 'Lukke opgave når der ikke er nogen aktivitet i bestemt kolonne',
+    'Close a task when there is no activity in a specific column' => 'Lukke opgave når der ikke er nogen aktivitet i bestemt kolonne',
     '%s removed a subtask for the task #%d' => '%s fjernet delopgave til opgave #%d',
     '%s removed a comment on the task #%d' => '%s fjernet kommentar til opgave #%d',
     'Comment removed on task #%d' => 'Kommentar fjernet til opgave #%d',

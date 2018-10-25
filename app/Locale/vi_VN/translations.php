@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Thẻ toàn cầu',
     'There is no global tag at the moment.' => 'Hiện tại không có nhãn toàn cầu. ',
     'This field cannot be empty' => 'Trường này không thể để trống',
-    'Close a task when there is no activity in an specific column' => 'Đóng một nhiệm vụ khi không có hoạt động trong một cột cụ thể',
+    'Close a task when there is no activity in a specific column' => 'Đóng một nhiệm vụ khi không có hoạt động trong một cột cụ thể',
     '%s removed a subtask for the task #%d' => ' %s loại bỏ một subtask cho nhiệm vụ #%d',
     '%s removed a comment on the task #%d' => ' %s xóa một nhận xét về nhiệm vụ #%d',
     'Comment removed on task #%d' => 'Đã xóa nhận xét về công việc #%d',

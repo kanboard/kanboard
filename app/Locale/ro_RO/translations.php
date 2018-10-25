@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Etichete globale',
     'There is no global tag at the moment.' => 'Nu există etichete globale momentan.',
     'This field cannot be empty' => 'Acest câmp nu poate fi gol',
-    'Close a task when there is no activity in an specific column' => 'Închide o sarcină când nu există activitate într-o anumită coloană',
+    'Close a task when there is no activity in a specific column' => 'Închide o sarcină când nu există activitate într-o anumită coloană',
     '%s removed a subtask for the task #%d' => '%s a șters o sub-sarcină din sarcina#%d',
     '%s removed a comment on the task #%d' => '%s a șters un comentariu din sarcina #%d',
     'Comment removed on task #%d' => 'Comentariu șters în sarcina #%d',

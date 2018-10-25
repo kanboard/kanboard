@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Genel etiketler',
     'There is no global tag at the moment.' => 'Şu anda genel bir etiket bulunmuyor.',
     'This field cannot be empty' => 'Bu alan boş bırakılamaz',
-    'Close a task when there is no activity in an specific column' => 'Bir kolonda hareket olmadığında bir görevi kapat',
+    'Close a task when there is no activity in a specific column' => 'Bir kolonda hareket olmadığında bir görevi kapat',
     '%s removed a subtask for the task #%d' => '%d görevi için %s bir alt görevi kaldırdı',
     '%s removed a comment on the task #%d' => '%s %d görevi için bir yorumu kaldırdı',
     'Comment removed on task #%d' => '%d görevindeki yorum kaldırıldı',
