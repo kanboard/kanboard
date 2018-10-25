@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Tag global',
     'There is no global tag at the moment.' => 'Saat ini tidak ada tag global.',
     'This field cannot be empty' => 'Bidang ini tidak boleh kosong',
-    'Close a task when there is no activity in an specific column' => 'Tutup tugas saat tidak ada aktivitas di kolom tertentu',
+    'Close a task when there is no activity in a specific column' => 'Tutup tugas saat tidak ada aktivitas di kolom tertentu',
     '%s removed a subtask for the task #%d' => '%s menghapus sub-tugas untuk tugas #%d',
     '%s removed a comment on the task #%d' => '%s menghapus komentar pada tugas #%d',
     'Comment removed on task #%d' => 'Komentar dihapus pada tugas #%d',

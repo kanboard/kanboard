@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Opšte oznake',
     'There is no global tag at the moment.' => 'Trenutno nema opštih oznaka.',
     'This field cannot be empty' => 'Ovo polje ne može biti prazno',
-    'Close a task when there is no activity in an specific column' => 'Zatvori zadatak kada nema aktivnosti u odabranoj koloni',
+    'Close a task when there is no activity in a specific column' => 'Zatvori zadatak kada nema aktivnosti u odabranoj koloni',
     '%s removed a subtask for the task #%d' => '%s je uklonio pod-zadatak za zadatak #%d',
     '%s removed a comment on the task #%d' => '%s je uklonio komentar na zadatku #%d',
     'Comment removed on task #%d' => 'Komentar ukloljen na zadatku #%d',

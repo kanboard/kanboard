@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'etiquetes globals',
     'There is no global tag at the moment.' => 'No hi ha cap variable global en el moment.',
     'This field cannot be empty' => 'Aquest camp no pot estar buit',
-    'Close a task when there is no activity in an specific column' => 'Tancar una tasca quan no hi ha activitat en una columna específica',
+    'Close a task when there is no activity in a specific column' => 'Tancar una tasca quan no hi ha activitat en una columna específica',
     '%s removed a subtask for the task #%d' => '%s extret una subtasca per a la tasca #%d',
     '%s removed a comment on the task #%d' => '%s remogut un comentari a la tasca #%d',
     'Comment removed on task #%d' => 'Comentari eliminat a la tasca #%d',

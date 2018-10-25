@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Globale Schlagwörter',
     'There is no global tag at the moment.' => 'Es gibt zur Zeit kein globales Schlagwort',
     'This field cannot be empty' => 'Dieses Feld kann nicht leer sein',
-    'Close a task when there is no activity in an specific column' => 'Aufgabe schließen wenn es keine Aktivität in einer bestimmten Spalte gibt',
+    'Close a task when there is no activity in a specific column' => 'Aufgabe schließen wenn es keine Aktivität in einer bestimmten Spalte gibt',
     '%s removed a subtask for the task #%d' => '%s hat eine Teilaufgabe der Aufgabe #%d entfernt',
     '%s removed a comment on the task #%d' => '%s hat einen Kommentar der Aufgabe #%d entfernt',
     'Comment removed on task #%d' => 'Kommentar der Aufgabe #%d entfernt',

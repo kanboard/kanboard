@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Глобальные метки',
     'There is no global tag at the moment.' => 'Нет глобальных меток.',
     'This field cannot be empty' => 'Это поле не может быть пустым',
-    'Close a task when there is no activity in an specific column' => 'Закрыть задачу при отсутствии активности в определенной колонке',
+    'Close a task when there is no activity in a specific column' => 'Закрыть задачу при отсутствии активности в определенной колонке',
     '%s removed a subtask for the task #%d' => '%s удалил подзадачу для #%d',
     '%s removed a comment on the task #%d' => '%s удалил комментарий к задаче #%d',
     'Comment removed on task #%d' => 'Комментарий удален в задаче #%d',

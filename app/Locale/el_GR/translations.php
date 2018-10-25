@@ -1101,7 +1101,7 @@ return array(
     // 'Global tags' => '',
     // 'There is no global tag at the moment.' => '',
     // 'This field cannot be empty' => '',
-    // 'Close a task when there is no activity in an specific column' => '',
+    // 'Close a task when there is no activity in a specific column' => '',
     // '%s removed a subtask for the task #%d' => '',
     // '%s removed a comment on the task #%d' => '',
     // 'Comment removed on task #%d' => '',

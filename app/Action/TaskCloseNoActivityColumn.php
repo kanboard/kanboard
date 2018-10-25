@@ -20,7 +20,7 @@ class TaskCloseNoActivityColumn extends Base
      */
     public function getDescription()
     {
-        return t('Close a task when there is no activity in an specific column');
+        return t('Close a task when there is no activity in a specific column');
     }
 
     /**

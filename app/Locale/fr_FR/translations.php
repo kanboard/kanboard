@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Libellés globaux',
     'There is no global tag at the moment.' => 'Il n\'y a aucun libellé global pour le moment.',
     'This field cannot be empty' => 'Ce champ ne peut être vide',
-    'Close a task when there is no activity in an specific column' => 'Fermer une tâche lorsqu\'il n\'y a aucune activité dans une colonne spécifique',
+    'Close a task when there is no activity in a specific column' => 'Fermer une tâche lorsqu\'il n\'y a aucune activité dans une colonne spécifique',
     '%s removed a subtask for the task #%d' => '%s a supprimé une sous-tâche de la tâche n°%d',
     '%s removed a comment on the task #%d' => '%s a supprimé un commentaire de la tâche n°%d',
     'Comment removed on task #%d' => 'Commentaire supprimé sur la tâche n°%d',

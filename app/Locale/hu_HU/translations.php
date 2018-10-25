@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => 'Globális címkék',
     'There is no global tag at the moment.' => 'Jelenleg nincs globális címke.',
     'This field cannot be empty' => 'Ez a mező nem lehet üres',
-    'Close a task when there is no activity in an specific column' => 'Feladat lezárása, ha nincs tevékenység egy adott oszlopban',
+    'Close a task when there is no activity in a specific column' => 'Feladat lezárása, ha nincs tevékenység egy adott oszlopban',
     '%s removed a subtask for the task #%d' => '%s eltávolított egy részfeladatot a(z) #%d. feladatból',
     '%s removed a comment on the task #%d' => '%s eltávolított egy megjegyzést a(z) #%d. feladatból',
     'Comment removed on task #%d' => 'Megjegyzés eltávolítva a(z) #%d. feladatból',

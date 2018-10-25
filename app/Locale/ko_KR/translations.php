@@ -1101,7 +1101,7 @@ return array(
     'Global tags' => '전역 태그',
     'There is no global tag at the moment.' => '현재 전역 태그가 없습니다.',
     'This field cannot be empty' => '이 필드는 비워둘 수 없습니다',
-    'Close a task when there is no activity in an specific column' => '활동이 없는 컬럼의 할일 마치기',
+    'Close a task when there is no activity in a specific column' => '활동이 없는 컬럼의 할일 마치기',
     '%s removed a subtask for the task #%d' => '%s가 할일 #%d의 서브 할일을 삭제하였습니다',
     '%s removed a comment on the task #%d' => '%s가 할일 #%d의 댓글을 삭제하였습니다',
     'Comment removed on task #%d' => '할일 #%d의 댓글이 삭제되었습니다',
