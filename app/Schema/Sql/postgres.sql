@@ -2717,4 +2717,5 @@ SELECT pg_catalog.setval('links_id_seq', 11, true);
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$eu5txjAlmBRZYmAcWjHAx.BSCIYL6RMTIyrIWG4eqWFtf62DCJPWy', 'app-admin');INSERT INTO schema_version VALUES ('108');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$eu5txjAlmBRZYmAcWjHAx.BSCIYL6RMTIyrIWG4eqWFtf62DCJPWy', 'app-admin');
+INSERT INTO schema_version VALUES ('111');
