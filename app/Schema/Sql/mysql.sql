@@ -807,4 +807,5 @@ UNLOCK TABLES;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$I5O18nLDOZ436DXzIRZal.ArrFe69gSMoegHDwV.8lChQHz6K4Kku', 'app-admin');INSERT INTO schema_version VALUES ('133');
+INSERT INTO users (username, password, role) VALUES ('admin', '$2y$10$I5O18nLDOZ436DXzIRZal.ArrFe69gSMoegHDwV.8lChQHz6K4Kku', 'app-admin');
+INSERT INTO schema_version VALUES ('133');
