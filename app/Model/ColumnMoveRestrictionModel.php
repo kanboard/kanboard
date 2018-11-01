@@ -159,8 +159,8 @@ class ColumnMoveRestrictionModel extends Base
             $result = $this->db->table(self::TABLE)->persist(array(
                 'project_id' => $project_dst_id,
                 'role_id' => $role_dst_id,
-                'src_column_id' => $row['src_column_id'],
-                'dst_column_id' => $row['dst_column_id'],
+                'src_column_id' => $src_column_id,
+                'dst_column_id' => $dst_column_id,
                 'only_assigned' => (int) $row['only_assigned'],
             ));
             
