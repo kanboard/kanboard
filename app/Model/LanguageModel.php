@@ -140,7 +140,7 @@ class LanguageModel extends Base
             'da_DK' => 'da',
             'de_DE' => 'de',
             'en_GB' => 'en-GB',
-            'en_US' => 'en-US',
+            'en_US' => 'en',
             'es_ES' => 'es',
             'fr_FR' => 'fr',
             'it_IT' => 'it',
