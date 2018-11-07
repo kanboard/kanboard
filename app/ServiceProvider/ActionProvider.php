@@ -34,6 +34,7 @@ use Kanboard\Action\TaskEmail;
 use Kanboard\Action\TaskEmailNoActivity;
 use Kanboard\Action\TaskMoveAnotherProject;
 use Kanboard\Action\TaskMoveColumnAssigned;
+use Kanboard\Action\TaskMoveSwimlaneAssigned;
 use Kanboard\Action\TaskMoveColumnCategoryChange;
 use Kanboard\Action\TaskMoveColumnUnAssigned;
 use Kanboard\Action\TaskMoveSwimlaneCategoryChange;
@@ -93,6 +94,7 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskEmailNoActivity($container));
         $container['actionManager']->register(new TaskMoveAnotherProject($container));
         $container['actionManager']->register(new TaskMoveColumnAssigned($container));
+        $container['actionManager']->register(new TaskMoveSwimlaneAssigned($container));
         $container['actionManager']->register(new TaskMoveColumnCategoryChange($container));
         $container['actionManager']->register(new TaskMoveColumnClosed($container));
         $container['actionManager']->register(new TaskMoveColumnNotMovedPeriod($container));
