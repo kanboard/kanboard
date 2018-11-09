@@ -10,6 +10,7 @@ class LanguageTest extends Base
     {
         $codes = LanguageModel::getCodes();
         $this->assertContains('fr_FR', $codes);
+        $this->assertContains('en_GB', $codes);
         $this->assertContains('en_US', $codes);
     }
 
@@ -17,6 +18,7 @@ class LanguageTest extends Base
     {
         $this->assertSame('', LanguageModel::findCode('xx-XX'));
         $this->assertSame('fr_FR', LanguageModel::findCode('fr-FR'));
+        $this->assertSame('en_GB', LanguageModel::findCode('en-GB'));
         $this->assertSame('en_US', LanguageModel::findCode('en-US'));
     }
 
@@ -36,6 +38,9 @@ class LanguageTest extends Base
     {
         $languageModel = new LanguageModel($this->container);
         $this->assertEquals('en_US', $languageModel->getCurrentLanguage());
+
+        $_SESSION['user'] = array('language' => 'en_GB');
+        $this->assertEquals('en_GB', $languageModel->getCurrentLanguage());
 
         $_SESSION['user'] = array('language' => 'fr_FR');
         $this->assertEquals('fr_FR', $languageModel->getCurrentLanguage());
