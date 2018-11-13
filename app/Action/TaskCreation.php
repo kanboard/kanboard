@@ -67,11 +67,20 @@ class TaskCreation extends Base
      */
     public function doAction(array $data)
     {
+        $events=implode($this->getEvents());
+        $this->logger->debug('Running add task action'.$events);
+
+        if ( $events == 'gitlab.webhook.issue.opened' ) {
+                $new_owner = $this->userModel->getByExternalId('gitlab_id',$data['assignee_id']) ;
+                $this->logger->debug("Adding owner:".implode($new_owner)."gitlab_assignee_id:".$data['assignee_id']);
+        }
+
         return (bool) $this->taskCreationModel->create(array(
             'project_id' => $data['project_id'],
             'title' => $data['title'],
             'reference' => $data['reference'],
             'description' => isset($data['description']) ? $data['description'] : '',
+            'owner_id' => isset($new_owner) ? $new_owner['id'] : 0
         ));
     }
 
