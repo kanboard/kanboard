@@ -1,11 +1,11 @@
 ---
 name: Bug report
-about: This template is only for bug reports
+about: This template is only for bug reports, use the forum for questions and feature requests.
 
 ---
 
 <!-- Please, read the documentation: https://docs.kanboard.org/ -->
-<!-- Ask questions on the Forum: https://github.com/kanboard/forum/issues -->
+<!-- Ask questions on the Forum: https://kanboard.discourse.group/ -->
 
 ### Actual behaviour
 
