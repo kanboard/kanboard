@@ -37,7 +37,7 @@
         </li>
         <li>
             <?= t('OS version:') ?>
-            <strong><?= php_uname('s').' '.php_uname('r') ?></strong>
+            <strong><?= @php_uname('s').' '.@php_uname('r') ?></strong>
         </li>
         <li>
             <?= t('Database driver:') ?>
