@@ -17,6 +17,8 @@
         <?= $this->form->number('board_private_refresh_interval', $values, $errors) ?>
         <p class="form-help"><?= t('Frequency in second (0 to disable this feature, 10 seconds by default)') ?></p>
     </fieldset>
+    
+    <?= $this->hook->render('template:config:board', array('values' => $values, 'errors' => $errors)) ?>
 
     <div class="form-actions">
         <button type="submit" class="btn btn-blue"><?= t('Save') ?></button>
