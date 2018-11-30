@@ -110,4 +110,18 @@ abstract class SettingModel extends Base
 
         return ! in_array(false, $results, true);
     }
+    
+    /**
+     * Remove a setting
+     *
+     * @access public
+     * @param  string  $option
+     * @return bool
+     */
+    public function remove($option)
+    {
+        return $this->db->table(self::TABLE)
+            ->eq('option', $option)
+            ->remove();
+    }
 }
