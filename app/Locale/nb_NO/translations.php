@@ -473,7 +473,7 @@ return array(
     '%dd' => '%dd',
     'Add a new link' => 'Legg til en ny relasjon',
     'Do you really want to remove this link: "%s"?' => 'Ønsker du virkelig å fjerne lenken: "%s"',
-    'Do you really want to remove this link with task #%d?' => 'Ønsker du virkelig å fjerne lenken oppgaven #d?',
+    'Do you really want to remove this link with task #%d?' => 'Ønsker du virkelig å fjerne denne lenken for oppgaven #%d?',
     'Field required' => 'Feltet må fylles ut',
     'Link added successfully.' => 'Ny relasjon er lagt til',
     'Link updated successfully.' => 'Relasjon er oppdatert',
