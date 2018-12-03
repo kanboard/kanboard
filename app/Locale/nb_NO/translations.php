@@ -1293,7 +1293,7 @@ return array(
     'Group ID' => 'Gruppe-ID',
     'External ID' => 'Ekstern ID',
      '%d users' => '%d brukere',
-     '%d user' => '#d bruker',
+     '%d user' => '%d bruker',
     'Hide subtasks' => 'Skjul deloppgaver',
     'Show subtasks' => 'Vis deloppgaver',
     'Authentication Parameters' => 'Autensitering',
