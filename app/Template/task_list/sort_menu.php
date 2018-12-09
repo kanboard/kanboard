@@ -34,5 +34,8 @@
         <li>
             <?= $paginator->order(t('Status'), \Kanboard\Model\TaskModel::TABLE.'.is_active') ?>
         </li>
+        <li>
+            <?= $paginator->order(t('Reference'), \Kanboard\Model\TaskModel::TABLE.'.reference') ?>
+        </li>
     </ul>
 </div>
