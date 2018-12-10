@@ -41,11 +41,11 @@ class ColorModelTest extends Base
         $colorModel = new ColorModel($this->container);
 
         $colors = $colorModel->getList();
-        $this->assertCount(16, $colors);
+        $this->assertCount(17, $colors);
         $this->assertEquals('Yellow', $colors['yellow']);
 
         $colors = $colorModel->getList(true);
-        $this->assertCount(17, $colors);
+        $this->assertCount(18, $colors);
         $this->assertEquals('All colors', $colors['']);
         $this->assertEquals('Yellow', $colors['yellow']);
     }
