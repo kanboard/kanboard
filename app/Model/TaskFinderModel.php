@@ -156,6 +156,29 @@ class TaskFinderModel extends Base
     }
 
     /**
+     * Get all tasks for a given project and status with tags
+     *
+     * @access public
+     * @param  integer   $project_id      Project id
+     * @param  integer   $status_id       Status id
+     * @return array
+     */
+    public function getAllWithTags($project_id, $status_id = TaskModel::STATUS_OPEN)
+    {
+
+        return $this->db
+            ->table(TaskModel::TABLE)
+            ->columns(TaskModel::TABLE.'.*', 'group_concat(t.name) as tags')
+            ->eq(TaskModel::TABLE.'.project_id', $project_id)
+            ->eq(TaskModel::TABLE.'.is_active', $status_id)
+            ->left(TaskTagModel::TABLE, 'tht', 'task_id', TaskModel::TABLE, 'id')
+            ->left(TagModel::TABLE, 't', 'id', 'tht', 'tag_id')
+            ->asc(TaskModel::TABLE.'.id')
+            ->groupBy(TaskModel::TABLE.'.id')
+            ->findAll();
+    }
+
+    /**
      * Get all tasks for a given project and status
      *
      * @access public

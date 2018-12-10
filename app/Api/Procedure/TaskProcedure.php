@@ -42,6 +42,13 @@ class TaskProcedure extends BaseProcedure
         return $this->tasksApiFormatter->withTasks($tasks)->format();
     }
 
+    public function getAllTasksWithTags($project_id, $status_id = TaskModel::STATUS_OPEN)
+    {
+        ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getAllTasksWithTags', $project_id);
+        $tasks = $this->taskFinderModel->getAllWithTags($project_id, $status_id);
+        return $this->tasksApiFormatter->withTasks($tasks)->format();
+    }
+
     public function getOverdueTasks()
     {
         return $this->taskFinderModel->getOverdueTasks();
