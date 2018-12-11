@@ -34,7 +34,7 @@
                 </div>
                 <div class="table-list-details">
                     <?php foreach ($project['columns'] as $column): ?>
-                        <strong title="<?= t('Task count') ?>"><?= $column['nb_open_tasks'] ?></strong>
+                        <strong title="<?= t('Task count') ?>"><?= $column['nb_open_tasks']+$column['nb_closed_tasks'] ?></strong>
                         <small><?= $this->text->e($column['title']) ?></small>
                     <?php endforeach ?>
                 </div>
