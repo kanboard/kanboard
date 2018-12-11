@@ -83,7 +83,7 @@ class UserSessionTest extends Base
     public function testFilters()
     {
         $userSession = new UserSession($this->container);
-        $this->assertEquals('status:open', $userSession->getFilters(1));
+        $this->assertEquals('status:all', $userSession->getFilters(1));
 
         $_SESSION['user'] = array('filter' => 'status:open');
         $this->assertEquals('status:open', $userSession->getFilters(1));
