@@ -8,7 +8,7 @@
         <div class="input-addon">
             <?= $this->form->text('search', $filters, array(), array('placeholder="'.t('Filter').'"'), 'input-addon-field') ?>
             <div class="input-addon-item">
-                <?= $this->render('app/filters_helper', array('reset' => 'status:open', 'project' => $project)) ?>
+                <?= $this->render('app/filters_helper', array('reset' => 'status:all', 'project' => $project)) ?>
             </div>
 
             <?php if (isset($custom_filters_list) && ! empty($custom_filters_list)): ?>
