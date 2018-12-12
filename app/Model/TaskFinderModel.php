@@ -117,6 +117,7 @@ class TaskFinderModel extends Base
                 TaskModel::TABLE.'.recurrence_child',
                 TaskModel::TABLE.'.time_estimated',
                 TaskModel::TABLE.'.time_spent',
+                TaskModel::TABLE.'.reference',
                 UserModel::TABLE.'.username AS assignee_username',
                 UserModel::TABLE.'.name AS assignee_name',
                 UserModel::TABLE.'.email AS assignee_email',
