@@ -1383,4 +1383,13 @@ return array(
     'Choose the properties that you would like to change for the selected tasks.' => 'Choisissez les propriétés que vous souhaitez changer pour les tâches sélectionnées.',
     'Configure this project' => 'Configurer ce projet',
     'Start now' => 'Débuter maintenant',
+    '%s removed a file from the task #%d' => '%s a supprimé un fichier de la tâche #%d',
+    'Attachment removed from task #%d: %s' => 'Pièce jointe supprimée de la tâche #%d: %s',
+    'No color' => 'Aucune couleur',
+    'Attachment removed "%s"' => 'Pièce jointe « %s » supprimée',
+    '%s removed a file from the task %s' => '%s a supprimé un fichier de la tâche %s',
+    'Move the task to another swimlane when assigned to a user' => 'Déplaçer la tâche dans une autre swimlane lorsqu\'un utilisateur est assigné',
+    'Destination swimlane' => 'Swimlane de destination',
+    'Assign a category when the task is moved to a specific swimlane' => 'Assigner une catégorie lorsque la tâche est déplaçée dans une swimlane spécifique',
+    'Move the task to another swimlane when the category is changed' => 'Déplaçer la tâche dans une autre swimlane lorsque la catégorie est modifiée',
 );

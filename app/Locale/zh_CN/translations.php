@@ -1383,4 +1383,13 @@ return array(
     'Choose the properties that you would like to change for the selected tasks.' => '选择你想要批量编辑的任务属性。',
     'Configure this project' => '项目配置',
     'Start now' => '立即开始',
+    // '%s removed a file from the task #%d' => '',
+    // 'Attachment removed from task #%d: %s' => '',
+    // 'No color' => '',
+    // 'Attachment removed "%s"' => '',
+    // '%s removed a file from the task %s' => '',
+    // 'Move the task to another swimlane when assigned to a user' => '',
+    // 'Destination swimlane' => '',
+    // 'Assign a category when the task is moved to a specific swimlane' => '',
+    // 'Move the task to another swimlane when the category is changed' => '',
 );

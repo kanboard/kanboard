@@ -1383,4 +1383,13 @@ return array(
     'Choose the properties that you would like to change for the selected tasks.' => 'Escolher as propriedades que deseja mudar para as tarefas selecionadas.',
     'Configure this project' => 'Configurar este projeto',
     'Start now' => 'Iniciar agora',
+    // '%s removed a file from the task #%d' => '',
+    // 'Attachment removed from task #%d: %s' => '',
+    // 'No color' => '',
+    // 'Attachment removed "%s"' => '',
+    // '%s removed a file from the task %s' => '',
+    // 'Move the task to another swimlane when assigned to a user' => '',
+    // 'Destination swimlane' => '',
+    // 'Assign a category when the task is moved to a specific swimlane' => '',
+    // 'Move the task to another swimlane when the category is changed' => '',
 );
