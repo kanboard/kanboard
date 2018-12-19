@@ -19,15 +19,15 @@ class ColorModel extends Base
      * @var array
      */
     protected $default_colors = array(
-        'white' => array(
-            'name' => 'White',
-            'background' => '#FFFFFF',
-            'border' => '#2C2C2C',
-        ),
         'yellow' => array(
             'name' => 'Yellow',
             'background' => 'rgb(245, 247, 196)',
             'border' => 'rgb(223, 227, 45)',
+        ),        
+        'white' => array(
+            'name' => 'White',
+            'background' => '#FFFFFF',
+            'border' => '#2C2C2C',
         ),
         'blue' => array(
             'name' => 'Blue',
