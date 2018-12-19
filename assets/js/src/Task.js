@@ -11,7 +11,7 @@ Kanboard.Task.prototype.onPopoverOpened = function() {
     // Assign to me
     $(document).on("click", ".assign-me", function(e) {
         var currentId = $(this).data("current-id");
-        var dropdownId = "#" + $(this).data("target-id");
+        var dropdownId = "#modal-box #" + $(this).data("target-id");
 
         e.preventDefault();
 
