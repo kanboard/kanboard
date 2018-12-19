@@ -31,6 +31,9 @@ class SubtaskTaskConversionModel extends Base
             'time_estimated' => $subtask['time_estimated'],
             'time_spent' => $subtask['time_spent'],
             'owner_id' => $subtask['user_id'],
+            'swimlane_id' => $parent_task['swimlane_id'],
+            'priority' => $parent_task['priority'],
+            'column_id' => $parent_task['column_id'],
             'category_id' => $parent_task['category_id']
         ));
 
