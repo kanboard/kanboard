@@ -12,7 +12,7 @@
     <?= $this->form->textEditor('description', $values, $errors, array('tabindex' => 2)) ?>
 
     <?= $this->form->label(t('Color'), 'color_id') ?>
-    <?= $this->form->select('color_id', array('' => t('No color')) + $colors, $values, $errors, array(), 'color-picker') ?>
+    <?= $this->form->select('color_id', $colors, $values, $errors, array(), 'color-picker') ?>
 
     <?= $this->modal->submitButtons() ?>
 </form>
