@@ -11,8 +11,6 @@ class ColorModelTest extends Base
     {
         $colorModel = new ColorModel($this->container);
         $this->assertEquals('yellow', $colorModel->find('yellow'));
-        $this->assertEquals('yellow', $colorModel->find('Yellow'));
-        $this->assertEquals('dark_grey', $colorModel->find('Dark Grey'));
         $this->assertEquals('dark_grey', $colorModel->find('dark_grey'));
     }
 
