@@ -67,7 +67,7 @@ class ColorModelTest extends Base
         $colorModel = new ColorModel($this->container);
 
         $colors = $colorModel->getDefaultColors();
-        $this->assertCount(16, $colors);
+        $this->assertCount(17, $colors);
     }
 
     public function testGetBorderColor()
