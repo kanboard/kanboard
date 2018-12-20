@@ -53,7 +53,7 @@ integration-test-sqlite:
 	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml down
 
 sql:
-	@ pg_dump --schema-only --no-owner --no-privileges --quote-all-identifiers -n public --file app/Schema/Sql/postgres.sql kanboard
+	@ pg_dump -x -O --schema-only --no-owner --no-privileges --quote-all-identifiers -n public --file app/Schema/Sql/postgres.sql kanboard
 	@ pg_dump -d kanboard --column-inserts --data-only --table settings >> app/Schema/Sql/postgres.sql
 	@ pg_dump -d kanboard --column-inserts --data-only --table links >> app/Schema/Sql/postgres.sql
 
@@ -61,7 +61,7 @@ sql:
 	@ mysqldump -uroot --quote-names --no-create-info --skip-comments --no-set-names kanboard settings >> app/Schema/Sql/mysql.sql
 	@ mysqldump -uroot --quote-names --no-create-info --skip-comments --no-set-names kanboard links >> app/Schema/Sql/mysql.sql
 
-	@ php -r "echo 'INSERT INTO users (username, password, role) VALUES (\'admin\', \''.password_hash('admin', PASSWORD_DEFAULT).'\', \'app-admin\');';" | \
+	@ php -r "echo 'INSERT INTO users (username, password, role) VALUES (\'admin\', \''.password_hash('admin', PASSWORD_DEFAULT).'\', \'app-admin\');'.PHP_EOL;" | \
 	tee -a app/Schema/Sql/postgres.sql app/Schema/Sql/mysql.sql >/dev/null
 
 	@ let mysql_version=`echo 'select version from schema_version;' | mysql -N -uroot kanboard` ;\
