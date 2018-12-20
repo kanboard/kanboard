@@ -1,3 +1,26 @@
+Version 1.2.7 (December 19, 2018)
+---------------------------------
+
+* Write log entry on file removal
+* Auto link duplicated tasks
+* Auto link tasks duplicated to another project
+* Auto link tasks created from a subtask
+* Redirect to board view of the current task after duplication
+* Fix broken link to contributor page
+* Add automatic action for moving a task to a swimlane based on category change
+* Add automatic action to assign a category based on swimlane change
+* Add ordering comments by id along with creation date
+* Fix custom roles duplication (source and destination column_id)
+* Add locale en_GB
+* New automatic action: move the task to another swimlane when assigned
+* Disable php_uname() warning for restrictive environments
+* Add hook to board settings
+* Add method remove() to settings model
+* Add php7-bcmath to Docker image
+* Add sorting by reference in list view
+* Added priority, swimlane, and column values from parent task to task converted from subtask
+* Update translations
+
 Version 1.2.6 (October 10, 2018)
 --------------------------------
 
