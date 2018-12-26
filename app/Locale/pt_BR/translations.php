@@ -1387,7 +1387,7 @@ return array(
     'Attachment removed from task #%d: %s' => 'Anexo removido da tarefa #%d: %s',
     'No color' => 'Nenhuma cor',
     'Attachment removed "%s"' => 'Anexo removido "%s"',
-    '%s removed a file from the task %s' => '%s removeu um arquivo da tarefa %d',
+    '%s removed a file from the task %s' => '%s removeu um arquivo da tarefa %s',
     'Move the task to another swimlane when assigned to a user' => 'Mover a tarefa para uma outra raia quando esta está atribuída a um usuário',
     'Destination swimlane' => 'Raia de destino',
     'Assign a category when the task is moved to a specific swimlane' => 'Atribuir uma categoria quando a tarefa for movida para uma raia específica',
