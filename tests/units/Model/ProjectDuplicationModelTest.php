@@ -418,15 +418,15 @@ class ProjectDuplicationModelTest extends Base
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
 
-        $this->assertEquals(1, $userModel->create(array('username' => 'user1')));
-        $this->assertEquals(2, $userModel->create(array('username' => 'user2')));
-        $this->assertEquals(3, $userModel->create(array('username' => 'user3')));
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user3')));
 
         $this->assertEquals(1, $actionModel->create(array(
             'project_id' => 1,
             'event_name' => TaskModel::EVENT_CREATE_UPDATE,
             'action_name' => 'TaskAssignSpecificUser',
-            'params' => array('column_id' => 1, 'user_id' => 2),
+            'params' => array('column_id' => 1, 'user_id' => 3),
         )));
 
         $this->assertEquals(2, $actionModel->create(array(
@@ -443,12 +443,12 @@ class ProjectDuplicationModelTest extends Base
         $this->assertNotEmpty($actions);
         $this->assertEquals('TaskAssignSpecificUser', $actions[0]['action_name']);
         $this->assertNotEmpty($actions[0]['params']);
-        $this->assertEquals(1, $actions[0]['params']['column_id']);
-        $this->assertEquals(2, $actions[0]['params']['user_id']);
+        $this->assertEquals(5, $actions[0]['params']['column_id']);
+        $this->assertEquals(3, $actions[0]['params']['user_id']);
 
         $this->assertEquals('TaskAssignSpecificUser', $actions[1]['action_name']);
         $this->assertNotEmpty($actions[1]['params']);
-        $this->assertEquals(2, $actions[1]['params']['column_id']);
+        $this->assertEquals(6, $actions[1]['params']['column_id']);
         $this->assertEquals(0, $actions[1]['params']['user_id']);
     }
     
