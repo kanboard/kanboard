@@ -422,6 +422,10 @@ class ProjectDuplicationModelTest extends Base
         $this->assertEquals(3, $userModel->create(array('username' => 'user2')));
         $this->assertEquals(4, $userModel->create(array('username' => 'user3')));
 
+        $this->assertTrue($projectUserRoleModel->addUser(1, 2, Role::PROJECT_VIEWER));
+        $this->assertTrue($projectUserRoleModel->addUser(1, 3, Role::PROJECT_VIEWER));
+        $this->assertTrue($projectUserRoleModel->addUser(1, 4, Role::PROJECT_VIEWER));
+
         $this->assertEquals(1, $actionModel->create(array(
             'project_id' => 1,
             'event_name' => TaskModel::EVENT_CREATE_UPDATE,
