@@ -386,6 +386,13 @@ class ProjectDuplicationModelTest extends Base
             'params' => array('color_id' => 'blue', 'category_id' => 2),
         )));
 
+        $this->assertEquals(2, $actionModel->create(array(
+            'project_id' => 1,
+            'event_name' => TaskModel::EVENT_CREATE_UPDATE,
+            'action_name' => 'TaskAssignColorCategory',
+            'params' => array('color_id' => 'red', 'category_id' => 0),
+        )));
+ 
         $this->assertEquals(2, $projectDuplicationModel->duplicate(1));
 
         $actions = $actionModel->getAllByProject(2);
@@ -395,8 +402,61 @@ class ProjectDuplicationModelTest extends Base
         $this->assertNotEmpty($actions[0]['params']);
         $this->assertEquals('blue', $actions[0]['params']['color_id']);
         $this->assertEquals(5, $actions[0]['params']['category_id']);
+        
+        $this->assertEquals('TaskAssignColorCategory', $actions[1]['action_name']);
+        $this->assertNotEmpty($actions[1]['params']);
+        $this->assertEquals('red', $actions[1]['params']['color_id']);
+        $this->assertEquals(0, $actions[1]['params']['category_id']);
     }
 
+    public function testCloneProjectWithActionTaskAssignSpecificUser()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $actionModel = new ActionModel($this->container);
+        $userModel = new UserModel($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
+        $projectDuplicationModel = new ProjectDuplicationModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user3')));
+
+        $this->assertTrue($projectUserRoleModel->addUser(1, 2, Role::PROJECT_MANAGER));
+        $this->assertTrue($projectUserRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
+        $this->assertTrue($projectUserRoleModel->addUser(1, 4, Role::PROJECT_VIEWER));
+
+        $this->assertEquals(1, $actionModel->create(array(
+            'project_id' => 1,
+            'event_name' => TaskModel::EVENT_CREATE_UPDATE,
+            'action_name' => 'TaskAssignSpecificUser',
+            'params' => array('column_id' => 1, 'user_id' => 3),
+        )));
+
+        $this->assertEquals(2, $actionModel->create(array(
+            'project_id' => 1,
+            'event_name' => TaskModel::EVENT_CREATE_UPDATE,
+            'action_name' => 'TaskAssignSpecificUser',
+            'params' => array('column_id' => 2, 'user_id' => 0),
+        )));
+        
+        $this->assertEquals(2, $projectDuplicationModel->duplicate(1));
+
+        $actions = $actionModel->getAllByProject(2);
+
+        $this->assertNotEmpty($actions);
+        $this->assertEquals('TaskAssignSpecificUser', $actions[0]['action_name']);
+        $this->assertNotEmpty($actions[0]['params']);
+        $this->assertEquals(5, $actions[0]['params']['column_id']);
+        $this->assertEquals(3, $actions[0]['params']['user_id']);
+
+        $this->assertEquals('TaskAssignSpecificUser', $actions[1]['action_name']);
+        $this->assertNotEmpty($actions[1]['params']);
+        $this->assertEquals(6, $actions[1]['params']['column_id']);
+        $this->assertEquals(0, $actions[1]['params']['user_id']);
+    }
+    
     public function testCloneProjectWithSwimlanes()
     {
         $projectModel = new ProjectModel($this->container);
