@@ -62,7 +62,7 @@
             </li>
         <?php endif ?>
 
-        <?php if ($this->user->hasProjectAccess('ProjectEditController', 'show', $project['id'])): ?>
+        <?php if ($this->user->hasProjectAccess('ProjectViewController', 'show', $project['id'])): ?>
             <li>
                 <?= $this->url->icon('cog', t('Configure this project'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>
             </li>
