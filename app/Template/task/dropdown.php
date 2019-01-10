@@ -2,7 +2,7 @@
     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong>#<?= $task['id'] ?> <i class="fa fa-caret-down"></i></strong></a>
     <ul>
         <?php if ($this->projectRole->canUpdateTask($task)): ?>
-            <?php if (array_key_exists('owner_id', $task) && $task['owner_id'] != $this->user->getId()): ?>
+            <?php if ($this->projectRole->canChangeAssignee($task) && array_key_exists('owner_id', $task) && $task['owner_id'] != $this->user->getId()): ?>
             <li>
                 <?= $this->url->icon('hand-o-right', t('Assign to me'), 'TaskModificationController', 'assignToMe', ['task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => isset($redirect) ? $redirect : '']) ?>
             </li>

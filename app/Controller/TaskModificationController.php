@@ -22,6 +22,10 @@ class TaskModificationController extends BaseController
         if (! $this->helper->projectRole->canUpdateTask($task)) {
             throw new AccessForbiddenException(t('You are not allowed to update tasks assigned to someone else.'));
         }
+        
+        if (! $this->helper->projectRole->canChangeAssignee($task)) {
+            throw new AccessForbiddenException(t('You are not allowed to change the assignee.'));
+        }
 
         $this->taskModificationModel->update($values);
         $this->redirectAfterQuickAction($task);
