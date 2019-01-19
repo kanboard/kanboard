@@ -118,7 +118,7 @@ class TaskViewController extends BaseController
             'task' => $task,
             'project' => $this->projectModel->getById($task['project_id']),
             'subtask_paginator' => $subtask_paginator,
-            'tags' => $this->taskTagModel->getList($task['id']),
+            'tags' => $this->taskTagModel->getTagsByTask($task['id']),
         )));
     }
 
@@ -135,7 +135,7 @@ class TaskViewController extends BaseController
             'task' => $task,
             'project' => $this->projectModel->getById($task['project_id']),
             'transitions' => $this->transitionModel->getAllByTask($task['id']),
-            'tags' => $this->taskTagModel->getList($task['id']),
+            'tags' => $this->taskTagModel->getTagsByTask($task['id']),
         )));
     }
 }
