@@ -153,7 +153,8 @@ abstract class BaseController extends Base
         }
 
         if (! $this->userSession->isAdmin() && $this->userSession->getId() != $user['id']) {
-            throw new AccessForbiddenException();
+            // Always returns a 404 otherwise people might guess which user exist.
+            throw new PageNotFoundException();
         }
 
         return $user;
