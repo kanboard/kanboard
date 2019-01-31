@@ -169,10 +169,16 @@ class Paginator
     public function executeQuery()
     {
         if ($this->query !== null) {
+
             $this->query
                 ->offset($this->offset)
-                ->limit($this->limit)
-                ->orderBy($this->order, $this->direction);
+                ->limit($this->limit);
+
+            if (preg_match('/^[a-zA-Z0-9._]+$/', $this->order)) {
+                $this->query->orderBy($this->order, $this->direction);
+            } else {
+                $this->order = '';
+            }
 
             if ($this->formatter !== null) {
                 return $this->formatter->withQuery($this->query)->format();
