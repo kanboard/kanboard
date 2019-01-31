@@ -177,6 +177,7 @@ class TwoFactorController extends UserViewController
 
         $this->response->html($this->helper->layout->app('twofactor/check', array(
             'title' => t('Check two factor authentication code'),
+            'no_layout' => true,
         )));
     }
 
