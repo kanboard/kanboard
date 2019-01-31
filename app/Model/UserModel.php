@@ -29,6 +29,15 @@ class UserModel extends Base
      */
     const EVERYBODY_ID = -1;
 
+    public function isValidSession($userID, $sessionRole)
+    {
+        return $this->db->table(self::TABLE)
+            ->eq('id', $userID)
+            ->eq('is_active', 1)
+            ->eq('role', $sessionRole)
+            ->exists();
+    }
+
     /**
      * Return true if the user exists
      *

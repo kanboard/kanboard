@@ -20,7 +20,8 @@ class AuthenticationMiddleware extends BaseMiddleware
     public function execute()
     {
         if (! $this->authenticationManager->checkCurrentSession()) {
-            throw AccessForbiddenException::getInstance()->withoutLayout();
+            $this->response->redirect($this->helper->url->to('AuthController', 'login'));
+            return;
         }
 
         if (! $this->isPublicAccess()) {
