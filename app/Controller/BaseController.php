@@ -33,6 +33,13 @@ abstract class BaseController extends Base
         }
     }
 
+    protected function checkCSRFForm()
+    {
+        if (! $this->token->validateCSRFToken($this->request->getRawValue('csrf_token'))) {
+            throw new AccessForbiddenException();
+        }
+    }
+
     /**
      * Check webhook token
      *
@@ -305,7 +312,7 @@ abstract class BaseController extends Base
 
         return $filter;
     }
-    
+
     /**
      * Redirect the user after the authentication
      *

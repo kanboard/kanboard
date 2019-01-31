@@ -119,6 +119,7 @@ class TwoFactorController extends UserViewController
      */
     public function deactivate()
     {
+        $this->checkCSRFForm();
         $user = $this->getUser();
         $this->checkCurrentUser($user);
 
