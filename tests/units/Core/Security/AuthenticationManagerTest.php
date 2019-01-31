@@ -56,7 +56,7 @@ class AuthenticationManagerTest extends Base
         $authManager = new AuthenticationManager($this->container);
         $authManager->register(new DatabaseAuth($this->container));
 
-        $_SESSION['user'] = array('id' => 1, 'username' => 'test');
+        $_SESSION['user'] = array('id' => 1, 'username' => 'test', 'role' => 'app-admin');
 
         $this->assertTrue($this->container['userSession']->isLogged());
         $this->assertTrue($authManager->checkCurrentSession());
@@ -67,7 +67,7 @@ class AuthenticationManagerTest extends Base
         $authManager = new AuthenticationManager($this->container);
         $authManager->register(new DatabaseAuth($this->container));
 
-        $_SESSION['user'] = array('id' => 42, 'username' => 'test');
+        $_SESSION['user'] = array('id' => 42, 'username' => 'test', 'role' => 'app-admin');
 
         $this->assertTrue($this->container['userSession']->isLogged());
         $this->assertFalse($authManager->checkCurrentSession());

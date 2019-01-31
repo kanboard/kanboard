@@ -46,17 +46,24 @@ class DatabaseAuthTest extends Base
 
         $this->assertFalse($provider->isValidSession());
 
-        $this->assertEquals(2, $userModel->create(array('username' => 'foobar')));
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2')));
 
-        $_SESSION['user'] = array('id' => 2);
+        $_SESSION['user'] = array('id' => 2, 'role' => 'app-user');
         $this->assertTrue($provider->isValidSession());
 
-        $_SESSION['user'] = array('id' => 3);
+        $_SESSION['user'] = array('id' => 4, 'role' => 'app-user');
         $this->assertFalse($provider->isValidSession());
 
         $this->assertTrue($userModel->disable(2));
 
-        $_SESSION['user'] = array('id' => 2);
+        $_SESSION['user'] = array('id' => 2, 'role' => 'app-user');
+        $this->assertFalse($provider->isValidSession());
+
+        $_SESSION['user'] = array('id' => 3, 'role' => 'app-user');
+        $this->assertTrue($provider->isValidSession());
+
+        $_SESSION['user'] = array('id' => 3, 'role' => 'app-admin');
         $this->assertFalse($provider->isValidSession());
     }
 }
