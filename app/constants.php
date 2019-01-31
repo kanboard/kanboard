@@ -21,7 +21,7 @@ defined('CACHE_DIR') or define('CACHE_DIR', DATA_DIR.DIRECTORY_SEPARATOR.'cache'
 // Plugins settings
 defined('PLUGINS_DIR') or define('PLUGINS_DIR', ROOT_DIR.DIRECTORY_SEPARATOR.'plugins');
 defined('PLUGIN_API_URL') or define('PLUGIN_API_URL', 'https://kanboard.org/plugins.json');
-defined('PLUGIN_INSTALLER') or define('PLUGIN_INSTALLER', true);
+defined('PLUGIN_INSTALLER') or define('PLUGIN_INSTALLER', false); // Disabled by default for security reason
 
 // Enable/disable debug
 defined('DEBUG') or define('DEBUG', strtolower(getenv('DEBUG')) === 'true');
