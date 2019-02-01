@@ -31,6 +31,11 @@ class AuthenticationManager extends Base
      */
     private $providers = array();
 
+    public function reset()
+    {
+        $this->providers = [];
+    }
+
     /**
      * Register a new authentication provider
      *

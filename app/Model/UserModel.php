@@ -38,6 +38,15 @@ class UserModel extends Base
             ->exists();
     }
 
+    public function has2FA($username)
+    {
+        return $this->db->table(self::TABLE)
+            ->eq('username', $username)
+            ->eq('is_active', 1)
+            ->eq('twofactor_activated', 1)
+            ->exists();
+    }
+
     /**
      * Return true if the user exists
      *

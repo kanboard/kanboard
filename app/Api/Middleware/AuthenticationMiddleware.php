@@ -5,6 +5,7 @@ namespace Kanboard\Api\Middleware;
 use JsonRPC\Exception\AccessDeniedException;
 use JsonRPC\Exception\AuthenticationFailureException;
 use JsonRPC\MiddlewareInterface;
+use Kanboard\Auth\ApiAccessTokenAuth;
 use Kanboard\Core\Base;
 
 /**
@@ -48,9 +49,21 @@ class AuthenticationMiddleware extends Base implements MiddlewareInterface
      */
     private function isUserAuthenticated($username, $password)
     {
-        return $username !== 'jsonrpc' &&
-        ! $this->userLockingModel->isLocked($username) &&
-        $this->authenticationManager->passwordAuthentication($username, $password);
+        if ($username === 'jsonrpc') {
+            return false;
+        }
+
+        if ($this->userLockingModel->isLocked($username)) {
+            return false;
+        }
+
+        if ($this->userModel->has2FA($username)) {
+            $this->logger->info('This API user ('.$username.') as 2FA enabled: only API keys are authorized');
+            $this->authenticationManager->reset();
+            $this->authenticationManager->register(new ApiAccessTokenAuth($this->container));
+        }
+
+        return $this->authenticationManager->passwordAuthentication($username, $password);
     }
 
     /**
