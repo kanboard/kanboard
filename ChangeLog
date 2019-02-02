@@ -1,3 +1,33 @@
+Version 1.2.8 (February 2, 2019)
+--------------------------------
+
+Breaking Changes:
+
+* Authorize only API tokens when 2FA is enabled (no user password)
+* Disable by default plugin installer for security reasons:
+    - There is no code review or any approval process to submit a plugin.
+    - This is up to the Kanboard instance owner to validate if a plugin is legit.
+
+Fixes and Improvements:
+
+* Limit avatar image size
+* Avoid CSRF in users CSV import
+* Avoid XSS in pagination sorting
+* Do not show projects dropdown when prompting the 2FA code
+* Always returns a 404 instead of 403 to avoid people discovering users
+* Check if user role has changed while the session is open
+* Add missing CSRF check in TwoFactorController::deactivate()
+* Hide edit button when user cannot edit task
+* Fix permission check before "Assign to me"
+* Fix permission check before showing project options
+* Fix assignable users on a group with a custom role
+* Fix import of automatic actions when parameters are "unassigned" or "no category"
+* Update license year
+* Update Docker image to Alpine 3.9
+* Update translations
+* Fix PHP error in task views (tag colors)
+* Limit assignee drop-down selector scope
+
 Version 1.2.7 (December 19, 2018)
 ---------------------------------
 
