@@ -1392,4 +1392,10 @@ return array(
     // 'Destination swimlane' => '',
     // 'Assign a category when the task is moved to a specific swimlane' => '',
     // 'Move the task to another swimlane when the category is changed' => '',
+    // 'Reorder this column by priority (ASC)' => '',
+    // 'Reorder this column by priority (DESC)' => '',
+    // 'Reorder this column by assignee and priority (ASC)' => '',
+    // 'Reorder this column by assignee and priority (DESC)' => '',
+    // 'Reorder this column by assignee (A-Z)' => '',
+    // 'Reorder this column by assignee (Z-A)' => '',
 );

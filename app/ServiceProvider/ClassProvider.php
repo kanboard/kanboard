@@ -85,6 +85,7 @@ class ClassProvider implements ServiceProviderInterface
             'TaskLinkModel',
             'TaskModificationModel',
             'TaskPositionModel',
+            'TaskReorderModel',
             'TaskStatusModel',
             'TaskTagModel',
             'TaskMetadataModel',

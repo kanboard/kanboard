@@ -1392,4 +1392,10 @@ return array(
     'Destination swimlane' => 'Swimlane de destination',
     'Assign a category when the task is moved to a specific swimlane' => 'Assigner une catégorie lorsque la tâche est déplaçée dans une swimlane spécifique',
     'Move the task to another swimlane when the category is changed' => 'Déplaçer la tâche dans une autre swimlane lorsque la catégorie est modifiée',
+    'Reorder this column by priority (ASC)' => 'Réorganiser cette colonne par priorité (ASC)',
+    'Reorder this column by priority (DESC)' => 'Réorganiser cette colonne par priorité (DESC)',
+    'Reorder this column by assignee and priority (ASC)' => 'Réorganiser cette colonne par assigné et par priorité (ASC)',
+    'Reorder this column by assignee and priority (DESC)' => 'Réorganiser cette colonne par assigné et par priorité (DESC)',
+    'Reorder this column by assignee (A-Z)' => 'Réorganiser cette colonne par assigné (A-Z)',
+    'Reorder this column by assignee (Z-A)' => 'Réorganiser cette colonne par assigné (Z-A)',
 );

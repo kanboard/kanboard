@@ -142,6 +142,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskLinkModel                           $taskLinkModel
  * @property \Kanboard\Model\TaskModificationModel                   $taskModificationModel
  * @property \Kanboard\Model\TaskPositionModel                       $taskPositionModel
+ * @property \Kanboard\Model\TaskReorderModel                        $taskReorderModel
  * @property \Kanboard\Model\TaskStatusModel                         $taskStatusModel
  * @property \Kanboard\Model\TaskTagModel                            $taskTagModel
  * @property \Kanboard\Model\TaskMetadataModel                       $taskMetadataModel

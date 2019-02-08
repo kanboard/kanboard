@@ -1392,4 +1392,10 @@ return array(
     'Destination swimlane' => 'Mål spor',
     'Assign a category when the task is moved to a specific swimlane' => 'Tildele kategori når opgave flyttes til anført spor',
     'Move the task to another swimlane when the category is changed' => 'Flytte opgave til andet spor når kategori ændres',
+    // 'Reorder this column by priority (ASC)' => '',
+    // 'Reorder this column by priority (DESC)' => '',
+    // 'Reorder this column by assignee and priority (ASC)' => '',
+    // 'Reorder this column by assignee and priority (DESC)' => '',
+    // 'Reorder this column by assignee (A-Z)' => '',
+    // 'Reorder this column by assignee (Z-A)' => '',
 );

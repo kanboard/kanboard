@@ -1392,4 +1392,10 @@ return array(
     'Destination swimlane' => '目标泳道',
     'Assign a category when the task is moved to a specific swimlane' => '将移动到指定泳道的任务设定分类',
     'Move the task to another swimlane when the category is changed' => '当分类改变时将任务移动到另一个泳道',
+    // 'Reorder this column by priority (ASC)' => '',
+    // 'Reorder this column by priority (DESC)' => '',
+    // 'Reorder this column by assignee and priority (ASC)' => '',
+    // 'Reorder this column by assignee and priority (DESC)' => '',
+    // 'Reorder this column by assignee (A-Z)' => '',
+    // 'Reorder this column by assignee (Z-A)' => '',
 );

@@ -1392,4 +1392,10 @@ return array(
     'Destination swimlane' => 'Raia de destino',
     'Assign a category when the task is moved to a specific swimlane' => 'Atribuir uma categoria quando a tarefa for movida para uma raia específica',
     'Move the task to another swimlane when the category is changed' => 'Mover a tarefa para outra raia quando a categoria é alterada',
+    // 'Reorder this column by priority (ASC)' => '',
+    // 'Reorder this column by priority (DESC)' => '',
+    // 'Reorder this column by assignee and priority (ASC)' => '',
+    // 'Reorder this column by assignee and priority (DESC)' => '',
+    // 'Reorder this column by assignee (A-Z)' => '',
+    // 'Reorder this column by assignee (Z-A)' => '',
 );
