@@ -150,6 +150,14 @@ class TaskEventBuilder extends BaseEventBuilder
                 return e('%s closed the task #%d', $author, $eventData['task']['id']);
             case TaskModel::EVENT_OPEN:
                 return e('%s opened the task #%d', $author, $eventData['task']['id']);
+            case TaskModel::EVENT_MOVE_PROJECT:
+                return e(
+                    '%s moved the task #%d "%s" to the project "%s"',
+                    $author,
+                    $eventData['task']['id'],
+                    $eventData['task']['title'],
+                    $eventData['task']['project_name']
+                );
             case TaskModel::EVENT_MOVE_COLUMN:
                 return e(
                     '%s moved the task #%d to the column "%s"',
@@ -203,6 +211,8 @@ class TaskEventBuilder extends BaseEventBuilder
                 return e('Task #%d closed', $eventData['task']['id']);
             case TaskModel::EVENT_OPEN:
                 return e('Task #%d opened', $eventData['task']['id']);
+            case TaskModel::EVENT_MOVE_PROJECT:
+                return e('Task #%d "%s" has been moved to the project "%s"', $eventData['task']['id'], $eventData['task']['title'], $eventData['task']['project_name']);
             case TaskModel::EVENT_MOVE_COLUMN:
                 return e('Column changed for task #%d', $eventData['task']['id']);
             case TaskModel::EVENT_MOVE_POSITION:
