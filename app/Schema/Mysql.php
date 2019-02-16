@@ -1069,17 +1069,32 @@ function version_46(PDO $pdo)
     $pdo->exec("CREATE UNIQUE INDEX task_has_links_unique ON task_has_links(link_id, task_id, opposite_task_id)");
 
     $rq = $pdo->prepare('INSERT INTO links (label, opposite_id) VALUES (?, ?)');
+    
+    # ID cannot be known at time of record creation so we have to update it after the fact
+    # On MariaDB clusters auto-increment size is normally != 1, so relying on increments of 1 would break
+    $arq = $pdo->prepare('UPDATE links SET opposite_id=? WHERE label=?');
+
     $rq->execute(array('relates to', 0));
-    $rq->execute(array('blocks', 3));
-    $rq->execute(array('is blocked by', 2));
-    $rq->execute(array('duplicates', 5));
-    $rq->execute(array('is duplicated by', 4));
-    $rq->execute(array('is a child of', 7));
-    $rq->execute(array('is a parent of', 6));
-    $rq->execute(array('targets milestone', 9));
-    $rq->execute(array('is a milestone of', 8));
-    $rq->execute(array('fixes', 11));
-    $rq->execute(array('is fixed by', 10));
+
+    $rq->execute(array('blocks', 0));
+    $rq->execute(array('is blocked by', get_last_insert_id($pdo)));
+    $arq->execute(array(get_last_insert_id($pdo), 'blocks'));
+
+    $rq->execute(array('duplicates', 0));
+    $rq->execute(array('is duplicated by', get_last_insert_id($pdo)));
+    $arq->execute(array(get_last_insert_id($pdo), 'duplicates'));
+
+    $rq->execute(array('is a parent of', 0));
+    $rq->execute(array('is a child of', get_last_insert_id($pdo)));
+    $arq->execute(array(get_last_insert_id($pdo), 'is a parent of'));
+
+    $rq->execute(array('is a milestone of', 0));
+    $rq->execute(array('targets milestone', get_last_insert_id($pdo)));
+    $arq->execute(array(get_last_insert_id($pdo), 'is a milestone of'));
+
+    $rq->execute(array('is fixed by', 0));
+    $rq->execute(array('fixes', get_last_insert_id($pdo)));
+    $arq->execute(array(get_last_insert_id($pdo), 'is fixed by'));
 }
 
 function version_45(PDO $pdo)
