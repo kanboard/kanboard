@@ -1,7 +1,5 @@
-<section class="accordion-section <?= empty($subtasks) ? 'accordion-collapsed' : '' ?>">
-    <div class="accordion-title">
-        <h3><a href="#" class="fa accordion-toggle"></a> <?= t('Sub-Tasks') ?></h3>
-    </div>
+<details class="accordion-section" <?= empty($subtasks) ? '' : 'open' ?>>
+    <summary class="accordion-title"><?= t('Sub-Tasks') ?></summary>
     <div class="accordion-content">
         <?= $this->render('subtask/table', array(
             'subtasks' => $subtasks,
@@ -9,4 +7,4 @@
             'editable' => $editable
         )) ?>
     </div>
-</section>
+</details>

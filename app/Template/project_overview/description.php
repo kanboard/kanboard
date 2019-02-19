@@ -1,7 +1,5 @@
-<section class="accordion-section <?= empty($project['description']) ? 'accordion-collapsed' : '' ?>">
-    <div class="accordion-title">
-        <h3><a href="#" class="fa accordion-toggle"></a> <?= t('Description') ?></h3>
-    </div>
+<details class="accordion-section" <?= empty($project['description']) ? '' : 'open' ?>>
+    <summary class="accordion-title"><?= t('Description') ?></summary>
     <div class="accordion-content">
         <?php if ($this->user->hasProjectAccess('ProjectEditController', 'show', $project['id'])): ?>
             <div class="buttons-header">
@@ -12,4 +10,4 @@
             <?= $this->text->markdown($project['description']) ?>
         </article>
     </div>
-</section>
+</details>

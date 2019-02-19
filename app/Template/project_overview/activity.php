@@ -1,8 +1,6 @@
-<section class="accordion-section <?= empty($events) ? 'accordion-collapsed' : '' ?>">
-    <div class="accordion-title">
-        <h3><a href="#" class="fa accordion-toggle"></a> <?= t('Last activity') ?></h3>
-    </div>
+<details class="accordion-section"  <?= empty($events) ? '' : 'open' ?>>
+    <summary class="accordion-title"><?= t('Last activity') ?></summary>
     <div class="accordion-content">
         <?= $this->render('event/events', array('events' => $events)) ?>
     </div>
-</section>
+</details>

@@ -1,7 +1,5 @@
-<section class="accordion-section">
-    <div class="accordion-title">
-        <h3><a href="#" class="fa accordion-toggle"></a> <?= t('Information') ?></h3>
-    </div>
+<details class="accordion-section" open>
+    <summary class="accordion-title"><?= t('Information') ?></summary>
     <div class="accordion-content">
         <div class="panel">
             <ul>
@@ -36,4 +34,4 @@
             </ul>
         </div>
     </div>
-</section>
+</details>

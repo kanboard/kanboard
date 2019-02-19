@@ -1,7 +1,5 @@
-<section class="accordion-section <?= empty($comments) ? 'accordion-collapsed' : '' ?>">
-    <div class="accordion-title">
-        <h3><a href="#" class="fa accordion-toggle"></a> <?= t('Comments') ?></h3>
-    </div>
+<details class="accordion-section" <?= empty($comments) ? '' : 'open' ?>>
+    <summary class="accordion-title"><?= t('Comments') ?></summary>
     <div class="accordion-content comments" id="comments">
         <?php if (!isset($is_public) || !$is_public): ?>
             <div class="comment-sorting">
@@ -35,4 +33,4 @@
             )) ?>
         <?php endif ?>
     </div>
-</section>
+</details>
