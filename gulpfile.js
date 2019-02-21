@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var bower = require('gulp-bower');
 var uglify = require('gulp-uglify');
 var sass = require('gulp-sass');
 
@@ -21,32 +20,25 @@ var src = {
 
 var vendor = {
     css: [
-        'bower_components/jquery-ui/themes/base/jquery-ui.min.css',
-        'bower_components/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.min.css',
-        'bower_components/select2/dist/css/select2.min.css',
-        'bower_components/font-awesome/css/font-awesome.min.css',
-        'bower_components/c3/c3.min.css'
+        'assets/vendor/jquery-ui/jquery-ui.min.css',
+        'assets/vendor/jqueryui-timepicker-addon/jquery-ui-timepicker-addon.min.css',
+        'assets/vendor/select2/css/select2.min.css',
+        'assets/vendor/font-awesome/css/font-awesome.min.css',
+        'assets/vendor/c3/c3.min.css'
     ],
     js: [
-        'bower_components/jquery/dist/jquery.min.js',
-        'bower_components/jquery-ui/jquery-ui.min.js',
-        'bower_components/jquery-ui/ui/minified/core.min.js',
-        'bower_components/jquery-ui/ui/minified/autocomplete.min.js',
-        'bower_components/jquery-ui/ui/minified/datepicker.min.js',
-        'bower_components/jquery-ui/ui/minified/i18n/*.js',
-        'bower_components/jquery-ui/ui/minified/draggable.min.js',
-        'bower_components/jquery-ui/ui/minified/droppable.min.js',
-        'bower_components/jquery-ui/ui/minified/resizable.min.js',
-        'bower_components/jquery-ui/ui/minified/sortable.min.js',
-        'bower_components/jquery-ui/ui/minified/i18n/datepicker-*.min.js',
-        'bower_components/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.min.js',
-        'bower_components/jqueryui-timepicker-addon/dist/i18n/jquery-ui-timepicker-addon-i18n.min.js',
-        'bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.min.js',
-        'bower_components/select2/dist/js/select2.min.js',
-        'bower_components/d3/d3.min.js',
-        'bower_components/c3/c3.min.js',
-        'bower_components/isMobile/isMobile.min.js',
-        'bower_components/marked/marked.min.js'
+        'assets/vendor/jquery/jquery-3.3.1.min.js',
+        'assets/vendor/jquery-ui/jquery-ui.min.js',
+        'assets/vendor/jquery-ui/i18n/datepicker-*.js',
+        'assets/vendor/jqueryui-timepicker-addon/jquery-ui-timepicker-addon.min.js',
+        'assets/vendor/jqueryui-timepicker-addon/i18n/jquery-ui-timepicker-addon-i18n.min.js',
+        'assets/vendor/jqueryui-touch-punch/jquery.ui.touch-punch.min.js',
+        'assets/vendor/select2/js/select2.min.js',
+        'assets/vendor/select2/js/i18n/*.js',
+        'assets/vendor/d3/d3.min.js',
+        'assets/vendor/c3/c3.min.js',
+        'assets/vendor/isMobile/isMobile.min.js',
+        'assets/vendor/marked/marked.min.js'
     ]
 };
 
@@ -56,10 +48,6 @@ var dist = {
     js: 'assets/js/',
     img: 'assets/img/'
 };
-
-gulp.task('bower', function() {
-    return bower();
-});
 
 gulp.task('vendor', function() {
     gulp.src(vendor.js)
@@ -72,10 +60,10 @@ gulp.task('vendor', function() {
         .pipe(gulp.dest(dist.css))
     ;
 
-    gulp.src('bower_components/font-awesome/fonts/*')
+    gulp.src('assets/vendor/font-awesome/fonts/*')
         .pipe(gulp.dest(dist.fonts));
 
-    gulp.src('bower_components/jquery-ui/themes/base/images/*')
+    gulp.src('assets/vendor/jquery-ui/images/*')
         .pipe(gulp.dest(dist.css + 'images/'));
 });
 
@@ -101,4 +89,4 @@ gulp.task('css:print', function() {
         .pipe(gulp.dest(dist.css));
 });
 
-gulp.task('default', ['bower', 'vendor', 'js', 'css', 'css:print']);
+gulp.task('default', ['vendor', 'js', 'css', 'css:print']);

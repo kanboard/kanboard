@@ -1,9 +1,7 @@
 {
   "name": "kanboard",
   "devDependencies": {
-    "bower": "^1.8.0",
     "gulp": "^3.9.1",
-    "gulp-bower": "^0.0.13",
     "gulp-cli": "^1.2.2",
     "gulp-concat": "^2.6.1",
     "gulp-sass": "^3.0.0",

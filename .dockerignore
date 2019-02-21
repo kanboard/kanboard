@@ -11,10 +11,10 @@ Makefile
 *.md
 *.sh
 app.json
-bower.json
 package.json
 Vagrantfile
 web.config
-bower_components
 node_modules
 hooks
+assets/sass
+assets/vendor

@@ -22,4 +22,3 @@ data/config.php
 /config.php
 !docker/var/wwww/app/config.php
 node_modules
-bower_components
