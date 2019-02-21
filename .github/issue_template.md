@@ -1,31 +1,3 @@
-This issue is:
+This issue tracker is **only** for bug report. Use the forum for everything else: https://kanboard.discourse.group/
 
-- [ ] Bug report
-- [ ] Feature request
-- [ ] Improvement
-
-- Please, read the [Frequently Asked Questions](https://docs.kanboard.org/en/latest/developer_guide/faq.html).
-- Ask questions on the [Forum](https://kanboard.discourse.group/).
-
-### Actual behaviour
-
-
-### Expected behaviour
-
-
-### Steps to reproduce
-
-
-### Screenshots
-
-
-### Logs
-
-
-### Configuration
-
-- Kanboard version:
-- Database type and version:
-- PHP version:
-- OS:
-- Browser:
+Your issue will be automatically closed by a bot if you don't follow this directive.
