@@ -17,15 +17,10 @@ RUN apk update && \
     rm -rf /var/www/localhost && \
     rm -f /etc/php7/php-fpm.d/www.conf
 
-RUN cd /tmp \
-    && curl -sL -o kb.zip https://github.com/kanboard/kanboard/archive/$VERSION.zip \
-    && unzip -qq kb.zip \
-    && cd kanboard-* \
-    && cp -R . /var/www/app \
-    && cd /tmp \
-    && rm -rf /tmp/kanboard-* /tmp/*.zip
-
+ADD . /var/www/app
 ADD docker/ /
+
+RUN rm -rf /var/www/app/docker && echo $VERSION > /version.txt
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD []

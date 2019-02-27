@@ -166,8 +166,6 @@ function array_column_sum(array &$input, $column)
  */
 function build_app_version($ref, $commit_hash)
 {
-    $version = 'master';
-
     if ($ref !== '$Format:%d$') {
         $tag = preg_replace('/\s*\(.*tag:\sv([^,]+).*\)/i', '\1', $ref);
 
@@ -177,10 +175,12 @@ function build_app_version($ref, $commit_hash)
     }
 
     if ($commit_hash !== '$Format:%H$') {
-        $version .= '.'.$commit_hash;
+        return 'master.'.$commit_hash;
+    } else if (file_exists('/version.txt')) {
+        return file_get_contents('/version.txt');
     }
 
-    return $version;
+    return 'master.unknown_revision';
 }
 
 /**

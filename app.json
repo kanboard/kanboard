@@ -1,8 +1,0 @@
-{
-  "name": "Kanboard",
-  "description": "Kanboard is a simple visual task board",
-  "repository": "https://github.com/kanboard/kanboard",
-  "logo": "https://kanboard.org/assets/img/icon.svg",
-  "keywords": ["kanboard", "kanban", "php", "agile"],
-  "addons": ["heroku-postgresql:hobby-dev"]
-}
