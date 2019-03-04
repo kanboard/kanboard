@@ -512,7 +512,7 @@ return array(
     'Open board switcher' => 'ボード切り替えを開く',
     'Application' => 'アプリケーション',
     'Compact view' => 'コンパクトビュー',
-    'Horizontal scrolling' => '縦スクロール',
+    'Horizontal scrolling' => '横スクロール',
     'Compact/wide view' => 'コンパクト／ワイドビュー',
     'Currency' => '通貨',
     'Private project' => 'プライベートプロジェクト',
