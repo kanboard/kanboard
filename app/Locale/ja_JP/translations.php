@@ -429,7 +429,7 @@ return array(
     'Add a new swimlane' => '新しいスイムレーン',
     'Default swimlane' => '既定スイムレーン',
     'Do you really want to remove this swimlane: "%s"?' => 'スイムレーン「%s」を削除しますか？',
-    'Inactive swimlanes' => 'インタラクティブなスイムレーン',
+    'Inactive swimlanes' => '無効なスイムレーン',
     'Remove a swimlane' => 'スイムレーンの削除',
     'Swimlane modification for the project "%s"' => '「%s」に対するスイムレーン変更',
     'Swimlane removed successfully.' => 'スイムレーンを削除しました',
