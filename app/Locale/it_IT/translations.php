@@ -1217,7 +1217,7 @@ return array(
     'Profile' => 'Profilo',
     'Application role' => 'Ruolo applicativo',
     '%d invitations were sent.' => 'Sono stati spediti %d inviti.',
-    '%d invitation was sent.' => 'E\' stato inviato un invito.',
+    '%d invitation was sent.' => 'E\' stato spedito %d invito.',
     'Unable to create this user.' => 'Non è stato possibile creare questo utente.',
     'Kanboard Invitation' => 'Invito a Kanboard',
     'Visible on dashboard' => 'Visibile sulla dashboard',
