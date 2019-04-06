@@ -1398,4 +1398,6 @@ return array(
     'Reorder this column by assignee and priority (DESC)' => 'Oszlop átrendezése felelős és prioritás szerint (csökkenő)',
     'Reorder this column by assignee (A-Z)' => 'Oszlop átrendezése felelős szerint (A-Z)',
     'Reorder this column by assignee (Z-A)' => 'Oszlop átrendezése felelős szerint (Z-A)',
+    // '%s moved the task #%d "%s" to the project "%s"' => '',
+    // 'Task #%d "%s" has been moved to the project "%s"' => '',
 );

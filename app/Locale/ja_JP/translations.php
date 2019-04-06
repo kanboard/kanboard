@@ -1398,4 +1398,6 @@ return array(
     'Reorder this column by assignee and priority (DESC)' => '担当者と優先度で並び替える(降順)',
     'Reorder this column by assignee (A-Z)' => '担当者で並び替える(A-Z)',
     'Reorder this column by assignee (Z-A)' => '担当者で並び替える(Z-A)',
+    // '%s moved the task #%d "%s" to the project "%s"' => '',
+    // 'Task #%d "%s" has been moved to the project "%s"' => '',
 );
