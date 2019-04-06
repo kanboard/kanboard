@@ -1398,4 +1398,6 @@ return array(
     'Reorder this column by assignee and priority (DESC)' => 'Zoradiť stĺpec podľa pridelenia a priority (ZOST)',
     'Reorder this column by assignee (A-Z)' => 'Zoradiť stĺpec podľa pridelenia (A-Z)',
     'Reorder this column by assignee (Z-A)' => 'Zoradiť stĺpec podľa pridelenia (Z-A)',
+    // '%s moved the task #%d "%s" to the project "%s"' => '',
+    // 'Task #%d "%s" has been moved to the project "%s"' => '',
 );

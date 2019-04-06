@@ -1398,4 +1398,6 @@ return array(
     'Reorder this column by assignee and priority (DESC)' => 'Ordina questa colonna per assegnatario e per priorità (DESC)',
     'Reorder this column by assignee (A-Z)' => 'Ordina questa colonna per assegnatario (ASC)',
     'Reorder this column by assignee (Z-A)' => 'Ordina questa colonna per assegnatario (DESC)',
+    // '%s moved the task #%d "%s" to the project "%s"' => '',
+    // 'Task #%d "%s" has been moved to the project "%s"' => '',
 );
