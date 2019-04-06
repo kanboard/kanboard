@@ -1,3 +1,19 @@
+Version 1.2.9 (April 5, 2019)
+-----------------------------
+
+* Add Slovak translation
+* Update translations
+* Changes search by reference to case insentive
+* Fix postgres explicit schema name usage
+* Simplify local Docker image build
+* Show a 404 when accessing data folder from URL (Docker Image)
+* Clarify the comment about MAIL_SMTP_ENCRYPTION
+* Remove dependency on Bower
+* Replaces accordion Javascript component by <details> HTML element
+* Fix MySQL migration when using increment values different from 1
+* Add missing webhook event: task.move.project
+* Add new actions to reorder tasks by column
+
 Version 1.2.8 (February 2, 2019)
 --------------------------------
 
