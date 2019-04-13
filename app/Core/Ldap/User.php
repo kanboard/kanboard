@@ -88,16 +88,34 @@ class User
      * @param  string  $username
      * @return string[]
      */
+    protected function getGroupsRecursive(Entry $entry, $member, &$groupsAll)
+    {
+
+        $groups = $this->group->find(sprintf($this->getGroupUserFilter(), $member));
+
+        foreach ($groups as $group) {
+            $groupId = $group->getExternalId();
+
+            if (!isset($groupsAll[$groupId])) {
+                $groupsAll[$groupId] = $member;
+                $this->getGroupsRecursive($entry, $groupId, $groupsAll);
+            }
+        }
+    }
+
     protected function getGroups(Entry $entry, $username)
     {
         $groupIds = array();
 
+        // If LDAP_GROUP_FILTER has been filled, use it to get groups referring to user
         if (! empty($username) && $this->group !== null && $this->hasGroupUserFilter()) {
-            $groups = $this->group->find(sprintf($this->getGroupUserFilter(), $username));
+            // Try with the dn (eg: member=uid=username,ou=accounts,dc=local)
+            $this->getGroupsRecursive($entry, $entry->getDn(), $groupIds);
+            // try with the username (eg: memberUid=username)
+            $this->getGroupsRecursive($entry, $username, $groupIds);
 
-            foreach ($groups as $group) {
-                $groupIds[] = $group->getExternalId();
-            }
+            $groupIds = array_keys($groupIds);
+
         } else {
             $groupIds = $entry->getAll($this->getAttributeGroup());
         }
@@ -134,7 +152,7 @@ class User
 
             if ($groupId === strtolower($this->getGroupManagerDn())) {
                 // Intermediate role found : we must continue to loop, maybe admin role after ?
-	        $role = Role::APP_MANAGER;
+                $role = Role::APP_MANAGER;
             }
         }
 

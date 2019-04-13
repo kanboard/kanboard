@@ -177,11 +177,14 @@ define('LDAP_GROUP_BASE_DN', '');
 
 // LDAP group filter
 // Example for ActiveDirectory: (&(objectClass=group)(sAMAccountName=%s*))
+// Example for OpenLDAP (nested groups): (&(objectClass=groupOfNames)(cn=*%s*))
+// Example for OpenLDAP (posix groups):  (&(objectClass=posixGroup)(cn=*%s*))
 define('LDAP_GROUP_FILTER', '');
 
 // LDAP user group filter
 // If this filter is configured, Kanboard will search user groups in LDAP_GROUP_BASE_DN with this filter
-// Example for OpenLDAP: (&(objectClass=posixGroup)(memberUid=%s))
+// Example for OpenLDAP (memberUid: username): (&(objectClass=posixGroup)(memberUid=%s))
+// Example for OpenLDAP (member: uid=userDn,ou=accounts,dc=local): (&(objectClass=groupOfNames)(member=%s))
 define('LDAP_GROUP_USER_FILTER', '');
 
 // LDAP attribute for the group name
