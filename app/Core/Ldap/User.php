@@ -78,15 +78,12 @@ class User
     }
 
     /**
-     * Get user groupIds (DN)
-     *
-     * 1) If configured, use memberUid and posixGroup
-     * 2) Otherwise, use memberOf
+     * Fill the 3rd param with all memberships of the 2nd param
      *
      * @access protected
-     * @param  Entry   $entry
-     * @param  string  $username
-     * @return string[]
+     * @param  Entry     $entry
+     * @param  string    $member
+     * @param  string[]  $groupsAll
      */
     protected function getGroupsRecursive(Entry $entry, $member, &$groupsAll)
     {
@@ -103,6 +100,17 @@ class User
         }
     }
 
+    /**
+     * Get user groupIds (DN)
+     *
+     * 1) If configured, use memberUid and posixGroup
+     * 2) Otherwise, use memberOf
+     *
+     * @access protected
+     * @param  Entry   $entry
+     * @param  string  $username
+     * @return string[]
+     */
     protected function getGroups(Entry $entry, $username)
     {
         $groupIds = array();
