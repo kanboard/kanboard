@@ -31,11 +31,20 @@ class MailNotification extends Base implements NotificationInterface
     public function notifyUser(array $user, $event_name, array $event_data)
     {
         if (! empty($user['email'])) {
+            $headers = [];
+
+            if (isset($event_data['task']['id'])) {
+                $headers['In-Reply-To'] = hash('sha256', 'KB'.$this->configModel->get('application_url').$event_data['task']['id']);
+            }
+
             $this->emailClient->send(
                 $user['email'],
                 $user['name'] ?: $user['username'],
                 $this->getMailSubject($event_name, $event_data),
-                $this->getMailContent($event_name, $event_data)
+                $this->getMailContent($event_name, $event_data),
+                null,
+                null,
+                $headers
             );
         }
     }

@@ -20,11 +20,20 @@ class EmailJob extends BaseJob
      * @param  string $html
      * @param  string $authorName
      * @param  string $authorEmail
+     * @param  array  $headers
      * @return $this
      */
-    public function withParams($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail)
+    public function withParams($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail, array $headers = [])
     {
-        $this->jobParams = array($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail);
+        $this->jobParams = [
+            $recipientEmail,
+            $recipientName,
+            $subject,
+            $html,
+            $authorName,
+            $authorEmail,
+            $headers,
+        ];
         return $this;
     }
 
@@ -38,8 +47,9 @@ class EmailJob extends BaseJob
      * @param  string $html
      * @param  string $authorName
      * @param  string $authorEmail
+     * @param  array  $headers
      */
-    public function execute($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail)
+    public function execute($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail, array $headers = [])
     {
         $transport = $this->helper->mail->getMailTransport();
         $startTime = microtime(true);
@@ -48,7 +58,7 @@ class EmailJob extends BaseJob
 
         $this->emailClient
             ->getTransport($transport)
-            ->sendEmail($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail);
+            ->sendEmail($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail, $headers);
 
         $this->logger->debug(__METHOD__.' Email sent in '.round(microtime(true) - $startTime, 6).' seconds');
     }

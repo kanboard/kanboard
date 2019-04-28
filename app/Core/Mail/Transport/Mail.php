@@ -27,8 +27,9 @@ class Mail extends Base implements ClientInterface
      * @param  string $html
      * @param  string $authorName
      * @param  string $authorEmail
+     * @param  array  $headers
      */
-    public function sendEmail($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail = '')
+    public function sendEmail($recipientEmail, $recipientName, $subject, $html, $authorName, $authorEmail = '', array $headers = [])
     {
         try {
             $message = Swift_Message::newInstance()
@@ -36,10 +37,14 @@ class Mail extends Base implements ClientInterface
                 ->setFrom($this->helper->mail->getMailSenderAddress(), $authorName)
                 ->setTo(array($recipientEmail => $recipientName));
 
-            $headers = $message->getHeaders();
+            $messageHeaders = $message->getHeaders();
 
             // See https://tools.ietf.org/html/rfc3834#section-5
-            $headers->addTextHeader('Auto-Submitted', 'auto-generated');
+            $messageHeaders->addTextHeader('Auto-Submitted', 'auto-generated');
+
+            foreach ($headers as $key => $value) {
+                $messageHeaders->addTextHeader($key, $value);
+            }
 
             if (! empty($authorEmail)) {
                 $message->setReplyTo($authorEmail);
