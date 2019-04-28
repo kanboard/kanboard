@@ -1,3 +1,5 @@
+<html>
+<body>
 <h2><?= t('Overdue tasks for the project(s) "%s"', $project_name) ?></h2>
 
 <table style="font-size: .8em; table-layout: fixed; width: 100%; border-collapse: collapse; border-spacing: 0; margin-bottom: 20px;" cellpadding=5 cellspacing=1>
@@ -35,3 +37,5 @@
         </tr>
     <?php endforeach ?>
 </table>
+</body>
+</html>
