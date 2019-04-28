@@ -36,6 +36,11 @@ class Mail extends Base implements ClientInterface
                 ->setFrom($this->helper->mail->getMailSenderAddress(), $authorName)
                 ->setTo(array($recipientEmail => $recipientName));
 
+            $headers = $message->getHeaders();
+
+            // See https://tools.ietf.org/html/rfc3834#section-5
+            $headers->addTextHeader('Auto-Submitted', 'auto-generated');
+
             if (! empty($authorEmail)) {
                 $message->setReplyTo($authorEmail);
             }
