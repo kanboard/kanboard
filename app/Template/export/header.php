@@ -13,5 +13,6 @@
         <li <?= $this->app->checkMenuSelection('ExportController', 'summary') ?>>
             <?= $this->modal->replaceLink(t('Daily project summary'), 'ExportController', 'summary', array('project_id' => $project['id'])) ?>
         </li>
+        <?= $this->hook->render('template:export:header', array('project_id' => $project['id'])) ?>
     </ul>
 </div>
