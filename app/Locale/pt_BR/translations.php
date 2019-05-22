@@ -997,7 +997,7 @@ return array(
     'User filters' => 'Filtros dos usuários',
     'Category filters' => 'Filtros das categorias',
     'Upload a file' => 'Enviar um arquivo',
-    'View file' => 'Ver um arquivo',
+    'View file' => 'Ver arquivo',
     'Last activity' => 'Últimas atividades',
     'Change subtask position' => 'Alterar a posição da subtarefa',
     'This value must be greater than %d' => 'Este valor deve ser maior que %d',
