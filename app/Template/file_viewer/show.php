@@ -9,6 +9,6 @@
             <?= $this->text->markdown($content) ?>
         </article>
     <?php elseif ($type === 'text'): ?>
-        <pre><?= $content ?></pre>
+        <pre><?= $this->text->e($content) ?></pre>
     <?php endif ?>
 </div>
