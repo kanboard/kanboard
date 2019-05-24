@@ -91,19 +91,21 @@ class ProjectProcedure extends BaseProcedure
         return $this->helper->projectActivity->getProjectEvents($project_id);
     }
 
-    public function createProject($name, $description = null, $owner_id = 0, $identifier = null)
+    public function createProject($name, $description = null, $owner_id = 0, $identifier = null, $start_date = null, $end_date = null)
     {
         $values = $this->filterValues(array(
             'name' => $name,
             'description' => $description,
             'identifier' => $identifier,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
         ));
 
         list($valid, ) = $this->projectValidator->validateCreation($values);
         return $valid ? $this->projectModel->create($values, $owner_id, $this->userSession->isLogged()) : false;
     }
 
-    public function updateProject($project_id, $name = null, $description = null, $owner_id = null, $identifier = null)
+    public function updateProject($project_id, $name = null, $description = null, $owner_id = null, $identifier = null, $start_date = null, $end_date = null)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateProject', $project_id);
 
@@ -113,6 +115,8 @@ class ProjectProcedure extends BaseProcedure
             'description' => $description,
             'owner_id' => $owner_id,
             'identifier' => $identifier,
+            'start_date' => $start_date,
+            'end_date' => $end_date
         ));
 
         list($valid, ) = $this->projectValidator->validateModification($values);
