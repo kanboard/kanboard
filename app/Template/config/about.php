@@ -36,6 +36,10 @@
             <strong><?= PHP_SAPI ?></strong>
         </li>
         <li>
+            <?= t('HttpClient:') ?>
+            <strong><?= Kanboard\Core\Http\Client::backend() ?></strong>
+        </li>
+        <li>
             <?= t('OS version:') ?>
             <strong><?= @php_uname('s').' '.@php_uname('r') ?></strong>
         </li>

@@ -241,6 +241,7 @@ define('HTTP_PROXY_HOSTNAME', '');
 define('HTTP_PROXY_PORT', '3128');
 define('HTTP_PROXY_USERNAME', '');
 define('HTTP_PROXY_PASSWORD', '');
+define('HTTP_PROXY_EXCLUDE', 'localhost');
 
 // Set to false to allow self-signed certificates
 define('HTTP_VERIFY_SSL_CERTIFICATE', true);

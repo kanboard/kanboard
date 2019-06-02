@@ -132,7 +132,7 @@ class Client extends Base
     }
 
     /**
-     * Make the HTTP request
+     * Make the HTTP request with cURL if detected, socket otherwise
      *
      * @access public
      * @param  string     $method
@@ -144,10 +144,40 @@ class Client extends Base
      */
     public function doRequest($method, $url, $content, array $headers, $raiseForErrors = false)
     {
-        if (empty($url)) {
-            return '';
-        }
+	$content = '';
 
+        if (!empty($url)) {
+		if (function_exists('curl_version')) {
+			if (DEBUG)
+			{
+				$this->logger->debug('HttpClient::doRequest: cURL detected');
+			}
+			$content = $this->doRequestWithCurl($method, $url, $content, $headers, $raiseForErrors);
+		} else {
+			if (DEBUG)
+			{
+				$this->logger->debug('HttpClient::doRequest: using socket');
+			}
+			$content = $this->doRequestWithSocket($method, $url, $content, $headers, $raiseForErrors);
+		}
+	}
+
+	return $content;
+    }
+
+    /**
+     * Make the HTTP request with socket
+     *
+     * @access private
+     * @param  string     $method
+     * @param  string     $url
+     * @param  string     $content
+     * @param  string[]   $headers
+     * @param  bool       $raiseForErrors
+     * @return string
+     */
+    private function doRequestWithSocket($method, $url, $content, array $headers, $raiseForErrors = false)
+    {
         $startTime = microtime(true);
         $stream = @fopen(trim($url), 'r', false, stream_context_create($this->getContext($method, $content, $headers, $raiseForErrors)));
 
@@ -181,6 +211,91 @@ class Client extends Base
             $this->logger->debug('HttpClient: executionTime='.(microtime(true) - $startTime));
         }
 
+        return $body;
+    }
+
+
+    /**
+     * Make the HTTP request with cURL
+     *
+     * @access private
+     * @param  string     $method
+     * @param  string     $url
+     * @param  string     $content
+     * @param  string[]   $headers
+     * @param  bool       $raiseForErrors
+     * @return string
+     */
+    private function doRequestWithCurl($method, $url, $content, array $headers, $raiseForErrors = false)
+    {
+        $startTime = microtime(true);
+	$curlSession = @curl_init();
+
+	curl_setopt($curlSession, CURLOPT_URL, trim($url));
+	curl_setopt($curlSession, CURLOPT_USERAGENT, self::HTTP_USER_AGENT);
+	curl_setopt($curlSession, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+	curl_setopt($curlSession, CURLOPT_TIMEOUT, HTTP_TIMEOUT);
+	curl_setopt($curlSession, CURLOPT_FORBID_REUSE, true);
+	curl_setopt($curlSession, CURLOPT_MAXREDIRS, HTTP_MAX_REDIRECTS);
+	curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($curlSession, CURLOPT_FOLLOWLOCATION, true);
+	
+	if ('POST' == $method) {
+		curl_setopt($curlSession, CURLOPT_POST, true);
+		curl_setopt($curlSession, CURLOPT_POSTFIELDS, $content);
+	}
+
+	if (!empty($headers)) {
+		curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);
+	}
+
+        if (HTTP_VERIFY_SSL_CERTIFICATE === false) {
+		curl_setopt($curlSession, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($curlSession, CURLOPT_SSL_VERIFYPEER, false);
+        }
+
+        if (HTTP_PROXY_HOSTNAME) {
+		curl_setopt($curlSession, CURLOPT_PROXY, HTTP_PROXY_HOSTNAME);
+		curl_setopt($curlSession, CURLOPT_PROXYPORT, HTTP_PROXY_PORT);
+		curl_setopt($curlSession, CURLOPT_NOPROXY, HTTP_PROXY_EXCLUDE);
+        }
+
+        if (HTTP_PROXY_USERNAME) {
+		curl_setopt($curlSession, CURLOPT_PROXYAUTH, CURLAUTH_BASIC);
+		curl_setopt($curlSession, CURLOPT_PROXYUSERPWD, HTTP_PROXY_USERNAME.':'.HTTP_PROXY_PASSWORD);
+        }
+	
+	$body = curl_exec($curlSession);
+
+        if (! $body) {
+		$this->logger->error('HttpClient: request failed ('.$url.')');
+
+		if ($raiseForErrors) {
+			throw new ClientException('Unreachable URL: '.$url);
+		}
+
+		curl_close($curlSession);
+		return '';
+        }
+
+        if ($raiseForErrors) {
+            $statusCode = curl_getinfo($curlSession, CURLINFO_RESPONSE_CODE);
+
+            if ($statusCode >= 400) {
+                throw new InvalidStatusException('Request failed with status code '.$statusCode, $statusCode, $body);
+            }
+        }
+
+        if (DEBUG) {
+            $this->logger->debug('HttpClient: url='.$url);
+            $this->logger->debug('HttpClient: headers='.var_export($headers, true));
+            $this->logger->debug('HttpClient: payload='.$content);
+            $this->logger->debug('HttpClient: metadata='.var_export(curl_getinfo($curlSession), true));
+            $this->logger->debug('HttpClient: body='.$body);
+            $this->logger->debug('HttpClient: executionTime='.(microtime(true) - $startTime));
+        }
+
+	curl_close($curlSession);
         return $body;
     }
 
@@ -246,5 +361,15 @@ class Client extends Base
         }
 
         return $status;
+    }
+
+    /**
+     * Get backend used for making HTTP connections
+     *
+     * @access public
+     * @return string
+     */
+    public static function backend() {
+	return function_exists('curl_version') ? 'cURL' : 'socket';
     }
 }
