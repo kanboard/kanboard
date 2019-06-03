@@ -144,7 +144,7 @@ class Client extends Base
      */
     public function doRequest($method, $url, $content, array $headers, $raiseForErrors = false)
     {
-	$content = '';
+	$requestBody = '';
 
         if (!empty($url)) {
 		if (function_exists('curl_version')) {
@@ -152,17 +152,17 @@ class Client extends Base
 			{
 				$this->logger->debug('HttpClient::doRequest: cURL detected');
 			}
-			$content = $this->doRequestWithCurl($method, $url, $content, $headers, $raiseForErrors);
+			$requestBody = $this->doRequestWithCurl($method, $url, $content, $headers, $raiseForErrors);
 		} else {
 			if (DEBUG)
 			{
 				$this->logger->debug('HttpClient::doRequest: using socket');
 			}
-			$content = $this->doRequestWithSocket($method, $url, $content, $headers, $raiseForErrors);
+			$requestBody = $this->doRequestWithSocket($method, $url, $content, $headers, $raiseForErrors);
 		}
 	}
 
-	return $content;
+	return $requestBody;
     }
 
     /**
