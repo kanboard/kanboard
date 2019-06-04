@@ -282,6 +282,7 @@ class Client extends Base
             $statusCode = curl_getinfo($curlSession, CURLINFO_RESPONSE_CODE);
 
             if ($statusCode >= 400) {
+                curl_close($curlSession);
                 throw new InvalidStatusException('Request failed with status code '.$statusCode, $statusCode, $body);
             }
         }
