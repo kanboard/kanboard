@@ -265,14 +265,16 @@ class Client extends Base
 
         $body = curl_exec($curlSession);
 
-        if (! $body) {
-            $this->logger->error('HttpClient: request failed ('.$url.')');
+        if ($body === false) {
+            $errorMsg = curl_error($curlSession);
+            curl_close($curlSession);
+
+            $this->logger->error('HttpClient: request failed ('.$url.' - '.$errorMsg.')');
 
             if ($raiseForErrors) {
-                throw new ClientException('Unreachable URL: '.$url);
+                throw new ClientException('Unreachable URL: '.$url.' ('.$errorMsg.')');
             }
 
-            curl_close($curlSession);
             return '';
         }
 
