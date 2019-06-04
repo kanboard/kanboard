@@ -148,6 +148,7 @@ defined('HTTP_PROXY_HOSTNAME') or define('HTTP_PROXY_HOSTNAME', '');
 defined('HTTP_PROXY_PORT') or define('HTTP_PROXY_PORT', '3128');
 defined('HTTP_PROXY_USERNAME') or define('HTTP_PROXY_USERNAME', '');
 defined('HTTP_PROXY_PASSWORD') or define('HTTP_PROXY_PASSWORD', '');
+defined('HTTP_PROXY_EXCLUDE') or define('HTTP_PROXY_EXCLUDE', 'localhost');
 defined('HTTP_VERIFY_SSL_CERTIFICATE') or define('HTTP_VERIFY_SSL_CERTIFICATE', true);
 
 defined('TOTP_ISSUER') or define('TOTP_ISSUER', 'Kanboard');
