@@ -57,7 +57,13 @@ class TaskLinkFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        $task_ids = $this->getSubQuery()->findAllByColumn('task_id');
+        if ($this->value === 'none') {
+            $task_ids = $this->getWithoutLinkTaskIds();
+        } elseif ($this->value === 'toplevel') {
+            $task_ids = $this->getTopLevelTaskIds();
+        } else {
+            $task_ids = $this->getLinkLabelTaskIds();
+        }
 
         if (! empty($task_ids)) {
             $this->query->in(TaskModel::TABLE.'.id', $task_ids);
@@ -67,12 +73,12 @@ class TaskLinkFilter extends BaseFilter implements FilterInterface
     }
 
     /**
-     * Get subquery
+     * Get IDs of tasks according to the label of their links
      *
      * @access protected
-     * @return Table
+     * @return array
      */
-    protected function getSubQuery()
+    protected function getLinkLabelTaskIds()
     {
         return $this->db->table(TaskLinkModel::TABLE)
             ->columns(
@@ -80,6 +86,39 @@ class TaskLinkFilter extends BaseFilter implements FilterInterface
                 LinkModel::TABLE.'.label'
             )
             ->join(LinkModel::TABLE, 'id', 'link_id', TaskLinkModel::TABLE)
-            ->ilike(LinkModel::TABLE.'.label', $this->value);
+            ->ilike(LinkModel::TABLE.'.label', $this->value)
+            ->findAllByColumn('task_id');
+    }
+
+    /**
+     * Get IDs of tasks that are not linked to other tasks
+     *
+     * @access protected
+     * @return array
+     */
+    protected function getWithoutLinkTaskIds()
+    {
+        return $this->db->table(TaskModel::TABLE)
+            ->left(TaskLinkModel::TABLE, 'tt', 'task_id', TaskModel::TABLE, 'id')
+            ->isNull('tt.link_id')
+            ->findAllByColumn(TaskModel::TABLE . '.id');
+    }
+
+    /**
+     * Get IDs of tasks that are not a child of other tasks
+     *
+     * @access protected
+     * @return array
+     */
+    protected function getTopLevelTaskIds()
+    {
+        // tasks with links "is a child of" :
+        $subquery = $this->db->table(TaskLinkModel::TABLE)
+            ->columns('task_id')->eq('link_id', '6');
+        // the other tasks
+        $result = $this->db->table(TaskModel::TABLE)
+            ->notInSubquery('id', $subquery)
+            ->findAllByColumn(TaskModel::TABLE . '.id');
+        return $result;
     }
 }
