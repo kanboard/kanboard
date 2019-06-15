@@ -11,6 +11,7 @@ use Kanboard\Action\TaskAssignColorPriority;
 use Kanboard\Action\TaskAssignDueDateOnCreation;
 use Kanboard\Action\TaskMoveColumnClosed;
 use Kanboard\Action\TaskMoveColumnNotMovedPeriod;
+use Kanboard\Action\TaskMoveColumnOnDueDate;
 use Kanboard\Core\Action\ActionManager;
 use Kanboard\Action\CommentCreation;
 use Kanboard\Action\CommentCreationMoveTaskColumn;
@@ -98,6 +99,7 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskMoveColumnCategoryChange($container));
         $container['actionManager']->register(new TaskMoveColumnClosed($container));
         $container['actionManager']->register(new TaskMoveColumnNotMovedPeriod($container));
+        $container['actionManager']->register(new TaskMoveColumnOnDueDate($container));
         $container['actionManager']->register(new TaskMoveColumnUnAssigned($container));
         $container['actionManager']->register(new TaskMoveSwimlaneCategoryChange($container));
         $container['actionManager']->register(new TaskOpen($container));
