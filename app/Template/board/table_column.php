@@ -19,7 +19,7 @@
                 <?= $this->task->getNewBoardTaskButton($swimlane, $column) ?>
             <?php endif ?>
 
-            <?php if ($column['nb_tasks'] > 0): ?>
+            <?php if ($swimlane['nb_swimlanes'] > 1 && $column['nb_tasks'] > 0): ?>
             <span title="<?= t('Task count') ?>">
                 (<span id="task-number-column-<?= $column['id'] ?>"><?= $column['nb_tasks'] ?></span>)
             </span>
