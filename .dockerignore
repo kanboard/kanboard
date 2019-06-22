@@ -17,6 +17,7 @@ tests
 ChangeLog
 composer.json
 Dockerfile
+Dockerfile.*
 Makefile
 package.json
 Vagrantfile
