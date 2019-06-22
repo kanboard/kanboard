@@ -1,3 +1,25 @@
+Version 1.2.10 (June 21, 2019)
+------------------------------
+
+* Add Auto-Submitted E-mail header as per RFC 8384
+* Add HTML tag in email notifications
+* Add new hook template:export:header
+* Do not show duplicated results when multiple comments match
+* Add Docker manifest with multiple architectures (arm32v6, arm32v7, arm64v8, amd64)
+* Update Docker image to Alpine 3.10.0
+* Add View File on popover to tooltip
+* Fix text file preview
+* Set "start date" and "end date" on projects from API
+* Add cURL support to HTTP Client
+    - Add HTTP_PROXY_EXCLUDE option when cURL is used
+    - Show HTTP client backend in about page
+    - Fallback to legacy Stream Contexts if cURL extension is not available
+* Add Bitcoin to the currency list
+* Add automatic action to move task between columns based on due date
+* Fixes icon opacity when hovered
+* Hide one task count when there is only one swimlane
+* Update translations
+
 Version 1.2.9 (April 5, 2019)
 -----------------------------
 
