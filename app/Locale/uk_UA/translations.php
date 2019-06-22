@@ -1400,4 +1400,7 @@ return array(
     // 'Reorder this column by assignee (Z-A)' => '',
     // '%s moved the task #%d "%s" to the project "%s"' => '',
     // 'Task #%d "%s" has been moved to the project "%s"' => '',
+    // 'Move the task to another column when due date is less than a certain number of days' => '',
+    // 'HTTP Client:' => '',
+    // 'XBT - bitcoin' => '',
 );

@@ -1400,4 +1400,7 @@ return array(
     'Reorder this column by assignee (Z-A)' => '按指派倒序重排(Z-A)',
     '%s moved the task #%d "%s" to the project "%s"' => '%s 已将任务 #%d "%s" 移动到项目"%s" ',
     'Task #%d "%s" has been moved to the project "%s"' => '任务 #%d "%s" 已被移动到项目 "%s"',
+    // 'Move the task to another column when due date is less than a certain number of days' => '',
+    // 'HTTP Client:' => '',
+    // 'XBT - bitcoin' => '',
 );

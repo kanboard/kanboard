@@ -8,7 +8,6 @@ use Kanboard\Model\TaskModel;
  * Move the task from one to another column when due date is LESS than a certain number of days
  *
  * @package Kanboard\Action
- * @author  Frederic Guillot
  */
 class TaskMoveColumnOnDueDate extends Base
 {
@@ -20,7 +19,7 @@ class TaskMoveColumnOnDueDate extends Base
      */
     public function getDescription()
     {
-        return t('Move the task from one to another column when due date is LESS than a certain number of days');
+        return t('Move the task to another column when the due date is less than a certain number of days');
     }
 
     /**
