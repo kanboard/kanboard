@@ -1402,7 +1402,7 @@ return array(
     // 'Reorder this column by due date (DESC)' => '',
     '%s moved the task #%d "%s" to the project "%s"' => '%s moveu a tarefa #%d "%s" para o projeto "%s"',
     'Task #%d "%s" has been moved to the project "%s"' => 'Tarefa #%d "%s" foi movida para o projeto "%s"',
-    // 'Move the task to another column when due date is less than a certain number of days' => '',
+    // 'Move the task to another column when the due date is less than a certain number of days' => '',
     // 'HTTP Client:' => '',
     // 'XBT - bitcoin' => '',
 );
