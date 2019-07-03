@@ -1398,6 +1398,8 @@ return array(
     // 'Reorder this column by assignee and priority (DESC)' => '',
     // 'Reorder this column by assignee (A-Z)' => '',
     // 'Reorder this column by assignee (Z-A)' => '',
+    // 'Reorder this column by due date (ASC)' => '',
+    // 'Reorder this column by due date (DESC)' => '',
     // '%s moved the task #%d "%s" to the project "%s"' => '',
     // 'Task #%d "%s" has been moved to the project "%s"' => '',
     // 'Move the task to another column when due date is less than a certain number of days' => '',

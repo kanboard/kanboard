@@ -1398,6 +1398,8 @@ return array(
     'Reorder this column by assignee and priority (DESC)' => 'Reordenar esta coluna por designado e prioridade (decrescente)',
     'Reorder this column by assignee (A-Z)' => 'Reordenar esta coluna por designado (A-Z)',
     'Reorder this column by assignee (Z-A)' => 'Reordenar esta coluna por designado (Z-A)',
+    // 'Reorder this column by due date (ASC)' => '',
+    // 'Reorder this column by due date (DESC)' => '',
     '%s moved the task #%d "%s" to the project "%s"' => '%s moveu a tarefa #%d "%s" para o projeto "%s"',
     'Task #%d "%s" has been moved to the project "%s"' => 'Tarefa #%d "%s" foi movida para o projeto "%s"',
     // 'Move the task to another column when due date is less than a certain number of days' => '',

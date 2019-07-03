@@ -1398,6 +1398,8 @@ return array(
     'Reorder this column by assignee and priority (DESC)' => '按指派和优先级倒序重排',
     'Reorder this column by assignee (A-Z)' => '按指派重排(A-Z)',
     'Reorder this column by assignee (Z-A)' => '按指派倒序重排(Z-A)',
+    // 'Reorder this column by due date (ASC)' => '',
+    // 'Reorder this column by due date (DESC)' => '',
     '%s moved the task #%d "%s" to the project "%s"' => '%s 已将任务 #%d "%s" 移动到项目"%s" ',
     'Task #%d "%s" has been moved to the project "%s"' => '任务 #%d "%s" 已被移动到项目 "%s"',
     'Move the task to another column when the due date is less than a certain number of days' => '当任务即将在指定天数内超期时移动到另一栏',

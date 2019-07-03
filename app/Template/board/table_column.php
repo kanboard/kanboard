@@ -67,6 +67,12 @@
                                 <li>
                                     <?= $this->url->icon('sort-alpha-desc', t('Reorder this column by assignee (Z-A)'), 'TaskReorderController', 'reorderColumn', ['sort' => 'assignee', 'direction' => 'desc', 'project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']]) ?>
                                 </li>
+                                <li>
+                                    <?= $this->url->icon('sort-numeric-asc', t('Reorder this column by due date (ASC)'), 'TaskReorderController', 'reorderColumn', ['sort' => 'due-date', 'direction' => 'asc', 'project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']]) ?>
+                                </li>
+                                <li>
+                                    <?= $this->url->icon('sort-numeric-desc', t('Reorder this column by due date (DESC)'), 'TaskReorderController', 'reorderColumn', ['sort' => 'due-date', 'direction' => 'desc', 'project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']]) ?>
+                                </li>
                             <?php endif ?>
 
                             <?= $this->hook->render('template:board:column:dropdown', array('swimlane' => $swimlane, 'column' => $column)) ?>
