@@ -124,7 +124,8 @@ class ProjectCreationController extends BaseController
             $selection,
             $this->userSession->getId(),
             $values['name'],
-            $values['is_private'] == 1
+            $values['is_private'] == 1,
+            $values['identifier']
         );
     }
 }

@@ -82,14 +82,15 @@ class ProjectDuplicationModel extends Base
      * @param  integer    $owner_id             Owner of the project
      * @param  string     $name                 Name of the project
      * @param  boolean    $private              Force the project to be private
+     * @param  string     $identifier           Identifier of the project
      * @return integer                          Cloned Project Id
      */
-    public function duplicate($src_project_id, $selection = array('projectPermissionModel', 'categoryModel', 'actionModel'), $owner_id = 0, $name = null, $private = null)
+    public function duplicate($src_project_id, $selection = array('projectPermissionModel', 'categoryModel', 'actionModel'), $owner_id = 0, $name = null, $private = null, $identifier = null)
     {
         $this->db->startTransaction();
 
         // Get the cloned project Id
-        $dst_project_id = $this->copy($src_project_id, $owner_id, $name, $private);
+        $dst_project_id = $this->copy($src_project_id, $owner_id, $name, $private, $identifier);
 
         if ($dst_project_id === false) {
             $this->db->cancelTransaction();
@@ -133,12 +134,17 @@ class ProjectDuplicationModel extends Base
      * @param  integer    $owner_id
      * @param  string     $name
      * @param  boolean    $private
+     * @param  string     $identifier
      * @return integer
      */
-    private function copy($src_project_id, $owner_id = 0, $name = null, $private = null)
+    private function copy($src_project_id, $owner_id = 0, $name = null, $private = null, $identifier = null)
     {
         $project = $this->projectModel->getById($src_project_id);
         $is_private = empty($project['is_private']) ? 0 : 1;
+
+        if (! empty($identifier)) {
+            $identifier = strtoupper($identifier);
+        }
 
         $values = array(
             'name' => $name ?: $this->getClonedProjectName($project['name']),
@@ -151,6 +157,7 @@ class ProjectDuplicationModel extends Base
             'priority_default' => $project['priority_default'],
             'priority_start' => $project['priority_start'],
             'priority_end' => $project['priority_end'],
+            'identifier' => $identifier,
         );
 
         return $this->db->table(ProjectModel::TABLE)->persist($values);
