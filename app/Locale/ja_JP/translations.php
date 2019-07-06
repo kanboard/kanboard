@@ -1403,6 +1403,7 @@ return array(
     '%s moved the task #%d "%s" to the project "%s"' => '%s がタスク #%d "%s" をプロジェクト "%s" に移動しました',
     'Task #%d "%s" has been moved to the project "%s"' => 'タスク#%d "%s" はプロジェクト "%s" へ移動されました ',
     'Move the task to another column when the due date is less than a certain number of days' => '期限までの日数が規定値以下になったら、タスクを別のカラムに移動する',
+    // 'Automatically update the start date when task move away from certain column' => '',
     'HTTP Client:' => 'HTTPクライアント',
     'XBT - bitcoin' => 'XBT - bitcoin',
 );
