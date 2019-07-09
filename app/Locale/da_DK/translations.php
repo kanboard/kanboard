@@ -1403,6 +1403,7 @@ return array(
     '%s moved the task #%d "%s" to the project "%s"' => '%s flyttede opgave #%d "%s" til projekt "%s"',
     'Task #%d "%s" has been moved to the project "%s"' => 'Opgave #%d "%s" er flyttet til projekt "%s"',
     'Move the task to another column when the due date is less than a certain number of days' => 'Flytte opgave til anden kolonne når afleveringsdato er mindre end et bestemt antal dage',
+    // 'Automatically update the start date when task move away from certain column' => '',
     'HTTP Client:' => 'HTTP klient:',
     'XBT - bitcoin' => 'XBT - bitcoin',
 );

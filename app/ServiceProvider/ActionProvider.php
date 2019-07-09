@@ -41,6 +41,7 @@ use Kanboard\Action\TaskMoveColumnUnAssigned;
 use Kanboard\Action\TaskMoveSwimlaneCategoryChange;
 use Kanboard\Action\TaskOpen;
 use Kanboard\Action\TaskUpdateStartDate;
+use Kanboard\Action\TaskUpdateStartDateOnMoveColumn;
 use Kanboard\Action\TaskCloseNoActivity;
 use Kanboard\Action\TaskCloseNoActivityColumn;
 use Kanboard\Action\TaskCloseNotMovedColumn;
@@ -104,6 +105,7 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskMoveSwimlaneCategoryChange($container));
         $container['actionManager']->register(new TaskOpen($container));
         $container['actionManager']->register(new TaskUpdateStartDate($container));
+        $container['actionManager']->register(new TaskUpdateStartDateOnMoveColumn($container));
         $container['actionManager']->register(new TaskAssignDueDateOnCreation($container));
         $container['actionManager']->register(new TaskAssignColorSwimlane($container));
         $container['actionManager']->register(new TaskAssignPrioritySwimlane($container));
