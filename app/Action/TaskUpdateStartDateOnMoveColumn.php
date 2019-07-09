@@ -8,7 +8,6 @@ use Kanboard\Model\TaskModel;
  * Set the start date when task move away from certain column
  *
  * @package Kanboard\Action
- * @author  Frederic Guillot
  */
 class TaskUpdateStartDateOnMoveColumn extends Base
 {
