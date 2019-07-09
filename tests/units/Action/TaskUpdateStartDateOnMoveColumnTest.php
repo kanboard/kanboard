@@ -95,5 +95,4 @@ class TaskUpdateStartDateOnMoveColumnTest extends Base
         $action->setParam('column_id', 1);
         $this->assertFalse($action->execute($event, TaskModel::EVENT_MOVE_COLUMN));
     }
-
 }
