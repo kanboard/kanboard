@@ -10,7 +10,7 @@ namespace Kanboard\Core;
  */
 class Thumbnail
 {
-    protected $quality = 95;
+    protected $compression = -1;
     protected $metadata = array();
     protected $srcImage;
     protected $dstImage;
@@ -124,6 +124,9 @@ class Thumbnail
             $this->dstImage = imagecreatetruecolor($width, $height);
         }
 
+        imagealphablending($this->dstImage, false);
+        imagesavealpha($this->dstImage, true);
+
         imagecopyresampled($this->dstImage, $this->srcImage, $dstX, $dstY, 0, 0, $dstWidth, $dstHeight, $srcWidth, $srcHeight);
 
         return $this;
@@ -138,7 +141,7 @@ class Thumbnail
      */
     public function toFile($filename)
     {
-        imagejpeg($this->dstImage, $filename, $this->quality);
+        imagepng($this->dstImage, $filename, $this->compression);
         imagedestroy($this->dstImage);
         imagedestroy($this->srcImage);
         return $this;
@@ -153,7 +156,7 @@ class Thumbnail
     public function toString()
     {
         ob_start();
-        imagejpeg($this->dstImage, null, $this->quality);
+        imagepng($this->dstImage, null, $this->compression);
         imagedestroy($this->dstImage);
         imagedestroy($this->srcImage);
         return ob_get_clean();
@@ -166,7 +169,7 @@ class Thumbnail
      */
     public function toOutput()
     {
-        imagejpeg($this->dstImage, null, $this->quality);
+        imagepng($this->dstImage, null, $this->compression);
         imagedestroy($this->dstImage);
         imagedestroy($this->srcImage);
     }

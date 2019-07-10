@@ -69,7 +69,7 @@ class AvatarFileController extends BaseController
         $etag = md5($filename.$size);
 
         $this->response->withCache(365 * 86400, $etag);
-        $this->response->withContentType('image/jpeg');
+        $this->response->withContentType('image/png');
 
         if ($this->request->getHeader('If-None-Match') !== '"'.$etag.'"') {
             $this->response->send();
