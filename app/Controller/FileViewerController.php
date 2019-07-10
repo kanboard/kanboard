@@ -116,7 +116,7 @@ class FileViewerController extends BaseController
         $etag = md5($filename);
 
         $this->response->withCache(5 * 86400, $etag);
-        $this->response->withContentType('image/jpeg');
+        $this->response->withContentType('image/png');
 
         if ($this->request->getHeader('If-None-Match') === '"'.$etag.'"') {
             $this->response->status(304);
