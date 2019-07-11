@@ -26,6 +26,7 @@
         "ext-ctype" : "*",
         "ext-filter" : "*",
         "ext-session" : "*",
+        "ext-pdo_sqlite": "*",
         "christian-riesen/otp" : "1.4.3",
         "eluceo/ical": "0.10.1",
         "erusev/parsedown" : "1.7.1",
