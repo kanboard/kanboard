@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Metode pemberitahuan',
     'Unable to read your file' => 'Tidak dapat membaca berkas Anda',
     '%d task(s) have been imported successfully.' => '%d tugas telah berhasil di impor',
-    'Nothing have been imported!' => 'Tidak ada yang dapat di impor',
+    'Nothing has been imported!' => 'Tidak ada yang dapat di impor',
     'Import users from CSV file' => 'Impor pengguna dari berkas CSV',
     '%d user(s) have been imported successfully.' => '%d pengguna telah berhasil di impor',
     'Comma' => 'Koma',

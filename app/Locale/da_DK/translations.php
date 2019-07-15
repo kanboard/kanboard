@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Påmindelse metoder:',
     'Unable to read your file' => 'Kan ikke læse fil',
     '%d task(s) have been imported successfully.' => '%d opgave(er) blev importeret.',
-    'Nothing have been imported!' => 'Intet blev importeret!',
+    'Nothing has been imported!' => 'Intet blev importeret!',
     'Import users from CSV file' => 'Importere brugere fra CSV fil',
     '%d user(s) have been imported successfully.' => '%d bruger(e) blev importeret.',
     'Comma' => 'Komma',

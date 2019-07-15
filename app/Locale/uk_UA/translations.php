@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Способи сповіщення:',
     'Unable to read your file' => 'Не вдалося прочитати ваш файл',
     '%d task(s) have been imported successfully.' => '%d задач(і) успішно імпортовано.',
-    'Nothing have been imported!' => 'Нічого не було імпортовано!',
+    'Nothing has been imported!' => 'Нічого не було імпортовано!',
     'Import users from CSV file' => 'Імпортувати користувачів з CSV-файлу',
     '%d user(s) have been imported successfully.' => '%d користувач(ів) успішно імпортовано.',
     'Comma' => 'Кома',

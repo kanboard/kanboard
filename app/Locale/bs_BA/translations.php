@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Metode obavještenja:',
     'Unable to read your file' => 'Nemoguće pročitati datoteku',
     '%d task(s) have been imported successfully.' => '%d zadataka uspješno uvezeno.',
-    'Nothing have been imported!' => 'Ništa nije uvezeno!',
+    'Nothing has been imported!' => 'Ništa nije uvezeno!',
     'Import users from CSV file' => 'Uvezi korisnike putem CSV datoteke',
     '%d user(s) have been imported successfully.' => '%d korisnika uspješno uvezeno.',
     'Comma' => 'Zarez',

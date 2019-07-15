@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => '通知方法：',
     'Unable to read your file' => 'あなたのファイルを読むことができません',
     '%d task(s) have been imported successfully.' => '%d件のタスクが正常にインポートされました',
-    'Nothing have been imported!' => '何もインポートされていません！',
+    'Nothing has been imported!' => '何もインポートされていません！',
     'Import users from CSV file' => 'CSVファイルからユーザーをインポート',
     '%d user(s) have been imported successfully.' => '%d人のユーザーが正常にインポートされました',
     'Comma' => 'カンマ',

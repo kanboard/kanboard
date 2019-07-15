@@ -56,7 +56,7 @@ class TaskImportController extends BaseController
             if ($taskImport->getNumberOfImportedTasks() > 0) {
                 $this->flash->success(t('%d task(s) have been imported successfully.', $taskImport->getNumberOfImportedTasks()));
             } else {
-                $this->flash->failure(t('Nothing have been imported!'));
+                $this->flash->failure(t('Nothing has been imported!'));
             }
 
             $this->response->redirect($this->helper->url->to('TaskImportController', 'show', array('project_id' => $project['id'])), true);

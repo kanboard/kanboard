@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Μέθοδοι ειδοποίησης:',
     'Unable to read your file' => 'Δεν είναι δυνατή η ανάγνωση του αρχείου',
     '%d task(s) have been imported successfully.' => '%d η(οι) εργασία(ες) εισήχθησαν με επιτυχία.',
-    'Nothing have been imported!' => 'Τίποτα δεν εισήχθη',
+    'Nothing has been imported!' => 'Τίποτα δεν εισήχθη',
     'Import users from CSV file' => 'Εισαγωγή χρηστών μέσω αρχείου CSV',
     '%d user(s) have been imported successfully.' => '%d ο(οι) χρήστης(ες) εισήχθησαν με επιτυχία.',
     'Comma' => 'Κόμμα',

@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Phương pháp thông báo:',
     'Unable to read your file' => 'Không thể đọc tập tin của bạn',
     '%d task(s) have been imported successfully.' => '%d nhiệm vụ đã được nhập thành công.',
-    'Nothing have been imported!' => 'Không có gì đã được nhập khẩu!',
+    'Nothing has been imported!' => 'Không có gì đã được nhập khẩu!',
     'Import users from CSV file' => 'Nhập khẩu người dùng từ tệp CSV',
     '%d user(s) have been imported successfully.' => '%d người dùng đã được nhập thành công.',
     'Comma' => 'Comma',

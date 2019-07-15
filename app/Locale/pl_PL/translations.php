@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Metody powiadomień:',
     'Unable to read your file' => 'Nie można odczytać pliku',
     '%d task(s) have been imported successfully.' => '%d zadań zostało zaimportowanych.',
-    'Nothing have been imported!' => 'Nic nie zostało zaimportowane!',
+    'Nothing has been imported!' => 'Nic nie zostało zaimportowane!',
     'Import users from CSV file' => 'Importuj użytkowników z pliku CSV',
     '%d user(s) have been imported successfully.' => '%d użytkowników zostało zaimportowanych.',
     'Comma' => 'Przecinek',

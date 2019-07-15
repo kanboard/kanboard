@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Bildirim yöntemleri:',
     'Unable to read your file' => 'Dosya okunamıyor',
     '%d task(s) have been imported successfully.' => '%d görev başarıyla içeri aktarıldı.',
-    'Nothing have been imported!' => 'Hiçbir şey içeri aktarılamadı!',
+    'Nothing has been imported!' => 'Hiçbir şey içeri aktarılamadı!',
     'Import users from CSV file' => 'CSV dosyasından kullanıcıları içeri aktar',
     '%d user(s) have been imported successfully.' => '%d kullanıcı başarıyla içeri aktarıldı.',
     'Comma' => 'Virgül',

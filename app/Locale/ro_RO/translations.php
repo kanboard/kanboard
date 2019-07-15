@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Metode de notificare:',
     'Unable to read your file' => 'Nu am putut citi fișierul',
     '%d task(s) have been imported successfully.' => 'Sarcini importate cu succes: %d.',
-    'Nothing have been imported!' => 'Nu s-a importat nimic!',
+    'Nothing has been imported!' => 'Nu s-a importat nimic!',
     'Import users from CSV file' => 'Importă utilizatori dintr-un fișier CSV',
     '%d user(s) have been imported successfully.' => 'Utilizatori importați cu succes: %d.',
     'Comma' => 'Virgulă',

@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Metódy upozornení:',
     'Unable to read your file' => 'Nemožno čítať zadaný súbor',
     '%d task(s) have been imported successfully.' => '%d úloha(y) úspešne importovaná/é.',
-    'Nothing have been imported!' => 'Nebolo importované nič',
+    'Nothing has been imported!' => 'Nebolo importované nič',
     'Import users from CSV file' => 'Importovať používateľov zo súboru CSV',
     '%d user(s) have been imported successfully.' => '%d požívateľ(ia) úspešne importovaní.',
     'Comma' => 'čiarka',

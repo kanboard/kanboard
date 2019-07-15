@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => '通知提醒方式：',
     'Unable to read your file' => '无法读取文件',
     '%d task(s) have been imported successfully.' => '成功导入%d条任务。',
-    'Nothing have been imported!' => '没有信息被导入！',
+    'Nothing has been imported!' => '没有信息被导入！',
     'Import users from CSV file' => '从CSV文件导入用户',
     '%d user(s) have been imported successfully.' => '成功导入%d个用户。',
     'Comma' => '逗号',

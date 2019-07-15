@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Vrste obavijesti:',
     // 'Unable to read your file' => '',
     // '%d task(s) have been imported successfully.' => '',
-    // 'Nothing have been imported!' => '',
+    // 'Nothing has been imported!' => '',
     // 'Import users from CSV file' => '',
     // '%d user(s) have been imported successfully.' => '',
     // 'Comma' => '',

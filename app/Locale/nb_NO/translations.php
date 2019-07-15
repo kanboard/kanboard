@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Varslingsmetoder',
     'Unable to read your file' => 'Kan ikke lese filen',
     '%d task(s) have been imported successfully.' => '%d oppgave(r) er importert.',
-    'Nothing have been imported!' => 'Ingenting ble importert!',
+    'Nothing has been imported!' => 'Ingenting ble importert!',
     'Import users from CSV file' => 'Importere brukere fra CSV-fil',
     '%d user(s) have been imported successfully.' => '%d bruker(e) er imporert.',
     'Comma' => 'Komma',

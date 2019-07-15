@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Értesítési módszerek:',
     'Unable to read your file' => 'Nem lehet beolvasni a fájlt',
     '%d task(s) have been imported successfully.' => '%d feladat sikeresen importálva.',
-    'Nothing have been imported!' => 'Semmi sem lett importálva!',
+    'Nothing has been imported!' => 'Semmi sem lett importálva!',
     'Import users from CSV file' => 'Felhasználók importálása CSV-fájlból',
     '%d user(s) have been imported successfully.' => '%d felhasználó sikeresen importálva.',
     'Comma' => 'Vessző',

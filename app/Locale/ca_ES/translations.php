@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Els mètodes de notificació:',
     'Unable to read your file' => 'No es pot llegir el fitxer',
     '%d task(s) have been imported successfully.' => '%d tasca(s) s\'han importat correctament.',
-    'Nothing have been imported!' => 'Res s\'han importat!',
+    'Nothing has been imported!' => 'Res s\'han importat!',
     'Import users from CSV file' => 'Importa usuaris des d\'arxiu CSV',
     '%d user(s) have been imported successfully.' => '%d usuari(s) s\'han importat correctament.',
     'Comma' => 'Coma',

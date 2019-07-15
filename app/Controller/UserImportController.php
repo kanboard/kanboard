@@ -78,7 +78,7 @@ class UserImportController extends BaseController
         if ($this->userImport->counter > 0) {
             $this->flash->success(t('%d user(s) have been imported successfully.', $this->userImport->counter));
         } else {
-            $this->flash->failure(t('Nothing have been imported!'));
+            $this->flash->failure(t('Nothing has been imported!'));
         }
     }
 }

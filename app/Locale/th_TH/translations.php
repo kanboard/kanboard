@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'ลักษณะการแจ้งเตือน:',
     'Unable to read your file' => 'ไม่สามารถอ่านไฟล์ของคุณ',
     '%d task(s) have been imported successfully.' => '%d งานนำเข้าเรียบร้อย',
-    'Nothing have been imported!' => 'ไม่มีอะไรถูกนำเข้า',
+    'Nothing has been imported!' => 'ไม่มีอะไรถูกนำเข้า',
     'Import users from CSV file' => 'นำเข้าผู้ใช้จากไฟล์ CSV',
     '%d user(s) have been imported successfully.' => '%d ผู้ใช้นำเข้าเรียบร้อย',
     'Comma' => ', - Comma',

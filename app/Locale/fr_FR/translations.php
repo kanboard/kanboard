@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => 'Méthodes de notifications :',
     'Unable to read your file' => 'Impossible de lire votre fichier',
     '%d task(s) have been imported successfully.' => '%d tâche(s) ont été importées avec succès.',
-    'Nothing have been imported!' => 'Rien n\'a été importé',
+    'Nothing has been imported!' => 'Rien n\'a été importé',
     'Import users from CSV file' => 'Importer des utilisateurs depuis un fichier CSV',
     '%d user(s) have been imported successfully.' => '%d utilisateur(s) ont été importés avec succès.',
     'Comma' => 'Virgule',

@@ -782,7 +782,7 @@ return array(
     'Notification methods:' => '알림 방법',
     'Unable to read your file' => '파일을 읽을 수 없습니다',
     '%d task(s) have been imported successfully.' => '%d 할일이 성공적으로 추가되었습니다',
-    'Nothing have been imported!' => '추가가 되지 않았습니다!',
+    'Nothing has been imported!' => '추가가 되지 않았습니다!',
     'Import users from CSV file' => 'CSV 파일에서 사용자 가져오기',
     '%d user(s) have been imported successfully.' => '%d 사용자가 성공적으로 추가되었습니다',
     'Comma' => '콤마',
