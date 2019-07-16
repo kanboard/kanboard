@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c4e8b7c267db97b532117fc9bc88c917",
+    "content-hash": "4cd3c1003bea4fd2b592527e365942b9",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -1505,6 +1505,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2017-06-30T09:13:00+00:00"
         },
         {
@@ -2263,7 +2264,8 @@
         "ext-json": "*",
         "ext-ctype": "*",
         "ext-filter": "*",
-        "ext-session": "*"
+        "ext-session": "*",
+        "ext-pdo_sqlite": "*"
     },
     "platform-dev": []
 }
