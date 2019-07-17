@@ -38,8 +38,8 @@
 
         <div class="task-form-bottom">
             <?php if (! isset($duplicate)): ?>
-                <?= $this->form->checkbox('another_task', t('Create another task'), 1, isset($values['another_task']) && $values['another_task'] == 1) ?>
-                <?= $this->form->checkbox('duplicate_multiple_projects', t('Duplicate to multiple projects'), 1) ?>
+                <?= $this->form->checkbox('another_task', t('Create another task'), 1, isset($values['another_task']) && $values['another_task'] == 1, '', array("tabindex" => "16")) ?>
+                <?= $this->form->checkbox('duplicate_multiple_projects', t('Duplicate to multiple projects'), 1, false, '', array("tabindex" => "17")) ?>
             <?php endif ?>
 
             <?= $this->modal->submitButtons() ?>
