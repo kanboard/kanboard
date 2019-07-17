@@ -443,7 +443,7 @@ class SwimlaneModel extends Base
                     'name'        => $swimlane['name'],
                     'description' => $swimlane['description'],
                     'position'    => $swimlane['position'],
-                    'is_active'   => $swimlane['is_active'],
+                    'is_active'   => $swimlane['is_active'] ? self::ACTIVE : self::INACTIVE, // Avoid SQL error with Postgres
                     'project_id'  => $projectDstId,
                 );
 
