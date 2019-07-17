@@ -17,6 +17,7 @@ use Kanboard\Model\SwimlaneModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\CustomFilterModel;
 use Kanboard\Core\Security\Role;
 
 class ProjectDuplicationModelTest extends Base
@@ -24,8 +25,8 @@ class ProjectDuplicationModelTest extends Base
     public function testGetSelections()
     {
         $projectDuplicationModel = new ProjectDuplicationModel($this->container);
-        $this->assertCount(7, $projectDuplicationModel->getOptionalSelection());
-        $this->assertCount(10, $projectDuplicationModel->getPossibleSelection());
+        $this->assertCount(8, $projectDuplicationModel->getOptionalSelection());
+        $this->assertCount(11, $projectDuplicationModel->getPossibleSelection());
     }
 
     public function testGetClonedProjectName()
@@ -539,6 +540,9 @@ class ProjectDuplicationModelTest extends Base
         $this->assertEquals(2, $taskCreationModel->create(array('title' => 'T2', 'project_id' => 1, 'column_id' => 2, 'owner_id' => 1)));
         $this->assertEquals(3, $taskCreationModel->create(array('title' => 'T3', 'project_id' => 1, 'column_id' => 3, 'owner_id' => 1)));
 
+        // make the first swimlane inactive (keep positions)
+        $this->assertTrue($swimlaneModel->disable(1, 1));
+
         $this->assertEquals(2, $projectDuplicationModel->duplicate(1, array('projectPermissionModel', 'swimlaneModel', 'projectTaskDuplicationModel')));
 
         // Check if Swimlanes have been duplicated
@@ -546,12 +550,16 @@ class ProjectDuplicationModelTest extends Base
         $this->assertCount(4, $swimlanes);
         $this->assertEquals(5, $swimlanes[0]['id']);
         $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
+        $this->assertEquals(0, $swimlanes[0]['is_active']);
         $this->assertEquals(6, $swimlanes[1]['id']);
         $this->assertEquals('S1', $swimlanes[1]['name']);
+        $this->assertEquals(1, $swimlanes[1]['is_active']);
         $this->assertEquals(7, $swimlanes[2]['id']);
         $this->assertEquals('S2', $swimlanes[2]['name']);
+        $this->assertEquals(1, $swimlanes[2]['is_active']);
         $this->assertEquals(8, $swimlanes[3]['id']);
         $this->assertEquals('S3', $swimlanes[3]['name']);
+        $this->assertEquals(1, $swimlanes[3]['is_active']);
 
         // Check if Tasks have been duplicated
         $tasks = $taskFinderModel->getAll(2);
@@ -602,5 +610,37 @@ class ProjectDuplicationModelTest extends Base
 
         $tags = $taskTagModel->getList(6);
         $this->assertEquals('C', $tags[6]);
+    }
+
+    public function testCloneProjectWithCustomFilters()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $customFilterModel = new CustomFilterModel($this->container);
+        $projectDuplicationModel = new ProjectDuplicationModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
+
+        $this->assertEquals(1, $customFilterModel->create(array('name' => 'My filter 1', 'filter' => 'status:open color:blue', 'project_id' => 1, 'user_id' => 1, 'append' => 1)));
+        $this->assertEquals(2, $customFilterModel->create(array('name' => 'My filter 2', 'filter' => 'status:open color:red', 'project_id' => 1, 'user_id' => 1, 'is_shared' => 1)));
+
+        $this->assertEquals(2, $projectDuplicationModel->duplicate(1, array('customFilterModel')));
+
+        $filter = $customFilterModel->getById(3);
+        $this->assertNotEmpty($filter);
+        $this->assertEquals('My filter 1', $filter['name']);
+        $this->assertEquals('status:open color:blue', $filter['filter']);
+        $this->assertEquals(2, $filter['project_id']);
+        $this->assertEquals(1, $filter['user_id']);
+        $this->assertEquals(0, $filter['is_shared']);
+        $this->assertEquals(1, $filter['append']);
+
+        $filter = $customFilterModel->getById(4);
+        $this->assertNotEmpty($filter);
+        $this->assertEquals('My filter 2', $filter['name']);
+        $this->assertEquals('status:open color:red', $filter['filter']);
+        $this->assertEquals(2, $filter['project_id']);
+        $this->assertEquals(1, $filter['user_id']);
+        $this->assertEquals(1, $filter['is_shared']);
+        $this->assertEquals(0, $filter['append']);
     }
 }

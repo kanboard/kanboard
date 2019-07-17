@@ -101,4 +101,39 @@ class CustomFilterModel extends Base
     {
         return $this->db->table(self::TABLE)->eq('id', $filter_id)->remove();
     }
+
+    /**
+     * Duplicate custom filters from a project to another one, must be executed inside a transaction
+     *
+     * @param  integer    $src_project_id        Source project id
+     * @param  integer    $dst_project_id        Destination project id
+     * @return boolean
+     */
+    public function duplicate($src_project_id, $dst_project_id)
+    {
+        $filters = $this->db
+            ->table(self::TABLE)
+            ->columns(
+                self::TABLE.'.user_id',
+                self::TABLE.'.filter',
+                self::TABLE.'.name',
+                self::TABLE.'.is_shared',
+                self::TABLE.'.append'
+            )
+            ->eq('project_id', $src_project_id)
+            ->findAll();
+
+        foreach ($filters as $filter) {
+            $filter['project_id'] = $dst_project_id;
+            // Avoid SQL error with Postgres
+            $filter['is_shared'] = $filter['is_shared'] ?: 0;
+            $filter['append'] = $filter['append'] ?: 0;
+
+            if (! $this->db->table(self::TABLE)->save($filter)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
