@@ -28,6 +28,7 @@ class ProjectDuplicationModel extends Base
             'projectPermissionModel',
             'actionModel',
             'tagDuplicationModel',
+            'customFilterModel',
             'projectMetadataModel',
             'projectTaskDuplicationModel',
         );
@@ -50,6 +51,7 @@ class ProjectDuplicationModel extends Base
             'actionModel',
             'swimlaneModel',
             'tagDuplicationModel',
+            'customFilterModel',
             'projectMetadataModel',
             'projectTaskDuplicationModel',
         );

@@ -18,6 +18,7 @@
         <?= $this->form->checkbox('categoryModel', t('Categories'), 1, true) ?>
         <?= $this->form->checkbox('tagDuplicationModel', t('Tags'), 1, true) ?>
         <?= $this->form->checkbox('actionModel', t('Actions'), 1, true) ?>
+        <?= $this->form->checkbox('customFilterModel', t('Custom filters'), 1, true) ?>
         <?= $this->form->checkbox('projectMetadataModel', t('Metadata'), 1, false) ?>
         <?= $this->form->checkbox('projectTaskDuplicationModel', t('Tasks'), 1, false) ?>
 

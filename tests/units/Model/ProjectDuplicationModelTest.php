@@ -17,6 +17,7 @@ use Kanboard\Model\SwimlaneModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\CustomFilterModel;
 use Kanboard\Core\Security\Role;
 
 class ProjectDuplicationModelTest extends Base
@@ -24,8 +25,8 @@ class ProjectDuplicationModelTest extends Base
     public function testGetSelections()
     {
         $projectDuplicationModel = new ProjectDuplicationModel($this->container);
-        $this->assertCount(7, $projectDuplicationModel->getOptionalSelection());
-        $this->assertCount(10, $projectDuplicationModel->getPossibleSelection());
+        $this->assertCount(8, $projectDuplicationModel->getOptionalSelection());
+        $this->assertCount(11, $projectDuplicationModel->getPossibleSelection());
     }
 
     public function testGetClonedProjectName()
@@ -602,5 +603,37 @@ class ProjectDuplicationModelTest extends Base
 
         $tags = $taskTagModel->getList(6);
         $this->assertEquals('C', $tags[6]);
+    }
+
+    public function testCloneProjectWithCustomFilters()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $customFilterModel = new CustomFilterModel($this->container);
+        $projectDuplicationModel = new ProjectDuplicationModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
+
+        $this->assertEquals(1, $customFilterModel->create(array('name' => 'My filter 1', 'filter' => 'status:open color:blue', 'project_id' => 1, 'user_id' => 1, 'append' => 1)));
+        $this->assertEquals(2, $customFilterModel->create(array('name' => 'My filter 2', 'filter' => 'status:open color:red', 'project_id' => 1, 'user_id' => 1, 'is_shared' => 1)));
+
+        $this->assertEquals(2, $projectDuplicationModel->duplicate(1, array('customFilterModel')));
+
+        $filter = $customFilterModel->getById(3);
+        $this->assertNotEmpty($filter);
+        $this->assertEquals('My filter 1', $filter['name']);
+        $this->assertEquals('status:open color:blue', $filter['filter']);
+        $this->assertEquals(2, $filter['project_id']);
+        $this->assertEquals(1, $filter['user_id']);
+        $this->assertEquals(0, $filter['is_shared']);
+        $this->assertEquals(1, $filter['append']);
+
+        $filter = $customFilterModel->getById(4);
+        $this->assertNotEmpty($filter);
+        $this->assertEquals('My filter 2', $filter['name']);
+        $this->assertEquals('status:open color:red', $filter['filter']);
+        $this->assertEquals(2, $filter['project_id']);
+        $this->assertEquals(1, $filter['user_id']);
+        $this->assertEquals(1, $filter['is_shared']);
+        $this->assertEquals(0, $filter['append']);
     }
 }
