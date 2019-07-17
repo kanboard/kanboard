@@ -62,4 +62,23 @@ class TaskReferenceFilterTest extends Base
 
         $this->assertCount(1, $query->findAll());
     }
+
+    public function testWithNone()
+    {
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $query = $taskFinder->getExtendedQuery();
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreation->create(array('title' => 'A', 'project_id' => 1, 'reference' => 'aaa-bbb')));
+        $this->assertEquals(2, $taskCreation->create(array('title' => 'B', 'project_id' => 1)));
+
+        $filter = new TaskReferenceFilter();
+        $filter->withQuery($query);
+        $filter->withValue('none');
+        $filter->apply();
+
+        $this->assertCount(1, $query->findAll());
+    }
 }
