@@ -16,6 +16,7 @@ class CustomFilterTest extends Base
         $this->assertEquals(1, $p->create(array('name' => 'UnitTest')));
         $this->assertEquals(1, $cf->create(array('name' => 'My filter 1', 'filter' => 'status:open color:blue', 'project_id' => 1, 'user_id' => 1)));
         $this->assertEquals(2, $cf->create(array('name' => 'My filter 2', 'filter' => 'status:open color:red', 'project_id' => 1, 'user_id' => 1, 'is_shared' => 1)));
+        $this->assertEquals(3, $cf->create(array('name' => 'My filter 3', 'filter' => 'status:open color:green', 'project_id' => 1, 'user_id' => 1, 'append' => 1)));
 
         $filter = $cf->getById(1);
         $this->assertNotEmpty($filter);
@@ -24,6 +25,7 @@ class CustomFilterTest extends Base
         $this->assertEquals(1, $filter['project_id']);
         $this->assertEquals(1, $filter['user_id']);
         $this->assertEquals(0, $filter['is_shared']);
+        $this->assertEquals(0, $filter['append']);
 
         $filter = $cf->getById(2);
         $this->assertNotEmpty($filter);
@@ -32,6 +34,16 @@ class CustomFilterTest extends Base
         $this->assertEquals(1, $filter['project_id']);
         $this->assertEquals(1, $filter['user_id']);
         $this->assertEquals(1, $filter['is_shared']);
+        $this->assertEquals(0, $filter['append']);
+
+        $filter = $cf->getById(3);
+        $this->assertNotEmpty($filter);
+        $this->assertEquals('My filter 3', $filter['name']);
+        $this->assertEquals('status:open color:green', $filter['filter']);
+        $this->assertEquals(1, $filter['project_id']);
+        $this->assertEquals(1, $filter['user_id']);
+        $this->assertEquals(0, $filter['is_shared']);
+        $this->assertEquals(1, $filter['append']);
     }
 
     public function testModification()
