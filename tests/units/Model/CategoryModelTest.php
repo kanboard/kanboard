@@ -156,7 +156,8 @@ class CategoryModelTest extends Base
         $categoryModel = new CategoryModel($this->container);
         $configModel = new ConfigModel($this->container);
 
-        $this->assertTrue($configModel->save(array('project_categories' => 'C1, C2, C3')));
+        // Custom categories: spaces should be trimed, no empty and no duplicates
+        $this->assertTrue($configModel->save(array('project_categories' => 'C1, C2, C2 , C3, C1,  ')));
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
         $this->assertTrue($categoryModel->createDefaultCategories(1));
 
