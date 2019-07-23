@@ -31,20 +31,16 @@ class BoardModel extends Base
      */
     public function getUserColumns()
     {
-        $column_names = explode(',', $this->configModel->get('board_columns', implode(',', $this->getDefaultColumns())));
+        $column_names = array_unique(explode_csv_field($this->configModel->get('board_columns', implode(',', $this->getDefaultColumns()))));
         $columns = array();
 
         foreach ($column_names as $column_name) {
-            $column_name = trim($column_name);
-
-            if (! empty($column_name)) {
-                $columns[] = array(
-                    'title' => $column_name,
-                    'task_limit' => 0,
-                    'description' => '',
-                    'hide_in_dashboard' => 0,
-                );
-            }
+            $columns[] = array(
+                'title' => $column_name,
+                'task_limit' => 0,
+                'description' => '',
+                'hide_in_dashboard' => 0,
+            );
         }
 
         return $columns;
