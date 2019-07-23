@@ -26,8 +26,8 @@ class BoardTest extends Base
         $this->assertEquals('Work in progress', $columns[3]);
         $this->assertEquals('Done', $columns[4]);
 
-        // Custom columns: spaces should be trimed and no empty columns
-        $input = '   column #1  , column #2, ';
+        // Custom columns: spaces should be trimed, no empty columns and no duplicates
+        $input = '   column #1  , column #2,column #1 ,column #3  , ';
 
         $this->assertTrue($c->save(array('board_columns' => $input)));
         $this->container['memoryCache']->flush();
@@ -37,8 +37,9 @@ class BoardTest extends Base
         $columns = $columnModel->getList(2);
 
         $this->assertTrue(is_array($columns));
-        $this->assertEquals(2, count($columns));
+        $this->assertEquals(3, count($columns));
         $this->assertEquals('column #1', $columns[5]);
         $this->assertEquals('column #2', $columns[6]);
+        $this->assertEquals('column #3', $columns[7]);
     }
 }
