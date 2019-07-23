@@ -137,17 +137,13 @@ class CategoryModel extends Base
     public function createDefaultCategories($project_id)
     {
         $results = array();
-        $categories = explode(',', $this->configModel->get('project_categories'));
+        $categories = array_unique(explode_csv_field($this->configModel->get('project_categories')));
 
         foreach ($categories as $category) {
-            $category = trim($category);
-
-            if (! empty($category)) {
-                $results[] = $this->db->table(self::TABLE)->insert(array(
-                    'project_id' => $project_id,
-                    'name' => $category,
-                ));
-            }
+            $results[] = $this->db->table(self::TABLE)->insert(array(
+                'project_id' => $project_id,
+                'name' => $category,
+            ));
         }
 
         return in_array(false, $results, true);
