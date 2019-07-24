@@ -218,6 +218,7 @@ class FormHelper extends Base
             'tabindex' => isset($attributes['tabindex']) ? $attributes['tabindex'] : '-1',
             'labelPreview' => t('Preview'),
             'labelWrite' => t('Write'),
+            'labelTitle' => t('Title'),
             'placeholder' => t('Write your text in Markdown'),
             'autofocus' => isset($attributes['autofocus']) && $attributes['autofocus'],
             'suggestOptions' => array(

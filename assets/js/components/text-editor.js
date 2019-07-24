@@ -44,6 +44,7 @@ KB.component('text-editor', function (containerElement, options) {
                 {href: '#', html: '<i class="fa fa-bold fa-fw"></i>', click: function() { insertEnclosedTag('**'); }},
                 {href: '#', html: '<i class="fa fa-italic fa-fw"></i>', click: function() { insertEnclosedTag('_'); }},
                 {href: '#', html: '<i class="fa fa-strikethrough fa-fw"></i>', click: function() { insertEnclosedTag('~~'); }},
+                {href: '#', html: '<i class="fa fa-link fa-fw"></i>', click: function() { insertLinkTag(); }},
                 {href: '#', html: '<i class="fa fa-quote-right fa-fw"></i>', click: function() { insertPrependTag('> '); }},
                 {href: '#', html: '<i class="fa fa-list-ul fa-fw"></i>', click: function() { insertPrependTag('* '); }},
                 {href: '#', html: '<i class="fa fa-code fa-fw"></i>', click: function() { insertBlockTag('```'); }}
@@ -128,6 +129,30 @@ KB.component('text-editor', function (containerElement, options) {
         }
 
         setCursorBeforeClosingTag(tag, 1);
+    }
+
+    function insertLinkTag() {
+        var selectedText = getSelectedText();
+        var linkLabel = options.labelTitle;
+        var linkUrl = 'http://...';
+        var selectionStartOffset = 0;
+        var selectionEndOffset = 0;
+
+        if (selectedText.startsWith('http')) {
+            linkUrl = selectedText;
+            selectionStartOffset = -1 * (linkUrl.length + 3 + linkLabel.length);
+            selectionEndOffset = selectionStartOffset + linkLabel.length;
+        } else if (selectedText.length > 0) {
+            linkLabel = selectedText;
+            selectionStartOffset = -1 * (linkUrl.length + 1);
+            selectionEndOffset = selectionStartOffset + linkUrl.length;
+        }
+        insertText('[' + linkLabel + '](' + linkUrl + ')');
+
+        var selectionPosition = KB.utils.getSelectionPosition(textarea);
+        var currentSelectionStart = selectionPosition.selectionStart;
+
+        textarea.setSelectionRange(currentSelectionStart + selectionStartOffset, currentSelectionStart + selectionEndOffset);
     }
 
     function insertText(replacedText) {
