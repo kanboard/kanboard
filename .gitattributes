@@ -18,14 +18,10 @@ CONTRIBUTING export-ignore
 app.json export-ignore
 composer.json export-ignore
 composer.lock export-ignore
-gulpfile.js export-ignore
-package.json export-ignore
-hooks export-ignore
 
-assets/sass export-ignore
+assets/css/src export-ignore
 assets/js/components export-ignore
 assets/js/core export-ignore
 assets/js/polyfills export-ignore
 assets/js/src export-ignore
-assets/sass export-ignore
 assets/vendor export-ignore

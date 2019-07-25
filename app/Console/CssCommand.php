@@ -98,7 +98,7 @@ class CssCommand extends BaseCommand
     {
         $this
             ->setName('css')
-            ->setDescription('Minify CSS')
+            ->setDescription('Minify CSS files')
         ;
     }
 
@@ -114,7 +114,7 @@ class CssCommand extends BaseCommand
         $minifier = new Minify\CSS();
 
         foreach ($files as $file) {
-            $filename =  $folder. $file;
+            $filename = $folder.$file;
             if (! file_exists($filename)) {
                 die("$filename not found\n");
             }

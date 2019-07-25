@@ -25,6 +25,7 @@ use Kanboard\Console\TransitionExportCommand;
 use Kanboard\Console\VersionCommand;
 use Kanboard\Console\WorkerCommand;
 use Kanboard\Console\CssCommand;
+use Kanboard\Console\JsCommand;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Symfony\Component\Console\Application;
@@ -69,6 +70,7 @@ class CommandProvider implements ServiceProviderInterface
         $application->add(new DatabaseVersionCommand($container));
         $application->add(new VersionCommand($container));
         $application->add(new CssCommand($container));
+        $application->add(new JsCommand($container));
 
         $container['cli'] = $application;
         return $container;

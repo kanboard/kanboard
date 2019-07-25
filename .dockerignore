@@ -19,9 +19,7 @@ composer.json
 Dockerfile
 Dockerfile.*
 Makefile
-package.json
 Vagrantfile
 web.config
-node_modules
-assets/sass
+assets/css/src
 assets/vendor
