@@ -1,0 +1,127 @@
+.task-list-avatars {
+    display: inline-block;
+    float: left
+}
+
+@media (max-width: 768px) {
+    .task-list-avatars {
+        float: none;
+        display: block
+    }
+}
+
+.task-list-avatars .task-avatar-assignee {
+    font-weight: 300;
+    color: #999
+}
+
+.task-list-avatars:hover .task-avatar-assignee {
+    font-weight: 400;
+    color: #000
+}
+
+.task-board-icons,
+.task-list-icons {
+    font-size: 0.8em;
+    text-align: right
+}
+
+.task-board-icons a,
+.task-board-icons span.tooltip,
+.task-list-icons a,
+.task-list-icons span.tooltip {
+    text-decoration: none
+}
+
+.task-board-icons a:hover,
+.task-board-icons span.tooltip:hover,
+.task-list-icons a:hover,
+.task-list-icons span.tooltip:hover {
+    color: var(--color-primary);
+}
+
+.task-board-icons a:hover i,
+.task-board-icons span.tooltip:hover i,
+.task-list-icons a:hover i,
+.task-list-icons span.tooltip:hover i {
+    color: var(--color-primary);
+}
+
+.task-board-icons .task-score,
+.task-list-icons .task-score {
+    font-weight: bold
+}
+
+.task-board-icons .flag-milestone,
+.task-list-icons .flag-milestone {
+    color: green
+}
+
+.task-board-icons {
+    margin-top: 7px
+}
+
+.task-board-icons a {
+    opacity: 0.5
+}
+
+.task-board-icons span {
+    opacity: 0.5;
+    margin-left: 4px
+}
+
+.task-board-icons a:hover,
+.task-board-icons span.tooltip:hover {
+    opacity: 1.0;
+    font-weight: bold
+}
+
+.task-board-icons .task-board-icons-row {
+    line-height: 22px
+}
+
+.task-list-icons {
+    line-height: 22px
+}
+
+.task-list-icons a,
+.task-list-icons span,
+.task-list-icons i {
+    color: #999;
+    opacity: 1.0
+}
+
+.task-list-icons span {
+    margin-left: 5px
+}
+
+@media (max-width: 768px) {
+    .task-list-icons {
+        text-align: left
+    }
+}
+
+.task-icon-age {
+    display: inline-block
+}
+
+span.task-icon-age-total {
+    border: 1px solid #e5e5e5;
+    padding: 1px 3px 1px 3px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px
+}
+
+span.task-icon-age-column {
+    border: 1px solid #e5e5e5;
+    border-left: none;
+    margin-left: -5px;
+    padding: 1px 3px 1px 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.task-board span.task-icon-age-total,
+.task-board span.task-icon-age-column {
+    border-color: #666
+}

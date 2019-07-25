@@ -1,0 +1,21 @@
+a {
+    color: var(--link-color-primary);
+    border: none;
+}
+
+a:focus {
+    color: var(--link-color-focus);
+    outline: 0;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--link-color-hover);
+    text-decoration: none;
+}
+
+a .fa {
+    color: var(--color-primary);
+    padding-right: 3px;
+    text-decoration: none;
+}

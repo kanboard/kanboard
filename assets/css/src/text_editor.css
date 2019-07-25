@@ -1,0 +1,29 @@
+.text-editor {
+    margin-top: 10px
+}
+
+.text-editor a {
+    font-size: 1em;
+    color: var(--color-light);
+    text-decoration: none;
+    margin-right: 10px
+}
+
+.text-editor a:hover {
+    color: var(--link-color-primary);
+}
+
+.text-editor .text-editor-preview-area {
+    border: 1px solid #dedede;
+    width: 700px;
+    max-width: 99%;
+    height: 250px;
+    overflow: auto;
+    padding: 2px
+}
+
+.text-editor textarea {
+    width: 700px;
+    max-width: 98%;
+    height: 250px
+}

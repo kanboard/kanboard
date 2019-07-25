@@ -1,0 +1,269 @@
+fieldset {
+    border: 1px solid #ddd;
+    margin-top: 10px
+}
+
+legend {
+    font-weight: 500;
+    font-size: 1.2em
+}
+
+label {
+    cursor: pointer;
+    display: block;
+    margin-top: 10px;
+    font-weight: 400
+}
+
+input[type="number"],
+input[type="date"],
+input[type="email"],
+input[type="password"],
+input[type="text"]:not(.input-addon-field) {
+    color: var(--color-light);
+    border: 1px solid #ccc;
+    width: 300px;
+    max-width: 95%;
+    font-size: 1em;
+    height: 25px;
+    padding-bottom: 0;
+    padding-left: 4px;
+    font-family: sans-serif;
+    -webkit-appearance: none;
+    -moz-appearance: none
+}
+
+input[type="number"]::-webkit-input-placeholder,
+input[type="date"]::-webkit-input-placeholder,
+input[type="email"]::-webkit-input-placeholder,
+input[type="password"]::-webkit-input-placeholder,
+input[type="text"]:not(.input-addon-field)::-webkit-input-placeholder {
+    color: #dedede
+}
+
+input[type="number"]::-moz-placeholder,
+input[type="date"]::-moz-placeholder,
+input[type="email"]::-moz-placeholder,
+input[type="password"]::-moz-placeholder,
+input[type="text"]:not(.input-addon-field)::-moz-placeholder {
+    color: #dedede
+}
+
+input[type="number"]:-ms-input-placeholder,
+input[type="date"]:-ms-input-placeholder,
+input[type="email"]:-ms-input-placeholder,
+input[type="password"]:-ms-input-placeholder,
+input[type="text"]:not(.input-addon-field):-ms-input-placeholder {
+    color: #dedede
+}
+
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+    color: #000;
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0;
+    box-shadow: 0 0 8px rgba(82, 168, 236, 0.6)
+}
+
+input[type="number"] {
+    width: 70px
+}
+
+input[type="text"]:not(.input-addon-field).form-numeric {
+    width: 70px
+}
+
+input[type="text"]:not(.input-addon-field).form-datetime,
+input[type="text"]:not(.input-addon-field).form-date {
+    width: 150px
+}
+
+input[type="text"]:not(.input-addon-field).form-input-large {
+    width: 400px
+}
+
+input[type="text"]:not(.input-addon-field).form-input-small {
+    width: 150px
+}
+
+textarea:focus {
+    color: #000;
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0;
+    box-shadow: 0 0 8px rgba(82, 168, 236, 0.6)
+}
+
+textarea {
+    padding: 4px;
+    border: 1px solid #ccc;
+    width: 400px;
+    max-width: 99%;
+    height: 200px;
+    font-family: sans-serif;
+    font-size: 1em
+}
+
+textarea::-webkit-input-placeholder {
+    color: #dedede
+}
+
+textarea::-moz-placeholder {
+    color: #dedede
+}
+
+textarea:-ms-input-placeholder {
+    color: #dedede
+}
+
+select {
+    font-size: 1.0em;
+    max-width: 95%
+}
+
+select:focus {
+    outline: 0
+}
+
+select[multiple] {
+    width: 300px
+}
+
+.tag-autocomplete {
+    width: 400px
+}
+
+span.select2-container {
+    margin-top: 2px
+}
+
+.form-actions {
+    padding-top: 20px;
+    clear: both
+}
+
+.form-required {
+    color: red;
+    padding-left: 5px;
+    font-weight: bold
+}
+
+@media (max-width: 480px) {
+    .form-required {
+        display: none
+    }
+}
+
+input[type="text"].form-max-width {
+    width: 100%
+}
+
+input.form-error,
+textarea.form-error {
+    border: 2px solid #b94a48
+}
+
+input.form-error:focus,
+textarea.form-error:focus {
+    box-shadow: none;
+    border: 2px solid #b94a48
+}
+
+.form-errors {
+    color: #b94a48;
+    list-style-type: none
+}
+
+ul.form-errors li {
+    margin-left: 0
+}
+
+.form-help {
+    font-size: 0.8em;
+    color: brown;
+    margin-bottom: 15px
+}
+
+.form-inline {
+    padding: 0;
+    margin: 0;
+    border: none
+}
+
+.form-inline label {
+    display: inline;
+    padding-right: 3px
+}
+
+.form-inline input,
+.form-inline select {
+    margin: 0 15px 0 0
+}
+
+.form-inline .form-required {
+    display: none
+}
+
+.form-inline .form-actions {
+    display: inline-block
+}
+
+.form-inline .js-submit-buttons-rendered {
+    display: inline-block
+}
+
+.form-inline-group {
+    display: inline
+}
+
+.form-columns {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start
+}
+
+.form-columns .form-column {
+    margin-right: 25px;
+    flex-grow: 1
+}
+
+.form-columns fieldset {
+    margin-top: 0
+}
+
+.form-login {
+    max-width: 350px;
+    margin: 5% auto 0
+}
+
+@media (max-width: 480px) {
+    .form-login {
+        margin-left: 5px
+    }
+}
+
+.form-login li {
+    margin-left: 25px;
+    line-height: 25px
+}
+
+.form-login h2 {
+    margin-bottom: 30px;
+    font-weight: bold
+}
+
+.reset-password {
+    margin-top: 20px;
+    margin-bottom: 20px
+}
+
+.reset-password a {
+    color: var(--color-light);
+}

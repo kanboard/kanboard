@@ -1,0 +1,8 @@
+.task-tags li {
+    display: inline-block;
+    margin: 3px 3px 0 0;
+    padding: 1px 3px 1px 3px;
+    color: var(--color-primary);
+    border: 1px solid #333;
+    border-radius: 4px
+}

@@ -1,0 +1,25 @@
+.tooltip i.fa {
+    cursor: pointer
+}
+
+.tooltip .fa-info-circle {
+    color: var(--color-light);
+}
+
+#tooltip-container {
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 6px 12px #aaa;
+    position: absolute;
+    min-width: 350px
+}
+
+#tooltip-container .markdown p {
+    margin-bottom: 0
+}
+
+#tooltip-container .tooltip-large {
+    width: 600px
+}

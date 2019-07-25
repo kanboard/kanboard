@@ -1,0 +1,10 @@
+.accordion-title {
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 10px
+}
+
+.accordion-content {
+    margin-top: 15px;
+    margin-bottom: 25px
+}

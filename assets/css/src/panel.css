@@ -1,0 +1,16 @@
+.panel {
+    border-radius: 4px;
+    padding: 8px 35px 8px 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    color: var(--color-primary);
+    background-color: #fcfcfc;
+    overflow: auto
+}
+
+.panel li {
+    list-style-type: square;
+    margin-left: 20px;
+    line-height: 1.35em
+}

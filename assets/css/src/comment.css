@@ -1,0 +1,65 @@
+.comment-sorting {
+    text-align: right
+}
+
+.comment-sorting a {
+    color: var(--color-medium);
+    font-weight: normal;
+    text-decoration: none
+}
+
+.comment-sorting a:hover {
+    color: var(--color-light);
+}
+
+.comment {
+    padding: 5px;
+    margin-bottom: 15px
+}
+
+.comment-title {
+    border-bottom: 1px dotted #eee;
+    margin-left: 55px
+}
+
+.comment-date {
+    color: var(--color-light);
+    font-weight: 200
+}
+
+.comment-actions {
+    text-align: right
+}
+
+.comment-content {
+    margin-left: 55px
+}
+
+.comments .text-editor textarea {
+    height: 90px
+}
+
+.comments .text-editor .text-editor-preview-area {
+    height: 90px
+}
+
+.comments .comment-highlighted {
+    background-color: #fff8dc;
+    border: 2px solid #ffeb8e
+}
+
+.comments .comment-highlighted:hover {
+    background-color: #fff8dc
+}
+
+.comments .comment:hover {
+    background: #fff8dc
+}
+
+.comments .comment:nth-child(even):not(.comment-highlighted) {
+    background: #fbfbfb
+}
+
+.comments .comment:nth-child(even):not(.comment-highlighted):hover {
+    background: #fff8dc
+}

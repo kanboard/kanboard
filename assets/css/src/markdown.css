@@ -1,0 +1,48 @@
+.markdown {
+    line-height: 1.4em
+}
+
+.markdown h1 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-weight: bold
+}
+
+.markdown h2 {
+    font-weight: bold
+}
+
+.markdown p {
+    margin-bottom: 10px
+}
+
+.markdown ol,
+.markdown ul {
+    margin-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.markdown pre {
+    background: #fbfbfb;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    overflow: auto;
+    overflow-wrap: initial;
+    color: var(--color-medium);
+}
+
+.markdown blockquote {
+    font-style: italic;
+    border-left: 3px solid #ddd;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px
+}
+
+.markdown img {
+    display: block;
+    max-width: 80%;
+    margin-top: 10px
+}

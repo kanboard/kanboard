@@ -1,0 +1,13 @@
+.bulk-change-checkbox {
+    float: left
+}
+
+.bulk-change-inputs {
+    float: left;
+    padding-left: 10px
+}
+
+.bulk-change-inputs label {
+    margin-top: 0;
+    margin-bottom: 3px
+}

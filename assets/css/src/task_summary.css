@@ -1,0 +1,51 @@
+.task-summary-container .task-tags {
+    margin-top: 10px
+}
+
+#task-summary {
+    margin-bottom: 15px
+}
+
+#task-summary h2 {
+    color: var(--color-medium);
+    font-size: 1.6em;
+    margin-top: 0;
+    padding-top: 0
+}
+
+.task-summary-container {
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 10px
+}
+
+.task-summary-columns {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between
+}
+
+@media (max-width: 768px) {
+    .task-summary-columns {
+        flex-flow: column
+    }
+}
+
+.task-summary-column {
+    color: var(--color-primary);
+}
+
+.task-summary-column span {
+    color: var(--color-medium);
+}
+
+.task-summary-column li {
+    line-height: 23px
+}
+
+#external-task-view {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px dotted #ccc
+}

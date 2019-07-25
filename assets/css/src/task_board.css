@@ -1,0 +1,68 @@
+.task-board-sort-handle {
+    float: left;
+    padding-right: 5px
+}
+
+.task-board {
+    position: relative;
+    margin-bottom: 4px;
+    border: 1px solid #000;
+    padding: 2px;
+    word-wrap: break-word;
+    font-size: 0.9em;
+    border-radius: 6px
+}
+
+div.task-board-recent {
+    border-width: 2px
+}
+
+div.task-board-status-closed {
+    user-select: none;
+    border: 1px dotted #555
+}
+
+.task-board a {
+    color: #000;
+    text-decoration: none
+}
+
+.task-board-collapsed {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.task-board-title {
+    margin-top: 5px;
+    margin-bottom: 8px
+}
+
+.task-board-title a:hover {
+    text-decoration: underline
+}
+
+.task-board-saving-state {
+    opacity: 0.3
+}
+
+.task-board-saving-icon {
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    color: #000
+}
+
+.task-board-avatars {
+    text-align: right;
+    float: right
+}
+
+.task-board-change-assignee {
+    cursor: pointer
+}
+
+.task-board-change-assignee:hover {
+    opacity: 0.6
+}

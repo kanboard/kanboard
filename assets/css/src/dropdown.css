@@ -1,0 +1,99 @@
+h2 .dropdown ul {
+    display: none
+}
+
+.dropdown {
+    display: inline;
+    position: relative
+}
+
+.dropdown ul {
+    display: none
+}
+
+.dropdown-smaller {
+    font-size: 0.85em
+}
+
+ul.dropdown-submenu-open {
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    min-width: 285px;
+    list-style: none;
+    margin: 3px 0 0 1px;
+    padding: 6px 0;
+    background-color: #fff;
+    border: 1px solid #b2b2b2;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15)
+}
+
+.dropdown-submenu-open li {
+    display: block;
+    margin: 0;
+    padding: 8px 10px;
+    font-size: 0.9em;
+    border-bottom: 1px solid #f8f8f8;
+    cursor: pointer
+}
+
+.dropdown-submenu-open li.no-hover {
+    cursor: default
+}
+
+.dropdown-submenu-open li:last-child {
+    border: none
+}
+
+.dropdown-submenu-open li:not(.no-hover):hover {
+    background: #4078C0;
+    color: #fff
+}
+
+.dropdown-submenu-open li:hover a {
+    color: #fff
+}
+
+.dropdown-submenu-open a {
+    text-decoration: none;
+    color: #333
+}
+
+.dropdown-submenu-open a:focus {
+    text-decoration: underline
+}
+
+.dropdown-menu-link-text,
+.dropdown-menu-link-icon {
+    color: #333;
+    text-decoration: none
+}
+
+.dropdown-menu-link-text:hover {
+    text-decoration: underline
+}
+
+td a.dropdown-menu strong {
+    color: #333
+}
+
+td a.dropdown-menu strong i {
+    color: #333
+}
+
+td a.dropdown-menu i {
+    color: #dedede
+}
+
+td a.dropdown-menu:hover strong {
+    color: #555
+}
+
+td a.dropdown-menu:hover strong i {
+    color: #555
+}
+
+td a.dropdown-menu:hover i {
+    color: #333
+}

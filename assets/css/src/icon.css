@@ -1,0 +1,21 @@
+.icon-success {
+    color: #468847
+}
+
+.icon-error {
+    color: #b94a48
+}
+
+.icon-fade-out {
+    opacity: 1;
+    animation: icon-fadeout 5s linear forwards
+}
+
+@keyframes icon-fadeout {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}

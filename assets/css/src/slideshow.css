@@ -1,0 +1,57 @@
+.image-slideshow-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    overflow: auto;
+    z-index: 100
+}
+
+.image-slideshow-overlay img {
+    display: block;
+    margin: auto
+}
+
+.image-slideshow-overlay figcaption {
+    color: #fff;
+    opacity: 0.7;
+    position: absolute;
+    bottom: 5px;
+    right: 15px
+}
+
+.slideshow-icon {
+    color: #fff;
+    position: absolute;
+    font-size: 2.5em;
+    opacity: 0.6
+}
+
+.slideshow-icon:hover {
+    opacity: 0.9;
+    cursor: pointer
+}
+
+.slideshow-previous-icon {
+    left: 10px;
+    top: 45%
+}
+
+.slideshow-next-icon {
+    right: 10px;
+    top: 45%
+}
+
+.slideshow-close-icon {
+    right: 10px;
+    top: 10px;
+    font-size: 1.4em
+}
+
+.slideshow-download-icon {
+    left: 10px;
+    bottom: 10px;
+    font-size: 1.3em
+}

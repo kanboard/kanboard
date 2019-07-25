@@ -1,0 +1,67 @@
+.alert {
+    padding: 8px 35px 8px 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: var(--alert-color-default);
+    background-color: var(--alert-background-color-default);
+    border: 1px solid var(--alert-border-color-default);
+    border-radius: 4px
+}
+
+.alert-success {
+    color: var(--alert-color-success);
+    background-color: var(--alert-background-color-success);
+    border-color: var(--alert-border-color-success);
+}
+
+.alert-error {
+    color: var(--alert-color-error);
+    background-color: var(--alert-background-color-error);
+    border-color: var(--alert-border-color-error);
+}
+
+.alert-info {
+    color: var(--alert-color-info);
+    background-color: var(--alert-background-color-info);
+    border-color: var(--alert-border-color-info);
+}
+
+.alert-normal {
+    color: var(--alert-color-normal);
+    background-color: var(--alert-background-color-normal);
+    border-color: var(--alert-border-color-normal);
+}
+
+.alert ul {
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.alert li {
+    margin-left: 25px
+}
+
+.alert-fade-out {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 20%;
+    width: 60%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 0;
+    border-width: 1px 0 0;
+    border-radius: 4px 4px 0 0;
+    z-index: 9999;
+    opacity: 1;
+    animation: fadeout 5s linear forwards
+}
+
+@keyframes fadeout {
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}

@@ -1,0 +1,65 @@
+h1,
+li,
+ul,
+ol,
+table,
+tr,
+td,
+th,
+p,
+blockquote,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 100%;
+    padding-bottom: 10px;
+    color: var(--color-primary);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-rendering: optimizeLegibility
+}
+
+small {
+    font-size: 0.8em
+}
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3)
+}
+
+.page {
+    margin-left: 10px;
+    margin-right: 10px
+}
+
+.margin-top {
+    margin-top: 20px
+}
+
+.margin-bottom {
+    margin-bottom: 20px
+}
+
+.pull-right {
+    text-align: right
+}
+
+ul.no-bullet li {
+    list-style-type: none;
+    margin-left: 0
+}
+
+#app-loading-icon {
+    position: fixed;
+    right: 3px;
+    bottom: 3px
+}
+
+.assign-me {
+    vertical-align: bottom
+}

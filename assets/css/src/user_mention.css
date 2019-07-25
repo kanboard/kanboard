@@ -1,0 +1,9 @@
+.user-mention-link {
+    font-weight: bold;
+    color: var(--user-mention-color);
+    text-decoration: none
+}
+
+.user-mention-link:hover {
+    color: var(--color-medium);
+}

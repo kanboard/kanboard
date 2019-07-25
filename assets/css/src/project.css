@@ -1,0 +1,90 @@
+.js-project-creation-options {
+    max-width: 500px;
+    border-left: 3px dotted #efefef;
+    margin-top: 20px;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    padding-top: 5px
+}
+
+.project-overview-columns {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 1.4em
+}
+
+@media (max-width: 480px) {
+    .project-overview-columns {
+        display: block
+    }
+}
+
+.project-overview-column {
+    text-align: center;
+    margin-right: 3%;
+    margin-top: 5px;
+    padding: 3px 15px 3px 15px;
+    border: 1px dashed #ddd
+}
+
+@media (max-width: 480px) {
+    .project-overview-column {
+        text-align: left
+    }
+}
+
+.project-overview-column small {
+    color: var(--color-light);
+}
+
+.project-overview-column strong {
+    color: var(--color-medium);
+    display: block
+}
+
+@media (max-width: 480px) {
+    .project-overview-column strong {
+        display: inline
+    }
+}
+
+.project-header {
+    margin-bottom: 8px
+}
+
+.project-header .dropdown-component {
+    margin-top: 4px;
+    margin-right: 5px;
+    float: left
+}
+
+@media (max-width: 768px) {
+    .project-header .dropdown-component {
+        float: none
+    }
+}
+
+.project-header .views-switcher-component {
+    margin-top: 4px;
+    float: left
+}
+
+@media (max-width: 768px) {
+    .project-header .views-switcher-component {
+        float: none;
+        margin-bottom: 10px
+    }
+}
+
+.project-header .filter-box-component form {
+    margin: 0
+}

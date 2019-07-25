@@ -1,0 +1,69 @@
+:root {
+    --color-primary: #333;
+    --color-light: #999;
+    --color-lighter: #dedede;
+    --color-dark: #000;
+    --color-medium: #555;
+    --color-error: #b94a48;
+
+    --link-color-primary: #3366CC;
+    --link-color-focus: #DF5353;
+    --link-color-hover: #333;
+
+    --alert-color-default: #c09853;
+    --alert-color-success: #468847;
+    --alert-color-error: #b94a48;
+    --alert-color-info: #3a87ad;
+    --alert-color-normal: #333;
+
+    --alert-background-color-default: #fcf8e3;
+    --alert-background-color-success: #dff0d8;
+    --alert-background-color-error: #f2dede;
+    --alert-background-color-info: #d9edf7;
+    --alert-background-color-normal: #f0f0f0;
+
+    --alert-border-color-default: #fbeed5;
+    --alert-border-color-success: #d6e9c6;
+    --alert-border-color-error: #eed3d7;
+    --alert-border-color-info: #bce8f1;
+    --alert-border-color-normal: #ddd;
+
+    --button-default-color: #333;
+    --button-default-background-color: #f5f5f5;
+    --button-default-border-color: #ddd;
+
+    --button-default-color-focus: #000;
+    --button-default-background-color-focus: #fafafa;
+    --button-default-border-color-focus: #bbb;
+
+    --button-primary-color: #fff;
+    --button-primary-background-color: #4d90fe;
+    --button-primary-border-color: #3079ed;
+
+    --button-primary-color-focus: #fff;
+    --button-primary-background-color-focus: #357ae8;
+    --button-primary-border-color-focus: #3079ed;
+
+    --button-danger-color: #fff;
+    --button-danger-background-color: #d14836;
+    --button-danger-border-color: #b0281a;
+
+    --button-danger-color-focus: #fff;
+    --button-danger-background-color-focus: #c53727;
+    --button-danger-border-color-focus: #b0281a;
+
+    --button-disabled-color: #ccc;
+    --button-disabled-background-color: #f7f7f7;
+    --button-disabled-border-color: #ccc;
+
+    --avatar-color-letter: #fff;
+
+    --activity-title-color: #000;
+    --activity-title-border-color: #efefef;
+    --activity-event-background-color: #fafafa;
+    --activity-event-hover-color: #fff8dc;
+
+    --user-mention-color: #000;
+
+    --board-task-limit-color: #DF5353;
+}

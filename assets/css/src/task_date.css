@@ -1,0 +1,14 @@
+.task-date {
+    font-weight: 500;
+    color: #000
+}
+
+span.task-date-today {
+    opacity: 1.0;
+    color: var(--link-color-primary);
+}
+
+span.task-date-overdue {
+    opacity: 1.0;
+    color: #b94a48
+}

@@ -1,0 +1,59 @@
+.file-thumbnails {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start
+}
+
+.file-thumbnail {
+    width: 250px;
+    border: 1px solid #efefef;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 4px 2px 10px -6px rgba(0, 0, 0, 0.55);
+    margin-right: 15px
+}
+
+.file-thumbnail img {
+    cursor: pointer;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px
+}
+
+.file-thumbnail img:hover {
+    opacity: 0.5
+}
+
+.file-thumbnail-content {
+    padding-left: 8px;
+    padding-right: 8px
+}
+
+.file-thumbnail-title {
+    font-weight: 700;
+    font-size: 0.9em;
+    color: var(--color-medium);
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.file-thumbnail-description {
+    font-size: 0.8em;
+    color: var(--color-light);
+    margin-top: 8px;
+    margin-bottom: 5px
+}
+
+.file-viewer {
+    position: relative
+}
+
+.file-viewer img {
+    max-width: 95%;
+    max-height: 85%;
+    margin-top: 10px
+}

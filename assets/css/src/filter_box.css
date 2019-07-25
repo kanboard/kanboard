@@ -1,0 +1,13 @@
+.filter-box {
+    max-width: 1024px
+}
+
+.action-menu {
+    color: var(--color-primary);
+    text-decoration: none
+}
+
+.action-menu:hover,
+.action-menu:focus {
+    text-decoration: underline
+}

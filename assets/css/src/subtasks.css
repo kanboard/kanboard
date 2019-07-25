@@ -1,0 +1,29 @@
+.subtask-cell {
+    padding: 4px 10px;
+    border-top: 1px dotted #dedede;
+    border-left: 1px dotted #dedede;
+    display: table-cell;
+    vertical-align: middle
+}
+
+.subtask-cell a {
+    color: var(--color-primary);
+    text-decoration: none
+}
+
+.subtask-cell a:hover,
+.subtask-cell a:focus {
+    color: var(--link-color-primary);
+}
+
+.subtask-cell:first-child {
+    border-left: none
+}
+
+@media (max-width: 768px) {
+    .subtask-cell {
+        width: 90%;
+        display: block;
+        border-left: none
+    }
+}

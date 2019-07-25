@@ -1,0 +1,14 @@
+.list-item-links,
+.list-item-actions {
+    display: inline-block;
+    float: left;
+    margin-left: 10px
+}
+
+.list-item-links a {
+    margin: 0
+}
+
+.list-item-action-hidden {
+    display: none
+}

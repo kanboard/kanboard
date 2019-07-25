@@ -1,0 +1,39 @@
+#file-dropzone,
+#screenshot-zone {
+    position: relative;
+    border: 2px dashed #ccc;
+    width: 99%;
+    height: 250px;
+    overflow: auto
+}
+
+#file-dropzone-inner,
+#screenshot-inner {
+    position: absolute;
+    left: 0;
+    bottom: 48%;
+    width: 100%;
+    text-align: center;
+    color: #aaa
+}
+
+#screenshot-zone.screenshot-pasted {
+    border: 2px solid #333
+}
+
+#file-list {
+    margin: 20px
+}
+
+#file-list li {
+    list-style-type: none;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px dotted #ddd;
+    width: 95%
+}
+
+#file-list li .file-error {
+    font-weight: bold;
+    color: #b94a48
+}

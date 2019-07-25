@@ -1,0 +1,19 @@
+.logo a {
+    opacity: 0.5;
+    color: #d40000;
+    text-decoration: none
+}
+
+.logo span {
+    color: var(--color-primary);
+}
+
+.logo a:hover {
+    opacity: 0.8;
+    color: var(--color-primary);
+}
+
+.logo a:focus span,
+.logo a:hover span {
+    color: #d40000
+}

@@ -1,0 +1,52 @@
+.input-addon {
+    display: flex
+}
+
+.input-addon-field {
+    flex: 1;
+    font-size: 1em;
+    color: var(--color-light);
+    margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none
+}
+
+.input-addon-field:first-child {
+    border-radius: 5px 0 0 5px
+}
+
+.input-addon-field:last-child {
+    border-radius: 0 5px 5px 0
+}
+
+.input-addon-item {
+    background-color: rgba(147, 128, 108, 0.1);
+    color: #666;
+    font: inherit;
+    font-weight: normal
+}
+
+.input-addon-item:first-child {
+    border-radius: 5px 0 0 5px
+}
+
+.input-addon-item:last-child {
+    border-radius: 0 5px 5px 0
+}
+
+@media (max-width: 480px) {
+    .input-addon-item .dropdown .fa-caret-down {
+        display: none
+    }
+}
+
+.input-addon-field,
+.input-addon-item {
+    border: 1px solid rgba(147, 128, 108, 0.25);
+    padding: 4px 0.75em
+}
+
+.input-addon-field:not(:first-child),
+.input-addon-item:not(:first-child) {
+    border-left: 0
+}

@@ -1,0 +1,32 @@
+.draggable-row-handle {
+    cursor: move;
+    color: #dedede
+}
+
+.draggable-row-handle:hover {
+    color: var(--color-primary);
+}
+
+tr.draggable-item-selected {
+    background: #fff;
+    border: 2px solid #666;
+    box-shadow: 4px 2px 10px -4px rgba(0, 0, 0, 0.55)
+}
+
+tr.draggable-item-selected td {
+    border-top: none;
+    border-bottom: none
+}
+
+tr.draggable-item-selected td:first-child {
+    border-left: none
+}
+
+tr.draggable-item-selected td:last-child {
+    border-right: none
+}
+
+.table-stripped tr.draggable-item-hover,
+.table-stripped tr.draggable-item-hover {
+    background: #FEFFF2
+}

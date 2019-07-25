@@ -1,0 +1,48 @@
+.activity-event {
+    margin-bottom: 15px;
+    padding: 10px
+}
+
+.activity-event:nth-child(even) {
+    background: var(--activity-event-background-color);
+}
+
+.activity-event:hover {
+    background: var(--activity-event-hover-color);
+}
+
+.activity-date {
+    margin-left: 10px;
+    font-weight: normal;
+    color: var(--color-light);
+}
+
+.activity-content {
+    margin-left: 55px
+}
+
+.activity-title {
+    font-weight: bold;
+    color: var(--activity-title-color);
+    border-bottom: 1px dotted var(--activity-title-border-color);
+}
+
+.activity-description {
+    color: var(--color-medium);
+    margin-top: 10px
+}
+
+@media (max-width: 480px) {
+    .activity-description {
+        overflow: auto
+    }
+}
+
+.activity-description li {
+    list-style-type: circle
+}
+
+.activity-description ul {
+    margin-top: 10px;
+    margin-left: 20px
+}

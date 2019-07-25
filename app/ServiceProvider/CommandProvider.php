@@ -24,6 +24,7 @@ use Kanboard\Console\TaskTriggerCommand;
 use Kanboard\Console\TransitionExportCommand;
 use Kanboard\Console\VersionCommand;
 use Kanboard\Console\WorkerCommand;
+use Kanboard\Console\CssCommand;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Symfony\Component\Console\Application;
@@ -67,6 +68,7 @@ class CommandProvider implements ServiceProviderInterface
         $application->add(new DatabaseMigrationCommand($container));
         $application->add(new DatabaseVersionCommand($container));
         $application->add(new VersionCommand($container));
+        $application->add(new CssCommand($container));
 
         $container['cli'] = $application;
         return $container;

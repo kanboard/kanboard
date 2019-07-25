@@ -1,0 +1,22 @@
+@page {
+    orientation: landscape;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+#board-container {
+    overflow-x: initial !important
+}
+
+.board-task-list {
+    min-height: 0 !important
+}
+
+.task-board {
+    page-break-inside: avoid
+}
+
+.menu-inline, .project-header, .page-header, .menus-container, .sidebar, .alert, .alert-info, .dropdown > ul {
+    display: none
+}

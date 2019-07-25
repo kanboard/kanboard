@@ -1,0 +1,15 @@
+.dashboard-project-stats small {
+    margin-right: 10px;
+    color: var(--color-light);
+}
+
+.dashboard-table-link {
+    font-weight: bold;
+    color: #000;
+    text-decoration: none
+}
+
+.dashboard-table-link:focus,
+.dashboard-table-link:hover {
+    color: var(--color-light);
+}

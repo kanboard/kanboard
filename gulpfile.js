@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var sass = require('gulp-sass');
 
 var src = {
     js: [
@@ -19,13 +18,6 @@ var src = {
 };
 
 var vendor = {
-    css: [
-        'assets/vendor/jquery-ui/jquery-ui.min.css',
-        'assets/vendor/jqueryui-timepicker-addon/jquery-ui-timepicker-addon.min.css',
-        'assets/vendor/select2/css/select2.min.css',
-        'assets/vendor/font-awesome/css/font-awesome.min.css',
-        'assets/vendor/c3/c3.min.css'
-    ],
     js: [
         'assets/vendor/jquery/jquery-3.3.1.min.js',
         'assets/vendor/jquery-ui/jquery-ui.min.js',
@@ -44,7 +36,6 @@ var vendor = {
 
 var dist = {
     fonts: 'assets/fonts/',
-    css: 'assets/css/',
     js: 'assets/js/',
     img: 'assets/img/'
 };
@@ -53,11 +44,6 @@ gulp.task('vendor', function() {
     gulp.src(vendor.js)
         .pipe(concat('vendor.min.js'))
         .pipe(gulp.dest(dist.js))
-    ;
-
-    gulp.src(vendor.css)
-        .pipe(concat('vendor.min.css'))
-        .pipe(gulp.dest(dist.css))
     ;
 
     gulp.src('assets/vendor/font-awesome/fonts/*')
@@ -75,18 +61,4 @@ gulp.task('js', function() {
     ;
 });
 
-gulp.task('css', function() {
-    gulp.src(['assets/sass/*.sass','!assets/sass/*_print.sass'])
-        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(concat('app.min.css'))
-        .pipe(gulp.dest(dist.css));
-});
-
-gulp.task('css:print', function() {
-    gulp.src('assets/sass/*_print.sass')
-        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(concat('print.min.css'))
-        .pipe(gulp.dest(dist.css));
-});
-
-gulp.task('default', ['vendor', 'js', 'css', 'css:print']);
+gulp.task('default', ['vendor', 'js']);

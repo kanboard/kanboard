@@ -1,0 +1,28 @@
+
+.task-list-subtasks {
+    display: table;
+    width: 100%
+}
+
+@media (max-width: 768px) {
+    .task-list-subtasks {
+        display: block
+    }
+}
+
+.task-list-subtask {
+    display: table-row
+}
+
+@media (max-width: 768px) {
+    .task-list-subtask {
+        display: block
+    }
+}
+
+@media (max-width: 768px) {
+    .subtask-assignee,
+    .subtask-time-tracking-cell {
+        display: none
+    }
+}

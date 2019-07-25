@@ -1,0 +1,70 @@
+
+
+.page-header {
+    margin-bottom: 20px
+}
+
+.page-header .dropdown {
+    padding-right: 10px
+}
+
+.page-header h2 {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    border-bottom: 1px dotted #ccc
+}
+
+.page-header h2 a {
+    color: var(--color-primary);
+    text-decoration: none
+}
+
+.page-header h2 a:focus,
+.page-header h2 a:hover {
+    color: var(--color-light);
+}
+
+.page-header ul {
+    text-align: left;
+    margin-top: 5px;
+    display: inline-block
+}
+
+.page-header li {
+    display: inline;
+    padding-right: 15px
+}
+
+@media (max-width: 480px) {
+    .page-header li {
+        display: block;
+        line-height: 1.5em
+    }
+}
+
+.page-header li.active a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold
+}
+
+.page-header li.active a:hover,
+.page-header li.active a:focus {
+    text-decoration: underline
+}
+
+.menu-inline {
+    margin-bottom: 5px
+}
+
+.menu-inline li {
+    display: inline;
+    padding-right: 15px
+}
+
+.menu-inline li .active a {
+    font-weight: bold;
+    color: #000;
+    text-decoration: none
+}

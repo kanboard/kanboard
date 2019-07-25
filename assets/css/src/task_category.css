@@ -1,0 +1,18 @@
+.task-board-category-container {
+    text-align: right;
+    margin-top: 8px;
+    margin-bottom: 8px
+}
+
+.task-board-category {
+    border: 1px solid #555;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #000;
+    padding: 1px 3px 1px 2px;
+    border-radius: 3px
+}
+
+.task-board-category a:hover {
+    text-decoration: underline
+}
