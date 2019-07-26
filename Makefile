@@ -2,22 +2,9 @@ DOCKER_IMAGE := docker.io/kanboard/kanboard
 DOCKER_TAG := master
 VERSION := $(shell git rev-parse --short HEAD)
 
-.PHONY: all clean static jshint archive test-sqlite test-mysql test-postgres test-browser \
+.PHONY: archive test-sqlite test-mysql test-postgres test-browser \
 	integration-test-mysql integration-test-postgres integration-test-sqlite sql \
 	docker-image docker-manifest docker-run docker-sh
-
-all: static
-
-clean:
-	@ rm -rf ./node_modules
-
-static: clean
-	@ npm install
-	@ ./node_modules/.bin/gulp vendor js css
-	@ ./node_modules/.bin/jshint assets/js/{core,components,polyfills}
-
-jshint:
-	@ ./node_modules/.bin/jshint assets/js/{core,components,polyfills}
 
 archive:
 	@ echo "Build archive: version=$(VERSION)"

@@ -79,34 +79,12 @@ class JsCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $appBundle = $this->concat($this->appFiles);
-        $vendorBundle = $this->concat($this->vendorFiles);
+        $appBundle = concat_files($this->appFiles);
+        $vendorBundle = concat_files($this->vendorFiles);
 
         $minifier = new Minify\JS($appBundle);
 
         file_put_contents('assets/js/app.min.js', $minifier->minify());
         file_put_contents('assets/js/vendor.min.js', $vendorBundle);
-    }
-
-    private function concat(array $files)
-    {
-        $data = '';
-        foreach ($files as $pattern) {
-            foreach (glob($pattern) as $filename) {
-                echo $filename.PHP_EOL;
-                if (! file_exists($filename)) {
-                    die("$filename not found\n");
-                }
-
-                $contents = file_get_contents($filename);
-                if ($contents === false) {
-                    die("Unable to read $filename\n");
-                }
-
-                $data .= $contents;
-            }
-        }
-
-        return $data;
     }
 }

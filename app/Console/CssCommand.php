@@ -87,11 +87,11 @@ class CssCommand extends BaseCommand
     ];
 
     private $vendorFiles = [
-        'jquery-ui/jquery-ui.min.css',
-        'jqueryui-timepicker-addon/jquery-ui-timepicker-addon.min.css',
-        'select2/css/select2.min.css',
-        'font-awesome/css/font-awesome.min.css',
-        'c3/c3.min.css',
+        self::CSS_VENDOR_PATH.'jquery-ui/jquery-ui.min.css',
+        self::CSS_VENDOR_PATH.'jqueryui-timepicker-addon/jquery-ui-timepicker-addon.min.css',
+        self::CSS_VENDOR_PATH.'select2/css/select2.min.css',
+        self::CSS_VENDOR_PATH.'font-awesome/css/font-awesome.min.css',
+        self::CSS_VENDOR_PATH.'c3/c3.min.css',
     ];
 
     protected function configure()
@@ -106,7 +106,9 @@ class CssCommand extends BaseCommand
     {
         $this->minifyFiles(self::CSS_SRC_PATH, $this->appFiles, 'app.min.css');
         $this->minifyFiles(self::CSS_SRC_PATH, $this->printFiles, 'print.min.css');
-        $this->minifyFiles(self::CSS_VENDOR_PATH, $this->vendorFiles, 'vendor.min.css');
+
+        $vendorBundle = concat_files($this->vendorFiles);
+        file_put_contents('assets/css/vendor.min.css', $vendorBundle);
     }
 
     private function minifyFiles($folder, array $files, $destination)

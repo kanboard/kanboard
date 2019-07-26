@@ -2,6 +2,28 @@
 
 use Kanboard\Core\Translator;
 
+function concat_files(array $files)
+{
+    $data = '';
+    foreach ($files as $pattern) {
+        foreach (glob($pattern) as $filename) {
+            echo $filename.PHP_EOL;
+            if (! file_exists($filename)) {
+                die("$filename not found\n");
+            }
+
+            $contents = file_get_contents($filename);
+            if ($contents === false) {
+                die("Unable to read $filename\n");
+            }
+
+            $data .= $contents;
+        }
+    }
+
+    return $data;
+}
+
 function session_get($key)
 {
     return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
