@@ -1316,7 +1316,7 @@ return array(
     'Your are not member of any project.' => 'Nie jesteś członkiem żadnego projektu.',
     'My subtasks' => 'Moje zadania podrzędne',
     '%d subtasks' => '%d zadań podrzędnych',
-    '%d subtask' => ''%d zadanie podrzędne,
+    '%d subtask' => '%d zadanie podrzędne',
     'Only moving task between those columns is permitted for tasks assigned to the current user' => 'Przesuwanie zadań pomiędzy kolumnami jest dozwolone jedynie dla użytkownika przypisanego do tych zadań',
     '[DUPLICATE]' => '[DUPLIKAT]',
     'DKK - Danish Krona' => 'DKK - Korona duńska',
