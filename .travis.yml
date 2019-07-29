@@ -20,11 +20,11 @@ env:
 matrix:
   fast_finish: true
 
-before_script:
+before_install:
   - composer install
-  - npm install
+  - npm install -g jshint
 
 script:
-  - ./node_modules/.bin/jshint assets/js/{core,components}
+  - jshint assets/js/{core,components}
   - ./vendor/bin/phpunit -c tests/units.$DB.xml
   - ./vendor/bin/phpunit tests/configtest
