@@ -117,7 +117,7 @@ class TaskModificationController extends BaseController
             try {
                 $taskProvider = $this->externalTaskManager->getProvider($task['external_provider']);
                 $params['template'] = $taskProvider->getModificationFormTemplate();
-                $params['external_task'] = $taskProvider->fetch($task['external_uri']);
+                $params['external_task'] = $taskProvider->fetch($task['external_uri'], $task['project_id']);
             } catch (ExternalTaskAccessForbiddenException $e) {
                 throw new AccessForbiddenException($e->getMessage());
             } catch (ExternalTaskException $e) {

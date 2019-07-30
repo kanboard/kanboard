@@ -40,9 +40,10 @@ interface ExternalTaskProviderInterface
      * @access public
      * @throws \Kanboard\Core\ExternalTask\ExternalTaskException
      * @param  string $uri
+     * @param  int    $projectID
      * @return ExternalTaskInterface
      */
-    public function fetch($uri);
+    public function fetch($uri, $projectID);
 
     /**
      * Save external task to another system

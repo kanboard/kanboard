@@ -44,7 +44,7 @@ class ExternalTaskCreationController extends BaseController
 
             if (empty($values)) {
                 $values = $this->request->getValues();
-                $externalTask = $taskProvider->fetch($taskProvider->buildTaskUri($values));
+                $externalTask = $taskProvider->fetch($taskProvider->buildTaskUri($values), $project['id']);
 
                 $values = $externalTask->getFormValues() + array(
                     'external_uri' => $externalTask->getUri(),
@@ -56,7 +56,7 @@ class ExternalTaskCreationController extends BaseController
                     'owner_id' => $this->userSession->getId(),
                 );
             } else {
-                $externalTask = $taskProvider->fetch($values['external_uri']);
+                $externalTask = $taskProvider->fetch($values['external_uri'], $project['id']);
             }
 
             $this->response->html($this->template->render('external_task_creation/step2', array(
