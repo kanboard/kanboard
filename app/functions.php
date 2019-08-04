@@ -6,7 +6,7 @@ function concat_files(array $files)
 {
     $data = '';
     foreach ($files as $pattern) {
-        foreach (glob($pattern) as $filename) {
+        foreach (glob($pattern, GLOB_ERR | GLOB_NOCHECK) as $filename) {
             echo $filename.PHP_EOL;
             if (! file_exists($filename)) {
                 die("$filename not found\n");
