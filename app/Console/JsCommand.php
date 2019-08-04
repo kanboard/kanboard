@@ -28,7 +28,7 @@ class JsCommand extends BaseCommand
     const CSS_DIST_PATH = 'assets/js/';
 
     private $appFiles = [
-        'assets/vendor/textarea-caret/index.js',
+        'assets/vendor/text-caret/index.js',
         'assets/js/polyfills/*.js',
         'assets/js/core/base.js',
         'assets/js/core/dom.js',
