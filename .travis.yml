@@ -4,6 +4,9 @@ notifications:
 git:
   depth: 3
 
+services:
+  - postgresql
+
 language: php
 sudo: false
 
