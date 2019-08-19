@@ -38,6 +38,8 @@ class ReverseProxyUserProvider implements UserProviderInterface
     public function __construct($username, array $userProfile = array())
     {
         $this->username = $username;
+        $this->email = $email;
+        $this->name = $name;
         $this->userProfile = $userProfile;
     }
 
@@ -123,7 +125,11 @@ class ReverseProxyUserProvider implements UserProviderInterface
      */
     public function getName()
     {
-        return '';
+        if (! REVERSE_PROXY_NAME_HEADER ){
+	        return '';
+	}else{
+		return $this->name;
+	}
     }
 
     /**
@@ -134,7 +140,12 @@ class ReverseProxyUserProvider implements UserProviderInterface
      */
     public function getEmail()
     {
-        return REVERSE_PROXY_DEFAULT_DOMAIN !== '' ? $this->username.'@'.REVERSE_PROXY_DEFAULT_DOMAIN : '';
+	if (! REVERSE_PROXY_MAIL_HEADER ){
+	        return REVERSE_PROXY_DEFAULT_DOMAIN !== '' ? $this->username.'@'.REVERSE_PROXY_DEFAULT_DOMAIN : '';
+	}else{
+		return $this->email;
+	}
+
     }
 
     /**
@@ -156,9 +167,17 @@ class ReverseProxyUserProvider implements UserProviderInterface
      */
     public function getExtraAttributes()
     {
-        return array(
-            'is_ldap_user' => 1,
-            'disable_login_form' => 1,
-        );
+        if (! REVERSE_PROXY_GET_FIELDS){
+                return array(
+                    'is_ldap_user' => 1,
+                    'disable_login_form' => 1,
+                );
+        }else{
+                return array(
+                    'is_ldap_user' => 0,
+                    'disable_login_form' => 1,
+        	);
+
+	}
     }
 }
