@@ -271,6 +271,29 @@ class Request extends Base
     }
 
     /**
+     * Get remote user's mail
+     *
+     * @access public
+     * @return string
+     */
+    public function getMail()
+    {
+        return $this->getServerVariable(REVERSE_PROXY_MAIL_HEADER);
+    }
+
+    /**
+     * Get remote user's Name
+     *
+     * @access public
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getServerVariable(REVERSE_PROXY_NAME_HEADER);
+    }
+
+
+    /**
      * Returns query string
      *
      * @access public
