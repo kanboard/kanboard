@@ -68,7 +68,7 @@
                 <?php endif ?>
                 ">
                 <i class="fa fa-calendar"></i>
-                <?php if (date('Hi', $task['date_due']) == '0000' ): ?>
+                <?php if (date('Hi', $task['date_due']) === '0000' ): ?>
                     <?= $this->dt->date($task['date_due']) ?>
                 <?php else: ?>
                     <?= $this->dt->datetime($task['date_due']) ?>
