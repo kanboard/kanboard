@@ -71,6 +71,7 @@ class CssCommand extends BaseCommand
         'task_form.css',
         'comment.css',
         'subtasks.css',
+        'task_list.css',
         'task_links.css',
         'text_editor.css',
         'markdown.css',
