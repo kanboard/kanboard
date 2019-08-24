@@ -9,6 +9,19 @@ KB.tooltip = function () {
         setTimeout(destroy, 500);
     }
 
+    function mouseLeftParent() {
+        setTimeout(destroyIfNotOnTooltip, 500);
+    }
+
+    function mouseOnTooltip() {
+        document.getElementById("tooltip-container").mouseOnTooltip = true;
+    }
+
+    function destroyIfNotOnTooltip() {
+        var div = document.getElementById("tooltip-container");
+        if(div != null && !div.mouseOnTooltip) destroy();
+    }
+
     function create(element) {
         var contentElement = element.querySelector("script");
         if (contentElement) {
@@ -45,6 +58,8 @@ KB.tooltip = function () {
         containerElement.id = "tooltip-container";
         containerElement.innerHTML = html;
         containerElement.addEventListener("mouseleave", onMouseLeaveContainer, false);
+        containerElement.addEventListener("mouseenter", mouseOnTooltip, false);
+        containerElement.mouseOnTooltip = false;
 
         var elementRect = element.getBoundingClientRect();
         var top = elementRect.top + window.scrollY + elementRect.height;
@@ -81,5 +96,6 @@ KB.tooltip = function () {
     var elements = document.querySelectorAll(".tooltip");
     for (var i = 0; i < elements.length; i++) {
         elements[i].addEventListener("mouseenter", onMouseOver, false);
+        elements[i].addEventListener("mouseleave", mouseLeftParent, false);
     }
 };
