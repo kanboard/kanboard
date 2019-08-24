@@ -1,3 +1,42 @@
+Version 1.2.11 (Aug 24, 2019)
+-----------------------------
+
+Breaking Changes:
+
+* Internet Explorer is not supported anymore
+
+Fixes and Improvements:
+
+* Fixed issue of tooltip not disapearing
+* Update Docker image to Alpine Linux 3.10.2
+* Hide due date time on the card if time is 00:00
+* Add new plugin hooks in view switcher
+* Add project ID to ExternalTaskProviderInterface::fetch()
+* Ignore Dockerfiles from git archive
+* Remove dependency on nodejs and gulp
+* Remove dependency on Sass
+    - Convert *.sass files to vanilla CSS
+    - Start using CSS variables
+    - Add PHP minifier
+* Add link button to text editor
+* Implements check for duplicate default categories
+* Implements check for duplicate default columns
+* Fix HTML parsing in Markdown editor
+* Change checkboxes alignment in task creation form
+* Add support for reference:none
+* Fix tabindexes on task creation and modification forms
+* Add option to clone filters on project duplication
+    - Fixed missing metadata option from project "create from"
+    - Added option to clone project custom filters
+    - Added append option to custom field tests
+    - Added a test that uses the "append" option
+    - Fixed disabled swimlane duplication error with Postgresql
+* Update translations
+* Save thumbnails as PNG to have transparency
+* New action to update the start date when a task move away from a column
+* Add the possibility to sort columns by due date
+* Add "identifier" beside "name" while creating a new project
+
 Version 1.2.10 (June 21, 2019)
 ------------------------------
 
