@@ -21,3 +21,13 @@ Credits
 - Main developer: Frédéric Guillot
 - [Contributors](https://github.com/kanboard/kanboard/graphs/contributors)
 - Distributed under [MIT License](https://github.com/kanboard/kanboard/blob/master/LICENSE)
+
+## Docker commands
+
+To run this project locally, use the following command:
+
+```
+docker run --name kanboard -p8088:80 kanboard/kanboard
+```
+
+Log into `http://localhost:8088` and use the credentials `admin:admin` to log in for the first time.  You can create extra users then.
