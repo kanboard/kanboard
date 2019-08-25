@@ -57,13 +57,7 @@ class TaskLinkFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        $task_ids = $this->getSubQuery()->findAllByColumn('task_id');
-
-        if (! empty($task_ids)) {
-            $this->query->in(TaskModel::TABLE.'.id', $task_ids);
-        } else {
-            $this->query->eq(TaskModel::TABLE.'.id', 0); // No match
-        }
+        $this->query->inSubquery(TaskModel::TABLE.'.id', $this->getSubQuery());
     }
 
     /**
@@ -76,8 +70,7 @@ class TaskLinkFilter extends BaseFilter implements FilterInterface
     {
         return $this->db->table(TaskLinkModel::TABLE)
             ->columns(
-                TaskLinkModel::TABLE.'.task_id',
-                LinkModel::TABLE.'.label'
+                TaskLinkModel::TABLE.'.task_id'
             )
             ->join(LinkModel::TABLE, 'id', 'link_id', TaskLinkModel::TABLE)
             ->ilike(LinkModel::TABLE.'.label', $this->value);
