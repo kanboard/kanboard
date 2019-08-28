@@ -19,17 +19,13 @@ class TaskUpdateStartDateOnMoveColumnTest extends Base
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 1)));
-        $this->container['db']->table(TaskModel::TABLE)->eq('id', 1)->update(array('column_id' => 2));
-
-        $task = $taskFinderModel->getById(1);
-        $this->assertNotEmpty($task);
 
         $event = new TaskEvent(array(
-            'task_id' => $task['id'],
+            'task_id' => 1,
             'task' => array(
-                'project_id' => $task['project_id'],
-                'column_id' => $task['column_id'],
-            )
+                'project_id' => 1,
+            ),
+            'src_column_id' => 1,
         ));
 
         $action = new TaskUpdateStartDateOnMoveColumn($this->container);
@@ -49,17 +45,13 @@ class TaskUpdateStartDateOnMoveColumnTest extends Base
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 2)));
-        $this->container['db']->table(TaskModel::TABLE)->eq('id', 1)->update(array('column_id' => 1));
-
-        $task = $taskFinderModel->getById(1);
-        $this->assertNotEmpty($task);
 
         $event = new TaskEvent(array(
-            'task_id' => $task['id'],
+            'task_id' => 1,
             'task' => array(
-                'project_id' => $task['project_id'],
-                'column_id' => $task['column_id'],
-            )
+                'project_id' => 1,
+            ),
+            'src_column_id' => 2,
         ));
 
         $action = new TaskUpdateStartDateOnMoveColumn($this->container);
@@ -76,18 +68,14 @@ class TaskUpdateStartDateOnMoveColumnTest extends Base
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 1, 'date_started' => time())));
-        $this->container['db']->table(TaskModel::TABLE)->eq('id', 1)->update(array('column_id' => 2));
-
-        $task = $taskFinderModel->getById(1);
-        $this->assertNotEmpty($task);
 
         $event = new TaskEvent(array(
-            'task_id' => $task['id'],
+            'task_id' => 1,
             'task' => array(
-                'project_id' => $task['project_id'],
-                'column_id' => $task['column_id'],
-                'date_started' => $task['date_started'],
-            )
+                'project_id' => 1,
+                'date_started' => time(),
+            ),
+            'src_column_id' => 1,
         ));
 
         $action = new TaskUpdateStartDateOnMoveColumn($this->container);
