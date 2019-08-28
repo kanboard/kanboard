@@ -1403,7 +1403,7 @@ return array(
     '%s moved the task #%d "%s" to the project "%s"' => '%s moveu a tarefa #%d "%s" para o projeto "%s"',
     'Task #%d "%s" has been moved to the project "%s"' => 'Tarefa #%d "%s" foi movida para o projeto "%s"',
     'Move the task to another column when the due date is less than a certain number of days' => 'Mover a tarefa para outra coluna quando a data fim estimada for menor que uma quantidade de dias',
-    'Automatically update the start date when task move away from certain column' => 'Atualizar automaticamente a data de início quando a tarefa sair de determinada coluna',
+    'Automatically update the start date when the task is moved away from a specific column' => 'Atualizar automaticamente a data de início quando a tarefa sair de determinada coluna',
     'HTTP Client:' => 'Cliente HTTP:',
     'XBT - bitcoin' => 'XBT - bitcoin',
 );

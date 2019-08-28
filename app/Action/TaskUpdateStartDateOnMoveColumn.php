@@ -19,7 +19,7 @@ class TaskUpdateStartDateOnMoveColumn extends Base
      */
     public function getDescription()
     {
-        return t('Automatically update the start date when task move away from certain column');
+        return t('Automatically update the start date when the task is moved away from a specific column');
     }
 
     /**
