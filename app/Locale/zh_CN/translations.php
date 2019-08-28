@@ -1403,7 +1403,7 @@ return array(
     '%s moved the task #%d "%s" to the project "%s"' => '%s 已将任务 #%d "%s" 移动到项目"%s" ',
     'Task #%d "%s" has been moved to the project "%s"' => '任务 #%d "%s" 已被移动到项目 "%s"',
     'Move the task to another column when the due date is less than a certain number of days' => '当任务即将在指定天数内超期时移动到另一栏',
-    'Automatically update the start date when task move away from certain column' => '当任务离开指定栏目时自动开始计时',
+    'Automatically update the start date when the task is moved away from a specific column' => '当任务离开指定栏目时自动开始计时',
     'HTTP Client:' => 'HTTP客户端',
     'XBT - bitcoin' => 'XBT - 比特币',
 );
