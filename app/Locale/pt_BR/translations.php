@@ -651,7 +651,7 @@ return array(
     '<15m' => '<15m',
     '<30m' => '<30m',
     'Stop timer' => 'Parar temporizador',
-    'Start timer' => 'Start temporizador',
+    'Start timer' => 'Iniciar temporizador',
     'My activity stream' => 'Meu feed de atividades',
     'Search tasks' => 'Pesquisar tarefas',
     'Reset filters' => 'Redefinir os filtros',
