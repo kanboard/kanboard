@@ -116,6 +116,9 @@ class TaskSubtaskAssigneeFilter extends BaseFilter implements FilterInterface
                 case 'nobody':
                     $subquery->eq(SubtaskModel::TABLE.'.user_id', 0);
                     break;
+                case 'anybody':
+                    $subquery->gt(SubtaskModel::TABLE.'.user_id', 0);
+                    break;
                 default:
                     $subquery->beginOr();
                     $subquery->ilike(UserModel::TABLE.'.username', $this->value.'%');
