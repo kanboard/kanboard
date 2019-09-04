@@ -662,6 +662,7 @@ return array(
     'Closed tasks' => 'Kapatılmış görevler',
     'Open tasks' => 'Açık görevler',
     'Not assigned' => 'Atanmamış',
+    'Assigned' => 'Atanmış',
     'View advanced search syntax' => 'Gelişmiş arama kodlarını göster',
     'Overview' => 'Özet Görünüm',
     'Board/Calendar/List view' => 'Pano/Takvim/Liste görünümü',

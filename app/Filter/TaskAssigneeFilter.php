@@ -64,6 +64,9 @@ class TaskAssigneeFilter extends BaseFilter implements FilterInterface
                 case 'nobody':
                     $this->query->eq(TaskModel::TABLE.'.owner_id', 0);
                     break;
+                case 'anybody':
+                    $this->query->gt(TaskModel::TABLE.'.owner_id', 0);
+                    break;
                 default:
                     $this->query->beginOr();
                     $this->query->ilike(UserModel::TABLE.'.username', '%'.$this->value.'%');
