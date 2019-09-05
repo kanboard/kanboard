@@ -27,7 +27,7 @@
             <?php if (isset($users_list)): ?>
             <div class="input-addon-item">
                 <div class="dropdown">
-                    <a href="#" class="dropdown-menu dropdown-menu-link-icon" title="<?= t('User filters') ?>"><i class="fa fa-users fa-fw"></i> <i class="fa fa-caret-down"></i></a>
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon" title="<?= t('User filters') ?>"><i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i></a>
                     <ul>
                         <li><a href="#" class="filter-helper" data-unique-filter="assignee:nobody"><?= t('Not assigned') ?></a></li>
                         <li><a href="#" class="filter-helper" data-unique-filter="assignee:anybody"><?= t('Assigned') ?></a></li>
