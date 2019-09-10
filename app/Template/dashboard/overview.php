@@ -46,7 +46,7 @@
 <?php endif ?>
 
 <?php if (empty($overview_paginator)): ?>
-    <p class="alert"><?= t('There is nothing assigned to you.') ?></p>
+    <p class="alert"><?= t('There is nothing assigned to you') ?></p>
 <?php else: ?>
     <?php foreach ($overview_paginator as $result): ?>
         <?php if (! $result['paginator']->isEmpty()): ?>
