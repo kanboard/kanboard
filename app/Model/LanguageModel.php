@@ -57,6 +57,7 @@ class LanguageModel extends Base
             'ja_JP',
             'th_TH',
             'vi_VN',
+            'fa_IR',
         );
     }
 
@@ -119,6 +120,7 @@ class LanguageModel extends Base
             'ja_JP' => '日本語',
             'th_TH' => 'ไทย',
             'vi_VN' => 'Tiếng Việt',
+            'fa_IR' => 'فارسی',
         );
 
         if ($prepend) {
@@ -168,6 +170,7 @@ class LanguageModel extends Base
             'th_TH' => 'th',
             'id_ID' => 'id',
             'el_GR' => 'el',
+            'fa_IR' => 'fa',
         );
 
         $lang = $this->getCurrentLanguage();
