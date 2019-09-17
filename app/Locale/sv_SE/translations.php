@@ -663,7 +663,7 @@ return array(
     'Open tasks' => 'Öppna uppgifter',
     'Not assigned' => 'Inte tilldelad',
     'View advanced search syntax' => 'Visa avancerad söksyntax',
-    'Overview' => 'Översikts',
+    'Overview' => 'Översikt',
     'Board/Calendar/List view' => 'Tavla/Kalender/Listvy',
     'Switch to the board view' => 'Växla till tavelvy',
     'Switch to the list view' => 'Växla till listvy',
