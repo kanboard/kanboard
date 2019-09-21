@@ -730,7 +730,7 @@ return array(
     'End date' => 'Slutdatum',
     // 'Users overview' => '',
     'Members' => 'Medlemmar',
-    'Shared project' => '',
+    // 'Shared project' => '',
     'Project managers' => 'Projektledare',
     'Projects list' => 'Projektlista',
     'End date:' => 'Slutdatum:',
