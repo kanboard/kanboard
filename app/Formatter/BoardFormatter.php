@@ -44,7 +44,7 @@ class BoardFormatter extends BaseFormatter implements FormatterInterface
     public function format()
     {
         $swimlanes = $this->swimlaneModel->getAllByStatus($this->projectId, SwimlaneModel::ACTIVE);
-        $columns = $this->columnModel->getAll($this->projectId);
+        $columns = $this->columnModel->getAllWithTaskCount($this->projectId);
 
         if (empty($swimlanes) || empty($columns)) {
             return array();

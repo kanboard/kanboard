@@ -101,6 +101,8 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
             foreach ($swimlane['columns'] as $columnIndex => &$column) {
                 $column['column_nb_tasks'] = $this->swimlanes[0]['columns'][$columnIndex]['column_nb_tasks'];
                 $column['column_nb_score'] = $this->swimlanes[0]['columns'][$columnIndex]['column_score'];
+                // add number of open tasks to each column, ignoring the current filter
+                $column['column_nb_open_tasks'] = $this->columns[array_search($column['id'], array_column($this->columns, 'id'))]['nb_open_tasks'];
             }
         }
 
@@ -108,7 +110,7 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
     }
 
     /**
-     * Calculate stats for each column acrosss all swimlanes
+     * Calculate stats for each column across all swimlanes
      *
      * @access protected
      * @param  array $columns
