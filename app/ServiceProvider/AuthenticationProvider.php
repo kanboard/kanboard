@@ -41,11 +41,11 @@ class AuthenticationProvider implements ServiceProviderInterface
             $container['authenticationManager']->register(new ReverseProxyAuth($container));
         }
 
+        $container['authenticationManager']->register(new ApiAccessTokenAuth($container));
+        
         if (LDAP_AUTH) {
             $container['authenticationManager']->register(new LdapAuth($container));
-        }
-
-        $container['authenticationManager']->register(new ApiAccessTokenAuth($container));
+        }     
 
         $container['projectAccessMap'] = $this->getProjectAccessMap();
         $container['applicationAccessMap'] = $this->getApplicationAccessMap();
