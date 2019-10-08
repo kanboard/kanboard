@@ -114,11 +114,27 @@ class ProjectPermissionController extends BaseController
         $project = $this->getProject();
         $values = $this->request->getJson();
 
-        if (! empty($project) && ! empty($values) && $this->projectUserRoleModel->changeUserRole($project['id'], $values['id'], $values['role'])) {
-            $this->response->json(array('status' => 'ok'));
-        } else {
+        if (empty($project) ||
+            empty($values)
+        ) {
             $this->response->json(array('status' => 'error'), 500);
+            return;
         }
+
+        $userRole = $this->projectUserRoleModel->getUserRole($project['id'], $values['id']);
+        $usersGroupedByRole = $this->projectUserRoleModel->getAllUsersGroupedByRole($project['id']);
+
+        if ($userRole === 'project-manager' &&
+            $values['role'] !== 'project-manager' &&
+            count($usersGroupedByRole['project-manager']) <= 1
+        ) {
+            $this->response->json(array('status' => 'error'), 500);
+            return;
+        }
+
+        $this->projectUserRoleModel->changeUserRole($project['id'], $values['id'], $values['role']);
+
+        $this->response->json(array('status' => 'ok'));
     }
 
     /**
