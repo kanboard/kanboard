@@ -67,7 +67,7 @@ class UserSession extends Base
      */
     public function getRole()
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return '';
         }
 
@@ -103,7 +103,7 @@ class UserSession extends Base
      */
     public function hasPostAuthentication()
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return false;
         }
 
@@ -124,10 +124,14 @@ class UserSession extends Base
      * Return true if the logged user is admin
      *
      * @access public
+     * @param  bool  $check_project_permission
      * @return bool
      */
-    public function isAdmin()
+    public function isAdmin($check_project_permission = false)
     {
+        if ($check_project_permission && defined('ADMIN_RESPECTS_PRIVACY')) {
+            return $this->getRole() === Role::APP_ADMIN && !ADMIN_RESPECTS_PRIVACY;
+        }        
         return $this->getRole() === Role::APP_ADMIN;
     }
 
@@ -139,7 +143,7 @@ class UserSession extends Base
      */
     public function getId()
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return 0;
         }
 
@@ -154,7 +158,7 @@ class UserSession extends Base
      */
     public function getUsername()
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return '';
         }
 
@@ -169,7 +173,7 @@ class UserSession extends Base
      */
     public function getLanguage()
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return '';
         }
 
@@ -184,7 +188,7 @@ class UserSession extends Base
      */
     public function getTimezone()
     {
-        if (! $this->isLogged()) {
+        if (!$this->isLogged()) {
             return '';
         }
 
@@ -222,11 +226,11 @@ class UserSession extends Base
      */
     public function getFilters($projectID)
     {
-        if (! session_exists('filters:'.$projectID)) {
+        if (!session_exists('filters:' . $projectID)) {
             return session_get('user')['filter'] ?: 'status:open';
         }
 
-        return session_get('filters:'.$projectID);
+        return session_get('filters:' . $projectID);
     }
 
     /**
@@ -238,6 +242,6 @@ class UserSession extends Base
      */
     public function setFilters($projectID, $filters)
     {
-        session_set('filters:'.$projectID, $filters);
+        session_set('filters:' . $projectID, $filters);
     }
 }

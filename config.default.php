@@ -251,3 +251,6 @@ define('TOTP_ISSUER', 'Kanboard');
 
 // Comma separated list of fields to not synchronize when using external authentication providers
 define('EXTERNAL_AUTH_EXCLUDE_FIELDS', 'username');
+
+// Administrator could only see projects with permission
+define('ADMIN_RESPECTS_PRIVACY', true);

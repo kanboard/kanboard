@@ -18,7 +18,7 @@ class ProjectUserOverviewController extends BaseController
     {
         $user_id = $this->request->getIntegerParam('user_id', UserModel::EVERYBODY_ID);
 
-        if ($this->userSession->isAdmin()) {
+        if ($this->userSession->isAdmin(true)) {
             $project_ids = $this->projectModel->getAllIds();
         } else {
             $project_ids = $this->projectPermissionModel->getActiveProjectIds($this->userSession->getId());

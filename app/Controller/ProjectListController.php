@@ -17,7 +17,7 @@ class ProjectListController extends BaseController
      */
     public function show()
     {
-        if ($this->userSession->isAdmin()) {
+        if ($this->userSession->isAdmin(true)) {
             $projectIds = $this->projectModel->getAllIds();
         } else {
             $projectIds = $this->projectPermissionModel->getProjectIds($this->userSession->getId());

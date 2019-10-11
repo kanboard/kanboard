@@ -169,7 +169,7 @@ class ProjectRoleHelper extends Base
             return true;
         }
 
-        if ($this->userSession->isAdmin() || $this->getProjectUserRole($task['project_id']) === Role::PROJECT_MANAGER) {
+        if (($this->userSession->isAdmin(true)) || $this->getProjectUserRole($task['project_id']) === Role::PROJECT_MANAGER) {
             return true;
         }
 
@@ -226,7 +226,7 @@ class ProjectRoleHelper extends Base
             return false;
         }
 
-        if ($this->userSession->isAdmin()) {
+        if ($this->userSession->isAdmin(true)) {
             return true;
         }
 

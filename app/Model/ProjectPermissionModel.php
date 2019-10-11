@@ -120,7 +120,7 @@ class ProjectPermissionModel extends Base
      */
     public function isUserAllowed($project_id, $user_id)
     {
-        if ($this->userSession->isAdmin()) {
+        if ($this->userSession->isAdmin(true)) {
             return true;
         }
 
