@@ -160,7 +160,7 @@ class TagModel extends Base
      * @param  string  $tag
      * @return bool
      */
-    public function update($tag_id, $tag, $color_id)
+    public function update($tag_id, $tag, $color_id = null)
     {
         return $this->db->table(self::TABLE)->eq('id', $tag_id)->update(array(
             'name' => $tag,
