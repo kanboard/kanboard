@@ -1308,7 +1308,7 @@ return array(
     'There is no external integration installed.' => 'Es ist keine externe Integration installiert.',
     'You are not allowed to update tasks assigned to someone else.' => 'Sie sind nicht berechtigt, Aufgaben zu aktualisieren, die jemand anderem zugewiesen wurden.',
     'You are not allowed to change the assignee.' => 'Sie dürfen den Zuständigen nicht ändern.',
-    'Task suppression is not permitted' => 'Taskausblendung ist nicht zulässig',
+    'Task suppression is not permitted' => 'Entfernen von Aufgaben ist nicht erlaubt.',
     'Changing assignee is not permitted' => 'Änderung des Zuständigen ist nicht zulässig',
     'Update only assigned tasks is permitted' => 'Nur zugeordnete Aufgaben dürfen aktualisiert werden',
     'Only for tasks assigned to the current user' => 'Nur für Aufgaben, die dem aktuellen Benutzer zugeordnet sind',
