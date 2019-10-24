@@ -55,7 +55,7 @@ class JsCommand extends BaseCommand
     ];
 
     private $vendorFiles = [
-        'assets/vendor/jquery/jquery-3.3.1.min.js',
+        'assets/vendor/jquery/jquery-3.4.1.min.js',
         'assets/vendor/jquery-ui/jquery-ui.min.js',
         'assets/vendor/jquery-ui/i18n/datepicker-*.js',
         'assets/vendor/jqueryui-timepicker-addon/jquery-ui-timepicker-addon.min.js',
