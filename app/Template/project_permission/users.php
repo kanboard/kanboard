@@ -56,4 +56,5 @@
             <button type="submit" class="btn btn-blue"><?= t('Add') ?></button>
         </form>
     </div>
+    <?= $this->hook->render('template:project-permission:after-adduser'), array($project, $values, $errors) ?>
 <?php endif ?>
