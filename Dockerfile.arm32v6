@@ -1,4 +1,4 @@
-FROM arm32v6/alpine:3.10.2
+FROM arm32v6/alpine:3.10.3
 
 VOLUME /var/www/app/data
 VOLUME /var/www/app/plugins
