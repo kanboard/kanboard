@@ -528,6 +528,7 @@ return array(
     'RSD - Serbian dinar' => 'RSD - Serbiska Dinarer',
     'CNY - Chinese Yuan' => 'CNY - Kinesisk Yuan',
     'USD - US Dollar' => 'USD - Amerikanska Dollar',
+    // 'VES - Venezuelan Bolívar' => '',
     'Destination column' => 'Målkolumn',
     'Move the task to another column when assigned to a user' => 'Flytta uppgiften till en annan kolumn när den tilldelats en användare',
     'Move the task to another column when assignee is cleared' => 'Flytta uppgiften till en annan kolumn när tilldelningen tas bort.',
@@ -1406,4 +1407,5 @@ return array(
     // 'Automatically update the start date when the task is moved away from a specific column' => '',
     // 'HTTP Client:' => '',
     // 'XBT - bitcoin' => '',
+    // 'Assigned' => '',
 );

@@ -528,6 +528,7 @@ return array(
     'RSD - Serbian dinar' => 'RSD - dinar Serbia',
     'CNY - Chinese Yuan' => 'CNY - Yuan Trung Quốc',
     'USD - US Dollar' => 'Đô la Mỹ - Đô la Mỹ',
+    // 'VES - Venezuelan Bolívar' => '',
     'Destination column' => 'Cột đích',
     'Move the task to another column when assigned to a user' => 'Chuyển nhiệm vụ sang cột khác khi được chỉ định cho người dùng',
     'Move the task to another column when assignee is cleared' => 'Di chuyển nhiệm vụ sang cột khác khi người nhận chuyển giao bị xóa',
@@ -1406,4 +1407,5 @@ return array(
     // 'Automatically update the start date when the task is moved away from a specific column' => '',
     // 'HTTP Client:' => '',
     // 'XBT - bitcoin' => '',
+    // 'Assigned' => '',
 );

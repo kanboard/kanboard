@@ -528,6 +528,7 @@ return array(
     'RSD - Serbian dinar' => 'RSD - 세르비아 디나르',
     // 'CNY - Chinese Yuan' => '',
     'USD - US Dollar' => 'USD - 미국 달러',
+    // 'VES - Venezuelan Bolívar' => '',
     'Destination column' => '이동 후 컬럼',
     'Move the task to another column when assigned to a user' => '사용자의 할당을 하면 할일을 다른 컬럼에 이동',
     'Move the task to another column when assignee is cleared' => '사용자의 할당이 없어지면 할일을 다른 컬럼에 이동',
@@ -1406,4 +1407,5 @@ return array(
     // 'Automatically update the start date when the task is moved away from a specific column' => '',
     // 'HTTP Client:' => '',
     // 'XBT - bitcoin' => '',
+    // 'Assigned' => '',
 );

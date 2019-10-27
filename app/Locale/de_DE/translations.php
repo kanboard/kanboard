@@ -528,6 +528,7 @@ return array(
     'RSD - Serbian dinar' => 'RSD - Serbische Dinar',
     'CNY - Chinese Yuan' => 'CNY - Renminbi',
     'USD - US Dollar' => 'USD - US-Dollar',
+    // 'VES - Venezuelan Bolívar' => '',
     'Destination column' => 'Zielspalte',
     'Move the task to another column when assigned to a user' => 'Aufgabe in eine andere Spalte verschieben, wenn ein Benutzer zugeordnet wurde.',
     'Move the task to another column when assignee is cleared' => 'Aufgabe in eine andere Spalte verschieben, wenn die Zuordnung gelöscht wurde.',
@@ -1406,4 +1407,5 @@ return array(
     'Automatically update the start date when the task is moved away from a specific column' => 'Aktualisiert automatisch das Startdatum, wenn die Aufgabe aus einer bestimmten Spalte genommen wird',
     'HTTP Client:' => 'HTTP-Client:',
     'XBT - bitcoin' => 'XBT - Bitcoin:',
+    // 'Assigned' => '',
 );

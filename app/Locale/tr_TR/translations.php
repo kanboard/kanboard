@@ -528,6 +528,7 @@ return array(
     'RSD - Serbian dinar' => 'Sırp Dinarı',
     'CNY - Chinese Yuan' => 'Çin Yuanı',
     'USD - US Dollar' => 'USD Amerikan Doları',
+    // 'VES - Venezuelan Bolívar' => '',
     'Destination column' => 'Hedef Sütun',
     'Move the task to another column when assigned to a user' => 'Bir kullanıcıya atandığında görevi başka bir sütuna taşı',
     'Move the task to another column when assignee is cleared' => 'Atanmış kullanıcı kaldırıldığında görevi başka bir sütuna taşı',
@@ -662,7 +663,6 @@ return array(
     'Closed tasks' => 'Kapatılmış görevler',
     'Open tasks' => 'Açık görevler',
     'Not assigned' => 'Atanmamış',
-    'Assigned' => 'Atanmış',
     'View advanced search syntax' => 'Gelişmiş arama kodlarını göster',
     'Overview' => 'Özet Görünüm',
     'Board/Calendar/List view' => 'Pano/Takvim/Liste görünümü',
@@ -1407,4 +1407,5 @@ return array(
     // 'Automatically update the start date when the task is moved away from a specific column' => '',
     // 'HTTP Client:' => '',
     // 'XBT - bitcoin' => '',
+    'Assigned' => 'Atanmış',
 );

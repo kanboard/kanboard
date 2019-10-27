@@ -528,6 +528,7 @@ return array(
     'RSD - Serbian dinar' => '第纳尔',
     'CNY - Chinese Yuan' => '人民币',
     'USD - US Dollar' => '美元',
+    // 'VES - Venezuelan Bolívar' => '',
     'Destination column' => '目标栏目',
     'Move the task to another column when assigned to a user' => '指定受理人时移动到其它栏目',
     'Move the task to another column when assignee is cleared' => '移除受理人时移动到其它栏目',
@@ -1406,4 +1407,5 @@ return array(
     'Automatically update the start date when the task is moved away from a specific column' => '当任务离开指定栏目时自动开始计时',
     'HTTP Client:' => 'HTTP客户端',
     'XBT - bitcoin' => 'XBT - 比特币',
+    // 'Assigned' => '',
 );

@@ -528,6 +528,7 @@ return array(
     'RSD - Serbian dinar' => 'RSD - Сербський динар',
     'CNY - Chinese Yuan' => 'CNY - Китайський юань',
     'USD - US Dollar' => 'USD - Американський долар',
+    // 'VES - Venezuelan Bolívar' => '',
     'Destination column' => 'Колонка призначення',
     'Move the task to another column when assigned to a user' => 'Перемістити задачу до іншої колонки, якщо призначено користувачу',
     'Move the task to another column when assignee is cleared' => 'Перемістити задачу до іншої колонки, якщо знято відповідального',
@@ -1406,4 +1407,5 @@ return array(
     'Automatically update the start date when the task is moved away from a specific column' => 'Автоматично оновлювати дату початку, коли задачу переміщено із вказаної колонки',
     'HTTP Client:' => 'HTTP-клієнт:',
     'XBT - bitcoin' => 'XBT - Біткоїн',
+    // 'Assigned' => '',
 );

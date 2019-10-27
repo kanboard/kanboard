@@ -528,6 +528,7 @@ return array(
     'RSD - Serbian dinar' => 'RSD – Srbský dinár',
     'CNY - Chinese Yuan' => 'CNY – Čínsky juan',
     'USD - US Dollar' => 'USD – Americký dolár',
+    // 'VES - Venezuelan Bolívar' => '',
     'Destination column' => 'Cieľový stĺpec',
     'Move the task to another column when assigned to a user' => 'Presunúť úlohu do iného stĺpca, keď je pridelená používateľovi',
     'Move the task to another column when assignee is cleared' => 'Presunúť úlohu do iného stĺpca, keď je pridelenie vymazané',
@@ -1406,4 +1407,5 @@ return array(
     'Automatically update the start date when the task is moved away from a specific column' => 'Automaticky aktualizovať dátum začiatku, keď je úloha presunutá zo zadaného stĺpca',
     'HTTP Client:' => 'Klient HTTP',
     'XBT - bitcoin' => 'XBT – bitcoin',
+    // 'Assigned' => '',
 );

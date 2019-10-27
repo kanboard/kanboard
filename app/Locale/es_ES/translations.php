@@ -528,7 +528,7 @@ return array(
     'RSD - Serbian dinar' => 'RSD - Dinar serbio',
     'CNY - Chinese Yuan' => 'CNY - Yuan Chino',
     'USD - US Dollar' => 'USD - Dólar estadounidense',
-    'VES - Venezuelan bolívar' => 'VES - bolívar soberano (moneda)',
+    // 'VES - Venezuelan Bolívar' => '',
     'Destination column' => 'Columna destino',
     'Move the task to another column when assigned to a user' => 'Mover la tarea a otra columna cuando sea asignada a un usuario',
     'Move the task to another column when assignee is cleared' => 'Mover la tarea a otra columna cuando se elimine la persona asignada',
@@ -1404,7 +1404,8 @@ return array(
     '%s moved the task #%d "%s" to the project "%s"' => '%s movió la tarea #%d "%s" al proyecto "%s',
     'Task #%d "%s" has been moved to the project "%s"' => 'La tarea #%d "%s" se movió al proyecto "%s',
     'Move the task to another column when the due date is less than a certain number of days' => 'Mueva la tarea a otra columna cuando la fecha de vencimiento sea inferior a un cierto número de días',
-    'Automatically update the start date when task move away from certain column' => 'Actualizar automáticamente la fecha de inicio cuando la tarea se aleje de cierta columna',
+    'Automatically update the start date when the task is moved away from a specific column' => 'Actualizar automáticamente la fecha de inicio cuando la tarea se aleje de cierta columna',
     'HTTP Client:' => 'Cliente HTTP:',
     'XBT - bitcoin' => 'XBT - bitcoin',
+    // 'Assigned' => '',
 );
