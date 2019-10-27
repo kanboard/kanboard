@@ -1,9 +1,32 @@
+Version 1.2.12 (Oct 26, 2019)
+-----------------------------
+
+* Update Docker image to Alpine Linux 3.10.3
+* Add new template hook: "template:project-permission:after-adduser"
+* Upgrade jQuery to version 3.4.1
+* Add Spanish (Venezuela) translation
+* Removed color_id requirement for tag API calls
+* Fix subtask restriction modal when clicking on the icon instead of link
+* Use PHPUnit 5 for Vagrant
+* Prevent last project manager role from being removed
+* Check API token before LDAP authentication
+* Make sure task limit consider all open tasks (not only filtered tasks)
+* Update translations
+* Change user filter and category icon
+* Add "anybody" filter
+* Disable user scaling to avoid page shrinking when drag&drop on mobile
+* Fix condition for action "Automatically update the start date when task move away from certain column"
+* Add tests for task link and subtask assignee filters
+* Changes filters from in array to subqueries
+* Add hash to image URL to force browser to update avatar image when changed
+
 Version 1.2.11 (Aug 24, 2019)
 -----------------------------
 
 Breaking Changes:
 
-* Internet Explorer is not supported anymore
+* Internet Explorer support is now deprecated
+* Add project ID to ExternalTaskProviderInterface::fetch()
 
 Fixes and Improvements:
 
@@ -11,7 +34,6 @@ Fixes and Improvements:
 * Update Docker image to Alpine Linux 3.10.2
 * Hide due date time on the card if time is 00:00
 * Add new plugin hooks in view switcher
-* Add project ID to ExternalTaskProviderInterface::fetch()
 * Ignore Dockerfiles from git archive
 * Remove dependency on nodejs and gulp
 * Remove dependency on Sass
