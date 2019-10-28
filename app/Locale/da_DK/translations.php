@@ -1407,5 +1407,5 @@ return array(
     'Automatically update the start date when the task is moved away from a specific column' => 'Opdatere automatisk startdato når opgaven flyttes væk fra bestemt kolonne',
     'HTTP Client:' => 'HTTP klient:',
     'XBT - bitcoin' => 'XBT - bitcoin',
-    // 'Assigned' => '',
+    'Assigned' => 'Tildelt',
 );
