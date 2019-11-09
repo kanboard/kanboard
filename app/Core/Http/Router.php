@@ -86,7 +86,7 @@ class Router extends Base
             $path = substr($path, 0, - strlen($this->request->getQueryString()) - 1);
         }
 
-        if ($path !== '' && $path{0} === '/') {
+        if ($path !== '' && $path[0] === '/') {
             $path = substr($path, 1);
         }
 

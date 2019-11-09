@@ -37,7 +37,7 @@ class ProjectActivityEventFormatter extends BaseFormatter implements FormatterIn
      */
     protected function unserializeEvent($data)
     {
-        if ($data{0} === 'a') {
+        if ($data[0] === 'a') {
             return unserialize($data);
         }
 

@@ -461,7 +461,7 @@ function version_99(PDO $pdo)
             $row['action_name'] = '\Kanboard\Action\TaskCloseColumn';
         } elseif ($row['action_name'] === 'TaskLogMoveAnotherColumn') {
             $row['action_name'] = '\Kanboard\Action\CommentCreationMoveTaskColumn';
-        } elseif ($row['action_name']{0} !== '\\') {
+        } elseif ($row['action_name'][0] !== '\\') {
             $row['action_name'] = '\Kanboard\Action\\'.$row['action_name'];
         }
 
