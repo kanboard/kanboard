@@ -50,3 +50,18 @@
 .input-addon-item:not(:first-child) {
     border-left: 0
 }
+
+.project-header .filter-box-component .input-addon {
+    min-width: 280px
+}
+
+.input-addon .input-addon-field {
+    flex: 1 1 auto;
+    width: 1% !important;
+}
+
+@media (max-width: 400px) {
+    .input-addon-item {
+        padding: 3px
+    }
+}
