@@ -41,6 +41,7 @@ Kanboard.Dropdown.prototype.listen = function() {
             if (newOffset < 0) {
                 newOffset = 15;
             }
+            clone.css('left', newOffset);
         }
         else {
             clone.css('left', offset.left);
