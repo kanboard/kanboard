@@ -36,7 +36,11 @@ Kanboard.Dropdown.prototype.listen = function() {
         }
 
         if (offset.left + submenuWidth > $(window).width()) {
-            clone.css('left', offset.left - submenuWidth + $(this).outerWidth());
+            var newOffset = offset.left - submenuWidth + $(this).outerWidth();
+            // If calculated left offset is negative (off-screen), default to 15 pixels
+            if (newOffset < 0) {
+                newOffset = 15;
+            }
         }
         else {
             clone.css('left', offset.left);
@@ -48,7 +52,7 @@ Kanboard.Dropdown.prototype.listen = function() {
     });
 
     $(document).on('click', '.dropdown-submenu-open li', function(e) {
-    	
+
         if ($(e.target).is('li')) {
             KB.trigger('dropdown.clicked');
 
