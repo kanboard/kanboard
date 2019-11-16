@@ -65,7 +65,9 @@ Kanboard.App.prototype.datePicker = function() {
     $(".form-datetime").datetimepicker({
         dateFormat: dateFormat,
         timeFormat: timeFormat,
-        constrainInput: false
+        constrainInput: false,
+        amNames: ['am', 'AM'],
+        pmNames: ['pm', 'PM']
     });
 };
 
