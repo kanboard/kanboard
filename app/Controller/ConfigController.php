@@ -69,7 +69,7 @@ class ConfigController extends BaseController
             'mail_transports' => $this->emailClient->getAvailableTransports(),
             'languages' => $this->languageModel->getLanguages(),
             'timezones' => $this->timezoneModel->getTimezones(),
-            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats()),
+            'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats(true)),
             'time_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getTimeFormats()),
             'title' => t('Settings').' &gt; '.t('Application settings'),
         )));
