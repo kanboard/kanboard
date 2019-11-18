@@ -48,7 +48,7 @@ Kanboard.App.prototype.datePicker = function() {
     var bodyElement = $("body");
     var dateFormat = bodyElement.data("js-date-format");
     var timeFormat = bodyElement.data("js-time-format");
-    var lang = bodyElement.data("js-lang");
+    var lang = $("html").attr("lang");
 
     $.datepicker.setDefaults($.datepicker.regional[lang]);
     $.timepicker.setDefaults($.timepicker.regional[lang]);
