@@ -154,7 +154,7 @@ class LanguageModel extends Base
             'hr_HR' => 'hr',
             'hu_HU' => 'hu',
             'nl_NL' => 'nl',
-            'nb_NO' => 'nb',
+            'nb_NO' => 'no',
             'pl_PL' => 'pl',
             'pt_PT' => 'pt',
             'pt_BR' => 'pt-BR',
@@ -174,6 +174,9 @@ class LanguageModel extends Base
             'id_ID' => 'id',
             'el_GR' => 'el',
             'fa_IR' => 'fa',
+            'vi_VN' => 'vi',
+            'bs_BA' => 'bs',
+            'my_MY' => 'my',
         );
 
         $lang = $this->getCurrentLanguage();
