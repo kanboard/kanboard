@@ -1,7 +1,7 @@
 base32
 ======
 
-Base32 Encoder/Decoder for PHP according to RFC 4648
+Base32 Encoder/Decoder for PHP according to [RFC 4648](https://tools.ietf.org/html/rfc4648).
 
 [![Build Status](https://secure.travis-ci.org/ChristianRiesen/base32.png)](http://travis-ci.org/ChristianRiesen/base32)
 [![HHVM Status](http://hhvm.h4cc.de/badge/christian-riesen/base32.png)](http://hhvm.h4cc.de/package/christian-riesen/base32)
@@ -15,19 +15,20 @@ Do you like this? Flattr it:
 Usage
 -----
 
-    <?php
+```php
+<?php
 
-    // Include class or user autoloader
-    use Base32\Base32;
+// Include class or user autoloader
+use Base32\Base32;
 
-    $string = 'fooba';
+$string = 'fooba';
 
-    $encoded = Base32::encode($string);
-    // $encoded contains now 'MZXW6YTB'
+$encoded = Base32::encode($string);
+// $encoded contains now 'MZXW6YTB'
 
-    $decoded = Base32::decode($encoded);
-    // $decoded is again 'fooba'
-
+$decoded = Base32::decode($encoded);
+// $decoded is again 'fooba'
+```
 
 About
 =====
@@ -44,9 +45,9 @@ Have a RFC compliant Base32 encoder and decoder. The implementation could be imp
 Requirements
 ------------
 
-PHP 5.3.x+
+PHP 5.3 to 5.6 or 7.0+
 
-If you want to run the tests, PHPUnit 3.6 or up is required.
+If you want to run the tests, PHPUnit 5.0+ or up is required. Tests require PHP 5.6 or 7.0+.
 
 Author
 ------
@@ -57,4 +58,3 @@ Acknowledgements
 ----------------
 
 Base32 is mostly based on the work of https://github.com/NTICompass/PHP-Base32
-
