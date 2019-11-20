@@ -37,7 +37,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
-    width: 300px
+    max-width: 300px
 }
 
 .select-dropdown-input-container input.select-dropdown-input {
