@@ -96,7 +96,10 @@ class PluginController extends BaseController
     public function confirm()
     {
         $pluginId = $this->request->getStringParam('pluginId');
-        $plugins = $this->pluginLoader->getPlugins();
+        $plugins = array_merge(
+          $this->pluginLoader->getPlugins(),
+          $this->pluginLoader->getIncompatiblePlugins()
+        );
 
         $this->response->html($this->template->render('plugin/remove', array(
             'plugin_id' => $pluginId,
