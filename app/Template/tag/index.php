@@ -12,12 +12,14 @@
 <?php else: ?>
     <table class="table-striped table-scrolling">
         <tr>
-            <th class="column-80"><?= t('Tag') ?></th>
+            <th class="column-60"><?= t('Tag') ?></th>
+            <th class="column-20"><?= t('Color') ?></th>
             <th><?= t('Action') ?></th>
         </tr>
         <?php foreach ($tags as $tag): ?>
             <tr>
                 <td><?= $this->text->e($tag['name']) ?></td>
+                <td><?= $this->text->e($colors[$tag['color_id']] ?? '') ?></td>
                 <td>
                     <?= $this->modal->medium('edit', t('Edit'), 'TagController', 'edit', array('tag_id' => $tag['id'])) ?>
                     <?= $this->modal->confirm('trash-o', t('Remove'), 'TagController', 'confirm', array('tag_id' => $tag['id'])) ?>

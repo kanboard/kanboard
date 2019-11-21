@@ -25,6 +25,7 @@ class CategoryController extends BaseController
         $this->response->html($this->helper->layout->project('category/index', array(
             'categories' => $this->categoryModel->getAll($project['id']),
             'project'    => $project,
+            'colors'  => $this->colorModel->getList(),
             'title'      => t('Categories'),
         )));
     }

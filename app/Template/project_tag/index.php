@@ -13,6 +13,7 @@
     <table class="table-striped table-scrolling">
         <tr>
             <th><?= t('Tag') ?></th>
+            <th><?= t('Color') ?></th>
         </tr>
         <?php foreach ($tags as $tag): ?>
             <tr>
@@ -30,6 +31,7 @@
                     </div>
                     <?= $this->text->e($tag['name']) ?>
                 </td>
+                <td><?= $this->text->e($colors[$tag['color_id']] ?? '') ?></td>
             </tr>
         <?php endforeach ?>
     </table>
