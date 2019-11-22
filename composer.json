@@ -60,6 +60,7 @@
         "symfony/stopwatch" : "3.4.2",
         "myclabs/deep-copy": "1.7.0",
         "phpunit/phpunit" : "5.7.24",
-        "phpunit/phpunit-selenium": "3.0.3"
+        "phpunit/phpunit-selenium": "3.0.3",
+        "roave/security-advisories": "dev-master"
     }
 }
