@@ -17,6 +17,7 @@ class ProjectTagController extends BaseController
         $this->response->html($this->helper->layout->project('project_tag/index', array(
             'project' => $project,
             'tags'    => $this->tagModel->getAllByProject($project['id']),
+            'colors'  => $this->colorModel->getList(),
             'title'   => t('Project tags management'),
         )));
     }
