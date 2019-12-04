@@ -4,9 +4,9 @@
         <tr>
             <th class="column-15"><?= t('Type') ?></th>
             <th><?= t('Title') ?></th>
-            <th class="column-10"><?= t('Dependency') ?></th>
+            <th class="column-15"><?= t('Dependency') ?></th>
             <th class="column-15"><?= t('Creator') ?></th>
-            <th class="column-15"><?= t('Date') ?></th>
+            <th class="column-10"><?= t('Date') ?></th>
         </tr>
     </thead>
     <tbody>

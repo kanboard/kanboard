@@ -2,9 +2,9 @@
     <table class="table-striped table-scrolling">
         <tr>
             <th><?= t('Filename') ?></th>
-            <th><?= t('Creator') ?></th>
-            <th><?= t('Date') ?></th>
-            <th><?= t('Size') ?></th>
+            <th class="column-15"><?= t('Size') ?></th>
+            <th class="column-15"><?= t('Creator') ?></th>
+            <th class="column-10"><?= t('Date') ?></th>
         </tr>
         <?php foreach ($files as $file): ?>
             <tr>
@@ -35,13 +35,13 @@
                     </div>
                 </td>
                 <td>
+                    <?= $this->text->bytes($file['size']) ?>
+                </td>
+                <td>
                     <?= $this->text->e($file['user_name'] ?: $file['username']) ?>
                 </td>
                 <td>
                     <?= $this->dt->date($file['date']) ?>
-                </td>
-                <td>
-                    <?= $this->text->bytes($file['size']) ?>
                 </td>
             </tr>
         <?php endforeach ?>
