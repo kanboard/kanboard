@@ -5,13 +5,13 @@
         <?php foreach ($grouped_links as $link): ?>
             <?php if (! $hide_td): ?>
                 <tr>
-                    <th class="column-45">
+                    <th>
                         <?= t('This task') ?>
                         <em><?= t($label) ?></em>
                         <span class="task-links-task-count">(<?= count($grouped_links) ?>)</span>
                     </th>
-                    <th class="column-15"><?= t('Assignee') ?></th>
-                    <th><?= t('Time tracking') ?></th>
+                    <th class="column-10"><?= t('Assignee') ?></th>
+                    <th class="column-30"><?= t('Time tracking') ?></th>
                 </tr>
                 <?php $hide_td = true ?>
             <?php endif ?>

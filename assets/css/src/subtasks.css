@@ -27,3 +27,18 @@
         border-left: none
     }
 }
+
+.subtasks-table .subtask-table-td {
+    display: flex;
+    white-space: normal;
+    min-width: 400px;
+}
+
+.subtasks-table .subtask-submenu {
+    display: flex
+}
+
+.js-subtask-toggle-status {
+    display: flex;
+    text-decoration: none
+}
