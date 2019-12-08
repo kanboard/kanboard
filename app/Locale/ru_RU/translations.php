@@ -1407,5 +1407,5 @@ return array(
     'Automatically update the start date when the task is moved away from a specific column' => 'Автоматически обновить дату начала, если задача перемещена из указанной колонки',
     'HTTP Client:' => 'HTTP Клиент:',
     'XBT - bitcoin' => 'XBT - Биткоин',
-    // 'Assigned' => '',
+    'Assigned' => 'Назначена',
 );
