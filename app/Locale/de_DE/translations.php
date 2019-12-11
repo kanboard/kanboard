@@ -428,7 +428,7 @@ return array(
     'Active swimlanes' => 'Aktive Swimlane',
     'Add a new swimlane' => 'Eine neue Swimlane hinzufügen',
     'Default swimlane' => 'Standard-Swimlane',
-    'Do you really want to remove this swimlane: "%s"?' => 'Diese Swimlane wirklich ändern: "%s"?',
+    'Do you really want to remove this swimlane: "%s"?' => 'Diese Swimlane wirklich entfernen: "%s"?',
     'Inactive swimlanes' => 'Inaktive Swimlane',
     'Remove a swimlane' => 'Swimlane entfernen',
     'Swimlane modification for the project "%s"' => 'Swimlane-Änderung für das Projekt "%s"',
@@ -1407,5 +1407,5 @@ return array(
     'Automatically update the start date when the task is moved away from a specific column' => 'Aktualisiert automatisch das Startdatum, wenn die Aufgabe aus einer bestimmten Spalte genommen wird',
     'HTTP Client:' => 'HTTP-Client:',
     'XBT - bitcoin' => 'XBT - Bitcoin:',
-    // 'Assigned' => '',
+    'Assigned' => 'Zugeordnet',
 );
