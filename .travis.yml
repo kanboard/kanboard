@@ -11,9 +11,9 @@ language: php
 sudo: false
 
 php:
+  - 7.4
   - 7.3
   - 7.2
-  - 5.6
 
 env:
   - DB=sqlite
@@ -22,8 +22,8 @@ env:
 matrix:
   fast_finish: true
 
-before_install:
-  - composer install
+before_script:
+  - composer install --no-interaction
   - npm install -g jshint
 
 script:

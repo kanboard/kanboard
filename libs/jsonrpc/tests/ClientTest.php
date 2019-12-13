@@ -77,7 +77,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
                 ),
             )));
 
-        $this->setExpectedException('BadFunctionCallException');
+        $this->expectException('BadFunctionCallException');
         $client->execute('methodA', array('a' => 'b'));
     }
 

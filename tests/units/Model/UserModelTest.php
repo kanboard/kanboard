@@ -392,6 +392,6 @@ class UserModelTest extends Base
         $this->assertTrue($userModel->disable(2));
 
         $project = $projectModel->getById(2);
-        $this->assertEquals(0, $project['is_active']);
+        $this->assertEquals(null, $project);
     }
 }
