@@ -23,7 +23,8 @@
     background-color: rgba(147, 128, 108, 0.1);
     color: #666;
     font: inherit;
-    font-weight: normal
+    font-weight: normal;
+    white-space: nowrap
 }
 
 .input-addon-item:first-child {
