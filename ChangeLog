@@ -1,3 +1,27 @@
+Version 1.2.13 (December 15, 2019)
+----------------------------------
+
+* Adjust width of time tracking column
+* Make subtasks not wrap under icons
+* Make column scrollable in Kanban view
+* Add composer dependency roave/security-advisories
+* Add colors to tag and category lists
+* Update Parsedown to v1.7.3 (security update)
+* Make sure the elements behind the alert notification are clickable after animation
+* Make sure incompatible plugins can be uninstalled from the web ui
+* Move "data-js-lang" attribute to HTML "lang" attribute
+* Update language codes for time picker so the calendars are translated correctly
+* Dropdown in project managers view covers heading
+* Fix date picker datetime parsing when using pre-defined localized versions of am/pm
+* Show ISO date format in application settings
+* Datepicker stores its Spanish locales as "es", not "es-ES" or "es-VE"
+* Increase width of color picker to avoid text overlap in Polish
+* Close open menu when clicking again on the button
+* Fix width of filter bar in mobile
+* In PHP-7.4, nested ternary operators are to be bracketed
+* Change string indexing from {0} to [0] (deprecated in PHP 7.4)
+* Update translations
+
 Version 1.2.12 (Oct 26, 2019)
 -----------------------------
 
