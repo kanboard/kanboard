@@ -29,6 +29,12 @@ class AttachmentLinkProvider extends BaseLinkProvider implements ExternalLinkPro
         'asp',
         'aspx',
         'cgi',
+        'com',
+        'net',
+        'io',
+        'org',
+        'edu',
+        'gov',
     );
 
     /**
