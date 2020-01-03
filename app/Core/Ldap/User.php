@@ -111,6 +111,17 @@ class User
     }
 
     /**
+     * Return true to set new user with role as Manager
+     *
+     * @access protected
+     * @return boolean
+     */
+    protected function userDefaultRole()
+    {
+        return LDAP_USER_DEFAULT_ROLE_MANAGER;
+    }
+
+    /**
      * Get role from LDAP groups
      *
      * Note: Do not touch the current role if groups are not configured
@@ -122,7 +133,12 @@ class User
     protected function getRole(array $groupIds)
     {
         if (! $this->hasGroupsConfigured()) {
-            return null;
+            if ($this->userDefaultRole()) {
+                $role = Role::APP_MANAGER;
+            } else {
+                $role = Role::APP_USER;
+            }
+            return $role;
         }
 
         // Init with smallest role
