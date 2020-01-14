@@ -391,7 +391,7 @@ class UserModelTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1', 'is_private' => 1, 'owner_id' => 2)));
         $this->assertTrue($userModel->disable(2));
 
-        $project = $projectModel->getById(2);
-        $this->assertEquals(null, $project);
+        $project = $projectModel->getById(1);
+        $this->assertEquals(0, $project['is_active']);
     }
 }
