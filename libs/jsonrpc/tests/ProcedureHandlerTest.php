@@ -39,14 +39,14 @@ class ProcedureHandlerTest extends PHPUnit_Framework_TestCase
 {
     public function testProcedureNotFound()
     {
-        $this->setExpectedException('BadFunctionCallException');
+        $this->expectException('BadFunctionCallException');
         $handler = new ProcedureHandler;
         $handler->executeProcedure('a');
     }
 
     public function testCallbackNotFound()
     {
-        $this->setExpectedException('BadFunctionCallException');
+        $this->expectException('BadFunctionCallException');
         $handler = new ProcedureHandler;
         $handler->withCallback('b', function() {});
         $handler->executeProcedure('a');
@@ -54,7 +54,7 @@ class ProcedureHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testClassNotFound()
     {
-        $this->setExpectedException('BadFunctionCallException');
+        $this->expectException('BadFunctionCallException');
         $handler = new ProcedureHandler;
         $handler->withClassAndMethod('getAllTasks', 'c', 'getAll');
         $handler->executeProcedure('getAllTasks');
@@ -62,7 +62,7 @@ class ProcedureHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testMethodNotFound()
     {
-        $this->setExpectedException('BadFunctionCallException');
+        $this->expectException('BadFunctionCallException');
         $handler = new ProcedureHandler;
         $handler->withClassAndMethod('getAllTasks', 'A', 'getNothing');
         $handler->executeProcedure('getAllTasks');
@@ -127,7 +127,7 @@ class ProcedureHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testTooManyArguments()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         $handler = new ProcedureHandler;
         $handler->withClassAndMethod('getAllC', new B, 'getAll');
@@ -136,7 +136,7 @@ class ProcedureHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testNotEnoughArguments()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
 
         $handler = new ProcedureHandler;
         $handler->withClassAndMethod('getAllC', new B, 'getAll');

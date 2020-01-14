@@ -16,7 +16,7 @@ class JsonEncodingValidatorTest extends PHPUnit_Framework_TestCase
     {
         json_encode("\xB1\x31");
 
-        $this->setExpectedException('\JsonRPC\Exception\ResponseEncodingFailureException');
+        $this->expectException('\JsonRPC\Exception\ResponseEncodingFailureException');
         JsonEncodingValidator::validate();
     }
 }

@@ -6,25 +6,25 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
 {
     public function testApiCredentialDoNotHaveAccessToUserCredentialProcedure()
     {
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->app->getMe();
     }
 
     public function testUserCredentialDoNotHaveAccessToAdminProcedures()
     {
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->user->getUser(1);
     }
 
     public function testManagerCredentialDoNotHaveAccessToAdminProcedures()
     {
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->user->getAllProjects();
     }
 
     public function testUserCredentialDoNotHaveAccessToManagerProcedures()
     {
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->user->createProject('Team project creation are only for app managers');
     }
 
@@ -38,7 +38,7 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
         $projectId = $this->admin->createProject('Team project created by admin');
         $this->assertNotFalse($projectId);
 
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->assertNotNull($this->manager->getProjectById($projectId));
     }
 
@@ -61,7 +61,7 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
         $projectId = $this->manager->createProject('A team project without members');
         $this->assertNotFalse($projectId);
 
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->user->getProjectById($projectId);
     }
 
@@ -90,7 +90,7 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
         $actionId = $this->manager->createAction($projectId, 'task.move.column', '\Kanboard\Action\TaskCloseColumn', array('column_id' => 1));
         $this->assertNotFalse($actionId);
 
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->user->removeAction($projectId);
     }
 
@@ -108,7 +108,7 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
 
         $this->assertTrue($this->manager->addProjectUser($projectId, $this->userUserId, 'project-member'));
 
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->user->removeAction($actionId);
     }
 
@@ -140,7 +140,7 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
         $categoryId = $this->manager->createCategory($projectId, 'Test');
         $this->assertNotFalse($categoryId);
 
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->user->removeCategory($categoryId);
     }
 
@@ -157,7 +157,7 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
         $this->assertNotFalse($categoryId);
 
         $this->assertTrue($this->manager->addProjectUser($projectId, $this->userUserId, 'project-member'));
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->user->removeCategory($categoryId);
     }
 
@@ -189,7 +189,7 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
         $columnId = $this->manager->addColumn($projectId, 'Test');
         $this->assertNotFalse($columnId);
 
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->user->removeColumn($columnId);
     }
 
@@ -206,7 +206,7 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
         $this->assertNotFalse($columnId);
 
         $this->assertTrue($this->manager->addProjectUser($projectId, $this->userUserId, 'project-member'));
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->user->removeColumn($columnId);
     }
 
@@ -242,7 +242,7 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
         $commentId = $this->manager->createComment($taskId, $this->userUserId, 'My comment');
         $this->assertNotFalse($commentId);
 
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->user->updateComment($commentId, 'something else');
     }
 
@@ -281,7 +281,7 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
         $subtaskId = $this->manager->createSubtask($taskId, 'My subtask');
         $this->assertNotFalse($subtaskId);
 
-        $this->setExpectedException('JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
         $this->user->removeSubtask($subtaskId);
     }
 
