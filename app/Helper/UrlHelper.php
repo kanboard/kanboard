@@ -171,7 +171,7 @@ class UrlHelper extends Base
     public function dir()
     {
         if ($this->directory === '' && $this->request->getMethod() !== '') {
-            if (strlen(KANBOARD_URL) > 0) {
+            if (defined('KANBOARD_URL') && strlen(KANBOARD_URL) > 0) {
                 $this->directory = parse_url(KANBOARD_URL, PHP_URL_PATH);
             } else {
                 $this->directory = str_replace('\\', '/', dirname($this->request->getServerVariable('PHP_SELF')));
