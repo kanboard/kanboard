@@ -704,7 +704,7 @@ return array(
     'Edit Authentication' => 'Modifica Autenticazione',
     'Remote user' => 'Utente remoto',
     'Remote users do not store their password in Kanboard database, examples: LDAP, Google and Github accounts.' => 'La password degli utenti remoti (ad esempio: LDAP, account Google e Github) non è salvata nel database di Kanboard',
-    'If you check the box "Disallow login form", credentials entered in the login form will be ignored.' => 'Se imposti l\'opzione "Disabilita il form di login", le credenzali inserite nella saranno ignorate.',
+    'If you check the box "Disallow login form", credentials entered in the login form will be ignored.' => 'Se selezioni la casella "Disabilita il form di login", le credenziali immesse nel modulo di accesso verranno ignorate.',
     'Default task color' => 'Colore predefinito dei task',
     'This feature does not work with all browsers.' => 'Questa feature non funziona con tutti i browser.',
     'There is no destination project available.' => 'Non ci sono progetti disponbili come destinazione.',
