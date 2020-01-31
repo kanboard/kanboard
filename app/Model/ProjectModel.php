@@ -457,6 +457,8 @@ class ProjectModel extends Base
             return false;
         }
 
+        $values['per_swimlane_task_limits'] = empty($values['per_swimlane_task_limits']) ? 0 : 1;
+
         $this->helper->model->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end'));
 
         return $this->exists($values['id']) &&

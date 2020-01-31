@@ -43,6 +43,7 @@ class ProjectModelTest extends Base
         $this->assertEquals(1, $project['is_active']);
         $this->assertEquals(0, $project['is_public']);
         $this->assertEquals(0, $project['is_private']);
+        $this->assertEquals(0, $project['per_swimlane_task_limits']);
         $this->assertEquals(time(), $project['last_modified'], '', 1);
         $this->assertEmpty($project['token']);
         $this->assertEmpty($project['start_date']);
@@ -198,6 +199,20 @@ class ProjectModelTest extends Base
         $project = $projectModel->getById(1);
         $this->assertNotEmpty($project);
         $this->assertEquals(0, $project['owner_id']);
+    }
+
+    public function testUpdatePerSwimlaneTaskLimits()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
+
+        $project = $projectModel->getById(1);
+        $this->assertEquals(0, $project['per_swimlane_task_limits']);
+
+        $this->assertTrue($projectModel->update(array('id'=> 1, 'per_swimlane_task_limits' => 1)));
+
+        $project = $projectModel->getById(1);
+        $this->assertEquals(1, $project['per_swimlane_task_limits']);
     }
 
     public function testGetAllIds()

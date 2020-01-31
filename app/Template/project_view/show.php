@@ -31,6 +31,12 @@
     <?php if ($project['end_date']): ?>
         <li><?= t('End date: ').$this->dt->date($project['end_date']) ?></li>
     <?php endif ?>
+
+    <?php if ($project['per_swimlane_task_limits']): ?>
+        <li><?= t('Task limits are applied to each swimlane individually') ?></li>
+    <?php else: ?>
+        <li><?= t('Task limits are applied across swimlanes') ?></li>
+    <?php endif ?>
 </ul>
 
 <?php if (! empty($project['description'])): ?>

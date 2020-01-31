@@ -14,6 +14,8 @@
         <?= $this->form->text('identifier', $values, $errors, array('autofocus')) ?>
         <p class="form-help"><?= t('The project identifier is optional and must be alphanumeric, example: MYPROJECT.') ?></p>
 
+        <?= $this->form->checkbox('per_swimlane_task_limits', t('Task limits apply to each swimlane individually'), 1, false) ?>
+
         <?php if (count($projects_list) > 1): ?>
             <?= $this->form->label(t('Create from another project'), 'src_project_id') ?>
             <?= $this->form->select('src_project_id', $projects_list, $values, array(), array(), 'js-project-creation-select-options') ?>
