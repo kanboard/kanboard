@@ -8,7 +8,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 111;
+const VERSION = 112;
+
+function version_112(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE "projects" ADD COLUMN per_swimlane_task_limits BOOLEAN DEFAULT FALSE');
+}
 
 function version_111(PDO $pdo)
 {
