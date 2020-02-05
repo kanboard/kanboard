@@ -18,6 +18,14 @@
                 <i class="fa fa-arrows-h fa-fw"></i> <a href="#" class="filter-toggle-scrolling" title="<?= t('Keyboard shortcut: "%s"', 'c') ?>"><?= t('Horizontal scrolling') ?></a>
             </span>
         </li>
+        <li>
+            <span class="filter-vert-collapse">
+                <i class="fa fa-arrow-up fa-fw"></i> <a href="#" class="filter-vert-toggle-collapse"><?= t('Collapse vertically') ?></a>
+            </span>
+            <span class="filter-vert-expand" style="display: none">
+                <i class="fa fa-arrow-down fa-fw"></i> <a href="#" class="filter-vert-toggle-collapse"><?= t('Expand vertically') ?></a>
+            </span>
+        </li>
         <?php endif ?>
 
         <?php if ($this->user->hasProjectAccess('TaskCreationController', 'show', $project['id'])): ?>
