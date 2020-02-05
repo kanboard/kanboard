@@ -41,7 +41,7 @@ class AttachmentLinkProviderTest extends Base
         $this->assertTrue($attachmentLinkProvider->match());
 
         $attachmentLinkProvider->setUserTextInput('https://www.github.io/folder/archive.zip');
-        $this->assertFalse($attachmentLinkProvider->match());
+        $this->assertTrue($attachmentLinkProvider->match());
 
         $attachmentLinkProvider->setUserTextInput('http:// invalid url');
         $this->assertFalse($attachmentLinkProvider->match());
