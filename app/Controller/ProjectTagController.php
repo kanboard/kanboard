@@ -121,4 +121,30 @@ class ProjectTagController extends BaseController
 
         $this->response->redirect($this->helper->url->to('ProjectTagController', 'index', array('project_id' => $project['id'])));
     }
+
+    public function confirmMakeGlobalTag()
+    {
+        $project = $this->getProject();
+        $tag = $this->getProjectTag($project);
+
+        $this->response->html($this->template->render('project_tag/make_global', array(
+            'tag'     => $tag,
+            'project' => $project,
+        )));
+    }
+
+    public function makeGlobalTag(){
+        if ($this->userSession->isAdmin()) {
+            $project = $this->getProject();
+            $tag = $this->getProjectTag($project);
+            
+            if ($this->tagModel->update($tag['id'], $tag['name'], $tag['color_id'], 0)) {
+                $this->flash->success(t('Tag updated successfully.'));
+            } else {
+                $this->flash->failure(t('Unable to update this tag.'));
+            }
+
+            $this->response->redirect($this->helper->url->to('ProjectTagController', 'index', array('project_id' => $project['id'])));
+        }
+    }    
 }

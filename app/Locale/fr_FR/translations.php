@@ -1411,4 +1411,6 @@ return array(
     'Task limits apply to each swimlane individually' => 'Les limites de tâches s\'appliquent à chaque swimlane individuellement',
     'Task limits are applied to each swimlane individually' => 'Les limites de tâches sont appliquées à chaque swimlane individuellement',
     'Task limits are applied across swimlanes' => 'Les limites de tâches sont appliquées entre les swimlanes',
+    // 'Change to global tag' => '',
+    // 'Do you really want to make the tag "%s" global?' => '',
 );
