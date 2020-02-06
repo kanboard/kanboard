@@ -1408,4 +1408,7 @@ return array(
     'HTTP Client:' => 'کلاینت HTTP:',
     'XBT - bitcoin' => 'XBT - بیت کوین',
     'Assigned' => 'محول شده',
+    // 'Task limits apply to each swimlane individually' => '',
+    // 'Task limits are applied to each swimlane individually' => '',
+    // 'Task limits are applied across swimlanes' => '',
 );

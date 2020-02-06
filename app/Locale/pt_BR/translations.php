@@ -1407,8 +1407,8 @@ return array(
     'Automatically update the start date when the task is moved away from a specific column' => 'Atualizar automaticamente a data de início quando a tarefa sair de determinada coluna',
     'HTTP Client:' => 'Cliente HTTP:',
     'XBT - bitcoin' => 'XBT - bitcoin',
+    // 'Assigned' => '',
     'Task limits apply to each swimlane individually' => 'Limites de tarefas aplicam-se a cada raia individualmente',
     'Task limits are applied to each swimlane individually' => 'Limites de tarefas são aplicados a cada raia individualmente',
     'Task limits are applied across swimlanes' => 'Limites de tarefas são aplicados ao conjunto de todas as raias',
-    // 'Assigned' => '',
 );
