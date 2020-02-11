@@ -1411,4 +1411,6 @@ return array(
     'Task limits apply to each swimlane individually' => 'Aufgabenlimit gilt pro Swimlane',
     'Task limits are applied to each swimlane individually' => 'Aufgabenlimit gilt pro Swimlane',
     'Task limits are applied across swimlanes' => 'Aufgabenlimit gilt Swimlane übergreifend',
+    'Change to global tag' => 'Zu globalem Schlagwort machen',
+    'Do you really want to make the tag "%s" global?' => 'Das Schlagwort "%s" wirklich global machen?',
 );
