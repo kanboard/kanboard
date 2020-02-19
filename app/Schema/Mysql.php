@@ -8,7 +8,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 134;
+const VERSION = 135;
+
+function version_135(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `projects` ADD COLUMN `task_limit` INT DEFAULT 0');
+}
 
 function version_134(PDO $pdo)
 {

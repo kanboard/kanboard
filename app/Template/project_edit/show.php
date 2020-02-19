@@ -28,6 +28,9 @@
         <?= $this->form->textEditor('description', $values, $errors, array('tabindex' => 4)) ?>
 
         <?= $this->form->checkbox('per_swimlane_task_limits', t('Task limits apply to each swimlane individually'), 1, $project['per_swimlane_task_limits'] == 1, '', array('tabindex' => 5)) ?>
+
+        <?= $this->form->label(t('Task limit'), 'task_limit') ?>
+        <?= $this->form->number('task_limit', $values, $errors, array('tabindex' => 6)) ?>
     </fieldset>
 
     <fieldset>
@@ -42,29 +45,29 @@
 
         <div class="form-inline">
             <?= $this->form->label(t('Project owner'), 'owner_id') ?>
-            <?= $this->form->select('owner_id', $owners, $values, $errors, array('tabindex="6"')) ?>
+            <?= $this->form->select('owner_id', $owners, $values, $errors, array('tabindex="7"')) ?>
         </div>
     </fieldset>
 
     <fieldset>
         <legend><?= t('Dates') ?></legend>
 
-        <?= $this->form->date(t('Start date'), 'start_date', $values, $errors, array('tabindex="7"')) ?>
-        <?= $this->form->date(t('End date'), 'end_date', $values, $errors, array('tabindex="8"')) ?>
+        <?= $this->form->date(t('Start date'), 'start_date', $values, $errors, array('tabindex="8"')) ?>
+        <?= $this->form->date(t('End date'), 'end_date', $values, $errors, array('tabindex="9"')) ?>
     </fieldset>
 
     <fieldset>
         <legend><?= t('Priorities') ?></legend>
 
         <?= $this->form->label(t('Default priority'), 'priority_default') ?>
-        <?= $this->form->number('priority_default', $values, $errors, array('tabindex="9"')) ?>
+        <?= $this->form->number('priority_default', $values, $errors, array('tabindex="10"')) ?>
 
         <?= $this->form->label(t('Lowest priority'), 'priority_start') ?>
-        <?= $this->form->number('priority_start', $values, $errors, array('tabindex="10"')) ?>
+        <?= $this->form->number('priority_start', $values, $errors, array('tabindex="11"')) ?>
 
         <?= $this->form->label(t('Highest priority'), 'priority_end') ?>
-        <?= $this->form->number('priority_end', $values, $errors, array('tabindex="11"')) ?>
+        <?= $this->form->number('priority_end', $values, $errors, array('tabindex="12"')) ?>
     </fieldset>
 
-    <?= $this->modal->submitButtons(array('tabindex' => 12)) ?>
+    <?= $this->modal->submitButtons(array('tabindex' => 13)) ?>
 </form>

@@ -97,7 +97,8 @@ class ProjectCreationController extends BaseController
             'name' => $values['name'],
             'is_private' => $values['is_private'],
             'identifier' => $values['identifier'],
-            'per_swimlane_task_limits' => $values['per_swimlane_task_limits'],
+            'per_swimlane_task_limits' => array_key_exists('per_swimlane_task_limits', $values) ? $values['per_swimlane_task_limits'] : 0,
+            'task_limit' => $values['task_limit'],
         );
 
         return $this->projectModel->create($project, $this->userSession->getId(), true);

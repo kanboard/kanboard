@@ -33,10 +33,12 @@
     <?php endif ?>
 
     <?php if ($project['per_swimlane_task_limits']): ?>
-        <li><?= t('Task limits are applied to each swimlane individually') ?></li>
+        <li><?= t('Column task limits are applied to each swimlane individually') ?></li>
     <?php else: ?>
-        <li><?= t('Task limits are applied across swimlanes') ?></li>
+        <li><?= t('Column task limits are applied across swimlanes') ?></li>
     <?php endif ?>
+
+    <li><?= t('Task limit: ') ?><?= $project['task_limit'] ? $project['task_limit'] : '∞' ?></li>
 </ul>
 
 <?php if (! empty($project['description'])): ?>
