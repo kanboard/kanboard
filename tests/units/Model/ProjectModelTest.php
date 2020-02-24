@@ -174,6 +174,14 @@ class ProjectModelTest extends Base
         $this->assertEmpty($categories);
     }
 
+    public function testCreationWithBlankTaskLimit()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest1', 'task_limit' => '')));
+        $project = $projectModel->getById(1);
+        $this->assertEquals(0, $project['task_limit']);
+    }
+
     public function testUpdateLastModifiedDate()
     {
         $projectModel = new ProjectModel($this->container);
