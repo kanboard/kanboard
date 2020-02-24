@@ -479,24 +479,29 @@ class ProjectModelTest extends Base
     {
         $projectModel = new ProjectModel($this->container);
         $userModel = new UserModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'Me')));
         $this->assertEquals(1, $projectModel->create(array('name' => 'My project 1'), 2));
         $this->assertEquals(2, $projectModel->create(array('name' => 'My project 2')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task #1', 'project_id' => 1)));
+        $this->assertEquals(2, $taskCreationModel->create(array('title' => 'Task #2', 'project_id' => 1)));
 
-        $project = $projectModel->getByIdWithOwner(1);
+        $project = $projectModel->getByIdWithOwnerAndTaskCount(1);
         $this->assertNotEmpty($project);
         $this->assertSame('My project 1', $project['name']);
         $this->assertSame('Me', $project['owner_name']);
         $this->assertSame('user1', $project['owner_username']);
         $this->assertEquals(2, $project['owner_id']);
+        $this->assertEquals(2, $project['nb_active_tasks']);
 
-        $project = $projectModel->getByIdWithOwner(2);
+        $project = $projectModel->getByIdWithOwnerAndTaskCount(2);
         $this->assertNotEmpty($project);
         $this->assertSame('My project 2', $project['name']);
         $this->assertEquals('', $project['owner_name']);
         $this->assertEquals('', $project['owner_username']);
         $this->assertEquals(0, $project['owner_id']);
+        $this->assertEquals(0, $project['nb_active_tasks']);
     }
 
     public function testGetList()

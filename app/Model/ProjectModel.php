@@ -89,7 +89,7 @@ class ProjectModel extends Base
     public function getByIdWithOwnerAndTaskCount($project_id)
     {
         return $this->db->table(self::TABLE)
-            ->columns(self::TABLE.'.*', UserModel::TABLE.'.username AS owner_username', UserModel::TABLE.'.name AS owner_name', 'SUM('.TaskModel::TABLE.'.is_active) AS nb_active_tasks')
+            ->columns(self::TABLE.'.*', UserModel::TABLE.'.username AS owner_username', UserModel::TABLE.'.name AS owner_name', 'SUM(CAST('.TaskModel::TABLE.'.is_active AS INTEGER)) AS nb_active_tasks')
             ->eq(self::TABLE.'.id', $project_id)
             ->join(UserModel::TABLE, 'id', 'owner_id')
             ->join(TaskModel::TABLE, 'project_id', 'id')
