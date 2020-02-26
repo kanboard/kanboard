@@ -44,6 +44,7 @@ class ProjectModelTest extends Base
         $this->assertEquals(0, $project['is_public']);
         $this->assertEquals(0, $project['is_private']);
         $this->assertEquals(0, $project['per_swimlane_task_limits']);
+        $this->assertEquals(0, $project['task_limit']);
         $this->assertEquals(time(), $project['last_modified'], '', 1);
         $this->assertEmpty($project['token']);
         $this->assertEmpty($project['start_date']);
@@ -63,6 +64,17 @@ class ProjectModelTest extends Base
         $this->assertEquals(2, $projectModel->create(array('name' => 'UnitTest'), 0));
         $project = $projectModel->getById(2);
         $this->assertEquals(0, $project['owner_id']);
+    }
+
+    public function testCreationWithTaskLimit()
+    {
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest', 'task_limit' => 3)));
+
+        $project = $projectModel->getById(1);
+        $this->assertNotEmpty($project);
+        $this->assertEquals(3, $project['task_limit']);
     }
 
     public function testProjectDate()
@@ -162,6 +174,14 @@ class ProjectModelTest extends Base
         $this->assertEmpty($categories);
     }
 
+    public function testCreationWithBlankTaskLimit()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest1', 'task_limit' => '')));
+        $project = $projectModel->getById(1);
+        $this->assertEquals(0, $project['task_limit']);
+    }
+
     public function testUpdateLastModifiedDate()
     {
         $projectModel = new ProjectModel($this->container);
@@ -213,6 +233,20 @@ class ProjectModelTest extends Base
 
         $project = $projectModel->getById(1);
         $this->assertEquals(1, $project['per_swimlane_task_limits']);
+    }
+
+    public function testUpdateTaskLimit()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
+
+        $project = $projectModel->getById(1);
+        $this->assertEquals(0, $project['task_limit']);
+
+        $this->assertTrue($projectModel->update(array('id'=> 1, 'task_limit' => 1)));
+
+        $project = $projectModel->getById(1);
+        $this->assertEquals(1, $project['task_limit']);
     }
 
     public function testGetAllIds()
@@ -453,24 +487,29 @@ class ProjectModelTest extends Base
     {
         $projectModel = new ProjectModel($this->container);
         $userModel = new UserModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
 
         $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'Me')));
         $this->assertEquals(1, $projectModel->create(array('name' => 'My project 1'), 2));
         $this->assertEquals(2, $projectModel->create(array('name' => 'My project 2')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task #1', 'project_id' => 1)));
+        $this->assertEquals(2, $taskCreationModel->create(array('title' => 'Task #2', 'project_id' => 1)));
 
-        $project = $projectModel->getByIdWithOwner(1);
+        $project = $projectModel->getByIdWithOwnerAndTaskCount(1);
         $this->assertNotEmpty($project);
         $this->assertSame('My project 1', $project['name']);
         $this->assertSame('Me', $project['owner_name']);
         $this->assertSame('user1', $project['owner_username']);
         $this->assertEquals(2, $project['owner_id']);
+        $this->assertEquals(2, $project['nb_active_tasks']);
 
-        $project = $projectModel->getByIdWithOwner(2);
+        $project = $projectModel->getByIdWithOwnerAndTaskCount(2);
         $this->assertNotEmpty($project);
         $this->assertSame('My project 2', $project['name']);
         $this->assertEquals('', $project['owner_name']);
         $this->assertEquals('', $project['owner_username']);
         $this->assertEquals(0, $project['owner_id']);
+        $this->assertEquals(0, $project['nb_active_tasks']);
     }
 
     public function testGetList()

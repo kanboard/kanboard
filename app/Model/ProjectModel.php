@@ -80,6 +80,24 @@ class ProjectModel extends Base
     }
 
     /**
+     * Get a project by id with owner name and task count
+     *
+     * @access public
+     * @param  integer   $project_id    Project id
+     * @return array
+     */
+    public function getByIdWithOwnerAndTaskCount($project_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->columns(self::TABLE.'.*', UserModel::TABLE.'.username AS owner_username', UserModel::TABLE.'.name AS owner_name', 'SUM(CAST('.TaskModel::TABLE.'.is_active AS INTEGER)) AS nb_active_tasks')
+            ->eq(self::TABLE.'.id', $project_id)
+            ->join(UserModel::TABLE, 'id', 'owner_id')
+            ->join(TaskModel::TABLE, 'project_id', 'id')
+            ->groupBy(self::TABLE.'.id', UserModel::TABLE.'.username', UserModel::TABLE.'.name')
+            ->findOne();
+    }
+
+    /**
      * Get a project by the name
      *
      * @access public
@@ -372,7 +390,7 @@ class ProjectModel extends Base
             $values['identifier'] = strtoupper($values['identifier']);
         }
 
-        $this->helper->model->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end'));
+        $this->helper->model->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end', 'task_limit'));
 
         if (! $this->db->table(self::TABLE)->save($values)) {
             $this->db->cancelTransaction();
@@ -459,7 +477,7 @@ class ProjectModel extends Base
 
         $values['per_swimlane_task_limits'] = empty($values['per_swimlane_task_limits']) ? 0 : 1;
 
-        $this->helper->model->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end'));
+        $this->helper->model->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end', 'task_limit'));
 
         return $this->exists($values['id']) &&
                $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
@@ -567,5 +585,20 @@ class ProjectModel extends Base
                     ->table(self::TABLE)
                     ->eq('id', $project_id)
                     ->save(array('is_public' => 0, 'token' => ''));
+    }
+
+    /**
+     * Return the task count for a project
+     *
+     * @access public
+     * @param  integer    $project_id   Project id
+     * @return integer
+     */
+    public function taskCount($project_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->eq('id', $project_id)->exists()
+            ->join(ColumnModel::TABLE, 'id', 'project_id')
+            ->count();
     }
 }

@@ -160,6 +160,7 @@ class ProjectDuplicationModel extends Base
             'priority_start' => $project['priority_start'],
             'priority_end' => $project['priority_end'],
             'per_swimlane_task_limits' => empty($project['per_swimlane_task_limits']) ? 0 : 1,
+            'task_limit' => $project['task_limit'],
             'identifier' => $identifier,
         );
 
