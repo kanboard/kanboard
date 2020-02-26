@@ -1411,6 +1411,10 @@ return array(
     'Task limits apply to each swimlane individually' => 'Les limites de tâches s\'appliquent à chaque swimlane individuellement',
     'Task limits are applied to each swimlane individually' => 'Les limites de tâches sont appliquées à chaque swimlane individuellement',
     'Task limits are applied across swimlanes' => 'Les limites de tâches sont appliquées entre les swimlanes',
-    // 'Change to global tag' => '',
-    // 'Do you really want to make the tag "%s" global?' => '',
+    'Column task limits apply to each swimlane individually' => 'Les limites de tâches par colonne s\'appliquent à chaque swimlane individuellement',
+    'Column task limits are applied to each swimlane individually' => 'Les limites de tâches par colonne sont appliquées à chaque swimlane individuellement',
+    'Column task limits are applied across swimlanes' => 'Les limites des tâches par colonne sont appliquées entre les swimlanes',
+    'Task limit: ' => 'Limite de tâche : ',
+    'Change to global tag' => 'Changer le libellé à global',
+    'Do you really want to make the tag "%s" global?' => 'Voulez-vous vraiment rendre le libellé « %s » global ?',
 );

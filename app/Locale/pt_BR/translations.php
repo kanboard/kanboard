@@ -1411,4 +1411,10 @@ return array(
     'Task limits apply to each swimlane individually' => 'Limites de tarefas aplicam-se a cada raia individualmente',
     'Task limits are applied to each swimlane individually' => 'Limites de tarefas são aplicados a cada raia individualmente',
     'Task limits are applied across swimlanes' => 'Limites de tarefas são aplicados ao conjunto de todas as raias',
+    // 'Column task limits apply to each swimlane individually' => '',
+    // 'Column task limits are applied to each swimlane individually' => '',
+    // 'Column task limits are applied across swimlanes' => '',
+    // 'Task limit: ' => '',
+    // 'Change to global tag' => '',
+    // 'Do you really want to make the tag "%s" global?' => '',
 );

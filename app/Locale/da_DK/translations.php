@@ -1411,5 +1411,10 @@ return array(
     'Task limits apply to each swimlane individually' => 'Opgavegrænser gælder individuelt for hvert sport',
     'Task limits are applied to each swimlane individually' => 'Opgavegrænser anvendes individuelt på hvert spor',
     'Task limits are applied across swimlanes' => 'Opgavegrænser anvendes på tværs af spor',
+    // 'Column task limits apply to each swimlane individually' => '',
+    // 'Column task limits are applied to each swimlane individually' => '',
+    // 'Column task limits are applied across swimlanes' => '',
+    // 'Task limit: ' => '',
+    // 'Change to global tag' => '',
+    // 'Do you really want to make the tag "%s" global?' => '',
 );
- 

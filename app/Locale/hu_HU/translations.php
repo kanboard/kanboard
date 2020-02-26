@@ -1411,4 +1411,10 @@ return array(
     'Task limits apply to each swimlane individually' => 'A feladatkorlátok alkalmazása az egyes sávokra egyénileg',
     'Task limits are applied to each swimlane individually' => 'A feladatkorlátok alkalmazva vannak az egyes sávokra egyénileg',
     'Task limits are applied across swimlanes' => 'A feladatkorlátok alkalmazva vannak a sávok között',
+    // 'Column task limits apply to each swimlane individually' => '',
+    // 'Column task limits are applied to each swimlane individually' => '',
+    // 'Column task limits are applied across swimlanes' => '',
+    // 'Task limit: ' => '',
+    // 'Change to global tag' => '',
+    // 'Do you really want to make the tag "%s" global?' => '',
 );
