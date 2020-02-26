@@ -243,7 +243,7 @@ class SwimlaneModel extends Base
             'description' => $description,
             'position'    => $this->getLastPosition($projectId),
             'is_active'   => 1,
-            'task_limit'  => $task_limit,
+            'task_limit'  => intval($task_limit),
         ));
     }
 
