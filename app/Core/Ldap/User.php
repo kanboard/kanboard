@@ -132,6 +132,10 @@ class User
      */
     protected function getRole(array $groupIds)
     {
+
+        // Init with smallest role
+        $role = Role::APP_USER ;
+        
         if (! $this->hasGroupsConfigured()) {
             if ($this->userDefaultRole()) {
                 $role = Role::APP_MANAGER;
@@ -140,9 +144,6 @@ class User
             }
             return $role;
         }
-
-        // Init with smallest role
-        $role = Role::APP_USER ;
 
         foreach ($groupIds as $groupId) {
             $groupId = strtolower($groupId);
