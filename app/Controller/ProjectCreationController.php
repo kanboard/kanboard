@@ -27,7 +27,7 @@ class ProjectCreationController extends BaseController
             'errors' => $errors,
             'is_private' => $is_private,
             'projects_list' => $projects_list,
-            'title' => $is_private ? t('New private project') : t('New project'),
+            'title' => $is_private ? t('New personal project') : t('New project'),
         )));
     }
 

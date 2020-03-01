@@ -44,7 +44,7 @@
     </form>
     <?php if ($is_private): ?>
     <div class="alert alert-info">
-        <p><?= t('There is no user management for private projects.') ?></p>
+        <p><?= t('There is no user management for personal projects.') ?></p>
     </div>
     <?php endif ?>
 </section>

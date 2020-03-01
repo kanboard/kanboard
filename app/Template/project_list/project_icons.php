@@ -6,7 +6,7 @@
     <?php endif ?>
 
     <?php if ($project['is_private']): ?>
-        <i class="fa fa-lock fa-fw" title="<?= t('Private project') ?>"></i>
+        <i class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>"></i>
     <?php endif ?>
 
     <?php if ($this->user->hasAccess('ProjectUserOverviewController', 'managers')): ?>

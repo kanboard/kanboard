@@ -29,7 +29,7 @@
                     </span>
 
                     <?php if ($project['is_private']): ?>
-                        <i class="fa fa-lock fa-fw" title="<?= t('Private project') ?>"></i>
+                        <i class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>"></i>
                     <?php endif ?>
                 </div>
                 <div class="table-list-details">

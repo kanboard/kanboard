@@ -38,8 +38,8 @@
 
         <?php if ($this->app->config('disable_private_project') != 1): ?>
             <?php if ($this->user->hasProjectAccess('ProjectCreationController', 'create', $project['id'])): ?>
-                <?= $this->form->checkbox('is_private', t('Private project'), 1, $project['is_private'] == 1) ?>
-                <p class="form-help"><?= t('Private projects do not have users and groups management.') ?></p>
+                <?= $this->form->checkbox('is_private', t('Personal project'), 1, $project['is_private'] == 1) ?>
+                <p class="form-help"><?= t('Personal projects do not have users and groups management.') ?></p>
             <?php endif ?>
         <?php endif ?>
 

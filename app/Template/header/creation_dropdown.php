@@ -12,7 +12,7 @@
             <?php endif ?>
             <?php if ($is_private_project_enabled): ?>
                 <li>
-                    <?= $this->modal->medium('lock', t('New private project'), 'ProjectCreationController', 'createPrivate') ?>
+                    <?= $this->modal->medium('lock', t('New personal project'), 'ProjectCreationController', 'createPrivate') ?>
                 </li>
             <?php endif ?>
             <?= $this->hook->render('template:header:creation-dropdown') ?>
