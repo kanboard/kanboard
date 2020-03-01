@@ -9,7 +9,7 @@
     <?php endif ?>
 
     <?php if ($project['is_private']): ?>
-        <li><i class="fa fa-lock"></i> <?= t('This project is private') ?></li>
+        <li><i class="fa fa-lock"></i> <?= t('This project is personal') ?></li>
     <?php endif ?>
 
     <?php if ($project['is_public']): ?>
