@@ -64,7 +64,7 @@ class SwimlaneController extends BaseController
 
         if ($valid) {
             if ($this->swimlaneModel->create($project['id'], $values['name'], $values['description'], $values['task_limit']) !== false) {
-                $this->flash->success(t('Your swimlane have been created successfully.'));
+                $this->flash->success(t('Your swimlane has been created successfully.'));
                 $this->response->redirect($this->helper->url->to('SwimlaneController', 'index', array('project_id' => $project['id'])), true);
                 return;
             } else {

@@ -58,7 +58,7 @@ class ProjectCreationController extends BaseController
             $project_id = $this->createOrDuplicate($values);
 
             if ($project_id > 0) {
-                $this->flash->success(t('Your project have been created successfully.'));
+                $this->flash->success(t('Your project has been created successfully.'));
                 return $this->response->redirect($this->helper->url->to('ProjectViewController', 'show', array('project_id' => $project_id)));
             }
 
