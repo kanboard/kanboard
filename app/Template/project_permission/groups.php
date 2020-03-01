@@ -3,7 +3,7 @@
 </div>
 
 <?php if (empty($groups)): ?>
-    <div class="alert"><?= t('No group have been allowed specifically.') ?></div>
+    <div class="alert"><?= t('No group has been allowed.') ?></div>
 <?php else: ?>
     <table class="table-scrolling">
         <tr>
