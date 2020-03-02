@@ -55,13 +55,7 @@ class TaskCommentFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        $task_ids = $this->getTaskIdsWithGivenComment();
-
-        if (empty($task_ids)) {
-            $task_ids = array(-1);
-        }
-
-        $this->query->in(TaskModel::TABLE.'.id', $task_ids);
+        $this->query->inSubquery(TaskModel::TABLE.'.id', $this->getSubQuery());
 
         return $this;
     }
@@ -72,11 +66,11 @@ class TaskCommentFilter extends BaseFilter implements FilterInterface
      * @access public
      * @return array
      */
-    protected function getTaskIdsWithGivenComment()
+    protected function getSubQuery()
     {
         return $this->db
             ->table(CommentModel::TABLE)
-            ->ilike(CommentModel::TABLE.'.comment', '%'.$this->value.'%')
-            ->findAllByColumn(CommentModel::TABLE.'.task_id');
+            ->columns(CommentModel::TABLE.'.task_id')
+            ->ilike(CommentModel::TABLE.'.comment', '%'.$this->value.'%');
     }
 }

@@ -34,7 +34,8 @@ class SubtaskTaskConversionModel extends Base
             'swimlane_id' => $parent_task['swimlane_id'],
             'priority' => $parent_task['priority'],
             'column_id' => $parent_task['column_id'],
-            'category_id' => $parent_task['category_id']
+            'category_id' => $parent_task['category_id'],
+            'color_id' => $parent_task['color_id']
         ));
 
         if ($task_id !== false) {

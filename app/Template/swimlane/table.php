@@ -4,6 +4,7 @@
     <thead>
         <tr>
             <th><?= t('Name') ?></th>
+            <th class="column-15"><?= t('Task limit') ?></th>
             <th class="column-15"><?= t('Open tasks') ?></th>
             <th class="column-15"><?= t('Closed tasks') ?></th>
         </tr>
@@ -42,6 +43,9 @@
                 <?php if (! empty($swimlane['description'])): ?>
                     <?= $this->app->tooltipMarkdown($swimlane['description']) ?>
                 <?php endif ?>
+            </td>
+            <td>
+                <?= $swimlane['task_limit'] > 0 ? $swimlane['task_limit'] : '∞' ?>
             </td>
             <td>
                 <?= $swimlane['nb_open_tasks'] ?>

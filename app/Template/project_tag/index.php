@@ -13,6 +13,7 @@
     <table class="table-striped table-scrolling">
         <tr>
             <th><?= t('Tag') ?></th>
+            <th><?= t('Color') ?></th>
         </tr>
         <?php foreach ($tags as $tag): ?>
             <tr>
@@ -23,6 +24,11 @@
                             <li>
                                 <?= $this->modal->medium('edit', t('Edit'), 'ProjectTagController', 'edit', array('tag_id' => $tag['id'], 'project_id' => $project['id'])) ?>
                             </li>
+                            <?php if ($this->user->isAdmin()): ?>
+                            <li>
+                                <?= $this->modal->confirm('globe', t('Change to global tag'), 'ProjectTagController', 'confirmMakeGlobalTag', array('tag_id' => $tag['id'], 'project_id' => $project['id'])) ?>
+                            </li>
+                            <?php endif ?>
                             <li>
                                 <?= $this->modal->confirm('trash-o', t('Remove'), 'ProjectTagController', 'confirm', array('tag_id' => $tag['id'], 'project_id' => $project['id'])) ?>
                             </li>
@@ -30,6 +36,7 @@
                     </div>
                     <?= $this->text->e($tag['name']) ?>
                 </td>
+                <td><?= $this->text->e($colors[$tag['color_id']] ?? '') ?></td>
             </tr>
         <?php endforeach ?>
     </table>

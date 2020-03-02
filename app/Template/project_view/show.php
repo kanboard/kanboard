@@ -9,7 +9,7 @@
     <?php endif ?>
 
     <?php if ($project['is_private']): ?>
-        <li><i class="fa fa-lock"></i> <?= t('This project is private') ?></li>
+        <li><i class="fa fa-lock"></i> <?= t('This project is personal') ?></li>
     <?php endif ?>
 
     <?php if ($project['is_public']): ?>
@@ -31,6 +31,14 @@
     <?php if ($project['end_date']): ?>
         <li><?= t('End date: ').$this->dt->date($project['end_date']) ?></li>
     <?php endif ?>
+
+    <?php if ($project['per_swimlane_task_limits']): ?>
+        <li><?= t('Column task limits are applied to each swimlane individually') ?></li>
+    <?php else: ?>
+        <li><?= t('Column task limits are applied across swimlanes') ?></li>
+    <?php endif ?>
+
+    <li><?= t('Task limit: ') ?><?= $project['task_limit'] ? $project['task_limit'] : '∞' ?></li>
 </ul>
 
 <?php if (! empty($project['description'])): ?>

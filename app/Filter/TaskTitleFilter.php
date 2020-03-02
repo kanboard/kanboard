@@ -32,7 +32,7 @@ class TaskTitleFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        if (ctype_digit($this->value) || (strlen($this->value) > 1 && $this->value{0} === '#' && ctype_digit(substr($this->value, 1)))) {
+        if (ctype_digit($this->value) || (strlen($this->value) > 1 && $this->value[0] === '#' && ctype_digit(substr($this->value, 1)))) {
             $this->query->beginOr();
             $this->query->eq(TaskModel::TABLE.'.id', str_replace('#', '', $this->value));
             $this->query->ilike(TaskModel::TABLE.'.title', '%'.$this->value.'%');

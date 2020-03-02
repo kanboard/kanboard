@@ -23,7 +23,7 @@ class AvatarFileProvider extends Base implements AvatarProviderInterface
      */
     public function render(array $user, $size)
     {
-        $url = $this->helper->url->href('AvatarFileController', 'image', array('user_id' => $user['id'], 'size' => $size));
+        $url = $this->helper->url->href('AvatarFileController', 'image', array('user_id' => $user['id'], 'hash' => md5($user['avatar_path']), 'size' => $size));
         $title = $this->helper->text->e($user['name'] ?: $user['username']);
         return '<img src="' . $url . '" alt="' . $title . '" title="' . $title . '">';
     }

@@ -8,7 +8,7 @@ class ExternalTaskManagerTest extends Base
 {
     public function testProviderNotFound()
     {
-        $this->setExpectedException('Kanboard\Core\ExternalTask\ProviderNotFoundException');
+        $this->expectException('Kanboard\Core\ExternalTask\ProviderNotFoundException');
 
         $manager = new ExternalTaskManager();
         $manager->getProvider('foobar');

@@ -1,5 +1,5 @@
 <?php if (empty($users)): ?>
-    <div class="alert"><?= t('No user have been allowed specifically.') ?></div>
+    <div class="alert"><?= t('No specific user has been allowed.') ?></div>
 <?php else: ?>
     <table class="table-scrolling">
         <tr>
@@ -56,4 +56,5 @@
             <button type="submit" class="btn btn-blue"><?= t('Add') ?></button>
         </form>
     </div>
+    <?= $this->hook->render('template:project-permission:after-adduser', ['project' => $project, 'values' => $values, 'errors' => $errors]) ?>
 <?php endif ?>

@@ -14,13 +14,15 @@ class SwimlaneModelTest extends Base
         $swimlaneModel = new SwimlaneModel($this->container);
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
-        $this->assertEquals(2, $swimlaneModel->create(1, 'Swimlane #1'));
+        $this->assertEquals(2, $swimlaneModel->create(1, 'Swimlane #1', '', 1));
 
         $swimlanes = $swimlaneModel->getAll(1);
         $this->assertNotEmpty($swimlanes);
         $this->assertEquals(2, count($swimlanes));
         $this->assertEquals('Default swimlane', $swimlanes[0]['name']);
         $this->assertEquals('Swimlane #1', $swimlanes[1]['name']);
+        $this->assertEquals(0, $swimlanes[0]['task_limit']);
+        $this->assertEquals(1, $swimlanes[1]['task_limit']);
 
         $this->assertEquals(2, $swimlaneModel->getIdByName(1, 'Swimlane #1'));
         $this->assertEquals(0, $swimlaneModel->getIdByName(2, 'Swimlane #2'));
@@ -85,10 +87,11 @@ class SwimlaneModelTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
         $this->assertEquals(2, $swimlaneModel->create(1, 'Swimlane #1'));
 
-        $this->assertTrue($swimlaneModel->update(2, array('name' => 'foobar')));
+        $this->assertTrue($swimlaneModel->update(2, array('name' => 'foobar', 'task_limit' => 1)));
 
         $swimlane = $swimlaneModel->getById(2);
         $this->assertEquals('foobar', $swimlane['name']);
+        $this->assertEquals(1, $swimlane['task_limit']);
     }
 
     public function testDisableEnable()

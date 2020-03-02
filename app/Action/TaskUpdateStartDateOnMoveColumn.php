@@ -19,7 +19,7 @@ class TaskUpdateStartDateOnMoveColumn extends Base
      */
     public function getDescription()
     {
-        return t('Automatically update the start date when task move away from certain column');
+        return t('Automatically update the start date when the task is moved away from a specific column');
     }
 
     /**
@@ -60,8 +60,8 @@ class TaskUpdateStartDateOnMoveColumn extends Base
             'task_id',
             'task' => array(
                 'project_id',
-                'column_id',
             ),
+            'src_column_id',
         );
     }
 
@@ -91,6 +91,6 @@ class TaskUpdateStartDateOnMoveColumn extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return empty($data['task']['date_started']) && $data['task']['column_id'] != $this->getParam('column_id');
+        return empty($data['task']['date_started']) && $data['src_column_id'] == $this->getParam('column_id');
     }
 }

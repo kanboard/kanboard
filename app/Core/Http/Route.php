@@ -100,7 +100,7 @@ class Route extends Base
                 $params = array();
 
                 for ($i = 0; $i < $count; $i++) {
-                    if ($route['items'][$i]{0} === ':') {
+                    if ($route['items'][$i][0] === ':') {
                         $params[substr($route['items'][$i], 1)] = $items[$i];
                     } elseif ($route['items'][$i] !== $items[$i]) {
                         break;
@@ -177,7 +177,7 @@ class Route extends Base
         $params = array();
 
         foreach ($items as $item) {
-            if ($item !== '' && $item{0} === ':') {
+            if ($item !== '' && $item[0] === ':') {
                 $params[substr($item, 1)] = true;
             }
         }

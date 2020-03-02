@@ -12,6 +12,7 @@
     <table class="table-striped">
         <tr>
             <th><?= t('Category Name') ?></th>
+            <th><?= t('Color') ?></th>
         </tr>
         <?php foreach ($categories as $category): ?>
         <tr>
@@ -34,6 +35,7 @@
                     <?= $this->app->tooltipMarkdown($category['description']) ?>
                 <?php endif ?>
             </td>
+            <td><?= $this->text->e($colors[$category['color_id']] ?? '') ?></td>
         </tr>
         <?php endforeach ?>
     </table>

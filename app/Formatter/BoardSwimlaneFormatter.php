@@ -78,13 +78,16 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
     public function format()
     {
         $nb_swimlanes = count($this->swimlanes);
-        $nb_columns = count($this->columns);
 
         foreach ($this->swimlanes as &$swimlane) {
+            $columns = array_values(array_filter($this->columns, function($column) use ($swimlane) {
+                return !array_key_exists('swimlane_id', $column) || $column['swimlane_id'] == $swimlane['id'];
+            }));
+            $nb_columns = count($columns);
             $swimlane['id'] = (int) $swimlane['id'];
             $swimlane['columns'] = $this->boardColumnFormatter
                 ->withSwimlaneId($swimlane['id'])
-                ->withColumns($this->columns)
+                ->withColumns($columns)
                 ->withTasks($this->tasks)
                 ->withTags($this->tags)
                 ->format();
@@ -95,12 +98,12 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
             $swimlane['score'] = array_column_sum($swimlane['columns'], 'score');
 
             $this->calculateStatsByColumnAcrossSwimlanes($swimlane['columns']);
-        }
 
-        foreach ($this->swimlanes as &$swimlane) {
             foreach ($swimlane['columns'] as $columnIndex => &$column) {
                 $column['column_nb_tasks'] = $this->swimlanes[0]['columns'][$columnIndex]['column_nb_tasks'];
                 $column['column_nb_score'] = $this->swimlanes[0]['columns'][$columnIndex]['column_score'];
+                // add number of open tasks to each column, ignoring the current filter
+                $column['column_nb_open_tasks'] = $columns[array_search($column['id'], array_column($columns, 'id'))]['nb_open_tasks'];
             }
         }
 
@@ -108,7 +111,7 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
     }
 
     /**
-     * Calculate stats for each column acrosss all swimlanes
+     * Calculate stats for each column across all swimlanes
      *
      * @access protected
      * @param  array $columns

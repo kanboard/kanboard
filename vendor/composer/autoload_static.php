@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
+class ComposerStaticInit094f3eabe2924332bc2198a9ba245f27
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -190,6 +190,7 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Action\\TaskAssignCategoryColor' => __DIR__ . '/../..' . '/app/Action/TaskAssignCategoryColor.php',
         'Kanboard\\Action\\TaskAssignCategoryLabel' => __DIR__ . '/../..' . '/app/Action/TaskAssignCategoryLabel.php',
         'Kanboard\\Action\\TaskAssignCategoryLink' => __DIR__ . '/../..' . '/app/Action/TaskAssignCategoryLink.php',
+        'Kanboard\\Action\\TaskAssignCategorySwimlaneChange' => __DIR__ . '/../..' . '/app/Action/TaskAssignCategorySwimlaneChange.php',
         'Kanboard\\Action\\TaskAssignColorCategory' => __DIR__ . '/../..' . '/app/Action/TaskAssignColorCategory.php',
         'Kanboard\\Action\\TaskAssignColorColumn' => __DIR__ . '/../..' . '/app/Action/TaskAssignColorColumn.php',
         'Kanboard\\Action\\TaskAssignColorLink' => __DIR__ . '/../..' . '/app/Action/TaskAssignColorLink.php',
@@ -219,10 +220,14 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Action\\TaskMoveColumnCategoryChange' => __DIR__ . '/../..' . '/app/Action/TaskMoveColumnCategoryChange.php',
         'Kanboard\\Action\\TaskMoveColumnClosed' => __DIR__ . '/../..' . '/app/Action/TaskMoveColumnClosed.php',
         'Kanboard\\Action\\TaskMoveColumnNotMovedPeriod' => __DIR__ . '/../..' . '/app/Action/TaskMoveColumnNotMovedPeriod.php',
+        'Kanboard\\Action\\TaskMoveColumnOnDueDate' => __DIR__ . '/../..' . '/app/Action/TaskMoveColumnOnDueDate.php',
         'Kanboard\\Action\\TaskMoveColumnOnStartDate' => __DIR__ . '/../..' . '/app/Action/TaskMoveColumnOnStartDate.php',
         'Kanboard\\Action\\TaskMoveColumnUnAssigned' => __DIR__ . '/../..' . '/app/Action/TaskMoveColumnUnAssigned.php',
+        'Kanboard\\Action\\TaskMoveSwimlaneAssigned' => __DIR__ . '/../..' . '/app/Action/TaskMoveSwimlaneAssigned.php',
+        'Kanboard\\Action\\TaskMoveSwimlaneCategoryChange' => __DIR__ . '/../..' . '/app/Action/TaskMoveSwimlaneCategoryChange.php',
         'Kanboard\\Action\\TaskOpen' => __DIR__ . '/../..' . '/app/Action/TaskOpen.php',
         'Kanboard\\Action\\TaskUpdateStartDate' => __DIR__ . '/../..' . '/app/Action/TaskUpdateStartDate.php',
+        'Kanboard\\Action\\TaskUpdateStartDateOnMoveColumn' => __DIR__ . '/../..' . '/app/Action/TaskUpdateStartDateOnMoveColumn.php',
         'Kanboard\\Analytic\\AverageLeadCycleTimeAnalytic' => __DIR__ . '/../..' . '/app/Analytic/AverageLeadCycleTimeAnalytic.php',
         'Kanboard\\Analytic\\AverageTimeSpentColumnAnalytic' => __DIR__ . '/../..' . '/app/Analytic/AverageTimeSpentColumnAnalytic.php',
         'Kanboard\\Analytic\\EstimatedTimeComparisonAnalytic' => __DIR__ . '/../..' . '/app/Analytic/EstimatedTimeComparisonAnalytic.php',
@@ -275,9 +280,11 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Auth\\TotpAuth' => __DIR__ . '/../..' . '/app/Auth/TotpAuth.php',
         'Kanboard\\Console\\BaseCommand' => __DIR__ . '/../..' . '/app/Console/BaseCommand.php',
         'Kanboard\\Console\\CronjobCommand' => __DIR__ . '/../..' . '/app/Console/CronjobCommand.php',
+        'Kanboard\\Console\\CssCommand' => __DIR__ . '/../..' . '/app/Console/CssCommand.php',
         'Kanboard\\Console\\DatabaseMigrationCommand' => __DIR__ . '/../..' . '/app/Console/DatabaseMigrationCommand.php',
         'Kanboard\\Console\\DatabaseVersionCommand' => __DIR__ . '/../..' . '/app/Console/DatabaseVersionCommand.php',
         'Kanboard\\Console\\JobCommand' => __DIR__ . '/../..' . '/app/Console/JobCommand.php',
+        'Kanboard\\Console\\JsCommand' => __DIR__ . '/../..' . '/app/Console/JsCommand.php',
         'Kanboard\\Console\\LocaleComparatorCommand' => __DIR__ . '/../..' . '/app/Console/LocaleComparatorCommand.php',
         'Kanboard\\Console\\LocaleSyncCommand' => __DIR__ . '/../..' . '/app/Console/LocaleSyncCommand.php',
         'Kanboard\\Console\\PluginInstallCommand' => __DIR__ . '/../..' . '/app/Console/PluginInstallCommand.php',
@@ -374,6 +381,7 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Controller\\TaskMovePositionController' => __DIR__ . '/../..' . '/app/Controller/TaskMovePositionController.php',
         'Kanboard\\Controller\\TaskPopoverController' => __DIR__ . '/../..' . '/app/Controller/TaskPopoverController.php',
         'Kanboard\\Controller\\TaskRecurrenceController' => __DIR__ . '/../..' . '/app/Controller/TaskRecurrenceController.php',
+        'Kanboard\\Controller\\TaskReorderController' => __DIR__ . '/../..' . '/app/Controller/TaskReorderController.php',
         'Kanboard\\Controller\\TaskStatusController' => __DIR__ . '/../..' . '/app/Controller/TaskStatusController.php',
         'Kanboard\\Controller\\TaskSuppressionController' => __DIR__ . '/../..' . '/app/Controller/TaskSuppressionController.php',
         'Kanboard\\Controller\\TaskViewController' => __DIR__ . '/../..' . '/app/Controller/TaskViewController.php',
@@ -716,6 +724,7 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Model\\TaskProjectDuplicationModel' => __DIR__ . '/../..' . '/app/Model/TaskProjectDuplicationModel.php',
         'Kanboard\\Model\\TaskProjectMoveModel' => __DIR__ . '/../..' . '/app/Model/TaskProjectMoveModel.php',
         'Kanboard\\Model\\TaskRecurrenceModel' => __DIR__ . '/../..' . '/app/Model/TaskRecurrenceModel.php',
+        'Kanboard\\Model\\TaskReorderModel' => __DIR__ . '/../..' . '/app/Model/TaskReorderModel.php',
         'Kanboard\\Model\\TaskStatusModel' => __DIR__ . '/../..' . '/app/Model/TaskStatusModel.php',
         'Kanboard\\Model\\TaskTagModel' => __DIR__ . '/../..' . '/app/Model/TaskTagModel.php',
         'Kanboard\\Model\\TimezoneModel' => __DIR__ . '/../..' . '/app/Model/TimezoneModel.php',
@@ -800,6 +809,16 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Kanboard\\Validator\\TaskLinkValidator' => __DIR__ . '/../..' . '/app/Validator/TaskLinkValidator.php',
         'Kanboard\\Validator\\TaskValidator' => __DIR__ . '/../..' . '/app/Validator/TaskValidator.php',
         'Kanboard\\Validator\\UserValidator' => __DIR__ . '/../..' . '/app/Validator/UserValidator.php',
+        'MatthiasMullie\\Minify\\CSS' => __DIR__ . '/../..' . '/libs/minify/src/CSS.php',
+        'MatthiasMullie\\Minify\\Exception' => __DIR__ . '/../..' . '/libs/minify/src/Exception.php',
+        'MatthiasMullie\\Minify\\Exceptions\\BasicException' => __DIR__ . '/../..' . '/libs/minify/src/Exceptions/BasicException.php',
+        'MatthiasMullie\\Minify\\Exceptions\\FileImportException' => __DIR__ . '/../..' . '/libs/minify/src/Exceptions/FileImportException.php',
+        'MatthiasMullie\\Minify\\Exceptions\\IOException' => __DIR__ . '/../..' . '/libs/minify/src/Exceptions/IOException.php',
+        'MatthiasMullie\\Minify\\JS' => __DIR__ . '/../..' . '/libs/minify/src/JS.php',
+        'MatthiasMullie\\Minify\\Minify' => __DIR__ . '/../..' . '/libs/minify/src/Minify.php',
+        'MatthiasMullie\\PathConverter\\Converter' => __DIR__ . '/../..' . '/libs/path-converter/src/Converter.php',
+        'MatthiasMullie\\PathConverter\\ConverterInterface' => __DIR__ . '/../..' . '/libs/path-converter/src/ConverterInterface.php',
+        'MatthiasMullie\\PathConverter\\NoConverter' => __DIR__ . '/../..' . '/libs/path-converter/src/NoConverter.php',
         'MiddlewareHandlerTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/MiddlewareHandlerTest.php',
         'MyException' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/ServerTest.php',
         'MysqlDatabaseTest' => __DIR__ . '/../..' . '/libs/picodb/tests/MysqlDatabaseTest.php',
@@ -886,6 +905,7 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+        'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
         'RequestBuilderTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Request/RequestBuilderTest.php',
         'ResponseBuilderTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Response/ResponseBuilderTest.php',
         'ResponseParserTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Response/ResponseParserTest.php',
@@ -1062,11 +1082,11 @@ class ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$prefixesPsr0;
-            $loader->fallbackDirsPsr0 = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$fallbackDirsPsr0;
-            $loader->classMap = ComposerStaticInitbdc3716ceecc7570f8ff9a8407f0ca0e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit094f3eabe2924332bc2198a9ba245f27::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit094f3eabe2924332bc2198a9ba245f27::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit094f3eabe2924332bc2198a9ba245f27::$prefixesPsr0;
+            $loader->fallbackDirsPsr0 = ComposerStaticInit094f3eabe2924332bc2198a9ba245f27::$fallbackDirsPsr0;
+            $loader->classMap = ComposerStaticInit094f3eabe2924332bc2198a9ba245f27::$classMap;
 
         }, null, ClassLoader::class);
     }

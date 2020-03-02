@@ -26,7 +26,7 @@ class ActionManagerTest extends Base
 
     public function testGetActionNotFound()
     {
-        $this->setExpectedException('RuntimeException', 'Automatic Action Not Found: foobar');
+        $this->expectException('RuntimeException', 'Automatic Action Not Found: foobar');
         $actionManager = new ActionManager($this->container);
         $actionManager->getAction('foobar');
     }

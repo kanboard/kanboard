@@ -3,6 +3,7 @@
 namespace Kanboard\Formatter;
 
 use Kanboard\Core\Filter\FormatterInterface;
+use Kanboard\Model\ProjectModel;
 use Kanboard\Model\SwimlaneModel;
 use Kanboard\Model\TaskModel;
 
@@ -43,8 +44,16 @@ class BoardFormatter extends BaseFormatter implements FormatterInterface
      */
     public function format()
     {
+        $project = $this->projectModel->getById($this->projectId);
         $swimlanes = $this->swimlaneModel->getAllByStatus($this->projectId, SwimlaneModel::ACTIVE);
-        $columns = $this->columnModel->getAll($this->projectId);
+        if ($project['per_swimlane_task_limits']) {
+            $columns = array();
+            foreach ($swimlanes as $swimlane) {
+                $columns = array_merge($columns, $this->columnModel->getAllWithPerSwimlaneTaskCount($this->projectId, $swimlane['id']));
+            }
+        } else {
+            $columns = $this->columnModel->getAllWithTaskCount($this->projectId);
+        }
 
         if (empty($swimlanes) || empty($columns)) {
             return array();

@@ -10,10 +10,18 @@ Kanboard.Dropdown.prototype.listen = function() {
         self.close();
     });
 
+    $(document).on('click', '.active-dropdown-menu', function() {
+        $(this).addClass('dropdown-menu');
+        $(this).removeClass('active-dropdown-menu');
+        self.close();
+    });
+
     $(document).on('click', '.dropdown-menu', function(e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         self.close();
+        $(this).removeClass('dropdown-menu');
+        $(this).addClass('active-dropdown-menu');
 
         var submenu = $(this).next('ul');
         var offset = $(this).offset();
@@ -36,7 +44,12 @@ Kanboard.Dropdown.prototype.listen = function() {
         }
 
         if (offset.left + submenuWidth > $(window).width()) {
-            clone.css('left', offset.left - submenuWidth + $(this).outerWidth());
+            var newOffset = offset.left - submenuWidth + $(this).outerWidth();
+            // If calculated left offset is negative (off-screen), default to 15 pixels
+            if (newOffset < 0) {
+                newOffset = 15;
+            }
+            clone.css('left', newOffset);
         }
         else {
             clone.css('left', offset.left);

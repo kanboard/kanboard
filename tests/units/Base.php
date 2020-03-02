@@ -11,7 +11,7 @@ use Kanboard\Core\Log\Logger;
 use Kanboard\Core\Session\FlashMessage;
 use Kanboard\ServiceProvider\ActionProvider;
 
-abstract class Base extends PHPUnit_Framework_TestCase
+abstract class Base extends PHPUnit\Framework\TestCase
 {
     protected $container;
 

@@ -17,9 +17,9 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 
 cd /var/www/html && composer install
 
-wget -q https://phar.phpunit.de/phpunit.phar
-chmod +x phpunit.phar
-sudo mv phpunit.phar /usr/local/bin/phpunit
+wget -q -O phpunit https://phar.phpunit.de/phpunit-5.phar
+chmod +x phpunit
+sudo mv phpunit /usr/local/bin/phpunit
 
 SCRIPT
 

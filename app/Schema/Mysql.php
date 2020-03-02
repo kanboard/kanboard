@@ -8,7 +8,22 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 133;
+const VERSION = 136;
+
+function version_136(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `swimlanes` ADD COLUMN `task_limit` INT DEFAULT 0');
+}
+
+function version_135(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `projects` ADD COLUMN `task_limit` INT DEFAULT 0');
+}
+
+function version_134(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `projects` ADD COLUMN `per_swimlane_task_limits` INT DEFAULT 0 NOT NULL');
+}
 
 function version_133(PDO $pdo)
 {
@@ -461,7 +476,7 @@ function version_99(PDO $pdo)
             $row['action_name'] = '\Kanboard\Action\TaskCloseColumn';
         } elseif ($row['action_name'] === 'TaskLogMoveAnotherColumn') {
             $row['action_name'] = '\Kanboard\Action\CommentCreationMoveTaskColumn';
-        } elseif ($row['action_name']{0} !== '\\') {
+        } elseif ($row['action_name'][0] !== '\\') {
             $row['action_name'] = '\Kanboard\Action\\'.$row['action_name'];
         }
 

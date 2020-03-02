@@ -787,7 +787,7 @@ class LdapUserTest extends Base
 
     public function testGetBaseDnNotConfigured()
     {
-        $this->setExpectedException('\LogicException');
+        $this->expectException('\LogicException');
 
         $user = new User($this->query);
         $user->getBasDn();
@@ -795,7 +795,7 @@ class LdapUserTest extends Base
 
     public function testGetLdapUserPatternNotConfigured()
     {
-        $this->setExpectedException('\LogicException');
+        $this->expectException('\LogicException');
 
         $user = new User($this->query);
         $user->getLdapUserPattern('test');

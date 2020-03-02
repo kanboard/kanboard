@@ -57,37 +57,33 @@ class TaskTagFilter extends BaseFilter implements FilterInterface
     public function apply()
     {
         if ($this->value === 'none') {
-            $task_ids = $this->getTaskIdsWithoutTags();
+            $sub_query = $this->getQueryOfTaskIdsWithoutTags();
         } else {
-            $task_ids = $this->getTaskIdsWithGivenTag();
+            $sub_query = $this->getQueryOfTaskIdsWithGivenTag();
         }
 
-        if (empty($task_ids)) {
-            $task_ids = array(-1);
-        }
-
-        $this->query->in(TaskModel::TABLE.'.id', $task_ids);
+        $this->query->inSubquery(TaskModel::TABLE.'.id', $sub_query);
 
         return $this;
     }
 
-    protected function getTaskIdsWithoutTags()
+    protected function getQueryOfTaskIdsWithoutTags()
     {
         return $this->db
             ->table(TaskModel::TABLE)
+            ->columns(TaskModel::TABLE . '.id')
             ->asc(TaskModel::TABLE . '.project_id')
             ->left(TaskTagModel::TABLE, 'tg', 'task_id', TaskModel::TABLE, 'id')
-            ->isNull('tg.tag_id')
-            ->findAllByColumn(TaskModel::TABLE . '.id');
+            ->isNull('tg.tag_id');
     }
 
-    protected function getTaskIdsWithGivenTag()
+    protected function getQueryOfTaskIdsWithGivenTag()
     {
         return $this->db
             ->table(TagModel::TABLE)
+            ->columns(TaskTagModel::TABLE.'.task_id')
             ->ilike(TagModel::TABLE.'.name', $this->value)
             ->asc(TagModel::TABLE.'.project_id')
-            ->join(TaskTagModel::TABLE, 'tag_id', 'id')
-            ->findAllByColumn(TaskTagModel::TABLE.'.task_id');
+            ->join(TaskTagModel::TABLE, 'tag_id', 'id');
     }
 }

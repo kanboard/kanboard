@@ -1,27 +1,28 @@
 [
     {
         "name": "christian-riesen/base32",
-        "version": "1.3.1",
-        "version_normalized": "1.3.1.0",
+        "version": "1.3.2",
+        "version_normalized": "1.3.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/ChristianRiesen/base32.git",
-            "reference": "0a31e50c0fa9b1692d077c86ac188eecdcbaf7fa"
+            "reference": "80ff0e3b2124e61b4b39e2535709452f70bff367"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/ChristianRiesen/base32/zipball/0a31e50c0fa9b1692d077c86ac188eecdcbaf7fa",
-            "reference": "0a31e50c0fa9b1692d077c86ac188eecdcbaf7fa",
+            "url": "https://api.github.com/repos/ChristianRiesen/base32/zipball/80ff0e3b2124e61b4b39e2535709452f70bff367",
+            "reference": "80ff0e3b2124e61b4b39e2535709452f70bff367",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.0"
+            "php": ">=5.3"
         },
         "require-dev": {
-            "phpunit/phpunit": "4.*",
-            "satooshi/php-coveralls": "0.*"
+            "php": ">=5.6",
+            "phpunit/phpunit": "^5.0",
+            "satooshi/php-coveralls": "^1.0"
         },
-        "time": "2016-05-05T11:49:03+00:00",
+        "time": "2018-11-02T09:03:50+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -164,34 +165,33 @@
         ]
     },
     {
-        "name": "psr/log",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "name": "erusev/parsedown",
+        "version": "1.7.3",
+        "version_normalized": "1.7.3.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/php-fig/log.git",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+            "url": "https://github.com/erusev/parsedown.git",
+            "reference": "6d893938171a817f4e9bc9e86f2da1e370b7bcd7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+            "url": "https://api.github.com/repos/erusev/parsedown/zipball/6d893938171a817f4e9bc9e86f2da1e370b7bcd7",
+            "reference": "6d893938171a817f4e9bc9e86f2da1e370b7bcd7",
             "shasum": ""
         },
         "require": {
+            "ext-mbstring": "*",
             "php": ">=5.3.0"
         },
-        "time": "2016-10-10T12:19:37+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0.x-dev"
-            }
+        "require-dev": {
+            "phpunit/phpunit": "^4.8.35"
         },
+        "time": "2019-03-17T18:48:37+00:00",
+        "type": "library",
         "installation-source": "dist",
         "autoload": {
-            "psr-4": {
-                "Psr\\Log\\": "Psr/Log/"
+            "psr-0": {
+                "Parsedown": ""
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -200,16 +200,16 @@
         ],
         "authors": [
             {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
+                "name": "Emanuil Rusev",
+                "email": "hello@erusev.com",
+                "homepage": "http://erusev.com"
             }
         ],
-        "description": "Common interface for logging libraries",
-        "homepage": "https://github.com/php-fig/log",
+        "description": "Parser for Markdown.",
+        "homepage": "http://parsedown.org",
         "keywords": [
-            "log",
-            "psr",
-            "psr-3"
+            "markdown",
+            "parser"
         ]
     },
     {
@@ -318,6 +318,58 @@
         ]
     },
     {
+        "name": "pimple/pimple",
+        "version": "v3.2.2",
+        "version_normalized": "3.2.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/silexphp/Pimple.git",
+            "reference": "4d45fb62d96418396ec58ba76e6f065bca16e10a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/silexphp/Pimple/zipball/4d45fb62d96418396ec58ba76e6f065bca16e10a",
+            "reference": "4d45fb62d96418396ec58ba76e6f065bca16e10a",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "psr/container": "^1.0"
+        },
+        "require-dev": {
+            "symfony/phpunit-bridge": "^3.2"
+        },
+        "time": "2017-07-23T07:32:15+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Pimple": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Pimple, a simple Dependency Injection Container",
+        "homepage": "http://pimple.sensiolabs.org",
+        "keywords": [
+            "container",
+            "dependency injection"
+        ]
+    },
+    {
         "name": "psr/container",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
@@ -369,38 +421,34 @@
         ]
     },
     {
-        "name": "pimple/pimple",
-        "version": "v3.2.2",
-        "version_normalized": "3.2.2.0",
+        "name": "psr/log",
+        "version": "1.1.2",
+        "version_normalized": "1.1.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/silexphp/Pimple.git",
-            "reference": "4d45fb62d96418396ec58ba76e6f065bca16e10a"
+            "url": "https://github.com/php-fig/log.git",
+            "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/silexphp/Pimple/zipball/4d45fb62d96418396ec58ba76e6f065bca16e10a",
-            "reference": "4d45fb62d96418396ec58ba76e6f065bca16e10a",
+            "url": "https://api.github.com/repos/php-fig/log/zipball/446d54b4cb6bf489fc9d75f55843658e6f25d801",
+            "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.0",
-            "psr/container": "^1.0"
+            "php": ">=5.3.0"
         },
-        "require-dev": {
-            "symfony/phpunit-bridge": "^3.2"
-        },
-        "time": "2017-07-23T07:32:15+00:00",
+        "time": "2019-11-01T11:05:21+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "3.2.x-dev"
+                "dev-master": "1.1.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
-            "psr-0": {
-                "Pimple": "src/"
+            "psr-4": {
+                "Psr\\Log\\": "Psr/Log/"
             }
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -409,15 +457,16 @@
         ],
         "authors": [
             {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
             }
         ],
-        "description": "Pimple, a simple Dependency Injection Container",
-        "homepage": "http://pimple.sensiolabs.org",
+        "description": "Common interface for logging libraries",
+        "homepage": "https://github.com/php-fig/log",
         "keywords": [
-            "container",
-            "dependency injection"
+            "log",
+            "psr",
+            "psr-3"
         ]
     },
     {
@@ -475,64 +524,6 @@
             "mail",
             "mailer"
         ]
-    },
-    {
-        "name": "symfony/debug",
-        "version": "v3.4.2",
-        "version_normalized": "3.4.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/debug.git",
-            "reference": "543deab3ffff94402440b326fc94153bae2dfa7a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/debug/zipball/543deab3ffff94402440b326fc94153bae2dfa7a",
-            "reference": "543deab3ffff94402440b326fc94153bae2dfa7a",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.5.9|>=7.0.8",
-            "psr/log": "~1.0"
-        },
-        "conflict": {
-            "symfony/http-kernel": ">=2.3,<2.3.24|~2.4.0|>=2.5,<2.5.9|>=2.6,<2.6.2"
-        },
-        "require-dev": {
-            "symfony/http-kernel": "~2.8|~3.0|~4.0"
-        },
-        "time": "2017-12-12T08:27:14+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "3.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\Debug\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Debug Component",
-        "homepage": "https://symfony.com"
     },
     {
         "name": "symfony/console",
@@ -606,6 +597,64 @@
         "homepage": "https://symfony.com"
     },
     {
+        "name": "symfony/debug",
+        "version": "v3.4.2",
+        "version_normalized": "3.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/debug.git",
+            "reference": "543deab3ffff94402440b326fc94153bae2dfa7a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/debug/zipball/543deab3ffff94402440b326fc94153bae2dfa7a",
+            "reference": "543deab3ffff94402440b326fc94153bae2dfa7a",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.5.9|>=7.0.8",
+            "psr/log": "~1.0"
+        },
+        "conflict": {
+            "symfony/http-kernel": ">=2.3,<2.3.24|~2.4.0|>=2.5,<2.5.9|>=2.6,<2.6.2"
+        },
+        "require-dev": {
+            "symfony/http-kernel": "~2.8|~3.0|~4.0"
+        },
+        "time": "2017-12-12T08:27:14+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Debug\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Debug Component",
+        "homepage": "https://symfony.com"
+    },
+    {
         "name": "symfony/event-dispatcher",
         "version": "v3.4.2",
         "version_normalized": "3.4.2.0",
@@ -671,115 +720,6 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "erusev/parsedown",
-        "version": "1.7.1",
-        "version_normalized": "1.7.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/erusev/parsedown.git",
-            "reference": "92e9c27ba0e74b8b028b111d1b6f956a15c01fc1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/erusev/parsedown/zipball/92e9c27ba0e74b8b028b111d1b6f956a15c01fc1",
-            "reference": "92e9c27ba0e74b8b028b111d1b6f956a15c01fc1",
-            "shasum": ""
-        },
-        "require": {
-            "ext-mbstring": "*",
-            "php": ">=5.3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^4.8.35"
-        },
-        "time": "2018-03-08T01:11:30+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Parsedown": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Emanuil Rusev",
-                "email": "hello@erusev.com",
-                "homepage": "http://erusev.com"
-            }
-        ],
-        "description": "Parser for Markdown.",
-        "homepage": "http://parsedown.org",
-        "keywords": [
-            "markdown",
-            "parser"
-        ]
-    },
-    {
-        "name": "symfony/polyfill-mbstring",
-        "version": "v1.8.0",
-        "version_normalized": "1.8.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "3296adf6a6454a050679cde90f95350ad604b171"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/3296adf6a6454a050679cde90f95350ad604b171",
-            "reference": "3296adf6a6454a050679cde90f95350ad604b171",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "suggest": {
-            "ext-mbstring": "For best performance"
-        },
-        "time": "2018-04-26T10:06:28+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Polyfill\\Mbstring\\": ""
-            },
-            "files": [
-                "bootstrap.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony polyfill for the Mbstring extension",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "compatibility",
-            "mbstring",
-            "polyfill",
-            "portable",
-            "shim"
-        ]
-    },
-    {
         "name": "symfony/finder",
         "version": "v3.4.8",
         "version_normalized": "3.4.8.0",
@@ -829,5 +769,66 @@
         ],
         "description": "Symfony Finder Component",
         "homepage": "https://symfony.com"
+    },
+    {
+        "name": "symfony/polyfill-mbstring",
+        "version": "v1.13.1",
+        "version_normalized": "1.13.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-mbstring.git",
+            "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7b4aab9743c30be783b73de055d24a39cf4b954f",
+            "reference": "7b4aab9743c30be783b73de055d24a39cf4b954f",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "suggest": {
+            "ext-mbstring": "For best performance"
+        },
+        "time": "2019-11-27T14:18:11+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.13-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Mbstring\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill for the Mbstring extension",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "mbstring",
+            "polyfill",
+            "portable",
+            "shim"
+        ]
     }
 ]

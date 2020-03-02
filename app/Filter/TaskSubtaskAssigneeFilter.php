@@ -78,13 +78,7 @@ class TaskSubtaskAssigneeFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        $task_ids = $this->getSubQuery()->findAllByColumn('task_id');
-
-        if (! empty($task_ids)) {
-            $this->query->in(TaskModel::TABLE.'.id', $task_ids);
-        } else {
-            $this->query->eq(TaskModel::TABLE.'.id', 0); // No match
-        }
+        $this->query->inSubquery(TaskModel::TABLE.'.id', $this->getSubQuery());
     }
 
     /**
@@ -96,12 +90,7 @@ class TaskSubtaskAssigneeFilter extends BaseFilter implements FilterInterface
     protected function getSubQuery()
     {
         $subquery = $this->db->table(SubtaskModel::TABLE)
-            ->columns(
-                SubtaskModel::TABLE.'.user_id',
-                SubtaskModel::TABLE.'.task_id',
-                UserModel::TABLE.'.name',
-                UserModel::TABLE.'.username'
-            )
+            ->columns(SubtaskModel::TABLE.'.task_id')
             ->join(UserModel::TABLE, 'id', 'user_id', SubtaskModel::TABLE)
             ->neq(SubtaskModel::TABLE.'.status', SubtaskModel::STATUS_DONE);
 
@@ -126,6 +115,9 @@ class TaskSubtaskAssigneeFilter extends BaseFilter implements FilterInterface
                     break;
                 case 'nobody':
                     $subquery->eq(SubtaskModel::TABLE.'.user_id', 0);
+                    break;
+                case 'anybody':
+                    $subquery->gt(SubtaskModel::TABLE.'.user_id', 0);
                     break;
                 default:
                     $subquery->beginOr();

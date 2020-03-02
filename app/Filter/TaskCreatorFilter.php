@@ -63,6 +63,9 @@ class TaskCreatorFilter extends BaseFilter implements FilterInterface
                 case 'nobody':
                     $this->query->eq(TaskModel::TABLE.'.creator_id', 0);
                     break;
+                case 'anybody':
+                    $this->query->gt(TaskModel::TABLE.'.creator_id', 0);
+                    break;
                 default:
                     $this->query->beginOr();
                     $this->query->ilike('uc.username', '%'.$this->value.'%');

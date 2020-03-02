@@ -99,12 +99,12 @@
                 <?php endif ?>
             </span>
 
-            <?php if (! empty($column['column_nb_tasks'])): ?>
+            <?php if (! empty($column['column_nb_open_tasks'])): ?>
             <span title="<?= t('Total number of tasks in this column across all swimlanes') ?>" class="board-column-header-task-count">
                 <?php if ($column['task_limit'] > 0): ?>
-                    (<span><?= $column['column_nb_tasks'] ?></span> / <span title="<?= t('Task limit') ?>"><?= $this->text->e($column['task_limit']) ?></span>)
+                    (<span><?= $column['column_nb_open_tasks'] ?></span> / <span title="<?= t('Task limit') ?>"><?= $this->text->e($column['task_limit']) ?></span>)
                 <?php else: ?>
-                    (<span><?= $column['column_nb_tasks'] ?></span>)
+                    (<span><?= $column['column_nb_open_tasks'] ?></span>)
                 <?php endif ?>
             </span>
             <?php endif ?>

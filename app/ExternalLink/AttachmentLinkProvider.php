@@ -74,7 +74,7 @@ class AttachmentLinkProvider extends BaseLinkProvider implements ExternalLinkPro
      */
     public function match()
     {
-        if (preg_match('/^https?:\/\/.*\.([^\/]+)$/', $this->userInput, $matches)) {
+        if (preg_match('/^https?:\/\/.*\/.*\.([^\/]+)$/', $this->userInput, $matches)) {
             return $this->isValidExtension($matches[1]);
         }
 
