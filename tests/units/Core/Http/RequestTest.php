@@ -135,6 +135,7 @@ class RequestTest extends Base
     {
         $request = new Request($this->container, array(), array(), array(), array(), array());
         $this->assertEmpty($request->getRemoteUser());
+
         $request = new Request($this->container, array(REVERSE_PROXY_USER_HEADER => 'test'), array(), array(), array(), array());
         $this->assertEquals('test', $request->getRemoteUser());
     }
@@ -143,6 +144,7 @@ class RequestTest extends Base
     {
         $request = new Request($this->container, array(), array(), array(), array(), array());
         $this->assertEmpty($request->getName());
+
         $request = new Request($this->container, array(REVERSE_PROXY_NAME_HEADER => 'John Doe'), array(), array(), array(), array());
         $this->assertEquals('John Doe', $request->getName());
     }
@@ -151,6 +153,7 @@ class RequestTest extends Base
     {
         $request = new Request($this->container, array(), array(), array(), array(), array());
         $this->assertEmpty($request->getMail());
+
         $request = new Request($this->container, array(REVERSE_PROXY_MAIL_HEADER => 'test@mail.com'), array(), array(), array(), array());
         $this->assertEquals('test@mail.com', $request->getMail());
     }
