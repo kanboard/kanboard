@@ -86,10 +86,10 @@ defined('LDAP_GROUP_ADMIN_DN') or define('LDAP_GROUP_ADMIN_DN', '');
 defined('LDAP_GROUP_MANAGER_DN') or define('LDAP_GROUP_MANAGER_DN', '');
 
 defined('LDAP_GROUP_PROVIDER') or define('LDAP_GROUP_PROVIDER', false);
-defined('LDAP_GROUP_BASE_DN') or define('LDAP_GROUP_BASE_DN', '');
-defined('LDAP_GROUP_FILTER') or define('LDAP_GROUP_FILTER', '');
-defined('LDAP_GROUP_USER_FILTER') or define('LDAP_GROUP_USER_FILTER', '');
-defined('LDAP_GROUP_ATTRIBUTE_NAME') or define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
+defined('LDAP_GROUP_BASE_DN') or define('LDAP_GROUP_BASE_DN', getenv('LDAP_GROUP_BASE_DN') ?: '');
+defined('LDAP_GROUP_FILTER') or define('LDAP_GROUP_FILTER', getenv('LDAP_GROUP_FILTER') ?: '');
+defined('LDAP_GROUP_USER_FILTER') or define('LDAP_GROUP_USER_FILTER', getenv('LDAP_GROUP_USER_FILTER') ?: '');
+defined('LDAP_GROUP_ATTRIBUTE_NAME') or define('LDAP_GROUP_ATTRIBUTE_NAME', getenv('LDAP_GROUP_ATTRIBUTE_NAME') ?: 'cn');
 
 // Proxy authentication
 defined('REVERSE_PROXY_AUTH') or define('REVERSE_PROXY_AUTH', false);
