@@ -1415,4 +1415,5 @@ return array(
     'Task limit: ' => 'Feladatkorlát: ',
     'Change to global tag' => 'Megváltoztatás globális címkére',
     'Do you really want to make the tag "%s" global?' => 'Valóban globálissá szeretné tenni a(z) „%s” címkét?',
+    // 'Enable global tags for this project' => '',
 );

@@ -1415,4 +1415,5 @@ return array(
     'Task limit: ' => 'Limite da tarefa: ',
     'Change to global tag' => 'Alterar para etiqueta global',
     'Do you really want to make the tag "%s" global?' => 'Tem a certeza que pretende por a etiqueta "%s" como global?',
+    // 'Enable global tags for this project' => '',
 );

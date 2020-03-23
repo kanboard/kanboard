@@ -47,17 +47,27 @@ class TagModel extends Base
      *
      * @access public
      * @param  integer $project_id
+     * @param  bool    $include_global_tags
      * @return array
      */
-    public function getAssignableList($project_id)
+    public function getAssignableList($project_id, $include_global_tags)
     {
-        return $this->db->hashtable(self::TABLE)
-            ->beginOr()
-            ->eq('project_id', $project_id)
-            ->eq('project_id', 0)
-            ->closeOr()
-            ->asc('name')
-            ->getAll('id', 'name');
+        if($include_global_tags){
+            return $this->db->hashtable(self::TABLE)
+                ->beginOr()
+                ->eq('project_id', $project_id)
+                ->eq('project_id', 0)
+                ->closeOr()
+                ->asc('name')
+                ->getAll('id', 'name');
+        } else {
+            return $this->db->hashtable(self::TABLE)
+                ->beginOr()
+                ->eq('project_id', $project_id)                
+                ->closeOr()
+                ->asc('name')
+                ->getAll('id', 'name');
+        }
     }
 
     /**
