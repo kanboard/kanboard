@@ -110,7 +110,7 @@ class UserHelper extends Base
     }
 
     /**
-     * Get group names(as a comma-separted list) for a given user
+     * Get group names(as a comma-separated list) for a given user
      *
      * @access public
      * @param  integer   $user_id   User id
