@@ -12,7 +12,7 @@ const VERSION = 137;
 
 function version_137(PDO $pdo)
 {
-    $pdo->exec('ALTER TABLE `projects` ADD COLUMN `enable_global_tags` INT DEFAULT 1 NOT NULL');
+    $pdo->exec('ALTER TABLE `projects` ADD COLUMN `enable_global_tags` TINYINT(1) DEFAULT 1 NOT NULL');
 }
 
 function version_136(PDO $pdo)
