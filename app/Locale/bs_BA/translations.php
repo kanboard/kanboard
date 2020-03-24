@@ -838,6 +838,7 @@ return array(
     'Remove group' => 'Ukloni grupu',
     'Group removed successfully.' => 'Grupa uspješno uklonjena.',
     'Unable to remove this group.' => 'Nemoguće ukloniti grupu.',
+    // 'Group membership(s):' => ':',
     'Project Permissions' => 'Prava na projektu',
     'Manager' => 'Menadžer',
     'Project Manager' => 'Menadžer projekta',

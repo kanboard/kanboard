@@ -838,6 +838,7 @@ return array(
     'Remove group' => 'Αφαίρεση ομάδας',
     'Group removed successfully.' => 'Η ομάδα αφαιρέθηκε με επιτυχία.',
     'Unable to remove this group.' => 'Δεν είναι δυνατή η αφαίρεση της ομάδας.',
+    // 'Group membership(s):' => ':',
     'Project Permissions' => 'Επιτρέψεις έργου',
     'Manager' => 'Διευθυντής',
     'Project Manager' => 'Διευθυντής έργου',

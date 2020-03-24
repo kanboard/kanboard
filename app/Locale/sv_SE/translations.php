@@ -838,6 +838,7 @@ return array(
     'Remove group' => 'Ta bort grupp',
     // 'Group removed successfully.' => '',
     // 'Unable to remove this group.' => '',
+    // 'Group membership(s):' => ':',
     // 'Project Permissions' => '',
     // 'Manager' => '',
     'Project Manager' => 'Projektägare',
