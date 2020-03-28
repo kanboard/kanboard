@@ -946,7 +946,7 @@ return array(
     'open' => 'offen',
     'closed' => 'geschlossen',
     'Priority:' => 'Priorität:',
-    'Reference:' => 'Bezug:',
+    'Reference:' => 'Referenz:',
     'Complexity:' => 'Komplexität:',
     'Swimlane:' => 'Swimlane:',
     'Column:' => 'Spalte:',
