@@ -528,7 +528,7 @@ return array(
     'RSD - Serbian dinar' => 'RSD - Serbische Dinar',
     'CNY - Chinese Yuan' => 'CNY - Chinesische Renminbi',
     'USD - US Dollar' => 'USD - US-Dollar',
-    'VES - Venezuelan Bolívar' => 'VES - Venezolanischer Bolívar',
+    'VES - Venezuelan Bolívar' => 'VES - Venezolanische Bolívar',
     'Destination column' => 'Zielspalte',
     'Move the task to another column when assigned to a user' => 'Aufgabe in eine andere Spalte verschieben, wenn ein Benutzer zugeordnet wurde.',
     'Move the task to another column when assignee is cleared' => 'Aufgabe in eine andere Spalte verschieben, wenn die Zuordnung gelöscht wurde.',
