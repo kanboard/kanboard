@@ -839,6 +839,8 @@ return array(
     // 'Group removed successfully.' => '',
     // 'Unable to remove this group.' => '',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'Oprávnění projektu',
     'Manager' => 'Správce',
     'Project Manager' => 'Správce projektu',

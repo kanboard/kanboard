@@ -839,6 +839,8 @@ return array(
     'Group removed successfully.' => 'Grupul a fost șters.',
     'Unable to remove this group.' => 'Nu am putut șterge grupul.',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'Permisiunile proiectului',
     'Manager' => 'Gestionar',
     'Project Manager' => 'Șef de proiect',

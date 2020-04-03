@@ -839,6 +839,8 @@ return array(
     'Group removed successfully.' => 'Grup başarıyla silindi.',
     'Unable to remove this group.' => 'Grup silinemedi.',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'Proje izimleri',
     'Manager' => 'Müdür',
     'Project Manager' => 'Proje müdürü',

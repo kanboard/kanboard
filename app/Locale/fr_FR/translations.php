@@ -839,6 +839,8 @@ return array(
     'Group removed successfully.' => 'Groupe supprimé avec succès.',
     'Unable to remove this group.' => 'Impossible de supprimer ce groupe.',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'Permissions du projet',
     'Manager' => 'Gestionnaire',
     'Project Manager' => 'Chef de projet',

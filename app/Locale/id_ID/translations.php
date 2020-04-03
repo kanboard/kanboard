@@ -839,6 +839,8 @@ return array(
     'Group removed successfully.' => 'Grup berhasil dihapus',
     'Unable to remove this group.' => 'Tidak dapat menghapus grup ini',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'Izin Proyek',
     'Manager' => 'Manajer',
     'Project Manager' => 'Manajer Proyek',

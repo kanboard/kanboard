@@ -839,6 +839,8 @@ return array(
     'Group removed successfully.' => 'Nhóm đã xoá thành công.',
     'Unable to remove this group.' => 'Không thể xóa nhóm này.',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'Quyền dự án',
     'Manager' => 'Giám đốc',
     'Project Manager' => 'Quản lý dự án',

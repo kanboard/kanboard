@@ -839,6 +839,8 @@ return array(
     'Group removed successfully.' => 'Gruppe fjernet.',
     'Unable to remove this group.' => 'Kan ikke fjerne gruppe.',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'Projekt tilladelser',
     'Manager' => 'Leder',
     'Project Manager' => 'Projektleder',

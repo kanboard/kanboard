@@ -839,6 +839,8 @@ return array(
     'Group removed successfully.' => '그룹이 성공적으로 삭제되었습니다',
     'Unable to remove this group.' => '그룹 삭제 비활성화',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => '프로젝트 권한',
     'Manager' => '매니저',
     'Project Manager' => '프로젝트 매니저',

@@ -839,6 +839,8 @@ return array(
     'Group removed successfully.' => 'Группа успешно удалена.',
     'Unable to remove this group.' => 'Невозможно удалить группу.',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'Разрешения проекта',
     'Manager' => 'Менеджер',
     'Project Manager' => 'Менеджер проекта',

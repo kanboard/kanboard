@@ -839,6 +839,8 @@ return array(
     'Group removed successfully.' => 'ลบกลุ่มเรียบร้อย',
     'Unable to remove this group.' => 'ไม่สามารถลบกลุ่มนี้',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'การอนุญาตใช้งานโปรเจค',
     'Manager' => 'ผู้จัดการ',
     'Project Manager' => 'ผู้จัดการโปรเจค',

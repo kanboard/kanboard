@@ -839,6 +839,8 @@ return array(
     'Group removed successfully.' => 'Grup eliminat correctament.',
     'Unable to remove this group.' => 'No es pot eliminar aquest grup.',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'Permisos de projectes',
     'Manager' => 'Gerent',
     'Project Manager' => 'Gerent de projectes',

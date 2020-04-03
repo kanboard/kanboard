@@ -839,6 +839,8 @@ return array(
     'Group removed successfully.' => 'Grupa uspješno uklonjena.',
     'Unable to remove this group.' => 'Nemoguće ukloniti grupu.',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'Prava na projektu',
     'Manager' => 'Menadžer',
     'Project Manager' => 'Menadžer projekta',

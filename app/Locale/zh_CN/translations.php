@@ -839,6 +839,8 @@ return array(
     'Group removed successfully.' => '用户组已删除',
     'Unable to remove this group.' => '无法删除该用户组',
     // 'Group membership(s):' => ':',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => '项目权限',
     'Manager' => '管理员',
     'Project Manager' => '项目管理员',
