@@ -838,7 +838,7 @@ return array(
     'Remove group' => 'حذف گروه',
     'Group removed successfully.' => 'گروه با موفقیت حذف شد.',
     'Unable to remove this group.' => 'حذف این گروه امکان پذیر نیست.',
-    // 'Group membership(s):' => ':',
+    // 'Group membership(s):' => '',
     'Project Permissions' => 'مجوز های پروژه',
     'Manager' => 'مدیر',
     'Project Manager' => 'مدیر پروژه',
@@ -1416,4 +1416,5 @@ return array(
     // 'Task limit: ' => '',
     // 'Change to global tag' => '',
     // 'Do you really want to make the tag "%s" global?' => '',
+    // 'Enable global tags for this project' => '',
 );

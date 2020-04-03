@@ -838,7 +838,7 @@ return array(
     'Remove group' => 'Remover grupo.',
     'Group removed successfully.' => 'Grupo removido com sucesso.',
     'Unable to remove this group.' => 'Não foi possivel remover este grupo.',
-    // 'Group membership(s):' => ':',
+    // 'Group membership(s):' => '',
     'Project Permissions' => 'Permissões de Projeto',
     'Manager' => 'Gestor',
     'Project Manager' => 'Gestor de Projeto',
@@ -1416,4 +1416,5 @@ return array(
     'Task limit: ' => 'Limite da tarefa: ',
     'Change to global tag' => 'Alterar para etiqueta global',
     'Do you really want to make the tag "%s" global?' => 'Tem a certeza que pretende por a etiqueta "%s" como global?',
+    // 'Enable global tags for this project' => '',
 );

@@ -605,4 +605,20 @@ class ProjectModel extends Base
             ->join(ColumnModel::TABLE, 'id', 'project_id')
             ->count();
     }
+
+    /**
+     * Change usage of global tags
+     *
+     * @param  integer $project_id  Project id
+     * @param  bool    $global_tags New global tag value
+     * @return bool
+     */    
+    public function changeGlobalTagUsage($project_id, $global_tags)
+    {
+        return $this->exists($project_id) &&
+               $this->db
+                    ->table(self::TABLE)
+                    ->eq('id', $project_id)
+                    ->save(array('enable_global_tags' => $global_tags));
+    }
 }

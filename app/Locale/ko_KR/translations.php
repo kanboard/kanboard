@@ -838,7 +838,7 @@ return array(
     'Remove group' => '그룹 삭제',
     'Group removed successfully.' => '그룹이 성공적으로 삭제되었습니다',
     'Unable to remove this group.' => '그룹 삭제 비활성화',
-    // 'Group membership(s):' => ':',
+    // 'Group membership(s):' => '',
     'Project Permissions' => '프로젝트 권한',
     'Manager' => '매니저',
     'Project Manager' => '프로젝트 매니저',
@@ -1416,4 +1416,5 @@ return array(
     // 'Task limit: ' => '',
     // 'Change to global tag' => '',
     // 'Do you really want to make the tag "%s" global?' => '',
+    // 'Enable global tags for this project' => '',
 );
