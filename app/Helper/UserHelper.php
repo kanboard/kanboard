@@ -119,7 +119,7 @@ class UserHelper extends Base
      */
     public function getDisplayGroupNamesInUserList($user_id)
     {
-        // config-CONSTANT is not mandatory in config.default.php so check to see if it's there ELSE set CONSTANT to default
+        // config-CONSTANT is not mandatory in config.php so check to see if it's there ELSE set CONSTANT to default = TRUE
         defined('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST') or define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST', true);
         return ( count($this->groupMemberModel->getGroups($user_id)) > 0 && SHOW_GROUP_MEMBERSHIPS_IN_USERLIST );
     }
@@ -145,7 +145,7 @@ class UserHelper extends Base
      */
     public function getGroupNamesLimited($user_id)
     {
-        // config-CONSTANT is not mandatory in config.default.php so check to see if it's there ELSE set CONSTANT to default
+        // config-CONSTANT is not mandatory in config.php so check to see if it's there ELSE set CONSTANT to default = 7
         defined('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT') or define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT', 7);
         $full_list = array_column($this->groupMemberModel->getGroups($user_id), 'name');
         // let's reduce the arry to the limit
