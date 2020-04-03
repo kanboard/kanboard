@@ -838,6 +838,7 @@ return array(
     'Remove group' => 'Odstrániť skupinu',
     'Group removed successfully.' => 'Skupina úspešne odstránená.',
     'Unable to remove this group.' => 'Nemožno odstrániť skupinu.',
+    // 'Group membership(s):' => ':',
     'Project Permissions' => 'Povolenia projektu',
     'Manager' => 'Správca',
     'Project Manager' => 'Správca projektu',

@@ -838,6 +838,7 @@ return array(
     'Remove group' => 'Csoport eltávolítása',
     'Group removed successfully.' => 'A csoport sikeresen eltávolítva.',
     'Unable to remove this group.' => 'Nem lehet eltávolítani a csoportot.',
+    // 'Group membership(s):' => ':',
     'Project Permissions' => 'Projektjogosultságok',
     'Manager' => 'Vezető',
     'Project Manager' => 'Projektvezető',

@@ -110,6 +110,18 @@ class UserHelper extends Base
     }
 
     /**
+     * Get group names(as a comma-separated list) for a given user
+     *
+     * @access public
+     * @param  integer   $user_id   User id
+     * @return string
+     */
+    public function getGroupNames($user_id)
+    {
+        return implode(', ', array_column($this->groupMemberModel->getGroups($user_id), 'name'));
+    }
+
+    /**
      * Check application access
      *
      * @param  string  $controller

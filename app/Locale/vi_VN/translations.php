@@ -838,6 +838,7 @@ return array(
     'Remove group' => 'Loại bỏ nhóm',
     'Group removed successfully.' => 'Nhóm đã xoá thành công.',
     'Unable to remove this group.' => 'Không thể xóa nhóm này.',
+    // 'Group membership(s):' => ':',
     'Project Permissions' => 'Quyền dự án',
     'Manager' => 'Giám đốc',
     'Project Manager' => 'Quản lý dự án',

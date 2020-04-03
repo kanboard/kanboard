@@ -838,6 +838,7 @@ return array(
     'Remove group' => 'Удалить группу',
     'Group removed successfully.' => 'Группа успешно удалена.',
     'Unable to remove this group.' => 'Невозможно удалить группу.',
+    // 'Group membership(s):' => ':',
     'Project Permissions' => 'Разрешения проекта',
     'Manager' => 'Менеджер',
     'Project Manager' => 'Менеджер проекта',

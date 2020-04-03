@@ -838,6 +838,7 @@ return array(
     'Remove group' => 'Grubu sil',
     'Group removed successfully.' => 'Grup başarıyla silindi.',
     'Unable to remove this group.' => 'Grup silinemedi.',
+    // 'Group membership(s):' => ':',
     'Project Permissions' => 'Proje izimleri',
     'Manager' => 'Müdür',
     'Project Manager' => 'Proje müdürü',

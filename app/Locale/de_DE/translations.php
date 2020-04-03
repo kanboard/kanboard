@@ -838,6 +838,7 @@ return array(
     'Remove group' => 'Gruppe löschen',
     'Group removed successfully.' => 'Gruppe erfolgreich gelöscht.',
     'Unable to remove this group.' => 'Gruppe konnte nicht gelöscht werden.',
+    'Group membership(s):' => 'Gruppen-Mitgliedschaft(en):',
     'Project Permissions' => 'Projekt Berechtigungen',
     'Manager' => 'Manager',
     'Project Manager' => 'Projekt Manager',
