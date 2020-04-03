@@ -156,5 +156,13 @@ defined('TOTP_ISSUER') or define('TOTP_ISSUER', getenv('TOTP_ISSUER') ?: 'Kanboa
 // Comma separated list of fields to not synchronize when using external authentication providers
 defined('EXTERNAL_AUTH_EXCLUDE_FIELDS') or define('EXTERNAL_AUTH_EXCLUDE_FIELDS', getenv('EXTERNAL_AUTH_EXCLUDE_FIELDS') ?: 'username');
 
+// Enable or disable displaying group-memberships in userlist (true by default)
+defined('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST') or define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST', getenv('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST') ?: true);
+
+// Limit number of groups to display in userlist (The full list of group-memberships is always shown, ...
+// ... when hovering the mouse over the group-icon of a given user!)
+// If set to 0 ALL group-memberships will be listed (7 by default)
+defined('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT') or define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT', intval(getenv('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT')) ?: 7);
+
 // Documentation URL
 defined('DOCUMENTATION_URL_PATTERN') or define('DOCUMENTATION_URL_PATTERN', getenv('DOCUMENTATION_URL_PATTERN') ?: 'https://docs.kanboard.org/en/%s/user_guide/%s.html');
