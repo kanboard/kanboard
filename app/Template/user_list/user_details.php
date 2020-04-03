@@ -11,7 +11,8 @@
         <span><a href="mailto:<?= $this->text->e($user['email']) ?>"><?= $this->text->e($user['email']) ?></a></span>
     <?php endif ?>
 
-    <?php if (! empty($this->user->getGroupNames($user['id'])) ): ?>
-        <span><i class="fa fa-fw fa-group aria-hidden="true"></i> <?= $this->user->getGroupNames($user['id']) ?></span>
+    <?php if ( $this->user->getDisplayGroupNamesInUserList($user['id']) ): ?>
+        <?php $groups_list_tooltip = t('%s is a member of the following group(s):', $user['name']) . '&#10;' . $this->user->getGroupNames($user['id']); ?>
+        <span><i class="fa fa-fw fa-group aria-hidden="true" title="<?= $groups_list_tooltip ?>"></i> <?= $this->user->getGroupNamesLimited($user['id']) ?></span>
     <?php endif ?>
 </div>
