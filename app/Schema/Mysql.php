@@ -8,7 +8,12 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 136;
+const VERSION = 137;
+
+function version_137(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `projects` ADD COLUMN `enable_global_tags` TINYINT(1) DEFAULT 1 NOT NULL');
+}
 
 function version_136(PDO $pdo)
 {

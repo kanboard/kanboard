@@ -838,7 +838,6 @@ return array(
     'Remove group' => 'Șterge grupul',
     'Group removed successfully.' => 'Grupul a fost șters.',
     'Unable to remove this group.' => 'Nu am putut șterge grupul.',
-    // 'Group membership(s):' => ':',
     'Project Permissions' => 'Permisiunile proiectului',
     'Manager' => 'Gestionar',
     'Project Manager' => 'Șef de proiect',
@@ -1416,4 +1415,6 @@ return array(
     // 'Task limit: ' => '',
     // 'Change to global tag' => '',
     // 'Do you really want to make the tag "%s" global?' => '',
+    // 'Enable global tags for this project' => '',
+    // 'Group membership(s):' => '',
 );

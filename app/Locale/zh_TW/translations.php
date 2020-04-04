@@ -838,7 +838,6 @@ return array(
     'Remove group' => '删除群組',
     'Group removed successfully.' => '群組已删除',
     'Unable to remove this group.' => '無法删除群組',
-    // 'Group membership(s):' => ':',
     'Project Permissions' => '專案全線',
     'Manager' => '管理員',
     'Project Manager' => '專案管理員',
@@ -1416,4 +1415,6 @@ return array(
     // 'Task limit: ' => '',
     // 'Change to global tag' => '',
     // 'Do you really want to make the tag "%s" global?' => '',
+    // 'Enable global tags for this project' => '',
+    // 'Group membership(s):' => '',
 );
