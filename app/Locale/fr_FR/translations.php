@@ -1416,5 +1416,6 @@ return array(
     'Task limit: ' => 'Limite de tâche : ',
     'Change to global tag' => 'Changer le libellé à global',
     'Do you really want to make the tag "%s" global?' => 'Voulez-vous vraiment rendre le libellé « %s » global ?',
-    // 'Enable global tags for this project' => '',
+    'Enable global tags for this project' => 'Activer les libellés globaux pour ce projet',
+    'Group membership(s):' => 'Membre des groupes :',
 );

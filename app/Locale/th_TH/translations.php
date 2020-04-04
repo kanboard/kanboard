@@ -838,7 +838,6 @@ return array(
     'Remove group' => 'ลบกลุ่ม',
     'Group removed successfully.' => 'ลบกลุ่มเรียบร้อย',
     'Unable to remove this group.' => 'ไม่สามารถลบกลุ่มนี้',
-    // 'Group membership(s):' => '',
     'Project Permissions' => 'การอนุญาตใช้งานโปรเจค',
     'Manager' => 'ผู้จัดการ',
     'Project Manager' => 'ผู้จัดการโปรเจค',
@@ -1417,4 +1416,5 @@ return array(
     // 'Change to global tag' => '',
     // 'Do you really want to make the tag "%s" global?' => '',
     // 'Enable global tags for this project' => '',
+    // 'Group membership(s):' => '',
 );

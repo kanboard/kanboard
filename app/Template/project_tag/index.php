@@ -1,13 +1,11 @@
 <div class="page-header">
-    <h2><?= t('Tags') ?></h2>
+    <h2><?= t('Project tags') ?></h2>
+    <ul class="no-bullet">
+        <li>
+            <?= $this->modal->medium('plus', t('Add new tag'), 'ProjectTagController', 'create', array('project_id' => $project['id'])) ?>
+        </li>
+    </ul>
 </div>
-
-<h3><?= t('Project tags') ?></h3>
-<ul class="no-bullet">
-    <li>
-        <?= $this->modal->medium('plus', t('Add new tag'), 'ProjectTagController', 'create', array('project_id' => $project['id'])) ?>
-    </li>
-</ul>
 
 <?php if (empty($tags)): ?>
     <p class="alert"><?= t('There is no specific tag for this project at the moment.') ?></p>
@@ -44,11 +42,11 @@
     </table>
 <?php endif ?>
 
-<h3><?= t('Global tags') ?></h3>
+<div class="page-header">
+    <h2><?= t('Global tags') ?></h2>
+</div>
 
-<ul class="panel no-bullet">
-
-<li>
+<div class="panel">
     <form method="post" action="<?= $this->url->href('ProjectTagController', 'updateSettings', array('project_id' => $project['id'])) ?>" autocomplete="off">
         <?= $this->form->csrf() ?>
         
@@ -56,6 +54,4 @@
 
         <?= $this->modal->submitButtons() ?>
     </form>
-</li>
-
-</ul>
+</div>

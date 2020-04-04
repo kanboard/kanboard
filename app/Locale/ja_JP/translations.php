@@ -838,7 +838,6 @@ return array(
     'Remove group' => 'グループを削除',
     'Group removed successfully.' => 'グループは正常に削除されました',
     'Unable to remove this group.' => 'このグループを削除できません',
-    // 'Group membership(s):' => '',
     'Project Permissions' => 'プロジェクトの権限',
     'Manager' => '組織の管理者',
     'Project Manager' => 'プロジェクト管理者',
@@ -1417,4 +1416,5 @@ return array(
     // 'Change to global tag' => '',
     // 'Do you really want to make the tag "%s" global?' => '',
     // 'Enable global tags for this project' => '',
+    // 'Group membership(s):' => '',
 );

@@ -838,7 +838,6 @@ return array(
     'Remove group' => 'Eliminar grupo',
     'Group removed successfully.' => 'Grupo eliminado correctamente.',
     'Unable to remove this group.' => 'No se pudo eliminar este grupo.',
-    // 'Group membership(s):' => '',
     'Project Permissions' => 'Permisos del proyecto',
     'Manager' => 'Gerente',
     'Project Manager' => 'Gerente de proyecto',
@@ -1417,4 +1416,5 @@ return array(
     // 'Change to global tag' => '',
     // 'Do you really want to make the tag "%s" global?' => '',
     // 'Enable global tags for this project' => '',
+    // 'Group membership(s):' => '',
 );
