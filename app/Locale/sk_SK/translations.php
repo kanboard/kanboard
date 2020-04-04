@@ -838,7 +838,7 @@ return array(
     'Remove group' => 'Odstrániť skupinu',
     'Group removed successfully.' => 'Skupina úspešne odstránená.',
     'Unable to remove this group.' => 'Nemožno odstrániť skupinu.',
-    // 'Group membership(s):' => ':',
+    // 'Group membership(s):' => '',
     'Project Permissions' => 'Povolenia projektu',
     'Manager' => 'Správca',
     'Project Manager' => 'Správca projektu',
@@ -1416,4 +1416,5 @@ return array(
     // 'Task limit: ' => '',
     // 'Change to global tag' => '',
     // 'Do you really want to make the tag "%s" global?' => '',
+    // 'Enable global tags for this project' => '',
 );

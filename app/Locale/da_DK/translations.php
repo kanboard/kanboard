@@ -838,7 +838,7 @@ return array(
     'Remove group' => 'Fjerne gruppe',
     'Group removed successfully.' => 'Gruppe fjernet.',
     'Unable to remove this group.' => 'Kan ikke fjerne gruppe.',
-    // 'Group membership(s):' => ':',
+    // 'Group membership(s):' => '',
     'Project Permissions' => 'Projekt tilladelser',
     'Manager' => 'Leder',
     'Project Manager' => 'Projektleder',
@@ -1416,4 +1416,5 @@ return array(
     'Task limit: ' => 'Opgave grænser:',
     'Change to global tag' => 'Ændre til globalt mærke',
     'Do you really want to make the tag "%s" global?' => 'Skal mærket "%s" gøres globalt?',
+    // 'Enable global tags for this project' => '',
 );

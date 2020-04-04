@@ -838,7 +838,7 @@ return array(
     'Remove group' => 'Αφαίρεση ομάδας',
     'Group removed successfully.' => 'Η ομάδα αφαιρέθηκε με επιτυχία.',
     'Unable to remove this group.' => 'Δεν είναι δυνατή η αφαίρεση της ομάδας.',
-    // 'Group membership(s):' => ':',
+    // 'Group membership(s):' => '',
     'Project Permissions' => 'Επιτρέψεις έργου',
     'Manager' => 'Διευθυντής',
     'Project Manager' => 'Διευθυντής έργου',
@@ -1416,4 +1416,5 @@ return array(
     // 'Task limit: ' => '',
     // 'Change to global tag' => '',
     // 'Do you really want to make the tag "%s" global?' => '',
+    // 'Enable global tags for this project' => '',
 );

@@ -1,11 +1,13 @@
 <div class="page-header">
-    <h2><?= t('Project tags') ?></h2>
-    <ul>
-        <li>
-            <?= $this->modal->medium('plus', t('Add new tag'), 'ProjectTagController', 'create', array('project_id' => $project['id'])) ?>
-        </li>
-    </ul>
+    <h2><?= t('Tags') ?></h2>
 </div>
+
+<h3><?= t('Project tags') ?></h3>
+<ul class="no-bullet">
+    <li>
+        <?= $this->modal->medium('plus', t('Add new tag'), 'ProjectTagController', 'create', array('project_id' => $project['id'])) ?>
+    </li>
+</ul>
 
 <?php if (empty($tags)): ?>
     <p class="alert"><?= t('There is no specific tag for this project at the moment.') ?></p>
@@ -41,3 +43,19 @@
         <?php endforeach ?>
     </table>
 <?php endif ?>
+
+<h3><?= t('Global tags') ?></h3>
+
+<ul class="panel no-bullet">
+
+<li>
+    <form method="post" action="<?= $this->url->href('ProjectTagController', 'updateSettings', array('project_id' => $project['id'])) ?>" autocomplete="off">
+        <?= $this->form->csrf() ?>
+        
+        <?= $this->form->checkbox('enable_global_tags', t('Enable global tags for this project'), 1, $project['enable_global_tags'] == 1) ?>
+
+        <?= $this->modal->submitButtons() ?>
+    </form>
+</li>
+
+</ul>

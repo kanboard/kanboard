@@ -838,7 +838,7 @@ return array(
     'Remove group' => 'Csoport eltávolítása',
     'Group removed successfully.' => 'A csoport sikeresen eltávolítva.',
     'Unable to remove this group.' => 'Nem lehet eltávolítani a csoportot.',
-    // 'Group membership(s):' => ':',
+    // 'Group membership(s):' => '',
     'Project Permissions' => 'Projektjogosultságok',
     'Manager' => 'Vezető',
     'Project Manager' => 'Projektvezető',
@@ -1416,4 +1416,5 @@ return array(
     'Task limit: ' => 'Feladatkorlát: ',
     'Change to global tag' => 'Megváltoztatás globális címkére',
     'Do you really want to make the tag "%s" global?' => 'Valóban globálissá szeretné tenni a(z) „%s” címkét?',
+    // 'Enable global tags for this project' => '',
 );

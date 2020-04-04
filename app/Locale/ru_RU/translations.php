@@ -838,7 +838,7 @@ return array(
     'Remove group' => 'Удалить группу',
     'Group removed successfully.' => 'Группа успешно удалена.',
     'Unable to remove this group.' => 'Невозможно удалить группу.',
-    // 'Group membership(s):' => ':',
+    // 'Group membership(s):' => '',
     'Project Permissions' => 'Разрешения проекта',
     'Manager' => 'Менеджер',
     'Project Manager' => 'Менеджер проекта',
@@ -1416,4 +1416,5 @@ return array(
     'Task limit: ' => 'Лимит задач:',
     'Change to global tag' => 'Сменить на глобальную метку',
     'Do you really want to make the tag "%s" global?' => 'Вы действительно хотите сделать метку "%s" глобальной?',
+    // 'Enable global tags for this project' => '',
 );
