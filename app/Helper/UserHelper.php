@@ -110,45 +110,33 @@ class UserHelper extends Base
     }
 
     /**
-     * Check if group-memberships should be displayed in user-list for a given user
-     * User must be a member of at least one group && CONSTANT(from config.php) to diplay group-memberships in userlist must be true!
+     * Get group names for a given user and return an associative array:
+     *  ['full_list'] = a comma-separated list of all group-memberships
+     *  ['limited_list'] = a comma-separated list limited to N groups depending on value of SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT
+     *  ['has_groups'] = boolean TRUE if user is member of at least one group ... else FALSE
      *
      * @access public
      * @param  integer   $user_id   User id
-     * @return boolean
+     * @return array
      */
-    public function getDisplayGroupNamesInUserList($user_id)
+    public function getUsersGroupNames($user_id)
     {
-        return (count($this->groupMemberModel->getGroups($user_id)) > 0 && SHOW_GROUP_MEMBERSHIPS_IN_USERLIST);
-    }
+        $groups_list = array_column($this->groupMemberModel->getGroups($user_id), 'name');
+        $full_list = implode(', ', $groups_list);
 
-    /**
-     * Get group names(as a comma-separated list) for a given user
-     *
-     * @access public
-     * @param  integer   $user_id   User id
-     * @return string
-     */
-    public function getGroupNames($user_id)
-    {
-        return implode(', ', array_column($this->groupMemberModel->getGroups($user_id), 'name'));
-    }
-
-    /**
-     * Get group names(as a comma-separated list) for a given user (limited to N groups depending on value of CONSTANT in config.php )
-     *
-     * @access public
-     * @param  integer   $user_id   User id
-     * @return string
-     */
-    public function getGroupNamesLimited($user_id)
-    {
-        $full_list = array_column($this->groupMemberModel->getGroups($user_id), 'name');
-        // let's reduce the arry to the limit
-        $limited_list = ( SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT == 0 ) ? $full_list : array_slice($full_list, 0 , SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT);
+        // let's reduce the array to the limit
+        $limited_list = ( SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT == 0 ) ? $groups_list : array_slice($groups_list, 0 , SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT);
         // if limiting had any effect ... let's add a hint to the list, to inform the user there are more group-memberships for that user
-        $limited_list = ( $full_list == $limited_list ) ? implode(', ', $limited_list) : implode(', ', $limited_list) . ' ( >> ' . t('hover mouse over group-icon, to show all group-memberships') . ' )';
-        return $limited_list;
+        $limited_list = ( $groups_list == $limited_list ) ? implode(', ', $limited_list) : implode(', ', $limited_list) . ' ( >> ' . t('hover mouse over group-icon, to show all group-memberships') . ' )';
+
+        $has_groups = (count($groups_list)) ? true : false;
+
+        $UsersGroupNames = array(
+            'full_list' => $full_list,
+            'limited_list' => $limited_list,
+            'has_groups' => $has_groups
+        );
+        return $UsersGroupNames;
     }
 
     /**
