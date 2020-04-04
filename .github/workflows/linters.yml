@@ -1,0 +1,16 @@
+name: Linters
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  jshint:
+    runs-on: ubuntu-latest
+    container: kanboard/tests:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install jshint
+        run: npm install -g jshint
+      - name: Run jshint
+        run: jshint ./assets/js/core ./assets/js/components
