@@ -1418,7 +1418,7 @@ return array(
     'Enable global tags for this project' => 'Globale Schlagworte für dieses Projekt aktivieren',
     'Group membership(s):' => 'Gruppen-Mitgliedschaft(en):',
     '%s is a member of the following group(s): %s' => '%s ist Mitglied in der/den folgenden Gruppe(n): %s',
-    // '%d/%d group(s) shown' => '',
+    '%d/%d group(s) shown' => '%d/%d Gruppe(n) angezeigt',
     'Group membership(s):' => 'Gruppen Mitgliedschaft(en)',
     'Subtask creation or modification' => 'Teilaufgabe erstellen oder ändern',
 );

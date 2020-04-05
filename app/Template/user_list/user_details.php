@@ -17,8 +17,8 @@
         <?php if ($users_groups['has_groups']): ?>
             <span title="<?= $groups_list_tooltip ?>">
                 <i class="fa fa-fw fa-group" aria-hidden="true"></i><?= $this->text->implode(', ', $users_groups['limited_list']) ?>
-                <?php if ($users_groups['not_shown'] > 0): ?>
-                    ‑&nbsp;<?= t('%d/%d group(s) shown', $users_groups['not_shown'], $users_groups['total']) ?>
+                <?php if ($users_groups['shown'] != $users_groups['total']): ?>
+                    ‑&nbsp;<?= t('%d/%d group(s) shown', $users_groups['shown'], $users_groups['total']) ?>
                 <?php endif ?>
             </span>
         <?php endif ?>
