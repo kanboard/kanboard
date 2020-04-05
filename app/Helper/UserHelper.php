@@ -131,12 +131,11 @@ class UserHelper extends Base
 
         $has_groups = (count($groups_list)) ? true : false;
 
-        $UsersGroupNames = array(
+        return array(
             'full_list' => $full_list,
             'limited_list' => $limited_list,
             'has_groups' => $has_groups
         );
-        return $UsersGroupNames;
     }
 
     /**
