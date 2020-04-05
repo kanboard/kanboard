@@ -1417,6 +1417,6 @@ return array(
     'Do you really want to make the tag "%s" global?' => 'Você realmente deseja transformar a etiqueta "%s" em etiqueta global?',
     // 'Enable global tags for this project' => '',
     // 'Group membership(s):' => '',
-    // 'hover mouse over group-icon, to show all group-memberships' => '',
-    // '%s is a member of the following group(s):' => '',
+    // '%s is a member of the following group(s): %s' => '',
+    // '%d/%d group(s) shown' => '',
 );

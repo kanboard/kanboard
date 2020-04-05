@@ -11,11 +11,16 @@
         <span><a href="mailto:<?= $this->text->e($user['email']) ?>"><?= $this->text->e($user['email']) ?></a></span>
     <?php endif ?>
 
-    <?php if ( SHOW_GROUP_MEMBERSHIPS_IN_USERLIST ): ?>
-        <?php $users_group_names = $this->user->getUsersGroupNames($user['id']); ?>
-        <?php $groups_list_tooltip = t('%s is a member of the following group(s):', $user['name']) . '&#10;' . $users_group_names['full_list']; ?>
-        <?php if ($users_group_names['has_groups']): ?>
-            <span><i class="fa fa-fw fa-group aria-hidden="true" title="<?= $groups_list_tooltip ?>"></i> <?= $users_group_names['limited_list'] ?></span>
+    <?php if (SHOW_GROUP_MEMBERSHIPS_IN_USERLIST): ?>
+        <?php $users_groups = $this->user->getUsersGroupNames($user['id']); ?>
+        <?php $groups_list_tooltip = t('%s is a member of the following group(s): %s', $user['name'] ?: $user['username'], implode(', ', $users_groups['full_list'])); ?>
+        <?php if ($users_groups['has_groups']): ?>
+            <span title="<?= $groups_list_tooltip ?>">
+                <i class="fa fa-fw fa-group" aria-hidden="true"></i><?= $this->text->implode(', ', $users_groups['limited_list']) ?>
+                <?php if ($users_groups['not_shown'] > 0): ?>
+                    ‑&nbsp;<?= t('%d/%d group(s) shown', $users_groups['not_shown'], $users_groups['total']) ?>
+                <?php endif ?>
+            </span>
         <?php endif ?>
     <?php endif ?>
 </div>
