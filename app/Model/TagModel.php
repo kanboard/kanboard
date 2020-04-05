@@ -45,19 +45,28 @@ class TagModel extends Base
     /**
      * Get assignable tags for a project
      *
-     * @access public
-     * @param  integer $project_id
+     * @param  integer $project_id          Project Id
+     * @param  bool    $include_global_tags Flag to include global tags
      * @return array
      */
-    public function getAssignableList($project_id)
+    public function getAssignableList($project_id, $include_global_tags = true)
     {
-        return $this->db->hashtable(self::TABLE)
-            ->beginOr()
-            ->eq('project_id', $project_id)
-            ->eq('project_id', 0)
-            ->closeOr()
-            ->asc('name')
-            ->getAll('id', 'name');
+        if ($include_global_tags) {
+            return $this->db->hashtable(self::TABLE)
+                ->beginOr()
+                ->eq('project_id', $project_id)
+                ->eq('project_id', 0)
+                ->closeOr()
+                ->asc('name')
+                ->getAll('id', 'name');
+        } else {
+            return $this->db->hashtable(self::TABLE)
+                ->beginOr()
+                ->eq('project_id', $project_id)
+                ->closeOr()
+                ->asc('name')
+                ->getAll('id', 'name');
+        }
     }
 
     /**
@@ -85,8 +94,8 @@ class TagModel extends Base
         return $this->db
             ->table(self::TABLE)
             ->beginOr()
-                ->eq('project_id', 0)
-                ->eq('project_id', $project_id)
+            ->eq('project_id', 0)
+            ->eq('project_id', $project_id)
             ->closeOr()
             ->ilike('name', $tag)
             ->asc('project_id')
@@ -162,18 +171,18 @@ class TagModel extends Base
      */
     public function update($tag_id, $tag, $color_id = null, $project_id = null)
     {
-        if($project_id !== null){
+        if ($project_id !== null) {
             return $this->db->table(self::TABLE)->eq('id', $tag_id)->update(array(
                 'name' => $tag,
                 'color_id' => $color_id,
-                'project_id' => $project_id
+                'project_id' => $project_id,
             ));
         } else {
             return $this->db->table(self::TABLE)->eq('id', $tag_id)->update(array(
                 'name' => $tag,
-                'color_id' => $color_id
+                'color_id' => $color_id,
             ));
-        }   
+        }
     }
 
     /**

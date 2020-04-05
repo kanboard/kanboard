@@ -838,9 +838,6 @@ return array(
     'Remove group' => 'Hapus grup',
     'Group removed successfully.' => 'Grup berhasil dihapus',
     'Unable to remove this group.' => 'Tidak dapat menghapus grup ini',
-    // 'Group membership(s):' => ':',
-    // 'hover mouse over group-icon, to show all group-memberships' => '',
-    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'Izin Proyek',
     'Manager' => 'Manajer',
     'Project Manager' => 'Manajer Proyek',
@@ -1418,4 +1415,8 @@ return array(
     // 'Task limit: ' => '',
     // 'Change to global tag' => '',
     // 'Do you really want to make the tag "%s" global?' => '',
+    // 'Enable global tags for this project' => '',
+    // 'Group membership(s):' => '',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
 );

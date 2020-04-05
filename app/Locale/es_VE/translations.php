@@ -838,9 +838,6 @@ return array(
     'Remove group' => 'Eliminar grupo',
     'Group removed successfully.' => 'Grupo eliminado correctamente.',
     'Unable to remove this group.' => 'No se pudo eliminar este grupo.',
-    // 'Group membership(s):' => ':',
-    // 'hover mouse over group-icon, to show all group-memberships' => '',
-    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => 'Permisos del proyecto',
     'Manager' => 'Gerente',
     'Project Manager' => 'Gerente de proyecto',
@@ -1418,4 +1415,8 @@ return array(
     // 'Task limit: ' => '',
     // 'Change to global tag' => '',
     // 'Do you really want to make the tag "%s" global?' => '',
+    // 'Enable global tags for this project' => '',
+    // 'Group membership(s):' => '',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
 );

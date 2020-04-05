@@ -838,9 +838,6 @@ return array(
     'Remove group' => '删除用户组',
     'Group removed successfully.' => '用户组已删除',
     'Unable to remove this group.' => '无法删除该用户组',
-    // 'Group membership(s):' => ':',
-    // 'hover mouse over group-icon, to show all group-memberships' => '',
-    // '%s is a member of the following group(s):' => '',
     'Project Permissions' => '项目权限',
     'Manager' => '管理员',
     'Project Manager' => '项目管理员',
@@ -1418,4 +1415,8 @@ return array(
     // 'Task limit: ' => '',
     // 'Change to global tag' => '',
     // 'Do you really want to make the tag "%s" global?' => '',
+    // 'Enable global tags for this project' => '',
+    // 'Group membership(s):' => '',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
 );
