@@ -1415,8 +1415,8 @@ return array(
     'Task limit: ' => 'Лимит задач:',
     'Change to global tag' => 'Сменить на глобальную метку',
     'Do you really want to make the tag "%s" global?' => 'Вы действительно хотите сделать метку "%s" глобальной?',
-    // 'Enable global tags for this project' => '',
-    // 'Group membership(s):' => '',
+    'Enable global tags for this project' => 'Разрешить глобальные метки в этом проекте',
+    'Group membership(s):' => 'Состоит в группах:',
     // 'hover mouse over group-icon, to show all group-memberships' => '',
     // '%s is a member of the following group(s):' => '',
 );
