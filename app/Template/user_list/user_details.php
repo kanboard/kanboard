@@ -12,9 +12,10 @@
     <?php endif ?>
 
     <?php if ( SHOW_GROUP_MEMBERSHIPS_IN_USERLIST ): ?>
-        <?php $groups_list_tooltip = t('%s is a member of the following group(s):', $user['name']) . '&#10;' . $this->user->getUsersGroupNames($user['id'])['full_list']; ?>
-        <?php if ($this->user->getUsersGroupNames($user['id'])['has_groups']): ?>
-            <span><i class="fa fa-fw fa-group aria-hidden="true" title="<?= $groups_list_tooltip ?>"></i> <?= $this->user->getUsersGroupNames($user['id'])['limited_list'] ?></span>
+        <?php $users_group_names = $this->user->getUsersGroupNames($user['id']); ?>
+        <?php $groups_list_tooltip = t('%s is a member of the following group(s):', $user['name']) . '&#10;' . $users_group_names['full_list']; ?>
+        <?php if ($users_group_names['has_groups']): ?>
+            <span><i class="fa fa-fw fa-group aria-hidden="true" title="<?= $groups_list_tooltip ?>"></i> <?= $users_group_names['limited_list'] ?></span>
         <?php endif ?>
     <?php endif ?>
 </div>
