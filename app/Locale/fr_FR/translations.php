@@ -838,7 +838,6 @@ return array(
     'Remove group' => 'Supprimer le groupe',
     'Group removed successfully.' => 'Groupe supprimé avec succès.',
     'Unable to remove this group.' => 'Impossible de supprimer ce groupe.',
-    // 'Group membership(s):' => '',
     'Project Permissions' => 'Permissions du projet',
     'Manager' => 'Gestionnaire',
     'Project Manager' => 'Chef de projet',
@@ -1418,4 +1417,6 @@ return array(
     'Do you really want to make the tag "%s" global?' => 'Voulez-vous vraiment rendre le libellé « %s » global ?',
     'Enable global tags for this project' => 'Activer les libellés globaux pour ce projet',
     'Group membership(s):' => 'Membre des groupes :',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
 );

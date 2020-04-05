@@ -1417,4 +1417,6 @@ return array(
     'Do you really want to make the tag "%s" global?' => 'Вы действительно хотите сделать метку "%s" глобальной?',
     // 'Enable global tags for this project' => '',
     // 'Group membership(s):' => '',
+    // 'hover mouse over group-icon, to show all group-memberships' => '',
+    // '%s is a member of the following group(s):' => '',
 );
