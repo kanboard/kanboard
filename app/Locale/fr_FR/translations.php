@@ -1417,6 +1417,6 @@ return array(
     'Do you really want to make the tag "%s" global?' => 'Voulez-vous vraiment rendre le libellé « %s » global ?',
     'Enable global tags for this project' => 'Activer les libellés globaux pour ce projet',
     'Group membership(s):' => 'Membre des groupes :',
-    // 'hover mouse over group-icon, to show all group-memberships' => '',
-    // '%s is a member of the following group(s):' => '',
+    '%s is a member of the following group(s): %s' => '%s est membre des groupes suivants: %s',
+    '%d/%d group(s) shown' => '%d/%d groupe(s) affiché(s)',
 );
