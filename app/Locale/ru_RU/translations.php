@@ -1419,4 +1419,7 @@ return array(
     'Group membership(s):' => 'Состоит в группах:',
     // '%s is a member of the following group(s): %s' => '',
     // '%d/%d group(s) shown' => '',
+    // 'Enable global tags for this project' => '',
+    // 'Group membership(s):' => '',
+    // 'Subtask creation or modification' => '',
 );

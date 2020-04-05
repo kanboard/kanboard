@@ -1419,4 +1419,5 @@ return array(
     // 'Group membership(s):' => '',
     // '%s is a member of the following group(s): %s' => '',
     // '%d/%d group(s) shown' => '',
+    // 'Subtask creation or modification' => '',
 );
