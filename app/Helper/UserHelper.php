@@ -131,7 +131,7 @@ class UserHelper extends Base
             'limited_list' => $limitedList,
             'has_groups' => $total > 0,
             'total' => $total,
-            'not_shown' => $total - count($limitedList),
+            'shown' => count($limitedList),
         ];
     }
 
