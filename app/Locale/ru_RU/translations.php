@@ -1417,7 +1417,7 @@ return array(
     'Do you really want to make the tag "%s" global?' => 'Вы действительно хотите сделать метку "%s" глобальной?',
     'Enable global tags for this project' => 'Разрешить глобальные метки в этом проекте',
     'Group membership(s):' => 'Состоит в группах:',
-    '%s is a member of the following group(s): %s' => '%s является членом слеюдующих групп: %s',
+    '%s is a member of the following group(s): %s' => '%s является членом следующих групп: %s',
     '%d/%d group(s) shown' => '%d/%d групп показано',
     'Enable global tags for this project' => 'Разрешить глобальные метки в этом проекте',
     'Group membership(s):' => 'Состоит в группах:',
