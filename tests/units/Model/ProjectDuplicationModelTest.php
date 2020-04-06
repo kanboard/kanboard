@@ -66,7 +66,7 @@ class ProjectDuplicationModelTest extends Base
         $projectDuplicationModel = new ProjectDuplicationModel($this->container);
         $projectUserRoleModel = new ProjectUserRoleModel($this->container);
 
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Personal', 'is_private' => 1), 1, true));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Private', 'is_private' => 1), 1, true));
         $this->assertEquals(2, $projectDuplicationModel->duplicate(1));
 
         $project = $projectModel->getById(2);
