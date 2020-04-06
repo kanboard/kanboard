@@ -66,7 +66,7 @@ class ProjectDuplicationModelTest extends Base
         $projectDuplicationModel = new ProjectDuplicationModel($this->container);
         $projectUserRoleModel = new ProjectUserRoleModel($this->container);
 
-        $this->assertEquals(1, $projectModel->create(array('name' => 'Private', 'is_private' => 1), 1, true));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Personal', 'is_private' => 1), 1, true));
         $this->assertEquals(2, $projectDuplicationModel->duplicate(1));
 
         $project = $projectModel->getById(2);
@@ -393,7 +393,7 @@ class ProjectDuplicationModelTest extends Base
             'action_name' => 'TaskAssignColorCategory',
             'params' => array('color_id' => 'red', 'category_id' => 0),
         )));
- 
+
         $this->assertEquals(2, $projectDuplicationModel->duplicate(1));
 
         $actions = $actionModel->getAllByProject(2);
@@ -403,7 +403,7 @@ class ProjectDuplicationModelTest extends Base
         $this->assertNotEmpty($actions[0]['params']);
         $this->assertEquals('blue', $actions[0]['params']['color_id']);
         $this->assertEquals(5, $actions[0]['params']['category_id']);
-        
+
         $this->assertEquals('TaskAssignColorCategory', $actions[1]['action_name']);
         $this->assertNotEmpty($actions[1]['params']);
         $this->assertEquals('red', $actions[1]['params']['color_id']);
@@ -441,7 +441,7 @@ class ProjectDuplicationModelTest extends Base
             'action_name' => 'TaskAssignSpecificUser',
             'params' => array('column_id' => 2, 'user_id' => 0),
         )));
-        
+
         $this->assertEquals(2, $projectDuplicationModel->duplicate(1));
 
         $actions = $actionModel->getAllByProject(2);
@@ -457,7 +457,7 @@ class ProjectDuplicationModelTest extends Base
         $this->assertEquals(6, $actions[1]['params']['column_id']);
         $this->assertEquals(0, $actions[1]['params']['user_id']);
     }
-    
+
     public function testCloneProjectWithSwimlanes()
     {
         $projectModel = new ProjectModel($this->container);
