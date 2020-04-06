@@ -1280,7 +1280,7 @@ return array(
     'Project ID' => 'ID du projet',
     'Project name' => 'Nom du projet',
     'Public' => 'Public',
-    'Personal' => 'Privé',
+    'Personal' => 'Personnel',
     '%d tasks' => '%d tâches',
     '%d task' => '%d tâche',
     'Task ID' => 'ID de la tâche',
