@@ -92,6 +92,7 @@ class TaskBulkController extends BaseController
                     'score' => $values['score'],
                     'time_estimated' => $values['time_estimated'],
                     'date_due' => $values['date_due'],
+										'project_task_id' => $project['id'],
                 ));
             }
         }

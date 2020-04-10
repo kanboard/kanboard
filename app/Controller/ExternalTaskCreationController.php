@@ -80,6 +80,7 @@ class ExternalTaskCreationController extends BaseController
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
+			  $values['project_task_id'] = $this->taskModel->getNextProjectTaskIdByProjectId($project['id']);
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 

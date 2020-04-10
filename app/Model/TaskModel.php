@@ -99,6 +99,18 @@ class TaskModel extends Base
         return $this->db->table(self::TABLE)->eq('id', $task_id)->remove();
     }
 
+	  /**
+     * Get the next project task ID for given project ID
+     *
+     * @access public
+     * @param  integer $projectId
+     * @return integer
+     */
+	  public function getNextProjectTaskIdByProjectId($projectId)
+    {
+        return $this->db->table(self::TABLE)->eq('project_id', $projectId)->desc('project_task_id')->limit(1)->findOneColumn('project_task_id') + 1;
+    }
+
     /**
      * Get a the task id from a text
      *

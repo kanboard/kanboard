@@ -46,6 +46,7 @@ class TaskValidator extends BaseValidator
             new Validators\Date('date_started', t('Invalid date'), $this->dateParser->getParserFormats()),
             new Validators\Numeric('time_spent', t('This value must be numeric')),
             new Validators\Numeric('time_estimated', t('This value must be numeric')),
+            new Validators\Numeric('project_task_id', t('This value must be an integer')),
         );
     }
 

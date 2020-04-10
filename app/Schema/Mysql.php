@@ -8,7 +8,30 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 137;
+const VERSION = 138;
+
+function version_138(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `tasks` ADD COLUMN `project_task_id` INT');
+	  $rows = $pdo->query('SELECT `id`, `project_id` FROM `tasks` ORDER BY `project_id` ASC, `id` ASC');
+	  $updateStatement = $pdo->prepare('UPDATE `tasks` SET `project_task_id` = :project_task_id WHERE `id` = :id');
+    $projectTaskId = 0;
+	  $previousProjectId = -1;
+	  $projectId = -1;
+	
+	  foreach ($rows as $row) {
+		  $previousProjectId = $projectId;
+      $projectId = $row['project_id'];
+		
+		  if ($previousProjectId !== $projectId) {
+        $projectTaskId = 0;
+		  }
+
+		  $updateStatement->execute(['project_task_id' => $projectTaskId, 'id' => $row['id']]);
+
+		  ++$projectTaskId;
+		}
+}
 
 function version_137(PDO $pdo)
 {

@@ -314,6 +314,11 @@ abstract class BaseController extends Base
         return $filter;
     }
 
+	  protected function getNextProjectTaskId($projectId)
+	  {
+        return $this->taskModel->getNextProjectTaskIdByProjectId($projectId);
+		}
+
     /**
      * Redirect the user after the authentication
      *

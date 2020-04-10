@@ -5,7 +5,7 @@
         <?php endif ?>
         <?= $this->render('task/dropdown', array('task' => $task, 'redirect' => isset($redirect) ? $redirect : '')) ?>
     <?php else: ?>
-        <strong><?= '#'.$task['id'] ?></strong>
+        <strong><?= '#'.$task['project_task_id'] ?></strong>
     <?php endif ?>
 
     <span class="table-list-title <?= $task['is_active'] == 0 ? 'status-closed' : '' ?>">

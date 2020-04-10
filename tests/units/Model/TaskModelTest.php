@@ -21,6 +21,18 @@ class TaskModelTest extends Base
         $this->assertFalse($taskModel->remove(1234));
     }
 
+	  public function testReturnProperNextProjectTaskId()
+    {
+        $taskModel = new TaskModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'UnitTest')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task #1', 'project_id' => 1, 'project_task_id' => 1)));
+
+			  $this->assertEquals(2, $taskModel->getNextProjectTaskIdByProjectId(1));
+    }
+
     public function testGetTaskIdFromText()
     {
         $taskModel = new TaskModel($this->container);

@@ -50,6 +50,7 @@ class TaskCreationController extends BaseController
         $project = $this->getProject();
         $values = $this->request->getValues();
         $values['project_id'] = $project['id'];
+			  $values['project_task_id'] = $this->getNextProjectTaskId($project['id']);
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
