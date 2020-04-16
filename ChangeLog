@@ -1,3 +1,28 @@
+Version 1.2.14 (April 15, 2020)
+-------------------------------
+
+* Update translations
+* Add new event subtask.create_update
+* Replace Travis CI by GitHub Actions
+* Add option to enable or disable global tags per projects
+* Show group membership(s) in user summary and user list
+* Docker: use real hostname instead of "localhost"
+* Add new task/project image hooks
+* Fix invalid RSS feed encoding
+* Add new plugin hooks
+* Rename "private" projects to "personal"
+* Add per-project and per-swimlane task limits
+* Use parent task color when converting a subtask to task
+* Add environment variables support to configure the application
+* Add the possibility to make project tags global from project settings
+* Fix regex to detect external links with attachments
+* Use KANBOARD_URL to build URIs if specified
+* Make time_spent and time_estimated fields editable for updateTask and createTask API calls
+* Kanboard now requires PHP >= 7.2 since other versions are deprecated
+* Avoid page shrinking when drag and drop cards on iOS devices
+* Added a hover color to i elements inside the "dropdown-submenu-open" class
+* Avoid duplicating Dockerfiles for each architecture
+
 Version 1.2.13 (December 15, 2019)
 ----------------------------------
 

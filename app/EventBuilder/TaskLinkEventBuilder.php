@@ -79,7 +79,7 @@ class TaskLinkEventBuilder extends BaseEventBuilder
     public function buildTitleWithoutAuthor($eventName, array $eventData)
     {
         if ($eventName === TaskLinkModel::EVENT_CREATE_UPDATE) {
-            return e('A new internal link for the task #%d have been defined', $eventData['task']['id']);
+            return e('A new internal link for the task #%d has been defined', $eventData['task']['id']);
         } elseif ($eventName === TaskLinkModel::EVENT_DELETE) {
             return e('Internal link removed for the task #%d', $eventData['task']['id']);
         }

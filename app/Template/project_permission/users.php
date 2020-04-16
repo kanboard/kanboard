@@ -1,5 +1,5 @@
 <?php if (empty($users)): ?>
-    <div class="alert"><?= t('No user have been allowed specifically.') ?></div>
+    <div class="alert"><?= t('No specific user has been allowed.') ?></div>
 <?php else: ?>
     <table class="table-scrolling">
         <tr>

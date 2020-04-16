@@ -29,10 +29,12 @@
                                         <?= $this->modal->confirm('trash-o', t('Remove'), 'TaskFileController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                                     </li>
                                 <?php endif ?>
+                                <?= $this->hook->render('template:task-file:images:dropdown', array('task' => $task, 'file' => $file)) ?>
                             </ul>
                         </div>
                     </div>
                     <div class="file-thumbnail-description">
+                        <?= $this->hook->render('template:task-file:images:before-thumbnail-description', array('task' => $task, 'file' => $file)) ?>
                         <?= $this->app->tooltipMarkdown(t('Uploaded: %s', $this->dt->datetime($file['date']))."\n\n".t('Size: %s', $this->text->bytes($file['size']))) ?>
                         <?php if (! empty($file['user_id'])): ?>
                             <?= t('Uploaded by %s', $file['user_name'] ?: $file['username']) ?>

@@ -63,7 +63,7 @@ class CategoryController extends BaseController
 
         if ($valid) {
             if ($this->categoryModel->create($values) !== false) {
-                $this->flash->success(t('Your category have been created successfully.'));
+                $this->flash->success(t('Your category has been created successfully.'));
                 $this->response->redirect($this->helper->url->to('CategoryController', 'index', array('project_id' => $project['id'])), true);
                 return;
             } else {

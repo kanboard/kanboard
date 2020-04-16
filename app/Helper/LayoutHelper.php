@@ -35,6 +35,8 @@ class LayoutHelper extends Base
             if (isset($params['project']['id'])) {
                 unset($params['board_selector'][$params['project']['id']]);
             }
+
+            $this->hook->reference('helper:layout:board-selector:list', $params['board_selector']);
         }
 
         return $this->pageLayout($template, $params);

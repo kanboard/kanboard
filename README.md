@@ -1,8 +1,6 @@
 Kanboard
 ========
 
-[![Build Status](https://travis-ci.org/kanboard/kanboard.svg?branch=master)](https://travis-ci.org/kanboard/kanboard)
-
 Kanboard is project management software that focuses on the Kanban methodology.
 
 - Official website: <https://kanboard.org/>
