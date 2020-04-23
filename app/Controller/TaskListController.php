@@ -35,11 +35,16 @@ class TaskListController extends BaseController
             $formatter = $this->taskListFormatter;
         }
 
+        list($order, $direction) = $this->userSession->getListOrder($project['id']);
+        $direction = $this->request->getStringParam('direction', $direction);
+        $order = $this->request->getStringParam('order', $order);
+        $this->userSession->setListOrder($project['id'], $order, $direction);
+
         $paginator = $this->paginator
             ->setUrl('TaskListController', 'show', array('project_id' => $project['id']))
             ->setMax(30)
-            ->setOrder(TaskModel::TABLE.'.id')
-            ->setDirection('DESC')
+            ->setOrder($order)
+            ->setDirection($direction)
             ->setFormatter($formatter)
             ->setQuery($this->taskLexer
                 ->build($search)

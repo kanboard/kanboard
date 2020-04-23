@@ -240,4 +240,35 @@ class UserSession extends Base
     {
         session_set('filters:'.$projectID, $filters);
     }
+
+    /**
+     * Get project list order from the session
+     *
+     * @access public
+     * @param  integer  $projectID
+     * @return array
+     */
+    public function getListOrder($projectID)
+    {
+        $default = ['tasks.id', 'DESC'];
+
+        if (! session_exists('listOrder:'.$projectID)) {
+            return $default;
+        }        
+
+        return session_get('listOrder:'.$projectID);
+    }
+
+    /**
+     * Save project list order in the session
+     *
+     * @access public
+     * @param  integer  $projectID
+     * @param  string   $listOrder
+     * @param  string   $listDirection
+     */
+    public function setListOrder($projectID, $listOrder, $listDirection)
+    {
+        session_set('listOrder:'.$projectID, [$listOrder, $listDirection]);
+    }
 }

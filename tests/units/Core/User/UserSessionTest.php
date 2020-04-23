@@ -97,6 +97,28 @@ class UserSessionTest extends Base
         $this->assertEquals('assignee:bob', $userSession->getFilters(2));
     }
 
+    public function testListOrder()
+    {
+        $userSession = new UserSession($this->container);
+        list($order, $direction) = $userSession->getListOrder(1);
+        $this->assertEquals('tasks.id', $order);
+        $this->assertEquals('DESC', $direction);
+
+        $userSession->setListOrder(1, 'tasks.priority', 'ASC');
+        list($order, $direction) = $userSession->getListOrder(1);
+        $this->assertEquals('tasks.priority', $order);
+        $this->assertEquals('ASC', $direction);
+
+        list($order, $direction) = $userSession->getListOrder(2);
+        $this->assertEquals('tasks.id', $order);
+        $this->assertEquals('DESC', $direction);
+
+        $userSession->setListOrder(2, 'tasks.is_active', 'DESC');
+        list($order, $direction) = $userSession->getListOrder(2);
+        $this->assertEquals('tasks.is_active', $order);
+        $this->assertEquals('DESC', $direction);
+    }
+
     public function testPostAuthentication()
     {
         $userSession = new UserSession($this->container);
