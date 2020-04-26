@@ -153,8 +153,8 @@ class SubtaskModelTest extends Base
         $this->assertEquals(0, $subtasks[1]['status']);
 
         $this->assertEquals(0, $subtasks[0]['user_id']);
-        $this->assertEquals(0, $subtasks[1]['user_id']);
-
+        $this->assertEquals(1, $subtasks[1]['user_id']);
+        
         $this->assertEquals(1, $subtasks[0]['position']);
         $this->assertEquals(2, $subtasks[1]['position']);
     }

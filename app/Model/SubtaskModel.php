@@ -281,7 +281,7 @@ class SubtaskModel extends Base
         return $this->db->transaction(function (Database $db) use ($srcTaskId, $dstTaskId) {
 
             $subtasks = $db->table(SubtaskModel::TABLE)
-                ->columns('title', 'time_estimated', 'position')
+                ->columns('title', 'time_estimated', 'position','user_id')
                 ->eq('task_id', $srcTaskId)
                 ->asc('position')
                 ->findAll();
