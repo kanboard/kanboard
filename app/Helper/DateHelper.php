@@ -73,7 +73,7 @@ class DateHelper extends Base
         $dtF = new DateTime("@0");
         $dtT = new DateTime("@$seconds");
 
-        $format = sprintf("%%d %s, %%h %s, %%i %s, %%s %s", t('days'), t('hours'), t('minutes'), t('seconds'));
+        $format = sprintf("%%a %s, %%h %s, %%i %s, %%s %s", t('days'), t('hours'), t('minutes'), t('seconds'));
         return $dtF->diff($dtT)->format($format);
     }
 
