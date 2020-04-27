@@ -57,8 +57,6 @@ KB.tooltip = function () {
         var containerElement = document.createElement("div");
         containerElement.id = "tooltip-container";
         containerElement.innerHTML = html;
-        containerElement.addEventListener("mouseleave", onMouseLeaveContainer, false);
-        containerElement.addEventListener("mouseenter", mouseOnTooltip, false);
         containerElement.mouseOnTooltip = false;
 
         var elementRect = element.getBoundingClientRect();
@@ -92,10 +90,9 @@ KB.tooltip = function () {
     function exists() {
         return !!document.getElementById("tooltip-container");
     }
-
-    var elements = document.querySelectorAll(".tooltip");
-    for (var i = 0; i < elements.length; i++) {
-        elements[i].addEventListener("mouseenter", onMouseOver, false);
-        elements[i].addEventListener("mouseleave", mouseLeftParent, false);
-    }
+    
+    $(document).on("mouseenter",".tooltip", onMouseOver);
+    $(document).on("mouseleave",".tooltip", mouseLeftParent);
+    $(document).on("mouseenter","tooltip-container", mouseOnTooltip);
+    $(document).on("mouseleave","tooltip-container", onMouseLeaveContainer);
 };
