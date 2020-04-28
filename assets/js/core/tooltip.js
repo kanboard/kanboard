@@ -57,6 +57,8 @@ KB.tooltip = function () {
         var containerElement = document.createElement("div");
         containerElement.id = "tooltip-container";
         containerElement.innerHTML = html;
+        containerElement.addEventListener("mouseleave", onMouseLeaveContainer, false);
+        containerElement.addEventListener("mouseenter", mouseOnTooltip, false);
         containerElement.mouseOnTooltip = false;
 
         var elementRect = element.getBoundingClientRect();
@@ -91,8 +93,16 @@ KB.tooltip = function () {
         return !!document.getElementById("tooltip-container");
     }
     
-    $(document).on("mouseenter",".tooltip", onMouseOver);
-    $(document).on("mouseleave",".tooltip", mouseLeftParent);
-    $(document).on("mouseenter","tooltip-container", mouseOnTooltip);
-    $(document).on("mouseleave","tooltip-container", onMouseLeaveContainer);
+    // for dynamically added elements, we add our event listeners to the doc body
+    // we need to use mouseover, because mouseenter only triggers on the body in this case
+    document.body.addEventListener('mouseover', function(e) {
+        if (e.target.classList.contains('tooltip')) {
+            onMouseOver(e);
+        }
+    });
+    document.body.addEventListener('mouseout', function(e) {
+        if (e.target.classList.contains('tooltip')) {
+            mouseLeftParent(e);
+        }
+    });
 };
