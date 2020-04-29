@@ -67,7 +67,7 @@ class UserSession extends Base
      */
     public function getRole()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return '';
         }
 
@@ -103,7 +103,7 @@ class UserSession extends Base
      */
     public function hasPostAuthentication()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return false;
         }
 
@@ -158,7 +158,7 @@ class UserSession extends Base
      */
     public function getUsername()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return '';
         }
 
@@ -173,7 +173,7 @@ class UserSession extends Base
      */
     public function getLanguage()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return '';
         }
 
@@ -188,7 +188,7 @@ class UserSession extends Base
      */
     public function getTimezone()
     {
-        if (!$this->isLogged()) {
+        if (! $this->isLogged()) {
             return '';
         }
 
@@ -230,7 +230,7 @@ class UserSession extends Base
             return session_get('user') ? session_get('user')['filter'] ?: 'status:open' : 'status:open';
         }
 
-        return session_get('filters:' . $projectID);
+        return session_get('filters:'.$projectID);
     }
 
     /**
@@ -242,7 +242,7 @@ class UserSession extends Base
      */
     public function setFilters($projectID, $filters)
     {
-        session_set('filters:' . $projectID, $filters);
+        session_set('filters:'.$projectID, $filters);
     }
 
     /**

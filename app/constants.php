@@ -156,6 +156,9 @@ defined('TOTP_ISSUER') or define('TOTP_ISSUER', getenv('TOTP_ISSUER') ?: 'Kanboa
 // Comma separated list of fields to not synchronize when using external authentication providers
 defined('EXTERNAL_AUTH_EXCLUDE_FIELDS') or define('EXTERNAL_AUTH_EXCLUDE_FIELDS', getenv('EXTERNAL_AUTH_EXCLUDE_FIELDS') ?: 'username');
 
+// Administrator could only see projects with permission
+defined('ADMIN_RESPECTS_PRIVACY') or define('ADMIN_RESPECTS_PRIVACY', getenv('ADMIN_RESPECTS_PRIVACY') ?: true);
+
 // Enable or disable displaying group-memberships in userlist (true by default)
 defined('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST') or define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST', getenv('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST') ?: true);
 
