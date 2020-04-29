@@ -1,6 +1,6 @@
 <?php
 
-class DefaultConfigFileTest extends PHPUnit_Framework_TestCase
+class DefaultConfigFileTest extends PHPUnit\Framework\TestCase
 {
     public function testThatFileCanBeImported()
     {

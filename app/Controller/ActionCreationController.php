@@ -116,7 +116,7 @@ class ActionCreationController extends BaseController
 
         if ($valid) {
             if ($this->actionModel->create($values) !== false) {
-                $this->flash->success(t('Your automatic action have been created successfully.'));
+                $this->flash->success(t('Your automatic action has been created successfully.'));
             } else {
                 $this->flash->failure(t('Unable to create your automatic action.'));
             }

@@ -32,7 +32,7 @@ class SubtaskHelper extends Base
     public function renderTitle(array $subtask)
     {
         if ($subtask['status'] == 0) {
-            $html = '<i class="fa fa-square-o fa-fw"></i>';
+            $html = '<i class="fa fa-square-o fa-fw ' . ($this->hasSubtaskInProgress() ? 'js-modal-confirm' : '') . '"></i>';
         } elseif ($subtask['status'] == 1) {
             $html = '<i class="fa fa-gears fa-fw"></i>';
         } else {

@@ -151,7 +151,7 @@ class LdapGroupTest extends Base
 
     public function testGetBaseDnNotConfigured()
     {
-        $this->setExpectedException('\LogicException');
+        $this->expectException('\LogicException');
 
         $group = new Group($this->query);
         $group->getBasDn();

@@ -16,6 +16,7 @@ class TagController extends BaseController
     {
         $this->response->html($this->helper->layout->config('tag/index', array(
             'tags' => $this->tagModel->getAllByProject(0),
+            'colors'  => $this->colorModel->getList(),
             'title' => t('Settings').' &gt; '.t('Global tags management'),
         )));
     }

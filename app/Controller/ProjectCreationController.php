@@ -27,7 +27,7 @@ class ProjectCreationController extends BaseController
             'errors' => $errors,
             'is_private' => $is_private,
             'projects_list' => $projects_list,
-            'title' => $is_private ? t('New private project') : t('New project'),
+            'title' => $is_private ? t('New personal project') : t('New project'),
         )));
     }
 
@@ -58,7 +58,7 @@ class ProjectCreationController extends BaseController
             $project_id = $this->createOrDuplicate($values);
 
             if ($project_id > 0) {
-                $this->flash->success(t('Your project have been created successfully.'));
+                $this->flash->success(t('Your project has been created successfully.'));
                 return $this->response->redirect($this->helper->url->to('ProjectViewController', 'show', array('project_id' => $project_id)));
             }
 
@@ -97,6 +97,8 @@ class ProjectCreationController extends BaseController
             'name' => $values['name'],
             'is_private' => $values['is_private'],
             'identifier' => $values['identifier'],
+            'per_swimlane_task_limits' => array_key_exists('per_swimlane_task_limits', $values) ? $values['per_swimlane_task_limits'] : 0,
+            'task_limit' => $values['task_limit'],
         );
 
         return $this->projectModel->create($project, $this->userSession->getId(), true);

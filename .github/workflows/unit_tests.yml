@@ -1,0 +1,47 @@
+name: Unit Tests
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  Sqlite:
+    runs-on: ubuntu-latest
+    container: kanboard/tests:latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Unit tests with Sqlite
+      run: ./vendor/bin/phpunit -c tests/units.sqlite.xml
+
+  Postgres:
+    runs-on: ubuntu-latest
+    container: kanboard/tests:latest
+    services:
+      postgres:
+        image: postgres:9.4
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+        - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+    - uses: actions/checkout@v2
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Unit tests with Postgres
+      run: ./vendor/bin/phpunit -c tests/units.postgres.xml
+      env:
+        DB_HOSTNAME: postgres
+        DB_PORT: ${{ job.services.postgres.ports[5432] }}

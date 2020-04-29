@@ -1,5 +1,5 @@
 <!-- task row -->
-<tr class="board-swimlane board-swimlane-tasks-<?= $swimlane['id'] ?>">
+<tr class="board-swimlane board-swimlane-tasks-<?= $swimlane['id'] ?><?= $swimlane['task_limit'] && $swimlane['nb_tasks'] > $swimlane['task_limit'] ? ' board-task-list-limit' : '' ?>">
     <?php foreach ($swimlane['columns'] as $column): ?>
         <td class="
             board-column-<?= $column['id'] ?>

@@ -64,7 +64,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
     public function testWithServerError()
     {
-        $this->setExpectedException('\JsonRPC\Exception\ServerErrorException');
+        $this->expectException('\JsonRPC\Exception\ServerErrorException');
 
         $httpClient = new HttpClient();
         $httpClient->handleExceptions(array(
@@ -76,7 +76,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
     public function testWithConnectionFailure()
     {
-        $this->setExpectedException('\JsonRPC\Exception\ConnectionFailureException');
+        $this->expectException('\JsonRPC\Exception\ConnectionFailureException');
 
         $httpClient = new HttpClient();
         $httpClient->handleExceptions(array(
@@ -86,7 +86,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
     public function testWithAccessForbidden()
     {
-        $this->setExpectedException('\JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('\JsonRPC\Exception\AccessDeniedException');
 
         $httpClient = new HttpClient();
         $httpClient->handleExceptions(array(
@@ -96,7 +96,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
 
     public function testWithAccessNotAllowed()
     {
-        $this->setExpectedException('\JsonRPC\Exception\AccessDeniedException');
+        $this->expectException('\JsonRPC\Exception\AccessDeniedException');
 
         $httpClient = new HttpClient();
         $httpClient->handleExceptions(array(
@@ -149,7 +149,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
             $client->withHeaders(array('Content-Length: '.strlen($payload)));
         });
 
-        $this->setExpectedException('\JsonRPC\Exception\ConnectionFailureException');
+        $this->expectException('\JsonRPC\Exception\ConnectionFailureException');
         $httpClient->execute('test');
     }
 
@@ -214,7 +214,7 @@ class HttpClientTest extends \PHPUnit_Framework_TestCase
             });
 
 
-        $this->setExpectedException('\JsonRPC\Exception\ConnectionFailureException');
+        $this->expectException('\JsonRPC\Exception\ConnectionFailureException');
         $httpClient->execute('test');
     }
 }

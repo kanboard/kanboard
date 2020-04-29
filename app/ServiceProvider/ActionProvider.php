@@ -27,6 +27,7 @@ use Kanboard\Action\TaskAssignCurrentUser;
 use Kanboard\Action\TaskAssignCurrentUserColumn;
 use Kanboard\Action\TaskAssignSpecificUser;
 use Kanboard\Action\TaskAssignUser;
+use Kanboard\Action\TaskAssignUserSwimlaneChange;
 use Kanboard\Action\TaskClose;
 use Kanboard\Action\TaskCloseColumn;
 use Kanboard\Action\TaskCreation;
@@ -85,6 +86,7 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskAssignCurrentUserColumn($container));
         $container['actionManager']->register(new TaskAssignSpecificUser($container));
         $container['actionManager']->register(new TaskAssignUser($container));
+        $container['actionManager']->register(new TaskAssignUserSwimlaneChange($container));
         $container['actionManager']->register(new TaskClose($container));
         $container['actionManager']->register(new TaskCloseColumn($container));
         $container['actionManager']->register(new TaskCloseNoActivity($container));

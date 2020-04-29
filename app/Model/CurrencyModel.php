@@ -49,6 +49,7 @@ class CurrencyModel extends Base
             'ARS' => t('ARS - Argentine Peso'),
             'COP' => t('COP - Colombian Peso'),
             'BRL' => t('BRL - Brazilian Real'),
+            'VBL' => t('VES - Venezuelan Bolívar'),
             'XBT' => t('XBT - bitcoin'),
         );
     }

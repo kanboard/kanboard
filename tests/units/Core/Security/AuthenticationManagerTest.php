@@ -22,14 +22,14 @@ class AuthenticationManagerTest extends Base
     public function testGetProviderNotFound()
     {
         $authManager = new AuthenticationManager($this->container);
-        $this->setExpectedException('LogicException');
+        $this->expectException('LogicException');
         $authManager->getProvider('Dababase');
     }
 
     public function testGetPostProviderNotFound()
     {
         $authManager = new AuthenticationManager($this->container);
-        $this->setExpectedException('LogicException');
+        $this->expectException('LogicException');
         $authManager->getPostAuthenticationProvider();
     }
 

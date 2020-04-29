@@ -222,7 +222,7 @@ class ServerTest extends HeaderMockTest
             throw new MyException('test');
         });
 
-        $this->setExpectedException('MyException');
+        $this->expectException('MyException');
         $server->execute();
     }
 

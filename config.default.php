@@ -254,3 +254,12 @@ define('EXTERNAL_AUTH_EXCLUDE_FIELDS', 'username');
 
 // Administrator could only see projects with permission
 define('ADMIN_RESPECTS_PRIVACY', true);
+
+// Enable or disable displaying group-memberships in userlist (true by default)
+define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST', true);
+
+// Limit number of groups to display in userlist (The full list of group-memberships is always shown, ...
+// ... when hovering the mouse over the group-icon of a given user!)
+// If set to 0 ALL group-memberships will be listed (7 by default)
+define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT', 7);
+

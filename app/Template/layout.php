@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="<?= $this->app->jsLang() ?>">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="robots" content="noindex,nofollow">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,7 +48,6 @@
           data-login-url="<?= $this->url->href('AuthController', 'login') ?>"
           data-keyboard-shortcut-url="<?= $this->url->href('DocumentationController', 'shortcuts') ?>"
           data-timezone="<?= $this->app->getTimezone() ?>"
-          data-js-lang="<?= $this->app->jsLang() ?>"
           data-js-date-format="<?= $this->app->getJsDateFormat() ?>"
           data-js-time-format="<?= $this->app->getJsTimeFormat() ?>"
     >

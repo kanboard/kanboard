@@ -10,7 +10,7 @@
 
         <?php if ($this->app->config('disable_private_project', 0) == 0): ?>
             <li>
-                <?= $this->modal->medium('lock', t('New private project'), 'ProjectCreationController', 'createPrivate') ?>
+                <?= $this->modal->medium('lock', t('New personal project'), 'ProjectCreationController', 'createPrivate') ?>
             </li>
         <?php endif ?>
 

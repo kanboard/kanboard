@@ -156,7 +156,7 @@ class ActionParameterModel extends Base
             case 'dst_column_id':
             case 'column_id':
                 $column = $this->columnModel->getById($value);
-                return empty($column) ? false : $this->columnModel->getColumnIdByTitle($project_id, $column['title']) ?: false;
+                return empty($column) ? false : ($this->columnModel->getColumnIdByTitle($project_id, $column['title']) ?: false);
             case 'user_id':
             case 'owner_id':
                 if ($value == 0) {
@@ -165,7 +165,7 @@ class ActionParameterModel extends Base
                 return $this->projectPermissionModel->isAssignable($project_id, $value) ? $value : false;
             case 'swimlane_id':
                 $column = $this->swimlaneModel->getById($value);
-                return empty($column) ? false : $this->swimlaneModel->getIdByName($project_id, $column['name']) ?: false;
+                return empty($column) ? false : ($this->swimlaneModel->getIdByName($project_id, $column['name']) ?: false);
             default:
                 return $value;
         }

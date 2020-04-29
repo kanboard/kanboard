@@ -1,4 +1,6 @@
-FROM alpine:3.10.2
+ARG BASE_IMAGE_ARCH="amd64"
+
+FROM ${BASE_IMAGE_ARCH}/alpine:3.11
 
 VOLUME /var/www/app/data
 VOLUME /var/www/app/plugins

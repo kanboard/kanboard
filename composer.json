@@ -14,7 +14,7 @@
         "discard-changes": true
     },
     "require" : {
-        "php" : ">=5.6.0",
+        "php" : ">=7.2.0",
         "ext-simplexml" : "*",
         "ext-dom" : "*",
         "ext-xml" : "*",
@@ -28,7 +28,7 @@
         "ext-session" : "*",
         "christian-riesen/otp" : "1.4.3",
         "eluceo/ical": "0.10.1",
-        "erusev/parsedown" : "1.7.1",
+        "erusev/parsedown" : "^1.7",
         "paragonie/random_compat": "2.0.11",
         "pimple/pimple" : "3.2.2",
         "psr/log": "~1.0",
@@ -50,16 +50,17 @@
         ]
     },
     "require-dev" : {
-        "phpunit/php-code-coverage": "4.0.8",
-        "phpunit/php-token-stream": "1.4.12",
-        "doctrine/instantiator": "1.0.5",
+        "phpunit/php-code-coverage": "^6",
+        "phpunit/php-token-stream": "^3.1",
+        "doctrine/instantiator": "^1.1",
         "phpdocumentor/reflection-docblock": "3.3.2",
         "symfony/debug": "3.4.2",
         "symfony/yaml": "3.4.2",
         "symfony/finder": "3.4.8",
         "symfony/stopwatch" : "3.4.2",
         "myclabs/deep-copy": "1.7.0",
-        "phpunit/phpunit" : "5.7.24",
-        "phpunit/phpunit-selenium": "3.0.3"
+        "phpunit/phpunit" : "^7",
+        "phpunit/phpunit-selenium": "^7",
+        "roave/security-advisories": "dev-master"
     }
 }

@@ -15,7 +15,11 @@
         <?php endif ?>
 
         <span title="<?= t('Task count') ?>" class="board-column-header-task-count swimlane-task-count-<?= $swimlane['id'] ?>">
-            (<?= $swimlane['nb_tasks'] ?>)
+            <?php if ($swimlane['task_limit']): ?>
+                (<?= $swimlane['nb_tasks'] ?>/<?= $swimlane['task_limit'] ?>)
+            <?php else: ?>
+                (<?= $swimlane['nb_tasks'] ?>)
+            <?php endif ?>
         </span>
     </th>
 </tr>

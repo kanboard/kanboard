@@ -8,7 +8,7 @@ class LdapBackendGroupProviderTest extends Base
 {
     public function testGetLdapGroupPattern()
     {
-        $this->setExpectedException('LogicException', 'LDAP group filter empty, check the parameter LDAP_GROUP_FILTER');
+        $this->expectException('LogicException', 'LDAP group filter empty, check the parameter LDAP_GROUP_FILTER');
 
         $backend = new LdapBackendGroupProvider($this->container);
         $backend->getLdapGroupPattern('test');

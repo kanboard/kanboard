@@ -139,6 +139,24 @@ class ColumnModel extends Base
     }
 
     /**
+     * Get all columns with task count
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return array
+     */
+    public function getAllWithPerSwimlaneTaskCount($project_id, $swimlane_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->columns('id', 'title', 'position', 'task_limit', 'description', 'hide_in_dashboard', 'project_id', $swimlane_id.' AS swimlane_id')
+            ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE column_id=".self::TABLE.".id AND swimlane_id=".$swimlane_id." AND is_active='1'", 'nb_open_tasks')
+            ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE column_id=".self::TABLE.".id AND swimlane_id=".$swimlane_id." AND is_active='0'", 'nb_closed_tasks')
+            ->eq('project_id', $project_id)
+            ->asc('position')
+            ->findAll();
+    }
+
+    /**
      * Get the list of columns sorted by position [ column_id => title ]
      *
      * @access public

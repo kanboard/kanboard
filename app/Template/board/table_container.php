@@ -1,4 +1,5 @@
-<div id="board-container">
+<div id="board-container"
+     class="<?= ($project['task_limit'] && array_key_exists('nb_active_tasks', $project) && $project['nb_active_tasks'] > $project['task_limit']) ? 'board-task-list-limit' : '' ?>">
     <?php if (empty($swimlanes) || empty($swimlanes[0]['nb_columns'])): ?>
         <p class="alert alert-error"><?= t('There is no column or swimlane activated in your project!') ?></p>
     <?php else: ?>
