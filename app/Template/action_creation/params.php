@@ -25,8 +25,7 @@
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->select('params['.$param_name.']', $projects_list, $values) ?>
         <?php elseif ($this->text->contains($param_name, 'color_id')): ?>
-            <?= $this->form->label($param_desc, $param_name) ?>
-            <?= $this->form->select('params['.$param_name.']', $colors_list, $values) ?>
+            <?= $this->form->colorSelect('params['.$param_name.']', $values) ?>
         <?php elseif ($this->text->contains($param_name, 'category_id')): ?>
             <?= $this->form->label($param_desc, $param_name) ?>
             <?= $this->form->select('params['.$param_name.']', $categories_list, $values) ?>
