@@ -84,7 +84,7 @@ KB.component('text-editor', function (containerElement, options) {
     }
 
     function toggleViewMode() {
-        var str=textarea.value
+        var str=textarea.value;
         str = str.replace(/(?:\r\n|\r|\n)/g, '<br>\n');
         KB.dom(previewElement).html(marked(DOMPurify.sanitize(str)));
         KB.dom(viewModeElement).toggle();
