@@ -6,6 +6,8 @@
 
 @media (max-width: 560px) {
     .views {
+        display: table;
+        table-layout: fixed;
         width: 100%
     }
 }
@@ -34,7 +36,9 @@
 
 @media (max-width: 560px) {
     .views li {
-        display: block;
+        padding: 10px 0;
+        text-align: center;
+        display: table-cell;
         margin-top: 5px;
         border-radius: 5px;
         border: 1px solid #ddd
