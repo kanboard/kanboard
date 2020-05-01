@@ -1,7 +1,7 @@
 KB.tooltip = function () {
-    function onMouseOver(event) {
+    function onMouseOver(mytarget) {
         if (! exists()) {
-            create(event.target);
+            create(mytarget);
         }
     }
 
@@ -92,10 +92,25 @@ KB.tooltip = function () {
     function exists() {
         return !!document.getElementById("tooltip-container");
     }
-
-    var elements = document.querySelectorAll(".tooltip");
-    for (var i = 0; i < elements.length; i++) {
-        elements[i].addEventListener("mouseenter", onMouseOver, false);
-        elements[i].addEventListener("mouseleave", mouseLeftParent, false);
-    }
+    
+    // for dynamically added elements, we add our event listeners to the doc body
+    // we need to use mouseover, because mouseenter only triggers on the body in this case
+    document.body.addEventListener('mouseover', function(e) {
+        if (e.target.classList.contains('tooltip')) {
+            onMouseOver(e.target);
+        }
+        // to catch the case where the event doesn't fire on tooltip but on the i-subelement
+        //    (this seems to depend on how you move your mouse over the element ...)
+        if (e.target.classList.contains('fa') && e.target.parentNode.classList.contains('tooltip')) {
+            onMouseOver(e.target.parentNode);
+        }
+    });
+    document.body.addEventListener('mouseout', function(e) {
+        if (e.target.classList.contains('tooltip')) {
+            mouseLeftParent();
+        }
+        if (e.target.classList.contains('fa') && e.target.parentNode.classList.contains('tooltip')) {
+            mouseLeftParent();
+        }
+    });
 };
