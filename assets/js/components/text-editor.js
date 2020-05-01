@@ -86,6 +86,7 @@ KB.component('text-editor', function (containerElement, options) {
     function toggleViewMode() {
         $.ajax({
             cache: false,
+            type: 'POST',
             url: options.previewUrl,
             data: { 'text': textarea.value},
             success: function(data) {

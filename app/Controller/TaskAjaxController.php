@@ -74,7 +74,7 @@ class TaskAjaxController extends BaseController
      */
     public function preview()
     {
-        $text = $this->request->getStringParam('text');
+        $text = $this->request->getRawValue('text');
 
         if (empty($text)) {
             $this->response->json(array());
