@@ -20,7 +20,7 @@
     #board th.board-column-header {
         width: calc(100vw - 42px);
         box-sizing: border-box;
-        scroll-margin: 10px;
+        scroll-margin: 1em;
         scroll-snap-align: center;
         scroll-snap-stop: normal
     }
