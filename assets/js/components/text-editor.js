@@ -84,9 +84,16 @@ KB.component('text-editor', function (containerElement, options) {
     }
 
     function toggleViewMode() {
-        var str=textarea.value;
-        str = str.replace(/(?:\r\n|\r|\n)/g, '<br>\n');
-        KB.dom(previewElement).html(marked(DOMPurify.sanitize(str)));
+        $.ajax({
+            cache: false,
+            type: 'POST',
+            url: options.previewUrl,
+            data: { 'text': textarea.value},
+            success: function(data) {
+                KB.dom(previewElement).html(data);
+            }
+        });
+
         KB.dom(viewModeElement).toggle();
         KB.dom(writeModeElement).toggle();
     }
