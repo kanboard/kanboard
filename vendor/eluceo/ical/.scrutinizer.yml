@@ -1,0 +1,20 @@
+filter:
+    excluded_paths:
+        - tests/*
+
+tools:
+    php_cs_fixer: true
+    php_code_sniffer:
+        config:
+            standard: PSR2
+    php_mess_detector: true
+    php_analyzer: true
+    sensiolabs_security_checker: true
+    external_code_coverage:
+        timeout: 300
+        runs: 1
+
+checks:
+    php:
+        code_rating: true
+        duplication: true

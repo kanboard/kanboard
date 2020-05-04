@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors="true">
+    <testsuites>
+        <testsuite name="Otp Test Suite">
+            <directory>tests/Otp/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/Otp/</directory>
+        </whitelist>
+    </filter>
+</phpunit>

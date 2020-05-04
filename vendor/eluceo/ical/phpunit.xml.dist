@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false"
+         bootstrap="./vendor/autoload.php">
+    <logging>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true" showOnlySummary="true"/>
+    </logging>
+    <testsuites>
+        <testsuite name="eluceo iCal Test Suite">
+            <directory suffix="Test.php">./tests/Eluceo/iCal/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
