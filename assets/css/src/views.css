@@ -42,6 +42,7 @@
         display: table-cell;
         margin-top: 5px;
         border-radius: 5px;
+        vertical-align: middle;
         border: 1px solid #ddd
     }
 }
@@ -65,6 +66,7 @@
 
 .views a {
     color: var(--color-medium);
+    white-space: break-spaces;
     text-decoration: none
 }
 
