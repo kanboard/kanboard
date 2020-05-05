@@ -84,7 +84,16 @@ KB.component('text-editor', function (containerElement, options) {
     }
 
     function toggleViewMode() {
-        KB.dom(previewElement).html(marked(textarea.value, {sanitize: true}));
+        $.ajax({
+            cache: false,
+            type: 'POST',
+            url: options.previewUrl,
+            data: { 'text': textarea.value},
+            success: function(data) {
+                KB.dom(previewElement).html(data);
+            }
+        });
+
         KB.dom(viewModeElement).toggle();
         KB.dom(writeModeElement).toggle();
     }

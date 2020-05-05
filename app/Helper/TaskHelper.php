@@ -86,7 +86,7 @@ class TaskHelper extends Base
 
     public function renderTagField(array $project, array $tags = array())
     {
-        $options = $this->tagModel->getAssignableList($project['id']);
+        $options = $this->tagModel->getAssignableList($project['id'], $project['enable_global_tags']);
 
         $html = $this->helper->form->label(t('Tags'), 'tags[]');
         $html .= '<input type="hidden" name="tags[]" value="">';
@@ -108,9 +108,7 @@ class TaskHelper extends Base
 
     public function renderColorField(array $values)
     {
-        $colors = $this->colorModel->getList();
-        $html = $this->helper->form->label(t('Color'), 'color_id');
-        $html .= $this->helper->form->select('color_id', $colors, $values, array(), array('tabindex="4"'), 'color-picker');
+        $html = $this->helper->form->colorSelect('color_id', $values);
         return $html;
     }
 

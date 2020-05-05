@@ -72,6 +72,22 @@ class FormHelper extends Base
     }
 
     /**
+     * Display a color select field
+     *
+     * @access public
+     * @param  string $name Field name
+     * @param  array $values Form values
+     * @return string
+     */
+    public function colorSelect($name, array $values)
+    {
+      $colors = $this->colorModel->getList();
+      $html = $this->label(t('Color'), $name);
+      $html .= $this->select($name, $colors, $values, array(), array('tabindex="4"'), 'color-picker');
+      return $html;
+    }
+
+    /**
      * Display a radio field group
      *
      * @access public
@@ -217,6 +233,7 @@ class FormHelper extends Base
             'required' => isset($attributes['required']) && $attributes['required'],
             'tabindex' => isset($attributes['tabindex']) ? $attributes['tabindex'] : '-1',
             'labelPreview' => t('Preview'),
+            'previewUrl' => $this->helper->url->to('TaskAjaxController', 'preview'),
             'labelWrite' => t('Write'),
             'labelTitle' => t('Title'),
             'placeholder' => t('Write your text in Markdown'),
