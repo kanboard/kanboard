@@ -233,6 +233,7 @@ class FormHelper extends Base
             'required' => isset($attributes['required']) && $attributes['required'],
             'tabindex' => isset($attributes['tabindex']) ? $attributes['tabindex'] : '-1',
             'labelPreview' => t('Preview'),
+            'previewUrl' => $this->helper->url->to('TaskAjaxController', 'preview'),
             'labelWrite' => t('Write'),
             'labelTitle' => t('Title'),
             'placeholder' => t('Write your text in Markdown'),

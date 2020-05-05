@@ -66,8 +66,6 @@ class JsCommand extends BaseCommand
         'assets/vendor/d3/d3.min.js',
         'assets/vendor/c3/c3.min.js',
         'assets/vendor/isMobile/isMobile.min.js',
-        'assets/vendor/marked/marked.min.js',
-        'assets/vendor/dompurify/purify.min.js',
     ];
 
     protected function configure()

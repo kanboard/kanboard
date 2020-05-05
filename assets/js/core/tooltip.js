@@ -1,4 +1,4 @@
-KB.tooltip = function () {
+KB.on('dom.ready', function() {
     function onMouseOver(mytarget) {
         if (! exists()) {
             create(mytarget);
@@ -113,4 +113,4 @@ KB.tooltip = function () {
             mouseLeftParent();
         }
     });
-};
+});
