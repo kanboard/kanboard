@@ -16,7 +16,7 @@
     min-width: 350px
 }
 
-#tooltip-container .markdown p {
+#tooltip-container .markdown p:last-child {
     margin-bottom: 0
 }
 
