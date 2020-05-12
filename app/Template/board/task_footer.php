@@ -10,7 +10,7 @@
                 'edit',
                 array('task_id' => $task['id'], 'project_id' => $task['project_id']),
                 false,
-                'js-modal-medium' . (! empty($task['category_description']) ? ' tooltip' : ''),
+                'js-modal-large' . (! empty($task['category_description']) ? ' tooltip' : ''),
                 t('Change category')
             ) ?>
             <?php if (! empty($task['category_description'])): ?>
