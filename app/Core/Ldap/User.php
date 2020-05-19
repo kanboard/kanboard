@@ -67,7 +67,7 @@ class User
      */
     public function find($query)
     {
-        $this->query->execute($this->getBasDn(), $query, $this->getAttributes());
+        $this->query->execute($this->getBaseDn(), $query, $this->getAttributes());
         $user = null;
 
         if ($this->query->hasResult()) {
@@ -324,7 +324,7 @@ class User
      * @access public
      * @return string
      */
-    public function getBasDn()
+    public function getBaseDn()
     {
         if (! LDAP_USER_BASE_DN) {
             throw new LogicException('LDAP user base DN empty, check the parameter LDAP_USER_BASE_DN');
