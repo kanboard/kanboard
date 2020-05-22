@@ -67,7 +67,7 @@ class User
      */
     public function find($query)
     {
-        $this->query->execute($this->getBasDn(), $query, $this->getAttributes());
+        $this->query->execute($this->getBaseDn(), $query, $this->getAttributes());
         $user = null;
 
         if ($this->query->hasResult()) {
@@ -85,15 +85,20 @@ class User
      *
      * @access protected
      * @param  Entry   $entry
-     * @param  string  $username
      * @return string[]
      */
-    protected function getGroups(Entry $entry, $username)
+    protected function getGroups(Entry $entry)
     {
+	$userattr = '';
+	if ('username' == $this->getGroupUserAttribute()) {
+		$userattr = $entry->getFirstValue($this->getAttributeUsername());
+	} else if ('dn' == $this->getGroupUserAttribute()) {
+		$userattr = $entry->getDn();
+	}
         $groupIds = array();
 
-        if (! empty($username) && $this->group !== null && $this->hasGroupUserFilter()) {
-            $groups = $this->group->find(sprintf($this->getGroupUserFilter(), $username));
+        if (! empty($userattr) && $this->group !== null && $this->hasGroupUserFilter()) {
+            $groups = $this->group->find(sprintf($this->getGroupUserFilter(), $userattr));
 
             foreach ($groups as $group) {
                 $groupIds[] = $group->getExternalId();
@@ -150,12 +155,11 @@ class User
     protected function build()
     {
         $entry = $this->query->getEntries()->getFirstEntry();
-        $username = $entry->getFirstValue($this->getAttributeUsername());
-        $groupIds = $this->getGroups($entry, $username);
+        $groupIds = $this->getGroups($entry);
 
         return new LdapUserProvider(
             $entry->getDn(),
-            $username,
+            $entry->getFirstValue($this->getAttributeUsername()),
             $entry->getFirstValue($this->getAttributeName()),
             $entry->getFirstValue($this->getAttributeEmail()),
             $this->getRole($groupIds),
@@ -275,6 +279,17 @@ class User
     }
 
     /**
+     * Get LDAP Group User attribute
+     *
+     * @access public
+     * @return string
+     */
+    public function getGroupUserAttribute()
+    {
+        return LDAP_GROUP_USER_ATTRIBUTE;
+    }
+
+    /**
      * Return true if LDAP Group User filter is defined
      *
      * @access public
@@ -324,7 +339,7 @@ class User
      * @access public
      * @return string
      */
-    public function getBasDn()
+    public function getBaseDn()
     {
         if (! LDAP_USER_BASE_DN) {
             throw new LogicException('LDAP user base DN empty, check the parameter LDAP_USER_BASE_DN');

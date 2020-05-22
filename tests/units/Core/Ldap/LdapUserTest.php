@@ -56,7 +56,7 @@ class LdapUserTest extends Base
                 'getGroupUserFilter',
                 'getGroupAdminDn',
                 'getGroupManagerDn',
-                'getBasDn',
+                'getBaseDn',
             ))
             ->getMock();
     }
@@ -127,7 +127,7 @@ class LdapUserTest extends Base
 
         $this->user
             ->expects($this->any())
-            ->method('getBasDn')
+            ->method('getBaseDn')
             ->will($this->returnValue('ou=People,dc=kanboard,dc=local'));
 
         $user = $this->user->find('(uid=my_ldap_user)');
@@ -202,7 +202,7 @@ class LdapUserTest extends Base
 
         $this->user
             ->expects($this->any())
-            ->method('getBasDn')
+            ->method('getBaseDn')
             ->will($this->returnValue('ou=People,dc=kanboard,dc=local'));
 
         $user = $this->user->find('(uid=my_ldap_user)');
@@ -293,7 +293,7 @@ class LdapUserTest extends Base
 
         $this->user
             ->expects($this->any())
-            ->method('getBasDn')
+            ->method('getBaseDn')
             ->will($this->returnValue('ou=People,dc=kanboard,dc=local'));
 
         $user = $this->user->find('(uid=my_ldap_user)');
@@ -396,7 +396,7 @@ class LdapUserTest extends Base
 
         $this->user
             ->expects($this->any())
-            ->method('getBasDn')
+            ->method('getBaseDn')
             ->will($this->returnValue('ou=People,dc=kanboard,dc=local'));
 
         $user = $this->user->find('(uid=my_ldap_user)');
@@ -451,7 +451,7 @@ class LdapUserTest extends Base
 
         $this->user
             ->expects($this->any())
-            ->method('getBasDn')
+            ->method('getBaseDn')
             ->will($this->returnValue('ou=People,dc=kanboard,dc=local'));
 
         $user = $this->user->find('(uid=my_ldap_user)');
@@ -543,7 +543,7 @@ class LdapUserTest extends Base
 
         $this->user
             ->expects($this->any())
-            ->method('getBasDn')
+            ->method('getBaseDn')
             ->will($this->returnValue('OU=Users,DC=kanboard,DC=local'));
 
         $this->group
@@ -649,7 +649,7 @@ class LdapUserTest extends Base
 
         $this->user
             ->expects($this->any())
-            ->method('getBasDn')
+            ->method('getBaseDn')
             ->will($this->returnValue('OU=Users,DC=kanboard,DC=local'));
 
         $this->group
@@ -760,7 +760,7 @@ class LdapUserTest extends Base
 
         $this->user
             ->expects($this->any())
-            ->method('getBasDn')
+            ->method('getBaseDn')
             ->will($this->returnValue('OU=Users,DC=kanboard,DC=local'));
 
         $this->group
@@ -790,7 +790,7 @@ class LdapUserTest extends Base
         $this->expectException('\LogicException');
 
         $user = new User($this->query);
-        $user->getBasDn();
+        $user->getBaseDn();
     }
 
     public function testGetLdapUserPatternNotConfigured()
