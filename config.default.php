@@ -184,6 +184,10 @@ define('LDAP_GROUP_FILTER', '');
 // Example for OpenLDAP: (&(objectClass=posixGroup)(memberUid=%s))
 define('LDAP_GROUP_USER_FILTER', '');
 
+// LDAP attribute for the user in the group filter
+// 'username' or 'dn'
+define('LDAP_GROUP_USER_ATTRIBUTE', 'username');
+
 // LDAP attribute for the group name
 define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
