@@ -55,7 +55,7 @@
         "doctrine/instantiator": "^1.1",
         "phpdocumentor/reflection-docblock": "3.3.2",
         "symfony/debug": "3.4.2",
-        "symfony/yaml": "3.4.2",
+        "symfony/yaml": "4.4.9",
         "symfony/finder": "3.4.8",
         "symfony/stopwatch" : "4.4.9",
         "myclabs/deep-copy": "1.9.5",
