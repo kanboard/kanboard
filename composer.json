@@ -29,7 +29,6 @@
         "christian-riesen/otp" : "1.4.3",
         "eluceo/ical": "0.10.1",
         "erusev/parsedown" : "^1.7",
-        "paragonie/random_compat": "2.0.11",
         "pimple/pimple" : "3.2.2",
         "psr/log": "~1.0",
         "swiftmailer/swiftmailer" : "5.4.8",
