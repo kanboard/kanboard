@@ -8,7 +8,6 @@ class ComposerStaticInit094f3eabe2924332bc2198a9ba245f27
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '8a67f3044590529ed0a5e02f9cc9c90b' => __DIR__ . '/../..' . '/app/functions.php',
     );
@@ -206,6 +205,7 @@ class ComposerStaticInit094f3eabe2924332bc2198a9ba245f27
         'Kanboard\\Action\\TaskAssignPrioritySwimlane' => __DIR__ . '/../..' . '/app/Action/TaskAssignPrioritySwimlane.php',
         'Kanboard\\Action\\TaskAssignSpecificUser' => __DIR__ . '/../..' . '/app/Action/TaskAssignSpecificUser.php',
         'Kanboard\\Action\\TaskAssignUser' => __DIR__ . '/../..' . '/app/Action/TaskAssignUser.php',
+        'Kanboard\\Action\\TaskAssignUserSwimlaneChange' => __DIR__ . '/../..' . '/app/Action/TaskAssignUserSwimlaneChange.php',
         'Kanboard\\Action\\TaskClose' => __DIR__ . '/../..' . '/app/Action/TaskClose.php',
         'Kanboard\\Action\\TaskCloseColumn' => __DIR__ . '/../..' . '/app/Action/TaskCloseColumn.php',
         'Kanboard\\Action\\TaskCloseNoActivity' => __DIR__ . '/../..' . '/app/Action/TaskCloseNoActivity.php',
@@ -903,7 +903,7 @@ class ComposerStaticInit094f3eabe2924332bc2198a9ba245f27
         'Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerInterface.php',
         'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerTrait.php',
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
-        'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+        'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
         'RequestBuilderTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Request/RequestBuilderTest.php',
