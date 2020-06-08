@@ -32,7 +32,7 @@
         "pimple/pimple" : "3.2.2",
         "psr/log": "~1.0",
         "swiftmailer/swiftmailer" : "5.4.8",
-        "symfony/console" : "3.4.2",
+        "symfony/console" : "4.2.12",
         "symfony/event-dispatcher" : "3.4.2",
         "gregwar/captcha": "1.1.8"
     },
