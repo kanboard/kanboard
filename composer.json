@@ -33,7 +33,7 @@
         "psr/log": "~1.0",
         "swiftmailer/swiftmailer" : "6.2.3",
         "symfony/console" : "4.2.12",
-        "symfony/event-dispatcher" : "3.4.2",
+        "symfony/event-dispatcher" : "5.1.0",
         "gregwar/captcha": "1.1.8"
     },
     "autoload" : {
