@@ -122,6 +122,12 @@ You can also pass directly the wanted phrase to the builder:
 $captcha = new CaptchaBuilder('hello');
 ```
 
+Complete example
+================
+
+If you want to see an example you can have a look at he ``demo/form.php``, which uses ``demo/session.php`` to
+render a captcha and check it after the submission
+
 Symfony Bundle
 ================
 

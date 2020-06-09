@@ -1,6 +1,34 @@
 CHANGELOG
 =========
 
+4.2.0
+-----
+
+ * allowed passing commands as `[$process, 'ENV_VAR' => 'value']` to
+   `ProcessHelper::run()` to pass environment variables
+ * deprecated passing a command as a string to `ProcessHelper::run()`,
+   pass it the command as an array of its arguments instead
+ * made the `ProcessHelper` class final
+ * added `WrappableOutputFormatterInterface::formatAndWrap()` (implemented in `OutputFormatter`)
+ * added `capture_stderr_separately` option to `CommandTester::execute()`
+
+4.1.0
+-----
+
+ * added option to run suggested command if command is not found and only 1 alternative is available
+ * added option to modify console output and print multiple modifiable sections
+ * added support for iterable messages in output `write` and `writeln` methods
+
+4.0.0
+-----
+
+ * `OutputFormatter` throws an exception when unknown options are used
+ * removed `QuestionHelper::setInputStream()/getInputStream()`
+ * removed `Application::getTerminalWidth()/getTerminalHeight()` and 
+  `Application::setTerminalDimensions()/getTerminalDimensions()`
+* removed `ConsoleExceptionEvent`
+* removed `ConsoleEvents::EXCEPTION`
+
 3.4.0
 -----
 
