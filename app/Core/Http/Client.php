@@ -243,6 +243,12 @@ class Client extends Base
             curl_setopt($curlSession, CURLOPT_POSTFIELDS, $content);
         }
 
+	elseif ('PUT' === $method) {
+            curl_setopt($curlSession, CURLOPT_CUSTOMREQUEST, 'PUT');
+            curl_setopt($curlSession, CURLOPT_POST, true);
+            curl_setopt($curlSession, CURLOPT_POSTFIELDS, $content);
+        }
+
         if (! empty($headers)) {
             curl_setopt($curlSession, CURLOPT_HTTPHEADER, $headers);
         }
