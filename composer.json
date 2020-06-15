@@ -26,7 +26,7 @@
         "ext-ctype" : "*",
         "ext-filter" : "*",
         "ext-session" : "*",
-        "christian-riesen/otp" : "1.4.3",
+        "christian-riesen/otp" : "2.6.2",
         "eluceo/ical": "0.10.1",
         "erusev/parsedown" : "^1.7",
         "pimple/pimple" : "3.2.2",
