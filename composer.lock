@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a94e856dd1860a70163b5bf612a7289",
+    "content-hash": "204b6d194b42f295989a47179a4bece2",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -2665,7 +2665,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.4.9",
+            "version": "v4.4.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
