@@ -44,26 +44,26 @@ final class ServiceIterator implements \Iterator
 
     public function rewind()
     {
-        reset($this->ids);
+        \reset($this->ids);
     }
 
     public function current()
     {
-        return $this->container[current($this->ids)];
+        return $this->container[\current($this->ids)];
     }
 
     public function key()
     {
-        return current($this->ids);
+        return \current($this->ids);
     }
 
     public function next()
     {
-        next($this->ids);
+        \next($this->ids);
     }
 
     public function valid()
     {
-        return null !== key($this->ids);
+        return null !== \key($this->ids);
     }
 }

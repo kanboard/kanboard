@@ -40,6 +40,6 @@ class FrozenServiceException extends \RuntimeException implements ContainerExcep
      */
     public function __construct($id)
     {
-        parent::__construct(sprintf('Cannot override frozen service "%s".', $id));
+        parent::__construct(\sprintf('Cannot override frozen service "%s".', $id));
     }
 }

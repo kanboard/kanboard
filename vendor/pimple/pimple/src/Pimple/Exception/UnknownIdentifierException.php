@@ -40,6 +40,6 @@ class UnknownIdentifierException extends \InvalidArgumentException implements No
      */
     public function __construct($id)
     {
-        parent::__construct(sprintf('Identifier "%s" is not defined.', $id));
+        parent::__construct(\sprintf('Identifier "%s" is not defined.', $id));
     }
 }

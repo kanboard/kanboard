@@ -49,7 +49,7 @@ class ServiceLocator implements ContainerInterface
         $this->container = $container;
 
         foreach ($ids as $key => $id) {
-            $this->aliases[is_int($key) ? $id : $key] = $id;
+            $this->aliases[\is_int($key) ? $id : $key] = $id;
         }
     }
 
