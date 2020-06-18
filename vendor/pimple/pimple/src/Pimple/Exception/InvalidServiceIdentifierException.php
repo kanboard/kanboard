@@ -40,6 +40,6 @@ class InvalidServiceIdentifierException extends \InvalidArgumentException implem
      */
     public function __construct($id)
     {
-        parent::__construct(sprintf('Identifier "%s" does not contain an object definition.', $id));
+        parent::__construct(\sprintf('Identifier "%s" does not contain an object definition.', $id));
     }
 }
