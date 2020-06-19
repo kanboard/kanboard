@@ -49,7 +49,7 @@ class CommentMailController extends BaseController
         }
     }
 
-    protected function sendByEmail(array $values, $task => null)
+    protected function sendByEmail(array $values, array $task)
     {
         $html = $this->template->render('comment_mail/email', array('email' => $values, 'task' => $task));
         $emails = explode_csv_field($values['emails']);
