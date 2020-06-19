@@ -859,7 +859,7 @@ return array(
     'Role' => 'Role',
     'Enter user name...' => 'Zadejte uživatelské jméno...',
     'Allowed Groups' => 'Povolené skupiny',
-    'No group has been allowed specifically.' => 'Žádná skupina nebyla výslovně povolena.',
+    // 'No group has been allowed.' => '',
     'Group' => 'Skupina',
     'Group Name' => 'Jméno skupiny',
     'Enter group name...' => 'Zadejte název skupiny ...',
@@ -1391,7 +1391,7 @@ return array(
     '%s removed a file from the task %s' => '%s odstranil soubor z úkolu %s',
     'Move the task to another swimlane when assigned to a user' => 'Když je úkol přiřazen uživateli, přesunout úkol na jinou dráhu',
     'Destination swimlane' => 'Cílová dráha',
-    'Assign a category when the task is moved to a specific swimlane' =>  'Při přesunu úkolu na konkrétní dráhu přiřaďte kategorii',
+    'Assign a category when the task is moved to a specific swimlane' => 'Při přesunu úkolu na konkrétní dráhu přiřaďte kategorii',
     'Move the task to another swimlane when the category is changed' => 'Při změně kategorie přesunout úkol na jinou dráhu',
     'Reorder this column by priority (ASC)' => 'Změnit pořadí tohoto sloupce podle priority (vzestupně)',
     'Reorder this column by priority (DESC)' => 'Změnit pořadí tohoto sloupce podle priority (sestupně)',
@@ -1420,4 +1420,5 @@ return array(
     '%s is a member of the following group(s): %s' => '%s je členem následující skupiny (skupin): %s',
     '%d/%d group(s) shown' => 'zobrazeno(a) %d/%d skupin(a)',
     'Subtask creation or modification' => 'Vytvoření nebo úprava dílčího úkolu',
+    // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
 );

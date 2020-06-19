@@ -2,8 +2,7 @@ DOCKER_IMAGE := docker.io/kanboard/kanboard
 DOCKER_TAG := master
 VERSION := $(shell git rev-parse --short HEAD)
 
-.PHONY: archive test-sqlite test-mysql test-postgres test-browser \
-	integration-test-mysql integration-test-postgres integration-test-sqlite sql \
+.PHONY: archive test-sqlite test-mysql test-postgres sql \
 	docker-image docker-manifest docker-run docker-sh
 
 archive:

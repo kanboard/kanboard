@@ -1420,4 +1420,5 @@ return array(
     '%s is a member of the following group(s): %s' => 'メンバー %s は以下のグループに所属しています: %s',
     '%d/%d group(s) shown' => 'グループ %d/%d を表示',
     'Subtask creation or modification' => 'サブタスクが作成or更新されました',
+    // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
 );

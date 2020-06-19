@@ -1420,4 +1420,5 @@ return array(
     '%s is a member of the following group(s): %s' => '%s je členom tejto skupiny(n): %s',
     '%d/%d group(s) shown' => 'zobrazených %d/%d skupíny(ín)',
     'Subtask creation or modification' => 'Vytvorenie alebo úprava podúlohy',
+    // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
 );
