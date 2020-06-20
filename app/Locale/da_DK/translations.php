@@ -1420,4 +1420,5 @@ return array(
     '%s is a member of the following group(s): %s' => '%s er medlem af følgende gruppe(r): %s',
     '%d/%d group(s) shown' => '%d/%d gruppe(r) vist',
     'Subtask creation or modification' => 'Underopgave oprettelse eller ændring',
+    // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
 );

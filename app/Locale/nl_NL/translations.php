@@ -1420,4 +1420,5 @@ return array(
     // '%s is a member of the following group(s): %s' => '',
     '%d/%d group(s) shown' => '%d/%d groep(en) getoond',
     // 'Subtask creation or modification' => '',
+    // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
 );

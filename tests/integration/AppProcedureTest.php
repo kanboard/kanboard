@@ -11,7 +11,7 @@ class AppProcedureTest extends BaseProcedureTest
 
     public function testGetVersion()
     {
-        $this->assertEquals('master', $this->app->getVersion());
+        $this->assertEquals('master.unknown_revision', $this->app->getVersion());
     }
 
     public function testGetApplicationRoles()

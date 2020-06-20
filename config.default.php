@@ -135,7 +135,7 @@ define('LDAP_USER_BASE_DN', '');
 define('LDAP_USER_FILTER', '');
 
 // LDAP attribute for username
-// Example for ActiveDirectory: 'samaccountname'
+// Example for ActiveDirectory: 'sAMAccountName'
 // Example for OpenLDAP: 'uid'
 define('LDAP_USER_ATTRIBUTE_USERNAME', 'uid');
 

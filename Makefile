@@ -2,8 +2,7 @@ DOCKER_IMAGE := docker.io/kanboard/kanboard
 DOCKER_TAG := master
 VERSION := $(shell git rev-parse --short HEAD)
 
-.PHONY: archive test-sqlite test-mysql test-postgres test-browser \
-	integration-test-mysql integration-test-postgres integration-test-sqlite sql \
+.PHONY: archive test-sqlite test-mysql test-postgres sql \
 	docker-image docker-manifest docker-run docker-sh
 
 archive:
@@ -18,30 +17,6 @@ test-mysql:
 
 test-postgres:
 	@ ./vendor/bin/phpunit -c tests/units.postgres.xml
-
-test-browser:
-	@ ./vendor/bin/phpunit -c tests/acceptance.xml
-
-integration-test-mysql:
-	@ composer install --dev
-	@ docker-compose -f tests/docker/compose.integration.mysql.yaml build
-	@ docker-compose -f tests/docker/compose.integration.mysql.yaml up -d mysql app
-	@ docker-compose -f tests/docker/compose.integration.mysql.yaml up tests
-	@ docker-compose -f tests/docker/compose.integration.mysql.yaml down
-
-integration-test-postgres:
-	@ composer install --dev
-	@ docker-compose -f tests/docker/compose.integration.postgres.yaml build
-	@ docker-compose -f tests/docker/compose.integration.postgres.yaml up -d postgres app
-	@ docker-compose -f tests/docker/compose.integration.postgres.yaml up tests
-	@ docker-compose -f tests/docker/compose.integration.postgres.yaml down
-
-integration-test-sqlite:
-	@ composer install --dev
-	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml build
-	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml up -d app
-	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml up tests
-	@ docker-compose -f tests/docker/compose.integration.sqlite.yaml down
 
 sql:
 	@ pg_dump --schema-only --no-owner --no-privileges --quote-all-identifiers -n public --file app/Schema/Sql/postgres.sql kanboard

@@ -26,7 +26,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
     /**
      * @var array
      */
-    protected $textColor = null;
+    protected $textColor = array();
 
     /**
      * @var array
@@ -135,12 +135,8 @@ class CaptchaBuilder implements CaptchaBuilderInterface
         } else {
             $this->builder = $builder;
         }
-
-        if ($phrase === null) {
-            $phrase = $this->builder->build();
-        }
-
-        $this->phrase = $phrase;
+        
+        $this->phrase = is_string($phrase) ? $phrase : $this->builder->build($phrase);
     }
 
     /**
