@@ -34,7 +34,7 @@ class CommentMailController extends BaseController
         list($valid, $errors) = $this->commentValidator->validateEmailCreation($values);
 
         if ($valid) {
-            $this->sendByEmail($values);
+            $this->sendByEmail($values, $task);
             $values = $this->prepareComment($values);
 
             if ($this->commentModel->create($values) !== false) {
@@ -49,9 +49,9 @@ class CommentMailController extends BaseController
         }
     }
 
-    protected function sendByEmail(array $values)
+    protected function sendByEmail(array $values, array $task)
     {
-        $html = $this->template->render('comment_mail/email', array('email' => $values));
+        $html = $this->template->render('comment_mail/email', array('email' => $values, 'task' => $task));
         $emails = explode_csv_field($values['emails']);
 
         foreach ($emails as $email) {
