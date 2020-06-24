@@ -53,7 +53,7 @@
         "phpunit/php-token-stream": "^3.1",
         "doctrine/instantiator": "^1.1",
         "phpdocumentor/reflection-docblock": "5.1.0",
-        "symfony/debug": "3.4.2",
+        "symfony/debug": "4.4.10",
         "symfony/yaml": "4.4.10",
         "symfony/finder": "3.4.8",
         "symfony/stopwatch" : "4.4.10",
