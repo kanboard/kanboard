@@ -103,9 +103,9 @@ class Container implements \ArrayAccess
 
         if (
             isset($this->raw[$id])
-            || !is_object($this->values[$id])
+            || !\is_object($this->values[$id])
             || isset($this->protected[$this->values[$id]])
-            || !method_exists($this->values[$id], '__invoke')
+            || !\method_exists($this->values[$id], '__invoke')
         ) {
             return $this->values[$id];
         }
@@ -143,7 +143,7 @@ class Container implements \ArrayAccess
     public function offsetUnset($id)
     {
         if (isset($this->keys[$id])) {
-            if (is_object($this->values[$id])) {
+            if (\is_object($this->values[$id])) {
                 unset($this->factories[$this->values[$id]], $this->protected[$this->values[$id]]);
             }
 
@@ -162,7 +162,7 @@ class Container implements \ArrayAccess
      */
     public function factory($callable)
     {
-        if (!method_exists($callable, '__invoke')) {
+        if (!\method_exists($callable, '__invoke')) {
             throw new ExpectedInvokableException('Service definition is not a Closure or invokable object.');
         }
 
@@ -184,7 +184,7 @@ class Container implements \ArrayAccess
      */
     public function protect($callable)
     {
-        if (!method_exists($callable, '__invoke')) {
+        if (!\method_exists($callable, '__invoke')) {
             throw new ExpectedInvokableException('Callable is not a Closure or invokable object.');
         }
 
@@ -241,15 +241,15 @@ class Container implements \ArrayAccess
             throw new FrozenServiceException($id);
         }
 
-        if (!is_object($this->values[$id]) || !method_exists($this->values[$id], '__invoke')) {
+        if (!\is_object($this->values[$id]) || !\method_exists($this->values[$id], '__invoke')) {
             throw new InvalidServiceIdentifierException($id);
         }
 
         if (isset($this->protected[$this->values[$id]])) {
-            @trigger_error(sprintf('How Pimple behaves when extending protected closures will be fixed in Pimple 4. Are you sure "%s" should be protected?', $id), E_USER_DEPRECATED);
+            @\trigger_error(\sprintf('How Pimple behaves when extending protected closures will be fixed in Pimple 4. Are you sure "%s" should be protected?', $id), \E_USER_DEPRECATED);
         }
 
-        if (!is_object($callable) || !method_exists($callable, '__invoke')) {
+        if (!\is_object($callable) || !\method_exists($callable, '__invoke')) {
             throw new ExpectedInvokableException('Extension service definition is not a Closure or invokable object.');
         }
 
@@ -274,7 +274,7 @@ class Container implements \ArrayAccess
      */
     public function keys()
     {
-        return array_keys($this->values);
+        return \array_keys($this->values);
     }
 
     /**

@@ -57,7 +57,7 @@
 <?php if (empty($columns)): ?>
     <p class="alert alert-error"><?= t('Your board doesn\'t have any columns!') ?></p>
 <?php else: ?>
-    <table class="table-striped table-scrolling"
+    <table class="table-striped table-scrolling">
         <thead>
         <tr>
             <th class="column-40"><?= t('Column') ?></th>

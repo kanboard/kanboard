@@ -1419,7 +1419,6 @@ return array(
     'Group membership(s):' => 'Состоит в группах:',
     '%s is a member of the following group(s): %s' => '%s является членом следующих групп: %s',
     '%d/%d group(s) shown' => '%d/%d групп показано',
-    'Enable global tags for this project' => 'Разрешить глобальные метки в этом проекте',
-    'Group membership(s):' => 'Состоит в группах:',
     'Subtask creation or modification' => 'Создание или изменение подзадач',
+    // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
 );

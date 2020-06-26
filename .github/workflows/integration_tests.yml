@@ -1,0 +1,104 @@
+name: Integration Tests
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  Sqlite:
+    runs-on: ubuntu-latest
+    container: kanboard/tests:latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Start Apache
+      run: /etc/init.d/apache2 start
+    - name: Link document root
+      run: |
+        rm -rf /var/www/html
+        ln -s $GITHUB_WORKSPACE /var/www/html
+        cp tests/configs/config.sqlite.php /var/www/html/config.php
+        chown -R www-data:www-data /var/www/html/data
+        ls -l /var/www/html/
+    - name: Integration tests with Sqlite
+      run: ./vendor/bin/phpunit -c tests/integration.sqlite.xml
+
+  Postgres:
+    runs-on: ubuntu-latest
+    container: kanboard/tests:latest
+    services:
+      postgres:
+        image: postgres:9.4
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: kanboard
+        ports:
+        - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+    - uses: actions/checkout@v2
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Start Apache
+      run: /etc/init.d/apache2 start
+    - name: Link document root
+      run: |
+        rm -rf /var/www/html
+        ln -s $GITHUB_WORKSPACE /var/www/html
+        cp tests/configs/config.postgres.php /var/www/html/config.php
+        chown -R www-data:www-data /var/www/html/data
+        ls -l /var/www/html/
+    - name: Integration tests with Postgres
+      run: ./vendor/bin/phpunit -c tests/integration.postgres.xml
+      env:
+        DB_HOSTNAME: postgres
+        DB_PORT: ${{ job.services.postgres.ports[5432] }}
+
+  Mysql:
+    runs-on: ubuntu-latest
+    container: kanboard/tests:latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: "kanboard"
+          MYSQL_DATABASE: "kanboard"
+          MYSQL_USER: "kanboard"
+          MYSQL_PASSWORD: "kanboard"
+        ports:
+        - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+    - uses: actions/checkout@v2
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Start Apache
+      run: /etc/init.d/apache2 start
+    - name: Link document root
+      run: |
+        rm -rf /var/www/html
+        ln -s $GITHUB_WORKSPACE /var/www/html
+        cp tests/configs/config.mysql.php /var/www/html/config.php
+        chown -R www-data:www-data /var/www/html/data
+        ls -l /var/www/html/
+    - name: Integration tests with Mysql
+      run: ./vendor/bin/phpunit -c tests/integration.mysql.xml
+      env:
+        DB_HOSTNAME: mysql
+        DB_PORT: ${{ job.services.mysql.ports[3306] }}
