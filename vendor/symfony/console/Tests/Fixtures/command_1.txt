@@ -1,6 +1,3 @@
-<comment>Description:</comment>
-  command 1 description
-
 <comment>Usage:</comment>
   descriptor:command1
   alias1

@@ -12,8 +12,8 @@
 namespace Symfony\Component\Console\Tests\Output;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Output\Output;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 class OutputTest extends TestCase
 {
@@ -77,21 +77,8 @@ class OutputTest extends TestCase
     public function testWriteAnArrayOfMessages()
     {
         $output = new TestOutput();
-        $output->writeln(['foo', 'bar']);
+        $output->writeln(array('foo', 'bar'));
         $this->assertEquals("foo\nbar\n", $output->output, '->writeln() can take an array of messages to output');
-    }
-
-    public function testWriteAnIterableOfMessages()
-    {
-        $output = new TestOutput();
-        $output->writeln($this->generateMessages());
-        $this->assertEquals("foo\nbar\n", $output->output, '->writeln() can take an iterable of messages to output');
-    }
-
-    private function generateMessages(): iterable
-    {
-        yield 'foo';
-        yield 'bar';
     }
 
     /**
@@ -106,10 +93,10 @@ class OutputTest extends TestCase
 
     public function provideWriteArguments()
     {
-        return [
-            ['<info>foo</info>', Output::OUTPUT_RAW, "<info>foo</info>\n"],
-            ['<info>foo</info>', Output::OUTPUT_PLAIN, "foo\n"],
-        ];
+        return array(
+            array('<info>foo</info>', Output::OUTPUT_RAW, "<info>foo</info>\n"),
+            array('<info>foo</info>', Output::OUTPUT_PLAIN, "foo\n"),
+        );
     }
 
     public function testWriteWithDecorationTurnedOff()
@@ -122,7 +109,7 @@ class OutputTest extends TestCase
 
     public function testWriteDecoratedMessage()
     {
-        $fooStyle = new OutputFormatterStyle('yellow', 'red', ['blink']);
+        $fooStyle = new OutputFormatterStyle('yellow', 'red', array('blink'));
         $output = new TestOutput();
         $output->getFormatter()->setStyle('FOO', $fooStyle);
         $output->setDecorated(true);
@@ -163,13 +150,13 @@ class OutputTest extends TestCase
 
     public function verbosityProvider()
     {
-        return [
-            [Output::VERBOSITY_QUIET, '2', '->write() in QUIET mode only outputs when an explicit QUIET verbosity is passed'],
-            [Output::VERBOSITY_NORMAL, '123', '->write() in NORMAL mode outputs anything below an explicit VERBOSE verbosity'],
-            [Output::VERBOSITY_VERBOSE, '1234', '->write() in VERBOSE mode outputs anything below an explicit VERY_VERBOSE verbosity'],
-            [Output::VERBOSITY_VERY_VERBOSE, '12345', '->write() in VERY_VERBOSE mode outputs anything below an explicit DEBUG verbosity'],
-            [Output::VERBOSITY_DEBUG, '123456', '->write() in DEBUG mode outputs everything'],
-        ];
+        return array(
+            array(Output::VERBOSITY_QUIET, '2', '->write() in QUIET mode only outputs when an explicit QUIET verbosity is passed'),
+            array(Output::VERBOSITY_NORMAL, '123', '->write() in NORMAL mode outputs anything below an explicit VERBOSE verbosity'),
+            array(Output::VERBOSITY_VERBOSE, '1234', '->write() in VERBOSE mode outputs anything below an explicit VERY_VERBOSE verbosity'),
+            array(Output::VERBOSITY_VERY_VERBOSE, '12345', '->write() in VERY_VERBOSE mode outputs anything below an explicit DEBUG verbosity'),
+            array(Output::VERBOSITY_DEBUG, '123456', '->write() in DEBUG mode outputs everything'),
+        );
     }
 }
 

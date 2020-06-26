@@ -13,12 +13,12 @@ namespace Symfony\Component\Console\Tests\Style;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Formatter\OutputFormatter;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\ConsoleOutputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\Console\Formatter\OutputFormatter;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class SymfonyStyleTest extends TestCase
 {
@@ -26,11 +26,9 @@ class SymfonyStyleTest extends TestCase
     protected $command;
     /** @var CommandTester */
     protected $tester;
-    private $colSize;
 
     protected function setUp()
     {
-        $this->colSize = getenv('COLUMNS');
         putenv('COLUMNS=121');
         $this->command = new Command('sfstyle');
         $this->tester = new CommandTester($this->command);
@@ -38,7 +36,7 @@ class SymfonyStyleTest extends TestCase
 
     protected function tearDown()
     {
-        putenv($this->colSize ? 'COLUMNS='.$this->colSize : 'COLUMNS');
+        putenv('COLUMNS');
         $this->command = null;
         $this->tester = null;
     }
@@ -50,7 +48,7 @@ class SymfonyStyleTest extends TestCase
     {
         $code = require $inputCommandFilepath;
         $this->command->setCode($code);
-        $this->tester->execute([], ['interactive' => false, 'decorated' => false]);
+        $this->tester->execute(array(), array('interactive' => false, 'decorated' => false));
         $this->assertStringEqualsFile($outputFilepath, $this->tester->getDisplay(true));
     }
 
@@ -61,7 +59,7 @@ class SymfonyStyleTest extends TestCase
     {
         $code = require $inputCommandFilepath;
         $this->command->setCode($code);
-        $this->tester->execute([], ['interactive' => true, 'decorated' => false]);
+        $this->tester->execute(array(), array('interactive' => true, 'decorated' => false));
         $this->assertStringEqualsFile($outputFilepath, $this->tester->getDisplay(true));
     }
 

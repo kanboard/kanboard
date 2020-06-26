@@ -38,12 +38,26 @@ class InputArgumentTest extends TestCase
     }
 
     /**
-     * @expectedException        \InvalidArgumentException
-     * @expectedExceptionMessage Argument mode "-1" is not valid.
+     * @dataProvider provideInvalidModes
      */
-    public function testInvalidModes()
+    public function testInvalidModes($mode)
     {
-        new InputArgument('foo', '-1');
+        if (method_exists($this, 'expectException')) {
+            $this->expectException('InvalidArgumentException');
+            $this->expectExceptionMessage(sprintf('Argument mode "%s" is not valid.', $mode));
+        } else {
+            $this->setExpectedException('InvalidArgumentException', sprintf('Argument mode "%s" is not valid.', $mode));
+        }
+
+        new InputArgument('foo', $mode);
+    }
+
+    public function provideInvalidModes()
+    {
+        return array(
+            array('ANOTHER_ONE'),
+            array(-1),
+        );
     }
 
     public function testIsArray()
@@ -77,8 +91,8 @@ class InputArgumentTest extends TestCase
         $this->assertEquals('another', $argument->getDefault(), '->setDefault() changes the default value');
 
         $argument = new InputArgument('foo', InputArgument::OPTIONAL | InputArgument::IS_ARRAY);
-        $argument->setDefault([1, 2]);
-        $this->assertEquals([1, 2], $argument->getDefault(), '->setDefault() changes the default value');
+        $argument->setDefault(array(1, 2));
+        $this->assertEquals(array(1, 2), $argument->getDefault(), '->setDefault() changes the default value');
     }
 
     /**

@@ -1,6 +1,3 @@
-Description:
-  Lists commands
-
 Usage:
   list [options] [--] [<namespace>]
 

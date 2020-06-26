@@ -21,7 +21,7 @@ class MarkdownDescriptorTest extends AbstractDescriptorTest
     {
         return $this->getDescriptionTestData(array_merge(
             ObjectsProvider::getCommands(),
-            ['command_mbstring' => new DescriptorCommandMbString()]
+            array('command_mbstring' => new DescriptorCommandMbString())
         ));
     }
 
@@ -29,7 +29,7 @@ class MarkdownDescriptorTest extends AbstractDescriptorTest
     {
         return $this->getDescriptionTestData(array_merge(
             ObjectsProvider::getApplications(),
-            ['application_mbstring' => new DescriptorApplicationMbString()]
+            array('application_mbstring' => new DescriptorApplicationMbString())
         ));
     }
 

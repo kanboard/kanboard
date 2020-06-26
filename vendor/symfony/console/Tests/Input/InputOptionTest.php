@@ -39,7 +39,7 @@ class InputOptionTest extends TestCase
         $this->assertEquals('f', $option->getShortcut(), '__construct() can take a shortcut as its second argument');
         $option = new InputOption('foo', '-f|-ff|fff');
         $this->assertEquals('f|ff|fff', $option->getShortcut(), '__construct() removes the leading - of the shortcuts');
-        $option = new InputOption('foo', ['f', 'ff', '-fff']);
+        $option = new InputOption('foo', array('f', 'ff', '-fff'));
         $this->assertEquals('f|ff|fff', $option->getShortcut(), '__construct() removes the leading - of the shortcuts');
         $option = new InputOption('foo');
         $this->assertNull($option->getShortcut(), '__construct() makes the shortcut null by default');
@@ -74,12 +74,26 @@ class InputOptionTest extends TestCase
     }
 
     /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Option mode "-1" is not valid.
+     * @dataProvider provideInvalidModes
      */
-    public function testInvalidModes()
+    public function testInvalidModes($mode)
     {
-        new InputOption('foo', 'f', '-1');
+        if (method_exists($this, 'expectException')) {
+            $this->expectException('InvalidArgumentException');
+            $this->expectExceptionMessage(sprintf('Option mode "%s" is not valid.', $mode));
+        } else {
+            $this->setExpectedException('InvalidArgumentException', sprintf('Option mode "%s" is not valid.', $mode));
+        }
+
+        new InputOption('foo', 'f', $mode);
+    }
+
+    public function provideInvalidModes()
+    {
+        return array(
+            array('ANOTHER_ONE'),
+            array(-1),
+        );
     }
 
     /**
@@ -132,7 +146,7 @@ class InputOptionTest extends TestCase
         $this->assertNull($option->getDefault(), '->getDefault() returns null if no default value is configured');
 
         $option = new InputOption('foo', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY);
-        $this->assertEquals([], $option->getDefault(), '->getDefault() returns an empty array if option is an array');
+        $this->assertEquals(array(), $option->getDefault(), '->getDefault() returns an empty array if option is an array');
 
         $option = new InputOption('foo', null, InputOption::VALUE_NONE);
         $this->assertFalse($option->getDefault(), '->getDefault() returns false if the option does not take a value');
@@ -147,8 +161,8 @@ class InputOptionTest extends TestCase
         $this->assertEquals('another', $option->getDefault(), '->setDefault() changes the default value');
 
         $option = new InputOption('foo', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY);
-        $option->setDefault([1, 2]);
-        $this->assertEquals([1, 2], $option->getDefault(), '->setDefault() changes the default value');
+        $option->setDefault(array(1, 2));
+        $this->assertEquals(array(1, 2), $option->getDefault(), '->setDefault() changes the default value');
     }
 
     /**
