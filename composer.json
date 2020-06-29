@@ -57,7 +57,7 @@
         "symfony/yaml": "4.4.10",
         "symfony/finder": "3.4.8",
         "symfony/stopwatch" : "4.4.10",
-        "myclabs/deep-copy": "1.9.5",
+        "myclabs/deep-copy": "1.10.0",
         "phpunit/phpunit" : "^7",
         "phpunit/phpunit-selenium": "^7",
         "roave/security-advisories": "dev-master"
