@@ -38,7 +38,9 @@ class SessionManager extends Base
      */
     public function open()
     {
-        session_set_save_handler(new SessionHandler($this->db), true);
+        if (SESSION_HANDLER === 'db') {
+            session_set_save_handler(new SessionHandler($this->db), true);
+        }
 
         $this->configure();
 

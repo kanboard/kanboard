@@ -240,6 +240,9 @@ define('BRUTEFORCE_LOCKDOWN_DURATION', 15);
 // See http://php.net/manual/en/session.configuration.php#ini.session.cookie-lifetime
 define('SESSION_DURATION', 0);
 
+// Session handler: db or php
+define('SESSION_HANDLER', 'db');
+
 // HTTP client proxy
 define('HTTP_PROXY_HOSTNAME', '');
 define('HTTP_PROXY_PORT', '3128');
