@@ -142,6 +142,9 @@ defined('BRUTEFORCE_LOCKDOWN_DURATION') or define('BRUTEFORCE_LOCKDOWN_DURATION'
 // See http://php.net/manual/en/session.configuration.php#ini.session.cookie-lifetime
 defined('SESSION_DURATION') or define('SESSION_DURATION', intval(getenv('SESSION_DURATION')) ?: 0);
 
+// Session handler: db or php
+defined('SESSION_HANDLER') or define('SESSION_HANDLER', getenv('SESSION_HANDLER') ?: 'db');
+
 // HTTP Client
 defined('HTTP_TIMEOUT') or define('HTTP_TIMEOUT', intval(getenv('HTTP_TIMEOUT')) ?: 10);
 defined('HTTP_MAX_REDIRECTS') or define('HTTP_MAX_REDIRECTS', intval(getenv('HTTP_MAX_REDIRECTS')) ?: 3);
