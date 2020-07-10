@@ -20,6 +20,9 @@ ADD . /var/www/app
 ADD docker/ /
 
 RUN rm -rf /var/www/app/docker && echo $VERSION > /version.txt
+RUN echo '#!/bin/sh' > /etc/periodic/daily/cronjob
+RUN echo /var/www/app/cli cronjob >> /etc/periodic/daily/cronjob
+RUN chmod u+x /etc/periodic/daily/cronjob
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD []
