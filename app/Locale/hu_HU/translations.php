@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Csak a hozzárendelt feladatok frissítése engedélyezett',
     'Only for tasks assigned to the current user' => 'Csak az aktuális felhasználóhoz rendelt feladatoknál',
     'My projects' => 'Saját projektek',
-    'Your are not member of any project.' => 'Ön nem tagja egyetlen projektnek sem.',
+    'You are not a member of any project.' => 'Ön nem tagja egyetlen projektnek sem.',
     'My subtasks' => 'Saját részfeladatok',
     '%d subtasks' => '%d részfeladat',
     '%d subtask' => '%d részfeladat',

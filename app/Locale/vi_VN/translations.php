@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Chỉ được phép cập nhật các nhiệm vụ được giao',
     'Only for tasks assigned to the current user' => 'Chỉ cho các nhiệm vụ được gán cho người dùng hiện tại',
     'My projects' => 'Dự án của tôi',
-    'Your are not member of any project.' => 'Bạn không phải là thành viên của bất kỳ dự án nào.',
+    'You are not a member of any project.' => 'Bạn không phải là thành viên của bất kỳ dự án nào.',
     'My subtasks' => 'Nhiệm vụ phụ của tôi',
     '%d subtasks' => '%d nhiệm vụ phụ',
     '%d subtask' => '%d nhiệm vụ phụ',

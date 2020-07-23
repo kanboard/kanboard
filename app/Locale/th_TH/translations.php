@@ -1314,7 +1314,7 @@ return array(
     // 'Update only assigned tasks is permitted' => '',
     // 'Only for tasks assigned to the current user' => '',
     // 'My projects' => '',
-    // 'Your are not member of any project.' => '',
+    // 'You are not a member of any project.' => '',
     // 'My subtasks' => '',
     // '%d subtasks' => '',
     // '%d subtask' => '',

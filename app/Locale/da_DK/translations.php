@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Opdatere kun tilladt tildelte opgaver',
     'Only for tasks assigned to the current user' => 'Kun opgaver tildelt nuværende bruger',
     'My projects' => 'Tildelte projekter',
-    'Your are not member of any project.' => 'Ikke medlem af noget projekt.',
+    'You are not a member of any project.' => 'Ikke medlem af noget projekt.',
     'My subtasks' => 'Tildelte delopgaver',
     '%d subtasks' => '%d delopgaver',
     '%d subtask' => '%d delopgave',

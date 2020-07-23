@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'فقط بروز رسانی کارهای محول شده مجاز است',
     'Only for tasks assigned to the current user' => 'فقط برای کارهایی که به کاربر جاری محول شده',
     'My projects' => 'پروژه های من',
-    'Your are not member of any project.' => 'شما عضو هیچ پروژه ای نمی باشید.',
+    'You are not a member of any project.' => 'شما عضو هیچ پروژه ای نمی باشید.',
     'My subtasks' => 'کارهای فرعی من',
     '%d subtasks' => '%d کار فرعی',
     '%d subtask' => '%d کار فرعی',

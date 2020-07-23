@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Дозволене редагування лише призначених задач',
     'Only for tasks assigned to the current user' => 'Лише задачі призначені поточному користувачу',
     'My projects' => 'Мої проєкти',
-    'Your are not member of any project.' => 'Ви не є учасником жодного з проєктів.',
+    'You are not a member of any project.' => 'Ви не є учасником жодного з проєктів.',
     'My subtasks' => 'Мої підзадачі',
     '%d subtasks' => '%d підзадач',
     '%d subtask' => '%d підзадача',

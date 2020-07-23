@@ -1314,7 +1314,7 @@ return array(
     // 'Update only assigned tasks is permitted' => '',
     // 'Only for tasks assigned to the current user' => '',
     'My projects' => '我的專案',
-    'Your are not member of any project.' => '你不是任何專案的成員。',
+    'You are not a member of any project.' => '你不是任何專案的成員。',
     'My subtasks' => '我的子任務',
     '%d subtasks' => '%d 子任務',
     '%d subtask' => '%d 子任務',
