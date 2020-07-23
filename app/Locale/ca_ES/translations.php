@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Actualitzar les tasques assignades només es permet',
     'Only for tasks assigned to the current user' => 'Només per a les tasques assignades a l\'usuari actual',
     'My projects' => 'Els meus projectes',
-    'Your are not member of any project.' => 'No és membre de cap projecte.',
+    'You are not a member of any project.' => 'No és membre de cap projecte.',
     'My subtasks' => 'Les meves subtasques',
     '%d subtasks' => '%d subtasques',
     '%d subtask' => '%d subtasca',
