@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "99933b1b63d97e4b455eb04338d8623d",
+    "content-hash": "a9ba48a21744c2b9baa5a2be68b9284e",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -2773,7 +2773,7 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v4.4.10",
+            "version": "v4.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
