@@ -109,6 +109,7 @@ defined('MAIL_SMTP_HOSTNAME') or define('MAIL_SMTP_HOSTNAME', getenv('MAIL_SMTP_
 defined('MAIL_SMTP_PORT') or define('MAIL_SMTP_PORT', intval(getenv('MAIL_SMTP_PORT')) ?: 25);
 defined('MAIL_SMTP_USERNAME') or define('MAIL_SMTP_USERNAME', getenv('MAIL_SMTP_USERNAME') ?: '');
 defined('MAIL_SMTP_PASSWORD') or define('MAIL_SMTP_PASSWORD', getenv('MAIL_SMTP_PASSWORD') ?: '');
+defined('MAIL_SMTP_HELO_NAME') or define('MAIL_SMTP_HELO_NAME', getenv('MAIL_SMTP_HELO_NAME') ?: null);
 defined('MAIL_SMTP_ENCRYPTION') or define('MAIL_SMTP_ENCRYPTION', getenv('MAIL_SMTP_ENCRYPTION') ?: null);
 defined('MAIL_SENDMAIL_COMMAND') or define('MAIL_SENDMAIL_COMMAND', getenv('MAIL_SENDMAIL_COMMAND') ?: '/usr/sbin/sendmail -bs');
 
@@ -141,6 +142,9 @@ defined('BRUTEFORCE_LOCKDOWN_DURATION') or define('BRUTEFORCE_LOCKDOWN_DURATION'
 // Session duration in second (0 = until the browser is closed)
 // See http://php.net/manual/en/session.configuration.php#ini.session.cookie-lifetime
 defined('SESSION_DURATION') or define('SESSION_DURATION', intval(getenv('SESSION_DURATION')) ?: 0);
+
+// Session handler: db or php
+defined('SESSION_HANDLER') or define('SESSION_HANDLER', getenv('SESSION_HANDLER') ?: 'db');
 
 // HTTP Client
 defined('HTTP_TIMEOUT') or define('HTTP_TIMEOUT', intval(getenv('HTTP_TIMEOUT')) ?: 10);

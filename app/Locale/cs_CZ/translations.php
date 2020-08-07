@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Povolené jsou pouze úkoly přiřazené aktualizací',
     'Only for tasks assigned to the current user' => 'Pouze pro úkoly přiřazené aktuálnímu uživateli',
     'My projects' => 'Moje projekty',
-    'Your are not member of any project.' => 'Nejste členem žádného projektu.',
+    'You are not a member of any project.' => 'Nejste členem žádného projektu.',
     'My subtasks' => 'Moje dílčí úkoly',
     '%d subtasks' => '%d dílčí úkoly',
     '%d subtask' => '%d dílčí úkol',

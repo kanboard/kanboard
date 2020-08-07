@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Du kan bare endre oppgaver du selv er ansvarlig for',
     'Only for tasks assigned to the current user' => 'Kun for oppgaver tilordnet aktiv bruker',
     'My projects' => 'Mine prosjekter',
-    'Your are not member of any project.' => 'Du er ikke med i noen prosjekter',
+    'You are not a member of any project.' => 'Du er ikke med i noen prosjekter',
     'My subtasks' => 'Mine deloppgaver',
     '%d subtasks' => '%d deloppgaver',
     '%d subtask' => '%d deloppgave',

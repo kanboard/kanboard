@@ -2,7 +2,7 @@
     <h2><?= $this->url->link(t('My projects'), 'DashboardController', 'projects', array('user_id' => $user['id'])) ?> (<?= $paginator->getTotal() ?>)</h2>
 </div>
 <?php if ($paginator->isEmpty()): ?>
-    <p class="alert"><?= t('Your are not member of any project.') ?></p>
+    <p class="alert"><?= t('You are not a member of any project.') ?></p>
 <?php else: ?>
     <div class="table-list">
         <?= $this->render('project_list/header', array('paginator' => $paginator)) ?>

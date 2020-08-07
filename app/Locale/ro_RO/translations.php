@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Numai actualizarea sarcinilor atribuite este permisă',
     'Only for tasks assigned to the current user' => 'Numai pentru sarcini atribuite utilizatorului curent',
     'My projects' => 'Proiectele mele',
-    'Your are not member of any project.' => 'Nu faci parte din vreun proiect',
+    'You are not a member of any project.' => 'Nu faci parte din vreun proiect',
     'My subtasks' => 'Sub-sarcinile mele',
     '%d subtasks' => '%d sub-sarcini',
     '%d subtask' => '%d sub-sarcină',

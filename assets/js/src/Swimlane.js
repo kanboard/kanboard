@@ -135,6 +135,6 @@ Kanboard.Swimlane.prototype.savePosition = function(swimlaneId, position) {
 // except for one have been removed.
 Kanboard.Swimlane.prototype.expandSingleSwimlane = function() {
     if ($("tr.board-swimlane").length == 1) {
-        localStorage.clear(this.getStorageKey());
+        localStorage.removeItem(this.getStorageKey());
     }
 }

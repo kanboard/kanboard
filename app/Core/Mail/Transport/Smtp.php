@@ -23,6 +23,9 @@ class Smtp extends Mail
         $transport = Swift_SmtpTransport::newInstance(MAIL_SMTP_HOSTNAME, MAIL_SMTP_PORT);
         $transport->setUsername(MAIL_SMTP_USERNAME);
         $transport->setPassword(MAIL_SMTP_PASSWORD);
+        if (!is_null(MAIL_SMTP_HELO_NAME)) {
+                $transport->setLocalDomain(MAIL_SMTP_HELO_NAME);
+        }
         $transport->setEncryption(MAIL_SMTP_ENCRYPTION);
 
         if (HTTP_VERIFY_SSL_CERTIFICATE === false) {

@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => '只允许更新已受理任务',
     'Only for tasks assigned to the current user' => '只作用于当前用户已受理任务',
     'My projects' => '我的项目',
-    'Your are not member of any project.' => '你不是任何项目的成员。',
+    'You are not a member of any project.' => '你不是任何项目的成员。',
     'My subtasks' => '我的子任务',
     '%d subtasks' => '%d 子任务',
     '%d subtask' => '%d 子任务',

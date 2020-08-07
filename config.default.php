@@ -52,6 +52,7 @@ define('MAIL_SMTP_HOSTNAME', '');
 define('MAIL_SMTP_PORT', 25);
 define('MAIL_SMTP_USERNAME', '');
 define('MAIL_SMTP_PASSWORD', '');
+define('MAIL_SMTP_HELO_NAME', null); // valid: null (default), or FQDN
 define('MAIL_SMTP_ENCRYPTION', null); // Valid values are null (not a string "null"), "ssl" or "tls"
 
 // Sendmail command to use when the transport is "sendmail"
@@ -239,6 +240,9 @@ define('BRUTEFORCE_LOCKDOWN_DURATION', 15);
 // Session duration in second (0 = until the browser is closed)
 // See http://php.net/manual/en/session.configuration.php#ini.session.cookie-lifetime
 define('SESSION_DURATION', 0);
+
+// Session handler: db or php
+define('SESSION_HANDLER', 'db');
 
 // HTTP client proxy
 define('HTTP_PROXY_HOSTNAME', '');

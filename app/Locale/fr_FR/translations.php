@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Seulement la mise à jour des tâches assignées est autorisé',
     'Only for tasks assigned to the current user' => 'Seulement pour les tâches assignées à l\'utilisateur courant',
     'My projects' => 'Mes projets',
-    'Your are not member of any project.' => 'Vous n\'êtes membre d\'aucun projet',
+    'You are not a member of any project.' => 'Vous n\'êtes membre d\'aucun projet',
     'My subtasks' => 'Mes sous-tâches',
     '%d subtasks' => '%d sous-tâches',
     '%d subtask' => '%d sous-tâche',
