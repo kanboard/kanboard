@@ -1417,7 +1417,7 @@ return array(
     'Do you really want to make the tag "%s" global?' => 'Tem a certeza que pretende por a etiqueta "%s" como global?',
     'Enable global tags for this project' => 'Activar etiquetas globais para este projeto',
     'Group membership(s):' => 'Membro(s) do grupo:',
-    '%s is a member of the following group(s): %s' => '%s é membro do(s) seguinte(s) grupo(s)',
+    '%s is a member of the following group(s): %s' => '%s é membro do(s) seguinte(s) grupo(s): %s',
     '%d/%d group(s) shown' => '%d/%d grupo(s) mostrado(s)',
     'Subtask creation or modification' => 'Alteração ou criação de sub-tarefa',
     'Assign the task to a specific user when the task is moved to a specific swimlane' => 'Assignar a tarefa a um utilizador especificado quando a tarefa é movida para uma swimlane especificada',
