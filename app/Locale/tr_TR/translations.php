@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Yalnızca atandığınız görevleri güncelleyebilirsiniz',
     'Only for tasks assigned to the current user' => 'Yalnızca geçerli kullanıcıya atanan görevler için',
     'My projects' => 'Projelerim',
-    'Your are not member of any project.' => 'Herhangi bir projenin üyesi değilsiniz.',
+    'You are not a member of any project.' => 'Herhangi bir projenin üyesi değilsiniz.',
     'My subtasks' => 'Altgörevlerim',
     '%d subtasks' => '%d alt görev',
     '%d subtask' => '%d alt görev',

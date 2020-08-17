@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => '割当てられたタスクのみ更新できます',
     'Only for tasks assigned to the current user' => '現在のユーザーに割当てられたタスクのみ',
     'My projects' => '自分のプロジェクト',
-    'Your are not member of any project.' => 'あなたが所属しているプロジェクトにはありません',
+    'You are not a member of any project.' => 'あなたが所属しているプロジェクトにはありません',
     'My subtasks' => '自分のサブタスク',
     '%d subtasks' => '%d 件のサブタスク',
     '%d subtask' => '%d サブタスク',
