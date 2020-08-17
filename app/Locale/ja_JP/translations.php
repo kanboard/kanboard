@@ -420,7 +420,7 @@ return array(
     'This value is required' => 'この値が必要です',
     'This value must be numeric' => 'この値は数字でなければなりません',
     'Unable to create this task.' => 'このタスクを作成できませんでした',
-    'Cumulative flow diagram' => '蓄積フロー図',
+    'Cumulative flow diagram' => '累積フロー図',
     'Daily project summary' => '日時プロジェクトサマリー',
     'Daily project summary export' => '日時プロジェクトサマリーの出力',
     'Exports' => '出力',
