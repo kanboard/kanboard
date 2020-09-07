@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "426728aa928af4eacae55195d103a115",
+    "content-hash": "8e2287d91ac72de25768de239094d631",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -2574,7 +2574,7 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v4.4.12",
+            "version": "v4.4.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
