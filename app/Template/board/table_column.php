@@ -30,10 +30,10 @@
                     <?= $this->text->e($column['title']) ?>
                 <?php else: ?>
                     <span class="dropdown">
-                        <a href="#" class="dropdown-menu"><?= $this->text->e($column['title']) ?> <i class="fa fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-menu"><?= $this->text->e($column['title']) ?> <em class="fa fa-caret-down"></em></a>
                         <ul>
                             <li>
-                                <i class="fa fa-minus-square fa-fw"></i>
+                                <em class="fa fa-minus-square fa-fw"></em>
                                 <a href="#" class="board-toggle-column-view" data-column-id="<?= $column['id'] ?>"><?= t('Hide this column') ?></a>
                             </li>
                             <?php if ($this->projectRole->canCreateTaskInColumn($column['project_id'], $column['id'])): ?>

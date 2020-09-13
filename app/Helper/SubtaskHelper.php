@@ -32,11 +32,11 @@ class SubtaskHelper extends Base
     public function renderTitle(array $subtask)
     {
         if ($subtask['status'] == 0) {
-            $html = '<i class="fa fa-square-o fa-fw ' . ($this->hasSubtaskInProgress() ? 'js-modal-confirm' : '') . '"></i>';
+            $html = '<em class="fa fa-square-o fa-fw ' . ($this->hasSubtaskInProgress() ? 'js-modal-confirm' : '') . '"></em>';
         } elseif ($subtask['status'] == 1) {
-            $html = '<i class="fa fa-gears fa-fw"></i>';
+            $html = '<em class="fa fa-gears fa-fw"></em>';
         } else {
-            $html = '<i class="fa fa-check-square-o fa-fw"></i>';
+            $html = '<em class="fa fa-check-square-o fa-fw"></em>';
         }
 
         return $html.$this->helper->text->e($subtask['title']);

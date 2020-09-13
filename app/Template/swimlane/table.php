@@ -14,11 +14,11 @@
         <tr data-swimlane-id="<?= $swimlane['id'] ?>">
             <td>
                 <?php if (! isset($disable_handle)): ?>
-                    <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change column position') ?>"></i>&nbsp;
+                    <em class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change column position') ?>"></em>&nbsp;
                 <?php endif ?>
 
                 <div class="dropdown">
-                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><em class="fa fa-cog"></em><em class="fa fa-caret-down"></em></a>
                     <ul>
                         <li>
                             <?= $this->modal->medium('edit', t('Edit'), 'SwimlaneController', 'edit', array('project_id' => $project['id'], 'swimlane_id' => $swimlane['id'])) ?>

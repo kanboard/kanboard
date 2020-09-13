@@ -9,9 +9,9 @@
         <?php foreach ($files as $file): ?>
             <tr>
                 <td>
-                    <i class="fa <?= $this->file->icon($file['name']) ?> fa-fw"></i>
+                    <em class="fa <?= $this->file->icon($file['name']) ?> fa-fw"></em>
                     <div class="dropdown">
-                        <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->text->e($file['name']) ?> <i class="fa fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->text->e($file['name']) ?> <em class="fa fa-caret-down"></em></a>
                         <ul>
                             <?php if ($this->file->getPreviewType($file['name']) !== null): ?>
                                 <li>

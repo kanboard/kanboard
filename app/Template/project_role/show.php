@@ -15,7 +15,7 @@
         <tr>
             <th>
                 <div class="dropdown">
-                    <a href="#" class="dropdown-menu"><?= t('Restrictions for the role "%s"', $role['role']) ?> <i class="fa fa-caret-down"></i></a>
+                    <a href="#" class="dropdown-menu"><?= t('Restrictions for the role "%s"', $role['role']) ?> <em class="fa fa-caret-down"></em></a>
                     <ul>
                         <li>
                             <?= $this->modal->medium('plus', t('Add a new project restriction'), 'ProjectRoleRestrictionController', 'create', array('project_id' => $project['id'], 'role_id' => $role['role_id'])) ?>
@@ -47,9 +47,9 @@
             <?php foreach ($role['project_restrictions'] as $restriction): ?>
                 <tr>
                     <td>
-                        <i class="fa fa-ban fa-fw" aria-hidden="true"></i>
+                        <em class="fa fa-ban fa-fw" aria-hidden="true"></em>
                         <strong><?= t('Project') ?></strong>
-                        <i class="fa fa-arrow-right fa-fw" aria-hidden="true"></i>
+                        <em class="fa fa-arrow-right fa-fw" aria-hidden="true"></em>
                         <?= $this->text->e($restriction['title']) ?>
                     </td>
                     <td>
@@ -61,12 +61,12 @@
                 <tr>
                     <td>
                         <?php if (strpos($restriction['rule'], 'block') === 0): ?>
-                            <i class="fa fa-ban fa-fw" aria-hidden="true"></i>
+                            <em class="fa fa-ban fa-fw" aria-hidden="true"></em>
                         <?php else: ?>
-                            <i class="fa fa-check-circle-o fa-fw" aria-hidden="true"></i>
+                            <em class="fa fa-check-circle-o fa-fw" aria-hidden="true"></em>
                         <?php endif ?>
                         <strong><?= $this->text->e($restriction['column_title']) ?></strong>
-                        <i class="fa fa-arrow-right fa-fw" aria-hidden="true"></i>
+                        <em class="fa fa-arrow-right fa-fw" aria-hidden="true"></em>
                         <?= $this->text->e($restriction['title']) ?>
                     </td>
                     <td>
@@ -77,9 +77,9 @@
             <?php foreach ($role['column_move_restrictions'] as $restriction): ?>
                 <tr>
                     <td>
-                        <i class="fa fa-check-circle-o fa-fw" aria-hidden="true"></i>
+                        <em class="fa fa-check-circle-o fa-fw" aria-hidden="true"></em>
                         <strong><?= $this->text->e($restriction['src_column_title']) ?> / <?= $this->text->e($restriction['dst_column_title']) ?></strong>
-                        <i class="fa fa-arrow-right fa-fw" aria-hidden="true"></i>
+                        <em class="fa fa-arrow-right fa-fw" aria-hidden="true"></em>
                         <?php if ($restriction['only_assigned'] == 1): ?>
                             <?= t('Only moving task between those columns is permitted for tasks assigned to the current user') ?>
                         <?php else: ?>

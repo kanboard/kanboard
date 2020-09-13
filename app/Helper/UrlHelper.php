@@ -51,7 +51,7 @@ class UrlHelper extends Base
      */
     public function button($icon, $label, $controller, $action, array $params = array(), $class = '')
     {
-        $html = '<i class="fa fa-'.$icon.' fa-fw"></i> '.$label;
+        $html = '<em class="fa fa-'.$icon.' fa-fw"></em> '.$label;
         $class = 'btn '.$class;
         return $this->link($html, $controller, $action, $params, false, $class);
     }
@@ -75,7 +75,7 @@ class UrlHelper extends Base
      */
     public function icon($icon, $label, $controller, $action, array $params = array(), $csrf = false, $class = '', $title = '', $newTab = false, $anchor = '', $absolute = false)
     {
-        $html = '<i class="fa fa-fw fa-'.$icon.'" aria-hidden="true"></i>'.$label;
+        $html = '<em class="fa fa-fw fa-'.$icon.'" aria-hidden="true"></em>'.$label;
         return $this->helper->url->link($html, $controller, $action, $params, $csrf, $class, $title, $newTab, $anchor, $absolute);
     }
 

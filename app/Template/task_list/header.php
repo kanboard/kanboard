@@ -14,7 +14,7 @@
             <div class="list-item-actions list-item-action-hidden">
                 -&nbsp;
                 <div class="dropdown">
-                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong><?= t('Apply action') ?> <i class="fa fa-caret-down"></i></strong></a>
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong><?= t('Apply action') ?> <em class="fa fa-caret-down"></em></strong></a>
                     <ul>
                         <li>
                             <a href="<?= $this->url->href('TaskBulkMoveColumnController', 'show', ['project_id' => $project['id']]) ?>" data-list-item-action="modal"><?= t('Move selected tasks to another column') ?></a>

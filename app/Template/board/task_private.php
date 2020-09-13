@@ -12,11 +12,11 @@
      data-due-date="<?= $task['date_due'] ?>"
      data-task-url="<?= $this->url->href('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>">
 
-    <div class="task-board-sort-handle" style="display: none;"><i class="fa fa-arrows-alt"></i></div>
+    <div class="task-board-sort-handle" style="display: none;"><em class="fa fa-arrows-alt"></em></div>
 
     <?php if ($this->board->isCollapsed($task['project_id'])): ?>
         <div class="task-board-collapsed">
-            <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse"></i></div>
+            <div class="task-board-saving-icon" style="display: none;"><em class="fa fa-spinner fa-pulse"></em></div>
             <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
                 <?= $this->render('task/dropdown', array('task' => $task, 'redirect' => 'board')) ?>
                 <?php if ($this->projectRole->canUpdateTask($task)): ?>
@@ -35,7 +35,7 @@
         </div>
     <?php else: ?>
         <div class="task-board-expanded">
-            <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
+            <div class="task-board-saving-icon" style="display: none;"><em class="fa fa-spinner fa-pulse fa-2x"></em></div>
             <div class="task-board-header">
                 <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
                     <?= $this->render('task/dropdown', array('task' => $task, 'redirect' => 'board')) ?>

@@ -37,43 +37,43 @@ class ModalHelper extends Base
 
     public function largeIcon($icon, $label, $controller, $action, array $params = array())
     {
-        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-large" aria-hidden="true"></i>';
+        $html = '<em class="fa fa-'.$icon.' fa-fw js-modal-large" aria-hidden="true"></em>';
         return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-large', $label);
     }
 
     public function large($icon, $label, $controller, $action, array $params = array())
     {
-        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-large" aria-hidden="true"></i>'.$label;
+        $html = '<em class="fa fa-'.$icon.' fa-fw js-modal-large" aria-hidden="true"></em>'.$label;
         return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-large');
     }
 
     public function medium($icon, $label, $controller, $action, array $params = array(), $title = '')
     {
-        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-medium" aria-hidden="true"></i>'.$label;
+        $html = '<em class="fa fa-'.$icon.' fa-fw js-modal-medium" aria-hidden="true"></em>'.$label;
         return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-medium', $title);
     }
 
     public function small($icon, $label, $controller, $action, array $params = array())
     {
-        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-small" aria-hidden="true"></i>'.$label;
+        $html = '<em class="fa fa-'.$icon.' fa-fw js-modal-small" aria-hidden="true"></em>'.$label;
         return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-small');
     }
 
     public function mediumButton($icon, $label, $controller, $action, array $params = array())
     {
-        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-medium" aria-hidden="true"></i>'.$label;
+        $html = '<em class="fa fa-'.$icon.' fa-fw js-modal-medium" aria-hidden="true"></em>'.$label;
         return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-medium btn');
     }
 
     public function mediumIcon($icon, $label, $controller, $action, array $params = array())
     {
-        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-medium" aria-hidden="true"></i>';
+        $html = '<em class="fa fa-'.$icon.' fa-fw js-modal-medium" aria-hidden="true"></em>';
         return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-medium', $label);
     }
 
     public function confirm($icon, $label, $controller, $action, array $params = array())
     {
-        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-confirm" aria-hidden="true"></i>'.$label;
+        $html = '<em class="fa fa-'.$icon.' fa-fw js-modal-confirm" aria-hidden="true"></em>'.$label;
         return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-confirm');
     }
 
@@ -89,7 +89,7 @@ class ModalHelper extends Base
 
     public function replaceIconLink($icon, $label, $controller, $action, array $params = array())
     {
-        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-replace" aria-hidden="true"></i>'.$label;
+        $html = '<em class="fa fa-'.$icon.' fa-fw js-modal-replace" aria-hidden="true"></em>'.$label;
         return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-replace');
     }
 }

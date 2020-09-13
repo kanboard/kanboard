@@ -29,7 +29,7 @@
                 <?php else: ?>
                     <?php if ($editable && $this->user->hasProjectAccess('Tasklink', 'edit', $task['project_id'])): ?>
                         <div class="dropdown">
-                            <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
+                            <a href="#" class="dropdown-menu dropdown-menu-link-icon"><em class="fa fa-cog"></em><em class="fa fa-caret-down"></em></a>
                             <ul>
                                 <li>
                                     <?= $this->modal->medium('edit', t('Edit'), 'TaskInternalLinkController', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>

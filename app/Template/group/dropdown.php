@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong>#<?= $group['id'] ?> <i class="fa fa-caret-down"></i></strong></a>
+    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong>#<?= $group['id'] ?> <em class="fa fa-caret-down"></em></strong></a>
     <ul>
         <li><?= $this->modal->medium('plus', t('Add group member'), 'GroupListController', 'associate', array('group_id' => $group['id'])) ?></li>
         <li><?= $this->url->icon('users', t('Members'), 'GroupListController', 'users', array('group_id' => $group['id'])) ?></li>

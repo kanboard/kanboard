@@ -3,7 +3,7 @@
         <?php foreach ($files as $file): ?>
         <tr>
             <th>
-                <i class="fa <?= $this->file->icon($file['name']) ?> fa-fw"></i>
+                <em class="fa <?= $this->file->icon($file['name']) ?> fa-fw"></em>
                 <?= $this->text->e($file['name']) ?>
             </th>
         </tr>
@@ -14,7 +14,7 @@
                     &nbsp;<?= $this->modal->large('eye', t('View file'), 'FileViewerController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                     &nbsp;<?= $this->url->icon('external-link', t('View file'), 'FileViewerController', ($file['is_image'] == 1 ? 'image' : 'show'), array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, '', '', true) ?>
                 <?php elseif ($this->file->getBrowserViewType($file['name']) !== null): ?>
-                        <i class="fa fa-eye fa-fw"></i>
+                        <em class="fa fa-eye fa-fw"></em>
                         <?= $this->url->link(t('View file'), 'FileViewerController', 'browser', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, '', '', true) ?>
                 <?php endif ?>
             </td>

@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><?= $this->avatar->currentUserSmall('avatar-inline') ?><i class="fa fa-caret-down"></i></a>
+    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><?= $this->avatar->currentUserSmall('avatar-inline') ?><em class="fa fa-caret-down"></em></a>
     <ul>
         <li class="no-hover"><strong><?= $this->text->e($this->user->getFullname()) ?></strong></li>
         <li>
@@ -29,7 +29,7 @@
         <?= $this->hook->render('template:header:dropdown') ?>
 
         <li>
-            <i class="fa fa-fw fa-life-ring" aria-hidden="true"></i>
+            <em class="fa fa-fw fa-life-ring" aria-hidden="true"></em>
             <?= $this->url->doc(t('Documentation'), 'index') ?>
         </li>
         <?php if (! DISABLE_LOGOUT): ?>

@@ -32,11 +32,11 @@
                     <?php elseif ($installed_plugins[$plugin['title']] < $plugin['version']): ?>
                         <?= $this->url->icon('refresh', t('Update'), 'PluginController', 'update', array('archive_url' => urlencode($plugin['download'])), true) ?>
                     <?php else: ?>
-                        <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                        <em class="fa fa-check-circle-o" aria-hidden="true"></em>
                         <?= t('Up to date') ?>
                     <?php endif ?>
                 <?php else: ?>
-                    <i class="fa fa-ban fa-fw" aria-hidden="true"></i>
+                    <em class="fa fa-ban fa-fw" aria-hidden="true"></em>
                     <?= t('Not available') ?>
                 <?php endif ?>
             </td>

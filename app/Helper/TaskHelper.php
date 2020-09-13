@@ -66,7 +66,7 @@ class TaskHelper extends Base
 
         if (! empty($templates)) {
             $html = '<div class="dropdown dropdown-smaller">';
-            $html .= '<a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-floppy-o fa-fw" aria-hidden="true"></i>'.t('Template for the task description').' <i class="fa fa-caret-down" aria-hidden="true"></i></a>';
+            $html .= '<a href="#" class="dropdown-menu dropdown-menu-link-icon"><em class="fa fa-floppy-o fa-fw" aria-hidden="true"></em>'.t('Template for the task description').' <em class="fa fa-caret-down" aria-hidden="true"></em></a>';
             $html .= '<ul>';
 
             foreach ($templates as  $template) {
@@ -283,7 +283,7 @@ class TaskHelper extends Base
             );
         } else {
             $html .= '<div class="dropdown">';
-            $html .= '<a href="#" class="dropdown-menu"><i class="fa fa-plus" aria-hidden="true"></i></a><ul>';
+            $html .= '<a href="#" class="dropdown-menu"><em class="fa fa-plus" aria-hidden="true"></em></a><ul>';
 
             $link = $this->helper->modal->large(
                 'plus',
