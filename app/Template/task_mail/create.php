@@ -9,7 +9,7 @@
 
     <?php if (! empty($members)): ?>
     <div class="dropdown">
-        <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-address-card-o"></i><i class="fa fa-caret-down"></i></a>
+        <a href="#" class="dropdown-menu dropdown-menu-link-icon"><em class="fa fa-address-card-o"></em><em class="fa fa-caret-down"></em></a>
         <ul>
             <?php foreach ($members as $member): ?>
                 <li data-email="<?= $this->text->e($member['email']) ?>" class="js-autocomplete-email">
@@ -25,7 +25,7 @@
 
     <?php if (! empty($project['predefined_email_subjects'])): ?>
         <div class="dropdown">
-            <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-archive"></i><i class="fa fa-caret-down"></i></a>
+            <a href="#" class="dropdown-menu dropdown-menu-link-icon"><em class="fa fa-archive"></em><em class="fa fa-caret-down"></em></a>
             <ul>
                 <?php foreach (explode("\r\n", trim($project['predefined_email_subjects'])) as $subject): ?>
                     <?php $subject = trim($subject); ?>

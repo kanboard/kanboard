@@ -35,7 +35,7 @@
                     </span>
 
                     <?php if ($project['is_private']): ?>
-                        <i class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>"></i>
+                        <em class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>"></em>
                     <?php endif ?>
 
                     <?= $this->hook->render('template:dashboard:project:after-title', array('project' => $project)) ?>

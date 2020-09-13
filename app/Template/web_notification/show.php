@@ -28,17 +28,17 @@
     <div class="table-list-row table-border-left">
         <span class="table-list-title">
             <?php if ($this->text->contains($notification['event_name'], 'subtask')): ?>
-                <i class="fa fa-tasks fa-fw"></i>
+                <em class="fa fa-tasks fa-fw"></em>
             <?php elseif ($this->text->contains($notification['event_name'], 'task.move')): ?>
-                <i class="fa fa-arrows-alt fa-fw"></i>
+                <em class="fa fa-arrows-alt fa-fw"></em>
             <?php elseif ($this->text->contains($notification['event_name'], 'task.overdue')): ?>
-                <i class="fa fa-calendar-times-o fa-fw"></i>
+                <em class="fa fa-calendar-times-o fa-fw"></em>
             <?php elseif ($this->text->contains($notification['event_name'], 'task')): ?>
-                <i class="fa fa-newspaper-o fa-fw"></i>
+                <em class="fa fa-newspaper-o fa-fw"></em>
             <?php elseif ($this->text->contains($notification['event_name'], 'comment')): ?>
-                <i class="fa fa-comments-o fa-fw"></i>
+                <em class="fa fa-comments-o fa-fw"></em>
             <?php elseif ($this->text->contains($notification['event_name'], 'file')): ?>
-                <i class="fa fa-file-o fa-fw"></i>
+                <em class="fa fa-file-o fa-fw"></em>
             <?php endif ?>
 
             <?php if (isset($notification['event_data']['task']['project_name'])): ?>

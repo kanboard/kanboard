@@ -9,9 +9,9 @@
         <?php foreach ($files as $file): ?>
             <tr>
                 <td>
-                    <i class="fa <?= $this->file->icon($file['name']) ?> fa-fw"></i>
+                    <em class="fa <?= $this->file->icon($file['name']) ?> fa-fw"></em>
                     <div class="dropdown">
-                        <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->text->e($file['name']) ?> <i class="fa fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->text->e($file['name']) ?> <em class="fa fa-caret-down"></em></a>
                         <ul>
                             <?php if ($this->file->getPreviewType($file['name']) !== null): ?>
                                 <li>
@@ -19,7 +19,7 @@
                                 </li>
                             <?php elseif ($this->file->getBrowserViewType($file['name']) !== null): ?>
                                 <li>
-                                    <i class="fa fa-eye fa-fw"></i>
+                                    <em class="fa fa-eye fa-fw"></em>
                                     <?= $this->url->link(t('View file'), 'FileViewerController', 'browser', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, '', '', true) ?>
                                 </li>
                             <?php endif ?>

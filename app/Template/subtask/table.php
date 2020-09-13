@@ -17,7 +17,7 @@
             <td>
               <div class="subtask-table-td">
                 <?php if ($editable): ?>
-                      <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change subtask position') ?>"></i>&nbsp;
+                      <em class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change subtask position') ?>"></em>&nbsp;
                       <?= $this->render('subtask/menu', array(
                           'task' => $task,
                           'subtask' => $subtask,

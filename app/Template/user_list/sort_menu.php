@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong><?= t('Sort') ?> <i class="fa fa-caret-down"></i></strong></a>
+    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong><?= t('Sort') ?> <em class="fa fa-caret-down"></em></strong></a>
     <ul>
         <li>
             <?= $paginator->order(t('User ID'), \Kanboard\Model\UserModel::TABLE.'.id') ?>

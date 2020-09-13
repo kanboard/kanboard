@@ -19,7 +19,7 @@
             <tr>
                 <td>
                     <div class="dropdown">
-                        <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
+                        <a href="#" class="dropdown-menu dropdown-menu-link-icon"><em class="fa fa-cog"></em><em class="fa fa-caret-down"></em></a>
                         <ul>
                             <li>
                                 <?= $this->modal->medium('edit', t('Edit'), 'ProjectTagController', 'edit', array('tag_id' => $tag['id'], 'project_id' => $project['id'])) ?>

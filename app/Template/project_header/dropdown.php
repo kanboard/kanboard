@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <a href="#" class="dropdown-menu action-menu" title="<?= t('Configure this project') ?>"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
+    <a href="#" class="dropdown-menu action-menu" title="<?= t('Configure this project') ?>"><em class="fa fa-cog"></em><em class="fa fa-caret-down"></em></a>
     <ul>
         <?php if ($board_view): ?>
         <li>
@@ -12,10 +12,10 @@
         </li>
         <li>
             <span class="filter-compact">
-                <i class="fa fa-th fa-fw"></i> <a href="#" class="filter-toggle-scrolling" title="<?= t('Keyboard shortcut: "%s"', 'c') ?>"><?= t('Compact view') ?></a>
+                <em class="fa fa-th fa-fw"></em> <a href="#" class="filter-toggle-scrolling" title="<?= t('Keyboard shortcut: "%s"', 'c') ?>"><?= t('Compact view') ?></a>
             </span>
             <span class="filter-wide" style="display: none">
-                <i class="fa fa-arrows-h fa-fw"></i> <a href="#" class="filter-toggle-scrolling" title="<?= t('Keyboard shortcut: "%s"', 'c') ?>"><?= t('Horizontal scrolling') ?></a>
+                <em class="fa fa-arrows-h fa-fw"></em> <a href="#" class="filter-toggle-scrolling" title="<?= t('Keyboard shortcut: "%s"', 'c') ?>"><?= t('Horizontal scrolling') ?></a>
             </span>
         </li>
         <?php endif ?>

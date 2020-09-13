@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><div class="subtask-submenu"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></div></a>
+    <a href="#" class="dropdown-menu dropdown-menu-link-icon"><div class="subtask-submenu"><em class="fa fa-cog"></em><em class="fa fa-caret-down"></em></div></a>
     <ul>
         <li>
             <?= $this->modal->medium('edit', t('Edit'), 'SubtaskController', 'edit', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])) ?>
