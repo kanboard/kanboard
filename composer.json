@@ -52,7 +52,7 @@
         "phpunit/php-code-coverage": "^6",
         "phpunit/php-token-stream": "^3.1",
         "doctrine/instantiator": "^1.1",
-        "phpdocumentor/reflection-docblock": "5.2.1",
+        "phpdocumentor/reflection-docblock": "5.2.2",
         "symfony/debug": "4.4.13",
         "symfony/yaml": "4.4.13",
         "symfony/finder": "3.4.8",
