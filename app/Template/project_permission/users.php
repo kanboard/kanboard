@@ -51,7 +51,7 @@
                 ),
                 'autocomplete') ?>
 
-            <?= $this->form->select('role', $roles, $values, $errors) ?>
+            <?= $this->form->select('role', $roles, $values, $errors, array('aria-label="'.t('Role').'"')) ?>
 
             <button type="submit" class="btn btn-blue"><?= t('Add') ?></button>
         </form>
