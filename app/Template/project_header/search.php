@@ -14,7 +14,7 @@
             <?php if (isset($custom_filters_list) && ! empty($custom_filters_list)): ?>
             <div class="input-addon-item">
                 <div class="dropdown">
-                    <a href="#" class="dropdown-menu dropdown-menu-link-icon" title="<?= t('Custom filters') ?>"><i class="fa fa-bookmark fa-fw"></i><i class="fa fa-caret-down"></i></a>
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon" title="<?= t('Custom filters') ?>" aria-label="<?= t('Custom filters') ?>"><i class="fa fa-bookmark fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
                         <?php foreach ($custom_filters_list as $filter): ?>
                             <li><a href="#" class="filter-helper" data-<?php if ($filter['append']): ?><?= 'append-' ?><?php endif ?>filter='<?= $this->text->e($filter['filter']) ?>'><?= $this->text->e($filter['name']) ?></a></li>
@@ -27,7 +27,7 @@
             <?php if (isset($users_list)): ?>
             <div class="input-addon-item">
                 <div class="dropdown">
-                    <a href="#" class="dropdown-menu dropdown-menu-link-icon" title="<?= t('User filters') ?>"><i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i></a>
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon" title="<?= t('User filters') ?>" aria-label="<?= t('Custom filters') ?>"><i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i></a>
                     <ul>
                         <li><a href="#" class="filter-helper" data-unique-filter="assignee:nobody"><?= t('Not assigned') ?></a></li>
                         <li><a href="#" class="filter-helper" data-unique-filter="assignee:anybody"><?= t('Assigned') ?></a></li>
@@ -42,7 +42,7 @@
             <?php if (isset($categories_list) && ! empty($categories_list)): ?>
             <div class="input-addon-item">
                 <div class="dropdown">
-                    <a href="#" class="dropdown-menu dropdown-menu-link-icon" title="<?= t('Category filters') ?>"><i class="fa fa-folder-open fa-fw"></i><i class="fa fa-caret-down"></i></a>
+                    <a href="#" class="dropdown-menu dropdown-menu-link-icon" title="<?= t('Category filters') ?>" aria-label="<?= t('Category filters') ?>"><i class="fa fa-folder-open fa-fw"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
                         <li><a href="#" class="filter-helper" data-unique-filter="category:none"><?= t('No category') ?></a></li>
                         <?php foreach ($categories_list as $category): ?>
