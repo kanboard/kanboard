@@ -26,7 +26,7 @@
     <form method="get" action="<?= $this->url->dir() ?>" class="search">
         <?= $this->form->hidden('controller', array('controller' => 'ProjectListController')) ?>
         <?= $this->form->hidden('action', array('action' => 'show')) ?>
-        <?= $this->form->text('search', $values, array(), array('placeholder="'.t('Search').'"')) ?>
+        <?= $this->form->text('search', $values, array(), array('placeholder="'.t('Search').'"', 'aria-label="'.t('Search').'"')) ?>
     </form>
 </div>
 
