@@ -14,7 +14,7 @@
         <tr data-swimlane-id="<?= $swimlane['id'] ?>">
             <td>
                 <?php if (! isset($disable_handle)): ?>
-                    <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change column position') ?>"></i>&nbsp;
+                    <i class="fa fa-arrows-alt draggable-row-handle" title="<?= t('Change column position') ?>" role="button" aria-label="<?= t('Change column position') ?>"></i>&nbsp;
                 <?php endif ?>
 
                 <div class="dropdown">

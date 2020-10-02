@@ -35,7 +35,7 @@
                     </span>
 
                     <?php if ($project['is_private']): ?>
-                        <i class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>"></i>
+                        <i class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>" role="img" aria-label="<?= t('Personal project') ?>"></i>
                     <?php endif ?>
 
                     <?= $this->hook->render('template:dashboard:project:after-title', array('project' => $project)) ?>

@@ -6,13 +6,13 @@
     <?php endif ?>
     <?php if ($task['is_milestone'] == 1): ?>
         <span title="<?= t('Milestone') ?>">
-            <i class="fa fa-flag flag-milestone"></i>
+            <i class="fa fa-flag flag-milestone" role="img" aria-label="<?= t('Milestone') ?>"></i>
         </span>
     <?php endif ?>
 
     <?php if ($task['score']): ?>
         <span class="task-score" title="<?= t('Complexity') ?>">
-            <i class="fa fa-trophy"></i>
+            <i class="fa fa-trophy" role="img" aria-label="<?= t('Complexity') ?>"></i>
         <?= $this->text->e($task['score']) ?>
         </span>
     <?php endif ?>
@@ -25,7 +25,7 @@
 
     <?php if (! empty($task['date_started'])): ?>
         <span title="<?= t('Start date') ?>" class="task-date">
-            <i class="fa fa-clock-o"></i>
+            <i class="fa fa-clock-o" role="img" aria-label="<?= t('Start date') ?>"></i>
             <?= $this->dt->date($task['date_started']) ?>
         </span>
     <?php endif ?>
@@ -38,7 +38,7 @@
                  task-date-today
             <?php endif ?>
             ">
-            <i class="fa fa-calendar"></i>
+            <i class="fa fa-calendar" role="img" aria-label="<?= t('Due date') ?>"></i>
             <?= $this->dt->datetime($task['date_due']) ?>
         </span>
     <?php endif ?>
@@ -78,7 +78,8 @@
                 $task['nb_comments'] == 1 ? t('%d comment', $task['nb_comments']) : t('%d comments', $task['nb_comments'])
             ) ?>
         <?php else: ?>
-            <span title="<?= $task['nb_comments'] == 1 ? t('%d comment', $task['nb_comments']) : t('%d comments', $task['nb_comments']) ?>"><i class="fa fa-comments-o"></i>&nbsp;<?= $task['nb_comments'] ?></span>
+            <?php $aria_label = $task['nb_comments'] == 1 ? t('%d comment', $task['nb_comments']) : t('%d comments', $task['nb_comments']); ?>
+            <span title="<?= $aria_label ?>" role="img" aria-label="<?= $aria_label ?>"><i class="fa fa-comments-o"></i>&nbsp;<?= $task['nb_comments'] ?></span>
         <?php endif ?>
     <?php endif ?>
 
