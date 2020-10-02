@@ -54,6 +54,8 @@ class TaskHelper extends Base
                 'placeholder="'.t('Title').'"'
             )
         );
+
+        return $html;
     }
 
     public function renderDescriptionField(array $values, array $errors)
