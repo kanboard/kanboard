@@ -42,7 +42,8 @@ class TaskHelper extends Base
 
     public function renderTitleField(array $values, array $errors)
     {
-        return $this->helper->form->text(
+        $html = $this->helper->form->label(t('Title'), 'title', ['class="ui-helper-hidden-accessible"']);
+        $html .= $this->helper->form->text(
             'title',
             $values,
             $errors,

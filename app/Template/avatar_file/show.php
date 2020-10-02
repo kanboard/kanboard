@@ -14,6 +14,7 @@
 
 <h3><?= t('Upload my avatar image') ?></h3>
 <form method="post" enctype="multipart/form-data" action="<?= $this->url->href('AvatarFileController', 'upload', array('user_id' => $user['id']), true) ?>">
+    <?= $this->form->label(t('Avatar'), 'avatar', ['class="ui-helper-hidden-accessible"']) ?>
     <?= $this->form->file('avatar') ?>
 
     <div class="form-actions">
