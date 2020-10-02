@@ -2,11 +2,11 @@
     &nbsp;
 
     <?php if ($project['is_public']): ?>
-        <i class="fa fa-share-alt fa-fw" title="<?= t('Shared project') ?>"></i>
+        <i class="fa fa-share-alt fa-fw" title="<?= t('Shared project') ?>" role="img" aria-label="<?= t('Shared project') ?>"></i>
     <?php endif ?>
 
     <?php if ($project['is_private']): ?>
-        <i class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>"></i>
+        <i class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>" role="img" aria-label="<?= t('Personal project') ?>"></i>
     <?php endif ?>
 
     <?php if ($this->user->hasAccess('ProjectUserOverviewController', 'managers')): ?>
