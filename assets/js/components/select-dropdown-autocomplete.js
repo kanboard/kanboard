@@ -235,6 +235,14 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
         return '';
     }
 
+    function getAriaLabelValue() {
+        if (options.ariaLabel) {
+            return options.ariaLabel;
+        }
+
+        return '';
+    }
+
     this.render = function () {
         KB.on('select.dropdown.loading.start', onLoadingStart);
         KB.on('select.dropdown.loading.stop', onLoadingStop);
@@ -264,6 +272,7 @@ KB.component('select-dropdown-autocomplete', function(containerElement, options)
         inputElement = KB.dom('input')
             .attr('type', 'text')
             .attr('placeholder', getPlaceholderValue())
+            .attr('aria-label', getAriaLabelValue())
             .addClass('select-dropdown-input')
             .on('focus', toggleDropdownMenu)
             .on('input', onInputChanged, true)
