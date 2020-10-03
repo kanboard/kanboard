@@ -63,7 +63,7 @@ KB.component('text-editor', function (containerElement, options) {
         }
 
         if (options.ariaLabel) {
-            textareaElement.attr('arai-label', options.ariaLabel);
+            textareaElement.attr('aria-label', options.ariaLabel);
         }
 
         // Order is important for IE11 (especially for the placeholder)
