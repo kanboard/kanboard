@@ -597,17 +597,17 @@
     },
     {
         "name": "symfony/contracts",
-        "version": "v1.1.9",
-        "version_normalized": "1.1.9.0",
+        "version": "v1.1.10",
+        "version_normalized": "1.1.10.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/contracts.git",
-            "reference": "8c4de0cf797f2eba4334a1d7a9b788c1b30a7579"
+            "reference": "011c20407c4b99d454f44021d023fb39ce23b73d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/contracts/zipball/8c4de0cf797f2eba4334a1d7a9b788c1b30a7579",
-            "reference": "8c4de0cf797f2eba4334a1d7a9b788c1b30a7579",
+            "url": "https://api.github.com/repos/symfony/contracts/zipball/011c20407c4b99d454f44021d023fb39ce23b73d",
+            "reference": "011c20407c4b99d454f44021d023fb39ce23b73d",
             "shasum": ""
         },
         "require": {
@@ -633,7 +633,7 @@
             "symfony/service-implementation": "",
             "symfony/translation-implementation": ""
         },
-        "time": "2020-07-29T14:46:19+00:00",
+        "time": "2020-09-02T16:08:58+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
