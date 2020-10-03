@@ -35,7 +35,7 @@
     <div class="task-board-icons-row">
         <?php if ($task['reference']): ?>
             <span class="task-board-reference" title="<?= t('Reference') ?>">
-                <?= $this->task->renderReference($task) ?>
+                <span class="ui-helper-hidden-accessible"><?= t('Reference') ?> </span><?= $this->task->renderReference($task) ?>
             </span>
         <?php endif ?>
     </div>
@@ -55,7 +55,7 @@
 
         <?php if (! empty($task['time_estimated']) || ! empty($task['time_spent'])): ?>
             <span class="task-time-estimated" title="<?= t('Time spent and estimated') ?>">
-                <?= $this->text->e($task['time_spent']) ?>/<?= $this->text->e($task['time_estimated']) ?>h
+                <span class="ui-helper-hidden-accessible"><?= t('Time spent and estimated') ?> </span><?= $this->text->e($task['time_spent']) ?>/<?= $this->text->e($task['time_estimated']) ?>h
             </span>
         <?php endif ?>
 
@@ -124,8 +124,8 @@
 
         <?php if ($task['is_active'] == 1): ?>
             <div class="task-icon-age">
-                <span title="<?= t('Task age in days')?>" class="task-icon-age-total"><?= $this->dt->age($task['date_creation']) ?></span>
-                <span title="<?= t('Days in this column')?>" class="task-icon-age-column"><?= $this->dt->age($task['date_moved']) ?></span>
+                <span title="<?= t('Task age in days')?>" class="task-icon-age-total"><span class="ui-helper-hidden-accessible"><?= t('Task age in days') ?> </span><?= $this->dt->age($task['date_creation']) ?></span>
+                <span title="<?= t('Days in this column')?>" class="task-icon-age-column"><span class="ui-helper-hidden-accessible"><?= t('Days in this column') ?> </span><?= $this->dt->age($task['date_moved']) ?></span>
             </div>
         <?php else: ?>
             <span class="task-board-closed"><i class="fa fa-ban fa-fw"></i><?= t('Closed') ?></span>
