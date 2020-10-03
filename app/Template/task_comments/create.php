@@ -3,6 +3,6 @@
     <?= $this->form->hidden('task_id', $values) ?>
     <?= $this->form->hidden('user_id', $values) ?>
 
-    <?= $this->form->textEditor('comment', $values, $errors, array('required' => true)) ?>
+    <?= $this->form->textEditor('comment', $values, $errors, array('required' => true, 'aria-label' => t('New comment'))) ?>
     <?= $this->modal->submitButtons() ?>
 </form>

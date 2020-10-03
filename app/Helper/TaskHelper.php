@@ -60,7 +60,7 @@ class TaskHelper extends Base
 
     public function renderDescriptionField(array $values, array $errors)
     {
-        return $this->helper->form->textEditor('description', $values, $errors, array('tabindex' => 2));
+        return $this->helper->form->textEditor('description', $values, $errors, array('tabindex' => 2, 'aria-label' => t('Description')));
     }
 
     public function renderDescriptionTemplateDropdown($projectId)
