@@ -33,6 +33,14 @@ KB.component('project-select-role', function (containerElement, options) {
         containerElement.appendChild(componentElement);
     }
 
+    function getAriaLabelValue() {
+        if (options.ariaLabel) {
+            return options.ariaLabel;
+        }
+
+        return '';
+    }
+
     function buildComponentElement() {
         var roles = [];
         var container = KB.dom('div');
@@ -49,7 +57,7 @@ KB.component('project-select-role', function (containerElement, options) {
             }
         }
 
-        container.add(KB.dom('select').change(onChange).for('option', roles).build());
+        container.add(KB.dom('select').attr('aria-label', getAriaLabelValue()).change(onChange).for('option', roles).build());
 
         if (isLoading) {
             container.text(' ');

@@ -17,6 +17,7 @@
                         'roles' => $roles,
                         'role' => $user['role'],
                         'id' => $user['id'],
+                        'ariaLabel' => t('Role'),
                         'url' => $this->url->to('ProjectPermissionController', 'changeUserRole', array('project_id' => $project['id'])),
                     )) ?>
                 </td>

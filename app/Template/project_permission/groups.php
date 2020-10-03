@@ -21,6 +21,7 @@
                         'roles' => $roles,
                         'role' => $group['role'],
                         'id' => $group['id'],
+                        'ariaLabel' => t('Role'),
                         'url' => $this->url->to('ProjectPermissionController', 'changeGroupRole', array('project_id' => $project['id'])),
                     )) ?>
                 </td>
