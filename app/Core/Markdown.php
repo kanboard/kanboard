@@ -92,6 +92,7 @@ class Markdown extends Parsedown
 
             if (! empty($user)) {
                 $url = $this->container['helper']->url->to('UserViewController', 'profile', array('user_id' => $user['id']));
+                $name = $user['name'] ?: $user['username'];
 
                 return array(
                     'extent'  => strlen($username) + 1,
@@ -101,7 +102,8 @@ class Markdown extends Parsedown
                         'attributes' => array(
                             'href'  => $url,
                             'class' => 'user-mention-link',
-                            'title' => $user['name'] ?: $user['username'],
+                            'title' => $name,
+                            'aria-label' => $name,
                         ),
                     ),
                 );
