@@ -1421,4 +1421,7 @@ return array(
     '%d/%d group(s) shown' => '%d/%d Gruppe(n) angezeigt',
     'Subtask creation or modification' => 'Teilaufgabe erstellen oder ändern',
     'Assign the task to a specific user when the task is moved to a specific swimlane' => 'Aufgabe einem bestimmten Nutzer zuordnen, wenn die Aufgabe in eine bestimmte Swimlane verschoben wird',
+    // 'Comment' => '',
+    // 'Collapse vertically' => '',
+    // 'Expand vertically' => '',
 );
