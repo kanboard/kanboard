@@ -49,17 +49,8 @@
         ]
     },
     "require-dev" : {
-        "phpunit/php-code-coverage": "^6",
-        "phpunit/php-token-stream": "^3.1",
-        "doctrine/instantiator": "^1.1",
-        "phpdocumentor/reflection-docblock": "5.2.2",
-        "symfony/debug": "4.4.14",
-        "symfony/yaml": "4.4.14",
-        "symfony/finder": "3.4.8",
         "symfony/stopwatch" : "4.4.14",
-        "myclabs/deep-copy": "1.10.1",
         "phpunit/phpunit" : "^7",
-        "phpunit/phpunit-selenium": "^7",
         "roave/security-advisories": "dev-master"
     }
 }
