@@ -87,7 +87,7 @@
         <?= $this->app->tooltipLink('<i class="fa fa-file-text-o"></i>', $this->url->href('BoardTooltipController', 'description', array('task_id' => $task['id'], 'project_id' => $task['project_id']))) ?>
     <?php endif ?>
 
-    <span title="<?= t('Position') ?>">(<span class="ui-helper-hidden-accessible"><?= t('Position') ?>: </span><?= $task['position'] ?>)</span>
+    <span title="<?= t('Position') ?>">(<span class="ui-helper-hidden-accessible"><?= t('Position') ?> </span><?= $task['position'] ?>)</span>
 
     <?php if ($task['is_active'] == 1): ?>
         <div class="task-icon-age">
