@@ -1,6 +1,6 @@
 {
     "name": "eluceo/ical",
-    "description": "The eluceo/iCal package offers a abstraction layer for creating iCalendars. You can easily create iCal files by using PHP object instead of typing your *.ics file by hand. The output will follow RFC 2445 as best as possible.",
+    "description": "The eluceo/iCal package offers a abstraction layer for creating iCalendars. You can easily create iCal files by using PHP object instead of typing your *.ics file by hand. The output will follow RFC 5545 as best as possible.",
     "license": "MIT",
     "homepage": "https://github.com/markuspoerschke/iCal",
     "authors": [
@@ -8,11 +8,6 @@
             "name": "Markus Poerschke",
             "email": "markus@eluceo.de",
             "role": "Developer"
-        },
-        {
-            "name": "Maciej Łebkowski",
-            "email": "m.lebkowski@gmail.com",
-            "role": "Contributor"
         }
     ],
     "keywords": [
@@ -27,17 +22,25 @@
         "source": "https://github.com/markuspoerschke/iCal"
     },
     "autoload": {
-        "psr-0": {
-            "Eluceo\\iCal": "src/"
+        "psr-4": {
+            "Eluceo\\iCal\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Eluceo\\iCal\\": "tests/"
         }
     },
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=7.1"
+    },
+    "suggest": {
+        "ext-mbstring" : "Massive performance enhancement of line folding"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.3"
+        "phpunit/phpunit": "^7.0"
     },
-    "config": {
-        "bin-dir": "bin"
+    "scripts": {
+        "test": "phpunit"
     }
 }

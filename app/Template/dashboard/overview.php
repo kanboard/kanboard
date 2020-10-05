@@ -6,7 +6,7 @@
         <?= $this->form->hidden('action', array('action' => 'index')) ?>
 
         <div class="input-addon">
-            <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"'), 'input-addon-field') ?>
+            <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"', 'aria-label="'.t('Search').'"'), 'input-addon-field') ?>
             <div class="input-addon-item">
                 <?= $this->render('app/filters_helper') ?>
             </div>
@@ -35,7 +35,7 @@
                     </span>
 
                     <?php if ($project['is_private']): ?>
-                        <i class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>"></i>
+                        <i class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>" role="img" aria-label="<?= t('Personal project') ?>"></i>
                     <?php endif ?>
 
                     <?= $this->hook->render('template:dashboard:project:after-title', array('project' => $project)) ?>

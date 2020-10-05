@@ -17,7 +17,7 @@
             <tr>
                 <td>
                     <?php if ($plugin->getPluginHomepage()): ?>
-                        <a href="<?= $plugin->getPluginHomepage() ?>" target="_blank" rel="noreferrer"><?= $this->text->e($plugin->getPluginName()) ?></a>
+                        <a href="<?= $plugin->getPluginHomepage() ?>" target="_blank" rel="noopener noreferrer"><?= $this->text->e($plugin->getPluginName()) ?></a>
                     <?php else: ?>
                         <?= $this->text->e($plugin->getPluginName()) ?>
                     <?php endif ?>
@@ -59,7 +59,7 @@
     <tr>
         <td>
             <?php if ($plugin->getPluginHomepage()): ?>
-                <a href="<?= $plugin->getPluginHomepage() ?>" target="_blank" rel="noreferrer"><?= $this->text->e($plugin->getPluginName()) ?></a>
+                <a href="<?= $plugin->getPluginHomepage() ?>" target="_blank" rel="noopener noreferrer"><?= $this->text->e($plugin->getPluginName()) ?></a>
             <?php else: ?>
                 <?= $this->text->e($plugin->getPluginName()) ?>
             <?php endif ?>

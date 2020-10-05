@@ -6,6 +6,10 @@ Kanboard.Swimlane.prototype.execute = function() {
     if ($(".swimlanes-table").length) {
         this.dragAndDrop();
     }
+    
+    if ($("#board").length) {
+        this.expandSingleSwimlane();
+    }
 };
 
 Kanboard.Swimlane.prototype.listen = function() {
@@ -126,3 +130,11 @@ Kanboard.Swimlane.prototype.savePosition = function(swimlaneId, position) {
         }
     });
 };
+
+// Prevents swimlane from becoming invisible/unusable when all swimlanes
+// except for one have been removed.
+Kanboard.Swimlane.prototype.expandSingleSwimlane = function() {
+    if ($("tr.board-swimlane").length == 1) {
+        localStorage.removeItem(this.getStorageKey());
+    }
+}

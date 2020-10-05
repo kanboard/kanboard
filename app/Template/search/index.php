@@ -12,7 +12,7 @@
         <?= $this->form->hidden('action', $values) ?>
 
         <div class="input-addon">
-            <?= $this->form->text('search', $values, array(), array(empty($values['search']) ? 'autofocus' : '', 'placeholder="'.t('Search').'"'), 'input-addon-field') ?>
+            <?= $this->form->text('search', $values, array(), array(empty($values['search']) ? 'autofocus' : '', 'placeholder="'.t('Search').'"', 'aria-label="'.t('Search').'"'), 'input-addon-field') ?>
             <div class="input-addon-item">
                 <?= $this->render('app/filters_helper') ?>
             </div>

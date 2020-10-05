@@ -1314,7 +1314,7 @@ return array(
     // 'Update only assigned tasks is permitted' => '',
     // 'Only for tasks assigned to the current user' => '',
     'My projects' => 'Moji projekti',
-    // 'Your are not member of any project.' => '',
+    // 'You are not a member of any project.' => '',
     'My subtasks' => 'Moji podzadaci',
     // '%d subtasks' => '',
     // '%d subtask' => '',
@@ -1420,4 +1420,8 @@ return array(
     // '%s is a member of the following group(s): %s' => '',
     // '%d/%d group(s) shown' => '',
     // 'Subtask creation or modification' => '',
+    // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
+    // 'Comment' => '',
+    // 'Collapse vertically' => '',
+    // 'Expand vertically' => '',
 );

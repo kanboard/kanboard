@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Numai actualizarea sarcinilor atribuite este permisă',
     'Only for tasks assigned to the current user' => 'Numai pentru sarcini atribuite utilizatorului curent',
     'My projects' => 'Proiectele mele',
-    'Your are not member of any project.' => 'Nu faci parte din vreun proiect',
+    'You are not a member of any project.' => 'Nu faci parte din vreun proiect',
     'My subtasks' => 'Sub-sarcinile mele',
     '%d subtasks' => '%d sub-sarcini',
     '%d subtask' => '%d sub-sarcină',
@@ -1420,4 +1420,8 @@ return array(
     // '%s is a member of the following group(s): %s' => '',
     // '%d/%d group(s) shown' => '',
     // 'Subtask creation or modification' => '',
+    // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
+    // 'Comment' => '',
+    // 'Collapse vertically' => '',
+    // 'Expand vertically' => '',
 );

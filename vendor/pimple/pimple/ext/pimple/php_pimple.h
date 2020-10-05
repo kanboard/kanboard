@@ -41,7 +41,7 @@ extern zend_module_entry pimple_module_entry;
 #include "TSRM.h"
 #endif
 
-#define PIMPLE_VERSION "3.2.2-DEV"
+#define PIMPLE_VERSION "3.2.3-DEV"
 
 #define PIMPLE_NS "Pimple"
 #define PSR_CONTAINER_NS "Psr\\Container"

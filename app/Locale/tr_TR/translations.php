@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Yalnızca atandığınız görevleri güncelleyebilirsiniz',
     'Only for tasks assigned to the current user' => 'Yalnızca geçerli kullanıcıya atanan görevler için',
     'My projects' => 'Projelerim',
-    'Your are not member of any project.' => 'Herhangi bir projenin üyesi değilsiniz.',
+    'You are not a member of any project.' => 'Herhangi bir projenin üyesi değilsiniz.',
     'My subtasks' => 'Altgörevlerim',
     '%d subtasks' => '%d alt görev',
     '%d subtask' => '%d alt görev',
@@ -1420,4 +1420,8 @@ return array(
     '%s is a member of the following group(s): %s' => '"%s" şu grupların üyesidir:"%s"',
     '%d/%d group(s) shown' => '%d/%dgrupları göster',
     'Subtask creation or modification' => 'Alt görev oluşturma veya değiştirme',
+    // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
+    // 'Comment' => '',
+    // 'Collapse vertically' => '',
+    // 'Expand vertically' => '',
 );

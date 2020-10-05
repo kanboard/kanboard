@@ -113,9 +113,12 @@ a.board-swimlane-toggle:focus {
 }
 
 .board-task-list {
+    min-height: 60px
+}
+
+.board-task-list-compact {
     max-height: 90vh;
     overflow-y: auto;
-    min-height: 60px
 }
 
 .board-task-list .task-board:last-child {

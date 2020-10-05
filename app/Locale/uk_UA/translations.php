@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Дозволене редагування лише призначених задач',
     'Only for tasks assigned to the current user' => 'Лише задачі призначені поточному користувачу',
     'My projects' => 'Мої проєкти',
-    'Your are not member of any project.' => 'Ви не є учасником жодного з проєктів.',
+    'You are not a member of any project.' => 'Ви не є учасником жодного з проєктів.',
     'My subtasks' => 'Мої підзадачі',
     '%d subtasks' => '%d підзадач',
     '%d subtask' => '%d підзадача',
@@ -1420,4 +1420,8 @@ return array(
     // '%s is a member of the following group(s): %s' => '',
     // '%d/%d group(s) shown' => '',
     // 'Subtask creation or modification' => '',
+    // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
+    // 'Comment' => '',
+    // 'Collapse vertically' => '',
+    // 'Expand vertically' => '',
 );

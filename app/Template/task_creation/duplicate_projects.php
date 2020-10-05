@@ -17,7 +17,7 @@
             $projects_list,
             $values,
             array(),
-            array('multiple')
+            array('multiple', 'aria-label="'.t('Duplicate to multiple projects').'"')
         ) ?>
 
         <?= $this->modal->submitButtons() ?>

@@ -23,7 +23,7 @@ class LetterAvatarProviderTest extends Base
     {
         $provider = new LetterAvatarProvider($this->container);
         $user = array('id' => 123, 'name' => 'Kanboard Admin', 'username' => 'bob', 'email' => '');
-        $expected = '<div class="avatar-letter" style="background-color: rgb(120, 83, 58)" title="Kanboard Admin">KA</div>';
+        $expected = '<div class="avatar-letter" style="background-color: rgb(120, 83, 58)" title="Kanboard Admin" role="img" aria-label="Kanboard Admin">KA</div>';
         $this->assertEquals($expected, $provider->render($user, 48));
     }
 
@@ -31,7 +31,7 @@ class LetterAvatarProviderTest extends Base
     {
         $provider = new LetterAvatarProvider($this->container);
         $user = array('id' => 123, 'name' => '', 'username' => 'admin', 'email' => '');
-        $expected = '<div class="avatar-letter" style="background-color: rgb(134, 45, 132)" title="admin">A</div>';
+        $expected = '<div class="avatar-letter" style="background-color: rgb(134, 45, 132)" title="admin" role="img" aria-label="admin">A</div>';
         $this->assertEquals($expected, $provider->render($user, 48));
     }
 
@@ -39,7 +39,7 @@ class LetterAvatarProviderTest extends Base
     {
         $provider = new LetterAvatarProvider($this->container);
         $user = array('id' => 123, 'name' => 'ü', 'username' => 'admin', 'email' => '');
-        $expected = '<div class="avatar-letter" style="background-color: rgb(62, 147, 31)" title="ü">Ü</div>';
+        $expected = '<div class="avatar-letter" style="background-color: rgb(62, 147, 31)" title="ü" role="img" aria-label="ü">Ü</div>';
         $this->assertEquals($expected, $provider->render($user, 48));
     }
 }

@@ -1314,7 +1314,7 @@ return array(
     'Update only assigned tasks is permitted' => 'Atualizar somente tarefas designadas é permitida',
     'Only for tasks assigned to the current user' => 'Somente para tarefas designadas para o usuário atual',
     'My projects' => 'Meus projetos',
-    'Your are not member of any project.' => 'Você não é membro de nenhum projeto.',
+    'You are not a member of any project.' => 'Você não é membro de nenhum projeto.',
     'My subtasks' => 'Minhas subtarefas',
     '%d subtasks' => '%d subtarefas',
     '%d subtask' => '%d subtarefa',
@@ -1420,4 +1420,8 @@ return array(
     // '%s is a member of the following group(s): %s' => '',
     // '%d/%d group(s) shown' => '',
     // 'Subtask creation or modification' => '',
+    // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
+    // 'Comment' => '',
+    // 'Collapse vertically' => '',
+    // 'Expand vertically' => '',
 );

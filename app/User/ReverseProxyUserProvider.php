@@ -22,6 +22,14 @@ class ReverseProxyUserProvider implements UserProviderInterface
     protected $username = '';
 
     /**
+     * Email
+     *
+     * @access protected
+     * @var string
+     */
+    protected $email = '';
+
+    /**
      * User profile if the user already exists
      *
      * @access protected
@@ -33,7 +41,9 @@ class ReverseProxyUserProvider implements UserProviderInterface
      * Constructor
      *
      * @access public
-     * @param  string $username $email $name
+     * @param  string $username
+     * @param  string $email
+     * @param  string  $name
      */
     public function __construct($username, $email, $name, array $userProfile = array())
     {
@@ -140,12 +150,20 @@ class ReverseProxyUserProvider implements UserProviderInterface
      */
     public function getEmail()
     {
+<<<<<<< HEAD
         if (! REVERSE_PROXY_MAIL_HEADER ){
             return REVERSE_PROXY_DEFAULT_DOMAIN !== '' ? $this->username.'@'.REVERSE_PROXY_DEFAULT_DOMAIN : '';
 	}else{
             return $this->email;
 	}
 
+=======
+        if (REVERSE_PROXY_DEFAULT_DOMAIN !== '' && $this->email === '') {
+            return $this->username.'@'.REVERSE_PROXY_DEFAULT_DOMAIN;
+        }
+
+        return $this->email;
+>>>>>>> upstream/master
     }
 
     /**

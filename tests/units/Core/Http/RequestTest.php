@@ -140,24 +140,23 @@ class RequestTest extends Base
         $this->assertEquals('test', $request->getRemoteUser());
     }
 
-    public function testGetName()
+    public function testGetRemoteName()
     {
         $request = new Request($this->container, array(), array(), array(), array(), array());
-        $this->assertEmpty($request->getName());
+        $this->assertEmpty($request->getRemoteName());
 
         $request = new Request($this->container, array(REVERSE_PROXY_NAME_HEADER => 'John Doe'), array(), array(), array(), array());
-        $this->assertEquals('John Doe', $request->getName());
+        $this->assertEquals('John Doe', $request->getRemoteName());
     }
 
-    public function testGetMail()
+    public function testGetRemoteEmail()
     {
         $request = new Request($this->container, array(), array(), array(), array(), array());
-        $this->assertEmpty($request->getMail());
+        $this->assertEmpty($request->getRemoteEmail());
 
-        $request = new Request($this->container, array(REVERSE_PROXY_MAIL_HEADER => 'test@mail.com'), array(), array(), array(), array());
-        $this->assertEquals('test@mail.com', $request->getMail());
+        $request = new Request($this->container, array(REVERSE_PROXY_EMAIL_HEADER => 'test@example.com'), array(), array(), array(), array());
+        $this->assertEquals('test@example.com', $request->getRemoteEmail());
     }
-
 
     public function testGetQueryString()
     {

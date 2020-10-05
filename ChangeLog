@@ -1,3 +1,31 @@
+Version 1.2.15 (June 19, 2020)
+------------------------------
+
+* Update dependencies
+* Added PUT method using CURLOPT_CUSTOMREQUEST
+* Run integration tests on Github Actions
+* Fixed capitalization of sAMAccountName for LDAP_USER_ATTRIBUTE_USERNAME example
+* Added missing closing HTML tag in template
+* Update Docker image to Alpine 3.12
+* Removed paragonie/random_compat (not required for PHP 7)
+* Setup Dependabot on GitHub
+* Allow use of the user's DN as the group filter substitution
+* Add subtask events to ProjectModificationDateSubscriber
+* Update Vagrantfile to Ubuntu 20.04
+* Open large modal when clicking on edit category link
+* Set margin-bottom at 0 only for the last child of a tooltip element
+* Prevent last swimlane to be hidden if there is only one
+* Execute tooltip listeners only once when the DOM is ready
+* Use Ajax request for Markdown preview
+* Make tooltip events bubble
+* Keep newlines in markdown
+* Show the color dropdown when creating a new automatic action
+* Update translations
+* Correct duration calculation
+* Copy subtask assignee when duplicating a task
+* Save task list order in user session
+* Add action to assign a user when the swimlane change
+
 Version 1.2.14 (April 15, 2020)
 -------------------------------
 

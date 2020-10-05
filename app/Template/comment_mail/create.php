@@ -42,7 +42,7 @@
         </div>
     <?php endif ?>
 
-    <?= $this->form->textEditor('comment', $values, $errors, array('required' => true, 'tabindex' => 3)) ?>
+    <?= $this->form->textEditor('comment', $values, $errors, array('required' => true, 'tabindex' => 3, 'aria-label' => t('New comment'))) ?>
 
     <?= $this->modal->submitButtons(array(
         'submitLabel' => t('Send by email'),

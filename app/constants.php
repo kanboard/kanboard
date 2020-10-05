@@ -81,6 +81,7 @@ defined('LDAP_USER_ATTRIBUTE_GROUPS') or define('LDAP_USER_ATTRIBUTE_GROUPS', ge
 defined('LDAP_USER_ATTRIBUTE_PHOTO') or define('LDAP_USER_ATTRIBUTE_PHOTO', getenv('LDAP_USER_ATTRIBUTE_PHOTO') ?: '');
 defined('LDAP_USER_ATTRIBUTE_LANGUAGE') or define('LDAP_USER_ATTRIBUTE_LANGUAGE', getenv('LDAP_USER_ATTRIBUTE_LANGUAGE') ?: '');
 defined('LDAP_USER_CREATION') or define('LDAP_USER_CREATION', getenv('LDAP_USER_CREATION') ? strtolower(getenv('LDAP_USER_CREATION')) === 'true' : true);
+defined('LDAP_USER_DEFAULT_ROLE_MANAGER') or define('LDAP_USER_DEFAULT_ROLE_MANAGER', getenv('LDAP_USER_DEFAULT_ROLE_MANAGER') ? strtolower(getenv('LDAP_USER_DEFAULT_ROLE_MANAGER')) === 'true' : false);
 
 defined('LDAP_GROUP_ADMIN_DN') or define('LDAP_GROUP_ADMIN_DN', getenv('LDAP_GROUP_ADMIN_DN') ?: '');
 defined('LDAP_GROUP_MANAGER_DN') or define('LDAP_GROUP_MANAGER_DN', getenv('LDAP_GROUP_MANAGER_DN') ?: '');
@@ -89,14 +90,15 @@ defined('LDAP_GROUP_PROVIDER') or define('LDAP_GROUP_PROVIDER', strtolower(geten
 defined('LDAP_GROUP_BASE_DN') or define('LDAP_GROUP_BASE_DN', getenv('LDAP_GROUP_BASE_DN') ?: '');
 defined('LDAP_GROUP_FILTER') or define('LDAP_GROUP_FILTER', getenv('LDAP_GROUP_FILTER') ?: '');
 defined('LDAP_GROUP_USER_FILTER') or define('LDAP_GROUP_USER_FILTER', getenv('LDAP_GROUP_USER_FILTER') ?: '');
+defined('LDAP_GROUP_USER_ATTRIBUTE') or define('LDAP_GROUP_USER_ATTRIBUTE', getenv('LDAP_GROUP_USER_ATTRIBUTE') ?: 'username');
 defined('LDAP_GROUP_ATTRIBUTE_NAME') or define('LDAP_GROUP_ATTRIBUTE_NAME', getenv('LDAP_GROUP_ATTRIBUTE_NAME') ?: 'cn');
 
 // Proxy authentication
 defined('REVERSE_PROXY_AUTH') or define('REVERSE_PROXY_AUTH', strtolower(getenv('REVERSE_PROXY_AUTH')) === 'true');
 defined('REVERSE_PROXY_USER_HEADER') or define('REVERSE_PROXY_USER_HEADER', getenv('REVERSE_PROXY_USER_HEADER') ?: 'REMOTE_USER');
-defined('REVERSE_PROXY_NAME_HEADER') or define('REVERSE_PROXY_NAME_HEADER', getenv('REVERSE_PROXY_NAME_HEADER') ?: 'AUTH-NAME');
-defined('REVERSE_PROXY_MAIL_HEADER') or define('REVERSE_PROXY_MAIL_HEADER', getenv('REVERSE_PROXY_MAIL_HEADER') ?: 'AUTH-MAIL');
+defined('REVERSE_PROXY_NAME_HEADER') or define('REVERSE_PROXY_NAME_HEADER', getenv('REVERSE_PROXY_NAME_HEADER') ?: 'REMOTE_NAME');
 defined('REVERSE_PROXY_GET_FIELDS') or define('REVERSE_PROXY_GET_FIELDS', getenv('REVERSE_PROXY_GET_FIELDS') ? strtolower(getenv('REVERSE_PROXY_GET_FIELDS')) === 'false' : false);
+defined('REVERSE_PROXY_EMAIL_HEADER') or define('REVERSE_PROXY_EMAIL_HEADER', getenv('REVERSE_PROXY_EMAIL_HEADER') ?: 'REMOTE_EMAIL');
 defined('REVERSE_PROXY_DEFAULT_ADMIN') or define('REVERSE_PROXY_DEFAULT_ADMIN', getenv('REVERSE_PROXY_DEFAULT_ADMIN') ?: '');
 defined('REVERSE_PROXY_DEFAULT_DOMAIN') or define('REVERSE_PROXY_DEFAULT_DOMAIN', getenv('REVERSE_PROXY_DEFAULT_DOMAIN') ?: '');
 
@@ -111,6 +113,7 @@ defined('MAIL_SMTP_HOSTNAME') or define('MAIL_SMTP_HOSTNAME', getenv('MAIL_SMTP_
 defined('MAIL_SMTP_PORT') or define('MAIL_SMTP_PORT', intval(getenv('MAIL_SMTP_PORT')) ?: 25);
 defined('MAIL_SMTP_USERNAME') or define('MAIL_SMTP_USERNAME', getenv('MAIL_SMTP_USERNAME') ?: '');
 defined('MAIL_SMTP_PASSWORD') or define('MAIL_SMTP_PASSWORD', getenv('MAIL_SMTP_PASSWORD') ?: '');
+defined('MAIL_SMTP_HELO_NAME') or define('MAIL_SMTP_HELO_NAME', getenv('MAIL_SMTP_HELO_NAME') ?: null);
 defined('MAIL_SMTP_ENCRYPTION') or define('MAIL_SMTP_ENCRYPTION', getenv('MAIL_SMTP_ENCRYPTION') ?: null);
 defined('MAIL_SENDMAIL_COMMAND') or define('MAIL_SENDMAIL_COMMAND', getenv('MAIL_SENDMAIL_COMMAND') ?: '/usr/sbin/sendmail -bs');
 
@@ -143,6 +146,9 @@ defined('BRUTEFORCE_LOCKDOWN_DURATION') or define('BRUTEFORCE_LOCKDOWN_DURATION'
 // Session duration in second (0 = until the browser is closed)
 // See http://php.net/manual/en/session.configuration.php#ini.session.cookie-lifetime
 defined('SESSION_DURATION') or define('SESSION_DURATION', intval(getenv('SESSION_DURATION')) ?: 0);
+
+// Session handler: db or php
+defined('SESSION_HANDLER') or define('SESSION_HANDLER', getenv('SESSION_HANDLER') ?: 'db');
 
 // HTTP Client
 defined('HTTP_TIMEOUT') or define('HTTP_TIMEOUT', intval(getenv('HTTP_TIMEOUT')) ?: 10);

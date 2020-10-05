@@ -56,7 +56,7 @@ class Group
      */
     public function find($query)
     {
-        $this->query->execute($this->getBasDn(), $query, $this->getAttributes());
+        $this->query->execute($this->getBaseDn(), $query, $this->getAttributes());
         $groups = array();
 
         if ($this->query->hasResult()) {
@@ -119,7 +119,7 @@ class Group
      * @access public
      * @return string
      */
-    public function getBasDn()
+    public function getBaseDn()
     {
         if (! LDAP_GROUP_BASE_DN) {
             throw new LogicException('LDAP group base DN empty, check the parameter LDAP_GROUP_BASE_DN');

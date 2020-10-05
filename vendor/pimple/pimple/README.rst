@@ -108,7 +108,7 @@ If you change the ``session_storage`` service definition like below:
     };
 
 You can now easily change the cookie name by overriding the
-``session_storage_class`` parameter instead of redefining the service
+``cookie_name`` parameter instead of redefining the service
 definition.
 
 Protecting Parameters

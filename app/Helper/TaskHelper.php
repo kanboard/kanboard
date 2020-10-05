@@ -42,7 +42,8 @@ class TaskHelper extends Base
 
     public function renderTitleField(array $values, array $errors)
     {
-        return $this->helper->form->text(
+        $html = $this->helper->form->label(t('Title'), 'title', ['class="ui-helper-hidden-accessible"']);
+        $html .= $this->helper->form->text(
             'title',
             $values,
             $errors,
@@ -53,11 +54,13 @@ class TaskHelper extends Base
                 'placeholder="'.t('Title').'"'
             )
         );
+
+        return $html;
     }
 
     public function renderDescriptionField(array $values, array $errors)
     {
-        return $this->helper->form->textEditor('description', $values, $errors, array('tabindex' => 2));
+        return $this->helper->form->textEditor('description', $values, $errors, array('tabindex' => 2, 'aria-label' => t('Description')));
     }
 
     public function renderDescriptionTemplateDropdown($projectId)
@@ -124,7 +127,7 @@ class TaskHelper extends Base
         $html .= $this->helper->form->select('owner_id', $users, $values, $errors, $attributes);
         $html .= '&nbsp;';
         $html .= '<small>';
-        $html .= '<a href="#" class="assign-me" data-target-id="form-owner_id" data-current-id="'.$this->userSession->getId().'" title="'.t('Assign to me').'">'.t('Me').'</a>';
+        $html .= '<a href="#" class="assign-me" data-target-id="form-owner_id" data-current-id="'.$this->userSession->getId().'" title="'.t('Assign to me').'" aria-label="'.t('Assign to me').'">'.t('Me').'</a>';
         $html .= '</small>';
 
         return $html;

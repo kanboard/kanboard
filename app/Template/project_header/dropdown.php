@@ -1,5 +1,5 @@
 <div class="dropdown">
-    <a href="#" class="dropdown-menu action-menu" title="<?= t('Configure this project') ?>"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
+    <a href="#" class="dropdown-menu action-menu" title="<?= t('Configure this project') ?>" aria-label="<?= t('Configure this project') ?>"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
     <ul>
         <?php if ($board_view): ?>
         <li>
@@ -16,6 +16,14 @@
             </span>
             <span class="filter-wide" style="display: none">
                 <i class="fa fa-arrows-h fa-fw"></i> <a href="#" class="filter-toggle-scrolling" title="<?= t('Keyboard shortcut: "%s"', 'c') ?>"><?= t('Horizontal scrolling') ?></a>
+            </span>
+        </li>
+        <li>
+            <span class="filter-vert-collapse">
+                <i class="fa fa-arrow-up fa-fw"></i> <a href="#" class="filter-vert-toggle-collapse"><?= t('Collapse vertically') ?></a>
+            </span>
+            <span class="filter-vert-expand" style="display: none">
+                <i class="fa fa-arrow-down fa-fw"></i> <a href="#" class="filter-vert-toggle-collapse"><?= t('Expand vertically') ?></a>
             </span>
         </li>
         <?php endif ?>

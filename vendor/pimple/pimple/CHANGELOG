@@ -1,3 +1,7 @@
+* 3.2.3 (2017-XX-XX)
+
+ * n/a
+
 * 3.2.2 (2017-07-23)
 
  * reverted extending a protected closure throws an exception (deprecated it instead)
