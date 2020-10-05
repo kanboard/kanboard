@@ -150,20 +150,14 @@ class ReverseProxyUserProvider implements UserProviderInterface
      */
     public function getEmail()
     {
-<<<<<<< HEAD
-        if (! REVERSE_PROXY_MAIL_HEADER ){
+        if (! REVERSE_PROXY_EMAIL_HEADER ){
+            if (REVERSE_PROXY_DEFAULT_DOMAIN !== '' && $this->email === '') {
+                return $this->username.'@'.REVERSE_PROXY_DEFAULT_DOMAIN;
+            }
             return REVERSE_PROXY_DEFAULT_DOMAIN !== '' ? $this->username.'@'.REVERSE_PROXY_DEFAULT_DOMAIN : '';
-	}else{
+        }else{
             return $this->email;
-	}
-
-=======
-        if (REVERSE_PROXY_DEFAULT_DOMAIN !== '' && $this->email === '') {
-            return $this->username.'@'.REVERSE_PROXY_DEFAULT_DOMAIN;
         }
-
-        return $this->email;
->>>>>>> upstream/master
     }
 
     /**
