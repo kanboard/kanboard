@@ -16,9 +16,9 @@
 
         <span title="<?= t('Task count') ?>" class="board-column-header-task-count swimlane-task-count-<?= $swimlane['id'] ?>">
             <?php if ($swimlane['task_limit']): ?>
-                (<?= $swimlane['nb_tasks'] ?>/<?= $swimlane['task_limit'] ?>)
+                (<span><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $swimlane['nb_tasks'] ?>/<?= $swimlane['task_limit'] ?>)
             <?php else: ?>
-                (<?= $swimlane['nb_tasks'] ?>)
+                (<span><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $swimlane['nb_tasks'] ?>)
             <?php endif ?>
         </span>
     </th>
