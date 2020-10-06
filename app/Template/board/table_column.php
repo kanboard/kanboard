@@ -8,8 +8,8 @@
 
         <!-- column in collapsed mode -->
         <div class="board-column-collapsed">
-            <small class="board-column-header-task-count" title="<?= t('Show this column') ?>">
-                <span id="task-number-column-<?= $column['id'] ?>"><?= $column['nb_tasks'] ?></span>
+            <small class="board-column-header-task-count" title="<?= t('Task count') ?>">
+                <span id="task-number-column-<?= $column['id'] ?>"><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $column['nb_tasks'] ?></span>
             </small>
         </div>
 
