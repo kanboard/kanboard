@@ -27,7 +27,7 @@
         "ext-filter" : "*",
         "ext-session" : "*",
         "christian-riesen/otp" : "1.4.3",
-        "eluceo/ical": "0.16.0",
+        "eluceo/ical": "0.16.1",
         "erusev/parsedown" : "^1.7",
         "pimple/pimple" : "3.3.0",
         "psr/log": "~1.0",

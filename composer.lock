@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f5cea914e240d933c4e1d128b3c37f86",
+    "content-hash": "16a7a269f4c7de4b747b44d59577c4ea",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -114,20 +114,20 @@
         },
         {
             "name": "eluceo/ical",
-            "version": "0.16.0",
+            "version": "0.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/markuspoerschke/iCal.git",
-                "reference": "97da0d94c9716e65c141066a2d96aa098379721b"
+                "reference": "7043337feaeacbc016844e7e52ef41bba504ad8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/markuspoerschke/iCal/zipball/97da0d94c9716e65c141066a2d96aa098379721b",
-                "reference": "97da0d94c9716e65c141066a2d96aa098379721b",
+                "url": "https://api.github.com/repos/markuspoerschke/iCal/zipball/7043337feaeacbc016844e7e52ef41bba504ad8f",
+                "reference": "7043337feaeacbc016844e7e52ef41bba504ad8f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.1 || ~8.0.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^7.0"
@@ -161,7 +161,7 @@
                 "ics",
                 "php calendar"
             ],
-            "time": "2019-12-29T22:08:56+00:00"
+            "time": "2020-10-04T17:41:11+00:00"
         },
         {
             "name": "erusev/parsedown",
