@@ -1,3 +1,32 @@
+Version 1.2.16 (October 9, 2020)
+--------------------------------
+
+* Update Composer dependencies
+* Update translations
+* Add link to toggle column scrolling in board view
+* Add missing environment variables in php-fpm config
+* Add setting that makes possible any new LDAP user to be Manager by default
+* Add ARIA label to modal link with title attribute
+* Add ARIA label to user mention
+* Add ARIA label to letter avatars
+* Add ARIA label to project select role without label
+* Add ARIA label to dropdown autocomplete without label 
+* Add ARIA label to form text editor without label
+* Add ARIA label to icons with title attributes
+* Add ARIA label for form inputs without labels
+* Add ARIA label for elements with titles
+* Add hidden accessible form input labels
+* Add hidden accessible titles
+* Hide user name from screen readers
+* Correct table collapsed column titles
+* Prevent the original page from being modified by the opened link
+* Allow email to be retrieve by SSO ReverseProxy
+* Fix grammatically incorrect error message
+* Add option to configure SMTP HELO name
+* Add new config parameter SESSION_HANDLER
+* Fix clearing of all Javascript storage
+* Added standard notification footer to comment email template
+
 Version 1.2.15 (June 19, 2020)
 ------------------------------
 
