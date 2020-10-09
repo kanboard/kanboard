@@ -1421,4 +1421,7 @@ return array(
     '%d/%d group(s) shown' => '%d/%d групп показано',
     'Subtask creation or modification' => 'Создание или изменение подзадач',
     // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
+    // 'Comment' => '',
+    // 'Collapse vertically' => '',
+    // 'Expand vertically' => '',
 );

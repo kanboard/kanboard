@@ -16,5 +16,6 @@ return array(
     'Psr\\Cache\\' => array($vendorDir . '/psr/cache/src'),
     'Kanboard\\' => array($baseDir . '/app'),
     'Gregwar\\' => array($vendorDir . '/gregwar/captcha/src/Gregwar'),
+    'Eluceo\\iCal\\' => array($vendorDir . '/eluceo/ical/src'),
     'Base32\\' => array($vendorDir . '/christian-riesen/base32/src'),
 );

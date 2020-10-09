@@ -15,7 +15,7 @@
     <table>
         <tr>
             <th colspan="3">
-                <a href="<?= $plugin['homepage'] ?>" target="_blank" rel="noreferrer"><?= $this->text->e($plugin['title']) ?></a>
+                <a href="<?= $plugin['homepage'] ?>" target="_blank" rel="noopener noreferrer"><?= $this->text->e($plugin['title']) ?></a>
             </th>
         </tr>
         <tr>

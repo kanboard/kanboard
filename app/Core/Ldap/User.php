@@ -121,25 +121,27 @@ class User
      */
     protected function getRole(array $groupIds)
     {
-        if (! $this->hasGroupsConfigured()) {
-            return null;
-        }
+        $role = Role::APP_USER;
 
-        // Init with smallest role
-        $role = Role::APP_USER ;
+        if (! $this->hasGroupsConfigured()) {
+            if (LDAP_USER_DEFAULT_ROLE_MANAGER) {
+                $role = Role::APP_MANAGER;
+            } else {
+                $role = Role::APP_USER;
+            }
+            return $role;
+        }
 
         foreach ($groupIds as $groupId) {
             $groupId = strtolower($groupId);
 
             if ($groupId === strtolower($this->getGroupAdminDn())) {
-                // Highest role found : we can and we must exit the loop
                 $role = Role::APP_ADMIN;
                 break;
             }
 
             if ($groupId === strtolower($this->getGroupManagerDn())) {
-                // Intermediate role found : we must continue to loop, maybe admin role after ?
-	        $role = Role::APP_MANAGER;
+                $role = Role::APP_MANAGER;
             }
         }
 

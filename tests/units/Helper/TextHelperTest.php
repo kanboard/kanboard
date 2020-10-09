@@ -67,42 +67,42 @@ class TextHelperTest extends Base
         $this->assertEquals(2, $userModel->create(array('username' => 'firstname.lastname', 'name' => 'Firstname Lastname')));
 
         $this->assertEquals(
-            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin">@admin</a> @notfound</p>',
+            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin" aria-label="admin">@admin</a> @notfound</p>',
             $textHelper->markdown('Text @admin @notfound')
         );
 
         $this->assertEquals(
-            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin">@admin</a>,</p>',
+            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin" aria-label="admin">@admin</a>,</p>',
             $textHelper->markdown('Text @admin,')
         );
 
         $this->assertEquals(
-            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin">@admin</a>!</p>',
+            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin" aria-label="admin">@admin</a>!</p>',
             $textHelper->markdown('Text @admin!')
         );
 
         $this->assertEquals(
-            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin">@admin</a>? </p>',
+            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin" aria-label="admin">@admin</a>? </p>',
             $textHelper->markdown('Text @admin? ')
         );
 
         $this->assertEquals(
-            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin">@admin</a>.</p>',
+            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin" aria-label="admin">@admin</a>.</p>',
             $textHelper->markdown('Text @admin.')
         );
 
         $this->assertEquals(
-            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin">@admin</a>: test</p>',
+            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin" aria-label="admin">@admin</a>: test</p>',
             $textHelper->markdown('Text @admin: test')
         );
 
         $this->assertEquals(
-            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin">@admin</a>: test</p>',
+            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=1" class="user-mention-link" title="admin" aria-label="admin">@admin</a>: test</p>',
             $textHelper->markdown('Text @admin: test')
         );
 
         $this->assertEquals(
-            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=2" class="user-mention-link" title="Firstname Lastname">@firstname.lastname</a>. test</p>',
+            '<p>Text <a href="?controller=UserViewController&amp;action=profile&amp;user_id=2" class="user-mention-link" title="Firstname Lastname" aria-label="Firstname Lastname">@firstname.lastname</a>. test</p>',
             $textHelper->markdown('Text @firstname.lastname. test')
         );
 

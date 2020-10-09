@@ -5,11 +5,11 @@
     <ul>
         <li>
             <?= t('Official website:') ?>
-            <a href="https://kanboard.org/" target="_blank" rel="noreferer">https://kanboard.org/</a>
+            <a href="https://kanboard.org/" target="_blank" rel="noopener noreferrer">https://kanboard.org/</a>
         </li>
         <li>
             <?= t('Author:') ?>
-            <strong>Frédéric Guillot</strong> (<a href="https://github.com/kanboard/kanboard/graphs/contributors" target="_blank"><?= t('contributors') ?></a>)
+            <strong>Frédéric Guillot</strong> (<a href="https://github.com/kanboard/kanboard/graphs/contributors" target="_blank" rel="noopener noreferrer"><?= t('contributors') ?></a>)
         </li>
         <li>
             <?= t('License:') ?>

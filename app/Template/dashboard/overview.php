@@ -6,7 +6,7 @@
         <?= $this->form->hidden('action', array('action' => 'index')) ?>
 
         <div class="input-addon">
-            <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"'), 'input-addon-field') ?>
+            <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"', 'aria-label="'.t('Search').'"'), 'input-addon-field') ?>
             <div class="input-addon-item">
                 <?= $this->render('app/filters_helper') ?>
             </div>
@@ -35,7 +35,7 @@
                     </span>
 
                     <?php if ($project['is_private']): ?>
-                        <i class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>"></i>
+                        <i class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>" role="img" aria-label="<?= t('Personal project') ?>"></i>
                     <?php endif ?>
 
                     <?= $this->hook->render('template:dashboard:project:after-title', array('project' => $project)) ?>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="table-list-details">
                     <?php foreach ($project['columns'] as $column): ?>
-                        <strong title="<?= t('Task count') ?>"><?= $column['nb_open_tasks'] ?></strong>
+                        <strong title="<?= t('Task count') ?>"><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $column['nb_open_tasks'] ?></strong>
                         <small><?= $this->text->e($column['title']) ?></small>
                     <?php endforeach ?>
                 </div>

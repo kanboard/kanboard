@@ -21,6 +21,7 @@
                         'roles' => $roles,
                         'role' => $group['role'],
                         'id' => $group['id'],
+                        'ariaLabel' => t('Role'),
                         'url' => $this->url->to('ProjectPermissionController', 'changeGroupRole', array('project_id' => $project['id'])),
                     )) ?>
                 </td>
@@ -51,7 +52,7 @@
             ),
                 'autocomplete') ?>
 
-            <?= $this->form->select('role', $roles, $values, $errors) ?>
+            <?= $this->form->select('role', $roles, $values, $errors, array('aria-label="'.t('Role').'"')) ?>
 
             <button type="submit" class="btn btn-blue"><?= t('Add') ?></button>
         </form>

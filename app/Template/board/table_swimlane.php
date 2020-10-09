@@ -3,8 +3,8 @@
    <th class="board-swimlane-header" colspan="<?= $swimlane['nb_columns'] ?>">
         <?php if (! $not_editable): ?>
             <a href="#" class="board-swimlane-toggle" data-swimlane-id="<?= $swimlane['id'] ?>">
-                <i class="fa fa-chevron-circle-up hide-icon-swimlane-<?= $swimlane['id'] ?>" title="<?= t('Collapse swimlane') ?>"></i>
-                <i class="fa fa-chevron-circle-down show-icon-swimlane-<?= $swimlane['id'] ?>" title="<?= t('Expand swimlane') ?>" style="display: none"></i>
+                <i class="fa fa-chevron-circle-up hide-icon-swimlane-<?= $swimlane['id'] ?>" title="<?= t('Collapse swimlane') ?>" role="button" aria-label="<?= t('Collapse swimlane') ?>"></i>
+                <i class="fa fa-chevron-circle-down show-icon-swimlane-<?= $swimlane['id'] ?>" title="<?= t('Expand swimlane') ?>" role="button" aria-label="<?= t('Expand swimlane') ?>" style="display: none"></i>
             </a>
         <?php endif ?>
 
@@ -16,9 +16,9 @@
 
         <span title="<?= t('Task count') ?>" class="board-column-header-task-count swimlane-task-count-<?= $swimlane['id'] ?>">
             <?php if ($swimlane['task_limit']): ?>
-                (<?= $swimlane['nb_tasks'] ?>/<?= $swimlane['task_limit'] ?>)
+                (<span><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $swimlane['nb_tasks'] ?>/<?= $swimlane['task_limit'] ?>)
             <?php else: ?>
-                (<?= $swimlane['nb_tasks'] ?>)
+                (<span><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $swimlane['nb_tasks'] ?>)
             <?php endif ?>
         </span>
     </th>

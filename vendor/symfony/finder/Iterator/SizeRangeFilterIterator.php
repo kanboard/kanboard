@@ -18,9 +18,9 @@ use Symfony\Component\Finder\Comparator\NumberComparator;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class SizeRangeFilterIterator extends FilterIterator
+class SizeRangeFilterIterator extends \FilterIterator
 {
-    private $comparators = array();
+    private $comparators = [];
 
     /**
      * @param \Iterator          $iterator    The Iterator to filter

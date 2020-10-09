@@ -237,6 +237,7 @@ class FormHelper extends Base
             'labelWrite' => t('Write'),
             'labelTitle' => t('Title'),
             'placeholder' => t('Write your text in Markdown'),
+            'ariaLabel' => isset($attributes['aria-label']) ? $attributes['aria-label'] : '',
             'autofocus' => isset($attributes['autofocus']) && $attributes['autofocus'],
             'suggestOptions' => array(
                 'triggers' => array(

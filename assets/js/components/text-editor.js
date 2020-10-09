@@ -62,6 +62,10 @@ KB.component('text-editor', function (containerElement, options) {
             textareaElement.attr('required', 'required');
         }
 
+        if (options.ariaLabel) {
+            textareaElement.attr('aria-label', options.ariaLabel);
+        }
+
         // Order is important for IE11 (especially for the placeholder)
         var textWrapper = KB.dom(containerElement).find('script');
         textareaElement.html(textWrapper.innerHTML);

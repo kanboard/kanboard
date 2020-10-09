@@ -1421,4 +1421,7 @@ return array(
     '%d/%d group(s) shown' => 'zobrazených %d/%d skupíny(ín)',
     'Subtask creation or modification' => 'Vytvorenie alebo úprava podúlohy',
     // 'Assign the task to a specific user when the task is moved to a specific swimlane' => '',
+    // 'Comment' => '',
+    // 'Collapse vertically' => '',
+    // 'Expand vertically' => '',
 );

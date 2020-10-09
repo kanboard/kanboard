@@ -1421,4 +1421,7 @@ return array(
     '%d/%d group(s) shown' => 'グループ %d/%d を表示',
     'Subtask creation or modification' => 'サブタスクが作成or更新されました',
     'Assign the task to a specific user when the task is moved to a specific swimlane' => '特定のスイムレーンにタスクを移動した時に、特定のユーザーにタスクを割当てる',
+    // 'Comment' => '',
+    // 'Collapse vertically' => '',
+    // 'Expand vertically' => '',
 );

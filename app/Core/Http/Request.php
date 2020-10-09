@@ -271,6 +271,17 @@ class Request extends Base
     }
 
     /**
+     * Get remote email
+     *
+     * @access public
+     * @return string
+     */
+    public function getRemoteEmail()
+    {
+        return $this->getServerVariable(REVERSE_PROXY_EMAIL_HEADER);
+    }
+
+    /**
      * Returns query string
      *
      * @access public

@@ -15,7 +15,7 @@
         <?php $users_groups = $this->user->getUsersGroupNames($user['id']); ?>
         <?php $groups_list_tooltip = t('%s is a member of the following group(s): %s', $user['name'] ?: $user['username'], implode(', ', $users_groups['full_list'])); ?>
         <?php if ($users_groups['has_groups']): ?>
-            <span title="<?= $groups_list_tooltip ?>">
+            <span title="<?= $groups_list_tooltip ?>" role="img" aria-label="<?= $groups_list_tooltip ?>">
                 <i class="fa fa-fw fa-group" aria-hidden="true"></i><?= $this->text->implode(', ', $users_groups['limited_list']) ?>
                 <?php if ($users_groups['shown'] != $users_groups['total']): ?>
                     ‑&nbsp;<?= t('%d/%d group(s) shown', $users_groups['shown'], $users_groups['total']) ?>
