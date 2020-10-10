@@ -137,9 +137,9 @@ class ReverseProxyUserProvider implements UserProviderInterface
     {
         if (! REVERSE_PROXY_NAME_HEADER ){
             return '';
-	}else{
+        }else{
             return $this->name;
-	}
+        }
     }
 
     /**
