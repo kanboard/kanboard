@@ -27,9 +27,9 @@
         "ext-filter" : "*",
         "ext-session" : "*",
         "christian-riesen/otp" : "1.4.3",
-        "eluceo/ical": "0.16.0",
+        "eluceo/ical": "0.16.1",
         "erusev/parsedown" : "^1.7",
-        "pimple/pimple" : "3.2.3",
+        "pimple/pimple" : "3.3.0",
         "psr/log": "~1.0",
         "swiftmailer/swiftmailer" : "5.4.8",
         "symfony/console" : "4.2.12",
@@ -49,7 +49,7 @@
         ]
     },
     "require-dev" : {
-        "symfony/stopwatch" : "4.4.14",
+        "symfony/stopwatch" : "5.1.7",
         "phpunit/phpunit" : "^7",
         "roave/security-advisories": "dev-master"
     }

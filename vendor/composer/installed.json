@@ -111,21 +111,21 @@
     },
     {
         "name": "eluceo/ical",
-        "version": "0.16.0",
-        "version_normalized": "0.16.0.0",
+        "version": "0.16.1",
+        "version_normalized": "0.16.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/markuspoerschke/iCal.git",
-            "reference": "97da0d94c9716e65c141066a2d96aa098379721b"
+            "reference": "7043337feaeacbc016844e7e52ef41bba504ad8f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/markuspoerschke/iCal/zipball/97da0d94c9716e65c141066a2d96aa098379721b",
-            "reference": "97da0d94c9716e65c141066a2d96aa098379721b",
+            "url": "https://api.github.com/repos/markuspoerschke/iCal/zipball/7043337feaeacbc016844e7e52ef41bba504ad8f",
+            "reference": "7043337feaeacbc016844e7e52ef41bba504ad8f",
             "shasum": ""
         },
         "require": {
-            "php": ">=7.1"
+            "php": ">=7.1 || ~8.0.0"
         },
         "require-dev": {
             "phpunit/phpunit": "^7.0"
@@ -133,7 +133,7 @@
         "suggest": {
             "ext-mbstring": "Massive performance enhancement of line folding"
         },
-        "time": "2019-12-29T22:08:56+00:00",
+        "time": "2020-10-04T17:41:11+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -267,31 +267,31 @@
     },
     {
         "name": "pimple/pimple",
-        "version": "v3.2.3",
-        "version_normalized": "3.2.3.0",
+        "version": "v3.3.0",
+        "version_normalized": "3.3.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/silexphp/Pimple.git",
-            "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32"
+            "reference": "e55d12f9d6a0e7f9c85992b73df1267f46279930"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/silexphp/Pimple/zipball/9e403941ef9d65d20cba7d54e29fe906db42cf32",
-            "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32",
+            "url": "https://api.github.com/repos/silexphp/Pimple/zipball/e55d12f9d6a0e7f9c85992b73df1267f46279930",
+            "reference": "e55d12f9d6a0e7f9c85992b73df1267f46279930",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.0",
+            "php": "^7.2.5",
             "psr/container": "^1.0"
         },
         "require-dev": {
-            "symfony/phpunit-bridge": "^3.2"
+            "symfony/phpunit-bridge": "^3.4|^4.4|^5.0"
         },
-        "time": "2018-01-21T07:42:36+00:00",
+        "time": "2020-03-03T09:12:48+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "3.2.x-dev"
+                "dev-master": "3.3.x-dev"
             }
         },
         "installation-source": "dist",
@@ -311,7 +311,7 @@
             }
         ],
         "description": "Pimple, a simple Dependency Injection Container",
-        "homepage": "http://pimple.sensiolabs.org",
+        "homepage": "https://pimple.symfony.com",
         "keywords": [
             "container",
             "dependency injection"
