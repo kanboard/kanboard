@@ -343,7 +343,7 @@ return array(
     'Not assigned, estimate of %sh' => 'Nedodeljen, procenjeno vreme %sh',
     '%s updated a comment on the task %s' => '%s je ažurirao/la komentar za zadatka %s',
     '%s commented the task %s' => '%s je komentarisao/la zadatak %s',
-    '%s\'s activity' => '%s - aktivnosti %s',
+    '%s\'s activity' => '%s - aktivnosti',
     'RSS feed' => 'RSS kanal',
     '%s updated a comment on the task #%d' => '%s ažurirao/la komentar za zadatka #%d',
     '%s commented on the task #%d' => '%s komentarisao/la zadatak #%d',
