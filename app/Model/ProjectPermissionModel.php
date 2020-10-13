@@ -124,7 +124,8 @@ class ProjectPermissionModel extends Base
             return true;
         }
 
-        return $this->isMember($project_id, $user_id);
+        return $this->userModel->isActive($user_id) &&
+               $this->isMember($project_id, $user_id);
     }
 
     /**
@@ -156,7 +157,7 @@ class ProjectPermissionModel extends Base
      */
     public function isMember($project_id, $user_id)
     {
-        return !empty($this->projectUserRoleModel->getUserRole($project_id, $user_id));
+        return ! empty($this->projectUserRoleModel->getUserRole($project_id, $user_id));
     }
 
     /**
