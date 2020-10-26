@@ -1420,7 +1420,7 @@ return array(
     '%s is a member of the following group(s): %s' => '%s является членом следующих групп: %s',
     '%d/%d group(s) shown' => '%d/%d групп показано',
     'Subtask creation or modification' => 'Создание или изменение подзадач',
-    'Assign the task to a specific user when the task is moved to a specific swimlane' => 'Назначить задачу определённому пользователю, если задача перемещена в указанному дорожку',
+    'Assign the task to a specific user when the task is moved to a specific swimlane' => 'Назначить задачу определённому пользователю, если задача перемещена в указанную дорожку',
     'Comment' => 'Комментарий',
     'Collapse vertically' => 'Свернуть вертикально',
     'Expand vertically' => 'Развернуть вертикально',
