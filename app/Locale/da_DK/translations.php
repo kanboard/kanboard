@@ -1421,7 +1421,7 @@ return array(
     '%d/%d group(s) shown' => '%d/%d gruppe(r) vist',
     'Subtask creation or modification' => 'Underopgave oprettelse eller ændring',
     'Assign the task to a specific user when the task is moved to a specific swimlane' => 'Tildele opgave til bestemt bruger når opgave flyttes til anført spor',
-    // 'Comment' => '',
-    // 'Collapse vertically' => '',
-    // 'Expand vertically' => '',
+    'Comment' => 'Kommentar',
+    'Collapse vertically' => 'Sammenfolde lodret',
+    'Expand vertically' => 'Udvide lodret',
 );
