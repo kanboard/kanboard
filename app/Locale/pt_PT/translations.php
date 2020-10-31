@@ -1421,7 +1421,7 @@ return array(
     '%d/%d group(s) shown' => '%d/%d grupo(s) mostrado(s)',
     'Subtask creation or modification' => 'Alteração ou criação de sub-tarefa',
     'Assign the task to a specific user when the task is moved to a specific swimlane' => 'Assignar a tarefa a um utilizador especificado quando a tarefa é movida para uma swimlane especificada',
-    // 'Comment' => '',
-    // 'Collapse vertically' => '',
-    // 'Expand vertically' => '',
+    'Comment' => 'Comentário',
+    'Collapse vertically' => 'Colapsar verticalmente',
+    'Expand vertically' => 'Expandir verticalmente',
 );
