@@ -125,7 +125,7 @@ class User
             return null;
         }
 	
-	if (LDAP_USER_DEFAULT_ROLE_MANAGER) {
+        if (LDAP_USER_DEFAULT_ROLE_MANAGER) {
             $role = Role::APP_MANAGER;
         } else {
             $role = Role::APP_USER;
