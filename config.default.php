@@ -44,6 +44,9 @@ define('MAIL_CONFIGURATION', true);
 // E-mail address used for the "From" header (notifications)
 define('MAIL_FROM', 'replace-me@kanboard.local');
 
+// Bcc email for a copy of all notifications. Comment out if not needed.
+// define('MAIL_BCC', 'replace-me@kanboard.local');
+
 // Mail transport available: "smtp", "sendmail", "mail" (PHP mail function), "postmark", "mailgun", "sendgrid"
 define('MAIL_TRANSPORT', 'mail');
 
