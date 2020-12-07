@@ -106,6 +106,7 @@ defined('REMEMBER_ME_AUTH') or define('REMEMBER_ME_AUTH', getenv('REMEMBER_ME_AU
 // Mail configuration
 defined('MAIL_CONFIGURATION') or define('MAIL_CONFIGURATION', getenv('MAIL_CONFIGURATION') ? strtolower(getenv('MAIL_CONFIGURATION')) === 'true' : true);
 defined('MAIL_FROM') or define('MAIL_FROM', getenv('MAIL_FROM') ?: 'notifications@kanboard.local');
+defined('MAIL_BCC') or define('MAIL_BCC', getenv('MAIL_BCC') ?: '');
 defined('MAIL_TRANSPORT') or define('MAIL_TRANSPORT', getenv('MAIL_TRANSPORT') ?: 'mail');
 defined('MAIL_SMTP_HOSTNAME') or define('MAIL_SMTP_HOSTNAME', getenv('MAIL_SMTP_HOSTNAME') ?: '');
 defined('MAIL_SMTP_PORT') or define('MAIL_SMTP_PORT', intval(getenv('MAIL_SMTP_PORT')) ?: 25);

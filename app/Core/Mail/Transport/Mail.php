@@ -36,7 +36,7 @@ class Mail extends Base implements ClientInterface
                 ->setFrom($this->helper->mail->getMailSenderAddress(), $authorName)
                 ->setTo(array($recipientEmail => $recipientName));
 
-            if (defined('MAIL_BCC')) {
+            if (! empty(MAIL_BCC)) {
                 $message->setBcc(MAIL_BCC);
             }
 
