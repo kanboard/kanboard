@@ -12,9 +12,9 @@ class SubtaskEventJobTest extends Base
     public function testJobParams()
     {
         $subtaskEventJob = new SubtaskEventJob($this->container);
-        $subtaskEventJob->withParams(123, 'foobar', array('k' => 'v'));
+        $subtaskEventJob->withParams(123, array('foobar'), array('k' => 'v'));
 
-        $this->assertSame(array(123, 'foobar', array('k' => 'v')), $subtaskEventJob->getJobParams());
+        $this->assertSame(array(123, array('foobar'), array('k' => 'v')), $subtaskEventJob->getJobParams());
     }
 
     public function testWithMissingSubtask()
@@ -22,7 +22,7 @@ class SubtaskEventJobTest extends Base
         $this->container['dispatcher']->addListener(SubtaskModel::EVENT_CREATE, function() {});
 
         $subtaskEventJob = new SubtaskEventJob($this->container);
-        $subtaskEventJob->execute(42, SubtaskModel::EVENT_CREATE);
+        $subtaskEventJob->execute(42, array(SubtaskModel::EVENT_CREATE));
 
         $called = $this->container['dispatcher']->getCalledListeners();
         $this->assertEmpty($called);
@@ -33,6 +33,7 @@ class SubtaskEventJobTest extends Base
         $this->container['dispatcher']->addListener(SubtaskModel::EVENT_CREATE, function() {});
         $this->container['dispatcher']->addListener(SubtaskModel::EVENT_UPDATE, function() {});
         $this->container['dispatcher']->addListener(SubtaskModel::EVENT_DELETE, function() {});
+        $this->container['dispatcher']->addListener(SubtaskModel::EVENT_CREATE_UPDATE, function() {});
 
         $subtaskModel = new SubtaskModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);
@@ -48,5 +49,6 @@ class SubtaskEventJobTest extends Base
         $this->assertArrayHasKey(SubtaskModel::EVENT_CREATE.'.closure', $called);
         $this->assertArrayHasKey(SubtaskModel::EVENT_UPDATE.'.closure', $called);
         $this->assertArrayHasKey(SubtaskModel::EVENT_DELETE.'.closure', $called);
+        $this->assertArrayHasKey(SubtaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
     }
 }

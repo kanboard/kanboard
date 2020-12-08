@@ -48,7 +48,7 @@ class UserMentionFormatter extends BaseFormatter implements FormatterInterface
             $html .= ' '.$this->helper->text->e($user['username']);
 
             if (! empty($user['name'])) {
-                $html .= ' <small>'.$this->helper->text->e($user['name']).'</small>';
+                $html .= ' <small aria-hidden="true">'.$this->helper->text->e($user['name']).'</small>';
             }
 
             $result[] = array(

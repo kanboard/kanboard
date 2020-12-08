@@ -10,7 +10,7 @@
 
         <?php if ($this->app->config('disable_private_project', 0) == 0): ?>
             <li>
-                <?= $this->modal->medium('lock', t('New private project'), 'ProjectCreationController', 'createPrivate') ?>
+                <?= $this->modal->medium('lock', t('New personal project'), 'ProjectCreationController', 'createPrivate') ?>
             </li>
         <?php endif ?>
 
@@ -26,7 +26,7 @@
     <form method="get" action="<?= $this->url->dir() ?>" class="search">
         <?= $this->form->hidden('controller', array('controller' => 'ProjectListController')) ?>
         <?= $this->form->hidden('action', array('action' => 'show')) ?>
-        <?= $this->form->text('search', $values, array(), array('placeholder="'.t('Search').'"')) ?>
+        <?= $this->form->text('search', $values, array(), array('placeholder="'.t('Search').'"', 'aria-label="'.t('Search').'"')) ?>
     </form>
 </div>
 

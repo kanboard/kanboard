@@ -8,7 +8,27 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 111;
+const VERSION = 115;
+
+function version_115(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE "projects" ADD COLUMN enable_global_tags BOOLEAN DEFAULT TRUE');
+}
+
+function version_114(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE "swimlanes" ADD COLUMN task_limit INTEGER DEFAULT 0');
+}
+
+function version_113(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE "projects" ADD COLUMN task_limit INTEGER DEFAULT 0');
+}
+
+function version_112(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE "projects" ADD COLUMN per_swimlane_task_limits BOOLEAN DEFAULT FALSE');
+}
 
 function version_111(PDO $pdo)
 {

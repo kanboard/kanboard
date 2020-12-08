@@ -40,6 +40,9 @@ class AttachmentLinkProviderTest extends Base
         $attachmentLinkProvider->setUserTextInput('  https://kanboard.org/folder/archive.tar ');
         $this->assertTrue($attachmentLinkProvider->match());
 
+        $attachmentLinkProvider->setUserTextInput('https://www.github.io/folder/archive.zip');
+        $this->assertTrue($attachmentLinkProvider->match());
+
         $attachmentLinkProvider->setUserTextInput('http:// invalid url');
         $this->assertFalse($attachmentLinkProvider->match());
 
@@ -53,6 +56,12 @@ class AttachmentLinkProviderTest extends Base
         $this->assertFalse($attachmentLinkProvider->match());
 
         $attachmentLinkProvider->setUserTextInput('https://kanboard.org/folder/document.do');
+        $this->assertFalse($attachmentLinkProvider->match());
+
+        $attachmentLinkProvider->setUserTextInput('https://www.github.io/folder/document.html');
+        $this->assertFalse($attachmentLinkProvider->match());
+
+        $attachmentLinkProvider->setUserTextInput('https://www.github.io');
         $this->assertFalse($attachmentLinkProvider->match());
     }
 

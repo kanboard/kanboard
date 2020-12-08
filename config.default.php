@@ -44,6 +44,9 @@ define('MAIL_CONFIGURATION', true);
 // E-mail address used for the "From" header (notifications)
 define('MAIL_FROM', 'replace-me@kanboard.local');
 
+// E-mail address used for the "Bcc" header to send a copy of all notifications
+define('MAIL_BCC', '');
+
 // Mail transport available: "smtp", "sendmail", "mail" (PHP mail function), "postmark", "mailgun", "sendgrid"
 define('MAIL_TRANSPORT', 'mail');
 
@@ -52,6 +55,7 @@ define('MAIL_SMTP_HOSTNAME', '');
 define('MAIL_SMTP_PORT', 25);
 define('MAIL_SMTP_USERNAME', '');
 define('MAIL_SMTP_PASSWORD', '');
+define('MAIL_SMTP_HELO_NAME', null); // valid: null (default), or FQDN
 define('MAIL_SMTP_ENCRYPTION', null); // Valid values are null (not a string "null"), "ssl" or "tls"
 
 // Sendmail command to use when the transport is "sendmail"
@@ -135,7 +139,7 @@ define('LDAP_USER_BASE_DN', '');
 define('LDAP_USER_FILTER', '');
 
 // LDAP attribute for username
-// Example for ActiveDirectory: 'samaccountname'
+// Example for ActiveDirectory: 'sAMAccountName'
 // Example for OpenLDAP: 'uid'
 define('LDAP_USER_ATTRIBUTE_USERNAME', 'uid');
 
@@ -159,6 +163,9 @@ define('LDAP_USER_ATTRIBUTE_LANGUAGE', '');
 
 // Allow automatic LDAP user creation
 define('LDAP_USER_CREATION', true);
+
+// Set new user as Manager
+define('LDAP_USER_DEFAULT_ROLE_MANAGER', false);
 
 // LDAP DN for administrators
 // Example: CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local
@@ -184,6 +191,10 @@ define('LDAP_GROUP_FILTER', '');
 // Example for OpenLDAP: (&(objectClass=posixGroup)(memberUid=%s))
 define('LDAP_GROUP_USER_FILTER', '');
 
+// LDAP attribute for the user in the group filter
+// 'username' or 'dn'
+define('LDAP_GROUP_USER_ATTRIBUTE', 'username');
+
 // LDAP attribute for the group name
 define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
@@ -195,6 +206,9 @@ define('REVERSE_PROXY_USER_HEADER', 'REMOTE_USER');
 
 // Username of the admin, by default blank
 define('REVERSE_PROXY_DEFAULT_ADMIN', '');
+
+// Header name to use for the username
+define('REVERSE_PROXY_EMAIL_HEADER', 'REMOTE_EMAIL');
 
 // Default domain to use for setting the email address
 define('REVERSE_PROXY_DEFAULT_DOMAIN', '');
@@ -236,6 +250,9 @@ define('BRUTEFORCE_LOCKDOWN_DURATION', 15);
 // See http://php.net/manual/en/session.configuration.php#ini.session.cookie-lifetime
 define('SESSION_DURATION', 0);
 
+// Session handler: db or php
+define('SESSION_HANDLER', 'db');
+
 // HTTP client proxy
 define('HTTP_PROXY_HOSTNAME', '');
 define('HTTP_PROXY_PORT', '3128');
@@ -251,3 +268,11 @@ define('TOTP_ISSUER', 'Kanboard');
 
 // Comma separated list of fields to not synchronize when using external authentication providers
 define('EXTERNAL_AUTH_EXCLUDE_FIELDS', 'username');
+
+// Enable or disable displaying group-memberships in userlist (true by default)
+define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST', true);
+
+// Limit number of groups to display in userlist (The full list of group-memberships is always shown, ...
+// ... when hovering the mouse over the group-icon of a given user!)
+// If set to 0 ALL group-memberships will be listed (7 by default)
+define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT', 7);

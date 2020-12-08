@@ -66,7 +66,7 @@ class CustomFilterController extends BaseController
 
         if ($valid) {
             if ($this->customFilterModel->create($values) !== false) {
-                $this->flash->success(t('Your custom filter have been created successfully.'));
+                $this->flash->success(t('Your custom filter has been created successfully.'));
                 $this->response->redirect($this->helper->url->to('CustomFilterController', 'index', array('project_id' => $project['id'])), true);
                 return;
             } else {
@@ -169,7 +169,7 @@ class CustomFilterController extends BaseController
 
         if ($valid) {
             if ($this->customFilterModel->update($values)) {
-                $this->flash->success(t('Your custom filter have been updated successfully.'));
+                $this->flash->success(t('Your custom filter has been updated successfully.'));
                 $this->response->redirect($this->helper->url->to('CustomFilterController', 'index', array('project_id' => $project['id'])), true);
                 return;
             } else {

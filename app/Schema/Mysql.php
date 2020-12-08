@@ -8,7 +8,27 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 133;
+const VERSION = 137;
+
+function version_137(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `projects` ADD COLUMN `enable_global_tags` TINYINT(1) DEFAULT 1 NOT NULL');
+}
+
+function version_136(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `swimlanes` ADD COLUMN `task_limit` INT DEFAULT 0');
+}
+
+function version_135(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `projects` ADD COLUMN `task_limit` INT DEFAULT 0');
+}
+
+function version_134(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE `projects` ADD COLUMN `per_swimlane_task_limits` INT DEFAULT 0 NOT NULL');
+}
 
 function version_133(PDO $pdo)
 {

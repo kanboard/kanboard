@@ -49,7 +49,8 @@ class ModalHelper extends Base
 
     public function medium($icon, $label, $controller, $action, array $params = array(), $title = '')
     {
-        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-medium" aria-hidden="true"></i>'.$label;
+        $ariaLabel = (empty($title) ? 'aria-hidden="true"' : 'role="img" aria-label="'.$title.'"');
+        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-medium" '.$ariaLabel.'></i>'.$label;
         return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-medium', $title);
     }
 

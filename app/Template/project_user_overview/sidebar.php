@@ -4,6 +4,7 @@
         'items' => $users,
         'defaultValue' => $filter['user_id'],
         'sortByKeys' => true,
+        'ariaLabel' => t('User filters'),
         'redirect' => array(
             'regex' => 'USER_ID',
             'url' => $this->url->to('ProjectUserOverviewController', $this->app->getRouterAction(), array('user_id' => 'USER_ID')),

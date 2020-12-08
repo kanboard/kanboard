@@ -1,16 +1,20 @@
+<?= $this->hook->render('template:dashboard:show:before-filter-box', array('user' => $user)) ?>
+
 <div class="filter-box margin-bottom">
     <form method="get" action="<?= $this->url->dir() ?>" class="search">
         <?= $this->form->hidden('controller', array('controller' => 'SearchController')) ?>
         <?= $this->form->hidden('action', array('action' => 'index')) ?>
 
         <div class="input-addon">
-            <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"'), 'input-addon-field') ?>
+            <?= $this->form->text('search', array(), array(), array('placeholder="'.t('Search').'"', 'aria-label="'.t('Search').'"'), 'input-addon-field') ?>
             <div class="input-addon-item">
                 <?= $this->render('app/filters_helper') ?>
             </div>
         </div>
     </form>
 </div>
+
+<?= $this->hook->render('template:dashboard:show:after-filter-box', array('user' => $user)) ?>
 
 <?php if (! $project_paginator->isEmpty()): ?>
     <div class="table-list">
@@ -24,17 +28,22 @@
                         <strong><?= '#'.$project['id'] ?></strong>
                     <?php endif ?>
 
+                    <?= $this->hook->render('template:dashboard:project:before-title', array('project' => $project)) ?>
+
                     <span class="table-list-title <?= $project['is_active'] == 0 ? 'status-closed' : '' ?>">
                         <?= $this->url->link($this->text->e($project['name']), 'BoardViewController', 'show', array('project_id' => $project['id'])) ?>
                     </span>
 
                     <?php if ($project['is_private']): ?>
-                        <i class="fa fa-lock fa-fw" title="<?= t('Private project') ?>"></i>
+                        <i class="fa fa-lock fa-fw" title="<?= t('Personal project') ?>" role="img" aria-label="<?= t('Personal project') ?>"></i>
                     <?php endif ?>
+
+                    <?= $this->hook->render('template:dashboard:project:after-title', array('project' => $project)) ?>
+
                 </div>
                 <div class="table-list-details">
                     <?php foreach ($project['columns'] as $column): ?>
-                        <strong title="<?= t('Task count') ?>"><?= $column['nb_open_tasks'] ?></strong>
+                        <strong title="<?= t('Task count') ?>"><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $column['nb_open_tasks'] ?></strong>
                         <small><?= $this->text->e($column['title']) ?></small>
                     <?php endforeach ?>
                 </div>

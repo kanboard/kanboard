@@ -223,7 +223,7 @@ class UserSession extends Base
     public function getFilters($projectID)
     {
         if (! session_exists('filters:'.$projectID)) {
-            return session_get('user')['filter'] ?: 'status:open';
+            return session_get('user') ? session_get('user')['filter'] ?: 'status:open' : 'status:open';
         }
 
         return session_get('filters:'.$projectID);
@@ -239,5 +239,36 @@ class UserSession extends Base
     public function setFilters($projectID, $filters)
     {
         session_set('filters:'.$projectID, $filters);
+    }
+
+    /**
+     * Get project list order from the session
+     *
+     * @access public
+     * @param  integer  $projectID
+     * @return array
+     */
+    public function getListOrder($projectID)
+    {
+        $default = ['tasks.id', 'DESC'];
+
+        if (! session_exists('listOrder:'.$projectID)) {
+            return $default;
+        }        
+
+        return session_get('listOrder:'.$projectID);
+    }
+
+    /**
+     * Save project list order in the session
+     *
+     * @access public
+     * @param  integer  $projectID
+     * @param  string   $listOrder
+     * @param  string   $listDirection
+     */
+    public function setListOrder($projectID, $listOrder, $listDirection)
+    {
+        session_set('listOrder:'.$projectID, [$listOrder, $listDirection]);
     }
 }

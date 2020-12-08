@@ -25,7 +25,7 @@ class ExternalLinkManagerTest extends Base
     {
         $externalLinkManager = new ExternalLinkManager($this->container);
 
-        $this->setExpectedException('\Kanboard\Core\ExternalLink\ExternalLinkProviderNotFound');
+        $this->expectException('\Kanboard\Core\ExternalLink\ExternalLinkProviderNotFound');
         $externalLinkManager->getProvider('not found');
     }
 
@@ -68,7 +68,7 @@ class ExternalLinkManagerTest extends Base
         $externalLinkManager->register($webLinkProvider);
         $externalLinkManager->register($attachmentLinkProvider);
 
-        $this->setExpectedException('\Kanboard\Core\ExternalLink\ExternalLinkProviderNotFound');
+        $this->expectException('\Kanboard\Core\ExternalLink\ExternalLinkProviderNotFound');
         $externalLinkManager->find();
     }
 
@@ -113,7 +113,7 @@ class ExternalLinkManagerTest extends Base
         $externalLinkManager->register($webLinkProvider);
         $externalLinkManager->register($attachmentLinkProvider);
 
-        $this->setExpectedException('\Kanboard\Core\ExternalLink\ExternalLinkProviderNotFound');
+        $this->expectException('\Kanboard\Core\ExternalLink\ExternalLinkProviderNotFound');
         $externalLinkManager->setUserInput(array('text' => 'https://google.com/', 'type' => 'not found'));
         $externalLinkManager->find();
     }

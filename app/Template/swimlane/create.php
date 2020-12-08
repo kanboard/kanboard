@@ -10,5 +10,8 @@
     <?= $this->form->label(t('Description'), 'description') ?>
     <?= $this->form->textEditor('description', $values, $errors, array('tabindex' => 2)) ?>
 
+    <?= $this->form->label(t('Task limit'), 'task_limit') ?>
+    <?= $this->form->number('task_limit', $values, $errors, array('tabindex' => 3)) ?>
+
     <?= $this->modal->submitButtons() ?>
 </form>

@@ -29,7 +29,7 @@
                     break;
                 case 'date_due':
                     if (empty($task['date_due'])) {
-                        echo '<li>'.t('The due date have been removed').'</li>';
+                        echo '<li>'.t('The due date has been removed').'</li>';
                     } else {
                         echo '<li>'.t('New due date: ').$this->dt->datetime($task['date_due']).'</li>';
                     }
@@ -46,7 +46,7 @@
                 case 'recurrence_basedate':
                 case 'recurrence_parent':
                 case 'recurrence_child':
-                    echo '<li>'.t('Recurrence settings have been modified').'</li>';
+                    echo '<li>'.t('Recurrence settings has been modified').'</li>';
                     break;
                 case 'time_spent':
                     echo '<li>'.t('Time spent changed: %sh', $task['time_spent']).'</li>';
@@ -60,7 +60,7 @@
                     }
                     break;
                 default:
-                    echo '<li>'.t('The field "%s" have been updated', $field).'</li>';
+                    echo '<li>'.t('The field "%s" has been updated', $field).'</li>';
             }
         }
 

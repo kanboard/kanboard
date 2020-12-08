@@ -1,5 +1,5 @@
 <?php if (empty($users)): ?>
-    <div class="alert"><?= t('No user have been allowed specifically.') ?></div>
+    <div class="alert"><?= t('No specific user has been allowed.') ?></div>
 <?php else: ?>
     <table class="table-scrolling">
         <tr>
@@ -17,6 +17,7 @@
                         'roles' => $roles,
                         'role' => $user['role'],
                         'id' => $user['id'],
+                        'ariaLabel' => t('Role'),
                         'url' => $this->url->to('ProjectPermissionController', 'changeUserRole', array('project_id' => $project['id'])),
                     )) ?>
                 </td>
@@ -51,7 +52,7 @@
                 ),
                 'autocomplete') ?>
 
-            <?= $this->form->select('role', $roles, $values, $errors) ?>
+            <?= $this->form->select('role', $roles, $values, $errors, array('aria-label="'.t('Role').'"')) ?>
 
             <button type="submit" class="btn btn-blue"><?= t('Add') ?></button>
         </form>

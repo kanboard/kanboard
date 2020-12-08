@@ -45,6 +45,7 @@ class JsCommand extends BaseCommand
         'assets/js/src/BoardColumnView.js',
         'assets/js/src/BoardHorizontalScrolling.js',
         'assets/js/src/BoardPolling.js',
+        'assets/js/src/BoardVerticalScrolling.js',
         'assets/js/src/Column.js',
         'assets/js/src/Dropdown.js',
         'assets/js/src/Search.js',
@@ -66,7 +67,6 @@ class JsCommand extends BaseCommand
         'assets/vendor/d3/d3.min.js',
         'assets/vendor/c3/c3.min.js',
         'assets/vendor/isMobile/isMobile.min.js',
-        'assets/vendor/marked/marked.min.js',
     ];
 
     protected function configure()

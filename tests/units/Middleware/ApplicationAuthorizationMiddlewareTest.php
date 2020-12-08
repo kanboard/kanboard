@@ -45,7 +45,7 @@ class ApplicationAuthorizationMiddlewareMiddlewareTest extends Base
             ->expects($this->never())
             ->method('execute');
 
-        $this->setExpectedException('Kanboard\Core\Controller\AccessForbiddenException');
+        $this->expectException('Kanboard\Core\Controller\AccessForbiddenException');
         $this->middleware->execute();
     }
 

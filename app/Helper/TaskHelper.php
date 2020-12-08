@@ -42,7 +42,8 @@ class TaskHelper extends Base
 
     public function renderTitleField(array $values, array $errors)
     {
-        return $this->helper->form->text(
+        $html = $this->helper->form->label(t('Title'), 'title', ['class="ui-helper-hidden-accessible"']);
+        $html .= $this->helper->form->text(
             'title',
             $values,
             $errors,
@@ -53,11 +54,13 @@ class TaskHelper extends Base
                 'placeholder="'.t('Title').'"'
             )
         );
+
+        return $html;
     }
 
     public function renderDescriptionField(array $values, array $errors)
     {
-        return $this->helper->form->textEditor('description', $values, $errors, array('tabindex' => 2));
+        return $this->helper->form->textEditor('description', $values, $errors, array('tabindex' => 2, 'aria-label' => t('Description')));
     }
 
     public function renderDescriptionTemplateDropdown($projectId)
@@ -86,7 +89,7 @@ class TaskHelper extends Base
 
     public function renderTagField(array $project, array $tags = array())
     {
-        $options = $this->tagModel->getAssignableList($project['id']);
+        $options = $this->tagModel->getAssignableList($project['id'], $project['enable_global_tags']);
 
         $html = $this->helper->form->label(t('Tags'), 'tags[]');
         $html .= '<input type="hidden" name="tags[]" value="">';
@@ -108,9 +111,7 @@ class TaskHelper extends Base
 
     public function renderColorField(array $values)
     {
-        $colors = $this->colorModel->getList();
-        $html = $this->helper->form->label(t('Color'), 'color_id');
-        $html .= $this->helper->form->select('color_id', $colors, $values, array(), array('tabindex="4"'), 'color-picker');
+        $html = $this->helper->form->colorSelect('color_id', $values);
         return $html;
     }
 
@@ -126,7 +127,7 @@ class TaskHelper extends Base
         $html .= $this->helper->form->select('owner_id', $users, $values, $errors, $attributes);
         $html .= '&nbsp;';
         $html .= '<small>';
-        $html .= '<a href="#" class="assign-me" data-target-id="form-owner_id" data-current-id="'.$this->userSession->getId().'" title="'.t('Assign to me').'">'.t('Me').'</a>';
+        $html .= '<a href="#" class="assign-me" data-target-id="form-owner_id" data-current-id="'.$this->userSession->getId().'" title="'.t('Assign to me').'" aria-label="'.t('Assign to me').'">'.t('Me').'</a>';
         $html .= '</small>';
 
         return $html;
@@ -237,6 +238,7 @@ class TaskHelper extends Base
     public function renderPriority($priority)
     {
         $html = '<span class="task-priority" title="'.t('Task priority').'">';
+        $html .= '<span class="ui-helper-hidden-accessible">'.t('Task priority').' </span>';
         $html .= $this->helper->text->e($priority >= 0 ? 'P'.$priority : '-P'.abs($priority));
         $html .= '</span>';
 

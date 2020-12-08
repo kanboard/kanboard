@@ -92,7 +92,8 @@ class TaskProcedure extends BaseProcedure
     public function createTask($title, $project_id, $color_id = '', $column_id = 0, $owner_id = 0, $creator_id = 0,
                                $date_due = '', $description = '', $category_id = 0, $score = 0, $swimlane_id = null, $priority = 0,
                                $recurrence_status = 0, $recurrence_trigger = 0, $recurrence_factor = 0, $recurrence_timeframe = 0,
-                               $recurrence_basedate = 0, $reference = '', array $tags = array(), $date_started = '')
+                               $recurrence_basedate = 0, $reference = '', array $tags = array(), $date_started = '',
+                               $time_spent = null, $time_estimated = null)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'createTask', $project_id);
 
@@ -125,6 +126,8 @@ class TaskProcedure extends BaseProcedure
             'priority' => $priority,
             'tags' => $tags,
             'date_started' => $date_started,
+            'time_spent' => $time_spent,
+            'time_estimated' => $time_estimated,
         );
 
         list($valid, ) = $this->taskValidator->validateCreation($values);
@@ -135,7 +138,8 @@ class TaskProcedure extends BaseProcedure
     public function updateTask($id, $title = null, $color_id = null, $owner_id = null,
                                $date_due = null, $description = null, $category_id = null, $score = null, $priority = null,
                                $recurrence_status = null, $recurrence_trigger = null, $recurrence_factor = null,
-                               $recurrence_timeframe = null, $recurrence_basedate = null, $reference = null, $tags = null, $date_started = null)
+                               $recurrence_timeframe = null, $recurrence_basedate = null, $reference = null, $tags = null, $date_started = null,
+                               $time_spent = null, $time_estimated = null)
     {
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateTask', $id);
         $project_id = $this->taskFinderModel->getProjectId($id);
@@ -166,6 +170,8 @@ class TaskProcedure extends BaseProcedure
             'priority' => $priority,
             'tags' => $tags,
             'date_started' => $date_started,
+            'time_spent' => $time_spent,
+            'time_estimated' => $time_estimated,
         ));
 
         list($valid) = $this->taskValidator->validateApiModification($values);

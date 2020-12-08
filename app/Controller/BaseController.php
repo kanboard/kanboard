@@ -127,7 +127,7 @@ abstract class BaseController extends Base
     protected function getProject($project_id = 0)
     {
         $project_id = $this->request->getIntegerParam('project_id', $project_id);
-        $project = $this->projectModel->getByIdWithOwner($project_id);
+        $project = $this->projectModel->getByIdWithOwnerAndTaskCount($project_id);
 
         if (empty($project)) {
             throw new PageNotFoundException();

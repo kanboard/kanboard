@@ -121,4 +121,61 @@ class ProjectTagController extends BaseController
 
         $this->response->redirect($this->helper->url->to('ProjectTagController', 'index', array('project_id' => $project['id'])));
     }
+    
+    /**
+     * Confirm dialog to make a tag global
+     *
+     * @return void
+     */
+    public function confirmMakeGlobalTag()
+    {
+        $project = $this->getProject();
+        $tag = $this->getProjectTag($project);
+
+        $this->response->html($this->template->render('project_tag/make_global', array(
+            'tag'     => $tag,
+            'project' => $project,
+        )));
+    }
+    
+    /**
+     * Make a tag global and flash result
+     *
+     * @return void
+     */
+    public function makeGlobalTag(){
+        if ($this->userSession->isAdmin()) {
+            $project = $this->getProject();
+            $tag = $this->getProjectTag($project);
+            
+            if ($this->tagModel->update($tag['id'], $tag['name'], $tag['color_id'], 0)) {
+                $this->flash->success(t('Tag updated successfully.'));
+            } else {
+                $this->flash->failure(t('Unable to update this tag.'));
+            }
+
+            $this->response->redirect($this->helper->url->to('ProjectTagController', 'index', array('project_id' => $project['id'])));
+        }
+    }    
+    
+    /**
+     * Update project tag settings
+     *
+     * @return void
+     */
+    public function updateSettings()
+    {
+        $project = $this->getProject();
+        $values = $this->request->getValues();
+
+        $values['enable_global_tags'] = array_key_exists('enable_global_tags', $values) ? $values['enable_global_tags'] : 0;
+
+        if ($this->projectModel->changeGlobalTagUsage($project['id'], $values['enable_global_tags'])) {
+            $this->flash->success(t('Project updated successfully.'));            
+            return $this->response->redirect($this->helper->url->to('ProjectTagController', 'index', array('project_id' => $project['id'])));
+        } else {
+            $this->flash->failure(t('Unable to update this project.'));
+        }
+
+    }
 }

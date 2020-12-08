@@ -20,7 +20,7 @@
             <?= $paginator->order(t('Public'), \Kanboard\Model\ProjectModel::TABLE.'.is_public') ?>
         </li>
         <li>
-            <?= $paginator->order(t('Private'), \Kanboard\Model\ProjectModel::TABLE.'.is_private') ?>
+            <?= $paginator->order(t('Personal'), \Kanboard\Model\ProjectModel::TABLE.'.is_private') ?>
         </li>
     </ul>
 </div>

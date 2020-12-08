@@ -37,7 +37,7 @@ class LdapGroupTest extends Base
             ->setConstructorArgs(array($this->query))
             ->setMethods(array(
                 'getAttributeName',
-                'getBasDn',
+                'getBaseDn',
             ))
             ->getMock();
     }
@@ -96,7 +96,7 @@ class LdapGroupTest extends Base
 
         $this->group
             ->expects($this->any())
-            ->method('getBasDn')
+            ->method('getBaseDn')
             ->will($this->returnValue('CN=Users,DC=kanboard,DC=local'));
 
         $groups = $this->group->find('(&(objectClass=group)(sAMAccountName=Kanboard*))');
@@ -142,7 +142,7 @@ class LdapGroupTest extends Base
 
         $this->group
             ->expects($this->any())
-            ->method('getBasDn')
+            ->method('getBaseDn')
             ->will($this->returnValue('CN=Users,DC=kanboard,DC=local'));
 
         $groups = $this->group->find('(&(objectClass=group)(sAMAccountName=Kanboard*))');
@@ -151,9 +151,9 @@ class LdapGroupTest extends Base
 
     public function testGetBaseDnNotConfigured()
     {
-        $this->setExpectedException('\LogicException');
+        $this->expectException('\LogicException');
 
         $group = new Group($this->query);
-        $group->getBasDn();
+        $group->getBaseDn();
     }
 }

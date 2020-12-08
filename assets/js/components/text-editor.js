@@ -62,6 +62,10 @@ KB.component('text-editor', function (containerElement, options) {
             textareaElement.attr('required', 'required');
         }
 
+        if (options.ariaLabel) {
+            textareaElement.attr('aria-label', options.ariaLabel);
+        }
+
         // Order is important for IE11 (especially for the placeholder)
         var textWrapper = KB.dom(containerElement).find('script');
         textareaElement.html(textWrapper.innerHTML);
@@ -84,7 +88,16 @@ KB.component('text-editor', function (containerElement, options) {
     }
 
     function toggleViewMode() {
-        KB.dom(previewElement).html(marked(textarea.value, {sanitize: true}));
+        $.ajax({
+            cache: false,
+            type: 'POST',
+            url: options.previewUrl,
+            data: { 'text': textarea.value},
+            success: function(data) {
+                KB.dom(previewElement).html(data);
+            }
+        });
+
         KB.dom(viewModeElement).toggle();
         KB.dom(writeModeElement).toggle();
     }

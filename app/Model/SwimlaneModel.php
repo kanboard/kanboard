@@ -178,7 +178,7 @@ class SwimlaneModel extends Base
         );
 
         $swimlanes = $this->db->table(self::TABLE)
-            ->columns('id', 'name', 'description', 'project_id', 'position', 'is_active')
+            ->columns('id', 'name', 'description', 'project_id', 'position', 'is_active', 'task_limit')
             ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE swimlane_id=".self::TABLE.".id AND is_active='1'", 'nb_open_tasks')
             ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE swimlane_id=".self::TABLE.".id AND is_active='0'", 'nb_closed_tasks')
             ->eq('project_id', $project_id)
@@ -231,7 +231,7 @@ class SwimlaneModel extends Base
      * @param  string  $description
      * @return bool|int
      */
-    public function create($projectId, $name, $description = '')
+    public function create($projectId, $name, $description = '', $task_limit = 0)
     {
         if (! $this->projectModel->exists($projectId)) {
             return 0;
@@ -243,6 +243,7 @@ class SwimlaneModel extends Base
             'description' => $description,
             'position'    => $this->getLastPosition($projectId),
             'is_active'   => 1,
+            'task_limit'  => intval($task_limit),
         ));
     }
 

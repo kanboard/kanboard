@@ -61,7 +61,7 @@ class TaskLinkEventBuilderTest extends Base
         $this->assertSame('', $title);
 
         $title = $taskLinkEventBuilder->buildTitleWithoutAuthor(TaskLinkModel::EVENT_CREATE_UPDATE, $eventData->getAll());
-        $this->assertEquals('A new internal link for the task #1 have been defined', $title);
+        $this->assertEquals('A new internal link for the task #1 has been defined', $title);
 
         $title = $taskLinkEventBuilder->buildTitleWithoutAuthor(TaskLinkModel::EVENT_DELETE, $eventData->getAll());
         $this->assertEquals('Internal link removed for the task #1', $title);

@@ -110,6 +110,32 @@ class UserHelper extends Base
     }
 
     /**
+     * Get group names for a given user and return an associative array:
+     *
+     * @access public
+     * @param  integer   $userID   User id
+     * @return array
+     */
+    public function getUsersGroupNames($userID)
+    {
+        $groupsList = array_column($this->groupMemberModel->getGroups($userID), 'name');
+        $limitedList = $groupsList;
+        $total = count($groupsList);
+
+        if ($total > 0 && SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT > 0) {
+            $limitedList = array_slice($groupsList, 0 , SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT);
+        }
+
+        return [
+            'full_list' => $groupsList,
+            'limited_list' => $limitedList,
+            'has_groups' => $total > 0,
+            'total' => $total,
+            'shown' => count($limitedList),
+        ];
+    }
+
+    /**
      * Check application access
      *
      * @param  string  $controller
