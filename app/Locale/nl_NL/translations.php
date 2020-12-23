@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Nieuw commentaar',
     'Comment updated' => 'Commentaar aangepast',
     'New subtask' => 'Nieuwe subtaak',
-    'I want to receive notifications only for those projects:' => 'Ik wil notificaties ontvangen van de volgende projecten:',
+    'I only want to receive notifications for these projects:' => 'Ik wil notificaties ontvangen van de volgende projecten:',
     'view the task on Kanboard' => 'taak bekijken op Kanboard',
     'Public access' => 'Publieke toegang',
     'Disable public access' => 'Publieke toegang uitschakelen',

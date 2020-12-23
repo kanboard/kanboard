@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Bình luận mới',
     'Comment updated' => 'Bình luận cập nhật',
     'New subtask' => 'Bổ sung phụ',
-    'I want to receive notifications only for those projects:' => 'Tôi chỉ muốn nhận thông báo cho các dự án đó:',
+    'I only want to receive notifications for these projects:' => 'Tôi chỉ muốn nhận thông báo cho các dự án đó:',
     'view the task on Kanboard' => 'xem công việc trên Kanboard',
     'Public access' => 'Truy cập công cộng',
     'Disable public access' => 'Vô hiệu hoá quyền truy cập công cộng',

@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Új megjegyzés',
     'Comment updated' => 'Megjegyzés frissítve',
     'New subtask' => 'Új részfeladat',
-    'I want to receive notifications only for those projects:' => 'Csak ezekről a projektekről szeretnék értesítést kapni:',
+    'I only want to receive notifications for these projects:' => 'Csak ezekről a projektekről szeretnék értesítést kapni:',
     'view the task on Kanboard' => 'feladat megtekintése a Kanboardon',
     'Public access' => 'Nyilvános hozzáférés',
     'Disable public access' => 'Nyilvános hozzáférés letiltása',

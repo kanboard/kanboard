@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Νέο σχόλιο',
     'Comment updated' => 'Το σχόλιο ενημερώθηκε',
     'New subtask' => 'Νέα υπο-εργασία',
-    'I want to receive notifications only for those projects:' => 'Θέλω να ενημερώνομαι αποκλειστικά για:',
+    'I only want to receive notifications for these projects:' => 'Θέλω να ενημερώνομαι αποκλειστικά για:',
     'view the task on Kanboard' => 'Προβολή της εργασίας στο Kanboard',
     'Public access' => 'Ανοιχτή πρόσβαση',
     'Disable public access' => 'Απενεργοποίηση δημόσιας πρόσβασης',

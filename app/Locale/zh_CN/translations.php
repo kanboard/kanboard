@@ -300,7 +300,7 @@ return array(
     'New comment' => '新建评论',
     'Comment updated' => '更新了评论',
     'New subtask' => '新建子任务',
-    'I want to receive notifications only for those projects:' => '我仅需要收到下面项目的通知：',
+    'I only want to receive notifications for these projects:' => '我仅需要收到下面项目的通知：',
     'view the task on Kanboard' => '在看板中查看此任务',
     'Public access' => '公开访问',
     'Disable public access' => '停止公开访问',

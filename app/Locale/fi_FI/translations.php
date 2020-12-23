@@ -300,7 +300,7 @@ return array(
     // 'New comment' => '',
     'Comment updated' => 'Kommentti päivitetty',
     // 'New subtask' => '',
-    'I want to receive notifications only for those projects:' => 'Haluan vastaanottaa ilmoituksia ainoastaan näistä projekteista:',
+    'I only want to receive notifications for these projects:' => 'Haluan vastaanottaa ilmoituksia ainoastaan näistä projekteista:',
     'view the task on Kanboard' => 'katso tehtävää Kanboardissa',
     'Public access' => 'Julkinen käyttöoikeus',
     'Disable public access' => 'Poista käytöstä julkinen käyttöoikeus',

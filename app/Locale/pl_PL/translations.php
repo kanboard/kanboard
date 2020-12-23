@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Nowy Komentarz',
     'Comment updated' => 'Komentarz zaktualizowany',
     'New subtask' => 'Nowe pod-zadanie',
-    'I want to receive notifications only for those projects:' => 'Chcę otrzymywać powiadomienia tylko dla poniższych projektów:',
+    'I only want to receive notifications for these projects:' => 'Chcę otrzymywać powiadomienia tylko dla poniższych projektów:',
     'view the task on Kanboard' => 'Zobacz zadanie',
     'Public access' => 'Dostęp publiczny',
     'Disable public access' => 'Zablokuj dostęp publiczny',

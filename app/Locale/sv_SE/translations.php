@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Ny kommentar',
     'Comment updated' => 'Kommentaren har uppdaterats',
     'New subtask' => 'Ny deluppgift',
-    'I want to receive notifications only for those projects:' => 'Jag vill endast få notiser för dessa projekt:',
+    'I only want to receive notifications for these projects:' => 'Jag vill endast få notiser för dessa projekt:',
     'view the task on Kanboard' => 'Visa uppgiften på Kanboard',
     'Public access' => 'Publik åtkomst',
     'Disable public access' => 'Inaktivera publik åtkomst',

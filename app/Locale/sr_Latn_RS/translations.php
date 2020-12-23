@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Novi komentar',
     'Comment updated' => 'Komentar ažuriran',
     'New subtask' => 'Novi podzadatak',
-    'I want to receive notifications only for those projects:' => 'Želim obaveštenja samo za projekate:',
+    'I only want to receive notifications for these projects:' => 'Želim obaveštenja samo za projekate:',
     'view the task on Kanboard' => 'pregled zadataka u Kanboard-u',
     'Public access' => 'Javni pristup',
     'Disable public access' => 'Zabrani javni pristup',

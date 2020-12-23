@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Komentar baru',
     'Comment updated' => 'Komentar diperbaharui',
     'New subtask' => 'Sub-tugas baru',
-    'I want to receive notifications only for those projects:' => 'Saya ingin menerima pemberitahuan hanya untuk projek-projek yang dipilih :',
+    'I only want to receive notifications for these projects:' => 'Saya ingin menerima pemberitahuan hanya untuk projek-projek yang dipilih :',
     'view the task on Kanboard' => 'lihat tugas di Kanboard',
     'Public access' => 'Akses awam',
     'Disable public access' => 'Nyahaktifkan akses awam',

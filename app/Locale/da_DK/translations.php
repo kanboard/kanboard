@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Ny kommentar',
     'Comment updated' => 'Kommentar opdateret',
     'New subtask' => 'Ny delopgave',
-    'I want to receive notifications only for those projects:' => 'Modtage påmindelser for disse projekter:',
+    'I only want to receive notifications for these projects:' => 'Modtage påmindelser for disse projekter:',
     'view the task on Kanboard' => 'vise opgave på Kanboard',
     'Public access' => 'Offentlig adgang',
     'Disable public access' => 'Deaktivere offentlig adgang',
