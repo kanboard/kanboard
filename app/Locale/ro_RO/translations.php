@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Comentariu nou',
     'Comment updated' => 'Comentariu actualizat',
     'New subtask' => 'Sub-sarcină nouă',
-    'I want to receive notifications only for those projects:' => 'Vreau să primesc notificări numai pentru acele proiecte:',
+    'I only want to receive notifications for these projects:' => 'Vreau să primesc notificări numai pentru acele proiecte:',
     'view the task on Kanboard' => 'vezi sarcina pe Kanboard',
     'Public access' => 'Acces public',
     'Disable public access' => 'Dezactivează accesul public',

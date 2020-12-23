@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Nový komentár',
     'Comment updated' => 'Komentár aktualizovaný',
     'New subtask' => 'Nová podúloha',
-    'I want to receive notifications only for those projects:' => 'Chcem dostávať upozornenia len z týchto projektov:',
+    'I only want to receive notifications for these projects:' => 'Chcem dostávať upozornenia len z týchto projektov:',
     'view the task on Kanboard' => 'zobraziť úlohu v Kanboard',
     'Public access' => 'Verejný prístup',
     'Disable public access' => 'Zakázať verejný prístup',

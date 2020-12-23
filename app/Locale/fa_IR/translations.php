@@ -300,7 +300,7 @@ return array(
     'New comment' => 'نظر جدید',
     'Comment updated' => 'نظر بروز رسانی شد',
     'New subtask' => 'کار فرعی جدید',
-    'I want to receive notifications only for those projects:' => 'می خواهم آگاه سازی ها را فقط برای این پروژه ها دریافت کنم:',
+    'I only want to receive notifications for these projects:' => 'می خواهم آگاه سازی ها را فقط برای این پروژه ها دریافت کنم:',
     'view the task on Kanboard' => 'نمایش کار در کن برد',
     'Public access' => 'دسترسی عمومی',
     'Disable public access' => 'غیر فعال کردن دسترسی عمومی',

@@ -300,7 +300,7 @@ return array(
     'New comment' => '新しいコメント',
     'Comment updated' => 'コメントが更新されました',
     'New subtask' => '新しいサブタスク',
-    'I want to receive notifications only for those projects:' => '以下のプロジェクトにのみ通知を受け取る：',
+    'I only want to receive notifications for these projects:' => '以下のプロジェクトにのみ通知を受け取る：',
     'view the task on Kanboard' => 'Kanboard でタスクを見る',
     'Public access' => '公開アクセス',
     'Disable public access' => '公開アクセスを無効にする',

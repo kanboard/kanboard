@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Новий коментар',
     'Comment updated' => 'Коментар оновлено',
     'New subtask' => 'Нова підзадача',
-    'I want to receive notifications only for those projects:' => 'Отримувати повідомлення лише для проєктів:',
+    'I only want to receive notifications for these projects:' => 'Отримувати повідомлення лише для проєктів:',
     'view the task on Kanboard' => 'переглянути задачу в Kanboard',
     'Public access' => 'Публічний доступ',
     'Disable public access' => 'Вимкнути публічний доступ',

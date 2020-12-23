@@ -300,7 +300,7 @@ return array(
     'New comment' => 'Yeni yorum',
     'Comment updated' => 'Yorum güncellendi',
     'New subtask' => 'Yeni alt görev',
-    'I want to receive notifications only for those projects:' => 'Yalnızca bu projelerle ilgili bildirim almak istiyorum:',
+    'I only want to receive notifications for these projects:' => 'Yalnızca bu projelerle ilgili bildirim almak istiyorum:',
     'view the task on Kanboard' => 'bu görevi Kanboard üzerinde göster',
     'Public access' => 'Dışa açık erişim',
     'Disable public access' => 'Dışa açık erişimi kapat',

@@ -300,7 +300,7 @@ return array(
     'New comment' => ' 새로운 댓글',
     'Comment updated' => '댓글가 갱신되었습니다',
     'New subtask' => ' 새로운 서브 할일',
-    'I want to receive notifications only for those projects:' => '다음 프로젝트의 알림만 받겠습니다:',
+    'I only want to receive notifications for these projects:' => '다음 프로젝트의 알림만 받겠습니다:',
     'view the task on Kanboard' => 'Kanboard에서 할일을 본다',
     'Public access' => '공개 접속 설정',
     'Disable public access' => '공개 접속 비활성화',
