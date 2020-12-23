@@ -4,7 +4,7 @@
         <?= $this->form->csrf() ?>
 
         <?= $this->form->label(t('Username'), 'username') ?>
-        <?= $this->form->text('username', $values, $errors, array('autofocus', 'required')) ?>
+        <?= $this->form->text('username', $values, $errors, array('autofocus', 'required', 'autocomplete="username"')) ?>
         <p class="form-help"><?= t('Your profile must have a valid email address.') ?></p>
 
         <?= $this->form->label(t('Enter the text below'), 'captcha') ?>

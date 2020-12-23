@@ -21,11 +21,11 @@
 
 <h3><?= t('Test your device') ?></h3>
 <div class="panel">
-<form method="post" action="<?= $this->url->href('TwoFactorController', 'test', array('user_id' => $user['id'])) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('TwoFactorController', 'test', array('user_id' => $user['id'])) ?>">
 
     <?= $this->form->csrf() ?>
     <?= $this->form->label(t('Code'), 'code') ?>
-    <?= $this->form->text('code', array(), array(), array('placeholder="123456"', 'autofocus'), 'form-numeric') ?>
+    <?= $this->form->text('code', array(), array(), array('placeholder="123456"', 'autofocus'), 'form-numeric', 'autocomplete="one-time-code"', 'pattern="[0-9]*"', 'inputmode="numeric"') ?>
 
     <?= $this->modal->submitButtons(array('submitLabel' => t('Check my code'))) ?>
 </form>
