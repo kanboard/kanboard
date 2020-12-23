@@ -1424,4 +1424,5 @@ return array(
     'Comment' => 'Комментарий',
     'Collapse vertically' => 'Свернуть вертикально',
     'Expand vertically' => 'Развернуть вертикально',
+    // 'MXN - Mexican Peso' => '',
 );

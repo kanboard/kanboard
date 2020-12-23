@@ -1424,4 +1424,5 @@ return array(
     'Comment' => 'Megjegyzés',
     'Collapse vertically' => 'Összecsukás függőlegesen',
     'Expand vertically' => 'Kinyitás függőlegesen',
+    // 'MXN - Mexican Peso' => '',
 );
