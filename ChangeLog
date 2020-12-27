@@ -1,3 +1,23 @@
+Version 1.2.17 (December 27, 2020)
+----------------------------------
+
+* Fix grammatical errors
+* Add autocomplete attribute to HTML forms
+* Added "Mexican Peso" to the list of currencies
+* Added an option to send a copy of all generated e-mails to a BCC address
+* Don't force role of users if no LDAP groups defined
+* Keep the tags when converting a subtask to task
+* Bump symfony/stopwatch from 5.1.8 to 5.2.0
+* Bump pimple/pimple from 3.3.0 to 3.3.1
+* Bump symfony/stopwatch from 5.2.0 to 5.2.1
+* Publish Docker images to GitHub container registry in addition to Docker Hub
+* Use Github Actions to publish Docker images
+* Check if the user is assigned to any role in the project
+* Fix tasks.swimlane_id foreign key for Sqlite
+* Remove unused namespaces
+* Add mk_MK (Macedonian) translation
+* Update translations
+
 Version 1.2.16 (October 9, 2020)
 --------------------------------
 
