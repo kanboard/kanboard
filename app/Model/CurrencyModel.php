@@ -35,6 +35,7 @@ class CurrencyModel extends Base
             'CAD' => t('CAD - Canadian Dollar'),
             'AUD' => t('AUD - Australian Dollar'),
             'NZD' => t('NZD - New Zealand Dollar'),
+            'MXN' => t('MXN - Mexican Peso'),
             'INR' => t('INR - Indian Rupee'),
             'JPY' => t('JPY - Japanese Yen'),
             'RSD' => t('RSD - Serbian dinar'),

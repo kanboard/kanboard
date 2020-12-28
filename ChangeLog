@@ -1,3 +1,52 @@
+Version 1.2.17 (December 27, 2020)
+----------------------------------
+
+* Fix grammatical errors
+* Add autocomplete attribute to HTML forms
+* Added "Mexican Peso" to the list of currencies
+* Added an option to send a copy of all generated e-mails to a BCC address
+* Don't force role of users if no LDAP groups defined
+* Keep the tags when converting a subtask to task
+* Bump symfony/stopwatch from 5.1.8 to 5.2.0
+* Bump pimple/pimple from 3.3.0 to 3.3.1
+* Bump symfony/stopwatch from 5.2.0 to 5.2.1
+* Publish Docker images to GitHub container registry in addition to Docker Hub
+* Use Github Actions to publish Docker images
+* Check if the user is assigned to any role in the project
+* Fix tasks.swimlane_id foreign key for Sqlite
+* Remove unused namespaces
+* Add mk_MK (Macedonian) translation
+* Update translations
+
+Version 1.2.16 (October 9, 2020)
+--------------------------------
+
+* Update Composer dependencies
+* Update translations
+* Add link to toggle column scrolling in board view
+* Add missing environment variables in php-fpm config
+* Add setting that makes possible any new LDAP user to be Manager by default
+* Add ARIA label to modal link with title attribute
+* Add ARIA label to user mention
+* Add ARIA label to letter avatars
+* Add ARIA label to project select role without label
+* Add ARIA label to dropdown autocomplete without label 
+* Add ARIA label to form text editor without label
+* Add ARIA label to icons with title attributes
+* Add ARIA label for form inputs without labels
+* Add ARIA label for elements with titles
+* Add hidden accessible form input labels
+* Add hidden accessible titles
+* Hide user name from screen readers
+* Correct table collapsed column titles
+* Prevent the original page from being modified by the opened link
+* Allow email to be retrieve by SSO ReverseProxy
+* Fix grammatically incorrect error message
+* Add option to configure SMTP HELO name
+* Add new config parameter SESSION_HANDLER
+* Fix clearing of all Javascript storage
+* Added standard notification footer to comment email template
+
 Version 1.2.15 (June 19, 2020)
 ------------------------------
 

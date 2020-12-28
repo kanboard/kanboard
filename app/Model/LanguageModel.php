@@ -38,6 +38,7 @@ class LanguageModel extends Base
             'it_IT',
             'hr_HR',
             'hu_HU',
+            'mk_MK',
             'my_MY',
             'nl_NL',
             'nb_NO',
@@ -102,6 +103,7 @@ class LanguageModel extends Base
             'hr_HR' => 'Hrvatski',
             'it_IT' => 'Italiano',
             'hu_HU' => 'Magyar',
+            'mk_MK' => 'Македонски',
             'my_MY' => 'Melayu',
             'nl_NL' => 'Nederlands',
             'nb_NO' => 'Norsk',
@@ -176,6 +178,7 @@ class LanguageModel extends Base
             'fa_IR' => 'fa',
             'vi_VN' => 'vi',
             'bs_BA' => 'bs',
+            'mk_MK' => 'mk',
             'my_MY' => 'my',
         );
 

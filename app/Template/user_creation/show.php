@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('New User') ?></h2>
 </div>
-<form method="post" action="<?= $this->url->href('UserCreationController', 'save') ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('UserCreationController', 'save') ?>">
     <?= $this->form->csrf() ?>
 
     <div class="form-columns">
@@ -10,13 +10,13 @@
                 <legend><?= t('Profile') ?></legend>
 
                 <?= $this->form->label(t('Username'), 'username') ?>
-                <?= $this->form->text('username', $values, $errors, array('autofocus', 'required', 'maxlength="191"')) ?>
+                <?= $this->form->text('username', $values, $errors, array('autofocus', 'required', 'maxlength="191"', 'autocomplete="username"')) ?>
 
                 <?= $this->form->label(t('Name'), 'name') ?>
-                <?= $this->form->text('name', $values, $errors) ?>
+                <?= $this->form->text('name', $values, $errors, ['autocomplete="name"']) ?>
 
                 <?= $this->form->label(t('Email'), 'email') ?>
-                <?= $this->form->email('email', $values, $errors) ?>
+                <?= $this->form->email('email', $values, $errors, ['autocomplete="email"']) ?>
             </fieldset>
 
             <fieldset>
@@ -25,7 +25,7 @@
                 <p class="form-help"><?= t('If checked, this user will use a third-party system for authentication.') ?></p>
 
                 <?= $this->form->label(t('Password'), 'password') ?>
-                <?= $this->form->password('password', $values, $errors) ?>
+                <?= $this->form->password('password', $values, $errors, ['autocomplete="new-password"']) ?>
                 <p class="form-help"><?= t('The password is necessary only for local users.') ?></p>
 
                 <?= $this->form->label(t('Confirmation'), 'confirmation') ?>

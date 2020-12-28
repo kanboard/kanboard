@@ -17,7 +17,7 @@
         <?= $this->form->text('name', $values, $errors, array('required', 'autofocus', 'tabindex="1"')) ?>
 
         <?= $this->form->label(t('Email'), 'email') ?>
-        <?= $this->form->email('email', $values, $errors, array('tabindex="2"')) ?>
+        <?= $this->form->email('email', $values, $errors, array('tabindex="2"', 'autocomplete="email"')) ?>
         <p class="form-help"><?= t('The project email is optional and could be used by several plugins.') ?></p>
 
         <?= $this->form->label(t('Identifier'), 'identifier') ?>
