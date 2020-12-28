@@ -3,6 +3,12 @@ Pimple
 
 .. caution::
 
+    Pimple is now closed for changes. No new features will be added and no
+    cosmetic changes will be accepted either. The only accepted changes are
+    compatiblity with newer PHP versions and security issue fixes.
+
+.. caution::
+
     This is the documentation for Pimple 3.x. If you are using Pimple 1.x, read
     the `Pimple 1.x documentation`_. Reading the Pimple 1.x code is also a good
     way to learn more about how to create a simple Dependency Injection
