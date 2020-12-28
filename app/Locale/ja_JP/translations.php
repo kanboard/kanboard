@@ -1424,5 +1424,5 @@ return array(
     'Comment' => 'コメント',
     'Collapse vertically' => '縦に折りたたむ',
     'Expand vertically' => '縦の折りたたみを解除',
-    // 'MXN - Mexican Peso' => '',
+    'MXN - Mexican Peso' => 'メキシコ・ペソ',
 );
