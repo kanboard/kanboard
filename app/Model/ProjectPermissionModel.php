@@ -124,10 +124,8 @@ class ProjectPermissionModel extends Base
             return true;
         }
 
-        return in_array(
-            $this->projectUserRoleModel->getUserRole($project_id, $user_id),
-            array(Role::PROJECT_MANAGER, Role::PROJECT_MEMBER, Role::PROJECT_VIEWER)
-        );
+        return $this->userModel->isActive($user_id) &&
+               $this->isMember($project_id, $user_id);
     }
 
     /**
@@ -159,7 +157,7 @@ class ProjectPermissionModel extends Base
      */
     public function isMember($project_id, $user_id)
     {
-        return in_array($this->projectUserRoleModel->getUserRole($project_id, $user_id), array(Role::PROJECT_MEMBER, Role::PROJECT_MANAGER, Role::PROJECT_VIEWER));
+        return ! empty($this->projectUserRoleModel->getUserRole($project_id, $user_id));
     }
 
     /**

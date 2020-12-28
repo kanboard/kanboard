@@ -3,7 +3,7 @@ DOCKER_TAG := master
 VERSION := $(shell git rev-parse --short HEAD)
 
 .PHONY: archive test-sqlite test-mysql test-postgres sql \
-	docker-image docker-manifest docker-run docker-sh
+	docker-image docker-images docker-run docker-sh
 
 archive:
 	@ echo "Build archive: version=$(VERSION)"
@@ -40,31 +40,15 @@ sql:
 	@ grep -v "SET idle_in_transaction_session_timeout = 0;" app/Schema/Sql/postgres.sql > temp && mv temp app/Schema/Sql/postgres.sql
 
 docker-image:
-	@ docker build --build-arg VERSION=$(VERSION) -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
+	@ docker build --build-arg VERSION=master.$(VERSION) -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
 
-docker-manifest:
-	for version in $(VERSION) latest; do \
-		docker build --build-arg VERSION=$(VERSION) --build-arg BASE_IMAGE_ARCH=amd64 -t $(DOCKER_IMAGE):amd64-$${version} . && \
-		docker build --build-arg VERSION=$(VERSION) --build-arg BASE_IMAGE_ARCH=arm32v6 -t $(DOCKER_IMAGE):arm32v6-$${version} . && \
-		docker build --build-arg VERSION=$(VERSION) --build-arg BASE_IMAGE_ARCH=arm32v7 -t $(DOCKER_IMAGE):arm32v7-$${version} . && \
-		docker build --build-arg VERSION=$(VERSION) --build-arg BASE_IMAGE_ARCH=arm64v8 -t $(DOCKER_IMAGE):arm64v8-$${version} . && \
-		docker push $(DOCKER_IMAGE):amd64-$${version} && \
-		docker push $(DOCKER_IMAGE):arm32v6-$${version} && \
-		docker push $(DOCKER_IMAGE):arm32v7-$${version} && \
-		docker push $(DOCKER_IMAGE):arm64v8-$${version} && \
-		docker manifest create --amend $(DOCKER_IMAGE):$${version} \
-			$(DOCKER_IMAGE):amd64-$${version} \
-			$(DOCKER_IMAGE):arm32v6-$${version} \
-			$(DOCKER_IMAGE):arm32v7-$${version} \
-			$(DOCKER_IMAGE):arm64v8-$${version} && \
-		docker manifest annotate $(DOCKER_IMAGE):$${version} \
-			$(DOCKER_IMAGE):arm32v6-$${version} --os linux --arch arm --variant v6 && \
-		docker manifest annotate $(DOCKER_IMAGE):$${version} \
-			$(DOCKER_IMAGE):arm32v7-$${version} --os linux --arch arm --variant v7 && \
-		docker manifest annotate $(DOCKER_IMAGE):$${version} \
-			$(DOCKER_IMAGE):arm64v8-$${version} --os linux --arch arm64 --variant v8 && \
-		docker manifest push --purge $(DOCKER_IMAGE):$${version} ;\
-	done
+docker-images:
+	docker buildx build \
+		--platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 \
+		--file Dockerfile \
+		--build-arg VERSION=master.$(VERSION) \
+		--tag $(DOCKER_IMAGE):$(VERSION) \
+		.
 
 docker-run:
 	@ docker run --rm --name=kanboard -p 80:80 -p 443:443 $(DOCKER_IMAGE):$(DOCKER_TAG)

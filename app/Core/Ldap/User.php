@@ -121,15 +121,14 @@ class User
      */
     protected function getRole(array $groupIds)
     {
-        $role = Role::APP_USER;
-
         if (! $this->hasGroupsConfigured()) {
-            if (LDAP_USER_DEFAULT_ROLE_MANAGER) {
-                $role = Role::APP_MANAGER;
-            } else {
-                $role = Role::APP_USER;
-            }
-            return $role;
+            return null;
+        }
+	
+        if (LDAP_USER_DEFAULT_ROLE_MANAGER) {
+            $role = Role::APP_MANAGER;
+        } else {
+            $role = Role::APP_USER;
         }
 
         foreach ($groupIds as $groupId) {

@@ -1,0 +1,62 @@
+name: Docker
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  push:
+    tags:
+      - 'v*.*.*'
+jobs:
+  multiplatform-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Generate Docker tag
+        id: docker_tag
+        run: |
+          SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`
+          APP_VERSION="master.${SHORT_SHA}"
+          DOCKER_IMAGE=kanboard/kanboard
+          DOCKER_VERSION=dev
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+          DOCKER_VERSION="nightly"
+          TAGS="${DOCKER_IMAGE}:${DOCKER_VERSION},ghcr.io/${DOCKER_IMAGE}:${DOCKER_VERSION}"
+          elif [[ $GITHUB_REF == refs/tags/* ]]; then
+          DOCKER_VERSION=${GITHUB_REF#refs/tags/}
+          APP_VERSION=$DOCKER_VERSION
+          TAGS="${DOCKER_IMAGE}:${DOCKER_VERSION},ghcr.io/${DOCKER_IMAGE}:${DOCKER_VERSION},${DOCKER_IMAGE}:latest,ghcr.io/${DOCKER_IMAGE}:latest"
+          fi
+          echo ::set-output name=version::${APP_VERSION}
+          echo ::set-output name=tags::${TAGS}
+          echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1 
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
+          push: true
+          build-args: |
+            VERSION=${{ steps.docker_tag.outputs.version }}
+          tags: ${{ steps.docker_tag.outputs.tags }}

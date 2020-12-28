@@ -8,7 +8,52 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 124;
+const VERSION = 125;
+
+function version_125(PDO $pdo)
+{
+    $pdo->exec("
+      CREATE TABLE tasks_new
+        (
+            id                   INTEGER PRIMARY KEY,
+            title                TEXT NOCASE NOT NULL,
+            description          TEXT,
+            date_creation        INTEGER,
+            color_id             TEXT,
+            project_id           INTEGER REFERENCES projects(id) ON DELETE CASCADE,
+            column_id            INTEGER REFERENCES columns(id) ON DELETE CASCADE,
+            owner_id             INTEGER DEFAULT '0',
+            position             INTEGER,
+            is_active            INTEGER DEFAULT 1,
+            date_completed       INTEGER,
+            score                INTEGER,
+            date_due             INTEGER,
+            category_id          INTEGER DEFAULT 0,
+            creator_id           INTEGER DEFAULT '0',
+            date_modification    INTEGER DEFAULT '0',
+            reference            TEXT    DEFAULT '',
+            date_started         INTEGER,
+            time_spent           NUMERIC DEFAULT 0,
+            time_estimated       NUMERIC DEFAULT 0,
+            swimlane_id          INTEGER REFERENCES swimlanes(id) ON DELETE CASCADE,
+            date_moved           INTEGER DEFAULT 0,
+            recurrence_status    INTEGER DEFAULT 0 NOT NULL,
+            recurrence_trigger   INTEGER DEFAULT 0 NOT NULL,
+            recurrence_factor    INTEGER DEFAULT 0 NOT NULL,
+            recurrence_timeframe INTEGER DEFAULT 0 NOT NULL,
+            recurrence_basedate  INTEGER DEFAULT 0 NOT NULL,
+            recurrence_parent    INTEGER,
+            recurrence_child     INTEGER,
+            priority             INTEGER DEFAULT 0,
+            external_provider    TEXT,
+            external_uri         TEXT
+        )
+    ");
+
+    $pdo->exec('INSERT INTO tasks_new SELECT * FROM tasks');
+    $pdo->exec('DROP TABLE tasks');
+    $pdo->exec('ALTER TABLE tasks_new RENAME TO tasks');
+}
 
 function version_124(PDO $pdo)
 {
