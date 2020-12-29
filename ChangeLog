@@ -1,3 +1,14 @@
+Version 1.2.18 (December 28, 2020)
+----------------------------------
+
+* Sqlite migrations should have foreign keys disabled outside the transaction
+    => Existing behavior could lead to data loss if schema is changed
+    => If you are using Sqlite, skip version 1.2.17, upgrade directly to v1.2.18
+* Use more secure default Nginx SSL configuration in Docker image
+* Update vendor folder
+* Add missing pt_br translations
+* Update ja_JP translations
+
 Version 1.2.17 (December 27, 2020)
 ----------------------------------
 
