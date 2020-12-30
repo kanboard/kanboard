@@ -99,7 +99,7 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
         
         if (! empty($username)) {
             // log login failure in web server log to allow fail2ban usage
-            error_log('Kanboard: user '.$username.' authentication failure with IPAddress: ' $ipAddress);
+            error_log('Kanboard: user '.$username.' authentication failure with IP address: '.$ipAddress);
             $this->userLockingModel->incrementFailedLogin($username);
 
             if ($this->userLockingModel->getFailedLogin($username) > BRUTEFORCE_LOCKDOWN) {
@@ -108,7 +108,7 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
         }
         else {
             // log login failure in web server log to allow fail2ban usage
-            error_log('Kanboard: user Unknown authentication failure with IPAddress: ' $ipAddress);
+            error_log('Kanboard: user Unknown authentication failure with IP address: '.$ipAddress);
         }
     }
 }
