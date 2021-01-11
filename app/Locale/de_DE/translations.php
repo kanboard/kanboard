@@ -878,7 +878,7 @@ return array(
     'Estimated vs actual time' => 'Erwarteter vs. tatsächlicher Zeitaufwand',
     'RUB - Russian Ruble' => 'RUB - Russische Rubel',
     'Assign the task to the person who does the action when the column is changed' => 'Aufgabe der Person zuordnen, die die Aktion durchführt, wenn die Spalte geändert wird',
-    'Close a task in a specific column' => 'Schliesse eine Aufgabe in einer bestimmten Spalte',
+    'Close a task in a specific column' => 'Schließe eine Aufgabe in einer bestimmten Spalte',
     'Time-based One-time Password Algorithm' => 'Zeitbasierter Einmalpasswort Algorithmus',
     'Two-Factor Provider: ' => '2FA Anbieter: ',
     'Disable two-factor authentication' => 'Zwei-Faktor-Authentifizierung deaktivieren',
