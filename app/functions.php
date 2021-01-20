@@ -199,7 +199,7 @@ function build_app_version($ref, $commit_hash)
     if ($commit_hash !== '$Format:%H$') {
         return 'master.'.$commit_hash;
     } else if (file_exists('/version.txt')) {
-        return file_get_contents('/version.txt');
+        return rtrim(file_get_contents('/version.txt'));
     }
 
     return 'master.unknown_revision';
