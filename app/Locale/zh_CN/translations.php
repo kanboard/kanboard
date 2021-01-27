@@ -1417,7 +1417,7 @@ return array(
     'Do you really want to make the tag "%s" global?' => '您是否真的想将标签 "%s" 设置为全局标签？',
     'Enable global tags for this project' => '为该项目启用全局标签',
     'Group membership(s):' => '群组成员：',
-    '%s is a member of the following group(s): %s' => '％s 是以下组的成员： ％s ',
+    '%s is a member of the following group(s): %s' => '%s 是以下组的成员： %s',
     '%d/%d group(s) shown' => '%d/%d 个组已显示',
     'Subtask creation or modification' => '子任务创建或修改',
     'Assign the task to a specific user when the task is moved to a specific swimlane' => '将任务移至特定泳道时，将任务分配给指定用户',
