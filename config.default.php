@@ -102,11 +102,8 @@ define('DB_TIMEOUT', null);
 // Enable LDAP authentication (false by default)
 define('LDAP_AUTH', false);
 
-// LDAP server hostname
+// LDAP server protocol, hostname and port URL (ldap[s]://hostname:port)
 define('LDAP_SERVER', '');
-
-// LDAP server port (389 by default)
-define('LDAP_PORT', 389);
 
 // By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification
 define('LDAP_SSL_VERIFY', true);
