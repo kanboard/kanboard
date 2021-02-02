@@ -785,14 +785,6 @@ class LdapUserTest extends Base
         $this->assertEquals(array('is_ldap_user' => 1), $user->getExtraAttributes());
     }
 
-    public function testGetBaseDnNotConfigured()
-    {
-        $this->expectException('\LogicException');
-
-        $user = new User($this->query);
-        $user->getBaseDn();
-    }
-
     public function testGetLdapUserPatternNotConfigured()
     {
         $this->expectException('\LogicException');
