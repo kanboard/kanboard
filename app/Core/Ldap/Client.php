@@ -88,11 +88,11 @@ class Client
             putenv('LDAPTLS_REQCERT=never');
         }
 
-        if (is_integer($port)) {
-            $this->ldap = @ldap_connect($server, $port);
+        if (filter_var($server, FILTER_VALIDATE_URL) !== false) {
+            $this->ldap = @ldap_connect($server);
         }
         else {
-            $this->ldap = @ldap_connect($server);
+            $this->ldap = @ldap_connect($server, $port);
         }
 
         if ($this->ldap === false) {
