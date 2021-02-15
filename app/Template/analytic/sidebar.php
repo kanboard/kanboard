@@ -21,6 +21,9 @@
         <li <?= $this->app->checkMenuSelection('AnalyticController', 'timeComparison') ?>>
             <?= $this->modal->replaceLink(t('Estimated vs actual time'), 'AnalyticController', 'timeComparison', array('project_id' => $project['id'])) ?>
         </li>
+        <li <?= $this->app->checkMenuSelection('AnalyticController', 'estimatedVsActualByColumn') ?>>
+            <?= $this->modal->replaceLink(t('Estimated vs actual time per column'), 'AnalyticController', 'estimatedVsActualByColumn', array('project_id' => $project['id'])) ?>
+        </li>
 
         <?= $this->hook->render('template:analytic:sidebar', array('project' => $project)) ?>
     </ul>
