@@ -1,11 +1,13 @@
 ---
 name: Bug report
-about: This template is only for bug reports, use the forum for questions and feature requests.
+about: This template is only for bug reports
+title: ''
+labels: bug
+assignees: ''
 
 ---
 
 <!-- Please, read the documentation: https://docs.kanboard.org/ -->
-<!-- Ask questions on the Forum: https://kanboard.discourse.group/ -->
 
 ### Actual behaviour
 
@@ -27,7 +29,7 @@ about: This template is only for bug reports, use the forum for questions and fe
 
 ### Configuration
 
-- Kanboard version:
+- Kanboard version: <!-- provide exact version (not master) -->
 - Database type and version:
 - PHP version:
 - OS:
