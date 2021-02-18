@@ -1424,5 +1424,5 @@ return array(
     'Comment' => 'Kommentar',
     'Collapse vertically' => 'Sammenfolde lodret',
     'Expand vertically' => 'Udvide lodret',
-    // 'MXN - Mexican Peso' => '',
+    'MXN - Mexican Peso' => 'Mexicanske Peso',
 );
