@@ -43,9 +43,9 @@ class HookHelper extends Base
     public function render($hook, array $variables = array())
     {
         $buffer = '';
-        $currentVariables = array();
 
         foreach ($this->hook->getListeners($hook) as $params) {
+            $currentVariables = $variables;
             if (! empty($params['variables'])) {
                 $currentVariables = array_merge($variables, $params['variables']);
             } elseif (! empty($params['callable'])) {
