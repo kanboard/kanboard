@@ -46,7 +46,7 @@ class TaskAssignDueDateOnMoveColumn extends Base
     {
         return array(
             'duration' => t('Duration in days'),
-                                                'column_id' => t('Column'),
+            'column_id' => t('Column'),
         );
     }
 /**
@@ -62,7 +62,7 @@ class TaskAssignDueDateOnMoveColumn extends Base
             'task' => array(
                 'project_id',
             ),
-                                                'src_column_id',
+            'src_column_id',
         );
     }
 
