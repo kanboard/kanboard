@@ -60,7 +60,7 @@ class TaskDuplicationModel extends Base
             $this->taskLinkModel->create($new_task_id, $task_id, 4);
         }
 
-        $hook_values = [ 'source_task_id' => $task_id, 'target_task_id' => $new_task_id];
+        $hook_values = [ 'source_task_id' => $task_id, 'destination_task_id' => $new_task_id];
         $this->hook->reference('model:task:duplication:aftersave', $hook_values);
 
         return $new_task_id;
