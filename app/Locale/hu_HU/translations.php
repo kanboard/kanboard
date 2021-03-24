@@ -1424,5 +1424,6 @@ return array(
     'Comment' => 'Megjegyzés',
     'Collapse vertically' => 'Összecsukás függőlegesen',
     'Expand vertically' => 'Kinyitás függőlegesen',
-    // 'MXN - Mexican Peso' => '',
+    'MXN - Mexican Peso' => 'MXN – mexikói peso',
+    'HUF - Hungarian Forint' => 'HUF – magyar forint',
 );
