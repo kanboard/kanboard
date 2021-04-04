@@ -563,7 +563,7 @@ return array(
     'This chart show the task complexity over the time (Work Remaining).' => 'Dieses Diagramm zeigt die Aufgabenkomplexität über den Faktor Zeit (Verbleibende Arbeit).',
     'Screenshot taken %s' => 'Screenshot aufgenommen %s',
     'Add a screenshot' => 'Screenshot hinzufügen',
-    'Take a screenshot and press CTRL+V or ⌘+V to paste here.' => 'Nimm einen Screenshot auf und drücke STRG+V oder ⌘+V um ihn hier einzufügen.',
+    'Take a screenshot and press CTRL+V or ⌘+V to paste here.' => 'Nehmen Sie einen Screenshot auf und drücken STRG+V oder ⌘+V um ihn hier einzufügen.',
     'Screenshot uploaded successfully.' => 'Screenshot erfolgreich hochgeladen.',
     'SEK - Swedish Krona' => 'SEK - Schwedische Kronen',
     'Identifier' => 'Identifikator',
