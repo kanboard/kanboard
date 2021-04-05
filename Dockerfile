@@ -1,4 +1,4 @@
-FROM alpine:3.13.3
+FROM alpine:3.13.4
 
 VOLUME /var/www/app/data
 VOLUME /var/www/app/plugins
