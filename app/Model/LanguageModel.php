@@ -149,7 +149,7 @@ class LanguageModel extends Base
             'ca_ES' => 'ca',
             'da_DK' => 'da',
             'de_DE' => 'de',
-            'de_DE_du' => 'de-du',
+            'de_DE_du' => 'de',
             'en_GB' => 'en-GB',
             'en_US' => 'en',
             'es_ES' => 'es',
