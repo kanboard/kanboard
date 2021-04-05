@@ -280,29 +280,101 @@ class TaskPositionModel extends Base
             'recurrence_trigger' => $task['recurrence_trigger'],
         );
 
-        if ($task['swimlane_id'] != $new_swimlane_id) {
-            $this->taskEventJob->execute(
-                $task['id'],
-                array(TaskModel::EVENT_MOVE_SWIMLANE),
-                $changes,
-                $changes
-            );
-        }
-        if ($task['column_id'] != $new_column_id) {
-            $this->taskEventJob->execute(
-                $task['id'],
-                array(TaskModel::EVENT_MOVE_COLUMN),
-                $changes,
-                $changes
-            );
-        }
-        if ($task['position'] != $new_position) {
-            $this->taskEventJob->execute(
-                $task['id'],
-                array(TaskModel::EVENT_MOVE_POSITION),
-                $changes,
-                $changes
-            );
+        if (TRIGGER_TASK_MOVE_EVENTS === 'Column') {
+            if ($task['column_id'] != $new_column_id) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_COLUMN),
+                    $changes,
+                    $changes
+                );
+            } elseif ($task['swimlane_id'] != $new_swimlane_id) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_SWIMLANE),
+                    $changes,
+                    $changes
+                );
+            } elseif ($task['position'] != $new_position) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_POSITION),
+                    $changes,
+                    $changes
+                );
+            }
+        } elseif (TRIGGER_TASK_MOVE_EVENTS === 'Swimlane+Column') {
+            if ($task['swimlane_id'] != $new_swimlane_id) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_SWIMLANE),
+                    $changes,
+                    $changes
+                );
+            }
+            if ($task['column_id'] != $new_column_id) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_COLUMN),
+                    $changes,
+                    $changes
+                );
+            } elseif ($task['position'] != $new_position) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_POSITION),
+                    $changes,
+                    $changes
+                );
+            }
+        } elseif (TRIGGER_TASK_MOVE_EVENTS === 'All') {
+            if ($task['swimlane_id'] != $new_swimlane_id) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_SWIMLANE),
+                    $changes,
+                    $changes
+                );
+            }
+            if ($task['column_id'] != $new_column_id) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_COLUMN),
+                    $changes,
+                    $changes
+                );
+            }
+            if ($task['position'] != $new_position) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_POSITION),
+                    $changes,
+                    $changes
+                );
+            }
+        } else {
+            if ($task['swimlane_id'] != $new_swimlane_id) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_SWIMLANE),
+                    $changes,
+                    $changes
+                );
+            } elseif ($task['column_id'] != $new_column_id) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_COLUMN),
+                    $changes,
+                    $changes
+                );
+            } elseif ($task['position'] != $new_position) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_POSITION),
+                    $changes,
+                    $changes
+                );
+            }
         }
     }
 }
