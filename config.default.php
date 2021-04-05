@@ -276,7 +276,7 @@ define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT', 7);
 
 // Define which EVENTS will be triggered, when moving tasks between columns AND swimlanes at once
 // Leave empty for the default: ONLY the MoveSwimlane-Event will be triggered (Default-behavior until Kanboard 1.2.18)
-// Set to 'Column' if ONLY the MoveColumn-Event will be triggered
-// Set to 'SwimLane+Column' if the MoveSwimlane-Event AND the MoveColumn-Event will be triggered
-// Set to 'All' if the MoveSwimlane-Event, MoveColumn-Event AND the MovePosition-Event will be triggered
+// if set to 'Column': ONLY the MoveColumn-Event will be triggered
+// if set to 'SwimLane+Column': the MoveSwimlane-Event AND the MoveColumn-Event will be triggered
+// if set to 'All': the MoveSwimlane-Event, MoveColumn-Event AND the MovePosition-Event will be triggered
 define('TRIGGER_TASK_MOVE_EVENTS', '');
