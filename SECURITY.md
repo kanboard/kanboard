@@ -8,4 +8,4 @@ Only the latest stable version is supported.
 
 Do not open a new GitHub issue if the bug is a security vulnerability.
 
-Send an email to `security AT kanboard DOT net` will all the steps to reproduce the problem.
+Send an email to `security AT kanboard DOT net` with all the steps to reproduce the problem.
