@@ -1406,7 +1406,6 @@ return array(
     'Move the task to another column when the due date is less than a certain number of days' => 'هنگامی که تاریخ سررسید کمتر از تعداد روز مشخصی شد، کار را به ستونی دیگر منتقل کن',
     'Automatically update the start date when the task is moved away from a specific column' => 'هنگامی که کار از ستونی مشخص منتقل شد، تاریخ شروع کار را بصورت خودکار بروز رسانی کن',
     'HTTP Client:' => 'کلاینت HTTP:',
-    'XBT - bitcoin' => 'XBT - بیت کوین',
     'Assigned' => 'محول شده',
     // 'Task limits apply to each swimlane individually' => '',
     // 'Column task limits apply to each swimlane individually' => '',
@@ -1425,4 +1424,7 @@ return array(
     // 'Collapse vertically' => '',
     // 'Expand vertically' => '',
     // 'MXN - Mexican Peso' => '',
+    // 'Estimated vs actual time per column' => '',
+    // 'HUF - Hungarian Forint' => '',
+    'XBT - Bitcoin' => 'XBT - بیت کوین',
 );

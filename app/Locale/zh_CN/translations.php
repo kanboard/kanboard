@@ -1406,7 +1406,6 @@ return array(
     'Move the task to another column when the due date is less than a certain number of days' => '当任务即将在指定天数内超期时移动到另一栏',
     'Automatically update the start date when the task is moved away from a specific column' => '当任务离开指定栏目时自动开始计时',
     'HTTP Client:' => 'HTTP客户端',
-    'XBT - bitcoin' => 'XBT - 比特币',
     'Assigned' => '已分配',
     'Task limits apply to each swimlane individually' => '任务限制分别应用于每个泳道',
     'Column task limits apply to each swimlane individually' => '列任务限制分别应用于每个泳道',
@@ -1425,4 +1424,7 @@ return array(
     'Collapse vertically' => '垂直折叠',
     'Expand vertically' => '垂直展开',
     'MXN - Mexican Peso' => '墨西哥比索',
+    // 'Estimated vs actual time per column' => '',
+    // 'HUF - Hungarian Forint' => '',
+    'XBT - Bitcoin' => 'XBT - 比特币',
 );

@@ -1406,7 +1406,6 @@ return array(
     'Move the task to another column when the due date is less than a certain number of days' => 'Pindahkan tugas ke kolom lain ketika batas waktu kurang dari jumlah hari tertentu',
     'Automatically update the start date when the task is moved away from a specific column' => 'Secara otomatis memperbarui tanggal mulai ketika tugas dipindahkan dari kolom tertentu',
     'HTTP Client:' => 'HTTP Client:',
-    'XBT - bitcoin' => 'XBT - bitcoin',
     'Assigned' => 'Ditugaskan',
     'Task limits apply to each swimlane individually' => 'Batas tugas berlaku untuk setiap swimlane secara individual',
     'Column task limits apply to each swimlane individually' => 'Batas tugas kolom berlaku untuk setiap swimlane secara individual',
@@ -1425,4 +1424,7 @@ return array(
     'Collapse vertically' => 'Ciutkan secara vertikal',
     'Expand vertically' => 'Bentangkan secara vertikal',
     // 'MXN - Mexican Peso' => '',
+    // 'Estimated vs actual time per column' => '',
+    // 'HUF - Hungarian Forint' => '',
+    'XBT - Bitcoin' => 'XBT - Bitcoin',
 );

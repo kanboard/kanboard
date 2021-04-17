@@ -1406,7 +1406,6 @@ return array(
     'Move the task to another column when the due date is less than a certain number of days' => 'Mover a tarefa para outra coluna quando a data fim estimada for menor que uma quantidade de dias',
     'Automatically update the start date when the task is moved away from a specific column' => 'Atualizar automaticamente a data de início quando a tarefa sair de determinada coluna',
     'HTTP Client:' => 'Cliente HTTP:',
-    'XBT - bitcoin' => 'XBT - bitcoin',
     'Assigned' => 'Atribuído',
     'Task limits apply to each swimlane individually' => 'Limites de tarefas aplicam-se a cada raia individualmente',
     'Column task limits apply to each swimlane individually' => 'Limites de tarefas da coluna aplicam-se a cada raia individualmente',
@@ -1425,4 +1424,7 @@ return array(
     'Collapse vertically' => 'Contrair verticalmente',
     'Expand vertically' => 'Expandir verticalmente',
     'MXN - Mexican Peso' => 'Peso mexicano',
+    // 'Estimated vs actual time per column' => '',
+    // 'HUF - Hungarian Forint' => '',
+    'XBT - Bitcoin' => 'XBT - Bitcoin',
 );

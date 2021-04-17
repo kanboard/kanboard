@@ -1406,7 +1406,6 @@ return array(
     'Move the task to another column when the due date is less than a certain number of days' => 'Поместете ја задачата во друга колона кога рок за завршување е пократок од одреден број денови',
     'Automatically update the start date when the task is moved away from a specific column' => 'Автоматски ажурирајте го датумот на почеток кога задачата е отстранета од одредена колона',
     'HTTP Client:' => 'Клиент за HTTP',
-    'XBT - bitcoin' => 'XBT - биткоин',
     'Assigned' => 'Доделени',
     'Task limits apply to each swimlane individually' => 'Границата за бројот на задачите се однесува на секоја патеката одделно',
     'Column task limits apply to each swimlane individually' => 'Границата за бројот на задачи во колоната се однесува на секоја патеката одделно',
@@ -1425,4 +1424,7 @@ return array(
     'Collapse vertically' => 'Собери вертикално',
     'Expand vertically' => 'Проширете вертикално',
     // 'MXN - Mexican Peso' => '',
+    // 'Estimated vs actual time per column' => '',
+    // 'HUF - Hungarian Forint' => '',
+    'XBT - Bitcoin' => 'XBT - биткоин',
 );

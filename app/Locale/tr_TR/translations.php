@@ -1406,7 +1406,6 @@ return array(
     'Move the task to another column when the due date is less than a certain number of days' => 'Hedef tarihe belirli bir gün sayısından az kaldığında görevi başka kolona taşı',
     'Automatically update the start date when the task is moved away from a specific column' => 'Görev bir kolondan taşındığında başlangıç tarihini otomatik olarak güncelle',
     'HTTP Client:' => 'HTTP İstemci',
-    'XBT - bitcoin' => 'XBT - bitcoin',
     'Assigned' => 'Atanmış',
     'Task limits apply to each swimlane individually' => 'Görev limitini her kulvara ayrı uygula',
     'Column task limits apply to each swimlane individually' => 'Kolon görev limitleri her kulvara ayrı uygulansın',
@@ -1425,4 +1424,7 @@ return array(
     // 'Collapse vertically' => '',
     // 'Expand vertically' => '',
     // 'MXN - Mexican Peso' => '',
+    // 'Estimated vs actual time per column' => '',
+    // 'HUF - Hungarian Forint' => '',
+    'XBT - Bitcoin' => 'XBT - Bitcoin',
 );

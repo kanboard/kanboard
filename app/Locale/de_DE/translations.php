@@ -1406,7 +1406,6 @@ return array(
     'Move the task to another column when the due date is less than a certain number of days' => 'Verschieben der Aufgabe in eine andere Spalte, wenn die Fälligkeit kleiner als eine bestimmte Anzahl von Tagen ist',
     'Automatically update the start date when the task is moved away from a specific column' => 'Aktualisiert automatisch das Startdatum, wenn die Aufgabe aus einer bestimmten Spalte genommen wird',
     'HTTP Client:' => 'HTTP-Client:',
-    'XBT - bitcoin' => 'XBT - Bitcoin',
     'Assigned' => 'Zugeordnet',
     'Task limits apply to each swimlane individually' => 'Aufgabenlimit gilt pro Swimlane',
     'Column task limits apply to each swimlane individually' => 'Spaltenaufgabenlimit für jede Swimlane einzeln anwenden',
@@ -1425,4 +1424,7 @@ return array(
     'Collapse vertically' => 'Vertikal zuklappen',
     'Expand vertically' => 'Vertikal aufklappen',
     'MXN - Mexican Peso' => 'MXN - Mexikanischer Peso',
+    // 'Estimated vs actual time per column' => '',
+    // 'HUF - Hungarian Forint' => '',
+    'XBT - Bitcoin' => 'XBT - Bitcoin',
 );
