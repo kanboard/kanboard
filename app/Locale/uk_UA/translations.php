@@ -1406,7 +1406,6 @@ return array(
     'Move the task to another column when the due date is less than a certain number of days' => 'Перемістити цю задачу до іншої колонки, коли до терміну виконання залишилося менше вказаного числа днів',
     'Automatically update the start date when the task is moved away from a specific column' => 'Автоматично оновлювати дату початку, коли задачу переміщено із вказаної колонки',
     'HTTP Client:' => 'HTTP-клієнт:',
-    'XBT - bitcoin' => 'XBT – Біткоїн',
     'Assigned' => 'Призначені будь-кому',
     'Task limits apply to each swimlane individually' => 'Ліміт задач застосовується до кожної доріжки окремо',
     'Column task limits apply to each swimlane individually' => 'Ліміт задач у колонці застосовується до кожної доріжки окремо',
@@ -1425,4 +1424,7 @@ return array(
     'Collapse vertically' => 'Згорнути вертикально',
     'Expand vertically' => 'Розгорнути вертикально',
     // 'MXN - Mexican Peso' => '',
+    // 'Estimated vs actual time per column' => '',
+    // 'HUF - Hungarian Forint' => '',
+    'XBT - Bitcoin' => 'XBT – Біткоїн',
 );

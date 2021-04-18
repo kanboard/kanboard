@@ -85,7 +85,7 @@ class RememberMeSessionModel extends Base
             ->insert(array(
                 'user_id' => $user_id,
                 'ip' => $ip,
-                'user_agent' => $user_agent,
+                'user_agent' => substr($user_agent, 0, 255),
                 'token' => $token,
                 'sequence' => $sequence,
                 'expiration' => $expiration,

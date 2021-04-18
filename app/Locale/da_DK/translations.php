@@ -1406,7 +1406,6 @@ return array(
     'Move the task to another column when the due date is less than a certain number of days' => 'Flytte opgave til anden kolonne når afleveringsdato er mindre end et bestemt antal dage',
     'Automatically update the start date when the task is moved away from a specific column' => 'Opdatere automatisk startdato når opgaven flyttes væk fra bestemt kolonne',
     'HTTP Client:' => 'HTTP klient:',
-    'XBT - bitcoin' => 'XBT - bitcoin',
     'Assigned' => 'Tildelt',
     'Task limits apply to each swimlane individually' => 'Opgavegrænser gælder individuelt for hvert sport',
     'Column task limits apply to each swimlane individually' => 'Kolonne opgave grænser gælder individuelt for hvert spor',
@@ -1425,4 +1424,7 @@ return array(
     'Collapse vertically' => 'Sammenfolde lodret',
     'Expand vertically' => 'Udvide lodret',
     'MXN - Mexican Peso' => 'Mexicanske Peso',
+    // 'Estimated vs actual time per column' => '',
+    // 'HUF - Hungarian Forint' => '',
+    'XBT - Bitcoin' => 'XBT - Bitcoin',
 );

@@ -1406,7 +1406,6 @@ return array(
     'Move the task to another column when the due date is less than a certain number of days' => '期限までの日数が規定値以下になったら、タスクを別のカラムに移動する',
     'Automatically update the start date when the task is moved away from a specific column' => 'タスクが特定のカラムから移動された時、自動的に開始日を更新する',
     'HTTP Client:' => 'HTTPクライアント',
-    'XBT - bitcoin' => 'XBT - bitcoin',
     'Assigned' => '割当済み',
     'Task limits apply to each swimlane individually' => 'スイムレーン毎にタスク数制限を適用する。',
     'Column task limits apply to each swimlane individually' => 'スイムレーン毎にカラムのタスク数制限が適用されます。',
@@ -1425,4 +1424,7 @@ return array(
     'Collapse vertically' => '縦に折りたたむ',
     'Expand vertically' => '縦の折りたたみを解除',
     'MXN - Mexican Peso' => 'メキシコ・ペソ',
+    // 'Estimated vs actual time per column' => '',
+    // 'HUF - Hungarian Forint' => '',
+    'XBT - Bitcoin' => 'XBT - Bitcoin',
 );

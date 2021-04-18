@@ -1406,7 +1406,6 @@ return array(
     'Move the task to another column when the due date is less than a certain number of days' => 'Pokud je datum vypršení platnosti menší než určitý počet dní, přesuňte úlohu do jiného sloupce',
     'Automatically update the start date when the task is moved away from a specific column' => 'Automaticky aktualizuje datum zahájení, když je úkol přesunut z určitého sloupce',
     'HTTP Client:' => 'HTTP klient:',
-    'XBT - bitcoin' => 'XBT - bitcoin',
     'Assigned' => 'Přiřazen',
     'Task limits apply to each swimlane individually' => 'Omezení úkolů platí pro každou dráhu samostatně',
     'Column task limits apply to each swimlane individually' => 'Omezení úkolů ve sloupcích platí pro každou dráhu samostatně',
@@ -1425,4 +1424,7 @@ return array(
     'Collapse vertically' => 'Rozbalit svisle',
     'Expand vertically' => 'Sbalit svisle',
     // 'MXN - Mexican Peso' => '',
+    // 'Estimated vs actual time per column' => '',
+    // 'HUF - Hungarian Forint' => '',
+    'XBT - Bitcoin' => 'XBT - Bitcoin',
 );
