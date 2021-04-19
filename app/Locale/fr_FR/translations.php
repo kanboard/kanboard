@@ -1427,6 +1427,6 @@ return array(
     'Estimated vs actual time per column' => 'Temps estimé vs temps réel par colonne',
     'HUF - Hungarian Forint' => 'HUF - Forint hongrois',
     'XBT - Bitcoin' => 'XBT - Bitcoin',
-    // 'You must select a file to upload as your avatar!' => '',
-    // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    'You must select a file to upload as your avatar!' => 'Vous devez choisir un fichier à télécharger en tant qu\'avatar',
+    'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Le fichier que vous avez téléchargé n\'est pas une image valide! (Seulement *.gif, *.jpg, *.jpeg and *.png sont autorisés)',
 );
