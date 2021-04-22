@@ -21,8 +21,14 @@
         <?php foreach ($swimlanes as $index => $swimlane): ?>
             <?php if (! ($swimlane['nb_tasks'] === 0 && isset($not_editable))): ?>
 
-                <!-- Note: Do not show swimlane row on the top otherwise we can't collapse columns -->
-                <?php if ($index > 0 && $swimlane['nb_swimlanes'] > 1): ?>
+                <!-- Note: Columns must render first otherwise we can't collapse them -->
+                <?= $this->render('board/table_column', array(
+                    'swimlane' => $swimlane,
+                    'not_editable' => isset($not_editable),
+                )) ?>
+
+                <!-- Hide first swimlane-header if project has only 1 swimlane -->
+                <?php if ($index === 0 && $swimlane['nb_swimlanes'] > 1): ?>
                     <?= $this->render('board/table_swimlane', array(
                         'project' => $project,
                         'swimlane' => $swimlane,
@@ -30,12 +36,7 @@
                     )) ?>
                 <?php endif ?>
 
-                <?= $this->render('board/table_column', array(
-                    'swimlane' => $swimlane,
-                    'not_editable' => isset($not_editable),
-                )) ?>
-
-                <?php if ($index === 0 && $swimlane['nb_swimlanes'] > 1): ?>
+                <?php if ($index > 0 && $swimlane['nb_swimlanes'] > 1): ?>
                     <?= $this->render('board/table_swimlane', array(
                         'project' => $project,
                         'swimlane' => $swimlane,
