@@ -21,8 +21,8 @@
         <?php foreach ($swimlanes as $index => $swimlane): ?>
             <?php if (! ($swimlane['nb_tasks'] === 0 && isset($not_editable))): ?>
 
-                <!-- Note: Columns must render first otherwise we can't collapse them -->
-                <?= $this->render('board/table_column', array(
+                <!-- Note: Render "empty" columns first to setup the "grid" for collapsing columns -->
+                <?= $this->render('board/table_column_first', array(
                     'swimlane' => $swimlane,
                     'not_editable' => isset($not_editable),
                 )) ?>
@@ -43,6 +43,11 @@
                         'not_editable' => isset($not_editable),
                     )) ?>
                 <?php endif ?>
+
+                <?= $this->render('board/table_column', array(
+                    'swimlane' => $swimlane,
+                    'not_editable' => isset($not_editable),
+                )) ?>
 
                 <?= $this->render('board/table_tasks', array(
                     'project' => $project,
