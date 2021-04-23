@@ -21,16 +21,16 @@
         <?php foreach ($swimlanes as $index => $swimlane): ?>
             <?php if (! ($swimlane['nb_tasks'] === 0 && isset($not_editable))): ?>
 
-                <!-- Render empty columns to setup the "grid" for collapsing columns (Only once and only if more than 1 swimlane in project) -->
                 <?php if ($index === 0 && $swimlane['nb_swimlanes'] > 1): ?>
+                    <!-- Render empty columns to setup the "grid" for collapsing columns (Only once and only if more than 1 swimlane in project) -->
                     <?= $this->render('board/table_column_first', array(
                         'swimlane' => $swimlane,
                         'not_editable' => isset($not_editable),
                     )) ?>
                 <?php endif ?>
 
-                <!-- Hide swimlane-header if project has only 1 swimlane -->
                 <?php if ($index === 0 && $swimlane['nb_swimlanes'] > 1): ?>
+                    <!-- Only show first swimlane-header if project more than 1 swimlanes -->
                     <?= $this->render('board/table_swimlane', array(
                         'project' => $project,
                         'swimlane' => $swimlane,
