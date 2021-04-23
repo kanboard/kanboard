@@ -1,8 +1,6 @@
-<!-- FIRST column titles .. setting up the "grid" -->
-
-<tr class="board-swimlane-columns-<?= $swimlane['id'] ?> ">
+<tr class="board-swimlane-columns-first">
     <?php foreach ($swimlane['columns'] as $column): ?>
-    <th class="board-column-header-first board-column-header-first-<?= $column['id'] ?>" data-column-id="<?= $column['id'] ?>">
+    <th class="board-column-header board-column-header-<?= $column['id'] ?>" data-column-id="<?= $column['id'] ?>">
 
         <!-- column in collapsed mode -->
         <div class="board-column-collapsed">

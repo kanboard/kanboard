@@ -20,11 +20,12 @@
     width: 240px
 }
 
-#board th.board-column-header-first {
-    width: 240px;
-    visibility:hidden;
-    padding: 0px
+#board tr.board-swimlane-columns-first {
+    visibility: hidden;
+    padding: 0px;
+    height: 0px
 }
+
 
 #board td {
     vertical-align: top
@@ -45,10 +46,6 @@
     width: initial
 }
 
-#board th.board-column-header-first.board-column-compact {
-    width: initial
-}
-
 .board-column-collapsed {
     display: none
 }
@@ -59,13 +56,6 @@ td.board-column-task-collapsed {
 }
 
 #board th.board-column-header-collapsed {
-    width: 28px;
-    min-width: 28px;
-    text-align: center;
-    overflow: hidden
-}
-
-#board th.board-column-header-first-collapsed {
     width: 28px;
     min-width: 28px;
     text-align: center;
