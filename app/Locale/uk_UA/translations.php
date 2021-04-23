@@ -1427,4 +1427,6 @@ return array(
     // 'Estimated vs actual time per column' => '',
     // 'HUF - Hungarian Forint' => '',
     'XBT - Bitcoin' => 'XBT – Біткоїн',
+    // 'You must select a file to upload as your avatar!' => '',
+    // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
 );

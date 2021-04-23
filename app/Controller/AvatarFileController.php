@@ -33,8 +33,14 @@ class AvatarFileController extends BaseController
         $this->checkCSRFParam();
         $user = $this->getUser();
 
-        if (! $this->avatarFileModel->uploadImageFile($user['id'], $this->request->getFileInfo('avatar'))) {
-            $this->flash->failure(t('Unable to upload files, check the permissions of your data folder.'));
+        if (! $this->request->getFileInfo('avatar')['name']) {
+            $this->flash->failure(t('You must select a file to upload as your avatar!'));
+        } elseif (! $this->avatarFileModel->isAvatarImage($this->request->getFileInfo('avatar')['name'])) {
+            $this->flash->failure(t('The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)'));
+        } else {
+            if (! $this->avatarFileModel->uploadImageFile($user['id'], $this->request->getFileInfo('avatar'))) {
+                $this->flash->failure(t('Unable to upload files, check the permissions of your data folder.'));
+            }
         }
 
         $this->renderResponse($user['id']);
