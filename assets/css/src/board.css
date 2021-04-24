@@ -16,8 +16,18 @@
     margin-bottom: 0
 }
 
+#board tr.board-swimlane-columns-first {
+    visibility: hidden;
+    padding: 0px
+}
+
 #board th.board-column-header {
     width: 240px
+}
+
+#board th.board-column-header-first {
+    visibility:hidden;
+    padding: 0px
 }
 
 #board td {
