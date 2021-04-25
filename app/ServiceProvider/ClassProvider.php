@@ -24,6 +24,7 @@ class ClassProvider implements ServiceProviderInterface
             'EstimatedTimeComparisonAnalytic',
             'AverageLeadCycleTimeAnalytic',
             'AverageTimeSpentColumnAnalytic',
+            'EstimatedActualColumnAnalytic',
         ),
         'Model' => array(
             'ActionModel',

@@ -15,6 +15,7 @@ use Pimple\Container;
  * @property \Kanboard\Analytic\EstimatedTimeComparisonAnalytic      $estimatedTimeComparisonAnalytic
  * @property \Kanboard\Analytic\AverageLeadCycleTimeAnalytic         $averageLeadCycleTimeAnalytic
  * @property \Kanboard\Analytic\AverageTimeSpentColumnAnalytic       $averageTimeSpentColumnAnalytic
+ * @property \Kanboard\Analytic\EstimatedActualColumnAnalytic        $estimatedActualColumnAnalytic
  * @property \Kanboard\Core\Action\ActionManager                     $actionManager
  * @property \Kanboard\Core\ExternalLink\ExternalLinkManager         $externalLinkManager
  * @property \Kanboard\Core\ExternalTask\ExternalTaskManager         $externalTaskManager

@@ -99,6 +99,11 @@
                 <?php endif ?>
             </span>
 
+            <?php if (! empty($column['column_nb_tasks'])): ?>
+            <span title="<?= t('Task count') ?>" class="board-column-header-task-count">
+                <span><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $column['column_nb_tasks'] ?></span>
+            </span>
+            <?php endif ?>
             <?php if (! empty($column['column_nb_open_tasks'])): ?>
             <span title="<?= t('Total number of tasks in this column across all swimlanes') ?>" class="board-column-header-task-count">
                 <?php if ($column['task_limit'] > 0): ?>

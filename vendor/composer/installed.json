@@ -267,27 +267,27 @@
     },
     {
         "name": "pimple/pimple",
-        "version": "v3.3.0",
-        "version_normalized": "3.3.0.0",
+        "version": "v3.3.1",
+        "version_normalized": "3.3.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/silexphp/Pimple.git",
-            "reference": "e55d12f9d6a0e7f9c85992b73df1267f46279930"
+            "reference": "21e45061c3429b1e06233475cc0e1f6fc774d5b0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/silexphp/Pimple/zipball/e55d12f9d6a0e7f9c85992b73df1267f46279930",
-            "reference": "e55d12f9d6a0e7f9c85992b73df1267f46279930",
+            "url": "https://api.github.com/repos/silexphp/Pimple/zipball/21e45061c3429b1e06233475cc0e1f6fc774d5b0",
+            "reference": "21e45061c3429b1e06233475cc0e1f6fc774d5b0",
             "shasum": ""
         },
         "require": {
-            "php": "^7.2.5",
+            "php": ">=7.2.5",
             "psr/container": "^1.0"
         },
         "require-dev": {
-            "symfony/phpunit-bridge": "^3.4|^4.4|^5.0"
+            "symfony/phpunit-bridge": "^5.0"
         },
-        "time": "2020-03-03T09:12:48+00:00",
+        "time": "2020-11-24T20:35:42+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

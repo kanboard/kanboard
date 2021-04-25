@@ -80,12 +80,18 @@ class TaskEmail extends Base
     public function doAction(array $data)
     {
         $user = $this->userModel->getById($this->getParam('user_id'));
+        $subject = $this->getParam('subject');
+        
+        foreach ($data["task"] as $key => $value) {
+            $placeholder = sprintf('{{%s}}', $key);
+            $subject = str_replace($placeholder, $value, $subject);
+        }
 
         if (! empty($user['email'])) {
             $this->emailClient->send(
                 $user['email'],
                 $user['name'] ?: $user['username'],
-                $this->getParam('subject'),
+                $subject,
                 $this->template->render('notification/task_create', array(
                     'task' => $data['task'],
                 ))

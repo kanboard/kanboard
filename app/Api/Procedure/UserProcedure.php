@@ -103,7 +103,7 @@ class UserProcedure extends BaseProcedure
                 'username' => $user->getUsername(),
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
-                'role' => $user->getRole(),
+                'role' => $user->getRole() ?: Role::APP_USER,
                 'is_ldap_user' => 1,
             );
 
