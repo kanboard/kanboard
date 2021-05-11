@@ -17,7 +17,7 @@
         <?= $this->form->checkbox('per_swimlane_task_limits', t('Column task limits apply to each swimlane individually'), 1, false) ?>
 
         <?= $this->form->label(t('Task limit'), 'task_limit') ?>
-        <?= $this->form->number('task_limit', $values, $errors) ?>
+        <?= $this->form->number('task_limit', $values, $errors, array('min="0"')) ?>
 
         <?php if (count($projects_list) > 1): ?>
             <?= $this->form->label(t('Create from another project'), 'src_project_id') ?>
