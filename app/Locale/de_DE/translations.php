@@ -1429,4 +1429,7 @@ return array(
     'XBT - Bitcoin' => 'XBT - Bitcoin',
     'You must select a file to upload as your avatar!' => 'Sie müssen eine Datei auswählen, die als Avatar hochgeladen werden soll!',
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Die hochgeladene Datei ist kein gültiges Bild! (Nur *.gif, *.jpg, *.jpeg and *.png sind erlaubt!)',
+    'Move a task to another column AND swimlane' => 'Aufgabe in andere Spalte UND Swimlane verschieben',
+    '%s moved the task #%d to the column "%s" in the first swimlane' => '%s hat die Aufgabe #%d in die Spalte "%s" der ersten Swimlane verschoben',
+    '%s moved the task #%d to the column "%s" in swimlane "%s"' => '%s hat die Aufgabe #%d in die Spalte "%s" in der Swimlane "%s" verschoben',
 );
