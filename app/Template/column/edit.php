@@ -9,7 +9,7 @@
     <?= $this->form->text('title', $values, $errors, array('autofocus', 'required', 'maxlength="191"')) ?>
 
     <?= $this->form->label(t('Task limit'), 'task_limit') ?>
-    <?= $this->form->number('task_limit', $values, $errors) ?>
+    <?= $this->form->number('task_limit', $values, $errors, array('min="0"')) ?>
 
     <?= $this->form->checkbox('hide_in_dashboard', t('Hide tasks in this column in the dashboard'), 1, $values['hide_in_dashboard'] == 1) ?>
 

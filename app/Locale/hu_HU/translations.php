@@ -1406,7 +1406,6 @@ return array(
     'Move the task to another column when the due date is less than a certain number of days' => 'A feladat áthelyezése egy másik oszlopba, ha a határidő kevesebb egy bizonyos számú napnál',
     'Automatically update the start date when the task is moved away from a specific column' => 'A kezdési dátum automatikus frissítése, ha a feladatot áthelyezték egy bizonyos oszlopból',
     'HTTP Client:' => 'HTTP ügyfél:',
-    'XBT - bitcoin' => 'XBT – bitcoin',
     'Assigned' => 'Hozzárendelve',
     'Task limits apply to each swimlane individually' => 'A feladatkorlátok alkalmazása az egyes sávokra egyénileg',
     'Column task limits apply to each swimlane individually' => 'Az oszlop feladatkorlátjainak alkalmazása az egyes sávokra egyénileg',
@@ -1425,5 +1424,9 @@ return array(
     'Collapse vertically' => 'Összecsukás függőlegesen',
     'Expand vertically' => 'Kinyitás függőlegesen',
     'MXN - Mexican Peso' => 'MXN – mexikói peso',
+    'Estimated vs actual time per column' => 'Becsült és tényleges idő oszloponként',
     'HUF - Hungarian Forint' => 'HUF – magyar forint',
+    'XBT - Bitcoin' => 'XBT – bitcoin',
+    'You must select a file to upload as your avatar!' => 'Ki kell választania egy fájlt a profilképként való feltöltéshez!',
+    'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'A feltöltött fájl nem érvényes kép! Csak *.gif, *.jpg, *.jpeg és *.png engedélyezett.',
 );

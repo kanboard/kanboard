@@ -90,7 +90,7 @@ class UserSession extends Base
      *
      * @access public
      */
-    public function validatePostAuthentication()
+    public function setPostAuthenticationAsValidated()
     {
         session_set('postAuthenticationValidated', true);
     }

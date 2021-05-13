@@ -127,7 +127,7 @@ class UserSessionTest extends Base
         $_SESSION['postAuthenticationValidated'] = false;
         $this->assertFalse($userSession->isPostAuthenticationValidated());
 
-        $userSession->validatePostAuthentication();
+        $userSession->setPostAuthenticationAsValidated();
         $this->assertTrue($userSession->isPostAuthenticationValidated());
 
         $_SESSION['user'] = array();
