@@ -6,7 +6,7 @@
                 $this->text->e($task['column_title'])
             ) ?>
     <?php else: ?>
-        <?= e('%s moved the task %s to the column "%s" in swimlane "%s"',
+        <?= e('%s moved the task %s to the column "%s" in the swimlane "%s"',
                 $this->text->e($author),
                 $this->url->link(t('#%d', $task['id']), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])),
                 $this->text->e($task['column_title']),
