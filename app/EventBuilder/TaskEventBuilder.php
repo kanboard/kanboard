@@ -196,7 +196,7 @@ class TaskEventBuilder extends BaseEventBuilder
                 }
 
                 return e(
-                    '%s moved the task #%d to the column "%s" in swimlane "%s"',
+                    '%s moved the task #%d to the column "%s" in the swimlane "%s"',
                     $author,
                     $eventData['task']['id'],
                     $eventData['task']['column_title'],
