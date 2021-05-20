@@ -36,7 +36,7 @@ KB.keyboardShortcuts = function () {
             KB.trigger('modal.close');
             _KB.get("Dropdown").close();
         }
-    });
+    }, true);
 
     KB.onKey('Enter', submitForm, true, true);
     KB.onKey('Enter', submitForm, true, false, true);
