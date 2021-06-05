@@ -85,6 +85,9 @@ class PasswordResetValidator extends BaseValidator
             if (! $result) {
                 $errors['captcha'] = array(t('Invalid captcha'));
             }
+
+            // Invalidate captcha to avoid reuse.
+            session_remove('captcha');
         }
 
         return array($result, $errors);
