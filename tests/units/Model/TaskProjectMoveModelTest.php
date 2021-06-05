@@ -270,8 +270,9 @@ class TaskProjectMoveModelTest extends Base
 
         // Check tags
         $tags = $taskTagModel->getList(1);
-        $this->assertCount(2, $tags);
+        $this->assertCount(3, $tags);
         $this->assertArrayHasKey(5, $tags);
         $this->assertArrayHasKey(6, $tags);
+        $this->assertArrayHasKey(7, $tags);
     }
 }
