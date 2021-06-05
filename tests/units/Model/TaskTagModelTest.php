@@ -147,7 +147,7 @@ class TaskTagModelTest extends Base
         $this->assertEquals(5, $tagModel->create(1, 'T3'));
         $this->assertTrue($taskTagModel->save(1, 1, array('T0', 'T2', 'T3')));
 
-        $tags = $taskTagModel->getTagsByTaskNotAvailableInProject(1, 2)
+        $tags = $taskTagModel->getTagsByTaskNotAvailableInProject(1, 2);
         $this->assertCount(2, $tags);
         $this->assertEquals('T2', $tags[0]['name']);
         $this->assertEquals(1, $tags[0]['project_id']);
