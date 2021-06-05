@@ -64,6 +64,7 @@ class SubtaskHelper extends Base
                 'subtask_id' => $subtask['id'],
                 'user_id'    => $userId,
                 'fragment'   => $fragment,
+                'csrf_token' => $this->token->getReusableCSRFToken(),
             );
 
             if ($subtask['status'] == 0 && $this->hasSubtaskInProgress()) {

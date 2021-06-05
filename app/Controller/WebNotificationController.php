@@ -34,6 +34,7 @@ class WebNotificationController extends BaseController
      */
     public function flush()
     {
+        $this->checkReusableGETCSRFParam();
         $userId = $this->getUserId();
         $this->userUnreadNotificationModel->markAllAsRead($userId);
         $this->show();
@@ -46,6 +47,7 @@ class WebNotificationController extends BaseController
      */
     public function remove()
     {
+        $this->checkReusableGETCSRFParam();
         $user_id = $this->getUserId();
         $notification_id = $this->request->getIntegerParam('notification_id');
         $this->userUnreadNotificationModel->markAsRead($user_id, $notification_id);

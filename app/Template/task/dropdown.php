@@ -6,12 +6,12 @@
         <?php if ($this->projectRole->canUpdateTask($task)): ?>
             <?php if ($this->projectRole->canChangeAssignee($task) && array_key_exists('owner_id', $task) && $task['owner_id'] != $this->user->getId()): ?>
             <li>
-                <?= $this->url->icon('hand-o-right', t('Assign to me'), 'TaskModificationController', 'assignToMe', ['task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => isset($redirect) ? $redirect : '']) ?>
+                <?= $this->url->icon('hand-o-right', t('Assign to me'), 'TaskModificationController', 'assignToMe', ['task_id' => $task['id'], 'project_id' => $task['project_id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken(), 'redirect' => isset($redirect) ? $redirect : '']) ?>
             </li>
             <?php endif ?>
             <?php if (array_key_exists('date_started', $task) && empty($task['date_started'])): ?>
             <li>
-                <?= $this->url->icon('play', t('Set the start date automatically'), 'TaskModificationController', 'start', ['task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => isset($redirect) ? $redirect : '']) ?>
+                <?= $this->url->icon('play', t('Set the start date automatically'), 'TaskModificationController', 'start', ['task_id' => $task['id'], 'project_id' => $task['project_id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken(), 'redirect' => isset($redirect) ? $redirect : '']) ?>
             </li>
             <?php endif ?>
             <li>

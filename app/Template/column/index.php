@@ -12,7 +12,7 @@
 <?php else: ?>
     <table
         class="columns-table table-striped"
-        data-save-position-url="<?= $this->url->href('ColumnController', 'move', array('project_id' => $project['id'])) ?>">
+        data-save-position-url="<?= $this->url->href('ColumnController', 'move', array('project_id' => $project['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())) ?>">
         <thead>
         <tr>
             <th><?= t('Column') ?></th>

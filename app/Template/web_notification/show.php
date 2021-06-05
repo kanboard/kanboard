@@ -4,7 +4,7 @@
     <?php if (! empty($notifications)): ?>
     <ul>
         <li>
-            <?= $this->modal->replaceIconLink('check-square-o', t('Mark all as read'), 'WebNotificationController', 'flush', array('user_id' => $user['id'])) ?>
+            <?= $this->modal->replaceIconLink('check-square-o', t('Mark all as read'), 'WebNotificationController', 'flush', array('user_id' => $user['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())) ?>
         </li>
     </ul>
     <?php endif ?>
@@ -60,7 +60,7 @@
         </span>
         <div class="table-list-details">
             <?= $this->dt->datetime($notification['date_creation']) ?>
-            <?= $this->modal->replaceIconLink('check', t('Mark as read'), 'WebNotificationController', 'remove', array('user_id' => $user['id'], 'notification_id' => $notification['id'])) ?>
+            <?= $this->modal->replaceIconLink('check', t('Mark as read'), 'WebNotificationController', 'remove', array('user_id' => $user['id'], 'notification_id' => $notification['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())) ?>
         </div>
     </div>
     <?php endforeach ?>

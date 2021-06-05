@@ -4,7 +4,7 @@
         <?php if (!isset($is_public) || !$is_public): ?>
             <div class="comment-sorting">
                 <small>
-                    <?= $this->url->icon('sort', t('Change sorting'), 'CommentController', 'toggleSorting', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                    <?= $this->url->icon('sort', t('Change sorting'), 'CommentController', 'toggleSorting', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())) ?>
                     <?php if ($editable): ?>
                         <?= $this->modal->medium('paper-plane', t('Send by email'), 'CommentMailController', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
                     <?php endif ?>
