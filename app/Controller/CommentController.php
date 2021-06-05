@@ -166,6 +166,7 @@ class CommentController extends BaseController
      */
     public function toggleSorting()
     {
+        $this->checkReusableGETCSRFParam();
         $task = $this->getTask();
         $this->helper->comment->toggleSorting();
 

@@ -112,6 +112,16 @@ class Request extends Base
     }
 
     /**
+     * Get POST values without modification
+     *
+     * @return array
+     */
+    public function getRawFormValues()
+    {
+        return $this->post;
+    }
+
+    /**
      * Get POST value without modification
      *
      * @param  $name

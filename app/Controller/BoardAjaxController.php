@@ -21,6 +21,7 @@ class BoardAjaxController extends BaseController
      */
     public function save()
     {
+        $this->checkReusableGETCSRFParam();
         $project_id = $this->request->getIntegerParam('project_id');
 
         if (! $project_id || ! $this->request->isAjax()) {

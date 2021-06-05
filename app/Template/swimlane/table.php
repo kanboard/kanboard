@@ -1,6 +1,6 @@
 <table
     class="swimlanes-table table-striped table-scrolling"
-    data-save-position-url="<?= $this->url->href('SwimlaneController', 'move', array('project_id' => $project['id'])) ?>">
+    data-save-position-url="<?= $this->url->href('SwimlaneController', 'move', array('project_id' => $project['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())) ?>">
     <thead>
         <tr>
             <th><?= t('Name') ?></th>
