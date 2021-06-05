@@ -65,6 +65,7 @@ class AvatarFileController extends BaseController
     {
         $user_id = $this->request->getIntegerParam('user_id');
         $size = $this->request->getStringParam('size', 48);
+        $hash = $this->request->getStringParam('hash');
 
         if ($size > 100) {
             $this->response->status(400);
@@ -73,6 +74,11 @@ class AvatarFileController extends BaseController
 
         $filename = $this->avatarFileModel->getFilename($user_id);
         $etag = md5($filename.$size);
+
+        if ($hash !== $etag) {
+            $this->response->status(404);
+            return;
+        }
 
         $this->response->withCache(365 * 86400, $etag);
         $this->response->withContentType('image/png');
