@@ -18,6 +18,11 @@ header .title-container {
     }
 }
 
+header .title-container .title {
+    unicode-bidi: plaintext;
+    margin-inline-end: 10px;
+}
+
 header .board-selector-container {
     min-width: 320px;
     display: flex;
@@ -45,7 +50,7 @@ header .menus-container {
     header .menus-container {
         order: 1;
         margin-bottom: 5px;
-        margin-left: auto
+        margin-inline-start: auto
     }
 }
 
