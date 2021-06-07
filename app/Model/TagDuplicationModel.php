@@ -47,7 +47,7 @@ class TagDuplicationModel extends Base
         foreach ($tags as $tag) {
             $tag_id = $this->tagModel->getIdByName($dst_project_id, $tag['name']);
 
-            if ( empty($tag_id) ) {
+            if (empty($tag_id)) {
                 $tag_id = $this->tagModel->create($dst_project_id, $tag['name'], $tag['color_id']);
             }
 
@@ -85,7 +85,7 @@ class TagDuplicationModel extends Base
         foreach ($tags as $tag) {
             $tag_id = $this->tagModel->getIdByName($dst_project_id, $tag['name']);
 
-            if ( empty($tag_id) ) {
+            if (empty($tag_id)) {
                 $tag_id = $this->tagModel->create($dst_project_id, $tag['name'], $tag['color_id']);
             }
 
