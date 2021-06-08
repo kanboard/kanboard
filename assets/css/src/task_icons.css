@@ -1,6 +1,6 @@
 .task-list-avatars {
     display: inline-block;
-    float: start
+    float: inline-start;
 }
 
 @media (max-width: 768px) {
@@ -23,7 +23,7 @@
 .task-board-icons,
 .task-list-icons {
     font-size: 0.8em;
-    text-align: right
+    text-align: end
 }
 
 .task-board-icons a,
@@ -108,17 +108,17 @@
 span.task-icon-age-total {
     border: 1px solid #e5e5e5;
     padding: 1px 3px 1px 3px;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px
+    border-start-start-radius: 3px;
+    border-end-start-radius: 3px
 }
 
 span.task-icon-age-column {
     border: 1px solid #e5e5e5;
-    border-left: none;
+    border-inline-start: none;
     margin-inline-start: -5px;
     padding: 1px 3px 1px 3px;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px
+    border-start-end-radius: 3px;
+    border-end-end-radius: 3px
 }
 
 .task-board span.task-icon-age-total,
