@@ -19,7 +19,6 @@ header .title-container {
 }
 
 header .title-container .title {
-    unicode-bidi: plaintext;
     margin-inline-end: 10px;
 }
 
