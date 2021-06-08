@@ -20,8 +20,8 @@
 
 .file-thumbnail img {
     cursor: pointer;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px
+    border-start-start-radius: 5px;
+    border-start-end-radius: 5px
 }
 
 .file-thumbnail img:hover {
