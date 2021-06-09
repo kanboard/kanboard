@@ -1,3 +1,20 @@
+Version 1.2.20 (June 8, 2021)
+-----------------------------
+
+* Duplicate tags when moving or duplicating tasks to another project
+* Bump symfony/stopwatch to 5.3.0
+* Avoid user enumeration by using avatar image URL
+* Invalidate captcha after it is used
+* Avoid user enumeration using password reset functionality
+* Add missing CSRF checks
+* Fix bug in search when using the plus sign
+* Close dialogs using Escape key even if focus is in input field
+* Add a min="0" attribute to task_list form input
+* Keep swimlane headers at the top
+* Catch error when trying to upload empty or invalid avatar image
+* Added new template hooks
+* Update translations
+
 Version 1.2.19 (April 16, 2021)
 -------------------------------
 
