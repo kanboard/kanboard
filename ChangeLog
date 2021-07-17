@@ -1,3 +1,47 @@
+Version 1.2.20 (June 8, 2021)
+-----------------------------
+
+* Duplicate tags when moving or duplicating tasks to another project
+* Bump symfony/stopwatch to 5.3.0
+* Avoid user enumeration by using avatar image URL
+* Invalidate captcha after it is used
+* Avoid user enumeration using password reset functionality
+* Add missing CSRF checks
+* Fix bug in search when using the plus sign
+* Close dialogs using Escape key even if focus is in input field
+* Add a min="0" attribute to task_list form input
+* Keep swimlane headers at the top
+* Catch error when trying to upload empty or invalid avatar image
+* Added new template hooks
+* Update translations
+
+Version 1.2.19 (April 16, 2021)
+-------------------------------
+
+* Trim user agent for RememberMe sessions because MySQL use a varchar(255) column
+* Update Docker image to Alpine 3.13.4
+* Added "Deutsch (du)" language
+* Fixed `createLdapUser` API procedure when LDAP groups are not configured
+* Write RememberMe cookie only after the two-factor code has been validated
+* Avoid warning when removing a plugin zip archive
+* Update Hungarian translation
+* Add new hook `model:task:duplication:aftersave`
+* Bump symfony/stopwatch from 5.2.3 to 5.2.4
+* Bump pimple/pimple from 3.3.1 to 3.4.0
+* Bump gregwar/captcha from 1.1.8 to 1.1.9
+* Added new analytic component: "Estimated vs actual time per column"
+* Do not retain any changes between shared plugins variables
+* Display number of tasks according to filter
+* Add support for LDAP protocol/host/port configuration by URL; make `BASE_DN` optional
+    - `ldap_connect($host, $port)` function signature is deprecated
+    - Querying an AD Global Catalog across an entire forest requires an empty base DN
+* Use an absolute file path in `AssetHelper` class for `css()` & `js()` functions
+* Remove whitespace at the end of `APP_VERSION` constant
+* Add IP address to authentication error logs
+* Add interpolation expressions to e-mail subject in automatic action "Send a task by email to someone"
+    - For example: `Email subject = {{column_title}}: {{title}} (#{{id}})`
+* Add Hungarian Forint to the list of currencies
+
 Version 1.2.18 (December 28, 2020)
 ----------------------------------
 

@@ -55,10 +55,10 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
         );
 
         if ($event->getAuthType() === 'RememberMe') {
-            $this->userSession->validatePostAuthentication();
+            $this->userSession->setPostAuthenticationAsValidated();
         }
 
-        if (session_is_true('hasRememberMe')) {
+        if (session_is_true('hasRememberMe') && ! $this->userSession->hasPostAuthentication()) {
             $session = $this->rememberMeSessionModel->create($this->userSession->getId(), $ipAddress, $userAgent);
             $this->rememberMeCookie->write($session['token'], $session['sequence'], $session['expiration']);
         }

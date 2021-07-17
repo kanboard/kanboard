@@ -149,8 +149,12 @@ class ProjectViewController extends BaseController
      */
     public function doDuplication()
     {
+        $this->checkCSRFForm();
+
         $project = $this->getProject();
-        $project_id = $this->projectDuplicationModel->duplicate($project['id'], array_keys($this->request->getValues()), $this->userSession->getId());
+        $values = $this->request->getRawFormValues();
+
+        $project_id = $this->projectDuplicationModel->duplicate($project['id'], array_keys($values), $this->userSession->getId());
 
         if ($project_id !== false) {
             $this->flash->success(t('Project cloned successfully.'));

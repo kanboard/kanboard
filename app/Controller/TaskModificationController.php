@@ -16,6 +16,7 @@ class TaskModificationController extends BaseController
 {
     public function assignToMe()
     {
+        $this->checkReusableGETCSRFParam();
         $task = $this->getTask();
         $values = ['id' => $task['id'], 'owner_id' => $this->userSession->getId()];
 
@@ -38,6 +39,7 @@ class TaskModificationController extends BaseController
      */
     public function start()
     {
+        $this->checkReusableGETCSRFParam();
         $task = $this->getTask();
         $values = ['id' => $task['id'], 'date_started' => time()];
 

@@ -30,7 +30,7 @@
         <?= $this->form->checkbox('per_swimlane_task_limits', t('Task limits apply to each swimlane individually'), 1, $project['per_swimlane_task_limits'] == 1, '', array('tabindex' => 5)) ?>
 
         <?= $this->form->label(t('Task limit'), 'task_limit') ?>
-        <?= $this->form->number('task_limit', $values, $errors, array('tabindex' => 6)) ?>
+        <?= $this->form->number('task_limit', $values, $errors, array('tabindex' => 6, 'min="0"')) ?>
     </fieldset>
 
     <fieldset>

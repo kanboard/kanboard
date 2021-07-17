@@ -31,6 +31,7 @@ class TaskMovePositionController extends BaseController
 
     public function save()
     {
+        $this->checkReusableGETCSRFParam();
         $task = $this->getTask();
         $values = $this->request->getJson();
 

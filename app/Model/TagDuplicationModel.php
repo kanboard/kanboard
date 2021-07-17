@@ -47,9 +47,11 @@ class TagDuplicationModel extends Base
         foreach ($tags as $tag) {
             $tag_id = $this->tagModel->getIdByName($dst_project_id, $tag['name']);
 
-            if ($tag_id) {
-                $this->taskTagModel->associateTag($dst_task_id, $tag_id);
+            if (empty($tag_id)) {
+                $tag_id = $this->tagModel->create($dst_project_id, $tag['name'], $tag['color_id']);
             }
+
+            $this->taskTagModel->associateTag($dst_task_id, $tag_id);
         }
     }
 
@@ -70,7 +72,7 @@ class TagDuplicationModel extends Base
     }
 
     /**
-     * Remove tags that are not available in destination project
+     * Sync tags that are not available in destination project
      *
      * @access public
      * @param  integer $task_id
@@ -78,10 +80,17 @@ class TagDuplicationModel extends Base
      */
     public function syncTaskTagsToAnotherProject($task_id, $dst_project_id)
     {
-        $tag_ids = $this->taskTagModel->getTagIdsByTaskNotAvailableInProject($task_id, $dst_project_id);
+        $tags = $this->taskTagModel->getTagsByTaskNotAvailableInProject($task_id, $dst_project_id);
 
-        foreach ($tag_ids as $tag_id) {
-            $this->taskTagModel->dissociateTag($task_id, $tag_id);
+        foreach ($tags as $tag) {
+            $tag_id = $this->tagModel->getIdByName($dst_project_id, $tag['name']);
+
+            if (empty($tag_id)) {
+                $tag_id = $this->tagModel->create($dst_project_id, $tag['name'], $tag['color_id']);
+            }
+
+            $this->taskTagModel->dissociateTag($task_id, $tag['id']);
+            $this->taskTagModel->associateTag($task_id, $tag_id);
         }
     }
 }
