@@ -7,6 +7,12 @@ assignees: ''
 
 ---
 
+### Checklist
+
+- [ ] I verified that Kanboard is correctly installed
+- [ ] I checked that the problem does not come from a plugin
+- [ ] I checked that the problem is not already reported
+
 <!-- Please, read the documentation: https://docs.kanboard.org/ -->
 
 ### Actual behaviour
