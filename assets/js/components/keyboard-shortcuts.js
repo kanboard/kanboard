@@ -54,6 +54,12 @@ KB.keyboardShortcuts = function () {
             }
         });
 
+        KB.onKey('p', function () {
+            if (! KB.modal.isOpen()) {
+                _KB.get('BoardVerticalScrolling').toggle();
+            }
+        });
+
         KB.onKey('s', function () {
             if (! KB.modal.isOpen()) {
                 _KB.get('BoardCollapsedMode').toggle();

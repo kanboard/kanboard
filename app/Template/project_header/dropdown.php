@@ -20,10 +20,10 @@
         </li>
         <li>
             <span class="filter-vert-collapse">
-                <i class="fa fa-arrow-up fa-fw"></i> <a href="#" class="filter-vert-toggle-collapse"><?= t('Collapse vertically') ?></a>
+                <i class="fa fa-arrow-up fa-fw"></i> <a href="#" class="filter-vert-toggle-collapse" title="<?= t('Keyboard shortcut: "%s"', 'p') ?>"><?= t('Collapse vertically') ?></a>
             </span>
             <span class="filter-vert-expand" style="display: none">
-                <i class="fa fa-arrow-down fa-fw"></i> <a href="#" class="filter-vert-toggle-collapse"><?= t('Expand vertically') ?></a>
+                <i class="fa fa-arrow-down fa-fw"></i> <a href="#" class="filter-vert-toggle-collapse" title="<?= t('Keyboard shortcut: "%s"', 'p') ?>"><?= t('Expand vertically') ?></a>
             </span>
         </li>
         <?php endif ?>
