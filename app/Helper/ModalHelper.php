@@ -30,7 +30,7 @@ class ModalHelper extends Base
             'url'         => $this->helper->url->href($controller, $action, $params, true),
             'submitLabel' => $submitLabel ?: t('Yes'),
             'orLabel'     => t('or'),
-            'cancelLabel' => t('cancel'),
+            'cancelLabel' => t('Cancel'),
             'tabindex'    => $tabindex,
         ));
     }
