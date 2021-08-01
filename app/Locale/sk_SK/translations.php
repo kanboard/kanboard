@@ -1422,9 +1422,9 @@ return array(
     'Collapse vertically' => 'Zbaliť vertikálne',
     'Expand vertically' => 'Rozbaliť vertikálne',
     'MXN - Mexican Peso' => 'Mexické peso',
-    // 'Estimated vs actual time per column' => '',
-    // 'HUF - Hungarian Forint' => '',
+    'Estimated vs actual time per column' => 'Očakávaný a aktuálny čas na stĺpec',
+    'HUF - Hungarian Forint' => 'HUF – Maďarský forint',
     'XBT - Bitcoin' => 'XBT – Bitcoin',
-    // 'You must select a file to upload as your avatar!' => '',
-    // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    'You must select a file to upload as your avatar!' => 'Musíte zvoliť súbor na nahratie ako svoj avatar',
+    'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'nahraný súbor nie je paltný obrázok! (Povolené sú len *.gif, *.jpg, *.jpeg a *.png!)',
 );
