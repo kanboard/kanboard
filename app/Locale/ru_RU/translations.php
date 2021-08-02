@@ -1422,9 +1422,9 @@ return array(
     'Collapse vertically' => 'Свернуть вертикально',
     'Expand vertically' => 'Развернуть вертикально',
     'MXN - Mexican Peso' => 'MXN - Мексиканское песо',
-    // 'Estimated vs actual time per column' => '',
-    // 'HUF - Hungarian Forint' => '',
+    'Estimated vs actual time per column' => 'Запланировано и реально затрачено времени по колонкам',
+    'HUF - Hungarian Forint' => 'HUF - Венгерский форинт',
     'XBT - Bitcoin' => 'XBT - Биткоин',
-    // 'You must select a file to upload as your avatar!' => '',
-    // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    'You must select a file to upload as your avatar!' => 'Вы должны выбрать файл для загрузки в качестве аватара!',
+    'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Выбранный вами файл не является изображением! (Допустимые расширения: *.gif, *.jpg, *.jpeg, *.png)',
 );
