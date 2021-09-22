@@ -195,6 +195,9 @@ define('LDAP_GROUP_USER_ATTRIBUTE', 'username');
 // LDAP attribute for the group name
 define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
+// Enable/Disable groups synchronization when external authentication is used.
+define('LDAP_GROUP_SYNC', true);
+
 // Enable/disable the reverse proxy authentication
 define('REVERSE_PROXY_AUTH', false);
 
