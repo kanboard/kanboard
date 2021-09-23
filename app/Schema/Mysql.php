@@ -1104,8 +1104,8 @@ function version_46(PDO $pdo)
     $rq->execute(array('is duplicated by', get_last_insert_id($pdo)));
     $arq->execute(array(get_last_insert_id($pdo), 'duplicates'));
 
-    $rq->execute(array('is a parent of', 0));
-    $rq->execute(array('is a child of', get_last_insert_id($pdo)));
+    $rq->execute(array('is a child of', 0));
+    $rq->execute(array('is a parent of', get_last_insert_id($pdo)));
     $arq->execute(array(get_last_insert_id($pdo), 'is a parent of'));
 
     $rq->execute(array('is a milestone of', 0));
