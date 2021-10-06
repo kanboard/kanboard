@@ -107,7 +107,7 @@ class TaskViewController extends BaseController
         $task = $this->getTask();
 
         $subtask_paginator = $this->paginator
-            ->setUrl('TaskViewController', 'timetracking', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'pagination' => 'subtasks'))
+            ->setUrl('TaskViewController', 'timetracking', array('task_id' => $task['id'], 'pagination' => 'subtasks'))
             ->setMax(15)
             ->setOrder('start')
             ->setDirection('DESC')

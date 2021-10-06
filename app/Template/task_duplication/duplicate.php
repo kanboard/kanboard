@@ -10,6 +10,6 @@
     <?= $this->modal->confirmButtons(
         'TaskDuplicationController',
         'duplicate',
-        array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'confirmation' => 'yes')
+        array('task_id' => $task['id'], 'confirmation' => 'yes')
     ) ?>
 </div>

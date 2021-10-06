@@ -1,7 +1,7 @@
 <?php if (! empty($subtasks)): ?>
     <table
         class="subtasks-table table-striped table-scrolling"
-        data-save-position-url="<?= $this->url->href('SubtaskController', 'movePosition', array('project_id' => $task['project_id'], 'task_id' => $task['id'])) ?>"
+        data-save-position-url="<?= $this->url->href('SubtaskController', 'movePosition', array('task_id' => $task['id'])) ?>"
     >
     <thead>
         <tr>

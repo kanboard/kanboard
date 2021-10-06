@@ -10,6 +10,6 @@
     <?= $this->modal->confirmButtons(
         'TaskInternalLinkController',
         'remove',
-        array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])
+        array('link_id' => $link['id'], 'task_id' => $task['id'])
     ) ?>
 </div>

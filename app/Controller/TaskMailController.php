@@ -41,7 +41,7 @@ class TaskMailController extends BaseController
                 'task_id' => $task['id'],
             ));
 
-            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'), true);
+            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id']), 'comments'), true);
         } else {
             $this->create($values, $errors);
         }
