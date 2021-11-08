@@ -158,7 +158,8 @@ define('LDAP_USER_ATTRIBUTE_PHOTO', '');
 // Put an empty string to disable language sync
 define('LDAP_USER_ATTRIBUTE_LANGUAGE', '');
 
-// Allow automatic LDAP user creation
+// Automatically create a user profile when a user authenticates via LDAP.
+// If set to false, only LDAP users can log in for whom a Kanboard profile already exists.
 define('LDAP_USER_CREATION', true);
 
 // Set new user as Manager
