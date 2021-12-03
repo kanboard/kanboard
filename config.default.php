@@ -102,11 +102,8 @@ define('DB_TIMEOUT', null);
 // Enable LDAP authentication (false by default)
 define('LDAP_AUTH', false);
 
-// LDAP server hostname
+// LDAP server protocol, hostname and port URL (ldap[s]://hostname:port)
 define('LDAP_SERVER', '');
-
-// LDAP server port (389 by default)
-define('LDAP_PORT', 389);
 
 // By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification
 define('LDAP_SSL_VERIFY', true);
@@ -161,7 +158,8 @@ define('LDAP_USER_ATTRIBUTE_PHOTO', '');
 // Put an empty string to disable language sync
 define('LDAP_USER_ATTRIBUTE_LANGUAGE', '');
 
-// Allow automatic LDAP user creation
+// Automatically create a user profile when a user authenticates via LDAP.
+// If set to false, only LDAP users can log in for whom a Kanboard profile already exists.
 define('LDAP_USER_CREATION', true);
 
 // Set new user as Manager
@@ -197,6 +195,9 @@ define('LDAP_GROUP_USER_ATTRIBUTE', 'username');
 
 // LDAP attribute for the group name
 define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
+
+// Enable/Disable groups synchronization when external authentication is used.
+define('LDAP_GROUP_SYNC', true);
 
 // Enable/disable the reverse proxy authentication
 define('REVERSE_PROXY_AUTH', false);

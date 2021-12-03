@@ -133,7 +133,8 @@ class Installer extends \Kanboard\Core\Base
      */
     protected function cleanupArchive(ZipArchive $zip)
     {
-        unlink($zip->filename);
+        $filename = $zip->filename;
         $zip->close();
+        unlink($filename);
     }
 }

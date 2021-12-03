@@ -39,7 +39,11 @@ class SubtaskTaskConversionModel extends Base
         ));
 
         if ($task_id !== false) {
-            $this->taskLinkModel->create($task_id, $subtask['task_id'], 6);
+            $link = $this->linkModel->getByLabel(t('is a child of'));
+            if ($link) {
+                $this->taskLinkModel->create($task_id, $subtask['task_id'], $link['id']);
+            }
+
             $this->tagDuplicationModel->duplicateTaskTags($parent_task['id'], $task_id);
             $this->subtaskModel->remove($subtask_id);
         }

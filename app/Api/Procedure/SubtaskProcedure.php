@@ -48,7 +48,7 @@ class SubtaskProcedure extends BaseProcedure
         return $valid ? $this->subtaskModel->create($values) : false;
     }
 
-    public function updateSubtask($id, $task_id, $title = null, $user_id = null, $time_estimated = null, $time_spent = null, $status = null)
+    public function updateSubtask($id, $task_id, $title = null, $user_id = null, $time_estimated = null, $time_spent = null, $status = null, $position = null)
     {
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateSubtask', $task_id);
         
@@ -60,6 +60,7 @@ class SubtaskProcedure extends BaseProcedure
             'time_estimated' => $time_estimated,
             'time_spent' => $time_spent,
             'status' => $status,
+            'position' => $position
         );
 
         foreach ($values as $key => $value) {

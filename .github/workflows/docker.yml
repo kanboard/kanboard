@@ -23,8 +23,8 @@ jobs:
           DOCKER_VERSION="nightly"
           TAGS="${DOCKER_IMAGE}:${DOCKER_VERSION},ghcr.io/${DOCKER_IMAGE}:${DOCKER_VERSION}"
           elif [[ $GITHUB_REF == refs/tags/* ]]; then
-          APP_VERSION=$DOCKER_VERSION
           DOCKER_VERSION=${GITHUB_REF#refs/tags/}
+          APP_VERSION=$DOCKER_VERSION
           TAGS="${DOCKER_IMAGE}:${DOCKER_VERSION},ghcr.io/${DOCKER_IMAGE}:${DOCKER_VERSION},${DOCKER_IMAGE}:latest,ghcr.io/${DOCKER_IMAGE}:latest"
           fi
           echo ::set-output name=version::${APP_VERSION}

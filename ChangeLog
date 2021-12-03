@@ -1,3 +1,78 @@
+Version 1.2.20 (June 8, 2021)
+-----------------------------
+
+* Duplicate tags when moving or duplicating tasks to another project
+* Bump symfony/stopwatch to 5.3.0
+* Avoid user enumeration by using avatar image URL
+* Invalidate captcha after it is used
+* Avoid user enumeration using password reset functionality
+* Add missing CSRF checks
+* Fix bug in search when using the plus sign
+* Close dialogs using Escape key even if focus is in input field
+* Add a min="0" attribute to task_list form input
+* Keep swimlane headers at the top
+* Catch error when trying to upload empty or invalid avatar image
+* Added new template hooks
+* Update translations
+
+Version 1.2.19 (April 16, 2021)
+-------------------------------
+
+* Trim user agent for RememberMe sessions because MySQL use a varchar(255) column
+* Update Docker image to Alpine 3.13.4
+* Added "Deutsch (du)" language
+* Fixed `createLdapUser` API procedure when LDAP groups are not configured
+* Write RememberMe cookie only after the two-factor code has been validated
+* Avoid warning when removing a plugin zip archive
+* Update Hungarian translation
+* Add new hook `model:task:duplication:aftersave`
+* Bump symfony/stopwatch from 5.2.3 to 5.2.4
+* Bump pimple/pimple from 3.3.1 to 3.4.0
+* Bump gregwar/captcha from 1.1.8 to 1.1.9
+* Added new analytic component: "Estimated vs actual time per column"
+* Do not retain any changes between shared plugins variables
+* Display number of tasks according to filter
+* Add support for LDAP protocol/host/port configuration by URL; make `BASE_DN` optional
+    - `ldap_connect($host, $port)` function signature is deprecated
+    - Querying an AD Global Catalog across an entire forest requires an empty base DN
+* Use an absolute file path in `AssetHelper` class for `css()` & `js()` functions
+* Remove whitespace at the end of `APP_VERSION` constant
+* Add IP address to authentication error logs
+* Add interpolation expressions to e-mail subject in automatic action "Send a task by email to someone"
+    - For example: `Email subject = {{column_title}}: {{title}} (#{{id}})`
+* Add Hungarian Forint to the list of currencies
+
+Version 1.2.18 (December 28, 2020)
+----------------------------------
+
+* Sqlite migrations should have foreign keys disabled outside the transaction
+    => Existing behavior could lead to data loss if schema is changed
+    => If you are using Sqlite, skip version 1.2.17, upgrade directly to v1.2.18
+* Use more secure default Nginx SSL configuration in Docker image
+* Update vendor folder
+* Add missing pt_br translations
+* Update ja_JP translations
+
+Version 1.2.17 (December 27, 2020)
+----------------------------------
+
+* Fix grammatical errors
+* Add autocomplete attribute to HTML forms
+* Added "Mexican Peso" to the list of currencies
+* Added an option to send a copy of all generated e-mails to a BCC address
+* Don't force role of users if no LDAP groups defined
+* Keep the tags when converting a subtask to task
+* Bump symfony/stopwatch from 5.1.8 to 5.2.0
+* Bump pimple/pimple from 3.3.0 to 3.3.1
+* Bump symfony/stopwatch from 5.2.0 to 5.2.1
+* Publish Docker images to GitHub container registry in addition to Docker Hub
+* Use Github Actions to publish Docker images
+* Check if the user is assigned to any role in the project
+* Fix tasks.swimlane_id foreign key for Sqlite
+* Remove unused namespaces
+* Add mk_MK (Macedonian) translation
+* Update translations
+
 Version 1.2.16 (October 9, 2020)
 --------------------------------
 

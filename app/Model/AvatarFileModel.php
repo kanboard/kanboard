@@ -136,4 +136,24 @@ class AvatarFileModel extends Base
     {
         return implode(DIRECTORY_SEPARATOR, array(self::PATH_PREFIX, $user_id, hash('sha1', $filename.time())));
     }
+
+    /**
+     * Check if a filename is an image (file types that can be shown as avatar)
+     *
+     * @access public
+     * @param  string   $filename   Filename
+     * @return bool
+     */
+    public function isAvatarImage($filename)
+    {
+        switch (get_file_extension($filename)) {
+            case 'jpeg':
+            case 'jpg':
+            case 'png':
+            case 'gif':
+                return true;
+        }
+
+        return false;
+    }
 }

@@ -131,6 +131,22 @@ class AnalyticController extends BaseController
     }
 
     /**
+     * Estimated vs actual time per column
+     *
+     * @access public
+     */
+    public function estimatedVsActualByColumn()
+    {
+        $project = $this->getProject();
+
+        $this->response->html($this->helper->layout->analytic('analytic/estimated_actual_column', array(
+            'project' => $project,
+            'metrics' => $this->estimatedActualColumnAnalytic->build($project['id']),
+            'title' => t('Estimated vs actual time per column'),
+        )));
+    }
+
+    /**
      * Common method for CFD and Burdown chart
      *
      * @access private

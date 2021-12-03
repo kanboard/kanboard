@@ -52,7 +52,9 @@ class UserProfile extends Base
             $profile = $this->userModel->getById($user->getInternalId());
         } elseif ($user->getExternalIdColumn() && $user->getExternalId()) {
             $profile = $this->userSync->synchronize($user);
-            $this->groupSync->synchronize($profile['id'], $user->getExternalGroupIds());
+            if (LDAP_GROUP_SYNC) {
+                $this->groupSync->synchronize($profile['id'], $user->getExternalGroupIds());
+            }
         }
 
         if (! empty($profile) && $profile['is_active'] == 1) {

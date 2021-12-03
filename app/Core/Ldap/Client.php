@@ -70,8 +70,8 @@ class Client
      *
      * @access public
      *
-     * @param  string $server LDAP server hostname or IP
-     * @param  int    $port   LDAP port
+     * @param  string $server LDAP server URI (ldap[s]://hostname:port) or hostname (deprecated) 
+     * @param  int    $port   LDAP port (deprecated)
      * @param  bool   $tls    Start TLS
      * @param  bool   $verify Skip SSL certificate verification
      * @return Client
@@ -88,7 +88,12 @@ class Client
             putenv('LDAPTLS_REQCERT=never');
         }
 
-        $this->ldap = @ldap_connect($server, $port);
+        if (filter_var($server, FILTER_VALIDATE_URL) !== false) {
+            $this->ldap = @ldap_connect($server);
+        }
+        else {
+            $this->ldap = @ldap_connect($server, $port);
+        }
 
         if ($this->ldap === false) {
             throw new ConnectionException('Malformed LDAP server hostname or LDAP server port');

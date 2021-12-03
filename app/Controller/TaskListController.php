@@ -23,6 +23,13 @@ class TaskListController extends BaseController
         $project = $this->getProject();
         $search = $this->helper->projectHeader->getSearchQuery($project);
 
+        if ($this->request->getIntegerParam('show_subtasks') !== 0 ||
+            $this->request->getIntegerParam('hide_subtasks') !== 0 ||
+            $this->request->getStringParam('direction') !== '' ||
+            $this->request->getStringParam('order') !== '') {
+            $this->checkReusableGETCSRFParam();
+        }
+
         if ($this->request->getIntegerParam('show_subtasks')) {
             session_set('subtaskListToggle', true);
         } elseif ($this->request->getIntegerParam('hide_subtasks')) {
@@ -41,7 +48,7 @@ class TaskListController extends BaseController
         $this->userSession->setListOrder($project['id'], $order, $direction);
 
         $paginator = $this->paginator
-            ->setUrl('TaskListController', 'show', array('project_id' => $project['id']))
+            ->setUrl('TaskListController', 'show', array('project_id' => $project['id'], 'csrf_token' => $this->token->getReusableCSRFToken()))
             ->setMax(30)
             ->setOrder($order)
             ->setDirection($direction)

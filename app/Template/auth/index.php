@@ -12,10 +12,10 @@
         <?= $this->form->csrf() ?>
 
         <?= $this->form->label(t('Username'), 'username') ?>
-        <?= $this->form->text('username', $values, $errors, array('autofocus', 'required')) ?>
+        <?= $this->form->text('username', $values, $errors, array('autofocus', 'required', 'autocomplete="username"')) ?>
 
         <?= $this->form->label(t('Password'), 'password') ?>
-        <?= $this->form->password('password', $values, $errors, array('required')) ?>
+        <?= $this->form->password('password', $values, $errors, array('required', 'autocomplete="current-password"')) ?>
 
         <?php if (isset($captcha) && $captcha): ?>
             <?= $this->form->label(t('Enter the text below'), 'captcha') ?>

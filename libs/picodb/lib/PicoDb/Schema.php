@@ -93,8 +93,8 @@ class Schema
     {
         try {
             for ($i = $current_version + 1; $i <= $next_version; $i++) {
-                $this->db->startTransaction();
                 $this->db->getDriver()->disableForeignKeys();
+                $this->db->startTransaction();
 
                 $function_name = $this->getNamespace().'\version_'.$i;
 
@@ -104,8 +104,8 @@ class Schema
                 }
 
                 $this->db->getDriver()->setSchemaVersion($i);
-                $this->db->getDriver()->enableForeignKeys();
                 $this->db->closeTransaction();
+                $this->db->getDriver()->enableForeignKeys();
             }
         } catch (PDOException $e) {
             $this->db->setLogMessage($e->getMessage());

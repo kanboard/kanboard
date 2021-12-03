@@ -78,6 +78,18 @@ class DateHelper extends Base
     }
 
     /**
+     * Get duration in hours into human format
+     *
+     * @access public
+     * @param  float  $hours
+     * @return string
+     */
+    public function durationHours($hours)
+    {
+        return sprintf('%0.2f %s', round($hours, 2), t('hours'));
+    }
+
+    /**
      * Get the age of an item in quasi human readable format.
      * It's in this format: <1h , NNh, NNd
      *

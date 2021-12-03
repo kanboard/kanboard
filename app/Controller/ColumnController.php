@@ -150,6 +150,7 @@ class ColumnController extends BaseController
      */
     public function move()
     {
+        $this->checkReusableGETCSRFParam();
         $project = $this->getProject();
         $values = $this->request->getJson();
 

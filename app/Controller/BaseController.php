@@ -33,6 +33,13 @@ abstract class BaseController extends Base
         }
     }
 
+    protected function checkReusableGETCSRFParam()
+    {
+        if (! $this->token->validateReusableCSRFToken($this->request->getStringParam('csrf_token'))) {
+            throw new AccessForbiddenException();
+        }
+    }
+
     protected function checkCSRFForm()
     {
         if (! $this->token->validateCSRFToken($this->request->getRawValue('csrf_token'))) {

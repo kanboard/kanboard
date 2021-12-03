@@ -4,10 +4,10 @@
         <?= $this->form->csrf() ?>
 
         <?= $this->form->label(t('New password'), 'password') ?>
-        <?= $this->form->password('password', $values, $errors) ?>
+        <?= $this->form->password('password', $values, $errors, ['autocomplete="new-password"']) ?>
 
         <?= $this->form->label(t('Confirmation'), 'confirmation') ?>
-        <?= $this->form->password('confirmation', $values, $errors) ?>
+        <?= $this->form->password('confirmation', $values, $errors, ['autocomplete="new-password"']) ?>
 
         <div class="form-actions">
             <button type="submit" class="btn btn-blue"><?= t('Change Password') ?></button>

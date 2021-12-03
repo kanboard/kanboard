@@ -92,6 +92,8 @@ defined('LDAP_GROUP_FILTER') or define('LDAP_GROUP_FILTER', getenv('LDAP_GROUP_F
 defined('LDAP_GROUP_USER_FILTER') or define('LDAP_GROUP_USER_FILTER', getenv('LDAP_GROUP_USER_FILTER') ?: '');
 defined('LDAP_GROUP_USER_ATTRIBUTE') or define('LDAP_GROUP_USER_ATTRIBUTE', getenv('LDAP_GROUP_USER_ATTRIBUTE') ?: 'username');
 defined('LDAP_GROUP_ATTRIBUTE_NAME') or define('LDAP_GROUP_ATTRIBUTE_NAME', getenv('LDAP_GROUP_ATTRIBUTE_NAME') ?: 'cn');
+defined('LDAP_GROUP_SYNC') or define('LDAP_GROUP_SYNC', getenv('LDAP_GROUP_SYNC') ?: true);
+
 
 // Proxy authentication
 defined('REVERSE_PROXY_AUTH') or define('REVERSE_PROXY_AUTH', strtolower(getenv('REVERSE_PROXY_AUTH')) === 'true');

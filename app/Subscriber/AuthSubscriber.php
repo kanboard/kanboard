@@ -55,10 +55,10 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
         );
 
         if ($event->getAuthType() === 'RememberMe') {
-            $this->userSession->validatePostAuthentication();
+            $this->userSession->setPostAuthenticationAsValidated();
         }
 
-        if (session_is_true('hasRememberMe')) {
+        if (session_is_true('hasRememberMe') && ! $this->userSession->hasPostAuthentication()) {
             $session = $this->rememberMeSessionModel->create($this->userSession->getId(), $ipAddress, $userAgent);
             $this->rememberMeCookie->write($session['token'], $session['sequence'], $session['expiration']);
         }
@@ -95,10 +95,11 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
     {
         $this->logger->debug('Subscriber executed: '.__METHOD__);
         $username = $event->getUsername();
-
+        $ipAddress = $this->request->getIpAddress();
+        
         if (! empty($username)) {
             // log login failure in web server log to allow fail2ban usage
-            error_log('Kanboard: user '.$username.' authentication failure');
+            error_log('Kanboard: user '.$username.' authentication failure with IP address: '.$ipAddress);
             $this->userLockingModel->incrementFailedLogin($username);
 
             if ($this->userLockingModel->getFailedLogin($username) > BRUTEFORCE_LOCKDOWN) {
@@ -107,7 +108,7 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
         }
         else {
             // log login failure in web server log to allow fail2ban usage
-            error_log('Kanboard: user Unknown authentication failure');
+            error_log('Kanboard: user Unknown authentication failure with IP address: '.$ipAddress);
         }
     }
 }
