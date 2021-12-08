@@ -3,11 +3,11 @@
     <th class="board-column-header board-column-header-first board-column-header-<?= $column['id'] ?>" data-column-id="<?= $column['id'] ?>">
 
         <!-- column in collapsed mode -->
-        <div class="board-column-collapsed">
+        <div class="board-column-collapsed-header">
         </div>
 
         <!-- column in expanded mode -->
-        <div class="board-column-expanded">
+        <div class="board-column-expanded-header">
             <span class="board-column-title">
             </span>
 
