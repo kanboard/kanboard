@@ -7,14 +7,14 @@
     <th class="board-column-header board-column-header-<?= $column['id'] ?>" data-column-id="<?= $column['id'] ?>">
 
         <!-- column in collapsed mode -->
-        <div class="board-column-collapsed">
+        <div class="board-column-collapsed-header">
             <small class="board-column-header-task-count" title="<?= t('Task count') ?>">
                 <span id="task-number-column-<?= $column['id'] ?>"><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $column['nb_tasks'] ?></span>
             </small>
         </div>
 
         <!-- column in expanded mode -->
-        <div class="board-column-expanded">
+        <div class="board-column-expanded-header">
             <?php if (! $not_editable && $this->projectRole->canCreateTaskInColumn($column['project_id'], $column['id'])): ?>
                 <?= $this->task->getNewBoardTaskButton($swimlane, $column) ?>
             <?php endif ?>
