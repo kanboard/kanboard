@@ -31,6 +31,7 @@
                                     <?= $this->modal->confirm('trash-o', t('Remove'), 'TaskFileController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
                                 </li>
                             <?php endif ?>
+                            <?= $this->hook->render('template:task-file:documents:dropdown', array('task' => $task, 'file' => $file)) ?>
                         </ul>
                     </div>
                 </td>
