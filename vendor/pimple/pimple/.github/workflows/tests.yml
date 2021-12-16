@@ -1,0 +1,47 @@
+name: "Tests"
+
+on:
+  - pull_request
+  - push
+
+jobs:
+  test:
+    name: PHP ${{ matrix.php }} - ${{ matrix.dependencies }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php:
+          - "7.2"
+          - "7.3"
+          - "7.4"
+          - "8.0"
+          - "8.1"
+        dependencies:
+          - "psr/container:^1.1"
+          - "psr/container:^2.0"
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          ini-values: display_errors=off, log_errors=on
+          extensions: :xdebug
+        env:
+          # https://github.com/shivammathur/setup-php/issues/407#issuecomment-773675741
+          fail-fast: true
+
+      - name: Validate composer.json
+        run: composer validate --strict --no-check-lock
+
+      - name: Install dependencies +${{ matrix.dependencies }}
+        run: |
+          composer require --no-update ${{ matrix.dependencies }}
+          composer update --prefer-dist --no-progress
+
+      - name: Run PHPUnit tests
+        run: vendor/bin/simple-phpunit --verbose

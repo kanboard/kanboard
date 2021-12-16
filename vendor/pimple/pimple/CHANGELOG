@@ -1,3 +1,11 @@
+* 3.4.0 (2021-03-06)
+
+ * Implement version 1.1 of PSR-11
+
+* 3.3.1 (2020-11-24)
+
+ * Add support for PHP 8
+
 * 3.3.0 (2020-03-03)
 
  * Drop PHP extension

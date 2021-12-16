@@ -43,12 +43,12 @@ final class Container implements ContainerInterface
         $this->pimple = $pimple;
     }
 
-    public function get($id)
+    public function get(string $id)
     {
         return $this->pimple[$id];
     }
 
-    public function has($id)
+    public function has(string $id): bool
     {
         return isset($this->pimple[$id]);
     }

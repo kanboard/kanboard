@@ -25,7 +25,11 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Container\\' => 14,
-            'Psr\\Cache\\' => 10,
+        ),
+        'M' => 
+        array (
+            'MatthiasMullie\\PathConverter\\' => 29,
+            'MatthiasMullie\\Minify\\' => 22,
         ),
         'K' => 
         array (
@@ -74,9 +78,13 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'Psr\\Cache\\' => 
+        'MatthiasMullie\\PathConverter\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/cache/src',
+            0 => __DIR__ . '/../..' . '/libs/path-converter/src',
+        ),
+        'MatthiasMullie\\Minify\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/libs/minify/src',
         ),
         'Kanboard\\' => 
         array (
@@ -97,15 +105,34 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
     );
 
     public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'SimpleValidator' => 
+            array (
+                0 => __DIR__ . '/../..' . '/libs',
+            ),
+            'SimpleQueue' => 
+            array (
+                0 => __DIR__ . '/../..' . '/libs',
+            ),
+        ),
         'P' => 
         array (
             'Pimple' => 
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
             ),
+            'PicoDb' => 
+            array (
+                0 => __DIR__ . '/../..' . '/libs/picodb/lib',
+            ),
             'Parsedown' => 
             array (
                 0 => __DIR__ . '/..' . '/erusev/parsedown',
+            ),
+            'PHPQRCode' => 
+            array (
+                0 => __DIR__ . '/../..' . '/libs/phpqrcode/lib',
             ),
         ),
         'O' => 
@@ -115,20 +142,18 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
                 0 => __DIR__ . '/..' . '/christian-riesen/otp/src',
             ),
         ),
-    );
-
-    public static $fallbackDirsPsr0 = array (
-        0 => __DIR__ . '/../..' . '/libs',
+        'J' => 
+        array (
+            'JsonRPC' => 
+            array (
+                0 => __DIR__ . '/../..' . '/libs/jsonrpc/src',
+            ),
+        ),
     );
 
     public static $classMap = array (
-        'A' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/ProcedureHandlerTest.php',
-        'B' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/ProcedureHandlerTest.php',
         'Base32\\Base32' => __DIR__ . '/..' . '/christian-riesen/base32/src/Base32.php',
-        'C' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/ServerProtocolTest.php',
-        'ClassWithBeforeMethod' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/ProcedureHandlerTest.php',
-        'ClientTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/ClientTest.php',
-        'DummyMiddleware' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/ServerTest.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Eluceo\\iCal\\Component' => __DIR__ . '/..' . '/eluceo/ical/src/Component.php',
         'Eluceo\\iCal\\Component\\Alarm' => __DIR__ . '/..' . '/eluceo/ical/src/Component/Alarm.php',
         'Eluceo\\iCal\\Component\\Calendar' => __DIR__ . '/..' . '/eluceo/ical/src/Component/Calendar.php',
@@ -152,15 +177,11 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Eluceo\\iCal\\Property\\ValueInterface' => __DIR__ . '/..' . '/eluceo/ical/src/Property/ValueInterface.php',
         'Eluceo\\iCal\\Util\\ComponentUtil' => __DIR__ . '/..' . '/eluceo/ical/src/Util/ComponentUtil.php',
         'Eluceo\\iCal\\Util\\DateUtil' => __DIR__ . '/..' . '/eluceo/ical/src/Util/DateUtil.php',
-        'FirstMiddleware' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/MiddlewareHandlerTest.php',
         'Gregwar\\Captcha\\CaptchaBuilder' => __DIR__ . '/..' . '/gregwar/captcha/src/Gregwar/Captcha/CaptchaBuilder.php',
         'Gregwar\\Captcha\\CaptchaBuilderInterface' => __DIR__ . '/..' . '/gregwar/captcha/src/Gregwar/Captcha/CaptchaBuilderInterface.php',
         'Gregwar\\Captcha\\ImageFileHandler' => __DIR__ . '/..' . '/gregwar/captcha/src/Gregwar/Captcha/ImageFileHandler.php',
         'Gregwar\\Captcha\\PhraseBuilder' => __DIR__ . '/..' . '/gregwar/captcha/src/Gregwar/Captcha/PhraseBuilder.php',
         'Gregwar\\Captcha\\PhraseBuilderInterface' => __DIR__ . '/..' . '/gregwar/captcha/src/Gregwar/Captcha/PhraseBuilderInterface.php',
-        'HostValidatorTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Validator/HostValidatorTest.php',
-        'JsonEncodingValidatorTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Validator/JsonEncodingValidatorTest.php',
-        'JsonFormatValidatorTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Validator/JsonFormatValidatorTest.php',
         'JsonRPC\\Client' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Client.php',
         'JsonRPC\\Exception\\AccessDeniedException' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Exception/AccessDeniedException.php',
         'JsonRPC\\Exception\\AuthenticationFailureException' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Exception/AuthenticationFailureException.php',
@@ -172,14 +193,12 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'JsonRPC\\Exception\\RpcCallFailedException' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Exception/RpcCallFailedException.php',
         'JsonRPC\\Exception\\ServerErrorException' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Exception/ServerErrorException.php',
         'JsonRPC\\HttpClient' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/HttpClient.php',
-        'JsonRPC\\HttpClientTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/HttpClientTest.php',
         'JsonRPC\\MiddlewareHandler' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/MiddlewareHandler.php',
         'JsonRPC\\MiddlewareInterface' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/MiddlewareInterface.php',
         'JsonRPC\\ProcedureHandler' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/ProcedureHandler.php',
         'JsonRPC\\Request\\BatchRequestParser' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Request/BatchRequestParser.php',
         'JsonRPC\\Request\\RequestBuilder' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Request/RequestBuilder.php',
         'JsonRPC\\Request\\RequestParser' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Request/RequestParser.php',
-        'JsonRPC\\Response\\HeaderMockTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Response/HeaderMockTest.php',
         'JsonRPC\\Response\\ResponseBuilder' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Response/ResponseBuilder.php',
         'JsonRPC\\Response\\ResponseParser' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Response/ResponseParser.php',
         'JsonRPC\\Server' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Server.php',
@@ -237,6 +256,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Kanboard\\Action\\TaskUpdateStartDateOnMoveColumn' => __DIR__ . '/../..' . '/app/Action/TaskUpdateStartDateOnMoveColumn.php',
         'Kanboard\\Analytic\\AverageLeadCycleTimeAnalytic' => __DIR__ . '/../..' . '/app/Analytic/AverageLeadCycleTimeAnalytic.php',
         'Kanboard\\Analytic\\AverageTimeSpentColumnAnalytic' => __DIR__ . '/../..' . '/app/Analytic/AverageTimeSpentColumnAnalytic.php',
+        'Kanboard\\Analytic\\EstimatedActualColumnAnalytic' => __DIR__ . '/../..' . '/app/Analytic/EstimatedActualColumnAnalytic.php',
         'Kanboard\\Analytic\\EstimatedTimeComparisonAnalytic' => __DIR__ . '/../..' . '/app/Analytic/EstimatedTimeComparisonAnalytic.php',
         'Kanboard\\Analytic\\TaskDistributionAnalytic' => __DIR__ . '/../..' . '/app/Analytic/TaskDistributionAnalytic.php',
         'Kanboard\\Analytic\\UserDistributionAnalytic' => __DIR__ . '/../..' . '/app/Analytic/UserDistributionAnalytic.php',
@@ -826,13 +846,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'MatthiasMullie\\PathConverter\\Converter' => __DIR__ . '/../..' . '/libs/path-converter/src/Converter.php',
         'MatthiasMullie\\PathConverter\\ConverterInterface' => __DIR__ . '/../..' . '/libs/path-converter/src/ConverterInterface.php',
         'MatthiasMullie\\PathConverter\\NoConverter' => __DIR__ . '/../..' . '/libs/path-converter/src/NoConverter.php',
-        'MiddlewareHandlerTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/MiddlewareHandlerTest.php',
-        'MyException' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/ServerTest.php',
-        'MysqlDatabaseTest' => __DIR__ . '/../..' . '/libs/picodb/tests/MysqlDatabaseTest.php',
-        'MysqlDriverTest' => __DIR__ . '/../..' . '/libs/picodb/tests/MysqlDriverTest.php',
-        'MysqlLobTest' => __DIR__ . '/../..' . '/libs/picodb/tests/MysqlLobTest.php',
-        'MysqlSchemaTest' => __DIR__ . '/../..' . '/libs/picodb/tests/MysqlSchemaTest.php',
-        'MysqlTableTest' => __DIR__ . '/../..' . '/libs/picodb/tests/MysqlTableTest.php',
         'Otp\\GoogleAuthenticator' => __DIR__ . '/..' . '/christian-riesen/otp/src/Otp/GoogleAuthenticator.php',
         'Otp\\Otp' => __DIR__ . '/..' . '/christian-riesen/otp/src/Otp/Otp.php',
         'Otp\\OtpInterface' => __DIR__ . '/..' . '/christian-riesen/otp/src/Otp/OtpInterface.php',
@@ -893,16 +906,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Pimple\\Tests\\Psr11\\ContainerTest' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Tests/Psr11/ContainerTest.php',
         'Pimple\\Tests\\Psr11\\ServiceLocatorTest' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Tests/Psr11/ServiceLocatorTest.php',
         'Pimple\\Tests\\ServiceIteratorTest' => __DIR__ . '/..' . '/pimple/pimple/src/Pimple/Tests/ServiceIteratorTest.php',
-        'PostgresDatabaseTest' => __DIR__ . '/../..' . '/libs/picodb/tests/PostgresDatabaseTest.php',
-        'PostgresDriverTest' => __DIR__ . '/../..' . '/libs/picodb/tests/PostgresDriverTest.php',
-        'PostgresLobTest' => __DIR__ . '/../..' . '/libs/picodb/tests/PostgresLobTest.php',
-        'PostgresSchemaTest' => __DIR__ . '/../..' . '/libs/picodb/tests/PostgresSchemaTest.php',
-        'PostgresTableTest' => __DIR__ . '/../..' . '/libs/picodb/tests/PostgresTableTest.php',
-        'ProcedureHandlerTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/ProcedureHandlerTest.php',
-        'Psr\\Cache\\CacheException' => __DIR__ . '/..' . '/psr/cache/src/CacheException.php',
-        'Psr\\Cache\\CacheItemInterface' => __DIR__ . '/..' . '/psr/cache/src/CacheItemInterface.php',
-        'Psr\\Cache\\CacheItemPoolInterface' => __DIR__ . '/..' . '/psr/cache/src/CacheItemPoolInterface.php',
-        'Psr\\Cache\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/cache/src/InvalidArgumentException.php',
         'Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
         'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
         'Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
@@ -917,13 +920,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
-        'RequestBuilderTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Request/RequestBuilderTest.php',
-        'ResponseBuilderTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Response/ResponseBuilderTest.php',
-        'ResponseParserTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Response/ResponseParserTest.php',
-        'RpcFormatValidatorTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Validator/RpcFormatValidatorTest.php',
-        'SecondMiddleware' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/MiddlewareHandlerTest.php',
-        'ServerProtocolTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/ServerProtocolTest.php',
-        'ServerTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/ServerTest.php',
         'SimpleQueue\\Adapter\\AmqpQueueAdapter' => __DIR__ . '/../..' . '/libs/SimpleQueue/Adapter/AmqpQueueAdapter.php',
         'SimpleQueue\\Adapter\\BeanstalkQueueAdapter' => __DIR__ . '/../..' . '/libs/SimpleQueue/Adapter/BeanstalkQueueAdapter.php',
         'SimpleQueue\\Exception\\NotSupportedException' => __DIR__ . '/../..' . '/libs/SimpleQueue/Exception/NotSupportedException.php',
@@ -952,11 +948,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'SimpleValidator\\Validators\\Range' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Range.php',
         'SimpleValidator\\Validators\\Required' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Required.php',
         'SimpleValidator\\Validators\\Unique' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Unique.php',
-        'SqliteDatabaseTest' => __DIR__ . '/../..' . '/libs/picodb/tests/SqliteDatabaseTest.php',
-        'SqliteDriverTest' => __DIR__ . '/../..' . '/libs/picodb/tests/SqliteDriverTest.php',
-        'SqliteLobTest' => __DIR__ . '/../..' . '/libs/picodb/tests/SqliteLobtest.php',
-        'SqliteSchemaTest' => __DIR__ . '/../..' . '/libs/picodb/tests/SqliteSchemaTest.php',
-        'SqliteTableTest' => __DIR__ . '/../..' . '/libs/picodb/tests/SqliteTableTest.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\CommandLoader\\CommandLoaderInterface' => __DIR__ . '/..' . '/symfony/console/CommandLoader/CommandLoaderInterface.php',
         'Symfony\\Component\\Console\\CommandLoader\\ContainerCommandLoader' => __DIR__ . '/..' . '/symfony/console/CommandLoader/ContainerCommandLoader.php',
@@ -1042,7 +1033,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcherInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcherInterface.php',
         'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/WrappedListener.php',
-        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\ExtractingEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\DependencyInjection\\RegisterListenersPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\Event' => __DIR__ . '/..' . '/symfony/event-dispatcher/Event.php',
         'Symfony\\Component\\EventDispatcher\\EventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcher.php',
@@ -1080,7 +1070,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/..' . '/symfony/contracts/EventDispatcher/EventDispatcherInterface.php',
         'Symfony\\Contracts\\HttpClient\\ChunkInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/ChunkInterface.php',
         'Symfony\\Contracts\\HttpClient\\Exception\\ClientExceptionInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Exception/ClientExceptionInterface.php',
-        'Symfony\\Contracts\\HttpClient\\Exception\\DecodingExceptionInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Exception/DecodingExceptionInterface.php',
         'Symfony\\Contracts\\HttpClient\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Exception/ExceptionInterface.php',
         'Symfony\\Contracts\\HttpClient\\Exception\\HttpExceptionInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Exception/HttpExceptionInterface.php',
         'Symfony\\Contracts\\HttpClient\\Exception\\RedirectionExceptionInterface' => __DIR__ . '/..' . '/symfony/contracts/HttpClient/Exception/RedirectionExceptionInterface.php',
@@ -1098,18 +1087,12 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Symfony\\Contracts\\Service\\ServiceSubscriberTrait' => __DIR__ . '/..' . '/symfony/contracts/Service/ServiceSubscriberTrait.php',
         'Symfony\\Contracts\\Service\\Test\\ServiceLocatorTest' => __DIR__ . '/..' . '/symfony/contracts/Service/Test/ServiceLocatorTest.php',
         'Symfony\\Contracts\\Tests\\Cache\\CacheTraitTest' => __DIR__ . '/..' . '/symfony/contracts/Tests/Cache/CacheTraitTest.php',
-        'Symfony\\Contracts\\Tests\\Cache\\TestPool' => __DIR__ . '/..' . '/symfony/contracts/Tests/Cache/CacheTraitTest.php',
-        'Symfony\\Contracts\\Tests\\Service\\ChildTestService' => __DIR__ . '/..' . '/symfony/contracts/Tests/Service/ServiceSubscriberTraitTest.php',
-        'Symfony\\Contracts\\Tests\\Service\\ParentTestService' => __DIR__ . '/..' . '/symfony/contracts/Tests/Service/ServiceSubscriberTraitTest.php',
         'Symfony\\Contracts\\Tests\\Service\\ServiceSubscriberTraitTest' => __DIR__ . '/..' . '/symfony/contracts/Tests/Service/ServiceSubscriberTraitTest.php',
-        'Symfony\\Contracts\\Tests\\Service\\TestService' => __DIR__ . '/..' . '/symfony/contracts/Tests/Service/ServiceSubscriberTraitTest.php',
         'Symfony\\Contracts\\Translation\\LocaleAwareInterface' => __DIR__ . '/..' . '/symfony/contracts/Translation/LocaleAwareInterface.php',
         'Symfony\\Contracts\\Translation\\Test\\TranslatorTest' => __DIR__ . '/..' . '/symfony/contracts/Translation/Test/TranslatorTest.php',
         'Symfony\\Contracts\\Translation\\TranslatorInterface' => __DIR__ . '/..' . '/symfony/contracts/Translation/TranslatorInterface.php',
         'Symfony\\Contracts\\Translation\\TranslatorTrait' => __DIR__ . '/..' . '/symfony/contracts/Translation/TranslatorTrait.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
-        'UrlParserTest' => __DIR__ . '/../..' . '/libs/picodb/tests/UrlParserTest.php',
-        'UserValidatorTest' => __DIR__ . '/../..' . '/libs/jsonrpc/tests/Validator/UserValidatorTest.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -1118,7 +1101,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
             $loader->prefixLengthsPsr4 = ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851::$prefixesPsr0;
-            $loader->fallbackDirsPsr0 = ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851::$fallbackDirsPsr0;
             $loader->classMap = ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851::$classMap;
 
         }, null, ClassLoader::class);

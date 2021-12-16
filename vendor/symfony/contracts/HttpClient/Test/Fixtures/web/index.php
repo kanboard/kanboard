@@ -29,35 +29,17 @@ foreach ($_SERVER as $k => $v) {
     }
 }
 
-$json = json_encode($vars, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-
 switch ($vars['REQUEST_URI']) {
     default:
         exit;
-
-    case '/head':
-        header('Content-Length: '.strlen($json), true);
-        break;
 
     case '/':
     case '/?a=a&b=b':
     case 'http://127.0.0.1:8057/':
     case 'http://localhost:8057/':
+        header('Content-Type: application/json');
         ob_start('ob_gzhandler');
         break;
-
-    case '/103':
-        header('HTTP/1.1 103 Early Hints');
-        header('Link: </style.css>; rel=preload; as=style', false);
-        header('Link: </script.js>; rel=preload; as=script', false);
-        flush();
-        usleep(1000);
-        echo "HTTP/1.1 200 OK\r\n";
-        echo "Date: Fri, 26 May 2017 10:02:11 GMT\r\n";
-        echo "Content-Length: 13\r\n";
-        echo "\r\n";
-        echo 'Here the body';
-        exit;
 
     case '/404':
         header('Content-Type: application/json', true, 404);
@@ -87,12 +69,6 @@ switch ($vars['REQUEST_URI']) {
         header('Location: ..', true, 302);
         break;
 
-    case '/304':
-        header('Content-Length: 10', true, 304);
-        echo '12345';
-
-        return;
-
     case '/307':
         header('Location: http://localhost:8057/post', true, 307);
         break;
@@ -104,7 +80,7 @@ switch ($vars['REQUEST_URI']) {
     case '/post':
         $output = json_encode($_POST + ['REQUEST_METHOD' => $vars['REQUEST_METHOD']], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         header('Content-Type: application/json', true);
-        header('Content-Length: '.strlen($output));
+        header('Content-Length: '.\strlen($output));
         echo $output;
         exit;
 
@@ -145,39 +121,8 @@ switch ($vars['REQUEST_URI']) {
         header('Content-Encoding: gzip');
         echo str_repeat('-', 1000);
         exit;
-
-    case '/max-duration':
-        ignore_user_abort(false);
-        while (true) {
-            echo '<1>';
-            @ob_flush();
-            flush();
-            usleep(500);
-        }
-        exit;
-
-    case '/json':
-        header("Content-Type: application/json");
-        echo json_encode([
-            'documents' => [
-                ['id' => '/json/1'],
-                ['id' => '/json/2'],
-                ['id' => '/json/3'],
-            ],
-        ]);
-        exit;
-
-    case '/json/1':
-    case '/json/2':
-    case '/json/3':
-        header("Content-Type: application/json");
-        echo json_encode([
-            'title' => $vars['REQUEST_URI'],
-        ]);
-
-        exit;
 }
 
 header('Content-Type: application/json', true);
 
-echo $json;
+echo json_encode($vars, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);

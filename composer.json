@@ -39,10 +39,16 @@
     "autoload" : {
         "classmap" : ["app/"],
         "psr-4" : {
-            "Kanboard\\" : "app/"
+            "Kanboard\\" : "app/",
+            "MatthiasMullie\\Minify\\": "libs/minify/src/",
+            "MatthiasMullie\\PathConverter\\": "libs/path-converter/src/"
         },
         "psr-0" : {
-            "": "libs/"
+            "JsonRPC": "libs/jsonrpc/src",
+            "PHPQRCode": "libs/phpqrcode/lib",
+            "PicoDb": "libs/picodb/lib",
+            "SimpleQueue": "libs",
+            "SimpleValidator": "libs"
         },
         "files" : [
             "app/functions.php"

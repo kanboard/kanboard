@@ -12,7 +12,6 @@
 namespace Symfony\Contracts\HttpClient;
 
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
@@ -65,8 +64,7 @@ interface ResponseInterface
      *
      * @param bool $throw Whether an exception should be thrown on 3/4/5xx status codes
      *
-     * @throws DecodingExceptionInterface    When the body cannot be decoded to an array
-     * @throws TransportExceptionInterface   When a network error occurs
+     * @throws TransportExceptionInterface   When the body cannot be decoded or when a network error occurs
      * @throws RedirectionExceptionInterface On a 3xx when $throw is true and the "max_redirects" option has been reached
      * @throws ClientExceptionInterface      On a 4xx when $throw is true
      * @throws ServerExceptionInterface      On a 5xx when $throw is true
@@ -74,9 +72,7 @@ interface ResponseInterface
     public function toArray(bool $throw = true): array;
 
     /**
-     * Closes the response stream and all related buffers.
-     *
-     * No further chunk will be yielded after this method has been called.
+     * Cancels the response.
      */
     public function cancel(): void;
 
@@ -88,16 +84,15 @@ interface ResponseInterface
      * another, as the request/response progresses.
      *
      * The following info MUST be returned:
-     *  - canceled (bool) - true if the response was canceled using ResponseInterface::cancel(), false otherwise
-     *  - error (string|null) - the error message when the transfer was aborted, null otherwise
-     *  - http_code (int) - the last response code or 0 when it is not known yet
-     *  - http_method (string) - the HTTP verb of the last request
-     *  - redirect_count (int) - the number of redirects followed while executing the request
-     *  - redirect_url (string|null) - the resolved location of redirect responses, null otherwise
-     *  - response_headers (array) - an array modelled after the special $http_response_header variable
-     *  - start_time (float) - the time when the request was sent or 0.0 when it's pending
-     *  - url (string) - the last effective URL of the request
-     *  - user_data (mixed|null) - the value of the "user_data" request option, null if not set
+     *  - response_headers - an array modelled after the special $http_response_header variable
+     *  - redirect_count - the number of redirects followed while executing the request
+     *  - redirect_url - the resolved location of redirect responses, null otherwise
+     *  - start_time - the time when the request was sent or 0.0 when it's pending
+     *  - http_method - the HTTP verb of the last request
+     *  - http_code - the last response code or 0 when it is not known yet
+     *  - error - the error message when the transfer was aborted, null otherwise
+     *  - user_data - the value of the "user_data" request option, null if not set
+     *  - url - the last effective URL of the request
      *
      * When the "capture_peer_cert_chain" option is true, the "peer_certificate_chain"
      * attribute SHOULD list the peer certificates as an array of OpenSSL X.509 resources.
