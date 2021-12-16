@@ -1,3 +1,22 @@
+Version 1.2.21 (December 16, 2021)
+----------------------------------
+
+* Fix and update Composer autoload
+* Add plugin hook for document attachments
+* Improve board column header alignment
+* Ignore `project_id` for file attachments download URL (already checked elsewhere)
+* Update translations
+* Clarify meaning of `LDAP_USER_CREATION` in `config.default.php`
+* Fix wrong internal link when converting a subtask to task (MySQL only)
+* Use the overridable Markdown parser for previews
+* Update `call_user_func_array()` calls to be compatible with PHP 8
+* Enable external group synchronization deactivation
+* Fix tooltip shifting on long descriptions
+* Add `position` argument to API procedure `updateSubtask()`
+* Bump Docker image to Alpine 3.15.0
+* Bump `symfony/stopwatch` to 5.4.0
+* Bump `pimple/pimple` to 3.5.0
+
 Version 1.2.20 (June 8, 2021)
 -----------------------------
 
