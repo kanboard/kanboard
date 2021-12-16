@@ -43,9 +43,7 @@ trait TranslatorTrait
      */
     public function trans($id, array $parameters = [], $domain = null, $locale = null)
     {
-        if ('' === $id = (string) $id) {
-            return '';
-        }
+        $id = (string) $id;
 
         if (!isset($parameters['%count%']) || !is_numeric($parameters['%count%'])) {
             return strtr($id, $parameters);
@@ -92,8 +90,8 @@ EOF;
                         }
                     }
                 } else {
-                    $leftNumber = '-Inf' === $matches['left'] ? -\INF : (float) $matches['left'];
-                    $rightNumber = is_numeric($matches['right']) ? (float) $matches['right'] : \INF;
+                    $leftNumber = '-Inf' === $matches['left'] ? -INF : (float) $matches['left'];
+                    $rightNumber = \is_numeric($matches['right']) ? (float) $matches['right'] : INF;
 
                     if (('[' === $matches['left_delimiter'] ? $number >= $leftNumber : $number > $leftNumber)
                         && (']' === $matches['right_delimiter'] ? $number <= $rightNumber : $number < $rightNumber)
@@ -119,7 +117,7 @@ EOF;
 
             $message = sprintf('Unable to choose a translation for "%s" with locale "%s" for value "%d". Double check that this translation has the correct plural options (e.g. "There is one apple|There are %%count%% apples").', $id, $locale, $number);
 
-            if (class_exists(InvalidArgumentException::class)) {
+            if (\class_exists(InvalidArgumentException::class)) {
                 throw new InvalidArgumentException($message);
             }
 

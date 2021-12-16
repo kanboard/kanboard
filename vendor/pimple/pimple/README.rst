@@ -5,7 +5,7 @@ Pimple
 
     Pimple is now closed for changes. No new features will be added and no
     cosmetic changes will be accepted either. The only accepted changes are
-    compatiblity with newer PHP versions and security issue fixes.
+    compatibility with newer PHP versions and security issue fixes.
 
 .. caution::
 
@@ -308,7 +308,7 @@ when iterated over:
         public function canAccess($resource)
         {
             foreach ($this->voters as $voter) {
-                if (true === $voter->canAccess($resource) {
+                if (true === $voter->canAccess($resource)) {
                     return true;
                 }
             }

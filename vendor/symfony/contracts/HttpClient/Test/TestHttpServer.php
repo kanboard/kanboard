@@ -19,28 +19,31 @@ use Symfony\Component\Process\Process;
  */
 class TestHttpServer
 {
-    private static $process = [];
+    private static $server;
 
-    public static function start(int $port = 8057)
+    public static function start()
     {
-        if (isset(self::$process[$port])) {
-            self::$process[$port]->stop();
-        } else {
-            register_shutdown_function(static function () use ($port) {
-                self::$process[$port]->stop();
-            });
+        if (null !== self::$server) {
+            return;
         }
 
         $finder = new PhpExecutableFinder();
-        $process = new Process(array_merge([$finder->find(false)], $finder->findArguments(), ['-dopcache.enable=0', '-dvariables_order=EGPCS', '-S', '127.0.0.1:'.$port]));
+        $process = new Process(array_merge([$finder->find(false)], $finder->findArguments(), ['-dopcache.enable=0', '-dvariables_order=EGPCS', '-S', '127.0.0.1:8057']));
         $process->setWorkingDirectory(__DIR__.'/Fixtures/web');
+        $process->setTimeout(300);
         $process->start();
-        self::$process[$port] = $process;
 
-        do {
-            usleep(50000);
-        } while (!@fopen('http://127.0.0.1:'.$port, 'r'));
+        self::$server = new class() {
+            public $process;
 
-        return $process;
+            public function __destruct()
+            {
+                $this->process->stop();
+            }
+        };
+
+        self::$server->process = $process;
+
+        sleep('\\' === \DIRECTORY_SEPARATOR ? 10 : 1);
     }
 }

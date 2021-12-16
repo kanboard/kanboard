@@ -27,7 +27,7 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 interface ChunkInterface
 {
     /**
-     * Tells when the idle timeout has been reached.
+     * Tells when the inactivity timeout has been reached.
      *
      * @throws TransportExceptionInterface on a network error
      */
@@ -36,28 +36,21 @@ interface ChunkInterface
     /**
      * Tells when headers just arrived.
      *
-     * @throws TransportExceptionInterface on a network error or when the idle timeout is reached
+     * @throws TransportExceptionInterface on a network error or when the inactivity timeout is reached
      */
     public function isFirst(): bool;
 
     /**
      * Tells when the body just completed.
      *
-     * @throws TransportExceptionInterface on a network error or when the idle timeout is reached
+     * @throws TransportExceptionInterface on a network error or when the inactivity timeout is reached
      */
     public function isLast(): bool;
 
     /**
-     * Returns a [status code, headers] tuple when a 1xx status code was just received.
-     *
-     * @throws TransportExceptionInterface on a network error or when the idle timeout is reached
-     */
-    public function getInformationalStatus(): ?array;
-
-    /**
      * Returns the content of the response chunk.
      *
-     * @throws TransportExceptionInterface on a network error or when the idle timeout is reached
+     * @throws TransportExceptionInterface on a network error or when the inactivity timeout is reached
      */
     public function getContent(): string;
 

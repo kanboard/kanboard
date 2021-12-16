@@ -13,17 +13,17 @@
     ],
     "require": {
         "php": ">=7.2.5",
-        "psr/container": "^1.0"
+        "psr/container": "^1.1 || ^2.0"
     },
     "require-dev": {
-        "symfony/phpunit-bridge": "^5.0"
+        "symfony/phpunit-bridge": "^5.4@dev"
     },
     "autoload": {
         "psr-0": { "Pimple": "src/" }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.3.x-dev"
+            "dev-master": "3.4.x-dev"
         }
     }
 }

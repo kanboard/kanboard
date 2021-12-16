@@ -22,7 +22,7 @@ use Psr\Container\ContainerInterface;
 trait ServiceSubscriberTrait
 {
     /** @var ContainerInterface */
-    protected $container;
+    private $container;
 
     public static function getSubscribedServices(): array
     {
@@ -40,7 +40,7 @@ trait ServiceSubscriberTrait
             }
 
             if (self::class === $method->getDeclaringClass()->name && ($returnType = $method->getReturnType()) && !$returnType->isBuiltin()) {
-                $services[self::class.'::'.$method->name] = '?'.($returnType instanceof \ReflectionNamedType ? $returnType->getName() : $type);
+                $services[self::class.'::'.$method->name] = '?'.$returnType->getName();
             }
         }
 
@@ -57,7 +57,5 @@ trait ServiceSubscriberTrait
         if (\is_callable(['parent', __FUNCTION__])) {
             return parent::setContainer($container);
         }
-
-        return null;
     }
 }

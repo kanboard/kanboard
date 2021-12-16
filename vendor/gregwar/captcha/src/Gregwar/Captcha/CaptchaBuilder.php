@@ -31,6 +31,11 @@ class CaptchaBuilder implements CaptchaBuilderInterface
     /**
      * @var array
      */
+    protected $lineColor = null;
+
+    /**
+     * @var array
+     */
     protected $backgroundColor = null;
 
     /**
@@ -229,6 +234,13 @@ class CaptchaBuilder implements CaptchaBuilderInterface
         return $this;
     }
 
+    public function setLineColor($r, $g, $b)
+    {
+        $this->lineColor = array($r, $g, $b);
+
+        return $this;
+    }
+
     /**
      * Sets the ignoreAllEffects value
      *
@@ -257,8 +269,18 @@ class CaptchaBuilder implements CaptchaBuilderInterface
      */
     protected function drawLine($image, $width, $height, $tcol = null)
     {
+        if ($this->lineColor === null) {
+            $red = $this->rand(100, 255);
+            $green = $this->rand(100, 255);
+            $blue = $this->rand(100, 255);
+        } else {
+            $red = $this->lineColor[0];
+            $green = $this->lineColor[1];
+            $blue = $this->lineColor[2];
+        }
+
         if ($tcol === null) {
-            $tcol = imagecolorallocate($image, $this->rand(100, 255), $this->rand(100, 255), $this->rand(100, 255));
+            $tcol = imagecolorallocate($image, $red, $green, $blue);
         }
 
         if ($this->rand(0, 1)) { // Horizontal

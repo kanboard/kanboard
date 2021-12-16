@@ -105,7 +105,7 @@ class CacheTraitTest extends TestCase
             return 'computed data';
         };
 
-        $cache->get('key', $callback, \INF);
+        $cache->get('key', $callback, INF);
     }
 
     public function testExceptionOnNegativeBeta()
@@ -127,39 +127,39 @@ class TestPool implements CacheItemPoolInterface
 {
     use CacheTrait;
 
-    public function hasItem($key): bool
+    public function hasItem($key)
     {
     }
 
-    public function deleteItem($key): bool
+    public function deleteItem($key)
     {
     }
 
-    public function deleteItems(array $keys = []): bool
+    public function deleteItems(array $keys = [])
     {
     }
 
-    public function getItem($key): CacheItemInterface
+    public function getItem($key)
     {
     }
 
-    public function getItems(array $key = []): iterable
+    public function getItems(array $key = [])
     {
     }
 
-    public function saveDeferred(CacheItemInterface $item): bool
+    public function saveDeferred(CacheItemInterface $item)
     {
     }
 
-    public function save(CacheItemInterface $item): bool
+    public function save(CacheItemInterface $item)
     {
     }
 
-    public function commit(): bool
+    public function commit()
     {
     }
 
-    public function clear(): bool
+    public function clear()
     {
     }
 }
