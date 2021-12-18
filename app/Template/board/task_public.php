@@ -12,9 +12,9 @@
             <div class="task-board-icons-top">
             </div>
             <div class="task-board-avatars-inner">
-                <?= $this->hook->render('template:board:private:task:before-avatar', array('task' => $task)) ?>
+                <?= $this->hook->render('template:board:public:task:before-avatar', array('task' => $task)) ?>
                 <?= $this->render('board/task_avatar', array('task' => $task)) ?>
-                <?= $this->hook->render('template:board:private:task:after-avatar', array('task' => $task)) ?>
+                <?= $this->hook->render('template:board:public:task:after-avatar', array('task' => $task)) ?>
             </div>
         </div>
     </div>
