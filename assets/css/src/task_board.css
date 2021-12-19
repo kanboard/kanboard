@@ -54,6 +54,14 @@ div.task-board-status-closed {
     color: #000
 }
 
+.task-board-avatars-outer {
+    float: right
+}
+
+.task-board-avatars-inner {
+    float: right
+}
+
 .task-board-avatars {
     text-align: right;
     float: right

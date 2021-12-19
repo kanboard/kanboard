@@ -20,6 +20,23 @@
     color: #000
 }
 
+.task-board-icons-top {
+    float: left;
+    position: relative;
+    margin-right: 3px
+}
+
+.task-board-icons-bottom {
+    margin-top: 7px
+}
+
+.task-board-icons-abs-topright {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    white-space: nowrap
+}
+
 .task-board-icons,
 .task-list-icons {
     font-size: 0.8em;
