@@ -12,15 +12,13 @@ class CommentMailController extends BaseController
 {
     public function create(array $values = array(), array $errors = array())
     {
-        $project = $this->getProject();
         $task = $this->getTask();
 
         $this->response->html($this->helper->layout->task('comment_mail/create', array(
             'values'  => $values,
             'errors'  => $errors,
             'task'    => $task,
-            'project' => $project,
-            'members' => $this->projectPermissionModel->getMembersWithEmail($project['id']),
+            'members' => $this->projectPermissionModel->getMembersWithEmail($task['project_id']),
         )));
     }
 
