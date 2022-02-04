@@ -57,7 +57,7 @@ class TaskDuplicationController extends BaseController
                                                                 $values['category_id'],
                                                                 $values['owner_id'])) {
                 $this->flash->success(t('Task updated successfully.'));
-                return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $values['project_id'], 'task_id' => $task['id'])));
+                return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])));
             }
 
             $this->flash->failure(t('Unable to update your task.'));

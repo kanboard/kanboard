@@ -28,7 +28,7 @@ class TaskApiFormatter extends BaseFormatter implements FormatterInterface
     public function format()
     {
         if (! empty($this->task)) {
-            $this->task['url'] = $this->helper->url->to('TaskViewController', 'show', array('task_id' => $this->task['id'], 'project_id' => $this->task['project_id']), '', true);
+            $this->task['url'] = $this->helper->url->to('TaskViewController', 'show', array('task_id' => $this->task['id']), '', true);
             $this->task['color'] = $this->colorModel->getColorProperties($this->task['color_id']);
         }
 
