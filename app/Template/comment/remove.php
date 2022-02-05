@@ -16,6 +16,6 @@
     <?= $this->modal->confirmButtons(
         'CommentController',
         'remove',
-        array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'comment_id' => $comment['id'])
+        array('task_id' => $task['id'], 'comment_id' => $comment['id'])
     ) ?>
 </div>

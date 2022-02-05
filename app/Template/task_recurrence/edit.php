@@ -15,7 +15,7 @@
 
 <?php if ($task['recurrence_status'] != \Kanboard\Model\TaskModel::RECURRING_STATUS_PROCESSED): ?>
 
-    <form method="post" action="<?= $this->url->href('TaskRecurrenceController', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off">
+    <form method="post" action="<?= $this->url->href('TaskRecurrenceController', 'update', array('task_id' => $task['id'])) ?>" autocomplete="off">
 
         <?= $this->form->csrf() ?>
 

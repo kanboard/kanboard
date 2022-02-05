@@ -21,7 +21,7 @@ class TaskFileController extends BaseController
 
         if ($this->request->isPost() && $this->taskFileModel->uploadScreenshot($task['id'], $this->request->getValue('screenshot')) !== false) {
             $this->flash->success(t('Screenshot uploaded successfully.'));
-            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
+            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])), true);
         }
 
         return $this->response->html($this->template->render('task_file/screenshot', array(
@@ -66,7 +66,7 @@ class TaskFileController extends BaseController
                 $this->flash->failure(t('Unable to upload files, check the permissions of your data folder.'));
             }
 
-            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
+            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])), true);
         }
     }
 
@@ -87,7 +87,7 @@ class TaskFileController extends BaseController
             $this->flash->failure(t('Unable to remove this file.'));
         }
 
-        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])));
     }
 
     /**

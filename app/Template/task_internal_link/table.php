@@ -32,10 +32,10 @@
                             <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
                             <ul>
                                 <li>
-                                    <?= $this->modal->medium('edit', t('Edit'), 'TaskInternalLinkController', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                                    <?= $this->modal->medium('edit', t('Edit'), 'TaskInternalLinkController', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'])) ?>
                                 </li>
                                 <li>
-                                    <?= $this->modal->confirm('trash-o', t('Remove'), 'TaskInternalLinkController', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                                    <?= $this->modal->confirm('trash-o', t('Remove'), 'TaskInternalLinkController', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'])) ?>
                                 </li>
                             </ul>
                         </div>

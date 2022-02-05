@@ -25,13 +25,13 @@
         <?php if ($task['recurrence_parent']): ?>
         <li>
             <?= t('This task has been created by: ') ?>
-            <?= $this->url->link('#'.$task['recurrence_parent'], 'TaskViewController', 'show', array('task_id' => $task['recurrence_parent'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->link('#'.$task['recurrence_parent'], 'TaskViewController', 'show', array('task_id' => $task['recurrence_parent'])) ?>
         </li>
         <?php endif ?>
         <?php if ($task['recurrence_child']): ?>
         <li>
             <?= t('This task has created this child task: ') ?>
-            <?= $this->url->link('#'.$task['recurrence_child'], 'TaskViewController', 'show', array('task_id' => $task['recurrence_child'], 'project_id' => $task['project_id'])) ?>
+            <?= $this->url->link('#'.$task['recurrence_child'], 'TaskViewController', 'show', array('task_id' => $task['recurrence_child'])) ?>
         </li>
         <?php endif ?>
     <?php endif ?>

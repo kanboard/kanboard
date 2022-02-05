@@ -2,7 +2,7 @@
     <h2><?= t('Edit link') ?></h2>
 </div>
 
-<form action="<?= $this->url->href('TaskInternalLinkController', 'update', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'link_id' => $task_link['id'])) ?>" method="post" autocomplete="off">
+<form action="<?= $this->url->href('TaskInternalLinkController', 'update', array('task_id' => $task['id'], 'link_id' => $task_link['id'])) ?>" method="post" autocomplete="off">
     <?= $this->form->csrf() ?>
 
     <?= $this->form->hidden('opposite_task_id', $values) ?>

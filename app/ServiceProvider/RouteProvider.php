@@ -89,14 +89,14 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/import', 'TaskImportController', 'show');
 
             // Task routes
-            $container['route']->addRoute('project/:project_id/task/:task_id', 'TaskViewController', 'show');
+            $container['route']->addRoute('task/:task_id', 'TaskViewController', 'show');
             $container['route']->addRoute('t/:task_id', 'TaskViewController', 'show');
             $container['route']->addRoute('public/task/:task_id/:token', 'TaskViewController', 'readonly');
 
-            $container['route']->addRoute('project/:project_id/task/:task_id/activity', 'ActivityController', 'task');
-            $container['route']->addRoute('project/:project_id/task/:task_id/transitions', 'TaskViewController', 'transitions');
-            $container['route']->addRoute('project/:project_id/task/:task_id/analytics', 'TaskViewController', 'analytics');
-            $container['route']->addRoute('project/:project_id/task/:task_id/time-tracking', 'TaskViewController', 'timetracking');
+            $container['route']->addRoute('task/:task_id/activity', 'ActivityController', 'task');
+            $container['route']->addRoute('task/:task_id/transitions', 'TaskViewController', 'transitions');
+            $container['route']->addRoute('task/:task_id/analytics', 'TaskViewController', 'analytics');
+            $container['route']->addRoute('task/:task_id/time-tracking', 'TaskViewController', 'timetracking');
 
             // Exports
             $container['route']->addRoute('export/tasks/:project_id', 'ExportController', 'tasks');

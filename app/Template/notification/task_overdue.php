@@ -16,7 +16,7 @@
             <td style="border: 1px solid #eee;">#<?= $task['id'] ?></td>
             <td style="border: 1px solid #eee;">
                 <?php if ($this->app->config('application_url') !== ''): ?>
-                    <?= $this->url->absoluteLink($this->text->e($task['title']), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                    <?= $this->url->absoluteLink($this->text->e($task['title']), 'TaskViewController', 'show', array('task_id' => $task['id'])) ?>
                 <?php else: ?>
                     <?= $this->text->e($task['title']) ?>
                 <?php endif ?>

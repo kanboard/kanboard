@@ -10,6 +10,6 @@
     <?= $this->modal->confirmButtons(
         'TaskSuppressionController',
         'remove',
-        array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'redirect' => $redirect)
+        array('task_id' => $task['id'], 'redirect' => $redirect)
     ) ?>
 </div>
