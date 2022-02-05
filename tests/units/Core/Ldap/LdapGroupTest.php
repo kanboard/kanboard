@@ -11,7 +11,7 @@ class LdapGroupTest extends Base
     private $client;
     private $group;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

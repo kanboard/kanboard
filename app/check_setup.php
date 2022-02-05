@@ -34,8 +34,3 @@ foreach (array('gd', 'mbstring', 'hash', 'openssl', 'json', 'hash', 'ctype', 'fi
 if (ini_get('arg_separator.output') === '&amp;') {
     ini_set('arg_separator.output', '&');
 }
-
-// Make sure we can read files with "\r", "\r\n" and "\n"
-if (ini_get('auto_detect_line_endings') != 1) {
-    ini_set("auto_detect_line_endings", 1);
-}

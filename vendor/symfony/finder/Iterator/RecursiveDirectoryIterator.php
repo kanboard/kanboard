@@ -56,14 +56,15 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
     /**
      * Return an instance of SplFileInfo with support for relative paths.
      *
-     * @return SplFileInfo File information
+     * @return SplFileInfo
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         // the logic here avoids redoing the same work in all iterations
 
         if (null === $subPathname = $this->subPath) {
-            $subPathname = $this->subPath = (string) $this->getSubPath();
+            $subPathname = $this->subPath = $this->getSubPath();
         }
         if ('' !== $subPathname) {
             $subPathname .= $this->directorySeparator;
@@ -78,10 +79,35 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
     }
 
     /**
-     * @return \RecursiveIterator
+     * @param bool $allowLinks
+     *
+     * @return bool
+     */
+    #[\ReturnTypeWillChange]
+    public function hasChildren($allowLinks = false)
+    {
+        $hasChildren = parent::hasChildren($allowLinks);
+
+        if (!$hasChildren || !$this->ignoreUnreadableDirs) {
+            return $hasChildren;
+        }
+
+        try {
+            parent::getChildren();
+
+            return true;
+        } catch (\UnexpectedValueException $e) {
+            // If directory is unreadable and finder is set to ignore it, skip children
+            return false;
+        }
+    }
+
+    /**
+     * @return \RecursiveDirectoryIterator
      *
      * @throws AccessDeniedException
      */
+    #[\ReturnTypeWillChange]
     public function getChildren()
     {
         try {
@@ -98,18 +124,16 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
 
             return $children;
         } catch (\UnexpectedValueException $e) {
-            if ($this->ignoreUnreadableDirs) {
-                // If directory is unreadable and finder is set to ignore it, a fake empty content is returned.
-                return new \RecursiveArrayIterator([]);
-            } else {
-                throw new AccessDeniedException($e->getMessage(), $e->getCode(), $e);
-            }
+            throw new AccessDeniedException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
      * Do nothing for non rewindable stream.
+     *
+     * @return void
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         if (false === $this->isRewindable()) {
@@ -122,7 +146,7 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
     /**
      * Checks if the stream is rewindable.
      *
-     * @return bool true when the stream is rewindable, false otherwise
+     * @return bool
      */
     public function isRewindable()
     {

@@ -38,7 +38,7 @@ class TaskAjaxController extends BaseController
                 $filter->withFilter(new TaskIdExclusionFilter(array($exclude_task_id)));
             }
 
-            if (ctype_digit($search)) {
+            if (ctype_digit((string) $search)) {
                 $filter->withFilter(new TaskIdFilter($search));
             } else {
                 $filter->withFilter(new TaskTitleFilter($search));

@@ -171,7 +171,7 @@ class InputDefinition
      */
     public function getArgumentCount()
     {
-        return $this->hasAnArrayArgument ? PHP_INT_MAX : \count($this->arguments);
+        return $this->hasAnArrayArgument ? \PHP_INT_MAX : \count($this->arguments);
     }
 
     /**
@@ -185,9 +185,7 @@ class InputDefinition
     }
 
     /**
-     * Gets the default values.
-     *
-     * @return array An array of default values
+     * @return array<string|bool|int|float|array|null>
      */
     public function getArgumentDefaults()
     {
@@ -316,9 +314,7 @@ class InputDefinition
     }
 
     /**
-     * Gets an array of default values.
-     *
-     * @return array An array of all default values
+     * @return array<string|bool|int|float|array|null>
      */
     public function getOptionDefaults()
     {
@@ -333,15 +329,11 @@ class InputDefinition
     /**
      * Returns the InputOption name given a shortcut.
      *
-     * @param string $shortcut The shortcut
-     *
-     * @return string The InputOption name
-     *
      * @throws InvalidArgumentException When option given does not exist
      *
      * @internal
      */
-    public function shortcutToName($shortcut)
+    public function shortcutToName(string $shortcut): string
     {
         if (!isset($this->shortcuts[$shortcut])) {
             throw new InvalidArgumentException(sprintf('The "-%s" option does not exist.', $shortcut));

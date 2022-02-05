@@ -36,7 +36,7 @@ class ProjectActivityHelperTest extends Base
         $this->assertNotEmpty($events[0]['event_content']);
         $this->assertNotEmpty($events[0]['event_title']);
         $this->assertNotEmpty($events[0]['author']);
-        $this->assertInternalType('array', $events[0]['task']);
+        $this->assertIsArray($events[0]['task']);
     }
 
     public function testGetProjectsEvents()
@@ -66,7 +66,7 @@ class ProjectActivityHelperTest extends Base
         $this->assertNotEmpty($events[0]['event_content']);
         $this->assertNotEmpty($events[0]['event_title']);
         $this->assertNotEmpty($events[0]['author']);
-        $this->assertInternalType('array', $events[0]['task']);
+        $this->assertIsArray($events[0]['task']);
     }
 
     public function testGetTaskEvents()
@@ -92,6 +92,6 @@ class ProjectActivityHelperTest extends Base
         $this->assertNotEmpty($events[0]['event_content']);
         $this->assertNotEmpty($events[0]['event_title']);
         $this->assertNotEmpty($events[0]['author']);
-        $this->assertInternalType('array', $events[0]['task']);
+        $this->assertIsArray($events[0]['task']);
     }
 }

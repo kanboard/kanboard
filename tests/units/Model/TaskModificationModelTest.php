@@ -75,8 +75,7 @@ class TaskModificationModelTest extends Base
         $this->assertTrue($taskModificationModel->update(array('id' => 1, 'title' => 'After')));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.TaskModificationModelTest::onCreateUpdate', $called);
-        $this->assertArrayHasKey(TaskModel::EVENT_UPDATE.'.TaskModificationModelTest::onUpdate', $called);
+        $this->assertCount(2, $called);
 
         $task = $taskFinderModel->getById(1);
         $this->assertEquals('After', $task['title']);
@@ -100,7 +99,7 @@ class TaskModificationModelTest extends Base
         $this->assertTrue($taskModificationModel->update(array('id' => 1, 'owner_id' => 1)));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_ASSIGNEE_CHANGE.'.TaskModificationModelTest::onAssigneeChange', $called);
+        $this->assertCount(1, $called);
 
         $task = $taskFinderModel->getById(1);
         $this->assertEquals(1, $task['owner_id']);

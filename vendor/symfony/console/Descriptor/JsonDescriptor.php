@@ -63,7 +63,7 @@ class JsonDescriptor extends Descriptor
      */
     protected function describeApplication(Application $application, array $options = [])
     {
-        $describedNamespace = isset($options['namespace']) ? $options['namespace'] : null;
+        $describedNamespace = $options['namespace'] ?? null;
         $description = new ApplicationDescription($application, $describedNamespace, true);
         $commands = [];
 
@@ -92,34 +92,26 @@ class JsonDescriptor extends Descriptor
 
     /**
      * Writes data as json.
-     *
-     * @return array|string
      */
     private function writeData(array $data, array $options)
     {
-        $flags = isset($options['json_encoding']) ? $options['json_encoding'] : 0;
+        $flags = $options['json_encoding'] ?? 0;
 
         $this->write(json_encode($data, $flags));
     }
 
-    /**
-     * @return array
-     */
-    private function getInputArgumentData(InputArgument $argument)
+    private function getInputArgumentData(InputArgument $argument): array
     {
         return [
             'name' => $argument->getName(),
             'is_required' => $argument->isRequired(),
             'is_array' => $argument->isArray(),
             'description' => preg_replace('/\s*[\r\n]\s*/', ' ', $argument->getDescription()),
-            'default' => INF === $argument->getDefault() ? 'INF' : $argument->getDefault(),
+            'default' => \INF === $argument->getDefault() ? 'INF' : $argument->getDefault(),
         ];
     }
 
-    /**
-     * @return array
-     */
-    private function getInputOptionData(InputOption $option)
+    private function getInputOptionData(InputOption $option): array
     {
         return [
             'name' => '--'.$option->getName(),
@@ -128,14 +120,11 @@ class JsonDescriptor extends Descriptor
             'is_value_required' => $option->isValueRequired(),
             'is_multiple' => $option->isArray(),
             'description' => preg_replace('/\s*[\r\n]\s*/', ' ', $option->getDescription()),
-            'default' => INF === $option->getDefault() ? 'INF' : $option->getDefault(),
+            'default' => \INF === $option->getDefault() ? 'INF' : $option->getDefault(),
         ];
     }
 
-    /**
-     * @return array
-     */
-    private function getInputDefinitionData(InputDefinition $definition)
+    private function getInputDefinitionData(InputDefinition $definition): array
     {
         $inputArguments = [];
         foreach ($definition->getArguments() as $name => $argument) {
@@ -150,10 +139,7 @@ class JsonDescriptor extends Descriptor
         return ['arguments' => $inputArguments, 'options' => $inputOptions];
     }
 
-    /**
-     * @return array
-     */
-    private function getCommandData(Command $command)
+    private function getCommandData(Command $command): array
     {
         $command->getSynopsis();
         $command->mergeApplicationDefinition(false);

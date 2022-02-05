@@ -12,7 +12,7 @@ class UserSyncTest extends Base
     {
         $user = new LdapUserProvider('ldapId', 'bob', 'Bob', '', Role::APP_MANAGER, array());
         $userSync = new UserSync($this->container);
-
+        $result = $userSync->synchronize($user);
         $profile = array(
             'id' => 2,
             'username' => 'bob',
@@ -22,7 +22,9 @@ class UserSyncTest extends Base
             'is_ldap_user' => 1,
         );
 
-        $this->assertArraySubset($profile, $userSync->synchronize($user));
+        foreach ($profile as $key => $value) {
+            $this->assertEquals($value, $result[$key]);
+        }
     }
 
     public function testSynchronizeExistingUser()
@@ -38,7 +40,10 @@ class UserSyncTest extends Base
             'role' => Role::APP_MANAGER,
         );
 
-        $this->assertArraySubset($profile, $userSync->synchronize($user));
+        $result = $userSync->synchronize($user);
+        foreach ($profile as $key => $value) {
+            $this->assertEquals($value, $result[$key]);
+        }
 
         $user = new LdapUserProvider('ldapId', 'admin', '', '', Role::APP_ADMIN, array());
 
@@ -50,6 +55,9 @@ class UserSyncTest extends Base
             'role' => Role::APP_ADMIN,
         );
 
-        $this->assertArraySubset($profile, $userSync->synchronize($user));
+        $result = $userSync->synchronize($user);
+        foreach ($profile as $key => $value) {
+            $this->assertEquals($value, $result[$key]);
+        }
     }
 }

@@ -33,7 +33,7 @@ class TaskProjectFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        if (is_int($this->value) || ctype_digit($this->value)) {
+        if (is_int($this->value) || ctype_digit((string) $this->value)) {
             $this->query->eq(TaskModel::TABLE.'.project_id', $this->value);
         } else {
             $this->query->ilike(ProjectModel::TABLE.'.name', $this->value);

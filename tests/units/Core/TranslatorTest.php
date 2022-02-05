@@ -6,7 +6,7 @@ use Kanboard\Core\Translator;
 
 class TranslatorTest extends Base
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         Translator::unload();

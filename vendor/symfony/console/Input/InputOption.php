@@ -21,10 +21,25 @@ use Symfony\Component\Console\Exception\LogicException;
  */
 class InputOption
 {
-    const VALUE_NONE = 1;
-    const VALUE_REQUIRED = 2;
-    const VALUE_OPTIONAL = 4;
-    const VALUE_IS_ARRAY = 8;
+    /**
+     * Do not accept input for the option (e.g. --yell). This is the default behavior of options.
+     */
+    public const VALUE_NONE = 1;
+
+    /**
+     * A value must be passed when the option is used (e.g. --iterations=5 or -i5).
+     */
+    public const VALUE_REQUIRED = 2;
+
+    /**
+     * The option may or may not have a value (e.g. --yell or --yell=loud).
+     */
+    public const VALUE_OPTIONAL = 4;
+
+    /**
+     * The option accepts multiple values (e.g. --dir=/foo --dir=/bar).
+     */
+    public const VALUE_IS_ARRAY = 8;
 
     private $name;
     private $shortcut;
@@ -33,17 +48,17 @@ class InputOption
     private $description;
 
     /**
-     * @param string                        $name        The option name
-     * @param string|array|null             $shortcut    The shortcuts, can be null, a string of shortcuts delimited by | or an array of shortcuts
-     * @param int|null                      $mode        The option mode: One of the VALUE_* constants
-     * @param string                        $description A description text
-     * @param string|string[]|int|bool|null $default     The default value (must be null for self::VALUE_NONE)
+     * @param string                           $name        The option name
+     * @param string|array|null                $shortcut    The shortcuts, can be null, a string of shortcuts delimited by | or an array of shortcuts
+     * @param int|null                         $mode        The option mode: One of the VALUE_* constants
+     * @param string                           $description A description text
+     * @param string|bool|int|float|array|null $default     The default value (must be null for self::VALUE_NONE)
      *
      * @throws InvalidArgumentException If option mode is invalid or incompatible
      */
     public function __construct(string $name, $shortcut = null, int $mode = null, string $description = '', $default = null)
     {
-        if (0 === strpos($name, '--')) {
+        if (str_starts_with($name, '--')) {
             $name = substr($name, 2);
         }
 
@@ -147,11 +162,7 @@ class InputOption
     }
 
     /**
-     * Sets the default value.
-     *
-     * @param string|string[]|int|bool|null $default The default value
-     *
-     * @throws LogicException When incorrect default value is given
+     * @param string|bool|int|float|array|null $default
      */
     public function setDefault($default = null)
     {
@@ -173,7 +184,7 @@ class InputOption
     /**
      * Returns the default value.
      *
-     * @return string|string[]|int|bool|null The default value
+     * @return string|bool|int|float|array|null
      */
     public function getDefault()
     {

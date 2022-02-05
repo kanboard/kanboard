@@ -54,7 +54,7 @@ class TaskProjectMoveModelTest extends Base
         $this->assertTrue($taskProjectMoveModel->moveToProject(1, 2));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_MOVE_PROJECT.'.TaskProjectMoveModelTest::onMoveProject', $called);
+        $this->assertCount(1, $called);
 
         // Check the values of the moved task
         $task = $taskFinderModel->getById(1);

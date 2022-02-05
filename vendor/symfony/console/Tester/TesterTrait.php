@@ -44,7 +44,7 @@ trait TesterTrait
         $display = stream_get_contents($this->output->getStream());
 
         if ($normalize) {
-            $display = str_replace(PHP_EOL, "\n", $display);
+            $display = str_replace(\PHP_EOL, "\n", $display);
         }
 
         return $display;
@@ -68,7 +68,7 @@ trait TesterTrait
         $display = stream_get_contents($this->output->getErrorOutput()->getStream());
 
         if ($normalize) {
-            $display = str_replace(PHP_EOL, "\n", $display);
+            $display = str_replace(\PHP_EOL, "\n", $display);
         }
 
         return $display;
@@ -110,7 +110,7 @@ trait TesterTrait
      * @param array $inputs An array of strings representing each input
      *                      passed to the command input stream
      *
-     * @return self
+     * @return $this
      */
     public function setInputs(array $inputs)
     {
@@ -141,8 +141,8 @@ trait TesterTrait
             }
         } else {
             $this->output = new ConsoleOutput(
-                isset($options['verbosity']) ? $options['verbosity'] : ConsoleOutput::VERBOSITY_NORMAL,
-                isset($options['decorated']) ? $options['decorated'] : null
+                $options['verbosity'] ?? ConsoleOutput::VERBOSITY_NORMAL,
+                $options['decorated'] ?? null
             );
 
             $errorOutput = new StreamOutput(fopen('php://memory', 'w', false));
@@ -162,12 +162,15 @@ trait TesterTrait
         }
     }
 
+    /**
+     * @return resource
+     */
     private static function createStream(array $inputs)
     {
         $stream = fopen('php://memory', 'r+', false);
 
         foreach ($inputs as $input) {
-            fwrite($stream, $input.PHP_EOL);
+            fwrite($stream, $input.\PHP_EOL);
         }
 
         rewind($stream);

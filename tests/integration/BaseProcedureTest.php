@@ -27,7 +27,7 @@ abstract class BaseProcedureTest extends PHPUnit\Framework\TestCase
     protected $username = 'test-user';
     protected $userId;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->setUpAppClient();
         $this->setUpAdminUser();

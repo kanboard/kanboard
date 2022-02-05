@@ -121,7 +121,7 @@ class HookHelperTest extends Base
 
         $this->container['helper']
             ->asset
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('css')
             ->with(
                 $this->equalTo('skin.css')
@@ -130,7 +130,7 @@ class HookHelperTest extends Base
 
         $this->container['helper']
             ->asset
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('js')
             ->with(
                 $this->equalTo('skin.js')
@@ -141,7 +141,7 @@ class HookHelperTest extends Base
         $hookHelper->attach('test1', 'skin.css');
         $hookHelper->attach('test2', 'skin.js');
 
-        $this->assertContains('<link rel="stylesheet" href="skin.css"></link>', $hookHelper->asset('css', 'test1'));
-        $this->assertContains('<script src="skin.js"></script>', $hookHelper->asset('js', 'test2'));
+        $this->assertStringContainsString('<link rel="stylesheet" href="skin.css"></link>', $hookHelper->asset('css', 'test1'));
+        $this->assertStringContainsString('<script src="skin.js"></script>', $hookHelper->asset('js', 'test2'));
     }
 }

@@ -20,7 +20,7 @@ abstract class Base extends PHPUnit\Framework\TestCase
      */
     protected $dispatcher;
 
-    public function setUp()
+    protected function setUp(): void
     {
         date_default_timezone_set('UTC');
         $_SESSION = array();
@@ -98,7 +98,7 @@ abstract class Base extends PHPUnit\Framework\TestCase
         $loader->register();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->container['db']->closeConnection();
         unset ($this->container);

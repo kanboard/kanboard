@@ -43,7 +43,7 @@ class AverageLeadCycleTimeAnalyticTest extends Base
         $stats = $averageLeadCycleTimeAnalytic->build(1);
 
         $this->assertEquals(5, $stats['count']);
-        $this->assertEquals(3600 + 1800 + 3600 + 2*3600, $stats['total_lead_time'], '', 5);
+        $this->assertEquals(3600 + 1800 + 3600 + 2*3600, $stats['total_lead_time'], '', 10);
         $this->assertEquals(1800 + 900, $stats['total_cycle_time'], '', 5);
         $this->assertEquals((3600 + 1800 + 3600 + 2*3600) / 5, $stats['avg_lead_time'], '', 5);
         $this->assertEquals((1800 + 900) / 5, $stats['avg_cycle_time'], '', 5);

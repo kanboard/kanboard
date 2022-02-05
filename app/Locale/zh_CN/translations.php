@@ -1427,4 +1427,5 @@ return array(
     'XBT - Bitcoin' => 'XBT - 比特币',
     'You must select a file to upload as your avatar!' => '你必须选择一张图片作为你的头像',
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '你所上传的文件不是有效图像！(只有*.gif, *.jpg, *.jpeg and *.png才被允许！)',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

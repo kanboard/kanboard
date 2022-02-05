@@ -13,7 +13,7 @@ class Integer extends Base
                     return ctype_digit(substr($data[$this->field], 1));
                 }
 
-                return ctype_digit($data[$this->field]);
+                return ctype_digit((string) $data[$this->field]);
             }
             else {
                 return is_int($data[$this->field]);

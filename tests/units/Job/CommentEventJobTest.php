@@ -45,9 +45,10 @@ class CommentEventJobTest extends Base
         $this->assertTrue($commentModel->remove(1));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(CommentModel::EVENT_CREATE.'.closure', $called);
-        $this->assertArrayHasKey(CommentModel::EVENT_UPDATE.'.closure', $called);
-        $this->assertArrayHasKey(CommentModel::EVENT_DELETE.'.closure', $called);
+        $this->assertCount(3, $called);
+        $this->assertEquals(CommentModel::EVENT_CREATE, $called[0]['event']);
+        $this->assertEquals(CommentModel::EVENT_UPDATE, $called[1]['event']);
+        $this->assertEquals(CommentModel::EVENT_DELETE, $called[2]['event']);
     }
 
     public function testThatUserMentionJobIsCalled()
