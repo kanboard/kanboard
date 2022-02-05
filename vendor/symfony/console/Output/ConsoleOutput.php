@@ -41,6 +41,13 @@ class ConsoleOutput extends StreamOutput implements ConsoleOutputInterface
     {
         parent::__construct($this->openOutputStream(), $verbosity, $decorated, $formatter);
 
+        if (null === $formatter) {
+            // for BC reasons, stdErr has it own Formatter only when user don't inject a specific formatter.
+            $this->stderr = new StreamOutput($this->openErrorStream(), $verbosity, $decorated);
+
+            return;
+        }
+
         $actualDecorated = $this->isDecorated();
         $this->stderr = new StreamOutput($this->openErrorStream(), $verbosity, $decorated, $this->getFormatter());
 
@@ -125,15 +132,13 @@ class ConsoleOutput extends StreamOutput implements ConsoleOutputInterface
     /**
      * Checks if current executing environment is IBM iSeries (OS400), which
      * doesn't properly convert character-encodings between ASCII to EBCDIC.
-     *
-     * @return bool
      */
-    private function isRunningOS400()
+    private function isRunningOS400(): bool
     {
         $checks = [
             \function_exists('php_uname') ? php_uname('s') : '',
             getenv('OSTYPE'),
-            PHP_OS,
+            \PHP_OS,
         ];
 
         return false !== stripos(implode(';', $checks), 'OS400');
@@ -148,7 +153,8 @@ class ConsoleOutput extends StreamOutput implements ConsoleOutputInterface
             return fopen('php://output', 'w');
         }
 
-        return @fopen('php://stdout', 'w') ?: fopen('php://output', 'w');
+        // Use STDOUT when possible to prevent from opening too many file descriptors
+        return \defined('STDOUT') ? \STDOUT : (@fopen('php://stdout', 'w') ?: fopen('php://output', 'w'));
     }
 
     /**
@@ -156,6 +162,11 @@ class ConsoleOutput extends StreamOutput implements ConsoleOutputInterface
      */
     private function openErrorStream()
     {
-        return fopen($this->hasStderrSupport() ? 'php://stderr' : 'php://output', 'w');
+        if (!$this->hasStderrSupport()) {
+            return fopen('php://output', 'w');
+        }
+
+        // Use STDERR when possible to prevent from opening too many file descriptors
+        return \defined('STDERR') ? \STDERR : (@fopen('php://stderr', 'w') ?: fopen('php://output', 'w'));
     }
 }

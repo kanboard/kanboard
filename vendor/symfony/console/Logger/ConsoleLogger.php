@@ -22,12 +22,12 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  *
- * @see http://www.php-fig.org/psr/psr-3/
+ * @see https://www.php-fig.org/psr/psr-3/
  */
 class ConsoleLogger extends AbstractLogger
 {
-    const INFO = 'info';
-    const ERROR = 'error';
+    public const INFO = 'info';
+    public const ERROR = 'error';
 
     private $output;
     private $verbosityLevelMap = [
@@ -61,6 +61,8 @@ class ConsoleLogger extends AbstractLogger
 
     /**
      * {@inheritdoc}
+     *
+     * @return void
      */
     public function log($level, $message, array $context = [])
     {
@@ -102,7 +104,7 @@ class ConsoleLogger extends AbstractLogger
      */
     private function interpolate(string $message, array $context): string
     {
-        if (false === strpos($message, '{')) {
+        if (!str_contains($message, '{')) {
             return $message;
         }
 

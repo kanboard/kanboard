@@ -32,7 +32,7 @@ class ProjectStatusFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        if (is_int($this->value) || ctype_digit($this->value)) {
+        if (is_int($this->value) || ctype_digit((string) $this->value)) {
             $this->query->eq(ProjectModel::TABLE.'.is_active', $this->value);
         } elseif ($this->value === 'inactive' || $this->value === 'closed' || $this->value === 'disabled') {
             $this->query->eq(ProjectModel::TABLE.'.is_active', 0);

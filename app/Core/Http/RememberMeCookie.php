@@ -112,7 +112,7 @@ class RememberMeCookie extends Base
             '',
             time() - 3600,
             $this->helper->url->dir(),
-            null,
+            '',
             $this->request->isHTTPS(),
             true
         );

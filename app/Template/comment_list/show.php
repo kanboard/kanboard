@@ -18,7 +18,6 @@
         <?= $this->render('comment/show', array(
             'comment'   => $comment,
             'task'      => $task,
-            'project'   => $project,
             'editable'  => $editable,
             'is_public' => isset($is_public) && $is_public,
         )) ?>

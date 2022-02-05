@@ -12,7 +12,7 @@ class AuthenticationMiddlewareTest extends Base
     private $middleware;
     private $nextMiddleware;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

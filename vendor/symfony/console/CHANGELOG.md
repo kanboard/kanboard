@@ -1,6 +1,28 @@
 CHANGELOG
 =========
 
+4.4.0
+-----
+
+ * deprecated finding hidden commands using an abbreviation, use the full name instead
+ * added `Question::setTrimmable` default to true to allow the answer to be trimmed
+ * added method `minSecondsBetweenRedraws()` and `maxSecondsBetweenRedraws()` on `ProgressBar`
+ * `Application` implements `ResetInterface`
+ * marked all dispatched event classes as `@final`
+ * added support for displaying table horizontally
+ * deprecated returning `null` from `Command::execute()`, return `0` instead
+ * Deprecated the `Application::renderException()` and `Application::doRenderException()` methods,
+   use `renderThrowable()` and `doRenderThrowable()` instead.
+ * added support for the `NO_COLOR` env var (https://no-color.org/)
+
+4.3.0
+-----
+
+ * added support for hyperlinks
+ * added `ProgressBar::iterate()` method that simplify updating the progress bar when iterating
+ * added `Question::setAutocompleterCallback()` to provide a callback function
+   that dynamically generates suggestions as the user types
+
 4.2.0
 -----
 
@@ -24,10 +46,10 @@ CHANGELOG
 
  * `OutputFormatter` throws an exception when unknown options are used
  * removed `QuestionHelper::setInputStream()/getInputStream()`
- * removed `Application::getTerminalWidth()/getTerminalHeight()` and 
-  `Application::setTerminalDimensions()/getTerminalDimensions()`
-* removed `ConsoleExceptionEvent`
-* removed `ConsoleEvents::EXCEPTION`
+ * removed `Application::getTerminalWidth()/getTerminalHeight()` and
+   `Application::setTerminalDimensions()/getTerminalDimensions()`
+ * removed `ConsoleExceptionEvent`
+ * removed `ConsoleEvents::EXCEPTION`
 
 3.4.0
 -----
@@ -44,29 +66,29 @@ CHANGELOG
 3.3.0
 -----
 
-* added `ExceptionListener`
-* added `AddConsoleCommandPass` (originally in FrameworkBundle)
-* [BC BREAK] `Input::getOption()` no longer returns the default value for options
-  with value optional explicitly passed empty
-* added console.error event to catch exceptions thrown by other listeners
-* deprecated console.exception event in favor of console.error
-* added ability to handle `CommandNotFoundException` through the 
- `console.error` event
-* deprecated default validation in `SymfonyQuestionHelper::ask`
+ * added `ExceptionListener`
+ * added `AddConsoleCommandPass` (originally in FrameworkBundle)
+ * [BC BREAK] `Input::getOption()` no longer returns the default value for options
+   with value optional explicitly passed empty
+ * added console.error event to catch exceptions thrown by other listeners
+ * deprecated console.exception event in favor of console.error
+ * added ability to handle `CommandNotFoundException` through the
+   `console.error` event
+ * deprecated default validation in `SymfonyQuestionHelper::ask`
 
 3.2.0
 ------
 
-* added `setInputs()` method to CommandTester for ease testing of commands expecting inputs
-* added `setStream()` and `getStream()` methods to Input (implement StreamableInputInterface)
-* added StreamableInputInterface
-* added LockableTrait
+ * added `setInputs()` method to CommandTester for ease testing of commands expecting inputs
+ * added `setStream()` and `getStream()` methods to Input (implement StreamableInputInterface)
+ * added StreamableInputInterface
+ * added LockableTrait
 
 3.1.0
 -----
 
  * added truncate method to FormatterHelper
- * added setColumnWidth(s) method to Table 
+ * added setColumnWidth(s) method to Table
 
 2.8.3
 -----

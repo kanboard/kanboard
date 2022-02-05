@@ -13,7 +13,7 @@ class RememberMeCookieTest extends \Base
 {
     public static $functions;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setup();
 
@@ -25,7 +25,7 @@ class RememberMeCookieTest extends \Base
             ->getMock();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         self::$functions = null;

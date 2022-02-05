@@ -79,7 +79,7 @@ class Request extends Base
      */
     public function getIntegerParam($name, $default_value = 0)
     {
-        return isset($this->get[$name]) && ctype_digit($this->get[$name]) ? (int) $this->get[$name] : $default_value;
+        return isset($this->get[$name]) && ctype_digit((string) $this->get[$name]) ? (int) $this->get[$name] : $default_value;
     }
 
     /**

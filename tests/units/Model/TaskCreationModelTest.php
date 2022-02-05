@@ -33,8 +33,7 @@ class TaskCreationModelTest extends Base
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1)));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE.'.closure', $called);
+        $this->assertCount(2, $called);
 
         $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
@@ -56,8 +55,7 @@ class TaskCreationModelTest extends Base
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE.'.TaskCreationModelTest::onCreate', $called);
+        $this->assertCount(2, $called);
 
         $task = $finderModel->getById(1);
         $this->assertNotEmpty($task);

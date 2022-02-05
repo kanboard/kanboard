@@ -8,7 +8,7 @@ require_once __DIR__.'/../Base.php';
 
 class ReverseProxyAuthTest extends Base
 {
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

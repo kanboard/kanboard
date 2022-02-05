@@ -46,9 +46,6 @@ class SubtaskEventJobTest extends Base
         $this->assertTrue($subtaskModel->remove(1));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(SubtaskModel::EVENT_CREATE.'.closure', $called);
-        $this->assertArrayHasKey(SubtaskModel::EVENT_UPDATE.'.closure', $called);
-        $this->assertArrayHasKey(SubtaskModel::EVENT_DELETE.'.closure', $called);
-        $this->assertArrayHasKey(SubtaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertCount(5, $called);
     }
 }

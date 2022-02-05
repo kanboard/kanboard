@@ -1427,4 +1427,5 @@ return array(
     'XBT - Bitcoin' => 'XBT - بیت کوین',
     'You must select a file to upload as your avatar!' => 'برای بارگذاری تصویر نمایه تان باید فایلی انتخاب کنید!',
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'فایلی که بارگذاری کردید یک تصویر معتبر نیست! (فقط *.gif, *.jpg, *.jpeg و *.png مجاز هستند!)',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

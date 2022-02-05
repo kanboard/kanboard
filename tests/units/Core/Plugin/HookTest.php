@@ -46,7 +46,7 @@ class HookTest extends Base
             return array($p);
         });
 
-        $hook->on('myhook', function () {
+        $hook->on('myhook', function ($p) {
             return array('D');
         });
 

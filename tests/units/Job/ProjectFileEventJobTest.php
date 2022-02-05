@@ -38,6 +38,7 @@ class ProjectFileEventJobTest extends Base
         $this->assertEquals(1, $projectFileModel->create(1, 'Test', '/tmp/test', 123));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(ProjectFileModel::EVENT_CREATE.'.closure', $called);
+        $this->assertCount(1, $called);
+        $this->assertEquals(ProjectFileModel::EVENT_CREATE, $called[0]['event']);
     }
 }

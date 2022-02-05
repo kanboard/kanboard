@@ -46,7 +46,7 @@ class ProjectProcedureTest extends BaseProcedureTest
     {
         $projects = $this->app->getAllProjects();
         $this->assertNotEmpty($projects);
-        $this->assertInternalType('array', $projects);
+        $this->assertIsArray($projects);
         $this->assertArrayHasKey('board', $projects[0]['url']);
         $this->assertArrayHasKey('list', $projects[0]['url']);
     }
@@ -54,14 +54,14 @@ class ProjectProcedureTest extends BaseProcedureTest
     public function assertGetProjectActivity()
     {
         $activities = $this->app->getProjectActivity($this->projectId);
-        $this->assertInternalType('array', $activities);
+        $this->assertIsArray($activities);
         $this->assertCount(0, $activities);
     }
 
     public function assertGetProjectsActivity()
     {
         $activities = $this->app->getProjectActivities(array('project_ids' => array($this->projectId)));
-        $this->assertInternalType('array', $activities);
+        $this->assertIsArray($activities);
         $this->assertCount(0, $activities);
     }
 

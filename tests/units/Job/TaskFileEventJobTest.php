@@ -41,6 +41,6 @@ class TaskFileEventJobTest extends Base
         $this->assertEquals(1, $taskFileModel->create(1, 'Test', '/tmp/test', 123));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskFileModel::EVENT_CREATE.'.closure', $called);
+        $this->assertCount(1, $called);
     }
 }
