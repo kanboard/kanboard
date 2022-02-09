@@ -21,7 +21,7 @@ class TextHelper extends Base
      */
     public function e($value)
     {
-        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', false);
+        return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8', false);
     }
 
     /**

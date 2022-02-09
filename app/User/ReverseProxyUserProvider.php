@@ -66,11 +66,11 @@ class ReverseProxyUserProvider implements UserProviderInterface
      * Get internal id
      *
      * @access public
-     * @return string
+     * @return integer
      */
     public function getInternalId()
     {
-        return '';
+        return 0;
     }
 
     /**
