@@ -76,7 +76,7 @@ class RememberMeCookie extends Base
             $this->encode($token, $sequence),
             $expiration,
             $this->helper->url->dir(),
-            null,
+            '',
             $this->request->isHTTPS(),
             true
         );

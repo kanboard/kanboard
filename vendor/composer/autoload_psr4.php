@@ -19,7 +19,7 @@ return array(
     'MatthiasMullie\\PathConverter\\' => array($baseDir . '/libs/path-converter/src'),
     'MatthiasMullie\\Minify\\' => array($baseDir . '/libs/minify/src'),
     'Kanboard\\' => array($baseDir . '/app'),
-    'Gregwar\\' => array($vendorDir . '/gregwar/captcha/src/Gregwar'),
-    'Eluceo\\iCal\\' => array($vendorDir . '/eluceo/ical/src'),
+    'Gregwar\\' => array($baseDir . '/libs'),
+    'Eluceo\\iCal\\' => array($baseDir . '/libs/ical'),
     'Base32\\' => array($vendorDir . '/christian-riesen/base32/src'),
 );

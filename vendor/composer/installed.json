@@ -117,60 +117,6 @@
             "install-path": "../christian-riesen/otp"
         },
         {
-            "name": "eluceo/ical",
-            "version": "0.16.1",
-            "version_normalized": "0.16.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/markuspoerschke/iCal.git",
-                "reference": "7043337feaeacbc016844e7e52ef41bba504ad8f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/markuspoerschke/iCal/zipball/7043337feaeacbc016844e7e52ef41bba504ad8f",
-                "reference": "7043337feaeacbc016844e7e52ef41bba504ad8f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1 || ~8.0.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.0"
-            },
-            "suggest": {
-                "ext-mbstring": "Massive performance enhancement of line folding"
-            },
-            "time": "2020-10-04T17:41:11+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "Eluceo\\iCal\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Markus Poerschke",
-                    "email": "markus@eluceo.de",
-                    "role": "Developer"
-                }
-            ],
-            "description": "The eluceo/iCal package offers a abstraction layer for creating iCalendars. You can easily create iCal files by using PHP object instead of typing your *.ics file by hand. The output will follow RFC 5545 as best as possible.",
-            "homepage": "https://github.com/markuspoerschke/iCal",
-            "keywords": [
-                "calendar",
-                "iCalendar",
-                "ical",
-                "ics",
-                "php calendar"
-            ],
-            "install-path": "../eluceo/ical"
-        },
-        {
             "name": "erusev/parsedown",
             "version": "1.7.4",
             "version_normalized": "1.7.4.0",
@@ -218,62 +164,6 @@
                 "parser"
             ],
             "install-path": "../erusev/parsedown"
-        },
-        {
-            "name": "gregwar/captcha",
-            "version": "v1.1.9",
-            "version_normalized": "1.1.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Gregwar/Captcha.git",
-                "reference": "4bb668e6b40e3205a020ca5ee4ca8cff8b8780c5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/4bb668e6b40e3205a020ca5ee4ca8cff8b8780c5",
-                "reference": "4bb668e6b40e3205a020ca5ee4ca8cff8b8780c5",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gd": "*",
-                "ext-mbstring": "*",
-                "php": ">=5.3.0",
-                "symfony/finder": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.4"
-            },
-            "time": "2020-03-24T14:39:05+00:00",
-            "type": "captcha",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "Gregwar\\": "src/Gregwar"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Grégoire Passault",
-                    "email": "g.passault@gmail.com",
-                    "homepage": "http://www.gregwar.com/"
-                },
-                {
-                    "name": "Jeremy Livingston",
-                    "email": "jeremy.j.livingston@gmail.com"
-                }
-            ],
-            "description": "Captcha generator",
-            "homepage": "https://github.com/Gregwar/Captcha",
-            "keywords": [
-                "bot",
-                "captcha",
-                "spam"
-            ],
-            "install-path": "../gregwar/captcha"
         },
         {
             "name": "pimple/pimple",
@@ -428,68 +318,6 @@
                 "psr-3"
             ],
             "install-path": "../psr/log"
-        },
-        {
-            "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.8",
-            "version_normalized": "5.4.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "9a06dc570a0367850280eefd3f1dc2da45aef517"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/9a06dc570a0367850280eefd3f1dc2da45aef517",
-                "reference": "9a06dc570a0367850280eefd3f1dc2da45aef517",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9.1",
-                "symfony/phpunit-bridge": "~3.2"
-            },
-            "time": "2017-05-01T15:54:03+00:00",
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.4-dev"
-                }
-            },
-            "installation-source": "dist",
-            "autoload": {
-                "files": [
-                    "lib/swift_required.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Corbyn"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Swiftmailer, free feature-rich PHP mailer",
-            "homepage": "http://swiftmailer.org",
-            "keywords": [
-                "email",
-                "mail",
-                "mailer"
-            ],
-            "support": {
-                "issues": "https://github.com/swiftmailer/swiftmailer/issues",
-                "source": "https://github.com/swiftmailer/swiftmailer/tree/v5.4.8"
-            },
-            "abandoned": "symfony/mailer",
-            "install-path": "../swiftmailer/swiftmailer"
         },
         {
             "name": "symfony/console",

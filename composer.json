@@ -27,14 +27,11 @@
         "ext-filter" : "*",
         "ext-session" : "*",
         "christian-riesen/otp" : "1.4.3",
-        "eluceo/ical": "0.16.1",
         "erusev/parsedown" : "1.7.4",
         "pimple/pimple" : "3.5.0",
         "psr/log": "1.1.4",
-        "swiftmailer/swiftmailer" : "5.4.8",
         "symfony/console" : "4.4.37",
         "symfony/event-dispatcher" : "4.4.37",
-        "gregwar/captcha": "1.1.9",
         "symfony/finder": "5.4.3"
     },
     "autoload" : {
@@ -42,7 +39,9 @@
         "psr-4" : {
             "Kanboard\\" : "app/",
             "MatthiasMullie\\Minify\\": "libs/minify/src/",
-            "MatthiasMullie\\PathConverter\\": "libs/path-converter/src/"
+            "MatthiasMullie\\PathConverter\\": "libs/path-converter/src/",
+            "Gregwar\\": "libs",
+            "Eluceo\\iCal\\": "libs/ical"
         },
         "psr-0" : {
             "JsonRPC": "libs/jsonrpc/src",
@@ -52,7 +51,8 @@
             "SimpleValidator": "libs"
         },
         "files" : [
-            "app/functions.php"
+            "app/functions.php",
+            "libs/swiftmailer/swift_required.php"
         ]
     },
     "require-dev" : {
