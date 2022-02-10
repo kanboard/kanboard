@@ -4,6 +4,7 @@
 .project
 /.settings/
 .idea
+.vscode
 /nbproject/
 .DS_Store
 ehthumbs.db
