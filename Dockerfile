@@ -14,7 +14,8 @@ RUN apk --no-cache --update add \
     php8-pdo php8-pdo_mysql php8-pdo_sqlite php8-pdo_pgsql php8-mbstring php8-session php8-bcmath \
     php8-gd php8-openssl php8-sockets php8-posix php8-ldap php8-simplexml && \
     rm -rf /var/www/localhost && \
-    rm -f /etc/php8/php-fpm.d/www.conf
+    rm -f /etc/php8/php-fpm.d/www.conf && \
+    ln -s /usr/bin/php8 /usr/bin/php
 
 ADD . /var/www/app
 ADD docker/ /
