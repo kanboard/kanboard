@@ -1,3 +1,13 @@
+Version 1.2.22 (February 12, 2022)
+----------------------------------
+
+* Add support for PHP 8.x
+* Remove `project_id` from task URLs
+* Update `da_DK` translations
+* Add automatic action to set the due date when the task is moved away from a specific column
+* Condense wording on inferred action and update translations
+* Add EVENT_CREATE and EVENT_CREATE_UPDATE events to TaskMoveColumnCategoryChange action
+
 Version 1.2.21 (December 16, 2021)
 ----------------------------------
 
