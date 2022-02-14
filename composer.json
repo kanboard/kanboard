@@ -11,10 +11,13 @@
     "config": {
         "preferred-install": "dist",
         "optimize-autoloader": true,
-        "discard-changes": true
+        "discard-changes": true,
+        "platform": {
+            "php": "7.3"
+        }
     },
     "require" : {
-        "php" : ">=7.2.0",
+        "php" : ">=7.3",
         "ext-simplexml" : "*",
         "ext-dom" : "*",
         "ext-xml" : "*",
