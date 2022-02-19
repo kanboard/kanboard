@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'f5bb55bdb8fe95c37877d4788cb85cfcb49c4d77',
+        'reference' => '02871400340b0d50795bd2b75649a8d8366d17f6',
         'name' => 'kanboard/kanboard',
         'dev' => false,
     ),
@@ -43,7 +43,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'f5bb55bdb8fe95c37877d4788cb85cfcb49c4d77',
+            'reference' => '02871400340b0d50795bd2b75649a8d8366d17f6',
             'dev_requirement' => false,
         ),
         'pimple/pimple' => array(
