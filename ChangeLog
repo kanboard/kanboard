@@ -1,7 +1,7 @@
 Version 1.2.22 (February 12, 2022)
 ----------------------------------
 
-* Add support for PHP 8.x
+* Add support for PHP 8.x (Minimum requirement is now PHP >= 7.4)
 * Remove `project_id` from task URLs
 * Update `da_DK` translations
 * Add automatic action to set the due date when the task is moved away from a specific column
