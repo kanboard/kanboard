@@ -15,7 +15,7 @@ function version_126(PDO $pdo)
 {
 	$pdo->exec('ALTER TABLE subtask_time_tracking RENAME TO subtask_time_tracking_old');
     
-    $pdo->exec("
+    $pdo->exec('
         CREATE TABLE subtask_time_tracking (
             id INTEGER PRIMARY KEY,
             user_id INTEGER NOT NULL,
@@ -26,12 +26,12 @@ function version_126(PDO $pdo)
             FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
             FOREIGN KEY(subtask_id) REFERENCES subtasks(id) ON DELETE CASCADE
         )
-    ");
+    ');
     
-	$pdo->exec('DROP INDEX subtasks_task_idx');    
+    $pdo->exec('DROP INDEX subtasks_task_idx');    
     $pdo->exec('CREATE INDEX subtasks_task_idx ON subtasks(task_id)'); 
-	$pdo->exec("INSERT INTO subtask_time_tracking SELECT * FROM subtask_time_tracking_old");
-	$pdo->exec("DROP TABLE subtask_time_tracking_old");
+    $pdo->exec('INSERT INTO subtask_time_tracking SELECT * FROM subtask_time_tracking_old');
+    $pdo->exec('DROP TABLE subtask_time_tracking_old');
 }
 
 function version_125(PDO $pdo)
