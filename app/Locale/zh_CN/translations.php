@@ -249,7 +249,7 @@ return array(
     'Edit the task' => '修改任务',
     'Add a comment' => '添加评论',
     'Edit a comment' => '编辑评论',
-    'Summary' => '帐号概要',
+    'Summary' => '概要',
     'Time tracking' => '时间记录',
     'Estimate:' => '评估：',
     'Spent:' => '花费：',
