@@ -1,69 +1,62 @@
 .views {
+    display: flex;
     margin-inline-end: 10px;
-    margin-top: 1px;
     font-size: 0.9em
-}
-
-@media (max-width: 560px) {
+  }
+  
+  @media (max-width: 560px) {
     .views {
         width: 100%
     }
-}
-
-@media (max-width: 768px) {
+  }
+  
+  @media (max-width: 768px) {
     .views {
-        margin-top: 10px;
         font-size: 1em
     }
-}
-
-@media (max-width: 480px) {
-    .views {
-        margin-top: 5px
-    }
-}
-
-.views li {
+  }
+  
+  .views li {
     white-space: nowrap;
     background: #fafafa;
     border: 1px solid #ddd;
     border-inline-end: none;
     padding: 4px 8px;
     display: inline
-}
-
-@media (max-width: 560px) {
+  }
+  
+  @media (max-width: 560px) {
     .views li {
         display: block;
-        margin-top: 5px;
         border-radius: 5px;
         border: 1px solid #ddd
     }
-}
-
-.views li.active a {
+  }
+  
+  .views li.active a {
     font-weight: bold;
     color: #000;
     text-decoration: none
-}
-
-.views li:first-child {
+  }
+  
+  .views li:first-child {
     border-start-start-radius: 5px;
     border-end-start-radius: 5px
-}
-
-.views li:last-child {
+  }
+  
+  .views li:last-child {
     border-inline-end: 1px solid #ddd;
     border-start-end-radius: 5px;
     border-end-end-radius: 5px
-}
-
-.views a {
+  }
+  
+  .views a {
     color: var(--color-medium);
     text-decoration: none
-}
-
-.views a:hover {
+  }
+  
+  .views a:hover {
     color: var(--color-primary);
     text-decoration: underline
-}
+  }
+  
