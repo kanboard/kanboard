@@ -12,15 +12,13 @@ class CommentMailController extends BaseController
 {
     public function create(array $values = array(), array $errors = array())
     {
-        $project = $this->getProject();
         $task = $this->getTask();
 
         $this->response->html($this->helper->layout->task('comment_mail/create', array(
             'values'  => $values,
             'errors'  => $errors,
             'task'    => $task,
-            'project' => $project,
-            'members' => $this->projectPermissionModel->getMembersWithEmail($project['id']),
+            'members' => $this->projectPermissionModel->getMembersWithEmail($task['project_id']),
         )));
     }
 
@@ -43,7 +41,7 @@ class CommentMailController extends BaseController
                 $this->flash->failure(t('Unable to create your comment.'));
             }
 
-            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'), true);
+            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id']), 'comments'), true);
         } else {
             $this->create($values, $errors);
         }

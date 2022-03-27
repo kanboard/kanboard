@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'Đóng một nhiệm vụ',
     'Assign a color to a specific user' => 'Chỉ định màu cho một người dùng cụ thể',
     'Position' => 'Chức vụ',
-    'Duplicate to another project' => 'Nhân bản với một dự án khác',
+    'Duplicate to project' => 'Nhân bản với một dự án khác',
     'Duplicate' => 'Bản sao',
     'Link' => 'Liên kết',
     'Comment updated successfully.' => 'Bình luận cập nhật thành công.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'Bật quyền truy cập công cộng',
     'Public access disabled' => 'Truy cập công cộng bị vô hiệu hóa',
     'Move the task to another project' => 'Di chuyển công việc sang dự án khác',
-    'Move to another project' => 'Chuyển sang dự án khác',
+    'Move to project' => 'Chuyển sang dự án khác',
     'Do you really want to duplicate this task?' => 'Bạn có thực sự muốn lặp lại nhiệm vụ này?',
     'Duplicate a task' => 'Nhân đôi một nhiệm vụ',
     'External accounts' => 'Tài khoản bên ngoài',
@@ -1427,4 +1427,5 @@ return array(
     // 'XBT - Bitcoin' => '',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

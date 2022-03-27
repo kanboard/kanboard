@@ -3,14 +3,19 @@ base32
 
 Base32 Encoder/Decoder for PHP according to [RFC 4648](https://tools.ietf.org/html/rfc4648).
 
-[![Build Status](https://secure.travis-ci.org/ChristianRiesen/base32.png)](http://travis-ci.org/ChristianRiesen/base32)
-[![HHVM Status](http://hhvm.h4cc.de/badge/christian-riesen/base32.png)](http://hhvm.h4cc.de/package/christian-riesen/base32)
+![CI](https://github.com/ChristianRiesen/base32/workflows/CI/badge.svg)
 
 [![Latest Stable Version](https://poser.pugx.org/christian-riesen/base32/v/stable.png)](https://packagist.org/packages/christian-riesen/base32) [![Total Downloads](https://poser.pugx.org/christian-riesen/base32/downloads.png)](https://packagist.org/packages/christian-riesen/base32) [![Latest Unstable Version](https://poser.pugx.org/christian-riesen/base32/v/unstable.png)](https://packagist.org/packages/christian-riesen/base32) [![License](https://poser.pugx.org/christian-riesen/base32/license.png)](https://packagist.org/packages/christian-riesen/base32)
 
-Do you like this? Flattr it:
 
-[![Flattr base32](http://api.flattr.com/button/flattr-badge-large.png)](http://flattr.com/thing/720563/ChristianRiesenbase32-on-GitHub)
+Installation
+-----
+
+Use composer:
+
+```bash
+composer require christian-riesen/base32
+```
 
 Usage
 -----
@@ -23,20 +28,19 @@ use Base32\Base32;
 
 $string = 'fooba';
 
-$encoded = Base32::encode($string);
 // $encoded contains now 'MZXW6YTB'
+$encoded = Base32::encode($string);
 
-$decoded = Base32::decode($encoded);
 // $decoded is again 'fooba'
+$decoded = Base32::decode($encoded);
 ```
+
+You can also use the extended hex alphabet by using the `Base32Hex` class instead.
 
 About
 =====
 
-Use
----
-
-Initially created to work with the [one time password project](https://github.com/ChristianRiesen/otp), yet it can stand alone just as well as [Jordi Boggiano](http://seld.be/) kindly pointed out. It's the only Base32 implementation I could make work that passes the test vectors (and contains unit tests).
+Initially created to work with the [one time password project](https://github.com/ChristianRiesen/otp), yet it can stand alone just as well as [Jordi Boggiano](http://seld.be/) kindly pointed out. It's the only Base32 implementation that passes the test vectors and contains unit tests as well.
 
 Goal
 ----
@@ -45,9 +49,9 @@ Have a RFC compliant Base32 encoder and decoder. The implementation could be imp
 Requirements
 ------------
 
-PHP 5.3 to 5.6 or 7.0+
+Works on PHP 7.2 and later, including PHP 8.0.
 
-If you want to run the tests, PHPUnit 5.0+ or up is required. Tests require PHP 5.6 or 7.0+.
+Tests run on PHPUnit 9.5, with PHP 7.3 and later. For PHP 7.2, tests use an older PHPUnit version.
 
 Author
 ------

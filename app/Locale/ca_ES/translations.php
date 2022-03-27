@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'El tancament d\'una tasca',
     'Assign a color to a specific user' => 'Assignar un color a un usuari específic',
     'Position' => 'Posició',
-    'Duplicate to another project' => 'Duplica a un altre projecte',
+    'Duplicate to project' => 'Duplica a un altre projecte',
     'Duplicate' => 'Duplica',
     'Link' => 'Enllaç',
     'Comment updated successfully.' => 'Comentari actualitzat correctament.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'Permetre l\'accés del públic',
     'Public access disabled' => 'L\'accés públic deshabilitat',
     'Move the task to another project' => 'Mou la tasca a un altre projecte',
-    'Move to another project' => 'Mou a un altre projecte',
+    'Move to project' => 'Mou a un altre projecte',
     'Do you really want to duplicate this task?' => 'És el que realment desitja duplicar aquesta tasca?',
     'Duplicate a task' => 'Duplica una tasca',
     'External accounts' => 'Els comptes externes',
@@ -1427,4 +1427,5 @@ return array(
     // 'XBT - Bitcoin' => '',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

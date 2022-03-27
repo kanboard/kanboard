@@ -106,7 +106,7 @@ class TaskSubtaskAssigneeFilter extends BaseFilter implements FilterInterface
      */
     protected function applySubQueryFilter(Table $subquery)
     {
-        if (is_int($this->value) || ctype_digit($this->value)) {
+        if (is_int($this->value) || ctype_digit((string) $this->value)) {
             $subquery->eq(SubtaskModel::TABLE.'.user_id', $this->value);
         } else {
             switch ($this->value) {

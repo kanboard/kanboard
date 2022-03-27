@@ -33,7 +33,7 @@ class ListCommand extends Command
         $this
             ->setName('list')
             ->setDefinition($this->createDefinition())
-            ->setDescription('Lists commands')
+            ->setDescription('List commands')
             ->setHelp(<<<'EOF'
 The <info>%command.name%</info> command lists all commands:
 
@@ -74,12 +74,11 @@ EOF
             'raw_text' => $input->getOption('raw'),
             'namespace' => $input->getArgument('namespace'),
         ]);
+
+        return 0;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    private function createDefinition()
+    private function createDefinition(): InputDefinition
     {
         return new InputDefinition([
             new InputArgument('namespace', InputArgument::OPTIONAL, 'The namespace name'),

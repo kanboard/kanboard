@@ -1,4 +1,4 @@
-FROM alpine:3.13.5
+FROM alpine:3.15.1
 
 VOLUME /var/www/app/data
 VOLUME /var/www/app/plugins
@@ -9,12 +9,13 @@ EXPOSE 80 443
 ARG VERSION
 
 RUN apk --no-cache --update add \
-    tzdata openssl unzip nginx bash ca-certificates s6 curl ssmtp mailx php7 php7-phar php7-curl \
-    php7-fpm php7-json php7-zlib php7-xml php7-dom php7-ctype php7-opcache php7-zip php7-iconv \
-    php7-pdo php7-pdo_mysql php7-pdo_sqlite php7-pdo_pgsql php7-mbstring php7-session php7-bcmath \
-    php7-gd php7-mcrypt php7-openssl php7-sockets php7-posix php7-ldap php7-simplexml && \
+    tzdata openssl unzip nginx bash ca-certificates s6 curl ssmtp mailx php8 php8-phar php8-curl \
+    php8-fpm php8-json php8-zlib php8-xml php8-dom php8-ctype php8-opcache php8-zip php8-iconv \
+    php8-pdo php8-pdo_mysql php8-pdo_sqlite php8-pdo_pgsql php8-mbstring php8-session php8-bcmath \
+    php8-gd php8-openssl php8-sockets php8-posix php8-ldap php8-simplexml && \
     rm -rf /var/www/localhost && \
-    rm -f /etc/php7/php-fpm.d/www.conf
+    rm -f /etc/php8/php-fpm.d/www.conf && \
+    ln -s /usr/bin/php8 /usr/bin/php
 
 ADD . /var/www/app
 ADD docker/ /

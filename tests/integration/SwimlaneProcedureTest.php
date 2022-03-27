@@ -31,7 +31,7 @@ class SwimlaneProcedureTest extends BaseProcedureTest
     public function assertGetSwimlane()
     {
         $swimlane = $this->app->getSwimlane($this->swimlaneId);
-        $this->assertInternalType('array', $swimlane);
+        $this->assertIsArray($swimlane);
         $this->assertEquals('Swimlane 1', $swimlane['name']);
     }
 

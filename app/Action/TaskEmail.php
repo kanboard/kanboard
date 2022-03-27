@@ -83,8 +83,10 @@ class TaskEmail extends Base
         $subject = $this->getParam('subject');
         
         foreach ($data["task"] as $key => $value) {
-            $placeholder = sprintf('{{%s}}', $key);
-            $subject = str_replace($placeholder, $value, $subject);
+            if ($value !== null) {
+                $placeholder = sprintf('{{%s}}', $key);
+                $subject = str_replace($placeholder, $value, $subject);
+            }
         }
 
         if (! empty($user['email'])) {

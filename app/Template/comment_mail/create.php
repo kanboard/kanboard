@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2><?= t('Create and send a comment by email') ?></h2>
 </div>
-<form method="post" action="<?= $this->url->href('CommentMailController', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>" autocomplete="off" class="js-mail-form">
+<form method="post" action="<?= $this->url->href('CommentMailController', 'save', array('task_id' => $task['id'])) ?>" autocomplete="off" class="js-mail-form">
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('task_id', $values) ?>
     <?= $this->form->hidden('user_id', $values) ?>

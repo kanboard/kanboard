@@ -5,7 +5,7 @@
 <form>
 
 <?= $this->app->component('task-move-position', array(
-    'saveUrl' => $this->url->href('TaskMovePositionController', 'save', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())),
+    'saveUrl' => $this->url->href('TaskMovePositionController', 'save', array('task_id' => $task['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())),
     'board' => $board,
     'task' => $task,
     'swimlaneLabel' => t('Swimlane'),

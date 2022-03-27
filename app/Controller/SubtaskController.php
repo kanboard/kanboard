@@ -37,7 +37,7 @@ class SubtaskController extends BaseController
             'task' => $task,
         )));
     }
-    
+
     /**
      * Prepare form values
      *
@@ -86,7 +86,7 @@ class SubtaskController extends BaseController
 
                 if (! $this->subtaskModel->create($subtaskValues)) {
                     $this->flash->failure(t('Unable to create your sub-task.'));
-                    $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'), true);
+                    $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id']), 'subtasks'), true);
                     return false;
                 }
 
@@ -110,7 +110,7 @@ class SubtaskController extends BaseController
             }
         }
 
-        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id']), 'subtasks'), true);
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id']), 'subtasks'), true);
     }
 
     /**
@@ -160,7 +160,7 @@ class SubtaskController extends BaseController
                 $this->flash->failure(t('Unable to update your sub-task.'));
             }
 
-            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
+            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])), true);
         }
 
         return $this->edit($values, $errors);
@@ -199,7 +199,7 @@ class SubtaskController extends BaseController
             $this->flash->failure(t('Unable to remove this sub-task.'));
         }
 
-        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $task['project_id'], 'task_id' => $task['id'])), true);
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])), true);
     }
 
     /**
@@ -209,12 +209,11 @@ class SubtaskController extends BaseController
      */
     public function movePosition()
     {
-        $project_id = $this->request->getIntegerParam('project_id');
-        $task_id = $this->request->getIntegerParam('task_id');
+        $task = $this->getTask();
         $values = $this->request->getJson();
 
-        if (! empty($values) && $this->helper->user->hasProjectAccess('SubtaskController', 'movePosition', $project_id)) {
-            $result = $this->subtaskPositionModel->changePosition($task_id, $values['subtask_id'], $values['position']);
+        if (! empty($values) && $this->helper->user->hasProjectAccess('SubtaskController', 'movePosition', $task['project_id'])) {
+            $result = $this->subtaskPositionModel->changePosition($task['id'], $values['subtask_id'], $values['position']);
             $this->response->json(array('result' => $result));
         } else {
             throw new AccessForbiddenException();

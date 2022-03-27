@@ -48,8 +48,7 @@ class TaskEventJobTest extends Base
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1)));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE.'.closure', $called);
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertCount(2, $called);
     }
 
     public function testTriggerUpdateEvent()
@@ -66,8 +65,7 @@ class TaskEventJobTest extends Base
         $this->assertTrue($taskModificationModel->update(array('id' => 1, 'title' => 'new title')));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_UPDATE.'.closure', $called);
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertCount(3, $called);
     }
 
     public function testTriggerAssigneeChangeEvent()
@@ -83,7 +81,7 @@ class TaskEventJobTest extends Base
         $this->assertTrue($taskModificationModel->update(array('id' => 1, 'owner_id' => 1)));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_ASSIGNEE_CHANGE.'.closure', $called);
+        $this->assertCount(1, $called);
     }
 
     public function testTriggerCloseEvent()
@@ -99,7 +97,7 @@ class TaskEventJobTest extends Base
         $this->assertTrue($taskStatusModel->close(1));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_CLOSE.'.closure', $called);
+        $this->assertCount(1, $called);
     }
 
     public function testTriggerOpenEvent()
@@ -116,7 +114,7 @@ class TaskEventJobTest extends Base
         $this->assertTrue($taskStatusModel->open(1));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_OPEN.'.closure', $called);
+        $this->assertCount(1, $called);
     }
 
     public function testTriggerMovePositionEvent()
@@ -133,7 +131,7 @@ class TaskEventJobTest extends Base
         $this->assertTrue($taskPositionModel->movePosition(1, 1, 1, 2));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_MOVE_POSITION.'.closure', $called);
+        $this->assertCount(1, $called);
     }
 
     public function testTriggerMoveColumnEvent()
@@ -149,7 +147,7 @@ class TaskEventJobTest extends Base
         $this->assertTrue($taskPositionModel->movePosition(1, 1, 2, 2));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_MOVE_COLUMN.'.closure', $called);
+        $this->assertCount(1, $called);
     }
 
     public function testTriggerMoveSwimlaneEvent()
@@ -167,7 +165,7 @@ class TaskEventJobTest extends Base
         $this->assertTrue($taskPositionModel->movePosition(1, 1, 1, 1, 2));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_MOVE_SWIMLANE.'.closure', $called);
+        $this->assertCount(1, $called);
     }
 
     public function testTriggerMoveProjectEvent()
@@ -184,7 +182,7 @@ class TaskEventJobTest extends Base
         $this->assertTrue($taskProjectMoveModel->moveToProject(1, 1));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_MOVE_PROJECT.'.closure', $called);
+        $this->assertCount(1, $called);
     }
 
     public function testThatUserMentionJobIsCalled()

@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'Bir görev kapatılıyor',
     'Assign a color to a specific user' => 'Bir kullanıcıya renk tanımla',
     'Position' => 'Pozisyon',
-    'Duplicate to another project' => 'Başka bir projeye kopyala',
+    'Duplicate to project' => 'Başka bir projeye kopyala',
     'Duplicate' => 'Kopya oluştur',
     'Link' => 'Bağlantı',
     'Comment updated successfully.' => 'Yorum güncellendi.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'Dışa açık erişimi aç',
     'Public access disabled' => 'Dışa açık erişim kapatıldı',
     'Move the task to another project' => 'Görevi başka projeye taşı',
-    'Move to another project' => 'Başka projeye taşı',
+    'Move to project' => 'Başka projeye taşı',
     'Do you really want to duplicate this task?' => 'Bu görevin kopyasını oluşturmak istediğinize emin misiniz?',
     'Duplicate a task' => 'Görevin kopyasını oluştur',
     'External accounts' => 'Dış hesaplar',
@@ -1427,4 +1427,5 @@ return array(
     'XBT - Bitcoin' => 'XBT - Bitcoin',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

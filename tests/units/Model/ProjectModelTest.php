@@ -281,7 +281,8 @@ class ProjectModelTest extends Base
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task #1', 'project_id' => 1)));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.Kanboard\Subscriber\ProjectModificationDateSubscriber::execute', $called);
+        $this->assertCount(1, $called);
+        $this->assertEquals(TaskModel::EVENT_CREATE_UPDATE, $called[0]['event']);
 
         $project = $projectModel->getById(1);
         $this->assertNotEmpty($project);

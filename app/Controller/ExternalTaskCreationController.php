@@ -91,7 +91,7 @@ class ExternalTaskCreationController extends BaseController
         } else {
             $taskId = $this->taskCreationModel->create($values);
             $this->flash->success(t('Task created successfully.'));
-            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('project_id' => $project['id'], 'task_id' => $taskId)), true);
+            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $taskId)), true);
         }
     }
 }

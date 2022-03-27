@@ -318,7 +318,7 @@ class User
      * @access public
      * @return string
      */
-    public function getGroupAdminDn()
+    public function getGroupAdminDn(): string
     {
         return strtolower(LDAP_GROUP_ADMIN_DN);
     }
@@ -329,7 +329,7 @@ class User
      * @access public
      * @return string
      */
-    public function getGroupManagerDn()
+    public function getGroupManagerDn(): string
     {
         return LDAP_GROUP_MANAGER_DN;
     }

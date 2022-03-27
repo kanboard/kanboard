@@ -100,8 +100,7 @@ class TaskStatusModelTest extends Base
         $this->assertEquals(time(), $task['date_modification'], '', 1);
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey('task.close.TaskStatusModelTest::onTaskClose', $called);
-        $this->assertArrayHasKey('task.open.TaskStatusModelTest::onTaskOpen', $called);
+        $this->assertCount(2, $called);
     }
 
     public function onTaskOpen($event)

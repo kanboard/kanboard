@@ -8,7 +8,31 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 125;
+const VERSION = 126;
+
+
+function version_126(PDO $pdo)
+{
+	$pdo->exec('ALTER TABLE subtask_time_tracking RENAME TO subtask_time_tracking_old');
+    
+    $pdo->exec('
+        CREATE TABLE subtask_time_tracking (
+            id INTEGER PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            subtask_id INTEGER NOT NULL,
+            start INTEGER DEFAULT 0,
+            end INTEGER DEFAULT 0,
+            time_spent REAL DEFAULT 0,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(subtask_id) REFERENCES subtasks(id) ON DELETE CASCADE
+        )
+    ');
+    
+    $pdo->exec('DROP INDEX subtasks_task_idx');    
+    $pdo->exec('CREATE INDEX subtasks_task_idx ON subtasks(task_id)'); 
+    $pdo->exec('INSERT INTO subtask_time_tracking SELECT * FROM subtask_time_tracking_old');
+    $pdo->exec('DROP TABLE subtask_time_tracking_old');
+}
 
 function version_125(PDO $pdo)
 {

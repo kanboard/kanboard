@@ -15,13 +15,15 @@ namespace Symfony\Component\Console\Event;
  * Allows to do things before the command is executed, like skipping the command or changing the input.
  *
  * @author Fabien Potencier <fabien@symfony.com>
+ *
+ * @final since Symfony 4.4
  */
 class ConsoleCommandEvent extends ConsoleEvent
 {
     /**
      * The return code for skipped commands, this will also be passed into the terminate event.
      */
-    const RETURN_CODE_DISABLED = 113;
+    public const RETURN_CODE_DISABLED = 113;
 
     /**
      * Indicates if the command should be run or skipped.

@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'Uzavření úkolu',
     'Assign a color to a specific user' => 'Přiřadit barvu konkrétnímu uživateli',
     'Position' => 'Pozice',
-    'Duplicate to another project' => 'Vytvořit kopii v jiném projektu',
+    'Duplicate to project' => 'Vytvořit kopii v jiném projektu',
     'Duplicate' => 'Vytvořit kopii',
     'Link' => 'Odkaz',
     'Comment updated successfully.' => 'Komentář byl úspěšně aktualizován.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'Povolit veřejný přístup',
     'Public access disabled' => 'Veřejný přístup zakázán',
     'Move the task to another project' => 'Přesunout úkol do jiného projektu',
-    'Move to another project' => 'Přesunout do jiného projektu',
+    'Move to project' => 'Přesunout do jiného projektu',
     'Do you really want to duplicate this task?' => 'Opravdu chcete vytořit kopii tohoto úkolu?',
     'Duplicate a task' => 'Vytvořit kopii úkolu',
     'External accounts' => 'Externí účty',
@@ -1427,4 +1427,5 @@ return array(
     'XBT - Bitcoin' => 'XBT - Bitcoin',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

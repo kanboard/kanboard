@@ -51,9 +51,9 @@ interface InputInterface
      * Does not necessarily return the correct result for short options
      * when multiple flags are combined in the same option.
      *
-     * @param string|array $values     The value(s) to look for in the raw parameters (can be an array)
-     * @param mixed        $default    The default value to return if no result is found
-     * @param bool         $onlyParams Only check real parameters, skip those following an end of options (--) signal
+     * @param string|array                     $values     The value(s) to look for in the raw parameters (can be an array)
+     * @param string|bool|int|float|array|null $default    The default value to return if no result is found
+     * @param bool                             $onlyParams Only check real parameters, skip those following an end of options (--) signal
      *
      * @return mixed The option value
      */
@@ -76,7 +76,7 @@ interface InputInterface
     /**
      * Returns all the given arguments merged with the default values.
      *
-     * @return array
+     * @return array<string|bool|int|float|array|null>
      */
     public function getArguments();
 
@@ -85,7 +85,7 @@ interface InputInterface
      *
      * @param string $name The argument name
      *
-     * @return string|string[]|null The argument value
+     * @return mixed
      *
      * @throws InvalidArgumentException When argument given doesn't exist
      */
@@ -94,8 +94,8 @@ interface InputInterface
     /**
      * Sets an argument value by name.
      *
-     * @param string               $name  The argument name
-     * @param string|string[]|null $value The argument value
+     * @param string $name  The argument name
+     * @param mixed  $value The argument value
      *
      * @throws InvalidArgumentException When argument given doesn't exist
      */
@@ -104,7 +104,7 @@ interface InputInterface
     /**
      * Returns true if an InputArgument object exists by name or position.
      *
-     * @param string|int $name The InputArgument name or position
+     * @param string $name The argument name
      *
      * @return bool true if the InputArgument object exists, false otherwise
      */
@@ -113,7 +113,7 @@ interface InputInterface
     /**
      * Returns all the given options merged with the default values.
      *
-     * @return array
+     * @return array<string|bool|int|float|array|null>
      */
     public function getOptions();
 
@@ -122,7 +122,7 @@ interface InputInterface
      *
      * @param string $name The option name
      *
-     * @return string|string[]|bool|null The option value
+     * @return mixed
      *
      * @throws InvalidArgumentException When option given doesn't exist
      */
@@ -131,8 +131,8 @@ interface InputInterface
     /**
      * Sets an option value by name.
      *
-     * @param string                    $name  The option name
-     * @param string|string[]|bool|null $value The option value
+     * @param string $name  The option name
+     * @param mixed  $value The option value
      *
      * @throws InvalidArgumentException When option given doesn't exist
      */

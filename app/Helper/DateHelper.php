@@ -38,7 +38,7 @@ class DateHelper extends Base
             return '';
         }
 
-        if (! ctype_digit($value)) {
+        if (! ctype_digit((string) $value)) {
             $value = strtotime($value);
         }
 

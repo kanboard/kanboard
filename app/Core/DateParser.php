@@ -175,7 +175,7 @@ class DateParser extends Base
      */
     public function getTimestamp($value)
     {
-        if (ctype_digit($value)) {
+        if (ctype_digit((string) $value)) {
             return (int) $value;
         }
 
@@ -263,7 +263,7 @@ class DateParser extends Base
      */
     public function getTimestampFromIsoFormat($value)
     {
-        return $this->removeTimeFromTimestamp(ctype_digit($value) ? $value : strtotime($value));
+        return $this->removeTimeFromTimestamp(ctype_digit((string) $value) ? $value : strtotime($value));
     }
 
     /**
@@ -291,7 +291,7 @@ class DateParser extends Base
     {
         foreach ($fields as $field) {
             if (! empty($values[$field])) {
-                if (ctype_digit($values[$field])) {
+                if (ctype_digit((string) $values[$field])) {
                     $values[$field] = date($format, $values[$field]);
                 }
             } else {

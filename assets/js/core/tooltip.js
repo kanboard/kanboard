@@ -63,14 +63,14 @@ KB.on('dom.ready', function() {
 
         var elementRect = element.getBoundingClientRect();
         var top = elementRect.top + window.scrollY + elementRect.height;
-        containerElement.style.top = top + "px";
+        containerElement.style.top = top - 20 + "px";
 
         if (elementRect.left > (window.innerWidth - 600)) {
             var right = window.innerWidth - elementRect.right - window.scrollX;
-            containerElement.style.right = right + "px";
+            containerElement.style.right = right - 25 + "px";
         } else {
             var left = elementRect.left + window.scrollX;
-            containerElement.style.left = left + "px";
+            containerElement.style.left = left - 25 + "px";
         }
 
         document.body.appendChild(containerElement);

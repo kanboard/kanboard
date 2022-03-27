@@ -41,7 +41,7 @@ class FileCacheTest extends \Base
      */
     public static $functions;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setup();
 
@@ -58,7 +58,7 @@ class FileCacheTest extends \Base
             ->getMock();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         self::$functions = null;
@@ -71,7 +71,7 @@ class FileCacheTest extends \Base
         $cache = new FileCache();
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('is_dir')
             ->with(
                 $this->equalTo(CACHE_DIR)
@@ -79,7 +79,7 @@ class FileCacheTest extends \Base
             ->will($this->returnValue(false));
 
         self::$functions
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('mkdir')
             ->with(
                 $this->equalTo(CACHE_DIR),
@@ -88,7 +88,7 @@ class FileCacheTest extends \Base
             ->will($this->returnValue(true));
 
         self::$functions
-            ->expects($this->at(2))
+            ->expects($this->once())
             ->method('file_put_contents')
             ->with(
                 $this->equalTo(CACHE_DIR.DIRECTORY_SEPARATOR.$key),
@@ -106,7 +106,7 @@ class FileCacheTest extends \Base
         $cache = new FileCache();
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('file_exists')
             ->with(
                 $this->equalTo(CACHE_DIR.DIRECTORY_SEPARATOR.$key)
@@ -114,7 +114,7 @@ class FileCacheTest extends \Base
             ->will($this->returnValue(true));
 
         self::$functions
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('file_get_contents')
             ->with(
                 $this->equalTo(CACHE_DIR.DIRECTORY_SEPARATOR.$key)
@@ -130,7 +130,7 @@ class FileCacheTest extends \Base
         $cache = new FileCache();
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('file_exists')
             ->with(
                 $this->equalTo(CACHE_DIR.DIRECTORY_SEPARATOR.$key)
@@ -146,7 +146,7 @@ class FileCacheTest extends \Base
         $cache = new FileCache();
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('file_exists')
             ->with(
                 $this->equalTo(CACHE_DIR.DIRECTORY_SEPARATOR.$key)
@@ -166,7 +166,7 @@ class FileCacheTest extends \Base
         $cache = new FileCache();
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('file_exists')
             ->with(
                 $this->equalTo(CACHE_DIR.DIRECTORY_SEPARATOR.$key)
@@ -174,7 +174,7 @@ class FileCacheTest extends \Base
             ->will($this->returnValue(true));
 
         self::$functions
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('unlink')
             ->with(
                 $this->equalTo(CACHE_DIR.DIRECTORY_SEPARATOR.$key)

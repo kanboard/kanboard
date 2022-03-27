@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'Lukke en oppgave',
     'Assign a color to a specific user' => 'Tildel en farge til en bestemt bruker',
     'Position' => 'Posisjon',
-    'Duplicate to another project' => 'Kopier til et annet prosjekt',
+    'Duplicate to project' => 'Kopier til et annet prosjekt',
     'Duplicate' => 'Kopier',
     'Link' => 'Link',
     'Comment updated successfully.' => 'Kommentar oppdatert.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'Aktiver offentlig tilgang',
     'Public access disabled' => 'Offentlig tilgang er deaktivert',
     'Move the task to another project' => 'Flytt oppgaven til et annet prosjekt',
-    'Move to another project' => 'Flytt til et annet prosjekt',
+    'Move to project' => 'Flytt til et annet prosjekt',
     'Do you really want to duplicate this task?' => 'Vil du kopiere denne oppgaven?',
     'Duplicate a task' => 'Kopier en oppgave',
     'External accounts' => 'Eksterne kontoer',
@@ -1427,4 +1427,5 @@ return array(
     // 'XBT - Bitcoin' => '',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

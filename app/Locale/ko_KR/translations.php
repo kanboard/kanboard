@@ -179,7 +179,7 @@ return array(
     'Closing a task' => '할일을 닫혔다',
     'Assign a color to a specific user' => '색을 사용자에 할당',
     'Position' => '위치',
-    'Duplicate to another project' => '다른 프로젝트에 복사',
+    'Duplicate to project' => '다른 프로젝트에 복사',
     'Duplicate' => '복사',
     'Link' => '링크',
     'Comment updated successfully.' => '댓글을 갱신했습니다.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => '공개 접속 활성화',
     'Public access disabled' => '공개 접속 불가',
     'Move the task to another project' => '할일별 프로젝트에 옮기',
-    'Move to another project' => '다른 프로젝트로 이동',
+    'Move to project' => '다른 프로젝트로 이동',
     'Do you really want to duplicate this task?' => '할일을 복제합니까?',
     'Duplicate a task' => '할일 복사',
     'External accounts' => '외부 계정',
@@ -1427,4 +1427,5 @@ return array(
     // 'XBT - Bitcoin' => '',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

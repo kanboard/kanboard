@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'タスクを完了',
     'Assign a color to a specific user' => '色をユーザーに割当てる',
     'Position' => '位置',
-    'Duplicate to another project' => '別プロジェクトに複製',
+    'Duplicate to project' => '別プロジェクトに複製',
     'Duplicate' => '複製',
     'Link' => 'リンク',
     'Comment updated successfully.' => 'コメントを更新しました',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => '公開アクセスを有効にする',
     'Public access disabled' => '公開アクセスは無効化されています',
     'Move the task to another project' => 'タスクを別プロジェクトに移動',
-    'Move to another project' => '別プロジェクトに移動',
+    'Move to project' => '別プロジェクトに移動',
     'Do you really want to duplicate this task?' => 'タスクを複製しますか？',
     'Duplicate a task' => 'タスクの複製',
     'External accounts' => '外部アカウント',
@@ -1427,4 +1427,5 @@ return array(
     'XBT - Bitcoin' => 'XBT - Bitcoin',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

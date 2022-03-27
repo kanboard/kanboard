@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'Zatvaranja zadatka',
     'Assign a color to a specific user' => 'Dodeli boju korisniku',
     'Position' => 'Pozicija',
-    'Duplicate to another project' => 'Kopiraj u drugi projekat',
+    'Duplicate to project' => 'Kopiraj u drugi projekat',
     'Duplicate' => 'Napravi kopiju',
     'Link' => 'Link',
     'Comment updated successfully.' => 'Komentar uspešno ažuriran.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'Dozvoli javni pristup',
     'Public access disabled' => 'Javni pristup onemogućen!',
     'Move the task to another project' => 'Premesti zadatak u drugi projekat',
-    'Move to another project' => 'Premesti u drugi projekat',
+    'Move to project' => 'Premesti u drugi projekat',
     'Do you really want to duplicate this task?' => 'Da li zaista želite da kopirate ovaj zadatak?',
     'Duplicate a task' => 'Kopiraj zadatak',
     'External accounts' => 'Spoljni nalozi',
@@ -1427,4 +1427,5 @@ return array(
     'XBT - Bitcoin' => 'XBT - Bitkoin',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

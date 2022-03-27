@@ -58,7 +58,7 @@ class UserMentionJob extends BaseJob
     {
         $users = array();
 
-        if (preg_match_all('/@([^\s,!:?]+)/', $text, $matches)) {
+        if ($text !== null && preg_match_all('/@([^\s,!:?]+)/', $text, $matches)) {
             array_walk($matches[1], function (&$username) { $username = rtrim($username, '.'); });
             $users = $this->db->table(UserModel::TABLE)
                 ->columns('id', 'username', 'name', 'email', 'language')

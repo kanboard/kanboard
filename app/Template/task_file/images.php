@@ -7,9 +7,9 @@
                     'image' => $file,
                     'regex' => 'FILE_ID',
                     'url' => array(
-                        'image' => $this->url->to('FileViewerController', 'image', array('file_id' => 'FILE_ID', 'project_id' => $task['project_id'], 'task_id' => $task['id'])),
-                        'thumbnail' => $this->url->to('FileViewerController', 'thumbnail', array('file_id' => 'FILE_ID', 'project_id' => $task['project_id'], 'task_id' => $task['id'])),
-                        'download' => $this->url->to('FileViewerController', 'download', array('file_id' => 'FILE_ID', 'project_id' => $task['project_id'], 'task_id' => $task['id'])),
+                        'image' => $this->url->to('FileViewerController', 'image', array('file_id' => 'FILE_ID', 'task_id' => $task['id'])),
+                        'thumbnail' => $this->url->to('FileViewerController', 'thumbnail', array('file_id' => 'FILE_ID', 'task_id' => $task['id'])),
+                        'download' => $this->url->to('FileViewerController', 'download', array('file_id' => 'FILE_ID', 'task_id' => $task['id'])),
                     )
                 )) ?>
 
@@ -19,14 +19,14 @@
                             <a href="#" class="dropdown-menu dropdown-menu-link-text" title="<?= $this->text->e($file['name']) ?>"><?= $this->text->e($file['name']) ?> <i class="fa fa-caret-down"></i></a>
                             <ul>
                                 <li>
-                                    <?= $this->url->icon('external-link', t('View file'), 'FileViewerController', 'image', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id']), false, '', '', true) ?>
+                                    <?= $this->url->icon('external-link', t('View file'), 'FileViewerController', 'image', array('task_id' => $task['id'], 'file_id' => $file['id']), false, '', '', true) ?>
                                 </li>
                                 <li>
-                                    <?= $this->url->icon('download', t('Download'), 'FileViewerController', 'download', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                                    <?= $this->url->icon('download', t('Download'), 'FileViewerController', 'download', array('task_id' => $task['id'], 'file_id' => $file['id'])) ?>
                                 </li>
                                 <?php if ($this->user->hasProjectAccess('TaskFileController', 'remove', $task['project_id'])): ?>
                                     <li>
-                                        <?= $this->modal->confirm('trash-o', t('Remove'), 'TaskFileController', 'confirm', array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'file_id' => $file['id'])) ?>
+                                        <?= $this->modal->confirm('trash-o', t('Remove'), 'TaskFileController', 'confirm', array('task_id' => $task['id'], 'file_id' => $file['id'])) ?>
                                     </li>
                                 <?php endif ?>
                                 <?= $this->hook->render('template:task-file:images:dropdown', array('task' => $task, 'file' => $file)) ?>

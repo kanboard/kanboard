@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'Închidere sarcină',
     'Assign a color to a specific user' => 'Atribuie o culoare unui utilizator specific',
     'Position' => 'Poziție',
-    'Duplicate to another project' => 'Duplichează în alt proiect',
+    'Duplicate to project' => 'Duplichează în alt proiect',
     'Duplicate' => 'Duplicare',
     'Link' => 'Legătură',
     'Comment updated successfully.' => 'Comentariu actualizat.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'Activează accesul public',
     'Public access disabled' => 'Accesul public dezactivat',
     'Move the task to another project' => 'Mută sarcina în alt proiect',
-    'Move to another project' => 'Mută în alt proiect',
+    'Move to project' => 'Mută în alt proiect',
     'Do you really want to duplicate this task?' => 'Vrei să duplichezi această sarcină?',
     'Duplicate a task' => 'Duplichează o sarcină',
     'External accounts' => 'Conturi externe',
@@ -1427,4 +1427,5 @@ return array(
     // 'XBT - Bitcoin' => '',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

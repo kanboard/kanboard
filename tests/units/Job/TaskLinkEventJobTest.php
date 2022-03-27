@@ -42,7 +42,7 @@ class TaskLinkEventJobTest extends Base
         $this->assertEquals(1, $taskLinkModel->create(1, 2, 1));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskLinkModel::EVENT_CREATE_UPDATE.'.closure', $called);
+        $this->assertCount(2, $called);
     }
 
     public function testTriggerDeleteEvents()
@@ -60,6 +60,6 @@ class TaskLinkEventJobTest extends Base
         $this->assertTrue($taskLinkModel->remove(1));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskLinkModel::EVENT_DELETE.'.closure', $called);
+        $this->assertCount(1, $called);
     }
 }

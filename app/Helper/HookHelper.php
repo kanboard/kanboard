@@ -49,7 +49,7 @@ class HookHelper extends Base
             if (! empty($params['variables'])) {
                 $currentVariables = array_merge($variables, $params['variables']);
             } elseif (! empty($params['callable'])) {
-                $result = call_user_func_array($params['callable'], $variables);
+                $result = call_user_func_array($params['callable'], array_values($variables));
 
                 if (is_array($result)) {
                     $currentVariables = array_merge($variables, $result);

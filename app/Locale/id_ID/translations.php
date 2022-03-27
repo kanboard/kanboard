@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'Menutup tugas',
     'Assign a color to a specific user' => 'Menetapkan warna untuk pengguna tertentu',
     'Position' => 'Posisi',
-    'Duplicate to another project' => 'Duplikasi ke proyek lain',
+    'Duplicate to project' => 'Duplikasi ke proyek lain',
     'Duplicate' => 'Duplikat',
     'Link' => 'tautan',
     'Comment updated successfully.' => 'Komentar berhasil diperbarui.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'Aktifkan akses publik',
     'Public access disabled' => 'Akses publik dinonaktifkan',
     'Move the task to another project' => 'Pindahkan tugas ke proyek lain',
-    'Move to another project' => 'Pindahkan ke proyek lain',
+    'Move to project' => 'Pindahkan ke proyek lain',
     'Do you really want to duplicate this task?' => 'Apakah Anda yakin mau menduplikasi tugas ini?',
     'Duplicate a task' => 'Duplikasi tugas',
     'External accounts' => 'Akun eksternal',
@@ -1427,4 +1427,5 @@ return array(
     'XBT - Bitcoin' => 'XBT - Bitcoin',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

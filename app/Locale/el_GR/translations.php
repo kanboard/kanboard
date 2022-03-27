@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'Κλείσιμο εργασίας',
     'Assign a color to a specific user' => 'Ανάθεση χρώματος σε συγκεκριμένο χρήστη',
     'Position' => 'Θέση',
-    'Duplicate to another project' => 'Αντιγραφή σε άλλο έργο',
+    'Duplicate to project' => 'Αντιγραφή σε άλλο έργο',
     'Duplicate' => 'Αντιγραφή',
     'Link' => 'σύνδεσμος',
     'Comment updated successfully.' => 'Το σχόλιο ενημερώθηκε με επιτυχία.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'Ενεργοποίηση δημόσιας πρόσβασης',
     'Public access disabled' => 'Δημόσια πρόσβαση απενεργοποιήθηκε',
     'Move the task to another project' => 'Μεταφορά της εργασίας σε άλλο έργο',
-    'Move to another project' => 'Μεταφορά σε άλλο έργο',
+    'Move to project' => 'Μεταφορά σε άλλο έργο',
     'Do you really want to duplicate this task?' => 'Θέλετε πραγματικά να επαναλάβετε αυτή την εργασία;?',
     'Duplicate a task' => 'Επανάληψη εργασίας',
     'External accounts' => 'Εξωτερικοί λογαριασμοί',
@@ -1427,4 +1427,5 @@ return array(
     // 'XBT - Bitcoin' => '',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

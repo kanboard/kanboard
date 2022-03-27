@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'Закриття задачі',
     'Assign a color to a specific user' => 'Призначити колір певному користувачу',
     'Position' => 'Позиція',
-    'Duplicate to another project' => 'Дублювати до іншого проєкту',
+    'Duplicate to project' => 'Дублювати до іншого проєкту',
     'Duplicate' => 'Дублювати',
     'Link' => 'Посилання',
     'Comment updated successfully.' => 'Комент успішно оновлено.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'Увімкнути публічний доступ',
     'Public access disabled' => 'Публічний доступ вимкнуто',
     'Move the task to another project' => 'Перемістити задачу до іншого проєкту',
-    'Move to another project' => 'Перемістити до іншого проєкту',
+    'Move to project' => 'Перемістити до іншого проєкту',
     'Do you really want to duplicate this task?' => 'Ви дійсно бажаєте створити копію цієї задачі?',
     'Duplicate a task' => 'Дублювати задачу',
     'External accounts' => 'Зовнішні облікові записи',
@@ -1427,4 +1427,5 @@ return array(
     'XBT - Bitcoin' => 'XBT – Біткоїн',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

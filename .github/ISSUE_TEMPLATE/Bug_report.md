@@ -7,6 +7,13 @@ assignees: ''
 
 ---
 
+### Checklist
+
+- [ ] I verified that Kanboard is correctly installed
+- [ ] I verified that the problem does not come from a plugin
+- [ ] I verified that the problem is not already reported
+- [ ] I understand that Kanboard is in maintenance mode. It doesn't mean it's abandoned, but there is no significant feature development
+
 <!-- Please, read the documentation: https://docs.kanboard.org/ -->
 
 ### Actual behaviour

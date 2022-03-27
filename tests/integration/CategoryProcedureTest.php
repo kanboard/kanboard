@@ -40,7 +40,7 @@ class CategoryProcedureTest extends BaseProcedureTest
     {
         $category = $this->app->getCategory($this->categoryId);
 
-        $this->assertInternalType('array', $category);
+        $this->assertIsArray($category);
         $this->assertEquals($this->categoryId, $category['id']);
         $this->assertEquals('Category', $category['name']);
         $this->assertEquals($this->projectId, $category['project_id']);

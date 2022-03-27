@@ -1,3 +1,49 @@
+Version 1.2.22 (February 12, 2022)
+----------------------------------
+
+* Add support for PHP 8.x (Minimum requirement is now PHP >= 7.4)
+* Remove `project_id` from task URLs
+* Update `da_DK` translations
+* Add automatic action to set the due date when the task is moved away from a specific column
+* Condense wording on inferred action and update translations
+* Add EVENT_CREATE and EVENT_CREATE_UPDATE events to TaskMoveColumnCategoryChange action
+
+Version 1.2.21 (December 16, 2021)
+----------------------------------
+
+* Fix and update Composer autoload
+* Add plugin hook for document attachments
+* Improve board column header alignment
+* Ignore `project_id` for file attachments download URL (already checked elsewhere)
+* Update translations
+* Clarify meaning of `LDAP_USER_CREATION` in `config.default.php`
+* Fix wrong internal link when converting a subtask to task (MySQL only)
+* Use the overridable Markdown parser for previews
+* Update `call_user_func_array()` calls to be compatible with PHP 8
+* Enable external group synchronization deactivation
+* Fix tooltip shifting on long descriptions
+* Add `position` argument to API procedure `updateSubtask()`
+* Bump Docker image to Alpine 3.15.0
+* Bump `symfony/stopwatch` to 5.4.0
+* Bump `pimple/pimple` to 3.5.0
+
+Version 1.2.20 (June 8, 2021)
+-----------------------------
+
+* Duplicate tags when moving or duplicating tasks to another project
+* Bump symfony/stopwatch to 5.3.0
+* Avoid user enumeration by using avatar image URL
+* Invalidate captcha after it is used
+* Avoid user enumeration using password reset functionality
+* Add missing CSRF checks
+* Fix bug in search when using the plus sign
+* Close dialogs using Escape key even if focus is in input field
+* Add a min="0" attribute to task_list form input
+* Keep swimlane headers at the top
+* Catch error when trying to upload empty or invalid avatar image
+* Added new template hooks
+* Update translations
+
 Version 1.2.19 (April 16, 2021)
 -------------------------------
 

@@ -24,15 +24,12 @@ class CommentController extends BaseController
      */
     public function create(array $values = array(), array $errors = array())
     {
-        $project = $this->getProject();
         $task = $this->getTask();
-        $values['project_id'] = $task['project_id'];
 
         $this->response->html($this->helper->layout->task('comment/create', array(
             'values' => $values,
             'errors' => $errors,
-            'task' => $task,
-            'project' => $project,
+            'task' => $task
         )));
     }
 
@@ -57,7 +54,7 @@ class CommentController extends BaseController
                 $this->flash->failure(t('Unable to create your comment.'));
             }
 
-            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'), true);
+            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id']), 'comments'), true);
         } else {
             $this->create($values, $errors);
         }
@@ -80,8 +77,6 @@ class CommentController extends BaseController
         if (empty($values)) {
             $values = $comment;
         }
-
-        $values['project_id'] = $task['project_id'];
 
         $this->response->html($this->template->render('comment/edit', array(
             'values' => $values,
@@ -115,7 +110,7 @@ class CommentController extends BaseController
                 $this->flash->failure(t('Unable to update your comment.'));
             }
 
-            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
+            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])), true);
             return;
         }
 
@@ -156,7 +151,7 @@ class CommentController extends BaseController
             $this->flash->failure(t('Unable to remove this comment.'));
         }
 
-        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'), true);
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id']), 'comments'), true);
     }
 
     /**
@@ -173,7 +168,7 @@ class CommentController extends BaseController
         $this->response->redirect($this->helper->url->to(
             'TaskViewController',
             'show',
-            array('task_id' => $task['id'], 'project_id' => $task['project_id']),
+            array('task_id' => $task['id']),
             'comments'
         ));
     }

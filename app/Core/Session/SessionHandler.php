@@ -24,32 +24,38 @@ class SessionHandler implements SessionHandlerInterface
         $this->db = $db;
     }
 
+    #[\ReturnTypeWillChange]
     public function close()
     {
         return true;
     }
 
+    #[\ReturnTypeWillChange]
     public function destroy($sessionID)
     {
         return $this->db->table(self::TABLE)->eq('id', $sessionID)->remove();
     }
 
+    #[\ReturnTypeWillChange]
     public function gc($maxlifetime)
     {
         return $this->db->table(self::TABLE)->lt('expire_at', time())->remove();
     }
 
+    #[\ReturnTypeWillChange]
     public function open($savePath, $name)
     {
         return true;
     }
 
+    #[\ReturnTypeWillChange]
     public function read($sessionID)
     {
         $result = $this->db->table(self::TABLE)->eq('id', $sessionID)->findOneColumn('data');
         return $result ?: '';
     }
 
+    #[\ReturnTypeWillChange]
     public function write($sessionID, $data)
     {
         $lifetime = time() + (ini_get('session.gc_maxlifetime') ?: 1440);

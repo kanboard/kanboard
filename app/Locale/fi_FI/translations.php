@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'Tehtävää suljetaan',
     'Assign a color to a specific user' => 'Valitse väri käyttäjälle',
     'Position' => 'Positio',
-    'Duplicate to another project' => 'Kopioi toiseen projektiin',
+    'Duplicate to project' => 'Kopioi toiseen projektiin',
     'Duplicate' => 'Monista',
     'Link' => 'Linkki',
     'Comment updated successfully.' => 'Kommentti päivitettiin onnistuneesti.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'Ota käyttöön ',
     'Public access disabled' => 'Julkinen käyttöoikeus ei ole käytössä',
     'Move the task to another project' => 'Siirrä tehtävä toiseen projektiin',
-    'Move to another project' => 'Siirrä toiseen projektiin',
+    'Move to project' => 'Siirrä toiseen projektiin',
     'Do you really want to duplicate this task?' => 'Haluatko varmasti kahdentaa tämän tehtävän?',
     'Duplicate a task' => 'Kahdenna tehtävä',
     'External accounts' => 'Muut tilit',
@@ -1427,4 +1427,5 @@ return array(
     // 'XBT - Bitcoin' => '',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

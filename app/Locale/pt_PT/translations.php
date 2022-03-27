@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'A finalizar uma tarefa',
     'Assign a color to a specific user' => 'Designar uma cor para um utilizador específico',
     'Position' => 'Posição',
-    'Duplicate to another project' => 'Duplicar para outro projeto',
+    'Duplicate to project' => 'Duplicar para outro projeto',
     'Duplicate' => 'Duplicar',
     'Link' => 'Link',
     'Comment updated successfully.' => 'Comentário actualizado com sucesso.',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'Activar o acesso público',
     'Public access disabled' => 'Acesso público desactivado',
     'Move the task to another project' => 'Mover a tarefa para outro projeto',
-    'Move to another project' => 'Mover para outro projeto',
+    'Move to project' => 'Mover para outro projeto',
     'Do you really want to duplicate this task?' => 'Tem a certeza que quer duplicar esta tarefa?',
     'Duplicate a task' => 'Duplicar uma tarefa',
     'External accounts' => 'Contas externas',
@@ -1427,4 +1427,5 @@ return array(
     'XBT - Bitcoin' => 'XBT - Bitcoin',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

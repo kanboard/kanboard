@@ -179,7 +179,7 @@ return array(
     'Closing a task' => 'กำลังปิดงาน',
     'Assign a color to a specific user' => 'กำหนดสีให้ผู้ใช้แบบเจาะจง',
     'Position' => 'ตำแหน่ง',
-    'Duplicate to another project' => 'ทำซ้ำในโปรเจคอื่น',
+    'Duplicate to project' => 'ทำซ้ำในโปรเจคอื่น',
     'Duplicate' => 'ทำซ้ำ',
     'Link' => 'ลิงค์',
     'Comment updated successfully.' => 'ปรับปรุงความคิดเห็นเรียบร้อยแล้ว',
@@ -307,7 +307,7 @@ return array(
     'Enable public access' => 'เปิดการเข้าถึงสาธารณะ',
     'Public access disabled' => 'การเข้าถึงสาธารณะถูกปิด',
     'Move the task to another project' => 'ย้ายงานไปโปรเจคอื่น',
-    'Move to another project' => 'ย้ายไปโปรเจคอื่น',
+    'Move to project' => 'ย้ายไปโปรเจคอื่น',
     'Do you really want to duplicate this task?' => 'คุณต้องการทำซ้ำงานนี้ใช่หรือไม่?',
     'Duplicate a task' => 'ทำซ้ำงาน',
     'External accounts' => 'บัญชีภายนอก',
@@ -1427,4 +1427,5 @@ return array(
     // 'XBT - Bitcoin' => '',
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
+    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );

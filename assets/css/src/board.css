@@ -53,6 +53,11 @@
     display: none
 }
 
+.board-column-expanded-header {
+    display: flex;
+    align-items: center
+}
+
 td.board-column-task-collapsed {
     font-weight: bold;
     background-color: #fbfbfb

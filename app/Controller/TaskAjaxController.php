@@ -9,7 +9,6 @@ use Kanboard\Filter\TaskStartsWithIdFilter;
 use Kanboard\Filter\TaskStatusFilter;
 use Kanboard\Filter\TaskTitleFilter;
 use Kanboard\Model\TaskModel;
-use Kanboard\Helper\TextHelper;
 
 /**
  * Task Ajax Controller
@@ -39,7 +38,7 @@ class TaskAjaxController extends BaseController
                 $filter->withFilter(new TaskIdExclusionFilter(array($exclude_task_id)));
             }
 
-            if (ctype_digit($search)) {
+            if (ctype_digit((string) $search)) {
                 $filter->withFilter(new TaskIdFilter($search));
             } else {
                 $filter->withFilter(new TaskTitleFilter($search));
@@ -79,8 +78,7 @@ class TaskAjaxController extends BaseController
         if (empty($text)) {
             $this->response->json(array());
         } else {
-            $textHelper = new TextHelper($this->container);
-            $preview = $textHelper->markdown($text);
+            $preview = $this->helper->text->markdown($text);
             $this->response->json(array($preview));
         }
     }

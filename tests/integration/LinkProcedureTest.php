@@ -43,11 +43,11 @@ class LinkProcedureTest extends BaseProcedureTest
     {
         $link_id = $this->app->createLink(array('label' => 'test'));
         $this->assertNotFalse($link_id);
-        $this->assertInternalType('int', $link_id);
+        $this->assertIsInt($link_id);
 
         $link_id = $this->app->createLink(array('label' => 'foo', 'opposite_label' => 'bar'));
         $this->assertNotFalse($link_id);
-        $this->assertInternalType('int', $link_id);
+        $this->assertIsInt($link_id);
     }
 
     public function testUpdateLink()
