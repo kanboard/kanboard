@@ -56,7 +56,7 @@
             </div>
 
             <?= $this->hook->render('template:board:private:task:before-title', array('task' => $task)) ?>
-            <div class="task-board-title">
+            <div class="task-board-title" dir="auto">
                 <?= $this->url->link($this->text->e($task['title']), 'TaskViewController', 'show', array('task_id' => $task['id'])) ?>
             </div>
             <?= $this->hook->render('template:board:private:task:after-title', array('task' => $task)) ?>
