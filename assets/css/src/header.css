@@ -1,10 +1,12 @@
 header {
     display: flex;
     flex-wrap: wrap;
+    gap: 10px;
     padding: 5px 10px;
     margin-bottom: 5px;
     border-bottom: 1px solid #dedede;
-    background-color: #fbfbfb
+    background-color: #fbfbfb;
+    box-sizing: border-box;
 }
 
 header .title-container {
@@ -18,8 +20,10 @@ header .title-container {
     }
 }
 
-header .title-container .title {
-    margin-inline-end: 10px;
+header .title-container h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 header .board-selector-container {
