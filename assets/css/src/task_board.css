@@ -33,6 +33,11 @@ div.task-board-status-closed {
     text-overflow: ellipsis;
 }
 
+.task-board-header {
+    display: flex;
+    gap: 5px;
+}
+
 .task-board-title {
     margin-top: 5px;
     margin-bottom: 8px;
@@ -59,9 +64,12 @@ div.task-board-status-closed {
     color: #000;
 }
 
+.task-board-assignee {
+    flex-grow: 1;
+}
+
 .task-board-avatars {
     text-align: end;
-    float: inline-end;
 }
 
 .task-board-change-assignee {
