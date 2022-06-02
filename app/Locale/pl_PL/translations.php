@@ -106,7 +106,7 @@ return array(
     'The id is required' => 'ID jest wymagane',
     'The project id is required' => 'ID projektu jest wymagane',
     'The project name is required' => 'Nazwa projektu jest wymagana',
-    'The title is required' => 'Tutył jest wymagany',
+    'The title is required' => 'Tytuł jest wymagany',
     'Settings saved successfully.' => 'Ustawienia zapisane.',
     'Unable to save your settings.' => 'Nie udało się zapisać ustawień.',
     'Database optimization done.' => 'Optymalizacja bazy danych zakończona.',
