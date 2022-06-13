@@ -30,6 +30,7 @@
                                     <?= $this->modal->confirm('trash-o', t('Remove'), 'ProjectFileController', 'confirm', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
                                 </li>
                             <?php endif ?>
+                            <?= $this->hook->render('template:project-overview:documents:dropdown', array('project' => $project, 'file' => $file)) ?>
                         </ul>
                     </div>
                 </td>
