@@ -29,6 +29,7 @@ class FileHelper extends Base
                 return 'fa-file-image-o';
             case 'xls':
             case 'xlsx':
+            case 'xlsm':
                 return 'fa-file-excel-o';
             case 'doc':
             case 'docx':
@@ -44,13 +45,25 @@ class FileHelper extends Base
             case 'gz':
                 return 'fa-file-archive-o';
             case 'mp3':
+            case 'amr':
+            case 'flac':
+            case 'm4a':
+            case 'ogg':
+            case 'opus':
+            case 'wav':
+            case 'wma':
+            case 'midi':
+            case 'mid':
                 return 'fa-file-audio-o';
             case 'avi':
             case 'mov':
+            case 'mp4':
+            case 'mkv':
                 return 'fa-file-video-o';
             case 'php':
             case 'html':
             case 'css':
+            case 'js':
                 return 'fa-file-code-o';
             case 'pdf':
                 return 'fa-file-pdf-o';
