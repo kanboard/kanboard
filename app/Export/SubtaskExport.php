@@ -77,7 +77,7 @@ class SubtaskExport extends Base
         $values = array();
         $values[] = $subtask['id'];
         $values[] = $subtask['title'];
-        $values[] = $this->subtask_status[$subtask['status']];
+        $values[] = t($this->subtask_status[$subtask['status']]);
         $values[] = $subtask['assignee_name'] ?: $subtask['assignee_username'];
         $values[] = $subtask['time_estimated'];
         $values[] = $subtask['time_spent'];
