@@ -97,7 +97,7 @@ class Mssql extends Base
      */
     public function escape($identifier)
     {
-        return '['.$identifier.']';
+        return '['.str_replace("]","]]",$identifier).']';
     }
 
     /**
