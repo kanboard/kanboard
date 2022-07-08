@@ -75,7 +75,7 @@ class Mssql extends Base
      */
     public function enableForeignKeys()
     {
-        $this->pdo->exec('EXEC sp_MSforeachtable @command1="ALTER TABLE ? CHECK CONSTRAINT ALL"; GO;');
+        $this->pdo->exec('EXEC sp_MSforeachtable @command1="ALTER TABLE ? CHECK CONSTRAINT ALL";');
     }
 
     /**
@@ -85,7 +85,7 @@ class Mssql extends Base
      */
     public function disableForeignKeys()
     {
-        $this->pdo->exec('EXEC sp_MSforeachtable @command1="ALTER TABLE ? NOCHECK CONSTRAINT ALL"; GO;');
+        $this->pdo->exec('EXEC sp_MSforeachtable @command1="ALTER TABLE ? NOCHECK CONSTRAINT ALL";');
     }
 
     /**
