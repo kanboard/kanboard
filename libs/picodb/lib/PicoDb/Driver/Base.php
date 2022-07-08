@@ -31,6 +31,14 @@ abstract class Base
     protected $pdo = null;
 
     /**
+     * use TOP or LIMIT for returning a subset of rows
+     *
+     * @access public
+     * @var bool
+     */
+    public bool $useTop;
+
+    /**
      * Create a new PDO connection
      *
      * @abstract
@@ -128,6 +136,7 @@ abstract class Base
 
         $this->createConnection($settings);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->useTop = false;
     }
 
     /**
@@ -231,4 +240,5 @@ abstract class Base
     {
         return $this->getConnection()->query('SELECT VERSION()')->fetchColumn();
     }
+
 }
