@@ -120,6 +120,14 @@ class Table
     private $sqlSelect = '';
 
     /**
+     * SQL TOP clause
+     *
+     * @access private
+     * @var    string
+     */
+    private $sqlTop = '';
+
+    /**
      * SQL joins
      *
      * @access private
@@ -578,7 +586,11 @@ class Table
     public function limit($value)
     {
         if (! is_null($value)) {
-            $this->sqlLimit = ' LIMIT '.(int) $value;
+            if ($this->db->getDriver()->useTop) {
+                $this->sqlTop = ' TOP ('.(int) $value.') ';
+            } else {
+                $this->sqlLimit = ' LIMIT '.(int) $value;
+            }
         }
 
         return $this;
@@ -693,7 +705,8 @@ class Table
         $this->groupBy = $this->db->escapeIdentifierList($this->groupBy);
 
         return trim(sprintf(
-            'SELECT %s FROM %s %s %s %s %s %s %s',
+            'SELECT %s %s FROM %s %s %s %s %s %s %s',
+            $this->sqlTop,
             $this->sqlSelect,
             $this->db->escapeIdentifier($this->name),
             implode(' ', $this->joins),

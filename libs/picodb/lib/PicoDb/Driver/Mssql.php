@@ -26,6 +26,18 @@ class Mssql extends Base
     );
 
     /**
+     * Constructor
+     *
+     * @access public
+     * @param  array   $settings
+     */
+    public function __construct(array $settings)
+    {
+        parent::__construct($settings);
+        $this->useTop = true;
+    }
+
+    /**
      * Table to store the schema version
      *
      * @access private
@@ -180,4 +192,5 @@ class Mssql extends Base
         $this->getConnection()->exec('SET SHOWPLAN_ALL ON');
         return $this->getConnection()->query($this->getSqlFromPreparedStatement($sql, $values))->fetchAll(PDO::FETCH_ASSOC);
     }
+
 }
