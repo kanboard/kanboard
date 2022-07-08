@@ -59,6 +59,15 @@ class DatabaseProvider implements ServiceProviderInterface
             case 'postgres':
                 $db = $this->getPostgresInstance();
                 break;
+            case 'dblib':
+                $db = $this->getMssqlInstance();
+                break;
+            case 'mssql':
+                $db = $this->getMssqlInstance();
+                break;
+            case 'odbc':
+                $db = $this->getMssqlInstance();
+                break;
             default:
                 throw new LogicException('Database driver not supported');
         }
@@ -158,6 +167,29 @@ class DatabaseProvider implements ServiceProviderInterface
             'database' => DB_NAME,
             'port'     => DB_PORT,
             'timeout'  => DB_TIMEOUT,
+        ));
+    }
+
+    /**
+     * Setup the MSSQL database driver
+     *
+     * @access private
+     * @return \PicoDb\Database
+     */
+    private function getMssqlInstance()
+    {
+        require_once __DIR__.'/../Schema/Mssql.php';
+
+        return new Database(array(
+            'driver'   => DB_DRIVER,
+            'hostname' => DB_HOSTNAME,
+            'username' => DB_USERNAME,
+            'password' => DB_PASSWORD,
+            'database' => DB_NAME,
+            'port'     => DB_PORT,
+            'odbc-dsn' => DB_ODBC_DSN,
+            'timeout'  => DB_TIMEOUT,
+            'appname'  => 'Kanboard',
         ));
     }
 }

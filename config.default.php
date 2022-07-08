@@ -66,22 +66,22 @@ define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
 // Do not run the migrations from multiple processes at the same time (example: web page + background worker)
 define('DB_RUN_MIGRATIONS', true);
 
-// Database driver: sqlite, mysql or postgres (sqlite by default)
+// Database driver: sqlite, mysql, postgres, odbc, dblib, or mssql (sqlite by default)
 define('DB_DRIVER', 'sqlite');
 
-// Mysql/Postgres username
+// Database username
 define('DB_USERNAME', 'root');
 
-// Mysql/Postgres password
+// Database password
 define('DB_PASSWORD', '');
 
-// Mysql/Postgres hostname
+// Database hostname
 define('DB_HOSTNAME', 'localhost');
 
-// Mysql/Postgres database name
+// Database database name
 define('DB_NAME', 'kanboard');
 
-// Mysql/Postgres custom port (null = default port)
+// Database custom port (null = default port)
 define('DB_PORT', null);
 
 // Mysql SSL key
@@ -98,6 +98,9 @@ define('DB_VERIFY_SERVER_CERT', null);
 
 // Timeout value for PDO attribute
 define('DB_TIMEOUT', null);
+
+// ODBC DSN (default: kanboard)
+define('DB_ODBC_DSN', 'kanboard');
 
 // Enable LDAP authentication (false by default)
 define('LDAP_AUTH', false);
