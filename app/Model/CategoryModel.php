@@ -170,7 +170,9 @@ class CategoryModel extends Base
      */
     public function update(array $values)
     {
-        return $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
+        $updates = $values;
+        unset($updates['id']);
+        return $this->db->table(self::TABLE)->eq('id', $values['id'])->save($updates);
     }
 
     /**
