@@ -237,7 +237,9 @@ class SubtaskModel extends Base
     public function update(array $values, $fireEvent = true)
     {
         $this->prepare($values);
-        $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
+        $updates = $values;
+        unset($updates['id']);
+        $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($updates);
 
         if ($result) {
             $subtask = $this->getById($values['id']);
