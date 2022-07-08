@@ -593,7 +593,7 @@ class Table
      */
     public function offset($value)
     {
-        if (! is_null($value)) {
+        if (! is_null($value) && is_int($value) && $value > 0) {
             $this->sqlOffset = ' OFFSET '.(int) $value;
         }
 
