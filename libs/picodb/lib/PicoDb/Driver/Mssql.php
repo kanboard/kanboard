@@ -41,18 +41,24 @@ class Mssql extends Base
      */
     public function createConnection(array $settings)
     {
-        $dsn = $settings['driver'] . ':Server=' . $settings['hostname'];
+        $dsn = $settings['driver'] . ':';
 
-        if (! empty($settings['database'])) {
-            $dsn .= ';dbname=' . $settings['database'];
-        }
+        if ($settings['driver'] == 'odbc') {
+            $dsn .= $settings['odbc-dsn'];
+        } else {
+            $dsn .= 'Server=' . $settings['hostname'];
 
-        if (! empty($settings['appname'])) {
-            $dsn .= ';appname=' . $settings['appname'];
-        }
+            if (! empty($settings['database'])) {
+                $dsn .= ';dbname=' . $settings['database'];
+            }
 
-        if (! empty($settings['port'])) {
-            $dsn .= ';port=' . $settings['port'];
+            if (! empty($settings['port'])) {
+                $dsn .= ';port=' . $settings['port'];
+            }
+
+            if (! empty($settings['appname'])) {
+                $dsn .= ';appname=' . $settings['appname'];
+            }
         }
 
         $this->pdo = new PDO($dsn, $settings['username'], $settings['password']);

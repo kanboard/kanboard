@@ -65,6 +65,9 @@ class DatabaseProvider implements ServiceProviderInterface
             case 'mssql':
                 $db = $this->getMssqlInstance();
                 break;
+            case 'odbc':
+                $db = $this->getMssqlInstance();
+                break;
             default:
                 throw new LogicException('Database driver not supported');
         }
@@ -184,6 +187,7 @@ class DatabaseProvider implements ServiceProviderInterface
             'password' => DB_PASSWORD,
             'database' => DB_NAME,
             'port'     => DB_PORT,
+            'odbc-dsn' => DB_ODBC_DSN,
             'timeout'  => DB_TIMEOUT,
             'appname'  => 'Kanboard',
         ));

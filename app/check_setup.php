@@ -23,6 +23,10 @@ if (DB_DRIVER === 'postgres' && !extension_loaded('pdo_pgsql')) {
     throw new Exception('PHP extension required: "pdo_pgsql"');
 }
 
+if (DB_DRIVER === 'odbc' && !extension_loaded('pdo_odbc')) {
+    throw new Exception('PHP extension required: "pdo_odbc"');
+}
+
 if (DB_DRIVER === 'dblib' && !extension_loaded('pdo_dblib')) {
     throw new Exception('PHP extension required: "pdo_dblib"');
 }
