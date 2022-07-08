@@ -135,9 +135,14 @@ class Mssql extends Base
      */
     public function getSchemaVersion()
     {
-        $this->pdo->exec("CREATE TABLE IF NOT EXISTS [".$this->schemaTable."] ([version] INT DEFAULT '0')");
+        $this->pdo->exec("
+            IF OBJECT_ID(N'dbo.".$this->schemaTable."', N'U') IS NULL
+              CREATE TABLE dbo.".$this->schemaTable." (
+                version INT DEFAULT '0'
+              );
+        ");
 
-        $rq = $this->pdo->prepare('SELECT [version] FROM ['.$this->schemaTable.']');
+        $rq = $this->pdo->prepare('SELECT version FROM dbo.'.$this->schemaTable.'');
         $rq->execute();
         $result = $rq->fetchColumn();
 
@@ -145,7 +150,7 @@ class Mssql extends Base
             return (int) $result;
         }
         else {
-            $this->pdo->exec('INSERT INTO ['.$this->schemaTable.'] VALUES(0)');
+            $this->pdo->exec('INSERT INTO dbo.'.$this->schemaTable.' (version) VALUES(0)');
         }
 
         return 0;
