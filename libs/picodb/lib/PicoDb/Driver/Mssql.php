@@ -41,7 +41,15 @@ class Mssql extends Base
      */
     public function createConnection(array $settings)
     {
-        $dsn = 'sqlsrv:Server=' . $settings['hostname'] . ';Database=' . $settings['database'];
+        $dsn = $settings['driver'] . ':Server=' . $settings['hostname'];
+
+        if (! empty($settings['database'])) {
+            $dsn .= ';dbname=' . $settings['database'];
+        }
+
+        if (! empty($settings['appname'])) {
+            $dsn .= ';appname=' . $settings['appname'];
+        }
 
         if (! empty($settings['port'])) {
             $dsn .= ';port=' . $settings['port'];

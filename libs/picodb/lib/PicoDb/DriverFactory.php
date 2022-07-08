@@ -32,6 +32,8 @@ class DriverFactory
         switch ($settings['driver']) {
             case 'sqlite':
                 return new Sqlite($settings);
+            case 'dblib':
+                return new Mssql($settings);
             case 'mssql':
                 return new Mssql($settings);
             case 'mysql':
