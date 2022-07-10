@@ -66,10 +66,10 @@ class ProjectRoleRestrictionModel extends Base
         $restrictions = $this->db
             ->table(self::TABLE)
             ->columns(
-                self::TABLE.'.restriction_id',
-                self::TABLE.'.project_id',
-                self::TABLE.'.role_id',
-                self::TABLE.'.rule'
+                'restriction_id',
+                'project_id',
+                'role_id',
+                'rule'
             )
             ->eq(self::TABLE.'.project_id', $project_id)
             ->findAll();
@@ -93,10 +93,10 @@ class ProjectRoleRestrictionModel extends Base
         return $this->db
             ->table(self::TABLE)
             ->columns(
-                self::TABLE.'.restriction_id',
-                self::TABLE.'.project_id',
-                self::TABLE.'.role_id',
-                self::TABLE.'.rule',
+                'restriction_id',
+                'project_id',
+                'role_id',
+                'rule',
                 'pr.role'
             )
             ->eq(self::TABLE.'.project_id', $project_id)
