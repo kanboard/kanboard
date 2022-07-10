@@ -96,7 +96,7 @@ class ProjectRoleRestrictionModel extends Base
                 self::TABLE.'.restriction_id',
                 self::TABLE.'.project_id',
                 self::TABLE.'.role_id',
-                self::TABLE.'.rule',
+                'rule',
                 'pr.role'
             )
             ->eq(self::TABLE.'.project_id', $project_id)
