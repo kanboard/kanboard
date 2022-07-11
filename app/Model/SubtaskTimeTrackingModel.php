@@ -29,7 +29,7 @@ class SubtaskTimeTrackingModel extends Base
      */
     public function getTimerQuery($user_id)
     {
-        return $this->db
+        $sql = $this->db
                     ->table(self::TABLE)
                     ->columns('start')
                     ->eq(self::TABLE.'.user_id', $user_id)
@@ -37,6 +37,12 @@ class SubtaskTimeTrackingModel extends Base
                     ->eq(self::TABLE.'.subtask_id', SubtaskModel::TABLE.'.id')
                     ->limit(1)
                     ->buildSelectQuery();
+        // need to interpolate values into the SQL text for use as a subquery
+        // in SubtaskModel::getQuery()
+        $sql = substr_replace($sql, $user_id, strpos($sql, '?'), 1);
+        $sql = substr_replace($sql, 0, strpos($sql, '?'), 1);
+        $sql = substr_replace($sql, SubtaskModel::TABLE.'.id', strpos($sql, '?'), 1);
+        return $sql;
     }
 
     /**
