@@ -32,9 +32,9 @@ class SubtaskTimeTrackingModel extends Base
         $sql = $this->db
                     ->table(self::TABLE)
                     ->columns('start')
-                    ->eq(self::TABLE.'.user_id', $user_id)
-                    ->eq(self::TABLE.'.end', 0)
-                    ->eq(self::TABLE.'.subtask_id', SubtaskModel::TABLE.'.id')
+                    ->eq($this->db->escapeIdentifier('user_id',self::TABLE), $user_id)
+                    ->eq($this->db->escapeIdentifier('end',self::TABLE), 0)
+                    ->eq($this->db->escapeIdentifier('subtask_id',self::TABLE), SubtaskModel::TABLE.'.id')
                     ->limit(1)
                     ->buildSelectQuery();
         // need to interpolate values into the SQL text for use as a subquery
