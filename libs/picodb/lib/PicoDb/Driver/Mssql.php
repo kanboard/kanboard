@@ -150,7 +150,15 @@ class Mssql extends Base
      */
     public function getLastId()
     {
-        return $this->pdo->lastInsertId();
+        try {
+            $rq = $this->pdo->prepare('SELECT @@IDENTITY');
+            $rq->execute();
+
+            return $rq->fetchColumn();
+        }
+        catch (PDOException $e) {
+            return 0;
+        }
     }
 
     /**
