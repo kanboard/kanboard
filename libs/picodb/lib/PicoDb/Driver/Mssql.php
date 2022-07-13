@@ -215,4 +215,15 @@ class Mssql extends Base
         return $this->getConnection()->query($this->getSqlFromPreparedStatement($sql, $values))->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Get database version
+     *
+     * @access public
+     * @return array
+     */
+    public function getDatabaseVersion()
+    {
+        return $this->getConnection()->query('SELECT @@VERSION;')->fetchColumn();
+    }
+
 }
