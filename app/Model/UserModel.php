@@ -290,8 +290,8 @@ class UserModel extends Base
     public function update(array $values)
     {
         $this->prepare($values);
-	$updates = $values;
-	unset($updates['id']);
+        $updates = $values;
+        unset($updates['id']);
         $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->update($updates);
         $this->userSession->refresh($values['id']);
         return $result;
