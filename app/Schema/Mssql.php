@@ -604,8 +604,8 @@ function version_1(PDO $pdo)
     ");
 
     // insert starting data
-    $aui = $pdo->prepare("INSERT INTO dbo.users (username, password) VALUES (?, ?);");
-    $aui->execute(array('admin', \password_hash('admin', PASSWORD_BCRYPT)));
+    $aui = $pdo->prepare("INSERT INTO dbo.users (username, password, role) VALUES (?, ?, ?);");
+    $aui->execute(array('admin', \password_hash('admin', PASSWORD_BCRYPT), Role::APP_ADMIN));
 
     $rq = $pdo->prepare('INSERT INTO dbo.settings ([option],value) VALUES (?, ?);');
     $rq->execute(array('api_token', Token::getToken()));
