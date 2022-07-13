@@ -72,7 +72,7 @@ function version_1(PDO $pdo)
           , task_limit int DEFAULT 0
           , description nvarchar(max)
           , hide_in_dashboard bit DEFAULT 0 NOT NULL
-          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
+          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
           , UNIQUE (title, project_id)
         );
 
@@ -141,7 +141,7 @@ function version_1(PDO $pdo)
           , project_id int NOT NULL
           , description nvarchar(max)
           , task_limit int DEFAULT 0
-          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
+          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
           , UNIQUE (name, project_id)
         );
 
@@ -179,9 +179,9 @@ function version_1(PDO $pdo)
           , priority             int DEFAULT 0
           , external_provider    nvarchar(255)
           , external_uri         nvarchar(255)
-          , FOREIGN KEY (project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
-          , FOREIGN KEY (column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION /* Handled in columns_cascade_delete_trigger */
-          , FOREIGN KEY (swimlane_id) REFERENCES dbo.swimlanes(id) ON DELETE NO ACTION /* Handled in swimlanes_cascade_delete_trigger */
+          , FOREIGN KEY (project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
+          , FOREIGN KEY (column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION /* columns_cascade_delete_trigger */
+          , FOREIGN KEY (swimlane_id) REFERENCES dbo.swimlanes(id) ON DELETE NO ACTION /* swimlanes_cascade_delete_trigger */
         );
 
         CREATE TABLE dbo.task_has_files (
@@ -230,8 +230,8 @@ function version_1(PDO $pdo)
           , column_id int NOT NULL
           , total int NOT NULL DEFAULT 0
           , score int NOT NULL DEFAULT 0
-          , FOREIGN KEY(column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION /* Handled in columns_cascade_delete_trigger */
-          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
+          , FOREIGN KEY(column_id) REFERENCES dbo.columns(id) ON DELETE CASCADE
+          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
         );
 
         CREATE TABLE dbo.subtask_time_tracking (
@@ -271,11 +271,11 @@ function version_1(PDO $pdo)
           , dst_column_id int NOT NULL
           , date bigint NOT NULL
           , time_spent int DEFAULT 0
-          , FOREIGN KEY(src_column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION  /* Handled in columns_cascade_delete_trigger */
-          , FOREIGN KEY(dst_column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION  /* Handled in columns_cascade_delete_trigger */
+          , FOREIGN KEY(src_column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION  /* columns_cascade_delete_trigger */
+          , FOREIGN KEY(dst_column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION  /* columns_cascade_delete_trigger */
           , FOREIGN KEY(user_id) REFERENCES dbo.users(id) ON DELETE CASCADE
-          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
-          , FOREIGN KEY(task_id) REFERENCES dbo.tasks(id) ON DELETE NO ACTION   /* Handled in tasks_cascade_delete_trigger */
+          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
+          , FOREIGN KEY(task_id) REFERENCES dbo.tasks(id) ON DELETE CASCADE
         );
 
         CREATE TABLE dbo.currencies (
@@ -463,10 +463,10 @@ function version_1(PDO $pdo)
           , dst_column_id int NOT NULL
           , only_assigned bit DEFAULT 0
           , UNIQUE(role_id, src_column_id, dst_column_id)
-          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
-          , FOREIGN KEY(role_id) REFERENCES dbo.project_has_roles(role_id) ON DELETE NO ACTION /* Handled in proj_roles_cascade_delete_trigger */
-          , FOREIGN KEY(src_column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION /* Handled in columns_cascade_delete_trigger */
-          , FOREIGN KEY(dst_column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION /* Handled in columns_cascade_delete_trigger */
+          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
+          , FOREIGN KEY(role_id) REFERENCES dbo.project_has_roles(role_id) ON DELETE CASCADE
+          , FOREIGN KEY(src_column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION /* columns_cascade_delete_trigger */
+          , FOREIGN KEY(dst_column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION /* columns_cascade_delete_trigger */
         );
 
         CREATE TABLE dbo.project_role_has_restrictions (
@@ -475,8 +475,8 @@ function version_1(PDO $pdo)
           , role_id int NOT NULL
           , [rule] nvarchar(255) NOT NULL
           , UNIQUE(role_id, [rule])
-          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
-          , FOREIGN KEY(role_id) REFERENCES dbo.project_has_roles(role_id) ON DELETE NO ACTION /* Handled in proj_roles_cascade_delete_trigger */
+          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
+          , FOREIGN KEY(role_id) REFERENCES dbo.project_has_roles(role_id) ON DELETE CASCADE
         );
 
         CREATE TABLE dbo.column_has_restrictions (
@@ -486,9 +486,9 @@ function version_1(PDO $pdo)
           , column_id int NOT NULL
           , [rule] nvarchar(255) NOT NULL
           , UNIQUE(role_id, column_id, [rule])
-          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
-          , FOREIGN KEY(role_id) REFERENCES dbo.project_has_roles(role_id) ON DELETE NO ACTION /* Handled in proj_roles_cascade_delete_trigger */
-          , FOREIGN KEY(column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION /* Handled in columns_cascade_delete_trigger */
+          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
+          , FOREIGN KEY(role_id) REFERENCES dbo.project_has_roles(role_id) ON DELETE CASCADE
+          , FOREIGN KEY(column_id) REFERENCES dbo.columns(id) ON DELETE CASCADE
         );
 
         CREATE TABLE dbo.invites (
@@ -507,8 +507,8 @@ function version_1(PDO $pdo)
           , task_id int NOT NULL
           , data nvarchar(max)
           , FOREIGN KEY(creator_id) REFERENCES dbo.users(id) ON DELETE CASCADE
-          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
-          , FOREIGN KEY(task_id) REFERENCES dbo.tasks(id) ON DELETE NO ACTION /* Handled in tasks_cascade_delete_trigger */
+          , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
+          , FOREIGN KEY(task_id) REFERENCES dbo.tasks(id) ON DELETE CASCADE
         );
 
         CREATE TABLE dbo.predefined_task_descriptions (
@@ -529,60 +529,68 @@ function version_1(PDO $pdo)
     // create triggers -- each of which must be in its own batch
     $pdo->exec("
         CREATE TRIGGER dbo.columns_cascade_delete_trigger
-        ON dbo.columns AFTER DELETE
+        ON dbo.columns INSTEAD OF DELETE
         AS
-          IF (ROWCOUNT_BIG() = 0)
-          RETURN;
-          DELETE dbo.column_has_restrictions
-          WHERE column_id IN (SELECT id FROM deleted);
+          SET NOCOUNT ON;
           DELETE dbo.column_has_move_restrictions
           WHERE src_column_id IN (SELECT id FROM deleted)
             OR  dst_column_id IN (SELECT id FROM deleted);
           DELETE dbo.transitions
           WHERE src_column_id IN (SELECT id FROM deleted)
             OR  dst_column_id IN (SELECT id FROM deleted);
-          DELETE dbo.project_daily_column_stats
-          WHERE column_id IN (SELECT id FROM deleted);
           DELETE dbo.tasks
           WHERE column_id IN (SELECT id FROM deleted);
+          DELETE dbo.columns
+          WHERE id IN (SELECT id FROM deleted);
     ");
 
     $pdo->exec("
-        CREATE TRIGGER dbo.proj_roles_cascade_delete_trigger
-        ON dbo.project_has_roles AFTER DELETE
+        CREATE TRIGGER projects_cascade_delete_trigger
+        ON dbo.projects INSTEAD OF DELETE
         AS
-          IF (ROWCOUNT_BIG() = 0)
-          RETURN;
-          DELETE dbo.project_role_has_restrictions
-          WHERE role_id IN (SELECT role_id FROM deleted);
-          DELETE dbo.column_has_restrictions
-          WHERE role_id IN (SELECT role_id FROM deleted);
+          SET NOCOUNT ON;
           DELETE dbo.column_has_move_restrictions
-          WHERE role_id IN (SELECT role_id FROM deleted);
+          WHERE project_id IN (SELECT id FROM deleted);
+          DELETE dbo.column_has_restrictions
+          WHERE project_id IN (SELECT id FROM deleted);
+          DELETE dbo.columns
+          WHERE project_id IN (SELECT id FROM deleted);
+          DELETE dbo.project_activities
+          WHERE project_id IN (SELECT id FROM deleted);
+          DELETE dbo.project_daily_column_stats
+          WHERE project_id IN (SELECT id FROM deleted);
+          DELETE dbo.project_role_has_restrictions
+          WHERE project_id IN (SELECT id FROM deleted);
+          DELETE dbo.swimlanes
+          WHERE project_id IN (SELECT id FROM deleted);
+          DELETE dbo.tasks
+          WHERE project_id IN (SELECT id FROM deleted);
+          DELETE dbo.transitions
+          WHERE project_id IN (SELECT id FROM deleted);
+          DELETE dbo.projects
+          WHERE id IN (SELECT id FROM deleted);
     ");
 
     $pdo->exec("
         CREATE TRIGGER dbo.swimlanes_cascade_delete_trigger
-        ON dbo.swimlanes AFTER DELETE
+        ON dbo.swimlanes INSTEAD OF DELETE
         AS
-          IF (ROWCOUNT_BIG() = 0)
-          RETURN;
+          SET NOCOUNT ON;
           DELETE dbo.tasks
           WHERE swimlane_id IN (SELECT id FROM deleted);
+          DELETE dbo.swimlanes
+          WHERE id IN (SELECT id FROM deleted);
     ");
 
     $pdo->exec("
         CREATE TRIGGER dbo.tasks_cascade_delete_trigger
-        ON dbo.tasks AFTER DELETE
+        ON dbo.tasks INSTEAD OF DELETE
         AS
-          IF (ROWCOUNT_BIG() = 0)
-          RETURN;
-          DELETE dbo.project_activities
-          WHERE task_id IN (SELECT id FROM deleted);
-          DELETE dbo.transitions
-          WHERE task_id IN (SELECT id FROM deleted);
+          SET NOCOUNT ON;
           DELETE dbo.task_has_links
           WHERE opposite_task_id IN (SELECT id FROM deleted);
+          DELETE dbo.tasks
+          WHERE id IN (SELECT id FROM deleted);
     ");
 
     // set defaults
