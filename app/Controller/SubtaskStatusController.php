@@ -43,6 +43,7 @@ class SubtaskStatusController extends BaseController
      */
     public function timer()
     {
+        $this->checkReusableGETCSRFParam();
         $task = $this->getTask();
         $subtask = $this->getSubtask($task);
         $timer = $this->request->getStringParam('timer');

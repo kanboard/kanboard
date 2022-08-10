@@ -80,12 +80,20 @@ class SubtaskHelper extends Base
     public function renderTimer(array $task, array $subtask)
     {
         $html = '<span class="subtask-timer-toggle">';
+        $params = array(
+            'task_id' => $subtask['task_id'],
+            'subtask_id' => $subtask['id'],
+            'timer' => '',
+            'csrf_token' => $this->token->getReusableCSRFToken(),
+        );
 
         if ($subtask['is_timer_started']) {
-            $html .= $this->helper->url->icon('pause', t('Stop timer'), 'SubtaskStatusController', 'timer', array('timer' => 'stop', 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id']), false, 'js-subtask-toggle-timer');
+            $params['timer'] = 'stop';
+            $html .= $this->helper->url->icon('pause', t('Stop timer'), 'SubtaskStatusController', 'timer', $params, false, 'js-subtask-toggle-timer');
             $html .= ' (' . $this->helper->dt->age($subtask['timer_start_date']) .')';
         } else {
-            $html .= $this->helper->url->icon('play-circle-o', t('Start timer'), 'SubtaskStatusController', 'timer', array('timer' => 'start', 'task_id' => $subtask['task_id'], 'subtask_id' => $subtask['id']), false, 'js-subtask-toggle-timer');
+            $params['timer'] = 'start';
+            $html .= $this->helper->url->icon('play-circle-o', t('Start timer'), 'SubtaskStatusController', 'timer', $params, false, 'js-subtask-toggle-timer');
         }
 
         $html .= '</span>';
