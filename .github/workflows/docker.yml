@@ -16,7 +16,7 @@ jobs:
         id: docker_tag
         run: |
           SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`
-          APP_VERSION="master.${SHORT_SHA}"
+          APP_VERSION="main.${SHORT_SHA}"
           DOCKER_IMAGE=kanboard/kanboard
           DOCKER_VERSION=dev
           if [ "${{ github.event_name }}" = "schedule" ]; then

@@ -36,7 +36,7 @@ assignees: ''
 
 ### Configuration
 
-- Kanboard version: <!-- provide exact version (not master) -->
+- Kanboard version: <!-- provide exact version (not master or main) -->
 - Database type and version:
 - PHP version:
 - OS:

@@ -1,5 +1,5 @@
 DOCKER_IMAGE := docker.io/kanboard/kanboard
-DOCKER_TAG := master
+DOCKER_TAG := main
 VERSION := $(shell git rev-parse --short HEAD)
 
 .PHONY: archive test-sqlite test-mysql test-postgres sql \
@@ -46,7 +46,7 @@ docker-images:
 	docker buildx build \
 		--platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 \
 		--file Dockerfile \
-		--build-arg VERSION=master.$(VERSION) \
+		--build-arg VERSION=main.$(VERSION) \
 		--tag $(DOCKER_IMAGE):$(VERSION) \
 		.
 
