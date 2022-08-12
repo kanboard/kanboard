@@ -19,7 +19,7 @@ class Version
      */
     public static function isCompatible($pluginCompatibleVersion, $appVersion = APP_VERSION)
     {
-        if (strpos($appVersion, 'master') !== false) {
+        if (strpos($appVersion, 'master') !== false || strpos($appVersion, 'main') !== false) {
             return true;
         }
 

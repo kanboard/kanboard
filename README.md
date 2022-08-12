@@ -9,7 +9,7 @@ Pull-requests are still accepted as long as the [guidelines](.github/pull_reques
 
 - Official website: <https://kanboard.org/>
 - [List of features](https://kanboard.org/#features)
-- [Change Log](https://github.com/kanboard/kanboard/blob/master/ChangeLog)
+- [Change Log](https://github.com/kanboard/kanboard/blob/main/ChangeLog)
 - [Forum](https://kanboard.discourse.group/)
 - Official documentation: <https://docs.kanboard.org/>
     - [Requirements](https://docs.kanboard.org/en/latest/admin_guide/requirements.html)
@@ -22,4 +22,4 @@ Credits
 
 - Main developer: Frédéric Guillot
 - [Contributors](https://github.com/kanboard/kanboard/graphs/contributors)
-- Distributed under [MIT License](https://github.com/kanboard/kanboard/blob/master/LICENSE)
+- Distributed under [MIT License](https://github.com/kanboard/kanboard/blob/main/LICENSE)
