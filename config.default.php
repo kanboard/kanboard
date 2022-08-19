@@ -99,7 +99,7 @@ define('DB_VERIFY_SERVER_CERT', null);
 // Timeout value for PDO attribute
 define('DB_TIMEOUT', null);
 
-// ODBC DSN
+// ODBC DSN (default: kanboard)
 define('DB_ODBC_DSN', 'kanboard');
 
 // Enable LDAP authentication (false by default)
