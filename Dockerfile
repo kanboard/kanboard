@@ -12,7 +12,8 @@ RUN apk --no-cache --update add \
     tzdata openssl unzip nginx bash ca-certificates s6 curl ssmtp mailx php8 php8-phar php8-curl \
     php8-fpm php8-json php8-zlib php8-xml php8-dom php8-ctype php8-opcache php8-zip php8-iconv \
     php8-pdo php8-pdo_mysql php8-pdo_sqlite php8-pdo_pgsql php8-mbstring php8-session php8-bcmath \
-    php8-gd php8-openssl php8-sockets php8-posix php8-ldap php8-simplexml && \
+    php8-gd php8-openssl php8-sockets php8-posix php8-ldap php8-simplexml \
+    php8-odbc php8-pdo_odbc unixodbc freetds gettext && \
     rm -rf /var/www/localhost && \
     rm -f /etc/php8/php-fpm.d/www.conf
 
