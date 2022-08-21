@@ -618,7 +618,7 @@ function version_1(PDO $pdo)
     $pdo->exec("
         INSERT INTO dbo.settings ([option], value) VALUES
           ('application_currency','USD'),
-          ('application_date_format','Y-m-d'),
+          ('application_date_format','m/d/Y'),
           ('application_language',''),
           ('application_stylesheet',''),
           ('application_time_format','H:i'),
