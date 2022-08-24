@@ -686,7 +686,7 @@ class Table
     public function buildSelectQuery()
     {
         if (empty($this->sqlSelect)) {
-            $this->columns = $this->db->escapeIdentifierList($this->columns);
+            $this->columns = $this->db->escapeIdentifierList($this->columns, $this->name);
             $this->sqlSelect = ($this->distinct ? 'DISTINCT ' : '').(empty($this->columns) ? '*' : implode(', ', $this->columns));
         }
 
