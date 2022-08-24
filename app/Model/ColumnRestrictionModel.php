@@ -46,11 +46,11 @@ class ColumnRestrictionModel extends Base
         return $this->db
             ->table(self::TABLE)
             ->columns(
-                self::TABLE.'.restriction_id',
-                self::TABLE.'.project_id',
-                self::TABLE.'.role_id',
-                self::TABLE.'.column_id',
-                self::TABLE.'.rule',
+                'restriction_id',
+                'project_id',
+                'role_id',
+                'column_id',
+                'rule',
                 'pr.role',
                 'c.title as column_title'
             )
@@ -73,11 +73,11 @@ class ColumnRestrictionModel extends Base
         $restrictions = $this->db
             ->table(self::TABLE)
             ->columns(
-                self::TABLE.'.restriction_id',
-                self::TABLE.'.project_id',
-                self::TABLE.'.role_id',
-                self::TABLE.'.column_id',
-                self::TABLE.'.rule',
+                'restriction_id',
+                'project_id',
+                'role_id',
+                'column_id',
+                'rule',
                 'pr.role',
                 'c.title as column_title'
             )
@@ -105,11 +105,11 @@ class ColumnRestrictionModel extends Base
         return $this->db
             ->table(self::TABLE)
             ->columns(
-                self::TABLE.'.restriction_id',
-                self::TABLE.'.project_id',
-                self::TABLE.'.role_id',
-                self::TABLE.'.column_id',
-                self::TABLE.'.rule',
+                'restriction_id',
+                'project_id',
+                'role_id',
+                'column_id',
+                'rule',
                 'pr.role'
             )
             ->eq(self::TABLE.'.project_id', $project_id)
