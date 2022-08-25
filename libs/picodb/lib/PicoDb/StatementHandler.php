@@ -350,6 +350,6 @@ class StatementHandler
             return false;
         }
 
-        throw new SQLException('SQL Error: '.$e->getMessage());
+        throw new SQLException('SQL Error['.$e->getCode().']: '.$e->getMessage());
     }
 }
