@@ -19,10 +19,6 @@ class Mssql extends Base
      * @var array
      */
     protected $requiredAttributes = array(
-        'hostname',
-        'username',
-        'password',
-        'database',
     );
 
     /**
