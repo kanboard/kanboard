@@ -40,7 +40,8 @@ function version_1(PDO $pdo)
           , api_access_token nvarchar(255)
           , filter nvarchar(max) DEFAULT N''
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.projects (
           id int identity PRIMARY KEY
           , name nvarchar(max) NOT NULL
@@ -63,7 +64,8 @@ function version_1(PDO $pdo)
           , task_limit int DEFAULT 0
           , enable_global_tags bit DEFAULT 1 NOT NULL
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.columns (
           id int identity PRIMARY KEY
           , title nvarchar(255) NOT NULL
@@ -75,7 +77,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
           , UNIQUE (title, project_id)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.project_has_users (
           project_id int NOT NULL
           , user_id int NOT NULL
@@ -84,7 +87,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(user_id) REFERENCES dbo.users(id) ON DELETE CASCADE
           , UNIQUE(project_id, user_id)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.actions (
             id int identity PRIMARY KEY
           , project_id int NOT NULL
@@ -92,7 +96,8 @@ function version_1(PDO $pdo)
           , action_name nvarchar(max) NOT NULL
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.action_has_params (
             id int identity PRIMARY KEY
           , action_id int NOT NULL
@@ -100,7 +105,8 @@ function version_1(PDO $pdo)
           , value nvarchar(max) NOT NULL
           , FOREIGN KEY(action_id) REFERENCES dbo.actions(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.remember_me (
             id int identity PRIMARY KEY
           , user_id int NOT NULL
@@ -112,7 +118,8 @@ function version_1(PDO $pdo)
           , date_creation bigint
           , FOREIGN KEY(user_id) REFERENCES dbo.users(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.last_logins (
             id int identity PRIMARY KEY
           , auth_type nvarchar(25)
@@ -122,7 +129,8 @@ function version_1(PDO $pdo)
           , date_creation bigint
           , FOREIGN KEY(user_id) REFERENCES dbo.users(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.project_has_categories (
             id int identity PRIMARY KEY
           , name nvarchar(255) NOT NULL
@@ -132,7 +140,8 @@ function version_1(PDO $pdo)
           , UNIQUE (project_id, name)
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.swimlanes (
             id int identity PRIMARY KEY
           , name nvarchar(848) NOT NULL  /* max size for unique index */
@@ -144,7 +153,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
           , UNIQUE (name, project_id)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.tasks
         (
             id                   int identity PRIMARY KEY
@@ -183,7 +193,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY (column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION /* columns_cascade_delete_trigger */
           , FOREIGN KEY (swimlane_id) REFERENCES dbo.swimlanes(id) ON DELETE NO ACTION /* swimlanes_cascade_delete_trigger */
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.task_has_files (
             id int identity PRIMARY KEY
           , name nvarchar(max) NOT NULL
@@ -195,7 +206,8 @@ function version_1(PDO $pdo)
           , size int NOT NULL DEFAULT 0
           , FOREIGN KEY(task_id) REFERENCES dbo.tasks(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.subtasks (
             id int identity PRIMARY KEY
           , title nvarchar(max) NOT NULL
@@ -207,7 +219,8 @@ function version_1(PDO $pdo)
           , position int DEFAULT 1
           , FOREIGN KEY(task_id) REFERENCES dbo.tasks(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.user_has_notifications (
             user_id int NOT NULL
           , project_id int NOT NULL
@@ -215,14 +228,16 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
           , UNIQUE(project_id, user_id)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.settings (
             [option] nvarchar(100) PRIMARY KEY
           , value nvarchar(max) DEFAULT ''
           , changed_by int DEFAULT 0 NOT NULL
           , changed_on int DEFAULT 0 NOT NULL
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.project_daily_column_stats (
             id int identity PRIMARY KEY
           , day nchar(10) NOT NULL
@@ -233,7 +248,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(column_id) REFERENCES dbo.columns(id) ON DELETE CASCADE
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.subtask_time_tracking (
             id int identity PRIMARY KEY
           , user_id int NOT NULL
@@ -244,14 +260,16 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(user_id) REFERENCES dbo.users(id) ON DELETE CASCADE
           , FOREIGN KEY(subtask_id) REFERENCES dbo.subtasks(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.links (
             id int identity PRIMARY KEY
           , label nvarchar(255) NOT NULL
           , opposite_id int DEFAULT 0
           , UNIQUE(label)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.task_has_links (
             id int identity PRIMARY KEY
           , link_id int NOT NULL
@@ -261,7 +279,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(task_id) REFERENCES dbo.tasks(id) ON DELETE CASCADE
           , FOREIGN KEY(opposite_task_id) REFERENCES dbo.tasks(id) ON DELETE NO ACTION /* Handled in tasks_cascade_delete_trigger */
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.transitions (
             id int identity PRIMARY KEY
           , user_id int NOT NULL
@@ -277,12 +296,14 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
           , FOREIGN KEY(task_id) REFERENCES dbo.tasks(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.currencies (
             currency nvarchar(3) NOT NULL UNIQUE
           , rate REAL DEFAULT 0
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.comments (
             id int identity PRIMARY KEY
           , task_id int NOT NULL
@@ -293,7 +314,8 @@ function version_1(PDO $pdo)
           , date_modification bigint
           , FOREIGN KEY(task_id) REFERENCES dbo.tasks(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.project_daily_stats (
             id int identity PRIMARY KEY
           , day nchar(10) NOT NULL
@@ -302,12 +324,14 @@ function version_1(PDO $pdo)
           , avg_cycle_time int NOT NULL DEFAULT 0
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.plugin_schema_versions (
             plugin nvarchar(80) NOT NULL PRIMARY KEY
           , version int NOT NULL DEFAULT 0
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.custom_filters (
             id int identity PRIMARY KEY
           , filter nvarchar(max) NOT NULL
@@ -317,7 +341,8 @@ function version_1(PDO $pdo)
           , is_shared bit DEFAULT 0
           , append bit DEFAULT 0
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.user_has_unread_notifications (
             id int identity PRIMARY KEY
           , user_id int NOT NULL
@@ -326,14 +351,16 @@ function version_1(PDO $pdo)
           , event_data nvarchar(max) NOT NULL
           , FOREIGN KEY(user_id) REFERENCES dbo.users(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.user_has_notification_types (
             id int identity PRIMARY KEY
           , user_id int NOT NULL
           , notification_type nvarchar(50)
           , FOREIGN KEY(user_id) REFERENCES dbo.users(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.project_has_notification_types (
             id int identity PRIMARY KEY
           , project_id int NOT NULL
@@ -341,7 +368,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
           , UNIQUE(project_id, notification_type)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.user_has_metadata (
             user_id int NOT NULL
           , name nvarchar(50) NOT NULL
@@ -351,7 +379,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(user_id) REFERENCES dbo.users(id) ON DELETE CASCADE
           , UNIQUE(user_id, name)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.project_has_metadata (
             project_id int NOT NULL
           , name nvarchar(50) NOT NULL
@@ -361,7 +390,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
           , UNIQUE(project_id, name)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.task_has_metadata (
             task_id int NOT NULL
           , name nvarchar(50) NOT NULL
@@ -371,13 +401,15 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(task_id) REFERENCES dbo.tasks(id) ON DELETE CASCADE
           , UNIQUE(task_id, name)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.groups (
             id int identity PRIMARY KEY
           , external_id nvarchar(255) DEFAULT ''
           , name nvarchar(850) NOT NULL UNIQUE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.group_has_users (
             group_id int NOT NULL
           , user_id int NOT NULL
@@ -385,7 +417,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(user_id) REFERENCES dbo.users(id) ON DELETE CASCADE
           , UNIQUE(group_id, user_id)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.project_has_groups (
             group_id int NOT NULL
           , project_id int NOT NULL
@@ -394,7 +427,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
           , UNIQUE(group_id, project_id)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.password_reset (
             token nvarchar(80) PRIMARY KEY
           , user_id int NOT NULL
@@ -405,7 +439,8 @@ function version_1(PDO $pdo)
           , is_active bit NOT NULL
           , FOREIGN KEY(user_id) REFERENCES dbo.users(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.task_has_external_links (
             id int identity PRIMARY KEY
           , link_type nvarchar(100) NOT NULL
@@ -418,7 +453,8 @@ function version_1(PDO $pdo)
           , creator_id int DEFAULT 0
           , FOREIGN KEY(task_id) REFERENCES dbo.tasks(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.project_has_files (
             id int identity PRIMARY KEY
           , project_id int NOT NULL
@@ -430,7 +466,8 @@ function version_1(PDO $pdo)
           , date int DEFAULT 0 NOT NULL /* TODO: bigint?? */
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.tags (
             id int identity PRIMARY KEY
           , name nvarchar(255) NOT NULL
@@ -438,7 +475,8 @@ function version_1(PDO $pdo)
           , color_id nvarchar(50) DEFAULT NULL
           , UNIQUE(project_id, name)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.task_has_tags (
             task_id int NOT NULL
           , tag_id int NOT NULL
@@ -446,7 +484,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(tag_id) REFERENCES dbo.tags(id) ON DELETE CASCADE
           , UNIQUE(tag_id, task_id)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.project_has_roles (
             role_id int identity PRIMARY KEY
           , role nvarchar(255) NOT NULL
@@ -454,7 +493,8 @@ function version_1(PDO $pdo)
           , UNIQUE(project_id, role)
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.column_has_move_restrictions (
             restriction_id int identity PRIMARY KEY
           , project_id int NOT NULL
@@ -468,7 +508,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(src_column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION /* columns_cascade_delete_trigger */
           , FOREIGN KEY(dst_column_id) REFERENCES dbo.columns(id) ON DELETE NO ACTION /* columns_cascade_delete_trigger */
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.project_role_has_restrictions (
             restriction_id int identity PRIMARY KEY
           , project_id int NOT NULL
@@ -478,7 +519,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
           , FOREIGN KEY(role_id) REFERENCES dbo.project_has_roles(role_id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.column_has_restrictions (
             restriction_id int identity PRIMARY KEY
           , project_id int NOT NULL
@@ -490,14 +532,16 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(role_id) REFERENCES dbo.project_has_roles(role_id) ON DELETE CASCADE
           , FOREIGN KEY(column_id) REFERENCES dbo.columns(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.invites (
             email nvarchar(255) NOT NULL
           , project_id int NOT NULL
           , token nvarchar(255) NOT NULL
           , PRIMARY KEY(email, token)
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.project_activities (
             id int identity PRIMARY KEY
           , date_creation bigint NOT NULL
@@ -510,7 +554,8 @@ function version_1(PDO $pdo)
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE NO ACTION /* projects_cascade_delete_trigger */
           , FOREIGN KEY(task_id) REFERENCES dbo.tasks(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.predefined_task_descriptions (
             id int identity PRIMARY KEY
           , project_id int NOT NULL
@@ -518,7 +563,8 @@ function version_1(PDO $pdo)
           , description nvarchar(max) NOT NULL
           , FOREIGN KEY(project_id) REFERENCES dbo.projects(id) ON DELETE CASCADE
         );
-
+    ");
+    $pdo->exec("
         CREATE TABLE dbo.sessions (
             id nvarchar(450) PRIMARY KEY /* max length for primary key */
           , expire_at int NOT NULL
