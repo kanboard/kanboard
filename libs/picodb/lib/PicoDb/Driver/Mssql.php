@@ -51,25 +51,43 @@ class Mssql extends Base
     {
         $dsn = $settings['driver'] . ':';
 
+        // exactly one of hostname/DSN needed, port is optional
         if ($settings['driver'] == 'odbc') {
             $dsn .= $settings['odbc-dsn'];
         } else {
-            $dsn .= 'Server=' . $settings['hostname'];
-
-            if (! empty($settings['database'])) {
-                $dsn .= ';dbname=' . $settings['database'];
+            if ($settings['driver'] == 'dblib') {
+                $dsn .= 'host=' . $settings['hostname'];
+            } elseif ($settings['driver'] == 'sqlsrv') {
+                $dsn .= 'Server=' . $settings['hostname'];
             }
-
             if (! empty($settings['port'])) {
-                $dsn .= ';port=' . $settings['port'];
-            }
-
-            if (! empty($settings['appname'])) {
-                $dsn .= ';appname=' . $settings['appname'];
+                $dsn .= ',' . $settings['port'];
             }
         }
 
-        $this->pdo = new PDO($dsn, $settings['username'], $settings['password']);
+        if (! empty($settings['database'])) {
+            if ($settings['driver'] == 'dblib') {
+                $dsn .= ';dbname=' . $settings['database'];
+            } elseif ($settings['driver'] == 'sqlsrv') {
+                $dsn .= ';Database=' . $settings['database'];
+            }
+        }
+
+
+        if (! empty($settings['appname'])) {
+            if ($settings['driver'] == 'dblib') {
+                $dsn .= ';appname=' . $settings['appname'];
+            } elseif ($settings['driver'] == 'sqlsrv') {
+                $dsn .= ';APP=' . $settings['appname'];
+            }
+        }
+
+        // create PDO object
+        if (! empty($settings['username'])) {
+            $this->pdo = new PDO($dsn, $settings['username'], $settings['password']);
+        } else {
+            $this->pdo = new PDO($dsn);
+        }
 
         if (isset($settings['schema_table'])) {
             $this->schemaTable = $settings['schema_table'];
