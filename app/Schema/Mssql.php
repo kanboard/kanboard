@@ -124,7 +124,7 @@ function version_1(PDO $pdo)
             id int identity PRIMARY KEY
           , auth_type nvarchar(25)
           , user_id int NOT NULL
-          , ip nvarchar(25)
+          , ip nvarchar(45)
           , user_agent nvarchar(255)
           , date_creation bigint
           , FOREIGN KEY(user_id) REFERENCES dbo.users(id) ON DELETE CASCADE
