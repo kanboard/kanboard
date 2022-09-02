@@ -665,10 +665,10 @@ function version_1(PDO $pdo)
         INSERT INTO dbo.settings ([option], value) VALUES
           ('application_currency','USD'),
           ('application_date_format','m/d/Y'),
-          ('application_language',''),
+          ('application_language','en_US'),
           ('application_stylesheet',''),
           ('application_time_format','H:i'),
-          ('application_timezone',''),
+          ('application_timezone','UTC'),
           ('board_columns',''),
           ('calendar_project_tasks','date_started'),
           ('calendar_user_subtasks_time_tracking','0'),
