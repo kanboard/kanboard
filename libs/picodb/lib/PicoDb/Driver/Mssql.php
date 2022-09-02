@@ -123,7 +123,10 @@ class Mssql extends Base
      */
     public function isDuplicateKeyError($code)
     {
-        return $code == 2601;
+        # 2601: Cannot insert duplicate key row in object '%.*ls' with unique index '%.*ls'.
+        # 2627: Violation of %ls constraint '%.*ls'. Cannot insert duplicate key in object '%.*ls'.
+        # 23000: Integrity constraint violation
+        return array_search($code, ['2601','2627','23000']) !== false;
     }
 
     /**
