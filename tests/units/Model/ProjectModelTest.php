@@ -19,6 +19,12 @@ use Kanboard\Model\CategoryModel;
 
 class ProjectModelTest extends Base
 {
+    protected function tearDown(): void
+    {
+        Translator::unload();
+        parent::tearDown();
+    }
+
     public function testCreationForAllLanguages()
     {
         $projectModel = new ProjectModel($this->container);
