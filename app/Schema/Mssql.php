@@ -300,7 +300,7 @@ function version_1(PDO $pdo)
     $pdo->exec("
         CREATE TABLE dbo.currencies (
             currency nvarchar(3) NOT NULL UNIQUE
-          , rate REAL DEFAULT 0
+          , rate decimal(19,9) DEFAULT 0
         );
     ");
     $pdo->exec("
