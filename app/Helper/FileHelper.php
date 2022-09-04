@@ -127,6 +127,9 @@ class FileHelper extends Base
             case 'pdf':
                 return 'application/pdf';
             case 'mp3':
+            case 'ogg':
+            case 'flac':
+            case 'wav':
                 return 'audio/mpeg';
         }
 
