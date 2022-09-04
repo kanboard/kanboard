@@ -131,6 +131,10 @@ class FileHelper extends Base
             case 'flac':
             case 'wav':
                 return 'audio/mpeg';
+            case 'avi':
+                return 'video/x-msvideo';
+            case 'webm':
+                return 'video/webm';
         }
 
         return null;
