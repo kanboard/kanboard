@@ -1,3 +1,22 @@
+Version 1.2.23 (September 4, 2022)
+----------------------------------
+
+* Open SVG, Ogg, and some Video file attachments in browser
+* Added more video, music, code and spreadsheet extensions to show better file attachment icons
+* Update jQuery to latest stable version
+* Update Docker image to PHP 8.1 and Alpine Linux 3.16
+* Rename default branch from master to main
+* Bump `phpunit/phpunit` from `9.5.14` to `9.5.23`
+* Bump `symfony/finder` from `5.4.3` to `5.4.11`
+* Translate subtask status on demand
+* Add Project Overview document template hook
+* Updated translations
+* Fix wrong foreign key constraint on table `subtask_time_tracking table`. The constraints references the no-longer-existing table `task_has_subtasks`
+* Fix regression regarding subtask reordering
+* Change minimum requirement to PHP 7.4
+    - PHP versions < 7.4 are end-of-life: https://www.php.net/supported-versions.php
+    - Libraries used by Kanboard have dropped support for older versions of PHP
+
 Version 1.2.22 (February 12, 2022)
 ----------------------------------
 
