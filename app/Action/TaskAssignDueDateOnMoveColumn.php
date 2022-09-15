@@ -92,6 +92,6 @@ class TaskAssignDueDateOnMoveColumn extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return true;
+        return !empty($data['src_column_id']) && $data['src_column_id'] == $this->getParam('column_id');
     }
 }
