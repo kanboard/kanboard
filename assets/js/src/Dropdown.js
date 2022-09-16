@@ -11,8 +11,6 @@ Kanboard.Dropdown.prototype.listen = function() {
     });
 
     $(document).on('click', '.active-dropdown-menu', function() {
-        $(this).addClass('dropdown-menu');
-        $(this).removeClass('active-dropdown-menu');
         self.close();
     });
 
@@ -79,5 +77,7 @@ Kanboard.Dropdown.prototype.close = function() {
         KB.trigger('dropdown.beforeDestroy');
     }
 
+    $('.active-dropdown-menu').addClass('dropdown-menu');
+    $('.active-dropdown-menu').removeClass('active-dropdown-menu');
     $("#dropdown").remove();
 };
