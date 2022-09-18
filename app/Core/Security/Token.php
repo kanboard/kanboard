@@ -79,7 +79,7 @@ class Token extends Base
      * Generate a session token of the given type
      *
      * @access protected
-     * @param  string   $type    Token type
+     * @param  string  $type    Token type
      * @return string  Random token
      */
     protected function createSessionToken($type)
@@ -98,10 +98,13 @@ class Token extends Base
      */
     protected function validateSessionToken($type, $token)
     {
-        if (!is_string($token))
+        if (!is_string($token)) {
             return false;
-        if (strlen($token) != (self::$NONCE_LENGTH + self::$HMAC_LENGTH) * 2)
+        }
+
+        if (strlen($token) != (self::$NONCE_LENGTH + self::$HMAC_LENGTH) * 2) {
             return false;
+        }
 
         $nonce = substr($token, 0, self::$NONCE_LENGTH * 2);
         $hmac = substr($token, self::$NONCE_LENGTH * 2, self::$HMAC_LENGTH * 2);
@@ -119,8 +122,9 @@ class Token extends Base
      */
     protected function signSessionToken($type, $nonce)
     {
-        if (!session_exists($type . '_key'))
+        if (!session_exists($type . '_key')) {
             session_set($type . '_key', self::getToken(self::$KEY_LENGTH));
+        }
 
         $data = $nonce . '-' . session_id();
         $key = session_get($type . '_key');
