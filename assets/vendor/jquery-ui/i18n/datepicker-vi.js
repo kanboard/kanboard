@@ -1,6 +1,8 @@
 /* Vietnamese initialisation for the jQuery UI date picker plugin. */
 /* Translated by Le Thanh Huy (lthanhhuy@cit.ctu.edu.vn). */
 ( function( factory ) {
+	"use strict";
+
 	if ( typeof define === "function" && define.amd ) {
 
 		// AMD. Register as an anonymous module.
@@ -10,12 +12,13 @@
 		// Browser globals
 		factory( jQuery.datepicker );
 	}
-}( function( datepicker ) {
+} )( function( datepicker ) {
+"use strict";
 
 datepicker.regional.vi = {
 	closeText: "Đóng",
-	prevText: "&#x3C;Trước",
-	nextText: "Tiếp&#x3E;",
+	prevText: "Trước",
+	nextText: "Tiếp",
 	currentText: "Hôm nay",
 	monthNames: [ "Tháng Một", "Tháng Hai", "Tháng Ba", "Tháng Tư", "Tháng Năm", "Tháng Sáu",
 	"Tháng Bảy", "Tháng Tám", "Tháng Chín", "Tháng Mười", "Tháng Mười Một", "Tháng Mười Hai" ],
@@ -34,4 +37,4 @@ datepicker.setDefaults( datepicker.regional.vi );
 
 return datepicker.regional.vi;
 
-} ) );
+} );

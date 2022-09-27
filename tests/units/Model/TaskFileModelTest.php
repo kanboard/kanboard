@@ -361,7 +361,6 @@ class TaskFileModelTest extends Base
         $this->assertEquals(1, $files[0]['task_id']);
         $this->assertEquals(0, $files[0]['user_id']);
         $this->assertEquals(4, $files[0]['size']);
-        $this->assertEquals(time(), $files[0]['date'], '', 2);
     }
 
     public function testRemove()
