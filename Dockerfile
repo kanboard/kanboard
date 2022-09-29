@@ -20,7 +20,7 @@ RUN apk --no-cache --update add \
 ADD . /var/www/app
 ADD docker/ /
 
-RUN rm -rf /var/www/app/docker && echo $VERSION > /version.txt
+RUN rm -rf /var/www/app/docker && echo $VERSION > /var/www/app/app/version.txt
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD []
