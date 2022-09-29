@@ -63,6 +63,7 @@ Kanboard.App.prototype.datePicker = function() {
 
     // Datetime picker
     $(".form-datetime").datetimepicker({
+        controlType: 'select',
         dateFormat: dateFormat,
         timeFormat: timeFormat,
         constrainInput: false,
