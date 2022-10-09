@@ -1,3 +1,17 @@
+Version 1.2.24 (October 9, 2022)
+--------------------------------
+
+* Fixed deprecation warnings when a project or a task description is null
+* Fixed missing condition in `TaskAssignDueDateOnMoveColumn` action
+* Fixed Reopening of dropdown menus
+* Fixed internal link creation on subtask to task conversion if language is not English
+* Use a HMAC to sign and validate CSRF tokens, instead of generating random ones and storing them in the session data
+* Set explicitly the time picker control to select instead of slider
+* Bump `phpunit/phpunit` from `9.5.24` to `9.5.25`
+* Bump `symfony/stopwatch` from `5.4.5` to `5.4.13`
+* Moved `version.txt` to `app` folder
+* Updated translations
+
 Version 1.2.23 (September 4, 2022)
 ----------------------------------
 
