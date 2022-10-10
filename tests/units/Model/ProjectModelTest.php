@@ -45,7 +45,7 @@ class ProjectModelTest extends Base
         $this->assertEquals(0, $project['is_private']);
         $this->assertEquals(0, $project['per_swimlane_task_limits']);
         $this->assertEquals(0, $project['task_limit']);
-        $this->assertEquals(time(), $project['last_modified'], '', 1);
+        $this->assertEqualsWithDelta(time(), $project['last_modified'], 1, '');
         $this->assertEmpty($project['token']);
         $this->assertEmpty($project['start_date']);
         $this->assertEmpty($project['end_date']);
@@ -191,7 +191,7 @@ class ProjectModelTest extends Base
 
         $project = $projectModel->getById(1);
         $this->assertNotEmpty($project);
-        $this->assertEquals($now, $project['last_modified'], 'Wrong Timestamp', 1);
+        $this->assertEqualsWithDelta($now, $project['last_modified'], 1, 'Wrong Timestamp');
 
         sleep(1);
         $this->assertTrue($projectModel->updateModificationDate(1));

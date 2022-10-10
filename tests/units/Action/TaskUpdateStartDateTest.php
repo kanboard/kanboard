@@ -36,7 +36,7 @@ class TaskUpdateStartDateTest extends Base
 
         $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEquals(time(), $task['date_started'], 'Date started delta', 2);
+        $this->assertEqualsWithDelta(time(), $task['date_started'], 2, 'Date started delta');
     }
 
     public function testWithWrongColumn()

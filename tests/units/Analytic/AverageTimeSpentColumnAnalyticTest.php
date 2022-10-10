@@ -30,23 +30,23 @@ class AverageTimeSpentColumnAnalyticTest extends Base
         $stats = $averageLeadCycleTimeAnalytic->build(1);
 
         $this->assertEquals(2, $stats[1]['count']);
-        $this->assertEquals(3600+1800, $stats[1]['time_spent'], '', 3);
-        $this->assertEquals((int) ((3600+1800)/2), $stats[1]['average'], '', 3);
+        $this->assertEqualsWithDelta(3600 + 1800, $stats[1]['time_spent'], 3, '');
+        $this->assertEqualsWithDelta((int)((3600 + 1800) / 2), $stats[1]['average'], 3, '');
         $this->assertEquals('Backlog', $stats[1]['title']);
 
         $this->assertEquals(0, $stats[2]['count']);
-        $this->assertEquals(0, $stats[2]['time_spent'], '', 3);
-        $this->assertEquals(0, $stats[2]['average'], '', 3);
+        $this->assertEqualsWithDelta(0, $stats[2]['time_spent'], 3, '');
+        $this->assertEqualsWithDelta(0, $stats[2]['average'], 3, '');
         $this->assertEquals('Ready', $stats[2]['title']);
 
         $this->assertEquals(0, $stats[3]['count']);
-        $this->assertEquals(0, $stats[3]['time_spent'], '', 3);
-        $this->assertEquals(0, $stats[3]['average'], '', 3);
+        $this->assertEqualsWithDelta(0, $stats[3]['time_spent'], 3, '');
+        $this->assertEqualsWithDelta(0, $stats[3]['average'], 3, '');
         $this->assertEquals('Work in progress', $stats[3]['title']);
 
         $this->assertEquals(0, $stats[4]['count']);
-        $this->assertEquals(0, $stats[4]['time_spent'], '', 3);
-        $this->assertEquals(0, $stats[4]['average'], '', 3);
+        $this->assertEqualsWithDelta(0, $stats[4]['time_spent'], 3, '');
+        $this->assertEqualsWithDelta(0, $stats[4]['average'], 3, '');
         $this->assertEquals('Done', $stats[4]['title']);
     }
 
@@ -79,23 +79,23 @@ class AverageTimeSpentColumnAnalyticTest extends Base
         $stats = $averageLeadCycleTimeAnalytic->build(1);
 
         $this->assertEquals(2, $stats[1]['count']);
-        $this->assertEquals(3600+1800, $stats[1]['time_spent'], '', 3);
-        $this->assertEquals((int) ((3600+1800)/2), $stats[1]['average'], '', 3);
+        $this->assertEqualsWithDelta(3600 + 1800, $stats[1]['time_spent'], 3, '');
+        $this->assertEqualsWithDelta((int)((3600 + 1800) / 2), $stats[1]['average'], 3, '');
         $this->assertEquals('Backlog', $stats[1]['title']);
 
         $this->assertEquals(0, $stats[2]['count']);
-        $this->assertEquals(0, $stats[2]['time_spent'], '', 3);
-        $this->assertEquals(0, $stats[2]['average'], '', 3);
+        $this->assertEqualsWithDelta(0, $stats[2]['time_spent'], 3, '');
+        $this->assertEqualsWithDelta(0, $stats[2]['average'], 3, '');
         $this->assertEquals('Ready', $stats[2]['title']);
 
         $this->assertEquals(2, $stats[3]['count']);
-        $this->assertEquals(1800, $stats[3]['time_spent'], '', 3);
-        $this->assertEquals(900, $stats[3]['average'], '', 3);
+        $this->assertEqualsWithDelta(1800, $stats[3]['time_spent'], 3, '');
+        $this->assertEqualsWithDelta(900, $stats[3]['average'], 3, '');
         $this->assertEquals('Work in progress', $stats[3]['title']);
 
         $this->assertEquals(0, $stats[4]['count']);
-        $this->assertEquals(0, $stats[4]['time_spent'], '', 3);
-        $this->assertEquals(0, $stats[4]['average'], '', 3);
+        $this->assertEqualsWithDelta(0, $stats[4]['time_spent'], 3, '');
+        $this->assertEqualsWithDelta(0, $stats[4]['average'], 3, '');
         $this->assertEquals('Done', $stats[4]['title']);
     }
 }

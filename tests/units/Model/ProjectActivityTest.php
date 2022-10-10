@@ -28,7 +28,7 @@ class ProjectActivityTest extends Base
         $events = $projectActivity->getQuery()->desc('id')->findAll();
 
         $this->assertCount(2, $events);
-        $this->assertEquals(time(), $events[0]['date_creation'], '', 1);
+        $this->assertEqualsWithDelta(time(), $events[0]['date_creation'], 1, '');
         $this->assertEquals(TaskModel::EVENT_UPDATE, $events[0]['event_name']);
         $this->assertEquals(TaskModel::EVENT_CLOSE, $events[1]['event_name']);
     }
