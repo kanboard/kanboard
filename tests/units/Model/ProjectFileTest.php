@@ -20,7 +20,7 @@ class ProjectFileTest extends Base
         $this->assertEquals('/tmp/foo', $file['path']);
         $this->assertEquals(0, $file['is_image']);
         $this->assertEquals(1, $file['project_id']);
-        $this->assertEquals(time(), $file['date'], '', 2);
+        $this->assertEqualsWithDelta(time(), $file['date'], 2, '');
         $this->assertEquals(0, $file['user_id']);
         $this->assertEquals(10, $file['size']);
 
@@ -168,7 +168,7 @@ class ProjectFileTest extends Base
         $this->assertEquals(1, $files[0]['project_id']);
         $this->assertEquals(0, $files[0]['user_id']);
         $this->assertEquals(123, $files[0]['size']);
-        $this->assertEquals(time(), $files[0]['date'], '', 2);
+        $this->assertEqualsWithDelta(time(), $files[0]['date'], 2, '');
 
         $this->assertEquals(2, $files[1]['id']);
         $this->assertEquals('file2.doc', $files[1]['name']);
@@ -176,7 +176,7 @@ class ProjectFileTest extends Base
         $this->assertEquals(1, $files[1]['project_id']);
         $this->assertEquals(0, $files[1]['user_id']);
         $this->assertEquals(456, $files[1]['size']);
-        $this->assertEquals(time(), $files[1]['date'], '', 2);
+        $this->assertEqualsWithDelta(time(), $files[1]['date'], 2, '');
     }
 
     public function testUploadFilesWithEmptyFiles()
@@ -270,7 +270,7 @@ class ProjectFileTest extends Base
         $this->assertEquals(1, $files[0]['project_id']);
         $this->assertEquals(0, $files[0]['user_id']);
         $this->assertEquals(4, $files[0]['size']);
-        $this->assertEquals(time(), $files[0]['date'], '', 2);
+        $this->assertEqualsWithDelta(time(), $files[0]['date'], 2, '');
     }
 
     public function testUploadImageContent()
@@ -306,6 +306,6 @@ class ProjectFileTest extends Base
         $this->assertEquals(1, $files[0]['project_id']);
         $this->assertEquals(0, $files[0]['user_id']);
         $this->assertEquals(4, $files[0]['size']);
-        $this->assertEquals(time(), $files[0]['date'], '', 2);
+        $this->assertEqualsWithDelta(time(), $files[0]['date'], 2, '');
     }
 }

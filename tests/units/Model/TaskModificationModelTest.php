@@ -240,7 +240,7 @@ class TaskModificationModelTest extends Base
         $this->assertTrue($taskModificationModel->update(array('id' => 1, 'date_started' => time())));
 
         $task = $taskFinderModel->getById(1);
-        $this->assertEquals(time(), $task['date_started'], '', 1);
+        $this->assertEqualsWithDelta(time(), $task['date_started'], 1, '');
     }
 
     public function testChangeTimeEstimated()
