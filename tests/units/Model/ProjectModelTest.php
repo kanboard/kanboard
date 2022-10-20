@@ -27,6 +27,10 @@ class ProjectModelTest extends Base
 
     public function testCreationForAllLanguages()
     {
+        if ( 'odbc' === DB_DRIVER ) {
+            $this->markTestSkipped('Bug in pdo_odbc: <https://github.com/php/php-src/issues/9498>');
+        }
+
         $projectModel = new ProjectModel($this->container);
 
         foreach ($this->container['languageModel']->getLanguages() as $locale => $language) {
