@@ -36,6 +36,29 @@ abstract class Base extends PHPUnit\Framework\TestCase
             $pdo->exec('DROP DATABASE '.DB_NAME);
             $pdo->exec('CREATE DATABASE '.DB_NAME.' WITH OWNER '.DB_USERNAME);
             $pdo = null;
+        } elseif (DB_DRIVER === 'dblib') {
+            $dsn = 'dblib:host='.DB_HOSTNAME;
+            if (! empty(DB_PORT) ) { $dsn .= ','.DB_PORT; }
+            $dsn .= ";dbname=master;appname=Kanboard Unit Tests [$test]";
+            $pdo = new PDO($dsn, DB_USERNAME, DB_PASSWORD);
+            $pdo->exec('use master;');
+            $pdo->exec('DROP DATABASE IF EXISTS ['.DB_NAME.'];');
+            $pdo->exec('CREATE DATABASE ['.DB_NAME.'];');
+            $pdo->exec('ALTER DATABASE ['.DB_NAME.'] SET ALLOW_SNAPSHOT_ISOLATION ON;');
+            $pdo->exec('ALTER DATABASE ['.DB_NAME.'] SET READ_COMMITTED_SNAPSHOT ON;');
+            $pdo->exec('ALTER DATABASE ['.DB_NAME.'] SET ANSI_NULL_DEFAULT ON;');
+            $pdo->exec('USE ['.DB_NAME.'];');
+            $pdo = null;
+        } elseif (DB_DRIVER === 'odbc') {
+            $pdo = new PDO('odbc:'.DB_ODBC_DSN, DB_USERNAME, DB_PASSWORD);
+            $pdo->exec('use master;');
+            $pdo->exec('DROP DATABASE IF EXISTS ['.DB_NAME.'];');
+            $pdo->exec('CREATE DATABASE ['.DB_NAME.'];');
+            $pdo->exec('ALTER DATABASE ['.DB_NAME.'] SET ALLOW_SNAPSHOT_ISOLATION ON;');
+            $pdo->exec('ALTER DATABASE ['.DB_NAME.'] SET READ_COMMITTED_SNAPSHOT ON;');
+            $pdo->exec('ALTER DATABASE ['.DB_NAME.'] SET ANSI_NULL_DEFAULT ON;');
+            $pdo->exec('USE ['.DB_NAME.'];');
+            $pdo = null;
         }
 
         $this->container = new Pimple\Container;
