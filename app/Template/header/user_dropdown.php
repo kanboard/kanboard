@@ -30,7 +30,7 @@
 
         <li>
             <i class="fa fa-fw fa-life-ring" aria-hidden="true"></i>
-            <?= $this->url->doc(t('Documentation'), 'index') ?>
+            <?= $this->url->doc(t('Documentation')) ?>
         </li>
         <?php if (! DISABLE_LOGOUT): ?>
             <li>

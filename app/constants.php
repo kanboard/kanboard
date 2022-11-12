@@ -176,4 +176,4 @@ defined('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST') or define('SHOW_GROUP_MEMBERSHIPS_
 defined('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT') or define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT', intval(getenv('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT')) ?: 7);
 
 // Documentation URL
-defined('DOCUMENTATION_URL_PATTERN') or define('DOCUMENTATION_URL_PATTERN', getenv('DOCUMENTATION_URL_PATTERN') ?: 'https://docs.kanboard.org/en/%s/user_guide/%s.html');
+defined('DOCUMENTATION_URL_PATTERN') or define('DOCUMENTATION_URL_PATTERN', getenv('DOCUMENTATION_URL_PATTERN') ?: 'https://docs.kanboard.org/v1/user/%s');
