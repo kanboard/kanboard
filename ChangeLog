@@ -1,3 +1,11 @@
+Version 1.2.25 (November 12, 2022)
+----------------------------------
+
+- Add experimental support for Microsoft SQL Server
+- Add Open Container labels to Dockerfile
+- Update links to the new documentation website
+- Update German translation
+
 Version 1.2.24 (October 9, 2022)
 --------------------------------
 
