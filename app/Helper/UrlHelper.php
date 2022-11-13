@@ -25,7 +25,7 @@ class UrlHelper extends Base
      */
     public function doc($label, $file = '')
     {
-        $url = sprintf(DOCUMENTATION_URL_PATTERN, 'v1', $file);
+        $url = sprintf(DOCUMENTATION_URL_PATTERN, $file);
         return sprintf('<a href="%s" target="_blank">%s</a>', $url, $label);
     }
 
