@@ -1427,5 +1427,5 @@ return array(
     'XBT - Bitcoin' => 'XBT - Bitcoin',
     'You must select a file to upload as your avatar!' => 'Sie müssen eine Datei auswählen, die als Avatar hochgeladen werden soll!',
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Die hochgeladene Datei ist kein gültiges Bild! (Nur *.gif, *.jpg, *.jpeg and *.png sind erlaubt!)',
-    // 'Automatically set the due date when the task is moved away from a specific column' => '',
+    'Automatically set the due date when the task is moved away from a specific column' => 'Automatisches Setzen des Fälligkeitsdatums, wenn die Aufgabe aus einer bestimmten Spalte heraus verschoben wird',
 );
