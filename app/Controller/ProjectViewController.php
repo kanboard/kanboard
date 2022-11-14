@@ -164,4 +164,62 @@ class ProjectViewController extends BaseController
 
         $this->response->redirect($this->helper->url->to('ProjectViewController', 'show', array('project_id' => $project_id)));
     }
+
+    /**
+     * Import another project's tasks into the currently opened project.
+     *
+     * @return void
+     * @throws \Kanboard\Core\Controller\AccessForbiddenException
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
+     */
+    public function importTasks()
+    {
+        $project = $this->getProject();
+
+        // Fetch list of projects to copy tasks from.
+        // Remove current project from the list of the user's projects.
+        $otherProjects = array_filter(
+            $this->projectUserRoleModel->getActiveProjectsByUser($this->getUser()['id']),
+            static function ($projectId) use ($project) {
+                return (int) $project['id'] !== $projectId;
+            },
+            ARRAY_FILTER_USE_KEY
+        );
+
+        $this->response->html($this->helper->layout->project('project_view/importTasks', array(
+            'project' => $project,
+            'title' => t('Import Tasks'),
+            'projects' => $otherProjects,
+        )));
+    }
+
+    /**
+     * Handle a form submission to copy tasks of a project.
+     *
+     * @return void
+     * @throws \Kanboard\Core\Controller\AccessForbiddenException
+     * @throws \Kanboard\Core\Controller\PageNotFoundException
+     */
+    public function doTasksImport()
+    {
+        $this->checkCSRFForm();
+
+        $project = $this->getProject();
+        $srcProjectId = $this->request->getRawFormValues()['projects'] ?? null;
+
+        if (empty($srcProjectId)) {
+            $this->response->redirect($this->helper->url->to('ProjectViewController', 'importTasks', array('project_id' => $project['id'])));
+            return;
+        }
+
+        if ($this->projectTaskDuplicationModel->duplicate($srcProjectId, $project['id'])) {
+            $this->flash->success(t('Tasks copied successfully.'));
+        } else {
+            $this->flash->failure(t('Unable to copy tasks.'));
+            $this->response->redirect($this->helper->url->to('ProjectViewController', 'importTasks', array('project_id' => $project['id'])));
+            return;
+        }
+
+        $this->response->redirect($this->helper->url->to('ProjectViewController', 'show', array('project_id' => $project['id'])));
+    }
 }
