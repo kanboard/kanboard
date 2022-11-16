@@ -64,9 +64,9 @@ class SubtaskModel extends Base
     public function getStatusList()
     {
         return array(
-            self::STATUS_TODO       => t('Todo'),
-            self::STATUS_INPROGRESS => t('In progress'),
-            self::STATUS_DONE       => t('Done'),
+            self::STATUS_TODO       => 'Todo',
+            self::STATUS_INPROGRESS => 'In progress',
+            self::STATUS_DONE       => 'Done',
         );
     }
 
@@ -237,7 +237,9 @@ class SubtaskModel extends Base
     public function update(array $values, $fireEvent = true)
     {
         $this->prepare($values);
-        $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
+        $updates = $values;
+        unset($updates['id']);
+        $result = $this->db->table(self::TABLE)->eq('id', $values['id'])->save($updates);
 
         if ($result) {
             $subtask = $this->getById($values['id']);

@@ -86,7 +86,7 @@ class TaskFinderModel extends Base
                 '(SELECT COUNT(*) FROM '.SubtaskModel::TABLE.' WHERE '.SubtaskModel::TABLE.'.task_id=tasks.id AND status=2) AS nb_completed_subtasks',
                 '(SELECT COUNT(*) FROM '.TaskLinkModel::TABLE.' WHERE '.TaskLinkModel::TABLE.'.task_id = tasks.id) AS nb_links',
                 '(SELECT COUNT(*) FROM '.TaskExternalLinkModel::TABLE.' WHERE '.TaskExternalLinkModel::TABLE.'.task_id = tasks.id) AS nb_external_links',
-                '(SELECT DISTINCT 1 FROM '.TaskLinkModel::TABLE.' WHERE '.TaskLinkModel::TABLE.'.task_id = tasks.id AND '.TaskLinkModel::TABLE.'.link_id = 9) AS is_milestone',
+                '(SELECT DISTINCT 1 FROM '.TaskLinkModel::TABLE.' tl JOIN '.LinkModel::TABLE.' l ON tl.link_id = l.id WHERE tl.task_id = tasks.id AND l.label = '."'is a milestone of') AS is_milestone",
                 TaskModel::TABLE.'.id',
                 TaskModel::TABLE.'.reference',
                 TaskModel::TABLE.'.title',

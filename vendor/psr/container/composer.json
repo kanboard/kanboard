@@ -18,5 +18,10 @@
         "psr-4": {
             "Psr\\Container\\": "src/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
     }
 }

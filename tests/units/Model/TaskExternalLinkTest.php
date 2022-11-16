@@ -27,8 +27,8 @@ class TaskExternalLinkTest extends Base
         $this->assertEquals('related', $link['dependency']);
         $this->assertEquals('weblink', $link['link_type']);
         $this->assertEquals(0, $link['creator_id']);
-        $this->assertEquals(time(), $link['date_modification'], '', 2);
-        $this->assertEquals(time(), $link['date_creation'], '', 2);
+        $this->assertEqualsWithDelta(time(), $link['date_modification'], 2, '');
+        $this->assertEqualsWithDelta(time(), $link['date_creation'], 2, '');
     }
 
     public function testCreateWithUserSession()
@@ -50,8 +50,8 @@ class TaskExternalLinkTest extends Base
         $this->assertEquals('related', $link['dependency']);
         $this->assertEquals('weblink', $link['link_type']);
         $this->assertEquals(1, $link['creator_id']);
-        $this->assertEquals(time(), $link['date_modification'], '', 2);
-        $this->assertEquals(time(), $link['date_creation'], '', 2);
+        $this->assertEqualsWithDelta(time(), $link['date_modification'], 2, '');
+        $this->assertEqualsWithDelta(time(), $link['date_creation'], 2, '');
     }
 
     public function testModification()
@@ -71,7 +71,7 @@ class TaskExternalLinkTest extends Base
         $link = $taskExternalLinkModel->getById(1);
         $this->assertNotEmpty($link);
         $this->assertEquals('https://kanboard.org/', $link['url']);
-        $this->assertEquals(time(), $link['date_modification'], '', 2);
+        $this->assertEqualsWithDelta(time(), $link['date_modification'], 2, '');
     }
 
     public function testRemove()

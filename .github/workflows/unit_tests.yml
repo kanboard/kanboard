@@ -2,14 +2,14 @@ name: Unit Tests
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   Sqlite:
     runs-on: ubuntu-latest
     container: kanboard/tests:latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Validate composer.json and composer.lock
       run: composer validate
     - name: Install dependencies
@@ -35,7 +35,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Validate composer.json and composer.lock
       run: composer validate
     - name: Install dependencies
@@ -45,3 +45,134 @@ jobs:
       env:
         DB_HOSTNAME: postgres
         DB_PORT: ${{ job.services.postgres.ports[5432] }}
+
+  SqlServer:
+    runs-on: ubuntu-22.04
+    env:
+      DB_DRIVER: odbc
+      DB_NAME: kanboard
+      DB_ODBC_DSN: KBunits
+      # https://github.com/orgs/community/discussions/29880
+      DB_PASSWORD: InsecureBecauseGitHubActionsDoNotSupportMaskedOutputs12#$
+      DB_HOSTNAME: 127.0.0.1
+      DB_USERNAME: sa
+
+    services:
+      mssql:
+        image: mcr.microsoft.com/mssql/server:2017-latest
+        env:
+          ACCEPT_EULA: Y
+          MSSQL_COLLATION: SQL_Latin1_General_CP1_CI_AS
+          MSSQL_PID: Developer
+          MSSQL_SA_PASSWORD: ${{ env.DB_PASSWORD }}
+        options: >-
+          --name mssql
+          --health-cmd "/opt/mssql-tools/bin/sqlcmd -b -o /dev/null -S 127.0.0.1 -U sa -P \"${MSSQL_SA_PASSWORD}\" -Q 'SELECT 1;'"
+          --health-interval 60s
+          --health-timeout 30s
+          --health-start-period 20s
+          --health-retries 5
+        ports:
+        - 1433:1433
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: install php and database client packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install --quiet --assume-yes \
+          composer \
+          freetds-bin \
+          gettext-base \
+          odbcinst \
+          php \
+          php-cli \
+          php-gd \
+          php-json \
+          php-ldap \
+          php-mbstring \
+          php-odbc \
+          php-xml \
+          php-zip \
+          tdsodbc \
+          unixodbc
+    - name: manually register FreeTDS ODBC driver and disable connection pooling
+      # https://bugs.debian.org/362012
+      run: |
+        sudo odbcinst -i -d -f /usr/share/tdsodbc/odbcinst.ini
+        echo "CPTimeout=0" | sudo tee -a /etc/odbcinst.ini
+        echo "# /etc/odbcinst.ini"
+        cat /etc/odbcinst.ini
+    - name: test connect to database as SA using freetds
+      run: |
+        fisql -e -S "$DB_HOSTNAME" -D master -U "$DB_USERNAME" -P "$DB_PASSWORD" << EOF
+          SELECT
+              ServerName = @@SERVERNAME
+            , spid = @@SPID
+            , login = SUSER_NAME()
+            , DatabaseName = DB_NAME()
+            , DBUser = USER_NAME()
+          ;
+          GO
+        EOF
+    - name: create database
+      run: |
+        envsubst <<EOF | fisql -e -S "$DB_HOSTNAME" -D master -U "$DB_USERNAME" -P "$DB_PASSWORD"
+        CREATE DATABASE [$DB_NAME];
+        ALTER DATABASE [$DB_NAME] SET ALLOW_SNAPSHOT_ISOLATION ON;
+        ALTER DATABASE [$DB_NAME] SET READ_COMMITTED_SNAPSHOT ON;
+        ALTER DATABASE [$DB_NAME] SET ANSI_NULL_DEFAULT ON;
+        GO
+        EOF
+    - name: set up ODBC DSN for app access
+      run: |
+        envsubst <<EOF | sudo odbcinst -i -s -l -r
+        [$DB_ODBC_DSN]
+        Driver = FreeTDS
+        Description = Kanboard database on MSSQL
+        Server = $DB_HOSTNAME
+        Port = 1433
+        Database = $DB_NAME
+        ClientCharset = UTF-8
+        CPTimeout = 0
+        EOF
+        echo "# /etc/odbc.ini"
+        cat /etc/odbc.ini
+    - name: test connect to database using ODBC DSN
+      run: printf '%s\n' "SELECT
+                              ServerName = @@SERVERNAME
+                            , SPID = @@SPID
+                            , Login = SUSER_NAME()
+                            , DatabaseName = DB_NAME()
+                            , DBUser = USER_NAME()
+           ;" | isql "$DB_ODBC_DSN" "$DB_USERNAME" "$DB_PASSWORD" -b -v
+    - name: Install php dependencies
+      run: |
+        composer update --no-progress --no-interaction
+        composer validate --verbose --no-interaction
+    - name: set location for kanboard debug logfile
+      run: echo "LOG_FILE=${RUNNER_TEMP}/kanboard-debug.log" >> "$GITHUB_ENV"
+    - name: Unit tests with MS SQL Server
+      id: phpunit
+      env:
+        DEBUG: true
+        LOG_DRIVER: file
+        LANG: C.UTF-8
+      run: |
+        touch "$LOG_FILE"
+        vendor/bin/phpunit --verbose -c tests/units.mssql.xml || export rc=$?
+        if [ ${rc:=0} -ne 0 ]; then
+          ls -l "$LOG_FILE"
+          wc "$LOG_FILE"
+          echo ::group::Kanboard Debug Log
+          cat "$LOG_FILE"
+          echo ::endgroup::
+        fi
+        exit $rc
+    - name: save kanboard debug logfile
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        if-no-files-found: ignore
+        name: kanboard_units_debug-MSSQL.log
+        path: ${{ env.LOG_FILE }}

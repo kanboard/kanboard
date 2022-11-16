@@ -19,11 +19,19 @@ class Mssql extends Base
      * @var array
      */
     protected $requiredAttributes = array(
-        'hostname',
-        'username',
-        'password',
-        'database',
     );
+
+    /**
+     * Constructor
+     *
+     * @access public
+     * @param  array   $settings
+     */
+    public function __construct(array $settings)
+    {
+        parent::__construct($settings);
+        $this->useTop = true;
+    }
 
     /**
      * Table to store the schema version
@@ -41,13 +49,45 @@ class Mssql extends Base
      */
     public function createConnection(array $settings)
     {
-        $dsn = 'sqlsrv:Server=' . $settings['hostname'] . ';Database=' . $settings['database'];
+        $dsn = $settings['driver'] . ':';
 
-        if (! empty($settings['port'])) {
-            $dsn .= ';port=' . $settings['port'];
+        // exactly one of hostname/DSN needed, port is optional
+        if ($settings['driver'] == 'odbc') {
+            $dsn .= $settings['odbc-dsn'];
+        } else {
+            if ($settings['driver'] == 'dblib') {
+                $dsn .= 'host=' . $settings['hostname'];
+            } elseif ($settings['driver'] == 'sqlsrv') {
+                $dsn .= 'Server=' . $settings['hostname'];
+            }
+            if (! empty($settings['port'])) {
+                $dsn .= ',' . $settings['port'];
+            }
         }
 
-        $this->pdo = new PDO($dsn, $settings['username'], $settings['password']);
+        if (! empty($settings['database'])) {
+            if ($settings['driver'] == 'dblib') {
+                $dsn .= ';dbname=' . $settings['database'];
+            } elseif ($settings['driver'] == 'sqlsrv') {
+                $dsn .= ';Database=' . $settings['database'];
+            }
+        }
+
+
+        if (! empty($settings['appname'])) {
+            if ($settings['driver'] == 'dblib') {
+                $dsn .= ';appname=' . $settings['appname'];
+            } elseif ($settings['driver'] == 'sqlsrv') {
+                $dsn .= ';APP=' . $settings['appname'];
+            }
+        }
+
+        // create PDO object
+        if (! empty($settings['username'])) {
+            $this->pdo = new PDO($dsn, $settings['username'], $settings['password']);
+        } else {
+            $this->pdo = new PDO($dsn);
+        }
 
         if (isset($settings['schema_table'])) {
             $this->schemaTable = $settings['schema_table'];
@@ -61,7 +101,7 @@ class Mssql extends Base
      */
     public function enableForeignKeys()
     {
-        $this->pdo->exec('EXEC sp_MSforeachtable @command1="ALTER TABLE ? CHECK CONSTRAINT ALL"; GO;');
+        $this->pdo->exec('EXEC sp_MSforeachtable @command1="ALTER TABLE ? CHECK CONSTRAINT ALL";');
     }
 
     /**
@@ -71,7 +111,7 @@ class Mssql extends Base
      */
     public function disableForeignKeys()
     {
-        $this->pdo->exec('EXEC sp_MSforeachtable @command1="ALTER TABLE ? NOCHECK CONSTRAINT ALL"; GO;');
+        $this->pdo->exec('EXEC sp_MSforeachtable @command1="ALTER TABLE ? NOCHECK CONSTRAINT ALL";');
     }
 
     /**
@@ -83,7 +123,10 @@ class Mssql extends Base
      */
     public function isDuplicateKeyError($code)
     {
-        return $code == 2601;
+        # 2601: Cannot insert duplicate key row in object '%.*ls' with unique index '%.*ls'.
+        # 2627: Violation of %ls constraint '%.*ls'. Cannot insert duplicate key in object '%.*ls'.
+        # 23000: Integrity constraint violation
+        return array_search($code, ['2601','2627','23000']) !== false;
     }
 
     /**
@@ -97,7 +140,7 @@ class Mssql extends Base
      */
     public function escape($identifier)
     {
-        return '['.$identifier.']';
+        return '['.str_replace("]","]]",$identifier).']';
     }
 
     /**
@@ -124,7 +167,15 @@ class Mssql extends Base
      */
     public function getLastId()
     {
-        return $this->pdo->lastInsertId();
+        try {
+            $rq = $this->pdo->prepare('SELECT @@IDENTITY');
+            $rq->execute();
+
+            return $rq->fetchColumn();
+        }
+        catch (PDOException $e) {
+            return 0;
+        }
     }
 
     /**
@@ -135,9 +186,14 @@ class Mssql extends Base
      */
     public function getSchemaVersion()
     {
-        $this->pdo->exec("CREATE TABLE IF NOT EXISTS [".$this->schemaTable."] ([version] INT DEFAULT '0')");
+        $this->pdo->exec("
+            IF OBJECT_ID(N'dbo.".$this->schemaTable."', N'U') IS NULL
+              CREATE TABLE dbo.".$this->schemaTable." (
+                version INT DEFAULT '0'
+              );
+        ");
 
-        $rq = $this->pdo->prepare('SELECT [version] FROM ['.$this->schemaTable.']');
+        $rq = $this->pdo->prepare('SELECT version FROM dbo.'.$this->schemaTable.'');
         $rq->execute();
         $result = $rq->fetchColumn();
 
@@ -145,7 +201,7 @@ class Mssql extends Base
             return (int) $result;
         }
         else {
-            $this->pdo->exec('INSERT INTO ['.$this->schemaTable.'] VALUES(0)');
+            $this->pdo->exec('INSERT INTO dbo.'.$this->schemaTable.' (version) VALUES(0)');
         }
 
         return 0;
@@ -175,4 +231,16 @@ class Mssql extends Base
         $this->getConnection()->exec('SET SHOWPLAN_ALL ON');
         return $this->getConnection()->query($this->getSqlFromPreparedStatement($sql, $values))->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Get database version
+     *
+     * @access public
+     * @return array
+     */
+    public function getDatabaseVersion()
+    {
+        return $this->getConnection()->query('SELECT @@VERSION;')->fetchColumn();
+    }
+
 }

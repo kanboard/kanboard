@@ -2,13 +2,13 @@ name: Linters
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   jshint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install jshint
         run: npm install -g jshint
       - name: Run jshint

@@ -73,8 +73,8 @@ class TaskCreationModelTest extends Base
         $this->assertEquals('', $task['description']);
         $this->assertEquals('', $task['reference']);
 
-        $this->assertEquals(time(), $task['date_creation'], 'Wrong timestamp', 1);
-        $this->assertEquals(time(), $task['date_modification'], 'Wrong timestamp', 1);
+        $this->assertEqualsWithDelta(time(), $task['date_creation'], 1, 'Wrong timestamp');
+        $this->assertEqualsWithDelta(time(), $task['date_modification'], 1, 'Wrong timestamp');
         $this->assertEquals(0, $task['date_due']);
         $this->assertEquals(0, $task['date_completed']);
         $this->assertEquals(0, $task['date_started']);
@@ -302,7 +302,7 @@ class TaskCreationModelTest extends Base
         $this->assertEquals(4, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'date_started' => time())));
 
         $task = $taskFinderModel->getById(4);
-        $this->assertEquals(time(), $task['date_started'], '', 1);
+        $this->assertEqualsWithDelta(time(), $task['date_started'], 1, '');
 
         // Set empty string
         $this->assertEquals(5, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'date_started' => '')));

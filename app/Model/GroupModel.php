@@ -132,7 +132,9 @@ class GroupModel extends Base
      */
     public function update(array $values)
     {
-        return $this->db->table(self::TABLE)->eq('id', $values['id'])->update($values);
+        $updates = $values;
+        unset($updates['id']);
+        return $this->db->table(self::TABLE)->eq('id', $values['id'])->update($updates);
     }
 
     /**

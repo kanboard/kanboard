@@ -29,16 +29,20 @@ class SubtaskTimeTrackingModel extends Base
      */
     public function getTimerQuery($user_id)
     {
-        return sprintf(
-            "SELECT %s FROM %s WHERE %s='%d' AND %s='0' AND %s=%s LIMIT 1",
-            $this->db->escapeIdentifier('start'),
-            $this->db->escapeIdentifier(self::TABLE),
-            $this->db->escapeIdentifier('user_id'),
-            $user_id,
-            $this->db->escapeIdentifier('end'),
-            $this->db->escapeIdentifier('subtask_id'),
-            SubtaskModel::TABLE.'.id'
-        );
+        $sql = $this->db
+                    ->table(self::TABLE)
+                    ->columns('start')
+                    ->eq($this->db->escapeIdentifier('user_id',self::TABLE), $user_id)
+                    ->eq($this->db->escapeIdentifier('end',self::TABLE), 0)
+                    ->eq($this->db->escapeIdentifier('subtask_id',self::TABLE), SubtaskModel::TABLE.'.id')
+                    ->limit(1)
+                    ->buildSelectQuery();
+        // need to interpolate values into the SQL text for use as a subquery
+        // in SubtaskModel::getQuery()
+        $sql = substr_replace($sql, $user_id, strpos($sql, '?'), 1);
+        $sql = substr_replace($sql, 0, strpos($sql, '?'), 1);
+        $sql = substr_replace($sql, SubtaskModel::TABLE.'.id', strpos($sql, '?'), 1);
+        return $sql;
     }
 
     /**

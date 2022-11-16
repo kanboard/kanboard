@@ -1,3 +1,44 @@
+Version 1.2.25 (November 12, 2022)
+----------------------------------
+
+- Add experimental support for Microsoft SQL Server
+- Add Open Container labels to Dockerfile
+- Update links to the new documentation website
+- Update German translation
+
+Version 1.2.24 (October 9, 2022)
+--------------------------------
+
+* Fixed deprecation warnings when a project or a task description is null
+* Fixed missing condition in `TaskAssignDueDateOnMoveColumn` action
+* Fixed Reopening of dropdown menus
+* Fixed internal link creation on subtask to task conversion if language is not English
+* Use a HMAC to sign and validate CSRF tokens, instead of generating random ones and storing them in the session data
+* Set explicitly the time picker control to select instead of slider
+* Bump `phpunit/phpunit` from `9.5.24` to `9.5.25`
+* Bump `symfony/stopwatch` from `5.4.5` to `5.4.13`
+* Moved `version.txt` to `app` folder
+* Updated translations
+
+Version 1.2.23 (September 4, 2022)
+----------------------------------
+
+* Open SVG, Ogg, and some video file attachments in browser
+* Added more video, music, code and spreadsheet extensions to show better file attachment icons
+* Updated jQuery to latest stable version
+* Updated Docker image to PHP 8.1 and Alpine Linux 3.16
+* Renamed default branch from `master` to `main`
+* Bumped `phpunit/phpunit` from `9.5.14` to `9.5.23`
+* Bumped `symfony/finder` from `5.4.3` to `5.4.11`
+* Fixed subtask translation when using different languages
+* Added Project Overview document template hook
+* Updated translations
+* Fixed wrong foreign key constraint on table `subtask_time_tracking table`. The constraints references a no-longer-existing table `task_has_subtasks`
+* Fixed regression regarding subtask reordering
+* Changed minimum requirement to PHP 7.4
+    - PHP versions lower than 7.4 are end-of-life: https://www.php.net/supported-versions.php
+    - Libraries used by Kanboard have dropped support for older versions of PHP
+
 Version 1.2.22 (February 12, 2022)
 ----------------------------------
 

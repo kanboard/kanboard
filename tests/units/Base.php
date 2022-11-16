@@ -24,6 +24,7 @@ abstract class Base extends PHPUnit\Framework\TestCase
     {
         date_default_timezone_set('UTC');
         $_SESSION = array();
+        $test = get_class($this)."::".$this->getName();
 
         if (DB_DRIVER === 'mysql') {
             $pdo = new PDO('mysql:host='.DB_HOSTNAME, DB_USERNAME, DB_PASSWORD);
@@ -34,6 +35,29 @@ abstract class Base extends PHPUnit\Framework\TestCase
             $pdo = new PDO('pgsql:host='.DB_HOSTNAME, DB_USERNAME, DB_PASSWORD);
             $pdo->exec('DROP DATABASE '.DB_NAME);
             $pdo->exec('CREATE DATABASE '.DB_NAME.' WITH OWNER '.DB_USERNAME);
+            $pdo = null;
+        } elseif (DB_DRIVER === 'dblib') {
+            $dsn = 'dblib:host='.DB_HOSTNAME;
+            if (! empty(DB_PORT) ) { $dsn .= ','.DB_PORT; }
+            $dsn .= ";dbname=master;appname=Kanboard Unit Tests [$test]";
+            $pdo = new PDO($dsn, DB_USERNAME, DB_PASSWORD);
+            $pdo->exec('use master;');
+            $pdo->exec('DROP DATABASE IF EXISTS ['.DB_NAME.'];');
+            $pdo->exec('CREATE DATABASE ['.DB_NAME.'];');
+            $pdo->exec('ALTER DATABASE ['.DB_NAME.'] SET ALLOW_SNAPSHOT_ISOLATION ON;');
+            $pdo->exec('ALTER DATABASE ['.DB_NAME.'] SET READ_COMMITTED_SNAPSHOT ON;');
+            $pdo->exec('ALTER DATABASE ['.DB_NAME.'] SET ANSI_NULL_DEFAULT ON;');
+            $pdo->exec('USE ['.DB_NAME.'];');
+            $pdo = null;
+        } elseif (DB_DRIVER === 'odbc') {
+            $pdo = new PDO('odbc:'.DB_ODBC_DSN, DB_USERNAME, DB_PASSWORD);
+            $pdo->exec('use master;');
+            $pdo->exec('DROP DATABASE IF EXISTS ['.DB_NAME.'];');
+            $pdo->exec('CREATE DATABASE ['.DB_NAME.'];');
+            $pdo->exec('ALTER DATABASE ['.DB_NAME.'] SET ALLOW_SNAPSHOT_ISOLATION ON;');
+            $pdo->exec('ALTER DATABASE ['.DB_NAME.'] SET READ_COMMITTED_SNAPSHOT ON;');
+            $pdo->exec('ALTER DATABASE ['.DB_NAME.'] SET ANSI_NULL_DEFAULT ON;');
+            $pdo->exec('USE ['.DB_NAME.'];');
             $pdo = null;
         }
 
@@ -50,6 +74,7 @@ abstract class Base extends PHPUnit\Framework\TestCase
         $this->container->register(new Kanboard\ServiceProvider\FormatterProvider());
         $this->container->register(new Kanboard\ServiceProvider\JobProvider());
         $this->container->register(new Kanboard\ServiceProvider\QueueProvider());
+        $this->container->register(new Kanboard\ServiceProvider\LoggingProvider());
         $this->container->register(new Kanboard\ServiceProvider\ExternalTaskProvider());
 
         $this->container['dispatcher'] = new TraceableEventDispatcher(
@@ -60,7 +85,6 @@ abstract class Base extends PHPUnit\Framework\TestCase
         $this->dispatcher = $this->container['dispatcher'];
 
         $this->container['db']->getStatementHandler()->withLogging();
-        $this->container['logger'] = new Logger();
         $this->container['cli'] = new \Symfony\Component\Console\Application('Kanboard', 'test');
 
         $this->container['httpClient'] = $this
@@ -96,11 +120,18 @@ abstract class Base extends PHPUnit\Framework\TestCase
         $loader = new ClassLoader();
         $loader->addPsr4('Kanboard\Plugin\\', PLUGINS_DIR);
         $loader->register();
+
+        $this->container['logger']->debug("Finished setUp() for test $test");
     }
 
     protected function tearDown(): void
     {
+        $test = get_class($this)."::".$this->getName();
+        foreach ($this->container['db']->getLogMessages() as $msg) {
+            $this->container['logger']->debug('SQL: '.$msg);
+        }
         $this->container['db']->closeConnection();
+        $this->container['logger']->debug("Finishing tearDown() for test $test");
         unset ($this->container);
     }
 }

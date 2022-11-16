@@ -38,7 +38,7 @@ class SubtaskTimeTrackingModelTest extends Base
         $subtaskTimeTrackingModel = new SubtaskTimeTrackingModel($this->container);
         $projectModel = new ProjectModel($this->container);
 
-        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')), 1);
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1, 'column_id' => 1, 'owner_id' => 1)));
         $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #2', 'task_id' => 1, 'user_id' => 1)));
 
@@ -95,12 +95,12 @@ class SubtaskTimeTrackingModelTest extends Base
 
         $subtasks = $subtaskModel->getAll(1);
         $this->assertNotEmpty($subtasks);
-        $this->assertEquals(time(), $subtasks[0]['timer_start_date'], '', 3);
+        $this->assertEqualsWithDelta(time(), $subtasks[0]['timer_start_date'], 3, '');
         $this->assertTrue($subtasks[0]['is_timer_started']);
 
         $subtask = $subtaskModel->getByIdWithDetails(1);
         $this->assertNotEmpty($subtask);
-        $this->assertEquals(time(), $subtask['timer_start_date'], '', 3);
+        $this->assertEqualsWithDelta(time(), $subtask['timer_start_date'], 3, '');
         $this->assertTrue($subtask['is_timer_started']);
 
         // Stop the clock
@@ -183,8 +183,8 @@ class SubtaskTimeTrackingModelTest extends Base
 
         $time = $subtaskTimeTrackingModel->calculateSubtaskTime(1);
         $this->assertCount(2, $time);
-        $this->assertEquals(3.3, $time['time_spent'], 'Total spent', 0.01);
-        $this->assertEquals(7.7, $time['time_estimated'], 'Total estimated', 0.01);
+        $this->assertEqualsWithDelta(3.3, $time['time_spent'], 0.01, 'Total spent');
+        $this->assertEqualsWithDelta(7.7, $time['time_estimated'], 0.01, 'Total estimated');
     }
 
     public function testUpdateSubtaskTimeSpent()
@@ -211,16 +211,16 @@ class SubtaskTimeTrackingModelTest extends Base
         $timesheet = $subtaskTimeTrackingModel->getUserTimesheet(1);
         $this->assertNotEmpty($timesheet);
         $this->assertCount(2, $timesheet);
-        $this->assertEquals(3600, $timesheet[0]['end'] - $timesheet[0]['start'], 'Wrong timestamps', 1);
-        $this->assertEquals(3600, $timesheet[1]['end'] - $timesheet[1]['start'], 'Wrong timestamps', 1);
+        $this->assertEqualsWithDelta(3600, $timesheet[0]['end'] - $timesheet[0]['start'], 1, 'Wrong timestamps');
+        $this->assertEqualsWithDelta(3600, $timesheet[1]['end'] - $timesheet[1]['start'], 1, 'Wrong timestamps');
 
         $time = $subtaskTimeTrackingModel->calculateSubtaskTime(1);
-        $this->assertEquals(4.2, $time['time_spent'], 'Total spent', 0.01);
-        $this->assertEquals(0, $time['time_estimated'], 'Total estimated', 0.01);
+        $this->assertEqualsWithDelta(4.2, $time['time_spent'], 0.01, 'Total spent');
+        $this->assertEqualsWithDelta(0, $time['time_estimated'], 0.01, 'Total estimated');
 
         $time = $subtaskTimeTrackingModel->calculateSubtaskTime(2);
-        $this->assertEquals(0, $time['time_spent'], 'Total spent', 0.01);
-        $this->assertEquals(0, $time['time_estimated'], 'Total estimated', 0.01);
+        $this->assertEqualsWithDelta(0, $time['time_spent'], 0.01, 'Total spent');
+        $this->assertEqualsWithDelta(0, $time['time_estimated'], 0.01, 'Total estimated');
     }
 
     public function testUpdateTaskTimeTracking()
@@ -251,13 +251,13 @@ class SubtaskTimeTrackingModelTest extends Base
 
         $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEquals(2.2, $task['time_spent'], 'Total spent', 0.01);
-        $this->assertEquals(1, $task['time_estimated'], 'Total estimated', 0.01);
+        $this->assertEqualsWithDelta(2.2, $task['time_spent'], 0.01, 'Total spent');
+        $this->assertEqualsWithDelta(1, $task['time_estimated'], 0.01, 'Total estimated');
 
         $task = $taskFinderModel->getById(2);
         $this->assertNotEmpty($task);
-        $this->assertEquals(3.4, $task['time_spent'], 'Total spent', 0.01);
-        $this->assertEquals(1.25, $task['time_estimated'], 'Total estimated', 0.01);
+        $this->assertEqualsWithDelta(3.4, $task['time_spent'], 0.01, 'Total spent');
+        $this->assertEqualsWithDelta(1.25, $task['time_estimated'], 0.01, 'Total estimated');
 
         $task = $taskFinderModel->getById(3);
         $this->assertNotEmpty($task);

@@ -71,10 +71,10 @@ class ProjectHeaderHelper extends Base
 
             if (! empty($project['description'])) {
                 $description .= '<hr>'.PHP_EOL.PHP_EOL;
-                $description .= $this->helper->text->markdown($project['description']);
+                $description .= $this->helper->text->markdown($project['description'] ?: '');
             }
         } else {
-            $description = $this->helper->text->markdown($project['description']);
+            $description = $this->helper->text->markdown($project['description'] ?: '');
         }
 
         return $description;

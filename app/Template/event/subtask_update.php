@@ -10,7 +10,7 @@
 
     <ul>
         <li>
-            <?= $this->text->e($subtask['title']) ?> (<strong><?= $this->text->e($subtask['status_name']) ?></strong>)
+            <?= $this->text->e($subtask['title']) ?> (<strong><?= t($subtask['status_name']) ?></strong>)
         </li>
         <li>
             <?php if ($subtask['username']): ?>

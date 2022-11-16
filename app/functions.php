@@ -197,12 +197,12 @@ function build_app_version($ref, $commit_hash)
     }
 
     if ($commit_hash !== '$Format:%H$') {
-        return 'master.'.$commit_hash;
-    } else if (file_exists('/version.txt')) {
-        return rtrim(file_get_contents('/version.txt'));
+        return 'main.'.$commit_hash;
+    } else if (file_exists(__DIR__ . '/version.txt')) {
+        return rtrim(file_get_contents(__DIR__ . '/version.txt'));
     }
 
-    return 'master.unknown_revision';
+    return 'main.unknown_revision';
 }
 
 /**

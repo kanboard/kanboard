@@ -19,8 +19,18 @@ use Kanboard\Model\CategoryModel;
 
 class ProjectModelTest extends Base
 {
+    protected function tearDown(): void
+    {
+        Translator::unload();
+        parent::tearDown();
+    }
+
     public function testCreationForAllLanguages()
     {
+        if ( 'odbc' === DB_DRIVER ) {
+            $this->markTestSkipped('Bug in pdo_odbc: <https://github.com/php/php-src/issues/9498>');
+        }
+
         $projectModel = new ProjectModel($this->container);
 
         foreach ($this->container['languageModel']->getLanguages() as $locale => $language) {
@@ -45,7 +55,7 @@ class ProjectModelTest extends Base
         $this->assertEquals(0, $project['is_private']);
         $this->assertEquals(0, $project['per_swimlane_task_limits']);
         $this->assertEquals(0, $project['task_limit']);
-        $this->assertEquals(time(), $project['last_modified'], '', 1);
+        $this->assertEqualsWithDelta(time(), $project['last_modified'], 1, '');
         $this->assertEmpty($project['token']);
         $this->assertEmpty($project['start_date']);
         $this->assertEmpty($project['end_date']);
@@ -191,7 +201,7 @@ class ProjectModelTest extends Base
 
         $project = $projectModel->getById(1);
         $this->assertNotEmpty($project);
-        $this->assertEquals($now, $project['last_modified'], 'Wrong Timestamp', 1);
+        $this->assertEqualsWithDelta($now, $project['last_modified'], 1, 'Wrong Timestamp');
 
         sleep(1);
         $this->assertTrue($projectModel->updateModificationDate(1));

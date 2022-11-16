@@ -483,8 +483,10 @@ class ProjectModel extends Base
 
         $this->helper->model->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end', 'task_limit'));
 
+        $updates = $values;
+        unset($updates['id']);
         return $this->exists($values['id']) &&
-               $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
+               $this->db->table(self::TABLE)->eq('id', $values['id'])->save($updates);
     }
 
     /**

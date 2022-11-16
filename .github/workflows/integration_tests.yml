@@ -2,14 +2,14 @@ name: Integration Tests
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   Sqlite:
     runs-on: ubuntu-latest
     container: kanboard/tests:latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Validate composer.json and composer.lock
       run: composer validate
     - name: Install dependencies
@@ -44,7 +44,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Validate composer.json and composer.lock
       run: composer validate
     - name: Install dependencies
@@ -83,7 +83,7 @@ jobs:
           --health-timeout 5s
           --health-retries 10
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Validate composer.json and composer.lock
       run: composer validate
     - name: Install dependencies
