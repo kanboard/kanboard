@@ -28,6 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (selectedItems.length > 0) {
             showActionMenu();
         }
+        
+        if (selectedItems.length == 0) {
+            hideActionMenu();
+        }
     }
 
     function showActionMenu() {
