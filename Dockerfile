@@ -22,8 +22,7 @@ RUN apk --no-cache --update add \
     php81-pdo php81-pdo_mysql php81-pdo_sqlite php81-pdo_pgsql php81-mbstring php81-session php81-bcmath \
     php81-gd php81-openssl php81-sockets php81-posix php81-ldap php81-simplexml && \
     rm -rf /var/www/localhost && \
-    rm -f /etc/php81/php-fpm.d/www.conf && \
-    ln -s /usr/bin/php81 /usr/bin/php
+    rm -f /etc/php81/php-fpm.d/www.conf
 
 ADD . /var/www/app
 ADD docker/ /
