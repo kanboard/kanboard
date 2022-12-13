@@ -495,7 +495,7 @@ return array(
     'is duplicated by' => 'дублирует',
     'is a child of' => 'является продолжением',
     'is a parent of' => 'является началом для',
-    'targets milestone' => 'часть вехи',
+    'targets milestone' => 'нацелена на веху',
     'is a milestone of' => 'является вехой для',
     'fixes' => 'исправлено',
     'is fixed by' => 'исправляет',
@@ -1403,6 +1403,7 @@ return array(
     'Task #%d "%s" has been moved to the project "%s"' => 'Задача #%d "%s" перемещена в проект "%s"',
     'Move the task to another column when the due date is less than a certain number of days' => 'Переместить задачу в другую колонку, если дата окончания меньше заданного количества дней',
     'Automatically update the start date when the task is moved away from a specific column' => 'Автоматически обновить дату начала, если задача перемещена из указанной колонки',
+    'Automatically set the due date when the task is moved away from a specific column' => 'Автоматически назначить дату завершения, если задача перемещена из указанной колонки',
     'HTTP Client:' => 'HTTP Клиент:',
     'Assigned' => 'Назначенные',
     'Task limits apply to each swimlane individually' => 'Лимиты задач применяются к каждой дорожке отдельно',
@@ -1427,5 +1428,4 @@ return array(
     'XBT - Bitcoin' => 'XBT - Биткоин',
     'You must select a file to upload as your avatar!' => 'Вы должны выбрать файл для загрузки в качестве аватара!',
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Выбранный вами файл не является изображением! (Допустимые расширения: *.gif, *.jpg, *.jpeg, *.png)',
-    // 'Automatically set the due date when the task is moved away from a specific column' => '',
 );
