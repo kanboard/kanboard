@@ -1353,7 +1353,7 @@ return array(
     'Color Name' => '颜色名称',
     'Column Name' => '栏目名称',
     'Swimlane Name' => '泳道名称',
-    'Time Estimated' => '已耗时',
+    'Time Estimated' => '预计耗时',
     'Time Spent' => '时间花费',
     'External Link' => '外部链接',
     'This feature enables the iCal feed, RSS feed and the public board view.' => '该功能将开启iCal订阅, RSS订阅以及公共查看权限。',
