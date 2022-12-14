@@ -104,12 +104,12 @@
                 <span><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $column['column_nb_tasks'] ?></span>
             </span>
             <?php endif ?>
-            <?php if (! empty($column['column_nb_open_tasks'])): ?>
+            <?php if (! empty($swimlane['nb_open_tasks'])): ?>
             <span title="<?= t('Total number of tasks in this column across all swimlanes') ?>" class="board-column-header-task-count">
                 <?php if ($column['task_limit'] > 0): ?>
-                    (<span><span class="ui-helper-hidden-accessible"><?= t('Total number of tasks in this column across all swimlanes') ?> </span><?= $column['column_nb_open_tasks'] ?></span> / <span title="<?= t('Task limit') ?>"><span class="ui-helper-hidden-accessible"><?= t('Task limit') ?> </span><?= $this->text->e($column['task_limit']) ?></span>)
+                    (<span><span class="ui-helper-hidden-accessible"><?= t('Total number of tasks in this column across all swimlanes') ?> </span><?= $swimlane['nb_open_tasks'] ?></span> / <span title="<?= t('Task limit') ?>"><span class="ui-helper-hidden-accessible"><?= t('Task limit') ?> </span><?= $this->text->e($column['task_limit']) ?></span>)
                 <?php else: ?>
-                    (<span><span class="ui-helper-hidden-accessible"><?= t('Total number of tasks in this column across all swimlanes') ?> </span><?= $column['column_nb_open_tasks'] ?></span>)
+                    (<span><span class="ui-helper-hidden-accessible"><?= t('Total number of tasks in this column across all swimlanes') ?> </span><?= $swimlane['nb_open_tasks'] ?></span>)
                 <?php endif ?>
             </span>
             <?php endif ?>
