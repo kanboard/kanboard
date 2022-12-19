@@ -104,9 +104,9 @@
                 <?php endif ?>
             </span>
 
-            <?php if (! empty($column['column_nb_open_tasks'])): ?>
+            <?php if (! empty($column['nb_tasks'])): ?>
             <span title="<?= t('Task count') ?>" class="board-column-header-task-count">
-                <span><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $column['column_nb_open_tasks'] ?></span>
+                <span><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $column['nb_tasks'] ?></span>
             </span>
             <?php endif ?>
             <?php if (! empty($column['column_nb_tasks'])): ?>
