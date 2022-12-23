@@ -78,12 +78,10 @@ class TaskTagFilter extends BaseFilter implements FilterInterface
 
     protected function getQueryOfTaskIdsWithGivenTag()
     {
-        $this->value = '%'.$this->value.'%';
-
         return $this->db
             ->table(TagModel::TABLE)
             ->columns(TaskTagModel::TABLE.'.task_id')
-            ->ilike(TagModel::TABLE.'.name', $this->value)
+            ->ilike(TagModel::TABLE.'.name', '%'.$this->value.'%')
             ->join(TaskTagModel::TABLE, 'tag_id', 'id');
     }
 }
