@@ -32,7 +32,7 @@
         "psr/log": "1.1.4",
         "symfony/console": "4.4.37",
         "symfony/event-dispatcher": "4.4.37",
-        "symfony/finder": "5.4.11"
+        "symfony/finder": "5.4.17"
     },
     "autoload": {
         "classmap": [
