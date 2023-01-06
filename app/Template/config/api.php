@@ -9,7 +9,7 @@
         </li>
         <li>
             <?= t('API endpoint:') ?>
-            <strong><?= $this->url->base().'jsonrpc.php' ?></strong>
+            <strong><?= $this->text->e($this->url->base()).'jsonrpc.php' ?></strong>
         </li>
     </ul>
 </div>
