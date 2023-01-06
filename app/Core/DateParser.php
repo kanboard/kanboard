@@ -204,7 +204,7 @@ class DateParser extends Base
 
         if ($date !== false) {
             $errors = DateTime::getLastErrors();
-            if ($errors['error_count'] === 0 && $errors['warning_count'] === 0) {
+            if ($errors == false) {
                 $timestamp = $date->getTimestamp();
                 return $timestamp > 0 ? $timestamp : 0;
             }
