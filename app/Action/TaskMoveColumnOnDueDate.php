@@ -81,7 +81,7 @@ class TaskMoveColumnOnDueDate extends Base
                     $this->getParam('dest_column_id'),
                     1,
                     $task['swimlane_id'],
-                    false
+                    true
                 );
             }
         }
