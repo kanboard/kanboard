@@ -35,7 +35,8 @@ class Date extends Base
 
         if ($date !== false) {
             $errors = DateTime::getLastErrors();
-            if ($errors['error_count'] === 0 && $errors['warning_count'] === 0) {
+            if ($errors === false ||
+                $errors['error_count'] === 0 && $errors['warning_count'] === 0) {
                 return $date->getTimestamp() > 0;
             }
         }
