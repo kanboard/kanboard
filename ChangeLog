@@ -1,3 +1,18 @@
+Version 1.2.26 (January 14, 2023)
+---------------------------------
+
+- Fire events after `TaskMoveColumnOnDueDate` action
+- Update date parsing logic to be compatible with PHP 8.2
+- Fix potential XSS on the Settings / API page
+- Use wildcard operator for tag filter
+- Fix broken user mentions in popup comment form
+- Test Docker image build on pull-requests
+- Bump Alpine Linux Docker image from 3.16 to 3.17
+- Update translations
+- Fixed a bug about unselecting in the file `list-item-selection.js`
+- Add functionality to import tasks from a project
+- Add missing jQuery UI CSS dependency
+
 Version 1.2.25 (November 12, 2022)
 ----------------------------------
 
