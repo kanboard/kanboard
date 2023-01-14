@@ -1428,4 +1428,10 @@ return array(
     'You must select a file to upload as your avatar!' => 'Vælg fil som overføres som profil billede!',
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Overført fil er ikke et gyldigt billede! (*.gif, *.jpg, *.jpeg eller *.png)',
     'Automatically set the due date when the task is moved away from a specific column' => 'Sæt automatisk afleveringsdato når opgave er flyttet væk fra en bestemt kolonne',
+    // 'No other projects found.' => '',
+    // 'Please choose a project you want to copy the tasks from.' => '',
+    // 'Import Tasks' => '',
+    // 'Copy' => '',
+    // 'Tasks copied successfully.' => '',
+    // 'Unable to copy tasks.' => '',
 );

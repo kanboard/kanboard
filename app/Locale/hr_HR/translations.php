@@ -1428,4 +1428,10 @@ return array(
     // 'You must select a file to upload as your avatar!' => '',
     // 'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '',
     // 'Automatically set the due date when the task is moved away from a specific column' => '',
+    // 'No other projects found.' => '',
+    // 'Please choose a project you want to copy the tasks from.' => '',
+    // 'Import Tasks' => '',
+    // 'Copy' => '',
+    // 'Tasks copied successfully.' => '',
+    // 'Unable to copy tasks.' => '',
 );
