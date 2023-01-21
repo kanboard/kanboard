@@ -3,9 +3,8 @@ Kanboard
 
 Kanboard is project management software that focuses on the Kanban methodology.
 
-**This software is in maintenance mode**.
-It doesn't mean it's abandoned, but there is no significant feature development.
-Pull-requests are still accepted as long as the [guidelines](.github/pull_request_template.md) are followed.
+**This application is feature complete**.
+Pull Requests for NEW features and fixes are accepted as long as the [guidelines](.github/pull_request_template.md) are followed.
 
 - Official website: <https://kanboard.org/>
 - [List of features](https://kanboard.org/#features)
