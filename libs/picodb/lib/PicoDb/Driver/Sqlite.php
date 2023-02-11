@@ -36,6 +36,12 @@ class Sqlite extends Base
         }
 
         $this->pdo = new PDO('sqlite:'.$settings['filename'], null, null, $options);
+
+        // Official docs: https://sqlite.org/wal.html
+        if (isset($settings['wal_mode']) && $settings['wal_mode'] === true) {
+            $this->pdo->exec('PRAGMA journal_mode=wal');
+        }
+
         $this->enableForeignKeys();
     }
 

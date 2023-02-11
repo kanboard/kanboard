@@ -117,10 +117,11 @@ class DatabaseProvider implements ServiceProviderInterface
     {
         require_once __DIR__.'/../Schema/Sqlite.php';
 
-        return new Database(array(
+        return new Database([
             'driver' => 'sqlite',
             'filename' => DB_FILENAME,
-        ));
+            'wal_mode' => DB_WAL_MODE,
+        ]);
     }
 
     /**
