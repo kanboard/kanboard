@@ -43,6 +43,7 @@ defined('DB_DRIVER') or define('DB_DRIVER', getenv('DB_DRIVER') ?: 'sqlite');
 
 // Sqlite configuration
 defined('DB_FILENAME') or define('DB_FILENAME', getenv('DB_FILENAME') ?: DATA_DIR.DIRECTORY_SEPARATOR.'db.sqlite');
+defined('DB_WAL_MODE') or define('DB_WAL_MODE', getenv('DB_WAL_MODE') ? strtolower(getenv('DB_WAL_MODE')) === 'true' : true);
 
 // Mysql/Postgres configuration
 defined('DB_USERNAME') or define('DB_USERNAME', getenv('DB_USERNAME') ?: 'root');
