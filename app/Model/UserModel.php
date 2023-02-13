@@ -261,6 +261,10 @@ class UserModel extends Base
             }
         }
 
+        if (isset($values['username'])) {
+            $values['username'] = trim($values['username']);
+        }
+
         $this->helper->model->removeFields($values, array('confirmation', 'current_password'));
         $this->helper->model->resetFields($values, array('is_ldap_user', 'disable_login_form'));
         $this->helper->model->convertNullFields($values, array('gitlab_id'));
