@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\EventDispatcher\Event;
 
 if (php_sapi_name() !== 'cli') {
@@ -10,8 +11,14 @@ if (php_sapi_name() !== 'cli') {
 
 try {
     require __DIR__.'/app/common.php';
-    $container['dispatcher']->dispatch('app.bootstrap', new Event);
-    $container['cli']->run();
+
+    $input = new ArgvInput();
+
+    if (! in_array($input->getFirstArgument(), ['db:migrate', 'db:version'])) {
+        $container['dispatcher']->dispatch('app.bootstrap', new Event);
+    }
+
+    $container['cli']->run($input);
 } catch (Exception $e) {
     echo $e->getMessage().PHP_EOL;
     exit(255);
