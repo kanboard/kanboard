@@ -267,7 +267,13 @@ class SubtaskModel extends Base
     public function remove($subtaskId)
     {
         $this->subtaskEventJob->execute($subtaskId, array(self::EVENT_DELETE));
-        return $this->db->table(self::TABLE)->eq('id', $subtaskId)->remove();
+
+        $subtask = $this->getById($subtaskId);
+        $result = $this->db->table(self::TABLE)->eq('id', $subtaskId)->remove();
+
+        $this->subtaskTimeTrackingModel->updateTaskTimeTracking($subtask['task_id']);
+
+        return $result;
     }
 
     /**
