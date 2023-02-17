@@ -53,7 +53,7 @@
                                     <?= $this->url->icon('sort-numeric-asc', t('Reorder this column by id (ASC)'), 'TaskReorderController', 'reorderColumn', ['sort' => 'id', 'direction' => 'asc', 'project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']]) ?>
                                 </li>
                                 <li>
-                                    <?= $this->url->icon('sort-numeric-desc', t('Reorder this column by id (ASC)'), 'TaskReorderController', 'reorderColumn', ['sort' => 'id', 'direction' => 'desc', 'project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']]) ?>
+                                    <?= $this->url->icon('sort-numeric-desc', t('Reorder this column by id (DESC)'), 'TaskReorderController', 'reorderColumn', ['sort' => 'id', 'direction' => 'desc', 'project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']]) ?>
                                 </li>
                                 <li>
                                     <?= $this->url->icon('sort-numeric-asc', t('Reorder this column by priority (ASC)'), 'TaskReorderController', 'reorderColumn', ['sort' => 'priority', 'direction' => 'asc', 'project_id' => $column['project_id'], 'column_id' => $column['id'], 'swimlane_id' => $swimlane['id']]) ?>
