@@ -46,7 +46,8 @@ hr {
 }
 
 .pull-right {
-    text-align: right
+    text-align: right;
+    margin-left: auto
 }
 
 ul.no-bullet li {
