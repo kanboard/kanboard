@@ -292,6 +292,17 @@ class Request extends Base
     }
 
     /**
+     * Get remote user full name
+     *
+     * @access public
+     * @return string
+     */
+    public function getRemoteName()
+    {
+        return $this->getServerVariable(REVERSE_PROXY_FULLNAME_HEADER);
+    }
+
+    /**
      * Returns query string
      *
      * @access public
