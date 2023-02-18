@@ -44,10 +44,11 @@ class ReverseProxyAuth extends Base implements PreAuthenticationProviderInterfac
     {
         $username = $this->request->getRemoteUser();
         $email = $this->request->getRemoteEmail();
+        $fullname = $this->request->getRemoteName();
 
         if (! empty($username)) {
             $userProfile = $this->userCacheDecorator->getByUsername($username);
-            $this->userInfo = new ReverseProxyUserProvider($username, $email, $userProfile ?: array());
+            $this->userInfo = new ReverseProxyUserProvider($username, $email, $fullname, $userProfile ?: array());
             return true;
         }
 
