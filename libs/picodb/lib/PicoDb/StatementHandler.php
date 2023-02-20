@@ -269,13 +269,13 @@ class StatementHandler
 
         foreach ($this->positionalParams as $value) {
             $pdoStatement->bindValue($i, $value, PDO::PARAM_STR);
-            $this->db->setLogMessage("param[$i]: $value");
+            $this->db->setLogMessage("param[$i]: '$value'");
             $i++;
         }
 
         foreach ($this->namedParams as $name => $value) {
             $pdoStatement->bindValue($name, $value, PDO::PARAM_STR);
-            $this->db->setLogMessage("param[$name]: $value");
+            $this->db->setLogMessage("param[$name]: '$value'");
         }
     }
 
