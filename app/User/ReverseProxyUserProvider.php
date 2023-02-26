@@ -30,6 +30,14 @@ class ReverseProxyUserProvider implements UserProviderInterface
     protected $email = '';
 
     /**
+     * Full name
+     *
+     * @access protected
+     * @var string
+     */
+    protected $fullname= '';
+
+    /**
      * User profile if the user already exists
      *
      * @access protected
@@ -43,11 +51,13 @@ class ReverseProxyUserProvider implements UserProviderInterface
      * @access public
      * @param  string $username
      * @param  string $email
+     * @param  string $fullname
      */
-    public function __construct($username, $email, array $userProfile = array())
+    public function __construct($username, $email, $fullname, array $userProfile = array())
     {
         $this->username = $username;
         $this->email = $email;
+        $this->fullname = $fullname;
         $this->userProfile = $userProfile;
     }
 
@@ -133,7 +143,7 @@ class ReverseProxyUserProvider implements UserProviderInterface
      */
     public function getName()
     {
-        return '';
+        return $this->fullname;
     }
 
     /**

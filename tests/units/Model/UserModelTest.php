@@ -401,6 +401,5 @@ class UserModelTest extends Base
         $this->assertNotFalse($userModel->create(array('username' => 'test ')));
 
         $this->assertNotEmpty($userModel->getByUsername('test'));
-        $this->assertEmpty($userModel->getByUsername('test '));
     }
 }

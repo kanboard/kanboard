@@ -15,6 +15,10 @@ label {
     font-weight: 400
 }
 
+input, textarea {
+    font-family: sans-serif;
+}
+
 input[type="number"],
 input[type="date"],
 input[type="email"],
@@ -28,7 +32,6 @@ input[type="text"]:not(.input-addon-field) {
     height: 25px;
     padding-bottom: 0;
     padding-left: 4px;
-    font-family: sans-serif;
     -webkit-appearance: none;
     -moz-appearance: none
 }
@@ -102,7 +105,6 @@ textarea {
     width: 400px;
     max-width: 99%;
     height: 200px;
-    font-family: sans-serif;
     font-size: 1em
 }
 
