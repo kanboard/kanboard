@@ -113,7 +113,7 @@ class User
     /**
      * Get role from LDAP groups
      *
-     * Note: Do not touch the current role if groups are not configured
+     * Note: Do not handle groupIds if groups are not configured
      *
      * @access protected
      * @param  string[] $groupIds
@@ -121,29 +121,26 @@ class User
      */
     protected function getRole(array $groupIds)
     {
-        if (! $this->hasGroupsConfigured()) {
-            return null;
-        }
-	
         if (LDAP_USER_DEFAULT_ROLE_MANAGER) {
             $role = Role::APP_MANAGER;
         } else {
-            $role = Role::APP_USER;
+            $role = null;
         }
+        
+        if ($this->hasGroupsConfigured()) {
+            foreach ($groupIds as $groupId) {
+                $groupId = strtolower($groupId);
 
-        foreach ($groupIds as $groupId) {
-            $groupId = strtolower($groupId);
+                if ($groupId === strtolower($this->getGroupAdminDn())) {
+                    $role = Role::APP_ADMIN;
+                    break;
+                }
 
-            if ($groupId === strtolower($this->getGroupAdminDn())) {
-                $role = Role::APP_ADMIN;
-                break;
-            }
-
-            if ($groupId === strtolower($this->getGroupManagerDn())) {
-                $role = Role::APP_MANAGER;
+                if ($groupId === strtolower($this->getGroupManagerDn())) {
+                    $role = Role::APP_MANAGER;
+                }
             }
         }
-
         return $role;
     }
 
