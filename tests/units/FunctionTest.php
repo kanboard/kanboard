@@ -4,6 +4,13 @@ require_once __DIR__.'/Base.php';
 
 class FunctionTest extends Base
 {
+    public function testConvertPHPSizeToBytes()
+    {
+        $this->assertEquals(2097152, convert_php_size_to_bytes('2M'));
+        $this->assertEquals(2048, convert_php_size_to_bytes('2 k'));
+        $this->assertEquals(0, convert_php_size_to_bytes('0'));
+    }
+
     public function testArrayColumnSum()
     {
         $input = array(

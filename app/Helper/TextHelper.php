@@ -72,29 +72,6 @@ class TextHelper extends Base
     }
 
     /**
-     * Get the number of bytes from PHP size
-     *
-     * @param  integer  $val        PHP size (example: 2M)
-     * @return integer
-     */
-    public function phpToBytes($val)
-    {
-        $size = (int) substr($val, 0, -1);
-        $last = strtolower(substr($val, -1));
-
-        switch ($last) {
-            case 'g':
-                $size *= 1024;
-            case 'm':
-                $size *= 1024;
-            case 'k':
-                $size *= 1024;
-        }
-
-        return $size;
-    }
-
-    /**
      * Return true if needle is contained in the haystack
      *
      * @param  string   $haystack   Haystack

@@ -9,7 +9,7 @@
     'labelDropzone'     => t('Drag and drop your files here'),
     'labelOr'           => t('or'),
     'labelChooseFiles'  => t('choose files'),
-    'labelOversize'     => t('The maximum allowed file size is %sB.', $this->text->bytes($max_size)),
+    'labelOversize'     => $max_size > 0 ? t('The maximum allowed file size is %sB.', $this->text->bytes($max_size)) : null,
     'labelSuccess'      => t('All files have been uploaded successfully.'),
     'labelCloseSuccess' => t('Close this window'),
     'labelUploadError'  => t('Unable to upload this file.'),
