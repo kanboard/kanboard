@@ -40,7 +40,7 @@ class TaskFileController extends BaseController
 
         $this->response->html($this->template->render('task_file/create', array(
             'task' => $task,
-            'max_size' => $this->helper->text->phpToBytes(get_upload_max_size()),
+            'max_size' => get_upload_max_size(),
         )));
     }
 

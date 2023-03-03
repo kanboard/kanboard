@@ -179,7 +179,7 @@ KB.component('file-upload', function (containerElement, options) {
             .text(' ' + files[index].name + ' ')
             .add(percentageElement);
 
-        if (files[index].size > options.maxSize) {
+        if (options.maxSize > 0 && files[index].size > options.maxSize) {
             itemElement.add(KB.dom('div').addClass('file-error').text(options.labelOversize).build());
             isOversize = true;
         }
