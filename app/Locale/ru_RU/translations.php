@@ -879,7 +879,7 @@ return array(
     'RUB - Russian Ruble' => 'РУБ - Российский рубль',
     'Assign the task to the person who does the action when the column is changed' => 'Назначить задачу пользователю, который произвёл изменение в колонке',
     'Close a task in a specific column' => 'Закрыть задачу в выбранной колонке',
-    'Time-based One-time Password Algorithm' => 'Зависимый от времени, одноразовый алгоритм пароля',
+    'Time-based One-time Password Algorithm' => 'Time-based One-time Password Algorithm',
     'Two-Factor Provider: ' => 'Провайдер двухфакторной авторизации: ',
     'Disable two-factor authentication' => 'Отключить двухфакторную авторизацию',
     'Enable two-factor authentication' => 'Включить двухфакторную авторизацию',
