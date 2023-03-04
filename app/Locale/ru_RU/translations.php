@@ -188,7 +188,7 @@ return array(
     'Comment removed successfully.' => 'Комментарий удалён.',
     'Unable to remove this comment.' => 'Не удалось удалить этот комментарий.',
     'Do you really want to remove this comment?' => 'Вы точно хотите удалить этот комментарий?',
-    'Current password for the user "%s"' => 'Текущий пароль для пользователя « %s »',
+    'Current password for the user "%s"' => 'Текущий пароль для пользователя "%s"',
     'The current password is required' => 'Требуется текущий пароль',
     'Wrong password' => 'Неверный пароль',
     'Unknown' => 'Неизвестно',
