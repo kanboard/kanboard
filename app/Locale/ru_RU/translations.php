@@ -259,7 +259,7 @@ return array(
     'estimated' => 'расчётное',
     'Sub-Tasks' => 'Подзадачи',
     'Add a sub-task' => 'Добавить подзадачу',
-    'Original estimate' => 'Заплан.',
+    'Original estimate' => 'Запланировано',
     'Create another sub-task' => 'Создать другую подзадачу',
     'Time spent' => 'Времени затрачено',
     'Edit a sub-task' => 'Изменить подзадачу',
