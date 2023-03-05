@@ -152,7 +152,7 @@ return array(
     'Comment is required' => 'Нужен комментарий',
     'Comment added successfully.' => 'Комментарий успешно добавлен.',
     'Unable to create your comment.' => 'Невозможно создать комментарий.',
-    'Due Date' => 'Сделать до',
+    'Due Date' => 'Дата завершения',
     'Invalid date' => 'Неверная дата',
     'Automatic actions' => 'Автоматические действия',
     'Your automatic action has been created successfully.' => 'Автоматизированное действие успешно настроено.',
