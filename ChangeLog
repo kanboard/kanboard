@@ -1,3 +1,29 @@
+Version 1.2.27 (March 5, 2023)
+------------------------------
+
+- Fix category filter when the category name is a number
+- Better handling of max file upload size according to PHP settings
+    - Allow unlimited size
+    - Better parsing of PHP size
+- Add dropdown menu on the board to reorder tasks by ID
+- Separate `font-family` specification for input and textarea. This avoids the use of `!important` in custom CSS
+- Change the total number of tasks displayed in the table header to match the description "Total number of tasks in this column across all swimlanes"
+- Allow full name to be retrieved by the reverse proxy authentication
+- Fix `pull-right` CSS class alignment
+- Use a separate dropdown menu for column sorting
+- Use `assertEqualsWithDelta()` to test `time_spent`
+- Add `color_id` argument to tag API procedures
+- Update task time spent/estimated when removing a subtask
+- Command `db:migrate` should work even if `DB_RUN_MIGRATIONS` is false
+- Always trim the username before saving changes in the database
+- Avoid Postgres SQL error when using project filter with a large integer
+- Enable Sqlite WAL mode by default:
+    - WAL provides more concurrency as readers do not block writers and,
+    a writer does not block readers. Reading and writing can proceed concurrently.
+    This change might reduce the number of errors related to locked databases.
+- Update translations
+- Update PHP dependencies: `phpunit/phpunit`, `symfony/stopwatch` and `symfony/finder`
+
 Version 1.2.26 (January 14, 2023)
 ---------------------------------
 
