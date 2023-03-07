@@ -31,7 +31,7 @@ class ICalendarController extends BaseController
         $startRange = strtotime('-2 months');
         $endRange = strtotime('+6 months');
 
-        $startColumn = $this->configModel->get('calendar_project_tasks', 'date_started');
+        $startColumn = $this->configModel->get('calendar_user_tasks', 'date_started');
 
         $calendar = new iCalendar('Kanboard');
         $calendar->setName($user['name'] ?: $user['username']);
