@@ -1391,8 +1391,8 @@ return array(
     'Destination swimlane' => 'Целевая дорожка',
     'Assign a category when the task is moved to a specific swimlane' => 'Присвоить категорию, если задача перемещена в определенную дорожку',
     'Move the task to another swimlane when the category is changed' => 'Переместить задачу в другую дорожку, если категория изменена',
-    'Reorder this column by id (ASC)' => 'Упорядочить колонку по ID (ASC)'
-    'Reorder this column by id (DESC)' => 'Упорядочить колонку по ID (DESC)'
+    'Reorder this column by id (ASC)' => 'Упорядочить колонку по ID (ASC)',
+    'Reorder this column by id (DESC)' => 'Упорядочить колонку по ID (DESC)',
     'Reorder this column by priority (ASC)' => 'Упорядочить колонку по приоритету (ASC)',
     'Reorder this column by priority (DESC)' => 'Упорядочить колонку по приоритету (DESC)',
     'Reorder this column by assignee and priority (ASC)' => 'Упорядочить колонку по назначенному пользователю и приоритету (ASC)',
