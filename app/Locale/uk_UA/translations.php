@@ -1391,6 +1391,8 @@ return array(
     'Destination swimlane' => 'Доріжка призначення',
     'Assign a category when the task is moved to a specific swimlane' => 'Призначити категорію, коли ця задача мереміщена на вказану доріжку',
     'Move the task to another swimlane when the category is changed' => 'Перемістити цю задачу на іншу доріжку при зміні категорії',
+    'Reorder this column by id (ASC)' => 'Впорядкувати цю колонку за ID (ASC)',
+    'Reorder this column by id (DESC)' => 'Впорядкувати цю колонку за ID (DESC)',
     'Reorder this column by priority (ASC)' => 'Впорядкувати цю колонку за зростанням пріоритету',
     'Reorder this column by priority (DESC)' => 'Впорядкувати цю колонку за спаданням пріоритету',
     'Reorder this column by assignee and priority (ASC)' => 'Впорядкувати цю колонку за відповідальним та зростанням пріоритету',
