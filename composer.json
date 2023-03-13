@@ -59,7 +59,7 @@
     },
     "require-dev": {
         "symfony/stopwatch": "5.4.21",
-        "phpunit/phpunit": "9.6.4",
+        "phpunit/phpunit": "9.6.5",
         "roave/security-advisories": "dev-master"
     }
 }
