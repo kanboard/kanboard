@@ -31,6 +31,24 @@ class TaskProjectDuplicationModel extends TaskDuplicationModel
         if ($new_task_id !== false) {
             $this->tagDuplicationModel->duplicateTaskTagsToAnotherProject($task_id, $new_task_id, $project_id);
             $this->taskLinkModel->create($new_task_id, $task_id, 4);
+
+            $attachments = $this->taskFileModel->getAll($task_id);
+            $externalLinks = $this->taskExternalLinkModel->getAll($task_id);
+
+            foreach ($attachments as $attachment) {
+                $this->taskFileModel->create($new_task_id, $attachment['name'], $attachment['path'], $attachment['size']);
+            }
+
+            foreach ($externalLinks as $externalLink) {
+                $this->taskExternalLinkModel->create([
+                    'task_id' => $new_task_id,
+                    'creator_id' => $externalLink['creator_id'],
+                    'dependency' => $externalLink['dependency'],
+                    'title' => $externalLink['title'],
+                    'link_type' => $externalLink['link_type'],
+                    'url' => $externalLink['url'],
+                ]);
+            }
         }
 
         $hook_values = [ 'source_task_id' => $task_id, 'destination_task_id' => $new_task_id];

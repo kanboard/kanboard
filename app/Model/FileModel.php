@@ -199,10 +199,15 @@ abstract class FileModel extends Base
             $this->fireDestructionEvent($file_id);
 
             $file = $this->getById($file_id);
-            $this->objectStorage->remove($file['path']);
 
-            if ($file['is_image'] == 1) {
-                $this->objectStorage->remove($this->getThumbnailPath($file['path']));
+            // Only remove files from disk attached to a single task.
+            $multiple_tasks_count = $this->db->table($this->getTable())->eq('path', $file['path'])->count();
+            if ($multiple_tasks_count === 1) {
+                $this->objectStorage->remove($file['path']);
+
+                if ($file['is_image'] == 1) {
+                    $this->objectStorage->remove($this->getThumbnailPath($file['path']));
+                }
             }
 
             return $this->db->table($this->getTable())->eq('id', $file['id'])->remove();
