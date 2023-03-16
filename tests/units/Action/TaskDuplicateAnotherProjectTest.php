@@ -13,6 +13,12 @@ class TaskDuplicateAnotherProjectTest extends Base
 {
     public function testSuccess()
     {
+        $this->container['externalLinkManager'] = $this
+            ->getMockBuilder('Kanboard\Core\ExternalLink\ExternalLinkManager')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(['push'])
+            ->getMock();
+
         $projectModel = new ProjectModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);
         $taskFinderModel = new TaskFinderModel($this->container);
