@@ -435,7 +435,7 @@ class TaskFileModelTest extends Base
         $this->assertEquals(2, $fileModel->create(1, 'test', 'tmp/foo', 10));
 
         $this->container['objectStorage']
-            ->expects($this->exactly(2))
+            ->expects($this->exactly(1))
             ->method('remove')
             ->with('tmp/foo');
 
