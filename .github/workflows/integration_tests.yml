@@ -7,7 +7,11 @@ on:
 jobs:
   Sqlite:
     runs-on: ubuntu-latest
-    container: kanboard/tests:latest
+    container:
+      image: ghcr.io/kanboard/tests:latest
+      credentials:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.CR_PAT }}
     steps:
     - uses: actions/checkout@v3
     - name: Validate composer.json and composer.lock
@@ -28,7 +32,11 @@ jobs:
 
   Postgres:
     runs-on: ubuntu-latest
-    container: kanboard/tests:latest
+    container:
+      image: ghcr.io/kanboard/tests:latest
+      credentials:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.CR_PAT }}
     services:
       postgres:
         image: postgres:9.4
@@ -66,7 +74,11 @@ jobs:
 
   Mysql:
     runs-on: ubuntu-latest
-    container: kanboard/tests:latest
+    container:
+      image: ghcr.io/kanboard/tests:latest
+      credentials:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.CR_PAT }}
     services:
       mysql:
         image: mysql:5.7
