@@ -37,11 +37,11 @@ jobs:
           DOCKER_VERSION=dev
           if [ "${{ github.event_name }}" = "schedule" ]; then
           DOCKER_VERSION="nightly"
-          TAGS="${DOCKER_IMAGE}:${DOCKER_VERSION},ghcr.io/${DOCKER_IMAGE}:${DOCKER_VERSION}"
+          TAGS="docker.io/${DOCKER_IMAGE}:${DOCKER_VERSION},ghcr.io/${DOCKER_IMAGE}:${DOCKER_VERSION},quay.io/${DOCKER_IMAGE}:${DOCKER_VERSION}"
           elif [[ $GITHUB_REF == refs/tags/* ]]; then
           DOCKER_VERSION=${GITHUB_REF#refs/tags/}
           APP_VERSION=$DOCKER_VERSION
-          TAGS="${DOCKER_IMAGE}:${DOCKER_VERSION},ghcr.io/${DOCKER_IMAGE}:${DOCKER_VERSION},${DOCKER_IMAGE}:latest,ghcr.io/${DOCKER_IMAGE}:latest"
+          TAGS="docker.io/${DOCKER_IMAGE}:${DOCKER_VERSION},ghcr.io/${DOCKER_IMAGE}:${DOCKER_VERSION},quay.io/${DOCKER_IMAGE}:${DOCKER_VERSION},docker.io/${DOCKER_IMAGE}:latest,ghcr.io/${DOCKER_IMAGE}:latest,quay.io/${DOCKER_IMAGE}:latest"
           fi
           echo ::set-output name=version::${APP_VERSION}
           echo ::set-output name=tags::${TAGS}
@@ -65,6 +65,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
+
+      - name: Login to Quay.io Registry
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_TOKEN }}
 
       - name: Build and push
         uses: docker/build-push-action@v4
