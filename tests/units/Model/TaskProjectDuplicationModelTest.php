@@ -17,6 +17,17 @@ use Kanboard\Model\UserModel;
 
 class TaskProjectDuplicationModelTest extends Base
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->container['externalLinkManager'] = $this
+            ->getMockBuilder('Kanboard\Core\ExternalLink\ExternalLinkManager')
+            ->setConstructorArgs(array($this->container))
+            ->setMethods(['push'])
+            ->getMock();
+    }
+
     public function testDuplicateAnotherProject()
     {
         $taskProjectDuplicationModel = new TaskProjectDuplicationModel($this->container);
