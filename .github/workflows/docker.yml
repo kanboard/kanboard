@@ -22,6 +22,8 @@ jobs:
           push: false
 
   multiplatform-build:
+    permissions:
+      packages: write
     if: ${{ ! github.event.pull_request }}
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +66,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.CR_PAT }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Login to Quay.io Registry
         uses: docker/login-action@v2
