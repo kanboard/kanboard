@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Alle oppgaver i kolonne "%s" og svømmebane "%s" er lukket.',
     'Do you really want to close all tasks of this column?' => 'Ønsker du virkelig å lukke ALLE saker i kolonnen?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d oppgave(r) i kolonne "%s" og svømmebane "%s" vil bli lukket.',
-    'Close all tasks of this column' => 'Lukk alle saker i denne kolonnen',
+    'Close all tasks in this column and this swimlane' => 'Lukk alle saker i denne kolonnen',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Det finnes ingen innstikk for prosjektvarsling. Du kan likevel sette opp individuelle varslinger i brukerprofilen din.',
     'My dashboard' => 'Mitt dashbord',
     'My profile' => 'Min profil',

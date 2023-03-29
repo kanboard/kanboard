@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Сите задачи во колоната "%s" и патеката "%s" се успешно затворени.',
     'Do you really want to close all tasks of this column?' => 'Дали навистина сакате да ги затворите сите задачи во оваа колона?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d Задачa(и) во колоната "%s" и патеката "%s" ќе бидат затворени.',
-    'Close all tasks of this column' => 'Затворете ги сите задачи во оваа колона',
+    'Close all tasks in this column and this swimlane' => 'Затворете ги сите задачи во оваа колона',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Ниту еден додаток не го регистрираше методот на известување за проектот. Сè уште можете да конфигурирате индивидуални известувања во вашиот кориснички профил.',
     'My dashboard' => 'Мојата табла',
     'My profile' => 'Мој Профил',

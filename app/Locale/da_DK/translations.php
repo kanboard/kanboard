@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Alle opgaver i kolonne "%s" og spor "%s" blev lukket.',
     'Do you really want to close all tasks of this column?' => 'Lukke alle opgaver i kolonnen?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d opgave(r) i kolonne "%s" og spor "%s" lukkes.',
-    'Close all tasks of this column' => 'Lukke alle opgaver i kolonne',
+    'Close all tasks in this column and this swimlane' => 'Lukke alle opgaver i kolonne',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Ingen udvidelses-modul har registreret projekt påmindelses-metode Brugeren kan stadig konfigurere individuelle påmindelser i brugerprofil.',
     'My dashboard' => 'Instrumentbræt',
     'My profile' => 'Profil',

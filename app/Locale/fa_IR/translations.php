@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'تمامی کارهای ستون "%s" و مسیر شنای "%s" با موفقیت بسته شدند.',
     'Do you really want to close all tasks of this column?' => 'واقعاً می خواهید همه کارهای این ستون را ببندید؟',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d کار در ستون "%s" و مسیر شنای "%s" بسته خواهند شد.',
-    'Close all tasks of this column' => 'تمامی کارهای این ستون بسته شود',
+    'Close all tasks in this column and this swimlane' => 'تمامی کارهای این ستون بسته شود',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'هیچ پلاگینی یک روش آگاه سازی در پروژه را ثبت نکرده است. شما هنوز می توانید آگاه سازی های مجزا را در پروفایل کاربری خود تنظیم کنید.',
     'My dashboard' => 'میز کار من',
     'My profile' => 'پروفایل من',

@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Svi zadaci kolone "%s" i staze "%s" uspešno su zatvoreni.',
     'Do you really want to close all tasks of this column?' => 'Da li zaista želite da zatvorite sve zadatke ove kolone?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d zadatak/zadaci u koloni "%s" i stazi "%s" će biti zatvoreni.',
-    'Close all tasks of this column' => 'Zatvori sve zadatke ove kolone',
+    'Close all tasks in this column and this swimlane' => 'Zatvori sve zadatke ove kolone',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Nijedan dodatak nije registrovao metodu obaveštavanja o projektu. U korisničkom profilu i dalje možete da konfigurišete pojedinačna obaveštenja.',
     'My dashboard' => 'Moja komandna tabla',
     'My profile' => 'Moj profil',

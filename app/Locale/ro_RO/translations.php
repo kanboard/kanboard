@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Toate sarcinile coloanei "%s" si a culoarului "%s" au fost închise.',
     'Do you really want to close all tasks of this column?' => 'Vrei să închizi toate sarcinile acestei coloane?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d sarcini în coloana "%s" si culoarul "%s" vor fi închise.',
-    'Close all tasks of this column' => 'Închide toate sarcinile acestei coloane',
+    'Close all tasks in this column and this swimlane' => 'Închide toate sarcinile acestei coloane',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Nici o extensie nu a înregistrat o metodă de notificare a proiectelor. Mai poți însă configura notificări individuale în profilul tău de utilizator.',
     'My dashboard' => 'Bordul meu',
     'My profile' => 'Profilul meu',

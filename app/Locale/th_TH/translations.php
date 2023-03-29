@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'ทุกงานของคอลัมน์ "%s" และสวิมเลน "%s" ถูกปิดเรียบร้อย',
     'Do you really want to close all tasks of this column?' => 'คุณต้องการปิดทุกงานในคอลัมนี้ใช่หรือไม่?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d งานในคอลัมน์ "%s" และสวิมเลน "%s" จะปิด',
-    'Close all tasks of this column' => 'ปิดทุกงานในคอลัมน์นี้',
+    'Close all tasks in this column and this swimlane' => 'ปิดทุกงานในคอลัมน์นี้',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'ปลั๊กอินไม่ได้ลงทะเบียนการแจ้งเตือนในโปรเจค คุณยังสามารถกำหนดค่าการแจ้งเตือนรายบุคคลในโปรไฟล์ผู้ใช้ของคุณ',
     'My dashboard' => 'แดชบอร์ดของฉํน',
     'My profile' => 'โปรเจคของฉัน',

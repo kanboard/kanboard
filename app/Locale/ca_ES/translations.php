@@ -899,7 +899,7 @@ return array(
     // 'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => '',
     'Do you really want to close all tasks of this column?' => 'Vols tancar totes les tasques d\'aquesta columna?',
     // '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '',
-    'Close all tasks of this column' => 'Tanqueu totes les tasques d\'aquesta columna',
+    'Close all tasks in this column and this swimlane' => 'Tanqueu totes les tasques d\'aquesta columna',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'No s\'ha registrat plugin d\'un mètode de notificació del projecte. Encara es pot configurar les notificacions individuals en el seu perfil d\'usuari.',
     'My dashboard' => 'El meu tauler',
     'My profile' => 'El meu perfil',

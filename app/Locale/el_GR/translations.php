@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Όλες οι εργασίας της στήλης « %s » και η λωρίδα « %s » έκλεισαν με επιτυχία.',
     'Do you really want to close all tasks of this column?' => 'Να κλείσουν όλες οι εργασίες αυτής της στήλης ?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d εργασία(ες) στη στήλη « %s » και στη λωρίδα « %s » θα κλείσουν.',
-    'Close all tasks of this column' => 'Κλείσιμο όλων των εργασιών αυτής της στήλης',
+    'Close all tasks in this column and this swimlane' => 'Κλείσιμο όλων των εργασιών αυτής της στήλης',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Κανένα plugin δεν έχει καταχωρηθεί με τη μέθοδο της κοινοποίησης του έργου. Μπορείτε ακόμα να διαμορφώσετε τις μεμονωμένες κοινοποιήσεις στο προφίλ χρήστη σας.',
     'My dashboard' => 'Το κεντρικό ταμπλό μου',
     'My profile' => 'Το προφίλ μου',
