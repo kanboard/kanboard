@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Semua tugas dalam kolom "%s" dan swimlane "%s" telah berhasil ditutup',
     'Do you really want to close all tasks of this column?' => 'Apakah Anda yakin mau menutup semua tugas dalam kolom ini?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d tugas dalam kolom "%s" dan swimlane "%s" akan ditutup.',
-    'Close all tasks of this column' => 'Tutup semua tugas dalam kolom ini',
+    'Close all tasks in this column and this swimlane' => 'Tutup semua tugas dalam kolom ini',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Tidak ada plugin yang mendaftarkan metode pemberitahuan proyek. Anda masih bisa mengatur pemberitahuan individu di dalam profil pengguna Anda.',
     'My dashboard' => 'Dasbor saya',
     'My profile' => 'Profil saya',

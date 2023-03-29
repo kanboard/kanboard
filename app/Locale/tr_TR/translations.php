@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => '"%s" sütunu ve "%s" kulvarındaki tüm görevler başarıyla kapatıldı.',
     'Do you really want to close all tasks of this column?' => 'Bu sütundaki tüm görevleri kapatmak istediğinize emin misiniz?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '"%s" sütunu ve "%s" kulvarındaki %d görev kapatılacak.',
-    'Close all tasks of this column' => 'Bu sütundaki tüm görevleri kapat',
+    'Close all tasks in this column and this swimlane' => 'Bu sütundaki tüm görevleri kapat',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Proje bildirimleri için hiçbir plugin kaydedilmedi. Yine de profil sayfanızdan bildirim ayarları yapabilirsiniz.',
     'My dashboard' => 'Panom',
     'My profile' => 'Profilim',

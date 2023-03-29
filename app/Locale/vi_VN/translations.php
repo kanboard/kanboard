@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Tất cả nhiệm vụ của cột "%s" và swimlane "%s" đã được đóng thành công.',
     'Do you really want to close all tasks of this column?' => 'Bạn có thực sự muốn đóng tất cả các nhiệm vụ của cột này?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d nhiệm vụ trong cột "%s" và swimlane "%s" sẽ được đóng lại.',
-    'Close all tasks of this column' => 'Đóng tất cả các tác vụ của cột này',
+    'Close all tasks in this column and this swimlane' => 'Đóng tất cả các tác vụ của cột này',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Không có plugin đã đăng ký một phương pháp thông báo dự án. Bạn vẫn có thể định cấu hình các thông báo riêng trong hồ sơ người dùng của bạn. ',
     'My dashboard' => 'Bảng điều khiển của tôi',
     'My profile' => 'Thông tin của tôi',

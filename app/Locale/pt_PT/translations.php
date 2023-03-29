@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Todas as tarefas na coluna "%s" e na swimlane "%s" foram fechadas com successo.',
     'Do you really want to close all tasks of this column?' => 'Tem a certeza que quer fechar todas as tarefas nesta coluna?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d tarefa(s) na coluna "%s" e na swimlane "%s" serão fechadas.',
-    'Close all tasks of this column' => 'Fechar todas as tarefas nesta coluna',
+    'Close all tasks in this column and this swimlane' => 'Fechar todas as tarefas nesta coluna',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Nenhum plugin tem registado um método de notificação do projeto. Pode continuar a configurar notificações individuais no seu perfil de utilizador.',
     'My dashboard' => 'Meu painel',
     'My profile' => 'Meu perfil',

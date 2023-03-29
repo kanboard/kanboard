@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => '任务栏 "%s" 和 泳道 "%s" 下的所有任务已关闭',
     'Do you really want to close all tasks of this column?' => '你确定要关闭此任务栏下的所有任务？',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '任务栏 "%s" 和 泳道 "%s" 下 %d 条任务将被关闭。',
-    'Close all tasks of this column' => '关闭此任务栏下的所有任务',
+    'Close all tasks in this column and this swimlane' => '关闭此任务栏下的所有任务',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => '没有插件注册到项目通知接口，你仍然可以在你个人设置里启用单独的通知',
     'My dashboard' => '我的看板',
     'My profile' => '个人信息',

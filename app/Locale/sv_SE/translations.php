@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Alla uppgifter i kolumnen "%s" samt simbanan "%s" har stängts.',
     'Do you really want to close all tasks of this column?' => 'Vill du verkligen stänga alla uppgifter i denna kolumn?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d uppgift(er) i kolumnen "%s" och simbanan "%s" kommer stängas.',
-    'Close all tasks of this column' => 'Stäng alla uppgifter i denna kolumn',
+    'Close all tasks in this column and this swimlane' => 'Stäng alla uppgifter i denna kolumn',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Inget insticksprogram har registrerat notifieringsmetod för projektet. Du kan fortfarande konfigurera personliga notifikationer i din användarprofil.',
     'My dashboard' => 'Min översiktspanel',
     'My profile' => 'Min profil',

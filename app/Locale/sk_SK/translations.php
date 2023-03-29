@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Všetky úlohy stĺpca „%s” a dráhy „%s” boli úspešne ukončené.',
     'Do you really want to close all tasks of this column?' => 'Naozaj chcete ukončiť všetky úlohy tohoto stĺpca?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d úloha(y) v stĺpci „%s” a dráhy „%s” budú ukončené.',
-    'Close all tasks of this column' => 'Ukončiť všetky úlohy tohoto stĺpca',
+    'Close all tasks in this column and this swimlane' => 'Ukončiť všetky úlohy tohoto stĺpca',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Žiadny zásuvný modul nemá zaregistrovanú metódu upozornení projektu. I tak môžete nastaviť jednotlivé upozornenia vo svojom profile.',
     'My dashboard' => 'Moja nástenka',
     'My profile' => 'Môj profil',

@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => '컬럼 "%s"와 스웜라인 "%s"의 모든 할일이 성공적으로 종료되었습니다',
     'Do you really want to close all tasks of this column?' => '이 컬럼의 모든 할일을 종료 하시겠습니까?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '컬럼 "%s"와 스웜라인 "%s"의 할일 %d가 종료될 것입니다',
-    'Close all tasks of this column' => '컬럼의 모든 할일 마치기',
+    'Close all tasks in this column and this swimlane' => '컬럼의 모든 할일 마치기',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => '프로젝트 알림 방법으로 플러그인이 등록되지 않았습니다. 각각의 알림을 프로파일에서 설정하실 수 있습니다',
     'My dashboard' => '대시보드',
     'My profile' => '프로필',

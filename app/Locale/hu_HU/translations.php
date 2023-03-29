@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'A(z) „%s” oszlop és a(z) „%s” sáv összes feladata sikeresen lezárva.',
     'Do you really want to close all tasks of this column?' => 'Valóban le szeretné zárni az oszlop összes feladatát?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => '%d feladat lesz lezárva a(z) „%s” oszlopban és a(z) „%s” sávban.',
-    'Close all tasks of this column' => 'Az oszlop összes feladatának lezárása',
+    'Close all tasks in this column and this swimlane' => 'Az oszlop összes feladatának lezárása',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Egyetlen bővítmény sem regisztrált projekt értesítési módszert. Egyedi értesítéseket továbbra is beállíthat a felhasználói profiljában.',
     'My dashboard' => 'Saját vezérlőpult',
     'My profile' => 'Saját profil',

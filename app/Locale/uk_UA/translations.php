@@ -899,7 +899,7 @@ return array(
     'All tasks of the column "%s" and the swimlane "%s" have been closed successfully.' => 'Всі задачі в колонці "%s" на доріжці "%s" успішно закрито.',
     'Do you really want to close all tasks of this column?' => 'Дійсно закрити всі задачі у колонці?',
     '%d task(s) in the column "%s" and the swimlane "%s" will be closed.' => 'буде закрито %d задач(і) у колонці "%s" на доріжці "%s".',
-    'Close all tasks of this column' => 'Закрити всі задачі в цій колонці',
+    'Close all tasks in this column and this swimlane' => 'Закрити всі задачі в цій колонці',
     'No plugin has registered a project notification method. You can still configure individual notifications in your user profile.' => 'Відсутні розширення, що надають сповіщення для проєкта. Налаштувати окремі сповіщення можна у вашому профілі користувача.',
     'My dashboard' => 'Моя панель',
     'My profile' => 'Мій профіль',
