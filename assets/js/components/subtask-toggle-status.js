@@ -16,6 +16,7 @@ KB.on('dom.ready', function () {
                 } else {
                     $(el).closest('.subtask-title').replaceWith(data);
                 }
+                KB.trigger('subtasks.reloaded');
             }
         });
     });
