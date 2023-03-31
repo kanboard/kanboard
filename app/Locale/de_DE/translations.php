@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Alle auswählen',
     'Unselect All' => 'Keine auswählen',
     'Apply action' => 'Aktion anwenden',
-    'Move selected tasks to another column' => 'Ausgewählte Aufgaben in andere Spalte verschieben',
+    'Move selected tasks to another column or swimlane' => 'Ausgewählte Aufgaben in andere Spalte verschieben',
     'Edit tasks in bulk' => 'Massenbearbeitung',
     'Choose the properties that you would like to change for the selected tasks.' => 'Wählen Sie die Eigenschaften aus, die Sie für die ausgewählten Aufgaben ändern möchten.',
     'Configure this project' => 'Projekteinstellungen',

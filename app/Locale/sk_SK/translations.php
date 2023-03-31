@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Vybrať všetky',
     'Unselect All' => 'Zrušiť výber',
     'Apply action' => 'Použiť akciu',
-    'Move selected tasks to another column' => 'Presunúť zvolené do iného stĺpca',
+    'Move selected tasks to another column or swimlane' => 'Presunúť zvolené do iného stĺpca',
     'Edit tasks in bulk' => 'Hromadná úprava úloh',
     'Choose the properties that you would like to change for the selected tasks.' => 'Zvoľte vlastnosti, ktoré chcete zmeniť vo všetkých zvolených úlohách.',
     'Configure this project' => 'Nastaviť projekt',

@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Pilih Semua',
     'Unselect All' => 'Batal Pilih Semua',
     'Apply action' => 'Terapkan tindakan',
-    'Move selected tasks to another column' => 'Pindahkan tugas yang dipilih ke kolom lain',
+    'Move selected tasks to another column or swimlane' => 'Pindahkan tugas yang dipilih ke kolom lain',
     'Edit tasks in bulk' => 'Edit tugas secara massal',
     'Choose the properties that you would like to change for the selected tasks.' => 'Pilih properti yang ingin Anda ubah untuk tugas yang dipilih.',
     'Configure this project' => 'Konfigurasi proyek ini',

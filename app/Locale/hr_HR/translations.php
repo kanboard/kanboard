@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Označi sve',
     'Unselect All' => 'Poništi odabir svega',
     'Apply action' => 'Primjeni radnju',
-    'Move selected tasks to another column' => 'Pomakni odabrani zadatak u neki drugi stupac',
+    'Move selected tasks to another column or swimlane' => 'Pomakni odabrani zadatak u neki drugi stupac',
     'Edit tasks in bulk' => 'Masovno uređivanje zadataka',
     'Choose the properties that you would like to change for the selected tasks.' => 'Izaberite svojstva koja želite promijeniti na izabranim zadacima.',
     'Configure this project' => 'Uredite ovaj projekt',

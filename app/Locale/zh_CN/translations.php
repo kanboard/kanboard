@@ -1377,7 +1377,7 @@ return array(
     'Select All' => '全选',
     'Unselect All' => '取消',
     'Apply action' => '应用动作',
-    'Move selected tasks to another column' => '移动选中任务到另一列',
+    'Move selected tasks to another column or swimlane' => '移动选中任务到另一列',
     'Edit tasks in bulk' => '批量编辑任务',
     'Choose the properties that you would like to change for the selected tasks.' => '选择你想要批量编辑的任务属性。',
     'Configure this project' => '项目配置',

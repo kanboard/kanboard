@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Изберете сè',
     'Unselect All' => 'Врати сè',
     'Apply action' => 'Примени акција',
-    'Move selected tasks to another column' => 'Преместете ја избраната задача во друга колона',
+    'Move selected tasks to another column or swimlane' => 'Преместете ја избраната задача во друга колона',
     'Edit tasks in bulk' => 'Масовно уредување на задачите',
     'Choose the properties that you would like to change for the selected tasks.' => 'Изберете ги својствата што сакате да ги промените за избраните задачи.',
     'Configure this project' => 'Конфигурирајте го овој проект',

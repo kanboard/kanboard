@@ -1377,7 +1377,7 @@ return array(
     // 'Select All' => '',
     // 'Unselect All' => '',
     // 'Apply action' => '',
-    // 'Move selected tasks to another column' => '',
+    // 'Move selected tasks to another column or swimlane' => '',
     // 'Edit tasks in bulk' => '',
     // 'Choose the properties that you would like to change for the selected tasks.' => '',
     // 'Configure this project' => '',

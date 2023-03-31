@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Vælge alle',
     'Unselect All' => 'Fravælge alle',
     'Apply action' => 'Anvende handling',
-    'Move selected tasks to another column' => 'Flyt valgte opgaver til anden kolonne',
+    'Move selected tasks to another column or swimlane' => 'Flyt valgte opgaver til anden kolonne',
     'Edit tasks in bulk' => 'Masse redigere opgaver',
     'Choose the properties that you would like to change for the selected tasks.' => 'Vælg egenskaber som skal ændres for de valgte opgaver.',
     'Configure this project' => 'Indstille projekt',

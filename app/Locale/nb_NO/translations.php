@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Velg alle',
     'Unselect All' => 'Fravelg alle',
     'Apply action' => 'Utfør',
-    'Move selected tasks to another column' => 'Flytt merkede oppgaver til en annen kolonne',
+    'Move selected tasks to another column or swimlane' => 'Flytt merkede oppgaver til en annen kolonne',
     'Edit tasks in bulk' => 'Masseredigering av oppgaver',
     'Choose the properties that you would like to change for the selected tasks.' => 'Velg egenskapene du vil endre for valgte oppgaver.',
     'Configure this project' => 'Prosjekt',

@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Zaznacz wszystko',
     'Unselect All' => 'Odznacz wszystko',
     'Apply action' => 'Zastosuj akcję',
-    'Move selected tasks to another column' => 'Przenieś wybrane zadania do innej kolumny',
+    'Move selected tasks to another column or swimlane' => 'Przenieś wybrane zadania do innej kolumny',
     'Edit tasks in bulk' => 'Edytuj zadania grupowo',
     'Choose the properties that you would like to change for the selected tasks.' => 'Wybierz właściwość wskazanego zadania, które chciałbyś zmienić.',
     'Configure this project' => 'Skonfiguruj projekt',

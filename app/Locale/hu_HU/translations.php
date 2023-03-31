@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Összes kijelölése',
     'Unselect All' => 'Összes kijelölésének megszüntetése',
     'Apply action' => 'Művelet alkalmazása',
-    'Move selected tasks to another column' => 'Kijelölt feladatok áthelyezése egy másik oszlopba',
+    'Move selected tasks to another column or swimlane' => 'Kijelölt feladatok áthelyezése egy másik oszlopba',
     'Edit tasks in bulk' => 'Feladatok tömeges szerkesztése',
     'Choose the properties that you would like to change for the selected tasks.' => 'Válassza ki azokat a tulajdonságokat, amelyeket meg szeretne változtatni a kijelölt feladatoknál.',
     'Configure this project' => 'A projekt beállítása',

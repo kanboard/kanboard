@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Вибрати все',
     'Unselect All' => 'Прибрати вибір',
     'Apply action' => 'Застосувати дію',
-    'Move selected tasks to another column' => 'Перемістити вибрані задачі до іншої колонки',
+    'Move selected tasks to another column or swimlane' => 'Перемістити вибрані задачі до іншої колонки',
     'Edit tasks in bulk' => 'Відредагувати багато задач одразу',
     'Choose the properties that you would like to change for the selected tasks.' => 'Оберіть властивості, які ви бажаєте змінити в обраних задачах.',
     'Configure this project' => 'Налаштувати цей проєкт',
