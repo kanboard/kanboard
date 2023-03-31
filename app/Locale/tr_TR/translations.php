@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Tümünü Seç',
     'Unselect All' => 'Tüm Seçimi Kaldır',
     'Apply action' => 'Komutu Uygula',
-    'Move selected tasks to another column' => 'Seçili görevleri başka kolona taşı',
+    'Move selected tasks to another column or swimlane' => 'Seçili görevleri başka kolona taşı',
     'Edit tasks in bulk' => 'Görevleri toplu olarak güncelle',
     'Choose the properties that you would like to change for the selected tasks.' => 'Seçili görevler için değiştirilecek özellikleri seç',
     'Configure this project' => 'Proje Ayarları',

@@ -1377,7 +1377,7 @@ return array(
     'Select All' => '全て選択',
     'Unselect All' => '全て選択解除',
     'Apply action' => 'アクションを実行',
-    'Move selected tasks to another column' => '選択したタスクを別のカラムに移動',
+    'Move selected tasks to another column or swimlane' => '選択したタスクを別のカラムに移動',
     'Edit tasks in bulk' => 'タスクを一括編集',
     'Choose the properties that you would like to change for the selected tasks.' => '選択したタスクの、変更したいプロパティを選択してください。',
     'Configure this project' => 'このプロジェクトの設定',

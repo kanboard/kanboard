@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Tout sélectionner',
     'Unselect All' => 'Tout désélectionner',
     'Apply action' => 'Appliquer une action',
-    'Move selected tasks to another column' => 'Déplacer les tâches sélectionnées vers une autre colonne',
+    'Move selected tasks to another column or swimlane' => 'Déplacer les tâches sélectionnées vers une autre colonne ou swimlane',
     'Edit tasks in bulk' => 'Modifier les tâches en masse',
     'Choose the properties that you would like to change for the selected tasks.' => 'Choisissez les propriétés que vous souhaitez changer pour les tâches sélectionnées.',
     'Configure this project' => 'Configurer ce projet',

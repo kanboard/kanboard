@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'Välj alla',
     'Unselect All' => 'Avmarkera alla',
     'Apply action' => 'Genomför åtgärd',
-    'Move selected tasks to another column' => 'Flytta markerade uppgifter till en annan kolumn',
+    'Move selected tasks to another column or swimlane' => 'Flytta markerade uppgifter till en annan kolumn',
     'Edit tasks in bulk' => 'Massredigera uppgifer',
     'Choose the properties that you would like to change for the selected tasks.' => 'Välj vilka egenskaper som du vill ändra för de valda uppgifterna.',
     'Configure this project' => 'Konfigurera projekt',

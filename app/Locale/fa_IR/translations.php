@@ -1377,7 +1377,7 @@ return array(
     'Select All' => 'انتخاب همه',
     'Unselect All' => 'عدم انتخاب همه',
     'Apply action' => 'انجام عمل',
-    'Move selected tasks to another column' => 'کارهای انتخاب شده به ستون دیگری منتقل شوند',
+    'Move selected tasks to another column or swimlane' => 'کارهای انتخاب شده به ستون دیگری منتقل شوند',
     'Edit tasks in bulk' => 'ویرایش کارها بصورت دسته ای',
     'Choose the properties that you would like to change for the selected tasks.' => 'مشخصاتی که می خواهید برای کارهای انتخاب شده تغییر کنند را انتخاب کنید.',
     'Configure this project' => 'پیکربندی این پروژه',

@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h2><?= t('Move selected tasks to another column') ?></h2>
+    <h2><?= t('Move selected tasks to another column or swimlane') ?></h2>
 </div>
 
 <form action="<?= $this->url->href('TaskBulkMoveColumnController', 'save', ['project_id' => $project['id']]) ?>" method="post">
