@@ -27,7 +27,7 @@ class Swift_EmbeddedFile extends Swift_Mime_EmbeddedFile
     public function __construct($data = null, $filename = null, $contentType = null)
     {
         call_user_func_array(
-            array($this, 'Swift_Mime_EmbeddedFile::__construct'),
+            'Swift_Mime_EmbeddedFile::__construct',
             Swift_DependencyContainer::getInstance()
                 ->createDependenciesFor('mime.embeddedfile')
             );
