@@ -117,7 +117,7 @@ class TaskRecurrenceModel extends TaskDuplicationModel
      */
     public function calculateRecurringTaskDueDate(array &$values)
     {
-        if (! empty($values['date_due']) && $values['recurrence_factor'] != 0) {
+        if ($values['recurrence_factor'] != 0) {
             if ($values['recurrence_basedate'] == TaskModel::RECURRING_BASEDATE_TRIGGERDATE) {
                 $values['date_due'] = time();
             }
