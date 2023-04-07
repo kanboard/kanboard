@@ -287,6 +287,15 @@ class TaskPositionModel extends Base
                 $changes,
                 $changes
             );
+
+            if ($task['column_id'] != $new_column_id) {
+                $this->taskEventJob->execute(
+                    $task['id'],
+                    array(TaskModel::EVENT_MOVE_COLUMN),
+                    $changes,
+                    $changes
+                );
+            }
         } elseif ($task['column_id'] != $new_column_id) {
             $this->taskEventJob->execute(
                 $task['id'],
