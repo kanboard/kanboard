@@ -498,12 +498,6 @@ class ProjectDuplicationModelTest extends Base
 
     public function testCloneProjectWithTasks()
     {
-        $this->container['externalLinkManager'] = $this
-            ->getMockBuilder('Kanboard\Core\ExternalLink\ExternalLinkManager')
-            ->setConstructorArgs(array($this->container))
-            ->setMethods(['push'])
-            ->getMock();
-
         $projectModel = new ProjectModel($this->container);
         $projectDuplicationModel = new ProjectDuplicationModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);
@@ -528,12 +522,6 @@ class ProjectDuplicationModelTest extends Base
 
     public function testCloneProjectWithSwimlanesAndTasks()
     {
-        $this->container['externalLinkManager'] = $this
-            ->getMockBuilder('Kanboard\Core\ExternalLink\ExternalLinkManager')
-            ->setConstructorArgs(array($this->container))
-            ->setMethods(['push'])
-            ->getMock();
-
         $projectModel = new ProjectModel($this->container);
         $projectDuplicationModel = new ProjectDuplicationModel($this->container);
         $swimlaneModel = new SwimlaneModel($this->container);
@@ -584,12 +572,6 @@ class ProjectDuplicationModelTest extends Base
 
     public function testCloneProjectWithTags()
     {
-        $this->container['externalLinkManager'] = $this
-            ->getMockBuilder('Kanboard\Core\ExternalLink\ExternalLinkManager')
-            ->setConstructorArgs(array($this->container))
-            ->setMethods(['push'])
-            ->getMock();
-
         $projectModel = new ProjectModel($this->container);
         $projectDuplicationModel = new ProjectDuplicationModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);
