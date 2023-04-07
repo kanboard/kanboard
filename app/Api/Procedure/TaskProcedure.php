@@ -74,7 +74,7 @@ class TaskProcedure extends BaseProcedure
     public function moveTaskPosition($project_id, $task_id, $column_id, $position, $swimlane_id)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'moveTaskPosition', $project_id);
-        return $this->taskPositionModel->movePosition($project_id, $task_id, $column_id, $position, $swimlane_id);
+        return $this->taskPositionModel->movePosition($project_id, $task_id, $column_id, $position, $swimlane_id, true, false);
     }
 
     public function moveTaskToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
