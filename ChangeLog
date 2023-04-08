@@ -1,3 +1,25 @@
+Version 1.2.28 (April 8, 2023)
+------------------------------
+
+* Trigger `EVENT_MOVE_COLUMN` event when moving task to another swimlane
+* Allow moving closed tasks when using the API
+* Duplicate external links when duplicating tasks
+* Add support for comparison operator to priority filter
+* Prevents users to convert subtaks to tasks when custom role does not allow it
+* Avoid deprecation messages when sending an email with PHP 8.2
+* Declare most common routes to have nice URLs
+* Improve wording of bulk action modal to move tasks position
+* Allow closing modals by clicking on the background
+* Improve wording of the menu to close all tasks in a given column/swimlane
+* Fix bug that prevent reordering subtasks after changing the status
+* Bump version of `phpunit/phpunit`, `symfony/stopwatch`, and `symfony/finder`
+* Use `GITHUB_TOKEN` instead of a personal token to run GitHub Actions
+* Duplicate attachments & external links during task duplication & importing
+* Move Docker image to run automated tests to GitHub Registry
+* Push Docker images to an additional registry Quay.io (RedHat)
+* Use the appropriate config for the start column in user iCal export
+* Improved translations
+
 Version 1.2.27 (March 5, 2023)
 ------------------------------
 
