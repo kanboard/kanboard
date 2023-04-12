@@ -14,10 +14,10 @@ class Translator
      * Locale
      *
      * @static
-     * @access private
+     * @access public
      * @var array
      */
-    private static $locales = array();
+    public static $locales = array();
 
     /**
      * Instance
