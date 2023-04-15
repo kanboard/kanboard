@@ -25,6 +25,12 @@ KB.component('file-upload', function (containerElement, options) {
         KB.trigger('modal.stop');
     }
 
+    function onRequestTooLarge() {
+        var label = options.labelOversize ? options.labelOversize : options.labelUploadError;
+        var errorElement = KB.dom('div').addClass('file-error').text(label).build();
+        KB.find('#file-item-' + currentFileIndex).add(errorElement);
+    }
+
     function onComplete() {
         currentFileIndex++;
 
@@ -92,7 +98,7 @@ KB.component('file-upload', function (containerElement, options) {
 
     function uploadFiles() {
         if (files.length > 0) {
-            KB.http.uploadFile(options.url, files[currentFileIndex], options.csrf, onProgress, onComplete, onError, onServerError);
+            KB.http.uploadFile(options.url, files[currentFileIndex], options.csrf, onProgress, onComplete, onError, onServerError, onRequestTooLarge);
         }
     }
 
