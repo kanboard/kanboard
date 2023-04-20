@@ -55,6 +55,14 @@ class RouteTest extends Base
 
         $this->assertEquals('v1', $this->container['request']->getStringParam('p1'));
         $this->assertEquals('v2', $this->container['request']->getStringParam('p2'));
+
+        $route->addRoute('/search/:query', 'searchcontroller', 'searchaction');
+        $this->assertEquals(
+            array('controller' => 'searchcontroller', 'action' => 'searchaction', 'plugin' => ''),
+            $route->findRoute('/search/modified%3A%22%3E%3D2023-04-01%22')
+        );
+
+        $this->assertEquals('modified:">=2023-04-01"', $this->container['request']->getStringParam('query'));
     }
 
     public function testFindUrl()
@@ -76,5 +84,6 @@ class RouteTest extends Base
         $this->assertEquals('something', $route->findUrl('controller1', 'action1', array(), 'myplugin'));
         $this->assertEquals('foo/123', $route->findUrl('controller1', 'action3', array('myvar' => 123), 'myplugin'));
         $this->assertEquals('foo/123', $route->findUrl('controller1', 'action3', array('myvar' => 123, 'plugin' => 'myplugin')));
+        $this->assertEquals('foo/modified%3A%22%3E%3D2023-04-01%22', $route->findUrl('controller1', 'action3', array('myvar' => 'modified:">=2023-04-01"', 'plugin' => 'myplugin')));
     }
 }
