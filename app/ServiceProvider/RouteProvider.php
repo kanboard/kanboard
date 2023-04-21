@@ -38,7 +38,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('dashboard/:user_id/subtasks', 'DashboardController', 'subtasks');
             $container['route']->addRoute('dashboard/:user_id/activity', 'DashboardController', 'activity');
             $container['route']->addRoute('dashboard/:user_id/notifications', 'DashboardController', 'notifications');
-            $container['route']->addRoute('dashboard/activity', 'ActivityController', 'user');
+            $container['route']->addRoute('my-activity', 'ActivityController', 'user');
 
             // Search routes
             $container['route']->addRoute('search', 'SearchController', 'index');
