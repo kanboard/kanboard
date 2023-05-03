@@ -17,7 +17,8 @@
     transform: translateX(-50%);
     background: #fff;
     overflow: auto;
-    border-radius: 5px
+    border-radius: 5px;
+    padding: 4%;
 }
 
 #modal-content {
