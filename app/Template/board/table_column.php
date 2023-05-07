@@ -14,7 +14,7 @@
         </div>
 
         <!-- column in expanded mode -->
-        <div class="board-column-expanded-header">
+        <div class="board-column-expanded board-column-expanded-header">
             <?php if (! $not_editable && $this->projectRole->canCreateTaskInColumn($column['project_id'], $column['id'])): ?>
                 <?= $this->task->getNewBoardTaskButton($swimlane, $column) ?>
             <?php endif ?>

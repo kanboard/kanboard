@@ -7,7 +7,7 @@
         </div>
 
         <!-- column in expanded mode -->
-        <div class="board-column-expanded-header">
+        <div class="board-column-expanded board-column-expanded-header">
             <span class="board-column-title">
             </span>
 
