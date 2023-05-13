@@ -1399,6 +1399,8 @@ return array(
     'Reorder this column by assignee (Z-A)' => 'Promenite redosled ove kolone prema izvršiocu (Ž-A)',
     'Reorder this column by due date (ASC)' => 'Promenite redosled ove kolone prema roku završetka (UZLAZNO)',
     'Reorder this column by due date (DESC)' => 'Promenite redosled ove kolone prema roku završetka (SILAZNO)',
+    // 'Reorder this column by id (ASC)' => '',
+    // 'Reorder this column by id (DESC)' => '',
     '%s moved the task #%d "%s" to the project "%s"' => '%s je pomerio/la zadatak #%d "%s" u projekat "%s"',
     'Task #%d "%s" has been moved to the project "%s"' => 'Zadatak #%d "%s" je premešten u projekat "%s"',
     'Move the task to another column when the due date is less than a certain number of days' => 'Pomeri zadatak u neku drugu kolonu kada je datum roka završetka kraći od određenog broja dana',
@@ -1434,4 +1436,9 @@ return array(
     // 'Copy' => '',
     // 'Tasks copied successfully.' => '',
     // 'Unable to copy tasks.' => '',
+    // 'Theme' => '',
+    // 'Theme:' => '',
+    // 'Light theme' => '',
+    // 'Dark theme' => '',
+    // 'Automatic theme - Sync with system' => '',
 );

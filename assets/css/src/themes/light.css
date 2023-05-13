@@ -1,4 +1,7 @@
 :root {
+    --body-background-color: #FFF;
+    --header-background-color: #fbfbfb;
+
     --color-primary: #333;
     --color-light: #999;
     --color-lighter: #dedede;
@@ -56,6 +59,10 @@
     --button-disabled-background-color: #f7f7f7;
     --button-disabled-border-color: #ccc;
 
+    --table-header-background-color: #fbfbfb;
+    --table-nth-background-color: #fefefe;
+    --table-border-color: #eee;
+
     --avatar-color-letter: #fff;
 
     --activity-title-color: #000;
@@ -66,4 +73,61 @@
     --user-mention-color: #000;
 
     --board-task-limit-color: #DF5353;
+
+    --table-list-header-border-color: #e5e5e5;
+    --table-list-header-background-color: #fbfbfb;
+    --table-list-nth-background-color: #fefefe;
+    --table-list-border-color: #e5e5e5;
+    --table-list-row-hover-border-color: #ffeb8e;
+    --table-list-row-background-color: #fff8dc;
+
+    --sidebar-border-color: #efefef;
+
+    --dropdown-background-color: #fff;
+    --dropdown-border-color: #b2b2b2;
+    --dropdown-li-border-color: #f8f8f8;
+
+    --input-addon-background-color: rgba(147, 128, 108, 0.1);
+    --input-addon-color: #666;
+
+    --views-background-color: #fafafa;
+    --views-border-color: #ddd;
+    --views-active-color: #000;
+
+    --input-focus-color: #000;
+    --input-focus-border-color: rgba(82, 168, 236, 0.8);
+    --input-focus-shadow-color: rgba(82, 168, 236, 0.6);
+    --input-background-color: #fff;
+    --input-border-color: #ccc;
+    --input-placeholder-color: #dedede;
+
+    --tooltip-background-color: #fff;
+    --tooltip-border-color: #ddd;
+    --tooltip-shadow-color: #aaa;
+
+    --panel-background-color: #fcfcfc;
+    --panel-border-color: #ddd;
+
+    --draggable-item-selected-background-color: #fff;
+    --draggable-item-selected-border-color: #666;
+    --draggable-item-hover-background-color: #FEFFF2;
+    --draggable-row-handle-color: #dedede;
+    --draggable-placeholder-background-color: #fafafa;
+    --draggable-placeholder-border-color: #000;
+
+    --task-list-icons-color: #999;
+
+    --form-help-color: brown;
+    --form-error-color: #b94a48;
+
+    --comment-title-border-color: #eee;
+    --comment-nth-background-color: #fbfbfb;
+    --comment-highlighted-background-color: #fff8dc;
+    --comment-highlighted-hover-background-color: #fff8dc;
+    --comment-highlighted-border-color: #ffeb8e;
 }
+
+html {
+    color-scheme: light;
+}
+

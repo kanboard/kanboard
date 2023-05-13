@@ -19,6 +19,9 @@
 
     <fieldset>
         <legend><?= t('Preferences') ?></legend>
+        <?= $this->form->label(t('Theme'), 'theme') ?>
+        <?= $this->form->select('theme', $themes, $values, $errors, array($this->user->hasAccess('UserModificationController', 'show/edit_theme') ? '' : 'disabled')) ?>
+
         <?= $this->form->label(t('Timezone'), 'timezone') ?>
         <?= $this->form->select('timezone', $timezones, $values, $errors, array($this->user->hasAccess('UserModificationController', 'show/edit_timezone') ? '' : 'disabled')) ?>
 

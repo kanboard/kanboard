@@ -1399,6 +1399,8 @@ return array(
     'Reorder this column by assignee (Z-A)' => 'Zoradiť stĺpec podľa pridelenia (Z-A)',
     'Reorder this column by due date (ASC)' => 'Zoradiť stĺpec podľa termínu ukončenia (VZOST)',
     'Reorder this column by due date (DESC)' => 'Zoradiť stĺpec podľa termínu ukončenia (ZOST)',
+    // 'Reorder this column by id (ASC)' => '',
+    // 'Reorder this column by id (DESC)' => '',
     '%s moved the task #%d "%s" to the project "%s"' => '%s presunul/a úlohu č. %d „%s” do projektu „%s”',
     'Task #%d "%s" has been moved to the project "%s"' => 'Úloha č. %d „%s” bola presunutá do projektu „%s”',
     'Move the task to another column when the due date is less than a certain number of days' => 'Presunúť úlohu do iného stĺpca, keď je do termínu ukončenia menej ako zadaný počet dní',
@@ -1434,4 +1436,9 @@ return array(
     // 'Copy' => '',
     // 'Tasks copied successfully.' => '',
     // 'Unable to copy tasks.' => '',
+    // 'Theme' => '',
+    // 'Theme:' => '',
+    // 'Light theme' => '',
+    // 'Dark theme' => '',
+    // 'Automatic theme - Sync with system' => '',
 );

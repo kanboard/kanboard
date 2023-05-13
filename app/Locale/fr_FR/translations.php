@@ -1399,6 +1399,8 @@ return array(
     'Reorder this column by assignee (Z-A)' => 'Réorganiser cette colonne par assigné (Z-A)',
     'Reorder this column by due date (ASC)' => 'Réorganiser cette colonne par date d\'échéance (ASC)',
     'Reorder this column by due date (DESC)' => 'Réorganiser cette colonne par date d\'échéance (DESC)',
+    'Reorder this column by id (ASC)' => 'Réorganiser cette colonne par ID (ASC)',
+    'Reorder this column by id (DESC)' => 'Réorganiser cette colonne par ID (DESC)',
     '%s moved the task #%d "%s" to the project "%s"' => '%s a déplacé la tâche #%d « %s » vers le projet « %s »',
     'Task #%d "%s" has been moved to the project "%s"' => 'La tâche #%d « %s » a été déplacée vers le projet « %s »',
     'Move the task to another column when the due date is less than a certain number of days' => 'Déplacer la tâche dans une autre colonne lorsque la date d\'échéance est inférieure à un certain nombre de jour',
@@ -1434,4 +1436,9 @@ return array(
     'Copy' => 'Copier',
     'Tasks copied successfully.' => 'Tâches copiées avec succès.',
     'Unable to copy tasks.' => 'Impossible de copier les tâches.',
+    'Theme' => 'Thème',
+    'Theme:' => 'Thème :',
+    'Light theme' => 'Thème clair',
+    'Dark theme' => 'Thème sombre',
+    'Automatic theme - Sync with system' => 'Thème automatique - Se synchronize avec le système d\'exploitation',
 );

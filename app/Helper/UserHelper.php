@@ -12,6 +12,11 @@ use Kanboard\Core\Base;
  */
 class UserHelper extends Base
 {
+    public function getTheme()
+    {
+        return $this->userSession->getTheme();
+    }
+
     /**
      * Return subtask list toggle value
      *

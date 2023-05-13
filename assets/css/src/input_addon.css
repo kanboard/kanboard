@@ -20,8 +20,8 @@
 }
 
 .input-addon-item {
-    background-color: rgba(147, 128, 108, 0.1);
-    color: #666;
+    background-color: var(--input-addon-background-color);
+    color: var(--input-addon-color);
     font: inherit;
     font-weight: normal
 }

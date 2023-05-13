@@ -32,7 +32,7 @@
 }
 
 .task-summary-column {
-    color: var(--color-primary);
+    color: var(--color-dark);
 }
 
 .task-summary-column span {

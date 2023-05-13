@@ -1399,6 +1399,8 @@ return array(
     'Reorder this column by assignee (Z-A)' => 'Susun ulang kolom ini oleh penerima tugas (Z-A)',
     'Reorder this column by due date (ASC)' => 'Susun ulang kolom ini sebelum tanggal jatuh tempo (ASC)',
     'Reorder this column by due date (DESC)' => 'Susun ulang kolom ini berdasarkan tanggal jatuh tempo (DESC)',
+    // 'Reorder this column by id (ASC)' => '',
+    // 'Reorder this column by id (DESC)' => '',
     '%s moved the task #%d "%s" to the project "%s"' => '%s memindahkan tugas #%d "%s" ke proyek "%s"',
     'Task #%d "%s" has been moved to the project "%s"' => 'Task #%d "%s" telah dipindahkan ke proyek "%s"',
     'Move the task to another column when the due date is less than a certain number of days' => 'Pindahkan tugas ke kolom lain ketika batas waktu kurang dari jumlah hari tertentu',
@@ -1434,4 +1436,9 @@ return array(
     // 'Copy' => '',
     // 'Tasks copied successfully.' => '',
     // 'Unable to copy tasks.' => '',
+    // 'Theme' => '',
+    // 'Theme:' => '',
+    // 'Light theme' => '',
+    // 'Dark theme' => '',
+    // 'Automatic theme - Sync with system' => '',
 );

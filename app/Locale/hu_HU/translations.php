@@ -1399,6 +1399,8 @@ return array(
     'Reorder this column by assignee (Z-A)' => 'Oszlop átrendezése felelős szerint (Z-A)',
     'Reorder this column by due date (ASC)' => 'Oszlop átrendezése határidő szerint (növekvő)',
     'Reorder this column by due date (DESC)' => 'Oszlop átrendezése határidő szerint (csökkenő)',
+    // 'Reorder this column by id (ASC)' => '',
+    // 'Reorder this column by id (DESC)' => '',
     '%s moved the task #%d "%s" to the project "%s"' => '%s áthelyezte a(z) #%d. „%s” feladatot ebbe a projektbe: „%s”',
     'Task #%d "%s" has been moved to the project "%s"' => 'A(z) #%d. „%s” feladat áthelyezésre került ebbe a projektbe: „%s”',
     'Move the task to another column when the due date is less than a certain number of days' => 'A feladat áthelyezése egy másik oszlopba, ha a határidő kevesebb egy bizonyos számú napnál',
@@ -1434,4 +1436,9 @@ return array(
     // 'Copy' => '',
     // 'Tasks copied successfully.' => '',
     // 'Unable to copy tasks.' => '',
+    // 'Theme' => '',
+    // 'Theme:' => '',
+    // 'Light theme' => '',
+    // 'Dark theme' => '',
+    // 'Automatic theme - Sync with system' => '',
 );

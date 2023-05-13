@@ -196,6 +196,21 @@ class UserSession extends Base
     }
 
     /**
+     * Get user theme
+     *
+     * @access public
+     * @return string
+     */
+    public function getTheme()
+    {
+        if (! $this->isLogged()) {
+            return 'light';
+        }
+
+        return session_get('user')['theme'];
+    }
+
+    /**
      * Return true if subtask list toggle is active
      *
      * @access public

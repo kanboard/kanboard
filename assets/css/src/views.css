@@ -25,8 +25,8 @@
 
 .views li {
     white-space: nowrap;
-    background: #fafafa;
-    border: 1px solid #ddd;
+    background: var(--views-background-color);
+    border: 1px solid var(--views-border-color);
     border-right: none;
     padding: 4px 8px;
     display: inline
@@ -37,13 +37,13 @@
         display: block;
         margin-top: 5px;
         border-radius: 5px;
-        border: 1px solid #ddd
+        border: 1px solid var(--views-border-color)
     }
 }
 
 .views li.active a {
     font-weight: bold;
-    color: #000;
+    color: var(--views-active-color);
     text-decoration: none
 }
 
@@ -53,13 +53,13 @@
 }
 
 .views li:last-child {
-    border-right: 1px solid #ddd;
+    border-right: 1px solid var(--views-border-color);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px
 }
 
 .views a {
-    color: var(--color-medium);
+    color: var(--color-ligth);
     text-decoration: none
 }
 

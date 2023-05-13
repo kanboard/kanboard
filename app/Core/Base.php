@@ -147,6 +147,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskStatusModel                         $taskStatusModel
  * @property \Kanboard\Model\TaskTagModel                            $taskTagModel
  * @property \Kanboard\Model\TaskMetadataModel                       $taskMetadataModel
+ * @property \Kanboard\Model\ThemeModel                              $themeModel
  * @property \Kanboard\Model\TimezoneModel                           $timezoneModel
  * @property \Kanboard\Model\TransitionModel                         $transitionModel
  * @property \Kanboard\Model\UserModel                               $userModel
