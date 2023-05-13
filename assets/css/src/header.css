@@ -4,7 +4,7 @@ header {
     padding: 5px 10px;
     margin-bottom: 5px;
     border-bottom: 1px solid #dedede;
-    background-color: #fbfbfb
+    background-color: var(--header-background-color);
 }
 
 header .title-container {

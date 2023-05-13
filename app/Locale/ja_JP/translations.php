@@ -1399,6 +1399,8 @@ return array(
     'Reorder this column by assignee (Z-A)' => '担当者で並び替える(Z-A)',
     'Reorder this column by due date (ASC)' => '期限で並び替える(昇順)',
     'Reorder this column by due date (DESC)' => '期限で並び替える(降順)',
+    // 'Reorder this column by id (ASC)' => '',
+    // 'Reorder this column by id (DESC)' => '',
     '%s moved the task #%d "%s" to the project "%s"' => '%s がタスク #%d "%s" をプロジェクト "%s" に移動しました',
     'Task #%d "%s" has been moved to the project "%s"' => 'タスク#%d "%s" はプロジェクト "%s" へ移動されました ',
     'Move the task to another column when the due date is less than a certain number of days' => '期限までの日数が規定値以下になったら、タスクを別のカラムに移動する',
@@ -1434,4 +1436,9 @@ return array(
     // 'Copy' => '',
     // 'Tasks copied successfully.' => '',
     // 'Unable to copy tasks.' => '',
+    // 'Theme' => '',
+    // 'Theme:' => '',
+    // 'Light theme' => '',
+    // 'Dark theme' => '',
+    // 'Automatic theme - Sync with system' => '',
 );

@@ -87,7 +87,7 @@
 .task-list-icons a,
 .task-list-icons span,
 .task-list-icons i {
-    color: #999;
+    color: var(--task-list-icons-color);
     opacity: 1.0
 }
 

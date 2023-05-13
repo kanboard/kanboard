@@ -30,7 +30,6 @@ class CssCommand extends BaseCommand
     const CSS_DIST_PATH = 'assets/css/';
 
     private $appFiles = [
-        'variables.css',
         'base.css',
         'links.css',
         'titles.css',
@@ -105,7 +104,9 @@ class CssCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->minifyFiles(self::CSS_SRC_PATH, $this->appFiles, 'app.min.css');
+        $this->minifyFiles(self::CSS_SRC_PATH, array_merge(['themes'.DIRECTORY_SEPARATOR.'light.css'], $this->appFiles), 'light.min.css');
+        $this->minifyFiles(self::CSS_SRC_PATH, array_merge(['themes'.DIRECTORY_SEPARATOR.'dark.css'], $this->appFiles), 'dark.min.css');
+        $this->minifyFiles(self::CSS_SRC_PATH, array_merge(['themes'.DIRECTORY_SEPARATOR.'auto.css'], $this->appFiles), 'auto.min.css');
         $this->minifyFiles(self::CSS_SRC_PATH, $this->printFiles, 'print.min.css');
 
         $vendorBundle = concat_files($this->vendorFiles);

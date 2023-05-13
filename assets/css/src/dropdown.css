@@ -23,8 +23,8 @@ ul.dropdown-submenu-open {
     list-style: none;
     margin: 3px 0 0 1px;
     padding: 6px 0;
-    background-color: #fff;
-    border: 1px solid #b2b2b2;
+    background-color: var(--dropdown-background-color);
+    border: 1px solid var(--dropdown-border-color);
     border-radius: 3px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15)
 }
@@ -34,7 +34,7 @@ ul.dropdown-submenu-open {
     margin: 0;
     padding: 8px 10px;
     font-size: 0.9em;
-    border-bottom: 1px solid #f8f8f8;
+    border-bottom: 1px solid var(--dropdown-li-border-color);
     cursor: pointer
 }
 
@@ -61,7 +61,7 @@ ul.dropdown-submenu-open {
 
 .dropdown-submenu-open a {
     text-decoration: none;
-    color: #333
+    color: var(--color-primary)
 }
 
 .dropdown-submenu-open a:focus {
@@ -70,7 +70,7 @@ ul.dropdown-submenu-open {
 
 .dropdown-menu-link-text,
 .dropdown-menu-link-icon {
-    color: #333;
+    color: var(--color-primary);
     text-decoration: none
 }
 
@@ -79,11 +79,11 @@ ul.dropdown-submenu-open {
 }
 
 td a.dropdown-menu strong {
-    color: #333
+    color: var(--color-primary);
 }
 
 td a.dropdown-menu strong i {
-    color: #333
+    color: var(--color-primary);
 }
 
 td a.dropdown-menu i {

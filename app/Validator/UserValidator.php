@@ -28,6 +28,7 @@ class UserValidator extends BaseValidator
             new Validators\Unique('username', t('This username is already taken'), $this->db->getConnection(), UserModel::TABLE, 'id'),
             new Validators\Email('email', t('Email address invalid')),
             new Validators\Integer('is_ldap_user', t('This value must be an integer')),
+            new Validators\MaxLength('theme', t('The maximum length is %d characters', 50), 50),
         );
     }
 

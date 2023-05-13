@@ -15,7 +15,7 @@
     top: 2%;
     left: 50%;
     transform: translateX(-50%);
-    background: #fff;
+    background: var(--body-background-color);
     overflow: auto;
     border-radius: 5px
 }

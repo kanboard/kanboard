@@ -4,9 +4,9 @@
     z-index: 1000;
     min-width: 160px;
     padding: 5px 0;
-    background: #fff;
+    background: var(--dropdown-background-color);
     list-style: none;
-    border: 1px solid #ccc;
+    border: 1px solid var(--dropdown-border-color);
     border-radius: 3px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     overflow: scroll
@@ -18,7 +18,7 @@
     padding: 3px 10px;
     color: var(--color-medium);
     cursor: pointer;
-    border-bottom: 1px solid #f8f8f8;
+    border-bottom: 1px solid var(--dropdown-li-border-color);
     line-height: 1.5em;
     font-weight: 400
 }
@@ -34,9 +34,9 @@
 
 .select-dropdown-input-container {
     position: relative;
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-border-color);
     border-radius: 5px;
-    background-color: #fff;
+    background-color: var(--input-background-color);
     max-width: 300px
 }
 

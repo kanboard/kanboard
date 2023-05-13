@@ -8,10 +8,10 @@
 
 #tooltip-container {
     padding: 5px;
-    background: #fff;
-    border: 1px solid #ddd;
+    background: var(--tooltip-background-color);
+    border: 1px solid var(--tooltip-border-color);
     border-radius: 4px;
-    box-shadow: 0 6px 12px #aaa;
+    box-shadow: 0 6px 12px var(--tooltip-shadow-color);
     position: absolute;
     min-width: 350px
 }

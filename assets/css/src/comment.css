@@ -18,7 +18,7 @@
 }
 
 .comment-title {
-    border-bottom: 1px dotted #eee;
+    border-bottom: 1px dotted var(--comment-title-border-color);
     margin-left: 55px
 }
 
@@ -44,22 +44,22 @@
 }
 
 .comments .comment-highlighted {
-    background-color: #fff8dc;
-    border: 2px solid #ffeb8e
+    background-color: var(--comment-highlighted-background-color);
+    border: 2px solid var(--comment-highlighted-border-color);
 }
 
 .comments .comment-highlighted:hover {
-    background-color: #fff8dc
+    background-color: var(--comment-highlighted-hover-background-color)
 }
 
 .comments .comment:hover {
-    background: #fff8dc
+    background: var(--comment-highlighted-hover-background-color)
 }
 
 .comments .comment:nth-child(even):not(.comment-highlighted) {
-    background: #fbfbfb
+    background: var(--comment-nth-background-color);
 }
 
 .comments .comment:nth-child(even):not(.comment-highlighted):hover {
-    background: #fff8dc
+    background: var(--comment-highlighted-hover-background-color)
 }

@@ -1399,6 +1399,8 @@ return array(
     'Reorder this column by assignee (Z-A)' => 'Sortuj kolumnę po osobie przydzielonej do zadania (malejąco)',
     'Reorder this column by due date (ASC)' => 'Sortuj kolumnę po dacie zakończenia (rosnąco)',
     'Reorder this column by due date (DESC)' => 'Sortuj kolumnę po dacie zakończenia (malejąco)',
+    // 'Reorder this column by id (ASC)' => '',
+    // 'Reorder this column by id (DESC)' => '',
     '%s moved the task #%d "%s" to the project "%s"' => '%s przeniósł zadanie nr %d "%s" do projektu "%s"',
     'Task #%d "%s" has been moved to the project "%s"' => 'Zadanie nr %d "%s" zostało przeniesione do projektu "%s"',
     'Move the task to another column when the due date is less than a certain number of days' => 'Przenieś zadanie do innej kolumny, kiedy data zakończenia jest oddalona o określoną liczbę dni od aktualnej daty',
@@ -1434,4 +1436,9 @@ return array(
     // 'Copy' => '',
     // 'Tasks copied successfully.' => '',
     // 'Unable to copy tasks.' => '',
+    // 'Theme' => '',
+    // 'Theme:' => '',
+    // 'Light theme' => '',
+    // 'Dark theme' => '',
+    // 'Automatic theme - Sync with system' => '',
 );

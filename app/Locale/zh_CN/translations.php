@@ -1399,6 +1399,8 @@ return array(
     'Reorder this column by assignee (Z-A)' => '按指派重排(Z-A)',
     'Reorder this column by due date (ASC)' => '按逾期时间重排(升序)',
     'Reorder this column by due date (DESC)' => '按逾期时间重排(降序)',
+    // 'Reorder this column by id (ASC)' => '',
+    // 'Reorder this column by id (DESC)' => '',
     '%s moved the task #%d "%s" to the project "%s"' => '%s 已将任务 #%d "%s" 移动到项目"%s" ',
     'Task #%d "%s" has been moved to the project "%s"' => '任务 #%d "%s" 已被移动到项目 "%s"',
     'Move the task to another column when the due date is less than a certain number of days' => '当任务即将在指定天数内超期时移动到另一栏',
@@ -1434,4 +1436,9 @@ return array(
     'Copy' => '复制',
     'Tasks copied successfully.' => '任务复制成功。',
     'Unable to copy tasks.' => '无法复制任务。',
+    // 'Theme' => '',
+    // 'Theme:' => '',
+    // 'Light theme' => '',
+    // 'Dark theme' => '',
+    // 'Automatic theme - Sync with system' => '',
 );

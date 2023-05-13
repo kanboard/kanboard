@@ -8,8 +8,13 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 126;
+const VERSION = 127;
 
+
+function version_127(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN theme TEXT DEFAULT 'light' NOT NULL");
+}
 
 function version_126(PDO $pdo)
 {

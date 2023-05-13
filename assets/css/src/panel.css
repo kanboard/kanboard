@@ -3,9 +3,9 @@
     padding: 8px 35px 8px 10px;
     margin-top: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--panel-border-color);
     color: var(--color-primary);
-    background-color: #fcfcfc;
+    background-color: var(--panel-background-color);
     overflow: auto
 }
 

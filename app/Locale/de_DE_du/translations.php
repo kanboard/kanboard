@@ -1399,6 +1399,8 @@ return array(
     'Reorder this column by assignee (Z-A)' => 'Spalte nach Zuständigem ordnen (Z-A)',
     'Reorder this column by due date (ASC)' => 'Spalte nach Fälligkeitsdatum ordnen (aufsteigend)',
     'Reorder this column by due date (DESC)' => 'Spalte nach Fälligkeitsdatum ordnen (absteigend)',
+    // 'Reorder this column by id (ASC)' => '',
+    // 'Reorder this column by id (DESC)' => '',
     '%s moved the task #%d "%s" to the project "%s"' => '%s hat die Aufgabe #%d "%s" in das Projekt "%s" verschoben',
     'Task #%d "%s" has been moved to the project "%s"' => 'Aufgabe #%d "%s" wurde in das Projekt "%s" verschoben',
     'Move the task to another column when the due date is less than a certain number of days' => 'Verschieben der Aufgabe in eine andere Spalte, wenn die Fälligkeit kleiner als eine bestimmte Anzahl von Tagen ist',
@@ -1434,4 +1436,9 @@ return array(
     'Copy' => 'Kopieren',
     'Tasks copied successfully.' => 'Die Aufgaben wurden erfolgreich kopiert.',
     'Unable to copy tasks.' => 'Die Aufgaben konnten nicht kopiert werden.',
+    // 'Theme' => '',
+    // 'Theme:' => '',
+    // 'Light theme' => '',
+    // 'Dark theme' => '',
+    // 'Automatic theme - Sync with system' => '',
 );

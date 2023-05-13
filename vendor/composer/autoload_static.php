@@ -8,9 +8,9 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
-        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '8a67f3044590529ed0a5e02f9cc9c90b' => __DIR__ . '/../..' . '/app/functions.php',
         'dda285bdc738399c7167126cf41c82cb' => __DIR__ . '/../..' . '/libs/swiftmailer/swift_required.php',
     );
@@ -776,6 +776,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Kanboard\\Model\\TaskReorderModel' => __DIR__ . '/../..' . '/app/Model/TaskReorderModel.php',
         'Kanboard\\Model\\TaskStatusModel' => __DIR__ . '/../..' . '/app/Model/TaskStatusModel.php',
         'Kanboard\\Model\\TaskTagModel' => __DIR__ . '/../..' . '/app/Model/TaskTagModel.php',
+        'Kanboard\\Model\\ThemeModel' => __DIR__ . '/../..' . '/app/Model/ThemeModel.php',
         'Kanboard\\Model\\TimezoneModel' => __DIR__ . '/../..' . '/app/Model/TimezoneModel.php',
         'Kanboard\\Model\\TransitionModel' => __DIR__ . '/../..' . '/app/Model/TransitionModel.php',
         'Kanboard\\Model\\UserLockingModel' => __DIR__ . '/../..' . '/app/Model/UserLockingModel.php',

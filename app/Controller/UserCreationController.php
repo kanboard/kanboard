@@ -23,6 +23,7 @@ class UserCreationController extends BaseController
     public function show(array $values = array(), array $errors = array())
     {
         $this->response->html($this->template->render('user_creation/show', array(
+            'themes' => $this->themeModel->getThemes(),
             'timezones' => $this->timezoneModel->getTimezones(true),
             'languages' => $this->languageModel->getLanguages(true),
             'roles' => $this->role->getApplicationRoles(),

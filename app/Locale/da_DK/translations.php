@@ -1399,6 +1399,8 @@ return array(
     'Reorder this column by assignee (Z-A)' => 'Sorter kolonne efter ansvarlig (Z-A)',
     'Reorder this column by due date (ASC)' => 'Sorter kolonne efter udløbstid (ASC)',
     'Reorder this column by due date (DESC)' => 'Sorter kolonne efter udløbstid (DESC)',
+    // 'Reorder this column by id (ASC)' => '',
+    // 'Reorder this column by id (DESC)' => '',
     '%s moved the task #%d "%s" to the project "%s"' => '%s flyttet opgave #%d "%s" til projekt "%s"',
     'Task #%d "%s" has been moved to the project "%s"' => 'Opgave #%d "%s" er flyttet til projekt "%s"',
     'Move the task to another column when the due date is less than a certain number of days' => 'Flyt opgave til anden kolonne når afleveringsdato er mindre end et bestemt antal dage',
@@ -1434,4 +1436,9 @@ return array(
     // 'Copy' => '',
     // 'Tasks copied successfully.' => '',
     // 'Unable to copy tasks.' => '',
+    // 'Theme' => '',
+    // 'Theme:' => '',
+    // 'Light theme' => '',
+    // 'Dark theme' => '',
+    // 'Automatic theme - Sync with system' => '',
 );
