@@ -36,7 +36,7 @@ KB.component('screenshot', function (containerElement) {
 
         if (! window.Clipboard) {
             // Insert the content editable at the top to avoid scrolling down in the board view
-            pasteCatcher = document.createElement('div');
+            pasteCatcher = document.createElement('template');
             pasteCatcher.id = 'screenshot-pastezone';
             pasteCatcher.contentEditable = true;
             pasteCatcher.style.opacity = 0;
