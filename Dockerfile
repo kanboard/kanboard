@@ -17,12 +17,12 @@ EXPOSE 80 443
 ARG VERSION
 
 RUN apk --no-cache --update add \
-    tzdata openssl unzip nginx bash ca-certificates s6 curl ssmtp mailx php81 php81-phar php81-curl \
-    php81-fpm php81-json php81-zlib php81-xml php81-dom php81-ctype php81-opcache php81-zip php81-iconv \
-    php81-pdo php81-pdo_mysql php81-pdo_sqlite php81-pdo_pgsql php81-mbstring php81-session php81-bcmath \
-    php81-gd php81-openssl php81-sockets php81-posix php81-ldap php81-simplexml && \
+    tzdata openssl unzip nginx bash ca-certificates s6 curl ssmtp mailx php82 php82-phar php82-curl \
+    php82-fpm php82-json php82-zlib php82-xml php82-dom php82-ctype php82-opcache php82-zip php82-iconv \
+    php82-pdo php82-pdo_mysql php82-pdo_sqlite php82-pdo_pgsql php82-mbstring php82-session php82-bcmath \
+    php82-gd php82-openssl php82-sockets php82-posix php82-ldap php82-simplexml && \
     rm -rf /var/www/localhost && \
-    rm -f /etc/php81/php-fpm.d/www.conf
+    rm -f /etc/php82/php-fpm.d/www.conf
 
 ADD . /var/www/app
 ADD docker/ /
