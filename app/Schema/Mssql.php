@@ -12,7 +12,7 @@ const VERSION = 2;
 
 function version_2(PDO $pdo)
 {
-  $pdo->exec("ALTER TABLE dbo.users ADD COLUMN theme nvarchar(50) DEFAULT N'light' NOT NULL");
+  $pdo->exec("ALTER TABLE dbo.users ADD theme nvarchar(50) DEFAULT N'light' NOT NULL");
 }
 
 function version_1(PDO $pdo)
