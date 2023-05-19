@@ -127,7 +127,7 @@ class Thumbnail
         imagealphablending($this->dstImage, false);
         imagesavealpha($this->dstImage, true);
 
-        imagecopyresampled($this->dstImage, $this->srcImage, $dstX, $dstY, 0, 0, $dstWidth, $dstHeight, $srcWidth, $srcHeight);
+        imagecopyresampled($this->dstImage, $this->srcImage, (int) $dstX, (int) $dstY, 0, 0, (int) $dstWidth, (int) $dstHeight, (int) $srcWidth, (int) $srcHeight);
 
         return $this;
     }
