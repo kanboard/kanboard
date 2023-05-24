@@ -1,3 +1,23 @@
+Version 1.2.29 (May 23, 2023)
+-----------------------------
+
+* Avoid potential clipboard based cross-site scripting ([CVE-2023-32685](https://github.com/kanboard/kanboard/security/advisories/GHSA-hjmw-gm82-r4gv))
+* Upgrade Docker image to PHP 8.2 and Alpine 3.18
+* Add themes support: dark, light and automatic mode
+* Fix broken "Hide this Column" feature
+* Do not close modals when clicking on the background if the form has changed
+* Fix incorrect route for "My Activity Stream"
+* Fix incorrect parameter encoding when using URLs rewriting
+* Add support for task links in Markdown headings
+* Handle 413 responses from Nginx when uploading files too large
+* Restore all previously loaded translations when sending user notifications
+* Regenerate session ID after successful authentication
+* Use `SESSION_DURATION` option to define the session lifetime stored in the database
+    - The option `SESSION_DURATION` is used to define the cookie lifetime.
+    - With this change, Kanboard will try to use first `SESSION_DURATION` instead of the
+    default `session.gc_maxlifetime` value.
+* Bump `phpunit/phpunit` from `9.6.6` to `9.6.8`
+
 Version 1.2.28 (April 8, 2023)
 ------------------------------
 
@@ -218,7 +238,7 @@ Version 1.2.16 (October 9, 2020)
 * Add ARIA label to user mention
 * Add ARIA label to letter avatars
 * Add ARIA label to project select role without label
-* Add ARIA label to dropdown autocomplete without label 
+* Add ARIA label to dropdown autocomplete without label
 * Add ARIA label to form text editor without label
 * Add ARIA label to icons with title attributes
 * Add ARIA label for form inputs without labels
