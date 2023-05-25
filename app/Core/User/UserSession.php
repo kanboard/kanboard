@@ -207,7 +207,13 @@ class UserSession extends Base
             return 'light';
         }
 
-        return session_get('user')['theme'];
+        $user_session = session_get('user');
+
+        if (array_key_exists('theme', $user_session)) {
+            return $user_session['theme'];
+        }
+
+        return 'light';
     }
 
     /**
@@ -273,7 +279,7 @@ class UserSession extends Base
 
         if (! session_exists('listOrder:'.$projectID)) {
             return $default;
-        }        
+        }
 
         return session_get('listOrder:'.$projectID);
     }
