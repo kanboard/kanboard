@@ -45,7 +45,8 @@ class UserSession extends Base
         $user['twofactor_activated'] = isset($user['twofactor_activated']) ? (bool) $user['twofactor_activated'] : false;
 
         if (session_status() === PHP_SESSION_ACTIVE) {
-            session_regenerate_id(true);
+            // Note: Do not delete the old session to avoid possible race condition and a PHP warning.
+            session_regenerate_id(false);
         }
 
         session_set('user', $user);
