@@ -29,7 +29,7 @@
                 <?= $this->text->e($link['type']) ?>
             </td>
             <td>
-                <a href="<?= $link['url'] ?>" title="<?= $this->text->e($link['url']) ?>" target="_blank"><?= $this->text->e($link['title']) ?><span class="ui-helper-hidden-accessible"> (<?= $this->text->e($link['url']) ?>)</span></a>
+                <a href="<?= $this->text->e($link['url']) ?>" title="<?= $this->text->e($link['url']) ?>" target="_blank"><?= $this->text->e($link['title']) ?><span class="ui-helper-hidden-accessible"> (<?= $this->text->e($link['url']) ?>)</span></a>
             </td>
             <td>
                 <?= $this->text->e($link['dependency_label']) ?>
