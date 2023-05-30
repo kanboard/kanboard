@@ -51,6 +51,15 @@ class TaskLinkProcedure extends BaseProcedure
     public function createTaskLink($task_id, $opposite_task_id, $link_id)
     {
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'createTaskLink', $task_id);
+
+        if ($this->userSession->isLogged()) {
+            $opposite_task = $this->taskFinderModel->getById($opposite_task_id);
+
+            if (! $this->projectPermissionModel->isUserAllowed($opposite_task['project_id'], $this->userSession->getId())) {
+                return false;
+            }
+        }
+
         return $this->taskLinkModel->create($task_id, $opposite_task_id, $link_id);
     }
 
@@ -67,6 +76,15 @@ class TaskLinkProcedure extends BaseProcedure
     public function updateTaskLink($task_link_id, $task_id, $opposite_task_id, $link_id)
     {
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateTaskLink', $task_id);
+
+        if ($this->userSession->isLogged()) {
+            $opposite_task = $this->taskFinderModel->getById($opposite_task_id);
+
+            if (! $this->projectPermissionModel->isUserAllowed($opposite_task['project_id'], $this->userSession->getId())) {
+                return false;
+            }
+        }
+
         return $this->taskLinkModel->update($task_link_id, $task_id, $opposite_task_id, $link_id);
     }
 
