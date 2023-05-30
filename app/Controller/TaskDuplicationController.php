@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 /**
  * Task Duplication controller
  *
@@ -50,14 +52,20 @@ class TaskDuplicationController extends BaseController
             $values = $this->request->getValues();
             list($valid, ) = $this->taskValidator->validateProjectModification($values);
 
-            if ($valid && $this->taskProjectMoveModel->moveToProject($task['id'],
+            if ($valid) {
+                if (! $this->projectPermissionModel->isUserAllowed($values['project_id'], $this->userSession->getId())) {
+                    throw new AccessForbiddenException();
+                }
+
+                if ($this->taskProjectMoveModel->moveToProject($task['id'],
                                                                 $values['project_id'],
                                                                 $values['swimlane_id'],
                                                                 $values['column_id'],
                                                                 $values['category_id'],
                                                                 $values['owner_id'])) {
-                $this->flash->success(t('Task updated successfully.'));
-                return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])));
+                    $this->flash->success(t('Task updated successfully.'));
+                    return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])));
+                }
             }
 
             $this->flash->failure(t('Unable to update your task.'));
@@ -80,9 +88,17 @@ class TaskDuplicationController extends BaseController
             list($valid, ) = $this->taskValidator->validateProjectModification($values);
 
             if ($valid) {
+                if (! $this->projectPermissionModel->isUserAllowed($values['project_id'], $this->userSession->getId())) {
+                    throw new AccessForbiddenException();
+                }
+
                 $task_id = $this->taskProjectDuplicationModel->duplicateToProject(
-                    $task['id'], $values['project_id'], $values['swimlane_id'],
-                    $values['column_id'], $values['category_id'], $values['owner_id']
+                    $task['id'],
+                    $values['project_id'],
+                    $values['swimlane_id'],
+                    $values['column_id'],
+                    $values['category_id'],
+                    $values['owner_id']
                 );
 
                 if ($task_id > 0) {
