@@ -19,7 +19,7 @@ class PluginUpgradeCommand extends BaseCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!Installer::isConfigured()) {
             throw new LogicException('Kanboard is not configured to install plugins itself');
@@ -40,6 +40,7 @@ class PluginUpgradeCommand extends BaseCommand
                 $output->writeln('<info>* Plugin up to date: '.$installedPlugin->getPluginName().'</info>');
             }
         }
+        return 0;
     }
 
     protected function getPluginDetails(array $availablePlugins, BasePlugin $installedPlugin)

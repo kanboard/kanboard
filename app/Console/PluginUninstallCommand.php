@@ -19,7 +19,7 @@ class PluginUninstallCommand extends BaseCommand
             ->addArgument('pluginId', InputArgument::REQUIRED, 'Plugin directory name');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!Installer::isConfigured()) {
             throw new LogicException('Kanboard is not configured to install plugins itself');
@@ -29,8 +29,10 @@ class PluginUninstallCommand extends BaseCommand
             $installer = new Installer($this->container);
             $installer->uninstall($input->getArgument('pluginId'));
             $output->writeln('<info>Plugin removed successfully</info>');
+            return 0;
         } catch (PluginInstallerException $e) {
             $output->writeln('<error>'.$e->getMessage().'</error>');
+            return 1;
         }
     }
 }

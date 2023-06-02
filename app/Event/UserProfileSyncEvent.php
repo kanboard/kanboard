@@ -4,7 +4,7 @@ namespace Kanboard\Event;
 
 use Kanboard\Core\User\UserProviderInterface;
 use Kanboard\User\LdapUserProvider;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class UserProfileSyncEvent

@@ -3,6 +3,7 @@
 namespace Kanboard\Middleware;
 
 use Kanboard\Core\Controller\BaseMiddleware;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class BootstrapMiddleware
@@ -18,7 +19,7 @@ class BootstrapMiddleware extends BaseMiddleware
     public function execute()
     {
         $this->sessionManager->open();
-        $this->dispatcher->dispatch('app.bootstrap');
+        $this->dispatcher->dispatch(new Event, 'app.bootstrap');
         $this->sendHeaders();
         $this->next();
     }

@@ -19,7 +19,7 @@ class PluginInstallCommand extends BaseCommand
             ->addArgument('url', InputArgument::REQUIRED, 'Archive URL');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!Installer::isConfigured()) {
             throw new LogicException('Kanboard is not configured to install plugins itself');
@@ -29,8 +29,10 @@ class PluginInstallCommand extends BaseCommand
             $installer = new Installer($this->container);
             $installer->install($input->getArgument('url'));
             $output->writeln('<info>Plugin installed successfully</info>');
+            return 0;
         } catch (PluginInstallerException $e) {
             $output->writeln('<error>'.$e->getMessage().'</error>');
+            return 1;
         }
     }
 }

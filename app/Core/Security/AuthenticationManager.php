@@ -97,7 +97,7 @@ class AuthenticationManager extends Base
     {
         foreach ($this->filterProviders('PreAuthenticationProviderInterface') as $provider) {
             if ($provider->authenticate() && $this->userProfile->initialize($provider->getUser())) {
-                $this->dispatcher->dispatch(self::EVENT_SUCCESS, new AuthSuccessEvent($provider->getName()));
+                $this->dispatcher->dispatch(new AuthSuccessEvent($provider->getName()), self::EVENT_SUCCESS);
                 return true;
             }
         }
@@ -122,7 +122,7 @@ class AuthenticationManager extends Base
 
             if ($provider->authenticate() && $this->userProfile->initialize($provider->getUser())) {
                 if ($fireEvent) {
-                    $this->dispatcher->dispatch(self::EVENT_SUCCESS, new AuthSuccessEvent($provider->getName()));
+                    $this->dispatcher->dispatch(new AuthSuccessEvent($provider->getName()), self::EVENT_SUCCESS);
                 }
 
                 return true;
@@ -130,7 +130,7 @@ class AuthenticationManager extends Base
         }
 
         if ($fireEvent) {
-            $this->dispatcher->dispatch(self::EVENT_FAILURE, new AuthFailureEvent($username));
+            $this->dispatcher->dispatch(new AuthFailureEvent($username), self::EVENT_FAILURE);
         }
 
         return false;
@@ -148,11 +148,11 @@ class AuthenticationManager extends Base
         $provider = $this->getProvider($name);
 
         if ($provider->authenticate() && $this->userProfile->initialize($provider->getUser())) {
-            $this->dispatcher->dispatch(self::EVENT_SUCCESS, new AuthSuccessEvent($provider->getName()));
+            $this->dispatcher->dispatch(new AuthSuccessEvent($provider->getName()), self::EVENT_SUCCESS);
             return true;
         }
 
-        $this->dispatcher->dispatch(self::EVENT_FAILURE, new AuthFailureEvent);
+        $this->dispatcher->dispatch(new AuthFailureEvent, self::EVENT_FAILURE);
 
         return false;
     }

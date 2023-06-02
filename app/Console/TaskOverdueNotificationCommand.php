@@ -24,7 +24,7 @@ class TaskOverdueNotificationCommand extends BaseCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if ($input->getOption('project')) {
             $tasks = $this->taskFinderModel->getOverdueTasksQuery()
@@ -48,6 +48,7 @@ class TaskOverdueNotificationCommand extends BaseCommand
         if ($input->getOption('show')) {
             $this->showTable($output, $tasks);
         }
+        return 0;
     }
 
     public function showTable(OutputInterface $output, array $tasks)

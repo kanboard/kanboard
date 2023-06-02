@@ -42,7 +42,7 @@ class SubtaskEventJob extends BaseJob
 
         if ($event !== null) {
             foreach ($eventNames as $eventName) {
-                $this->dispatcher->dispatch($eventName, $event);
+                $this->dispatcher->dispatch($event, $eventName);
             }
         }
     }

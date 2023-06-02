@@ -14,8 +14,9 @@ class ProjectActivityArchiveCommand extends BaseCommand
             ->setDescription('Remove project activities after one year');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->projectActivityModel->cleanup(strtotime('-1 year'));
+        return 0;
     }
 }

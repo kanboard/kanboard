@@ -2,7 +2,7 @@
 
 namespace Kanboard\Event;
 
-use Symfony\Component\EventDispatcher\Event as BaseEvent;
+use Symfony\Contracts\EventDispatcher\Event as BaseEvent;
 
 /**
  * Authentication Success Event

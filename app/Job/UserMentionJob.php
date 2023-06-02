@@ -42,7 +42,7 @@ class UserMentionJob extends BaseJob
         foreach ($users as $user) {
             if ($this->projectPermissionModel->isMember($event->getProjectId(), $user['id'])) {
                 $event['mention'] = $user;
-                $this->dispatcher->dispatch($eventName, $event);
+                $this->dispatcher->dispatch($event, $eventName);
             }
         }
     }
