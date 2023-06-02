@@ -24,12 +24,12 @@ class DirectoryTest extends Base
         $plugins = array(
             array(
                 'title' => 'Plugin A',
-                'compatible_version' => '1.0.30',
+                'compatible_version' => '>=1.0.30',
                 'remote_install' => true,
             ),
             array(
                 'title' => 'Plugin B',
-                'compatible_version' => '1.0.29',
+                'compatible_version' => '>=1.0.29',
                 'remote_install' => false,
             ),
         );
