@@ -18,7 +18,7 @@ class LocaleComparatorCommand extends BaseCommand
             ->setDescription('Compare application translations with the '.self::REF_LOCALE.' locale');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $strings = array();
         $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(APP_DIR));
@@ -33,6 +33,7 @@ class LocaleComparatorCommand extends BaseCommand
         }
 
         $this->compare(array_unique($strings));
+        return 0;
     }
 
     public function show(array $strings)

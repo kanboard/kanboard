@@ -19,7 +19,7 @@ class SubtaskExportCommand extends BaseCommand
             ->addArgument('end_date', InputArgument::REQUIRED, 'End date (YYYY-MM-DD)');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $data = $this->subtaskExport->export(
             $input->getArgument('project_id'),
@@ -30,5 +30,6 @@ class SubtaskExportCommand extends BaseCommand
         if (is_array($data)) {
             Csv::output($data);
         }
+        return 0;
     }
 }

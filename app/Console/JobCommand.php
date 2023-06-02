@@ -23,7 +23,7 @@ class JobCommand extends BaseCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $payload = fgets(STDIN);
 
@@ -31,5 +31,6 @@ class JobCommand extends BaseCommand
         $job->unserialize($payload);
 
         JobHandler::getInstance($this->container)->executeJob($job);
+        return 0;
     }
 }

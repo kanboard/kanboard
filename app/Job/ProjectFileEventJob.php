@@ -38,7 +38,7 @@ class ProjectFileEventJob extends BaseJob
             ->buildEvent();
 
         if ($event !== null) {
-            $this->dispatcher->dispatch($eventName, $event);
+            $this->dispatcher->dispatch($event, $eventName);
         }
     }
 }

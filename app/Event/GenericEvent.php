@@ -3,7 +3,7 @@
 namespace Kanboard\Event;
 
 use ArrayAccess;
-use Symfony\Component\EventDispatcher\Event as BaseEvent;
+use Symfony\Contracts\EventDispatcher\Event as BaseEvent;
 
 class GenericEvent extends BaseEvent implements ArrayAccess
 {

@@ -65,7 +65,7 @@ class TaskEventJob extends BaseJob
     protected function fireEvent($eventName, TaskEvent $event)
     {
         $this->logger->debug(__METHOD__.' Event fired: '.$eventName);
-        $this->dispatcher->dispatch($eventName, $event);
+        $this->dispatcher->dispatch($event, $eventName);
 
         if ($eventName === TaskModel::EVENT_CREATE) {
             $userMentionJob = $this->userMentionJob->withParams($event['task']['description'], TaskModel::EVENT_USER_MENTION, $event);

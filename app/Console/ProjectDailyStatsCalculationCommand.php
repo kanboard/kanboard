@@ -15,7 +15,7 @@ class ProjectDailyStatsCalculationCommand extends BaseCommand
             ->setDescription('Calculate daily statistics for all projects');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $projects = $this->projectModel->getAllByStatus(ProjectModel::ACTIVE);
 
@@ -24,5 +24,6 @@ class ProjectDailyStatsCalculationCommand extends BaseCommand
             $this->projectDailyColumnStatsModel->updateTotals($project['id'], date('Y-m-d'));
             $this->projectDailyStatsModel->updateTotals($project['id'], date('Y-m-d'));
         }
+        return 0;
     }
 }

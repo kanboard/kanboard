@@ -7,6 +7,7 @@ use JsonRPC\Exception\AuthenticationFailureException;
 use JsonRPC\MiddlewareInterface;
 use Kanboard\Auth\ApiAccessTokenAuth;
 use Kanboard\Core\Base;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class AuthenticationApiMiddleware
@@ -28,7 +29,7 @@ class AuthenticationMiddleware extends Base implements MiddlewareInterface
      */
     public function execute($username, $password, $procedureName)
     {
-        $this->dispatcher->dispatch('app.bootstrap');
+        $this->dispatcher->dispatch(new Event, 'app.bootstrap');
         session_set('scope', 'API');
 
         if ($this->isUserAuthenticated($username, $password)) {
