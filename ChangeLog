@@ -1,3 +1,18 @@
+Version 1.2.30 (June 2, 2023)
+-----------------------------
+
+Security Fixes:
+
+- [CVE-2023-33956: Parameter based Indirect Object Referencing leading to private file exposure](https://github.com/kanboard/kanboard/security/advisories/GHSA-r36m-44gg-wxg2)
+- [CVE-2023-33968: Missing access control allows user to move and duplicate tasks to any project in the software](https://github.com/kanboard/kanboard/security/advisories/GHSA-gf8r-4p6m-v8vr)
+- [CVE-2023-33969: Stored XSS in the Task External Link Functionality](https://github.com/kanboard/kanboard/security/advisories/GHSA-8qvf-9847-gpc9)
+- [CVE-2023-33970: Missing access control in internal task links feature](https://github.com/kanboard/kanboard/security/advisories/GHSA-wfch-8rhv-v286)
+
+Other Fixes:
+
+- Avoid PHP warning caused by `session_regenerate_id()`
+- Avoid CSS issue when upgrading to v1.2.29 without flushing user sessions
+
 Version 1.2.29 (May 23, 2023)
 -----------------------------
 

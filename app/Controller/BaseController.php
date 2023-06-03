@@ -89,10 +89,10 @@ abstract class BaseController extends Base
      * @access protected
      * @return array
      * @throws PageNotFoundException
-     * @throws AccessForbiddenException
      */
     protected function getFile()
     {
+        $project_id = $this->request->getIntegerParam('project_id');
         $task_id = $this->request->getIntegerParam('task_id');
         $file_id = $this->request->getIntegerParam('file_id');
         $model = 'projectFileModel';
@@ -108,7 +108,11 @@ abstract class BaseController extends Base
         }
 
         if (isset($file['task_id']) && $file['task_id'] != $task_id) {
-            throw new AccessForbiddenException();
+            throw new PageNotFoundException();
+        }
+
+        if (isset($file['project_id']) && $file['project_id'] != $project_id) {
+            throw new PageNotFoundException();
         }
 
         $file['model'] = $model;
