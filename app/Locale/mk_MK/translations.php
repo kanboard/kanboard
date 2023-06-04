@@ -1399,7 +1399,7 @@ return array(
     'Reorder this column by assignee (Z-A)' => 'Променете го редоследот на оваа колона од извршител (Ш-A)',
     'Reorder this column by due date (ASC)' => 'Променете го редоследот на оваа колона според рок за завршување (РАСТЕЧКИ)',
     'Reorder this column by due date (DESC)' => 'Променете го редоследот на оваа колона според рок за завршување (ОПАЃАЧКИ)',
-    'Reorder this column by id (ASC)' => 'Променете го редоследот на оваа колона според ИД (ОПАЃАЧКИ)',
+    'Reorder this column by id (ASC)' => 'Променете го редоследот на оваа колона според ИД (РАСТЕЧКИ)',
     'Reorder this column by id (DESC)' => 'Променете го редоследот на оваа колона според ИД (ОПАЃАЧКИ)',
     '%s moved the task #%d "%s" to the project "%s"' => '%s ја премести задачата #%d "%s" за да проектира "%s"',
     'Task #%d "%s" has been moved to the project "%s"' => 'Задачата #%d "%s" е преместена во проектот "%s"',
