@@ -51,20 +51,13 @@ class UserNotificationTest extends Base
         ));
 
         $this->container['userNotificationTypeModel']
-            ->expects($this->at(0))
+            ->expects($this->exactly(3))
             ->method('getSelectedTypes')
-            ->will($this->returnValue(array('email')));
-
-        $this->container['userNotificationTypeModel']
-            ->expects($this->at(1))
-            ->method('getSelectedTypes')
-            ->will($this->returnValue(array('email')));
-
-        $this->container['userNotificationTypeModel']
-            ->expects($this->at(2))
-            ->method('getSelectedTypes')
-            ->with($this->equalTo(1))
-            ->will($this->returnValue(array('email', 'web')));
+            ->willReturnOnConsecutiveCalls(
+                array('email'),
+                array('email'),
+                array('email','web'),
+            );
 
         $settings = $n->readSettings(1);
         $this->assertNotEmpty($settings);
@@ -209,21 +202,18 @@ class UserNotificationTest extends Base
             ->method('notifyUser');
 
         $this->container['userNotificationTypeModel']
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('getSelectedTypes')
             ->will($this->returnValue(array('email', 'web')));
 
         $this->container['userNotificationTypeModel']
-            ->expects($this->at(1))
+            ->expects($this->exactly(2))
             ->method('getType')
-            ->with($this->equalTo('email'))
-            ->will($this->returnValue($notifier));
-
-        $this->container['userNotificationTypeModel']
-            ->expects($this->at(2))
-            ->method('getType')
-            ->with($this->equalTo('web'))
-            ->will($this->returnValue($notifier));
+            ->withConsecutive(
+                ['email'],
+                ['web'],
+            )
+            ->willReturn($notifier);
 
         $userNotificationModel->sendNotifications(TaskModel::EVENT_CREATE, array('task' => $taskFinderModel->getDetails(1)));
     }

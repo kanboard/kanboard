@@ -175,14 +175,12 @@ class TaskFileModelTest extends Base
             ->method('generateThumbnailFromFile');
 
         $this->container['objectStorage']
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('moveUploadedFile')
-            ->with($this->equalTo('/tmp/phpYzdqkD'), $this->anything());
-
-        $this->container['objectStorage']
-            ->expects($this->at(1))
-            ->method('moveUploadedFile')
-            ->with($this->equalTo('/tmp/phpeEwEWG'), $this->anything());
+            ->withConsecutive(
+                ['/tmp/phpYzdqkD'],
+                ['/tmp/phpeEwEWG'],
+            );
 
         $this->assertTrue($fileModel->uploadFiles(1, $files));
 
@@ -259,7 +257,7 @@ class TaskFileModelTest extends Base
         );
 
         $this->container['objectStorage']
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('moveUploadedFile')
             ->with($this->equalTo('/tmp/phpYzdqkD'), $this->anything())
             ->will($this->throwException(new \Kanboard\Core\ObjectStorage\ObjectStorageException('test')));
@@ -411,14 +409,12 @@ class TaskFileModelTest extends Base
         $this->assertEquals(1, $fileModel->create(1, 'image.gif', 'tmp/image.gif', 10));
 
         $this->container['objectStorage']
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('remove')
-            ->with('tmp/image.gif');
-
-        $this->container['objectStorage']
-            ->expects($this->at(1))
-            ->method('remove')
-            ->with('thumbnails'.DIRECTORY_SEPARATOR.'tmp/image.gif');
+            ->withConsecutive(
+                ['tmp/image.gif'],
+                ['thumbnails'.DIRECTORY_SEPARATOR.'tmp/image.gif'],
+            );
 
         $this->assertTrue($fileModel->remove(1));
     }
