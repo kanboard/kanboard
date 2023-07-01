@@ -32,7 +32,9 @@
         "psr/log": "1.1.4",
         "symfony/console": "4.4.37",
         "symfony/event-dispatcher": "4.4.37",
-        "symfony/finder": "5.4.21"
+        "symfony/finder": "5.4.21",
+        "symfony/service-contracts": "2.5.2",
+        "symfony/deprecation-contracts": "2.5.2"
     },
     "autoload": {
         "classmap": [
@@ -58,6 +60,7 @@
         ]
     },
     "require-dev": {
+        "doctrine/instantiator": "1.5.0",
         "symfony/stopwatch": "5.4.21",
         "phpunit/phpunit": "9.6.9",
         "roave/security-advisories": "dev-master"

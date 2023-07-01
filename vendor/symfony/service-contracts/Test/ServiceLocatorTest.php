@@ -15,9 +15,12 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Symfony\Contracts\Service\ServiceLocatorTrait;
 
-class ServiceLocatorTest extends TestCase
+abstract class ServiceLocatorTest extends TestCase
 {
-    public function getServiceLocator(array $factories)
+    /**
+     * @return ContainerInterface
+     */
+    protected function getServiceLocator(array $factories)
     {
         return new class($factories) implements ContainerInterface {
             use ServiceLocatorTrait;
@@ -64,12 +67,12 @@ class ServiceLocatorTest extends TestCase
         $this->assertSame(2, $i);
     }
 
-    /**
-     * @expectedException        \Psr\Container\NotFoundExceptionInterface
-     * @expectedExceptionMessage The service "foo" has a dependency on a non-existent service "bar". This locator only knows about the "foo" service.
-     */
     public function testThrowsOnUndefinedInternalService()
     {
+        if (!$this->getExpectedException()) {
+            $this->expectException(\Psr\Container\NotFoundExceptionInterface::class);
+            $this->expectExceptionMessage('The service "foo" has a dependency on a non-existent service "bar". This locator only knows about the "foo" service.');
+        }
         $locator = $this->getServiceLocator([
             'foo' => function () use (&$locator) { return $locator->get('bar'); },
         ]);
@@ -77,12 +80,10 @@ class ServiceLocatorTest extends TestCase
         $locator->get('foo');
     }
 
-    /**
-     * @expectedException        \Psr\Container\ContainerExceptionInterface
-     * @expectedExceptionMessage Circular reference detected for service "bar", path: "bar -> baz -> bar".
-     */
     public function testThrowsOnCircularReference()
     {
+        $this->expectException(\Psr\Container\ContainerExceptionInterface::class);
+        $this->expectExceptionMessage('Circular reference detected for service "bar", path: "bar -> baz -> bar".');
         $locator = $this->getServiceLocator([
             'foo' => function () use (&$locator) { return $locator->get('bar'); },
             'bar' => function () use (&$locator) { return $locator->get('baz'); },
