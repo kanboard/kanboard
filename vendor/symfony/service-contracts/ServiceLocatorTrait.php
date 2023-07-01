@@ -14,6 +14,10 @@ namespace Symfony\Contracts\Service;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
+// Help opcache.preload discover always-needed symbols
+class_exists(ContainerExceptionInterface::class);
+class_exists(NotFoundExceptionInterface::class);
+
 /**
  * A trait to help implement ServiceProviderInterface.
  *
@@ -36,16 +40,20 @@ trait ServiceLocatorTrait
 
     /**
      * {@inheritdoc}
+     *
+     * @return bool
      */
-    public function has($id)
+    public function has(string $id)
     {
         return isset($this->factories[$id]);
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @return mixed
      */
-    public function get($id)
+    public function get(string $id)
     {
         if (!isset($this->factories[$id])) {
             throw $this->createNotFoundException($id);
@@ -81,7 +89,7 @@ trait ServiceLocatorTrait
                 } else {
                     $type = (new \ReflectionFunction($factory))->getReturnType();
 
-                    $this->providedTypes[$name] = $type ? ($type->allowsNull() ? '?' : '').$type->getName() : '?';
+                    $this->providedTypes[$name] = $type ? ($type->allowsNull() ? '?' : '').($type instanceof \ReflectionNamedType ? $type->getName() : $type) : '?';
                 }
             }
         }
