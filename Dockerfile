@@ -22,7 +22,8 @@ RUN apk --no-cache --update add \
     php82-pdo php82-pdo_mysql php82-pdo_sqlite php82-pdo_pgsql php82-mbstring php82-session php82-bcmath \
     php82-gd php82-openssl php82-sockets php82-posix php82-ldap php82-simplexml && \
     rm -rf /var/www/localhost && \
-    rm -f /etc/php82/php-fpm.d/www.conf
+    rm -f /etc/php82/php-fpm.d/www.conf && \
+    ln -s /usr/bin/php82 /usr/bin/php
 
 ADD . /var/www/app
 ADD docker/ /
