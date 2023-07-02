@@ -32,8 +32,10 @@
         "psr/log": "1.1.4",
         "symfony/console": "5.4.21",
         "symfony/event-dispatcher": "5.4.21",
+        "symfony/event-dispatcher-contracts": "^2",
         "symfony/finder": "5.4.21",
         "symfony/service-contracts": "2.5.2",
+        "symfony/string": "^5.1",
         "symfony/deprecation-contracts": "2.5.2"
     },
     "autoload": {
