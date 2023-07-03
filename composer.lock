@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "566433f74ff500ba88ea452e5a6a7adc",
+    "content-hash": "1654fd41535f07e4d7ca2de08db7f8e2",
     "packages": [
         {
             "name": "christian-riesen/base32",
@@ -373,16 +373,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.4.21",
+            "version": "v5.4.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "c77433ddc6cdc689caf48065d9ea22ca0853fbd9"
+                "reference": "560fc3ed7a43e6d30ea94a07d77f9a60b8ed0fb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/c77433ddc6cdc689caf48065d9ea22ca0853fbd9",
-                "reference": "c77433ddc6cdc689caf48065d9ea22ca0853fbd9",
+                "url": "https://api.github.com/repos/symfony/console/zipball/560fc3ed7a43e6d30ea94a07d77f9a60b8ed0fb8",
+                "reference": "560fc3ed7a43e6d30ea94a07d77f9a60b8ed0fb8",
                 "shasum": ""
             },
             "require": {
@@ -447,12 +447,12 @@
             "homepage": "https://symfony.com",
             "keywords": [
                 "cli",
-                "command line",
+                "command-line",
                 "console",
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.4.21"
+                "source": "https://github.com/symfony/console/tree/v5.4.24"
             },
             "funding": [
                 {
@@ -468,7 +468,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-25T16:59:41+00:00"
+            "time": "2023-05-26T05:13:16+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
