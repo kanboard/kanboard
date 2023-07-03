@@ -32,7 +32,7 @@ class InputArgument
 
     /**
      * @param string                           $name        The argument name
-     * @param int|null                         $mode        The argument mode: self::REQUIRED or self::OPTIONAL
+     * @param int|null                         $mode        The argument mode: a bit mask of self::REQUIRED, self::OPTIONAL and self::IS_ARRAY
      * @param string                           $description A description text
      * @param string|bool|int|float|array|null $default     The default value (for self::OPTIONAL mode only)
      *
@@ -56,7 +56,7 @@ class InputArgument
     /**
      * Returns the argument name.
      *
-     * @return string The argument name
+     * @return string
      */
     public function getName()
     {
@@ -92,7 +92,7 @@ class InputArgument
      */
     public function setDefault($default = null)
     {
-        if (self::REQUIRED === $this->mode && null !== $default) {
+        if ($this->isRequired() && null !== $default) {
             throw new LogicException('Cannot set a default value except for InputArgument::OPTIONAL mode.');
         }
 
@@ -120,7 +120,7 @@ class InputArgument
     /**
      * Returns the description text.
      *
-     * @return string The description text
+     * @return string
      */
     public function getDescription()
     {

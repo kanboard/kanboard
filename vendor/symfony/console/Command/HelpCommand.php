@@ -11,6 +11,9 @@
 
 namespace Symfony\Component\Console\Command;
 
+use Symfony\Component\Console\Completion\CompletionInput;
+use Symfony\Component\Console\Completion\CompletionSuggestions;
+use Symfony\Component\Console\Descriptor\ApplicationDescription;
 use Symfony\Component\Console\Helper\DescriptorHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -44,11 +47,11 @@ class HelpCommand extends Command
             ->setHelp(<<<'EOF'
 The <info>%command.name%</info> command displays help for a given command:
 
-  <info>php %command.full_name% list</info>
+  <info>%command.full_name% list</info>
 
 You can also output the help in other formats by using the <comment>--format</comment> option:
 
-  <info>php %command.full_name% --format=xml list</info>
+  <info>%command.full_name% --format=xml list</info>
 
 To display the list of available commands, please use the <info>list</info> command.
 EOF
@@ -79,5 +82,20 @@ EOF
         $this->command = null;
 
         return 0;
+    }
+
+    public function complete(CompletionInput $input, CompletionSuggestions $suggestions): void
+    {
+        if ($input->mustSuggestArgumentValuesFor('command_name')) {
+            $descriptor = new ApplicationDescription($this->getApplication());
+            $suggestions->suggestValues(array_keys($descriptor->getCommands()));
+
+            return;
+        }
+
+        if ($input->mustSuggestOptionValuesFor('format')) {
+            $helper = new DescriptorHelper();
+            $suggestions->suggestValues($helper->getFormats());
+        }
     }
 }
