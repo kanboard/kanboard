@@ -21,22 +21,18 @@ use Symfony\Component\Process\Process;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  *
- * @final since Symfony 4.2
+ * @final
  */
 class ProcessHelper extends Helper
 {
     /**
      * Runs an external process.
      *
-     * @param array|Process $cmd       An instance of Process or an array of the command and arguments
-     * @param string|null   $error     An error message that must be displayed if something went wrong
-     * @param callable|null $callback  A PHP callback to run whenever there is some
-     *                                 output available on STDOUT or STDERR
-     * @param int           $verbosity The threshold for verbosity
-     *
-     * @return Process The process that ran
+     * @param array|Process $cmd      An instance of Process or an array of the command and arguments
+     * @param callable|null $callback A PHP callback to run whenever there is some
+     *                                output available on STDOUT or STDERR
      */
-    public function run(OutputInterface $output, $cmd, $error = null, callable $callback = null, $verbosity = OutputInterface::VERBOSITY_VERY_VERBOSE)
+    public function run(OutputInterface $output, $cmd, string $error = null, callable $callback = null, int $verbosity = OutputInterface::VERBOSITY_VERY_VERBOSE): Process
     {
         if (!class_exists(Process::class)) {
             throw new \LogicException('The ProcessHelper cannot be run as the Process component is not installed. Try running "compose require symfony/process".');
@@ -53,8 +49,7 @@ class ProcessHelper extends Helper
         }
 
         if (!\is_array($cmd)) {
-            @trigger_error(sprintf('Passing a command as a string to "%s()" is deprecated since Symfony 4.2, pass it the command as an array of arguments instead.', __METHOD__), \E_USER_DEPRECATED);
-            $cmd = [method_exists(Process::class, 'fromShellCommandline') ? Process::fromShellCommandline($cmd) : new Process($cmd)];
+            throw new \TypeError(sprintf('The "command" argument of "%s()" must be an array or a "%s" instance, "%s" given.', __METHOD__, Process::class, get_debug_type($cmd)));
         }
 
         if (\is_string($cmd[0] ?? null)) {
@@ -96,17 +91,14 @@ class ProcessHelper extends Helper
      * exits with a non-zero exit code.
      *
      * @param array|Process $cmd      An instance of Process or a command to run
-     * @param string|null   $error    An error message that must be displayed if something went wrong
      * @param callable|null $callback A PHP callback to run whenever there is some
      *                                output available on STDOUT or STDERR
-     *
-     * @return Process The process that ran
      *
      * @throws ProcessFailedException
      *
      * @see run()
      */
-    public function mustRun(OutputInterface $output, $cmd, $error = null, callable $callback = null)
+    public function mustRun(OutputInterface $output, $cmd, string $error = null, callable $callback = null): Process
     {
         $process = $this->run($output, $cmd, $error, $callback);
 
@@ -119,10 +111,8 @@ class ProcessHelper extends Helper
 
     /**
      * Wraps a Process callback to add debugging output.
-     *
-     * @return callable
      */
-    public function wrapCallback(OutputInterface $output, Process $process, callable $callback = null)
+    public function wrapCallback(OutputInterface $output, Process $process, callable $callback = null): callable
     {
         if ($output instanceof ConsoleOutputInterface) {
             $output = $output->getErrorOutput();
@@ -147,7 +137,7 @@ class ProcessHelper extends Helper
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'process';
     }

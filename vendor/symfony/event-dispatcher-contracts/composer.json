@@ -16,10 +16,10 @@
         }
     ],
     "require": {
-        "php": ">=7.1.3"
+        "php": ">=7.2.5",
+        "psr/event-dispatcher": "^1"
     },
     "suggest": {
-        "psr/event-dispatcher": "",
         "symfony/event-dispatcher-implementation": ""
     },
     "autoload": {
@@ -28,7 +28,7 @@
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-main": "1.1-dev"
+            "dev-main": "2.5-dev"
         },
         "thanks": {
             "name": "symfony/contracts",

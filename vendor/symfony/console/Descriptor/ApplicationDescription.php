@@ -34,12 +34,12 @@ class ApplicationDescription
     private $namespaces;
 
     /**
-     * @var Command[]
+     * @var array<string, Command>
      */
     private $commands;
 
     /**
-     * @var Command[]
+     * @var array<string, Command>
      */
     private $aliases;
 
@@ -131,7 +131,7 @@ class ApplicationDescription
         }
 
         if ($namespacedCommands) {
-            ksort($namespacedCommands);
+            ksort($namespacedCommands, \SORT_STRING);
             foreach ($namespacedCommands as $key => $commandsSet) {
                 ksort($commandsSet);
                 $sortedCommands[$key] = $commandsSet;

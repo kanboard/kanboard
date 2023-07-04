@@ -59,7 +59,7 @@ class UserProfile extends Base
 
         if (! empty($profile) && $profile['is_active'] == 1) {
             $this->userSession->initialize($profile);
-            $this->dispatcher->dispatch(self::EVENT_USER_PROFILE_AFTER_SYNC, new UserProfileSyncEvent($profile, $user));
+            $this->dispatcher->dispatch(new UserProfileSyncEvent($profile, $user), self::EVENT_USER_PROFILE_AFTER_SYNC);
             return true;
         }
 

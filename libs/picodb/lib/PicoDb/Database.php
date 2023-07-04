@@ -5,6 +5,7 @@ namespace PicoDb;
 use Closure;
 use PDOException;
 use LogicException;
+use PicoDb\SQLException;
 use PicoDb\Driver\Mssql;
 use PicoDb\Driver\Sqlite;
 use PicoDb\Driver\Mysql;
@@ -213,6 +214,11 @@ class Database
         // Do not escape custom query
         if (strpos($value, '.') !== false || strpos($value, ' ') !== false) {
             return $value;
+        }
+
+        // Avoid potential SQL injection
+        if (preg_match('/^[a-z0-9_]+$/', $value) === 0) {
+            throw new SQLException('Invalid identifier: '.$value);
         }
 
         if (! empty($table)) {

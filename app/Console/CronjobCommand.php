@@ -22,11 +22,12 @@ class CronjobCommand extends BaseCommand
             ->setDescription('Execute daily cronjob');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         foreach ($this->commands as $command) {
             $job = $this->getApplication()->find($command);
             $job->run(new ArrayInput(array('command' => $command)), new NullOutput());
         }
+        return 0;
     }
 }

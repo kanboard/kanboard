@@ -19,7 +19,7 @@ class TransitionExportCommand extends BaseCommand
             ->addArgument('end_date', InputArgument::REQUIRED, 'End date (YYYY-MM-DD)');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $data = $this->transitionExport->export(
             $input->getArgument('project_id'),
@@ -30,5 +30,6 @@ class TransitionExportCommand extends BaseCommand
         if (is_array($data)) {
             Csv::output($data);
         }
+        return 0;
     }
 }

@@ -102,7 +102,7 @@ class CssCommand extends BaseCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->minifyFiles(self::CSS_SRC_PATH, array_merge(['themes'.DIRECTORY_SEPARATOR.'light.css'], $this->appFiles), 'light.min.css');
         $this->minifyFiles(self::CSS_SRC_PATH, array_merge(['themes'.DIRECTORY_SEPARATOR.'dark.css'], $this->appFiles), 'dark.min.css');
@@ -111,6 +111,7 @@ class CssCommand extends BaseCommand
 
         $vendorBundle = concat_files($this->vendorFiles);
         file_put_contents('assets/css/vendor.min.css', $vendorBundle);
+        return 0;
     }
 
     private function minifyFiles($folder, array $files, $destination)

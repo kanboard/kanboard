@@ -30,9 +30,13 @@
         "erusev/parsedown": "1.7.4",
         "pimple/pimple": "3.5.0",
         "psr/log": "1.1.4",
-        "symfony/console": "4.4.37",
-        "symfony/event-dispatcher": "4.4.37",
-        "symfony/finder": "5.4.21"
+        "symfony/console": "5.4.24",
+        "symfony/event-dispatcher": "5.4.21",
+        "symfony/event-dispatcher-contracts": "^2",
+        "symfony/finder": "5.4.21",
+        "symfony/service-contracts": "2.5.2",
+        "symfony/string": "^5.1",
+        "symfony/deprecation-contracts": "2.5.2"
     },
     "autoload": {
         "classmap": [
@@ -58,8 +62,9 @@
         ]
     },
     "require-dev": {
+        "doctrine/instantiator": "1.5.0",
         "symfony/stopwatch": "5.4.21",
-        "phpunit/phpunit": "9.6.8",
+        "phpunit/phpunit": "9.6.9",
         "roave/security-advisories": "dev-master"
     }
 }

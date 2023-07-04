@@ -88,22 +88,12 @@ class HookHelperTest extends Base
             ->getMock();
 
         $this->container['template']
-            ->expects($this->at(0))
+            ->expects($this->any())
             ->method('render')
-            ->with(
-                $this->equalTo('tpl1'),
-                $this->equalTo(array())
-            )
-            ->will($this->returnValue('tpl1_content'));
-
-        $this->container['template']
-            ->expects($this->at(1))
-            ->method('render')
-            ->with(
-                $this->equalTo('tpl2'),
-                $this->equalTo(array())
-            )
-            ->will($this->returnValue('tpl2_content'));
+            ->willReturnMap([
+                ['tpl1', array(), 'tpl1_content'],
+                ['tpl2', array(), 'tpl2_content'],
+            ]);
 
         $hookHelper = new HookHelper($this->container);
         $hookHelper->attach('test', 'tpl1');

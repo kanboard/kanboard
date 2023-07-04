@@ -77,7 +77,7 @@ class JsCommand extends BaseCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $appBundle = concat_files($this->appFiles);
         $vendorBundle = concat_files($this->vendorFiles);
@@ -86,5 +86,6 @@ class JsCommand extends BaseCommand
 
         file_put_contents('assets/js/app.min.js', $minifier->minify());
         file_put_contents('assets/js/vendor.min.js', $vendorBundle);
+        return 0;
     }
 }

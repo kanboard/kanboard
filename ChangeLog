@@ -1,3 +1,21 @@
+Version 1.2.31 (July 3, 2023)
+-----------------------------
+
+Security Fixes:
+
+- [CVE-2023-36813: Avoid potential SQL injections without breaking compatibility with plugins](https://github.com/kanboard/kanboard/security/advisories/GHSA-9gvq-78jp-jxcx)
+
+Other fixes and updates:
+
+- Run tests with PHP 8 on GitHub Actions
+- Bump Symfony dependencies
+- Update Composer dependencies to be able to run tests with PHP 8.2
+- Add `/usr/bin/php` symlink in the Docker image
+- Replace usage of `at()` matcher with alternatives in unit tests
+- Adjust plugin directory test case to work on released versions
+- Fix incorrect background dynamic property in captcha library
+- Update translations
+
 Version 1.2.30 (June 2, 2023)
 -----------------------------
 

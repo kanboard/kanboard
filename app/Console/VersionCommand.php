@@ -21,8 +21,9 @@ class VersionCommand extends BaseCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln(APP_VERSION);
+        return 0;
     }
 }

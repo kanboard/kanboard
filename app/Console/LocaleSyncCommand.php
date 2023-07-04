@@ -17,7 +17,7 @@ class LocaleSyncCommand extends BaseCommand
             ->setDescription('Synchronize all translations based on the '.self::REF_LOCALE.' locale');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $reference_file = APP_DIR.DIRECTORY_SEPARATOR.'Locale'.DIRECTORY_SEPARATOR.self::REF_LOCALE.DIRECTORY_SEPARATOR.'translations.php';
         $reference = include $reference_file;
@@ -30,6 +30,7 @@ class LocaleSyncCommand extends BaseCommand
                 file_put_contents($filename, $this->updateFile($reference, $filename));
             }
         }
+        return 0;
     }
 
     public function updateFile(array $reference, $outdated_file)

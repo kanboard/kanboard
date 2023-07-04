@@ -15,9 +15,10 @@ class DatabaseMigrationCommand extends DatabaseVersionCommand
             ->setDescription('Execute SQL migrations');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         parent::execute($input, $output);
         DatabaseProvider::runMigrations($this->container['db']);
+        return 0;
     }
 }

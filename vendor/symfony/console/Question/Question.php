@@ -30,6 +30,7 @@ class Question
     private $default;
     private $normalizer;
     private $trimmable = true;
+    private $multiline = false;
 
     /**
      * @param string                     $question The question to ask to the user
@@ -62,6 +63,26 @@ class Question
     }
 
     /**
+     * Returns whether the user response accepts newline characters.
+     */
+    public function isMultiline(): bool
+    {
+        return $this->multiline;
+    }
+
+    /**
+     * Sets whether the user response should accept newline characters.
+     *
+     * @return $this
+     */
+    public function setMultiline(bool $multiline): self
+    {
+        $this->multiline = $multiline;
+
+        return $this;
+    }
+
+    /**
      * Returns whether the user response must be hidden.
      *
      * @return bool
@@ -74,25 +95,23 @@ class Question
     /**
      * Sets whether the user response must be hidden or not.
      *
-     * @param bool $hidden
-     *
      * @return $this
      *
      * @throws LogicException In case the autocompleter is also used
      */
-    public function setHidden($hidden)
+    public function setHidden(bool $hidden)
     {
         if ($this->autocompleterCallback) {
             throw new LogicException('A hidden question cannot use the autocompleter.');
         }
 
-        $this->hidden = (bool) $hidden;
+        $this->hidden = $hidden;
 
         return $this;
     }
 
     /**
-     * In case the response can not be hidden, whether to fallback on non-hidden question or not.
+     * In case the response cannot be hidden, whether to fallback on non-hidden question or not.
      *
      * @return bool
      */
@@ -102,15 +121,13 @@ class Question
     }
 
     /**
-     * Sets whether to fallback on non-hidden question if the response can not be hidden.
-     *
-     * @param bool $fallback
+     * Sets whether to fallback on non-hidden question if the response cannot be hidden.
      *
      * @return $this
      */
-    public function setHiddenFallback($fallback)
+    public function setHiddenFallback(bool $fallback)
     {
-        $this->hiddenFallback = (bool) $fallback;
+        $this->hiddenFallback = $fallback;
 
         return $this;
     }
@@ -130,14 +147,11 @@ class Question
     /**
      * Sets values for the autocompleter.
      *
-     * @param iterable|null $values
-     *
      * @return $this
      *
-     * @throws InvalidArgumentException
      * @throws LogicException
      */
-    public function setAutocompleterValues($values)
+    public function setAutocompleterValues(?iterable $values)
     {
         if (\is_array($values)) {
             $values = $this->isAssoc($values) ? array_merge(array_keys($values), array_values($values)) : array_values($values);
@@ -150,10 +164,8 @@ class Question
             $callback = static function () use ($values, &$valueCache) {
                 return $valueCache ?? $valueCache = iterator_to_array($values, false);
             };
-        } elseif (null === $values) {
-            $callback = null;
         } else {
-            throw new InvalidArgumentException('Autocompleter values can be either an array, "null" or a "Traversable" object.');
+            $callback = null;
         }
 
         return $this->setAutocompleterCallback($callback);
@@ -212,19 +224,14 @@ class Question
      *
      * Null means an unlimited number of attempts.
      *
-     * @param int|null $attempts
-     *
      * @return $this
      *
      * @throws InvalidArgumentException in case the number of attempts is invalid
      */
-    public function setMaxAttempts($attempts)
+    public function setMaxAttempts(?int $attempts)
     {
-        if (null !== $attempts) {
-            $attempts = (int) $attempts;
-            if ($attempts < 1) {
-                throw new InvalidArgumentException('Maximum number of attempts must be a positive value.');
-            }
+        if (null !== $attempts && $attempts < 1) {
+            throw new InvalidArgumentException('Maximum number of attempts must be a positive value.');
         }
 
         $this->attempts = $attempts;
@@ -270,7 +277,7 @@ class Question
         return $this->normalizer;
     }
 
-    protected function isAssoc($array)
+    protected function isAssoc(array $array)
     {
         return (bool) \count(array_filter(array_keys($array), 'is_string'));
     }

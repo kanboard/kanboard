@@ -16,7 +16,7 @@ class ResetTwoFactorCommand extends BaseCommand
             ->addArgument('username', InputArgument::REQUIRED, 'Username');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $username = $input->getArgument('username');
         $userId = $this->userModel->getIdByUsername($username);
@@ -32,5 +32,6 @@ class ResetTwoFactorCommand extends BaseCommand
         }
 
         $output->writeln('<info>Two-factor authentication disabled</info>');
+        return 0;
     }
 }
