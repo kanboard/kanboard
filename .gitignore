@@ -1,5 +1,7 @@
 *.sqlite
 *.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
 .buildpath
 .project
 /.settings/
