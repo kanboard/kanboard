@@ -3,6 +3,7 @@
 namespace Kanboard\Core\Session;
 
 use Kanboard\Core\Base;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Session Manager
@@ -59,7 +60,7 @@ class SessionManager extends Base
      */
     public function close()
     {
-        $this->dispatcher->dispatch(self::EVENT_DESTROY);
+        $this->dispatcher->dispatch(new Event(), self::EVENT_DESTROY);
 
         // Destroy the session cookie
         $params = session_get_cookie_params();
