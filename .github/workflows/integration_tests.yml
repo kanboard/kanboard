@@ -41,6 +41,8 @@ jobs:
       run: composer validate
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Refresh APT index
+      run: sudo apt update
     - name: Install Apache PHP module
       run: sudo apt install -y libapache2-mod-php
     - name: Start Apache
