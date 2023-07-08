@@ -83,7 +83,7 @@ class TaskMoveColumnClosed extends Base
             $this->getParam('dest_column_id'),
             1,
             $data['task']['swimlane_id'],
-            false,
+            true,
             false
         );
     }
