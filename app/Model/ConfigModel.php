@@ -73,6 +73,26 @@ class ConfigModel extends SettingModel
     }
 
     /**
+     * Get database extra options
+     *
+     * @access public
+     * @return array
+     */
+    public function getDatabaseOptions()
+    {
+        if (DB_DRIVER === 'sqlite') {
+            return [
+                'journal_mode' => $this->db->getConnection()->query('PRAGMA journal_mode')->fetchColumn(),
+                'wal_autocheckpoint' => $this->db->getConnection()->query('PRAGMA wal_autocheckpoint')->fetchColumn(),
+                'synchronous' => $this->db->getConnection()->query('PRAGMA synchronous')->fetchColumn(),
+                'busy_timeout' => $this->db->getConnection()->query('PRAGMA busy_timeout')->fetchColumn(),
+            ];
+        }
+
+        return [];
+    }
+
+    /**
      * Regenerate a token
      *
      * @access public
