@@ -47,6 +47,6 @@ class TaskTriggerCommand extends BaseCommand
         $event = new TaskListEvent(array('project_id' => $project_id));
         $event->setTasks($tasks);
 
-        $this->dispatcher->dispatch(TaskModel::EVENT_DAILY_CRONJOB, $event);
+        $this->dispatcher->dispatch($event, TaskModel::EVENT_DAILY_CRONJOB);
     }
 }
