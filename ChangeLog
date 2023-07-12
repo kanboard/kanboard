@@ -1,3 +1,12 @@
+Version 1.2.32 (July 11, 2023)
+------------------------------
+
+* Fix unexpected EventDispatcher exception in cronjob and during logout
+* Integration Tests: Run `apt update` before installing Apache
+* Automatic action `TaskMoveColumnClosed` does not log column movement
+* Tweak Sqlite connection settings to reduce database locked errors
+* Bump `phpunit/phpunit` from `9.6.9` to `9.6.10`
+
 Version 1.2.31 (July 3, 2023)
 -----------------------------
 
