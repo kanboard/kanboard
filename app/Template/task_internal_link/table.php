@@ -45,7 +45,7 @@
                         $this->text->e('#'.$link['task_id'].' '.$link['title']),
                         'TaskViewController',
                         'show',
-                        array('task_id' => $link['task_id'], 'project_id' => $link['project_id']),
+                        array('task_id' => $link['task_id']),
                         false,
                         $link['is_active'] ? '' : 'task-link-closed'
                     ) ?>
