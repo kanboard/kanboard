@@ -48,7 +48,7 @@ class ClientTest extends \Base
 
         self::$functions = $this
             ->getMockBuilder('stdClass')
-            ->setMethods(array(
+            ->addMethods(array(
                 'ldap_connect',
                 'ldap_set_option',
                 'ldap_get_option',

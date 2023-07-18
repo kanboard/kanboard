@@ -19,7 +19,7 @@ class RememberMeCookieTest extends \Base
 
         self::$functions = $this
             ->getMockBuilder('stdClass')
-            ->setMethods(array(
+            ->addMethods(array(
                 'setcookie',
             ))
             ->getMock();

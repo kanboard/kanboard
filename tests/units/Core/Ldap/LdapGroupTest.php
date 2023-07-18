@@ -17,7 +17,7 @@ class LdapGroupTest extends Base
 
         $this->client = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\Client')
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'getConnection',
             ))
             ->getMock();
@@ -25,7 +25,7 @@ class LdapGroupTest extends Base
         $this->query = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\Query')
             ->setConstructorArgs(array($this->client))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'execute',
                 'hasResult',
                 'getEntries',
@@ -35,7 +35,7 @@ class LdapGroupTest extends Base
         $this->group = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\Group')
             ->setConstructorArgs(array($this->query))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'getAttributeName',
                 'getBaseDn',
             ))

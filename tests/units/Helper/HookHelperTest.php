@@ -11,7 +11,7 @@ class HookHelperTest extends Base
         $this->container['template'] = $this
             ->getMockBuilder('\Kanboard\Core\Template')
             ->setConstructorArgs(array($this->container['helper']))
-            ->setMethods(array('render'))
+            ->onlyMethods(array('render'))
             ->getMock();
 
         $this->container['template']
@@ -38,7 +38,7 @@ class HookHelperTest extends Base
         $this->container['template'] = $this
             ->getMockBuilder('\Kanboard\Core\Template')
             ->setConstructorArgs(array($this->container['helper']))
-            ->setMethods(array('render'))
+            ->onlyMethods(array('render'))
             ->getMock();
 
         $this->container['template']
@@ -62,7 +62,7 @@ class HookHelperTest extends Base
         $this->container['template'] = $this
             ->getMockBuilder('\Kanboard\Core\Template')
             ->setConstructorArgs(array($this->container['helper']))
-            ->setMethods(array('render'))
+            ->onlyMethods(array('render'))
             ->getMock();
 
         $this->container['template']
@@ -84,7 +84,7 @@ class HookHelperTest extends Base
         $this->container['template'] = $this
             ->getMockBuilder('\Kanboard\Core\Template')
             ->setConstructorArgs(array($this->container['helper']))
-            ->setMethods(array('render'))
+            ->onlyMethods(array('render'))
             ->getMock();
 
         $this->container['template']
@@ -106,7 +106,7 @@ class HookHelperTest extends Base
         $this->container['helper']->asset = $this
             ->getMockBuilder('\Kanboard\Helper\AssetHelper')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('css', 'js'))
+            ->onlyMethods(array('css', 'js'))
             ->getMock();
 
         $this->container['helper']

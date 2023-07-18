@@ -194,7 +194,7 @@ class UserNotificationTest extends Base
 
         $notifier = $this
             ->getMockBuilder('Stdclass')
-            ->setMethods(array('notifyUser'))
+            ->addMethods(array('notifyUser'))
             ->getMock();
 
         $notifier
@@ -206,14 +206,18 @@ class UserNotificationTest extends Base
             ->method('getSelectedTypes')
             ->will($this->returnValue(array('email', 'web')));
 
+        $series = [
+            [['email'], $notifier],
+            [['web'], $notifier],
+        ];
         $this->container['userNotificationTypeModel']
             ->expects($this->exactly(2))
             ->method('getType')
-            ->withConsecutive(
-                ['email'],
-                ['web'],
-            )
-            ->willReturn($notifier);
+            ->willReturnCallback(function (...$args) use (&$series) {
+                [$expectedArgs, $return] = array_shift($series);
+                $this->assertSame($expectedArgs, $args);
+                return $return;
+            });
 
         $userNotificationModel->sendNotifications(TaskModel::EVENT_CREATE, array('task' => $taskFinderModel->getDetails(1)));
     }

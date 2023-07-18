@@ -7,7 +7,7 @@ use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Action\TaskCreation as TaskCreationAction;
 
-class TaskCreationActionTest extends Base
+class TaskCreationTest extends Base
 {
     public function testSuccess()
     {

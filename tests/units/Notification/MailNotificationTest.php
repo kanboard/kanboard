@@ -80,7 +80,7 @@ class MailNotificationTest extends Base
         $this->container['emailClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Mail\Client')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('send'))
+            ->onlyMethods(array('send'))
             ->getMock();
 
         $this->container['emailClient']
@@ -110,7 +110,7 @@ class MailNotificationTest extends Base
         $this->container['emailClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Mail\Client')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('send'))
+            ->onlyMethods(array('send'))
             ->getMock();
 
         $this->container['emailClient']
