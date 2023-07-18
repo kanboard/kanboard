@@ -22,13 +22,13 @@ class ProjectMetricJobTest extends Base
         $this->container['projectDailyColumnStatsModel'] = $this
             ->getMockBuilder('\Kanboard\Model\ProjectDailyColumnStatsModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('updateTotals'))
+            ->onlyMethods(array('updateTotals'))
             ->getMock();
 
         $this->container['projectDailyStatsModel'] = $this
             ->getMockBuilder('\Kanboard\Model\ProjectDailyStatsModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('updateTotals'))
+            ->onlyMethods(array('updateTotals'))
             ->getMock();
 
         $this->container['projectDailyColumnStatsModel']

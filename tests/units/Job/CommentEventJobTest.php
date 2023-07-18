@@ -58,7 +58,7 @@ class CommentEventJobTest extends Base
         $this->container['queueManager'] = $this
             ->getMockBuilder('\Kanboard\Core\Queue\QueueManager')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'push',
             ))
             ->getMock();
@@ -66,7 +66,7 @@ class CommentEventJobTest extends Base
         $this->container['userMentionJob'] = $this
             ->getMockBuilder('\Kanboard\Job\UserMentionJob')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'withParams',
             ))
             ->getMock();

@@ -19,30 +19,30 @@ class AuthenticationMiddlewareTest extends Base
         $this->container['authenticationManager'] = $this
             ->getMockBuilder('Kanboard\Core\Security\AuthenticationManager')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('checkCurrentSession'))
+            ->onlyMethods(array('checkCurrentSession'))
             ->getMock();
 
         $this->container['applicationAuthorization'] = $this
             ->getMockBuilder('Kanboard\Core\Security\AccessMap')
-            ->setMethods(array('isAllowed'))
+            ->addMethods(array('isAllowed'))
             ->getMock();
 
         $this->container['response'] = $this
             ->getMockBuilder('Kanboard\Core\Http\Response')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('redirect'))
+            ->onlyMethods(array('redirect'))
             ->getMock();
 
         $this->container['userSession'] = $this
             ->getMockBuilder('Kanboard\Core\User\UserSession')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('isLogged'))
+            ->onlyMethods(array('isLogged'))
             ->getMock();
 
         $this->nextMiddleware = $this
             ->getMockBuilder('Kanboard\Middleware\AuthenticationMiddleware')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('execute'))
+            ->onlyMethods(array('execute'))
             ->getMock();
 
         $this->middleware = new AuthenticationMiddleware($this->container);

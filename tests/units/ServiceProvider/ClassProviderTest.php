@@ -5,7 +5,7 @@ use Pimple\Container;
 
 require_once __DIR__.'/../Base.php';
 
-class ModelProviderTest extends Base
+class ClassProviderTest extends Base
 {
     public function testServiceInstance()
     {

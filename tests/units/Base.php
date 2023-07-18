@@ -24,7 +24,7 @@ abstract class Base extends PHPUnit\Framework\TestCase
     {
         date_default_timezone_set('UTC');
         $_SESSION = array();
-        $test = get_class($this)."::".$this->getName();
+        $test = get_class($this)."::".$this->name();
 
         if (DB_DRIVER === 'mysql') {
             $pdo = new PDO('mysql:host='.DB_HOSTNAME, DB_USERNAME, DB_PASSWORD);
@@ -95,25 +95,25 @@ abstract class Base extends PHPUnit\Framework\TestCase
         $this->container['httpClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Http\Client')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync'))
+            ->onlyMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync'))
             ->getMock();
 
         $this->container['emailClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Mail\Client')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('send'))
+            ->onlyMethods(array('send'))
             ->getMock();
 
         $this->container['userNotificationTypeModel'] = $this
             ->getMockBuilder('\Kanboard\Model\UserNotificationTypeModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('getType', 'getSelectedTypes'))
+            ->onlyMethods(array('getType', 'getSelectedTypes'))
             ->getMock();
 
         $this->container['objectStorage'] = $this
             ->getMockBuilder('\Kanboard\Core\ObjectStorage\FileStorage')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('put', 'moveFile', 'remove', 'moveUploadedFile'))
+            ->onlyMethods(array('put', 'moveFile', 'remove', 'moveUploadedFile'))
             ->getMock();
 
         $this->container->register(new ActionProvider);
@@ -131,7 +131,7 @@ abstract class Base extends PHPUnit\Framework\TestCase
 
     protected function tearDown(): void
     {
-        $test = get_class($this)."::".$this->getName();
+        $test = get_class($this)."::".$this->name();
         foreach ($this->container['db']->getLogMessages() as $msg) {
             $this->container['logger']->debug('SQL: '.$msg);
         }

@@ -15,7 +15,7 @@ class ReverseProxyAuthTest extends Base
         $this->container['request'] = $this
             ->getMockBuilder('\Kanboard\Core\Http\Request')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('getRemoteUser'))
+            ->onlyMethods(array('getRemoteUser'))
             ->getMock();
     }
 

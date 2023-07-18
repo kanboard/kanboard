@@ -4,7 +4,7 @@ use Kanboard\Middleware\ProjectAuthorizationMiddleware;
 
 require_once __DIR__.'/../Base.php';
 
-class ProjectAuthorizationMiddlewareMiddlewareTest extends Base
+class ProjectAuthorizationMiddlewareTest extends Base
 {
     /**
      * @var ProjectAuthorizationMiddleware
@@ -21,19 +21,19 @@ class ProjectAuthorizationMiddlewareMiddlewareTest extends Base
         $this->container['helper']->user = $this
             ->getMockBuilder('Kanboard\Helper\UserHelper')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('hasProjectAccess'))
+            ->onlyMethods(array('hasProjectAccess'))
             ->getMock();
 
         $this->container['request'] = $this
             ->getMockBuilder('Kanboard\Core\Http\Request')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('getIntegerParam'))
+            ->onlyMethods(array('getIntegerParam'))
             ->getMock();
 
         $this->nextMiddleware = $this
             ->getMockBuilder('Kanboard\Middleware\ProjectAuthorizationMiddleware')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('execute'))
+            ->onlyMethods(array('execute'))
             ->getMock();
 
         $this->middleware = new ProjectAuthorizationMiddleware($this->container);

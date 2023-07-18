@@ -25,7 +25,7 @@ class QueryTest extends \Base
 
         self::$functions = $this
             ->getMockBuilder('stdClass')
-            ->setMethods(array(
+            ->addMethods(array(
                 'ldap_search',
                 'ldap_get_entries',
             ))
@@ -33,7 +33,7 @@ class QueryTest extends \Base
 
         $this->client = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\Client')
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'getConnection',
             ))
             ->getMock();

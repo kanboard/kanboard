@@ -117,7 +117,7 @@ class ProjectFileTest extends Base
         $fileModel = $this
             ->getMockBuilder('\Kanboard\Model\ProjectFileModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('generateThumbnailFromFile'))
+            ->onlyMethods(array('generateThumbnailFromFile'))
             ->getMock();
 
         $projectModel = new ProjectModel($this->container);
@@ -150,10 +150,13 @@ class ProjectFileTest extends Base
         $this->container['objectStorage']
             ->expects($this->exactly(2))
             ->method('moveUploadedFile')
-            ->withConsecutive(
-                ['/tmp/phpYzdqkD'],
-                ['/tmp/phpeEwEWG'],
-            );
+            ->willReturnCallback(function (string $tmpPath) {
+                static $series = [
+                    '/tmp/phpYzdqkD',
+                    '/tmp/phpeEwEWG',
+                ];
+                $this->assertSame(array_shift($series), $tmpPath);
+            });
 
         $this->assertTrue($fileModel->uploadFiles(1, $files));
 
@@ -244,7 +247,7 @@ class ProjectFileTest extends Base
         $fileModel = $this
             ->getMockBuilder('\Kanboard\Model\ProjectFileModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('generateThumbnailFromFile'))
+            ->onlyMethods(array('generateThumbnailFromFile'))
             ->getMock();
 
         $projectModel = new ProjectModel($this->container);
@@ -276,7 +279,7 @@ class ProjectFileTest extends Base
         $fileModel = $this
             ->getMockBuilder('\Kanboard\Model\ProjectFileModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('generateThumbnailFromData'))
+            ->onlyMethods(array('generateThumbnailFromData'))
             ->getMock();
 
         $projectModel = new ProjectModel($this->container);

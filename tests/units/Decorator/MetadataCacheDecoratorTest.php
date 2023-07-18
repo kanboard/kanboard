@@ -30,7 +30,7 @@ class MetadataCacheDecoratorTest extends Base
 
         $this->cacheMock = $this
             ->getMockBuilder('\Kanboard\Core\Cache\MemoryCache')
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'set',
                 'get',
             ))
@@ -39,7 +39,7 @@ class MetadataCacheDecoratorTest extends Base
         $this->metadataModelMock = $this
             ->getMockBuilder('\Kanboard\Model\UserMetadataModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'getAll',
                 'save',
             ))
