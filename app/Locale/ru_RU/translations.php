@@ -447,7 +447,7 @@ return array(
     'Subtasks Export' => 'Экспортировать подзадачи',
     'Task Title' => 'Заголовок задачи',
     'Untitled' => 'Заголовок отсутствует',
-    'Application default' => 'Приложение по умолчанию',
+    'Application default' => 'Значение по умолчанию из приложения',
     'Language:' => 'Язык:',
     'Timezone:' => 'Временная зона:',
     'All columns' => 'Все колонки',
