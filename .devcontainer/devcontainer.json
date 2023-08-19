@@ -1,0 +1,43 @@
+{
+	"name": "Kanboard",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+	// For use with PHP or Apache (e.g.php -S localhost:8080 or apache2ctl start)
+	"forwardPorts": [
+        8080,
+		3306,
+        5432
+	],
+
+    // Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers-contrib/features/gh-cli:1": {}
+	},
+
+    "portsAttributes": {
+        "8080": {
+            "label": "Application port"
+        },
+        "3306": {
+            "label": "MySQL port"
+        },
+        "5432": {
+            "label": "PostgreSQL port"
+        }
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"zobo.php-intellisense",
+				"xdebug.php-debug",
+				"waderyan.gitblame",
+				"ms-vscode.makefile-tools",
+				"GitHub.copilot"
+			]
+		}
+	}
+}
