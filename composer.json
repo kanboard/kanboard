@@ -64,7 +64,7 @@
     "require-dev": {
         "doctrine/instantiator": "1.5.0",
         "symfony/stopwatch": "5.4.21",
-        "phpunit/phpunit": "9.6.10",
+        "phpunit/phpunit": "9.6.11",
         "roave/security-advisories": "dev-master"
     }
 }
