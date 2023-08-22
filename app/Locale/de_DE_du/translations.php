@@ -388,7 +388,7 @@ return array(
     'Add' => 'Hinzufügen',
     'Start date' => 'Startdatum',
     'Time estimated' => 'Geschätzte Zeit',
-    'There is nothing assigned to you.' => 'Ihnen ist nichts zugewiesen.',
+    'There is nothing assigned to you.' => 'Dir ist nichts zugewiesen.',
     'My tasks' => 'Meine Aufgaben',
     'Activity stream' => 'Letzte Aktivitäten',
     'Dashboard' => 'Dashboard',
