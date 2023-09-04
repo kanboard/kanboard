@@ -8,7 +8,7 @@ jobs:
   jshint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install jshint
         run: npm install -g jshint
       - name: Run jshint
