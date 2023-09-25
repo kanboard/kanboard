@@ -1,4 +1,4 @@
-<section class="page">
+<section class="form-login">
     <div class="page-header">
         <h2><?= t('Two factor authentication') ?></h2>
     </div>
