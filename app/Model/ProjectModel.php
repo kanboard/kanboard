@@ -594,21 +594,6 @@ class ProjectModel extends Base
     }
 
     /**
-     * Return the task count for a project
-     *
-     * @access public
-     * @param  integer    $project_id   Project id
-     * @return integer
-     */
-    public function taskCount($project_id)
-    {
-        return $this->db->table(self::TABLE)
-            ->eq('id', $project_id)->exists()
-            ->join(ColumnModel::TABLE, 'id', 'project_id')
-            ->count();
-    }
-
-    /**
      * Change usage of global tags
      *
      * @param  integer $project_id  Project id
