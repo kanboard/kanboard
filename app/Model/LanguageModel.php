@@ -91,7 +91,7 @@ class LanguageModel extends Base
         // Sorted by value
         $languages = array(
             'id_ID' => 'Bahasa Indonesia',
-            'bg_BG' => 'Български'
+            'bg_BG' => 'Български',
             'bs_BA' => 'Bosanski',
             'ca_ES' => 'Català',
             'cs_CZ' => 'Čeština',
