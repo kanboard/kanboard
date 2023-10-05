@@ -646,7 +646,7 @@ return array(
     'Only for tasks assigned to me' => 'Само за задачи, които са ми възложени',
     'Only for tasks created by me' => 'Само за задачи, създадени от мен',
     'Only for tasks created by me and tasks assigned to me' => 'Само за задачи, създадени от мен, и задачи, възложени на мен',
-    '%%Y-%%m-%%d' => 'Y/m/d',
+    '%%Y-%%m-%%d' => '%%Y/%%m/%%d',
     'Total for all columns' => 'Общо за всички колони',
     'You need at least 2 days of data to show the chart.' => 'Необходими са ви поне 2 дни данни, за да покажете диаграмата.',
     '<15m' => '- 15м.',
