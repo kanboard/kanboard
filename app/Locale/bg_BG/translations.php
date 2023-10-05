@@ -1373,7 +1373,7 @@ return array(
     '%s moved the task #%d to the position %d in the column "%s"' => '%s премести задачата #%d на позиция %d в колоната "%s"',
     '%s moved the task #%d to the swimlane "%s"' => '%s премести задачата #%d в коридор "%s"',
     '%sh spent' => '%sh използвано',
-    '%sh estimated' => '% очаквано',
+    '%sh estimated' => '%sh очаквано',
     'Select All' => 'Избери всички',
     'Unselect All' => 'Отмаркирай всички',
     'Apply action' => 'Приложи',
