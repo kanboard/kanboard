@@ -832,7 +832,7 @@ return array(
     'Add group member to "%s"' => 'Добавяне на член на групата към "%s"',
     'Group member added successfully.' => 'Членът на групата е добавен успешно.',
     'Unable to add group member.' => 'Не може да се добави член на групата.',
-    'Remove user from group "%s"' => 'Премахни потребителя от групата',
+    'Remove user from group "%s"' => 'Премахни потребителя от групата "%s"',
     'User removed successfully from this group.' => 'Потребителят е премахнат успешно от тази група.',
     'Unable to remove this user from the group.' => 'Този потребител не може да бъде премахнат от групата.',
     'Remove group' => 'Премахване',
