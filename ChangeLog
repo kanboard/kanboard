@@ -1,3 +1,23 @@
+Version 1.2.33 (October 15, 2023)
+---------------------------------
+
+* Do not close modals when clicking on the background
+* Add Bulgarian translation
+* Update Ukrainian and Russian translations
+* Show the two factor form in the middle of the screen like the login form does
+* Do not override the `creator_id` with the current logged user if the task is imported
+* Add basic Dev Container configs
+* Add adaptive SVG favicon and more SVG variants:
+    * See https://web.dev/building-an-adaptive-favicon/
+    * Added more variant of the original Inkscape icon:
+        - Text SVG
+        - Vectorized text path SVG
+        - Optimized SVG icon
+* Remove `project_id` from task links (A few were missed in #4892)
+* Remove unused and invalid method in `ProjectModel`
+* Update `phpunit/phpunit` and `symfony/*` dependencies
+* Update vendor folder
+
 Version 1.2.32 (July 11, 2023)
 ------------------------------
 
