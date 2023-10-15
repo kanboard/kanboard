@@ -8,19 +8,19 @@
     }
 
     KB.onClick('.js-modal-large', function (e) {
-        KB.modal.open(getLink(e), 'large', true);
+        KB.modal.open(getLink(e), 'large', false);
     });
 
     KB.onClick('.js-modal-medium', function (e) {
         if (KB.modal.isOpen()) {
             KB.modal.replace(getLink(e));
         } else {
-            KB.modal.open(getLink(e), 'medium', true);
+            KB.modal.open(getLink(e), 'medium', false);
         }
     });
 
     KB.onClick('.js-modal-small', function (e) {
-        KB.modal.open(getLink(e), 'small', true);
+        KB.modal.open(getLink(e), 'small', false);
     });
 
     KB.onClick('.js-modal-confirm', function (e) {
