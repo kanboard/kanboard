@@ -25,6 +25,11 @@ Table of Contents
     - [Installation instructions](https://docs.kanboard.org/v1/admin/installation/)
     - [Upgrade to a new version](https://docs.kanboard.org/v1/admin/upgrade/)
     - [Use Kanboard with Docker](https://docs.kanboard.org/v1/admin/docker/)
+    
+Deploy
+------
+
+- [Try Kanboard's one-click self-hosting option](https://app.trydome.io/signup?package=kanboard)
 
 Credits
 -------
