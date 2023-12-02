@@ -11,6 +11,7 @@ class ProjectProcedureTest extends BaseProcedureTest
         $this->assertCreateTeamProject();
         $this->assertGetProjectById();
         $this->assertGetProjectByName();
+        $this->assertGetInexistingProjectByName();
         $this->assertGetAllProjects();
         $this->assertUpdateProject();
         $this->assertUpdateProjectIdentifier();
@@ -40,6 +41,12 @@ class ProjectProcedureTest extends BaseProcedureTest
         $this->assertEquals($this->projectId, $project['id']);
         $this->assertEquals($this->projectName, $project['name']);
         $this->assertEquals('Description', $project['description']);
+    }
+
+    public function assertGetInexistingProjectByName()
+    {
+        $project = $this->app->getProjectByName('inexisting project');
+        $this->assertFalse($project);
     }
 
     public function assertGetAllProjects()
