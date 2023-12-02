@@ -22,6 +22,11 @@ class ProjectProcedure extends BaseProcedure
     public function getProjectByName($name)
     {
         $project = $this->projectModel->getByName($name);
+
+        if (empty($project)) {
+            return false;
+        }
+
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectByName', $project['id']);
         return $this->projectApiFormatter->withProject($project)->format();
     }
@@ -29,6 +34,11 @@ class ProjectProcedure extends BaseProcedure
     public function getProjectByIdentifier($identifier)
     {
         $project = $this->projectModel->getByIdentifier($identifier);
+
+        if (empty($project)) {
+            return false;
+        }
+
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectByIdentifier', $project['id']);
         return $this->projectApiFormatter->withProject($project)->format();
     }
@@ -36,6 +46,11 @@ class ProjectProcedure extends BaseProcedure
     public function getProjectByEmail($email)
     {
         $project = $this->projectModel->getByEmail($email);
+
+        if (empty($project)) {
+            return false;
+        }
+
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectByEmail', $project['id']);
         return $this->projectApiFormatter->withProject($project)->format();
     }
