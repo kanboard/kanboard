@@ -1341,16 +1341,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.4.31",
+            "version": "v5.4.32",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "2765096c03f39ddf54f6af532166e42aaa05b24b"
+                "reference": "91bf4453d65d8231688a04376c3a40efe0770f04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/2765096c03f39ddf54f6af532166e42aaa05b24b",
-                "reference": "2765096c03f39ddf54f6af532166e42aaa05b24b",
+                "url": "https://api.github.com/repos/symfony/string/zipball/91bf4453d65d8231688a04376c3a40efe0770f04",
+                "reference": "91bf4453d65d8231688a04376c3a40efe0770f04",
                 "shasum": ""
             },
             "require": {
@@ -1407,7 +1407,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.4.31"
+                "source": "https://github.com/symfony/string/tree/v5.4.32"
             },
             "funding": [
                 {
@@ -1423,7 +1423,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-11-09T08:19:44+00:00"
+            "time": "2023-11-26T13:43:46+00:00"
         }
     ],
     "packages-dev": [
