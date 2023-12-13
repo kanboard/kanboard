@@ -374,17 +374,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v5.4.28",
-            "version_normalized": "5.4.28.0",
+            "version": "v5.4.32",
+            "version_normalized": "5.4.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "f4f71842f24c2023b91237c72a365306f3c58827"
+                "reference": "c70df1ffaf23a8d340bded3cfab1b86752ad6ed7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/f4f71842f24c2023b91237c72a365306f3c58827",
-                "reference": "f4f71842f24c2023b91237c72a365306f3c58827",
+                "url": "https://api.github.com/repos/symfony/console/zipball/c70df1ffaf23a8d340bded3cfab1b86752ad6ed7",
+                "reference": "c70df1ffaf23a8d340bded3cfab1b86752ad6ed7",
                 "shasum": ""
             },
             "require": {
@@ -422,7 +422,7 @@
                 "symfony/lock": "",
                 "symfony/process": ""
             },
-            "time": "2023-08-07T06:12:30+00:00",
+            "time": "2023-11-18T18:23:04+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -456,7 +456,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v5.4.28"
+                "source": "https://github.com/symfony/console/tree/v5.4.32"
             },
             "funding": [
                 {
@@ -1378,17 +1378,17 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.4.26",
-            "version_normalized": "5.4.26.0",
+            "version": "v5.4.32",
+            "version_normalized": "5.4.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "1181fe9270e373537475e826873b5867b863883c"
+                "reference": "91bf4453d65d8231688a04376c3a40efe0770f04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/1181fe9270e373537475e826873b5867b863883c",
-                "reference": "1181fe9270e373537475e826873b5867b863883c",
+                "url": "https://api.github.com/repos/symfony/string/zipball/91bf4453d65d8231688a04376c3a40efe0770f04",
+                "reference": "91bf4453d65d8231688a04376c3a40efe0770f04",
                 "shasum": ""
             },
             "require": {
@@ -1408,7 +1408,7 @@
                 "symfony/translation-contracts": "^1.1|^2",
                 "symfony/var-exporter": "^4.4|^5.0|^6.0"
             },
-            "time": "2023-06-28T12:46:07+00:00",
+            "time": "2023-11-26T13:43:46+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1447,7 +1447,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.4.26"
+                "source": "https://github.com/symfony/string/tree/v5.4.32"
             },
             "funding": [
                 {
