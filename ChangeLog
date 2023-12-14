@@ -1,3 +1,12 @@
+Version 1.2.34 (December 13, 2023)
+----------------------------------
+
+* Upgrade Docker image to Alpine 3.19 and PHP 8.3
+* API: Avoid PHP notice when searching for a project name that does not exist
+* Update Bulgarian translation
+* Bump `symfony/console` from `5.4.28` to `5.4.32`
+* Bump `phpunit/phpunit` from `9.6.13` to `9.6.15`
+
 Version 1.2.33 (October 15, 2023)
 ---------------------------------
 
