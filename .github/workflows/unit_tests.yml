@@ -193,7 +193,7 @@ jobs:
         exit $rc
     - name: save kanboard debug logfile
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         if-no-files-found: ignore
         name: kanboard_units_debug-MSSQL.log
