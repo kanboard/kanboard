@@ -1,3 +1,12 @@
+Version 1.2.35 (February 2, 2024)
+---------------------------------
+
+* Add missing HTML escaping when showing group membership in user profile ([CVE-2024-22720](https://github.com/kanboard/kanboard/security/advisories/GHSA-8p3h-v7fc-xppj))
+* Update Dutch translation
+* Update Bulgarian translation
+* Bump `phpunit/phpunit` from `9.6.15` to `9.6.16`
+* Bump `symfony/console` from `5.4.32` to `5.4.34`
+
 Version 1.2.34 (December 13, 2023)
 ----------------------------------
 
