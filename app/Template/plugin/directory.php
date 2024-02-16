@@ -11,7 +11,7 @@
 <?php if (empty($available_plugins)): ?>
     <p class="alert"><?= t('There is no plugin available.') ?></p>
 <?php else: ?>
-    <?php foreach ($available_plugins as $plugin): ?>
+    <?php foreach ($available_plugins as $plugin_name => $plugin): ?>
     <table>
         <tr>
             <th colspan="3">
@@ -27,9 +27,9 @@
             </td>
             <td>
                 <?php if ($is_configured): ?>
-                    <?php if (! isset($installed_plugins[$plugin['title']])): ?>
+                    <?php if (! isset($installed_plugins[$plugin_name])): ?>
                         <?= $this->url->icon('cloud-download', t('Install'), 'PluginController', 'install', array('archive_url' => urlencode($plugin['download'])), true) ?>
-                    <?php elseif ($installed_plugins[$plugin['title']] < $plugin['version']): ?>
+                    <?php elseif ($installed_plugins[$plugin_name] < $plugin['version']): ?>
                         <?= $this->url->icon('refresh', t('Update'), 'PluginController', 'update', array('archive_url' => urlencode($plugin['download'])), true) ?>
                     <?php else: ?>
                         <i class="fa fa-check-circle-o" aria-hidden="true"></i>
