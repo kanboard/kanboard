@@ -45,8 +45,8 @@ class PluginUpgradeCommand extends BaseCommand
 
     protected function getPluginDetails(array $availablePlugins, BasePlugin $installedPlugin)
     {
-        foreach ($availablePlugins as $availablePlugin) {
-            if ($availablePlugin['title'] === $installedPlugin->getPluginName()) {
+        foreach ($availablePlugins as $availablePluginName => $availablePlugin) {
+            if ($availablePluginName === $installedPlugin->getPluginName()) {
                 return $availablePlugin;
             }
         }
