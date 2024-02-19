@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# gets the current tag name or tag and revision
+# plus checked out commit hash
+# and writes the result into app/version.txt
+
+BRANCH_NAME="$(git branch --show-current)"
+COMMIT_HASH="$(git rev-parse --short HEAD)"
+TAG_NAME="$(git describe --tags --abbrev=0)"
+
+[[ -z "$BRANCH_NAME" ]] && APP_VERSION="${TAG_NAME}"
+[[ ! -z "$BRANCH_NAME" ]] && APP_VERSION="${BRANCH_NAME}.${COMMIT_HASH}"
+VERSION_FILE="version.txt"
+VERSION_DIR="app"
+
+# create directory if it does not already exist.
+[[ ! -d $VERSION_DIR ]] && mkdir $VERSION_DIR
+
+echo "$APP_VERSION" > ${VERSION_DIR}/${VERSION_FILE} &&\
+echo "Updated ${VERSION_FILE} to \"${APP_VERSION}\""
+
+exit $?
