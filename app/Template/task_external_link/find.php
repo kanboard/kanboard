@@ -6,14 +6,14 @@
     <?= $this->form->csrf() ?>
 
     <?= $this->form->label(t('External link'), 'text') ?>
-    <?= $this->form->text(
+    <?= $this->form->textarea(
         'text',
         $values,
         $errors,
         array(
             'required',
             'autofocus',
-            'placeholder="'.t('Copy and paste your link here...').'"',
+            'placeholder="'.t('Copy and paste your links here...').'"',
         )) ?>
 
     <?= $this->form->label(t('Link type'), 'type') ?>
