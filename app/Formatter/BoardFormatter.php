@@ -52,7 +52,7 @@ class BoardFormatter extends BaseFormatter implements FormatterInterface
                 $columns = array_merge($columns, $this->columnModel->getAllWithPerSwimlaneTaskCount($this->projectId, $swimlane['id']));
             }
         } else {
-            $columns = $this->columnModel->getAllWithTaskCount($this->projectId);
+            $columns = $this->columnModel->getAllWithOpenedTaskCount($this->projectId);
         }
 
         if (empty($swimlanes) || empty($columns)) {

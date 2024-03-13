@@ -121,6 +121,24 @@ class ColumnModel extends Base
     }
 
     /**
+     * Get all columns with opened task count only
+     *
+     * @access public
+     * @param  integer  $project_id   Project id
+     * @return array
+     */
+    public function getAllWithOpenedTaskCount($project_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->columns('id', 'title', 'position', 'task_limit', 'description', 'hide_in_dashboard', 'project_id')
+            ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE column_id=".self::TABLE.".id AND is_active='1'", 'nb_open_tasks')
+            ->eq('project_id', $project_id)
+            ->asc('position')
+            ->findAll();
+    }
+
+
+    /**
      * Get all columns with task count
      *
      * @access public
