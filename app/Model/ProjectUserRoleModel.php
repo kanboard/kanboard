@@ -71,6 +71,9 @@ class ProjectUserRoleModel extends Base
 
         if (empty($role)) {
             $role = $this->projectGroupRoleModel->getUserRole($project_id, $user_id);
+			if(empty($role)) {
+				$role = ""; // force use of the cache
+			}
         }
 
         return $role;
