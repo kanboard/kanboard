@@ -38,7 +38,6 @@
             <div class="task-board-saving-icon" style="display: none;"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
             <div class="task-board-header">
                 <?php if ($this->user->hasProjectAccess('TaskModificationController', 'edit', $task['project_id'])): ?>
-                    <?= $this->render('task/dropdown', array('task' => $task, 'redirect' => 'board')) ?>
                     <?php if ($this->projectRole->canUpdateTask($task)): ?>
                         <?= $this->modal->large('edit', '', 'TaskModificationController', 'edit', array('task_id' => $task['id'])) ?>
                     <?php endif ?>
