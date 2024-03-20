@@ -45,19 +45,30 @@ class TaskExternalLinkController extends BaseController
         $values = $this->request->getValues();
 
         try {
-            $provider = $this->externalLinkManager->setUserInput($values)->find();
-            $link = $provider->getLink();
+            $urls = explode("\r\n", isset($values['text']) ? $values['text'] : '');
+            $index = 0;
 
-            $this->response->html($this->template->render('task_external_link/create', array(
-                'values' => array(
-                    'title' => $link->getTitle(),
-                    'url' => $link->getUrl(),
-                    'link_type' => $provider->getType(),
-                ),
-                'dependencies' => $provider->getDependencies(),
-                'errors' => array(),
-                'task' => $task,
-            )));
+            $this->response->html($this->template->render('task_external_link/formOpen', array('task' => $task)));
+            foreach($urls as $url){
+                if(!empty($url)){
+                    $values['text'] = $url;
+                    $provider = $this->externalLinkManager->setUserInput($values)->find();
+                    $link = $provider->getLink();
+                    $this->response->html($this->template->render('task_external_link/form', array(
+                        'values' => array(
+                            'title-'.$index => $link->getTitle(),
+                            'url-'.$index => $url,
+                            'link_type-'.$index => $provider->getType(),
+                            'index' => $index,
+                        ),
+                        'dependencies' => $provider->getDependencies(),
+                        'errors' => array(),
+                        'task' => $task,
+                    )));
+                }
+                $index = $index + 1;
+            }
+            $this->response->html($this->template->render('task_external_link/formClose'));
 
         } catch (ExternalLinkProviderNotFound $e) {
             $errors = array('text' => array(t('Unable to fetch link information.')));
@@ -74,27 +85,38 @@ class TaskExternalLinkController extends BaseController
     {
         $task = $this->getTask();
         $values = $this->request->getValues();
-        $values['task_id'] = $task['id'];
 
-        list($valid, $errors) = $this->externalLinkValidator->validateCreation($values);
+        $countd = count($values)/4;
+        $index = 0;
+        while($index < $countd){
+            $linkValues = array();
+            $linkValues['task_id'] = $task['id'];
+            $linkValues['url'] = $values['url-'.$index];
+            $linkValues['title'] = $values['title-'.$index];
+            $linkValues['link_type'] = $values['link_type-'.$index];
+            $linkValues['dependency'] = $values['dependency-'.$index];
+            list($valid, $errors) = $this->externalLinkValidator->validateCreation($linkValues);
+            if ($valid) {
+                if ($this->taskExternalLinkModel->create($linkValues) !== false) {
+                    $this->flash->success(t('Link added successfully.'));
+                } else {
+                    $this->flash->success(t('Unable to create your link.'));
+                }
 
-        if ($valid) {
-            if ($this->taskExternalLinkModel->create($values) !== false) {
-                $this->flash->success(t('Link added successfully.'));
             } else {
-                $this->flash->success(t('Unable to create your link.'));
+                $provider = $this->externalLinkManager->getProvider($linkValues['link_type']);
+                $this->response->html($this->template->render('task_external_link/create', array(
+                    'values' => $linkValues,
+                    'errors' => $errors,
+                    'dependencies' => $provider->getDependencies(),
+                    'task' => $task,
+                    'index' => $index,
+                )));
             }
-
-            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])), true);
-        } else {
-            $provider = $this->externalLinkManager->getProvider($values['link_type']);
-            $this->response->html($this->template->render('task_external_link/create', array(
-                'values' => $values,
-                'errors' => $errors,
-                'dependencies' => $provider->getDependencies(),
-                'task' => $task,
-            )));
+            $index = $index + 1;
         }
+
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])), true);
     }
 
     /**
