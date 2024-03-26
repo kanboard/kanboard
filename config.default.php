@@ -287,5 +287,5 @@ define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST', true);
 // If set to 0 ALL group-memberships will be listed (7 by default)
 define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT', 7);
 
-// dashboard settings
+// Dashboard settings
 define('DASHBOARD_MAX_PROJECTS', 10);

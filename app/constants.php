@@ -179,3 +179,6 @@ defined('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT') or define('SHOW_GROUP_M
 
 // Documentation URL
 defined('DOCUMENTATION_URL_PATTERN') or define('DOCUMENTATION_URL_PATTERN', getenv('DOCUMENTATION_URL_PATTERN') ?: 'https://docs.kanboard.org/v1/user/%s');
+
+// Dashboard settings
+defined('DASHBOARD_MAX_PROJECTS') or define('DASHBOARD_MAX_PROJECTS', getenv('DASHBOARD_MAX_PROJECTS') ?: 10);
