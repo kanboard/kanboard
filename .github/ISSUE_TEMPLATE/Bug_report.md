@@ -2,7 +2,7 @@
 name: Bug report
 about: This template is only for bug reports
 title: ''
-labels: bug
+labels: bug, triage needed
 assignees: ''
 
 ---
@@ -27,7 +27,7 @@ assignees: ''
 ### Steps to reproduce
 
 
-### Screenshots
+### Screenshots and Video Recording
 
 <!-- If applicable, add screenshots to help explain your problem. -->
 
