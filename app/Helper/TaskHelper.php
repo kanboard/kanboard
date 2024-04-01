@@ -187,7 +187,7 @@ class TaskHelper extends Base
         $referenceCurrency = $this->configModel->get('application_currency');
 
         $html = $this->helper->form->label(t('Task expense'), 'task_expenses');
-        $html .= $this->helper->form->text('task_expenses', $values, $errors, $attributes, 'form-input-small');
+        $html .= $this->helper->form->number('task_expenses', $values, $errors, $attributes, 'form-input-small');
         $html .= ' '.$referenceCurrency;
 		
         return $html;

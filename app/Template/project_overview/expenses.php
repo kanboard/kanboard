@@ -22,7 +22,7 @@
                         <?= t('Task name') ?>
                     </th>
                     <th style="text-align: center; background-color: #d2d2d2">
-                        <?= t('Task expenses') ?>
+                        <?= t('Task expense') ?>
                     </th>
                     <th style="text-align: center; background-color: #d2d2d2">
                         <?= t('Task expenses percentage') ?>

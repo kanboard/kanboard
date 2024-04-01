@@ -20,51 +20,58 @@
                     <li>
                         <strong><?= t('Priority:') ?></strong> <span><?= $task['priority'] ?></span>
                     </li>
-                    <?php if (! empty($task['reference'])): ?>
+                    <?php if (!empty($task['reference'])): ?>
                         <li>
-                            <strong><?= t('Reference:') ?></strong> <span><?= $this->task->renderReference($task) ?></span>
+                            <strong><?= t('Reference:') ?></strong>
+                            <span><?= $this->task->renderReference($task) ?></span>
                         </li>
                     <?php endif ?>
-                    <?php if (! empty($task['score'])): ?>
+                    <?php if (!empty($task['score'])): ?>
                         <li>
                             <strong><?= t('Complexity:') ?></strong> <span><?= $this->text->e($task['score']) ?></span>
                         </li>
                     <?php endif ?>
                     <?php if ($project['is_public']): ?>
-                    <li>
-                        <small>
-                            <?= $this->url->icon('external-link', t('Public link'), 'TaskViewController', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
-                        </small>
-                    </li>
+                        <li>
+                            <small>
+                                <?= $this->url->icon('external-link', t('Public link'), 'TaskViewController', 'readonly', array('task_id' => $task['id'], 'token' => $project['token']), false, '', '', true) ?>
+                            </small>
+                        </li>
                     <?php endif ?>
                     <?php if ($project['is_public'] && !$editable): ?>
-                    <li>
-                        <small>
-                            <?= $this->url->icon('th', t('Back to the board'), 'BoardViewController', 'readonly', array('token' => $project['token'])) ?>
-                        </small>
-                    </li>
+                        <li>
+                            <small>
+                                <?= $this->url->icon('th', t('Back to the board'), 'BoardViewController', 'readonly', array('token' => $project['token'])) ?>
+                            </small>
+                        </li>
                     <?php endif ?>
-                    <li>
-                        <strong><?= t('Task expense') ?></strong>
-                        <small>
+
+                    <?php
+                    $taskExpense = $task['task_expenses'];
+                    if (is_numeric($taskExpense)) :
+                        ?>
+                        <li>
+                            <strong><?= t('Task expense') ?></strong>
+                            <small>
                             <span>
                                 <?= $this->text->e($task['task_expenses']) . ' ' . $referenceCurrency ?>
                             </span>
-                        </small>
-                    </li>
+                            </small>
+                        </li>
+                    <?php endif ?>
 
                     <?= $this->hook->render('template:task:details:first-column', array('task' => $task)) ?>
                 </ul>
             </div>
             <div class="task-summary-column">
                 <ul class="no-bullet">
-                    <?php if (! empty($task['category_name'])): ?>
+                    <?php if (!empty($task['category_name'])): ?>
                         <li>
                             <strong><?= t('Category:') ?></strong>
                             <span><?= $this->text->e($task['category_name']) ?></span>
                         </li>
                     <?php endif ?>
-                    <?php if (! empty($task['swimlane_name'])): ?>
+                    <?php if (!empty($task['swimlane_name'])): ?>
                         <li>
                             <strong><?= t('Swimlane:') ?></strong>
                             <span><?= $this->text->e($task['swimlane_name']) ?></span>
@@ -94,7 +101,8 @@
                         <?php endif ?>
                         </span>
                         <?php if ($editable && $task['owner_id'] != $this->user->getId()): ?>
-                            - <span><?= $this->url->link(t('Assign to me'), 'TaskModificationController', 'assignToMe', ['task_id' => $task['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken()]) ?></span>
+                            -
+                            <span><?= $this->url->link(t('Assign to me'), 'TaskModificationController', 'assignToMe', ['task_id' => $task['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken()]) ?></span>
                         <?php endif ?>
                     </li>
                     <?php if ($task['creator_username']): ?>
@@ -104,16 +112,16 @@
                         </li>
                     <?php endif ?>
                     <?php if ($task['time_estimated']): ?>
-                    <li>
-                        <strong><?= t('Time estimated:') ?></strong>
-                        <span><?= t('%s hours', $task['time_estimated']) ?></span>
-                    </li>
+                        <li>
+                            <strong><?= t('Time estimated:') ?></strong>
+                            <span><?= t('%s hours', $task['time_estimated']) ?></span>
+                        </li>
                     <?php endif ?>
                     <?php if ($task['time_spent']): ?>
-                    <li>
-                        <strong><?= t('Time spent:') ?></strong>
-                        <span><?= t('%s hours', $task['time_spent']) ?></span>
-                    </li>
+                        <li>
+                            <strong><?= t('Time spent:') ?></strong>
+                            <span><?= t('%s hours', $task['time_spent']) ?></span>
+                        </li>
                     <?php endif ?>
 
                     <?= $this->hook->render('template:task:details:third-column', array('task' => $task)) ?>
@@ -144,23 +152,23 @@
                         <span><?= $this->dt->datetime($task['date_modification']) ?></span>
                     </li>
                     <?php if ($task['date_completed']): ?>
-                    <li>
-                        <strong><?= t('Completed:') ?></strong>
-                        <span><?= $this->dt->datetime($task['date_completed']) ?></span>
-                    </li>
+                        <li>
+                            <strong><?= t('Completed:') ?></strong>
+                            <span><?= $this->dt->datetime($task['date_completed']) ?></span>
+                        </li>
                     <?php endif ?>
                     <?php if ($task['date_moved']): ?>
-                    <li>
-                        <strong><?= t('Moved:') ?></strong>
-                        <span><?= $this->dt->datetime($task['date_moved']) ?></span>
-                    </li>
+                        <li>
+                            <strong><?= t('Moved:') ?></strong>
+                            <span><?= $this->dt->datetime($task['date_moved']) ?></span>
+                        </li>
                     <?php endif ?>
 
                     <?= $this->hook->render('template:task:details:fourth-column', array('task' => $task)) ?>
                 </ul>
             </div>
         </div>
-        <?php if (! empty($tags)): ?>
+        <?php if (!empty($tags)): ?>
             <div class="task-tags">
                 <ul>
                     <?php foreach ($tags as $tag): ?>
@@ -171,7 +179,7 @@
         <?php endif ?>
     </div>
 
-    <?php if (! empty($task['external_uri']) && ! empty($task['external_provider'])): ?>
+    <?php if (!empty($task['external_uri']) && !empty($task['external_provider'])): ?>
         <?= $this->app->component('external-task-view', array(
             'url' => $this->url->href('ExternalTaskViewController', 'show', array('task_id' => $task['id'])),
         )) ?>
