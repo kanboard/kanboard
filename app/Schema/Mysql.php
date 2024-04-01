@@ -8,7 +8,13 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 138;
+const VERSION = 139;
+
+function version_139(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE tasks ADD COLUMN task_expenses FLOAT");
+    $pdo->exec("ALTER TABLE projects ADD COLUMN project_expenses_threshold FLOAT");
+}
 
 function version_138(PDO $pdo)
 {

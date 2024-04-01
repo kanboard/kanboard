@@ -69,5 +69,13 @@
         <?= $this->form->number('priority_end', $values, $errors, array('tabindex="12"')) ?>
     </fieldset>
 
+    <?php if ($this->user->hasProjectAccess('ProjectEditController', 'show', $project['id'])): ?>
+    <fieldset>
+        <legend><?= t('Project expenses') ?></legend>
+        <?= $this->form->label(t('Project expenses threshold'), 'project_expenses_threshold') ?>
+        <?= $this->form->number('project_expenses_threshold', $values, $errors, array('tabindex="13"')). ' ' . $referenceCurrency  ?>
+    </fieldset>
+    <?php endif ?>
+
     <?= $this->modal->submitButtons(array('tabindex' => 13)) ?>
 </form>

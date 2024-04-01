@@ -181,6 +181,18 @@ class TaskHelper extends Base
         return $html;
     }
 
+    public function renderTaskExpenseField(array $values, array $errors = array(), array $attributes = array())
+    {
+        $attributes = array_merge(array('tabindex="21"'), $attributes);
+        $referenceCurrency = $this->configModel->get('application_currency');
+
+        $html = $this->helper->form->label(t('Task expense'), 'task_expenses');
+        $html .= $this->helper->form->text('task_expenses', $values, $errors, $attributes, 'form-input-small');
+        $html .= ' '.$referenceCurrency;
+		
+        return $html;
+    }
+
     public function renderScoreField(array $values, array $errors = array(), array $attributes = array())
     {
         $attributes = array_merge(array('tabindex="14"'), $attributes);

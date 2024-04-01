@@ -26,6 +26,7 @@ class ProjectEditController extends BaseController
             'values' => empty($values) ? $project : $values,
             'errors' => $errors,
             'project' => $project,
+            'referenceCurrency' => $this->configModel->get('application_currency'),
             'title' => t('Edit project')
         )));
     }

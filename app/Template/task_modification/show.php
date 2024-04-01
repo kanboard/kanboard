@@ -19,6 +19,7 @@
             <?= $this->task->renderAssigneeField($users_list, $values, $errors) ?>
             <?= $this->task->renderCategoryField($categories_list, $values, $errors) ?>
             <?= $this->task->renderPriorityField($project, $values) ?>
+            <?= $this->task->renderTaskExpenseField($values, $errors) ?>
 
             <?= $this->hook->render('template:task:form:second-column', array('values' => $values, 'errors' => $errors)) ?>
         </div>

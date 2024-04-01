@@ -3,6 +3,7 @@
 <?= $this->render('task/details', array(
     'task' => $task,
     'tags' => $tags,
+    'referenceCurrency' => $referenceCurrency,
     'project' => $project,
     'editable' => $this->user->hasProjectAccess('TaskModificationController', 'edit', $project['id']),
 )) ?>

@@ -143,4 +143,33 @@ class TaskModel extends Base
 
         return round(($position * 100) / count($columns), 1);
     }
+
+    /**
+     * Get tasks from project which have expenses
+     *
+     * @access public
+     * @param  integer   $project_id   Project id
+     * @return array
+     */
+    public function getAllTasksWithExpenses($project_id)
+    {
+        return $this->db->table(TaskModel::TABLE)
+            ->columns(
+                TaskModel::TABLE.'.id as taskId',
+                TaskModel::TABLE.'.title as taskName',
+                TaskModel::TABLE.'.task_expenses as taskExpenses',
+                TaskModel::TABLE.'.color_id as taskColor',
+                TaskModel::TABLE.'.date_completed as dateCompleted',
+                TaskModel::TABLE.'.date_moved as dateMoved',
+                ColumnModel::TABLE.'.title as columnTitle'
+            )
+            ->join(ColumnModel::TABLE, 'id', 'column_id', TaskModel::TABLE)
+            ->eq(TaskModel::TABLE.'.project_id', $project_id)
+            ->notNull(TaskModel::TABLE.'.task_expenses')
+            ->gt(TaskModel::TABLE.'.task_expenses', 0)
+            ->neq(TaskModel::TABLE.'.task_expenses', '')
+            ->asc(TaskModel::TABLE.'.task_expenses')
+            ->findAll();
+    }
+
 }

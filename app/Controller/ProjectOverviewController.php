@@ -17,6 +17,7 @@ class ProjectOverviewController extends BaseController
     {
         $project = $this->getProject();
         $columns = $this->columnModel->getAllWithTaskCount($project['id']);
+        $tasks = $this->taskModel->getAllTasksWithExpenses($project['id']);
 
         $this->response->html($this->helper->layout->app('project_overview/show', array(
             'project'     => $project,
@@ -24,6 +25,8 @@ class ProjectOverviewController extends BaseController
             'title'       => $project['name'],
             'description' => $this->helper->projectHeader->getDescription($project),
             'users'       => $this->projectUserRoleModel->getAllUsersGroupedByRole($project['id']),
+            'tasks'       => $tasks,
+            'referenceCurrency' => $this->configModel->get('application_currency'),
             'roles'       => $this->projectRoleModel->getList($project['id']),
             'events'      => $this->helper->projectActivity->getProjectEvents($project['id'], 10),
             'images'      => $this->projectFileModel->getAllImages($project['id']),

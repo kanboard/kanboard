@@ -44,6 +44,14 @@
                         </small>
                     </li>
                     <?php endif ?>
+                    <li>
+                        <strong><?= t('Task expense') ?></strong>
+                        <small>
+                            <span>
+                                <?= $this->text->e($task['task_expenses']) . ' ' . $referenceCurrency ?>
+                            </span>
+                        </small>
+                    </li>
 
                     <?= $this->hook->render('template:task:details:first-column', array('task' => $task)) ?>
                 </ul>

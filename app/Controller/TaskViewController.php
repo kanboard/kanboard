@@ -67,6 +67,7 @@ class TaskViewController extends BaseController
         $this->response->html($this->helper->layout->task('task/show', array(
             'task' => $task,
             'project' => $this->projectModel->getById($task['project_id']),
+            'referenceCurrency' => $this->configModel->get('application_currency'),
             'files' => $this->taskFileModel->getAllDocuments($task['id']),
             'images' => $this->taskFileModel->getAllImages($task['id']),
             'comments' => $this->commentModel->getAll($task['id'], $commentSortingDirection),
