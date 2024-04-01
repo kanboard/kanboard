@@ -161,6 +161,7 @@ class TaskModel extends Base
                 TaskModel::TABLE.'.color_id as taskColor',
                 TaskModel::TABLE.'.date_completed as dateCompleted',
                 TaskModel::TABLE.'.date_moved as dateMoved',
+                TaskModel::TABLE.'.date_modification as dateModification',
                 ColumnModel::TABLE.'.title as columnTitle'
             )
             ->join(ColumnModel::TABLE, 'id', 'column_id', TaskModel::TABLE)

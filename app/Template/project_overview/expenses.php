@@ -28,7 +28,7 @@
                         <?= t('Task expenses percentage') ?>
                     </th>
                     <th style="text-align: center; background-color: #d2d2d2">
-                        <?= t('Date moved') ?>
+                        <?= t('Date modification') ?>
                     </th>
                     <th style="text-align: center; background-color: #d2d2d2">
                         <?= t('In column') ?>
@@ -57,7 +57,7 @@
                             ?>
                         </td>
                         <td style="text-align: right;">
-                            <?= $this->dt->datetime($task['dateMoved']) ?>
+                            <?= $this->dt->datetime($task['dateModification']) ?>
                         </td>
                         <td style="text-align: center;">
                             <?= $this->text->e($task['columnTitle']) ?>
