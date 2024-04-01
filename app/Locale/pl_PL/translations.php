@@ -1444,8 +1444,6 @@ return array(
     'Project current expenses' => 'Aktualne wydatki projektu',
     'Percent of project expenses' => 'Procent aktualnych wydatków projektu',
     'Project expenses' => 'Wydatki projektu',
-    'Project current expanses' => '',
-    'Percent of project expanses' => '',
 
     // 'Automatically set the due date when the task is moved away from a specific column' => '',
     // 'No other projects found.' => '',
