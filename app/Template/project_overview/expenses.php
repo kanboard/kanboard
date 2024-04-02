@@ -92,12 +92,10 @@
                 <?= t('None project tasks have expense set') ?>
             </span>
     <?php endif; ?>
-    </div>
     <?php else: ?>
         <span>
                 <?= t('Project expanses threshold is required') ?>
             </span>
     <?php endif; ?>
-    </div>
     </div>
 </details>
