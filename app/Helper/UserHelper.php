@@ -103,6 +103,17 @@ class UserHelper extends Base
     }
 
     /**
+     * Get role
+     *
+     * @access public
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->userSession->getRole();
+    }
+
+    /**
      * Get role name
      *
      * @access public

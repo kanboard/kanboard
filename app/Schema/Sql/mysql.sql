@@ -102,6 +102,7 @@ CREATE TABLE `comments` (
   `comment` mediumtext COLLATE utf8mb4_unicode_ci,
   `reference` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT '',
   `date_modification` bigint(20) DEFAULT NULL,
+--   `role` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'app-user',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `comments_reference_idx` (`reference`),

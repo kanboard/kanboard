@@ -1443,4 +1443,5 @@ return array(
     'Automatic theme - Sync with system' => 'Thème automatique - Se synchronize avec le système d\'exploitation',
     'Managers or more' => 'Gestionnaires ou plus',
     'Administrators' => 'Administrateurs',
+    'Visibility :' => 'Visibilite :',
 );

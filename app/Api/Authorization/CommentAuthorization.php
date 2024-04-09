@@ -2,6 +2,9 @@
 
 namespace Kanboard\Api\Authorization;
 
+use JsonRPC\Exception\AccessDeniedException;
+use Kanboard\Core\Security\Role;
+
 /**
  * Class CommentAuthorization
  *
@@ -14,6 +17,25 @@ class CommentAuthorization extends ProjectAuthorization
     {
         if ($this->userSession->isLogged()) {
             $this->checkProjectPermission($class, $method, $this->commentModel->getProjectId($comment_id));
+            $this->checkCommentAccess($comment_id);
+        }
+    }
+
+    protected function checkCommentAccess($comment_id)
+    {
+        if (empty($comment_id)) {
+            throw new AccessDeniedException('Comment Not Found');
+        }
+
+        $privacy = $this->commentModel->getPrivacy($comment_id);
+        $role = $this->userSession->getRole();
+
+        if ($role === Role::APP_MANAGER && $privacy === Role::APP_ADMIN) {
+            throw new AccessDeniedException('Comment access denied');
+        }
+
+        if ($role === Role::APP_USER && $privacy !== Role::APP_USER) {
+            throw new AccessDeniedException('Comment access denied');
         }
     }
 }
