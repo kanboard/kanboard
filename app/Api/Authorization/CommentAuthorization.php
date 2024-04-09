@@ -21,6 +21,11 @@ class CommentAuthorization extends ProjectAuthorization
         }
     }
 
+    /**
+     * @param $comment_id ID of the comment to check
+     * @return void
+     * @throws AccessDeniedException
+     */
     protected function checkCommentAccess($comment_id)
     {
         if (empty($comment_id)) {
