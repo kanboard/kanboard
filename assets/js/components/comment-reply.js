@@ -1,0 +1,38 @@
+KB.onClick('.js-reply-to-comment', function (e) {
+    var commentId = parseInt($(e.target).parents('li[data-comment-id]').attr('data-comment-id'));
+
+    var commentTextContent = document.querySelector('#comment-' + commentId + ' .reply-content').textContent;
+
+    var textarea = document.querySelector("#task-view .sidebar-content textarea[name=comment]");
+    textarea.value += commentTextContent + '\n\n';
+
+    const $editorContainer = $(textarea).parents('.text-editor');
+
+    // The text editor gives us no way to refresh the preview mode. We have to simulate it by triggering a click
+    // on the edit button and then on the preview button to do so.
+
+    // We are in edit mode, so we are fine
+    if ($editorContainer.find('.text-editor-view-mode').is(':hidden')) {
+        textarea.focus();
+        return;
+    }
+
+
+    let $editButton = $editorContainer.find('.text-editor-toolbar a:has(> i.fa-pencil-square-o)');
+
+    if ($editButton.length === 0) {
+        console.error('Could not find the edit button');
+        return;
+    }
+
+    $editButton[0].click();
+
+    let $previewButton = $editorContainer.find('.text-editor-toolbar a:has(> i.fa-eye)');
+
+    if ($previewButton.length === 0) {
+        console.error('Could not find the preview button');
+        return;
+    }
+
+    $previewButton[0].click();
+});

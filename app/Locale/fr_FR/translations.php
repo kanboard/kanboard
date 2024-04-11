@@ -1441,4 +1441,6 @@ return array(
     'Light theme' => 'Thème clair',
     'Dark theme' => 'Thème sombre',
     'Automatic theme - Sync with system' => 'Thème automatique - Se synchronize avec le système d\'exploitation',
+    'Reply' => 'Répondre',
+    '%s wrote: ' => '%s a écrit : ',
 );
