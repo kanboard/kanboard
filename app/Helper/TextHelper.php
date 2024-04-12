@@ -61,7 +61,7 @@ class TextHelper extends Base
      */
     public function reply($username, $text)
     {
-        $res = t('%s wrote: ', $username).PHP_EOL.'>';
+        $res = t('%s wrote: ', $username).PHP_EOL.'> ';
 
         $lines = preg_split("/\r\n|\n|\r/", $text);
 
