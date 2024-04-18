@@ -69,7 +69,7 @@ class TaskMoveColumnOnDueDate extends Base
     public function doAction(array $data)
     {
         $results = array();
-        $min = $this->getParam('duration') * 86400;
+        $min = (int)$this->getParam('duration') * 86400;
 
         foreach ($data['tasks'] as $task) {
             $duration = $task['date_due'] - time();
