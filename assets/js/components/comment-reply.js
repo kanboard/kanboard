@@ -3,7 +3,7 @@ KB.onClick('.js-reply-to-comment', function (e) {
 
     var commentTextContent = document.querySelector('#comment-' + commentId + ' .reply-content').textContent;
 
-    var textarea = document.querySelector("#task-view .sidebar-content textarea[name=comment]");
+    var textarea = document.querySelector(".text-editor textarea[name=comment]");
     textarea.value += commentTextContent + '\n\n';
 
     const $editorContainer = $(textarea).parents('.text-editor');
@@ -18,7 +18,7 @@ KB.onClick('.js-reply-to-comment', function (e) {
     }
 
 
-    let $editButton = $editorContainer.find('.text-editor-toolbar a:has(> i.fa-pencil-square-o)');
+    var $editButton = $editorContainer.find('.text-editor-toolbar a:has(> i.fa-pencil-square-o)');
 
     if ($editButton.length === 0) {
         console.error('Could not find the edit button');
@@ -27,7 +27,7 @@ KB.onClick('.js-reply-to-comment', function (e) {
 
     $editButton[0].click();
 
-    let $previewButton = $editorContainer.find('.text-editor-toolbar a:has(> i.fa-eye)');
+    var $previewButton = $editorContainer.find('.text-editor-toolbar a:has(> i.fa-eye)');
 
     if ($previewButton.length === 0) {
         console.error('Could not find the preview button');
