@@ -32,15 +32,15 @@ class CommentAuthorization extends ProjectAuthorization
             throw new AccessDeniedException('Comment Not Found');
         }
 
-        $privacy = $this->commentModel->getPrivacy($comment_id);
+        $Visibility = $this->commentModel->getVisibility($comment_id);
         $role = $this->userSession->getRole();
 
-        if ($role === Role::APP_MANAGER && $privacy === Role::APP_ADMIN) {
-            throw new AccessDeniedException('Comment access denied');
+        if ($role === Role::APP_MANAGER && $Visibility === Role::APP_ADMIN) {
+            throw new AccessDeniedException('Comment Access Denied');
         }
 
-        if ($role === Role::APP_USER && $privacy !== Role::APP_USER) {
-            throw new AccessDeniedException('Comment access denied');
+        if ($role === Role::APP_USER && $Visibility !== Role::APP_USER) {
+            throw new AccessDeniedException('Comment Access Denied');
         }
     }
 }

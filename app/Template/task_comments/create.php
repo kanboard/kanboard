@@ -6,13 +6,30 @@
 
     <?= $this->form->textEditor('comment', $values, $errors, array('required' => true, 'aria-label' => t('New comment'))) ?>
 
-    <?php if ($this->user->getRole() !== Role::APP_USER): ?>
-        <?= $this->form->radio('privacy', t('Public'), 'app-user', true) ?>
-        <?= $this->form->radio('privacy', t('Managers or more'), 'app-manager', false) ?>
-    <?php endif ?>
+<!--    --><?php //if ($this->user->getRole() !== Role::APP_USER): ?>
+<!--        --><?php //= $this->form->radio('visibility', t('Standard users'), 'app-user', true) ?>
+<!--        --><?php //= $this->form->radio('visibility', t('Application managers or more'), 'app-manager', false) ?>
+<!--    --><?php //endif ?>
+<!---->
+<!--    --><?php //if ($this->user->getRole() === Role::APP_ADMIN): ?>
+<!--        --><?php //= $this->form->radio('visibility', t('Administrators'), 'app-admin', false) ?>
+<!--    --><?php //endif ?>
 
-    <?php if ($this->user->getRole() === Role::APP_ADMIN): ?>
-        <?= $this->form->radio('privacy', t('Administrators'), 'app-admin', false) ?>
+    <?php if ($this->user->getRole() !== Role::APP_USER) {
+        $formName = 'visibility';
+        $visibilityOptions['app-user'] = t('Standard users');
+        $visibilityOptions['app-manager'] = t('Application managers or more');
+    }
+    ?>
+
+    <?php if ($this->user->getRole() === Role::APP_ADMIN) {
+        $visibilityOptions['app-admin'] = t('Administrators');
+    }
+    ?>
+
+    <?php if (isset($visibilityOptions)): ?>
+        <?= $this->form->label(t('Visibility:'), $formName) ?>
+        <?= $this->form->select($formName, $visibilityOptions) ?>
     <?php endif ?>
 
     <?= $this->modal->submitButtons() ?>

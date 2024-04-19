@@ -12,7 +12,7 @@ const VERSION = 117;
 
 function version_117(PDO $pdo)
 {
-    $pdo->exec('ALTER TABLE "comments" ADD COLUMN "privacy" VARCHAR(25) NOT NULL DEFAULT \''.Role::APP_USER."'");
+    $pdo->exec('ALTER TABLE "comments" ADD COLUMN "visibility" VARCHAR(25) NOT NULL DEFAULT \''.Role::APP_USER."'");
 }
 
 function version_116(PDO $pdo)

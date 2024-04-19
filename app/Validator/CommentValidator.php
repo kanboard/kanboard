@@ -4,6 +4,7 @@ namespace Kanboard\Validator;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
+use Kanboard\Core\Security\Role;
 
 /**
  * Comment Validator
@@ -48,6 +49,7 @@ class CommentValidator extends BaseValidator
     {
         $rules = array(
             new Validators\Required('task_id', t('This value is required')),
+            new Validators\InArray('visibility', array(Role::APP_USER, Role::APP_MANAGER, Role::APP_ADMIN), 'The visibility should be an app role'),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
@@ -68,7 +70,8 @@ class CommentValidator extends BaseValidator
     public function validateModification(array $values)
     {
         $rules = array(
-            new Validators\Required('id', t('This value is required')),
+            new Validators\Required('task_id', t('This value is required')),
+            new Validators\InArray('visibility', array(Role::APP_USER, Role::APP_MANAGER, Role::APP_ADMIN), 'The visibility should be an app role'),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));

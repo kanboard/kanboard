@@ -1441,7 +1441,8 @@ return array(
     'Light theme' => 'Thème clair',
     'Dark theme' => 'Thème sombre',
     'Automatic theme - Sync with system' => 'Thème automatique - Se synchronize avec le système d\'exploitation',
-    'Managers or more' => 'Gestionnaires ou plus',
+    'Application managers or more' => 'Gestionnaires de l\'application ou plus',
     'Administrators' => 'Administrateurs',
-    'Visibility :' => 'Visibilite :',
-);
+    'Visibility:' => 'Visibilité :',
+    'Standard users' => 'Utilisateurs standards',
+    );

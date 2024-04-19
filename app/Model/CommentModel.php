@@ -47,18 +47,18 @@ class CommentModel extends Base
     }
 
     /**
-     * Get privacy from commentId
+     * Get visibility from commentId
      *
      * @access public
      * @param  integer $comment_id
      * @return string
      */
-    public function getPrivacy($comment_id)
+    public function getVisibility($comment_id)
     {
         return $this->db
             ->table(self::TABLE)
             ->eq(self::TABLE.'.id', $comment_id)
-            ->findOneColumn(self::TABLE . '.privacy') ?: Role::APP_USER;
+            ->findOneColumn(self::TABLE . '.visibility') ?: Role::APP_USER;
     }
 
     /**
@@ -80,7 +80,7 @@ class CommentModel extends Base
                 self::TABLE.'.task_id',
                 self::TABLE.'.user_id',
                 self::TABLE.'.comment',
-                self::TABLE.'.privacy',
+                self::TABLE.'.visibility',
                 UserModel::TABLE.'.username',
                 UserModel::TABLE.'.name',
                 UserModel::TABLE.'.email',
@@ -112,7 +112,7 @@ class CommentModel extends Base
                 self::TABLE.'.date_modification',
                 self::TABLE.'.comment',
                 self::TABLE.'.reference',
-                self::TABLE.'.privacy',
+                self::TABLE.'.visibility',
                 UserModel::TABLE.'.username',
                 UserModel::TABLE.'.name',
                 UserModel::TABLE.'.email',
