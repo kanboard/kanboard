@@ -28,6 +28,8 @@ class CommentValidator extends BaseValidator
             new Validators\Required('user_id', t('This value is required')),
             new Validators\Required('subject', t('This field is required')),
             new Validators\Required('emails', t('This field is required')),
+            new Validators\Required('visibility', t('Visibility is required')),
+            new Validators\InArray('visibility', array(Role::APP_USER, Role::APP_MANAGER, Role::APP_ADMIN), t('The visibility should be an app role'))
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
@@ -49,7 +51,8 @@ class CommentValidator extends BaseValidator
     {
         $rules = array(
             new Validators\Required('task_id', t('This value is required')),
-            new Validators\InArray('visibility', array(Role::APP_USER, Role::APP_MANAGER, Role::APP_ADMIN), 'The visibility should be an app role'),
+            new Validators\Required('visibility', t('Visibility is required')),
+            new Validators\InArray('visibility', array(Role::APP_USER, Role::APP_MANAGER, Role::APP_ADMIN), t('The visibility should be an app role'))
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
@@ -70,8 +73,7 @@ class CommentValidator extends BaseValidator
     public function validateModification(array $values)
     {
         $rules = array(
-            new Validators\Required('task_id', t('This value is required')),
-            new Validators\InArray('visibility', array(Role::APP_USER, Role::APP_MANAGER, Role::APP_ADMIN), 'The visibility should be an app role'),
+            new Validators\Required('id', t('This value is required')),
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));

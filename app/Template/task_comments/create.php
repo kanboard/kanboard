@@ -6,15 +6,6 @@
 
     <?= $this->form->textEditor('comment', $values, $errors, array('required' => true, 'aria-label' => t('New comment'))) ?>
 
-<!--    --><?php //if ($this->user->getRole() !== Role::APP_USER): ?>
-<!--        --><?php //= $this->form->radio('visibility', t('Standard users'), 'app-user', true) ?>
-<!--        --><?php //= $this->form->radio('visibility', t('Application managers or more'), 'app-manager', false) ?>
-<!--    --><?php //endif ?>
-<!---->
-<!--    --><?php //if ($this->user->getRole() === Role::APP_ADMIN): ?>
-<!--        --><?php //= $this->form->radio('visibility', t('Administrators'), 'app-admin', false) ?>
-<!--    --><?php //endif ?>
-
     <?php if ($this->user->getRole() !== Role::APP_USER) {
         $formName = 'visibility';
         $visibilityOptions['app-user'] = t('Standard users');
