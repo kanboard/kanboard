@@ -1441,4 +1441,10 @@ return array(
     'Light theme' => 'Thème clair',
     'Dark theme' => 'Thème sombre',
     'Automatic theme - Sync with system' => 'Thème automatique - Se synchronize avec le système d\'exploitation',
-);
+    'Application managers or more' => 'Gestionnaires de l\'application ou plus',
+    'Administrators' => 'Administrateurs',
+    'Visibility:' => 'Visibilité :',
+    'Standard users' => 'Utilisateurs standards',
+    'Visibility is required' => 'La visibilité est obligatoire',
+    'The visibility should be an app role' => 'La visibilité doit être un rôle de l\'application',
+    );

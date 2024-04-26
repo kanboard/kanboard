@@ -4,6 +4,7 @@ namespace Kanboard\Api\Procedure;
 
 use Kanboard\Api\Authorization\CommentAuthorization;
 use Kanboard\Api\Authorization\TaskAuthorization;
+use Kanboard\Core\Security\Role;
 
 /**
  * Comment API controller
@@ -31,7 +32,7 @@ class CommentProcedure extends BaseProcedure
         return $this->commentModel->remove($comment_id);
     }
 
-    public function createComment($task_id, $user_id, $content, $reference = '')
+    public function createComment($task_id, $user_id, $content, $reference = '', $visibility = Role::APP_USER)
     {
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'createComment', $task_id);
         
@@ -40,6 +41,7 @@ class CommentProcedure extends BaseProcedure
             'user_id' => $user_id,
             'comment' => $content,
             'reference' => $reference,
+            'visibility' => $visibility,
         );
 
         list($valid, ) = $this->commentValidator->validateCreation($values);

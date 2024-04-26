@@ -3,6 +3,7 @@
 require_once __DIR__.'/../Base.php';
 
 use Kanboard\Validator\CommentValidator;
+use Kanboard\Core\Security\Role;
 
 class CommentValidatorTest extends Base
 {
@@ -14,6 +15,7 @@ class CommentValidatorTest extends Base
             'user_id' => 1,
             'task_id' => 1,
             'comment' => 'blah',
+            'visibility' => Role::APP_USER,
             'emails'  => 'test@localhost, another@localhost',
             'subject' => 'something',
         ));
@@ -24,6 +26,28 @@ class CommentValidatorTest extends Base
             'user_id' => 1,
             'task_id' => 1,
             'comment' => 'blah',
+            'visibility' => Role::APP_USER,
+            'subject' => 'something',
+        ));
+
+        $this->assertFalse($result[0]);
+
+        $result = $commentValidator->validateEmailCreation(array(
+            'user_id' => 1,
+            'task_id' => 1,
+            'comment' => 'blah',
+            'emails'  => 'test@localhost, another@localhost',
+            'subject' => 'something',
+        ));
+
+        $this->assertFalse($result[0]);
+
+        $result = $commentValidator->validateEmailCreation(array(
+            'user_id' => 1,
+            'task_id' => 1,
+            'comment' => 'blah',
+            'visibility' => 'admin',
+            'emails'  => 'test@localhost, another@localhost',
             'subject' => 'something',
         ));
 
@@ -34,23 +58,32 @@ class CommentValidatorTest extends Base
     {
         $commentValidator = new CommentValidator($this->container);
 
-        $result = $commentValidator->validateCreation(array('user_id' => 1, 'task_id' => 1, 'comment' => 'bla'));
+        $result = $commentValidator->validateCreation(array('user_id' => 1, 'task_id' => 1, 'comment' => 'bla', 'visibility' => Role::APP_USER));
         $this->assertTrue($result[0]);
 
-        $result = $commentValidator->validateCreation(array('user_id' => 1, 'task_id' => 1, 'comment' => ''));
+        $result = $commentValidator->validateCreation(array('user_id' => 1, 'task_id' => 1, 'comment' => '', 'visibility' => 'admin'));
         $this->assertFalse($result[0]);
 
-        $result = $commentValidator->validateCreation(array('user_id' => 1, 'task_id' => 'a', 'comment' => 'bla'));
+        $result = $commentValidator->validateCreation(array('user_id' => 1, 'task_id' => 1, 'comment' => '', 'visibility' => Role::APP_USER));
         $this->assertFalse($result[0]);
 
-        $result = $commentValidator->validateCreation(array('user_id' => 'b', 'task_id' => 1, 'comment' => 'bla'));
+        $result = $commentValidator->validateCreation(array('user_id' => 1, 'task_id' => 'a', 'comment' => 'bla', 'visibility' => Role::APP_USER));
         $this->assertFalse($result[0]);
 
-        $result = $commentValidator->validateCreation(array('user_id' => 1, 'comment' => 'bla'));
+        $result = $commentValidator->validateCreation(array('user_id' => 'b', 'task_id' => 1, 'comment' => 'bla', 'visibility' => Role::APP_USER));
+        $this->assertFalse($result[0]);
+
+        $result = $commentValidator->validateCreation(array('user_id' => 1, 'comment' => 'bla', 'visibility' => Role::APP_USER));
+        $this->assertFalse($result[0]);
+
+        $result = $commentValidator->validateCreation(array('task_id' => 1, 'comment' => 'bla', 'visibility' => Role::APP_USER));
+        $this->assertTrue($result[0]);
+
+        $result = $commentValidator->validateCreation(array('user_id' => 1, 'task_id' => 1, 'comment' => 'bla'));
         $this->assertFalse($result[0]);
 
         $result = $commentValidator->validateCreation(array('task_id' => 1, 'comment' => 'bla'));
-        $this->assertTrue($result[0]);
+        $this->assertFalse($result[0]);
 
         $result = $commentValidator->validateCreation(array('comment' => 'bla'));
         $this->assertFalse($result[0]);

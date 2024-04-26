@@ -1,3 +1,17 @@
+<?php
+
+use Kanboard\Core\Security\Role;
+
+if ($this->user->getRole() === Role::APP_MANAGER && $comment['visibility'] === Role::APP_ADMIN) {
+    return;
+}
+
+if ($this->user->getRole() === Role::APP_USER && $comment['visibility'] !== Role::APP_USER) {
+    return;
+}
+
+?>
+
 <div class="comment <?= isset($preview) ? 'comment-preview' : '' ?>" id="comment-<?= $comment['id'] ?>">
 
     <?= $this->avatar->render($comment['user_id'], $comment['username'], $comment['name'], $comment['email'], $comment['avatar_path']) ?>
@@ -9,6 +23,15 @@
 
         <small class="comment-date"><?= t('Created at:') ?> <?= $this->dt->datetime($comment['date_creation']) ?></small>
         <small class="comment-date"><?= t('Updated at:') ?> <?= $this->dt->datetime($comment['date_modification']) ?></small>
+        <small class="comment-visibility"><?= t('Visibility:') ?>
+            <?php if ($comment['visibility'] === Role::APP_USER): ?>
+                <?= t('Standard users') ?>
+            <?php elseif ($comment['visibility'] === Role::APP_MANAGER): ?>
+                <?= t('Application managers or more') ?>
+            <?php else: ?>
+                <?= t('Administrators') ?>
+            <?php endif ?>
+        </small>
     </div>
 
     <?php if (! isset($hide_actions)): ?>
