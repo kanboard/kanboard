@@ -6,8 +6,15 @@
 
     <?= $this->form->textEditor('comment', $values, $errors, array('required' => true, 'aria-label' => t('New comment'))) ?>
 
-    <?php if ($this->user->getRole() !== Role::APP_USER) {
+    <?php
         $formName = 'visibility';
+        $visibilityOptions['app-user'] = t('Standard users');
+        $attribute[] = ('hidden');
+    ?>
+
+    <?php if ($this->user->getRole() !== Role::APP_USER) {
+        echo $this->form->label(t('Visibility:'), $formName);
+        $attribute = [];
         $visibilityOptions['app-user'] = t('Standard users');
         $visibilityOptions['app-manager'] = t('Application managers or more');
     }
@@ -18,10 +25,6 @@
     }
     ?>
 
-    <?php if (isset($visibilityOptions)): ?>
-        <?= $this->form->label(t('Visibility:'), $formName) ?>
-        <?= $this->form->select($formName, $visibilityOptions) ?>
-    <?php endif ?>
-
+    <?= $this->form->select($formName, $visibilityOptions, array(), array(), $attribute) ?>
     <?= $this->modal->submitButtons() ?>
 </form>
