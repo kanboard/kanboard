@@ -53,6 +53,22 @@ class TextHelper extends Base
     }
 
     /**
+     * Reply transformation
+     *
+     * @param  string   $username
+     * @param  string   $text
+     * @return string
+     */
+    public function reply($username, $text)
+    {
+        $res = t('%s wrote: ', $username).PHP_EOL.'> ';
+
+        $lines = preg_split("/\r\n|\n|\r/", $text);
+
+        return $res.implode(PHP_EOL.'> ', $lines);
+    }
+
+    /**
      * Format a file size
      *
      * @param  integer  $size        Size in bytes

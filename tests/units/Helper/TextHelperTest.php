@@ -149,4 +149,12 @@ class TextHelperTest extends Base
         $this->assertEquals('?', $textHelper->in('a', array('b' => 'c')));
         $this->assertEquals('c', $textHelper->in('b', array('b' => 'c')));
     }
+
+    public function testFormatReply()
+    {
+        $textHelper = new TextHelper($this->container);
+        $this->assertEquals(
+            'User wrote: '.PHP_EOL.'> a comment'.PHP_EOL.'> to test this'.PHP_EOL.'> feature',
+            $textHelper->reply('User', 'a comment'.PHP_EOL.'to test this'.PHP_EOL.'feature'));
+    }
 }

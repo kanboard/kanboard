@@ -1447,4 +1447,6 @@ return array(
     'Standard users' => 'Utilisateurs standards',
     'Visibility is required' => 'La visibilité est obligatoire',
     'The visibility should be an app role' => 'La visibilité doit être un rôle de l\'application',
+    'Reply' => 'Répondre',
+    '%s wrote: ' => '%s a écrit : ',
     );

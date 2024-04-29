@@ -42,6 +42,9 @@ if ($this->user->getRole() === Role::APP_USER && $comment['visibility'] !== Role
                 <li>
                     <?= $this->url->icon('link', t('Link'), 'TaskViewController', 'show', array('task_id' => $task['id']), false, '', '', $this->app->isAjax(), 'comment-'.$comment['id']) ?>
                 </li>
+                <li data-comment-id="<?= $comment['id'] ?>">
+                    <?= $this->url->icon('reply', t('Reply'), 'TaskViewController', 'show', array('task_id' => $task['id']), false, 'js-reply-to-comment', '', $this->app->isAjax(), 'form-task_id') ?>
+                </li>
                 <?php if ($editable && ($this->user->isAdmin() || $this->user->isCurrentUser($comment['user_id']))): ?>
                     <li>
                         <?= $this->modal->medium('edit', t('Edit'), 'CommentController', 'edit', array('task_id' => $task['id'], 'comment_id' => $comment['id'])) ?>
@@ -59,5 +62,6 @@ if ($this->user->getRole() === Role::APP_USER && $comment['visibility'] !== Role
         <div class="markdown">
             <?= $this->text->markdown($comment['comment'], isset($is_public) && $is_public) ?>
         </div>
+        <div class="reply-content" style="display: none"><?= $this->text->reply($comment['name'] ?: $comment['username'], $comment['comment']) ?></div>
     </div>
 </div>
