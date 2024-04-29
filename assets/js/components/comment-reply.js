@@ -6,7 +6,7 @@ KB.onClick('.js-reply-to-comment', function (e) {
     var textarea = document.querySelector(".text-editor textarea[name=comment]");
     textarea.value += commentTextContent + '\n\n';
 
-    const $editorContainer = $(textarea).parents('.text-editor');
+    var $editorContainer = $(textarea).parents('.text-editor');
 
     // The text editor gives us no way to refresh the preview mode. We have to simulate it by triggering a click
     // on the edit button and then on the preview button to do so.
