@@ -1,4 +1,4 @@
-KB.onClick('.js-reply-to-comment', function (e) {
+KB.onClick('.js-reply-to-comment, .fa-reply', function (e) {
     var commentId = parseInt($(e.target).parents('li[data-comment-id]').attr('data-comment-id'));
 
     var commentTextContent = document.querySelector('#comment-' + commentId + ' .reply-content').textContent;
@@ -14,7 +14,7 @@ KB.onClick('.js-reply-to-comment', function (e) {
     // We are in edit mode, so we are fine
     if ($editorContainer.find('.text-editor-view-mode').is(':hidden')) {
         textarea.focus();
-        return;
+        return false;
     }
 
 
@@ -22,7 +22,7 @@ KB.onClick('.js-reply-to-comment', function (e) {
 
     if ($editButton.length === 0) {
         console.error('Could not find the edit button');
-        return;
+        return false;
     }
 
     $editButton[0].click();
@@ -31,8 +31,9 @@ KB.onClick('.js-reply-to-comment', function (e) {
 
     if ($previewButton.length === 0) {
         console.error('Could not find the preview button');
-        return;
+        return false;
     }
 
     $previewButton[0].click();
+    return false;
 });

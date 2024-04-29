@@ -43,7 +43,7 @@ if ($this->user->getRole() === Role::APP_USER && $comment['visibility'] !== Role
                     <?= $this->url->icon('link', t('Link'), 'TaskViewController', 'show', array('task_id' => $task['id']), false, '', '', $this->app->isAjax(), 'comment-'.$comment['id']) ?>
                 </li>
                 <li data-comment-id="<?= $comment['id'] ?>">
-                    <?= $this->url->icon('reply', t('Reply'), 'TaskViewController', 'show', array('task_id' => $task['id']), false, 'js-reply-to-comment', '', $this->app->isAjax(), '') ?>
+                    <?= $this->url->icon('reply', t('Reply'), 'TaskViewController', 'show', array('task_id' => $task['id']), false, 'js-reply-to-comment', '', $this->app->isAjax(), 'form-task_id') ?>
                 </li>
                 <?php if ($editable && ($this->user->isAdmin() || $this->user->isCurrentUser($comment['user_id']))): ?>
                     <li>
