@@ -84,7 +84,7 @@ class TaskEmailNoActivity extends Base
     public function doAction(array $data)
     {
         $results = array();
-        $max = $this->getParam('duration') * 86400;
+        $max = (int)$this->getParam('duration') * 86400;
         $user = $this->userModel->getById($this->getParam('user_id'));
 
         if (! empty($user['email'])) {

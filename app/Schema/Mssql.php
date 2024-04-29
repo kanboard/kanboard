@@ -8,7 +8,13 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 2;
+
+const VERSION = 3;
+
+function version_3(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE dbo.comments ADD visibility nvarchar(25) DEFAULT N'".Role::APP_USER."' NOT NULL");
+}
 
 function version_2(PDO $pdo)
 {

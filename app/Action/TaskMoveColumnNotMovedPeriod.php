@@ -70,7 +70,7 @@ class TaskMoveColumnNotMovedPeriod extends Base
     public function doAction(array $data)
     {
         $results = array();
-        $max = $this->getParam('duration') * 86400;
+        $max = (int)$this->getParam('duration') * 86400;
 
         foreach ($data['tasks'] as $task) {
             $duration = time() - $task['date_moved'];

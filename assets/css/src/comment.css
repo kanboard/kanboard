@@ -27,6 +27,11 @@
     font-weight: 200
 }
 
+.comment-visibility {
+    color: var(--color-light);
+    font-weight: 200
+}
+
 .comment-actions {
     text-align: right
 }
