@@ -154,7 +154,7 @@ class TextHelperTest extends Base
     {
         $textHelper = new TextHelper($this->container);
         $this->assertEquals(
-            'User wrote: '.PHP_EOL.'> a comment'.PHP_EOL.'> to test this'.PHP_EOL.'> feature'.PHP_EOL.PHP_EOL,
+            'User wrote: '.PHP_EOL.'> a comment'.PHP_EOL.'> to test this'.PHP_EOL.'> feature',
             $textHelper->reply('User', 'a comment'.PHP_EOL.'to test this'.PHP_EOL.'feature'));
     }
 }
