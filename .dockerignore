@@ -17,6 +17,7 @@ plugins/*
 tests
 ChangeLog
 composer.json
+custom-hooks
 Dockerfile
 Makefile
 Vagrantfile
