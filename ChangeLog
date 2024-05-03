@@ -1,3 +1,18 @@
+Version 1.2.36 (May 2, 2024)
+----------------------------
+
+* Add comments visibility
+* Add explicit int casting to avoid PHP 8 TypeError when having empty automatic action parameters
+* Add new config option `DASHBOARD_MAX_PROJECTS`
+* Add reply feature to comments
+* Fix search bar layout when adding more buttons via third-party plugins
+* Introduce a Git hook to automatically update `version.txt` during Git checkout
+* Performance improvements:
+    * Don't count closed tasks when rendering the board
+    * Force the use of the cache when there is no custom roles
+* Use unique plugin name instead of plugin title for plugin registry logic
+* Update dependencies
+
 Version 1.2.35 (February 2, 2024)
 ---------------------------------
 
