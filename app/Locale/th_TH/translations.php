@@ -1441,4 +1441,12 @@ return array(
     // 'Light theme' => '',
     // 'Dark theme' => '',
     // 'Automatic theme - Sync with system' => '',
+    // 'Application managers or more' => '',
+    // 'Administrators' => '',
+    // 'Visibility:' => '',
+    // 'Standard users' => '',
+    // 'Visibility is required' => '',
+    // 'The visibility should be an app role' => '',
+    // 'Reply' => '',
+    // '%s wrote: ' => '',
 );

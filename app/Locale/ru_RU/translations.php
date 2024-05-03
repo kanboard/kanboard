@@ -1441,4 +1441,12 @@ return array(
     'Light theme' => 'Светлая тема',
     'Dark theme' => 'Тёмная тема',
     'Automatic theme - Sync with system' => 'Автоматический выбор - использовать системные настройки',
+    // 'Application managers or more' => '',
+    // 'Administrators' => '',
+    // 'Visibility:' => '',
+    // 'Standard users' => '',
+    // 'Visibility is required' => '',
+    // 'The visibility should be an app role' => '',
+    // 'Reply' => '',
+    // '%s wrote: ' => '',
 );

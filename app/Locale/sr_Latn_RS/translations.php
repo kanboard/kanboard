@@ -1441,4 +1441,12 @@ return array(
     'Light theme' => 'Svetla tema',
     'Dark theme' => 'Tamna tema',
     'Automatic theme - Sync with system' => 'Automatska tema - sinhronizacija sa sistemom',
+    // 'Application managers or more' => '',
+    // 'Administrators' => '',
+    // 'Visibility:' => '',
+    // 'Standard users' => '',
+    // 'Visibility is required' => '',
+    // 'The visibility should be an app role' => '',
+    // 'Reply' => '',
+    // '%s wrote: ' => '',
 );
