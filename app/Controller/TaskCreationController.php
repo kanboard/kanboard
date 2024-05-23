@@ -50,6 +50,8 @@ class TaskCreationController extends BaseController
         $project = $this->getProject();
         $values = $this->request->getValues();
         $values['project_id'] = $project['id'];
+        $screenshot = $values['screenshot'];
+        array_splice($values, 13, 1);
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
@@ -64,6 +66,9 @@ class TaskCreationController extends BaseController
 
             if ($task_id > 0) {
                 $this->flash->success(t('Task created successfully.'));
+                if ($screenshot != ''){
+                    $this->taskFileModel->uploadScreenshot($task_id, $screenshot);
+                }
                 $this->afterSave($project, $values, $task_id);
             } else {
                 $this->flash->failure(t('Unable to create this task.'));

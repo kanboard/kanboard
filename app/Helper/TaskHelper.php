@@ -260,6 +260,15 @@ class TaskHelper extends Base
         return '';
     }
 
+    public function renderScreenshotUpload()
+    {
+        $html =  '<div id="screenshot-zone">';
+        $html .=  '    <p id="screenshot-inner">'.t('Take a screenshot and press CTRL+V or ⌘+V to paste here.').'</p>';
+        $html .=  '</div>';
+        $html .= $this->helper->app->component('screenshot');
+        return $html;
+    }
+
     public function getProgress($task)
     {
         if (! isset($this->columns[$task['project_id']])) {

@@ -36,6 +36,8 @@
             <?= $this->hook->render('template:task:form:third-column', array('values' => $values, 'errors' => $errors)) ?>
         </div>
 
+        <?= $this->task->renderScreenshotUpload() ?>
+
         <div class="task-form-bottom">
 
             <?= $this->hook->render('template:task:form:bottom-before-buttons', array('values' => $values, 'errors' => $errors)) ?>
