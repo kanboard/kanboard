@@ -50,6 +50,7 @@ class TaskCreationController extends BaseController
         $project = $this->getProject();
         $values = $this->request->getValues();
         $values['project_id'] = $project['id'];
+        $files = $this->request->getFileInfo('files');
         $screenshot = $values['screenshot'];
         array_splice($values, 13, 1);
 
@@ -68,6 +69,9 @@ class TaskCreationController extends BaseController
                 $this->flash->success(t('Task created successfully.'));
                 if ($screenshot != ''){
                     $this->taskFileModel->uploadScreenshot($task_id, $screenshot);
+                }
+                if ($files != null){
+                    $result = $this->taskFileModel->uploadFiles($task_id, $files);
                 }
                 $this->afterSave($project, $values, $task_id);
             } else {

@@ -37,6 +37,7 @@
         </div>
 
         <?= $this->task->renderScreenshotUpload() ?>
+        <?= $this->task->renderFileUpload() ?>
 
         <div class="task-form-bottom">
 

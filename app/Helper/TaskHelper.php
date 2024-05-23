@@ -269,6 +269,22 @@ class TaskHelper extends Base
         return $html;
     }
 
+    public function renderFileUpload()
+    {
+        $max_size = get_upload_max_size();
+        $html =  $this->helper->app->component('file-upload', array(
+            'maxSize'           => $max_size,
+            'labelDropzone'     => t('Drag and drop your files here'),
+            'labelOr'           => t('or'),
+            'labelChooseFiles'  => t('choose files'),
+            'labelOversize'     => $max_size > 0 ? t('The maximum allowed file size is %sB.', $this->helper->text->bytes($max_size)) : null,
+            'labelSuccess'      => t('All files have been uploaded successfully.'),
+            'labelCloseSuccess' => t('Close this window'),
+            'labelUploadError'  => t('Unable to upload this file.'),
+        ));
+        return $html;
+    }
+
     public function getProgress($task)
     {
         if (! isset($this->columns[$task['project_id']])) {
