@@ -31,26 +31,28 @@ class CategoryProcedure extends BaseProcedure
         return $this->categoryModel->remove($category_id);
     }
 
-    public function createCategory($project_id, $name)
+    public function createCategory($project_id, $name, $color_id = null)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'createCategory', $project_id);
 
         $values = array(
             'project_id' => $project_id,
             'name' => $name,
+            'color_id' => $color_id,
         );
 
         list($valid, ) = $this->categoryValidator->validateCreation($values);
         return $valid ? $this->categoryModel->create($values) : false;
     }
 
-    public function updateCategory($id, $name)
+    public function updateCategory($id, $name, $color_id = null)
     {
         CategoryAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateCategory', $id);
 
         $values = array(
             'id' => $id,
             'name' => $name,
+            'color_id' => $color_id,
         );
 
         list($valid, ) = $this->categoryValidator->validateModification($values);
