@@ -1,4 +1,4 @@
-FROM alpine:3.19
+FROM alpine:3.20
 
 LABEL org.opencontainers.image.source https://github.com/kanboard/kanboard
 LABEL org.opencontainers.image.title=Kanboard
@@ -23,7 +23,7 @@ RUN apk --no-cache --update add \
     php83-gd php83-openssl php83-sockets php83-posix php83-ldap php83-simplexml && \
     rm -rf /var/www/localhost && \
     rm -f /etc/php83/php-fpm.d/www.conf && \
-    ln -s /usr/bin/php83 /usr/bin/php
+    ln -sf /usr/bin/php83 /usr/bin/php
 
 ADD . /var/www/app
 ADD docker/ /
