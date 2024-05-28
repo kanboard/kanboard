@@ -66,14 +66,19 @@ class TaskCreationController extends BaseController
             $task_id = $this->taskCreationModel->create($values);
 
             if ($task_id > 0) {
-                $this->flash->success(t('Task created successfully.'));
-                if ($screenshot != ''){
+                if ($screenshot) {
                     $this->taskFileModel->uploadScreenshot($task_id, $screenshot);
                 }
-                if ($files != null){
-                    $result = $this->taskFileModel->uploadFiles($task_id, $files);
+                if ($files['name'][0]) {
+                    $filesUploaded = $this->taskFileModel->uploadFiles($task_id, $files);
                 }
-                $this->afterSave($project, $values, $task_id);
+
+                if ($files['name'][0] && !$filesUploaded) {
+                    $this->flash->failure(t('Unable to upload files, check the permissions of your data folder.'));
+                } else {
+                    $this->flash->success(t('Task created successfully.'));
+                    $this->afterSave($project, $values, $task_id);
+                }
             } else {
                 $this->flash->failure(t('Unable to create this task.'));
                 $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);

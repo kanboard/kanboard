@@ -36,10 +36,10 @@
             <?= $this->hook->render('template:task:form:third-column', array('values' => $values, 'errors' => $errors)) ?>
         </div>
 
-        <?= $this->task->renderScreenshotUpload() ?>
-        <?= $this->task->renderFileUpload() ?>
-
         <div class="task-form-bottom">
+
+<!--            --><?php //= $this->task->renderScreenshotUpload() ?>
+            <?= $this->task->renderFileUpload() ?>
 
             <?= $this->hook->render('template:task:form:bottom-before-buttons', array('values' => $values, 'errors' => $errors)) ?>
 

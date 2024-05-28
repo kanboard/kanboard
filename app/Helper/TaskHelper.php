@@ -271,13 +271,16 @@ class TaskHelper extends Base
 
     public function renderFileUpload()
     {
-        $max_size = get_upload_max_size();
-        $html =  $this->helper->app->component('file-upload', array(
+        $html =  '<div id="screenshot-zone">';
+        $html .=  '    <p id="screenshot-inner">'.t('Take a screenshot and press CTRL+V or ⌘+V to paste here.').'</p>';
+        $html .=  '</div>';
+        $max_size = 1024000;
+        $html .=  $this->helper->app->component('file-upload-task-create', array(
             'maxSize'           => $max_size,
             'labelDropzone'     => t('Drag and drop your files here'),
             'labelOr'           => t('or'),
             'labelChooseFiles'  => t('choose files'),
-            'labelOversize'     => $max_size > 0 ? t('The maximum allowed file size is %sB.', $this->helper->text->bytes($max_size)) : null,
+            'labelOversize'     => t('The total maximum allowed attachments size is %sB.', $this->helper->text->bytes($max_size)),
             'labelSuccess'      => t('All files have been uploaded successfully.'),
             'labelCloseSuccess' => t('Close this window'),
             'labelUploadError'  => t('Unable to upload this file.'),
