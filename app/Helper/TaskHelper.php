@@ -260,21 +260,15 @@ class TaskHelper extends Base
         return '';
     }
 
-    public function renderScreenshotUpload()
-    {
-        $html =  '<div id="screenshot-zone">';
-        $html .=  '    <p id="screenshot-inner">'.t('Take a screenshot and press CTRL+V or ⌘+V to paste here.').'</p>';
-        $html .=  '</div>';
-        $html .= $this->helper->app->component('screenshot');
-        return $html;
-    }
-
     public function renderFileUpload()
     {
-        $html =  '<div id="screenshot-zone">';
-        $html .=  '    <p id="screenshot-inner">'.t('Take a screenshot and press CTRL+V or ⌘+V to paste here.').'</p>';
+        $html =  '<div class="task-form-bottom-column">';
+        $html .=  '    <div id="screenshot-zone">';
+        $html .=  '        <p id="screenshot-inner">'.t('Take a screenshot and press CTRL+V or ⌘+V to paste here.').'</p>';
+        $html .=  '    </div>';
         $html .=  '</div>';
         $max_size = 1024000;
+        $html .=  '<div class="task-form-bottom-column">';
         $html .=  $this->helper->app->component('file-upload-task-create', array(
             'maxSize'           => $max_size,
             'labelDropzone'     => t('Drag and drop your files here'),
@@ -285,6 +279,7 @@ class TaskHelper extends Base
             'labelCloseSuccess' => t('Close this window'),
             'labelUploadError'  => t('Unable to upload this file.'),
         ));
+        $html .=  '</div>';
         return $html;
     }
 

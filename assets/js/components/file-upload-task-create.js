@@ -63,6 +63,7 @@ KB.component('file-upload-task-create', function (containerElement, options) {
     function checkMaxSize() {
         var isOversize = false;
         var message = KB.find('#message-container');
+        var messageElement = KB.dom(containerElement).parent('.task-form-bottom');
 
         if (totalSize > options.maxSize) {
             isOversize = true;
@@ -71,11 +72,12 @@ KB.component('file-upload-task-create', function (containerElement, options) {
         if (isOversize) {
             KB.trigger('modal.disable');
             if (!message) {
-                KB.dom(containerElement).add(KB.dom('div')
+                messageElement
+                    .insertBefore(KB.dom('div')
                     .attr('id', 'message-container')
                     .attr('class', 'alert alert-error')
                     .text(options.labelOversize)
-                    .build());
+                    .build(), messageElement.firstChild);
             }
         } else {
             KB.trigger('modal.enable');
