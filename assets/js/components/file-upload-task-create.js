@@ -3,10 +3,8 @@ KB.component('file-upload-task-create', function (containerElement, options) {
     var dropzoneElement = null;
     var files = [];
     var totalSize = 0;
-    var currentScreenShotSize = 0;
+    var currentScreenshotSize = 0;
     var inputElement = null;
-    var alertMaxSize = KB.find('.task-form-bottom');
-
 
     function onFileLoaded(e) {
         createImage(e.target.result);
@@ -14,11 +12,9 @@ KB.component('file-upload-task-create', function (containerElement, options) {
     }
 
     function sizeOfImage(e) {
-        var data = e.split('base64,')[1].length;
-        totalSize -= currentScreenShotSize;
-        currentScreenShotSize = data*(3/4);
-        totalSize += currentScreenShotSize;
-        console.log(totalSize);
+        totalSize -= currentScreenshotSize;
+        currentScreenshotSize = e.length;
+        totalSize += currentScreenshotSize;
         checkMaxSize();
     }
 
@@ -83,7 +79,9 @@ KB.component('file-upload-task-create', function (containerElement, options) {
             }
         } else {
             KB.trigger('modal.enable');
-            message.remove();
+            if (message){
+                message.remove();
+            }
         }
     }
 
@@ -169,10 +167,6 @@ KB.component('file-upload-task-create', function (containerElement, options) {
     }
 
     function buildFileListItem(index) {
-        var progressElement = KB.dom('progress')
-            .attr('id', 'file-progress-' + index)
-            .attr('value', 0)
-            .build();
 
         var deleteElement = KB.dom('span')
             .attr('id', 'file-delete-' + index)
@@ -188,7 +182,6 @@ KB.component('file-upload-task-create', function (containerElement, options) {
         var itemElement = KB.dom('li')
             .attr('id', 'file-item-' + index)
             .add(deleteElement)
-            .add(progressElement)
             .text(' ' + files[index].name + ' ');
 
         return itemElement.build();
