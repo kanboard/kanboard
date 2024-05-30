@@ -118,6 +118,9 @@ KB.component('file-upload-task-create', function (containerElement, options) {
     }
 
     function showFiles() {
+        var newFileList = new DataTransfer();
+        for (var file of files) newFileList.items.add(file);
+        inputFileElement.files = newFileList.files;
         if (files.length > 0) {
             KB.dom(dropzoneElement)
                 .empty()
