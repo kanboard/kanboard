@@ -207,13 +207,6 @@ KB.component('file-upload-task-create', function (containerElement, options) {
     }
 
     function onLoad() {
-        console.log(options.files);
-        if (options.files.length !== 0) {
-            console.log('files', options.files);
-            // for (var i = 0; i < options.files.name.length; i++) {
-            //     // files += new File(options.files.name[i], options.files.full_path[i], options.files.size[i], options.files.tmp_name[i], options.files.type[i]);
-            // }
-        }
         if (options.screenshot) {
             var data = 'data:image/png;base64,' + options.screenshot;
             createImage(data);
@@ -221,6 +214,7 @@ KB.component('file-upload-task-create', function (containerElement, options) {
     }
 
     this.render = function () {
+        KB.on('modal.submit', onSubmit);
         inputElement = KB.dom('input')
             .attr('type', 'hidden')
             .attr('name', 'screenshot')
@@ -234,4 +228,30 @@ KB.component('file-upload-task-create', function (containerElement, options) {
         initialize();
         onLoad();
     };
+
+    function onSubmit() {
+        var form = document.querySelector('#modal-content form');
+
+        if (form) {
+            var url = form.getAttribute('action');
+
+            if (url) {
+                KB.http.postForm(url, form).success(function (response) {
+                    KB.trigger('modal.stop');
+
+                    if (response) {
+                        KB.modal.replaceHtml(response);
+                    } else {
+                        KB.modal.close();
+                    }
+                }).error(function (response) {
+                    KB.trigger('modal.stop');
+
+                    if (response.hasOwnProperty('message')) {
+                        window.alert(response.message);
+                    }
+                });
+            }
+        }
+    }
 });
