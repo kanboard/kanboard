@@ -206,6 +206,20 @@ KB.component('file-upload-task-create', function (containerElement, options) {
         return fileListElement;
     }
 
+    function onLoad() {
+        console.log(options.files);
+        if (options.files.length !== 0) {
+            console.log('files', options.files);
+            // for (var i = 0; i < options.files.name.length; i++) {
+            //     // files += new File(options.files.name[i], options.files.full_path[i], options.files.size[i], options.files.tmp_name[i], options.files.type[i]);
+            // }
+        }
+        if (options.screenshot) {
+            var data = 'data:image/png;base64,' + options.screenshot;
+            createImage(data);
+        }
+    }
+
     this.render = function () {
         inputElement = KB.dom('input')
             .attr('type', 'hidden')
@@ -218,5 +232,6 @@ KB.component('file-upload-task-create', function (containerElement, options) {
         containerElement.appendChild(inputFileElement);
         containerElement.appendChild(dropzoneElement);
         initialize();
+        onLoad();
     };
 });

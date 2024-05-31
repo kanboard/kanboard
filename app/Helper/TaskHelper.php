@@ -260,7 +260,7 @@ class TaskHelper extends Base
         return '';
     }
 
-    public function renderFileUpload()
+    public function renderFileUpload($screenshot = '', array $files = array())
     {
         $html =  '<div class="task-form-bottom-column">';
         $html .=  '    <div id="screenshot-zone">';
@@ -278,6 +278,8 @@ class TaskHelper extends Base
             'labelSuccess'      => t('All files have been uploaded successfully.'),
             'labelCloseSuccess' => t('Close this window'),
             'labelUploadError'  => t('Unable to upload this file.'),
+            'screenshot' => $screenshot,
+            'files' => $files,
         ));
         $html .=  '</div>';
         return $html;
