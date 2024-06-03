@@ -1,7 +1,7 @@
+var files = [];
 KB.component('file-upload-task-create', function (containerElement, options) {
     var inputFileElement = null;
     var dropzoneElement = null;
-    var files = [];
     var totalSize = 0;
     var currentScreenshotSize = 0;
     var inputElement = null;
@@ -211,10 +211,16 @@ KB.component('file-upload-task-create', function (containerElement, options) {
             var data = 'data:image/png;base64,' + options.screenshot;
             createImage(data);
         }
+        if (files.length !== 0) {
+            showFiles();
+        }
     }
 
     this.render = function () {
         KB.on('modal.submit', onSubmit);
+        KB.on('modal.stop', function () {
+            KB.removeListener('modal.submit', onSubmit);
+        });
         inputElement = KB.dom('input')
             .attr('type', 'hidden')
             .attr('name', 'screenshot')
