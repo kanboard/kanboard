@@ -66,6 +66,8 @@ class ProjectPermissionController extends BaseController
      */
     public function addUser()
     {
+        $this->checkCSRFForm();
+
         $project = $this->getProject();
         $values = $this->request->getValues();
 
@@ -75,7 +77,7 @@ class ProjectPermissionController extends BaseController
 
         if (empty($values['user_id'])) {
             $this->flash->failure(t('User not found.'));
-        } elseif ($this->projectUserRoleModel->addUser($values['project_id'], $values['user_id'], $values['role'])) {
+        } elseif ($this->projectUserRoleModel->addUser($project['id'], $values['user_id'], $values['role'])) {
             $this->flash->success(t('Project updated successfully.'));
         } else {
             $this->flash->failure(t('Unable to update this project.'));
@@ -144,6 +146,8 @@ class ProjectPermissionController extends BaseController
      */
     public function addGroup()
     {
+        $this->checkCSRFForm();
+
         $project = $this->getProject();
         $values = $this->request->getValues();
 
