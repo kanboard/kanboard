@@ -35,7 +35,6 @@
     <div class="panel">
         <form method="post" action="<?= $this->url->href('ProjectPermissionController', 'addUser', array('project_id' => $project['id'])) ?>" autocomplete="off" class="form-inline">
             <?= $this->form->csrf() ?>
-            <?= $this->form->hidden('project_id', array('project_id' => $project['id'])) ?>
             <?= $this->form->hidden('user_id', $values) ?>
             <?= $this->form->hidden('username', $values) ?>
             <?= $this->form->hidden('external_id', $values) ?>
