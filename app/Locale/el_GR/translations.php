@@ -1336,7 +1336,7 @@ return array(
     'Predefined Contents' => 'Προκαθορισμένα Περιεχόμενα',
     'Predefined contents' => 'Προκαθορισμένα περιεχόμενα',
     'Predefined Task Description' => 'Προκαθορισμένη Περιγραφή Εργασίας',
-    'Do you really want to remove this template? "%s"' => 'Είστε σίγουροι για την αφαίρεση του προτύπου;',
+    'Do you really want to remove this template? "%s"' => 'Είστε σίγουροι για την αφαίρεση του προτύπου; «%s»',
     'Add predefined task description' => 'Προσθήκη προκαθορισμένης περιγραφής εργασίας',
     'Predefined Task Descriptions' => 'Προκαθορισμένες Περιγραφές Εργασιών',
     'Template created successfully.' => 'Το πρότυπο δημιουργήθηκε με επιτυχία.',
