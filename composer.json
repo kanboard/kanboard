@@ -30,7 +30,7 @@
         "erusev/parsedown": "1.7.4",
         "pimple/pimple": "3.5.0",
         "psr/log": "1.1.4",
-        "symfony/console": "5.4.40",
+        "symfony/console": "5.4.41",
         "symfony/event-dispatcher": "5.4.21",
         "symfony/event-dispatcher-contracts": "^2",
         "symfony/finder": "5.4.40",
