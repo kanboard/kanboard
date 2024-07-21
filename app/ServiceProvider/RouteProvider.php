@@ -185,6 +185,13 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('board/:project_id/task/create/swimlane/:swimlane_id/column/:column_id', 'TaskCreationController', 'show');
             $container['route']->addRoute('board/:project_id/task/bulk/create/swimlane/:swimlane_id/column/:column_id', 'TaskBulkController', 'show');
             $container['route']->addRoute('board/:project_id/close-tasks/swimlane/:swimlane_id/column/:column_id', 'BoardPopoverController', 'confirmCloseColumnTasks');
+            $container['route']->addRoute('board/tooltip/:task_id/tasklinks', 'BoardTooltipController', 'tasklinks');
+            $container['route']->addRoute('board/tooltip/:task_id/externallinks', 'BoardTooltipController', 'externallinks');
+            $container['route']->addRoute('board/tooltip/:task_id/subtasks', 'BoardTooltipController', 'subtasks');
+            $container['route']->addRoute('board/tooltip/:task_id/attachments', 'BoardTooltipController', 'attachments');
+            $container['route']->addRoute('board/tooltip/:task_id/description', 'BoardTooltipController', 'description');
+            $container['route']->addRoute('board/tooltip/:task_id/recurrence', 'BoardTooltipController', 'recurrence');
+            $container['route']->addRoute('board/tooltip/:project_id/swimlane/:swimlane_id', 'BoardTooltipController', 'swimlane');
             $container['route']->addRoute('b/:project_id', 'BoardViewController', 'show');
             $container['route']->addRoute('public/board/:token', 'BoardViewController', 'readonly');
 

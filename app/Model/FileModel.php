@@ -95,7 +95,11 @@ abstract class FileModel extends Base
      */
     public function getById($file_id)
     {
-        return $this->db->table($this->getTable())->eq('id', $file_id)->findOne();
+        $file = $this->db->table($this->getTable())->eq('id', $file_id)->findOne();
+        if ($file) {
+            $file['etag'] = md5($file['path']);
+        }
+        return $file;
     }
 
     /**
