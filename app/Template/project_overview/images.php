@@ -5,11 +5,12 @@
                 <?= $this->app->component('image-slideshow', array(
                     'images' => $images,
                     'image' => $file,
-                    'regex' => 'FILE_ID',
+                    'regex_file_id' => 'FILE_ID',
+                    'regex_etag' => 'ETAG',
                     'url' => array(
-                        'image' => $this->url->to('FileViewerController', 'image', array('file_id' => 'FILE_ID', 'project_id' => $project['id'])),
-                        'thumbnail' => $this->url->to('FileViewerController', 'thumbnail', array('file_id' => 'FILE_ID', 'project_id' => $project['id'])),
-                        'download' => $this->url->to('FileViewerController', 'download', array('file_id' => 'FILE_ID', 'project_id' => $project['id'])),
+                        'image' => $this->url->to('FileViewerController', 'image', array('file_id' => 'FILE_ID', 'project_id' => $project['id'], 'etag' => 'ETAG')),
+                        'thumbnail' => $this->url->to('FileViewerController', 'thumbnail', array('file_id' => 'FILE_ID', 'project_id' => $project['id'], 'etag' => 'ETAG')),
+                        'download' => $this->url->to('FileViewerController', 'download', array('file_id' => 'FILE_ID', 'project_id' => $project['id'], 'etag' => 'ETAG')),
                     )
                 )) ?>
 
@@ -19,10 +20,10 @@
                             <a href="#" class="dropdown-menu dropdown-menu-link-text"><?= $this->text->e($file['name']) ?> <i class="fa fa-caret-down"></i></a>
                             <ul>
                                 <li>
-                                    <?= $this->url->icon('external-link', t('View file'), 'FileViewerController', 'image', array('project_id' => $project['id'], 'file_id' => $file['id']), false, '', '', true) ?>
+                                    <?= $this->url->icon('external-link', t('View file'), 'FileViewerController', 'image', array('project_id' => $project['id'], 'file_id' => $file['id'], 'etag' => $file['etag']), false, '', '', true) ?>
                                 </li>
                                 <li>
-                                    <?= $this->url->icon('download', t('Download'), 'FileViewerController', 'download', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
+                                    <?= $this->url->icon('download', t('Download'), 'FileViewerController', 'download', array('project_id' => $project['id'], 'file_id' => $file['id'], 'etag' => $file['etag'])) ?>
                                 </li>
                                 <?php if ($this->user->hasProjectAccess('ProjectFileController', 'remove', $project['id'])): ?>
                                     <li>
