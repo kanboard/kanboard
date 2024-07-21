@@ -119,7 +119,11 @@ abstract class FileModel extends Base
      */
     public function getAllImages($id)
     {
-        return $this->getQuery()->eq($this->getForeignKey(), $id)->eq('is_image', 1)->findAll();
+        $images = $this->getQuery()->eq($this->getForeignKey(), $id)->eq('is_image', 1)->findAll();
+        foreach ($images as &$image) {
+            $image['etag'] = md5($image['path']);
+        }
+        return $images;
     }
 
     /**
