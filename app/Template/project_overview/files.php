@@ -15,7 +15,7 @@
                         <ul>
                             <?php if ($this->file->getPreviewType($file['name']) !== null): ?>
                                 <li>
-                                    <?= $this->modal->large('eye', t('View file'), 'FileViewerController', 'show', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
+                                    <?= $this->modal->large('eye', t('View file'), 'FileViewerController', 'show', array('project_id' => $project['id'], 'file_id' => $file['id'], 'etag' => $file['etag'])) ?>
                                 </li>
                             <?php elseif ($this->file->getBrowserViewType($file['name']) !== null): ?>
                                 <li>
@@ -23,7 +23,7 @@
                                 </li>
                             <?php endif ?>
                             <li>
-                                <?= $this->url->icon('download', t('Download'), 'FileViewerController', 'download', array('project_id' => $project['id'], 'file_id' => $file['id'])) ?>
+                                <?= $this->url->icon('download', t('Download'), 'FileViewerController', 'download', array('project_id' => $project['id'], 'file_id' => $file['id'], 'etag' => $file['etag'])) ?>
                             </li>
                             <?php if ($this->user->hasProjectAccess('ProjectFileController', 'remove', $project['id'])): ?>
                                 <li>
