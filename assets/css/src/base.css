@@ -19,7 +19,8 @@ body {
     padding-bottom: 10px;
     color: var(--color-primary);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-rendering: optimizeLegibility
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
 }
 
 small {
