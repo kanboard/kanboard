@@ -98,7 +98,9 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
             $swimlane['score'] = array_column_sum($swimlane['columns'], 'score');
 
             $this->calculateStatsByColumnAcrossSwimlanes($swimlane['columns']);
+        }
 
+        foreach ($this->swimlanes as &$swimlane) {
             foreach ($swimlane['columns'] as $columnIndex => &$column) {
                 $column['column_nb_tasks'] = $this->swimlanes[0]['columns'][$columnIndex]['column_nb_tasks'];
                 $column['column_nb_score'] = $this->swimlanes[0]['columns'][$columnIndex]['column_score'];
