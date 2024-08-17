@@ -14,11 +14,11 @@
             <?= $this->app->tooltipLink('<i class="fa fa-info-circle"></i>', $this->url->href('BoardTooltipController', 'swimlane', array('swimlane_id' => $swimlane['id'], 'project_id' => $project['id']))) ?>
         <?php endif ?>
 
-        <span title="<?= t('Task count') ?>" class="board-column-header-task-count swimlane-task-count-<?= $swimlane['id'] ?>">
+        <span title="<?= t('Number of tasks in this swimlane') ?>" class="board-column-header-task-count swimlane-task-count-<?= $swimlane['id'] ?>">
             <?php if ($swimlane['task_limit']): ?>
-                (<span><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $swimlane['nb_tasks'] ?>/<?= $swimlane['task_limit'] ?>)
+                (<span><span class="ui-helper-hidden-accessible"><?= t('Number of tasks in this swimlane') ?> </span><?= $swimlane['nb_tasks'] ?>/<?= $swimlane['task_limit'] ?>)
             <?php else: ?>
-                (<span><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $swimlane['nb_tasks'] ?>)
+                (<span><span class="ui-helper-hidden-accessible"><?= t('Number of tasks in this swimlane') ?> </span><?= $swimlane['nb_tasks'] ?>)
             <?php endif ?>
         </span>
     </th>
