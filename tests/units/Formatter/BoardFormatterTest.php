@@ -124,6 +124,49 @@ class BoardFormatterTest extends Base
 
         $this->assertEquals('Task 8', $board[2]['columns'][2]['tasks'][0]['title']);
         $this->assertArrayHasKey('is_draggable', $board[2]['columns'][2]['tasks'][0]);
+
+        // Assert the number of tasks in each column across swimlanes
+        $this->assertEquals("Default swimlane", $board[0]['name']);
+        $this->assertSame(1, $board[0]['columns'][0]['id']);
+        $this->assertSame(4, $board[0]['columns'][0]['column_nb_tasks']);
+        $this->assertSame(9, $board[0]['columns'][0]['column_score']);
+        $this->assertSame(2, $board[0]['columns'][1]['id']);
+        $this->assertSame(1, $board[0]['columns'][1]['column_nb_tasks']);
+        $this->assertSame(0, $board[0]['columns'][1]['column_score']);
+        $this->assertSame(3, $board[0]['columns'][2]['id']);
+        $this->assertSame(3, $board[0]['columns'][2]['column_nb_tasks']);
+        $this->assertSame(6, $board[0]['columns'][2]['column_score']);
+        $this->assertSame(4, $board[0]['columns'][3]['id']);
+        $this->assertSame(0, $board[0]['columns'][3]['column_nb_tasks']);
+        $this->assertSame(0, $board[0]['columns'][3]['column_score']);
+
+        $this->assertEquals("Swimlane 1", $board[1]['name']);
+        $this->assertSame(1, $board[1]['columns'][0]['id']);
+        $this->assertSame(4, $board[1]['columns'][0]['column_nb_tasks']);
+        $this->assertSame(9, $board[1]['columns'][0]['column_score']);
+        $this->assertSame(2, $board[1]['columns'][1]['id']);
+        $this->assertSame(1, $board[1]['columns'][1]['column_nb_tasks']);
+        $this->assertSame(0, $board[1]['columns'][3]['column_score']);
+        $this->assertSame(3, $board[1]['columns'][2]['id']);
+        $this->assertSame(3, $board[1]['columns'][2]['column_nb_tasks']);
+        $this->assertSame(6, $board[1]['columns'][2]['column_score']);
+        $this->assertSame(4, $board[1]['columns'][3]['id']);
+        $this->assertSame(0, $board[1]['columns'][3]['column_nb_tasks']);
+        $this->assertSame(0, $board[1]['columns'][3]['column_score']);
+
+        $this->assertEquals("Swimlane 2", $board[2]['name']);
+        $this->assertSame(1, $board[2]['columns'][0]['id']);
+        $this->assertSame(4, $board[2]['columns'][0]['column_nb_tasks']);
+        $this->assertSame(9, $board[2]['columns'][0]['column_score']);
+        $this->assertSame(2, $board[2]['columns'][1]['id']);
+        $this->assertSame(1, $board[2]['columns'][1]['column_nb_tasks']);
+        $this->assertSame(0, $board[2]['columns'][1]['column_score']);
+        $this->assertSame(3, $board[2]['columns'][2]['id']);
+        $this->assertSame(3, $board[2]['columns'][2]['column_nb_tasks']);
+        $this->assertSame(6, $board[2]['columns'][2]['column_score']);
+        $this->assertSame(4, $board[2]['columns'][3]['id']);
+        $this->assertSame(0, $board[2]['columns'][3]['column_nb_tasks']);
+        $this->assertSame(0, $board[2]['columns'][3]['column_score']);
     }
 
     public function testFormatWithoutDefaultSwimlane()
