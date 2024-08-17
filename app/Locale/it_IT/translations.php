@@ -1449,4 +1449,6 @@ return array(
     'The visibility should be an app role' => 'La visibilità dovrebbe essere un ruolo dell\'app',
     'Reply' => 'Rispondi',
     '%s wrote: ' => '%s ha scritto',
+    // 'Number of visible tasks in this column and swimlane' => '',
+    // 'Number of tasks in this swimlane' => '',
 );

@@ -1449,4 +1449,6 @@ return array(
     'The visibility should be an app role' => 'A láthatóságnak alkalmazásszerepnek kell lennie',
     'Reply' => 'Válasz',
     '%s wrote: ' => '%s írta: ',
+    // 'Number of visible tasks in this column and swimlane' => '',
+    // 'Number of tasks in this swimlane' => '',
 );

@@ -106,7 +106,8 @@ td.board-column-task-collapsed {
 
 .board-column-header-task-count {
     color: var(--color-light);
-    font-weight: normal
+    font-weight: normal;
+    font-size: 0.85em
 }
 
 a.board-swimlane-toggle {

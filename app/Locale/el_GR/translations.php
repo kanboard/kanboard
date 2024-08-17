@@ -1449,4 +1449,6 @@ return array(
     'The visibility should be an app role' => 'Η ορατότητα πρέπει να είναι ρόλος της εφαρμογής',
     'Reply' => 'Απάντηση',
     '%s wrote: ' => 'Ο/Η %s έγραψε: ',
+    // 'Number of visible tasks in this column and swimlane' => '',
+    // 'Number of tasks in this swimlane' => '',
 );
