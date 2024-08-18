@@ -1,3 +1,14 @@
+Version 1.2.39 (August 18, 2024)
+--------------------------------
+
+* fix: remove CSS which caused responsive issues on mobile
+* fix: incorrect template condition that set the username field to read only for remote users
+* fix: tasks count across swimlanes was incorrect
+* fix: avoid warning from libpng when loading PNG image with incorrect iCCP profiles
+* feat: improve column header task counts
+* feat: add `apple-mobile-web-app-capable` meta tag
+* build(deps): bump `symfony/finder` from `5.4.40` to `5.4.42`
+
 Version 1.2.38 (July 20, 2024)
 ------------------------------
 
