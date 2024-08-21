@@ -31,7 +31,26 @@ abstract class Base
     protected $pdo = null;
 
     /**
-     * use TOP or LIMIT for returning a subset of rows
+     * use FETCH with OFFSET instead of LIMIT for pagination
+     * default is false, but overridable by the driver
+     *
+     * @access public
+     * @var bool
+     */
+    public bool $useFetch;
+
+    /**
+     * add ROWS suffix to OFFSET clause in SELECT
+     * default is false, but overridable by the driver
+     *
+     * @access public
+     * @var bool
+     */
+    public bool $useOffsetRows;
+
+    /**
+     * use TOP instead of LIMIT for returning a subset of rows
+     * default is false, but overridable by the driver
      *
      * @access public
      * @var bool
@@ -136,6 +155,8 @@ abstract class Base
 
         $this->createConnection($settings);
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->useFetch = false;
+        $this->useOffsetRows = false;
         $this->useTop = false;
     }
 

@@ -30,6 +30,8 @@ class Mssql extends Base
     public function __construct(array $settings)
     {
         parent::__construct($settings);
+        $this->useFetch = true;
+        $this->useOffsetRows = true;
         $this->useTop = true;
     }
 
