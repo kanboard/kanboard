@@ -16,6 +16,7 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
     protected $columns = array();
     protected $tasks = array();
     protected $tags = array();
+    protected $taskCountBySwimlaneAndColumn = array();
 
     /**
      * Set swimlanes
@@ -70,6 +71,19 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
     }
 
     /**
+     * Set task count by swimlane and column
+     *
+     * @access public
+     * @param  array $taskCountBySwimlaneAndColumn
+     * @return $this
+     */
+    public function withTaskCountBySwimlaneAndColumn(array $taskCountBySwimlaneAndColumn)
+    {
+        $this->taskCountBySwimlaneAndColumn = $taskCountBySwimlaneAndColumn;
+        return $this;
+    }
+
+    /**
      * Apply formatter
      *
      * @access public
@@ -96,6 +110,7 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
                 ->withColumns($this->columns)
                 ->withTasks($this->tasks)
                 ->withTags($this->tags)
+                ->withTaskCountBySwimlaneAndColumn($this->taskCountBySwimlaneAndColumn)
                 ->format();
 
             $swimlane['nb_swimlanes'] = $nb_swimlanes;
@@ -112,9 +127,9 @@ class BoardSwimlaneFormatter extends BaseFormatter implements FormatterInterface
 
         foreach ($this->swimlanes as &$swimlane) {
             foreach ($swimlane['columns'] as &$column) {
-                $column['column_nb_tasks'] = $tasks_stats_by_column_across_swimlanes[$column['id']]['nb_visible_tasks_across_swimlane'];
-                $column['column_nb_open_tasks'] = $tasks_stats_by_column_across_swimlanes[$column['id']]['nb_unfiltered_tasks_across_swimlane'];
-                $column['column_score'] = $tasks_stats_by_column_across_swimlanes[$column['id']]['cumulative_score_across_swimlane'];
+                $column['nb_visible_tasks_across_swimlane'] = $tasks_stats_by_column_across_swimlanes[$column['id']]['nb_visible_tasks_across_swimlane'];
+                $column['nb_unfiltered_tasks_across_swimlane'] = $tasks_stats_by_column_across_swimlanes[$column['id']]['nb_unfiltered_tasks_across_swimlane'];
+                $column['cumulative_score_across_swimlane'] = $tasks_stats_by_column_across_swimlanes[$column['id']]['cumulative_score_across_swimlane'];
             }
         }
 
