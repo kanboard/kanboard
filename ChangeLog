@@ -1,3 +1,36 @@
+Version 1.2.39 (August 18, 2024)
+--------------------------------
+
+* fix: remove CSS which caused responsive issues on mobile
+* fix: incorrect template condition that set the username field to read only for remote users
+* fix: tasks count across swimlanes was incorrect
+* fix: avoid warning from libpng when loading PNG image with incorrect iCCP profiles
+* feat: improve column header task counts
+* feat: add `apple-mobile-web-app-capable` meta tag
+* build(deps): bump `symfony/finder` from `5.4.40` to `5.4.42`
+
+Version 1.2.38 (July 20, 2024)
+------------------------------
+
+* fix: avoid browser caching issue when showing file attachments
+* fix: comments visibility was not taken into consideration on event activities page
+* fix: send comment via email was broken due to missing comment visibility logic implemented in v1.2.36
+* feat(locale): update Greek translations
+* feat(locale): update Italian translations
+* build(deps): bump `symfony/console` from `5.4.40` to `5.4.41`
+* build(deps): bump `docker/build-push-action` from `5` to `6`
+
+Version 1.2.37 (June 5, 2024)
+-----------------------------
+
+* Add CSRF check and remove `project_id` form value for `addUser` and `addGroup` actions ([CVE-2024-36399](https://github.com/kanboard/kanboard/security/advisories/GHSA-x8v7-3ghx-65cv))
+* Update `symfony/*` dependencies
+* Update Docker image to Alpine 3.20
+* Update Russian and Hungarian translation
+* Add `color_id` argument to `createCategory` and `updateCategory` API procedures
+* Add link to create a comment before the list
+* Fix: unable to create comments with "c" shortcut or "Add a comment" menu
+
 Version 1.2.36 (May 2, 2024)
 ----------------------------
 

@@ -58,15 +58,15 @@ class BoardFormatterTest extends Base
         $this->assertSame(3, $board[0]['columns'][2]['id']);
         $this->assertSame(4, $board[0]['columns'][3]['id']);
 
-        $this->assertEquals(4, $board[0]['columns'][0]['column_nb_tasks']);
-        $this->assertEquals(1, $board[0]['columns'][1]['column_nb_tasks']);
-        $this->assertEquals(3, $board[0]['columns'][2]['column_nb_tasks']);
-        $this->assertEquals(0, $board[0]['columns'][3]['column_nb_tasks']);
+        $this->assertEquals(4, $board[0]['columns'][0]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(1, $board[0]['columns'][1]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(3, $board[0]['columns'][2]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][3]['nb_visible_tasks_across_swimlane']);
 
-        $this->assertEquals(9, $board[0]['columns'][0]['column_score']);
-        $this->assertEquals(0, $board[0]['columns'][1]['column_score']);
-        $this->assertEquals(6, $board[0]['columns'][2]['column_score']);
-        $this->assertEquals(0, $board[0]['columns'][3]['column_score']);
+        $this->assertEquals(9, $board[0]['columns'][0]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][1]['cumulative_score_across_swimlane']);
+        $this->assertEquals(6, $board[0]['columns'][2]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][3]['cumulative_score_across_swimlane']);
 
         $this->assertSame(9, $board[0]['columns'][0]['score']);
         $this->assertSame(0, $board[0]['columns'][1]['score']);
@@ -126,6 +126,184 @@ class BoardFormatterTest extends Base
         $this->assertArrayHasKey('is_draggable', $board[2]['columns'][2]['tasks'][0]);
     }
 
+    public function testFormatWithSwimlanesAndTaskLimitAcrossSwimlane()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $swimlaneModel = new SwimlaneModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(2, $swimlaneModel->create(1, 'Swimlane 1'));
+        $this->assertEquals(3, $swimlaneModel->create(1, 'Swimlane 2'));
+
+        // 2 task within the same column but no score
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task 1', 'project_id' => 1, 'swimlane_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $taskCreationModel->create(array('title' => 'Task 2', 'project_id' => 1, 'swimlane_id' => 1, 'column_id' => 1)));
+
+        // 2 tasks in the same column with score
+        $this->assertEquals(3, $taskCreationModel->create(array('title' => 'Task 3', 'project_id' => 1, 'swimlane_id' => 1, 'column_id' => 1, 'score' => 4)));
+        $this->assertEquals(4, $taskCreationModel->create(array('title' => 'Task 4', 'project_id' => 1, 'swimlane_id' => 1, 'column_id' => 1, 'score' => 5)));
+
+        // 1 task in 2nd column
+        $this->assertEquals(5, $taskCreationModel->create(array('title' => 'Task 5', 'project_id' => 1, 'swimlane_id' => 1, 'column_id' => 2)));
+
+        // tasks in same column but different swimlanes
+        $this->assertEquals(6, $taskCreationModel->create(array('title' => 'Task 6', 'project_id' => 1, 'swimlane_id' => 1, 'column_id' => 3, 'score' => 1)));
+        $this->assertEquals(7, $taskCreationModel->create(array('title' => 'Task 7', 'project_id' => 1, 'swimlane_id' => 2, 'column_id' => 3, 'score' => 2)));
+        $this->assertEquals(8, $taskCreationModel->create(array('title' => 'Task 8', 'project_id' => 1, 'swimlane_id' => 3, 'column_id' => 3, 'score' => 3)));
+
+        $board = BoardFormatter::getInstance($this->container)
+            ->withQuery($taskFinderModel->getExtendedQuery())
+            ->withProjectId(1)
+            ->format();
+
+        $this->assertCount(3, $board);
+
+        $this->assertEquals("Default swimlane", $board[0]['name']);
+        $this->assertEquals(1, $board[0]['columns'][0]['id']);
+        $this->assertEquals(4, $board[0]['columns'][0]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(9, $board[0]['columns'][0]['cumulative_score_across_swimlane']);
+        $this->assertEquals(4, $board[0]['columns'][0]['column_nb_open_tasks']);
+        $this->assertEquals(2, $board[0]['columns'][1]['id']);
+        $this->assertEquals(1, $board[0]['columns'][1]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][1]['cumulative_score_across_swimlane']);
+        $this->assertEquals(1, $board[0]['columns'][1]['column_nb_open_tasks']);
+        $this->assertEquals(3, $board[0]['columns'][2]['id']);
+        $this->assertEquals(3, $board[0]['columns'][2]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(6, $board[0]['columns'][2]['cumulative_score_across_swimlane']);
+        $this->assertEquals(3, $board[0]['columns'][2]['column_nb_open_tasks']);
+        $this->assertEquals(4, $board[0]['columns'][3]['id']);
+        $this->assertEquals(0, $board[0]['columns'][3]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][3]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][3]['column_nb_open_tasks']);
+
+        $this->assertEquals("Swimlane 1", $board[1]['name']);
+        $this->assertEquals(1, $board[1]['columns'][0]['id']);
+        $this->assertEquals(4, $board[1]['columns'][0]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(9, $board[1]['columns'][0]['cumulative_score_across_swimlane']);
+        $this->assertEquals(4, $board[1]['columns'][0]['column_nb_open_tasks']);
+        $this->assertEquals(2, $board[1]['columns'][1]['id']);
+        $this->assertEquals(1, $board[1]['columns'][1]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[1]['columns'][3]['cumulative_score_across_swimlane']);
+        $this->assertEquals(1, $board[1]['columns'][1]['column_nb_open_tasks']);
+        $this->assertEquals(3, $board[1]['columns'][2]['id']);
+        $this->assertEquals(3, $board[1]['columns'][2]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(6, $board[1]['columns'][2]['cumulative_score_across_swimlane']);
+        $this->assertEquals(3, $board[1]['columns'][2]['column_nb_open_tasks']);
+        $this->assertEquals(4, $board[1]['columns'][3]['id']);
+        $this->assertEquals(0, $board[1]['columns'][3]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[1]['columns'][3]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[1]['columns'][3]['column_nb_open_tasks']);
+
+        $this->assertEquals("Swimlane 2", $board[2]['name']);
+        $this->assertEquals(1, $board[2]['columns'][0]['id']);
+        $this->assertEquals(4, $board[2]['columns'][0]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(9, $board[2]['columns'][0]['cumulative_score_across_swimlane']);
+        $this->assertEquals(4, $board[1]['columns'][0]['column_nb_open_tasks']);
+        $this->assertEquals(2, $board[2]['columns'][1]['id']);
+        $this->assertEquals(1, $board[2]['columns'][1]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[2]['columns'][1]['cumulative_score_across_swimlane']);
+        $this->assertEquals(1, $board[1]['columns'][1]['column_nb_open_tasks']);
+        $this->assertEquals(3, $board[2]['columns'][2]['id']);
+        $this->assertEquals(3, $board[2]['columns'][2]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(6, $board[2]['columns'][2]['cumulative_score_across_swimlane']);
+        $this->assertEquals(3, $board[1]['columns'][2]['column_nb_open_tasks']);
+        $this->assertEquals(4, $board[2]['columns'][3]['id']);
+        $this->assertEquals(0, $board[2]['columns'][3]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[2]['columns'][3]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[1]['columns'][3]['column_nb_open_tasks']);
+    }
+
+    public function testFormatWithSwimlanesAndTaskLimitPerSwimlane()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $swimlaneModel = new SwimlaneModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test', 'per_swimlane_task_limits' => 1)));
+        $this->assertEquals(2, $swimlaneModel->create(1, 'Swimlane 1'));
+        $this->assertEquals(3, $swimlaneModel->create(1, 'Swimlane 2'));
+
+        // 2 task within the same column but no score
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task 1', 'project_id' => 1, 'swimlane_id' => 1, 'column_id' => 1)));
+        $this->assertEquals(2, $taskCreationModel->create(array('title' => 'Task 2', 'project_id' => 1, 'swimlane_id' => 1, 'column_id' => 1)));
+
+        // 2 tasks in the same column with score
+        $this->assertEquals(3, $taskCreationModel->create(array('title' => 'Task 3', 'project_id' => 1, 'swimlane_id' => 1, 'column_id' => 1, 'score' => 4)));
+        $this->assertEquals(4, $taskCreationModel->create(array('title' => 'Task 4', 'project_id' => 1, 'swimlane_id' => 1, 'column_id' => 1, 'score' => 5)));
+
+        // 1 task in 2nd column
+        $this->assertEquals(5, $taskCreationModel->create(array('title' => 'Task 5', 'project_id' => 1, 'swimlane_id' => 1, 'column_id' => 2)));
+
+        // tasks in same column but different swimlanes
+        $this->assertEquals(6, $taskCreationModel->create(array('title' => 'Task 6', 'project_id' => 1, 'swimlane_id' => 1, 'column_id' => 3, 'score' => 1)));
+        $this->assertEquals(7, $taskCreationModel->create(array('title' => 'Task 7', 'project_id' => 1, 'swimlane_id' => 2, 'column_id' => 3, 'score' => 2)));
+        $this->assertEquals(8, $taskCreationModel->create(array('title' => 'Task 8', 'project_id' => 1, 'swimlane_id' => 3, 'column_id' => 3, 'score' => 3)));
+
+        $board = BoardFormatter::getInstance($this->container)
+            ->withQuery($taskFinderModel->getExtendedQuery())
+            ->withProjectId(1)
+            ->format();
+
+        $this->assertCount(3, $board);
+
+        $this->assertEquals("Default swimlane", $board[0]['name']);
+        $this->assertEquals(1, $board[0]['columns'][0]['id']);
+        $this->assertEquals(4, $board[0]['columns'][0]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(9, $board[0]['columns'][0]['cumulative_score_across_swimlane']);
+        $this->assertEquals(4, $board[0]['columns'][0]['column_nb_open_tasks']);
+        $this->assertEquals(2, $board[0]['columns'][1]['id']);
+        $this->assertEquals(1, $board[0]['columns'][1]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][1]['cumulative_score_across_swimlane']);
+        $this->assertEquals(1, $board[0]['columns'][1]['column_nb_open_tasks']);
+        $this->assertEquals(3, $board[0]['columns'][2]['id']);
+        $this->assertEquals(3, $board[0]['columns'][2]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(6, $board[0]['columns'][2]['cumulative_score_across_swimlane']);
+        $this->assertEquals(1, $board[0]['columns'][2]['column_nb_open_tasks']);
+        $this->assertEquals(4, $board[0]['columns'][3]['id']);
+        $this->assertEquals(0, $board[0]['columns'][3]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][3]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][3]['column_nb_open_tasks']);
+
+        $this->assertEquals("Swimlane 1", $board[1]['name']);
+        $this->assertEquals(1, $board[1]['columns'][0]['id']);
+        $this->assertEquals(4, $board[1]['columns'][0]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(9, $board[1]['columns'][0]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[1]['columns'][0]['column_nb_open_tasks']);
+        $this->assertEquals(2, $board[1]['columns'][1]['id']);
+        $this->assertEquals(1, $board[1]['columns'][1]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[1]['columns'][3]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[1]['columns'][1]['column_nb_open_tasks']);
+        $this->assertEquals(3, $board[1]['columns'][2]['id']);
+        $this->assertEquals(3, $board[1]['columns'][2]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(6, $board[1]['columns'][2]['cumulative_score_across_swimlane']);
+        $this->assertEquals(1, $board[1]['columns'][2]['column_nb_open_tasks']);
+        $this->assertEquals(4, $board[1]['columns'][3]['id']);
+        $this->assertEquals(0, $board[1]['columns'][3]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[1]['columns'][3]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[1]['columns'][3]['column_nb_open_tasks']);
+
+        $this->assertEquals("Swimlane 2", $board[2]['name']);
+        $this->assertEquals(1, $board[2]['columns'][0]['id']);
+        $this->assertEquals(4, $board[2]['columns'][0]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(9, $board[2]['columns'][0]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[1]['columns'][0]['column_nb_open_tasks']);
+        $this->assertEquals(2, $board[2]['columns'][1]['id']);
+        $this->assertEquals(1, $board[2]['columns'][1]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[2]['columns'][1]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[1]['columns'][1]['column_nb_open_tasks']);
+        $this->assertEquals(3, $board[2]['columns'][2]['id']);
+        $this->assertEquals(3, $board[2]['columns'][2]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(6, $board[2]['columns'][2]['cumulative_score_across_swimlane']);
+        $this->assertEquals(1, $board[1]['columns'][2]['column_nb_open_tasks']);
+        $this->assertEquals(4, $board[2]['columns'][3]['id']);
+        $this->assertEquals(0, $board[2]['columns'][3]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[2]['columns'][3]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[1]['columns'][3]['column_nb_open_tasks']);
+    }
+
     public function testFormatWithoutDefaultSwimlane()
     {
         $projectModel = new ProjectModel($this->container);
@@ -157,15 +335,15 @@ class BoardFormatterTest extends Base
         $this->assertEquals(2, $board[0]['nb_tasks']);
         $this->assertEquals(1, $board[0]['score']);
 
-        $this->assertEquals(2, $board[0]['columns'][0]['column_nb_tasks']);
-        $this->assertEquals(2, $board[0]['columns'][1]['column_nb_tasks']);
-        $this->assertEquals(0, $board[0]['columns'][2]['column_nb_tasks']);
-        $this->assertEquals(0, $board[0]['columns'][3]['column_nb_tasks']);
+        $this->assertEquals(2, $board[0]['columns'][0]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(2, $board[0]['columns'][1]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][2]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][3]['nb_visible_tasks_across_swimlane']);
 
-        $this->assertEquals(0, $board[0]['columns'][0]['column_score']);
-        $this->assertEquals(1, $board[0]['columns'][1]['column_score']);
-        $this->assertEquals(0, $board[0]['columns'][2]['column_score']);
-        $this->assertEquals(0, $board[0]['columns'][3]['column_score']);
+        $this->assertEquals(0, $board[0]['columns'][0]['cumulative_score_across_swimlane']);
+        $this->assertEquals(1, $board[0]['columns'][1]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][2]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][3]['cumulative_score_across_swimlane']);
 
         $this->assertSame(0, $board[0]['columns'][0]['score']);
         $this->assertSame(1, $board[0]['columns'][1]['score']);
@@ -262,15 +440,15 @@ class BoardFormatterTest extends Base
         $this->assertEquals(0, $board[0]['nb_tasks']);
         $this->assertEquals(0, $board[0]['score']);
 
-        $this->assertEquals(0, $board[0]['columns'][0]['column_nb_tasks']);
-        $this->assertEquals(0, $board[0]['columns'][1]['column_nb_tasks']);
-        $this->assertEquals(0, $board[0]['columns'][2]['column_nb_tasks']);
-        $this->assertEquals(0, $board[0]['columns'][3]['column_nb_tasks']);
+        $this->assertEquals(0, $board[0]['columns'][0]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][1]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][2]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][3]['nb_visible_tasks_across_swimlane']);
 
-        $this->assertEquals(0, $board[0]['columns'][0]['column_score']);
-        $this->assertEquals(0, $board[0]['columns'][1]['column_score']);
-        $this->assertEquals(0, $board[0]['columns'][2]['column_score']);
-        $this->assertEquals(0, $board[0]['columns'][3]['column_score']);
+        $this->assertEquals(0, $board[0]['columns'][0]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][1]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][2]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][3]['cumulative_score_across_swimlane']);
 
         $this->assertSame(0, $board[0]['columns'][0]['score']);
         $this->assertSame(0, $board[0]['columns'][1]['score']);
@@ -346,15 +524,15 @@ class BoardFormatterTest extends Base
         $this->assertEquals(3, $board[0]['nb_tasks']);
         $this->assertEquals(0, $board[0]['score']);
 
-        $this->assertEquals(2, $board[0]['columns'][0]['column_nb_tasks']);
-        $this->assertEquals(0, $board[0]['columns'][1]['column_nb_tasks']);
-        $this->assertEquals(1, $board[0]['columns'][2]['column_nb_tasks']);
-        $this->assertEquals(0, $board[0]['columns'][3]['column_nb_tasks']);
+        $this->assertEquals(2, $board[0]['columns'][0]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][1]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(1, $board[0]['columns'][2]['nb_visible_tasks_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][3]['nb_visible_tasks_across_swimlane']);
 
-        $this->assertEquals(0, $board[0]['columns'][0]['column_score']);
-        $this->assertEquals(0, $board[0]['columns'][1]['column_score']);
-        $this->assertEquals(0, $board[0]['columns'][2]['column_score']);
-        $this->assertEquals(0, $board[0]['columns'][3]['column_score']);
+        $this->assertEquals(0, $board[0]['columns'][0]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][1]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][2]['cumulative_score_across_swimlane']);
+        $this->assertEquals(0, $board[0]['columns'][3]['cumulative_score_across_swimlane']);
 
         $this->assertSame(0, $board[0]['columns'][0]['score']);
         $this->assertSame(0, $board[0]['columns'][1]['score']);

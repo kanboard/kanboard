@@ -103,7 +103,7 @@ class LanguageModel extends Base
             'es_ES' => 'Español (España)',
             'es_VE' => 'Español (Venezuela)',
             'fr_FR' => 'Français',
-            'el_GR' => 'Grec',
+            'el_GR' => 'Greek (Ελληνικά)',
             'hr_HR' => 'Hrvatski',
             'it_IT' => 'Italiano',
             'hu_HU' => 'Magyar',

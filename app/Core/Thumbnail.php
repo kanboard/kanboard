@@ -55,7 +55,7 @@ class Thumbnail
     public function fromFile($filename)
     {
         $this->metadata = getimagesize($filename);
-        $this->srcImage = imagecreatefromstring(file_get_contents($filename));
+        $this->srcImage = @imagecreatefromstring(file_get_contents($filename));
         return $this;
     }
 
@@ -75,7 +75,8 @@ class Thumbnail
             $this->metadata = getimagesizefromstring($blob);
         }
 
-        $this->srcImage = imagecreatefromstring($blob);
+        // Avoid warning from libpng when loading PNG image with obscure or incorrect iCCP profiles
+        $this->srcImage = @imagecreatefromstring($blob);
         return $this;
     }
 

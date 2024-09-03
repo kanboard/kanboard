@@ -1449,5 +1449,6 @@ return array(
     'The visibility should be an app role' => 'La visibilité doit être un rôle de l\'application',
     'Reply' => 'Répondre',
     '%s wrote: ' => '%s a écrit : ',
-    'The total maximum allowed attachments size is %sB.' => 'La taille maximale totale des pièces jointes autorisée %s o.',
+    'Number of visible tasks in this column and swimlane' => 'Nombre de tâches visibles dans cette colonne et cette swimlane',
+    'Number of tasks in this swimlane' => 'Nombre de tâches dans cette swimlane',
 );

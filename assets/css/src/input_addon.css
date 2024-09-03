@@ -51,10 +51,6 @@
     border-left: 0
 }
 
-.project-header .filter-box-component .input-addon {
-    min-width: 640px
-}
-
 .input-addon .input-addon-field {
     flex: 1 1 auto;
     width: 1% !important;

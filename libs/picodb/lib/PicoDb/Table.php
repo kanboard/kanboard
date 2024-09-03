@@ -88,6 +88,14 @@ class Table
     private $sumColumns = array();
 
     /**
+     * SQL fetch
+     *
+     * @access private
+     * @var    string
+     */
+    private $sqlFetch = '';
+
+    /**
      * SQL limit
      *
      * @access private
@@ -586,10 +594,24 @@ class Table
     public function limit($value)
     {
         if (! is_null($value)) {
-            if ($this->db->getDriver()->useTop) {
-                $this->sqlTop = ' TOP ('.(int) $value.') ';
+            if ($this->sqlOffset != '') {
+                /* pagination: use LIMIT or FETCH, depending on driver */
+                if ($this->db->getDriver()->useFetch) {
+                    $this->sqlFetch = ' FETCH NEXT '.(int) $value.' ROWS ONLY ';
+                    $this->sqlLimit = '';
+                } else {
+                    $this->sqlFetch = '';
+                    $this->sqlLimit = ' LIMIT '.(int) $value;
+                }
             } else {
-                $this->sqlLimit = ' LIMIT '.(int) $value;
+                /* subset: use LIMIT or TOP, depending on driver */
+                if ($this->db->getDriver()->useTop) {
+                    $this->sqlTop = ' TOP ('.(int) $value.') ';
+                    $this->sqlLimit = '';
+                } else {
+                    $this->sqlTop = '';
+                    $this->sqlLimit = ' LIMIT '.(int) $value;
+                }
             }
         }
 
@@ -607,6 +629,9 @@ class Table
     {
         if (! is_null($value) && is_int($value) && $value > 0) {
             $this->sqlOffset = ' OFFSET '.(int) $value;
+            if ($this->db->getDriver()->useOffsetRows) {
+                $this->sqlOffset .= ' ROWS ';
+            }
         }
 
         return $this;
@@ -705,7 +730,7 @@ class Table
         $this->groupBy = $this->db->escapeIdentifierList($this->groupBy);
 
         return trim(sprintf(
-            'SELECT %s %s FROM %s %s %s %s %s %s %s',
+            'SELECT %s %s FROM %s %s %s %s %s %s %s %s',
             $this->sqlTop,
             $this->sqlSelect,
             $this->db->escapeIdentifier($this->name),
@@ -714,7 +739,8 @@ class Table
             empty($this->groupBy) ? '' : 'GROUP BY '.implode(', ', $this->groupBy),
             $this->sqlOrder,
             $this->sqlLimit,
-            $this->sqlOffset
+            $this->sqlOffset,
+            $this->sqlFetch
         ));
     }
 

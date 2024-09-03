@@ -72,6 +72,11 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/enable', 'ProjectStatusController', 'confirmEnable');
             $container['route']->addRoute('project/:project_id/disable', 'ProjectStatusController', 'confirmDisable');
             $container['route']->addRoute('project/:project_id/remove', 'ProjectStatusController', 'confirmRemove');
+            $container['route']->addRoute('project/:project_id/file/:file_id/thumbnail/:etag', 'FileViewerController', 'thumbnail');
+            $container['route']->addRoute('project/:project_id/file/:file_id/image/:etag', 'FileViewerController', 'image');
+            $container['route']->addRoute('project/:project_id/file/:file_id/download/:etag', 'FileViewerController', 'download');
+            $container['route']->addRoute('project/:project_id/file/:file_id/show/:etag', 'FileViewerController', 'show');
+            $container['route']->addRoute('project/:project_id/file/:file_id/remove', 'ProjectFileController', 'confirm');
 
             // Project Overview
             $container['route']->addRoute('project/:project_id/overview', 'ProjectOverviewController', 'show');
@@ -136,7 +141,12 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('task/:task_id/file/screenshot', 'TaskFileController', 'screenshot');
             $container['route']->addRoute('task/:task_id/file/create', 'TaskFileController', 'create');
             $container['route']->addRoute('task/:task_id/file/save', 'TaskFileController', 'save');
-            $container['route']->addRoute('task/:task_id/file/remove', 'TaskFileController', 'remove');
+            $container['route']->addRoute('task/:task_id/file/:file_id/remove', 'TaskFileController', 'remove');
+            $container['route']->addRoute('task/:task_id/file/:file_id/confirm', 'TaskFileController', 'confirm');
+            $container['route']->addRoute('task/:task_id/file/:file_id/thumbnail/:etag', 'FileViewerController', 'thumbnail');
+            $container['route']->addRoute('task/:task_id/file/:file_id/image/:etag', 'FileViewerController', 'image');
+            $container['route']->addRoute('task/:task_id/file/:file_id/download/:etag', 'FileViewerController', 'download');
+            $container['route']->addRoute('task/:task_id/file/:file_id/show/:etag', 'FileViewerController', 'show');
             $container['route']->addRoute('task/:task_id/external-link/find', 'TaskExternalLinkController', 'find');
             $container['route']->addRoute('task/:task_id/external-link/create', 'TaskExternalLinkController', 'create');
             $container['route']->addRoute('task/:task_id/external-link/save', 'TaskExternalLinkController', 'save');
@@ -175,6 +185,13 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('board/:project_id/task/create/swimlane/:swimlane_id/column/:column_id', 'TaskCreationController', 'show');
             $container['route']->addRoute('board/:project_id/task/bulk/create/swimlane/:swimlane_id/column/:column_id', 'TaskBulkController', 'show');
             $container['route']->addRoute('board/:project_id/close-tasks/swimlane/:swimlane_id/column/:column_id', 'BoardPopoverController', 'confirmCloseColumnTasks');
+            $container['route']->addRoute('board/tooltip/:task_id/tasklinks', 'BoardTooltipController', 'tasklinks');
+            $container['route']->addRoute('board/tooltip/:task_id/externallinks', 'BoardTooltipController', 'externallinks');
+            $container['route']->addRoute('board/tooltip/:task_id/subtasks', 'BoardTooltipController', 'subtasks');
+            $container['route']->addRoute('board/tooltip/:task_id/attachments', 'BoardTooltipController', 'attachments');
+            $container['route']->addRoute('board/tooltip/:task_id/description', 'BoardTooltipController', 'description');
+            $container['route']->addRoute('board/tooltip/:task_id/recurrence', 'BoardTooltipController', 'recurrence');
+            $container['route']->addRoute('board/tooltip/:project_id/swimlane/:swimlane_id', 'BoardTooltipController', 'swimlane');
             $container['route']->addRoute('b/:project_id', 'BoardViewController', 'show');
             $container['route']->addRoute('public/board/:token', 'BoardViewController', 'readonly');
 

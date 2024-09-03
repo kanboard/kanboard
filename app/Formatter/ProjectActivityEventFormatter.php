@@ -3,6 +3,7 @@
 namespace Kanboard\Formatter;
 
 use Kanboard\Core\Filter\FormatterInterface;
+use Kanboard\Core\Security\Role;
 
 class ProjectActivityEventFormatter extends BaseFormatter implements FormatterInterface
 {
@@ -15,17 +16,28 @@ class ProjectActivityEventFormatter extends BaseFormatter implements FormatterIn
     public function format()
     {
         $events = $this->query->findAll();
+        $res = array();
 
         foreach ($events as &$event) {
             $event += $this->unserializeEvent($event['data']);
             unset($event['data']);
 
+            if (isset($event['comment'])) {
+                if ($this->userSession->getRole() === Role::APP_USER && $event['comment']['visibility'] !== Role::APP_USER) {
+                    continue;
+                }
+                if ($this->userSession->getRole() === Role::APP_MANAGER && $event['comment']['visibility'] === Role::APP_ADMIN) {
+                    continue;
+                }
+            }
+
             $event['author'] = $event['author_name'] ?: $event['author_username'];
             $event['event_title'] = $this->notificationModel->getTitleWithAuthor($event['author'], $event['event_name'], $event);
             $event['event_content'] = $this->renderEvent($event);
+            $res []= $event;
         }
 
-        return $events;
+        return $res;
     }
 
     /**
