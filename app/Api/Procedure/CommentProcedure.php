@@ -51,9 +51,6 @@ class CommentProcedure extends BaseProcedure
 
     public function createComment($task_id, $user_id, $content, $reference = '', $visibility = Role::APP_USER)
     {
-        if ($this->userSession->getId()!=$user_id) {
-            return false;
-        }
 
         if ($this->userSession->getRole() === Role::APP_MANAGER && $visibility === Role::APP_ADMIN) {
             return false;
