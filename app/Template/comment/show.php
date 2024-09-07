@@ -62,6 +62,8 @@ if ($this->user->getRole() === Role::APP_USER && $comment['visibility'] !== Role
         <div class="markdown">
             <?= $this->text->markdown($comment['comment'], isset($is_public) && $is_public) ?>
         </div>
-        <div class="reply-content" style="display: none"><?= $this->text->reply($comment['name'] ?: $comment['username'], $comment['comment']) ?></div>
+        <template id="comment-reply-content-<?= $comment['id'] ?>">
+            <textarea><?= $this->text->reply($comment['name'] ?: $comment['username'], $comment['comment']) ?></textarea>
+        </template>
     </div>
 </div>
