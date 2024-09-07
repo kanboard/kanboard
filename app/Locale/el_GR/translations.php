@@ -1451,4 +1451,5 @@ return array(
     '%s wrote: ' => 'Ο/Η %s έγραψε: ',
     // 'Number of visible tasks in this column and swimlane' => '',
     // 'Number of tasks in this swimlane' => '',
+    // 'Unable to find another subtask in progress, you can close this window.' => '',
 );
