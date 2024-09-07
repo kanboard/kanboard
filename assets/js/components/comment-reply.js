@@ -1,7 +1,11 @@
 KB.onClick('.js-reply-to-comment, .fa-reply', function (e) {
     var commentId = parseInt($(e.target).parents('li[data-comment-id]').attr('data-comment-id'));
 
-    var commentTextContent = document.querySelector('#comment-' + commentId + ' .reply-content').textContent;
+    var commentReplyTemplate = document.querySelector('#comment-reply-content-' + commentId);
+    if (! commentReplyTemplate) {
+        return false;
+    }
+    var commentTextContent = commentReplyTemplate.content.querySelector("textarea").textContent;
 
     var textarea = document.querySelector(".text-editor textarea[name=comment]");
     textarea.value += commentTextContent + '\n\n';
@@ -17,23 +21,19 @@ KB.onClick('.js-reply-to-comment, .fa-reply', function (e) {
         return false;
     }
 
-
     var $editButton = $editorContainer.find('.text-editor-toolbar a:has(> i.fa-pencil-square-o)');
-
     if ($editButton.length === 0) {
         console.error('Could not find the edit button');
         return false;
     }
-
     $editButton[0].click();
 
     var $previewButton = $editorContainer.find('.text-editor-toolbar a:has(> i.fa-eye)');
-
     if ($previewButton.length === 0) {
         console.error('Could not find the preview button');
         return false;
     }
-
     $previewButton[0].click();
+
     return false;
 });
