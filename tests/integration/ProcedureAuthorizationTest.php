@@ -239,7 +239,7 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
         $taskId = $this->manager->createTask('My Task', $projectId);
         $this->assertNotFalse($taskId);
 
-        $commentId = $this->manager->createComment($taskId, $this->userUserId, 'My comment');
+        $commentId = $this->manager->createComment($taskId, $this->managerUserId, 'My comment');
         $this->assertNotFalse($commentId);
 
         $this->expectException('JsonRPC\Exception\AccessDeniedException');
