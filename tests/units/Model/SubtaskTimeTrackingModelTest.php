@@ -331,7 +331,9 @@ class SubtaskTimeTrackingModelTest extends Base
         $this->assertEquals(1, $row['project_id'], "User #2 SubTaskTiming Query ProjectId");
         $this->assertEquals('yellow', $row['color_id'], "User #2 SubTaskTiming Query Color");
 
-        $u3stt = $subtaskTimeTrackingModel->getUserQuery(3)->findAll();
+        $u3stt = $subtaskTimeTrackingModel->getUserQuery(3)->orderBy(
+                 $subtaskTimeTrackingModel->db->escapeIdentifier('id', SubtaskTimeTrackingModel::TABLE)
+        )->findAll();
         $this->assertCount(2, $u3stt, "User #3 SubTaskTiming Count");
         $row = $u3stt[0];
         $this->assertCount(10, $row, "User #3 SubTaskTiming Query Column Count");
@@ -356,7 +358,9 @@ class SubtaskTimeTrackingModelTest extends Base
         $this->assertEquals(1, $row['project_id'], "User #3 SubTaskTiming Query ProjectId");
         $this->assertEquals('yellow', $row['color_id'], "User #3 SubTaskTiming Query Color");
 
-        $t1stt = $subtaskTimeTrackingModel->getTaskQuery(1)->findAll();
+        $t1stt = $subtaskTimeTrackingModel->getTaskQuery(1)->orderBy(
+                 $subtaskTimeTrackingModel->db->escapeIdentifier('id', SubtaskTimeTrackingModel::TABLE)
+        )->findAll();
         $this->assertCount(4, $t1stt, "Task #1 SubTaskTiming Count");
         $row = $t1stt[0];
         $this->assertCount(11, $row, "Task #1 SubTaskTiming Query Column Count");
