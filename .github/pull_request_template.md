@@ -5,4 +5,4 @@ Do you follow the guidelines?
 - [ ] There is no regression
 - [ ] I have updated the unit tests and integration tests accordingly
 - [ ] I follow the existing [coding style](https://docs.kanboard.org/v1/dev/coding_standards/)
-
+- [ ] Ideally, my commit messages follow the [Conventional Commits specification](https://www.conventionalcommits.org/)
