@@ -219,4 +219,52 @@ class SubtaskController extends BaseController
             throw new AccessForbiddenException();
         }
     }
+    
+    /**
+     * Handle the GET request to display the form to move a subtask to another task
+     *
+     * @access public
+     */
+    public function selectOtherTask()
+    {
+        $task = $this->getTask();
+        $subtask = $this->getSubtask($task);
+
+        $this->response->html($this->template->render('subtask/move_to_task', array(
+            'task' => $task,
+            'subtask' => $subtask,
+            'values' => array(),  // Add initial values if necessary
+            'errors' => array(),  // Errors can be added later if needed
+        )));
+    }
+
+    /**
+     * Handle the POST request to move the subtask to another task
+     *
+     * @access public
+     */
+    public function moveToOtherTask()
+    {
+        $task = $this->getTask();
+        $subtask = $this->getSubtask($task);
+        $values = $this->request->getValues();  // This captures form values, including 'new_task_id'
+
+        // Check if new task ID is valid
+        if (!isset($values['new_task_id']) || empty($values['new_task_id'])) {
+            $this->flash->failure(t('Please enter a valid task ID.'));
+            $this->response->redirect($this->helper->url->to('SubtaskController', 'selectOtherTask', array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])));
+            return;
+        }
+
+        $new_task_id = $values['new_task_id'];
+
+        // Logic to move the subtask to the new task
+        if ($this->subtaskModel->moveSubtaskToTask($new_task_id, $subtask['id'])) {
+            $this->flash->success(t('Subtask moved successfully.'));
+        } else {
+            $this->flash->failure(t('Unable to move the subtask.'));
+        }
+
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $new_task_id)));
+    }   
 }

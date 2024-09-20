@@ -334,4 +334,18 @@ class SubtaskModel extends Base
         $values['user_id'] = isset($values['user_id']) ? $values['user_id'] : 0;
         $this->hook->reference('model:subtask:creation:prepare', $values);
     }
+    
+    /**
+     * Move subtask to different task in DB
+     *
+     * @access public
+     */ 
+    public function moveSubtaskToTask($new_task_id, $subtask_id)
+    {
+        $result = $this->db->table(self::TABLE)
+                        ->eq('id', $subtask_id)
+                        ->update(['task_id' => $new_task_id]);
+
+        return $result;
+    }   
 }
