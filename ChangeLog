@@ -1,3 +1,20 @@
+Version 1.2.40 (September 25, 2024)
+-----------------------------------
+
+* build(deps): bump symfony/finder from 5.4.42 to 5.4.43
+* chore: add php83-xmlwriter package to the Docker image
+* ci: update GitHub pull-request template
+* fix: avoid PHP error if no subtask in progress is found
+* fix: avoid potential XSS and HTML injection in comment replies
+* fix: prevent duplicated columns when enabling per-swimlane column task limits
+* fix(api): check comment visibility in API procedures
+* fix(api): verify comment ownership in API procedures
+* fix(mssql): escape identifiers in timesheet queries
+* fix(mssql): use ANSI OFFSET/FETCH syntax for pagination queries
+* fix(test): use explicit ORDER BY for queries returning multiple rows
+* test: add unit tests for Subtask Time Tracking query methods
+* test: ensure pagination produces correct chunks
+
 Version 1.2.39 (August 18, 2024)
 --------------------------------
 
