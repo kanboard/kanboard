@@ -108,6 +108,7 @@ class ClassProvider implements ServiceProviderInterface
             'ColumnRestrictionValidator',
             'ColumnValidator',
             'CommentValidator',
+            'ConfigValidator',
             'CurrencyValidator',
             'CustomFilterValidator',
             'ExternalLinkValidator',

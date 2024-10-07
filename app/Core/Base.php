@@ -169,6 +169,7 @@ use Pimple\Container;
  * @property \Kanboard\Validator\ColumnRestrictionValidator          $columnRestrictionValidator
  * @property \Kanboard\Validator\ColumnMoveRestrictionValidator      $columnMoveRestrictionValidator
  * @property \Kanboard\Validator\CommentValidator                    $commentValidator
+ * @property \Kanboard\Validator\ConfigValidator                     $configValidator
  * @property \Kanboard\Validator\CurrencyValidator                   $currencyValidator
  * @property \Kanboard\Validator\CustomFilterValidator               $customFilterValidator
  * @property \Kanboard\Validator\ExternalLinkValidator               $externalLinkValidator
