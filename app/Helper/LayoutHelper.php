@@ -118,7 +118,7 @@ class LayoutHelper extends Base
      */
     public function config($template, array $params)
     {
-        if (! isset($params['values'])) {
+        if (empty($params['values'])) {
             $params['values'] = $this->configModel->getAll();
         }
 
