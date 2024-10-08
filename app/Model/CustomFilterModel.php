@@ -85,9 +85,11 @@ class CustomFilterModel extends Base
      */
     public function update(array $values)
     {
+        $updates = $values;
+        unset($updates['id']);
         return $this->db->table(self::TABLE)
             ->eq('id', $values['id'])
-            ->update($values);
+            ->update($updates);
     }
 
     /**

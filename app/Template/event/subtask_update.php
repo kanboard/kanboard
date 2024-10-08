@@ -1,7 +1,7 @@
 <p class="activity-title">
     <?= e('%s updated a subtask for the task %s',
             $this->text->e($author),
-            $this->url->link(t('#%d', $task['id']), 'TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']))
+            $this->url->link(t('#%d', $task['id']), 'TaskViewController', 'show', array('task_id' => $task['id']))
         ) ?>
     <small class="activity-date"><?= $this->dt->datetime($date_creation) ?></small>
 </p>
@@ -10,7 +10,7 @@
 
     <ul>
         <li>
-            <?= $this->text->e($subtask['title']) ?> (<strong><?= $this->text->e($subtask['status_name']) ?></strong>)
+            <?= $this->text->e($subtask['title']) ?> (<strong><?= t($subtask['status_name']) ?></strong>)
         </li>
         <li>
             <?php if ($subtask['username']): ?>

@@ -23,7 +23,7 @@ class CurrencyTest extends Base
         $currencies = $currencyModel->getAll();
         $this->assertCount(1, $currencies);
         $this->assertEquals('USD', $currencies[0]['currency']);
-        $this->assertEquals(9.9, $currencies[0]['rate']);
+        $this->assertEqualsWithDelta(9.9, $currencies[0]['rate'], 0.0001);
     }
 
     public function testCreate()

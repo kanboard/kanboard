@@ -8,7 +8,17 @@ use PDO;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 
-const VERSION = 115;
+const VERSION = 117;
+
+function version_117(PDO $pdo)
+{
+    $pdo->exec('ALTER TABLE "comments" ADD COLUMN "visibility" VARCHAR(25) NOT NULL DEFAULT \''.Role::APP_USER."'");
+}
+
+function version_116(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN theme TEXT DEFAULT 'light' NOT NULL");
+}
 
 function version_115(PDO $pdo)
 {

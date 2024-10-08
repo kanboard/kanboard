@@ -32,7 +32,7 @@ class UserProcedureTest extends BaseProcedureTest
     public function assertGetAllUsers()
     {
         $users = $this->app->getAllUsers();
-        $this->assertInternalType('array', $users);
+        $this->assertIsArray($users);
         $this->assertNotEmpty($users);
     }
 

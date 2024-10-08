@@ -53,9 +53,14 @@
     display: none
 }
 
+.board-column-expanded-header {
+    display: flex;
+    align-items: center
+}
+
 td.board-column-task-collapsed {
     font-weight: bold;
-    background-color: #fbfbfb
+    background-color: var(--table-header-background-color)
 }
 
 #board th.board-column-header-collapsed {
@@ -74,14 +79,7 @@ td.board-column-task-collapsed {
 
 .board-rotation {
     white-space: nowrap;
-    -webkit-backface-visibility: hidden;
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
     transform: rotate(90deg);
-    -webkit-transform-origin: 0 100%;
-    -moz-transform-origin: 0 100%;
-    -ms-transform-origin: 0 100%;
     transform-origin: 0 100%
 }
 
@@ -108,7 +106,8 @@ td.board-column-task-collapsed {
 
 .board-column-header-task-count {
     color: var(--color-light);
-    font-weight: normal
+    font-weight: normal;
+    font-size: 0.85em
 }
 
 a.board-swimlane-toggle {
@@ -147,8 +146,8 @@ a.board-swimlane-toggle:focus {
 }
 
 .draggable-placeholder {
-    border: 2px dashed #000;
-    background: #fafafa;
+    border: 2px dashed var(--draggable-placeholder-border-color);
+    background: var(--draggable-placeholder-background-color);
     height: 70px;
     margin-bottom: 10px
 }

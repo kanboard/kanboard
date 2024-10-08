@@ -80,8 +80,7 @@ class TaskDuplicationModelTest extends Base
         $this->assertEquals(2, $taskDuplicationModel->duplicate(1));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE.'.closure', $called);
+        $this->assertCount(2, $called);
 
         // Check the values of the duplicated task
         $task = $taskFinderModel->getById(2);

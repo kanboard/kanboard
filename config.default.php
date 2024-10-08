@@ -47,7 +47,7 @@ define('MAIL_FROM', 'replace-me@kanboard.local');
 // E-mail address used for the "Bcc" header to send a copy of all notifications
 define('MAIL_BCC', '');
 
-// Mail transport available: "smtp", "sendmail", "mail" (PHP mail function), "postmark", "mailgun", "sendgrid"
+// Mail transport available: "smtp", "sendmail", "mail" (PHP mail function)
 define('MAIL_TRANSPORT', 'mail');
 
 // SMTP configuration to use when the "smtp" transport is chosen
@@ -66,22 +66,22 @@ define('MAIL_SENDMAIL_COMMAND', '/usr/sbin/sendmail -bs');
 // Do not run the migrations from multiple processes at the same time (example: web page + background worker)
 define('DB_RUN_MIGRATIONS', true);
 
-// Database driver: sqlite, mysql or postgres (sqlite by default)
+// Database driver: sqlite, mysql, postgres, odbc, dblib, or mssql (sqlite by default)
 define('DB_DRIVER', 'sqlite');
 
-// Mysql/Postgres username
+// Database username
 define('DB_USERNAME', 'root');
 
-// Mysql/Postgres password
+// Database password
 define('DB_PASSWORD', '');
 
-// Mysql/Postgres hostname
+// Database hostname
 define('DB_HOSTNAME', 'localhost');
 
-// Mysql/Postgres database name
+// Database database name
 define('DB_NAME', 'kanboard');
 
-// Mysql/Postgres custom port (null = default port)
+// Database custom port (null = default port)
 define('DB_PORT', null);
 
 // Mysql SSL key
@@ -99,11 +99,17 @@ define('DB_VERIFY_SERVER_CERT', null);
 // Timeout value for PDO attribute
 define('DB_TIMEOUT', null);
 
+// ODBC DSN (default: kanboard)
+define('DB_ODBC_DSN', 'kanboard');
+
 // Enable LDAP authentication (false by default)
 define('LDAP_AUTH', false);
 
 // LDAP server protocol, hostname and port URL (ldap[s]://hostname:port)
 define('LDAP_SERVER', '');
+
+// LDAP server port (389 by default)
+define('LDAP_PORT', 389);
 
 // By default, require certificate to be verified for ldaps:// style URL. Set to false to skip the verification
 define('LDAP_SSL_VERIFY', true);
@@ -158,7 +164,8 @@ define('LDAP_USER_ATTRIBUTE_PHOTO', '');
 // Put an empty string to disable language sync
 define('LDAP_USER_ATTRIBUTE_LANGUAGE', '');
 
-// Allow automatic LDAP user creation
+// Automatically create a user profile when a user authenticates via LDAP.
+// If set to false, only LDAP users can log in for whom a Kanboard profile already exists.
 define('LDAP_USER_CREATION', true);
 
 // Set new user as Manager
@@ -195,6 +202,9 @@ define('LDAP_GROUP_USER_ATTRIBUTE', 'username');
 // LDAP attribute for the group name
 define('LDAP_GROUP_ATTRIBUTE_NAME', 'cn');
 
+// Enable/Disable groups synchronization when external authentication is used.
+define('LDAP_GROUP_SYNC', true);
+
 // Enable/disable the reverse proxy authentication
 define('REVERSE_PROXY_AUTH', false);
 
@@ -204,8 +214,11 @@ define('REVERSE_PROXY_USER_HEADER', 'REMOTE_USER');
 // Username of the admin, by default blank
 define('REVERSE_PROXY_DEFAULT_ADMIN', '');
 
-// Header name to use for the username
+// Header name to use for the user email
 define('REVERSE_PROXY_EMAIL_HEADER', 'REMOTE_EMAIL');
+
+// Header name to use for the user full name
+define('REVERSE_PROXY_FULLNAME_HEADER', 'REMOTE_NAME');
 
 // Default domain to use for setting the email address
 define('REVERSE_PROXY_DEFAULT_DOMAIN', '');
@@ -273,3 +286,6 @@ define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST', true);
 // ... when hovering the mouse over the group-icon of a given user!)
 // If set to 0 ALL group-memberships will be listed (7 by default)
 define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT', 7);
+
+// Dashboard settings
+define('DASHBOARD_MAX_PROJECTS', 10);

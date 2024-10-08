@@ -56,7 +56,7 @@ class JsCommand extends BaseCommand
     ];
 
     private $vendorFiles = [
-        'assets/vendor/jquery/jquery-3.4.1.min.js',
+        'assets/vendor/jquery/jquery-3.6.1.min.js',
         'assets/vendor/jquery-ui/jquery-ui.min.js',
         'assets/vendor/jquery-ui/i18n/datepicker-*.js',
         'assets/vendor/jqueryui-timepicker-addon/jquery-ui-timepicker-addon.min.js',
@@ -77,7 +77,7 @@ class JsCommand extends BaseCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $appBundle = concat_files($this->appFiles);
         $vendorBundle = concat_files($this->vendorFiles);
@@ -86,5 +86,6 @@ class JsCommand extends BaseCommand
 
         file_put_contents('assets/js/app.min.js', $minifier->minify());
         file_put_contents('assets/js/vendor.min.js', $vendorBundle);
+        return 0;
     }
 }

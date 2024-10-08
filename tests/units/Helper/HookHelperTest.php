@@ -88,22 +88,12 @@ class HookHelperTest extends Base
             ->getMock();
 
         $this->container['template']
-            ->expects($this->at(0))
+            ->expects($this->any())
             ->method('render')
-            ->with(
-                $this->equalTo('tpl1'),
-                $this->equalTo(array())
-            )
-            ->will($this->returnValue('tpl1_content'));
-
-        $this->container['template']
-            ->expects($this->at(1))
-            ->method('render')
-            ->with(
-                $this->equalTo('tpl2'),
-                $this->equalTo(array())
-            )
-            ->will($this->returnValue('tpl2_content'));
+            ->willReturnMap([
+                ['tpl1', array(), 'tpl1_content'],
+                ['tpl2', array(), 'tpl2_content'],
+            ]);
 
         $hookHelper = new HookHelper($this->container);
         $hookHelper->attach('test', 'tpl1');
@@ -121,7 +111,7 @@ class HookHelperTest extends Base
 
         $this->container['helper']
             ->asset
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('css')
             ->with(
                 $this->equalTo('skin.css')
@@ -130,7 +120,7 @@ class HookHelperTest extends Base
 
         $this->container['helper']
             ->asset
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('js')
             ->with(
                 $this->equalTo('skin.js')
@@ -141,7 +131,7 @@ class HookHelperTest extends Base
         $hookHelper->attach('test1', 'skin.css');
         $hookHelper->attach('test2', 'skin.js');
 
-        $this->assertContains('<link rel="stylesheet" href="skin.css"></link>', $hookHelper->asset('css', 'test1'));
-        $this->assertContains('<script src="skin.js"></script>', $hookHelper->asset('js', 'test2'));
+        $this->assertStringContainsString('<link rel="stylesheet" href="skin.css"></link>', $hookHelper->asset('css', 'test1'));
+        $this->assertStringContainsString('<script src="skin.js"></script>', $hookHelper->asset('js', 'test2'));
     }
 }

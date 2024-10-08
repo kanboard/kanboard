@@ -3,6 +3,7 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Base;
+use Kanboard\Core\Security\Role;
 
 /**
  * Comment model
@@ -46,6 +47,21 @@ class CommentModel extends Base
     }
 
     /**
+     * Get visibility from commentId
+     *
+     * @access public
+     * @param  integer $comment_id
+     * @return string
+     */
+    public function getVisibility($comment_id)
+    {
+        return $this->db
+            ->table(self::TABLE)
+            ->eq(self::TABLE.'.id', $comment_id)
+            ->findOneColumn(self::TABLE . '.visibility') ?: Role::APP_USER;
+    }
+
+    /**
      * Get all comments for a given task
      *
      * @access public
@@ -64,6 +80,7 @@ class CommentModel extends Base
                 self::TABLE.'.task_id',
                 self::TABLE.'.user_id',
                 self::TABLE.'.comment',
+                self::TABLE.'.visibility',
                 UserModel::TABLE.'.username',
                 UserModel::TABLE.'.name',
                 UserModel::TABLE.'.email',
@@ -95,6 +112,7 @@ class CommentModel extends Base
                 self::TABLE.'.date_modification',
                 self::TABLE.'.comment',
                 self::TABLE.'.reference',
+                self::TABLE.'.visibility',
                 UserModel::TABLE.'.username',
                 UserModel::TABLE.'.name',
                 UserModel::TABLE.'.email',

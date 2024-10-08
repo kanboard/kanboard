@@ -15,7 +15,7 @@ class ProjectArchiveCommand extends BaseCommand
             ->setDescription('Disable projects not touched during one year');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $projects = $this->db->table(ProjectModel::TABLE)
             ->eq('is_active', 1)
@@ -26,5 +26,6 @@ class ProjectArchiveCommand extends BaseCommand
             $output->writeln('Deactivating project: #'.$project['id'].' - '.$project['name']);
             $this->projectModel->disable($project['id']);
         }
+        return 0;
     }
 }

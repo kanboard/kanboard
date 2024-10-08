@@ -85,7 +85,7 @@ class TaskExternalLinkController extends BaseController
                 $this->flash->success(t('Unable to create your link.'));
             }
 
-            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
+            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])), true);
         } else {
             $provider = $this->externalLinkManager->getProvider($values['link_type']);
             $this->response->html($this->template->render('task_external_link/create', array(
@@ -140,7 +140,7 @@ class TaskExternalLinkController extends BaseController
 
         if ($valid && $this->taskExternalLinkModel->update($values)) {
             $this->flash->success(t('Link updated successfully.'));
-            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])), true);
+            return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])), true);
         }
 
         return $this->edit($values, $errors);
@@ -179,6 +179,6 @@ class TaskExternalLinkController extends BaseController
             $this->flash->failure(t('Unable to remove this link.'));
         }
 
-        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])));
     }
 }

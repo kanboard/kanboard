@@ -15,7 +15,7 @@ class LdapUserTest extends Base
     private $user;
     private $group;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

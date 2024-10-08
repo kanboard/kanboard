@@ -86,8 +86,8 @@ class AuthenticationManagerTest extends Base
         $this->assertTrue($authManager->preAuthentication());
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(AuthenticationManager::EVENT_SUCCESS.'.AuthenticationManagerTest::onSuccess', $called);
-        $this->assertArrayNotHasKey(AuthenticationManager::EVENT_FAILURE.'.AuthenticationManagerTest::onFailure', $called);
+        $this->assertCount(1, $called);
+        $this->assertEquals('auth.success', $called[0]['event']);
     }
 
     public function testPreAuthenticationFailed()
@@ -102,8 +102,7 @@ class AuthenticationManagerTest extends Base
         $this->assertFalse($authManager->preAuthentication());
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayNotHasKey(AuthenticationManager::EVENT_SUCCESS.'.AuthenticationManagerTest::onSuccess', $called);
-        $this->assertArrayNotHasKey(AuthenticationManager::EVENT_FAILURE.'.AuthenticationManagerTest::onFailure', $called);
+        $this->assertCount(0, $called);
     }
 
     public function testPasswordAuthenticationSuccessful()
@@ -117,8 +116,8 @@ class AuthenticationManagerTest extends Base
         $this->assertTrue($authManager->passwordAuthentication('admin', 'admin'));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(AuthenticationManager::EVENT_SUCCESS.'.AuthenticationManagerTest::onSuccess', $called);
-        $this->assertArrayNotHasKey(AuthenticationManager::EVENT_FAILURE.'.AuthenticationManagerTest::onFailure', $called);
+        $this->assertCount(1, $called);
+        $this->assertEquals('auth.success', $called[0]['event']);
     }
 
     public function testPasswordAuthenticationFailed()
@@ -132,8 +131,8 @@ class AuthenticationManagerTest extends Base
         $this->assertFalse($authManager->passwordAuthentication('admin', 'wrong password'));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayNotHasKey(AuthenticationManager::EVENT_SUCCESS.'.AuthenticationManagerTest::onSuccess', $called);
-        $this->assertArrayHasKey(AuthenticationManager::EVENT_FAILURE.'.AuthenticationManagerTest::onFailure', $called);
+        $this->assertCount(1, $called);
+        $this->assertEquals('auth.failure', $called[0]['event']);
     }
 
     public function onSuccess($event)

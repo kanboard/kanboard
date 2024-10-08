@@ -53,7 +53,7 @@ class FileStorageTest extends \Base
 {
     public static $functions;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setup();
 
@@ -73,7 +73,7 @@ class FileStorageTest extends \Base
             ->getMock();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         self::$functions = null;
@@ -85,7 +85,7 @@ class FileStorageTest extends \Base
         $storage = new FileStorage('somewhere');
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('is_dir')
             ->with(
                 $this->equalTo('somewhere')
@@ -93,7 +93,7 @@ class FileStorageTest extends \Base
             ->will($this->returnValue(false));
 
         self::$functions
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('mkdir')
             ->with(
                 $this->equalTo('somewhere')
@@ -101,7 +101,7 @@ class FileStorageTest extends \Base
             ->will($this->returnValue(true));
 
         self::$functions
-            ->expects($this->at(2))
+            ->expects($this->once())
             ->method('file_put_contents')
             ->with(
                 $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey'),
@@ -118,7 +118,7 @@ class FileStorageTest extends \Base
         $storage = new FileStorage('somewhere');
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('is_dir')
             ->with(
                 $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'my')
@@ -126,7 +126,7 @@ class FileStorageTest extends \Base
             ->will($this->returnValue(false));
 
         self::$functions
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('mkdir')
             ->with(
                 $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'my')
@@ -134,7 +134,7 @@ class FileStorageTest extends \Base
             ->will($this->returnValue(true));
 
         self::$functions
-            ->expects($this->at(2))
+            ->expects($this->once())
             ->method('file_put_contents')
             ->with(
                 $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'my'.DIRECTORY_SEPARATOR.'key'),
@@ -150,11 +150,13 @@ class FileStorageTest extends \Base
      */
     public function testPutWhenNotAbleToCreateFolder()
     {
+        $this->expectException(\Kanboard\Core\ObjectStorage\ObjectStorageException::class);
+
         $data = 'data';
         $storage = new FileStorage('somewhere');
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('is_dir')
             ->with(
                 $this->equalTo('somewhere')
@@ -162,7 +164,7 @@ class FileStorageTest extends \Base
             ->will($this->returnValue(false));
 
         self::$functions
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('mkdir')
             ->with(
                 $this->equalTo('somewhere')
@@ -177,7 +179,7 @@ class FileStorageTest extends \Base
         $storage = new FileStorage('somewhere');
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('file_exists')
             ->with(
                 $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
@@ -185,7 +187,7 @@ class FileStorageTest extends \Base
             ->will($this->returnValue(true));
 
         self::$functions
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('file_get_contents')
             ->with(
                 $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
@@ -202,8 +204,10 @@ class FileStorageTest extends \Base
     {
         $storage = new FileStorage('somewhere');
 
+        $this->expectException(\Kanboard\Core\ObjectStorage\ObjectStorageException::class);
+
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('file_exists')
             ->with(
                 $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
@@ -218,7 +222,7 @@ class FileStorageTest extends \Base
         $storage = new FileStorage('somewhere');
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('file_exists')
             ->with(
                 $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
@@ -226,7 +230,7 @@ class FileStorageTest extends \Base
             ->will($this->returnValue(true));
 
         self::$functions
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('readfile')
             ->with(
                 $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
@@ -242,7 +246,7 @@ class FileStorageTest extends \Base
         $storage = new FileStorage('somewhere');
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('file_exists')
             ->with(
                 $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
@@ -250,7 +254,7 @@ class FileStorageTest extends \Base
             ->will($this->returnValue(true));
 
         self::$functions
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('unlink')
             ->with(
                 $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
@@ -265,7 +269,7 @@ class FileStorageTest extends \Base
         $storage = new FileStorage('somewhere');
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('is_dir')
             ->with(
                 $this->equalTo('somewhere')
@@ -273,7 +277,7 @@ class FileStorageTest extends \Base
             ->will($this->returnValue(true));
 
         self::$functions
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('rename')
             ->with(
                 $this->equalTo('src_file'),
@@ -289,7 +293,7 @@ class FileStorageTest extends \Base
         $storage = new FileStorage('somewhere');
 
         self::$functions
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('is_dir')
             ->with(
                 $this->equalTo('somewhere')
@@ -297,7 +301,7 @@ class FileStorageTest extends \Base
             ->will($this->returnValue(true));
 
         self::$functions
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('move_uploaded_file')
             ->with(
                 $this->equalTo('src_file'),

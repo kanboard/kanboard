@@ -75,6 +75,7 @@
 
 .project-header .views-switcher-component {
     margin-top: 4px;
+    margin-bottom: 10px;
     float: left
 }
 
@@ -87,4 +88,9 @@
 
 .project-header .filter-box-component form {
     margin: 0
+}
+
+.no-projects {
+    margin: 1rem 0 0;
+    font-style: italic;
 }

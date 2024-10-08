@@ -5,53 +5,78 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  pull_request:
+    branches: [ main ]
 jobs:
-  multiplatform-build:
+  test-image-build:
+    if: github.event.pull_request
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          push: false
+
+  multiplatform-build:
+    permissions:
+      packages: write
+    if: ${{ ! github.event.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Generate Docker tag
         id: docker_tag
         run: |
           SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`
-          APP_VERSION="master.${SHORT_SHA}"
+          APP_VERSION="main.${SHORT_SHA}"
           DOCKER_IMAGE=kanboard/kanboard
           DOCKER_VERSION=dev
           if [ "${{ github.event_name }}" = "schedule" ]; then
           DOCKER_VERSION="nightly"
-          TAGS="${DOCKER_IMAGE}:${DOCKER_VERSION},ghcr.io/${DOCKER_IMAGE}:${DOCKER_VERSION}"
+          TAGS="docker.io/${DOCKER_IMAGE}:${DOCKER_VERSION},ghcr.io/${DOCKER_IMAGE}:${DOCKER_VERSION},quay.io/${DOCKER_IMAGE}:${DOCKER_VERSION}"
           elif [[ $GITHUB_REF == refs/tags/* ]]; then
           DOCKER_VERSION=${GITHUB_REF#refs/tags/}
           APP_VERSION=$DOCKER_VERSION
-          TAGS="${DOCKER_IMAGE}:${DOCKER_VERSION},ghcr.io/${DOCKER_IMAGE}:${DOCKER_VERSION},${DOCKER_IMAGE}:latest,ghcr.io/${DOCKER_IMAGE}:latest"
+          TAGS="docker.io/${DOCKER_IMAGE}:${DOCKER_VERSION},ghcr.io/${DOCKER_IMAGE}:${DOCKER_VERSION},quay.io/${DOCKER_IMAGE}:${DOCKER_VERSION},docker.io/${DOCKER_IMAGE}:latest,ghcr.io/${DOCKER_IMAGE}:latest,quay.io/${DOCKER_IMAGE}:latest"
           fi
           echo ::set-output name=version::${APP_VERSION}
           echo ::set-output name=tags::${TAGS}
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v3
 
       - name: Login to DockerHub
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1 
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.CR_PAT }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Login to Quay.io Registry
+        uses: docker/login-action@v3
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_TOKEN }}
 
       - name: Build and push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: Dockerfile

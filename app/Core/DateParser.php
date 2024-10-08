@@ -175,7 +175,7 @@ class DateParser extends Base
      */
     public function getTimestamp($value)
     {
-        if (ctype_digit($value)) {
+        if (ctype_digit((string) $value)) {
             return (int) $value;
         }
 
@@ -204,7 +204,8 @@ class DateParser extends Base
 
         if ($date !== false) {
             $errors = DateTime::getLastErrors();
-            if ($errors['error_count'] === 0 && $errors['warning_count'] === 0) {
+            if ($errors === false ||
+                $errors['error_count'] === 0 && $errors['warning_count'] === 0) {
                 $timestamp = $date->getTimestamp();
                 return $timestamp > 0 ? $timestamp : 0;
             }
@@ -263,7 +264,7 @@ class DateParser extends Base
      */
     public function getTimestampFromIsoFormat($value)
     {
-        return $this->removeTimeFromTimestamp(ctype_digit($value) ? $value : strtotime($value));
+        return $this->removeTimeFromTimestamp(ctype_digit((string) $value) ? $value : strtotime($value));
     }
 
     /**
@@ -291,7 +292,7 @@ class DateParser extends Base
     {
         foreach ($fields as $field) {
             if (! empty($values[$field])) {
-                if (ctype_digit($values[$field])) {
+                if (ctype_digit((string) $values[$field])) {
                     $values[$field] = date($format, $values[$field]);
                 }
             } else {

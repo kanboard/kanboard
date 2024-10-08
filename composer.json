@@ -13,44 +13,58 @@
         "optimize-autoloader": true,
         "discard-changes": true
     },
-    "require" : {
-        "php" : ">=7.2.0",
-        "ext-simplexml" : "*",
-        "ext-dom" : "*",
-        "ext-xml" : "*",
-        "ext-gd" : "*",
-        "ext-mbstring" : "*",
-        "ext-hash" : "*",
-        "ext-openssl" : "*",
-        "ext-json" : "*",
-        "ext-ctype" : "*",
-        "ext-filter" : "*",
-        "ext-session" : "*",
-        "christian-riesen/otp" : "1.4.3",
-        "eluceo/ical": "0.16.1",
-        "erusev/parsedown" : "^1.7",
-        "pimple/pimple" : "3.4.0",
-        "psr/log": "~1.0",
-        "swiftmailer/swiftmailer" : "5.4.8",
-        "symfony/console" : "4.2.12",
-        "symfony/event-dispatcher" : "3.4.2",
-        "gregwar/captcha": "1.1.9"
+    "require": {
+        "php": ">=7.4.0",
+        "ext-simplexml": "*",
+        "ext-dom": "*",
+        "ext-xml": "*",
+        "ext-gd": "*",
+        "ext-mbstring": "*",
+        "ext-hash": "*",
+        "ext-openssl": "*",
+        "ext-json": "*",
+        "ext-ctype": "*",
+        "ext-filter": "*",
+        "ext-session": "*",
+        "christian-riesen/otp": "1.4.3",
+        "erusev/parsedown": "1.7.4",
+        "pimple/pimple": "3.5.0",
+        "psr/log": "1.1.4",
+        "symfony/console": "5.4.41",
+        "symfony/event-dispatcher": "5.4.21",
+        "symfony/event-dispatcher-contracts": "^2",
+        "symfony/finder": "5.4.43",
+        "symfony/service-contracts": "2.5.3",
+        "symfony/string": "^5.1",
+        "symfony/deprecation-contracts": "2.5.3"
     },
-    "autoload" : {
-        "classmap" : ["app/"],
-        "psr-4" : {
-            "Kanboard\\" : "app/"
+    "autoload": {
+        "classmap": [
+            "app/"
+        ],
+        "psr-4": {
+            "Kanboard\\": "app/",
+            "MatthiasMullie\\Minify\\": "libs/minify/src/",
+            "MatthiasMullie\\PathConverter\\": "libs/path-converter/src/",
+            "Gregwar\\": "libs",
+            "Eluceo\\iCal\\": "libs/ical"
         },
-        "psr-0" : {
-            "": "libs/"
+        "psr-0": {
+            "JsonRPC": "libs/jsonrpc/src",
+            "PHPQRCode": "libs/phpqrcode/lib",
+            "PicoDb": "libs/picodb/lib",
+            "SimpleQueue": "libs",
+            "SimpleValidator": "libs"
         },
-        "files" : [
-            "app/functions.php"
+        "files": [
+            "app/functions.php",
+            "libs/swiftmailer/swift_required.php"
         ]
     },
-    "require-dev" : {
-        "symfony/stopwatch" : "5.2.7",
-        "phpunit/phpunit" : "^7",
+    "require-dev": {
+        "doctrine/instantiator": "1.5.0",
+        "symfony/stopwatch": "5.4.40",
+        "phpunit/phpunit": "9.6.19",
         "roave/security-advisories": "dev-master"
     }
 }

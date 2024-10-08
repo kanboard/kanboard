@@ -41,6 +41,7 @@ class UserNotificationModel extends Base
      */
     public function sendUserNotification(array $user, $event_name, array $event_data)
     {
+        $loadedLocales = Translator::$locales;
         Translator::unload();
 
         // Use the user language otherwise use the application language (do not use the session language)
@@ -55,7 +56,7 @@ class UserNotificationModel extends Base
         }
 
         // Restore locales
-        $this->languageModel->loadCurrentLanguage();
+        Translator::$locales = $loadedLocales;
     }
 
     /**

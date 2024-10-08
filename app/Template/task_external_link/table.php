@@ -18,10 +18,10 @@
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><i class="fa fa-cog"></i><i class="fa fa-caret-down"></i></a>
                     <ul>
                         <li>
-                            <?= $this->modal->medium('edit', t('Edit'), 'TaskExternalLinkController', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                            <?= $this->modal->medium('edit', t('Edit'), 'TaskExternalLinkController', 'edit', array('link_id' => $link['id'], 'task_id' => $task['id'])) ?>
                         </li>
                         <li>
-                            <?= $this->modal->confirm('trash-o', t('Remove'), 'TaskExternalLinkController', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                            <?= $this->modal->confirm('trash-o', t('Remove'), 'TaskExternalLinkController', 'confirm', array('link_id' => $link['id'], 'task_id' => $task['id'])) ?>
                         </li>
                     </ul>
                 </div>
@@ -29,7 +29,7 @@
                 <?= $this->text->e($link['type']) ?>
             </td>
             <td>
-                <a href="<?= $link['url'] ?>" title="<?= $this->text->e($link['url']) ?>" target="_blank"><?= $this->text->e($link['title']) ?><span class="ui-helper-hidden-accessible"> (<?= $this->text->e($link['url']) ?>)</span></a>
+                <a href="<?= $this->text->e($link['url']) ?>" title="<?= $this->text->e($link['url']) ?>" target="_blank"><?= $this->text->e($link['title']) ?><span class="ui-helper-hidden-accessible"> (<?= $this->text->e($link['url']) ?>)</span></a>
             </td>
             <td>
                 <?= $this->text->e($link['dependency_label']) ?>

@@ -6,6 +6,7 @@ use Exception;
 use Kanboard\Core\Base;
 use Kanboard\Job\BaseJob;
 use SimpleQueue\Job;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * Class JobHandler
@@ -84,6 +85,6 @@ class JobHandler extends Base
     {
         $this->memoryCache->flush();
         $this->actionManager->removeEvents();
-        $this->dispatcher->dispatch('app.bootstrap');
+        $this->dispatcher->dispatch(new Event(), 'app.bootstrap');
     }
 }

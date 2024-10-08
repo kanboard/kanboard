@@ -56,7 +56,7 @@ class ServiceLocator implements ContainerInterface
     /**
      * {@inheritdoc}
      */
-    public function get($id)
+    public function get(string $id)
     {
         if (!isset($this->aliases[$id])) {
             throw new UnknownIdentifierException($id);
@@ -68,7 +68,7 @@ class ServiceLocator implements ContainerInterface
     /**
      * {@inheritdoc}
      */
-    public function has($id)
+    public function has(string $id): bool
     {
         return isset($this->aliases[$id]) && isset($this->container[$this->aliases[$id]]);
     }

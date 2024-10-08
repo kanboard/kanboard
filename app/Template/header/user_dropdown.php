@@ -30,11 +30,11 @@
 
         <li>
             <i class="fa fa-fw fa-life-ring" aria-hidden="true"></i>
-            <?= $this->url->doc(t('Documentation'), 'index') ?>
+            <?= $this->url->doc(t('Documentation')) ?>
         </li>
         <?php if (! DISABLE_LOGOUT): ?>
             <li>
-                <?= $this->url->icon('sign-out', t('Logout'), 'AuthController', 'logout') ?>
+                <?= $this->url->icon('sign-out', t('Logout'), 'AuthController', 'logout', [], true) ?>
             </li>
         <?php endif ?>
     </ul>

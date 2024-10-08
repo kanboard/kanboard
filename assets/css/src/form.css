@@ -15,46 +15,34 @@ label {
     font-weight: 400
 }
 
+input, textarea {
+    font-family: sans-serif;
+    background-color: var(--input-background-color);
+}
+
 input[type="number"],
 input[type="date"],
 input[type="email"],
 input[type="password"],
 input[type="text"]:not(.input-addon-field) {
     color: var(--color-light);
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-border-color);
     width: 300px;
     max-width: 95%;
     font-size: 1em;
     height: 25px;
     padding-bottom: 0;
     padding-left: 4px;
-    font-family: sans-serif;
     -webkit-appearance: none;
     -moz-appearance: none
 }
 
-input[type="number"]::-webkit-input-placeholder,
-input[type="date"]::-webkit-input-placeholder,
-input[type="email"]::-webkit-input-placeholder,
-input[type="password"]::-webkit-input-placeholder,
-input[type="text"]:not(.input-addon-field)::-webkit-input-placeholder {
-    color: #dedede
-}
-
-input[type="number"]::-moz-placeholder,
-input[type="date"]::-moz-placeholder,
-input[type="email"]::-moz-placeholder,
-input[type="password"]::-moz-placeholder,
-input[type="text"]:not(.input-addon-field)::-moz-placeholder {
-    color: #dedede
-}
-
-input[type="number"]:-ms-input-placeholder,
-input[type="date"]:-ms-input-placeholder,
-input[type="email"]:-ms-input-placeholder,
-input[type="password"]:-ms-input-placeholder,
-input[type="text"]:not(.input-addon-field):-ms-input-placeholder {
-    color: #dedede
+input[type="number"]::placeholder,
+input[type="date"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="text"]:not(.input-addon-field)::placeholder {
+    color: var(--input-placeholder-color)
 }
 
 input[type="number"]:focus,
@@ -62,10 +50,10 @@ input[type="date"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="text"]:focus {
-    color: #000;
-    border-color: rgba(82, 168, 236, 0.8);
+    color: var(--input-focus-color);
+    border-color: var(--input-focus-border-color);
     outline: 0;
-    box-shadow: 0 0 8px rgba(82, 168, 236, 0.6)
+    box-shadow: 0 0 8px var(--input-focus-shadow-color);
 }
 
 input[type="number"] {
@@ -90,32 +78,23 @@ input[type="text"]:not(.input-addon-field).form-input-small {
 }
 
 textarea:focus {
-    color: #000;
-    border-color: rgba(82, 168, 236, 0.8);
+    color: var(--input-focus-color);
+    border-color: var(--input-focus-border-color);
     outline: 0;
-    box-shadow: 0 0 8px rgba(82, 168, 236, 0.6)
+    box-shadow: 0 0 8px var(--input-focus-shadow-color);
 }
 
 textarea {
     padding: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-border-color);
     width: 400px;
     max-width: 99%;
     height: 200px;
-    font-family: sans-serif;
     font-size: 1em
 }
 
-textarea::-webkit-input-placeholder {
-    color: #dedede
-}
-
-textarea::-moz-placeholder {
-    color: #dedede
-}
-
-textarea:-ms-input-placeholder {
-    color: #dedede
+textarea::placeholder {
+    color: var(--input-placeholder-color)
 }
 
 select {
@@ -162,17 +141,17 @@ input[type="text"].form-max-width {
 
 input.form-error,
 textarea.form-error {
-    border: 2px solid #b94a48
+    border: 2px solid var(--form-error-color);
 }
 
 input.form-error:focus,
 textarea.form-error:focus {
     box-shadow: none;
-    border: 2px solid #b94a48
+    border: 2px solid var(--form-error-color)
 }
 
 .form-errors {
-    color: #b94a48;
+    color: var(--form-error-color);
     list-style-type: none
 }
 
@@ -182,7 +161,7 @@ ul.form-errors li {
 
 .form-help {
     font-size: 0.8em;
-    color: brown;
+    color: var(--form-help-color);
     margin-bottom: 15px
 }
 

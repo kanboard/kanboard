@@ -92,6 +92,18 @@ class TaskRecurrenceModel extends TaskDuplicationModel
             if ($recurring_task_id !== false) {
                 $this->tagDuplicationModel->duplicateTaskTags($task_id, $recurring_task_id);
 
+                $externalLinks = $this->taskExternalLinkModel->getAll($task_id);
+                foreach ($externalLinks as $externalLink) {
+                    $this->taskExternalLinkModel->create([
+                        'task_id' => $recurring_task_id,
+                        'creator_id' => $externalLink['creator_id'],
+                        'dependency' => $externalLink['dependency'],
+                        'title' => $externalLink['title'],
+                        'link_type' => $externalLink['link_type'],
+                        'url' => $externalLink['url'],
+                    ]);
+                }
+
                 $parent_update = $this->db
                     ->table(TaskModel::TABLE)
                     ->eq('id', $task_id)

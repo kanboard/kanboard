@@ -72,7 +72,6 @@ class TaskTagFilter extends BaseFilter implements FilterInterface
         return $this->db
             ->table(TaskModel::TABLE)
             ->columns(TaskModel::TABLE . '.id')
-            ->asc(TaskModel::TABLE . '.project_id')
             ->left(TaskTagModel::TABLE, 'tg', 'task_id', TaskModel::TABLE, 'id')
             ->isNull('tg.tag_id');
     }
@@ -82,8 +81,7 @@ class TaskTagFilter extends BaseFilter implements FilterInterface
         return $this->db
             ->table(TagModel::TABLE)
             ->columns(TaskTagModel::TABLE.'.task_id')
-            ->ilike(TagModel::TABLE.'.name', $this->value)
-            ->asc(TagModel::TABLE.'.project_id')
+            ->ilike(TagModel::TABLE.'.name', '%'.$this->value.'%')
             ->join(TaskTagModel::TABLE, 'tag_id', 'id');
     }
 }

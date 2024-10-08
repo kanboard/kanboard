@@ -4,8 +4,8 @@
 }
 
 .table-list-header {
-    background: #fbfbfb;
-    border: 1px solid #e5e5e5;
+    background: var(--table-list-header-background-color);
+    border: 1px solid var(--table-list-header-border-color);
     border-radius: 5px 5px 0 0;
     line-height: 28px;
     padding-left: 3px;
@@ -13,7 +13,7 @@
 }
 
 .table-list-header a {
-    color: #333;
+    color: var(--color-primary);
     font-weight: 500;
     text-decoration: none;
     margin-right: 10px
@@ -31,22 +31,22 @@
 }
 
 .table-list-header .table-list-header-menu {
-    text-align: right
+    text-align: right;
 }
 
 .table-list-row {
     padding-left: 3px;
     padding-right: 3px;
-    border-bottom: 1px solid #e5e5e5;
-    border-right: 1px solid #e5e5e5
+    border-bottom: 1px solid var(--table-list-border-color);
+    border-right: 1px solid var(--table-list-border-color);
 }
 
 .table-list-row.table-border-left {
-    border-left: 1px solid #e5e5e5
+    border-left: 1px solid var(--table-list-border-color);
 }
 
 .table-list-row:nth-child(odd) {
-    background: #fefefe
+    background: var(--table-list-nth-background-color)
 }
 
 .table-list-row:last-child {
@@ -54,9 +54,9 @@
 }
 
 .table-list-row:hover {
-    background: #fff8dc;
-    border-bottom: 1px solid #ffeb8e;
-    border-right: 1px solid #ffeb8e
+    background: var(--table-list-row-background-color);
+    border-bottom: 1px solid var(--table-list-row-hover-border-color);
+    border-right: 1px solid var(--table-list-row-hover-border-color)
 }
 
 .table-list-row .table-list-title {
@@ -74,7 +74,7 @@
 }
 
 .table-list-row .table-list-title a {
-    color: #333;
+    color: var(--color-primary);
     text-decoration: none
 }
 
@@ -147,11 +147,11 @@
 }
 
 .table-list-row .table-list-icons a:hover {
-    color: #333
+    color: var(--color-primary)
 }
 
 .table-list-row .table-list-icons a:hover i {
-    color: #333
+    color: var(--color-primary)
 }
 
 .table-list-category {

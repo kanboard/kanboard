@@ -46,13 +46,13 @@ class BoardFormatter extends BaseFormatter implements FormatterInterface
     {
         $project = $this->projectModel->getById($this->projectId);
         $swimlanes = $this->swimlaneModel->getAllByStatus($this->projectId, SwimlaneModel::ACTIVE);
+        $columns = $this->columnModel->getAllWithOpenedTaskCount($this->projectId);
+        $task_count_by_swimlanes_and_columns = [];
+
         if ($project['per_swimlane_task_limits']) {
-            $columns = array();
-            foreach ($swimlanes as $swimlane) {
-                $columns = array_merge($columns, $this->columnModel->getAllWithPerSwimlaneTaskCount($this->projectId, $swimlane['id']));
+            foreach ($this->taskModel->getOpenTaskCountBySwimlaneAndColumn($this->projectId) as $task_count) {
+                $task_count_by_swimlanes_and_columns[$task_count['swimlane_id']][$task_count['column_id']] = $task_count['nb_open_tasks'];
             }
-        } else {
-            $columns = $this->columnModel->getAllWithTaskCount($this->projectId);
         }
 
         if (empty($swimlanes) || empty($columns)) {
@@ -74,6 +74,7 @@ class BoardFormatter extends BaseFormatter implements FormatterInterface
             ->withColumns($columns)
             ->withTasks($tasks)
             ->withTags($tags)
+            ->withTaskCountBySwimlaneAndColumn($task_count_by_swimlanes_and_columns)
             ->format();
     }
 }

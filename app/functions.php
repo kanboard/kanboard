@@ -197,12 +197,12 @@ function build_app_version($ref, $commit_hash)
     }
 
     if ($commit_hash !== '$Format:%H$') {
-        return 'master.'.$commit_hash;
-    } else if (file_exists('/version.txt')) {
-        return rtrim(file_get_contents('/version.txt'));
+        return 'main.'.$commit_hash;
+    } else if (file_exists(__DIR__ . '/version.txt')) {
+        return rtrim(file_get_contents(__DIR__ . '/version.txt'));
     }
 
-    return 'master.unknown_revision';
+    return 'main.unknown_revision';
 }
 
 /**
@@ -212,7 +212,44 @@ function build_app_version($ref, $commit_hash)
  */
 function get_upload_max_size()
 {
-    return min(ini_get('upload_max_filesize'), ini_get('post_max_size'));
+    $upload_max_filesize = convert_php_size_to_bytes(ini_get('upload_max_filesize'));
+    $post_max_size = convert_php_size_to_bytes(ini_get('post_max_size'));
+
+    if ($post_max_size == 0) {
+        return $upload_max_filesize;
+    }
+
+    if ($upload_max_filesize == 0) {
+        return $post_max_size;
+    }
+
+    return min($post_max_size, $upload_max_filesize);
+}
+
+/**
+ * Get the number of bytes from PHP size
+ *
+ * @param  integer  $value PHP size (example: 2M)
+ * @return integer
+ */
+function convert_php_size_to_bytes($value)
+{
+    // Remove the non-unit characters from the size
+    $unit = preg_replace('/[^bkmgtpezy]/i', '', $value);
+
+    // Remove the non-numeric characters from the size
+    $size = preg_replace('/[^0-9\.]/', '', $value);
+
+    switch (strtoupper($unit)) {
+        case 'G':
+            $size *= 1024;
+        case 'M':
+            $size *= 1024;
+        case 'K':
+            $size *= 1024;
+    }
+
+    return $size;
 }
 
 /**

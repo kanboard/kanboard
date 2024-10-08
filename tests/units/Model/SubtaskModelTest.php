@@ -113,6 +113,36 @@ class SubtaskModelTest extends Base
         $this->assertEmpty($subtask);
     }
 
+    public function testRemoveUpdateTaskTimeTracking()
+    {
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $subtaskModel = new SubtaskModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test 1', 'project_id' => 1)));
+
+        $this->assertEquals(1, $subtaskModel->create(array('title' => 'subtask #1', 'task_id' => 1, 'time_estimated' => 1, 'time_spent' => 2)));
+        $this->assertEquals(2, $subtaskModel->create(array('title' => 'subtask #2', 'task_id' => 1, 'time_estimated' => 3, 'time_spent' => 4)));
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertEquals(4, $task['time_estimated']);
+        $this->assertEquals(6, $task['time_spent']);
+
+        $this->assertTrue($subtaskModel->remove(1));
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertEquals(3, $task['time_estimated']);
+        $this->assertEquals(4, $task['time_spent']);
+
+        $this->assertTrue($subtaskModel->remove(2));
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertEquals(0, $task['time_estimated']);
+        $this->assertEquals(0, $task['time_spent']);
+    }
+
     public function testDuplicate()
     {
         $taskCreationModel = new TaskCreationModel($this->container);

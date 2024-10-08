@@ -11,7 +11,7 @@ use Kanboard\Model\TaskModel;
  * @package Kanboard\Filter
  * @author  Frederic Guillot
  */
-class TaskPriorityFilter extends BaseFilter implements FilterInterface
+class TaskPriorityFilter extends BaseComparisonFilter implements FilterInterface
 {
     /**
      * Get search attribute
@@ -32,7 +32,7 @@ class TaskPriorityFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        $this->query->eq(TaskModel::TABLE.'.priority', $this->value);
+        $this->applyComparisonFilter(TaskModel::TABLE.'.priority');
         return $this;
     }
 }

@@ -15,6 +15,7 @@ class Terminal
 {
     private static $width;
     private static $height;
+    private static $stty;
 
     /**
      * Gets the terminal width.
@@ -54,20 +55,60 @@ class Terminal
         return self::$height ?: 50;
     }
 
+    /**
+     * @internal
+     */
+    public static function hasSttyAvailable(): bool
+    {
+        if (null !== self::$stty) {
+            return self::$stty;
+        }
+
+        // skip check if shell_exec function is disabled
+        if (!\function_exists('shell_exec')) {
+            return false;
+        }
+
+        return self::$stty = (bool) shell_exec('stty 2> '.('\\' === \DIRECTORY_SEPARATOR ? 'NUL' : '/dev/null'));
+    }
+
     private static function initDimensions()
     {
         if ('\\' === \DIRECTORY_SEPARATOR) {
-            if (preg_match('/^(\d+)x(\d+)(?: \((\d+)x(\d+)\))?$/', trim(getenv('ANSICON')), $matches)) {
+            $ansicon = getenv('ANSICON');
+            if (false !== $ansicon && preg_match('/^(\d+)x(\d+)(?: \((\d+)x(\d+)\))?$/', trim($ansicon), $matches)) {
                 // extract [w, H] from "wxh (WxH)"
                 // or [w, h] from "wxh"
                 self::$width = (int) $matches[1];
                 self::$height = isset($matches[4]) ? (int) $matches[4] : (int) $matches[2];
+            } elseif (!self::hasVt100Support() && self::hasSttyAvailable()) {
+                // only use stty on Windows if the terminal does not support vt100 (e.g. Windows 7 + git-bash)
+                // testing for stty in a Windows 10 vt100-enabled console will implicitly disable vt100 support on STDOUT
+                self::initDimensionsUsingStty();
             } elseif (null !== $dimensions = self::getConsoleMode()) {
                 // extract [w, h] from "wxh"
                 self::$width = (int) $dimensions[0];
                 self::$height = (int) $dimensions[1];
             }
-        } elseif ($sttyString = self::getSttyColumns()) {
+        } else {
+            self::initDimensionsUsingStty();
+        }
+    }
+
+    /**
+     * Returns whether STDOUT has vt100 support (some Windows 10+ configurations).
+     */
+    private static function hasVt100Support(): bool
+    {
+        return \function_exists('sapi_windows_vt100_support') && sapi_windows_vt100_support(fopen('php://stdout', 'w'));
+    }
+
+    /**
+     * Initializes dimensions using the output of an stty columns line.
+     */
+    private static function initDimensionsUsingStty()
+    {
+        if ($sttyString = self::getSttyColumns()) {
             if (preg_match('/rows.(\d+);.columns.(\d+);/i', $sttyString, $matches)) {
                 // extract [w, h] from "rows h; columns w;"
                 self::$width = (int) $matches[2];
@@ -85,38 +126,29 @@ class Terminal
      *
      * @return int[]|null An array composed of the width and the height or null if it could not be parsed
      */
-    private static function getConsoleMode()
+    private static function getConsoleMode(): ?array
     {
-        if (!\function_exists('proc_open')) {
-            return;
+        $info = self::readFromProcess('mode CON');
+
+        if (null === $info || !preg_match('/--------+\r?\n.+?(\d+)\r?\n.+?(\d+)\r?\n/', $info, $matches)) {
+            return null;
         }
 
-        $descriptorspec = [
-            1 => ['pipe', 'w'],
-            2 => ['pipe', 'w'],
-        ];
-        $process = proc_open('mode CON', $descriptorspec, $pipes, null, null, ['suppress_errors' => true]);
-        if (\is_resource($process)) {
-            $info = stream_get_contents($pipes[1]);
-            fclose($pipes[1]);
-            fclose($pipes[2]);
-            proc_close($process);
-
-            if (preg_match('/--------+\r?\n.+?(\d+)\r?\n.+?(\d+)\r?\n/', $info, $matches)) {
-                return [(int) $matches[2], (int) $matches[1]];
-            }
-        }
+        return [(int) $matches[2], (int) $matches[1]];
     }
 
     /**
      * Runs and parses stty -a if it's available, suppressing any error output.
-     *
-     * @return string|null
      */
-    private static function getSttyColumns()
+    private static function getSttyColumns(): ?string
+    {
+        return self::readFromProcess('stty -a | grep columns');
+    }
+
+    private static function readFromProcess(string $command): ?string
     {
         if (!\function_exists('proc_open')) {
-            return;
+            return null;
         }
 
         $descriptorspec = [
@@ -124,14 +156,22 @@ class Terminal
             2 => ['pipe', 'w'],
         ];
 
-        $process = proc_open('stty -a | grep columns', $descriptorspec, $pipes, null, null, ['suppress_errors' => true]);
-        if (\is_resource($process)) {
-            $info = stream_get_contents($pipes[1]);
-            fclose($pipes[1]);
-            fclose($pipes[2]);
-            proc_close($process);
+        $cp = \function_exists('sapi_windows_cp_set') ? sapi_windows_cp_get() : 0;
 
-            return $info;
+        $process = proc_open($command, $descriptorspec, $pipes, null, null, ['suppress_errors' => true]);
+        if (!\is_resource($process)) {
+            return null;
         }
+
+        $info = stream_get_contents($pipes[1]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+        proc_close($process);
+
+        if ($cp) {
+            sapi_windows_cp_set($cp);
+        }
+
+        return $info;
     }
 }

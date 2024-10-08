@@ -7,6 +7,7 @@ use Kanboard\Model\TaskModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\ProjectModel;
+use Kanboard\Model\UserModel;
 
 class TaskCreationModelTest extends Base
 {
@@ -33,8 +34,7 @@ class TaskCreationModelTest extends Base
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1)));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE.'.closure', $called);
+        $this->assertCount(2, $called);
 
         $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
@@ -56,8 +56,7 @@ class TaskCreationModelTest extends Base
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE_UPDATE.'.closure', $called);
-        $this->assertArrayHasKey(TaskModel::EVENT_CREATE.'.TaskCreationModelTest::onCreate', $called);
+        $this->assertCount(2, $called);
 
         $task = $finderModel->getById(1);
         $this->assertNotEmpty($task);
@@ -75,8 +74,8 @@ class TaskCreationModelTest extends Base
         $this->assertEquals('', $task['description']);
         $this->assertEquals('', $task['reference']);
 
-        $this->assertEquals(time(), $task['date_creation'], 'Wrong timestamp', 1);
-        $this->assertEquals(time(), $task['date_modification'], 'Wrong timestamp', 1);
+        $this->assertEqualsWithDelta(time(), $task['date_creation'], 1, 'Wrong timestamp');
+        $this->assertEqualsWithDelta(time(), $task['date_modification'], 1, 'Wrong timestamp');
         $this->assertEquals(0, $task['date_due']);
         $this->assertEquals(0, $task['date_completed']);
         $this->assertEquals(0, $task['date_started']);
@@ -142,15 +141,40 @@ class TaskCreationModelTest extends Base
         $projectModel = new ProjectModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);
         $taskFinderModel = new TaskFinderModel($this->container);
+        $userModel = new UserModel($this->container);
 
+        $this->assertEquals(2, $userModel->create(array('username' => 'someone')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'logged_user')));
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
-        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'creator_id' => 1)));
 
+        // Scenario 1: creator_id is defined and no logged user
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'creator_id' => 2)));
         $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
-
         $this->assertEquals(1, $task['id']);
-        $this->assertEquals(1, $task['creator_id']);
+        $this->assertEquals(2, $task['creator_id']);
+
+        // Scenario 2: creator_id is not defined and no logged user
+        $this->assertEquals(2, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+        $task = $taskFinderModel->getById(2);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(2, $task['id']);
+        $this->assertEquals(0, $task['creator_id']);
+
+        // Scenario 3: creator_id is not defined and a user is logged
+        $_SESSION['user'] = array('id' => 3);
+        $this->assertEquals(3, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+        $task = $taskFinderModel->getById(3);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(3, $task['id']);
+        $this->assertEquals(3, $task['creator_id']);
+
+        // Scenario 4: creator_id is defined and it's different than the logged user
+        $this->assertEquals(4, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'creator_id' => 2)));
+        $task = $taskFinderModel->getById(4);
+        $this->assertNotEmpty($task);
+        $this->assertEquals(4, $task['id']);
+        $this->assertEquals(2, $task['creator_id']);
     }
 
     public function testThatCreatorIsDefined()
@@ -304,7 +328,7 @@ class TaskCreationModelTest extends Base
         $this->assertEquals(4, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'date_started' => time())));
 
         $task = $taskFinderModel->getById(4);
-        $this->assertEquals(time(), $task['date_started'], '', 1);
+        $this->assertEqualsWithDelta(time(), $task['date_started'], 1, '');
 
         // Set empty string
         $this->assertEquals(5, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'date_started' => '')));

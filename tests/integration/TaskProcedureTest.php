@@ -44,7 +44,7 @@ class TaskProcedureTest extends BaseProcedureTest
     public function assertGetAllTasks()
     {
         $tasks = $this->app->getAllTasks($this->projectId);
-        $this->assertInternalType('array', $tasks);
+        $this->assertIsArray($tasks);
         $this->assertNotEmpty($tasks);
         $this->assertArrayHasKey('url', $tasks[0]);
     }

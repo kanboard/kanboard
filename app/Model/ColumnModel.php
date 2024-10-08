@@ -121,18 +121,17 @@ class ColumnModel extends Base
     }
 
     /**
-     * Get all columns with task count
+     * Get all columns with opened task count only
      *
      * @access public
      * @param  integer  $project_id   Project id
      * @return array
      */
-    public function getAllWithTaskCount($project_id)
+    public function getAllWithOpenedTaskCount($project_id)
     {
         return $this->db->table(self::TABLE)
             ->columns('id', 'title', 'position', 'task_limit', 'description', 'hide_in_dashboard', 'project_id')
             ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE column_id=".self::TABLE.".id AND is_active='1'", 'nb_open_tasks')
-            ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE column_id=".self::TABLE.".id AND is_active='0'", 'nb_closed_tasks')
             ->eq('project_id', $project_id)
             ->asc('position')
             ->findAll();
@@ -145,12 +144,12 @@ class ColumnModel extends Base
      * @param  integer  $project_id   Project id
      * @return array
      */
-    public function getAllWithPerSwimlaneTaskCount($project_id, $swimlane_id)
+    public function getAllWithTaskCount($project_id)
     {
         return $this->db->table(self::TABLE)
-            ->columns('id', 'title', 'position', 'task_limit', 'description', 'hide_in_dashboard', 'project_id', $swimlane_id.' AS swimlane_id')
-            ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE column_id=".self::TABLE.".id AND swimlane_id=".$swimlane_id." AND is_active='1'", 'nb_open_tasks')
-            ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE column_id=".self::TABLE.".id AND swimlane_id=".$swimlane_id." AND is_active='0'", 'nb_closed_tasks')
+            ->columns('id', 'title', 'position', 'task_limit', 'description', 'hide_in_dashboard', 'project_id')
+            ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE column_id=".self::TABLE.".id AND is_active='1'", 'nb_open_tasks')
+            ->subquery("SELECT COUNT(*) FROM ".TaskModel::TABLE." WHERE column_id=".self::TABLE.".id AND is_active='0'", 'nb_closed_tasks')
             ->eq('project_id', $project_id)
             ->asc('position')
             ->findAll();

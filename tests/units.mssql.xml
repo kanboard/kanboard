@@ -1,0 +1,7 @@
+<phpunit stopOnError="false" stopOnFailure="false" colors="true">
+    <testsuites>
+        <testsuite name="Kanboard">
+            <directory>units</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

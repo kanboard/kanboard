@@ -14,12 +14,10 @@ class CommentListController extends BaseController
 {
     public function show()
     {
-        $project = $this->getProject();
         $task = $this->getTask();
         $commentSortingDirection = $this->userMetadataCacheDecorator->get(UserMetadataModel::KEY_COMMENT_SORTING_DIRECTION, 'ASC');
 
         $this->response->html($this->template->render('comment_list/show', array(
-            'project'  => $project,
             'task'     => $task,
             'comments' => $this->commentModel->getAll($task['id'], $commentSortingDirection),
             'editable' => $this->helper->user->hasProjectAccess('CommentController', 'edit', $task['project_id']),

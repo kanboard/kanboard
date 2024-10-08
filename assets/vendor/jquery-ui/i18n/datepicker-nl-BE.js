@@ -1,6 +1,8 @@
 /* Dutch (Belgium) initialisation for the jQuery UI date picker plugin. */
 /* David De Sloovere @DavidDeSloovere */
 ( function( factory ) {
+	"use strict";
+
 	if ( typeof define === "function" && define.amd ) {
 
 		// AMD. Register as an anonymous module.
@@ -10,12 +12,13 @@
 		// Browser globals
 		factory( jQuery.datepicker );
 	}
-}( function( datepicker ) {
+} )( function( datepicker ) {
+"use strict";
 
 datepicker.regional[ "nl-BE" ] = {
 	closeText: "Sluiten",
-	prevText: "←",
-	nextText: "→",
+	prevText: "Vorig",
+	nextText: "Volgende",
 	currentText: "Vandaag",
 	monthNames: [ "januari", "februari", "maart", "april", "mei", "juni",
 	"juli", "augustus", "september", "oktober", "november", "december" ],
@@ -34,4 +37,4 @@ datepicker.setDefaults( datepicker.regional[ "nl-BE" ] );
 
 return datepicker.regional[ "nl-BE" ];
 
-} ) );
+} );

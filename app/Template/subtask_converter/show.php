@@ -15,6 +15,6 @@
     <?= $this->modal->confirmButtons(
         'SubtaskConverterController',
         'save',
-        array('task_id' => $task['id'], 'project_id' => $task['project_id'], 'subtask_id' => $subtask['id'])
+        array('task_id' => $task['id'], 'subtask_id' => $subtask['id'])
     ) ?>
 </div>

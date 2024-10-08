@@ -21,7 +21,7 @@ class ProjectFileController extends BaseController
 
         $this->response->html($this->template->render('project_file/create', array(
             'project' => $project,
-            'max_size' => $this->helper->text->phpToBytes(get_upload_max_size()),
+            'max_size' => get_upload_max_size(),
         )));
     }
 

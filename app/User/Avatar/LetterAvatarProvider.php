@@ -113,7 +113,7 @@ class LetterAvatarProvider extends Base implements AvatarProviderInterface
      *
      * @access protected
      * @param  string $str
-     * @return int[]
+     * @return array
      */
     protected function getHSL($str)
     {

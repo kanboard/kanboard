@@ -42,14 +42,12 @@ class FileViewerController extends BaseController
      */
     protected function renderFileWithCache(array $file, $mimetype)
     {
-        $etag = md5($file['path']);
-
-        if ($this->request->getHeader('If-None-Match') === '"'.$etag.'"') {
+        if ($this->request->getHeader('If-None-Match') === '"'.$file['etag'].'"') {
             $this->response->status(304);
         } else {
             try {
                 $this->response->withContentType($mimetype);
-                $this->response->withCache(5 * 86400, $etag);
+                $this->response->withCache(5 * 86400, $file['etag']);
                 $this->response->send();
                 $this->objectStorage->output($file['path']);
             } catch (ObjectStorageException $e) {
@@ -67,7 +65,16 @@ class FileViewerController extends BaseController
     {
         $file = $this->getFile();
         $type = $this->helper->file->getPreviewType($file['name']);
-        $params = array('file_id' => $file['id'], 'project_id' => $this->request->getIntegerParam('project_id'));
+        $params = ['file_id' => $file['id']];
+
+        if (array_key_exists('etag', $file)) {
+            $params['etag'] = $file['etag'];
+        }
+
+        $project_id = $this->request->getIntegerParam('project_id');
+        if ($project_id !== 0) {
+            $params['project_id'] = $project_id;
+        }
 
         if ($file['model'] === 'taskFileModel') {
             $params['task_id'] = $file['task_id'];
@@ -113,12 +120,11 @@ class FileViewerController extends BaseController
         $file = $this->getFile();
         $model = $file['model'];
         $filename = $this->$model->getThumbnailPath($file['path']);
-        $etag = md5($filename);
 
-        $this->response->withCache(5 * 86400, $etag);
+        $this->response->withCache(5 * 86400, $file['etag']);
         $this->response->withContentType('image/png');
 
-        if ($this->request->getHeader('If-None-Match') === '"'.$etag.'"') {
+        if ($this->request->getHeader('If-None-Match') === '"'.$file['etag'].'"') {
             $this->response->status(304);
         } else {
 

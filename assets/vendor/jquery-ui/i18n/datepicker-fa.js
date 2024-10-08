@@ -2,6 +2,8 @@
 /* Javad Mowlanezhad -- jmowla@gmail.com */
 /* Jalali calendar should supported soon! (Its implemented but I have to test it) */
 ( function( factory ) {
+	"use strict";
+
 	if ( typeof define === "function" && define.amd ) {
 
 		// AMD. Register as an anonymous module.
@@ -11,12 +13,13 @@
 		// Browser globals
 		factory( jQuery.datepicker );
 	}
-}( function( datepicker ) {
+} )( function( datepicker ) {
+"use strict";
 
 datepicker.regional.fa = {
 	closeText: "بستن",
-	prevText: "&#x3C;قبلی",
-	nextText: "بعدی&#x3E;",
+	prevText: "قبلی",
+	nextText: "بعدی",
 	currentText: "امروز",
 	monthNames: [
 		"ژانویه",
@@ -32,7 +35,7 @@ datepicker.regional.fa = {
 		"نوامبر",
 		"دسامبر"
 	],
-	monthNamesShort: [ "1","2","3","4","5","6","7","8","9","10","11","12" ],
+	monthNamesShort: [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" ],
 	dayNames: [
 		"يکشنبه",
 		"دوشنبه",
@@ -70,4 +73,4 @@ datepicker.setDefaults( datepicker.regional.fa );
 
 return datepicker.regional.fa;
 
-} ) );
+} );

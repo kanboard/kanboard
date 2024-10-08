@@ -43,7 +43,7 @@ class ConsoleSectionOutput extends StreamOutput
      *
      * @param int $lines Number of lines to clear. If null, then the entire output of this section is cleared
      */
-    public function clear(int $lines = null)
+    public function clear(?int $lines = null)
     {
         if (empty($this->content) || !$this->isDecorated()) {
             return;
@@ -82,20 +82,22 @@ class ConsoleSectionOutput extends StreamOutput
      */
     public function addContent(string $input)
     {
-        foreach (explode(PHP_EOL, $input) as $lineContent) {
+        foreach (explode(\PHP_EOL, $input) as $lineContent) {
             $this->lines += ceil($this->getDisplayLength($lineContent) / $this->terminal->getWidth()) ?: 1;
             $this->content[] = $lineContent;
-            $this->content[] = PHP_EOL;
+            $this->content[] = \PHP_EOL;
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function doWrite($message, $newline)
+    protected function doWrite(string $message, bool $newline)
     {
         if (!$this->isDecorated()) {
-            return parent::doWrite($message, $newline);
+            parent::doWrite($message, $newline);
+
+            return;
         }
 
         $erasedContent = $this->popStreamContentUntilCurrentSection();
@@ -134,8 +136,8 @@ class ConsoleSectionOutput extends StreamOutput
         return implode('', array_reverse($erasedContent));
     }
 
-    private function getDisplayLength(string $text): string
+    private function getDisplayLength(string $text): int
     {
-        return Helper::strlenWithoutDecoration($this->getFormatter(), str_replace("\t", '        ', $text));
+        return Helper::width(Helper::removeDecoration($this->getFormatter(), str_replace("\t", '        ', $text)));
     }
 }

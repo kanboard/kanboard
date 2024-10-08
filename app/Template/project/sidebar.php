@@ -51,6 +51,9 @@
             <li <?= $this->app->checkMenuSelection('ProjectViewController', 'duplicate') ?>>
                 <?= $this->url->link(t('Duplicate'), 'ProjectViewController', 'duplicate', array('project_id' => $project['id'])) ?>
             </li>
+            <li <?= $this->app->checkMenuSelection('ProjectViewController', 'importTasks') ?>>
+                <?= $this->url->link(t('Import Tasks'), 'ProjectViewController', 'importTasks', array('project_id' => $project['id'])) ?>
+            </li>
                 <?php if ($project['is_active']): ?>
                     <li>
                     <?= $this->modal->confirmLink(t('Close this project'), 'ProjectStatusController', 'confirmDisable', array('project_id' => $project['id'])) ?>

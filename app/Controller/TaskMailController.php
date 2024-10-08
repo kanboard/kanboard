@@ -12,15 +12,13 @@ class TaskMailController extends BaseController
 {
     public function create(array $values = array(), array $errors = array())
     {
-        $project = $this->getProject();
         $task = $this->getTask();
 
         $this->response->html($this->helper->layout->task('task_mail/create', array(
             'values'  => $values,
             'errors'  => $errors,
             'task'    => $task,
-            'project' => $project,
-            'members' => $this->projectPermissionModel->getMembersWithEmail($project['id']),
+            'members' => $this->projectPermissionModel->getMembersWithEmail($task['project_id']),
         )));
     }
 
@@ -41,7 +39,7 @@ class TaskMailController extends BaseController
                 'task_id' => $task['id'],
             ));
 
-            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id']), 'comments'), true);
+            $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id']), 'comments'), true);
         } else {
             $this->create($values, $errors);
         }

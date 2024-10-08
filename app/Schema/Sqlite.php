@@ -8,7 +8,40 @@ use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
 use PDO;
 
-const VERSION = 125;
+const VERSION = 128;
+
+function version_128(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE comments ADD COLUMN visibility VARCHAR(25) NOT NULL DEFAULT '".Role::APP_USER."'");
+}
+
+function version_127(PDO $pdo)
+{
+    $pdo->exec("ALTER TABLE users ADD COLUMN theme TEXT DEFAULT 'light' NOT NULL");
+}
+
+function version_126(PDO $pdo)
+{
+	$pdo->exec('ALTER TABLE subtask_time_tracking RENAME TO subtask_time_tracking_old');
+    
+    $pdo->exec('
+        CREATE TABLE subtask_time_tracking (
+            id INTEGER PRIMARY KEY,
+            user_id INTEGER NOT NULL,
+            subtask_id INTEGER NOT NULL,
+            start INTEGER DEFAULT 0,
+            end INTEGER DEFAULT 0,
+            time_spent REAL DEFAULT 0,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+            FOREIGN KEY(subtask_id) REFERENCES subtasks(id) ON DELETE CASCADE
+        )
+    ');
+    
+    $pdo->exec('DROP INDEX subtasks_task_idx');    
+    $pdo->exec('CREATE INDEX subtasks_task_idx ON subtasks(task_id)'); 
+    $pdo->exec('INSERT INTO subtask_time_tracking SELECT * FROM subtask_time_tracking_old');
+    $pdo->exec('DROP TABLE subtask_time_tracking_old');
+}
 
 function version_125(PDO $pdo)
 {
@@ -439,12 +472,12 @@ function version_90(PDO $pdo)
     $rq->execute();
     $rows = $rq->fetchAll(PDO::FETCH_ASSOC) ?: array();
 
-    $rq = $pdo->prepare('UPDATE project_has_users SET "role"=? WHERE "id"=?');
+    $rq = $pdo->prepare('UPDATE project_has_users SET "role"=? WHERE "user_id"=?');
 
     foreach ($rows as $row) {
         $rq->execute(array(
             $row['is_owner'] == 1 ? Role::PROJECT_MANAGER : Role::PROJECT_MEMBER,
-            $row['id'],
+            $row['user_id'],
         ));
     }
 }

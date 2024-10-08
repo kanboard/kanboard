@@ -20,8 +20,8 @@
 }
 
 .input-addon-item {
-    background-color: rgba(147, 128, 108, 0.1);
-    color: #666;
+    background-color: var(--input-addon-background-color);
+    color: var(--input-addon-color);
     font: inherit;
     font-weight: normal
 }
@@ -49,10 +49,6 @@
 .input-addon-field:not(:first-child),
 .input-addon-item:not(:first-child) {
     border-left: 0
-}
-
-.project-header .filter-box-component .input-addon {
-    min-width: 280px
 }
 
 .input-addon .input-addon-field {

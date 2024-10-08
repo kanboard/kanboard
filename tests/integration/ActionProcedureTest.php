@@ -10,7 +10,7 @@ class ActionProcedureTest extends BaseProcedureTest
     {
         $actions = $this->app->getAvailableActions();
         $this->assertNotEmpty($actions);
-        $this->assertInternalType('array', $actions);
+        $this->assertIsArray($actions);
         $this->assertArrayHasKey('\Kanboard\Action\TaskCloseColumn', $actions);
     }
 
@@ -18,7 +18,7 @@ class ActionProcedureTest extends BaseProcedureTest
     {
         $events = $this->app->getAvailableActionEvents();
         $this->assertNotEmpty($events);
-        $this->assertInternalType('array', $events);
+        $this->assertIsArray($events);
         $this->assertArrayHasKey('task.move.column', $events);
     }
 
@@ -26,7 +26,7 @@ class ActionProcedureTest extends BaseProcedureTest
     {
         $events = $this->app->getCompatibleActionEvents('\Kanboard\Action\TaskCloseColumn');
         $this->assertNotEmpty($events);
-        $this->assertInternalType('array', $events);
+        $this->assertIsArray($events);
         $this->assertArrayHasKey('task.move.column', $events);
     }
 
@@ -49,7 +49,7 @@ class ActionProcedureTest extends BaseProcedureTest
     {
         $actions = $this->app->getActions($this->projectId);
         $this->assertNotEmpty($actions);
-        $this->assertInternalType('array', $actions);
+        $this->assertIsArray($actions);
         $this->assertArrayHasKey('id', $actions[0]);
         $this->assertArrayHasKey('project_id', $actions[0]);
         $this->assertArrayHasKey('event_name', $actions[0]);

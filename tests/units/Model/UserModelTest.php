@@ -394,4 +394,12 @@ class UserModelTest extends Base
         $project = $projectModel->getById(1);
         $this->assertEquals(0, $project['is_active']);
     }
+
+    public function testTrimUsername()
+    {
+        $userModel = new UserModel($this->container);
+        $this->assertNotFalse($userModel->create(array('username' => 'test ')));
+
+        $this->assertNotEmpty($userModel->getByUsername('test'));
+    }
 }

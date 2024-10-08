@@ -58,6 +58,7 @@ class AuthController extends BaseController
     public function logout()
     {
         if (! DISABLE_LOGOUT) {
+            $this->checkCSRFParam();
             $this->sessionManager->close();
             $this->response->redirect($this->helper->url->to('AuthController', 'login'));
         } else {

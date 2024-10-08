@@ -39,7 +39,7 @@ class CommentEventJob extends BaseJob
             ->buildEvent();
 
         if ($event !== null) {
-            $this->dispatcher->dispatch($eventName, $event);
+            $this->dispatcher->dispatch($event, $eventName);
 
             if ($eventName === CommentModel::EVENT_CREATE) {
                 $userMentionJob = $this->userMentionJob->withParams($event['comment']['comment'], CommentModel::EVENT_USER_MENTION, $event);

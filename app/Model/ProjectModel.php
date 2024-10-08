@@ -483,8 +483,10 @@ class ProjectModel extends Base
 
         $this->helper->model->convertIntegerFields($values, array('priority_default', 'priority_start', 'priority_end', 'task_limit'));
 
+        $updates = $values;
+        unset($updates['id']);
         return $this->exists($values['id']) &&
-               $this->db->table(self::TABLE)->eq('id', $values['id'])->save($values);
+               $this->db->table(self::TABLE)->eq('id', $values['id'])->save($updates);
     }
 
     /**
@@ -589,21 +591,6 @@ class ProjectModel extends Base
                     ->table(self::TABLE)
                     ->eq('id', $project_id)
                     ->save(array('is_public' => 0, 'token' => ''));
-    }
-
-    /**
-     * Return the task count for a project
-     *
-     * @access public
-     * @param  integer    $project_id   Project id
-     * @return integer
-     */
-    public function taskCount($project_id)
-    {
-        return $this->db->table(self::TABLE)
-            ->eq('id', $project_id)->exists()
-            ->join(ColumnModel::TABLE, 'id', 'project_id')
-            ->count();
     }
 
     /**

@@ -29,13 +29,21 @@ class Sqlite extends Base
      */
     public function createConnection(array $settings)
     {
-        $options = array();
+        $options = [];
 
-        if (! empty($settings['timeout'])) {
-            $options[PDO::ATTR_TIMEOUT] = $settings['timeout'];
-        }
+        // Set a default timeout of 30 seconds to reduce "database is locked" errors.
+        $options[PDO::ATTR_TIMEOUT] = (! empty($settings['timeout'])) ? $settings['timeout'] : 30;
 
         $this->pdo = new PDO('sqlite:'.$settings['filename'], null, null, $options);
+
+        // Enabling WAL mode by default should also reduce the "database is locked" errors.
+        // Official docs: https://sqlite.org/wal.html
+        if (isset($settings['wal_mode']) && $settings['wal_mode'] === true) {
+            $this->pdo->exec('PRAGMA journal_mode=wal');
+            $this->pdo->exec('PRAGMA wal_autocheckpoint = 0');
+            $this->pdo->exec('PRAGMA synchronous=NORMAL');
+        }
+
         $this->enableForeignKeys();
     }
 

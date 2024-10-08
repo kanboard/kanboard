@@ -16,7 +16,7 @@ class TaskTriggerCommand extends BaseCommand
             ->setDescription('Trigger scheduler event for all tasks');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         foreach ($this->getProjectIds() as $project_id) {
             $tasks = $this->taskFinderModel->getAll($project_id);
@@ -27,6 +27,7 @@ class TaskTriggerCommand extends BaseCommand
                 $this->sendEvent($tasks, $project_id);
             }
         }
+        return 0;
     }
 
     private function getProjectIds()
@@ -46,6 +47,6 @@ class TaskTriggerCommand extends BaseCommand
         $event = new TaskListEvent(array('project_id' => $project_id));
         $event->setTasks($tasks);
 
-        $this->dispatcher->dispatch(TaskModel::EVENT_DAILY_CRONJOB, $event);
+        $this->dispatcher->dispatch($event, TaskModel::EVENT_DAILY_CRONJOB);
     }
 }

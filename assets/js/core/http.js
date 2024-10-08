@@ -108,7 +108,7 @@ KB.http.postForm = function (url, formElement) {
     return (new KB.http.request('POST', url, {}, formData)).execute();
 };
 
-KB.http.uploadFile = function (url, file, csrf, onProgress, onComplete, onError, onServerError) {
+KB.http.uploadFile = function (url, file, csrf, onProgress, onComplete, onError, onServerError, onRequestTooLarge) {
     var fd = new FormData();
     fd.append('files[]', file);
     fd.append('csrf_token', csrf);
@@ -123,6 +123,12 @@ KB.http.uploadFile = function (url, file, csrf, onProgress, onComplete, onError,
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 onComplete();
+            } else if (xhr.status === 413) {
+                if (typeof onRequestTooLarge !== 'undefined') {
+                    onRequestTooLarge();
+                } else {
+                    onError(xhr.responseText);
+                }
             } else if (typeof onServerError !== 'undefined') {
                 onServerError(JSON.parse(xhr.responseText));
             }

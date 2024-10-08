@@ -23,7 +23,7 @@ class ProjectHeaderHelper extends Base
     {
         $search = $this->request->getStringParam('search', $this->userSession->getFilters($project['id']));
         $this->userSession->setFilters($project['id'], $search);
-        return urldecode($search);
+        return rawurldecode($search);
     }
 
     /**
@@ -71,10 +71,10 @@ class ProjectHeaderHelper extends Base
 
             if (! empty($project['description'])) {
                 $description .= '<hr>'.PHP_EOL.PHP_EOL;
-                $description .= $this->helper->text->markdown($project['description']);
+                $description .= $this->helper->text->markdown($project['description'] ?: '');
             }
         } else {
-            $description = $this->helper->text->markdown($project['description']);
+            $description = $this->helper->text->markdown($project['description'] ?: '');
         }
 
         return $description;

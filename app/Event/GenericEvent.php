@@ -3,7 +3,7 @@
 namespace Kanboard\Event;
 
 use ArrayAccess;
-use Symfony\Component\EventDispatcher\Event as BaseEvent;
+use Symfony\Contracts\EventDispatcher\Event as BaseEvent;
 
 class GenericEvent extends BaseEvent implements ArrayAccess
 {
@@ -41,6 +41,7 @@ class GenericEvent extends BaseEvent implements ArrayAccess
         return $this->container;
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if (is_null($offset)) {
@@ -50,16 +51,19 @@ class GenericEvent extends BaseEvent implements ArrayAccess
         }
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;

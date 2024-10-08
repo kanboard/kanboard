@@ -14,10 +14,10 @@ class Translator
      * Locale
      *
      * @static
-     * @access private
+     * @access public
      * @var array
      */
-    private static $locales = array();
+    public static $locales = array();
 
     /**
      * Instance
@@ -61,7 +61,7 @@ class Translator
         array_unshift($args, $this->get($identifier, $identifier));
 
         foreach ($args as &$arg) {
-            $arg = htmlspecialchars($arg, ENT_QUOTES, 'UTF-8', false);
+            $arg = htmlspecialchars((string) $arg, ENT_QUOTES, 'UTF-8', false);
         }
 
         return call_user_func_array(

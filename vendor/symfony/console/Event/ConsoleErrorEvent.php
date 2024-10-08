@@ -25,7 +25,7 @@ final class ConsoleErrorEvent extends ConsoleEvent
     private $error;
     private $exitCode;
 
-    public function __construct(InputInterface $input, OutputInterface $output, \Throwable $error, Command $command = null)
+    public function __construct(InputInterface $input, OutputInterface $output, \Throwable $error, ?Command $command = null)
     {
         parent::__construct($command, $input, $output);
 
@@ -53,6 +53,6 @@ final class ConsoleErrorEvent extends ConsoleEvent
 
     public function getExitCode(): int
     {
-        return null !== $this->exitCode ? $this->exitCode : (\is_int($this->error->getCode()) && 0 !== $this->error->getCode() ? $this->error->getCode() : 1);
+        return $this->exitCode ?? (\is_int($this->error->getCode()) && 0 !== $this->error->getCode() ? $this->error->getCode() : 1);
     }
 }

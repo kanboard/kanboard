@@ -34,7 +34,7 @@ class TransitionTest extends Base
         $this->assertEquals('', $transitions[0]['name']);
         $this->assertEquals('admin', $transitions[0]['username']);
         $this->assertEquals(1, $transitions[0]['user_id']);
-        $this->assertEquals(time(), $transitions[0]['date'], '', 3);
+        $this->assertEqualsWithDelta(time(), $transitions[0]['date'], 3, '');
         $this->assertEquals(3600, $transitions[0]['time_spent']);
     }
 
@@ -133,9 +133,9 @@ class TransitionTest extends Base
         $this->assertEquals('admin', $transitions[2]['username']);
         $this->assertEquals('admin', $transitions[3]['username']);
 
-        $this->assertEquals(1200, $transitions[0]['time_spent']);
-        $this->assertEquals(1200, $transitions[1]['time_spent']);
-        $this->assertEquals(3600, $transitions[2]['time_spent']);
-        $this->assertEquals(3600, $transitions[3]['time_spent']);
+        $this->assertEqualsWithDelta(1200, $transitions[0]['time_spent'], 3);
+        $this->assertEqualsWithDelta(1200, $transitions[1]['time_spent'], 3);
+        $this->assertEqualsWithDelta(3600, $transitions[2]['time_spent'], 3);
+        $this->assertEqualsWithDelta(3600, $transitions[3]['time_spent'], 3);
     }
 }

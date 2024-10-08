@@ -17,6 +17,7 @@ class SubtaskStatusController extends BaseController
      */
     public function change()
     {
+        $this->checkReusableGETCSRFParam();
         $task = $this->getTask();
         $subtask = $this->getSubtask($task);
         $fragment = $this->request->getStringParam('fragment');
@@ -42,6 +43,7 @@ class SubtaskStatusController extends BaseController
      */
     public function timer()
     {
+        $this->checkReusableGETCSRFParam();
         $task = $this->getTask();
         $subtask = $this->getSubtask($task);
         $timer = $this->request->getStringParam('timer');

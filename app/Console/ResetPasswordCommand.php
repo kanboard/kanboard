@@ -18,7 +18,7 @@ class ResetPasswordCommand extends BaseCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $helper = $this->getHelper('question');
         $username = $input->getArgument('username');
@@ -38,6 +38,7 @@ class ResetPasswordCommand extends BaseCommand
         if ($this->validatePassword($output, $password, $confirmation)) {
             $this->resetPassword($output, $username, $password);
         }
+        return 0;
     }
 
     private function validatePassword(OutputInterface $output, $password, $confirmation)

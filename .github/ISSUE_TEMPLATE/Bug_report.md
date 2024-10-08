@@ -2,10 +2,17 @@
 name: Bug report
 about: This template is only for bug reports
 title: ''
-labels: bug
+labels: bug, triage needed
 assignees: ''
 
 ---
+
+### Checklist
+
+- [ ] I verified that Kanboard is correctly installed
+- [ ] I verified that the problem does not come from a plugin
+- [ ] I verified that the problem is not already reported
+- [ ] I understand that Kanboard is in maintenance mode. It doesn't mean it's abandoned, but there is no significant feature development
 
 <!-- Please, read the documentation: https://docs.kanboard.org/ -->
 
@@ -20,7 +27,7 @@ assignees: ''
 ### Steps to reproduce
 
 
-### Screenshots
+### Screenshots and Video Recording
 
 <!-- If applicable, add screenshots to help explain your problem. -->
 
@@ -29,7 +36,7 @@ assignees: ''
 
 ### Configuration
 
-- Kanboard version: <!-- provide exact version (not master) -->
+- Kanboard version: <!-- provide exact version (not master or main) -->
 - Database type and version:
 - PHP version:
 - OS:

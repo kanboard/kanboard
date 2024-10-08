@@ -269,11 +269,13 @@ class StatementHandler
 
         foreach ($this->positionalParams as $value) {
             $pdoStatement->bindValue($i, $value, PDO::PARAM_STR);
+            $this->db->setLogMessage("param[$i]: '$value'");
             $i++;
         }
 
         foreach ($this->namedParams as $name => $value) {
             $pdoStatement->bindValue($name, $value, PDO::PARAM_STR);
+            $this->db->setLogMessage("param[$name]: '$value'");
         }
     }
 
@@ -348,6 +350,6 @@ class StatementHandler
             return false;
         }
 
-        throw new SQLException('SQL Error: '.$e->getMessage());
+        throw new SQLException('SQL Error['.$e->getCode().']: '.$e->getMessage());
     }
 }

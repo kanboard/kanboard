@@ -58,9 +58,21 @@ class TaskDuplicationModel extends Base
         if ($new_task_id !== false) {
             $this->tagDuplicationModel->duplicateTaskTags($task_id, $new_task_id);
             $this->taskLinkModel->create($new_task_id, $task_id, 4);
+
+            $externalLinks = $this->taskExternalLinkModel->getAll($task_id);
+            foreach ($externalLinks as $externalLink) {
+                $this->taskExternalLinkModel->create([
+                    'task_id' => $new_task_id,
+                    'creator_id' => $externalLink['creator_id'],
+                    'dependency' => $externalLink['dependency'],
+                    'title' => $externalLink['title'],
+                    'link_type' => $externalLink['link_type'],
+                    'url' => $externalLink['url'],
+                ]);
+            }
         }
 
-        $hook_values = [ 'source_task_id' => $task_id, 'destination_task_id' => $new_task_id];
+        $hook_values = ['source_task_id' => $task_id, 'destination_task_id' => $new_task_id];
         $this->hook->reference('model:task:duplication:aftersave', $hook_values);
 
         return $new_task_id;

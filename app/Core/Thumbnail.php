@@ -55,7 +55,7 @@ class Thumbnail
     public function fromFile($filename)
     {
         $this->metadata = getimagesize($filename);
-        $this->srcImage = imagecreatefromstring(file_get_contents($filename));
+        $this->srcImage = @imagecreatefromstring(file_get_contents($filename));
         return $this;
     }
 
@@ -75,7 +75,8 @@ class Thumbnail
             $this->metadata = getimagesizefromstring($blob);
         }
 
-        $this->srcImage = imagecreatefromstring($blob);
+        // Avoid warning from libpng when loading PNG image with obscure or incorrect iCCP profiles
+        $this->srcImage = @imagecreatefromstring($blob);
         return $this;
     }
 
@@ -127,7 +128,7 @@ class Thumbnail
         imagealphablending($this->dstImage, false);
         imagesavealpha($this->dstImage, true);
 
-        imagecopyresampled($this->dstImage, $this->srcImage, $dstX, $dstY, 0, 0, $dstWidth, $dstHeight, $srcWidth, $srcHeight);
+        imagecopyresampled($this->dstImage, $this->srcImage, (int) $dstX, (int) $dstY, 0, 0, (int) $dstWidth, (int) $dstHeight, (int) $srcWidth, (int) $srcHeight);
 
         return $this;
     }

@@ -78,7 +78,8 @@ class TaskCreationModel extends Base
             $values['title'] = t('Untitled');
         }
 
-        if ($this->userSession->isLogged()) {
+        // Note: Do not override the creator_id if the task is imported
+        if (empty($values['creator_id']) && $this->userSession->isLogged()) {
             $values['creator_id'] = $this->userSession->getId();
         }
 

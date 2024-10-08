@@ -31,6 +31,7 @@ class TaskMovePositionController extends BaseController
 
     public function save()
     {
+        $this->checkReusableGETCSRFParam();
         $task = $this->getTask();
         $values = $this->request->getJson();
 
@@ -46,6 +47,6 @@ class TaskMovePositionController extends BaseController
             $values['swimlane_id']
         );
 
-        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'], 'project_id' => $task['project_id'])));
+        $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])));
     }
 }

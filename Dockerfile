@@ -1,4 +1,12 @@
-FROM alpine:3.13.5
+FROM alpine:3.20
+
+LABEL org.opencontainers.image.source https://github.com/kanboard/kanboard
+LABEL org.opencontainers.image.title=Kanboard
+LABEL org.opencontainers.image.description="Kanboard is project management software that focuses on the Kanban methodology"
+LABEL org.opencontainers.image.vendor=Kanboard
+LABEL org.opencontainers.image.licenses=MIT
+LABEL org.opencontainers.image.url=https://kanboard.org
+LABEL org.opencontainers.image.documentation=https://docs.kanboard.org
 
 VOLUME /var/www/app/data
 VOLUME /var/www/app/plugins
@@ -9,17 +17,18 @@ EXPOSE 80 443
 ARG VERSION
 
 RUN apk --no-cache --update add \
-    tzdata openssl unzip nginx bash ca-certificates s6 curl ssmtp mailx php7 php7-phar php7-curl \
-    php7-fpm php7-json php7-zlib php7-xml php7-dom php7-ctype php7-opcache php7-zip php7-iconv \
-    php7-pdo php7-pdo_mysql php7-pdo_sqlite php7-pdo_pgsql php7-mbstring php7-session php7-bcmath \
-    php7-gd php7-mcrypt php7-openssl php7-sockets php7-posix php7-ldap php7-simplexml && \
+    tzdata openssl unzip nginx bash ca-certificates s6 curl ssmtp mailx php83 php83-phar php83-curl \
+    php83-fpm php83-json php83-zlib php83-xml php83-dom php83-ctype php83-opcache php83-zip php83-iconv \
+    php83-pdo php83-pdo_mysql php83-pdo_sqlite php83-pdo_pgsql php83-mbstring php83-session php83-bcmath \
+    php83-gd php83-openssl php83-sockets php83-posix php83-ldap php83-simplexml php83-xmlwriter && \
     rm -rf /var/www/localhost && \
-    rm -f /etc/php7/php-fpm.d/www.conf
+    rm -f /etc/php83/php-fpm.d/www.conf && \
+    ln -sf /usr/bin/php83 /usr/bin/php
 
 ADD . /var/www/app
 ADD docker/ /
 
-RUN rm -rf /var/www/app/docker && echo $VERSION > /version.txt
+RUN rm -rf /var/www/app/docker && echo $VERSION > /var/www/app/app/version.txt
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD []

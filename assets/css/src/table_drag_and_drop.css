@@ -1,6 +1,6 @@
 .draggable-row-handle {
     cursor: move;
-    color: #dedede
+    color: var(--draggable-row-handle-color)
 }
 
 .draggable-row-handle:hover {
@@ -8,8 +8,8 @@
 }
 
 tr.draggable-item-selected {
-    background: #fff;
-    border: 2px solid #666;
+    background: var(--draggable-item-selected-background-color);
+    border: 2px solid var(--draggable-item-selected-border-color);
     box-shadow: 4px 2px 10px -4px rgba(0, 0, 0, 0.55)
 }
 
@@ -28,5 +28,5 @@ tr.draggable-item-selected td:last-child {
 
 .table-stripped tr.draggable-item-hover,
 .table-stripped tr.draggable-item-hover {
-    background: #FEFFF2
+    background: var(--draggable-item-hover-background-color)
 }

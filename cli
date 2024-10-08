@@ -1,7 +1,8 @@
 #!/usr/bin/env php
 <?php
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Contracts\EventDispatcher\Event;
 
 if (php_sapi_name() !== 'cli') {
     echo 'This script run only from the command line'.PHP_EOL;
@@ -10,8 +11,14 @@ if (php_sapi_name() !== 'cli') {
 
 try {
     require __DIR__.'/app/common.php';
-    $container['dispatcher']->dispatch('app.bootstrap', new Event);
-    $container['cli']->run();
+
+    $input = new ArgvInput();
+
+    if (! in_array($input->getFirstArgument(), ['db:migrate', 'db:version'])) {
+        $container['dispatcher']->dispatch(new Event, 'app.bootstrap');
+    }
+
+    $container['cli']->run($input);
 } catch (Exception $e) {
     echo $e->getMessage().PHP_EOL;
     exit(255);

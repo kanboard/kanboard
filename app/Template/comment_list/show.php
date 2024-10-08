@@ -3,11 +3,11 @@
     <?php if (!isset($is_public) || !$is_public): ?>
         <ul>
             <li>
-                <?= $this->url->icon('sort', t('Change sorting'), 'CommentListController', 'toggleSorting', array('task_id' => $task['id'], 'project_id' => $task['project_id']), false, 'js-modal-replace') ?>
+                <?= $this->url->icon('sort', t('Change sorting'), 'CommentListController', 'toggleSorting', array('task_id' => $task['id']), false, 'js-modal-replace') ?>
             </li>
             <?php if ($editable): ?>
                 <li>
-                    <?= $this->modal->medium('paper-plane', t('Send by email'), 'CommentMailController', 'create', array('task_id' => $task['id'], 'project_id' => $task['project_id'])) ?>
+                    <?= $this->modal->medium('paper-plane', t('Send by email'), 'CommentMailController', 'create', array('task_id' => $task['id'])) ?>
                 </li>
             <?php endif ?>
         </ul>
@@ -18,7 +18,6 @@
         <?= $this->render('comment/show', array(
             'comment'   => $comment,
             'task'      => $task,
-            'project'   => $project,
             'editable'  => $editable,
             'is_public' => isset($is_public) && $is_public,
         )) ?>

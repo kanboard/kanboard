@@ -88,6 +88,14 @@ class Table
     private $sumColumns = array();
 
     /**
+     * SQL fetch
+     *
+     * @access private
+     * @var    string
+     */
+    private $sqlFetch = '';
+
+    /**
      * SQL limit
      *
      * @access private
@@ -118,6 +126,14 @@ class Table
      * @var    string
      */
     private $sqlSelect = '';
+
+    /**
+     * SQL TOP clause
+     *
+     * @access private
+     * @var    string
+     */
+    private $sqlTop = '';
 
     /**
      * SQL joins
@@ -578,7 +594,25 @@ class Table
     public function limit($value)
     {
         if (! is_null($value)) {
-            $this->sqlLimit = ' LIMIT '.(int) $value;
+            if ($this->sqlOffset != '') {
+                /* pagination: use LIMIT or FETCH, depending on driver */
+                if ($this->db->getDriver()->useFetch) {
+                    $this->sqlFetch = ' FETCH NEXT '.(int) $value.' ROWS ONLY ';
+                    $this->sqlLimit = '';
+                } else {
+                    $this->sqlFetch = '';
+                    $this->sqlLimit = ' LIMIT '.(int) $value;
+                }
+            } else {
+                /* subset: use LIMIT or TOP, depending on driver */
+                if ($this->db->getDriver()->useTop) {
+                    $this->sqlTop = ' TOP ('.(int) $value.') ';
+                    $this->sqlLimit = '';
+                } else {
+                    $this->sqlTop = '';
+                    $this->sqlLimit = ' LIMIT '.(int) $value;
+                }
+            }
         }
 
         return $this;
@@ -593,8 +627,11 @@ class Table
      */
     public function offset($value)
     {
-        if (! is_null($value)) {
+        if (! is_null($value) && is_int($value) && $value > 0) {
             $this->sqlOffset = ' OFFSET '.(int) $value;
+            if ($this->db->getDriver()->useOffsetRows) {
+                $this->sqlOffset .= ' ROWS ';
+            }
         }
 
         return $this;
@@ -686,14 +723,15 @@ class Table
     public function buildSelectQuery()
     {
         if (empty($this->sqlSelect)) {
-            $this->columns = $this->db->escapeIdentifierList($this->columns);
+            $this->columns = $this->db->escapeIdentifierList($this->columns, $this->name);
             $this->sqlSelect = ($this->distinct ? 'DISTINCT ' : '').(empty($this->columns) ? '*' : implode(', ', $this->columns));
         }
 
         $this->groupBy = $this->db->escapeIdentifierList($this->groupBy);
 
         return trim(sprintf(
-            'SELECT %s FROM %s %s %s %s %s %s %s',
+            'SELECT %s %s FROM %s %s %s %s %s %s %s %s',
+            $this->sqlTop,
             $this->sqlSelect,
             $this->db->escapeIdentifier($this->name),
             implode(' ', $this->joins),
@@ -701,7 +739,8 @@ class Table
             empty($this->groupBy) ? '' : 'GROUP BY '.implode(', ', $this->groupBy),
             $this->sqlOrder,
             $this->sqlLimit,
-            $this->sqlOffset
+            $this->sqlOffset,
+            $this->sqlFetch
         ));
     }
 

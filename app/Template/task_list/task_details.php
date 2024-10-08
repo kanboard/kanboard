@@ -10,7 +10,7 @@
                     $this->text->e($task['category_name']),
                     'TaskModificationController',
                     'edit',
-                    array('task_id' => $task['id'], 'project_id' => $task['project_id']),
+                    array('task_id' => $task['id']),
                     false,
                     'js-modal-medium' . (! empty($task['category_description']) ? ' tooltip' : ''),
                     t('Change category')

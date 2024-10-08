@@ -33,9 +33,9 @@ class TaskFinderModelTest extends Base
         $this->assertEquals('test', $task['reference']);
         $this->assertEquals('Task #1', $task['title']);
         $this->assertEquals('desc', $task['description']);
-        $this->assertEquals(time(), $task['date_creation'], 'Delta', 1);
-        $this->assertEquals(time(), $task['date_modification'], 'Delta', 1);
-        $this->assertEquals(time(), $task['date_moved'], 'Delta', 1);
+        $this->assertEqualsWithDelta(time(), $task['date_creation'], 1, 'Delta');
+        $this->assertEqualsWithDelta(time(), $task['date_modification'], 1, 'Delta');
+        $this->assertEqualsWithDelta(time(), $task['date_moved'], 1, 'Delta');
         $this->assertEquals(0, $task['date_completed']);
         $this->assertEquals(0, $task['date_due']);
         $this->assertEquals(0, $task['date_started']);

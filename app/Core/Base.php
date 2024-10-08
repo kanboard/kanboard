@@ -147,6 +147,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\TaskStatusModel                         $taskStatusModel
  * @property \Kanboard\Model\TaskTagModel                            $taskTagModel
  * @property \Kanboard\Model\TaskMetadataModel                       $taskMetadataModel
+ * @property \Kanboard\Model\ThemeModel                              $themeModel
  * @property \Kanboard\Model\TimezoneModel                           $timezoneModel
  * @property \Kanboard\Model\TransitionModel                         $transitionModel
  * @property \Kanboard\Model\UserModel                               $userModel
@@ -168,6 +169,7 @@ use Pimple\Container;
  * @property \Kanboard\Validator\ColumnRestrictionValidator          $columnRestrictionValidator
  * @property \Kanboard\Validator\ColumnMoveRestrictionValidator      $columnMoveRestrictionValidator
  * @property \Kanboard\Validator\CommentValidator                    $commentValidator
+ * @property \Kanboard\Validator\ConfigValidator                     $configValidator
  * @property \Kanboard\Validator\CurrencyValidator                   $currencyValidator
  * @property \Kanboard\Validator\CustomFilterValidator               $customFilterValidator
  * @property \Kanboard\Validator\ExternalLinkValidator               $externalLinkValidator

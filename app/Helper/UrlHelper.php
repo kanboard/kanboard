@@ -23,17 +23,9 @@ class UrlHelper extends Base
      * @param  string  $file
      * @return string
      */
-    public function doc($label, $file)
+    public function doc($label, $file = '')
     {
-        $version = 'latest';
-
-        if (substr(APP_VERSION, 0, 1) === 'v') {
-            $version = substr(APP_VERSION, 1);
-        } else if (ctype_digit(substr(APP_VERSION, 0, 1))) {
-            $version = APP_VERSION;
-        }
-
-        $url = sprintf(DOCUMENTATION_URL_PATTERN, $version, $file);
+        $url = sprintf(DOCUMENTATION_URL_PATTERN, $file);
         return sprintf('<a href="%s" target="_blank">%s</a>', $url, $label);
     }
 

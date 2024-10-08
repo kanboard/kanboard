@@ -4,6 +4,8 @@
 /* Written by Mohammed Alshehri -- m@dralshehri.com */
 
 ( function( factory ) {
+	"use strict";
+
 	if ( typeof define === "function" && define.amd ) {
 
 		// AMD. Register as an anonymous module.
@@ -13,12 +15,13 @@
 		// Browser globals
 		factory( jQuery.datepicker );
 	}
-}( function( datepicker ) {
+} )( function( datepicker ) {
+"use strict";
 
 datepicker.regional.ar = {
 	closeText: "إغلاق",
-	prevText: "&#x3C;السابق",
-	nextText: "التالي&#x3E;",
+	prevText: "السابق",
+	nextText: "التالي",
 	currentText: "اليوم",
 	monthNames: [ "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
 	"يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر" ],
@@ -36,4 +39,4 @@ datepicker.setDefaults( datepicker.regional.ar );
 
 return datepicker.regional.ar;
 
-} ) );
+} );

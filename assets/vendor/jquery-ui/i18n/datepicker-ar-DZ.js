@@ -4,6 +4,8 @@
 /* Mohamed Amine HADDAD -- zatamine@gmail.com */
 
 ( function( factory ) {
+	"use strict";
+
 	if ( typeof define === "function" && define.amd ) {
 
 		// AMD. Register as an anonymous module.
@@ -13,15 +15,16 @@
 		// Browser globals
 		factory( jQuery.datepicker );
 	}
-}( function( datepicker ) {
+} )( function( datepicker ) {
+"use strict";
 
 datepicker.regional[ "ar-DZ" ] = {
 	closeText: "إغلاق",
-	prevText: "&#x3C;السابق",
-	nextText: "التالي&#x3E;",
+	prevText: "السابق",
+	nextText: "التالي",
 	currentText: "اليوم",
 	monthNames: [ "جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان",
-	"جويلية", "أوت", "سبتمبر","أكتوبر", "نوفمبر", "ديسمبر" ],
+	"جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر" ],
 	monthNamesShort: [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" ],
 	dayNames: [ "الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت" ],
 	dayNamesShort: [ "الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت" ],
@@ -36,4 +39,4 @@ datepicker.setDefaults( datepicker.regional[ "ar-DZ" ] );
 
 return datepicker.regional[ "ar-DZ" ];
 
-} ) );
+} );

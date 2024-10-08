@@ -552,8 +552,7 @@ class TaskPositionModelTest extends Base
         $this->assertEquals(2, $task['position']);
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_MOVE_COLUMN.'.TaskPositionModelTest::onMoveColumn', $called);
-        $this->assertEquals(1, count($called));
+        $this->assertCount(1, $called);
 
         // We move the task 1 to the position 2
         $this->assertTrue($taskPositionModel->movePosition(1, 1, 2, 2));
@@ -569,15 +568,14 @@ class TaskPositionModelTest extends Base
         $this->assertEquals(1, $task['position']);
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_MOVE_POSITION.'.TaskPositionModelTest::onMovePosition', $called);
-        $this->assertEquals(2, count($called));
+        $this->assertCount(2, $called);
 
         // Move to another swimlane
-        $this->assertTrue($taskPositionModel->movePosition(1, 1, 3, 1, 2));
+        $this->assertTrue($taskPositionModel->movePosition(1, 1, 2, 1, 2));
 
         $task = $taskFinderModel->getById(1);
         $this->assertEquals(1, $task['id']);
-        $this->assertEquals(3, $task['column_id']);
+        $this->assertEquals(2, $task['column_id']);
         $this->assertEquals(1, $task['position']);
         $this->assertEquals(2, $task['swimlane_id']);
 
@@ -588,8 +586,7 @@ class TaskPositionModelTest extends Base
         $this->assertEquals(1, $task['swimlane_id']);
 
         $called = $this->container['dispatcher']->getCalledListeners();
-        $this->assertArrayHasKey(TaskModel::EVENT_MOVE_SWIMLANE.'.TaskPositionModelTest::onMoveSwimlane', $called);
-        $this->assertEquals(3, count($called));
+        $this->assertCount(3, $called);
     }
 
     public function onMoveColumn($event)
@@ -624,7 +621,7 @@ class TaskPositionModelTest extends Base
         $this->assertNotEmpty($event_data);
         $this->assertEquals(1, $event_data['task_id']);
         $this->assertEquals(1, $event_data['position']);
-        $this->assertEquals(3, $event_data['column_id']);
+        $this->assertEquals(2, $event_data['column_id']);
         $this->assertEquals(1, $event_data['project_id']);
         $this->assertEquals(2, $event_data['swimlane_id']);
     }

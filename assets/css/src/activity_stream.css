@@ -18,7 +18,7 @@
 }
 
 .activity-content {
-    margin-left: 55px
+    margin-left: 55px;
 }
 
 .activity-title {
@@ -28,7 +28,7 @@
 }
 
 .activity-description {
-    color: var(--color-medium);
+    color: var(--color-light);
     margin-top: 10px
 }
 

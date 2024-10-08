@@ -24,7 +24,7 @@
     });
 
     KB.onClick('.js-modal-confirm', function (e) {
-        KB.modal.open(getLink(e), 'small');
+        KB.modal.open(getLink(e), 'small', true);
     });
 
     KB.onClick('.js-modal-close', function () {

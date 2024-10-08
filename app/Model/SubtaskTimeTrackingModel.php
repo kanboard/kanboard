@@ -29,16 +29,20 @@ class SubtaskTimeTrackingModel extends Base
      */
     public function getTimerQuery($user_id)
     {
-        return sprintf(
-            "SELECT %s FROM %s WHERE %s='%d' AND %s='0' AND %s=%s LIMIT 1",
-            $this->db->escapeIdentifier('start'),
-            $this->db->escapeIdentifier(self::TABLE),
-            $this->db->escapeIdentifier('user_id'),
-            $user_id,
-            $this->db->escapeIdentifier('end'),
-            $this->db->escapeIdentifier('subtask_id'),
-            SubtaskModel::TABLE.'.id'
-        );
+        $sql = $this->db
+                    ->table(self::TABLE)
+                    ->columns('start')
+                    ->eq($this->db->escapeIdentifier('user_id',self::TABLE), $user_id)
+                    ->eq($this->db->escapeIdentifier('end',self::TABLE), 0)
+                    ->eq($this->db->escapeIdentifier('subtask_id',self::TABLE), SubtaskModel::TABLE.'.id')
+                    ->limit(1)
+                    ->buildSelectQuery();
+        // need to interpolate values into the SQL text for use as a subquery
+        // in SubtaskModel::getQuery()
+        $sql = substr_replace($sql, $user_id, strpos($sql, '?'), 1);
+        $sql = substr_replace($sql, 0, strpos($sql, '?'), 1);
+        $sql = substr_replace($sql, SubtaskModel::TABLE.'.id', strpos($sql, '?'), 1);
+        return $sql;
     }
 
     /**
@@ -53,20 +57,20 @@ class SubtaskTimeTrackingModel extends Base
         return $this->db
                     ->table(self::TABLE)
                     ->columns(
-                        self::TABLE.'.id',
-                        self::TABLE.'.subtask_id',
-                        self::TABLE.'.end',
-                        self::TABLE.'.start',
-                        self::TABLE.'.time_spent',
-                        SubtaskModel::TABLE.'.task_id',
-                        SubtaskModel::TABLE.'.title AS subtask_title',
-                        TaskModel::TABLE.'.title AS task_title',
-                        TaskModel::TABLE.'.project_id',
-                        TaskModel::TABLE.'.color_id'
+                        $this->db->escapeIdentifier('id', self::TABLE),
+                        $this->db->escapeIdentifier('subtask_id', self::TABLE),
+                        $this->db->escapeIdentifier('end', self::TABLE),
+                        $this->db->escapeIdentifier('start', self::TABLE),
+                        $this->db->escapeIdentifier('time_spent', self::TABLE),
+                        $this->db->escapeIdentifier('task_id', SubtaskModel::TABLE),
+                        $this->db->escapeIdentifier('title', SubtaskModel::TABLE).' AS subtask_title',
+                        $this->db->escapeIdentifier('title', TaskModel::TABLE).' AS task_title',
+                        $this->db->escapeIdentifier('project_id', TaskModel::TABLE),
+                        $this->db->escapeIdentifier('color_id', TaskModel::TABLE),
                     )
                     ->join(SubtaskModel::TABLE, 'id', 'subtask_id')
                     ->join(TaskModel::TABLE, 'id', 'task_id', SubtaskModel::TABLE)
-                    ->eq(self::TABLE.'.user_id', $user_id);
+                    ->eq($this->db->escapeIdentifier('user_id',self::TABLE), $user_id);
     }
 
     /**
@@ -81,22 +85,22 @@ class SubtaskTimeTrackingModel extends Base
         return $this->db
                     ->table(self::TABLE)
                     ->columns(
-                        self::TABLE.'.id',
-                        self::TABLE.'.subtask_id',
-                        self::TABLE.'.end',
-                        self::TABLE.'.start',
-                        self::TABLE.'.time_spent',
-                        self::TABLE.'.user_id',
-                        SubtaskModel::TABLE.'.task_id',
-                        SubtaskModel::TABLE.'.title AS subtask_title',
-                        TaskModel::TABLE.'.project_id',
-                        UserModel::TABLE.'.username',
-                        UserModel::TABLE.'.name AS user_fullname'
+                        $this->db->escapeIdentifier('id', self::TABLE),
+                        $this->db->escapeIdentifier('subtask_id', self::TABLE),
+                        $this->db->escapeIdentifier('end', self::TABLE),
+                        $this->db->escapeIdentifier('start', self::TABLE),
+                        $this->db->escapeIdentifier('time_spent', self::TABLE),
+                        $this->db->escapeIdentifier('user_id', self::TABLE),
+                        $this->db->escapeIdentifier('task_id', SubtaskModel::TABLE),
+                        $this->db->escapeIdentifier('title', SubtaskModel::TABLE).' AS subtask_title',
+                        $this->db->escapeIdentifier('project_id', TaskModel::TABLE),
+                        $this->db->escapeIdentifier('username', UserModel::TABLE),
+                        $this->db->escapeIdentifier('name', UserModel::TABLE).' AS user_fullname',
                     )
                     ->join(SubtaskModel::TABLE, 'id', 'subtask_id')
                     ->join(TaskModel::TABLE, 'id', 'task_id', SubtaskModel::TABLE)
                     ->join(UserModel::TABLE, 'id', 'user_id', self::TABLE)
-                    ->eq(TaskModel::TABLE.'.id', $task_id);
+                    ->eq($this->db->escapeIdentifier('id',TaskModel::TABLE), $task_id);
     }
 
     /**

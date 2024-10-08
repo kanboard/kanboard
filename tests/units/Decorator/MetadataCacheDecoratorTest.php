@@ -24,7 +24,7 @@ class MetadataCacheDecoratorTest extends Base
      */
     protected $metadataCacheDecorator;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -61,11 +61,11 @@ class MetadataCacheDecoratorTest extends Base
             ->method('set');
 
         $this->metadataModelMock
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('save');
 
         $this->metadataModelMock
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('getAll')
             ->with($this->entityId)
         ;
@@ -100,14 +100,14 @@ class MetadataCacheDecoratorTest extends Base
     public function testGetWithoutCache()
     {
         $this->cacheMock
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('get')
             ->with($this->cachePrefix.$this->entityId)
             ->will($this->returnValue(null))
         ;
 
         $this->cacheMock
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('set')
             ->with(
                 $this->cachePrefix.$this->entityId,

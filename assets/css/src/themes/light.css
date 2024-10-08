@@ -1,0 +1,133 @@
+:root {
+    --body-background-color: #FFF;
+    --header-background-color: #fbfbfb;
+
+    --color-primary: #333;
+    --color-light: #999;
+    --color-lighter: #dedede;
+    --color-dark: #000;
+    --color-medium: #555;
+    --color-error: #b94a48;
+
+    --link-color-primary: #3366CC;
+    --link-color-focus: #DF5353;
+    --link-color-hover: #333;
+
+    --alert-color-default: #c09853;
+    --alert-color-success: #468847;
+    --alert-color-error: #b94a48;
+    --alert-color-info: #3a87ad;
+    --alert-color-normal: #333;
+
+    --alert-background-color-default: #fcf8e3;
+    --alert-background-color-success: #dff0d8;
+    --alert-background-color-error: #f2dede;
+    --alert-background-color-info: #d9edf7;
+    --alert-background-color-normal: #f0f0f0;
+
+    --alert-border-color-default: #fbeed5;
+    --alert-border-color-success: #d6e9c6;
+    --alert-border-color-error: #eed3d7;
+    --alert-border-color-info: #bce8f1;
+    --alert-border-color-normal: #ddd;
+
+    --button-default-color: #333;
+    --button-default-background-color: #f5f5f5;
+    --button-default-border-color: #ddd;
+
+    --button-default-color-focus: #000;
+    --button-default-background-color-focus: #fafafa;
+    --button-default-border-color-focus: #bbb;
+
+    --button-primary-color: #fff;
+    --button-primary-background-color: #4d90fe;
+    --button-primary-border-color: #3079ed;
+
+    --button-primary-color-focus: #fff;
+    --button-primary-background-color-focus: #357ae8;
+    --button-primary-border-color-focus: #3079ed;
+
+    --button-danger-color: #fff;
+    --button-danger-background-color: #d14836;
+    --button-danger-border-color: #b0281a;
+
+    --button-danger-color-focus: #fff;
+    --button-danger-background-color-focus: #c53727;
+    --button-danger-border-color-focus: #b0281a;
+
+    --button-disabled-color: #ccc;
+    --button-disabled-background-color: #f7f7f7;
+    --button-disabled-border-color: #ccc;
+
+    --table-header-background-color: #fbfbfb;
+    --table-nth-background-color: #fefefe;
+    --table-border-color: #eee;
+
+    --avatar-color-letter: #fff;
+
+    --activity-title-color: #000;
+    --activity-title-border-color: #efefef;
+    --activity-event-background-color: #fafafa;
+    --activity-event-hover-color: #fff8dc;
+
+    --user-mention-color: #000;
+
+    --board-task-limit-color: #DF5353;
+
+    --table-list-header-border-color: #e5e5e5;
+    --table-list-header-background-color: #fbfbfb;
+    --table-list-nth-background-color: #fefefe;
+    --table-list-border-color: #e5e5e5;
+    --table-list-row-hover-border-color: #ffeb8e;
+    --table-list-row-background-color: #fff8dc;
+
+    --sidebar-border-color: #efefef;
+
+    --dropdown-background-color: #fff;
+    --dropdown-border-color: #b2b2b2;
+    --dropdown-li-border-color: #f8f8f8;
+
+    --input-addon-background-color: rgba(147, 128, 108, 0.1);
+    --input-addon-color: #666;
+
+    --views-background-color: #fafafa;
+    --views-border-color: #ddd;
+    --views-active-color: #000;
+
+    --input-focus-color: #000;
+    --input-focus-border-color: rgba(82, 168, 236, 0.8);
+    --input-focus-shadow-color: rgba(82, 168, 236, 0.6);
+    --input-background-color: #fff;
+    --input-border-color: #ccc;
+    --input-placeholder-color: #dedede;
+
+    --tooltip-background-color: #fff;
+    --tooltip-border-color: #ddd;
+    --tooltip-shadow-color: #aaa;
+
+    --panel-background-color: #fcfcfc;
+    --panel-border-color: #ddd;
+
+    --draggable-item-selected-background-color: #fff;
+    --draggable-item-selected-border-color: #666;
+    --draggable-item-hover-background-color: #FEFFF2;
+    --draggable-row-handle-color: #dedede;
+    --draggable-placeholder-background-color: #fafafa;
+    --draggable-placeholder-border-color: #000;
+
+    --task-list-icons-color: #999;
+
+    --form-help-color: brown;
+    --form-error-color: #b94a48;
+
+    --comment-title-border-color: #eee;
+    --comment-nth-background-color: #fbfbfb;
+    --comment-highlighted-background-color: #fff8dc;
+    --comment-highlighted-hover-background-color: #fff8dc;
+    --comment-highlighted-border-color: #ffeb8e;
+}
+
+html {
+    color-scheme: light;
+}
+

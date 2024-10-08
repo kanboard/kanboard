@@ -23,13 +23,9 @@ class FormatterHelper extends Helper
     /**
      * Formats a message within a section.
      *
-     * @param string $section The section name
-     * @param string $message The message
-     * @param string $style   The style to apply to the section
-     *
-     * @return string The format section
+     * @return string
      */
-    public function formatSection($section, $message, $style = 'info')
+    public function formatSection(string $section, string $message, string $style = 'info')
     {
         return sprintf('<%s>[%s]</%s> %s', $style, $section, $style, $message);
     }
@@ -38,12 +34,10 @@ class FormatterHelper extends Helper
      * Formats a message as a block of text.
      *
      * @param string|array $messages The message to write in the block
-     * @param string       $style    The style to apply to the whole block
-     * @param bool         $large    Whether to return a large block
      *
-     * @return string The formatter message
+     * @return string
      */
-    public function formatBlock($messages, $style, $large = false)
+    public function formatBlock($messages, string $style, bool $large = false)
     {
         if (!\is_array($messages)) {
             $messages = [$messages];
@@ -54,12 +48,12 @@ class FormatterHelper extends Helper
         foreach ($messages as $message) {
             $message = OutputFormatter::escape($message);
             $lines[] = sprintf($large ? '  %s  ' : ' %s ', $message);
-            $len = max($this->strlen($message) + ($large ? 4 : 2), $len);
+            $len = max(self::width($message) + ($large ? 4 : 2), $len);
         }
 
         $messages = $large ? [str_repeat(' ', $len)] : [];
         for ($i = 0; isset($lines[$i]); ++$i) {
-            $messages[] = $lines[$i].str_repeat(' ', $len - $this->strlen($lines[$i]));
+            $messages[] = $lines[$i].str_repeat(' ', $len - self::width($lines[$i]));
         }
         if ($large) {
             $messages[] = str_repeat(' ', $len);
@@ -75,25 +69,17 @@ class FormatterHelper extends Helper
     /**
      * Truncates a message to the given length.
      *
-     * @param string $message
-     * @param int    $length
-     * @param string $suffix
-     *
      * @return string
      */
-    public function truncate($message, $length, $suffix = '...')
+    public function truncate(string $message, int $length, string $suffix = '...')
     {
-        $computedLength = $length - $this->strlen($suffix);
+        $computedLength = $length - self::width($suffix);
 
-        if ($computedLength > $this->strlen($message)) {
+        if ($computedLength > self::width($message)) {
             return $message;
         }
 
-        if (false === $encoding = mb_detect_encoding($message, null, true)) {
-            return substr($message, 0, $length).$suffix;
-        }
-
-        return mb_substr($message, 0, $length, $encoding).$suffix;
+        return self::substr($message, 0, $length).$suffix;
     }
 
     /**

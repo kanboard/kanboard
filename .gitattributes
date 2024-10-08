@@ -7,17 +7,16 @@ app/constants.php export-subst
 
 docker export-ignore
 Dockerfile export-ignore
-Dockerfile.* export-ignore
 docker-compose.yml export-ignore
 Makefile export-ignore
 README.md export-ignore
+SECURITY.md export-ignore
 Vagrantfile export-ignore
 data/*.sqlite export-ignore
 tests export-ignore
-CONTRIBUTING export-ignore
-app.json export-ignore
 composer.json export-ignore
 composer.lock export-ignore
+ChangeLog export-ignore
 
 assets/css/src export-ignore
 assets/js/components export-ignore

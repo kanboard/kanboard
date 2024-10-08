@@ -2,14 +2,21 @@ name: Integration Tests
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
+
+permissions:
+  packages: read
 
 jobs:
   Sqlite:
     runs-on: ubuntu-latest
-    container: kanboard/tests:latest
+    container:
+      image: ghcr.io/kanboard/tests:latest
+      credentials:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Validate composer.json and composer.lock
       run: composer validate
     - name: Install dependencies
@@ -26,9 +33,37 @@ jobs:
     - name: Integration tests with Sqlite
       run: ./vendor/bin/phpunit -c tests/integration.sqlite.xml
 
+  Sqlite-PHP8:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Refresh APT index
+      run: sudo apt update
+    - name: Install Apache PHP module
+      run: sudo apt install -y libapache2-mod-php
+    - name: Start Apache
+      run: sudo systemctl start apache2
+    - name: Setup document root
+      run: |
+        sudo rm -rf /var/www/html
+        sudo cp -R $GITHUB_WORKSPACE /var/www/html
+        sudo cp tests/configs/config.sqlite.php /var/www/html/config.php
+        sudo chown -R www-data:www-data /var/www/html/data
+        ls -l /var/www/html/
+    - name: Integration tests with Sqlite
+      run: ./vendor/bin/phpunit -c tests/integration.sqlite.xml
+
   Postgres:
     runs-on: ubuntu-latest
-    container: kanboard/tests:latest
+    container:
+      image: ghcr.io/kanboard/tests:latest
+      credentials:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     services:
       postgres:
         image: postgres:9.4
@@ -44,7 +79,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Validate composer.json and composer.lock
       run: composer validate
     - name: Install dependencies
@@ -66,7 +101,11 @@ jobs:
 
   Mysql:
     runs-on: ubuntu-latest
-    container: kanboard/tests:latest
+    container:
+      image: ghcr.io/kanboard/tests:latest
+      credentials:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     services:
       mysql:
         image: mysql:5.7
@@ -83,7 +122,7 @@ jobs:
           --health-timeout 5s
           --health-retries 10
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Validate composer.json and composer.lock
       run: composer validate
     - name: Install dependencies

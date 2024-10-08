@@ -21,9 +21,9 @@ use Symfony\Component\Console\Exception\LogicException;
  */
 class InputArgument
 {
-    const REQUIRED = 1;
-    const OPTIONAL = 2;
-    const IS_ARRAY = 4;
+    public const REQUIRED = 1;
+    public const OPTIONAL = 2;
+    public const IS_ARRAY = 4;
 
     private $name;
     private $mode;
@@ -31,14 +31,14 @@ class InputArgument
     private $description;
 
     /**
-     * @param string               $name        The argument name
-     * @param int|null             $mode        The argument mode: self::REQUIRED or self::OPTIONAL
-     * @param string               $description A description text
-     * @param string|string[]|null $default     The default value (for self::OPTIONAL mode only)
+     * @param string                           $name        The argument name
+     * @param int|null                         $mode        The argument mode: a bit mask of self::REQUIRED, self::OPTIONAL and self::IS_ARRAY
+     * @param string                           $description A description text
+     * @param string|bool|int|float|array|null $default     The default value (for self::OPTIONAL mode only)
      *
      * @throws InvalidArgumentException When argument mode is not valid
      */
-    public function __construct(string $name, int $mode = null, string $description = '', $default = null)
+    public function __construct(string $name, ?int $mode = null, string $description = '', $default = null)
     {
         if (null === $mode) {
             $mode = self::OPTIONAL;
@@ -56,7 +56,7 @@ class InputArgument
     /**
      * Returns the argument name.
      *
-     * @return string The argument name
+     * @return string
      */
     public function getName()
     {
@@ -86,13 +86,13 @@ class InputArgument
     /**
      * Sets the default value.
      *
-     * @param string|string[]|null $default The default value
+     * @param string|bool|int|float|array|null $default
      *
      * @throws LogicException When incorrect default value is given
      */
     public function setDefault($default = null)
     {
-        if (self::REQUIRED === $this->mode && null !== $default) {
+        if ($this->isRequired() && null !== $default) {
             throw new LogicException('Cannot set a default value except for InputArgument::OPTIONAL mode.');
         }
 
@@ -110,7 +110,7 @@ class InputArgument
     /**
      * Returns the default value.
      *
-     * @return string|string[]|null The default value
+     * @return string|bool|int|float|array|null
      */
     public function getDefault()
     {
@@ -120,7 +120,7 @@ class InputArgument
     /**
      * Returns the description text.
      *
-     * @return string The description text
+     * @return string
      */
     public function getDescription()
     {

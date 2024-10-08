@@ -12,6 +12,11 @@ use Kanboard\Core\Base;
  */
 class UserHelper extends Base
 {
+    public function getTheme()
+    {
+        return $this->userSession->getTheme();
+    }
+
     /**
      * Return subtask list toggle value
      *
@@ -95,6 +100,17 @@ class UserHelper extends Base
     public function isAdmin()
     {
         return $this->userSession->isAdmin();
+    }
+
+    /**
+     * Get role
+     *
+     * @access public
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->userSession->getRole();
     }
 
     /**

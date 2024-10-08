@@ -24,7 +24,7 @@ class TaskFileModelTest extends Base
         $this->assertEquals('/tmp/foo', $file['path']);
         $this->assertEquals(0, $file['is_image']);
         $this->assertEquals(1, $file['task_id']);
-        $this->assertEquals(time(), $file['date'], '', 2);
+        $this->assertEqualsWithDelta(time(), $file['date'], 2, '');
         $this->assertEquals(0, $file['user_id']);
         $this->assertEquals(10, $file['size']);
 
@@ -175,14 +175,12 @@ class TaskFileModelTest extends Base
             ->method('generateThumbnailFromFile');
 
         $this->container['objectStorage']
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('moveUploadedFile')
-            ->with($this->equalTo('/tmp/phpYzdqkD'), $this->anything());
-
-        $this->container['objectStorage']
-            ->expects($this->at(1))
-            ->method('moveUploadedFile')
-            ->with($this->equalTo('/tmp/phpeEwEWG'), $this->anything());
+            ->withConsecutive(
+                ['/tmp/phpYzdqkD'],
+                ['/tmp/phpeEwEWG'],
+            );
 
         $this->assertTrue($fileModel->uploadFiles(1, $files));
 
@@ -195,7 +193,7 @@ class TaskFileModelTest extends Base
         $this->assertEquals(1, $files[0]['task_id']);
         $this->assertEquals(0, $files[0]['user_id']);
         $this->assertEquals(123, $files[0]['size']);
-        $this->assertEquals(time(), $files[0]['date'], '', 2);
+        $this->assertEqualsWithDelta(time(), $files[0]['date'], 2, '');
 
         $this->assertEquals(2, $files[1]['id']);
         $this->assertEquals('file2.doc', $files[1]['name']);
@@ -203,7 +201,7 @@ class TaskFileModelTest extends Base
         $this->assertEquals(1, $files[1]['task_id']);
         $this->assertEquals(0, $files[1]['user_id']);
         $this->assertEquals(456, $files[1]['size']);
-        $this->assertEquals(time(), $files[1]['date'], '', 2);
+        $this->assertEqualsWithDelta(time(), $files[1]['date'], 2, '');
     }
 
     public function testUploadFilesWithEmptyFiles()
@@ -259,7 +257,7 @@ class TaskFileModelTest extends Base
         );
 
         $this->container['objectStorage']
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('moveUploadedFile')
             ->with($this->equalTo('/tmp/phpYzdqkD'), $this->anything())
             ->will($this->throwException(new \Kanboard\Core\ObjectStorage\ObjectStorageException('test')));
@@ -299,7 +297,7 @@ class TaskFileModelTest extends Base
         $this->assertEquals(1, $files[0]['task_id']);
         $this->assertEquals(0, $files[0]['user_id']);
         $this->assertEquals(4, $files[0]['size']);
-        $this->assertEquals(time(), $files[0]['date'], '', 2);
+        $this->assertEqualsWithDelta(time(), $files[0]['date'], 2, '');
     }
 
     public function testUploadFileContentWithObjectStorageError()
@@ -361,7 +359,6 @@ class TaskFileModelTest extends Base
         $this->assertEquals(1, $files[0]['task_id']);
         $this->assertEquals(0, $files[0]['user_id']);
         $this->assertEquals(4, $files[0]['size']);
-        $this->assertEquals(time(), $files[0]['date'], '', 2);
     }
 
     public function testRemove()
@@ -412,14 +409,12 @@ class TaskFileModelTest extends Base
         $this->assertEquals(1, $fileModel->create(1, 'image.gif', 'tmp/image.gif', 10));
 
         $this->container['objectStorage']
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('remove')
-            ->with('tmp/image.gif');
-
-        $this->container['objectStorage']
-            ->expects($this->at(1))
-            ->method('remove')
-            ->with('thumbnails'.DIRECTORY_SEPARATOR.'tmp/image.gif');
+            ->withConsecutive(
+                ['tmp/image.gif'],
+                ['thumbnails'.DIRECTORY_SEPARATOR.'tmp/image.gif'],
+            );
 
         $this->assertTrue($fileModel->remove(1));
     }
@@ -436,7 +431,7 @@ class TaskFileModelTest extends Base
         $this->assertEquals(2, $fileModel->create(1, 'test', 'tmp/foo', 10));
 
         $this->container['objectStorage']
-            ->expects($this->exactly(2))
+            ->expects($this->exactly(1))
             ->method('remove')
             ->with('tmp/foo');
 

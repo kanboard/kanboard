@@ -43,6 +43,7 @@ class UserViewController extends BaseController
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user_view/show', array(
             'user'      => $user,
+            'themes'    => $this->themeModel->getThemes(),
             'timezones' => $this->timezoneModel->getTimezones(true),
             'languages' => $this->languageModel->getLanguages(true),
         )));

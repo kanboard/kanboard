@@ -19,7 +19,7 @@ class QueryTest extends \Base
     public static $functions;
     private $client;
 
-    public function setUp()
+    protected function setUp(): void
     {
         parent::setup();
 
@@ -39,7 +39,7 @@ class QueryTest extends \Base
             ->getMock();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         self::$functions = null;

@@ -29,7 +29,7 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
     /**
      * @var bool
      */
-    private $rewindable;
+    private $ignoreFirstRewind = true;
 
     // these 3 properties take part of the performance optimization to avoid redoing the same work in all iterations
     private $rootPath;
@@ -56,21 +56,23 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
     /**
      * Return an instance of SplFileInfo with support for relative paths.
      *
-     * @return SplFileInfo File information
+     * @return SplFileInfo
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         // the logic here avoids redoing the same work in all iterations
 
         if (null === $subPathname = $this->subPath) {
-            $subPathname = $this->subPath = (string) $this->getSubPath();
+            $subPathname = $this->subPath = $this->getSubPath();
         }
         if ('' !== $subPathname) {
             $subPathname .= $this->directorySeparator;
         }
         $subPathname .= $this->getFilename();
+        $basePath = $this->rootPath;
 
-        if ('/' !== $basePath = $this->rootPath) {
+        if ('/' !== $basePath && !str_ends_with($basePath, $this->directorySeparator) && !str_ends_with($basePath, '/')) {
             $basePath .= $this->directorySeparator;
         }
 
@@ -78,10 +80,35 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
     }
 
     /**
-     * @return \RecursiveIterator
+     * @param bool $allowLinks
+     *
+     * @return bool
+     */
+    #[\ReturnTypeWillChange]
+    public function hasChildren($allowLinks = false)
+    {
+        $hasChildren = parent::hasChildren($allowLinks);
+
+        if (!$hasChildren || !$this->ignoreUnreadableDirs) {
+            return $hasChildren;
+        }
+
+        try {
+            parent::getChildren();
+
+            return true;
+        } catch (\UnexpectedValueException $e) {
+            // If directory is unreadable and finder is set to ignore it, skip children
+            return false;
+        }
+    }
+
+    /**
+     * @return \RecursiveDirectoryIterator
      *
      * @throws AccessDeniedException
      */
+    #[\ReturnTypeWillChange]
     public function getChildren()
     {
         try {
@@ -92,53 +119,40 @@ class RecursiveDirectoryIterator extends \RecursiveDirectoryIterator
                 $children->ignoreUnreadableDirs = $this->ignoreUnreadableDirs;
 
                 // performance optimization to avoid redoing the same work in all children
-                $children->rewindable = &$this->rewindable;
                 $children->rootPath = $this->rootPath;
             }
 
             return $children;
         } catch (\UnexpectedValueException $e) {
-            if ($this->ignoreUnreadableDirs) {
-                // If directory is unreadable and finder is set to ignore it, a fake empty content is returned.
-                return new \RecursiveArrayIterator([]);
-            } else {
-                throw new AccessDeniedException($e->getMessage(), $e->getCode(), $e);
-            }
+            throw new AccessDeniedException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
     /**
-     * Do nothing for non rewindable stream.
+     * @return void
      */
+    #[\ReturnTypeWillChange]
+    public function next()
+    {
+        $this->ignoreFirstRewind = false;
+
+        parent::next();
+    }
+
+    /**
+     * @return void
+     */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
-        if (false === $this->isRewindable()) {
+        // some streams like FTP are not rewindable, ignore the first rewind after creation,
+        // as newly created DirectoryIterator does not need to be rewound
+        if ($this->ignoreFirstRewind) {
+            $this->ignoreFirstRewind = false;
+
             return;
         }
 
         parent::rewind();
-    }
-
-    /**
-     * Checks if the stream is rewindable.
-     *
-     * @return bool true when the stream is rewindable, false otherwise
-     */
-    public function isRewindable()
-    {
-        if (null !== $this->rewindable) {
-            return $this->rewindable;
-        }
-
-        if (false !== $stream = @opendir($this->getPath())) {
-            $infos = stream_get_meta_data($stream);
-            closedir($stream);
-
-            if ($infos['seekable']) {
-                return $this->rewindable = true;
-            }
-        }
-
-        return $this->rewindable = false;
     }
 }

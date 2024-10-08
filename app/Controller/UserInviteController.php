@@ -46,6 +46,7 @@ class UserInviteController extends BaseController
             'token'        => $invite['token'],
             'errors'       => $errors,
             'values'       => $values + array('email' => $invite['email']),
+            'themes'       => $this->themeModel->getThemes(),
             'timezones'    => $this->timezoneModel->getTimezones(true),
             'languages'    => $this->languageModel->getLanguages(true),
         )));

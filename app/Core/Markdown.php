@@ -41,9 +41,31 @@ class Markdown extends Parsedown
     {
         $this->isPublicLink = $isPublicLink;
         $this->container = $container;
+        $this->BlockTypes['#'][0] = 'CustomHeader';
         $this->InlineTypes['#'][] = 'TaskLink';
         $this->InlineTypes['@'][] = 'UserLink';
         $this->inlineMarkerList .= '#@';
+    }
+
+    protected function blockCustomHeader($Line)
+    {
+        if (preg_match('!#(\d+)!i', $Line['text'], $matches))
+        {
+            $link = $this->buildTaskLink($matches[1]);
+
+            if (! empty($link)) {
+                return [
+                    'extent' => strlen($matches[0]),
+                    'element' => [
+                        'name' => 'a',
+                        'text' => $matches[0],
+                        'attributes' => ['href' => $link],
+                    ],
+                ];
+            }
+        }
+
+        return $this->blockHeader($Line);
     }
 
     /**

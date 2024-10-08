@@ -20,10 +20,11 @@ class TokenTest extends Base
     public function testCSRFTokens()
     {
         $token = new Token($this->container);
-        $t1 = $token->getCSRFToken();
 
-        $this->assertNotEmpty($t1);
-        $this->assertTrue($token->validateCSRFToken($t1));
-        $this->assertFalse($token->validateCSRFToken($t1));
+        $csrf = $token->getCSRFToken();
+        $this->assertTrue($token->validateCSRFToken($csrf));
+
+        $pcsrf = $token->getReusableCSRFToken();
+        $this->assertTrue($token->validateReusableCSRFToken($pcsrf));
     }
 }

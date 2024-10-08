@@ -5,6 +5,7 @@
 .idea
 .DS_Store
 .htaccess
+.vscode
 *.lock
 *.md
 *.js
@@ -16,8 +17,8 @@ plugins/*
 tests
 ChangeLog
 composer.json
+custom-hooks
 Dockerfile
-Dockerfile.*
 Makefile
 Vagrantfile
 web.config

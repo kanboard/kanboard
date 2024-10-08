@@ -25,7 +25,7 @@ table.table-small {
 }
 
 table.table-striped tr:nth-child(odd) {
-    background: #fefefe
+    background: var(--table-nth-background-color);
 }
 
 @media (max-width: 768px) {
@@ -41,8 +41,8 @@ table.table-striped tr:nth-child(odd) {
 table th {
     text-align: left;
     padding: 0.5em 3px;
-    border: 1px solid #eee;
-    background: #fbfbfb
+    border: 1px solid var(--table-border-color);
+    background-color: var(--table-header-background-color)
 }
 
 table th a {
@@ -56,13 +56,17 @@ table th a:hover {
 }
 
 table td {
-    border: 1px solid #eee;
+    border: 1px solid var(--table-border-color);
     padding: 0.5em 3px;
     vertical-align: top
 }
 
 table td li {
     margin-left: 20px
+}
+
+.task-table a {
+    color: #000;
 }
 
 .column-1 {

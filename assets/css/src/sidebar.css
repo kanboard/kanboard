@@ -60,7 +60,7 @@
 .sidebar>ul li {
     list-style-type: none;
     line-height: 35px;
-    border-bottom: 1px dotted #efefef;
+    border-bottom: 1px dotted var(--sidebar-border-color);
     padding-left: 13px
 }
 
@@ -76,7 +76,7 @@
 
 .sidebar>ul li.active a {
     color: var(--color-primary);
-    font-weight: bold
+    font-weight: 400
 }
 
 .sidebar-icons>ul li {

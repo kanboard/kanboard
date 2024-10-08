@@ -17,7 +17,7 @@
                     <a href="#" class="dropdown-menu dropdown-menu-link-icon"><strong><?= t('Apply action') ?> <i class="fa fa-caret-down"></i></strong></a>
                     <ul>
                         <li>
-                            <a href="<?= $this->url->href('TaskBulkMoveColumnController', 'show', ['project_id' => $project['id']]) ?>" data-list-item-action="modal"><?= t('Move selected tasks to another column') ?></a>
+                            <a href="<?= $this->url->href('TaskBulkMoveColumnController', 'show', ['project_id' => $project['id']]) ?>" data-list-item-action="modal"><?= t('Move selected tasks to another column or swimlane') ?></a>
                         </li>
                         <li>
                             <a href="<?= $this->url->href('TaskBulkChangePropertyController', 'show', ['project_id' => $project['id']]) ?>" data-list-item-action="modal"><?= t('Edit tasks in bulk') ?></a>
@@ -30,9 +30,9 @@
     <div class="table-list-header-menu">
         <?php if (isset($project)): ?>
             <?php if ($this->user->hasSubtaskListActivated()): ?>
-                <?= $this->url->icon('tasks', t('Hide subtasks'), 'TaskListController', 'show', array('project_id' => $project['id'], 'hide_subtasks' => 1)) ?>
+                <?= $this->url->icon('tasks', t('Hide subtasks'), 'TaskListController', 'show', array('project_id' => $project['id'], 'hide_subtasks' => 1, 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())) ?>
             <?php else: ?>
-                <?= $this->url->icon('tasks', t('Show subtasks'), 'TaskListController', 'show', array('project_id' => $project['id'], 'show_subtasks' => 1)) ?>
+                <?= $this->url->icon('tasks', t('Show subtasks'), 'TaskListController', 'show', array('project_id' => $project['id'], 'show_subtasks' => 1, 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())) ?>
             <?php endif ?>
         <?php endif ?>
 

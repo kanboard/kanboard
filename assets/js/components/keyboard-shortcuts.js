@@ -27,7 +27,7 @@ KB.keyboardShortcuts = function () {
 
     KB.onKey('?', function () {
         if (! KB.modal.isOpen()) {
-            KB.modal.open(KB.find('body').data('keyboardShortcutUrl'));
+            KB.modal.open(KB.find('body').data('keyboardShortcutUrl'), '', true);
         }
     });
 
@@ -36,7 +36,7 @@ KB.keyboardShortcuts = function () {
             KB.trigger('modal.close');
             _KB.get("Dropdown").close();
         }
-    });
+    }, true);
 
     KB.onKey('Enter', submitForm, true, true);
     KB.onKey('Enter', submitForm, true, false, true);

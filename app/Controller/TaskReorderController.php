@@ -20,6 +20,9 @@ class TaskReorderController extends BaseController
         $sort = $this->request->getStringParam('sort');
 
         switch ($sort) {
+            case 'id':
+                $this->taskReorderModel->reorderByTaskId($project['id'], $swimlaneID, $columnID, $direction);
+                break;
             case 'priority':
                 $this->taskReorderModel->reorderByPriority($project['id'], $swimlaneID, $columnID, $direction);
                 break;
