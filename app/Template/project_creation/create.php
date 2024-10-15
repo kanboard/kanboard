@@ -40,6 +40,8 @@
             <?= $this->form->checkbox('projectTaskDuplicationModel', t('Tasks'), 1, false) ?>
         </div>
 
+        <?= $this->hook->render('template:project:creation:form', array('values' => $values, 'errors' => $errors)) ?>
+
         <?= $this->modal->submitButtons() ?>
     </form>
     <?php if ($is_private): ?>
