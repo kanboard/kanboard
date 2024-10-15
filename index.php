@@ -8,5 +8,5 @@ try {
     $runner = new Runner($container);
     $runner->execute();
 } catch (Exception $e) {
-    echo 'Internal Error: '.$e->getMessage();
+    echo htmlspecialchars('Internal Error: '.$e->getMessage(), ENT_QUOTES, 'UTF-8', false);
 }

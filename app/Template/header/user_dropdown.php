@@ -34,7 +34,7 @@
         </li>
         <?php if (! DISABLE_LOGOUT): ?>
             <li>
-                <?= $this->url->icon('sign-out', t('Logout'), 'AuthController', 'logout') ?>
+                <?= $this->url->icon('sign-out', t('Logout'), 'AuthController', 'logout', [], true) ?>
             </li>
         <?php endif ?>
     </ul>
