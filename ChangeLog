@@ -1,3 +1,15 @@
+Version 1.2.41 (October 25, 2024)
+---------------------------------
+
+* feat: add new plugin hooks in project forms
+* feat: add option to add BOM at the beginning of CSV files (required for Microsoft Excel)
+* feat: validate app config form values
+* feat: add cancel button on 2FA code validation screen
+* fix: add CSRF check to the logout endpoint
+* fix: add HTML escaping when displaying exception message
+* fix: add URL validation for external task links
+* fix: correct broken migration logic for Sqlite
+
 Version 1.2.40 (September 25, 2024)
 -----------------------------------
 
