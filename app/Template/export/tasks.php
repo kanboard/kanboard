@@ -7,6 +7,7 @@
     <?= $this->form->hidden('project_id', $values) ?>
     <?= $this->form->date(t('Start date'), 'from', $values) ?>
     <?= $this->form->date(t('End date'), 'to', $values) ?>
+    <?= $this->form->checkbox('bom', t('Add a BOM at the beginning of the file (required for Microsoft Excel)'), 1, isset($values['bom']) && $values['bom'] == 1) ?>
 
     <div class="form-actions">
         <button type="submit" class="btn btn-blue js-form-export"><?= t('Export') ?></button>
