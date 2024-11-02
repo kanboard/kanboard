@@ -7,7 +7,6 @@ use Composer\Autoload\ClassLoader;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
 use Symfony\Component\Stopwatch\Stopwatch;
-use Kanboard\Core\Log\Logger;
 use Kanboard\Core\Session\FlashMessage;
 use Kanboard\ServiceProvider\ActionProvider;
 
@@ -95,25 +94,25 @@ abstract class Base extends PHPUnit\Framework\TestCase
         $this->container['httpClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Http\Client')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync'))
+            ->onlyMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync'))
             ->getMock();
 
         $this->container['emailClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Mail\Client')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('send'))
+            ->onlyMethods(array('send'))
             ->getMock();
 
         $this->container['userNotificationTypeModel'] = $this
             ->getMockBuilder('\Kanboard\Model\UserNotificationTypeModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('getType', 'getSelectedTypes'))
+            ->onlyMethods(array('getType', 'getSelectedTypes'))
             ->getMock();
 
         $this->container['objectStorage'] = $this
             ->getMockBuilder('\Kanboard\Core\ObjectStorage\FileStorage')
-            ->setConstructorArgs(array($this->container))
-            ->setMethods(array('put', 'moveFile', 'remove', 'moveUploadedFile'))
+            ->setConstructorArgs([sys_get_temp_dir()])
+            ->onlyMethods(array('put', 'moveFile', 'remove', 'moveUploadedFile'))
             ->getMock();
 
         $this->container->register(new ActionProvider);
