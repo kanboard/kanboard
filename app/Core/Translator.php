@@ -161,19 +161,28 @@ class Translator
      *
      * @static
      * @access public
-     * @param  string   $language   Locale code: fr_FR
-     * @param  string   $path       Locale folder
+     * @param  string   $languageCode   Locale code: fr_FR
+     * @param  string   $localeDir      Locale folder
      */
-    public static function load($language, $path = '')
+    public static function load($languageCode, $localeDir = '')
     {
-        if ($path === '') {
-            $path = self::getDefaultFolder();
+        if (! preg_match('/^[a-z]{2}(_[A-Z]{2}(_[a-zA-Z]{2,4})?)?$/', $languageCode)) {
+            return;
         }
 
-        $filename = implode(DIRECTORY_SEPARATOR, array($path, $language, 'translations.php'));
+        if ($localeDir === '') {
+            $localeDir = self::getDefaultFolder();
+        }
 
-        if (file_exists($filename)) {
-            self::$locales = array_merge(self::$locales, require($filename));
+        $baseDir = realpath($localeDir);
+        if ($baseDir === false) {
+            return;
+        }
+
+        $realFilePath = realpath(implode(DIRECTORY_SEPARATOR, [$localeDir, $languageCode, 'translations.php']));
+
+        if ($realFilePath !== false && strpos($realFilePath, $baseDir) === 0) {
+            self::$locales = array_merge(self::$locales, require($realFilePath));
         }
     }
 
