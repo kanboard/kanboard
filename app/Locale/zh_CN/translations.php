@@ -525,6 +525,7 @@ return array(
     'INR - Indian Rupee' => '印度卢比',
     'JPY - Japanese Yen' => '日元',
     'NZD - New Zealand Dollar' => '新西兰元',
+    // 'PEN - Peruvian Sol' => '',
     'RSD - Serbian dinar' => '第纳尔',
     'CNY - Chinese Yuan' => '人民币',
     'USD - US Dollar' => '美元',
