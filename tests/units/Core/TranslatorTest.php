@@ -42,4 +42,17 @@ class TranslatorTest extends Base
         $this->assertSame('&lt;b&gt;', $translator->translate('<b>'));
         $this->assertSame('<b>', $translator->translateNoEscaping('<b>'));
     }
+
+    public function testLoadingAllLanguages()
+    {
+        $languageCodes = array_map(function ($value) {
+            return basename($value);
+        }, glob(Translator::getDefaultFolder().DIRECTORY_SEPARATOR.'*', GLOB_ONLYDIR));
+
+        foreach ($languageCodes as $languageCode) {
+            $this->assertTrue(Translator::load($languageCode), "Unable to load translation for $languageCode");
+        }
+
+        Translator::unload();
+    }
 }

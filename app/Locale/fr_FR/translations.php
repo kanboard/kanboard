@@ -525,6 +525,7 @@ return array(
     'INR - Indian Rupee' => 'INR - Roupie indienne',
     'JPY - Japanese Yen' => 'JPY - Yen',
     'NZD - New Zealand Dollar' => 'NZD - Dollar néo-zélandais',
+    'PEN - Peruvian Sol' => 'PEN - Sol péruvien',
     'RSD - Serbian dinar' => 'RSD - Dinar serbe',
     'CNY - Chinese Yuan' => 'CNY - Yuan (Chine)',
     'USD - US Dollar' => 'USD - Dollar américain',
@@ -1462,5 +1463,6 @@ return array(
     'Invalid Mail transport' => 'Transport de courrier invalide',
     'Color invalid' => 'Couleur invalide',
     'This value must be greater or equal to %d' => 'Cette valeur doit être supérieure ou égale à %d',
+    'Add a BOM at the beginning of the file (required for Microsoft Excel)' => 'Ajouter un BOM au début du fichier (requis pour Microsoft Excel)',
     'The total maximum allowed attachments size is %sB.' => 'La taille maximale totale des pièces jointes autorisée %so.',
 );

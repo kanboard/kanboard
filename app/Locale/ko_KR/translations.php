@@ -525,6 +525,7 @@ return array(
     'INR - Indian Rupee' => 'INR - 인도 루피',
     'JPY - Japanese Yen' => 'JPY - 일본 엔',
     'NZD - New Zealand Dollar' => 'NZD - 뉴질랜드 달러',
+    // 'PEN - Peruvian Sol' => '',
     'RSD - Serbian dinar' => 'RSD - 세르비아 디나르',
     // 'CNY - Chinese Yuan' => '',
     'USD - US Dollar' => 'USD - 미국 달러',
@@ -1462,4 +1463,5 @@ return array(
     // 'Invalid Mail transport' => '',
     // 'Color invalid' => '',
     // 'This value must be greater or equal to %d' => '',
+    // 'Add a BOM at the beginning of the file (required for Microsoft Excel)' => '',
 );
