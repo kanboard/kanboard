@@ -163,11 +163,12 @@ class Translator
      * @access public
      * @param  string   $languageCode   Locale code: fr_FR
      * @param  string   $localeDir      Locale folder
+     * @return boolean  True if the translation file has been loaded
      */
     public static function load($languageCode, $localeDir = '')
     {
-        if (! preg_match('/^[a-z]{2}(_[A-Z]{2}(_[a-zA-Z]{2,4})?)?$/', $languageCode)) {
-            return;
+        if (! preg_match('/^[a-z]{2}(_[a-zA-Z]{2,4}(_[a-zA-Z]{2,4})?)?$/', $languageCode)) {
+            return false;
         }
 
         if ($localeDir === '') {
@@ -176,14 +177,17 @@ class Translator
 
         $baseDir = realpath($localeDir);
         if ($baseDir === false) {
-            return;
+            return false;
         }
 
         $realFilePath = realpath(implode(DIRECTORY_SEPARATOR, [$localeDir, $languageCode, 'translations.php']));
 
         if ($realFilePath !== false && strpos($realFilePath, $baseDir) === 0) {
             self::$locales = array_merge(self::$locales, require($realFilePath));
+            return true;
         }
+
+        return false;
     }
 
     /**
