@@ -36,7 +36,7 @@
         "symfony/finder": "5.4.45",
         "symfony/service-contracts": "2.5.3",
         "symfony/string": "^5.1",
-        "symfony/deprecation-contracts": "2.5.3"
+        "symfony/deprecation-contracts": "2.5.4"
     },
     "autoload": {
         "classmap": [
