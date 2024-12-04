@@ -1,5 +1,13 @@
 <?php if (! empty($images)): ?>
     <div class="file-thumbnails">
+        <?php  
+        if (! empty($images)) {  
+            foreach ($images as $key => $row) {  
+                $dates[$key] = $row['date'];  
+            }  
+            array_multisort($dates, SORT_DESC, $images);  
+        }   
+        ?>
         <?php foreach ($images as $file): ?>
             <div class="file-thumbnail">
                 <?= $this->app->component('image-slideshow', array(
