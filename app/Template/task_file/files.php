@@ -6,6 +6,12 @@
             <th class="column-15"><?= t('Creator') ?></th>
             <th class="column-10"><?= t('Date') ?></th>
         </tr>
+        <?php  
+        foreach ($files as $key => $row) {  
+            $dates[$key] = $row['date'];  
+        }  
+        array_multisort($dates, SORT_DESC, $files);  
+        ?>        
         <?php foreach ($files as $file): ?>
             <tr>
                 <td>
