@@ -1,3 +1,17 @@
+Version 1.2.43 (December 18, 2024)
+----------------------------------
+
+* fix: verify the session hasn't expired before returning data
+* fix: avoid PHP 8.4 deprecation notices in third-party libraries
+* fix: avoid Composer warnings regarding PSR compatibility
+* feat(locale): add missing Brazilian Portuguese translations
+* ci: run GitHub Actions tests with `ubuntu-24.04`
+* chore: don't `export-ignore` the ChangeLog
+* build(deps): bump `symfony/service-contracts` from `2.5.3` to `2.5.4`
+* build(deps): bump `symfony/event-dispatcher-contracts` from `2.5.3` to `2.5.4`
+* build(deps): bump `symfony/deprecation-contracts` from `2.5.3` to `2.5.4`
+* build(deps): bump `alpine` from `3.20` to `3.21`
+
 Version 1.2.42 (November 10, 2024)
 ----------------------------------
 
