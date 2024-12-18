@@ -8,7 +8,7 @@ permissions:
   packages: read
 
 jobs:
-  Sqlite:
+  Sqlite-PHP7:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/kanboard/tests:latest
@@ -34,7 +34,7 @@ jobs:
       run: ./vendor/bin/phpunit -c tests/integration.sqlite.xml
 
   Sqlite-PHP8:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
     - name: Validate composer.json and composer.lock
@@ -57,13 +57,8 @@ jobs:
     - name: Integration tests with Sqlite
       run: ./vendor/bin/phpunit -c tests/integration.sqlite.xml
 
-  Postgres:
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/kanboard/tests:latest
-      credentials:
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+  Postgres-PHP8:
+    runs-on: ubuntu-24.04
     services:
       postgres:
         image: postgres:9.4
@@ -84,28 +79,34 @@ jobs:
       run: composer validate
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Install Apache PHP module
+      run: |
+        sudo apt update
+        sudo apt install -y libapache2-mod-php
     - name: Start Apache
-      run: /etc/init.d/apache2 start
+      run: sudo systemctl start apache2
     - name: Link document root
       run: |
-        rm -rf /var/www/html
-        ln -s $GITHUB_WORKSPACE /var/www/html
-        cp tests/configs/config.postgres.php /var/www/html/config.php
-        chown -R www-data:www-data /var/www/html/data
+        sudo rm -rf /var/www/html
+        sudo cp -R $GITHUB_WORKSPACE /var/www/html
+        sudo cp tests/configs/config.postgres.php /var/www/html/config.php
+        sudo chown -R www-data:www-data /var/www/html/data
         ls -l /var/www/html/
     - name: Integration tests with Postgres
       run: ./vendor/bin/phpunit -c tests/integration.postgres.xml
       env:
-        DB_HOSTNAME: postgres
+        DB_HOSTNAME: 127.0.0.1
         DB_PORT: ${{ job.services.postgres.ports[5432] }}
+    - name: Archive Error Logs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: apache-error-logs-postgres
+        path: /var/log/apache2/error.log
+        retention-days: 2
 
-  Mysql:
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/kanboard/tests:latest
-      credentials:
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+  Mysql-PHP8:
+    runs-on: ubuntu-24.04
     services:
       mysql:
         image: mysql:5.7
@@ -127,17 +128,28 @@ jobs:
       run: composer validate
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Install Apache PHP module
+      run: |
+        sudo apt update
+        sudo apt install -y libapache2-mod-php
     - name: Start Apache
-      run: /etc/init.d/apache2 start
+      run: sudo systemctl start apache2
     - name: Link document root
       run: |
-        rm -rf /var/www/html
-        ln -s $GITHUB_WORKSPACE /var/www/html
-        cp tests/configs/config.mysql.php /var/www/html/config.php
-        chown -R www-data:www-data /var/www/html/data
+        sudo rm -rf /var/www/html
+        sudo cp -R $GITHUB_WORKSPACE /var/www/html
+        sudo cp tests/configs/config.mysql.php /var/www/html/config.php
+        sudo chown -R www-data:www-data /var/www/html/data
         ls -l /var/www/html/
     - name: Integration tests with Mysql
       run: ./vendor/bin/phpunit -c tests/integration.mysql.xml
       env:
-        DB_HOSTNAME: mysql
+        DB_HOSTNAME: 127.0.0.1
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
+    - name: Archive Error Logs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: apache-error-logs-mysql
+        path: /var/log/apache2/error.log
+        retention-days: 2

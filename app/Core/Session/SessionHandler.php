@@ -51,7 +51,10 @@ class SessionHandler implements SessionHandlerInterface
     #[\ReturnTypeWillChange]
     public function read($sessionID)
     {
-        $result = $this->db->table(self::TABLE)->eq('id', $sessionID)->findOneColumn('data');
+        $result = $this->db->table(self::TABLE)->eq('id', $sessionID)->gt('expire_at', time())->findOneColumn('data');
+
+        // Note: Returning false display an error message and write() is never called
+        // preventing new sessions to be created when calling session_start()
         return $result ?: '';
     }
 

@@ -1,3 +1,12 @@
+Version 1.2.42 (November 10, 2024)
+----------------------------------
+
+* fix: validate translation filename before loading locales
+* fix: avoid path traversal in `FileStorage`
+* feat: add Peruvian Sol to the list of currencies
+* build(deps): bump `symfony/finder` from `5.4.43` to `5.4.45`
+* build(deps-dev): bump `symfony/stopwatch` from `5.4.40` to `5.4.45`
+
 Version 1.2.41 (October 25, 2024)
 ---------------------------------
 
