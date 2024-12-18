@@ -131,11 +131,11 @@ class Server
     public function __construct(
         $request = '',
         array $server = array(),
-        ResponseBuilder $responseBuilder = null,
-        RequestParser $requestParser = null,
-        BatchRequestParser $batchRequestParser = null,
-        ProcedureHandler $procedureHandler = null,
-        MiddlewareHandler $middlewareHandler = null
+        ?ResponseBuilder $responseBuilder = null,
+        ?RequestParser $requestParser = null,
+        ?BatchRequestParser $batchRequestParser = null,
+        ?ProcedureHandler $procedureHandler = null,
+        ?MiddlewareHandler $middlewareHandler = null
     ) {
         if ($request !== '') {
             $this->payload = json_decode($request, true);
@@ -330,7 +330,7 @@ class Server
 
     /**
      * Handle exceptions
-     * 
+     *
      * @access protected
      * @param  Exception $e
      * @return string

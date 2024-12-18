@@ -3,7 +3,7 @@
         'name' => 'kanboard/kanboard',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'e87f8958acab59fc8cddc100cdf4a7b05a07f4e0',
+        'reference' => '39dcf77d19cfc9a443c20d13ea17fd5f93b4a8fb',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -28,19 +28,10 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'erusev/parsedown' => array(
-            'pretty_version' => '1.7.4',
-            'version' => '1.7.4.0',
-            'reference' => 'cb17b6477dfff935958ba01325f2e8a2bfa6dab3',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../erusev/parsedown',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'kanboard/kanboard' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'e87f8958acab59fc8cddc100cdf4a7b05a07f4e0',
+            'reference' => '39dcf77d19cfc9a443c20d13ea17fd5f93b4a8fb',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -72,12 +63,6 @@
             'install_path' => __DIR__ . '/../psr/event-dispatcher',
             'aliases' => array(),
             'dev_requirement' => false,
-        ),
-        'psr/event-dispatcher-implementation' => array(
-            'dev_requirement' => false,
-            'provided' => array(
-                0 => '1.0',
-            ),
         ),
         'psr/log' => array(
             'pretty_version' => '1.1.4',
@@ -112,15 +97,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'symfony/event-dispatcher' => array(
-            'pretty_version' => 'v5.4.21',
-            'version' => '5.4.21.0',
-            'reference' => 'f0ae1383a8285dfc6752b8d8602790953118ff5a',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../symfony/event-dispatcher',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'symfony/event-dispatcher-contracts' => array(
             'pretty_version' => 'v2.5.4',
             'version' => '2.5.4.0',
@@ -129,12 +105,6 @@
             'install_path' => __DIR__ . '/../symfony/event-dispatcher-contracts',
             'aliases' => array(),
             'dev_requirement' => false,
-        ),
-        'symfony/event-dispatcher-implementation' => array(
-            'dev_requirement' => false,
-            'provided' => array(
-                0 => '2.0',
-            ),
         ),
         'symfony/finder' => array(
             'pretty_version' => 'v5.4.45',

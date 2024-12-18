@@ -109,7 +109,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         ),
         'Symfony\\Component\\EventDispatcher\\' => 
         array (
-            0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
+            0 => __DIR__ . '/../..' . '/libs/event-dispatcher',
         ),
         'Symfony\\Component\\Console\\' => 
         array (
@@ -168,15 +168,15 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
             ),
-            'PicoDb\\' => 
+            'PicoDb' => 
             array (
                 0 => __DIR__ . '/../..' . '/libs/picodb/lib',
             ),
             'Parsedown' => 
             array (
-                0 => __DIR__ . '/..' . '/erusev/parsedown',
+                0 => __DIR__ . '/../..' . '/libs/erusev/parsedown',
             ),
-            'PHPQRCode\\' => 
+            'PHPQRCode' => 
             array (
                 0 => __DIR__ . '/../..' . '/libs/phpqrcode/lib',
             ),
@@ -190,7 +190,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         ),
         'J' => 
         array (
-            'JsonRPC\\' => 
+            'JsonRPC' => 
             array (
                 0 => __DIR__ . '/../..' . '/libs/jsonrpc/src',
             ),
@@ -921,7 +921,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'PHPQRCode\\QRsplit' => __DIR__ . '/../..' . '/libs/phpqrcode/lib/PHPQRCode/QRsplit.php',
         'PHPQRCode\\QRstr' => __DIR__ . '/../..' . '/libs/phpqrcode/lib/PHPQRCode/QRstr.php',
         'PHPQRCode\\QRtools' => __DIR__ . '/../..' . '/libs/phpqrcode/lib/PHPQRCode/QRtools.php',
-        'Parsedown' => __DIR__ . '/..' . '/erusev/parsedown/Parsedown.php',
+        'Parsedown' => __DIR__ . '/../..' . '/libs/erusev/parsedown/Parsedown.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'PicoDb\\Builder\\BaseBuilder' => __DIR__ . '/../..' . '/libs/picodb/lib/PicoDb/Builder/BaseBuilder.php',
         'PicoDb\\Builder\\ConditionBuilder' => __DIR__ . '/../..' . '/libs/picodb/lib/PicoDb/Builder/ConditionBuilder.php',
@@ -1114,17 +1114,17 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Symfony\\Component\\Console\\Tester\\CommandTester' => __DIR__ . '/..' . '/symfony/console/Tester/CommandTester.php',
         'Symfony\\Component\\Console\\Tester\\Constraint\\CommandIsSuccessful' => __DIR__ . '/..' . '/symfony/console/Tester/Constraint/CommandIsSuccessful.php',
         'Symfony\\Component\\Console\\Tester\\TesterTrait' => __DIR__ . '/..' . '/symfony/console/Tester/TesterTrait.php',
-        'Symfony\\Component\\EventDispatcher\\Attribute\\AsEventListener' => __DIR__ . '/..' . '/symfony/event-dispatcher/Attribute/AsEventListener.php',
-        'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php',
-        'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/WrappedListener.php',
-        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\AddEventAliasesPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/AddEventAliasesPass.php',
-        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\RegisterListenersPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
-        'Symfony\\Component\\EventDispatcher\\EventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcher.php',
-        'Symfony\\Component\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcherInterface.php',
-        'Symfony\\Component\\EventDispatcher\\EventSubscriberInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventSubscriberInterface.php',
-        'Symfony\\Component\\EventDispatcher\\GenericEvent' => __DIR__ . '/..' . '/symfony/event-dispatcher/GenericEvent.php',
-        'Symfony\\Component\\EventDispatcher\\ImmutableEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/ImmutableEventDispatcher.php',
-        'Symfony\\Component\\EventDispatcher\\LegacyEventDispatcherProxy' => __DIR__ . '/..' . '/symfony/event-dispatcher/LegacyEventDispatcherProxy.php',
+        'Symfony\\Component\\EventDispatcher\\Attribute\\AsEventListener' => __DIR__ . '/../..' . '/libs/event-dispatcher/Attribute/AsEventListener.php',
+        'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcher' => __DIR__ . '/../..' . '/libs/event-dispatcher/Debug/TraceableEventDispatcher.php',
+        'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => __DIR__ . '/../..' . '/libs/event-dispatcher/Debug/WrappedListener.php',
+        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\AddEventAliasesPass' => __DIR__ . '/../..' . '/libs/event-dispatcher/DependencyInjection/AddEventAliasesPass.php',
+        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\RegisterListenersPass' => __DIR__ . '/../..' . '/libs/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
+        'Symfony\\Component\\EventDispatcher\\EventDispatcher' => __DIR__ . '/../..' . '/libs/event-dispatcher/EventDispatcher.php',
+        'Symfony\\Component\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/../..' . '/libs/event-dispatcher/EventDispatcherInterface.php',
+        'Symfony\\Component\\EventDispatcher\\EventSubscriberInterface' => __DIR__ . '/../..' . '/libs/event-dispatcher/EventSubscriberInterface.php',
+        'Symfony\\Component\\EventDispatcher\\GenericEvent' => __DIR__ . '/../..' . '/libs/event-dispatcher/GenericEvent.php',
+        'Symfony\\Component\\EventDispatcher\\ImmutableEventDispatcher' => __DIR__ . '/../..' . '/libs/event-dispatcher/ImmutableEventDispatcher.php',
+        'Symfony\\Component\\EventDispatcher\\LegacyEventDispatcherProxy' => __DIR__ . '/../..' . '/libs/event-dispatcher/LegacyEventDispatcherProxy.php',
         'Symfony\\Component\\Finder\\Comparator\\Comparator' => __DIR__ . '/..' . '/symfony/finder/Comparator/Comparator.php',
         'Symfony\\Component\\Finder\\Comparator\\DateComparator' => __DIR__ . '/..' . '/symfony/finder/Comparator/DateComparator.php',
         'Symfony\\Component\\Finder\\Comparator\\NumberComparator' => __DIR__ . '/..' . '/symfony/finder/Comparator/NumberComparator.php',
