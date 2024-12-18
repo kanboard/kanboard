@@ -46,15 +46,15 @@
             "Kanboard\\": "app/",
             "MatthiasMullie\\Minify\\": "libs/minify/src/",
             "MatthiasMullie\\PathConverter\\": "libs/path-converter/src/",
-            "Gregwar\\": "libs",
-            "Eluceo\\iCal\\": "libs/ical"
+            "Gregwar\\Captcha\\": "libs/Captcha",
+            "Eluceo\\iCal\\": "libs/ical",
+            "SimpleQueue\\": "libs/SimpleQueue",
+            "SimpleValidator\\": "libs/SimpleValidator"
         },
         "psr-0": {
-            "JsonRPC": "libs/jsonrpc/src",
-            "PHPQRCode": "libs/phpqrcode/lib",
-            "PicoDb": "libs/picodb/lib",
-            "SimpleQueue": "libs",
-            "SimpleValidator": "libs"
+            "JsonRPC\\": "libs/jsonrpc/src",
+            "PHPQRCode\\": "libs/phpqrcode/lib",
+            "PicoDb\\": "libs/picodb/lib"
         },
         "files": [
             "app/functions.php",

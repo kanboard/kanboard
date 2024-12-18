@@ -34,6 +34,8 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\Console\\' => 26,
+            'SimpleValidator\\' => 16,
+            'SimpleQueue\\' => 12,
         ),
         'P' => 
         array (
@@ -52,7 +54,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         ),
         'G' => 
         array (
-            'Gregwar\\' => 8,
+            'Gregwar\\Captcha\\' => 16,
         ),
         'E' => 
         array (
@@ -113,6 +115,14 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'SimpleValidator\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/libs/SimpleValidator',
+        ),
+        'SimpleQueue\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/libs/SimpleQueue',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
@@ -137,9 +147,9 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
-        'Gregwar\\' => 
+        'Gregwar\\Captcha\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/libs',
+            0 => __DIR__ . '/../..' . '/libs/Captcha',
         ),
         'Eluceo\\iCal\\' => 
         array (
@@ -152,24 +162,13 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
     );
 
     public static $prefixesPsr0 = array (
-        'S' => 
-        array (
-            'SimpleValidator' => 
-            array (
-                0 => __DIR__ . '/../..' . '/libs',
-            ),
-            'SimpleQueue' => 
-            array (
-                0 => __DIR__ . '/../..' . '/libs',
-            ),
-        ),
         'P' => 
         array (
             'Pimple' => 
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
             ),
-            'PicoDb' => 
+            'PicoDb\\' => 
             array (
                 0 => __DIR__ . '/../..' . '/libs/picodb/lib',
             ),
@@ -177,7 +176,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
             array (
                 0 => __DIR__ . '/..' . '/erusev/parsedown',
             ),
-            'PHPQRCode' => 
+            'PHPQRCode\\' => 
             array (
                 0 => __DIR__ . '/../..' . '/libs/phpqrcode/lib',
             ),
@@ -191,7 +190,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         ),
         'J' => 
         array (
-            'JsonRPC' => 
+            'JsonRPC\\' => 
             array (
                 0 => __DIR__ . '/../..' . '/libs/jsonrpc/src',
             ),
