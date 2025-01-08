@@ -49,6 +49,21 @@ class ConfigController extends BaseController
                 break;
         }
 
+        list($valid, $errors) = $this->configValidator->validate($values);
+
+        if (!$valid) {
+            switch ($redirect) {
+                case 'email':
+                    return $this->email($values, $errors);
+                case 'project':
+                    return $this->project($values, $errors);
+                case 'board':
+                    return $this->board($values, $errors);
+                default:
+                    return $this->application($values, $errors);
+            }
+        }
+
         if ($this->configModel->save($values)) {
             $this->languageModel->loadCurrentLanguage();
             $this->flash->success(t('Settings saved successfully.'));
@@ -64,7 +79,7 @@ class ConfigController extends BaseController
      *
      * @access public
      */
-    public function application()
+    public function application(array $values = [], array $errors = [])
     {
         $this->response->html($this->helper->layout->config('config/application', array(
             'mail_transports' => $this->emailClient->getAvailableTransports(),
@@ -73,6 +88,8 @@ class ConfigController extends BaseController
             'date_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getDateFormats(true)),
             'time_formats' => $this->dateParser->getAvailableFormats($this->dateParser->getTimeFormats()),
             'title' => t('Settings').' &gt; '.t('Application settings'),
+            'errors' => $errors,
+            'values' => $values,
         )));
     }
 
@@ -81,9 +98,11 @@ class ConfigController extends BaseController
      *
      * @access public
      */
-    public function email()
+    public function email(array $values = [], array $errors = [])
     {
-        $values = $this->configModel->getAll();
+        if (empty($values)) {
+            $values = $this->configModel->getAll();
+        }
 
         if (empty($values['mail_transport'])) {
             $values['mail_transport'] = MAIL_TRANSPORT;
@@ -93,6 +112,7 @@ class ConfigController extends BaseController
             'values' => $values,
             'mail_transports' => $this->emailClient->getAvailableTransports(),
             'title' => t('Settings').' &gt; '.t('Email settings'),
+            'errors' => $errors,
         )));
     }
 
@@ -101,12 +121,14 @@ class ConfigController extends BaseController
      *
      * @access public
      */
-    public function project()
+    public function project(array $values = [], array $errors = [])
     {
         $this->response->html($this->helper->layout->config('config/project', array(
             'colors' => $this->colorModel->getList(),
             'default_columns' => implode(', ', $this->boardModel->getDefaultColumns()),
             'title' => t('Settings').' &gt; '.t('Project settings'),
+            'errors' => $errors,
+            'values' => $values,
         )));
     }
 
@@ -115,10 +137,12 @@ class ConfigController extends BaseController
      *
      * @access public
      */
-    public function board()
+    public function board(array $values = [], array $errors = [])
     {
         $this->response->html($this->helper->layout->config('config/board', array(
             'title' => t('Settings').' &gt; '.t('Board settings'),
+            'errors' => $errors,
+            'values' => $values,
         )));
     }
 

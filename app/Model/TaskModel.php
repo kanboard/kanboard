@@ -143,4 +143,14 @@ class TaskModel extends Base
 
         return round(($position * 100) / count($columns), 1);
     }
+
+    public function getOpenTaskCountBySwimlaneAndColumn($project_id)
+    {
+        return $this->db->table(self::TABLE)
+            ->columns('swimlane_id', 'column_id', 'COUNT(*) AS nb_open_tasks')
+            ->eq('project_id', $project_id)
+            ->eq('is_active', 1)
+            ->groupBy('swimlane_id', 'column_id')
+            ->findAll();
+    }
 }

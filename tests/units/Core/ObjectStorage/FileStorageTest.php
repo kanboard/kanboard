@@ -1,314 +1,131 @@
 <?php
 
-namespace Kanboard\Core\ObjectStorage;
-
 require_once __DIR__.'/../../Base.php';
 
-function file_put_contents($filename, $data)
-{
-    return FileStorageTest::$functions->file_put_contents($filename, $data);
-}
+use Kanboard\Core\ObjectStorage\FileStorage;
+use Kanboard\Core\ObjectStorage\ObjectStorageException;
 
-function file_get_contents($filename)
+class FileStorageTest extends Base
 {
-    return FileStorageTest::$functions->file_get_contents($filename);
-}
-
-function mkdir($filename, $mode, $recursif)
-{
-    return FileStorageTest::$functions->mkdir($filename, $mode, $recursif);
-}
-
-function is_dir($filename)
-{
-    return FileStorageTest::$functions->is_dir($filename);
-}
-
-function file_exists($filename)
-{
-    return FileStorageTest::$functions->file_exists($filename);
-}
-
-function unlink($filename)
-{
-    return FileStorageTest::$functions->unlink($filename);
-}
-
-function readfile($filename)
-{
-    echo FileStorageTest::$functions->readfile($filename);
-}
-
-function rename($src, $dst)
-{
-    return FileStorageTest::$functions->rename($src, $dst);
-}
-
-function move_uploaded_file($src, $dst)
-{
-    return FileStorageTest::$functions->move_uploaded_file($src, $dst);
-}
-
-class FileStorageTest extends \Base
-{
-    public static $functions;
+    private $tempDir;
+    private $storage;
 
     protected function setUp(): void
     {
-        parent::setup();
-
-        self::$functions = $this
-            ->getMockBuilder('stdClass')
-            ->setMethods(array(
-                'file_put_contents',
-                'file_get_contents',
-                'file_exists',
-                'mkdir',
-                'is_dir',
-                'unlink',
-                'rename',
-                'move_uploaded_file',
-                'readfile',
-            ))
-            ->getMock();
+        // Create temporary directory for testing
+        $this->tempDir = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'kanboard_test_' . uniqid();
+        mkdir($this->tempDir);
+        $this->storage = new FileStorage($this->tempDir);
     }
 
     protected function tearDown(): void
     {
-        parent::tearDown();
-        self::$functions = null;
+        // Clean up temporary directory after tests
+        $this->removeDirectory($this->tempDir);
     }
 
-    public function testPut()
+    private function removeDirectory($dir)
     {
-        $data = 'data';
-        $storage = new FileStorage('somewhere');
+        if (!file_exists($dir)) {
+            return;
+        }
 
-        self::$functions
-            ->expects($this->once())
-            ->method('is_dir')
-            ->with(
-                $this->equalTo('somewhere')
-            )
-            ->will($this->returnValue(false));
-
-        self::$functions
-            ->expects($this->once())
-            ->method('mkdir')
-            ->with(
-                $this->equalTo('somewhere')
-            )
-            ->will($this->returnValue(true));
-
-        self::$functions
-            ->expects($this->once())
-            ->method('file_put_contents')
-            ->with(
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey'),
-                $this->equalTo($data)
-            )
-            ->will($this->returnValue(true));
-
-        $storage->put('mykey', $data);
+        $files = array_diff(scandir($dir), array('.', '..'));
+        foreach ($files as $file) {
+            $path = $dir . DIRECTORY_SEPARATOR . $file;
+            is_dir($path) ? $this->removeDirectory($path) : unlink($path);
+        }
+        rmdir($dir);
     }
 
-    public function testPutWithSubfolder()
+    public function testConstructorWithInvalidDirectory()
     {
-        $data = 'data';
-        $storage = new FileStorage('somewhere');
-
-        self::$functions
-            ->expects($this->once())
-            ->method('is_dir')
-            ->with(
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'my')
-            )
-            ->will($this->returnValue(false));
-
-        self::$functions
-            ->expects($this->once())
-            ->method('mkdir')
-            ->with(
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'my')
-            )
-            ->will($this->returnValue(true));
-
-        self::$functions
-            ->expects($this->once())
-            ->method('file_put_contents')
-            ->with(
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'my'.DIRECTORY_SEPARATOR.'key'),
-                $this->equalTo('data')
-            )
-            ->will($this->returnValue(true));
-
-        $storage->put('my'.DIRECTORY_SEPARATOR.'key', $data);
+        $this->expectException(ObjectStorageException::class);
+        new FileStorage('/path/that/does/not/exist');
     }
 
-    /**
-     * @expectedException \Kanboard\Core\ObjectStorage\ObjectStorageException
-     */
-    public function testPutWhenNotAbleToCreateFolder()
+    public function testPutAndGet()
     {
-        $this->expectException(\Kanboard\Core\ObjectStorage\ObjectStorageException::class);
+        $key = 'test.txt';
+        $content = 'Hello World';
 
-        $data = 'data';
-        $storage = new FileStorage('somewhere');
+        $this->storage->put($key, $content);
 
-        self::$functions
-            ->expects($this->once())
-            ->method('is_dir')
-            ->with(
-                $this->equalTo('somewhere')
-            )
-            ->will($this->returnValue(false));
-
-        self::$functions
-            ->expects($this->once())
-            ->method('mkdir')
-            ->with(
-                $this->equalTo('somewhere')
-            )
-            ->will($this->returnValue(false));
-
-        $storage->put('mykey', $data);
+        $this->assertFileExists($this->tempDir . DIRECTORY_SEPARATOR . $key);
+        $this->assertEquals($content, $this->storage->get($key));
     }
 
-    public function testGet()
+    public function testPutAndGetWithSubdirectory()
     {
-        $storage = new FileStorage('somewhere');
+        $key = 'subdir/test.txt';
+        $content = 'Hello World';
 
-        self::$functions
-            ->expects($this->once())
-            ->method('file_exists')
-            ->with(
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
-            )
-            ->will($this->returnValue(true));
+        $this->storage->put($key, $content);
 
-        self::$functions
-            ->expects($this->once())
-            ->method('file_get_contents')
-            ->with(
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
-            )
-            ->will($this->returnValue('data'));
-
-        $this->assertEquals('data', $storage->get('mykey'));
+        $this->assertFileExists($this->tempDir . DIRECTORY_SEPARATOR . $key);
+        $this->assertEquals($content, $this->storage->get($key));
     }
 
-    /**
-     * @expectedException \Kanboard\Core\ObjectStorage\ObjectStorageException
-     */
-    public function testGetWithFileNotFound()
+    public function testGetNonExistentFile()
     {
-        $storage = new FileStorage('somewhere');
-
-        $this->expectException(\Kanboard\Core\ObjectStorage\ObjectStorageException::class);
-
-        self::$functions
-            ->expects($this->once())
-            ->method('file_exists')
-            ->with(
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
-            )
-            ->will($this->returnValue(false));
-
-        $this->assertEquals('data', $storage->get('mykey'));
-    }
-
-    public function testOutput()
-    {
-        $storage = new FileStorage('somewhere');
-
-        self::$functions
-            ->expects($this->once())
-            ->method('file_exists')
-            ->with(
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
-            )
-            ->will($this->returnValue(true));
-
-        self::$functions
-            ->expects($this->once())
-            ->method('readfile')
-            ->with(
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
-            )
-            ->will($this->returnValue('data'));
-
-        $this->expectOutputString('data');
-        $storage->output('mykey');
-    }
-
-    public function testRemove()
-    {
-        $storage = new FileStorage('somewhere');
-
-        self::$functions
-            ->expects($this->once())
-            ->method('file_exists')
-            ->with(
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
-            )
-            ->will($this->returnValue(true));
-
-        self::$functions
-            ->expects($this->once())
-            ->method('unlink')
-            ->with(
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
-            )
-            ->will($this->returnValue(true));
-
-        $this->assertTrue($storage->remove('mykey'));
+        $this->expectException(ObjectStorageException::class);
+        $this->storage->get('nonexistent.txt');
     }
 
     public function testMoveFile()
     {
-        $storage = new FileStorage('somewhere');
+        $sourceFile = $this->tempDir . DIRECTORY_SEPARATOR . 'source.txt';
+        $key = 'destination.txt';
+        file_put_contents($sourceFile, 'Test Content');
 
-        self::$functions
-            ->expects($this->once())
-            ->method('is_dir')
-            ->with(
-                $this->equalTo('somewhere')
-            )
-            ->will($this->returnValue(true));
+        $result = $this->storage->moveFile($sourceFile, $key);
 
-        self::$functions
-            ->expects($this->once())
-            ->method('rename')
-            ->with(
-                $this->equalTo('src_file'),
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
-            )
-            ->will($this->returnValue(true));
-
-        $this->assertTrue($storage->moveFile('src_file', 'mykey'));
+        $this->assertTrue($result);
+        $this->assertFileDoesNotExist($sourceFile);
+        $this->assertFileExists($this->tempDir . DIRECTORY_SEPARATOR . $key);
+        $this->assertEquals('Test Content', file_get_contents($this->tempDir . DIRECTORY_SEPARATOR . $key));
     }
 
-    public function testMoveUploadedFile()
+    public function testRemoveFile()
     {
-        $storage = new FileStorage('somewhere');
+        $key = 'test.txt';
+        $content = 'Hello World';
 
-        self::$functions
-            ->expects($this->once())
-            ->method('is_dir')
-            ->with(
-                $this->equalTo('somewhere')
-            )
-            ->will($this->returnValue(true));
+        $this->storage->put($key, $content);
+        $this->assertTrue($this->storage->remove($key));
+        $this->assertFileDoesNotExist($this->tempDir . DIRECTORY_SEPARATOR . $key);
+    }
 
-        self::$functions
-            ->expects($this->once())
-            ->method('move_uploaded_file')
-            ->with(
-                $this->equalTo('src_file'),
-                $this->equalTo('somewhere'.DIRECTORY_SEPARATOR.'mykey')
-            )
-            ->will($this->returnValue(true));
+    public function testRemoveFileWithEmptyDirectory()
+    {
+        $key = 'subdir/test.txt';
+        $content = 'Hello World';
 
-        $this->assertTrue($storage->moveUploadedFile('src_file', 'mykey'));
+        $this->storage->put($key, $content);
+        $this->assertTrue($this->storage->remove($key));
+
+        // Check that both file and directory are removed
+        $this->assertFileDoesNotExist($this->tempDir . DIRECTORY_SEPARATOR . $key);
+        $this->assertDirectoryDoesNotExist($this->tempDir . DIRECTORY_SEPARATOR . 'subdir');
+    }
+
+    public function testOutput()
+    {
+        $key = 'test.txt';
+        $content = 'Hello World';
+
+        $this->storage->put($key, $content);
+
+        ob_start();
+        $this->storage->output($key);
+        $output = ob_get_clean();
+
+        $this->assertEquals($content, $output);
+    }
+
+    public function testPathTraversal()
+    {
+        $this->expectException(ObjectStorageException::class);
+        $this->storage->get('../outside.txt');
     }
 }

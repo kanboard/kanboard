@@ -140,8 +140,9 @@ KB.component('image-slideshow', function (containerElement, options) {
     }
 
     function getUrl(image, type) {
-        var regex = new RegExp(options.regex, 'g');
-        return options.url[type].replace(regex, image.id);
+        var regexFileID = new RegExp(options.regex_file_id, 'g');
+        var regexFileEtag = new RegExp(options.regex_etag, 'g');
+        return options.url[type].replace(regexFileID, image.id).replace(regexFileEtag, image.etag);
     }
 
     function buildThumbnailElement(image) {

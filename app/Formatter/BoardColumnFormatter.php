@@ -16,6 +16,7 @@ class BoardColumnFormatter extends BaseFormatter implements FormatterInterface
     protected $columns = array();
     protected $tasks = array();
     protected $tags = array();
+    protected $taskCountBySwimlaneAndColumn = array();
 
     /**
      * Set swimlaneId
@@ -70,6 +71,19 @@ class BoardColumnFormatter extends BaseFormatter implements FormatterInterface
     }
 
     /**
+     * Set task count by swimlane and column
+     *
+     * @access public
+     * @param  array $taskCountBySwimlaneAndColumn
+     * @return $this
+     */
+    public function withTaskCountBySwimlaneAndColumn(array $taskCountBySwimlaneAndColumn)
+    {
+        $this->taskCountBySwimlaneAndColumn = $taskCountBySwimlaneAndColumn;
+        return $this;
+    }
+
+    /**
      * Apply formatter
      *
      * @access public
@@ -88,6 +102,12 @@ class BoardColumnFormatter extends BaseFormatter implements FormatterInterface
 
             $column['nb_tasks'] = count($column['tasks']);
             $column['score'] = (int) array_column_sum($column['tasks'], 'score');
+
+            if (empty($this->taskCountBySwimlaneAndColumn)) {
+                $column['column_nb_open_tasks'] = $column['nb_open_tasks'];
+            } else {
+                $column['column_nb_open_tasks'] = isset($this->taskCountBySwimlaneAndColumn[$this->swimlaneId][$column['id']]) ? $this->taskCountBySwimlaneAndColumn[$this->swimlaneId][$column['id']] : 0;
+            }
         }
 
         return $this->columns;

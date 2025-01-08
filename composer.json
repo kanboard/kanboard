@@ -27,16 +27,14 @@
         "ext-filter": "*",
         "ext-session": "*",
         "christian-riesen/otp": "1.4.3",
-        "erusev/parsedown": "1.7.4",
         "pimple/pimple": "3.5.0",
         "psr/log": "1.1.4",
-        "symfony/console": "5.4.40",
-        "symfony/event-dispatcher": "5.4.21",
+        "symfony/console": "5.4.41",
         "symfony/event-dispatcher-contracts": "^2",
-        "symfony/finder": "5.4.40",
-        "symfony/service-contracts": "2.5.3",
+        "symfony/finder": "5.4.45",
+        "symfony/service-contracts": "2.5.4",
         "symfony/string": "^5.1",
-        "symfony/deprecation-contracts": "2.5.3"
+        "symfony/deprecation-contracts": "2.5.4"
     },
     "autoload": {
         "classmap": [
@@ -46,15 +44,17 @@
             "Kanboard\\": "app/",
             "MatthiasMullie\\Minify\\": "libs/minify/src/",
             "MatthiasMullie\\PathConverter\\": "libs/path-converter/src/",
-            "Gregwar\\": "libs",
-            "Eluceo\\iCal\\": "libs/ical"
+            "Gregwar\\Captcha\\": "libs/Captcha",
+            "Eluceo\\iCal\\": "libs/ical",
+            "SimpleQueue\\": "libs/SimpleQueue",
+            "SimpleValidator\\": "libs/SimpleValidator",
+            "Symfony\\Component\\EventDispatcher\\": "libs/event-dispatcher"
         },
         "psr-0": {
             "JsonRPC": "libs/jsonrpc/src",
             "PHPQRCode": "libs/phpqrcode/lib",
             "PicoDb": "libs/picodb/lib",
-            "SimpleQueue": "libs",
-            "SimpleValidator": "libs"
+            "Parsedown": "libs/erusev/parsedown/"
         },
         "files": [
             "app/functions.php",
@@ -63,7 +63,7 @@
     },
     "require-dev": {
         "doctrine/instantiator": "1.5.0",
-        "symfony/stopwatch": "5.4.40",
+        "symfony/stopwatch": "5.4.45",
         "phpunit/phpunit": "9.6.19",
         "roave/security-advisories": "dev-master"
     }

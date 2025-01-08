@@ -1,3 +1,77 @@
+Version 1.2.43 (December 18, 2024)
+----------------------------------
+
+* fix: verify the session hasn't expired before returning data
+* fix: avoid PHP 8.4 deprecation notices in third-party libraries
+* fix: avoid Composer warnings regarding PSR compatibility
+* feat(locale): add missing Brazilian Portuguese translations
+* ci: run GitHub Actions tests with `ubuntu-24.04`
+* chore: don't `export-ignore` the ChangeLog
+* build(deps): bump `symfony/service-contracts` from `2.5.3` to `2.5.4`
+* build(deps): bump `symfony/event-dispatcher-contracts` from `2.5.3` to `2.5.4`
+* build(deps): bump `symfony/deprecation-contracts` from `2.5.3` to `2.5.4`
+* build(deps): bump `alpine` from `3.20` to `3.21`
+
+Version 1.2.42 (November 10, 2024)
+----------------------------------
+
+* fix: validate translation filename before loading locales
+* fix: avoid path traversal in `FileStorage`
+* feat: add Peruvian Sol to the list of currencies
+* build(deps): bump `symfony/finder` from `5.4.43` to `5.4.45`
+* build(deps-dev): bump `symfony/stopwatch` from `5.4.40` to `5.4.45`
+
+Version 1.2.41 (October 25, 2024)
+---------------------------------
+
+* feat: add new plugin hooks in project forms
+* feat: add option to add BOM at the beginning of CSV files (required for Microsoft Excel)
+* feat: validate app config form values
+* feat: add cancel button on 2FA code validation screen
+* fix: add CSRF check to the logout endpoint
+* fix: add HTML escaping when displaying exception message
+* fix: add URL validation for external task links
+* fix: correct broken migration logic for Sqlite
+
+Version 1.2.40 (September 25, 2024)
+-----------------------------------
+
+* build(deps): bump symfony/finder from 5.4.42 to 5.4.43
+* chore: add php83-xmlwriter package to the Docker image
+* ci: update GitHub pull-request template
+* fix: avoid PHP error if no subtask in progress is found
+* fix: avoid potential XSS and HTML injection in comment replies
+* fix: prevent duplicated columns when enabling per-swimlane column task limits
+* fix(api): check comment visibility in API procedures
+* fix(api): verify comment ownership in API procedures
+* fix(mssql): escape identifiers in timesheet queries
+* fix(mssql): use ANSI OFFSET/FETCH syntax for pagination queries
+* fix(test): use explicit ORDER BY for queries returning multiple rows
+* test: add unit tests for Subtask Time Tracking query methods
+* test: ensure pagination produces correct chunks
+
+Version 1.2.39 (August 18, 2024)
+--------------------------------
+
+* fix: remove CSS which caused responsive issues on mobile
+* fix: incorrect template condition that set the username field to read only for remote users
+* fix: tasks count across swimlanes was incorrect
+* fix: avoid warning from libpng when loading PNG image with incorrect iCCP profiles
+* feat: improve column header task counts
+* feat: add `apple-mobile-web-app-capable` meta tag
+* build(deps): bump `symfony/finder` from `5.4.40` to `5.4.42`
+
+Version 1.2.38 (July 20, 2024)
+------------------------------
+
+* fix: avoid browser caching issue when showing file attachments
+* fix: comments visibility was not taken into consideration on event activities page
+* fix: send comment via email was broken due to missing comment visibility logic implemented in v1.2.36
+* feat(locale): update Greek translations
+* feat(locale): update Italian translations
+* build(deps): bump `symfony/console` from `5.4.40` to `5.4.41`
+* build(deps): bump `docker/build-push-action` from `5` to `6`
+
 Version 1.2.37 (June 5, 2024)
 -----------------------------
 
@@ -438,8 +512,8 @@ Version 1.2.13 (December 15, 2019)
 * Change string indexing from {0} to [0] (deprecated in PHP 7.4)
 * Update translations
 
-Version 1.2.12 (Oct 26, 2019)
------------------------------
+Version 1.2.12 (October 26, 2019)
+---------------------------------
 
 * Update Docker image to Alpine Linux 3.10.3
 * Add new template hook: "template:project-permission:after-adduser"
@@ -460,8 +534,8 @@ Version 1.2.12 (Oct 26, 2019)
 * Changes filters from in array to subqueries
 * Add hash to image URL to force browser to update avatar image when changed
 
-Version 1.2.11 (Aug 24, 2019)
------------------------------
+Version 1.2.11 (August 24, 2019)
+--------------------------------
 
 Breaking Changes:
 
@@ -971,8 +1045,8 @@ Breaking Changes:
 
 * Remove method getQrCodeUrl() from PostAuthenticationProviderInterface
 
-Version 1.0.40 (Feb 24 2017)
-----------------------------
+Version 1.0.40 (February 24, 2017)
+----------------------------------
 
 New features:
 
@@ -1021,8 +1095,8 @@ Those issues are harmless if you use default Kanboard settings for CSP rules:
 * Avoid potential XSS in project overview when listing users
 * Avoid potential XSS in Gantt chart
 
-Version 1.0.39 (Feb 12, 2017)
------------------------------
+Version 1.0.39 (February 12, 2017)
+----------------------------------
 
 Improvements:
 
@@ -1049,8 +1123,8 @@ Bug fixes:
 * Fix broken subtask restriction per user
 * Fix CFD chart (stack wrongly ordered)
 
-Version 1.0.38 (Jan 28, 2017)
------------------------------
+Version 1.0.38 (January 28, 2017)
+----------------------------------
 
 New features:
 
@@ -1084,8 +1158,8 @@ Bug fixes:
 * Fix wrong default value for add group member modal
 * Add missing filter (completed) for task search
 
-Version 1.0.37 (Jan 14, 2017)
------------------------------
+Version 1.0.37 (January 14, 2017)
+---------------------------------
 
 Improvements:
 
@@ -1112,8 +1186,8 @@ Bug fixes:
 
 * Closing screenshot dialog prevent input elements to get focus
 
-Version 1.0.36 (Dec 30, 2016)
------------------------------
+Version 1.0.36 (December 30, 2016)
+----------------------------------
 
 New features:
 
@@ -1138,8 +1212,8 @@ Bug fixes:
 * Fix wrong controller name on project activity page when using filters
 * Uploaded avatar images are now visible in public board view
 
-Version 1.0.35 (Dec 4, 2016)
-----------------------------
+Version 1.0.35 (December 4, 2016)
+---------------------------------
 
 New features:
 
@@ -1172,8 +1246,8 @@ Bug fixes:
 * Fix link generation when user mention is followed by a punctuation mark
 * Make user mentions works again
 
-Version 1.0.34 (Oct 11, 2016)
------------------------------
+Version 1.0.34 (October 11, 2016)
+---------------------------------
 
 New features:
 
@@ -1204,8 +1278,8 @@ Bug fixes:
 * Do not show closed tasks in task move position form
 * Avoid "Controller not found" in Settings > Links
 
-Version 1.0.33 (Sep 5, 2016)
-----------------------------
+Version 1.0.33 (September 5, 2016)
+----------------------------------
 
 New features:
 
@@ -1288,8 +1362,8 @@ Bug fixes:
 * Fixed Markdown editor auto-grow on the task form (Safari)
 * Fixed compatibility issue with PHP 5.3 for OAuthUserProvider class
 
-Version 1.0.31 (Jul 3, 2016)
-----------------------------
+Version 1.0.31 (July 3, 2016)
+-----------------------------
 
 New features:
 
@@ -1326,8 +1400,8 @@ Breaking changes:
 
 * Docker volume paths are changed to /var/www/app/{data,plugins}
 
-Version 1.0.30 (Jun 8, 2016)
-----------------------------
+Version 1.0.30 (June 8, 2016)
+-----------------------------
 
 Improvements:
 
@@ -1339,8 +1413,8 @@ Bug fixes:
 * Fixed plural form in alert message
 * Fixed CSS cosmetic issue with popover and tooltips
 
-Version 1.0.29 (Jun 5, 2016)
-----------------------------
+Version 1.0.29 (June 5, 2016)
+-----------------------------
 
 New features:
 
@@ -1424,8 +1498,8 @@ Bug fixes:
 * Fixed form submission with Meta+Enter keyboard shortcut
 * Removed PHP notices in comment suppression view
 
-Version 1.0.27 (Mar 27, 2016)
------------------------------
+Version 1.0.27 (March 27, 2016)
+-------------------------------
 
 New features:
 
@@ -1469,8 +1543,8 @@ Bug fixes:
 * Fix invalid user filter for API procedure createLdapUser()
 * Ambiguous column name with very old version of Sqlite
 
-Version 1.0.26 (Feb 28, 2016)
------------------------------
+Version 1.0.26 (February 28, 2016)
+----------------------------------
 
 Breaking changes:
 
@@ -1502,8 +1576,8 @@ Bug fixes:
 * Fix filter dropdown not accessible when there are too many items
 * Fix regression: unable to change project in "task move/duplicate to another project"
 
-Version 1.0.25 (Feb 7, 2016)
-----------------------------
+Version 1.0.25 (February 7, 2016)
+---------------------------------
 
 Breaking changes:
 
@@ -1549,8 +1623,8 @@ Bug fixes:
 * Category label is broken on the board if there's a url in the description
 * Fix pagination on task time tracking page
 
-Version 1.0.24 (Jan 23, 2016)
------------------------------
+Version 1.0.24 (January 23, 2016)
+---------------------------------
 
 New features:
 
@@ -1591,8 +1665,8 @@ Bug fixes:
 * Unable to unassign a task from the API
 * Revert back previous optimizations of TaskPosition (incompatibility with some environment)
 
-Version 1.0.23 (Jan 9, 2016)
-----------------------------
+Version 1.0.23 (January 9, 2016)
+--------------------------------
 
 Breaking changes:
 
@@ -1626,8 +1700,8 @@ Bug fixes:
 * Fix pagination in group members listing
 * Avoid PHP error when enabling LDAP group provider with PHP < 5.5
 
-Version 1.0.22 (Dec 13, 2015)
------------------------------
+Version 1.0.22 (December 13, 2015)
+----------------------------------
 
 Breaking changes:
 
@@ -1656,8 +1730,8 @@ New features:
 * Add capability to reopen Gitlab issues
 * Try to load config.php from /data if not available
 
-Version 1.0.21 (Nov 22, 2015)
------------------------------
+Version 1.0.21 (November 22, 2015)
+----------------------------------
 
 Breaking changes:
 
@@ -1695,8 +1769,8 @@ Bug fixes:
 * Make CSV export compatible with PHP 5.3
 * Avoid Safari to append .html at the end of downloaded files
 
-Version 1.0.20 (Oct 24, 2015)
------------------------------
+Version 1.0.20 (October 24, 2015)
+---------------------------------
 
 Breaking changes:
 
@@ -1722,8 +1796,8 @@ Bug fixes:
 * People should not see any tasks during a search when they are not associated to a project
 * Avoid disabling the default swimlane during renaming when there is no other activated swimlane
 
-Version 1.0.19 (Oct 11, 2015)
------------------------------
+Version 1.0.19 (October 11, 2015)
+---------------------------------
 
 New features:
 
@@ -1786,8 +1860,8 @@ Bug fixes:
 * Fix Postgres issue "Cardinality violation" when there is multiple "is_milestone_of" links
 * Fix issue with due date greater than year 2038
 
-Version 1.0.18 (Aug 30, 2015)
------------------------------
+Version 1.0.18 (August 30, 2015)
+--------------------------------
 
 New features:
 
@@ -1833,8 +1907,8 @@ Bug fixes:
 * Fix screenshot feature with Firefox 40
 * Fix bug when uploading files with Cyrilic characters
 
-Version 1.0.17 (Jul 27, 2015)
------------------------------
+Version 1.0.17 (July 27, 2015)
+------------------------------
 
 New features:
 

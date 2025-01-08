@@ -19,12 +19,6 @@
                 <?= $this->task->getNewBoardTaskButton($swimlane, $column) ?>
             <?php endif ?>
 
-            <?php if ($swimlane['nb_swimlanes'] > 1 && $column['nb_tasks'] > 0): ?>
-            <span title="<?= t('Task count') ?>">
-                (<span id="task-number-column-<?= $column['id'] ?>"><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $column['nb_tasks'] ?></span>)
-            </span>
-            <?php endif ?>
-
             <span class="board-column-title">
                 <?php if ($not_editable): ?>
                     <?= $this->text->e($column['title']) ?>
@@ -91,38 +85,39 @@
                 <?php endif ?>
             </span>
 
-            <span class="pull-right">
-                <?php if ($swimlane['nb_swimlanes'] > 1 && ! empty($column['column_score'])): ?>
-                    <span title="<?= t('Total score in this column across all swimlanes') ?>">
-                        (<span><span class="ui-helper-hidden-accessible"><?= t('Total score in this column across all swimlanes') ?> </span><?= $column['column_score'] ?></span>)
-                    </span>
-                <?php endif ?>
-
+            <span class="pull-right board-column-header-task-count">
                 <?php if (! empty($column['score'])): ?>
                     <span title="<?= t('Score') ?>">
                         <span class="ui-helper-hidden-accessible"><?= t('Score') ?> </span><?= $column['score'] ?>
                     </span>
                 <?php endif ?>
 
-                <?php if (! $not_editable && ! empty($column['description'])): ?>
-                    <?= $this->app->tooltipMarkdown($column['description']) ?>
+                <?php if ($swimlane['nb_swimlanes'] > 1 && ! empty($column['cumulative_score_across_swimlane'])): ?>
+                    <span title="<?= t('Total score in this column across all swimlanes') ?>">
+                        (<span><span class="ui-helper-hidden-accessible"><?= t('Total score in this column across all swimlanes') ?> </span><?= $column['cumulative_score_across_swimlane'] ?></span>)&nbsp;
+                    </span>
                 <?php endif ?>
-            </span>
 
-            <?php if (! empty($column['nb_tasks'])): ?>
-            <span title="<?= t('Task count') ?>" class="board-column-header-task-count">
-                <span><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $column['nb_tasks'] ?></span>
-            </span>
-            <?php endif ?>
-            <?php if (! empty($column['column_nb_tasks'])): ?>
-            <span title="<?= t('Total number of tasks in this column across all swimlanes') ?>" class="board-column-header-task-count">
-                <?php if ($column['task_limit'] > 0): ?>
-                    (<span><span class="ui-helper-hidden-accessible"><?= t('Total number of tasks in this column across all swimlanes') ?> </span><?= $column['column_nb_tasks'] ?></span> / <span title="<?= t('Task limit') ?>"><span class="ui-helper-hidden-accessible"><?= t('Task limit') ?> </span><?= $this->text->e($column['task_limit']) ?></span>)
-                <?php else: ?>
-                    (<span><span class="ui-helper-hidden-accessible"><?= t('Total number of tasks in this column across all swimlanes') ?> </span><?= $column['column_nb_tasks'] ?></span>)
+                <?php if (! $not_editable && ! empty($column['description'])): ?>
+                    <?= $this->app->tooltipMarkdown($column['description']) ?>&nbsp;
+                <?php endif ?>
+
+                <?php if (! empty($column['nb_tasks'])): ?>
+                <span title="<?= t('Number of visible tasks in this column and swimlane') ?>">
+                    <span><span class="ui-helper-hidden-accessible"><?= t('Task count') ?> </span><?= $column['nb_tasks'] ?></span>&nbsp;
+                </span>
+                <?php endif ?>
+
+                <?php if (! empty($column['nb_unfiltered_tasks_across_swimlane'])): ?>
+                <span title="<?= t('Total number of tasks in this column across all swimlanes') ?>">
+                    <?php if ($column['task_limit'] > 0): ?>
+                        (<span><span class="ui-helper-hidden-accessible"><?= t('Total number of tasks in this column across all swimlanes') ?> </span><?= $column['nb_unfiltered_tasks_across_swimlane'] ?></span>/<span title="<?= t('Task limit') ?>"><span class="ui-helper-hidden-accessible"><?= t('Task limit') ?> </span><?= $this->text->e($column['task_limit']) ?></span>)
+                    <?php else: ?>
+                        (<span><span class="ui-helper-hidden-accessible"><?= t('Total number of tasks in this column across all swimlanes') ?> </span><?= $column['nb_unfiltered_tasks_across_swimlane'] ?></span>)
+                    <?php endif ?>
+                </span>
                 <?php endif ?>
             </span>
-            <?php endif ?>
             <?= $this->hook->render('template:board:column:header', array('swimlane' => $swimlane, 'column' => $column)) ?>
         </div>
     </th>

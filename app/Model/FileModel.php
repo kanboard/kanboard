@@ -95,7 +95,11 @@ abstract class FileModel extends Base
      */
     public function getById($file_id)
     {
-        return $this->db->table($this->getTable())->eq('id', $file_id)->findOne();
+        $file = $this->db->table($this->getTable())->eq('id', $file_id)->findOne();
+        if ($file) {
+            $file['etag'] = md5($file['path']);
+        }
+        return $file;
     }
 
     /**
@@ -107,7 +111,11 @@ abstract class FileModel extends Base
      */
     public function getAll($id)
     {
-        return $this->getQuery()->eq($this->getForeignKey(), $id)->findAll();
+        $files = $this->getQuery()->eq($this->getForeignKey(), $id)->findAll();
+        foreach ($files as &$file) {
+            $file['etag'] = md5($file['path']);
+        }
+        return $files;
     }
 
     /**
@@ -119,7 +127,11 @@ abstract class FileModel extends Base
      */
     public function getAllImages($id)
     {
-        return $this->getQuery()->eq($this->getForeignKey(), $id)->eq('is_image', 1)->findAll();
+        $images = $this->getQuery()->eq($this->getForeignKey(), $id)->eq('is_image', 1)->findAll();
+        foreach ($images as &$image) {
+            $image['etag'] = md5($image['path']);
+        }
+        return $images;
     }
 
     /**
@@ -131,7 +143,11 @@ abstract class FileModel extends Base
      */
     public function getAllDocuments($id)
     {
-        return $this->getQuery()->eq($this->getForeignKey(), $id)->eq('is_image', 0)->findAll();
+        $files = $this->getQuery()->eq($this->getForeignKey(), $id)->eq('is_image', 0)->findAll();
+        foreach ($files as &$file) {
+            $file['etag'] = md5($file['path']);
+        }
+        return $files;
     }
 
     /**

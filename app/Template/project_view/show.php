@@ -46,6 +46,9 @@
         <h2><?= t('Description') ?></h2>
     </div>
 
+    <?= $this->hook->render('template:project:view:form', array('values' => $values, 'errors' => $errors)) ?>
+
+
     <article class="markdown">
         <?= $this->text->markdown($project['description']) ?>
     </article>
