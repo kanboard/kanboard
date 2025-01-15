@@ -20,6 +20,8 @@ class TaskHelper extends Base
      */
     private $columns = array();
 
+    const MAX_ATTACHMENT_SIZE  = 1024000;
+
     public function getColors()
     {
         return $this->colorModel->getList();
@@ -267,14 +269,13 @@ class TaskHelper extends Base
         $html .=  '        <p id="screenshot-inner">'.t('Take a screenshot and press CTRL+V or ⌘+V to paste here.').'</p>';
         $html .=  '    </div>';
         $html .=  '</div>';
-        $max_size = 1024000;
         $html .=  '<div class="task-form-bottom-column">';
         $html .=  $this->helper->app->component('file-upload-task-create', array(
-            'maxSize'           => $max_size,
+            'maxSize'           => self::MAX_ATTACHMENT_SIZE,
             'labelDropzone'     => t('Drag and drop your files here'),
             'labelOr'           => t('or'),
             'labelChooseFiles'  => t('choose files'),
-            'labelOversize'     => t('The total maximum allowed attachments size is %sB.', $this->helper->text->bytes($max_size)),
+            'labelOversize'     => t('The total maximum allowed attachments size is %sB.', $this->helper->text->bytes(self::MAX_ATTACHMENT_SIZE)),
             'labelSuccess'      => t('All files have been uploaded successfully.'),
             'labelCloseSuccess' => t('Close this window'),
             'labelUploadError'  => t('Unable to upload this file.'),
