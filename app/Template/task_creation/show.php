@@ -38,7 +38,10 @@
 
         <div class="task-form-bottom">
 
-            <?= $this->task->renderFileUpload($screenshot, $files) ?>
+            <details>
+                <summary><?= t('Add attachments') ?></summary>
+                <?= $this->task->renderFileUpload($screenshot, $files) ?>
+            </details>
 
             <?= $this->hook->render('template:task:form:bottom-before-buttons', array('values' => $values, 'errors' => $errors)) ?>
 

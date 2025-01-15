@@ -1465,4 +1465,5 @@ return array(
     'This value must be greater or equal to %d' => 'Cette valeur doit être supérieure ou égale à %d',
     'Add a BOM at the beginning of the file (required for Microsoft Excel)' => 'Ajouter un BOM au début du fichier (requis pour Microsoft Excel)',
     'The total maximum allowed attachments size is %sB.' => 'La taille maximale totale des pièces jointes autorisée %so.',
+    'Add attachments' => 'Ajouter des pièces jointes',
 );
