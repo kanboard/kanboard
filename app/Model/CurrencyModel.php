@@ -46,6 +46,7 @@ class CurrencyModel extends Base
             'MXN' => t('MXN - Mexican Peso'),
             'NOK' => t('NOK - Norwegian Krone'),
             'NZD' => t('NZD - New Zealand Dollar'),
+            'PEN' => t('PEN - Peruvian Sol'),
             'RSD' => t('RSD - Serbian dinar'),
             'RUB' => t('RUB - Russian Ruble'),
             'SEK' => t('SEK - Swedish Krona'),

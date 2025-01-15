@@ -291,14 +291,15 @@ class Response extends Base
      * Send a CSV response
      *
      * @access public
-     * @param  array  $data  Data to serialize in csv
+     * @param  array  $data    Data to serialize in csv
+     * @param  bool   $addBOM  Add BOM header
      */
-    public function csv(array $data)
+    public function csv(array $data, $addBOM = false)
     {
         $this->withoutCache();
         $this->withContentType('text/csv; charset=utf-8');
         $this->send();
-        Csv::output($data);
+        Csv::output($data, $addBOM);
     }
 
     /**

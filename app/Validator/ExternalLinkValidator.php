@@ -62,6 +62,7 @@ class ExternalLinkValidator extends BaseValidator
         return array(
             new Validators\Required('url', t('Field required')),
             new Validators\MaxLength('url', t('The maximum length is %d characters', 65535), 65535),
+            new Validators\URL('url', t('This URL is invalid')),
             new Validators\Required('title', t('Field required')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 65535), 65535),
             new Validators\Required('link_type', t('Field required')),

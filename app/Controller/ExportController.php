@@ -32,7 +32,7 @@ class ExportController extends BaseController
             if ($from && $to) {
                 $data = $this->$model->$method($project['id'], $from, $to);
                 $this->response->withFileDownload($filename.'.csv');
-                $this->response->csv($data);
+                $this->response->csv($data, $this->request->getRawValue('bom') === '1');
             }
         } else {
             $this->response->html($this->template->render('export/'.$action, array(
@@ -86,7 +86,7 @@ class ExportController extends BaseController
                 $to = $this->dateParser->getIsoDate($to);
                 $data = $this->projectDailyColumnStatsModel->getAggregatedMetrics($project['id'], $from, $to);
                 $this->response->withFileDownload(t('Summary').'.csv');
-                $this->response->csv($data);
+                $this->response->csv($data, $this->request->getRawValue('bom') === '1');
             }
         } else {
             $this->response->html($this->template->render('export/summary', array(

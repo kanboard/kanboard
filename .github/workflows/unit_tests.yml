@@ -8,7 +8,7 @@ permissions:
   packages: read
 
 jobs:
-  Sqlite:
+  Sqlite-PHP7:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/kanboard/tests:latest
@@ -25,7 +25,7 @@ jobs:
       run: ./vendor/bin/phpunit -c tests/units.sqlite.xml
 
   Sqlite-PHP8:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
     - name: Validate composer.json and composer.lock
@@ -35,20 +35,15 @@ jobs:
     - name: Unit tests with Sqlite
       run: ./vendor/bin/phpunit -c tests/units.sqlite.xml
 
-  Postgres:
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/kanboard/tests:latest
-      credentials:
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+  Postgres-PHP8:
+    runs-on: ubuntu-24.04
     services:
       postgres:
         image: postgres:9.4
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+          POSTGRES_DB: kanboard_unit_test
         ports:
         - 5432:5432
         options: >-
@@ -65,7 +60,7 @@ jobs:
     - name: Unit tests with Postgres
       run: ./vendor/bin/phpunit -c tests/units.postgres.xml
       env:
-        DB_HOSTNAME: postgres
+        DB_HOSTNAME: 127.0.0.1
         DB_PORT: ${{ job.services.postgres.ports[5432] }}
 
   SqlServer:
@@ -198,3 +193,4 @@ jobs:
         if-no-files-found: ignore
         name: kanboard_units_debug-MSSQL.log
         path: ${{ env.LOG_FILE }}
+        retention-days: 2

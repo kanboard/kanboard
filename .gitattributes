@@ -16,7 +16,6 @@ data/*.sqlite export-ignore
 tests export-ignore
 composer.json export-ignore
 composer.lock export-ignore
-ChangeLog export-ignore
 
 assets/css/src export-ignore
 assets/js/components export-ignore

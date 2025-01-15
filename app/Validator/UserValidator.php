@@ -23,12 +23,14 @@ class UserValidator extends BaseValidator
     protected function commonValidationRules()
     {
         return array(
-            new Validators\MaxLength('role', t('The maximum length is %d characters', 25), 25),
             new Validators\MaxLength('username', t('The maximum length is %d characters', 191), 191),
             new Validators\Unique('username', t('This username is already taken'), $this->db->getConnection(), UserModel::TABLE, 'id'),
             new Validators\Email('email', t('Email address invalid')),
             new Validators\Integer('is_ldap_user', t('This value must be an integer')),
-            new Validators\MaxLength('theme', t('The maximum length is %d characters', 50), 50),
+            new Validators\InArray('theme', array_keys($this->themeModel->getThemes()), t('This theme is invalid')),
+            new Validators\InArray('role', array_keys($this->role->getApplicationRoles()), t('This role is invalid')),
+            new Validators\Timezone('timezone', t('This timezone is invalid')),
+            new Validators\InArray('language', array_keys($this->languageModel->getLanguages()), t('This language is invalid')),
         );
     }
 

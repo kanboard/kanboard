@@ -34,6 +34,8 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\Console\\' => 26,
+            'SimpleValidator\\' => 16,
+            'SimpleQueue\\' => 12,
         ),
         'P' => 
         array (
@@ -52,7 +54,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         ),
         'G' => 
         array (
-            'Gregwar\\' => 8,
+            'Gregwar\\Captcha\\' => 16,
         ),
         'E' => 
         array (
@@ -107,11 +109,19 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         ),
         'Symfony\\Component\\EventDispatcher\\' => 
         array (
-            0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
+            0 => __DIR__ . '/../..' . '/libs/event-dispatcher',
         ),
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'SimpleValidator\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/libs/SimpleValidator',
+        ),
+        'SimpleQueue\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/libs/SimpleQueue',
         ),
         'Psr\\Log\\' => 
         array (
@@ -137,9 +147,9 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
-        'Gregwar\\' => 
+        'Gregwar\\Captcha\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/libs',
+            0 => __DIR__ . '/../..' . '/libs/Captcha',
         ),
         'Eluceo\\iCal\\' => 
         array (
@@ -152,17 +162,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
     );
 
     public static $prefixesPsr0 = array (
-        'S' => 
-        array (
-            'SimpleValidator' => 
-            array (
-                0 => __DIR__ . '/../..' . '/libs',
-            ),
-            'SimpleQueue' => 
-            array (
-                0 => __DIR__ . '/../..' . '/libs',
-            ),
-        ),
         'P' => 
         array (
             'Pimple' => 
@@ -175,7 +174,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
             ),
             'Parsedown' => 
             array (
-                0 => __DIR__ . '/..' . '/erusev/parsedown',
+                0 => __DIR__ . '/../..' . '/libs/erusev/parsedown',
             ),
             'PHPQRCode' => 
             array (
@@ -873,6 +872,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Kanboard\\Validator\\ColumnRestrictionValidator' => __DIR__ . '/../..' . '/app/Validator/ColumnRestrictionValidator.php',
         'Kanboard\\Validator\\ColumnValidator' => __DIR__ . '/../..' . '/app/Validator/ColumnValidator.php',
         'Kanboard\\Validator\\CommentValidator' => __DIR__ . '/../..' . '/app/Validator/CommentValidator.php',
+        'Kanboard\\Validator\\ConfigValidator' => __DIR__ . '/../..' . '/app/Validator/ConfigValidator.php',
         'Kanboard\\Validator\\CurrencyValidator' => __DIR__ . '/../..' . '/app/Validator/CurrencyValidator.php',
         'Kanboard\\Validator\\CustomFilterValidator' => __DIR__ . '/../..' . '/app/Validator/CustomFilterValidator.php',
         'Kanboard\\Validator\\ExternalLinkValidator' => __DIR__ . '/../..' . '/app/Validator/ExternalLinkValidator.php',
@@ -921,7 +921,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'PHPQRCode\\QRsplit' => __DIR__ . '/../..' . '/libs/phpqrcode/lib/PHPQRCode/QRsplit.php',
         'PHPQRCode\\QRstr' => __DIR__ . '/../..' . '/libs/phpqrcode/lib/PHPQRCode/QRstr.php',
         'PHPQRCode\\QRtools' => __DIR__ . '/../..' . '/libs/phpqrcode/lib/PHPQRCode/QRtools.php',
-        'Parsedown' => __DIR__ . '/..' . '/erusev/parsedown/Parsedown.php',
+        'Parsedown' => __DIR__ . '/../..' . '/libs/erusev/parsedown/Parsedown.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'PicoDb\\Builder\\BaseBuilder' => __DIR__ . '/../..' . '/libs/picodb/lib/PicoDb/Builder/BaseBuilder.php',
         'PicoDb\\Builder\\ConditionBuilder' => __DIR__ . '/../..' . '/libs/picodb/lib/PicoDb/Builder/ConditionBuilder.php',
@@ -992,6 +992,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'SimpleValidator\\Validators\\Equals' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Equals.php',
         'SimpleValidator\\Validators\\Exists' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Exists.php',
         'SimpleValidator\\Validators\\GreaterThan' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/GreaterThan.php',
+        'SimpleValidator\\Validators\\GreaterThanOrEqual' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/GreaterThanOrEqual.php',
         'SimpleValidator\\Validators\\InArray' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/InArray.php',
         'SimpleValidator\\Validators\\Integer' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Integer.php',
         'SimpleValidator\\Validators\\Ip' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Ip.php',
@@ -1004,6 +1005,8 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'SimpleValidator\\Validators\\Numeric' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Numeric.php',
         'SimpleValidator\\Validators\\Range' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Range.php',
         'SimpleValidator\\Validators\\Required' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Required.php',
+        'SimpleValidator\\Validators\\Timezone' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Timezone.php',
+        'SimpleValidator\\Validators\\URL' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/URL.php',
         'SimpleValidator\\Validators\\Unique' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Unique.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
@@ -1111,17 +1114,17 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Symfony\\Component\\Console\\Tester\\CommandTester' => __DIR__ . '/..' . '/symfony/console/Tester/CommandTester.php',
         'Symfony\\Component\\Console\\Tester\\Constraint\\CommandIsSuccessful' => __DIR__ . '/..' . '/symfony/console/Tester/Constraint/CommandIsSuccessful.php',
         'Symfony\\Component\\Console\\Tester\\TesterTrait' => __DIR__ . '/..' . '/symfony/console/Tester/TesterTrait.php',
-        'Symfony\\Component\\EventDispatcher\\Attribute\\AsEventListener' => __DIR__ . '/..' . '/symfony/event-dispatcher/Attribute/AsEventListener.php',
-        'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php',
-        'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/WrappedListener.php',
-        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\AddEventAliasesPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/AddEventAliasesPass.php',
-        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\RegisterListenersPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
-        'Symfony\\Component\\EventDispatcher\\EventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcher.php',
-        'Symfony\\Component\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcherInterface.php',
-        'Symfony\\Component\\EventDispatcher\\EventSubscriberInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventSubscriberInterface.php',
-        'Symfony\\Component\\EventDispatcher\\GenericEvent' => __DIR__ . '/..' . '/symfony/event-dispatcher/GenericEvent.php',
-        'Symfony\\Component\\EventDispatcher\\ImmutableEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/ImmutableEventDispatcher.php',
-        'Symfony\\Component\\EventDispatcher\\LegacyEventDispatcherProxy' => __DIR__ . '/..' . '/symfony/event-dispatcher/LegacyEventDispatcherProxy.php',
+        'Symfony\\Component\\EventDispatcher\\Attribute\\AsEventListener' => __DIR__ . '/../..' . '/libs/event-dispatcher/Attribute/AsEventListener.php',
+        'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcher' => __DIR__ . '/../..' . '/libs/event-dispatcher/Debug/TraceableEventDispatcher.php',
+        'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => __DIR__ . '/../..' . '/libs/event-dispatcher/Debug/WrappedListener.php',
+        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\AddEventAliasesPass' => __DIR__ . '/../..' . '/libs/event-dispatcher/DependencyInjection/AddEventAliasesPass.php',
+        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\RegisterListenersPass' => __DIR__ . '/../..' . '/libs/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
+        'Symfony\\Component\\EventDispatcher\\EventDispatcher' => __DIR__ . '/../..' . '/libs/event-dispatcher/EventDispatcher.php',
+        'Symfony\\Component\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/../..' . '/libs/event-dispatcher/EventDispatcherInterface.php',
+        'Symfony\\Component\\EventDispatcher\\EventSubscriberInterface' => __DIR__ . '/../..' . '/libs/event-dispatcher/EventSubscriberInterface.php',
+        'Symfony\\Component\\EventDispatcher\\GenericEvent' => __DIR__ . '/../..' . '/libs/event-dispatcher/GenericEvent.php',
+        'Symfony\\Component\\EventDispatcher\\ImmutableEventDispatcher' => __DIR__ . '/../..' . '/libs/event-dispatcher/ImmutableEventDispatcher.php',
+        'Symfony\\Component\\EventDispatcher\\LegacyEventDispatcherProxy' => __DIR__ . '/../..' . '/libs/event-dispatcher/LegacyEventDispatcherProxy.php',
         'Symfony\\Component\\Finder\\Comparator\\Comparator' => __DIR__ . '/..' . '/symfony/finder/Comparator/Comparator.php',
         'Symfony\\Component\\Finder\\Comparator\\DateComparator' => __DIR__ . '/..' . '/symfony/finder/Comparator/DateComparator.php',
         'Symfony\\Component\\Finder\\Comparator\\NumberComparator' => __DIR__ . '/..' . '/symfony/finder/Comparator/NumberComparator.php',

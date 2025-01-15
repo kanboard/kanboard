@@ -27,6 +27,9 @@
         <?= $this->form->label(t('Description'), 'description') ?>
         <?= $this->form->textEditor('description', $values, $errors, array('tabindex' => 4)) ?>
 
+        <?= $this->hook->render('template:project:edit:form', array('values' => $values, 'errors' => $errors)) ?>
+
+
         <?= $this->form->checkbox('per_swimlane_task_limits', t('Task limits apply to each swimlane individually'), 1, $project['per_swimlane_task_limits'] == 1, '', array('tabindex' => 5)) ?>
 
         <?= $this->form->label(t('Task limit'), 'task_limit') ?>

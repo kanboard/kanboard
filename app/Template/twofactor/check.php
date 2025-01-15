@@ -10,6 +10,8 @@
 
         <div class="form-actions">
             <button type="submit" class="btn btn-blue"><?= t('Check my code') ?></button>
+            <?= t('or') ?>
+            <?= $this->url->link(t('cancel'), 'AuthController', 'logout', [], true) ?>
         </div>
     </form>
 </section>
