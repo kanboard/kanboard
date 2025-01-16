@@ -19,7 +19,12 @@
         <?php foreach ($tags as $tag): ?>
             <tr>
                 <td><?= $this->text->e($tag['name']) ?></td>
-                <td><?= $this->text->e($colors[$tag['color_id']] ?? '') ?></td>
+                <td>
+                    <?php if ($tag['color_id']): ?>
+                    <div class="color-picker-square color-<?= $tag['color_id'] ?>"></div>
+                    <?= $this->text->e($colors[$tag['color_id']]) ?>
+                    <?php endif ?>
+                </td>
                 <td>
                     <?= $this->modal->medium('edit', t('Edit'), 'TagController', 'edit', array('tag_id' => $tag['id'])) ?>
                     <?= $this->modal->confirm('trash-o', t('Remove'), 'TagController', 'confirm', array('tag_id' => $tag['id'])) ?>
