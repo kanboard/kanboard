@@ -36,7 +36,12 @@
                     </div>
                     <?= $this->text->e($tag['name']) ?>
                 </td>
-                <td><?= $this->text->e($colors[$tag['color_id']] ?? '') ?></td>
+                <td>
+                    <?php if ($tag['color_id']): ?>
+                    <div class="color-picker-square color-<?= $tag['color_id'] ?>"></div>
+                    <?= $this->text->e($colors[$tag['color_id']]) ?>
+                    <?php endif ?>
+                </td>
             </tr>
         <?php endforeach ?>
     </table>
