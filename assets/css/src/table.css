@@ -65,6 +65,13 @@ table td li {
     margin-left: 20px
 }
 
+table td .color-picker-square  {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 1px solid #000
+}
+
 .task-table a {
     color: #000;
 }
