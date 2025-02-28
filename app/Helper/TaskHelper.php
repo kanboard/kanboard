@@ -260,6 +260,37 @@ class TaskHelper extends Base
         return '';
     }
 
+    public function renderInternalLinkField(array $internallinks, array $values, array $errors = array(), array $attributes = array())
+    {
+        $attributes = array_merge(array('tabindex="15"'), $attributes);
+        $html = '';
+
+        $html .= $this->helper->form->hidden('opposite_task_id', $values);
+        $html .= '<span class="task-internallink" title="'.t('Add internal link').'">'.t('Add internal link').'</span>';
+        $html .= '<br><br>';
+        $html .= $this->helper->form->label(t('Label'), 'link_id');
+        $html .= $this->helper->form->select('link_id', $internallinks, $values, $errors, $attributes);
+
+        $html .= $this->helper->form->label(t('Task'), 'title');
+        $html .= $this->helper->form->text(
+            'title',
+            $values,
+            $errors,
+            array(
+               'required',
+               'placeholder="'.t('Start to type task title...').'"',
+               'title="'.t('Start to type task title...').'"',
+               'data-dst-field="opposite_task_id"',
+               // TODO exclude_task_id shoulb be changed to allow more than one task id
+               // 'data-search-url="'.$this->helper->url->href('TaskAjaxController', 'autocomplete', array('exclude_task_id' => $task['id'])).'"',
+               'data-search-url="'.$this->helper->url->href('TaskAjaxController', 'autocomplete').'"',
+            ),
+            'autocomplete'
+        );
+
+        return $html;
+    }
+
     public function getProgress($task)
     {
         if (! isset($this->columns[$task['project_id']])) {
