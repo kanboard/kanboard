@@ -18,7 +18,7 @@
         <tr>
             <td>
                 <div class="task-links-table-td">
-                        <?php $link_mode = 'TaskViewController' ?>
+                        <?php $link_mode = 'show' ?>
                         <?php $link_array = array() ?>
 
                         <?php if ($is_public): ?>
