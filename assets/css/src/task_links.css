@@ -10,3 +10,7 @@
 .task-link-closed {
     text-decoration: line-through
 }
+
+.task-links-table-td {
+    display: flex
+}
