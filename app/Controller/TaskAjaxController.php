@@ -26,7 +26,8 @@ class TaskAjaxController extends BaseController
     {
         $search = $this->request->getStringParam('term');
         $project_ids = $this->projectPermissionModel->getActiveProjectIds($this->userSession->getId());
-        $exclude_task_id = $this->request->getIntegerParam('exclude_task_id');
+        $exclude_task_ids = $this->request->getStringParam('exclude_task_ids');
+        $exclude_task_ids = array_filter(array_map('trim', explode(',', $exclude_task_ids)));
 
         if (empty($project_ids)) {
             $this->response->json(array());
@@ -34,8 +35,8 @@ class TaskAjaxController extends BaseController
 
             $filter = $this->taskQuery->withFilter(new TaskProjectsFilter($project_ids));
 
-            if (! empty($exclude_task_id)) {
-                $filter->withFilter(new TaskIdExclusionFilter(array($exclude_task_id)));
+            if (! empty($exclude_task_ids)) {
+                $filter->withFilter(new TaskIdExclusionFilter($exclude_task_ids));
             }
 
             if (ctype_digit((string) $search)) {
