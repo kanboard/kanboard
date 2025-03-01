@@ -112,12 +112,8 @@
             <input type="checkbox" name="change_internallink_remove" value="1">
         </div>
         <div class="bulk-change-inputs">
-            <span class="task-internallink-remove" title="<?= t('Remove internal link') ?>">
-                <?= t('Remove internal link') ?>
-            </span>
-            <br>
-            <span class="task-internallink-remove" title="<?= t('(removes all internal links for this task)') ?>">
-                <em><?= t('(removes all internal links for this task)') ?></em>
+            <span class="task-internallink-remove" title="<?= t('Remove internal link(s)') ?>">
+                <?= t('Remove internal link(s)') ?>
             </span>
         </div>
     </fieldset>

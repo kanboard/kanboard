@@ -931,6 +931,7 @@ return array(
     'Type' => 'Typ',
     'Dependency' => 'Abhängigkeit',
     'Add internal link' => 'Interne Verbindung hinzufügen',
+    'Remove internal link(s)' => 'Interne Verbindung(en) entfernen',
     'Add a new external link' => 'Füge eine neue externe Verbindung hinzu',
     'Edit external link' => 'Externe Verbindung bearbeiten',
     'External link' => 'Externe Verbindung',
