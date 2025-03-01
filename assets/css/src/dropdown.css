@@ -74,6 +74,10 @@ ul.dropdown-submenu-open {
     text-decoration: none
 }
 
+.dropdown-menu-link-icon {
+    display: inline-flex
+}
+
 .dropdown-menu-link-text:hover {
     text-decoration: underline
 }
