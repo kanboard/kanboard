@@ -49,6 +49,9 @@ class TaskBulkChangePropertyController extends BaseController
 
             if (isset($values['change_tags']) && $values['change_tags'] == 1) {
                 $changes['tags'] = $values['tags'];
+                if (isset($values['change_tags_only_add_new']) && $values['change_tags_only_add_new'] == 1) {
+                    $changes['tags_only_add_new'] = $values['change_tags_only_add_new'];
+                }
             }
 
             if (isset($values['change_due_date']) && $values['change_due_date'] == 1) {

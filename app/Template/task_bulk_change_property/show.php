@@ -50,6 +50,10 @@
         </div>
         <div class="bulk-change-inputs">
             <?= $this->task->renderTagField($project) ?>
+            <input type="checkbox" name="change_tags_only_add_new" value="1">
+            <span class="task-changetags" title="<?= t('Just add these tag(s)') ?>">
+                <?= t('Just add these tag(s)') ?>
+            </span>
         </div>
     </fieldset>
 

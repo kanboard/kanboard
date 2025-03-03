@@ -1095,6 +1095,7 @@ return array(
     'Tags' => 'Schlagworte',
     'Tags management' => 'Schlagwort-Management',
     'Add new tag' => 'Neues Schlagwort hinzufügen',
+    'Just add these tag(s)' => 'Schlagwort(e) nur hinzufügen (bereits zugeordnete nicht löschen)',
     'Edit a tag' => 'Schlagwort bearbeiten',
     'Project tags' => 'Projektbezogene Schlagwörter',
     'There is no specific tag for this project at the moment.' => 'Es gibt zur Zeit kein spezifisches Schlagwort.',
