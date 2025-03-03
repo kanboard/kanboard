@@ -98,5 +98,25 @@
         </div>
     </fieldset>
 
+    <fieldset class="bulk-change-block">
+        <div class="bulk-change-checkbox">
+            <input type="checkbox" name="change_internallink" value="1">
+        </div>
+        <div class="bulk-change-inputs">
+            <?= $this->task->renderInternalLinkField($internallink_list, $values, $errors) ?>
+        </div>
+    </fieldset>
+
+    <fieldset class="bulk-change-block">
+        <div class="bulk-change-checkbox">
+            <input type="checkbox" name="change_internallink_remove" value="1">
+        </div>
+        <div class="bulk-change-inputs">
+            <span class="task-internallink-remove" title="<?= t('Remove internal link(s)') ?>">
+                <?= t('Remove internal link(s)') ?>
+            </span>
+        </div>
+    </fieldset>
+
     <?= $this->modal->submitButtons() ?>
 </form>
