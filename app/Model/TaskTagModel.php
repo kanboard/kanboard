@@ -97,13 +97,17 @@ class TaskTagModel extends Base
      * @param  string[] $tags
      * @return boolean
      */
-    public function save($project_id, $task_id, array $tags)
+    public function save($project_id, $task_id, array $tags, $remove_other_tags = true)
     {
         $task_tags = $this->getList($task_id);
         $tags = array_filter($tags);
 
-        return $this->associateTags($project_id, $task_id, $task_tags, $tags) &&
-            $this->dissociateTags($task_id, $task_tags, $tags);
+        if ($remove_other_tags) {
+            return $this->associateTags($project_id, $task_id, $task_tags, $tags) &&
+                   $this->dissociateTags($task_id, $task_tags, $tags);
+        } else {
+            return $this->associateTags($project_id, $task_id, $task_tags, $tags);
+        }
     }
 
     /**

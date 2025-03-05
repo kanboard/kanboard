@@ -24,7 +24,12 @@ class TaskModificationModel extends Base
     {
         $task = $this->taskFinderModel->getById($values['id']);
 
-        $this->updateTags($values, $task);
+        if (isset($values['tags_only_add_new']) && $values['tags_only_add_new'] == 1) {
+            $this->updateTags($values, $task, false);
+        } else {
+            $this->updateTags($values, $task);
+        }
+
         $this->prepare($values);
         $result = $this->db->table(TaskModel::TABLE)->eq('id', $task['id'])->update($values);
 
@@ -117,11 +122,12 @@ class TaskModificationModel extends Base
      * @param  array  $values
      * @param  array  $original_task
      */
-    protected function updateTags(array &$values, array $original_task)
+    protected function updateTags(array &$values, array $original_task, $remove_other_tags = true)
     {
         if (isset($values['tags'])) {
-            $this->taskTagModel->save($original_task['project_id'], $values['id'], $values['tags']);
+            $this->taskTagModel->save($original_task['project_id'], $values['id'], $values['tags'], $remove_other_tags);
             unset($values['tags']);
+            unset($values['tags_only_add_new']);
         }
     }
 }
