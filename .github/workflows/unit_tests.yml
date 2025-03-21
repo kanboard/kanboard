@@ -76,7 +76,7 @@ jobs:
 
     services:
       mssql:
-        image: mcr.microsoft.com/mssql/server:2017-latest
+        image: mcr.microsoft.com/mssql/server:2019-latest
         env:
           ACCEPT_EULA: Y
           MSSQL_COLLATION: SQL_Latin1_General_CP1_CI_AS
@@ -188,6 +188,8 @@ jobs:
         exit $rc
     - name: save kanboard debug logfile
       if: always()
+      env:
+        LOG_FILE: ${{ env.LOG_FILE }}
       uses: actions/upload-artifact@v4
       with:
         if-no-files-found: ignore
