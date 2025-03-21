@@ -1430,7 +1430,6 @@ return array(
     'XBT - Bitcoin' => 'XBT - Bitcoin',
     'You must select a file to upload as your avatar!' => 'Você deve selecionar um arquivo para enviar como seu avatar!',
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'O arquivo enviado não é uma imagem válida! (Apenas *.gif, *.jpg, *.jpeg e *.png são aceitos!)',
-    'Automatically set the due date on task creation' => 'Definir data de vencimento automaticamente ao criar uma tarefa',
     'Automatically set the due date when the task is moved away from a specific column' => 'Definir data de vencimento automaticamente quando a tarefa sair de determinada coluna',
     'No other projects found.' => 'Nenhum outro projeto encontrado.',
     'Please choose a project you want to copy the tasks from.' => 'Por favor escolha o projeto de onde você deseja copiar as tarefas.',
@@ -1465,4 +1464,6 @@ return array(
     'Color invalid' => 'Cor inválida',
     'This value must be greater or equal to %d' => 'Esse valor deve ser maior ou igual a %d',
     'Add a BOM at the beginning of the file (required for Microsoft Excel)' => 'Adicionar BOM ao início do arquivo (obrigatório para Microsoft Excel)',
+    // 'Just add these tag(s)' => '',
+    // 'Remove internal link(s)' => '',
 );

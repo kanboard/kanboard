@@ -1464,4 +1464,6 @@ return array(
     // 'Color invalid' => '',
     // 'This value must be greater or equal to %d' => '',
     // 'Add a BOM at the beginning of the file (required for Microsoft Excel)' => '',
+    // 'Just add these tag(s)' => '',
+    // 'Remove internal link(s)' => '',
 );
