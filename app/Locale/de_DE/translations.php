@@ -931,7 +931,6 @@ return array(
     'Type' => 'Typ',
     'Dependency' => 'Abhängigkeit',
     'Add internal link' => 'Interne Verbindung hinzufügen',
-    'Remove internal link(s)' => 'Interne Verbindung(en) entfernen',
     'Add a new external link' => 'Füge eine neue externe Verbindung hinzu',
     'Edit external link' => 'Externe Verbindung bearbeiten',
     'External link' => 'Externe Verbindung',
@@ -1095,7 +1094,6 @@ return array(
     'Tags' => 'Schlagworte',
     'Tags management' => 'Schlagwort-Management',
     'Add new tag' => 'Neues Schlagwort hinzufügen',
-    'Just add these tag(s)' => 'Schlagwort(e) nur hinzufügen (bereits zugeordnete nicht löschen)',
     'Edit a tag' => 'Schlagwort bearbeiten',
     'Project tags' => 'Projektbezogene Schlagwörter',
     'There is no specific tag for this project at the moment.' => 'Es gibt zur Zeit kein spezifisches Schlagwort.',
@@ -1466,4 +1464,6 @@ return array(
     // 'Color invalid' => '',
     // 'This value must be greater or equal to %d' => '',
     // 'Add a BOM at the beginning of the file (required for Microsoft Excel)' => '',
+    'Just add these tag(s)' => 'Schlagwort(e) nur hinzufügen (bereits zugeordnete nicht löschen)',
+    'Remove internal link(s)' => 'Interne Verbindung(en) entfernen',
 );
