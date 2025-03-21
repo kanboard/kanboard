@@ -1,3 +1,12 @@
+Version 1.2.44 (March 21, 2025)
+-------------------------------
+
+* fix: prevent internal task titles from wrapping under the dropdown menu icon
+* feat(locale): update Greek and French translations
+* feat: display tag color squares next to their names in project and global settings
+* feat: enable bulk addition/removal of internal links
+* feat: provide an option to add tags without replacing existing ones during bulk operations
+
 Version 1.2.43 (December 18, 2024)
 ----------------------------------
 
