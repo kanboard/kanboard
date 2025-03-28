@@ -70,6 +70,14 @@ class UserCreationController extends BaseController
             if (! empty($values['notifications_enabled'])) {
                 $this->userNotificationTypeModel->saveSelectedTypes($user_id, array(MailNotification::TYPE));
             }
+			
+			if (ENABLE_NOTIFICATIONS) {
+				$this->userNotificationModel->enableNotification($user_id);	
+				$this->userNotificationTypeModel->saveSelectedTypes($user_id, array(MailNotification::TYPE,WebNotification::TYPE));
+				if (NOTIFICATION_FILTER >= 1 && NOTIFICATION_FILTER <= 4) {
+					$this->userNotificationFilterModel->saveFilter($user_id, NOTIFICATION_FILTER);
+				}
+			}
 
             $this->flash->success(t('User created successfully.'));
             $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user_id)));

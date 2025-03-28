@@ -182,3 +182,7 @@ defined('DOCUMENTATION_URL_PATTERN') or define('DOCUMENTATION_URL_PATTERN', gete
 
 // Dashboard settings
 defined('DASHBOARD_MAX_PROJECTS') or define('DASHBOARD_MAX_PROJECTS', getenv('DASHBOARD_MAX_PROJECTS') ?: 10);
+
+//Notification Settings
+defined('ENABLE_NOTIFICATIONS') or define('ENABLE_NOTIFICATIONS', getenv('ENABLE_NOTIFICATIONS') ?: false);
+defined('NOTIFICATION_FILTER') or define('NOTIFICATION_FILTER', getenv('NOTIFICATION_FILTER') ?: 4);
