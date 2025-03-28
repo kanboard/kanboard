@@ -291,7 +291,7 @@ define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT', 7);
 define('DASHBOARD_MAX_PROJECTS', 10);
 
 //Enable notifications by default
-define('ENABLE_NOTIFICATIONS',true);
+define('ENABLE_NOTIFICATIONS',false);
 
 //Default notification filter 1=All tasks, 2=Tasks assigned to User, 3=Tasks created by User, 4=Tasks created by User and tasks assigned to User
-define('NOTIFICATION_FILTER',2);
+define('NOTIFICATION_FILTER',4);
