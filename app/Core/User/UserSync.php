@@ -3,6 +3,7 @@
 namespace Kanboard\Core\User;
 
 use Kanboard\Core\Base;
+use Kanboard\Notification\MailNotification;
 use Kanboard\Notification\WebNotification;
 use Kanboard\Model\UserNotificationFilterModel;
 
