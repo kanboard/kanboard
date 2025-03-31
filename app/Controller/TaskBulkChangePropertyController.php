@@ -18,6 +18,7 @@ class TaskBulkChangePropertyController extends BaseController
             'errors' => $errors,
             'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id']),
             'categories_list' => $this->categoryModel->getList($project['id']),
+            'internallink_list' => $this->linkModel->getList(),
         ]));
     }
 
@@ -48,6 +49,9 @@ class TaskBulkChangePropertyController extends BaseController
 
             if (isset($values['change_tags']) && $values['change_tags'] == 1) {
                 $changes['tags'] = $values['tags'];
+                if (isset($values['change_tags_only_add_new']) && $values['change_tags_only_add_new'] == 1) {
+                    $changes['tags_only_add_new'] = $values['change_tags_only_add_new'];
+                }
             }
 
             if (isset($values['change_due_date']) && $values['change_due_date'] == 1) {
@@ -68,6 +72,17 @@ class TaskBulkChangePropertyController extends BaseController
 
             if (isset($values['change_score']) && $values['change_score'] == 1) {
                 $changes['score'] = $values['score'];
+            }
+
+            if (isset($values['change_internallink']) && $values['change_internallink'] == 1) {
+                $this->taskLinkModel->create($taskID, $values['opposite_task_id'], $values['link_id']);
+            }
+
+            if (isset($values['change_internallink_remove']) && $values['change_internallink_remove'] == 1) {
+                $task_link_ids = $this->taskLinkModel->getAll($taskID);
+                foreach ($task_link_ids as $task_link_id) {
+                    $this->taskLinkModel->remove($task_link_id['id']);
+                }
             }
 
             if (! empty($changes)) {

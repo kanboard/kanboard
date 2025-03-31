@@ -50,6 +50,10 @@
         </div>
         <div class="bulk-change-inputs">
             <?= $this->task->renderTagField($project) ?>
+            <input type="checkbox" name="change_tags_only_add_new" value="1">
+            <span class="task-changetags" title="<?= t('Just add these tag(s)') ?>">
+                <?= t('Just add these tag(s)') ?>
+            </span>
         </div>
     </fieldset>
 
@@ -95,6 +99,26 @@
         </div>
         <div class="bulk-change-inputs">
             <?= $this->task->renderScoreField($values, $errors) ?>
+        </div>
+    </fieldset>
+
+    <fieldset class="bulk-change-block">
+        <div class="bulk-change-checkbox">
+            <input type="checkbox" name="change_internallink" value="1">
+        </div>
+        <div class="bulk-change-inputs">
+            <?= $this->task->renderInternalLinkField($internallink_list, $values, $errors) ?>
+        </div>
+    </fieldset>
+
+    <fieldset class="bulk-change-block">
+        <div class="bulk-change-checkbox">
+            <input type="checkbox" name="change_internallink_remove" value="1">
+        </div>
+        <div class="bulk-change-inputs">
+            <span class="task-internallink-remove" title="<?= t('Remove internal link(s)') ?>">
+                <?= t('Remove internal link(s)') ?>
+            </span>
         </div>
     </fieldset>
 

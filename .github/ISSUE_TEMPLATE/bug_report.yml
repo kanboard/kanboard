@@ -1,0 +1,134 @@
+name: "Bug Report"
+description: "Report a bug or unexpected behavior"
+title: "[Bug]: "
+type: Bug
+labels: ["bug", "triage needed"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please provide detailed information to help us reproduce and fix the issue.
+
+  - type: input
+    id: summary
+    attributes:
+      label: "Bug Summary"
+      description: "Briefly describe the bug."
+      placeholder: "e.g., Error when saving a new entry"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "A clear and concise description of the bug."
+      placeholder: "e.g., When I click 'Save', I get a 500 error."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: "Steps to Reproduce"
+      description: "Steps to reproduce the behavior."
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: "Expected Behavior"
+      description: "What should happen instead?"
+      placeholder: "e.g., The form should be saved successfully."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual_behavior
+    attributes:
+      label: "Actual Behavior"
+      description: "What actually happens?"
+      placeholder: "e.g., A 500 error is returned with no useful error message."
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: "Version"
+      description: "Which version of Kanboard are you using?"
+      placeholder: "e.g., v1.2.44"
+    validations:
+      required: true
+
+  - type: input
+    id: database
+    attributes:
+      label: "Database"
+      description: "Which database are you using? Please provide the version."
+      placeholder: "e.g., MySQL, PostgreSQL, or SQLite"
+    validations:
+      required: true
+
+  - type: input
+    id: php_version
+    attributes:
+      label: "PHP Version"
+      description: "Which version of PHP are you using?"
+      placeholder: "e.g., 8.0.0"
+    validations:
+      required: false
+
+  - type: input
+    id: browser
+    attributes:
+      label: "Browser"
+      description: "If applicable, which browser are you using? Please provide the version."
+      placeholder: "e.g., Chrome, Firefox, Safari"
+    validations:
+      required: false
+
+  - type: input
+    id: operating_system
+    attributes:
+      label: "Operating System"
+      description: "If applicable, which operating system are you using? Please provide the version."
+      placeholder: "e.g., Ubuntu 24.10, Debian 12"
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Relevant Logs or Error Output"
+      description: "Paste any relevant logs or error messages (if applicable)."
+      render: shell
+      placeholder: "e.g., Stack trace, log files, browser console logs, or console output"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: "Additional Context"
+      description: "Add any other context about the problem here."
+      placeholder: "e.g., Screenshots, video recordings, or related issues"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: agreement
+    attributes:
+      label: "Checklist"
+      description: "Please confirm the following:"
+      options:
+        - label: "I have searched existing issues to ensure this bug hasn't been reported before."
+          required: true
+        - label: "I verified that the problem is not caused by a plugin. Please report the issue to the plugin author if applicable."
+          required: true
