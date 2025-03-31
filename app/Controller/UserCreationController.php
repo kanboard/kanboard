@@ -4,6 +4,8 @@ namespace Kanboard\Controller;
 
 use Kanboard\Core\Security\Role;
 use Kanboard\Notification\MailNotification;
+use Kanboard\Notification\WebNotification;
+use Kanboard\Model\UserNotificationFilterModel;
 
 /**
  * Class UserCreationController
