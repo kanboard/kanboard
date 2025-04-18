@@ -80,6 +80,10 @@ class Lexer
     {
         $tokens = array();
         $this->offset = 0;
+
+        if (is_null($input)) {
+            $input = "";
+        }
         $input_length = mb_strlen($input, 'UTF-8');
 
         while ($this->offset < $input_length) {
