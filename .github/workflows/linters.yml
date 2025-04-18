@@ -9,7 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Install jshint
         run: npm install -g jshint
       - name: Run jshint
         run: jshint ./assets/js/core ./assets/js/components
+
+  commit-linter:
+    if: github.event_name == 'pull_request'
+    name: Commit Linter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Validate PR commits
+        run: python3 .github/workflows/scripts/commit-checker.py --base ${{ github.event.pull_request.base.sha }} --head ${{ github.event.pull_request.head.sha }}
