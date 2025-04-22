@@ -56,8 +56,6 @@ KB.component('file-upload-task-create', function (containerElement, options) {
         zone.innerHTML = '';
         zone.className = 'screenshot-pasted';
         zone.appendChild(pastedImage);
-
-        initialize();
     }
 
     function checkMaxSize() {
@@ -168,7 +166,6 @@ KB.component('file-upload-task-create', function (containerElement, options) {
 
         dropzoneElement.ondragover = onDragOver;
         dropzoneElement.ondrop = onDrop;
-        dropzoneElement.ondragover = onDragOver;
 
         return dropzoneElement;
     }
