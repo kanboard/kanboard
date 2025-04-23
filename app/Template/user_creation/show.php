@@ -54,7 +54,7 @@
                 <?= $this->form->label(t('Filter'), 'filter') ?>
                 <?= $this->form->text('filter', $values, $errors) ?>
 
-                <?php if (ENABLE_NOTIFICATIONS == false): ?>
+                <?php if (!ENABLE_NOTIFICATIONS): ?>
                     <?= $this->form->checkbox('notifications_enabled', t('Enable email notifications'), 1, isset($values['notifications_enabled']) && $values['notifications_enabled'] == 1 ? true : false) ?>
                 <?php endif ?>
             </fieldset>
