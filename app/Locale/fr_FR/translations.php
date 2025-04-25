@@ -1432,9 +1432,6 @@ return array(
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Le fichier que vous avez téléchargé n\'est pas une image valide ! (Seuls * .gif, * .jpg, * .jpeg et * .png sont autorisés !)',
     'Automatically set the due date when the task is moved away from a specific column' => 'Changer automatiquement la date d\'échéance lorsque la tâche est déplacée dans une colonne spécifique',
     'No other projects found.' => 'Aucun autre projet trouvé.',
-    'Please choose a project you want to copy the tasks from.' => 'Veuillez choisir un projet dont vous souhaitez copier les tâches.',
-    'Import Tasks' => 'Importer des tâches',
-    'Copy' => 'Copier',
     'Tasks copied successfully.' => 'Tâches copiées avec succès.',
     'Unable to copy tasks.' => 'Impossible de copier les tâches.',
     'Theme' => 'Thème',
@@ -1466,4 +1463,6 @@ return array(
     'Add a BOM at the beginning of the file (required for Microsoft Excel)' => 'Ajouter un BOM au début du fichier (requis pour Microsoft Excel)',
     'Just add these tag(s)' => 'Ajouter seulement ces libellés',
     'Remove internal link(s)' => 'Enlever le(s) lien(s) interne(s)',
+    'Import tasks from another project' => 'Importer les tâches d\'un autre projet',
+    'Select the project to copy tasks from' => 'Sélectionner le projet dont vous souhaitez copier les tâches',
 );

@@ -179,7 +179,7 @@ class ProjectViewController extends BaseController
         // Fetch list of projects to copy tasks from.
         // Remove current project from the list of the user's projects.
         $otherProjects = array_filter(
-            $this->projectUserRoleModel->getActiveProjectsByUser($this->getUser()['id']),
+            $this->projectUserRoleModel->getActiveProjectsByUser($this->userSession->getId()),
             static function ($projectId) use ($project) {
                 return (int) $project['id'] !== $projectId;
             },
@@ -188,8 +188,10 @@ class ProjectViewController extends BaseController
 
         $this->response->html($this->helper->layout->project('project_view/importTasks', array(
             'project' => $project,
-            'title' => t('Import Tasks'),
+            'title' => t('Import tasks from another project'),
             'projects' => $otherProjects,
+            'values' => [],
+            'errors' => [],
         )));
     }
 
@@ -205,9 +207,10 @@ class ProjectViewController extends BaseController
         $this->checkCSRFForm();
 
         $project = $this->getProject();
-        $srcProjectId = $this->request->getRawFormValues()['projects'] ?? null;
+        $values = $this->request->getValues();
+        $srcProjectId = isset($values['src_project_id']) ? (int) $values['src_project_id'] : 0;
 
-        if (empty($srcProjectId)) {
+        if (empty($srcProjectId) || !$this->projectPermissionModel->isUserAllowed($srcProjectId, $this->userSession->getId())) {
             $this->response->redirect($this->helper->url->to('ProjectViewController', 'importTasks', array('project_id' => $project['id'])));
             return;
         }

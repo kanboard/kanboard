@@ -1432,9 +1432,6 @@ return array(
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Filen du laddade upp är inte ett giltigt bildformat! (Endast *.gif *.jpg *.jpeg samt *.png är tillåtet!)',
     // 'Automatically set the due date when the task is moved away from a specific column' => '',
     // 'No other projects found.' => '',
-    // 'Please choose a project you want to copy the tasks from.' => '',
-    // 'Import Tasks' => '',
-    // 'Copy' => '',
     // 'Tasks copied successfully.' => '',
     // 'Unable to copy tasks.' => '',
     // 'Theme' => '',
@@ -1466,4 +1463,6 @@ return array(
     // 'Add a BOM at the beginning of the file (required for Microsoft Excel)' => '',
     // 'Just add these tag(s)' => '',
     // 'Remove internal link(s)' => '',
+    // 'Import tasks from another project' => '',
+    // 'Select the project to copy tasks from' => '',
 );

@@ -1432,9 +1432,6 @@ return array(
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Het bestand dat je hebt geüpload is geen geldige afbeelding! (Alleen *.gif, *.jpg, *.jpeg en *.png zijn toegestaan!)',
     'Automatically set the due date when the task is moved away from a specific column' => 'Stel automatisch de vervaldatum in wanneer de taak wordt verplaatst van een specifieke kolom',
     'No other projects found.' => 'Geen andere projecten gevonden.',
-    'Please choose a project you want to copy the tasks from.' => 'Kies een project waarvan je de taken wilt kopiëren.',
-    'Import Tasks' => 'Taken importeren',
-    'Copy' => 'Kopiëren',
     'Tasks copied successfully.' => 'De taken zijn succesvol gekopieerd.',
     'Unable to copy tasks.' => 'Kan taken niet kopiëren.',
     'Theme' => 'Thema',
@@ -1466,4 +1463,6 @@ return array(
     // 'Add a BOM at the beginning of the file (required for Microsoft Excel)' => '',
     // 'Just add these tag(s)' => '',
     // 'Remove internal link(s)' => '',
+    // 'Import tasks from another project' => '',
+    // 'Select the project to copy tasks from' => '',
 );

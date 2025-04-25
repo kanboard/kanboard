@@ -1432,9 +1432,6 @@ return array(
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'A feltöltött fájl nem érvényes kép! Csak *.gif, *.jpg, *.jpeg és *.png engedélyezett.',
     'Automatically set the due date when the task is moved away from a specific column' => 'A határidő automatikus beállítása, ha a feladatot áthelyezik egy adott oszlopból',
     'No other projects found.' => 'Nem találhatók más projektek.',
-    'Please choose a project you want to copy the tasks from.' => 'Válasszon egy projektet, amelyből a feladatokat másolni szeretné.',
-    'Import Tasks' => 'Feladatok importálása',
-    'Copy' => 'Másolás',
     'Tasks copied successfully.' => 'A feladatok sikeresen másolva.',
     'Unable to copy tasks.' => 'Nem lehet másolni a feladatokat',
     'Theme' => 'Téma',
@@ -1466,4 +1463,6 @@ return array(
     // 'Add a BOM at the beginning of the file (required for Microsoft Excel)' => '',
     // 'Just add these tag(s)' => '',
     // 'Remove internal link(s)' => '',
+    // 'Import tasks from another project' => '',
+    // 'Select the project to copy tasks from' => '',
 );

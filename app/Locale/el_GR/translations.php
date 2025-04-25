@@ -1432,9 +1432,6 @@ return array(
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Το αρχείο που ανεβάσατε δεν είναι έγκυρη εικόνα! (Επιτρέπονται μόνο *.gif, *.jpg, *.jpeg και *.png!)',
     'Automatically set the due date when the task is moved away from a specific column' => 'Αυτόματος ορισμός της ημερομηνίας προθεσμίας όταν η εργασία μετακινείται εκτός συγκεκριμένης στήλης',
     'No other projects found.' => 'Δε βρέθηκαν άλλα έργα',
-    'Please choose a project you want to copy the tasks from.' => 'Επιλογή έργου από το οποίο θέλετε να αντιγραφούν οι εργασίες.',
-    'Import Tasks' => 'Εισαγωγή Εργασιών',
-    'Copy' => 'Αντιγραφή',
     'Tasks copied successfully.' => 'Οι εργασίες αντιγράφηκαν με επιτυχία.',
     'Unable to copy tasks.' => 'Δεν ήταν δυνατή η αντιγραφή των εργασιών.',
     'Theme' => 'Θέμα',
@@ -1466,4 +1463,6 @@ return array(
     // 'Add a BOM at the beginning of the file (required for Microsoft Excel)' => '',
     // 'Just add these tag(s)' => '',
     // 'Remove internal link(s)' => '',
+    // 'Import tasks from another project' => '',
+    // 'Select the project to copy tasks from' => '',
 );

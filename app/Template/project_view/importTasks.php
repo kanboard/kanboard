@@ -1,21 +1,15 @@
 <div class="page-header">
-    <h2><?= t('Import Tasks') ?></h2>
+    <h2><?= t('Import tasks from another project') ?></h2>
 </div>
-<p><?= t('Please choose a project you want to copy the tasks from.') ?></p>
-<?php if (count($projects) > 0) { ?>
+<?php if (count($projects) > 0): ?>
     <form method="post" action="<?= $this->url->href('ProjectViewController', 'doTasksImport', ['project_id' => $project['id']]) ?>">
         <?= $this->form->csrf() ?>
-        <select name="projects" id="projects">
-            <option value="" disabled selected><?= t('Choose a project') ?></option>
-            <?php foreach ($projects as $projectId => $projectName) { ?>
-                <option value="<?= $projectId?>"><?= $projectName ?></option>
-            <?php } ?>
-        </select>
-        <div class="form-actions">
-            <button type="submit" class="btn btn-red"><?= t('Copy') ?></button>
-            <?= t('or') ?> <?= $this->url->link(t('cancel'), 'ProjectViewController', 'show', array('project_id' => $project['id'])) ?>
-        </div>
+
+        <?= $this->form->label(t('Select the project to copy tasks from'), 'src_project_id') ?>
+        <?= $this->form->select('src_project_id', $projects, $values, $errors) ?>
+
+        <?= $this->modal->submitButtons(['submitLabel' => t('Save')]) ?>
     </form>
-<?php } else { ?>
-    <p class="no-projects"><?= t('No other projects found.') ?></p>
-<?php } ?>
+<?php else: ?>
+    <p class="alert alert-info"><?= t('No other projects found.') ?></p>
+<?php endif ?>
