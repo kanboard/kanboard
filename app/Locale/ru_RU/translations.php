@@ -1432,9 +1432,6 @@ return array(
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Выбранный вами файл не является изображением! (Допустимые расширения: *.gif, *.jpg, *.jpeg, *.png)',
     'Automatically set the due date when the task is moved away from a specific column' => 'Автоматически назначить дату завершения, если задача перемещена из указанной колонки',
     'No other projects found.' => 'Других проектов не найдено.',
-    'Please choose a project you want to copy the tasks from.' => 'Пожалуйста, выберите проект, из которого вы хотите скопировать задачи.',
-    'Import Tasks' => 'Импорт задач',
-    'Copy' => 'Копировать',
     'Tasks copied successfully.' => 'Задачи успешно скопированы.',
     'Unable to copy tasks.' => 'Не удалось скопировать задачи.',
     'Theme' => 'Тема',
@@ -1466,4 +1463,6 @@ return array(
     // 'Add a BOM at the beginning of the file (required for Microsoft Excel)' => '',
     // 'Just add these tag(s)' => '',
     // 'Remove internal link(s)' => '',
+    // 'Import tasks from another project' => '',
+    // 'Select the project to copy tasks from' => '',
 );

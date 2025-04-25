@@ -1432,9 +1432,6 @@ return array(
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => '你所上传的文件不是有效图像！(只有*.gif, *.jpg, *.jpeg and *.png才被允许！)',
     'Automatically set the due date when the task is moved away from a specific column' => '当任务离开指定栏目时自动设置到期时间',
     'No other projects found.' => '未找到其它项目。',
-    'Please choose a project you want to copy the tasks from.' => '请选择将要复制的任务所属的项目。',
-    'Import Tasks' => '引入任务',
-    'Copy' => '复制',
     'Tasks copied successfully.' => '任务复制成功。',
     'Unable to copy tasks.' => '无法复制任务。',
     // 'Theme' => '',
@@ -1466,4 +1463,6 @@ return array(
     // 'Add a BOM at the beginning of the file (required for Microsoft Excel)' => '',
     // 'Just add these tag(s)' => '',
     // 'Remove internal link(s)' => '',
+    // 'Import tasks from another project' => '',
+    // 'Select the project to copy tasks from' => '',
 );

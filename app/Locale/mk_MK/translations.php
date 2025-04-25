@@ -1432,9 +1432,6 @@ return array(
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Датотеката што ја поставивте не е валидна слика! (Дозволени се само *.gif, *.jpg, *.jpeg и *.png!)',
     'Automatically set the due date when the task is moved away from a specific column' => 'Автоматски поставете го рок за завршување кога задачата ќе се оддалечи од одредена колона',
     'No other projects found.' => 'Не се пронајдени други проекти.',
-    'Please choose a project you want to copy the tasks from.' => 'Изберете проект од кој сакате да ги копирате задачите.',
-    'Import Tasks' => 'Задачи за увоз',
-    'Copy' => 'Копирај',
     'Tasks copied successfully.' => 'Задачите се успешно копирани.',
     'Unable to copy tasks.' => 'Не може да се копираат задачите.',
     'Theme' => 'Тема',
@@ -1466,4 +1463,6 @@ return array(
     // 'Add a BOM at the beginning of the file (required for Microsoft Excel)' => '',
     // 'Just add these tag(s)' => '',
     // 'Remove internal link(s)' => '',
+    // 'Import tasks from another project' => '',
+    // 'Select the project to copy tasks from' => '',
 );
