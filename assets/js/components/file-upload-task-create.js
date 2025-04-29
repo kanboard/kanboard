@@ -218,6 +218,9 @@ KB.component('file-upload-task-create', function (containerElement, options) {
         KB.on('modal.stop', function () {
             KB.removeListener('modal.submit', onSubmit);
         });
+        KB.on('modal.close', function () {
+            files = [];
+        });
         inputElement = KB.dom('input')
             .attr('type', 'hidden')
             .attr('name', 'screenshot')
