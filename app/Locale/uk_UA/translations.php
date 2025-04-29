@@ -1432,9 +1432,6 @@ return array(
     'The file you uploaded is not a valid image! (Only *.gif, *.jpg, *.jpeg and *.png are allowed!)' => 'Вибраний файл не є зображенням! (Допустимі розширення: *.gif, *.jpg, *.jpeg, *.png)',
     'Automatically set the due date when the task is moved away from a specific column' => 'Автоматично призначити дату завершення, якщо завдання переміщене із зазначеної колонки',
     'No other projects found.' => 'Інших проектів не знайдено.',
-    'Please choose a project you want to copy the tasks from.' => 'Виберіть проект, з якого ви хочете скопіювати завдання.',
-    'Import Tasks' => 'Імпорт завдань',
-    'Copy' => 'Копіювати',
     'Tasks copied successfully.' => 'Завдання успішно скопійовано.',
     'Unable to copy tasks.' => 'Не вдалося скопіювати завдання.',
     'Theme' => 'Тема',
@@ -1466,4 +1463,6 @@ return array(
     // 'Add a BOM at the beginning of the file (required for Microsoft Excel)' => '',
     // 'Just add these tag(s)' => '',
     // 'Remove internal link(s)' => '',
+    // 'Import tasks from another project' => '',
+    // 'Select the project to copy tasks from' => '',
 );
