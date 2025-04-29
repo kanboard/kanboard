@@ -220,6 +220,7 @@ KB.component('file-upload-task-create', function (containerElement, options) {
         });
         KB.on('modal.close', function () {
             files = [];
+            KB.removeListener('modal.submit', onSubmit);
         });
         inputElement = KB.dom('input')
             .attr('type', 'hidden')
