@@ -190,6 +190,7 @@
                 replace(response);
             });
         },
+        replaceHtml: replace,
         getForm: getForm,
         submitForm: submitForm
     };

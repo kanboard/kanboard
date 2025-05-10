@@ -20,7 +20,7 @@ class TaskCreationController extends BaseController
      * @param  array $errors
      * @throws PageNotFoundException
      */
-    public function show(array $values = array(), array $errors = array())
+    public function show(array $values = array(), $screenshot = '', array $files = array(), array $errors = array())
     {
         $project = $this->getProject();
         $swimlanesList = $this->swimlaneModel->getList($project['id'], false, true);
@@ -37,6 +37,8 @@ class TaskCreationController extends BaseController
             'users_list' => $this->projectUserRoleModel->getAssignableUsersList($project['id'], true, false, $project['is_private'] == 1),
             'categories_list' => $this->categoryModel->getList($project['id']),
             'swimlanes_list' => $swimlanesList,
+            'screenshot' => $screenshot,
+            'files' => $files,
         )));
     }
 
@@ -50,12 +52,15 @@ class TaskCreationController extends BaseController
         $project = $this->getProject();
         $values = $this->request->getValues();
         $values['project_id'] = $project['id'];
+        $files = $this->request->getFileInfo('files');
+        $screenshot = $values['screenshot'];
+        array_splice($values, 13, 1);
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
         if (! $valid) {
             $this->flash->failure(t('Unable to create your task.'));
-            $this->show($values, $errors);
+            $this->show($values, $screenshot, $files,$errors);
         } else if (! $this->helper->projectRole->canCreateTaskInColumn($project['id'], $values['column_id'])) {
             $this->flash->failure(t('You cannot create tasks in this column.'));
             $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);
@@ -63,8 +68,19 @@ class TaskCreationController extends BaseController
             $task_id = $this->taskCreationModel->create($values);
 
             if ($task_id > 0) {
-                $this->flash->success(t('Task created successfully.'));
-                $this->afterSave($project, $values, $task_id);
+                if ($screenshot) {
+                    $this->taskFileModel->uploadScreenshot($task_id, $screenshot);
+                }
+                if ($files['name'][0]) {
+                    $filesUploaded = $this->taskFileModel->uploadFiles($task_id, $files);
+                }
+
+                if ($files['name'][0] && !$filesUploaded) {
+                    $this->flash->failure(t('Unable to upload files, check the permissions of your data folder.'));
+                } else {
+                    $this->flash->success(t('Task created successfully.'));
+                    $this->afterSave($project, $values, $task_id);
+                }
             } else {
                 $this->flash->failure(t('Unable to create this task.'));
                 $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);

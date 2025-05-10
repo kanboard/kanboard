@@ -67,3 +67,10 @@
 .task-form-bottom label {
     display: inline-block
 }
+
+.task-form-bottom-column {
+    display: inline-block;
+    width: 49%;
+    margin-left: 5px;
+    margin-right: 5px;
+}

@@ -288,6 +288,31 @@ class TaskHelper extends Base
         return $html;
     }
 
+    public function renderFileUpload($screenshot = '', array $files = array())
+    {
+		$upload_max_size = get_upload_max_size()*0.90; // 10% margin for the orther part of request + conversion in base64
+        $html =  '<div class="task-form-bottom-column">';
+        $html .=  '    <div id="screenshot-zone">';
+        $html .=  '        <p id="screenshot-inner">'.t('Take a screenshot and press CTRL+V or ⌘+V to paste here.').'</p>';
+        $html .=  '    </div>';
+        $html .=  '</div>';
+        $html .=  '<div class="task-form-bottom-column">';
+        $html .=  $this->helper->app->component('file-upload-task-create', array(
+            'maxSize'           => $upload_max_size,
+            'labelDropzone'     => t('Drag and drop your files here'),
+            'labelOr'           => t('or'),
+            'labelChooseFiles'  => t('choose files'),
+            'labelOversize'     => t('The total maximum allowed attachments size is %sB. (You will be able to upload more later)', $this->helper->text->bytes($upload_max_size)),
+            'labelSuccess'      => t('All files have been uploaded successfully.'),
+            'labelCloseSuccess' => t('Close this window'),
+            'labelUploadError'  => t('Unable to upload this file.'),
+            'screenshot' => $screenshot,
+            'files' => $files,
+        ));
+        $html .=  '</div>';
+        return $html;
+    }
+
     public function getProgress($task)
     {
         if (! isset($this->columns[$task['project_id']])) {
