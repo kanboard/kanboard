@@ -77,6 +77,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('project/:project_id/file/:file_id/download/:etag', 'FileViewerController', 'download');
             $container['route']->addRoute('project/:project_id/file/:file_id/show/:etag', 'FileViewerController', 'show');
             $container['route']->addRoute('project/:project_id/file/:file_id/remove', 'ProjectFileController', 'confirm');
+            $container['route']->addRoute('project/:project_id/file/:file_id/view', 'FileViewerController', 'browser');
 
             // Project Overview
             $container['route']->addRoute('project/:project_id/overview', 'ProjectOverviewController', 'show');
@@ -143,6 +144,7 @@ class RouteProvider implements ServiceProviderInterface
             $container['route']->addRoute('task/:task_id/file/save', 'TaskFileController', 'save');
             $container['route']->addRoute('task/:task_id/file/:file_id/remove', 'TaskFileController', 'remove');
             $container['route']->addRoute('task/:task_id/file/:file_id/confirm', 'TaskFileController', 'confirm');
+            $container['route']->addRoute('task/:task_id/file/:file_id/view', 'FileViewerController', 'browser');
             $container['route']->addRoute('task/:task_id/file/:file_id/thumbnail/:etag', 'FileViewerController', 'thumbnail');
             $container['route']->addRoute('task/:task_id/file/:file_id/image/:etag', 'FileViewerController', 'image');
             $container['route']->addRoute('task/:task_id/file/:file_id/download/:etag', 'FileViewerController', 'download');
