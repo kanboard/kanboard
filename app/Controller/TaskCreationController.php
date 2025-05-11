@@ -53,38 +53,44 @@ class TaskCreationController extends BaseController
         $values = $this->request->getValues();
         $values['project_id'] = $project['id'];
         $files = $this->request->getFileInfo('files');
-        $screenshot = $values['screenshot'];
-        array_splice($values, 13, 1);
+
+        $screenshot = null;
+        if (array_key_exists('screenshot', $values)) {
+            $screenshot = $values['screenshot'];
+            unset($values['screenshot']);
+        }
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
         if (! $valid) {
             $this->flash->failure(t('Unable to create your task.'));
-            $this->show($values, $screenshot, $files,$errors);
+            $this->show($values, $screenshot, $files, $errors);
         } else if (! $this->helper->projectRole->canCreateTaskInColumn($project['id'], $values['column_id'])) {
             $this->flash->failure(t('You cannot create tasks in this column.'));
             $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);
         } else {
             $task_id = $this->taskCreationModel->create($values);
-
-            if ($task_id > 0) {
-                if ($screenshot) {
-                    $this->taskFileModel->uploadScreenshot($task_id, $screenshot);
-                }
-                if ($files['name'][0]) {
-                    $filesUploaded = $this->taskFileModel->uploadFiles($task_id, $files);
-                }
-
-                if ($files['name'][0] && !$filesUploaded) {
-                    $this->flash->failure(t('Unable to upload files, check the permissions of your data folder.'));
-                } else {
-                    $this->flash->success(t('Task created successfully.'));
-                    $this->afterSave($project, $values, $task_id);
-                }
-            } else {
+            if ($task_id === 0) {
                 $this->flash->failure(t('Unable to create this task.'));
                 $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);
+                return;
             }
+
+            if ($screenshot) {
+                $this->taskFileModel->uploadScreenshot($task_id, $screenshot);
+            }
+
+            if (isset($files['name'][0]) && $files['name'][0] !== '') {
+                $filesUploaded = $this->taskFileModel->uploadFiles($task_id, $files);
+                if (! $filesUploaded) {
+                    $this->flash->failure(t('Unable to upload files, check the permissions of your data folder.'));
+                    $this->response->redirect($this->helper->url->to('BoardViewController', 'show', ['project_id' => $project['id']]), true);
+                    return;
+                }
+            }
+
+            $this->flash->success(t('Task created successfully.'));
+            $this->afterSave($project, $values, $task_id);
         }
     }
 
