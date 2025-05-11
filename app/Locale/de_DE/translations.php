@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'number.decimals_separator' => ',',
     'number.thousands_separator' => '.',
     'None' => 'Keines',
@@ -526,9 +526,9 @@ return array(
     'JPY - Japanese Yen' => 'JPY - Japanische Yen',
     'NZD - New Zealand Dollar' => 'NZD - Neuseeland-Dollar',
     'PEN - Peruvian Sol' => 'PEN - Peruanischer Sol',
-    // 'RSD - Serbian dinar' => '',
+    'RSD - Serbian dinar' => 'RSD – Serbischer Dinar',
     'CNY - Chinese Yuan' => 'CNY - Chinesischer Yuan',
-    // 'USD - US Dollar' => '',
+    'USD - US Dollar' => 'USD – US-Dollar',
     'VES - Venezuelan Bolívar' => 'VES - Venezolanischer Bolívar',
     'Destination column' => 'Zielspalte',
     'Move the task to another column when assigned to a user' => 'Aufgabe in eine andere Spalte verschieben, wenn ein Benutzer zugeordnet wurde.',
@@ -1399,8 +1399,8 @@ return array(
     'Reorder this column by assignee (Z-A)' => 'Spalte nach Zuständigem ordnen (Z-A)',
     'Reorder this column by due date (ASC)' => 'Spalte nach Fälligkeitsdatum ordnen (aufsteigend)',
     'Reorder this column by due date (DESC)' => 'Spalte nach Fälligkeitsdatum ordnen (absteigend)',
-    // 'Reorder this column by id (ASC)' => '',
-    // 'Reorder this column by id (DESC)' => '',
+    'Reorder this column by id (ASC)' => 'Diese Spalte nach ID aufsteigend sortieren',
+    'Reorder this column by id (DESC)' => 'Diese Spalte nach ID absteigend sortieren',
     '%s moved the task #%d "%s" to the project "%s"' => '%s hat die Aufgabe #%d "%s" in das Projekt "%s" verschoben',
     'Task #%d "%s" has been moved to the project "%s"' => 'Aufgabe #%d "%s" wurde in das Projekt "%s" verschoben',
     'Move the task to another column when the due date is less than a certain number of days' => 'Verschieben der Aufgabe in eine andere Spalte, wenn die Fälligkeit kleiner als eine bestimmte Anzahl von Tagen ist',
@@ -1467,4 +1467,4 @@ return array(
     'The total maximum allowed attachments size is %sB.' => 'Die maximal zulässige Gesamtgröße für Anhänge beträgt %sB.',
     'Add attachments' => 'Anhänge hinzufügen',
     'Task #%d "%s" is overdue' => 'Aufgabe #%d "%s" ist überfällig',
-);
+];

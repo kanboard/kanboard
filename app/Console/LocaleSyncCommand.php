@@ -38,17 +38,18 @@ class LocaleSyncCommand extends BaseCommand
         $outdated = include $outdated_file;
 
         $output = '<?php'.PHP_EOL.PHP_EOL;
-        $output .= 'return array('.PHP_EOL;
+        $output .= 'return ['.PHP_EOL;
 
         foreach ($reference as $key => $value) {
+            $escapedKey = str_replace("'", "\'", $key);
             if (! empty($outdated[$key])) {
-                $output .= "    '".str_replace("'", "\'", $key)."' => '".str_replace("'", "\'", $outdated[$key])."',\n";
+                $output .= "    '".$escapedKey."' => '".str_replace("'", "\'", $outdated[$key])."',\n";
             } else {
-                $output .= "    // '".str_replace("'", "\'", $key)."' => '',\n";
+                $output .= "    // '".$escapedKey."' => '',\n";
             }
         }
 
-        $output .= ");\n";
+        $output .= "];\n";
         return $output;
     }
 }

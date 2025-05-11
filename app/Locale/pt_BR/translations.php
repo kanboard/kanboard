@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'number.decimals_separator' => ',',
     'number.thousands_separator' => '.',
     'None' => 'Nenhum',
@@ -1399,8 +1399,8 @@ return array(
     'Reorder this column by assignee (Z-A)' => 'Reordenar esta coluna por designado (Z-A)',
     'Reorder this column by due date (ASC)' => 'Reordenar esta coluna por data fim estimada (crescente)',
     'Reorder this column by due date (DESC)' => 'Reordenar esta coluna por data fim estimada (decrescente)',
-    // 'Reorder this column by id (ASC)' => '',
-    // 'Reorder this column by id (DESC)' => '',
+    'Reorder this column by id (ASC)' => 'Reordenar esta coluna por id (ASC)',
+    'Reorder this column by id (DESC)' => 'Reordenar esta coluna por id (DESC)',
     '%s moved the task #%d "%s" to the project "%s"' => '%s moveu a tarefa #%d "%s" para o projeto "%s"',
     'Task #%d "%s" has been moved to the project "%s"' => 'Tarefa #%d "%s" foi movida para o projeto "%s"',
     'Move the task to another column when the due date is less than a certain number of days' => 'Mover a tarefa para outra coluna quando a data fim estimada for menor que uma quantidade de dias',
@@ -1467,4 +1467,4 @@ return array(
     'The total maximum allowed attachments size is %sB.' => 'O tamanho máximo total permitido para anexos é %sB.',
     'Add attachments' => 'Adicionar anexos',
     'Task #%d "%s" is overdue' => 'Tarefa #%d "%s" está atrasada',
-);
+];
