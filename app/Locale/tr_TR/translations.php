@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => '#%d görevinin kulvarı değişti',
     'Assignee changed on task #%d' => '#%d görevine atanan değişti',
     '%d overdue tasks' => '%d gecikmiş görev',
-    'Task #%d is overdue' => '#%d görevi gecikti',
     'No notification.' => 'Yeni bildirim yok.',
     'Mark all as read' => 'Tümünü okunmuş olarak işaretle',
     'Mark as read' => 'Okunmuş olarak işaretle',
@@ -1467,4 +1466,5 @@ return array(
     'Select the project to copy tasks from' => 'Görevleri kopyalamak için projeyi seçin',
     'The total maximum allowed attachments size is %sB.' => 'Ekler için izin verilen toplam maksimum boyut %sB.',
     'Add attachments' => 'Ekleri ekle',
+    'Task #%d "%s" is overdue' => 'Görev #%d "%s" son tarihi geçti',
 );

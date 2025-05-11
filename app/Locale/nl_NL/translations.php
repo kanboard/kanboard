@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'Swimlane gewijzigd voor taak #%d',
     'Assignee changed on task #%d' => 'Toegewezene gewijzigd voor taak #%d',
     '%d overdue tasks' => '%d achterstallige taken',
-    'Task #%d is overdue' => 'Taak #%d is te laat',
     'No notification.' => 'Geen melding.',
     'Mark all as read' => 'Markeer alles als gelezen',
     'Mark as read' => 'Markeer als gelezen',
@@ -1467,4 +1466,5 @@ return array(
     'Select the project to copy tasks from' => 'Selecteer het project waarvan u taken wilt kopiëren',
     'The total maximum allowed attachments size is %sB.' => 'De maximaal toegestane totale grootte voor bijlagen is %sB.',
     'Add attachments' => 'Bijlagen toevoegen',
+    'Task #%d "%s" is overdue' => 'Taak #%d "%s" is te laat',
 );

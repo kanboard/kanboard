@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'Променен коридор за задача #%d',
     'Assignee changed on task #%d' => 'Променен изпълнител при задача #%d',
     '%d overdue tasks' => '%d просрочени задачи',
-    'Task #%d is overdue' => 'Задача #%d е просрочена',
     'No notification.' => 'Няма известия.',
     'Mark all as read' => 'Отбележи всички като прочетени',
     'Mark as read' => 'Маркирай като прочетено',
@@ -1467,4 +1466,5 @@ return array(
     'Select the project to copy tasks from' => 'Изберете проект, от който да копирате задачи',
     'The total maximum allowed attachments size is %sB.' => 'Общият максимален разрешен размер на прикачените файлове е %sB.',
     'Add attachments' => 'Добавете прикачени файлове',
+    'Task #%d "%s" is overdue' => 'Задача #%d "%s" е с изтекъл срок',
 );

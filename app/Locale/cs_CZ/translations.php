@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'Dráha úkolu #%d byla změněna',
     'Assignee changed on task #%d' => 'Vlastník úkolu #%d byl změněn',
     '%d overdue tasks' => '%d úkolů po datu splnění',
-    'Task #%d is overdue' => 'Úkol #%d je po datu splnění',
     'No notification.' => 'Žádná notifikace.',
     'Mark all as read' => 'Označit vše jako přečtené',
     'Mark as read' => 'Označit jako přečtené',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Úkol #%d "%s" je po termínu',
 );

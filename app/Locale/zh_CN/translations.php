@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => '任务#%d的泳道已改变',
     'Assignee changed on task #%d' => '任务#%d的指派人已改变',
     '%d overdue tasks' => '%d条超期任务',
-    'Task #%d is overdue' => '任务#%d已超期',
     'No notification.' => '没有新通知',
     'Mark all as read' => '标记所有为已读',
     'Mark as read' => '标记为已读',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => '任务 #%d "%s" 已逾期',
 );

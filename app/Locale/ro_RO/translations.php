@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'Culoarul schimbat pentru sarcina #%d',
     'Assignee changed on task #%d' => 'Persoana desemnată a fost schimbată în sarcina #%d',
     '%d overdue tasks' => '%d sarcini întârziate',
-    'Task #%d is overdue' => 'Sarcina #%d întârzie',
     'No notification.' => 'Fără notificări.',
     'Mark all as read' => 'Marchează toate ca citite',
     'Mark as read' => 'Marchează citit',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Sarcina #%d "%s" este întârziată',
 );

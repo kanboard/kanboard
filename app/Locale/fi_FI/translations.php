@@ -769,7 +769,6 @@ return array(
     // 'Swimlane changed for task #%d' => '',
     // 'Assignee changed on task #%d' => '',
     // '%d overdue tasks' => '',
-    // 'Task #%d is overdue' => '',
     // 'No notification.' => '',
     // 'Mark all as read' => '',
     // 'Mark as read' => '',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Tehtävä #%d "%s" on myöhässä',
 );

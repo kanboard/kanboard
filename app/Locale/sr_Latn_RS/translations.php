@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'Staza je promenjena za zadatak #%d',
     'Assignee changed on task #%d' => 'Izvršilac je promenjen na zadatku #%d',
     '%d overdue tasks' => '%d zadataka kasni',
-    'Task #%d is overdue' => 'Zadatak #%d kasni',
     'No notification.' => 'Nema novih obaveštenja.',
     'Mark all as read' => 'Označi sve kao pročitano',
     'Mark as read' => 'Označi kao pročitano',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Zadatak #%d "%s" je s iztečen rok',
 );

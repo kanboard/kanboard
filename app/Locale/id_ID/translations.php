@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'Swimlane diganti untuk tugas #%d',
     'Assignee changed on task #%d' => 'Orang yang ditugaskan diganti pada tugas #%d',
     '%d overdue tasks' => '%d tugas kadaluarsa',
-    'Task #%d is overdue' => 'Tugas #%d sudah kadaluarsa',
     'No notification.' => 'Tidak ada notifikasi baru',
     'Mark all as read' => 'Tandai semua sebagai sudah dibaca',
     'Mark as read' => 'Tandai sebagai sudah dibaca',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Tugas #%d "%s" sudah kadaluarsa',
 );

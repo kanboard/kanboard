@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'Simbana uppdaterad för uppgift #%d',
     'Assignee changed on task #%d' => 'Uppgiftsinnehavare ändrades på uppgift #%d',
     '%d overdue tasks' => '%d försenade uppgifter',
-    'Task #%d is overdue' => 'Uppgift #%d är försenad',
     'No notification.' => 'Ingen notifiering',
     'Mark all as read' => 'Markera alla som lästa',
     'Mark as read' => 'Markera som läst',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Uppgift #%d "%s" är försenad',
 );
