@@ -302,7 +302,7 @@ class TaskHelper extends Base
             'labelDropzone'     => t('Drag and drop your files here'),
             'labelOr'           => t('or'),
             'labelChooseFiles'  => t('choose files'),
-            'labelOversize'     => t('The total maximum allowed attachments size is %sB. (You will be able to upload more later)', $this->helper->text->bytes($upload_max_size)),
+            'labelOversize'     => t('The total maximum allowed attachments size is %sB.', $this->helper->text->bytes($upload_max_size)),
             'labelSuccess'      => t('All files have been uploaded successfully.'),
             'labelCloseSuccess' => t('Close this window'),
             'labelUploadError'  => t('Unable to upload this file.'),
