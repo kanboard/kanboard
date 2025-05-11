@@ -1465,4 +1465,6 @@ return array(
     'Remove internal link(s)' => 'Interne Verbindung(en) entfernen',
     // 'Import tasks from another project' => '',
     // 'Select the project to copy tasks from' => '',
+    // 'The total maximum allowed attachments size is %sB.' => '',
+    // 'Add attachments' => '',
 );

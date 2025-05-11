@@ -1465,6 +1465,6 @@ return array(
     'Remove internal link(s)' => 'Enlever le(s) lien(s) interne(s)',
     'Import tasks from another project' => 'Importer les tâches d\'un autre projet',
     'Select the project to copy tasks from' => 'Sélectionner le projet dont vous souhaitez copier les tâches',
-    'The total maximum allowed attachments size is %sB. (You will be able to upload more later)' => 'Taille maximale totale des pièces jointes atteinte %so. (Vous pourrez en ajouter ultérieurement)',
+    'The total maximum allowed attachments size is %sB.' => 'La taille totale maximale autorisée pour les pièces jointes est de %sB.',
     'Add attachments' => 'Ajouter des pièces jointes',
 );
