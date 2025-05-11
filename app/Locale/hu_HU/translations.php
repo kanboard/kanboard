@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'A sáv megváltozott a(z) #%d. feladatnál',
     'Assignee changed on task #%d' => 'A felelős megváltozott a(z) #%d. feladatnál',
     '%d overdue tasks' => '%d lejárt feladat',
-    'Task #%d is overdue' => 'A(z) #%d. feladat határideje lejárt',
     'No notification.' => 'Nincs értesítés.',
     'Mark all as read' => 'Az összes megjelölése olvasottként',
     'Mark as read' => 'Megjelölés olvasottként',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Zadatak #%d "%s" je s iztečen rok',
 );

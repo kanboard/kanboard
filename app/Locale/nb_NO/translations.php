@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'Svømmebane er endret for oppgaven #%d',
     'Assignee changed on task #%d' => 'Ansvarlig er endret for oppgaven #%d',
     '%d overdue tasks' => '%d forfalte oppgaver',
-    'Task #%d is overdue' => 'Oppgave #%d er forfalt',
     'No notification.' => 'Ingen varslinger',
     'Mark all as read' => 'Merk alle som lest',
     'Mark as read' => 'Merk som lest',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Oppgaven #%d "%s" er forsinket',
 );

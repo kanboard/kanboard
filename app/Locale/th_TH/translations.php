@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'เปลี่ยนสวิมเลนสำหรับงาน #%d',
     'Assignee changed on task #%d' => 'เปลี่ยนผู้รับผิดชอบงาน #%d',
     '%d overdue tasks' => '%d งานเกินกำหนด',
-    'Task #%d is overdue' => 'งาน #%d เกินกำหนด',
     'No notification.' => 'ไม่มีการแจ้งเตือนใหม่',
     'Mark all as read' => 'มาร์คทั้งหมดว่าอ่านแล้ว',
     'Mark as read' => 'มาร์คว่าอ่านแล้ว',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'งาน #%d "%s" เกินกำหนด',
 );

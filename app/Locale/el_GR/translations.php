@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'Η λωρίδα άλλαξε για την εργασία #%d',
     'Assignee changed on task #%d' => 'Η ανάθεση άλλαξε για την εργασία #%d',
     '%d overdue tasks' => '%d εκπρόθεσμες εργασίες',
-    'Task #%d is overdue' => 'Η εργασία #%d είναι εκπρόθεσμη',
     'No notification.' => 'Χωρίς νέες ειδοποιήσεις.',
     'Mark all as read' => 'Μαρκάρισμα όλων ως διαβασμένα',
     'Mark as read' => 'Μαρκάρισμα ως διαβασμένο',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Η εργασία #%d «%s» είναι εκπρόθεσμη',
 );

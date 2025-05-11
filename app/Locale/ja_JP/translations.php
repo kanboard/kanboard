@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'タスク＃%dのスイムレーンが変更されました',
     'Assignee changed on task #%d' => 'タスク＃%dの担当者が変更されました',
     '%d overdue tasks' => '%d 件の期限切れタスク',
-    'Task #%d is overdue' => 'タスク＃%dは期限切れです',
     'No notification.' => '通知なし',
     'Mark all as read' => 'すべてを既読にする',
     'Mark as read' => '既読にする',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'タスク #%d "%s" は期限切れです',
 );

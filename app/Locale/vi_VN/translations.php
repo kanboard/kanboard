@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'Swimlane đã thay đổi cho nhiệm vụ #%d',
     'Assignee changed on task #%d' => 'Người được chỉ định thay đổi về nhiệm vụ #%d',
     '%d overdue tasks' => '%d quá hạn tác vụ',
-    'Task #%d is overdue' => 'Công việc #%d là quá hạn',
     'No notification.' => 'Không có thông báo.',
     'Mark all as read' => 'Đánh dấu tất cả như đã đọc',
     'Mark as read' => 'Đánh dấu là đã đọc',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Nhiệm vụ #%d "%s" đã quá hạn',
 );

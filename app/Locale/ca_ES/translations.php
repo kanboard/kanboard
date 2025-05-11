@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'El swimlane va canviat per  la tasca #%d',
     'Assignee changed on task #%d' => 'L\'assignat va canviar a la tasca #%d',
     '%d overdue tasks' => '%d tasques endarrerides',
-    'Task #%d is overdue' => 'La tasca #%d està vençuda',
     'No notification.' => 'Sense notificacions.',
     'Mark all as read' => 'Marca totes com llegides',
     'Mark as read' => 'Marca com llegida',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Tasca #%d "%s" ha caducat',
 );

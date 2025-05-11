@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => '#%d 할일의 스웜라인이 변경됩니다',
     'Assignee changed on task #%d' => '#%d 할일의 담당자가 변경됩니다',
     '%d overdue tasks' => '할일의 기한이 %d일 지났습니다',
-    'Task #%d is overdue' => '#%d 할일의 기한이 지났습니다',
     'No notification.' => '알림이 없습니다',
     'Mark all as read' => '모두 읽음',
     'Mark as read' => '읽음',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' =>  '할일 #%d "%s"의 기한이 지났습니다',
 );

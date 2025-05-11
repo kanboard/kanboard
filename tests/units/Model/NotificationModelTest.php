@@ -54,7 +54,7 @@ class NotificationModelTest extends Base
             $this->assertNotEmpty($notificationModel->getTitleWithAuthor('Foobar', $eventName, $eventData));
         }
 
-        $this->assertNotEmpty($notificationModel->getTitleWithoutAuthor(TaskModel::EVENT_OVERDUE, array('tasks' => array(array('id' => 1)))));
+        $this->assertNotEmpty($notificationModel->getTitleWithoutAuthor(TaskModel::EVENT_OVERDUE, array('tasks' => array(array('id' => 1, 'title' => 'test')))));
         $this->assertNotEmpty($notificationModel->getTitleWithoutAuthor('unknown', array()));
     }
 

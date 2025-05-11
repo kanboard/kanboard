@@ -223,7 +223,7 @@ class TaskEventBuilder extends BaseEventBuilder
                 return e('Assignee changed on task #%d', $eventData['task']['id']);
             case TaskModel::EVENT_OVERDUE:
                 $nb = count($eventData['tasks']);
-                return $nb > 1 ? e('%d overdue tasks', $nb) : e('Task #%d is overdue', $eventData['tasks'][0]['id']);
+                return $nb > 1 ? e('%d overdue tasks', $nb) : e('Task #%d "%s" is overdue', $eventData['tasks'][0]['id'], $eventData['tasks'][0]['title']);
             case TaskModel::EVENT_USER_MENTION:
                 return e('You were mentioned in the task #%d', $eventData['task']['id']);
             default:

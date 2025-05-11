@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'Zmieniono tor dla zadania #%d',
     'Assignee changed on task #%d' => 'Zmieniono osobę odpowiedzialną dla zadania #%d',
     '%d overdue tasks' => '%d zaległych zadań',
-    'Task #%d is overdue' => 'Zadanie #%d jest zaległe',
     'No notification.' => 'Brak nowych powiadomień.',
     'Mark all as read' => 'Oznacz wszystkie jako przeczytane',
     'Mark as read' => 'Oznacz jako przeczytane',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Zadanie nr %d "%s" jest przeterminowane',
 );

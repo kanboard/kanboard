@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'مسیر شنا برای کار #%d  تغییر کرد',
     'Assignee changed on task #%d' => 'شخص محول شده در کار #%d تغییر کرد',
     '%d overdue tasks' => '%d کار عقب افتاده',
-    'Task #%d is overdue' => 'کار #%d عقب افتاده است',
     'No notification.' => 'بدون آگاه سازی.',
     'Mark all as read' => 'همه را بعنوان خوانده شده علامتگذاری کن',
     'Mark as read' => 'علامتگذاری بعنوان خوانده شده',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'کار #%d "%s" از موعد گذشته است',
 );

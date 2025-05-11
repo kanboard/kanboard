@@ -769,7 +769,6 @@ return array(
     'Swimlane changed for task #%d' => 'Swimlane alterado na tarefa #%d',
     'Assignee changed on task #%d' => 'Assignado alterado na tarefa #%d',
     '%d overdue tasks' => '%d tarefas em atraso',
-    'Task #%d is overdue' => 'Tarefa #%d está em atraso',
     'No notification.' => 'Sem novas notificações.',
     'Mark all as read' => 'Marcar tudo como lido',
     'Mark as read' => 'Marcar como lido',
@@ -1467,4 +1466,5 @@ return array(
     // 'Select the project to copy tasks from' => '',
     // 'The total maximum allowed attachments size is %sB.' => '',
     // 'Add attachments' => '',
+    'Task #%d "%s" is overdue' => 'Tarefa #%d "%s" está atrasada',
 );
