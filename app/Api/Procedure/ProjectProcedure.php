@@ -106,21 +106,29 @@ class ProjectProcedure extends BaseProcedure
         return $this->helper->projectActivity->getProjectEvents($project_id);
     }
 
-    public function createProject($name, $description = null, $owner_id = 0, $identifier = null, $start_date = null, $end_date = null)
+    public function createProject($name, $description = null, $owner_id = 0, $identifier = null, $start_date = null, $end_date = null, $priority_default = null, $priority_start = null, $priority_end = null, $email = null)
     {
+        if ($owner_id === 0 && $this->userSession->isLogged()) {
+            $owner_id = $this->userSession->getId();
+        }
+
         $values = $this->filterValues(array(
             'name' => $name,
             'description' => $description,
             'identifier' => $identifier,
             'start_date' => $start_date,
             'end_date' => $end_date,
+            'priority_default' => $priority_default,
+            'priority_start' => $priority_start,
+            'priority_end' => $priority_end,
+            'email' => $email,
         ));
 
         list($valid, ) = $this->projectValidator->validateCreation($values);
         return $valid ? $this->projectModel->create($values, $owner_id, $this->userSession->isLogged()) : false;
     }
 
-    public function updateProject($project_id, $name = null, $description = null, $owner_id = null, $identifier = null, $start_date = null, $end_date = null)
+    public function updateProject($project_id, $name = null, $description = null, $owner_id = null, $identifier = null, $start_date = null, $end_date = null, $priority_default = null, $priority_start = null, $priority_end = null, $email = null)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateProject', $project_id);
 
@@ -131,7 +139,11 @@ class ProjectProcedure extends BaseProcedure
             'owner_id' => $owner_id,
             'identifier' => $identifier,
             'start_date' => $start_date,
-            'end_date' => $end_date
+            'end_date' => $end_date,
+            'priority_default' => $priority_default,
+            'priority_start' => $priority_start,
+            'priority_end' => $priority_end,
+            'email' => $email,
         ));
 
         list($valid, ) = $this->projectValidator->validateModification($values);

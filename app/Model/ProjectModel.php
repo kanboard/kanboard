@@ -373,8 +373,8 @@ class ProjectModel extends Base
      *
      * @access public
      * @param  array   $values Form values
-     * @param  integer $userId User who create the project
-     * @param  bool    $addUser Automatically add the user
+     * @param  integer $userId User who creates the project
+     * @param  bool    $addUser Whether to automatically add the user to the project
      * @return int     Project id
      */
     public function create(array $values, $userId = 0, $addUser = false)
@@ -599,7 +599,7 @@ class ProjectModel extends Base
      * @param  integer $project_id  Project id
      * @param  bool    $global_tags New global tag value
      * @return bool
-     */    
+     */
     public function changeGlobalTagUsage($project_id, $global_tags)
     {
         return $this->exists($project_id) &&
