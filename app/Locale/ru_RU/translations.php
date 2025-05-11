@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'number.decimals_separator' => ',',
     'number.thousands_separator' => ' ',
     'None' => 'Отсутствует',
@@ -526,9 +526,9 @@ return array(
     'JPY - Japanese Yen' => 'JPY - Японская йена',
     'NZD - New Zealand Dollar' => 'NZD - Новозеландский доллар',
     'PEN - Peruvian Sol' => 'PEN - Перуанский соль',
-    // 'RSD - Serbian dinar' => '',
+    'RSD - Serbian dinar' => 'RSD - Сербский динар',
     'CNY - Chinese Yuan' => 'CNY - Китайский юань',
-    // 'USD - US Dollar' => '',
+    'USD - US Dollar' => 'USD - Американский доллар',
     'VES - Venezuelan Bolívar' => 'VES - Венесуэльский боливар',
     'Destination column' => 'Колонка назначения',
     'Move the task to another column when assigned to a user' => 'Переместить задачу в другую колонку, когда она назначена пользователю',
@@ -1467,4 +1467,4 @@ return array(
     'The total maximum allowed attachments size is %sB.' => 'Общий максимально допустимый размер вложений — %sB.',
     'Add attachments' => 'Добавить вложения',
     'Task #%d "%s" is overdue' => 'Задача #%d "%s" просрочена',
-);
+];

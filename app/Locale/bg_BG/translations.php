@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'number.decimals_separator' => ',',
     'number.thousands_separator' => ' ',
     'None' => 'Няма',
@@ -1467,4 +1467,4 @@ return array(
     'The total maximum allowed attachments size is %sB.' => 'Общият максимален разрешен размер на прикачените файлове е %sB.',
     'Add attachments' => 'Добавете прикачени файлове',
     'Task #%d "%s" is overdue' => 'Задача #%d "%s" е с изтекъл срок',
-);
+];

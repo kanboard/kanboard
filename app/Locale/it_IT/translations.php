@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'number.decimals_separator' => ',',
     'number.thousands_separator' => '.',
     'None' => 'Nessuno',
@@ -526,9 +526,9 @@ return array(
     'JPY - Japanese Yen' => 'JPY - Yen Giapponesi',
     'NZD - New Zealand Dollar' => 'NZD - Dollari della Nuova Zelanda',
     'PEN - Peruvian Sol' => 'PEN - Sol peruviano',
-    // 'RSD - Serbian dinar' => '',
+    'RSD - Serbian dinar' => 'RSD - Dinar serbo',
     'CNY - Chinese Yuan' => 'CNY - Yuan cinese',
-    // 'USD - US Dollar' => '',
+    'USD - US Dollar' => 'USD - Dollari Americani',
     'VES - Venezuelan Bolívar' => 'VES - Bolívar venezuelano',
     'Destination column' => 'Colonna destinazione',
     'Move the task to another column when assigned to a user' => 'Sposta il compito in un\'altra colonna quando viene assegnato ad un utente',
@@ -1467,4 +1467,4 @@ return array(
     'The total maximum allowed attachments size is %sB.' => 'La dimensione massima totale consentita per gli allegati è %sB.',
     'Add attachments' => 'Aggiungi allegati',
     'Task #%d "%s" is overdue' => 'Il compito #%d "%s" è scaduto',
-);
+];

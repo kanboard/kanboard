@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'number.decimals_separator' => ',',
     'number.thousands_separator' => '.',
     'None' => 'Geen',
@@ -526,7 +526,7 @@ return array(
     'JPY - Japanese Yen' => 'JPY - Japanse yen',
     'NZD - New Zealand Dollar' => 'NZD - Nieuw-Zeelandse dollar',
     'PEN - Peruvian Sol' => 'PEN - Peruaanse sol',
-    // 'RSD - Serbian dinar' => '',
+    'RSD - Serbian dinar' => 'RSD - Servische dinar',
     'CNY - Chinese Yuan' => 'CNY - Chinese yuan',
     'USD - US Dollar' => 'USD - Amerikaanse dollar',
     'VES - Venezuelan Bolívar' => 'VES - Venezolaanse bolivar',
@@ -1467,4 +1467,4 @@ return array(
     'The total maximum allowed attachments size is %sB.' => 'De maximaal toegestane totale grootte voor bijlagen is %sB.',
     'Add attachments' => 'Bijlagen toevoegen',
     'Task #%d "%s" is overdue' => 'Taak #%d "%s" is te laat',
-);
+];

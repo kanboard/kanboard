@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'number.decimals_separator' => '.',
     'number.thousands_separator' => ',',
     'None' => 'Hiçbiri',
@@ -1467,4 +1467,4 @@ return array(
     'The total maximum allowed attachments size is %sB.' => 'Ekler için izin verilen toplam maksimum boyut %sB.',
     'Add attachments' => 'Ekleri ekle',
     'Task #%d "%s" is overdue' => 'Görev #%d "%s" son tarihi geçti',
-);
+];

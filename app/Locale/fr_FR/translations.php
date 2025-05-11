@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
     'number.decimals_separator' => ',',
     'number.thousands_separator' => ' ',
     'None' => 'Aucun',
@@ -1467,4 +1467,4 @@ return array(
     'The total maximum allowed attachments size is %sB.' => 'La taille totale maximale autorisée pour les pièces jointes est de %sB.',
     'Add attachments' => 'Ajouter des pièces jointes',
     'Task #%d "%s" is overdue' => 'La tâche n°%d « %s » est en retard',
-);
+];
