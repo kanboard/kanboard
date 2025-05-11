@@ -9,16 +9,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    reviewers:
-      - "fguillot"
-    assignees:
-      - "fguillot"
 
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "weekly"
-    reviewers:
-      - "fguillot"
-    assignees:
-      - "fguillot"
