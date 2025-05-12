@@ -1,3 +1,20 @@
+Version 1.2.45 (May 12, 2025)
+-----------------------------
+
+* refactor: reuse existing helpers in tasks import form
+* fix(filter): handle `null` input in the `Lexer` class
+* fix(docker): legacy key/value format with whitespace separator should not be used
+* fix(api): allow and validate creator ID assignment in task creation
+* feat(routes): add `view` routes for project and task file browsing
+* feat(locale): update all language files using machine translation
+* feat(api): add priority fields to `createProject` and `updateProject` procedures
+* feat: allow attaching screenshots and files when creating a task
+* feat: add task title to overdue notification title
+* ci: replace GitHub Issue Markdown templates with YAML forms
+* ci: remove broken SQL Server unit tests pipeline
+* ci: improve pull request template
+* ci: add commit linter to validate conventional commit messages in pull requests
+
 Version 1.2.44 (March 21, 2025)
 -------------------------------
 
