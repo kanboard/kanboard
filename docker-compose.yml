@@ -1,6 +1,7 @@
 services:
   kanboard:
     image: kanboard/kanboard:latest
+    container_name: kanboard_app
     ports:
      - "443:443"
     volumes:
