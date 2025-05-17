@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Вкупната максимална дозволена големина на прилози е %sB.',
     'Add attachments' => 'Додади прилози',
     'Task #%d "%s" is overdue' => 'Задачата #%d "%s" е задоцнета',
+    'Enable notifications by default for all new users' => 'Овозможете известувања по подразбирање за сите нови корисници',
 ];

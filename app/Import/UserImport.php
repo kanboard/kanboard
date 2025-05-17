@@ -8,6 +8,8 @@ use SimpleValidator\Validators;
 use Kanboard\Core\Security\Role;
 use Kanboard\Core\Base;
 use Kanboard\Core\Csv;
+use Kanboard\Notification\MailNotification;
+use Kanboard\Notification\WebNotification;
 
 /**
  * User Import
@@ -56,9 +58,13 @@ class UserImport extends Base
         $row = $this->prepare($row);
 
         if ($this->validateCreation($row)) {
-            if ($this->userModel->create($row) !== false) {
+            if (($user_id = $this->userModel->create($row)) !== false) {
                 $this->logger->debug('UserImport: imported successfully line '.$line_number);
                 $this->counter++;
+
+                if ($this->configModel->get('notifications_enabled', 0) == 1) {
+                    $this->userNotificationTypeModel->saveSelectedTypes($user_id, [MailNotification::TYPE, WebNotification::TYPE]);
+                }
             } else {
                 $this->logger->error('UserImport: creation error at line '.$line_number);
             }

@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Tổng kích thước tệp đính kèm tối đa được phép là %sB.',
     'Add attachments' => 'Thêm tệp đính kèm',
     'Task #%d "%s" is overdue' => 'Nhiệm vụ #%d "%s" đã quá hạn',
+    'Enable notifications by default for all new users' => 'Kích hoạt thông báo theo mặc định cho tất cả người dùng mới',
 ];

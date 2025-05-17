@@ -3,6 +3,8 @@
 namespace Kanboard\Core\User;
 
 use Kanboard\Core\Base;
+use Kanboard\Notification\MailNotification;
+use Kanboard\Notification\WebNotification;
 
 /**
  * User Synchronization
@@ -69,6 +71,10 @@ class UserSync extends Base
         if ($userId === false) {
             $this->logger->error('Unable to create user profile: '.$user->getExternalId());
             return array();
+        }
+
+        if ($this->configModel->get('notifications_enabled', 0) == 1) {
+            $this->userNotificationTypeModel->saveSelectedTypes($userId, [MailNotification::TYPE, WebNotification::TYPE]);
         }
 
         return $this->userModel->getById($userId);

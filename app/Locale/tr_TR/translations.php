@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Ekler için izin verilen toplam maksimum boyut %sB.',
     'Add attachments' => 'Ekleri ekle',
     'Task #%d "%s" is overdue' => 'Görev #%d "%s" son tarihi geçti',
+    'Enable notifications by default for all new users' => 'Tüm yeni kullanıcılar için bildirimleri varsayılan olarak etkinleştir',
 ];

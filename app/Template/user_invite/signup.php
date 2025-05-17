@@ -36,7 +36,9 @@
             <?= $this->form->label(t('Language'), 'language') ?>
             <?= $this->form->select('language', $languages, $values, $errors) ?>
 
-            <?= $this->form->checkbox('notifications_enabled', t('Enable email notifications'), 1, isset($values['notifications_enabled']) && $values['notifications_enabled'] == 1 ? true : false) ?>
+            <?php if ($this->app->config('notifications_enabled') != 1): ?>
+                <?= $this->form->checkbox('notifications_enabled', t('Enable email notifications'), 1, isset($values['notifications_enabled']) && $values['notifications_enabled'] == 1 ? true : false) ?>
+            <?php endif; ?>
         </fieldset>
 
         <div class="form-actions">

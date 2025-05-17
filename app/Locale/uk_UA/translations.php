@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Загальний максимально дозволений розмір вкладень становить %sБ.',
     'Add attachments' => 'Додати вкладення',
     'Task #%d "%s" is overdue' => 'Задача #%d "%s" прострочена',
+    'Enable notifications by default for all new users' => 'Увімкнути сповіщення за замовчуванням для всіх нових користувачів',
 ];

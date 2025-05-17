@@ -28,6 +28,10 @@
     </fieldset>
 
     <fieldset>
+        <?= $this->form->checkbox('notifications_enabled', t('Enable notifications by default for all new users'), 1, isset($values['notifications_enabled']) && $values['notifications_enabled'] == 1) ?>
+    </fieldset>
+
+    <fieldset>
         <?= $this->form->label(t('Custom Stylesheet'), 'application_stylesheet') ?>
         <?= $this->form->textarea('application_stylesheet', $values, $errors) ?>
     </fieldset>

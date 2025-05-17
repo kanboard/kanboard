@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'A mellékletek maximális megengedett mérete %sB.',
     'Add attachments' => 'Mellékletek hozzáadása',
     'Task #%d "%s" is overdue' => 'Zadatak #%d "%s" je s iztečen rok',
+    'Enable notifications by default for all new users' => 'Értesítések alapértelmezett engedélyezése minden új felhasználó számára',
 ];

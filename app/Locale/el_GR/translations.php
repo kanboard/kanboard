@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Το συνολικό μέγιστο επιτρεπόμενο μέγεθος συνημμένων είναι %sB.',
     'Add attachments' => 'Προσθήκη συνημμένων',
     'Task #%d "%s" is overdue' => 'Η εργασία #%d «%s» είναι εκπρόθεσμη',
+    'Enable notifications by default for all new users' => 'Ενεργοποίηση ειδοποιήσεων από προεπιλογή για όλους τους νέους χρήστες',
 ];

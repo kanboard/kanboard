@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'La taille totale maximale autorisée pour les pièces jointes est de %sB.',
     'Add attachments' => 'Ajouter des pièces jointes',
     'Task #%d "%s" is overdue' => 'La tâche n°%d « %s » est en retard',
+    'Enable notifications by default for all new users' => 'Activer les notifications par défaut pour tous les nouveaux utilisateurs',
 ];

@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Den totala maximalt tillåtna bilagestorleken är %sB.',
     'Add attachments' => 'Lägg till bilagor',
     'Task #%d "%s" is overdue' => 'Uppgift #%d "%s" är försenad',
+    'Enable notifications by default for all new users' => 'Aktivera notifieringar som standard för alla nya användare',
 ];
