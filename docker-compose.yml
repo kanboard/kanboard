@@ -1,18 +1,20 @@
-version: '2'
+name: kanboard
 services:
-  kanboard:
-    image: kanboard/kanboard:latest
+  app:
+    image: ${KANBOARD_IMAGE:-kanboard/kanboard:latest}
+    container_name: kanboard
+    restart: always
     ports:
      - "80:80"
      - "443:443"
     volumes:
-     - kanboard_data:/var/www/app/data
-     - kanboard_plugins:/var/www/app/plugins
-     - kanboard_ssl:/etc/nginx/ssl
+     - data:/var/www/app/data
+     - plugins:/var/www/app/plugins
+     - certs:/etc/nginx/ssl
 volumes:
-  kanboard_data:
+  data:
     driver: local
-  kanboard_plugins:
+  plugins:
     driver: local
-  kanboard_ssl:
+  certs:
     driver: local
