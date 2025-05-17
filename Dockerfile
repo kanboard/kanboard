@@ -28,5 +28,8 @@ ADD docker/ /
 
 RUN rm -rf /var/www/app/docker && echo $VERSION > /var/www/app/app/version.txt
 
+HEALTHCHECK --start-period=3s --timeout=5s \
+  CMD curl -f http://localhost/healthcheck.php || exit 1
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD []

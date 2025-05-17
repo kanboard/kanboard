@@ -1,0 +1,45 @@
+# Sample docker-compose file to run Kanboard with Mariadb
+# More information at https://docs.kanboard.org/v1/admin/docker/
+name: kanboard
+services:
+  app:
+    image: ${KANBOARD_IMAGE:-kanboard/kanboard:latest}
+    container_name: kanboard
+    restart: always
+    ports:
+     - "80:80"
+     - "443:443"
+    volumes:
+     - data:/var/www/app/data
+     - plugins:/var/www/app/plugins
+     - certs:/etc/nginx/ssl
+    environment:
+      DATABASE_URL: mysql://kanboard:kanboard-secret@db/kanboard
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mariadb:lts
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: kanboard
+      MYSQL_USER: kanboard
+      MYSQL_PASSWORD: kanboard-secret
+    volumes:
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  data:
+    driver: local
+  plugins:
+    driver: local
+  certs:
+    driver: local
+  db:
+    driver: local
