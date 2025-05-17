@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Den totale maksimalt tillatte vedleggsstørrelsen er %sB.',
     'Add attachments' => 'Legg til vedlegg',
     'Task #%d "%s" is overdue' => 'Oppgaven #%d "%s" er forsinket',
+    'Enable notifications by default for all new users' => 'Aktiver varslinger som standard for alle nye brukere',
 ];

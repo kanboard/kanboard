@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Sallittu liitteiden kokonaiskoko on %sB.',
     'Add attachments' => 'Lisää liitteitä',
     'Task #%d "%s" is overdue' => 'Tehtävä #%d "%s" on myöhässä',
+    'Enable notifications by default for all new users' => 'Ota ilmoitukset käyttöön oletuksena kaikille uusille käyttäjille',
 ];

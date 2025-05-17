@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Общият максимален разрешен размер на прикачените файлове е %sB.',
     'Add attachments' => 'Добавете прикачени файлове',
     'Task #%d "%s" is overdue' => 'Задача #%d "%s" е с изтекъл срок',
+    'Enable notifications by default for all new users' => 'Активиране на известия по подразбиране за всички нови потребители',
 ];

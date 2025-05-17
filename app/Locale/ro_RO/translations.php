@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Dimensiunea totală maximă permisă pentru atașamente este %sB.',
     'Add attachments' => 'Adaugă atașamente',
     'Task #%d "%s" is overdue' => 'Sarcina #%d "%s" este întârziată',
+    'Enable notifications by default for all new users' => 'Activează notificările implicit pentru toți utilizatorii noi',
 ];

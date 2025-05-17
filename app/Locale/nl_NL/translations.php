@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'De maximaal toegestane totale grootte voor bijlagen is %sB.',
     'Add attachments' => 'Bijlagen toevoegen',
     'Task #%d "%s" is overdue' => 'Taak #%d "%s" is te laat',
+    'Enable notifications by default for all new users' => 'Standaard meldingen inschakelen voor alle nieuwe gebruikers',
 ];

@@ -37,7 +37,7 @@ class ConfigController extends BaseController
 
         switch ($redirect) {
             case 'application':
-                $values += array('password_reset' => 0);
+                $values += array('password_reset' => 0, 'notifications_enabled' => 0);
                 break;
             case 'project':
                 $values += array(

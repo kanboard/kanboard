@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => '허용되는 총 첨부 파일 최대 크기는 %sB입니다.',
     'Add attachments' => '첨부 파일 추가',
     'Task #%d "%s" is overdue' => '할일 #%d "%s"의 기한이 지났습니다',
+    'Enable notifications by default for all new users' => '모든 신규 사용자에 대해 기본적으로 알림 활성화',
 ];

@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Ukupna maksimalna dozvoljena veličina priloga je %sB.',
     'Add attachments' => 'Dodajte priloge',
     'Task #%d "%s" is overdue' => 'Zadatak #%d "%s" je s iztečen сроком',
+    'Enable notifications by default for all new users' => 'Omogući obavještenja po difoltu za sve nove korisnike',
 ];

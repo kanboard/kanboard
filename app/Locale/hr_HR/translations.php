@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Ukupna maksimalna dopuštena veličina privitaka je %sB.',
     'Add attachments' => 'Dodaj privitke',
     'Task #%d "%s" is overdue' => 'Zadatak #%d "%s" je istekao',
+    'Enable notifications by default for all new users' => 'Omogući obavijesti prema zadanim postavkama za sve nove korisnike',
 ];

@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => '允許的附件總大小上限為 %sB。',
     'Add attachments' => '加入附件',
     'Task #%d "%s" is overdue' => '任務 #%d "%s" 已逾期',
+    'Enable notifications by default for all new users' => '預設啟用所有新使用者的通知',
 ];

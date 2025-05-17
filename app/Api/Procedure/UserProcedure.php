@@ -7,6 +7,8 @@ use Kanboard\Core\Security\Role;
 use Kanboard\Core\Ldap\Client as LdapClient;
 use Kanboard\Core\Ldap\ClientException as LdapException;
 use Kanboard\Core\Ldap\User as LdapUser;
+use Kanboard\Notification\MailNotification;
+use Kanboard\Notification\WebNotification;
 
 /**
  * User API controller
@@ -63,7 +65,16 @@ class UserProcedure extends BaseProcedure
         );
 
         list($valid, ) = $this->userValidator->validateCreation($values);
-        return $valid ? $this->userModel->create($values) : false;
+
+        if ($valid) {
+            $user_id = $this->userModel->create($values);
+            if ($user_id !== false && $this->configModel->get('notifications_enabled', 0) == 1) {
+                $this->userNotificationTypeModel->saveSelectedTypes($user_id, [MailNotification::TYPE, WebNotification::TYPE]);
+            }
+            return $user_id;
+        }
+
+        return false;
     }
 
     /**
@@ -107,8 +118,13 @@ class UserProcedure extends BaseProcedure
                 'is_ldap_user' => 1,
             );
 
-            return $this->userModel->create($values);
+            $user_id = $this->userModel->create($values);
 
+            if ($user_id !== false && $this->configModel->get('notifications_enabled', 0) == 1) {
+                $this->userNotificationTypeModel->saveSelectedTypes($user_id, [MailNotification::TYPE, WebNotification::TYPE]);
+            }
+
+            return $user_id;
         } catch (LdapException $e) {
             $this->logger->error($e->getMessage());
             return false;

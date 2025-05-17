@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'O tamanho máximo total permitido para anexos é %sB.',
     'Add attachments' => 'Adicionar anexos',
     'Task #%d "%s" is overdue' => 'Tarefa #%d "%s" está atrasada',
+    'Enable notifications by default for all new users' => 'Habilitar notificações por padrão para todos os novos usuários',
 ];

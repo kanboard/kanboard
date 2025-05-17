@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'ขนาดไฟล์แนบสูงสุดที่อนุญาตทั้งหมดคือ %sB',
     'Add attachments' => 'เพิ่มไฟล์แนบ',
     'Task #%d "%s" is overdue' => 'งาน #%d "%s" เกินกำหนด',
+    'Enable notifications by default for all new users' => 'เปิดใช้งานการแจ้งเตือนตามค่าเริ่มต้นสำหรับผู้ใช้ใหม่ทั้งหมด',
 ];

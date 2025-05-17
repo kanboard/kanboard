@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Celková maximální povolená velikost příloh je %sB.',
     'Add attachments' => 'Přidat přílohy',
     'Task #%d "%s" is overdue' => 'Úkol #%d "%s" je po termínu',
+    'Enable notifications by default for all new users' => 'Ve výchozím nastavení povolit oznámení pro všechny nové uživatele',
 ];

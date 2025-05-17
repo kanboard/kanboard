@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => '添付ファイルの合計最大許容サイズは %sB です。',
     'Add attachments' => '添付ファイルを追加',
     'Task #%d "%s" is overdue' => 'タスク #%d "%s" は期限切れです',
+    'Enable notifications by default for all new users' => '新規ユーザーに対して、デフォルトで通知を有効にする',
 ];

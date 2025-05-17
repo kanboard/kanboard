@@ -1467,4 +1467,5 @@ return [
     'The total maximum allowed attachments size is %sB.' => 'Ukuran total maksimum lampiran yang diizinkan adalah %sB.',
     'Add attachments' => 'Tambahkan lampiran',
     'Task #%d "%s" is overdue' => 'Tugas #%d "%s" sudah kadaluarsa',
+    'Enable notifications by default for all new users' => 'Aktifkan notifikasi secara default untuk semua pengguna baru',
 ];
