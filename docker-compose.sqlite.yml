@@ -1,3 +1,5 @@
+# Sample docker-compose file to run Kanboard with Sqlite
+# More information at https://docs.kanboard.org/v1/admin/docker/
 name: kanboard
 services:
   app:

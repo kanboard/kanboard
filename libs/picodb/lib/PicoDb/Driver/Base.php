@@ -261,5 +261,4 @@ abstract class Base
     {
         return $this->getConnection()->query('SELECT VERSION()')->fetchColumn();
     }
-
 }
