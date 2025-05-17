@@ -98,7 +98,10 @@ class Installer extends \Kanboard\Core\Base
      */
     protected function downloadPluginArchive($archiveUrl)
     {
-        $zip = new ZipArchive();
+        if (!preg_match('/^https?:\/\//', $archiveUrl) || !filter_var($archiveUrl, FILTER_VALIDATE_URL)) {
+            throw new PluginInstallerException(t('This URL is invalid'));
+        }
+
         $archiveData = $this->httpClient->get($archiveUrl);
         $archiveFile = tempnam(ini_get('upload_tmp_dir') ? ini_get('upload_tmp_dir') : sys_get_temp_dir(), 'kb_plugin');
 
@@ -112,6 +115,7 @@ class Installer extends \Kanboard\Core\Base
             throw new PluginInstallerException(t('Unable to write temporary file for plugin.'));
         }
 
+        $zip = new ZipArchive();
         if ($zip->open($archiveFile) !== true) {
             unlink($archiveFile);
             throw new PluginInstallerException(t('Unable to open plugin archive.'));
