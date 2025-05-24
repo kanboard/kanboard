@@ -15,4 +15,3 @@
 </div>
 
 <?= $this->url->link(t('Reset token'), 'ConfigController', 'token', array('type' => 'api'), true, 'btn btn-red') ?>
-

@@ -100,7 +100,7 @@ class SubtaskModel extends Base
         $query = $this->db->table(self::TABLE)
             ->eq('user_id', $userId)
             ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
-            ->join(Taskmodel::TABLE, 'id', 'task_id');
+            ->join(TaskModel::TABLE, 'id', 'task_id');
 
         $this->hook->reference('model:subtask:count:query', $query);
 
@@ -218,7 +218,7 @@ class SubtaskModel extends Base
         if ($subtaskId !== false) {
             $this->subtaskTimeTrackingModel->updateTaskTimeTracking($values['task_id']);
             $this->queueManager->push($this->subtaskEventJob->withParams(
-                $subtaskId, 
+                $subtaskId,
                 array(self::EVENT_CREATE_UPDATE, self::EVENT_CREATE)
             ));
         }
@@ -247,7 +247,7 @@ class SubtaskModel extends Base
 
             if ($fireEvent) {
                 $this->queueManager->push($this->subtaskEventJob->withParams(
-                    $subtask['id'], 
+                    $subtask['id'],
                     array(self::EVENT_CREATE_UPDATE, self::EVENT_UPDATE),
                     $values
                 ));
