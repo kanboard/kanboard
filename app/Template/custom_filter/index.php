@@ -55,4 +55,3 @@
 <?php else: ?>
     <p class="alert"><?= t('There is no custom filter.') ?></p>
 <?php endif ?>
-

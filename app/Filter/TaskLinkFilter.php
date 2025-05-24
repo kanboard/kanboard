@@ -53,11 +53,12 @@ class TaskLinkFilter extends BaseFilter implements FilterInterface
      * Apply filter
      *
      * @access public
-     * @return string
+     * @return FilterInterface
      */
     public function apply()
     {
         $this->query->inSubquery(TaskModel::TABLE.'.id', $this->getSubQuery());
+        return $this;
     }
 
     /**

@@ -11,4 +11,3 @@
         'board.selector.open',
     )
 )) ?>
-

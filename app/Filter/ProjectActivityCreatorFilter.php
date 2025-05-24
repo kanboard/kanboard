@@ -49,7 +49,7 @@ class ProjectActivityCreatorFilter extends BaseFilter implements FilterInterface
      * Apply filter
      *
      * @access public
-     * @return string
+     * @return FilterInterface
      */
     public function apply()
     {
@@ -61,5 +61,6 @@ class ProjectActivityCreatorFilter extends BaseFilter implements FilterInterface
             $this->query->ilike('uc.name', '%'.$this->value.'%');
             $this->query->closeOr();
         }
+        return $this;
     }
 }
