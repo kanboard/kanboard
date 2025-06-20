@@ -190,11 +190,14 @@ class RequestTest extends Base
         $request = new Request($this->container, array(), array(), array(), array(), array());
         $this->assertEquals('Unknown', $request->getIpAddress());
 
+        $request = new Request($this->container, array('HTTP_X_REAL_IP' => '192.168.1.1,127.0.0.1', 'REMOTE_ADDR' => '192.168.0.1'), array(), array(), array(), array());
+        $this->assertEquals('192.168.0.1', $request->getIpAddress());
+
         $request = new Request($this->container, array('HTTP_X_REAL_IP' => '192.168.1.1,127.0.0.1'), array(), array(), array(), array());
-        $this->assertEquals('192.168.1.1', $request->getIpAddress());
+        $this->assertEquals('192.168.1.1', $request->getIpAddress(['HTTP_X_REAL_IP']));
 
         $request = new Request($this->container, array('HTTP_X_FORWARDED_FOR' => '192.168.0.1,127.0.0.1'), array(), array(), array(), array());
-        $this->assertEquals('192.168.0.1', $request->getIpAddress());
+        $this->assertEquals('192.168.0.1', $request->getIpAddress(['HTTP_X_FORWARDED_FOR']));
 
         $request = new Request($this->container, array('REMOTE_ADDR' => '192.168.0.1'), array(), array(), array(), array());
         $this->assertEquals('192.168.0.1', $request->getIpAddress());

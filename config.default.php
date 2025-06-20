@@ -287,5 +287,8 @@ define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST', true);
 // If set to 0 ALL group-memberships will be listed (7 by default)
 define('SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT', 7);
 
-// Dashboard settings
+// Maximum number of projects displayed in the dashboard
 define('DASHBOARD_MAX_PROJECTS', 10);
+
+// Comma separated list of trusted proxy headers, for example: "HTTP_X_REAL_IP,HTTP_X_FORWARDED_FOR"
+define('TRUSTED_PROXY_HEADERS', '');
