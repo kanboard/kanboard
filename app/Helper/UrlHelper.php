@@ -148,7 +148,7 @@ class UrlHelper extends Base
     public function base()
     {
         if (empty($this->base)) {
-            $this->base = $this->configModel->get('application_url') ?: $this->server();
+            $this->base = $this->configModel->get('application_url') ?: 'http://localhost/';
         }
 
         return $this->base;
@@ -173,26 +173,6 @@ class UrlHelper extends Base
         }
 
         return $this->directory;
-    }
-
-    /**
-     * Get current server base url
-     *
-     * @access public
-     * @return string
-     */
-    public function server()
-    {
-        if ($this->request->getServerVariable('SERVER_NAME') === '') {
-            return 'http://localhost/';
-        }
-
-        $url = $this->request->isHTTPS() ? 'https://' : 'http://';
-        $url .= $this->request->getServerVariable('SERVER_NAME');
-        $url .= $this->request->getServerVariable('SERVER_PORT') == 80 || $this->request->getServerVariable('SERVER_PORT') == 443 ? '' : ':'.$this->request->getServerVariable('SERVER_PORT');
-        $url .= $this->dir() ?: '/';
-
-        return $url;
     }
 
     /**
