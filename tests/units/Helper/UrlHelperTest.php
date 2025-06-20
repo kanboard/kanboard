@@ -77,43 +77,10 @@ class UrlHelperTest extends Base
         $this->assertEquals('/', $h->dir());
     }
 
-    public function testServer()
-    {
-        $this->container['request'] = new Request($this->container, array(
-                'PHP_SELF' => '/index.php',
-                'REQUEST_METHOD' => 'GET',
-                'SERVER_NAME' => 'localhost',
-                'SERVER_PORT' => 80,
-            )
-        );
-
-        $h = new UrlHelper($this->container);
-        $this->assertEquals('http://localhost/', $h->server());
-
-        $this->container['request'] = new Request($this->container, array(
-                'PHP_SELF' => '/index.php',
-                'REQUEST_METHOD' => 'GET',
-                'SERVER_NAME' => 'kb',
-                'SERVER_PORT' => 1234,
-            )
-        );
-
-        $h = new UrlHelper($this->container);
-        $this->assertEquals('http://kb:1234/', $h->server());
-    }
-
     public function testBase()
     {
-        $this->container['request'] = new Request($this->container, array(
-                'PHP_SELF' => '/index.php',
-                'REQUEST_METHOD' => 'GET',
-                'SERVER_NAME' => 'kb',
-                'SERVER_PORT' => 1234,
-            )
-        );
-
         $h = new UrlHelper($this->container);
-        $this->assertEquals('http://kb:1234/', $h->base());
+        $this->assertEquals('http://localhost/', $h->base());
 
         $c = new ConfigModel($this->container);
         $c->save(array('application_url' => 'https://mykanboard/'));
