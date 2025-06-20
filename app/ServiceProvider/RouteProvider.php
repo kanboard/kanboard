@@ -269,6 +269,7 @@ class RouteProvider implements ServiceProviderInterface
 
             // Auth routes
             $container['route']->addRoute('login', 'AuthController', 'login');
+            $container['route']->addRoute('login/check', 'AuthController', 'check');
             $container['route']->addRoute('logout', 'AuthController', 'logout');
 
             // PasswordReset

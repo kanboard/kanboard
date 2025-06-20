@@ -339,25 +339,22 @@ class Request extends Base
      * Get the IP address of the user
      *
      * @access public
+     * @param  array   $trustedProxyHeaders  List of trusted proxy headers
+     *                                       (default: TRUSTED_PROXY_HEADERS constant)
      * @return string
      */
-    public function getIpAddress()
+    public function getIpAddress(array $trustedProxyHeaders = [])
     {
-        $keys = array(
-            'HTTP_X_REAL_IP',
-            'HTTP_CLIENT_IP',
-            'HTTP_X_FORWARDED_FOR',
-            'HTTP_X_FORWARDED',
-            'HTTP_X_CLUSTER_CLIENT_IP',
-            'HTTP_FORWARDED_FOR',
-            'HTTP_FORWARDED',
-            'REMOTE_ADDR'
-        );
+        $trustedProxyHeaders = $trustedProxyHeaders ?: explode(',', TRUSTED_PROXY_HEADERS);
+        $keys = array_merge(array_map('trim', $trustedProxyHeaders), ['REMOTE_ADDR']);
 
         foreach ($keys as $key) {
             if ($this->getServerVariable($key) !== '') {
                 foreach (explode(',', $this->server[$key]) as $ipAddress) {
-                    return trim($ipAddress);
+                    $ipAddress = trim($ipAddress);
+                    if (filter_var($ipAddress, FILTER_VALIDATE_IP)) {
+                        return $ipAddress;
+                    }
                 }
             }
         }
