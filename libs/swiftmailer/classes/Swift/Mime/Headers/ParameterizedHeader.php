@@ -44,7 +44,7 @@ class Swift_Mime_Headers_ParameterizedHeader extends Swift_Mime_Headers_Unstruct
      * @param Swift_Encoder            $paramEncoder, optional
      * @param Swift_Mime_Grammar       $grammar
      */
-    public function __construct($name, Swift_Mime_HeaderEncoder $encoder, Swift_Encoder $paramEncoder = null, Swift_Mime_Grammar $grammar)
+    public function __construct($name, Swift_Mime_HeaderEncoder $encoder, ?Swift_Encoder $paramEncoder = null, ?Swift_Mime_Grammar $grammar = null)
     {
         parent::__construct($name, $encoder, $grammar);
         $this->_paramEncoder = $paramEncoder;

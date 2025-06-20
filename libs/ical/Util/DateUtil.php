@@ -11,9 +11,11 @@
 
 namespace Eluceo\iCal\Util;
 
+use DateTimeInterface;
+
 class DateUtil
 {
-    public static function getDefaultParams(\DateTimeInterface $dateTime = null, $noTime = false, $useTimezone = false, $timezoneString = '')
+    public static function getDefaultParams(?DateTimeInterface $dateTime = null, $noTime = false, $useTimezone = false, $timezoneString = '')
     {
         $params = [];
 
@@ -39,7 +41,7 @@ class DateUtil
      *
      * @return mixed
      */
-    public static function getDateString(\DateTimeInterface $dateTime = null, $noTime = false, $useTimezone = false, $useUtc = false)
+    public static function getDateString(?DateTimeInterface $dateTime = null, $noTime = false, $useTimezone = false, $useUtc = false)
     {
         if (empty($dateTime)) {
             $dateTime = new \DateTimeImmutable();

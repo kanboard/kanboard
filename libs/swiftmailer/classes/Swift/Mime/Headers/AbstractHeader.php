@@ -240,7 +240,7 @@ abstract class Swift_Mime_Headers_AbstractHeader implements Swift_Mime_Header
      *
      * @return string
      */
-    protected function createPhrase(Swift_Mime_Header $header, $string, $charset, Swift_Mime_HeaderEncoder $encoder = null, $shorten = false)
+    protected function createPhrase(Swift_Mime_Header $header, $string, $charset, ?Swift_Mime_HeaderEncoder $encoder = null, $shorten = false)
     {
         // Treat token as exactly what was given
         $phraseStr = $string;

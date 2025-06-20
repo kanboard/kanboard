@@ -14,6 +14,7 @@ namespace Eluceo\iCal\Property\Event;
 use Eluceo\iCal\ParameterBag;
 use Eluceo\iCal\Property\ValueInterface;
 use InvalidArgumentException;
+use DateTimeInterface;
 
 /**
  * Implementation of Recurrence Rule.
@@ -209,7 +210,7 @@ class RecurrenceRule implements ValueInterface
     /**
      * @return $this
      */
-    public function setUntil(\DateTimeInterface $until = null)
+    public function setUntil(?DateTimeInterface $until = null)
     {
         $this->until = $until;
 
