@@ -133,14 +133,14 @@ class CaptchaBuilder implements CaptchaBuilderInterface
      */
     public $tempDir = 'temp/';
 
-    public function __construct($phrase = null, PhraseBuilderInterface $builder = null)
+    public function __construct($phrase = null, ?PhraseBuilderInterface $builder = null)
     {
         if ($builder === null) {
             $this->builder = new PhraseBuilder;
         } else {
             $this->builder = $builder;
         }
-        
+
         $this->phrase = is_string($phrase) ? $phrase : $this->builder->build($phrase);
     }
 

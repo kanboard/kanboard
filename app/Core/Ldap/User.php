@@ -37,7 +37,7 @@ class User
      * @param  Query $query
      * @param  Group  $group
      */
-    public function __construct(Query $query, Group $group = null)
+    public function __construct(Query $query, ?Group $group = null)
     {
         $this->query = $query;
         $this->group = $group;
@@ -124,7 +124,7 @@ class User
         if (! $this->hasGroupsConfigured()) {
             return null;
         }
-	
+
         if (LDAP_USER_DEFAULT_ROLE_MANAGER) {
             $role = Role::APP_MANAGER;
         } else {

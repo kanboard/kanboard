@@ -76,7 +76,7 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
      * @param Swift_Plugins_Sleeper $sleeper (only needed in testing)
      * @param Swift_Plugins_Timer   $timer   (only needed in testing)
      */
-    public function __construct($rate, $mode = self::BYTES_PER_MINUTE, Swift_Plugins_Sleeper $sleeper = null, Swift_Plugins_Timer $timer = null)
+    public function __construct($rate, $mode = self::BYTES_PER_MINUTE, ?Swift_Plugins_Sleeper $sleeper = null, ?Swift_Plugins_Timer $timer = null)
     {
         $this->_rate = $rate;
         $this->_mode = $mode;
