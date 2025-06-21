@@ -100,7 +100,7 @@ class AuthValidator extends BaseValidator
         $result = true;
         $errors = array();
 
-        if ($this->userLockingModel->hasCaptcha($values['username'])) {
+        if ($this->userLockingModel->hasCaptcha($values['username']) || $this->captchaModel->isLocked($this->request->getIpAddress())) {
             if (! session_exists('captcha')) {
                 $result = false;
             } else {
@@ -109,7 +109,7 @@ class AuthValidator extends BaseValidator
                 $result = $builder->testPhrase(isset($values['captcha']) ? $values['captcha'] : '');
 
                 if (! $result) {
-                    $errors['login'] = t('Invalid captcha');
+                    $errors['login'] = t('Bad username or password');
                 }
             }
         }

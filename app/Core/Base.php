@@ -87,6 +87,7 @@ use Pimple\Container;
  * @property \Kanboard\Model\ActionParameterModel                    $actionParameterModel
  * @property \Kanboard\Model\AvatarFileModel                         $avatarFileModel
  * @property \Kanboard\Model\BoardModel                              $boardModel
+ * @property \Kanboard\Model\CaptchaModel                            $captchaModel
  * @property \Kanboard\Model\CategoryModel                           $categoryModel
  * @property \Kanboard\Model\ColorModel                              $colorModel
  * @property \Kanboard\Model\ColumnModel                             $columnModel
