@@ -90,7 +90,7 @@ class FileCache extends BaseCache
     protected function createCacheFolder()
     {
         if (! is_dir(CACHE_DIR)) {
-            if (! mkdir(CACHE_DIR, 0755)) {
+            if (! mkdir(CACHE_DIR, 0o755)) {
                 throw new LogicException('Unable to create cache directory: '.CACHE_DIR);
             }
         }

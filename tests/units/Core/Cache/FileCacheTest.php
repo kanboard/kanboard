@@ -14,7 +14,7 @@ function file_get_contents($filename)
     return FileCacheTest::$functions->file_get_contents($filename);
 }
 
-function mkdir($filename, $mode = 0777, $recursif = false)
+function mkdir($filename, $mode = 0o777, $recursif = false)
 {
     return FileCacheTest::$functions->mkdir($filename, $mode, $recursif);
 }
@@ -83,7 +83,7 @@ class FileCacheTest extends \Base
             ->method('mkdir')
             ->with(
                 $this->equalTo(CACHE_DIR),
-                0755
+                0o755
             )
             ->will($this->returnValue(true));
 

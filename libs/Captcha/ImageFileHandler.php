@@ -99,7 +99,7 @@ class ImageFileHandler
     protected function createFolderIfMissing()
     {
         if (!file_exists($this->webPath . '/' . $this->imageFolder)) {
-            mkdir($this->webPath . '/' . $this->imageFolder, 0755);
+            mkdir($this->webPath . '/' . $this->imageFolder, 0o755);
         }
     }
 }
