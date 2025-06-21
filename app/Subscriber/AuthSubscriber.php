@@ -46,6 +46,7 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
         $ipAddress = $this->request->getIpAddress();
 
         $this->userLockingModel->resetFailedLogin($this->userSession->getUsername());
+        $this->captchaModel->resetFailedLogin($ipAddress);
 
         $this->lastLoginModel->create(
             $event->getAuthType(),
@@ -96,7 +97,10 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
         $this->logger->debug('Subscriber executed: '.__METHOD__);
         $username = $event->getUsername();
         $ipAddress = $this->request->getIpAddress();
-        
+
+        // IP-based captcha
+        $this->captchaModel->incrementFailedLogin($ipAddress);
+
         if (! empty($username)) {
             // log login failure in web server log to allow fail2ban usage
             error_log('Kanboard: user '.$username.' authentication failure with IP address: '.$ipAddress);

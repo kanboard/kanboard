@@ -22,8 +22,14 @@ class AuthController extends BaseController
         if ($this->userSession->isLogged()) {
             $this->response->redirect($this->helper->url->to('DashboardController', 'show'));
         } else {
+            $showCaptcha = false;
+            if (! empty($values['username']) && $this->userLockingModel->hasCaptcha($values['username'])) {
+                $showCaptcha = true;
+            } elseif ($this->captchaModel->isLocked($this->request->getIpAddress())) {
+                $showCaptcha = true;
+            }
             $this->response->html($this->helper->layout->app('auth/index', array(
-                'captcha' => ! empty($values['username']) && $this->userLockingModel->hasCaptcha($values['username']),
+                'captcha' => $showCaptcha,
                 'errors' => $errors,
                 'values' => $values,
                 'no_layout' => true,

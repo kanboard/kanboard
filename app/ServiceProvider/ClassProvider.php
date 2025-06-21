@@ -31,6 +31,7 @@ class ClassProvider implements ServiceProviderInterface
             'ActionParameterModel',
             'AvatarFileModel',
             'BoardModel',
+            'CaptchaModel',
             'CategoryModel',
             'ColorModel',
             'ColumnModel',
