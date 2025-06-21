@@ -236,7 +236,7 @@ class Event extends Component
      */
     protected $attachments = [];
 
-    public function __construct(string $uniqueId = null)
+    public function __construct(?string $uniqueId = null)
     {
         if (null == $uniqueId) {
             $uniqueId = uniqid();

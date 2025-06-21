@@ -375,7 +375,7 @@ class CaptchaBuilder implements CaptchaBuilderInterface
     public function isOCRReadable()
     {
         if (!is_dir($this->tempDir)) {
-            @mkdir($this->tempDir, 0755, true);
+            @mkdir($this->tempDir, 0o755, true);
         }
 
         $tempj = $this->tempDir . uniqid('captcha', true) . '.jpg';

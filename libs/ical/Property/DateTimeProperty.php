@@ -26,7 +26,7 @@ class DateTimeProperty extends Property
      */
     public function __construct(
         $name,
-        \DateTimeInterface $dateTime = null,
+        ?\DateTimeInterface $dateTime = null,
         $noTime = false,
         $useTimezone = false,
         $useUtc = false,

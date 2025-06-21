@@ -150,7 +150,7 @@ class FileStorage implements ObjectStorageInterface
     {
         $folder = strpos($key, DIRECTORY_SEPARATOR) !== false ? $this->baseDir.DIRECTORY_SEPARATOR.dirname($key) : $this->baseDir;
 
-        if (! is_dir($folder) && ! mkdir($folder, 0755, true)) {
+        if (! is_dir($folder) && ! mkdir($folder, 0o755, true)) {
             throw new ObjectStorageException('Unable to create folder: '.$folder);
         }
     }

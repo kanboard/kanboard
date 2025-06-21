@@ -38,7 +38,7 @@ class Swift_FileSpool extends Swift_ConfigurableSpool
         $this->_path = $path;
 
         if (!file_exists($this->_path)) {
-            if (!mkdir($this->_path, 0777, true)) {
+            if (!mkdir($this->_path, 0o777, true)) {
                 throw new Swift_IoException(sprintf('Unable to create path "%s".', $this->_path));
             }
         }

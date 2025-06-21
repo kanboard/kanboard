@@ -44,7 +44,7 @@ class RecurrenceId extends Property
      */
     protected $range;
 
-    public function __construct(\DateTimeInterface $dateTime = null)
+    public function __construct(?\DateTimeInterface $dateTime = null)
     {
         $this->name = 'RECURRENCE-ID';
         $this->parameterBag = new ParameterBag();
