@@ -740,6 +740,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Kanboard\\Model\\ActionParameterModel' => __DIR__ . '/../..' . '/app/Model/ActionParameterModel.php',
         'Kanboard\\Model\\AvatarFileModel' => __DIR__ . '/../..' . '/app/Model/AvatarFileModel.php',
         'Kanboard\\Model\\BoardModel' => __DIR__ . '/../..' . '/app/Model/BoardModel.php',
+        'Kanboard\\Model\\CaptchaModel' => __DIR__ . '/../..' . '/app/Model/CaptchaModel.php',
         'Kanboard\\Model\\CategoryModel' => __DIR__ . '/../..' . '/app/Model/CategoryModel.php',
         'Kanboard\\Model\\ColorModel' => __DIR__ . '/../..' . '/app/Model/ColorModel.php',
         'Kanboard\\Model\\ColumnModel' => __DIR__ . '/../..' . '/app/Model/ColumnModel.php',

@@ -548,6 +548,7 @@ return array(
     'Kanboard\\Model\\ActionParameterModel' => $baseDir . '/app/Model/ActionParameterModel.php',
     'Kanboard\\Model\\AvatarFileModel' => $baseDir . '/app/Model/AvatarFileModel.php',
     'Kanboard\\Model\\BoardModel' => $baseDir . '/app/Model/BoardModel.php',
+    'Kanboard\\Model\\CaptchaModel' => $baseDir . '/app/Model/CaptchaModel.php',
     'Kanboard\\Model\\CategoryModel' => $baseDir . '/app/Model/CategoryModel.php',
     'Kanboard\\Model\\ColorModel' => $baseDir . '/app/Model/ColorModel.php',
     'Kanboard\\Model\\ColumnModel' => $baseDir . '/app/Model/ColumnModel.php',
