@@ -1,8 +1,8 @@
 <?php
 
-// PHP 7.4.0 minimum
-if (version_compare(PHP_VERSION, '7.4.0', '<')) {
-    throw new Exception('This software requires PHP 7.4.0 minimum');
+// PHP 8.1.0 minimum
+if (version_compare(PHP_VERSION, '8.1.0', '<')) {
+    throw new Exception('This software requires PHP 8.1.0 minimum');
 }
 
 // Check data folder if sqlite

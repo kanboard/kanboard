@@ -121,6 +121,9 @@ final class EnglishInflector implements InflectorInterface
         // statuses (status)
         ['sesutats', 8, true, true, 'status'],
 
+        // article (articles), ancle (ancles)
+        ['sel', 3, true, true, 'le'],
+
         // analyses (analysis), ellipses (ellipsis), fungi (fungus),
         // neuroses (neurosis), theses (thesis), emphases (emphasis),
         // oases (oasis), crises (crisis), houses (house), bases (base),
@@ -345,14 +348,14 @@ final class EnglishInflector implements InflectorInterface
         // indices (index)
         ['xedni', 5, false, true, ['indicies', 'indexes']],
 
+        // fax (faxes, faxxes)
+        ['xaf', 3, true, true, ['faxes', 'faxxes']],
+
         // boxes (box)
         ['xo', 2, false, true, 'oxes'],
 
-        // indexes (index), matrixes (matrix)
-        ['x', 1, true, false, ['cies', 'xes']],
-
-        // appendices (appendix)
-        ['xi', 2, false, true, 'ices'],
+        // indexes (index), matrixes (matrix), appendices (appendix)
+        ['x', 1, true, false, ['ces', 'xes']],
 
         // babies (baby)
         ['y', 1, false, true, 'ies'],

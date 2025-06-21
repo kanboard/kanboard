@@ -8,31 +8,6 @@ permissions:
   packages: read
 
 jobs:
-  Sqlite-PHP7:
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/kanboard/tests:latest
-      credentials:
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-    - uses: actions/checkout@v4
-    - name: Validate composer.json and composer.lock
-      run: composer validate
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
-    - name: Start Apache
-      run: /etc/init.d/apache2 start
-    - name: Link document root
-      run: |
-        rm -rf /var/www/html
-        ln -s $GITHUB_WORKSPACE /var/www/html
-        cp tests/configs/config.sqlite.php /var/www/html/config.php
-        chown -R www-data:www-data /var/www/html/data
-        ls -l /var/www/html/
-    - name: Integration tests with Sqlite
-      run: ./vendor/bin/phpunit -c tests/integration.sqlite.xml
-
   Sqlite-PHP8:
     runs-on: ubuntu-24.04
     steps:
