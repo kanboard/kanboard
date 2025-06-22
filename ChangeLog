@@ -1,3 +1,26 @@
+Version 1.2.46 (June 22, 2025)
+------------------------------
+
+* refactor: update return type in filter apply methods
+* fix(security): prevent potential `Host` header injection via `SERVER_NAME`
+   -  You must specify the Kanboard application URL explicitly to generate correct URLs from email notifications. The default is `http://localhost/`.
+* fix: make various PHP 8.x compatibility changes
+* fix: avoid `Implicitly nullable parameter declarations` errors in PHP 8.4
+* feat: validate plugin archive URL before downloading
+* feat: use PHP 8.4 in the official Docker image
+* feat: show CAPTCHA on login form regardless of user existence
+* feat: add new option to enable notifications by default for new users
+* feat: add healthcheck endpoint `healthcheck.php`, and new Docker Compose files for MariaDB, Postgres, and SQLite
+* feat: add `TRUSTED_PROXY_HEADERS` config option
+    - If you use a reverse proxy, you can now specify which headers to trust for the client IP address. Nothing is trusted by default.
+* docs: add `CONTRIBUTING.md` file
+* ci(docker): avoid using `set-output` deprecated command
+* chore!: PHP 8.1 is now the minimum version supported
+    - **!! PHP 7.4 is no longer supported !!**
+* chore: update `docker-compose.yml` sample file to the latest specs
+* chore: remove obsolete `Vagrantfile`
+* build(deps): bump Alpine Docker image from 3.21 to 3.22
+
 Version 1.2.45 (May 12, 2025)
 -----------------------------
 
