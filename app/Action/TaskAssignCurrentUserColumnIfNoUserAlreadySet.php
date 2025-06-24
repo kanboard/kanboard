@@ -20,7 +20,7 @@ class TaskAssignCurrentUserColumnIfNoUserAlreadySet extends Base
      */
     public function getDescription()
     {
-        return t('Assign the task to the person who does the action when the column is changed if no user is assigned already');
+        return t('Assign a task to the logged user on column change to specified column if no user is assigned');
     }
 
     /**
