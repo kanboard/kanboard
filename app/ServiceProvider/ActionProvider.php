@@ -52,7 +52,8 @@ use Kanboard\Action\SubtaskTimerMoveTaskColumn;
 use Kanboard\Action\StopSubtaskTimerMoveTaskColumn;
 use Kanboard\Action\TaskMoveColumnOnStartDate;
 use Kanboard\Action\TaskAssignDueDateOnMoveColumn;
-
+use Kanboard\Action\TaskAssignToUserOnCreationInColumn;
+use Kanboard\Action\TaskAssignCurrentUserColumnIfNoUserAlreadySet;
 
 /**
  * Action Provider
@@ -119,6 +120,8 @@ class ActionProvider implements ServiceProviderInterface
         $container['actionManager']->register(new TaskMoveColumnOnStartDate($container));
         $container['actionManager']->register(new TaskAssignColorOnStartDate($container));
         $container['actionManager']->register(new TaskAssignDueDateOnMoveColumn($container));
+        $container['actionManager']->register(new TaskAssignToUserOnCreationInColumn($container));
+        $container['actionManager']->register(new TaskAssignCurrentUserColumnIfNoUserAlreadySet($container));
         
         return $container;
     }
