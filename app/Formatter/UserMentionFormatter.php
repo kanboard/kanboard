@@ -20,7 +20,8 @@ class UserMentionFormatter extends BaseFormatter implements FormatterInterface
      * @param array $users
      * @return $this
      */
-    public function withUsers(array $users) {
+    public function withUsers(array $users)
+    {
         $this->users = $users;
         return $this;
     }

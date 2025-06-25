@@ -70,7 +70,7 @@ class UserCreationController extends BaseController
 
             if ($this->configModel->get('notifications_enabled', 0) == 1) {
                 $this->userNotificationTypeModel->saveSelectedTypes($user_id, [MailNotification::TYPE, WebNotification::TYPE]);
-            } else if (! empty($values['notifications_enabled'])) {
+            } elseif (! empty($values['notifications_enabled'])) {
                 $this->userNotificationTypeModel->saveSelectedTypes($user_id, [MailNotification::TYPE]);
             }
 

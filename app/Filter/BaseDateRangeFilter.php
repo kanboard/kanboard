@@ -43,7 +43,7 @@ abstract class BaseDateRangeFilter extends BaseFilter
     {
         $dates = explode('..', $this->value);
 
-        if(count($dates)=== 2){
+        if (count($dates)=== 2) {
             $timestampFrom = $this->dateParser->getTimestamp($dates[0]." 00:00");
             $timestampTo = $this->dateParser->getTimestamp($dates[1]." 00:00");
 

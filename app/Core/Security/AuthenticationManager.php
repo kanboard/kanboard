@@ -185,7 +185,7 @@ class AuthenticationManager extends Base
     {
         $interface = '\Kanboard\Core\Security\\'.$interface;
 
-        return array_filter($this->providers, function(AuthenticationProviderInterface $provider) use ($interface) {
+        return array_filter($this->providers, function (AuthenticationProviderInterface $provider) use ($interface) {
             return is_a($provider, $interface);
         });
     }

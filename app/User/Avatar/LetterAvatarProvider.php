@@ -95,9 +95,9 @@ class LetterAvatarProvider extends Base implements AvatarProviderInterface
 
             if ($color < 1/6) {
                 $color = $p + ($q - $p) * 6 * $color;
-            } else if ($color < 0.5) {
+            } elseif ($color < 0.5) {
                 $color = $q;
-            } else if ($color < 2/3) {
+            } elseif ($color < 2/3) {
                 $color = $p + ($q - $p) * 6 * (2/3 - $color);
             } else {
                 $color = $p;

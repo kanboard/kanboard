@@ -41,7 +41,8 @@ class UserListController extends BaseController
         if ($search !== '' && ! $paginator->isEmpty()) {
             $paginator = $paginator
                 ->setUrl('UserListController', 'search', array('search' => $search))
-                ->setQuery($this->userQuery
+                ->setQuery(
+                    $this->userQuery
                     ->withFilter(new UserNameFilter($search))
                     ->getQuery()
                 )

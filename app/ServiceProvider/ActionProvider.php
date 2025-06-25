@@ -53,7 +53,6 @@ use Kanboard\Action\StopSubtaskTimerMoveTaskColumn;
 use Kanboard\Action\TaskMoveColumnOnStartDate;
 use Kanboard\Action\TaskAssignDueDateOnMoveColumn;
 
-
 /**
  * Action Provider
  *

@@ -97,8 +97,8 @@ class PluginController extends BaseController
     {
         $pluginId = $this->request->getStringParam('pluginId');
         $plugins = array_merge(
-          $this->pluginLoader->getPlugins(),
-          $this->pluginLoader->getIncompatiblePlugins()
+            $this->pluginLoader->getPlugins(),
+            $this->pluginLoader->getIncompatiblePlugins()
         );
 
         $this->response->html($this->template->render('plugin/remove', array(

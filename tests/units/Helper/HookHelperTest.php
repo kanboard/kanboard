@@ -24,7 +24,7 @@ class HookHelperTest extends Base
             ->will($this->returnValue('tpl1_content'));
 
         $hookHelper = new HookHelper($this->container);
-        $hookHelper->attachCallable('test', 'tpl1', function() {
+        $hookHelper->attachCallable('test', 'tpl1', function () {
             return array(
                 'k1' => 'v1',
             );
@@ -51,7 +51,7 @@ class HookHelperTest extends Base
             ->will($this->returnValue('tpl1_content'));
 
         $hookHelper = new HookHelper($this->container);
-        $hookHelper->attachCallable('test', 'tpl1', function() {
+        $hookHelper->attachCallable('test', 'tpl1', function () {
         });
 
         $this->assertEquals('tpl1_content', $hookHelper->render('test', array('k0' => 'v0')));

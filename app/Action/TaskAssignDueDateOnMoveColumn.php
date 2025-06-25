@@ -49,12 +49,12 @@ class TaskAssignDueDateOnMoveColumn extends Base
             'column_id' => t('Column'),
         );
     }
-/**
-     * Get the required parameter for the event
-     *
-     * @access public
-     * @return string[]
-     */
+    /**
+         * Get the required parameter for the event
+         *
+         * @access public
+         * @return string[]
+         */
     public function getEventRequiredParameters()
     {
         return array(

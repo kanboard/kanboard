@@ -81,10 +81,10 @@ class FormHelper extends Base
      */
     public function colorSelect($name, array $values)
     {
-      $colors = $this->colorModel->getList();
-      $html = $this->label(t('Color'), $name);
-      $html .= $this->select($name, $colors, $values, array(), array('tabindex="4"'), 'color-picker');
-      return $html;
+        $colors = $this->colorModel->getList();
+        $html = $this->label(t('Color'), $name);
+        $html .= $this->select($name, $colors, $values, array(), array('tabindex="4"'), 'color-picker');
+        return $html;
     }
 
     /**

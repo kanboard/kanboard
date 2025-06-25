@@ -59,7 +59,8 @@ class TaskModificationModel extends Base
         }
 
         if (! empty($events)) {
-            $this->queueManager->push($this->taskEventJob
+            $this->queueManager->push(
+                $this->taskEventJob
                 ->withParams($task['id'], $events, $changes, array(), $task)
             );
         }

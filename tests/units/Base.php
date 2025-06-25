@@ -37,7 +37,9 @@ abstract class Base extends PHPUnit\Framework\TestCase
             $pdo = null;
         } elseif (DB_DRIVER === 'dblib') {
             $dsn = 'dblib:host='.DB_HOSTNAME;
-            if (! empty(DB_PORT) ) { $dsn .= ','.DB_PORT; }
+            if (! empty(DB_PORT)) {
+                $dsn .= ','.DB_PORT;
+            }
             $dsn .= ";dbname=master;appname=Kanboard Unit Tests [$test]";
             $pdo = new PDO($dsn, DB_USERNAME, DB_PASSWORD);
             $pdo->exec('use master;');
@@ -136,6 +138,6 @@ abstract class Base extends PHPUnit\Framework\TestCase
         }
         $this->container['db']->closeConnection();
         $this->container['logger']->debug("Finishing tearDown() for test $test");
-        unset ($this->container);
+        unset($this->container);
     }
 }
