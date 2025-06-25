@@ -18,7 +18,7 @@ class ProjectFileEventJobTest extends Base
 
     public function testWithMissingFile()
     {
-        $this->container['dispatcher']->addListener(ProjectFileModel::EVENT_CREATE, function() {});
+        $this->container['dispatcher']->addListener(ProjectFileModel::EVENT_CREATE, function () {});
 
         $projectFileEventJob = new ProjectFileEventJob($this->container);
         $projectFileEventJob->execute(42, ProjectFileModel::EVENT_CREATE);
@@ -29,7 +29,7 @@ class ProjectFileEventJobTest extends Base
 
     public function testTriggerEvents()
     {
-        $this->container['dispatcher']->addListener(ProjectFileModel::EVENT_CREATE, function() {});
+        $this->container['dispatcher']->addListener(ProjectFileModel::EVENT_CREATE, function () {});
 
         $projectModel = new ProjectModel($this->container);
         $projectFileModel = new ProjectFileModel($this->container);

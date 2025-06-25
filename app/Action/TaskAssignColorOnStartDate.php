@@ -4,7 +4,6 @@ namespace Kanboard\Action;
 
 use Kanboard\Model\TaskModel;
 
-
 /**
  * Assign a color when preset start date is reached
  *

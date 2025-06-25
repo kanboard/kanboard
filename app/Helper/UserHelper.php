@@ -139,7 +139,7 @@ class UserHelper extends Base
         $total = count($groupsList);
 
         if ($total > 0 && SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT > 0) {
-            $limitedList = array_slice($groupsList, 0 , SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT);
+            $limitedList = array_slice($groupsList, 0, SHOW_GROUP_MEMBERSHIPS_IN_USERLIST_WITH_LIMIT);
         }
 
         return [

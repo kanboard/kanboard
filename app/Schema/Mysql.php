@@ -400,7 +400,8 @@ function version_106(PDO $pdo)
 {
     $pdo->exec('RENAME TABLE files TO task_has_files');
 
-    $pdo->exec("
+    $pdo->exec(
+        "
         CREATE TABLE project_has_files (
             `id` INT NOT NULL AUTO_INCREMENT,
             `project_id` INT NOT NULL,
@@ -519,7 +520,7 @@ function version_97(PDO $pdo)
 
         if ($row['is_admin'] == 1) {
             $role = Role::APP_ADMIN;
-        } else if ($row['is_project_admin']) {
+        } elseif ($row['is_project_admin']) {
             $role = Role::APP_MANAGER;
         }
 
@@ -1472,7 +1473,8 @@ function version_19(PDO $pdo)
 
 function version_18(PDO $pdo)
 {
-    $pdo->exec("
+    $pdo->exec(
+        "
         CREATE TABLE task_has_subtasks (
             id INT NOT NULL AUTO_INCREMENT,
             title VARCHAR(255),
@@ -1489,7 +1491,8 @@ function version_18(PDO $pdo)
 
 function version_17(PDO $pdo)
 {
-    $pdo->exec("
+    $pdo->exec(
+        "
         CREATE TABLE task_has_files (
             id INT NOT NULL AUTO_INCREMENT,
             name VARCHAR(50),
@@ -1504,7 +1507,8 @@ function version_17(PDO $pdo)
 
 function version_16(PDO $pdo)
 {
-    $pdo->exec("
+    $pdo->exec(
+        "
         CREATE TABLE project_has_categories (
             id INT NOT NULL AUTO_INCREMENT,
             name VARCHAR(255),
@@ -1537,7 +1541,8 @@ function version_13(PDO $pdo)
 
 function version_12(PDO $pdo)
 {
-    $pdo->exec("
+    $pdo->exec(
+        "
         CREATE TABLE remember_me (
             id INT NOT NULL AUTO_INCREMENT,
             user_id INT,
@@ -1552,7 +1557,8 @@ function version_12(PDO $pdo)
         ) ENGINE=InnoDB CHARSET=utf8"
     );
 
-    $pdo->exec("
+    $pdo->exec(
+        "
         CREATE TABLE last_logins (
             id INT NOT NULL AUTO_INCREMENT,
             auth_type VARCHAR(25),

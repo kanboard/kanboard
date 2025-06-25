@@ -45,7 +45,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         
         if (LDAP_AUTH) {
             $container['authenticationManager']->register(new LdapAuth($container));
-        }     
+        }
 
         $container['projectAccessMap'] = $this->getProjectAccessMap();
         $container['applicationAccessMap'] = $this->getApplicationAccessMap();

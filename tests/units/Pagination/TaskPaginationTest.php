@@ -29,14 +29,15 @@ class TaskPaginationTest extends Base
         $this->assertCount(1, $taskPagination->getDashboardPaginator(1, 'tasks', 5)->setOrder(TaskModel::TABLE.'.date_due')->getCollection());
     }
 
-    public function testTaskPaginationTotal() {
+    public function testTaskPaginationTotal()
+    {
 
         $taskCreationModel = new TaskCreationModel($this->container);
         $projectModel = new ProjectModel($this->container);
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
 
         $numTasks = 11;
-        foreach (range(1,$numTasks) as $i) {
+        foreach (range(1, $numTasks) as $i) {
             $this->assertEquals($i, $taskCreationModel->create(array('title' => 'Task #'.$i, 'project_id' => 1)));
         }
 
@@ -44,22 +45,23 @@ class TaskPaginationTest extends Base
         $this->assertEquals($numTasks, $taskPaginationTotal->getDashboardPaginator(0, 'tasks', 5)->getTotal());
     }
 
-    public function testTaskPaginationPaging() {
+    public function testTaskPaginationPaging()
+    {
 
         $taskCreationModel = new TaskCreationModel($this->container);
         $projectModel = new ProjectModel($this->container);
         $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
 
         $numTasks = 12;
-        foreach (range(1,$numTasks) as $i) {
+        foreach (range(1, $numTasks) as $i) {
             $this->assertEquals($i, $taskCreationModel->create(array('title' => 'Task #'.$i, 'project_id' => 1)));
         }
 
         $taskPaginationMaxM = new TaskPagination($this->container);
-        foreach (range(1,$numTasks) as $m) {
-            foreach(range(1, (int) ceil($numTasks / $m)) as $p) {
+        foreach (range(1, $numTasks) as $m) {
+            foreach (range(1, (int) ceil($numTasks / $m)) as $p) {
                 $this->container['request'] = new Request($this->container, array(), array('page' => $p), array(), array(), array());
-                $this->assertEquals(1+($p-1)*$m , $taskPaginationMaxM->getDashboardPaginator(0, 'tasks', $m)->calculate()->getCollection()[0]['id']);
+                $this->assertEquals(1+($p-1)*$m, $taskPaginationMaxM->getDashboardPaginator(0, 'tasks', $m)->calculate()->getCollection()[0]['id']);
             }
         }
     }

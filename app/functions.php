@@ -198,7 +198,7 @@ function build_app_version($ref, $commit_hash)
 
     if ($commit_hash !== '$Format:%H$') {
         return 'main.'.$commit_hash;
-    } else if (file_exists(__DIR__ . '/version.txt')) {
+    } elseif (file_exists(__DIR__ . '/version.txt')) {
         return rtrim(file_get_contents(__DIR__ . '/version.txt'));
     }
 
@@ -243,8 +243,10 @@ function convert_php_size_to_bytes($value)
     switch (strtoupper($unit)) {
         case 'G':
             $size *= 1024;
+            // no break
         case 'M':
             $size *= 1024;
+            // no break
         case 'K':
             $size *= 1024;
     }

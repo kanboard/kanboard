@@ -261,7 +261,7 @@ class ProjectRoleHelper extends Base
             if ($restriction['column_id'] == $columnId) {
                 if ($restriction['rule'] == ColumnRestrictionModel::RULE_ALLOW_TASK_OPEN_CLOSE) {
                     return true;
-                } else if ($restriction['rule'] == ColumnRestrictionModel::RULE_BLOCK_TASK_OPEN_CLOSE) {
+                } elseif ($restriction['rule'] == ColumnRestrictionModel::RULE_BLOCK_TASK_OPEN_CLOSE) {
                     return false;
                 }
             }
@@ -286,7 +286,7 @@ class ProjectRoleHelper extends Base
             if ($restriction['column_id'] == $columnId) {
                 if ($restriction['rule'] == ColumnRestrictionModel::RULE_ALLOW_TASK_CREATION) {
                     return true;
-                } else if ($restriction['rule'] == ColumnRestrictionModel::RULE_BLOCK_TASK_CREATION) {
+                } elseif ($restriction['rule'] == ColumnRestrictionModel::RULE_BLOCK_TASK_CREATION) {
                     return false;
                 }
             }

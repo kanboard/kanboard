@@ -28,8 +28,8 @@ class TaskInternalLinkController extends BaseController
         $task = $this->getTask();
 
         if (empty($values)) {
-          $values['another_tasklink'] = $this->request->getIntegerParam('another_tasklink', 0);
-          $values = $this->hook->merge('controller:tasklink:form:default', $values, array('default_values' => $values));
+            $values['another_tasklink'] = $this->request->getIntegerParam('another_tasklink', 0);
+            $values = $this->hook->merge('controller:tasklink:form:default', $values, array('default_values' => $values));
         }
 
         $this->response->html($this->template->render('task_internal_link/create', array(

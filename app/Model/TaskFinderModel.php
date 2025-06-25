@@ -213,25 +213,25 @@ class TaskFinderModel extends Base
         return $this->getOverdueTasksQuery()->findAll();
     }
 
-     /**
-     * Get a list of overdue tasks by project
-     *
-     * @access public
-     * @param  integer $project_id
-     * @return array
-     */
+    /**
+    * Get a list of overdue tasks by project
+    *
+    * @access public
+    * @param  integer $project_id
+    * @return array
+    */
     public function getOverdueTasksByProject($project_id)
     {
         return $this->getOverdueTasksQuery()->eq(TaskModel::TABLE.'.project_id', $project_id)->findAll();
     }
 
-     /**
-     * Get a list of overdue tasks by user
-     *
-     * @access public
-     * @param  integer $user_id
-     * @return array
-     */
+    /**
+    * Get a list of overdue tasks by user
+    *
+    * @access public
+    * @param  integer $user_id
+    * @return array
+    */
     public function getOverdueTasksByUser($user_id)
     {
         return $this->getOverdueTasksQuery()->eq(TaskModel::TABLE.'.owner_id', $user_id)->findAll();

@@ -21,7 +21,7 @@ class AssetHelper extends Base
      */
     public function js($filename, $async = false)
     {
-        $dir = dirname(__DIR__,2);
+        $dir = dirname(__DIR__, 2);
         $filepath = $dir.'/'.$filename;
         return '<script '.($async ? 'async' : '').' defer type="text/javascript" src="'.$this->helper->url->dir().$filename.'?'.filemtime($filepath).'"></script>';
     }
@@ -36,7 +36,7 @@ class AssetHelper extends Base
      */
     public function css($filename, $is_file = true, $media = 'screen')
     {
-        $dir = dirname(__DIR__,2);
+        $dir = dirname(__DIR__, 2);
         $filepath = $dir.'/'.$filename;
         return '<link rel="stylesheet" href="'.$this->helper->url->dir().$filename.($is_file ? '?'.filemtime($filepath) : '').'" media="'.$media.'">';
     }

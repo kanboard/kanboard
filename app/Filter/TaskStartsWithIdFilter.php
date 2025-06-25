@@ -7,7 +7,7 @@ use Kanboard\Model\TaskModel;
 
 /**
  * Class TaskIdSearchFilter
- * 
+ *
  * @package Kanboard\Filter
  * @author  Frederic Guillot
  */

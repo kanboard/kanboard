@@ -24,11 +24,11 @@ class SessionProvider implements ServiceProviderInterface
      */
     public function register(Container $container)
     {
-        $container['sessionManager'] = function($c) {
+        $container['sessionManager'] = function ($c) {
             return new SessionManager($c);
         };
 
-        $container['flash'] = function($c) {
+        $container['flash'] = function ($c) {
             return new FlashMessage($c);
         };
 
