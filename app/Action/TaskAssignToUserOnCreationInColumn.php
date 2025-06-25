@@ -32,8 +32,8 @@ class TaskAssignToUserOnCreationInColumn extends Base
     public function getCompatibleEvents()
     {
         return array(
-                TaskModel::EVENT_CREATE,
-                );
+            TaskModel::EVENT_CREATE,
+        );
     }
 
     /**
@@ -45,8 +45,8 @@ class TaskAssignToUserOnCreationInColumn extends Base
     public function getActionRequiredParameters()
     {
         return array(
-                'column_id' => t('Column'),
-                );
+            'column_id' => t('Column'),
+        );
     }
 
     /**
@@ -58,13 +58,13 @@ class TaskAssignToUserOnCreationInColumn extends Base
     public function getEventRequiredParameters()
     {
         return array(
-                'task_id',
-                'task' => array(
-                    'project_id',
-                    'column_id',
-                    'creator_id',
-                    ),
-                );
+            'task_id',
+            'task' => array(
+                'project_id',
+                'column_id',
+                'creator_id',
+            ),
+        );
     }
 
     /**
@@ -81,16 +81,16 @@ class TaskAssignToUserOnCreationInColumn extends Base
 
         if ($data['task']['assignee_username']) {
             $values = array(
-                    'id' => $data['task_id'],
-                    'owner_id' => $assignee_id,
-                    );
+                'id' => $data['task_id'],
+                'owner_id' => $assignee_id,
+            );
             return $this->taskModificationModel->update($values);
         }
 
         $values = array(
-                'id' => $data['task_id'],
-                'owner_id' => $data['task']['creator_id'],
-                );
+            'id' => $data['task_id'],
+            'owner_id' => $data['task']['creator_id'],
+        );
 
         return $this->taskModificationModel->update($values);
     }
