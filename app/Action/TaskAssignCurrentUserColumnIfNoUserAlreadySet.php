@@ -32,8 +32,8 @@ class TaskAssignCurrentUserColumnIfNoUserAlreadySet extends Base
     public function getCompatibleEvents()
     {
         return array(
-                TaskModel::EVENT_MOVE_COLUMN,
-                );
+            TaskModel::EVENT_MOVE_COLUMN,
+        );
     }
 
     /*** Get the required parameter for the action (defined by the user)
@@ -44,8 +44,8 @@ class TaskAssignCurrentUserColumnIfNoUserAlreadySet extends Base
     public function getActionRequiredParameters()
     {
         return array(
-                'column_id' => t('Column'),
-                );
+            'column_id' => t('Column'),
+        );
     }
 
     /**
@@ -57,13 +57,13 @@ class TaskAssignCurrentUserColumnIfNoUserAlreadySet extends Base
     public function getEventRequiredParameters()
     {
         return array(
-                'task_id',
-                'task' => array(
-                    'project_id',
-                    'column_id',
-                    'owner_id',
-                    ),
-                );
+            'task_id',
+            'task' => array(
+                'project_id',
+                'column_id',
+                'owner_id',
+            ),
+        );
     }
 
     /**
@@ -81,9 +81,9 @@ class TaskAssignCurrentUserColumnIfNoUserAlreadySet extends Base
 
         if (!$data['task']['owner_id']) {
             $values = array(
-                    'id' => $data['task_id'],
-                    'owner_id' => $this->userSession->getId(),
-                    );
+                'id' => $data['task_id'],
+                'owner_id' => $this->userSession->getId(),
+            );
             return $this->taskModificationModel->update($values);
         }
         return false;
