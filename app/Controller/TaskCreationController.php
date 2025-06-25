@@ -65,7 +65,7 @@ class TaskCreationController extends BaseController
         if (! $valid) {
             $this->flash->failure(t('Unable to create your task.'));
             $this->show($values, $screenshot, $files, $errors);
-        } else if (! $this->helper->projectRole->canCreateTaskInColumn($project['id'], $values['column_id'])) {
+        } elseif (! $this->helper->projectRole->canCreateTaskInColumn($project['id'], $values['column_id'])) {
             $this->flash->failure(t('You cannot create tasks in this column.'));
             $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);
         } else {

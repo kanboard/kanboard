@@ -234,7 +234,7 @@ abstract class Base extends \Kanboard\Core\Base
         foreach ($parameters as $key => $value) {
             if (is_array($value)) {
                 return isset($data[$key]) && $this->hasRequiredParameters($data[$key], $value);
-            } else if (! isset($data[$value])) {
+            } elseif (! isset($data[$value])) {
                 return false;
             }
         }

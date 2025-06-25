@@ -53,7 +53,8 @@ class TaskListController extends BaseController
             ->setOrder($order)
             ->setDirection($direction)
             ->setFormatter($formatter)
-            ->setQuery($this->taskLexer
+            ->setQuery(
+                $this->taskLexer
                 ->build($search)
                 ->withFilter(new TaskProjectFilter($project['id']))
                 ->getQuery()

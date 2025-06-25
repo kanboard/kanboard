@@ -37,8 +37,7 @@ class BoardViewController extends BaseController
             'swimlanes' => $this->boardFormatter
                 ->withProjectId($project['id'])
                 ->withQuery($query)
-                ->format()
-            ,
+                ->format(),
             'title' => $project['name'],
             'description' => $project['description'],
             'no_layout' => true,

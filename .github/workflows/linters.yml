@@ -16,6 +16,17 @@ jobs:
       - name: Run jshint
         run: jshint ./assets/js/core ./assets/js/components
 
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Run php-cs-fixer
+        run: ./vendor/bin/php-cs-fixer fix --dry-run --diff --verbose --show-progress none
+
   commit-linter:
     if: github.event_name == 'pull_request'
     name: Commit Linter

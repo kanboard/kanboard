@@ -77,4 +77,3 @@ function get_last_insert_id(PDO $pdo)
 
     return $pdo->lastInsertId();
 }
-

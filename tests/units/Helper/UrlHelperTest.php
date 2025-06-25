@@ -58,7 +58,9 @@ class UrlHelperTest extends Base
 
     public function testDir()
     {
-        $this->container['request'] = new Request($this->container, array(
+        $this->container['request'] = new Request(
+            $this->container,
+            array(
                 'PHP_SELF' => '/kanboard/index.php',
                 'REQUEST_METHOD' => 'GET'
             )
@@ -67,7 +69,9 @@ class UrlHelperTest extends Base
         $h = new UrlHelper($this->container);
         $this->assertEquals('/kanboard/', $h->dir());
 
-        $this->container['request'] = new Request($this->container, array(
+        $this->container['request'] = new Request(
+            $this->container,
+            array(
                 'PHP_SELF' => '/index.php',
                 'REQUEST_METHOD' => 'GET'
             )

@@ -57,12 +57,14 @@ class TaskDuplicationController extends BaseController
                     throw new AccessForbiddenException();
                 }
 
-                if ($this->taskProjectMoveModel->moveToProject($task['id'],
-                                                                $values['project_id'],
-                                                                $values['swimlane_id'],
-                                                                $values['column_id'],
-                                                                $values['category_id'],
-                                                                $values['owner_id'])) {
+                if ($this->taskProjectMoveModel->moveToProject(
+                    $task['id'],
+                    $values['project_id'],
+                    $values['swimlane_id'],
+                    $values['column_id'],
+                    $values['category_id'],
+                    $values['owner_id']
+                )) {
                     $this->flash->success(t('Task updated successfully.'));
                     return $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])));
                 }

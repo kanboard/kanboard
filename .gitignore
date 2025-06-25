@@ -27,3 +27,4 @@ data/config.php
 node_modules
 .phpunit.result.cache
 app/version.txt
+.php-cs-fixer.cache

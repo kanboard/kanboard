@@ -22,8 +22,8 @@ class TaskAssignPrioritySwimlaneTest extends Base
 
         $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertEquals(1, $task['priority']);				
-				
+        $this->assertEquals(1, $task['priority']);
+                
         $event = new TaskEvent(array(
             'task_id' => 1,
             'task' => array(

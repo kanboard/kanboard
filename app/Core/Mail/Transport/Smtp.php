@@ -24,7 +24,7 @@ class Smtp extends Mail
         $transport->setUsername(MAIL_SMTP_USERNAME);
         $transport->setPassword(MAIL_SMTP_PASSWORD);
         if (!is_null(MAIL_SMTP_HELO_NAME)) {
-                $transport->setLocalDomain(MAIL_SMTP_HELO_NAME);
+            $transport->setLocalDomain(MAIL_SMTP_HELO_NAME);
         }
         $transport->setEncryption(MAIL_SMTP_ENCRYPTION);
 

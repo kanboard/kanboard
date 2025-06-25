@@ -33,7 +33,7 @@ class TaskMoveSwimlaneAssigned extends Base
     {
         return array(
             
-            TaskModel::EVENT_CREATE_UPDATE,           
+            TaskModel::EVENT_CREATE_UPDATE,
             TaskModel::EVENT_ASSIGNEE_CHANGE,
             TaskModel::EVENT_UPDATE,
         );
@@ -50,7 +50,7 @@ class TaskMoveSwimlaneAssigned extends Base
         return array(
             'user_id' => t('Assignee'),
             'dest_swimlane_id' => t('Destination swimlane'),
-	
+    
         );
     }
 

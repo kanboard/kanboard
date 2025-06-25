@@ -10,7 +10,8 @@ use Iterator;
  * @package Kanboard\EventBuilder
  * @author  Frederic Guillot
  */
-class EventIteratorBuilder implements Iterator {
+class EventIteratorBuilder implements Iterator
+{
     private $position = 0;
     private $builders = array();
 
@@ -28,7 +29,8 @@ class EventIteratorBuilder implements Iterator {
     }
 
     #[\ReturnTypeWillChange]
-    public function rewind() {
+    public function rewind()
+    {
         $this->position = 0;
     }
 
@@ -36,22 +38,26 @@ class EventIteratorBuilder implements Iterator {
      * @return BaseEventBuilder
      */
     #[\ReturnTypeWillChange]
-    public function current() {
+    public function current()
+    {
         return $this->builders[$this->position];
     }
 
     #[\ReturnTypeWillChange]
-    public function key() {
+    public function key()
+    {
         return $this->position;
     }
 
     #[\ReturnTypeWillChange]
-    public function next() {
+    public function next()
+    {
         ++$this->position;
     }
 
     #[\ReturnTypeWillChange]
-    public function valid() {
+    public function valid()
+    {
         return isset($this->builders[$this->position]);
     }
 }

@@ -102,7 +102,7 @@ class SubtaskController extends BaseController
                 'another_subtask' => 1,
                 'subtasks_added' => $subtasksAdded,
             ));
-        } else if ($subtasksAdded > 0) {
+        } elseif ($subtasksAdded > 0) {
             if ($subtasksAdded === 1) {
                 $this->flash->success(t('Subtask added successfully.'));
             } else {

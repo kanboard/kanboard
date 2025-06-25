@@ -30,12 +30,12 @@ class TaskAssignColorSwimlaneTest extends Base
 
         $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
-        $this->assertNotEquals('red', $task['color_id']);				
-				
+        $this->assertNotEquals('red', $task['color_id']);
+                
         $action = new TaskAssignColorSwimlane($this->container);
         $action->setProjectId(1);
         $action->setParam('color_id', 'red');
-          $action->setParam('swimlane_id', 2);
+        $action->setParam('swimlane_id', 2);
 
         $this->assertTrue($action->execute($event, TaskModel::EVENT_MOVE_SWIMLANE));
 

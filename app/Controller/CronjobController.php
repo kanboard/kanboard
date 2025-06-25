@@ -20,7 +20,7 @@ class CronjobController extends BaseController
         $this->checkWebhookToken();
 
         $input = new ArrayInput(array(
-           'command' => 'cronjob',
+            'command' => 'cronjob',
         ));
         $output = new NullOutput();
 

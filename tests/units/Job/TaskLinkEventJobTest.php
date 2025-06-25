@@ -19,7 +19,7 @@ class TaskLinkEventJobTest extends Base
 
     public function testWithMissingLink()
     {
-        $this->container['dispatcher']->addListener(TaskLinkModel::EVENT_CREATE_UPDATE, function() {});
+        $this->container['dispatcher']->addListener(TaskLinkModel::EVENT_CREATE_UPDATE, function () {});
 
         $taskLinkEventJob = new TaskLinkEventJob($this->container);
         $taskLinkEventJob->execute(42, TaskLinkModel::EVENT_CREATE_UPDATE);
@@ -30,7 +30,7 @@ class TaskLinkEventJobTest extends Base
 
     public function testTriggerCreationEvents()
     {
-        $this->container['dispatcher']->addListener(TaskLinkModel::EVENT_CREATE_UPDATE, function() {});
+        $this->container['dispatcher']->addListener(TaskLinkModel::EVENT_CREATE_UPDATE, function () {});
 
         $taskCreationModel = new TaskCreationModel($this->container);
         $projectModel = new ProjectModel($this->container);
@@ -47,7 +47,7 @@ class TaskLinkEventJobTest extends Base
 
     public function testTriggerDeleteEvents()
     {
-        $this->container['dispatcher']->addListener(TaskLinkModel::EVENT_DELETE, function() {});
+        $this->container['dispatcher']->addListener(TaskLinkModel::EVENT_DELETE, function () {});
 
         $taskCreationModel = new TaskCreationModel($this->container);
         $projectModel = new ProjectModel($this->container);
