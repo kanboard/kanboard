@@ -107,4 +107,3 @@ class TaskAssignToUserOnCreationInColumn extends Base
         return $data['task']['column_id'] == $this->getParam('column_id');
     }
 }
-?>
