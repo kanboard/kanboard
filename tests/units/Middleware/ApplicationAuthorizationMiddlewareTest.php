@@ -1,10 +1,12 @@
 <?php
 
+namespace KanboardTests\units\Middleware;
+
+use KanboardTests\units\Base;
 use Kanboard\Middleware\ApplicationAuthorizationMiddleware;
+use stdClass;
 
-require_once __DIR__.'/../Base.php';
-
-class ApplicationAuthorizationMiddlewareMiddlewareTest extends Base
+class ApplicationAuthorizationMiddlewareTest extends Base
 {
     /**
      * @var ApplicationAuthorizationMiddleware

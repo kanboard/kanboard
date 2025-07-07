@@ -1,16 +1,35 @@
 <?php
 
-require __DIR__.'/../../vendor/autoload.php';
+namespace KanboardTests\units;
+
 require __DIR__.'/../../app/constants.php';
 
 use Composer\Autoload\ClassLoader;
+use Kanboard\ServiceProvider\AuthenticationProvider;
+use Kanboard\ServiceProvider\AvatarProvider;
+use Kanboard\ServiceProvider\CacheProvider;
+use Kanboard\ServiceProvider\ClassProvider;
+use Kanboard\ServiceProvider\DatabaseProvider;
+use Kanboard\ServiceProvider\ExternalTaskProvider;
+use Kanboard\ServiceProvider\FilterProvider;
+use Kanboard\ServiceProvider\FormatterProvider;
+use Kanboard\ServiceProvider\HelperProvider;
+use Kanboard\ServiceProvider\JobProvider;
+use Kanboard\ServiceProvider\LoggingProvider;
+use Kanboard\ServiceProvider\NotificationProvider;
+use Kanboard\ServiceProvider\QueueProvider;
+use Kanboard\ServiceProvider\RouteProvider;
+use PDO;
+use PHPUnit\Framework\TestCase;
+use Pimple\Container;
+use Symfony\Component\Console\Application;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Kanboard\Core\Session\FlashMessage;
 use Kanboard\ServiceProvider\ActionProvider;
 
-abstract class Base extends PHPUnit\Framework\TestCase
+abstract class Base extends TestCase
 {
     protected $container;
 
@@ -62,21 +81,21 @@ abstract class Base extends PHPUnit\Framework\TestCase
             $pdo = null;
         }
 
-        $this->container = new Pimple\Container;
-        $this->container->register(new Kanboard\ServiceProvider\CacheProvider());
-        $this->container->register(new Kanboard\ServiceProvider\HelperProvider());
-        $this->container->register(new Kanboard\ServiceProvider\AuthenticationProvider());
-        $this->container->register(new Kanboard\ServiceProvider\DatabaseProvider());
-        $this->container->register(new Kanboard\ServiceProvider\ClassProvider());
-        $this->container->register(new Kanboard\ServiceProvider\NotificationProvider());
-        $this->container->register(new Kanboard\ServiceProvider\RouteProvider());
-        $this->container->register(new Kanboard\ServiceProvider\AvatarProvider());
-        $this->container->register(new Kanboard\ServiceProvider\FilterProvider());
-        $this->container->register(new Kanboard\ServiceProvider\FormatterProvider());
-        $this->container->register(new Kanboard\ServiceProvider\JobProvider());
-        $this->container->register(new Kanboard\ServiceProvider\QueueProvider());
-        $this->container->register(new Kanboard\ServiceProvider\LoggingProvider());
-        $this->container->register(new Kanboard\ServiceProvider\ExternalTaskProvider());
+        $this->container = new Container;
+        $this->container->register(new CacheProvider());
+        $this->container->register(new HelperProvider());
+        $this->container->register(new AuthenticationProvider());
+        $this->container->register(new DatabaseProvider());
+        $this->container->register(new ClassProvider());
+        $this->container->register(new NotificationProvider());
+        $this->container->register(new RouteProvider());
+        $this->container->register(new AvatarProvider());
+        $this->container->register(new FilterProvider());
+        $this->container->register(new FormatterProvider());
+        $this->container->register(new JobProvider());
+        $this->container->register(new QueueProvider());
+        $this->container->register(new LoggingProvider());
+        $this->container->register(new ExternalTaskProvider());
 
         $this->container['dispatcher'] = new TraceableEventDispatcher(
             new EventDispatcher,
@@ -86,7 +105,7 @@ abstract class Base extends PHPUnit\Framework\TestCase
         $this->dispatcher = $this->container['dispatcher'];
 
         $this->container['db']->getStatementHandler()->withLogging();
-        $this->container['cli'] = new \Symfony\Component\Console\Application('Kanboard', 'test');
+        $this->container['cli'] = new Application('Kanboard', 'test');
 
         $this->container['externalLinkManager'] = $this
             ->getMockBuilder('Kanboard\Core\ExternalLink\ExternalLinkManager')

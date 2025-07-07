@@ -1,9 +1,10 @@
 <?php
 
+namespace KanboardTests\units\ServiceProvider;
+
+use KanboardTests\units\Base;
 use Kanboard\ServiceProvider\FormatterProvider;
 use Pimple\Container;
-
-require_once __DIR__.'/../Base.php';
 
 class FormatterProviderTest extends Base
 {

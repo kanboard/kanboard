@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\Filter;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\Filter\LexerBuilder;
 use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Filter\TaskTitleFilter;

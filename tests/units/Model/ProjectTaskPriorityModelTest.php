@@ -1,9 +1,10 @@
 <?php
 
+namespace KanboardTests\units\Model;
+
+use KanboardTests\units\Base;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectTaskPriorityModel;
-
-require_once __DIR__.'/../Base.php';
 
 class ProjectTaskPriorityModelTest extends Base
 {

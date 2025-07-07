@@ -1,8 +1,9 @@
 <?php
 
-use Kanboard\Job\ProjectMetricJob;
+namespace KanboardTests\units\Job;
 
-require_once __DIR__.'/../Base.php';
+use KanboardTests\units\Base;
+use Kanboard\Job\ProjectMetricJob;
 
 class ProjectMetricJobTest extends Base
 {

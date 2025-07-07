@@ -2,7 +2,7 @@
 
 namespace Kanboard\Core\Ldap;
 
-require_once __DIR__.'/../../Base.php';
+use KanboardTests\units\Core\Ldap\QueryTest;
 
 function ldap_search($link_identifier, $base_dn, $filter, array $attributes)
 {
@@ -14,7 +14,12 @@ function ldap_get_entries($link_identifier, $result_identifier)
     return QueryTest::$functions->ldap_get_entries($link_identifier, $result_identifier);
 }
 
-class QueryTest extends \Base
+namespace KanboardTests\units\Core\Ldap;
+
+use Kanboard\Core\Ldap\Query;
+use KanboardTests\units\Base;
+
+class QueryTest extends Base
 {
     public static $functions;
     private $client;

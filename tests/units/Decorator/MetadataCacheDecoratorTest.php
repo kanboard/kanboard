@@ -1,8 +1,9 @@
 <?php
 
-use Kanboard\Decorator\MetadataCacheDecorator;
+namespace KanboardTests\units\Decorator;
 
-require_once __DIR__.'/../Base.php';
+use KanboardTests\units\Base;
+use Kanboard\Decorator\MetadataCacheDecorator;
 
 class MetadataCacheDecoratorTest extends Base
 {

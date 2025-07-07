@@ -2,7 +2,7 @@
 
 namespace Kanboard\Core\Cache;
 
-require_once __DIR__.'/../../Base.php';
+use KanboardTests\units\Core\Cache\FileCacheTest;
 
 function file_put_contents($filename, $data)
 {
@@ -34,7 +34,12 @@ function unlink($filename)
     return FileCacheTest::$functions->unlink($filename);
 }
 
-class FileCacheTest extends \Base
+namespace KanboardTests\units\Core\Cache;
+
+use Kanboard\Core\Cache\FileCache;
+use KanboardTests\units\Base;
+
+class FileCacheTest extends Base
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject

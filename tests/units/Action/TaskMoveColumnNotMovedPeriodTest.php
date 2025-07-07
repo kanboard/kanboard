@@ -1,13 +1,14 @@
 <?php
 
+namespace KanboardTests\units\Action;
+
+use KanboardTests\units\Base;
 use Kanboard\Action\TaskMoveColumnNotMovedPeriod;
 use Kanboard\Event\TaskListEvent;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\TaskModel;
-
-require_once __DIR__.'/../Base.php';
 
 class TaskMoveColumnNotMovedPeriodTest extends Base
 {

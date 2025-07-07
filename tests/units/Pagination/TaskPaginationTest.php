@@ -1,12 +1,13 @@
 <?php
 
+namespace KanboardTests\units\Pagination;
+
+use KanboardTests\units\Base;
 use Kanboard\Core\Http\Request;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Pagination\TaskPagination;
-
-require_once __DIR__.'/../Base.php';
 
 class TaskPaginationTest extends Base
 {

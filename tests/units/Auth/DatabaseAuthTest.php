@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+namespace KanboardTests\units\Auth;
 
+use KanboardTests\units\Base;
 use Kanboard\Auth\DatabaseAuth;
 use Kanboard\Model\UserModel;
 

@@ -1,9 +1,10 @@
 <?php
 
+namespace KanboardTests\units\Pagination;
+
+use KanboardTests\units\Base;
 use Kanboard\Model\UserModel;
 use Kanboard\Pagination\UserPagination;
-
-require_once __DIR__.'/../Base.php';
 
 class UserPaginationTest extends Base
 {

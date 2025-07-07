@@ -1,8 +1,9 @@
 <?php
 
-use Kanboard\Model\LanguageModel;
+namespace KanboardTests\units\Model;
 
-require_once __DIR__.'/../Base.php';
+use KanboardTests\units\Base;
+use Kanboard\Model\LanguageModel;
 
 class LanguageTest extends Base
 {

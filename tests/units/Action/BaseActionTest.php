@@ -1,10 +1,11 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+namespace KanboardTests\units\Action;
 
+use KanboardTests\units\Base;
 use Kanboard\Event\GenericEvent;
 
-class DummyAction extends Kanboard\Action\Base
+class DummyAction extends \Kanboard\Action\Base
 {
     public function getDescription()
     {
@@ -42,7 +43,7 @@ class BaseActionTest extends Base
     public function testGetName()
     {
         $dummyAction = new DummyAction($this->container);
-        $this->assertEquals('\\DummyAction', $dummyAction->getName());
+        $this->assertEquals('\\' . __NAMESPACE__ . '\\DummyAction', $dummyAction->getName());
     }
 
     public function testGetDescription()
@@ -80,14 +81,14 @@ class BaseActionTest extends Base
     public function testProjectId()
     {
         $dummyAction = new DummyAction($this->container);
-        $this->assertInstanceOf('DummyAction', $dummyAction->setProjectId(123));
+        $this->assertInstanceOf(__NAMESPACE__ . '\\DummyAction', $dummyAction->setProjectId(123));
         $this->assertEquals(123, $dummyAction->getProjectId());
     }
 
     public function testParam()
     {
         $dummyAction = new DummyAction($this->container);
-        $this->assertInstanceOf('DummyAction', $dummyAction->setParam('p1', 123));
+        $this->assertInstanceOf(__NAMESPACE__ . '\\DummyAction', $dummyAction->setParam('p1', 123));
         $this->assertEquals(123, $dummyAction->getParam('p1'));
     }
 

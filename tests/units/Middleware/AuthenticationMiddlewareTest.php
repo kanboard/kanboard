@@ -1,8 +1,9 @@
 <?php
 
-use Kanboard\Middleware\AuthenticationMiddleware;
+namespace KanboardTests\units\Middleware;
 
-require_once __DIR__.'/../Base.php';
+use KanboardTests\units\Base;
+use Kanboard\Middleware\AuthenticationMiddleware;
 
 class AuthenticationMiddlewareTest extends Base
 {

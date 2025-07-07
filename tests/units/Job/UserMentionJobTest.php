@@ -1,5 +1,8 @@
 <?php
 
+namespace KanboardTests\units\Job;
+
+use KanboardTests\units\Base;
 use Kanboard\Core\Security\Role;
 use Kanboard\Event\TaskEvent;
 use Kanboard\Job\UserMentionJob;
@@ -7,8 +10,6 @@ use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectUserRoleModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\UserModel;
-
-require_once __DIR__.'/../Base.php';
 
 class UserMentionJobTest extends Base
 {

@@ -1,10 +1,11 @@
 <?php
 
+namespace KanboardTests\units\Auth;
+
+use KanboardTests\units\Base;
 use Kanboard\Auth\ReverseProxyAuth;
 use Kanboard\Core\Security\Role;
 use Kanboard\Model\UserModel;
-
-require_once __DIR__.'/../Base.php';
 
 class ReverseProxyAuthTest extends Base
 {

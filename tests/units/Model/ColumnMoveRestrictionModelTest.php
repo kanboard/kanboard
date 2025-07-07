@@ -1,10 +1,11 @@
 <?php
 
+namespace KanboardTests\units\Model;
+
+use KanboardTests\units\Base;
 use Kanboard\Model\ColumnMoveRestrictionModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectRoleModel;
-
-require_once __DIR__.'/../Base.php';
 
 class ColumnMoveRestrictionModelTest extends Base
 {

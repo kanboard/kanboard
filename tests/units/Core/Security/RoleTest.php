@@ -1,8 +1,9 @@
 <?php
 
-use Kanboard\Core\Security\Role;
+namespace KanboardTests\units\Core\Security;
 
-require_once __DIR__.'/../../Base.php';
+use KanboardTests\units\Base;
+use Kanboard\Core\Security\Role;
 
 class RoleTest extends Base
 {

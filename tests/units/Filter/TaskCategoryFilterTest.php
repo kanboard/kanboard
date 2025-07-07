@@ -1,13 +1,14 @@
 <?php
 
+namespace KanboardTests\units\Filter;
+
+use KanboardTests\units\Base;
 use Kanboard\Filter\TaskCategoryFilter;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\CategoryModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\TaskModel;
-
-require_once __DIR__.'/../Base.php';
 
 class TaskCategoryFilterTest extends Base
 {

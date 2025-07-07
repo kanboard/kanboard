@@ -1,6 +1,8 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+namespace KanboardTests\units\Locale;
+
+use KanboardTests\units\Base;
 
 class LocaleTest extends Base
 {

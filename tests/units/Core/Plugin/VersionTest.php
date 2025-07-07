@@ -1,8 +1,9 @@
 <?php
 
-use Kanboard\Core\Plugin\Version;
+namespace KanboardTests\units\Core\Plugin;
 
-require_once __DIR__.'/../../Base.php';
+use KanboardTests\units\Base;
+use Kanboard\Core\Plugin\Version;
 
 class VersionTest extends Base
 {

@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+namespace KanboardTests\units\Notification;
 
+use KanboardTests\units\Base;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\SubtaskModel;

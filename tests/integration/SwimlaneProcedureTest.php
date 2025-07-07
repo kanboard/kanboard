@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/BaseProcedureTest.php';
+namespace KanboardTests\integration;
 
 class SwimlaneProcedureTest extends BaseProcedureTest
 {

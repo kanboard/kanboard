@@ -1,12 +1,13 @@
 <?php
 
+namespace KanboardTests\units\Pagination;
+
+use KanboardTests\units\Base;
 use Kanboard\Core\Security\Role;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectUserRoleModel;
 use Kanboard\Model\UserModel;
 use Kanboard\Pagination\ProjectPagination;
-
-require_once __DIR__.'/../Base.php';
 
 class ProjectPaginationTest extends Base
 {

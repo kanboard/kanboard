@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\Ldap;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\Ldap\Entries;
 
 class EntriesTest extends Base

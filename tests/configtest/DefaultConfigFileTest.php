@@ -1,6 +1,10 @@
 <?php
 
-class DefaultConfigFileTest extends PHPUnit\Framework\TestCase
+namespace KanboardTests\configtest;
+
+use PHPUnit\Framework\TestCase;
+
+class DefaultConfigFileTest extends TestCase
 {
     public function testThatFileCanBeImported()
     {

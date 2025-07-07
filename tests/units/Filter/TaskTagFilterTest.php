@@ -1,13 +1,14 @@
 <?php
 
+namespace KanboardTests\units\Filter;
+
+use KanboardTests\units\Base;
 use Kanboard\Filter\TaskTagFilter;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\TaskTagModel;
-
-require_once __DIR__.'/../Base.php';
 
 class TaskTagFilterTest extends Base
 {

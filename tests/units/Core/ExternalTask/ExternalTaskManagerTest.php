@@ -1,8 +1,9 @@
 <?php
 
-use Kanboard\Core\ExternalTask\ExternalTaskManager;
+namespace KanboardTests\units\Core\ExternalTask;
 
-require_once __DIR__.'/../../Base.php';
+use KanboardTests\units\Base;
+use Kanboard\Core\ExternalTask\ExternalTaskManager;
 
 class ExternalTaskManagerTest extends Base
 {

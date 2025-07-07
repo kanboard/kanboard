@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+namespace KanboardTests\units\Validator;
 
+use KanboardTests\units\Base;
 use Kanboard\Validator\TaskLinkValidator;
 use Kanboard\Model\TaskLinkModel;
 use Kanboard\Model\TaskCreationModel;

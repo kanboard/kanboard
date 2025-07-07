@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+namespace KanboardTests\units\Action;
 
+use KanboardTests\units\Base;
 use Kanboard\Event\TaskEvent;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;

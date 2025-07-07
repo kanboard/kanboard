@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\Ldap;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\Ldap\Query;
 use Kanboard\Core\Ldap\User;
 use Kanboard\Core\Ldap\Entries;

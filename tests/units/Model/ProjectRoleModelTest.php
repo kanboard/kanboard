@@ -1,5 +1,8 @@
 <?php
 
+namespace KanboardTests\units\Model;
+
+use KanboardTests\units\Base;
 use Kanboard\Core\Security\Role;
 use Kanboard\Model\GroupMemberModel;
 use Kanboard\Model\GroupModel;
@@ -7,8 +10,6 @@ use Kanboard\Model\ProjectGroupRoleModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectRoleModel;
 use Kanboard\Model\ProjectUserRoleModel;
-
-require_once __DIR__.'/../Base.php';
 
 class ProjectRoleModelTest extends Base
 {

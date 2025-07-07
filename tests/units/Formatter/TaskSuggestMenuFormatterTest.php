@@ -1,10 +1,11 @@
 <?php
 
+namespace KanboardTests\units\Formatter;
+
+use KanboardTests\units\Base;
 use Kanboard\Formatter\TaskSuggestMenuFormatter;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
-
-require_once __DIR__.'/../Base.php';
 
 class TaskSuggestMenuFormatterTest extends Base
 {

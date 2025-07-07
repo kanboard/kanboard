@@ -1,5 +1,8 @@
 <?php
 
+namespace KanboardTests\units\Pagination;
+
+use KanboardTests\units\Base;
 use Kanboard\Core\Security\Role;
 use Kanboard\Model\ColumnModel;
 use Kanboard\Model\ProjectModel;
@@ -8,8 +11,6 @@ use Kanboard\Model\SubtaskModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\UserModel;
 use Kanboard\Pagination\DashboardPagination;
-
-require_once __DIR__.'/../Base.php';
 
 class DashboardPaginationTest extends Base
 {

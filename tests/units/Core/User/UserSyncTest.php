@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\User;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\Security\Role;
 use Kanboard\Core\User\UserSync;
 use Kanboard\User\LdapUserProvider;

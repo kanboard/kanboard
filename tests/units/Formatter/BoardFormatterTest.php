@@ -1,5 +1,8 @@
 <?php
 
+namespace KanboardTests\units\Formatter;
+
+use KanboardTests\units\Base;
 use Kanboard\Formatter\BoardFormatter;
 use Kanboard\Model\ColumnModel;
 use Kanboard\Model\ProjectModel;
@@ -7,8 +10,6 @@ use Kanboard\Model\SwimlaneModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\TaskTagModel;
-
-require_once __DIR__.'/../Base.php';
 
 class BoardFormatterTest extends Base
 {

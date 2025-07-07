@@ -1,10 +1,11 @@
 <?php
 
+namespace KanboardTests\units\Model;
+
+use KanboardTests\units\Base;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TagDuplicationModel;
 use Kanboard\Model\TagModel;
-
-require_once __DIR__.'/../Base.php';
 
 class TagDuplicationModelTest extends Base
 {

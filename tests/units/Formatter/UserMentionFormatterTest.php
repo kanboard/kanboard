@@ -1,8 +1,9 @@
 <?php
 
-use Kanboard\Formatter\UserMentionFormatter;
+namespace KanboardTests\units\Formatter;
 
-require_once __DIR__.'/../Base.php';
+use KanboardTests\units\Base;
+use Kanboard\Formatter\UserMentionFormatter;
 
 class UserMentionFormatterTest extends Base
 {

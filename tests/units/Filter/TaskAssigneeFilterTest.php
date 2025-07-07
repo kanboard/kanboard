@@ -1,12 +1,13 @@
 <?php
 
+namespace KanboardTests\units\Filter;
+
+use KanboardTests\units\Base;
 use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\UserModel;
-
-require_once __DIR__.'/../Base.php';
 
 class TaskAssigneeFilterTest extends Base
 {

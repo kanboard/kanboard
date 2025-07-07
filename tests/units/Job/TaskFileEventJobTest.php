@@ -1,11 +1,12 @@
 <?php
 
+namespace KanboardTests\units\Job;
+
+use KanboardTests\units\Base;
 use Kanboard\Job\TaskFileEventJob;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFileModel;
-
-require_once __DIR__.'/../Base.php';
 
 class TaskFileEventJobTest extends Base
 {
