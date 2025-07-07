@@ -1,13 +1,14 @@
 <?php
 
+namespace KanboardTests\units\Helper;
+
+use KanboardTests\units\Base;
 use Kanboard\Helper\ProjectActivityHelper;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectActivityModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
-
-require_once __DIR__.'/../Base.php';
 
 class ProjectActivityHelperTest extends Base
 {

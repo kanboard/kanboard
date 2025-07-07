@@ -1,8 +1,9 @@
 <?php
 
-use Kanboard\Core\Plugin\Directory;
+namespace KanboardTests\units\Core\Plugin;
 
-require_once __DIR__.'/../../Base.php';
+use KanboardTests\units\Base;
+use Kanboard\Core\Plugin\Directory;
 
 class DirectoryTest extends Base
 {

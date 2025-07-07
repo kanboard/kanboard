@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\Action;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\Action\ActionManager;
 use Kanboard\Action\TaskAssignColorColumn;
 use Kanboard\Action\TaskClose;

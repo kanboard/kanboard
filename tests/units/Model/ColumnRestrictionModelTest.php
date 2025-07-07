@@ -1,10 +1,11 @@
 <?php
 
+namespace KanboardTests\units\Model;
+
+use KanboardTests\units\Base;
 use Kanboard\Model\ColumnRestrictionModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectRoleModel;
-
-require_once __DIR__.'/../Base.php';
 
 class ColumnRestrictionModelTest extends Base
 {

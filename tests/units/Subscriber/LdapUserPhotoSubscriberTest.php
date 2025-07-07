@@ -1,13 +1,14 @@
 <?php
 
+namespace KanboardTests\units\Subscriber;
+
+use KanboardTests\units\Base;
 use Kanboard\Core\Security\Role;
 use Kanboard\Event\UserProfileSyncEvent;
 use Kanboard\Model\UserModel;
 use Kanboard\Subscriber\LdapUserPhotoSubscriber;
 use Kanboard\User\DatabaseUserProvider;
 use Kanboard\User\LdapUserProvider;
-
-require_once __DIR__.'/../Base.php';
 
 class LdapUserPhotoSubscriberTest extends Base
 {

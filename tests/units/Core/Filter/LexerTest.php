@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\Filter;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\Filter\Lexer;
 
 class LexerTest extends Base

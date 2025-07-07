@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__ . '/../Base.php';
+namespace KanboardTests\units\Export;
 
+use KanboardTests\units\Base;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Export\TaskExport;
 use Kanboard\Model\ProjectModel;

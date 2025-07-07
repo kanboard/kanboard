@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/Base.php';
+namespace KanboardTests\units;
 
 class FunctionTest extends Base
 {

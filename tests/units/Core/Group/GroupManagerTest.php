@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\Group;
 
+use KanboardTests\units\Base;
 use Kanboard\Model\GroupModel;
 use Kanboard\Core\Group\GroupManager;
 use Kanboard\Group\DatabaseBackendGroupProvider;

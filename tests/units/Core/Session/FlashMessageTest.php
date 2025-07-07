@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\Session;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\Session\FlashMessage;
 
 class FlashMessageTest extends Base

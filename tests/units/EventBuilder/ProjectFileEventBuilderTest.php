@@ -1,10 +1,11 @@
 <?php
 
+namespace KanboardTests\units\EventBuilder;
+
+use KanboardTests\units\Base;
 use Kanboard\EventBuilder\ProjectFileEventBuilder;
 use Kanboard\Model\ProjectFileModel;
 use Kanboard\Model\ProjectModel;
-
-require_once __DIR__.'/../Base.php';
 
 class ProjectFileEventBuilderTest extends Base
 {

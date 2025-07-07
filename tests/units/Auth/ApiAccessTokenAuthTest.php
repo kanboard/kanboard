@@ -1,9 +1,10 @@
 <?php
 
+namespace KanboardTests\units\Auth;
+
+use KanboardTests\units\Base;
 use Kanboard\Auth\ApiAccessTokenAuth;
 use Kanboard\Model\UserModel;
-
-require_once __DIR__.'/../Base.php';
 
 class ApiAccessTokenAuthTest extends Base
 {

@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\User;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\User\GroupSync;
 use Kanboard\Model\GroupModel;
 use Kanboard\Model\GroupMemberModel;

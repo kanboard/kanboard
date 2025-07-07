@@ -2,14 +2,20 @@
 
 namespace Kanboard\Core\Http;
 
-require_once __DIR__.'/../../Base.php';
+use KanboardTests\units\Core\Http\RememberMeCookieTest;
 
 function setcookie($name, $value = "", $expire = 0, $path = "", $domain = "", $secure = false, $httponly = false)
 {
     return RememberMeCookieTest::$functions->setcookie($name, $value, $expire, $path, $domain, $secure, $httponly);
 }
 
-class RememberMeCookieTest extends \Base
+namespace KanboardTests\units\Core\Http;
+
+use Kanboard\Core\Http\RememberMeCookie;
+use Kanboard\Core\Http\Request;
+use KanboardTests\units\Base;
+
+class RememberMeCookieTest extends Base
 {
     public static $functions;
 

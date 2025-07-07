@@ -1,11 +1,12 @@
 <?php
 
+namespace KanboardTests\units\Model;
+
+use KanboardTests\units\Base;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TagModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskTagModel;
-
-require_once __DIR__.'/../Base.php';
 
 class TaskTagModelTest extends Base
 {

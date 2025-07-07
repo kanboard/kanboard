@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+namespace KanboardTests\units\Helper;
 
+use KanboardTests\units\Base;
 use Kanboard\Helper\FileHelper;
 
 class FileHelperTest extends Base

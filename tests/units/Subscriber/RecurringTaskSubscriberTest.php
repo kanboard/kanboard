@@ -1,13 +1,14 @@
 <?php
 
+namespace KanboardTests\units\Subscriber;
+
+use KanboardTests\units\Base;
 use Kanboard\EventBuilder\TaskEventBuilder;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Subscriber\RecurringTaskSubscriber;
-
-require_once __DIR__.'/../Base.php';
 
 class RecurringTaskSubscriberTest extends Base
 {

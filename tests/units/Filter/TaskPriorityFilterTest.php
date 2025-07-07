@@ -1,11 +1,12 @@
 <?php
 
+namespace KanboardTests\units\Filter;
+
+use KanboardTests\units\Base;
 use Kanboard\Filter\TaskPriorityFilter;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
-
-require_once __DIR__.'/../Base.php';
 
 class TaskPriorityFilterTest extends Base
 {

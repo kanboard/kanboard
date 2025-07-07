@@ -1,13 +1,14 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+namespace KanboardTests\units\Action;
 
+use KanboardTests\units\Base;
 use Kanboard\Event\GenericEvent;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Action\TaskCreation as TaskCreationAction;
 
-class TaskCreationActionTest extends Base
+class TaskCreationTest extends Base
 {
     public function testSuccess()
     {

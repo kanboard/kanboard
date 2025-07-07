@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\Security;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\Http\Request;
 use Kanboard\Core\Security\AuthenticationManager;
 use Kanboard\Auth\DatabaseAuth;

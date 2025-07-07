@@ -1,8 +1,11 @@
 <?php
 
-require_once __DIR__.'/../../vendor/autoload.php';
+namespace KanboardTests\integration;
 
-abstract class BaseProcedureTest extends PHPUnit\Framework\TestCase
+use JsonRPC\Client;
+use PHPUnit\Framework\TestCase;
+
+abstract class BaseProcedureTest extends TestCase
 {
     protected $app = null;
     protected $admin = null;
@@ -37,7 +40,7 @@ abstract class BaseProcedureTest extends PHPUnit\Framework\TestCase
 
     public function setUpAppClient()
     {
-        $this->app = new JsonRPC\Client(API_URL);
+        $this->app = new Client(API_URL);
         $this->app->authentication('jsonrpc', API_KEY);
         $this->app->getHttpClient()->withDebug()->withTimeout(10);
     }
@@ -51,7 +54,7 @@ abstract class BaseProcedureTest extends PHPUnit\Framework\TestCase
             $this->assertNotFalse($this->adminUserId);
         }
 
-        $this->admin = new JsonRPC\Client(API_URL);
+        $this->admin = new Client(API_URL);
         $this->admin->authentication('superuser', 'password');
         $this->admin->getHttpClient()->withDebug();
     }
@@ -65,7 +68,7 @@ abstract class BaseProcedureTest extends PHPUnit\Framework\TestCase
             $this->assertNotFalse($this->managerUserId);
         }
 
-        $this->manager = new JsonRPC\Client(API_URL);
+        $this->manager = new Client(API_URL);
         $this->manager->authentication('manager', 'password');
         $this->manager->getHttpClient()->withDebug();
     }
@@ -79,7 +82,7 @@ abstract class BaseProcedureTest extends PHPUnit\Framework\TestCase
             $this->assertNotFalse($this->userUserId);
         }
 
-        $this->user = new JsonRPC\Client(API_URL);
+        $this->user = new Client(API_URL);
         $this->user->authentication('user', 'password');
         $this->user->getHttpClient()->withDebug();
     }

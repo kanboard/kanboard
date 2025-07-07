@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\Cache;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\Cache\MemoryCache;
 
 class MemoryCacheTest extends Base

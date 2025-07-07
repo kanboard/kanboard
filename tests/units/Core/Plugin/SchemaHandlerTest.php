@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\Plugin;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\Plugin\SchemaHandler;
 
 class SchemaHandlerTest extends Base

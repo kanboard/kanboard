@@ -1,5 +1,8 @@
 <?php
 
+namespace KanboardTests\units\Helper;
+
+use KanboardTests\units\Base;
 use Kanboard\Core\Security\Role;
 use Kanboard\Core\User\UserSession;
 use Kanboard\Helper\ProjectRoleHelper;
@@ -13,8 +16,6 @@ use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\TaskStatusModel;
 use Kanboard\Model\UserModel;
-
-require_once __DIR__.'/../Base.php';
 
 class ProjectRoleHelperTest extends Base
 {

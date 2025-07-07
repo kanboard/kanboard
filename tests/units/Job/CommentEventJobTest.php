@@ -1,11 +1,12 @@
 <?php
 
+namespace KanboardTests\units\Job;
+
+use KanboardTests\units\Base;
 use Kanboard\Job\CommentEventJob;
 use Kanboard\Model\CommentModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
-
-require_once __DIR__.'/../Base.php';
 
 class CommentEventJobTest extends Base
 {

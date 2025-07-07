@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\Event;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\Event\EventManager;
 
 class EventManagerTest extends Base

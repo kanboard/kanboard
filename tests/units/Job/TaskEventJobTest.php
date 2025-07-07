@@ -1,5 +1,8 @@
 <?php
 
+namespace KanboardTests\units\Job;
+
+use KanboardTests\units\Base;
 use Kanboard\Job\TaskEventJob;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\SwimlaneModel;
@@ -9,8 +12,6 @@ use Kanboard\Model\TaskModificationModel;
 use Kanboard\Model\TaskPositionModel;
 use Kanboard\Model\TaskProjectMoveModel;
 use Kanboard\Model\TaskStatusModel;
-
-require_once __DIR__.'/../Base.php';
 
 class TaskEventJobTest extends Base
 {

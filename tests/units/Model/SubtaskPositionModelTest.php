@@ -1,11 +1,12 @@
 <?php
 
+namespace KanboardTests\units\Model;
+
+use KanboardTests\units\Base;
 use Kanboard\Model\SubtaskPositionModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\SubtaskModel;
 use Kanboard\Model\ProjectModel;
-
-require_once __DIR__.'/../Base.php';
 
 class SubtaskPositionModelTest extends Base
 {

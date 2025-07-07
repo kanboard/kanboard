@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\User\Avatar;
 
+use KanboardTests\units\Base;
 use Kanboard\User\Avatar\LetterAvatarProvider;
 
 class LetterAvatarProviderTest extends Base

@@ -1,7 +1,9 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+namespace KanboardTests\units\Core;
 
+use DateTime;
+use KanboardTests\units\Base;
 use Kanboard\Core\DateParser;
 
 class DateParserTest extends Base

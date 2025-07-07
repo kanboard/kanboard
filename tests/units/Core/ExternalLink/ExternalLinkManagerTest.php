@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../../Base.php';
+namespace KanboardTests\units\Core\ExternalLink;
 
+use KanboardTests\units\Base;
 use Kanboard\Core\ExternalLink\ExternalLinkManager;
 use Kanboard\ExternalLink\WebLinkProvider;
 use Kanboard\ExternalLink\AttachmentLinkProvider;

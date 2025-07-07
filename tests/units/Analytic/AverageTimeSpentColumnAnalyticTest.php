@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+namespace KanboardTests\units\Analytic;
 
+use KanboardTests\units\Base;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TransitionModel;

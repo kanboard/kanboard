@@ -1,11 +1,12 @@
 <?php
 
+namespace KanboardTests\units\Formatter;
+
+use KanboardTests\units\Base;
 use Kanboard\Formatter\TaskAutoCompleteFormatter;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
-
-require_once __DIR__.'/../Base.php';
 
 class TaskAutoCompleteFormatterTest extends Base
 {

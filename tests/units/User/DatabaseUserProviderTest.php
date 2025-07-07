@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+namespace KanboardTests\units\User;
 
+use KanboardTests\units\Base;
 use Kanboard\User\DatabaseUserProvider;
 
 class DatabaseUserProviderTest extends Base

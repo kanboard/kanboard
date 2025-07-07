@@ -1,10 +1,11 @@
 <?php
 
+namespace KanboardTests\units\Model;
+
+use KanboardTests\units\Base;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectRoleModel;
 use Kanboard\Model\ProjectRoleRestrictionModel;
-
-require_once __DIR__.'/../Base.php';
 
 class ProjectRoleRestrictionModelTest extends Base
 {

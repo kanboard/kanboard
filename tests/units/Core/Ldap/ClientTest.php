@@ -2,7 +2,7 @@
 
 namespace Kanboard\Core\Ldap;
 
-require_once __DIR__.'/../../Base.php';
+use KanboardTests\units\Core\Ldap\ClientTest;
 
 function ldap_connect($hostname, $port)
 {
@@ -38,7 +38,12 @@ function ldap_start_tls($link_identifier)
     return ClientTest::$functions->ldap_start_tls($link_identifier);
 }
 
-class ClientTest extends \Base
+namespace KanboardTests\units\Core\Ldap;
+
+use Kanboard\Core\Ldap\Client;
+use KanboardTests\units\Base;
+
+class ClientTest extends Base
 {
     public static $functions;
 

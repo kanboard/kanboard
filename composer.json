@@ -42,6 +42,7 @@
         ],
         "psr-4": {
             "Kanboard\\": "app/",
+            "KanboardTests\\": "tests/",
             "MatthiasMullie\\Minify\\": "libs/minify/src/",
             "MatthiasMullie\\PathConverter\\": "libs/path-converter/src/",
             "Gregwar\\Captcha\\": "libs/Captcha",

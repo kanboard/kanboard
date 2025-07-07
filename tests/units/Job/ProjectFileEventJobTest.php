@@ -1,10 +1,11 @@
 <?php
 
+namespace KanboardTests\units\Job;
+
+use KanboardTests\units\Base;
 use Kanboard\Job\ProjectFileEventJob;
 use Kanboard\Model\ProjectFileModel;
 use Kanboard\Model\ProjectModel;
-
-require_once __DIR__.'/../Base.php';
 
 class ProjectFileEventJobTest extends Base
 {

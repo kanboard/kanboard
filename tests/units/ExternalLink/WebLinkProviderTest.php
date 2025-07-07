@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__.'/../Base.php';
+namespace KanboardTests\units\ExternalLink;
 
+use KanboardTests\units\Base;
 use Kanboard\ExternalLink\WebLinkProvider;
 
 class WebLinkProviderTest extends Base

@@ -1,13 +1,14 @@
 <?php
 
+namespace KanboardTests\units\Filter;
+
+use KanboardTests\units\Base;
 use Kanboard\Filter\ProjectActivityProjectIdFilter;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectActivityModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\TaskModel;
-
-require_once __DIR__.'/../Base.php';
 
 class ProjectActivityProjectIdFilterTest extends Base
 {
