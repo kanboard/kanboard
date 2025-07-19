@@ -51,8 +51,8 @@ class UserProfile extends Base
         if ($user->getInternalId()) {
             $profile = $this->userModel->getById($user->getInternalId());
         } elseif ($user->getExternalIdColumn() && $user->getExternalId()) {
-            $profile = $this->userSync->synchronize($user);
-            if (LDAP_GROUP_SYNC) {
+            $profile = $this->userSync->synchronize($user); // The profile can be null when external user creation is disabled
+            if (LDAP_GROUP_SYNC && ! empty($profile)) {
                 $this->groupSync->synchronize($profile['id'], $user->getExternalGroupIds());
             }
         }
