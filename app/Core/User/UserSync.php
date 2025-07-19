@@ -19,7 +19,7 @@ class UserSync extends Base
      *
      * @access public
      * @param  UserProviderInterface $user
-     * @return array
+     * @return array|null
      */
     public function synchronize(UserProviderInterface $user)
     {
