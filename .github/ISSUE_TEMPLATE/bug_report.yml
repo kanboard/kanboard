@@ -2,7 +2,7 @@ name: "Bug Report"
 description: "Report a bug or unexpected behavior"
 title: "[Bug]: "
 type: Bug
-labels: ["bug", "triage needed"]
+labels: ["triage needed"]
 body:
   - type: markdown
     attributes:
