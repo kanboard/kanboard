@@ -46,7 +46,11 @@ class AuthController extends BaseController
     public function check()
     {
         $values = $this->request->getValues();
-        session_set('hasRememberMe', ! empty($values['remember_me']));
+
+        if (REMEMBER_ME_AUTH) {
+            session_set('hasRememberMe', ! empty($values['remember_me']));
+        }
+
         list($valid, $errors) = $this->authValidator->validateForm($values);
 
         if ($valid) {

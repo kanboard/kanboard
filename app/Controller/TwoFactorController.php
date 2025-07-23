@@ -156,7 +156,7 @@ class TwoFactorController extends UserViewController
             $this->userSession->setPostAuthenticationAsValidated();
             $this->flash->success(t('The two factor authentication code is valid.'));
 
-            if (session_is_true('hasRememberMe')) {
+            if (REMEMBER_ME_AUTH && session_is_true('hasRememberMe')) {
                 $session = $this->rememberMeSessionModel->create($this->userSession->getId(), $this->request->getIpAddress(), $this->request->getUserAgent());
                 $this->rememberMeCookie->write($session['token'], $session['sequence'], $session['expiration']);
             }

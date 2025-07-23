@@ -34,7 +34,11 @@ class AuthenticationProvider implements ServiceProviderInterface
     {
         $container['authenticationManager'] = new AuthenticationManager($container);
         $container['authenticationManager']->register(new TotpAuth($container));
-        $container['authenticationManager']->register(new RememberMeAuth($container));
+
+        if (REMEMBER_ME_AUTH) {
+            $container['authenticationManager']->register(new RememberMeAuth($container));
+        }
+
         $container['authenticationManager']->register(new DatabaseAuth($container));
 
         if (REVERSE_PROXY_AUTH) {
@@ -42,7 +46,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         }
 
         $container['authenticationManager']->register(new ApiAccessTokenAuth($container));
-        
+
         if (LDAP_AUTH) {
             $container['authenticationManager']->register(new LdapAuth($container));
         }
