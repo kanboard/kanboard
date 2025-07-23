@@ -69,7 +69,7 @@
                     <?= $this->modal->medium('id-badge', t('Last logins'), 'UserViewController', 'lastLogin', array('user_id' => $user['id'])) ?>
                 </li>
             <?php endif ?>
-            <?php if ($this->user->hasAccess('UserViewController', 'sessions')): ?>
+            <?php if ($this->user->hasAccess('UserViewController', 'sessions') && REMEMBER_ME_AUTH): ?>
                 <li>
                     <?= $this->modal->medium('database', t('Persistent connections'), 'UserViewController', 'sessions', array('user_id' => $user['id'])) ?>
                 </li>

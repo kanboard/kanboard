@@ -107,6 +107,11 @@ class UserViewController extends BaseController
      */
     public function sessions()
     {
+        if (! REMEMBER_ME_AUTH) {
+            $this->response->status(404);
+            return;
+        }
+
         $user = $this->getUser();
         $this->response->html($this->helper->layout->user('user_view/sessions', array(
             'sessions' => $this->rememberMeSessionModel->getAll($user['id']),
