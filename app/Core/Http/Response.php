@@ -395,4 +395,25 @@ class Response extends Base
         $this->withBody($data);
         $this->send();
     }
+
+    /**
+     * Send a PDF response
+     *
+     * @access public
+     * @param  string  $data
+     * @param  integer $statusCode
+     * @param  string  $fileName
+     */
+    public function pdf($data, int $statusCode = 200, string $fileName = "")
+    {
+        $this->withStatusCode($statusCode);
+        $this->withContentType('application/pdf');
+
+        if (!empty($fileName)) {
+            $this->httpHeaders["content-disposition"] = "attachment; filename=".$fileName;
+        }
+
+        $this->withBody($data);
+        $this->send();
+    }
 }
