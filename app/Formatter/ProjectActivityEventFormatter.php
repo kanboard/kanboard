@@ -19,7 +19,12 @@ class ProjectActivityEventFormatter extends BaseFormatter implements FormatterIn
         $res = array();
 
         foreach ($events as &$event) {
-            $event += $this->unserializeEvent($event['data']);
+            $eventData = $this->unserializeEvent($event['data']);
+            if (empty($eventData)) {
+                continue;
+            }
+
+            $event += $eventData;
             unset($event['data']);
 
             if (isset($event['comment'])) {
@@ -34,7 +39,7 @@ class ProjectActivityEventFormatter extends BaseFormatter implements FormatterIn
             $event['author'] = $event['author_name'] ?: $event['author_username'];
             $event['event_title'] = $this->notificationModel->getTitleWithAuthor($event['author'], $event['event_name'], $event);
             $event['event_content'] = $this->renderEvent($event);
-            $res []= $event;
+            $res[] = $event;
         }
 
         return $res;
@@ -49,11 +54,12 @@ class ProjectActivityEventFormatter extends BaseFormatter implements FormatterIn
      */
     protected function unserializeEvent($data)
     {
+        // Ignore legacy events serialized with PHP due potential security issues.
         if ($data[0] === 'a') {
-            return unserialize($data);
+            return [];
         }
 
-        return json_decode($data, true) ?: array();
+        return json_decode($data, true) ?: [];
     }
 
     /**
