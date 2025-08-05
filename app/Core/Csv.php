@@ -139,7 +139,7 @@ class Csv
     {
         $file = new SplFileObject($filename);
         $file->setFlags(SplFileObject::READ_CSV);
-        $file->setCsvControl($this->delimiter, $this->enclosure);
+        $file->setCsvControl($this->delimiter, $this->enclosure, '\\');
         $line_number = 0;
 
         foreach ($file as $row) {
@@ -174,7 +174,7 @@ class Csv
             }
 
             foreach ($rows as $row) {
-                fputcsv($fp, $row, $this->delimiter, $this->enclosure);
+                fputcsv($fp, $row, $this->delimiter, $this->enclosure, '\\');
             }
 
             fclose($fp);
