@@ -2,7 +2,6 @@
 
 namespace Kanboard\ServiceProvider;
 
-use Kanboard\Core\Cache\FileCache;
 use Kanboard\Core\Cache\MemoryCache;
 use Kanboard\Decorator\ColumnMoveRestrictionCacheDecorator;
 use Kanboard\Decorator\ColumnRestrictionCacheDecorator;
@@ -33,13 +32,7 @@ class CacheProvider implements ServiceProviderInterface
             return new MemoryCache();
         };
 
-        if (CACHE_DRIVER === 'file') {
-            $container['cacheDriver'] = function () {
-                return new FileCache();
-            };
-        } else {
-            $container['cacheDriver'] = $container['memoryCache'];
-        }
+        $container['cacheDriver'] = $container['memoryCache'];
 
         $container['userCacheDecorator'] = function ($c) {
             return new UserCacheDecorator(
