@@ -159,4 +159,54 @@ class FunctionTest extends Base
 
         $this->assertSame($expected, $input);
     }
+
+    public function testSanitizePath()
+    {
+        // Test empty path
+        $this->assertFalse(sanitize_path(''));
+
+        // Test root path
+        $this->assertEquals('/', sanitize_path('/'));
+
+        // Test simple absolute path
+        $this->assertEquals('/home/user/file.txt', sanitize_path('/home/user/file.txt'));
+
+        // Test path with Windows-style backslashes
+        $this->assertEquals('/home/user/file.txt', sanitize_path('\\home\\user\\file.txt'));
+
+        // Test path with multiple slashes
+        $this->assertEquals('/home/user/file.txt', sanitize_path('///home//user///file.txt'));
+
+        // Test path with current directory references
+        $this->assertEquals('/home/user/file.txt', sanitize_path('/home/./user/./file.txt'));
+
+        // Test path with parent directory navigation
+        $this->assertEquals('/home/file.txt', sanitize_path('/home/user/../file.txt'));
+
+        // Test complex path with mixed navigation
+        $this->assertEquals('/home/user/documents/file.txt', sanitize_path('/home/user/../user/./documents/../documents/file.txt'));
+
+        // Test path trying to go above root
+        $this->assertEquals('/', sanitize_path('/../../..'));
+
+        // Test relative path (should be converted to absolute)
+        $currentDir = getcwd();
+        $this->assertEquals($currentDir . '/test/file.txt', sanitize_path('test/file.txt'));
+
+        // Test relative path with parent navigation
+        $expectedPath = dirname($currentDir) . '/file.txt';
+        $this->assertEquals($expectedPath, sanitize_path('../file.txt'));
+
+        // Test path with trailing slash removal
+        $this->assertEquals('/home/user', sanitize_path('/home/user/'));
+
+        // Test complex Windows-style path
+        $this->assertEquals('/c/Users/John/Documents/file.txt', sanitize_path('\\c\\Users\\John\\..\\John\\Documents\\file.txt'));
+
+        // Test path with only dots and slashes
+        $this->assertEquals('/', sanitize_path('/.././../'));
+
+        // Test path with empty components
+        $this->assertEquals('/home/user/file.txt', sanitize_path('/home//user///file.txt'));
+    }
 }

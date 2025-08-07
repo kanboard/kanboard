@@ -275,6 +275,12 @@ abstract class FileModel extends Base
      */
     public function generatePath($id, $filename)
     {
+        if (is_string($id)) {
+            $id = (int) $id;
+        }
+        if (! is_int($id) || $id <= 0) {
+            throw new Exception('Invalid ID provided for file path generation');
+        }
         return $this->getPathPrefix().DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR.hash('sha1', $filename.time());
     }
 

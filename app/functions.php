@@ -295,3 +295,58 @@ function n($value)
 {
     return Translator::getInstance()->number($value);
 }
+
+/**
+ * Sanitize a file path
+ *
+ * @param  string $path
+ * @return string|false
+ */
+function sanitize_path(string $path): string|false
+{
+    // Handle empty path
+    if (empty($path)) {
+        return false;
+    }
+
+    // Convert Windows-style backslashes to forward slashes
+    $path = str_replace('\\', '/', $path);
+
+    // If path is not absolute, make it relative to current working directory
+    if ($path[0] !== '/') {
+        $path = getcwd() . '/' . $path;
+    }
+
+    // Split path into components
+    $parts = explode('/', $path);
+    $resolved = [];
+
+    foreach ($parts as $part) {
+        // Skip empty parts (caused by multiple slashes)
+        if ($part === '' || $part === '.') {
+            continue;
+        }
+
+        // Handle parent directory
+        if ($part === '..') {
+            if (count($resolved) > 0) {
+                array_pop($resolved);
+            }
+            // If we're at root and encounter .., ignore it
+            continue;
+        }
+
+        // Add normal directory/file component
+        $resolved[] = $part;
+    }
+
+    // Reconstruct the path
+    $normalized = '/' . implode('/', $resolved);
+
+    // Handle root case
+    if ($normalized === '/') {
+        return '/';
+    }
+
+    return $normalized;
+}

@@ -62,10 +62,11 @@ class FileStorage implements ObjectStorageInterface
      */
     public function put($key, &$blob)
     {
+        $filename = $this->getSanitizedFilePath($key);
         $this->createFolder($key);
 
-        if (file_put_contents($this->baseDir.DIRECTORY_SEPARATOR.$key, $blob) === false) {
-            throw new ObjectStorageException('Unable to write the file: '.$this->baseDir.DIRECTORY_SEPARATOR.$key);
+        if (file_put_contents($filename, $blob) === false) {
+            throw new ObjectStorageException('Unable to write the file: '.$filename);
         }
     }
 
@@ -86,17 +87,21 @@ class FileStorage implements ObjectStorageInterface
      *
      * @access public
      * @throws ObjectStorageException
-     * @param  string  $src_filename
+     * @param  string  $srcFilename
      * @param  string  $key
      * @return boolean
      */
-    public function moveFile($src_filename, $key)
+    public function moveFile($srcFilename, $key)
     {
-        $this->createFolder($key);
-        $dst_filename = $this->baseDir.DIRECTORY_SEPARATOR.$key;
+        if (! file_exists($srcFilename)) {
+            throw new ObjectStorageException('Source file does not exist: '.$srcFilename);
+        }
 
-        if (! rename($src_filename, $dst_filename)) {
-            throw new ObjectStorageException('Unable to move the file: '.$src_filename.' to '.$dst_filename);
+        $dstFilename = $this->getSanitizedFilePath($key);
+        $this->createFolder($key);
+
+        if (! rename($srcFilename, $dstFilename)) {
+            throw new ObjectStorageException('Unable to move the file: '.$srcFilename.' to '.$dstFilename);
         }
 
         return true;
@@ -106,14 +111,20 @@ class FileStorage implements ObjectStorageInterface
      * Move uploaded file to object storage
      *
      * @access public
-     * @param  string  $filename
+     * @param  string  $srcFilename
      * @param  string  $key
      * @return boolean
      */
-    public function moveUploadedFile($filename, $key)
+    public function moveUploadedFile($srcFilename, $key)
     {
+        if (! file_exists($srcFilename)) {
+            throw new ObjectStorageException('Source file does not exist: '.$srcFilename);
+        }
+
+        $dstFilename = $this->getSanitizedFilePath($key);
         $this->createFolder($key);
-        return move_uploaded_file($filename, $this->baseDir.DIRECTORY_SEPARATOR.$key);
+
+        return move_uploaded_file($srcFilename, $dstFilename);
     }
 
     /**
@@ -139,14 +150,7 @@ class FileStorage implements ObjectStorageInterface
         return $result;
     }
 
-    /**
-     * Create object folder
-     *
-     * @access private
-     * @throws ObjectStorageException
-     * @param  string  $key
-     */
-    private function createFolder($key)
+    private function createFolder(string $key)
     {
         $folder = strpos($key, DIRECTORY_SEPARATOR) !== false ? $this->baseDir.DIRECTORY_SEPARATOR.dirname($key) : $this->baseDir;
 
@@ -155,30 +159,39 @@ class FileStorage implements ObjectStorageInterface
         }
     }
 
-    /**
-     * Get real file path
-     *
-     * @access private
-     * @throws ObjectStorageException
-     * @param  string  $key
-     * @return string
-     */
-    private function getRealFilePath($key)
+    private function getRealFilePath(string $key): string
     {
-        $realFilePath = realpath($this->baseDir.DIRECTORY_SEPARATOR.$key);
+        $filename = $this->baseDir.DIRECTORY_SEPARATOR.$key;
 
+        // Resolve the real path and make sure the file exists
+        $realFilePath = realpath($filename);
         if ($realFilePath === false) {
-            throw new ObjectStorageException('Invalid path: '.$key);
+            throw new ObjectStorageException('Invalid file path: '.$filename);
         }
 
-        if (strpos($realFilePath, $this->baseDir) !== 0) {
-            throw new ObjectStorageException('File is not in base directory: '.$realFilePath);
-        }
-
-        if (! file_exists($realFilePath)) {
-            throw new ObjectStorageException('File not found: '.$realFilePath);
-        }
+        $this->validateBasePath($realFilePath);
 
         return $realFilePath;
+    }
+
+    public function getSanitizedFilePath(string $key): string
+    {
+        $filename = $this->baseDir.DIRECTORY_SEPARATOR.$key;
+        $sanitizedKey = sanitize_path($filename);
+
+        if ($sanitizedKey === false) {
+            throw new ObjectStorageException('Invalid file path: '.$key);
+        }
+
+        $this->validateBasePath($sanitizedKey);
+
+        return $sanitizedKey;
+    }
+
+    private function validateBasePath(string $filePath)
+    {
+        if (strpos($filePath, $this->baseDir) !== 0) {
+            throw new ObjectStorageException('File is not in base directory: '.$filePath);
+        }
     }
 }

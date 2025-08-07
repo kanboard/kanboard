@@ -48,6 +48,17 @@ class TaskFileProcedure extends BaseProcedure
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'createTaskFile', $project_id);
 
+        if (!$this->taskFinderModel->exists($task_id)) {
+            return false;
+        }
+
+        $taskProjectID = $this->taskFinderModel->getProjectId($task_id);
+        if ($taskProjectID != $project_id) {
+            return false;
+        }
+
+        TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'createTaskFile', $task_id);
+
         try {
             return $this->taskFileModel->uploadContent($task_id, $filename, $blob);
         } catch (ObjectStorageException $e) {
