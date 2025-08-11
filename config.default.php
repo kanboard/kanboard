@@ -29,9 +29,6 @@ define('PLUGIN_API_URL', 'https://kanboard.org/plugins.json');
 // This is up to the Kanboard instance owner to validate if a plugin is legit.
 define('PLUGIN_INSTALLER', false);
 
-// Available cache drivers are "file" and "memory"
-define('CACHE_DRIVER', 'memory');
-
 // Cache folder to use if cache driver is "file" (must be writeable by the web server user)
 define('CACHE_DIR', DATA_DIR.DIRECTORY_SEPARATOR.'cache');
 

@@ -1,3 +1,19 @@
+Version 1.2.47 (August 11, 2025)
+--------------------------------
+
+* refactor: add namespace to test files
+* fix: the `$escape` parameter must be provided in PHP 8.4 for CSV functions
+* fix: sanitize and validate uploaded files path
+* fix: do not load `RememberMeAuth` provider when `REMEMBER_ME_AUTH` is `false`
+* fix: avoid PHP warning when external user creation is disabled
+* feat!: remove file cache driver to avoid using `unserialize()`
+* feat!: ignore legacy events serialized with PHP due to potential security issues
+* feat: add new actions: `TaskAssignCurrentUserColumnIfNoUserAlreadySet` and `TaskAssignToUserOnCreationInColumn`
+* feat: Add new `pdf()` method in `Core\Http\Response`
+* ci: run `php-cs-fixer` on GitHub Actions
+* ci: remove unnecessary labels from issue templates
+* chore: replace deprecated `gh-cli` feature source in devcontainer configuration
+
 Version 1.2.46 (June 22, 2025)
 ------------------------------
 

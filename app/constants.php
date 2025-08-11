@@ -12,9 +12,6 @@ defined('DATA_DIR') or define('DATA_DIR', getenv('DATA_DIR') ?: ROOT_DIR.DIRECTO
 // Files directory (attachments)
 defined('FILES_DIR') or define('FILES_DIR', getenv('FILES_DIR') ?: DATA_DIR.DIRECTORY_SEPARATOR.'files');
 
-// Available cache drivers are "file" and "memory"
-defined('CACHE_DRIVER') or define('CACHE_DRIVER', getenv('CACHE_DRIVER') ?: 'memory');
-
 // Cache folder (file driver)
 defined('CACHE_DIR') or define('CACHE_DIR', getenv('CACHE_DIR') ?: DATA_DIR.DIRECTORY_SEPARATOR.'cache');
 
