@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => 'Anhänge hinzufügen',
     'Task #%d "%s" is overdue' => 'Aufgabe #%d "%s" ist überfällig',
     'Enable notifications by default for all new users' => 'Benachrichtigungen standardmäßig für alle neuen Benutzer aktivieren',
+    'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Aufgabe dem angemeldeten Nutzer bei Spaltenänderung zuweisen, wenn eine Aufgabe in die ausgewählte Spalte verschoben wird.',
+    'Assign the task to its creator for specific columns if no assignee is set manually' => 'Aufgabe dem Ersteller zuweisen, wenn sie in einer ausgewählten Spalte ohne Bearbeiter ist.',
 ];
