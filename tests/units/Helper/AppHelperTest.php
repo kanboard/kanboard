@@ -14,6 +14,12 @@ class AppHelperTest extends Base
         $this->assertEquals('en', $h->jsLang());
     }
 
+    public function testIsRtlLanguage()
+    {
+        $h = new AppHelper($this->container);
+        $this->assertFalse($h->isRtlLanguage());
+    }
+
     public function testTimezone()
     {
         $h = new AppHelper($this->container);

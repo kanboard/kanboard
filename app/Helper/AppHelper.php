@@ -131,6 +131,17 @@ class AppHelper extends Base
     }
 
     /**
+     * Check if current language requires RTL direction
+     *
+     * @access public
+     * @return bool
+     */
+    public function isRtlLanguage()
+    {
+        return $this->languageModel->isRtlLanguage();
+    }
+
+    /**
      * Get date format for Jquery DatePicker
      *
      * @access public

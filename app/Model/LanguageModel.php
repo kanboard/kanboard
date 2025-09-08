@@ -194,6 +194,24 @@ class LanguageModel extends Base
     }
 
     /**
+     * Check if current language requires RTL direction
+     *
+     * @access public
+     * @return bool
+     */
+    public function isRtlLanguage()
+    {
+        $rtlJsLanguageCodes = array(
+            'ar',
+            'fa',
+        );
+
+        $lang = $this->getJsLanguageCode();
+
+        return in_array($lang, $rtlJsLanguageCodes);
+    }
+
+    /**
      * Get current language
      *
      * @access public
