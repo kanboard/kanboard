@@ -35,6 +35,18 @@ class LanguageTest extends Base
         $this->assertEquals('en', $languageModel->getJsLanguageCode());
     }
 
+    public function testIsRtlLanguage()
+    {
+        $languageModel = new LanguageModel($this->container);
+        $this->assertFalse($languageModel->isRtlLanguage());
+
+        $_SESSION['user'] = array('language' => 'ar_SY');
+        $this->assertTrue($languageModel->isRtlLanguage());
+
+        $_SESSION['user'] = array('language' => 'en_GB');
+        $this->assertFalse($languageModel->isRtlLanguage());
+    }
+
     public function testGetCurrentLanguage()
     {
         $languageModel = new LanguageModel($this->container);
