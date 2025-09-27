@@ -5,7 +5,7 @@ app/constants.php export-subst
 .gitattributes export-ignore
 .gitignore export-ignore
 .dockerignore export-ignore
-.php-cs-fixer.dist.php export-ignore
+.php-cs-fixer.php export-ignore
 
 custom-hooks export-ignore
 docker export-ignore
