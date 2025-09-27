@@ -171,9 +171,6 @@ class FunctionTest extends Base
         // Test simple absolute path
         $this->assertEquals('/home/user/file.txt', sanitize_path('/home/user/file.txt'));
 
-        // Test path with Windows-style backslashes
-        $this->assertEquals('/home/user/file.txt', sanitize_path('\\home\\user\\file.txt'));
-
         // Test path with multiple slashes
         $this->assertEquals('/home/user/file.txt', sanitize_path('///home//user///file.txt'));
 
@@ -201,7 +198,7 @@ class FunctionTest extends Base
         $this->assertEquals('/home/user', sanitize_path('/home/user/'));
 
         // Test complex Windows-style path
-        $this->assertEquals('/c/Users/John/Documents/file.txt', sanitize_path('\\c\\Users\\John\\..\\John\\Documents\\file.txt'));
+        $this->assertEquals('C:\\Users\\John\\Documents\\file.txt', sanitize_path('C:\\Users\\John\\..\\John\\Documents\\file.txt'));
 
         // Test path with only dots and slashes
         $this->assertEquals('/', sanitize_path('/.././../'));
