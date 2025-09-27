@@ -191,7 +191,7 @@ class FileStorage implements ObjectStorageInterface
     private function validateBasePath(string $filePath)
     {
         if (strpos($filePath, $this->baseDir) !== 0) {
-            throw new ObjectStorageException('File is not in base directory: '.$filePath);
+            throw new ObjectStorageException('File '.$filePath.' is not in base directory: '.$this->baseDir);
         }
     }
 }

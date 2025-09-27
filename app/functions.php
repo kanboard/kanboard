@@ -309,16 +309,23 @@ function sanitize_path(string $path): string|false
         return false;
     }
 
-    // Convert Windows-style backslashes to forward slashes
-    $path = str_replace('\\', '/', $path);
+    $dirSeparator = '/';
+
+    // Get Windows drive letter (C:/ or C:\)
+    $driveLetter = '';
+    if (preg_match('/^([a-zA-Z]:)([\/\\\].*)$/', $path, $matches)) {
+        $driveLetter = $matches[1];
+        $path = $matches[2];
+        $dirSeparator = '\\';
+    }
 
     // If path is not absolute, make it relative to current working directory
-    if ($path[0] !== '/') {
-        $path = getcwd() . '/' . $path;
+    if ($driveLetter === '' && substr($path, 0, 1) !== '/') {
+        $path = getcwd() . $dirSeparator . $path;
     }
 
     // Split path into components
-    $parts = explode('/', $path);
+    $parts = explode($dirSeparator, $path);
     $resolved = [];
 
     foreach ($parts as $part) {
@@ -341,11 +348,11 @@ function sanitize_path(string $path): string|false
     }
 
     // Reconstruct the path
-    $normalized = '/' . implode('/', $resolved);
+    $normalized = ($driveLetter !== '' ? $driveLetter . $dirSeparator : $dirSeparator) . implode($dirSeparator, $resolved);
 
     // Handle root case
-    if ($normalized === '/') {
-        return '/';
+    if ($normalized === $dirSeparator) {
+        return $dirSeparator;
     }
 
     return $normalized;
