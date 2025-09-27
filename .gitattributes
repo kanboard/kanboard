@@ -1,10 +1,13 @@
 app/constants.php export-subst
 
+.devcontainer export-ignore
 .github export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
 .dockerignore export-ignore
+.php-cs-fixer.dist.php export-ignore
 
+custom-hooks export-ignore
 docker export-ignore
 Dockerfile export-ignore
 docker-compose.yml export-ignore
