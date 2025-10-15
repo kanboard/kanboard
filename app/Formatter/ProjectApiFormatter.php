@@ -32,6 +32,13 @@ class ProjectApiFormatter extends BaseFormatter implements FormatterInterface
                 'board' => $this->helper->url->to('BoardViewController', 'show', array('project_id' => $this->project['id']), '', true),
                 'list' => $this->helper->url->to('TaskListController', 'show', array('project_id' => $this->project['id']), '', true),
             );
+            
+            // Add public board URL if public access is enabled
+            if (!empty($this->project['is_public']) && !empty($this->project['token'])) {
+                $this->project['url']['public_board'] = $this->helper->url->to('BoardViewController', 'readonly', array('token' => $this->project['token']), '', true);
+                $this->project['url']['rss_feed'] = $this->helper->url->to('FeedController', 'project', array('token' => $this->project['token']), '', true);
+                $this->project['url']['ical_feed'] = $this->helper->url->to('ICalendarController', 'project', array('token' => $this->project['token']), '', true);
+            }
         }
 
         return $this->project;
