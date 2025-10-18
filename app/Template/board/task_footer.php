@@ -95,7 +95,8 @@
         <?php endif ?>
 
         <?php if (! empty($task['nb_subtasks'])): ?>
-            <?= $this->app->tooltipLink('<i class="fa fa-bars fa-fw"></i>'.round($task['nb_completed_subtasks'] / $task['nb_subtasks'] * 100, 0).'%', $this->url->href('BoardTooltipController', 'subtasks', array('task_id' => $task['id']))) ?>
+            <?php $nb_subtasks = (int) $task['nb_subtasks']; $nb_completed = (int) $task['nb_completed_subtasks']; $percentage = $nb_subtasks > 0 ? round($nb_completed / $nb_subtasks * 100, 0) : 0; ?>
+            <?= $this->app->tooltipLink('<i class="fa fa-bars fa-fw"></i>'.$percentage.'% ('.$nb_completed.'/'.$nb_subtasks.')', $this->url->href('BoardTooltipController', 'subtasks', array('task_id' => $task['id']))) ?>
         <?php endif ?>
 
         <?php if (! empty($task['nb_files'])): ?>
