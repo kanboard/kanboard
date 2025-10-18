@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => 'Bijlagen toevoegen',
     'Task #%d "%s" is overdue' => 'Taak #%d "%s" is te laat',
     'Enable notifications by default for all new users' => 'Standaard meldingen inschakelen voor alle nieuwe gebruikers',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];

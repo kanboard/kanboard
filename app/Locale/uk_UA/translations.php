@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => 'Додати вкладення',
     'Task #%d "%s" is overdue' => 'Задача #%d "%s" прострочена',
     'Enable notifications by default for all new users' => 'Увімкнути сповіщення за замовчуванням для всіх нових користувачів',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];

@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => 'Tambahkan lampiran',
     'Task #%d "%s" is overdue' => 'Tugas #%d "%s" sudah kadaluarsa',
     'Enable notifications by default for all new users' => 'Aktifkan notifikasi secara default untuk semua pengguna baru',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];

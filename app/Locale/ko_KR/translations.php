@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => '첨부 파일 추가',
     'Task #%d "%s" is overdue' => '할일 #%d "%s"의 기한이 지났습니다',
     'Enable notifications by default for all new users' => '모든 신규 사용자에 대해 기본적으로 알림 활성화',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];

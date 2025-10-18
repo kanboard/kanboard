@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => 'Legg til vedlegg',
     'Task #%d "%s" is overdue' => 'Oppgaven #%d "%s" er forsinket',
     'Enable notifications by default for all new users' => 'Aktiver varslinger som standard for alle nye brukere',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];

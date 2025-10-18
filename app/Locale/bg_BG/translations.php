@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => 'Добавете прикачени файлове',
     'Task #%d "%s" is overdue' => 'Задача #%d "%s" е с изтекъл срок',
     'Enable notifications by default for all new users' => 'Активиране на известия по подразбиране за всички нови потребители',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];

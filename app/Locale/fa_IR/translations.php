@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => 'افزودن پیوست‌ها',
     'Task #%d "%s" is overdue' => 'کار #%d "%s" از موعد گذشته است',
     'Enable notifications by default for all new users' => 'به‌طور پیش‌فرض آگاه‌سازی‌ها را برای همه کاربران جدید فعال کنید',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];

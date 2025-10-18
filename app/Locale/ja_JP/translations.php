@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => '添付ファイルを追加',
     'Task #%d "%s" is overdue' => 'タスク #%d "%s" は期限切れです',
     'Enable notifications by default for all new users' => '新規ユーザーに対して、デフォルトで通知を有効にする',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];
