@@ -1,3 +1,16 @@
+Version 1.2.48 (October 18, 2025)
+---------------------------------
+
+* fix: handle Windows-style paths in `sanitize_path` function
+* feat(locale): added missing German translation phrases
+* feat(locale): added Arabic translation
+* feat(api): add board, rss and ical public links to the API response
+* feat: display sub-tasks completion in numbers (x/y) alongside percentage
+* feat: add basic support for right-to-left (RTL) languages
+* chore: update .gitattributes to ignore additional configuration files
+* build(deps): bump actions/setup-python from 5 to 6
+* build(deps): bump actions/checkout from 4 to 5
+
 Version 1.2.47 (August 11, 2025)
 --------------------------------
 
