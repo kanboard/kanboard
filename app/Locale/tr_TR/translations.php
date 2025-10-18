@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => 'Ekleri ekle',
     'Task #%d "%s" is overdue' => 'Görev #%d "%s" son tarihi geçti',
     'Enable notifications by default for all new users' => 'Tüm yeni kullanıcılar için bildirimleri varsayılan olarak etkinleştir',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];

@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => 'Ajouter des pièces jointes',
     'Task #%d "%s" is overdue' => 'La tâche n°%d « %s » est en retard',
     'Enable notifications by default for all new users' => 'Activer les notifications par défaut pour tous les nouveaux utilisateurs',
+    'Assign the task to its creator for specific columns if no assignee is set manually' => 'Assigner la tâche à son créateur pour des colonnes spécifiques si aucun responsable n\'est défini manuellement',
+    'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Assigner une tâche à l\'utilisateur connecté lors du changement de colonne vers la colonne spécifiée si aucun utilisateur n\'est assigné',
 ];

@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => 'Thêm tệp đính kèm',
     'Task #%d "%s" is overdue' => 'Nhiệm vụ #%d "%s" đã quá hạn',
     'Enable notifications by default for all new users' => 'Kích hoạt thông báo theo mặc định cho tất cả người dùng mới',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];

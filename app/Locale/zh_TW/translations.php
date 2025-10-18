@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => '加入附件',
     'Task #%d "%s" is overdue' => '任務 #%d "%s" 已逾期',
     'Enable notifications by default for all new users' => '預設啟用所有新使用者的通知',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];

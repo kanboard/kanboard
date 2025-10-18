@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => 'Aggiungi allegati',
     'Task #%d "%s" is overdue' => 'Il compito #%d "%s" è scaduto',
     'Enable notifications by default for all new users' => 'Abilita le notifiche per impostazione predefinita per tutti i nuovi utenti',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];

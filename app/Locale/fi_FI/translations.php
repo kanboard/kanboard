@@ -1468,4 +1468,6 @@ return [
     'Add attachments' => 'Lisää liitteitä',
     'Task #%d "%s" is overdue' => 'Tehtävä #%d "%s" on myöhässä',
     'Enable notifications by default for all new users' => 'Ota ilmoitukset käyttöön oletuksena kaikille uusille käyttäjille',
+    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
+    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
 ];
