@@ -214,13 +214,8 @@ KB.component('file-upload-task-create', function (containerElement, options) {
     }
 
     this.render = function () {
-        KB.on('modal.submit', onSubmit);
-        KB.on('modal.stop', function () {
-            KB.removeListener('modal.submit', onSubmit);
-        });
         KB.on('modal.close', function () {
             files = [];
-            KB.removeListener('modal.submit', onSubmit);
         });
         inputElement = KB.dom('input')
             .attr('type', 'hidden')
@@ -235,30 +230,4 @@ KB.component('file-upload-task-create', function (containerElement, options) {
         initialize();
         onLoad();
     };
-
-    function onSubmit() {
-        var form = document.querySelector('#modal-content form');
-
-        if (form) {
-            var url = form.getAttribute('action');
-
-            if (url) {
-                KB.http.postForm(url, form).success(function (response) {
-                    KB.trigger('modal.stop');
-
-                    if (response) {
-                        KB.modal.replaceHtml(response);
-                    } else {
-                        KB.modal.close();
-                    }
-                }).error(function (response) {
-                    KB.trigger('modal.stop');
-
-                    if (response.hasOwnProperty('message')) {
-                        window.alert(response.message);
-                    }
-                });
-            }
-        }
-    }
 });
