@@ -1,0 +1,25 @@
+name: Mirror to Codeberg
+
+on:
+  push:
+    branches: [ main ]
+  delete:
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Mirror to Codeberg
+        env:
+          CODEBERG_USERNAME: ${{ secrets.CODEBERG_USERNAME }}
+          CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+        run: |
+          git remote add codeberg https://${{ secrets.CODEBERG_USERNAME }}:${{ secrets.CODEBERG_TOKEN }}@codeberg.org/kanboard/kanboard.git
+          git push --force --prune codeberg \
+            "refs/heads/*:refs/heads/*" \
+            "refs/tags/*:refs/tags/*"
