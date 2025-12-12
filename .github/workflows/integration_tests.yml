@@ -74,7 +74,7 @@ jobs:
         DB_PORT: ${{ job.services.postgres.ports[5432] }}
     - name: Archive Error Logs
       if: always()
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: apache-error-logs-postgres
         path: /var/log/apache2/error.log
@@ -123,7 +123,7 @@ jobs:
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
     - name: Archive Error Logs
       if: always()
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: apache-error-logs-mysql
         path: /var/log/apache2/error.log
