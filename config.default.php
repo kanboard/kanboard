@@ -289,3 +289,6 @@ define('DASHBOARD_MAX_PROJECTS', 10);
 
 // Comma separated list of trusted proxy headers, for example: "HTTP_X_REAL_IP,HTTP_X_FORWARDED_FOR"
 define('TRUSTED_PROXY_HEADERS', '');
+
+// Allow private network access when fetching metadata for external links
+define('EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS', false);

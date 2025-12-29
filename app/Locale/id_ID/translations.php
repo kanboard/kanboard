@@ -923,7 +923,6 @@ return [
     'Auto' => 'Otomatis',
     'Related' => 'Terkait',
     'Attachment' => 'Lampiran',
-    'Title not found' => 'Judul tidak ditemukan',
     'Web Link' => 'Tautan web',
     'External links' => 'Tautan eksternal',
     'Add external link' => 'Tambah tautan eksternal',

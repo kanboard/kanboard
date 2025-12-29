@@ -923,7 +923,6 @@ return [
     'Auto' => 'Auto',
     'Related' => 'Relacionat',
     'Attachment' => 'Adjunt',
-    'Title not found' => 'Títol no trobat',
     'Web Link' => 'Enllaç web',
     'External links' => 'Enllaços externs',
     'Add external link' => 'Afegeix un enllaç extern',

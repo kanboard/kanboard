@@ -923,7 +923,6 @@ return [
     'Auto' => 'Auto',
     'Related' => 'Asociat',
     'Attachment' => 'Atașament',
-    'Title not found' => 'Titlul nu a fost găsit',
     'Web Link' => 'Link web',
     'External links' => 'Legături externe',
     'Add external link' => 'Adaugă legătură externă',

@@ -43,4 +43,19 @@ class WebLinkTest extends Base
 
         $this->assertEquals('kanboard.org/something', $webLink->getTitle());
     }
+
+    public function testGetTitleFromPrivateNetworkUrl()
+    {
+        $url = 'http://192.168.0.1/test';
+
+        $webLink = new WebLink($this->container);
+        $webLink->setUrl($url);
+        $this->assertEquals($url, $webLink->getUrl());
+
+        $this->container['httpClient']
+            ->expects($this->never())
+            ->method('get');
+
+        $this->assertEquals($url, $webLink->getTitle());
+    }
 }

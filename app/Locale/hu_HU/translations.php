@@ -923,7 +923,6 @@ return [
     'Auto' => 'Automatikus',
     'Related' => 'Kapcsolódó',
     'Attachment' => 'Melléklet',
-    'Title not found' => 'A cím nem található',
     'Web Link' => 'Webes hivatkozás',
     'External links' => 'Külső hivatkozások',
     'Add external link' => 'Külső hivatkozás hozzáadása',

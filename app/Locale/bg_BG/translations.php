@@ -923,7 +923,6 @@ return [
     'Auto' => 'Авто',
     'Related' => 'Свързано',
     'Attachment' => 'Прикачен файл',
-    'Title not found' => 'Заглавието не е намерено',
     'Web Link' => 'Препратка в Интернет',
     'External links' => 'Външна връзка',
     'Add external link' => 'Добавяне на външна връзка',

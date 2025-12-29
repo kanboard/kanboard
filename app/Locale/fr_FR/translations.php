@@ -923,7 +923,6 @@ return [
     'Auto' => 'Auto',
     'Related' => 'Relié',
     'Attachment' => 'Pièce-jointe',
-    'Title not found' => 'Titre non trouvé',
     'Web Link' => 'Lien web',
     'External links' => 'Liens externes',
     'Add external link' => 'Ajouter un lien externe',

@@ -923,7 +923,6 @@ return [
     'Auto' => 'Tự động',
     'Related' => 'Liên quan',
     'Attachment' => 'Tập tin đính kèm',
-    'Title not found' => 'Tiêu đề không tìm thấy',
     'Web Link' => 'Liên kết Web',
     'External links' => 'Liện kết ngoại',
     'Add external link' => 'Thêm liên kết bên ngoài',

@@ -923,7 +923,6 @@ return [
     'Auto' => 'تلقائي',
     'Related' => 'مرتبط',
     'Attachment' => 'مرفق',
-    'Title not found' => 'العنوان غير موجود',
     'Web Link' => 'رابط ويب',
     'External links' => 'روابط خارجية',
     'Add external link' => 'إضافة رابط خارجي',

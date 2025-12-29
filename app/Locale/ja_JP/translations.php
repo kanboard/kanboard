@@ -923,7 +923,6 @@ return [
     'Auto' => '自動',
     'Related' => '関連',
     'Attachment' => '添付',
-    'Title not found' => 'タイトルが見つかりません',
     'Web Link' => 'Webリンク',
     'External links' => '外部リンク',
     'Add external link' => '外部リンクを追加',

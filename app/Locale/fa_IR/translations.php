@@ -923,7 +923,6 @@ return [
     'Auto' => 'خودکار',
     'Related' => 'مرتبط',
     'Attachment' => 'پیوست',
-    'Title not found' => 'عنوان یافت نشد',
     'Web Link' => 'پیوند وب',
     'External links' => 'پیوند های خارجی',
     'Add external link' => 'افزودن پیوند خارجی',

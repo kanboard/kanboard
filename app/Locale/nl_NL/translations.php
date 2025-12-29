@@ -923,7 +923,6 @@ return [
     'Auto' => 'Auto',
     'Related' => 'Gerelateerd',
     'Attachment' => 'Bijlage',
-    'Title not found' => 'Titel niet gevonden',
     'Web Link' => 'Weblink',
     'External links' => 'Externe links',
     'Add external link' => 'Externe link toevoegen',

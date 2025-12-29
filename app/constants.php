@@ -182,3 +182,6 @@ defined('DASHBOARD_MAX_PROJECTS') or define('DASHBOARD_MAX_PROJECTS', getenv('DA
 
 // Comma separated list of trusted proxy headers, for example: "HTTP_X_REAL_IP,HTTP_X_FORWARDED_FOR"
 defined('TRUSTED_PROXY_HEADERS') or define('TRUSTED_PROXY_HEADERS', getenv('TRUSTED_PROXY_HEADERS') ?: '');
+
+// Allow private network access when fetching metadata for external links
+defined('EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS') or define('EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS', getenv('EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS') ? strtolower(getenv('EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS')) === 'true' : false);

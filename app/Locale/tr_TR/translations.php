@@ -923,7 +923,6 @@ return [
     'Auto' => 'Otomatik',
     'Related' => 'İlişkili',
     'Attachment' => 'Ek',
-    'Title not found' => 'Başlık bulunamadı',
     'Web Link' => 'Web Linki',
     'External links' => 'Harici linkler',
     'Add external link' => 'Harici link ekle',

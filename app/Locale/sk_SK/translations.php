@@ -923,7 +923,6 @@ return [
     'Auto' => 'Auto',
     'Related' => 'Súvisí',
     'Attachment' => 'Prílohy',
-    'Title not found' => 'Názov nenájdený',
     'Web Link' => 'Webový odkaz',
     'External links' => 'Externé odkazy',
     'Add external link' => 'Pridať externý odkaz',
