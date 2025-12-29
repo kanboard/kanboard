@@ -20,6 +20,11 @@ class WebLink extends BaseLink implements ExternalLinkInterface
      */
     public function getTitle()
     {
+        if (! EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS && $this->httpClient->isPrivateURL($this->url)) {
+            $this->logger->info('Blocked attempt to fetch URL from private network: '.$this->url);
+            return $this->url;
+        }
+
         $html = $this->httpClient->get($this->url);
 
         if (preg_match('/<title>(.*)<\/title>/siU', $html, $matches)) {
@@ -32,6 +37,6 @@ class WebLink extends BaseLink implements ExternalLinkInterface
             return $components['host'].$components['path'];
         }
 
-        return t('Title not found');
+        return $this->url;
     }
 }

@@ -923,7 +923,6 @@ return [
     'Auto' => 'Αυτόματο',
     'Related' => 'Σχετίζεται',
     'Attachment' => 'Συνημμένο',
-    'Title not found' => 'Ο τίτλος δεν βρέθηκε',
     'Web Link' => 'Σύνδεσμος web',
     'External links' => 'Εξωτερικοί σύνδεσμοι',
     'Add external link' => 'Προσθήκη εξωτερικού συνδέσμου',

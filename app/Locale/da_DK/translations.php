@@ -923,7 +923,6 @@ return [
     'Auto' => 'Auto',
     'Related' => 'Relateret',
     'Attachment' => 'Vedhæftning',
-    'Title not found' => 'Titel ikke fundet',
     'Web Link' => 'Net henvisning',
     'External links' => 'Eksterne henvisninger',
     'Add external link' => 'Tilføj ekstern henvisning',

@@ -923,7 +923,6 @@ return [
     'Auto' => 'Automatski',
     'Related' => 'Povezani',
     'Attachment' => 'Dodijeljeni',
-    'Title not found' => 'Bez naslova',
     'Web Link' => 'Web veza',
     'External links' => 'Vanjska veza',
     'Add external link' => 'Dodaj vanjsku vezu',

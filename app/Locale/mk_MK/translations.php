@@ -923,7 +923,6 @@ return [
     'Auto' => 'Автоматски',
     'Related' => 'Поврзан',
     'Attachment' => 'Прилог',
-    'Title not found' => 'Без наслов',
     'Web Link' => 'Веб линк',
     'External links' => 'Надворешни врски',
     'Add external link' => 'Додадете надворешен линк',

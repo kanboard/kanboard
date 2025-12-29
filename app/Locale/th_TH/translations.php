@@ -923,7 +923,6 @@ return [
     'Auto' => 'อัตโนมัติ',
     'Related' => 'ที่เกี่ยวข้อง',
     'Attachment' => 'แนบ',
-    'Title not found' => 'ไม่พบหัวเรื่อง',
     'Web Link' => 'เวบลิงค์',
     'External links' => 'เชื่อมโยงภายนอก',
     'Add external link' => 'เพิ่มการเชื่อมโยงภายนอก',

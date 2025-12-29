@@ -923,7 +923,6 @@ return [
     'Auto' => '자동',
     'Related' => '연관된',
     'Attachment' => '첨부',
-    'Title not found' => '제목이 없습니다',
     'Web Link' => '웹 링크',
     'External links' => '외부 링크',
     'Add external link' => '외부 링크 추가',

@@ -923,7 +923,6 @@ return [
     'Auto' => '自动',
     'Related' => '相关的',
     'Attachment' => '附件',
-    'Title not found' => '标题未找到',
     'Web Link' => '网页链接',
     'External links' => '外部关联',
     'Add external link' => '添加外部关联',

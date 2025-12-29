@@ -923,7 +923,6 @@ return [
     'Auto' => 'Automatski',
     'Related' => 'Povezan',
     'Attachment' => 'Priložak',
-    'Title not found' => 'Bez naslova',
     'Web Link' => 'Veb link',
     'External links' => 'Spoljne veze',
     'Add external link' => 'Dodaj spoljnu vezu',

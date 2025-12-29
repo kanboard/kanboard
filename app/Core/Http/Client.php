@@ -378,4 +378,65 @@ class Client extends Base
     {
         return function_exists('curl_version') ? 'cURL' : 'socket';
     }
+
+    /**
+     * Check if an IP address is private
+     *
+     * @access public
+     * @param  string     $ip
+     * @return bool
+     */
+    public function isPrivateIpAddress($ip)
+    {
+        if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
+            return false;
+        }
+
+        return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false;
+    }
+
+    /**
+     * Check if a URL is private (RFC1918, localhost, etc.)
+     *
+     * @access public
+     * @param  string     $url
+     * @return bool
+     */
+    public function isPrivateURL($url)
+    {
+        $parsedUrl = parse_url($url);
+
+        if (!isset($parsedUrl['scheme']) || !in_array(strtolower($parsedUrl['scheme']), ['http', 'https'], true)) {
+            return false;
+        }
+
+        if (!isset($parsedUrl['host'])) {
+            return false;
+        }
+
+        $host = trim($parsedUrl['host']);
+        if ($host === '') {
+            return false;
+        }
+
+        $ipv4Address = gethostbyname($host);
+        if ($this->isPrivateIpAddress($ipv4Address)) {
+            return true;
+        }
+
+        if (function_exists('dns_get_record')) {
+            $dnsRecords = @dns_get_record($host, DNS_AAAA);
+            if (is_array($dnsRecords)) {
+                foreach ($dnsRecords as $record) {
+                    if (isset($record['type']) && $record['type'] === 'AAAA' && isset($record['ipv6'])) {
+                        if ($this->isPrivateIpAddress($record['ipv6'])) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 }
