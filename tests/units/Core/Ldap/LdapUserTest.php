@@ -812,6 +812,15 @@ class LdapUserTest extends Base
         $this->assertEquals($expected, $user->getLdapUserPattern('test', $filter));
     }
 
+    public function testGetLdapUserPatternWithSpecialCharacters()
+    {
+        $username = 'admin*';
+        $filter = '(uid=%s)';
+        $expected = '(uid=admin\2a)';
+
+        $this->assertEquals($expected, $this->user->getLdapUserPattern($username, $filter));
+    }
+
     public function testGetGroupUserFilter()
     {
         $user = new User($this->query);
