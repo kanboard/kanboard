@@ -339,4 +339,46 @@ class RequestTest extends Base
         $this->assertTrue($request->isTrustedProxy(['::1/128']));
         $this->assertFalse($request->isTrustedProxy(['2001:db8::/128']));
     }
+
+    public function testIsSafeRedirectUriRejectsEmptyString()
+    {
+        $request = new Request($this->container);
+        $this->assertFalse($request->isSafeRedirectUri('   '));
+    }
+
+    public function testIsSafeRedirectUriRejectsBackslashes()
+    {
+        $request = new Request($this->container);
+        $this->assertFalse($request->isSafeRedirectUri('/admin\\panel'));
+    }
+
+    public function testIsSafeRedirectUriRejectsProtocolRelative()
+    {
+        $request = new Request($this->container);
+        $this->assertFalse($request->isSafeRedirectUri('//example.com/dashboard'));
+    }
+
+    public function testIsSafeRedirectUriRejectsRelativePathsWithoutSlash()
+    {
+        $request = new Request($this->container);
+        $this->assertFalse($request->isSafeRedirectUri('settings'));
+    }
+
+    public function testIsSafeRedirectUriRejectsAbsoluteUrls()
+    {
+        $request = new Request($this->container);
+        $this->assertFalse($request->isSafeRedirectUri('https://example.org/login'));
+    }
+
+    public function testIsSafeRedirectUriAcceptsRelativePath()
+    {
+        $request = new Request($this->container);
+        $this->assertTrue($request->isSafeRedirectUri('/board/1/tasks'));
+    }
+
+    public function testIsSafeRedirectUriAcceptsQueryString()
+    {
+        $request = new Request($this->container);
+        $this->assertTrue($request->isSafeRedirectUri('/?redirect=1&foo=bar'));
+    }
 }

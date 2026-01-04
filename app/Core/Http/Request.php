@@ -337,6 +337,48 @@ class Request extends Base
     }
 
     /**
+     * Check if a redirect URI is safe (relative path)
+     *
+     * @access public
+     * @param  string   $uri   Redirect URI
+     * @return bool
+     */
+    public function isSafeRedirectUri($uri)
+    {
+        $uri = trim($uri);
+        if ($uri === '') {
+            return false;
+        }
+
+        // Reject backslashes
+        if (str_contains($uri, '\\')) {
+            return false;
+        }
+
+        // Reject if it starts with // (protocol-relative)
+        if (str_starts_with($uri, '//')) {
+            return false;
+        }
+
+        // Reject if it does not start with a slash (relative path)
+        if (! str_starts_with($uri, '/')) {
+            return false;
+        }
+
+        $parsedUrl = parse_url($uri);
+        if ($parsedUrl === false) {
+            return false;
+        }
+
+        // Reject if it contains a scheme or host (partial or full URL)
+        if (isset($parsedUrl['scheme']) || isset($parsedUrl['host'])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Get the user agent
      *
      * @access public
