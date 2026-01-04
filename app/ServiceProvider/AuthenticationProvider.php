@@ -41,7 +41,7 @@ class AuthenticationProvider implements ServiceProviderInterface
 
         $container['authenticationManager']->register(new DatabaseAuth($container));
 
-        if (REVERSE_PROXY_AUTH) {
+        if (REVERSE_PROXY_AUTH && ! empty(TRUSTED_PROXY_NETWORKS)) {
             $container['authenticationManager']->register(new ReverseProxyAuth($container));
         }
 

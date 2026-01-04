@@ -132,31 +132,85 @@ class RequestTest extends Base
         $this->assertEquals('test', $request->getHeader('X-Forwarded-For'));
     }
 
-    public function testGetRemoteUser()
+    public function testGetRemoteUserReturnsEmptyWhenHeaderMissing()
     {
-        $request = new Request($this->container, array(), array(), array(), array(), array());
-        $this->assertEmpty($request->getRemoteUser());
-
-        $request = new Request($this->container, array(REVERSE_PROXY_USER_HEADER => 'test'), array(), array(), array(), array());
-        $this->assertEquals('test', $request->getRemoteUser());
+        $server = ['REMOTE_ADDR' => '203.0.113.5'];
+        $request = new Request($this->container, $server);
+        $this->assertEmpty($request->getRemoteUser(['203.0.113.0/24']));
     }
 
-    public function testGetRemoteEmail()
+    public function testGetRemoteUserReturnsHeaderValueWhenUsingTrustedProxy()
     {
-        $request = new Request($this->container, array(), array(), array(), array(), array());
-        $this->assertEmpty($request->getRemoteEmail());
-
-        $request = new Request($this->container, array(REVERSE_PROXY_EMAIL_HEADER => 'test@example.com'), array(), array(), array(), array());
-        $this->assertEquals('test@example.com', $request->getRemoteEmail());
+        $server = [
+            'REMOTE_ADDR' => '203.0.113.5',
+            REVERSE_PROXY_USER_HEADER => 'test',
+        ];
+        $request = new Request($this->container, $server);
+        $this->assertEquals('test', $request->getRemoteUser(['203.0.113.0/24']));
     }
 
-    public function testGetRemoteName()
+    public function testGetRemoteUserReturnsEmptyWhenUsingUntrustedProxy()
     {
-        $request = new Request($this->container, array(), array(), array(), array(), array());
-        $this->assertEmpty($request->getRemoteName());
+        $server = [
+            'REMOTE_ADDR' => '198.51.100.5',
+            REVERSE_PROXY_USER_HEADER => 'test',
+        ];
+        $request = new Request($this->container, $server);
+        $this->assertEmpty($request->getRemoteUser(['203.0.113.0/24']));
+    }
 
-        $request = new Request($this->container, array(REVERSE_PROXY_FULLNAME_HEADER => 'Test Name'), array(), array(), array(), array());
-        $this->assertEquals('Test Name', $request->getRemoteName());
+    public function testGetRemoteEmailReturnsEmptyWhenHeaderMissing()
+    {
+        $server = ['REMOTE_ADDR' => '203.0.113.5'];
+        $request = new Request($this->container, $server);
+        $this->assertEmpty($request->getRemoteEmail(['203.0.113.0/24']));
+    }
+
+    public function testGetRemoteEmailReturnsHeaderValueWhenUsingTrustedProxy()
+    {
+        $server = [
+            'REMOTE_ADDR' => '203.0.113.5',
+            REVERSE_PROXY_EMAIL_HEADER => 'test@example.com',
+        ];
+        $request = new Request($this->container, $server);
+        $this->assertEquals('test@example.com', $request->getRemoteEmail(['203.0.113.0/24']));
+    }
+
+    public function testGetRemoteEmailReturnsEmptyWhenUsingUntrustedProxy()
+    {
+        $server = [
+            'REMOTE_ADDR' => '198.51.100.5',
+            REVERSE_PROXY_EMAIL_HEADER => 'test@example.com',
+        ];
+        $request = new Request($this->container, $server);
+        $this->assertEmpty($request->getRemoteEmail(['203.0.113.0/24']));
+    }
+
+    public function testGetRemoteNameReturnsEmptyWhenHeaderMissing()
+    {
+        $server = ['REMOTE_ADDR' => '203.0.113.5'];
+        $request = new Request($this->container, $server);
+        $this->assertEmpty($request->getRemoteName(['203.0.113.0/24']));
+    }
+
+    public function testGetRemoteNameReturnsHeaderValueWhenUsingTrustedProxy()
+    {
+        $server = [
+            'REMOTE_ADDR' => '203.0.113.5',
+            REVERSE_PROXY_FULLNAME_HEADER => 'Test Name',
+        ];
+        $request = new Request($this->container, $server);
+        $this->assertEquals('Test Name', $request->getRemoteName(['203.0.113.0/24']));
+    }
+
+    public function testGetRemoteNameReturnsEmptyWhenUsingUntrustedProxy()
+    {
+        $server = [
+            'REMOTE_ADDR' => '198.51.100.5',
+            REVERSE_PROXY_FULLNAME_HEADER => 'Test Name',
+        ];
+        $request = new Request($this->container, $server);
+        $this->assertEmpty($request->getRemoteName(['203.0.113.0/24']));
     }
 
     public function testGetQueryString()
@@ -186,24 +240,103 @@ class RequestTest extends Base
         $this->assertEquals('My browser', $request->getUserAgent());
     }
 
-    public function testGetIpAddress()
+    public function testGetIpAddressReturnsEmptyStringWhenNoRemoteAddr()
     {
-        $request = new Request($this->container, array(), array(), array(), array(), array());
-        $this->assertEquals('Unknown', $request->getIpAddress());
+        $request = new Request($this->container);
+        $this->assertEquals('', $request->getIpAddress());
+    }
 
-        $request = new Request($this->container, array('HTTP_X_REAL_IP' => '192.168.1.1,127.0.0.1', 'REMOTE_ADDR' => '192.168.0.1'), array(), array(), array(), array());
-        $this->assertEquals('192.168.0.1', $request->getIpAddress());
+    public function testGetIpAddressReturnsRemoteAddrByDefault()
+    {
+        $request = new Request($this->container, ['REMOTE_ADDR' => '203.0.113.10']);
+        $this->assertEquals('203.0.113.10', $request->getIpAddress());
+    }
 
-        $request = new Request($this->container, array('HTTP_X_REAL_IP' => '192.168.1.1,127.0.0.1'), array(), array(), array(), array());
-        $this->assertEquals('192.168.1.1', $request->getIpAddress(['HTTP_X_REAL_IP']));
+    public function testGetIpAddressUsesTrustedProxyHeaderWhenValid()
+    {
+        $server = [
+            'REMOTE_ADDR' => '203.0.113.5',
+            'HTTP_X_FORWARDED_FOR' => 'invalid, 198.51.100.42, 198.51.100.52',
+        ];
+        $request = new Request($this->container, $server);
 
-        $request = new Request($this->container, array('HTTP_X_FORWARDED_FOR' => '192.168.0.1,127.0.0.1'), array(), array(), array(), array());
-        $this->assertEquals('192.168.0.1', $request->getIpAddress(['HTTP_X_FORWARDED_FOR']));
+        $this->assertEquals(
+            '198.51.100.42',
+            $request->getIpAddress(['HTTP_X_FORWARDED_FOR'], ['203.0.113.0/24'])
+        );
+    }
 
-        $request = new Request($this->container, array('REMOTE_ADDR' => '192.168.0.1'), array(), array(), array(), array());
-        $this->assertEquals('192.168.0.1', $request->getIpAddress());
+    public function testGetIpAddressFallsBackToRemoteAddrWhenHeaderInvalid()
+    {
+        $server = [
+            'REMOTE_ADDR' => '203.0.113.5',
+            'HTTP_X_FORWARDED_FOR' => 'still-invalid',
+        ];
+        $request = new Request($this->container, $server);
 
-        $request = new Request($this->container, array('REMOTE_ADDR' => ''), array(), array(), array(), array());
-        $this->assertEquals('Unknown', $request->getIpAddress());
+        $this->assertEquals(
+            '203.0.113.5',
+            $request->getIpAddress(['HTTP_X_FORWARDED_FOR'], ['203.0.113.0/24'])
+        );
+    }
+
+    public function testGetIpAddressSupportsIPv6ForwardedValues()
+    {
+        $server = [
+            'REMOTE_ADDR' => '2001:db8::10',
+            'HTTP_X_FORWARDED_FOR' => '2001:db8::abcd',
+        ];
+        $request = new Request($this->container, $server);
+
+        $this->assertEquals(
+            '2001:db8::abcd',
+            $request->getIpAddress(['HTTP_X_FORWARDED_FOR'], ['2001:db8::/32'])
+        );
+    }
+
+    public function testGetIpAddressIgnoresUntrustedProxyHeaders()
+    {
+        $server = [
+            'REMOTE_ADDR' => '198.51.100.1',
+            'HTTP_X_FORWARDED_FOR' => '203.0.113.77',
+        ];
+        $request = new Request($this->container, $server);
+
+        $this->assertEquals(
+            '198.51.100.1',
+            $request->getIpAddress(['HTTP_X_FORWARDED_FOR'], ['203.0.113.0/24'])
+        );
+    }
+
+    public function testIsTrustedProxyWithIPv4Networks()
+    {
+        $request = new Request($this->container, ['REMOTE_ADDR' => '203.0.113.5']);
+
+        $this->assertTrue($request->isTrustedProxy(['203.0.113.0/24']));
+        $this->assertFalse($request->isTrustedProxy(['198.51.100.0/24']));
+    }
+
+    public function testIsTrustedProxyWithIPv6Networks()
+    {
+        $request = new Request($this->container, ['REMOTE_ADDR' => '2001:db8::abcd']);
+
+        $this->assertTrue($request->isTrustedProxy(['2001:db8::/32']));
+        $this->assertFalse($request->isTrustedProxy(['2001:db9::/32']));
+    }
+
+    public function testIsTrustedProxyWithIPv4Loopback()
+    {
+        $request = new Request($this->container, ['REMOTE_ADDR' => '127.0.0.1']);
+
+        $this->assertTrue($request->isTrustedProxy(['127.0.0.0/8']));
+        $this->assertFalse($request->isTrustedProxy(['10.0.0.0/8']));
+    }
+
+    public function testIsTrustedProxyWithIPv6Loopback()
+    {
+        $request = new Request($this->container, ['REMOTE_ADDR' => '::1']);
+
+        $this->assertTrue($request->isTrustedProxy(['::1/128']));
+        $this->assertFalse($request->isTrustedProxy(['2001:db8::/128']));
     }
 }

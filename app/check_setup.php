@@ -42,3 +42,8 @@ foreach (array('gd', 'mbstring', 'hash', 'openssl', 'json', 'hash', 'ctype', 'fi
 if (ini_get('arg_separator.output') === '&amp;') {
     ini_set('arg_separator.output', '&');
 }
+
+// Check Reverse Proxy Authentication settings
+if (REVERSE_PROXY_AUTH && empty(TRUSTED_PROXY_NETWORKS)) {
+    throw new Exception('REVERSE_PROXY_AUTH is enabled but TRUSTED_PROXY_NETWORKS is not configured');
+}
