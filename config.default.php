@@ -290,5 +290,8 @@ define('DASHBOARD_MAX_PROJECTS', 10);
 // Comma separated list of trusted proxy headers, for example: "HTTP_X_REAL_IP,HTTP_X_FORWARDED_FOR"
 define('TRUSTED_PROXY_HEADERS', '');
 
+// Comma separated list of trusted proxy IP networks (CIDR), for example: "192.168.0.0/16,10.0.0.0/8,::1/128"
+define('TRUSTED_PROXY_NETWORKS', '');
+
 // Allow private network access when fetching metadata for external links
 define('EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS', false);
