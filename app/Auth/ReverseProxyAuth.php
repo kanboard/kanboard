@@ -3,6 +3,7 @@
 namespace Kanboard\Auth;
 
 use Kanboard\Core\Base;
+use Kanboard\Core\Security\OptionalAuthenticationProviderInterface;
 use Kanboard\Core\Security\PreAuthenticationProviderInterface;
 use Kanboard\Core\Security\SessionCheckProviderInterface;
 use Kanboard\User\ReverseProxyUserProvider;
@@ -13,7 +14,7 @@ use Kanboard\User\ReverseProxyUserProvider;
  * @package  Kanboard\Auth
  * @author   Frederic Guillot
  */
-class ReverseProxyAuth extends Base implements PreAuthenticationProviderInterface, SessionCheckProviderInterface
+class ReverseProxyAuth extends Base implements PreAuthenticationProviderInterface, SessionCheckProviderInterface, OptionalAuthenticationProviderInterface
 {
     /**
      * User properties
@@ -75,5 +76,16 @@ class ReverseProxyAuth extends Base implements PreAuthenticationProviderInterfac
     public function getUser()
     {
         return $this->userInfo;
+    }
+
+    /**
+     * Check if the authentication provider should be used
+     *
+     * @access public
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return ! empty($this->request->getRemoteUser());
     }
 }
