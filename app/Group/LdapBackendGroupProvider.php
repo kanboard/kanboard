@@ -41,14 +41,16 @@ class LdapBackendGroupProvider extends Base implements GroupBackendProviderInter
      *
      * @access public
      * @param  string $input
+     * @param  string $filter
      * @return string
      */
-    public function getLdapGroupPattern($input)
+    public function getLdapGroupPattern($input, $filter = LDAP_GROUP_FILTER)
     {
-        if (LDAP_GROUP_FILTER === '') {
-            throw new LogicException('LDAP group filter empty, check the parameter LDAP_GROUP_FILTER');
+        if ($filter === '') {
+            throw new LogicException('LDAP group filter is empty. Please configure the LDAP_GROUP_FILTER parameter in your configuration file');
         }
 
-        return sprintf(LDAP_GROUP_FILTER, $input);
+        $escapedInput = ldap_escape($input, '', LDAP_ESCAPE_FILTER);
+        return sprintf($filter, $escapedInput);
     }
 }

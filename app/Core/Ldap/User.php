@@ -98,7 +98,8 @@ class User
         $groupIds = array();
 
         if (! empty($userattr) && $this->group !== null && $this->hasGroupUserFilter()) {
-            $groups = $this->group->find(sprintf($this->getGroupUserFilter(), $userattr));
+            $escapedUserAttribute = ldap_escape($userattr, '', LDAP_ESCAPE_FILTER);
+            $groups = $this->group->find(sprintf($this->getGroupUserFilter(), $escapedUserAttribute));
 
             foreach ($groups as $group) {
                 $groupIds[] = $group->getExternalId();
@@ -356,9 +357,10 @@ class User
     public function getLdapUserPattern($username, $filter = LDAP_USER_FILTER)
     {
         if (! $filter) {
-            throw new LogicException('LDAP user filter empty, check the parameter LDAP_USER_FILTER');
+            throw new LogicException('LDAP user filter is not configured. Please set the LDAP_USER_FILTER parameter in your configuration file');
         }
 
-        return str_replace('%s', $username, $filter);
+        $escapedUsername = ldap_escape($username, '', LDAP_ESCAPE_FILTER);
+        return str_replace('%s', $escapedUsername, $filter);
     }
 }
