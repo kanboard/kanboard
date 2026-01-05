@@ -26,6 +26,7 @@ return array(
     'MatthiasMullie\\PathConverter\\' => array($baseDir . '/libs/path-converter/src'),
     'MatthiasMullie\\Minify\\' => array($baseDir . '/libs/minify/src'),
     'Kanboard\\' => array($baseDir . '/app'),
+    'KanboardTests\\' => array($baseDir . '/tests'),
     'Gregwar\\Captcha\\' => array($baseDir . '/libs/Captcha'),
     'Eluceo\\iCal\\' => array($baseDir . '/libs/ical'),
     'Base32\\' => array($vendorDir . '/christian-riesen/base32/src'),
