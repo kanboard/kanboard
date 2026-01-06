@@ -1467,6 +1467,6 @@ return [
     'Add attachments' => '添加附件',
     'Task #%d "%s" is overdue' => '任务 #%d "%s" 已逾期',
     'Enable notifications by default for all new users' => '默认启用所有新用户的通知',
-    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
-    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
+    'Assign the task to its creator for specific columns if no assignee is set manually' => '如果未手动指定负责人，则在指定列中将任务分配给创建者',
+    'Assign a task to the logged user on column change to specified column if no user is assigned' => '如果未分配用户，则在列变更移动到指定列时将任务分配给已登录用户',
 ];

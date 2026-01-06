@@ -1467,6 +1467,6 @@ return [
     'Add attachments' => 'Pridať prílohy',
     'Task #%d "%s" is overdue' => 'Úloha #%d „%s” je po termíne',
     'Enable notifications by default for all new users' => 'Predvolene zapnúť upozornenia pre všetkých nových používateľov',
-    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
-    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
+    'Assign the task to its creator for specific columns if no assignee is set manually' => 'Priradiť úlohu jej tvorcovi pre vybrané stĺpce, ak nie je ručne nastavený riešiteľ',
+    'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Priradiť úlohu prihlásenému používateľovi pri presune do zadaného stĺpca, ak nie je priradený žiadny používateľ',
 ];

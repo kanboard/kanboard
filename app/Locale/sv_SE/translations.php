@@ -1467,6 +1467,6 @@ return [
     'Add attachments' => 'Lägg till bilagor',
     'Task #%d "%s" is overdue' => 'Uppgift #%d "%s" är försenad',
     'Enable notifications by default for all new users' => 'Aktivera notifieringar som standard för alla nya användare',
-    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
-    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
+    'Assign the task to its creator for specific columns if no assignee is set manually' => 'Tilldela uppgiften till dess skapare för specifika kolumner om ingen ansvarig är satt manuellt',
+    'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Tilldela en uppgift till den inloggade användaren vid kolumnbyte till angiven kolumn om ingen användare är tilldelad',
 ];

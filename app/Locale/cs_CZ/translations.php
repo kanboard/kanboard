@@ -1467,6 +1467,6 @@ return [
     'Add attachments' => 'Přidat přílohy',
     'Task #%d "%s" is overdue' => 'Úkol #%d "%s" je po termínu',
     'Enable notifications by default for all new users' => 'Ve výchozím nastavení povolit oznámení pro všechny nové uživatele',
-    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
-    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
+    'Assign the task to its creator for specific columns if no assignee is set manually' => 'Přiřadit úkol jeho tvůrci pro vybrané sloupce, pokud není ručně nastaven řešitel',
+    'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Přiřadit úkol přihlášenému uživateli při přesunu do zadaného sloupce, pokud není přiřazen žádný uživatel',
 ];

@@ -1467,6 +1467,6 @@ return [
     'Add attachments' => 'Thêm tệp đính kèm',
     'Task #%d "%s" is overdue' => 'Nhiệm vụ #%d "%s" đã quá hạn',
     'Enable notifications by default for all new users' => 'Kích hoạt thông báo theo mặc định cho tất cả người dùng mới',
-    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
-    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
+    'Assign the task to its creator for specific columns if no assignee is set manually' => 'Gán công việc cho người tạo nó đối với các cột cụ thể nếu chưa đặt người phụ trách thủ công',
+    'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Gán công việc cho người dùng đang đăng nhập khi chuyển cột sang cột được chỉ định nếu chưa có người dùng được gán',
 ];
