@@ -1467,6 +1467,6 @@ return [
     'Add attachments' => 'Bijlagen toevoegen',
     'Task #%d "%s" is overdue' => 'Taak #%d "%s" is te laat',
     'Enable notifications by default for all new users' => 'Standaard meldingen inschakelen voor alle nieuwe gebruikers',
-    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
-    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
+    'Assign the task to its creator for specific columns if no assignee is set manually' => 'Wijs de taak toe aan de maker voor specifieke kolommen als er niet handmatig een gebruiker is toegewezen',
+    'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Wijs een taak toe aan de ingelogde gebruiker bij het wijzigen van kolom naar de opgegeven kolom als er geen gebruiker is toegewezen',
 ];

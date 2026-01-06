@@ -1467,6 +1467,6 @@ return [
     'Add attachments' => 'Tilføj vedhæftede filer',
     'Task #%d "%s" is overdue' => 'Opgave #%d "%s" er forfalden',
     'Enable notifications by default for all new users' => 'Aktiver påmindelser som standard for alle nye brugere',
-    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
-    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
+    'Assign the task to its creator for specific columns if no assignee is set manually' => 'Tildel opgaven til dens opretter for bestemte kolonner, hvis ingen ansvarlig er sat manuelt',
+    'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Tildel en opgave til den loggede bruger ved kolonneændring til den angivne kolonne, hvis ingen bruger er tildelt',
 ];

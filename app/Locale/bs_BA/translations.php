@@ -1467,6 +1467,6 @@ return [
     'Add attachments' => 'Dodajte priloge',
     'Task #%d "%s" is overdue' => 'Zadatak #%d "%s" je s iztečen сроком',
     'Enable notifications by default for all new users' => 'Omogući obavještenja po difoltu za sve nove korisnike',
-    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
-    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
+    'Assign the task to its creator for specific columns if no assignee is set manually' => 'Dodijeli zadatak njegovom kreatoru za određene kolone ako izvršilac nije ručno postavljen',
+    'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Dodijeli zadatak prijavljenom korisniku pri promjeni kolone na odabranu kolonu ako niko nije dodijeljen',
 ];

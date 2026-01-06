@@ -1467,6 +1467,6 @@ return [
     'Add attachments' => 'เพิ่มไฟล์แนบ',
     'Task #%d "%s" is overdue' => 'งาน #%d "%s" เกินกำหนด',
     'Enable notifications by default for all new users' => 'เปิดใช้งานการแจ้งเตือนตามค่าเริ่มต้นสำหรับผู้ใช้ใหม่ทั้งหมด',
-    // 'Assign the task to its creator for specific columns if no assignee is set manually' => '',
-    // 'Assign a task to the logged user on column change to specified column if no user is assigned' => '',
+    'Assign the task to its creator for specific columns if no assignee is set manually' => 'กำหนดงานให้ผู้สร้างสำหรับคอลัมน์ที่ระบุ หากไม่มีผู้รับมอบหมายที่ตั้งค่าเอง',
+    'Assign a task to the logged user on column change to specified column if no user is assigned' => 'กำหนดงานให้ผู้ใช้ที่ล็อกอินเมื่อย้ายคอลัมน์ไปยังคอลัมน์ที่ระบุ หากยังไม่มีผู้ใช้ที่ถูกกำหนด',
 ];
