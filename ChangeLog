@@ -1,3 +1,32 @@
+Version 1.2.49 (January 6, 2026)
+--------------------------------
+
+* fix(ldap): ensure LDAP placeholders are escaped
+* fix: restore Ctrl+Enter submission on the task creation form
+* feat(locale): update translations
+* feat: prevent protocol-relative URL redirects after login
+* feat: block private network access for external web link (configurable)
+* feat: add `TRUSTED_PROXY_NETWORKS` config option
+* ci: add workflow to mirror GitHub repo to Codeberg
+* chore: remove outdated `tests/Dockerfile`
+* chore: regenerate autoload Composer files
+* build(deps): bump alpine from 3.22 to 3.23
+* build(deps): bump actions/upload-artifact from 4 to 6
+* build(deps): bump actions/checkout from 5 to 6
+
+Version 1.2.48 (October 18, 2025)
+--------------------------------
+
+* fix: handle Windows-style paths in `sanitize_path` function
+* feat(locale): added missing German translation phrases
+* feat(locale): added Arabic translation
+* feat(api): add board, rss and ical public links to the API response
+* feat: display sub-tasks completion in numbers (x/y) alongside percentage
+* feat: add basic support for right-to-left (RTL) languages
+* chore: update .gitattributes to ignore additional configuration files
+* build(deps): bump actions/setup-python from 5 to 6
+* build(deps): bump actions/checkout from 4 to 5
+
 Version 1.2.47 (August 11, 2025)
 --------------------------------
 
