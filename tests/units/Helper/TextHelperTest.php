@@ -127,6 +127,16 @@ class TextHelperTest extends Base
         );
     }
 
+    public function testMarkdownRejectsJavascriptScheme()
+    {
+        $textHelper = new TextHelper($this->container);
+
+        $this->assertEquals(
+            '<p><a href="javascript%3Aalert(1)">XSS</a></p>',
+            $textHelper->markdown('[XSS](javascript:alert(1))')
+        );
+    }
+
     public function testFormatBytes()
     {
         $textHelper = new TextHelper($this->container);
