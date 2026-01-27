@@ -22,7 +22,7 @@
                         'role' => $group['role'],
                         'id' => $group['id'],
                         'ariaLabel' => t('Role'),
-                        'url' => $this->url->to('ProjectPermissionController', 'changeGroupRole', array('project_id' => $project['id'])),
+                        'url' => $this->url->to('ProjectPermissionController', 'changeGroupRole', array('project_id' => $project['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())),
                     )) ?>
                 </td>
                 <td>

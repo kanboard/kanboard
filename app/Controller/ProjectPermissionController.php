@@ -113,7 +113,14 @@ class ProjectPermissionController extends BaseController
      */
     public function changeUserRole()
     {
+        $this->checkReusableGETCSRFParam();
         $project = $this->getProject();
+
+        if (! $this->request->isAjax()) {
+            $this->response->json(array('status' => 'error'), 400);
+            return;
+        }
+
         $values = $this->request->getJson();
 
         if (empty($project) ||
@@ -195,7 +202,14 @@ class ProjectPermissionController extends BaseController
      */
     public function changeGroupRole()
     {
+        $this->checkReusableGETCSRFParam();
         $project = $this->getProject();
+
+        if (! $this->request->isAjax()) {
+            $this->response->json(array('status' => 'error'), 400);
+            return;
+        }
+
         $values = $this->request->getJson();
 
         if (! empty($project) && ! empty($values) && $this->projectGroupRoleModel->changeGroupRole($project['id'], $values['id'], $values['role'])) {

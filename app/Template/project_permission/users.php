@@ -18,7 +18,7 @@
                         'role' => $user['role'],
                         'id' => $user['id'],
                         'ariaLabel' => t('Role'),
-                        'url' => $this->url->to('ProjectPermissionController', 'changeUserRole', array('project_id' => $project['id'])),
+                        'url' => $this->url->to('ProjectPermissionController', 'changeUserRole', array('project_id' => $project['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken())),
                     )) ?>
                 </td>
                 <td>
