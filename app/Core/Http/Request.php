@@ -147,10 +147,15 @@ class Request extends Base
      * Get the Json request body
      *
      * @access public
+     * @param  bool  $enforceContentType
      * @return array
      */
-    public function getJson()
+    public function getJson($enforceContentType = true)
     {
+        if ($enforceContentType && ! $this->isJsonContentType()) {
+            return array();
+        }
+
         return json_decode($this->getBody(), true) ?: array();
     }
 
@@ -225,6 +230,23 @@ class Request extends Base
     public function isAjax()
     {
         return $this->getHeader('X-Requested-With') === 'XMLHttpRequest';
+    }
+
+    /**
+     * Check if the request Content-Type is JSON
+     *
+     * @access public
+     * @return bool
+     */
+    public function isJsonContentType()
+    {
+        $contentType = $this->getServerVariable('CONTENT_TYPE');
+
+        if ($contentType === '') {
+            $contentType = $this->getServerVariable('HTTP_CONTENT_TYPE');
+        }
+
+        return stripos($contentType, 'application/json') === 0;
     }
 
     /**
