@@ -41,8 +41,10 @@ class TaskProjectDuplicationModelTest extends Base
             'priority' => 3,
         )));
 
-        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {});
-        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE, function () {});
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {
+        });
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE, function () {
+        });
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $taskProjectDuplicationModel->duplicateToProject(1, 2));

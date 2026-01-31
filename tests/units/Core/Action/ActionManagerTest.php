@@ -213,7 +213,8 @@ class ActionManagerTest extends Base
         )));
 
         $actionManager->attachEvents();
-        $this->dispatcher->addListener(TaskModel::EVENT_CREATE, function () {});
+        $this->dispatcher->addListener(TaskModel::EVENT_CREATE, function () {
+        });
 
         $listeners = $this->dispatcher->getListeners(TaskModel::EVENT_CREATE);
         $this->assertCount(2, $listeners);

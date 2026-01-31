@@ -74,8 +74,10 @@ class TaskDuplicationModelTest extends Base
         $this->assertEquals(2, $task['category_id']);
         $this->assertEquals(4.4, $task['time_spent']);
 
-        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {});
-        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE, function () {});
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {
+        });
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE, function () {
+        });
 
         // We duplicate our task
         $this->assertEquals(2, $taskDuplicationModel->duplicate(1));

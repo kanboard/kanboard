@@ -68,7 +68,9 @@ function session_flush()
 function explode_csv_field($str)
 {
     $fields = explode(',', $str);
-    array_walk($fields, function (&$value) { $value = trim($value); });
+    array_walk($fields, function (&$value) {
+        $value = trim($value);
+    });
     return array_filter($fields);
 }
 
