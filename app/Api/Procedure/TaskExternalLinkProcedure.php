@@ -32,7 +32,13 @@ class TaskExternalLinkProcedure extends BaseProcedure
     public function getExternalTaskLinkById($task_id, $link_id)
     {
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'getExternalTaskLink', $task_id);
-        return $this->taskExternalLinkModel->getById($link_id);
+        $link = $this->taskExternalLinkModel->getById($link_id);
+
+        if (empty($link) || (int) $link['task_id'] !== (int) $task_id) {
+            return false;
+        }
+
+        return $link;
     }
 
     public function getAllExternalTaskLinks($task_id)
@@ -81,6 +87,11 @@ class TaskExternalLinkProcedure extends BaseProcedure
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateExternalTaskLink', $task_id);
 
         $link = $this->taskExternalLinkModel->getById($link_id);
+
+        if (empty($link) || (int) $link['task_id'] !== (int) $task_id) {
+            return false;
+        }
+
         $values = $this->filterValues(array(
             'title' => $title,
             'url' => $url,
@@ -101,6 +112,12 @@ class TaskExternalLinkProcedure extends BaseProcedure
     public function removeExternalTaskLink($task_id, $link_id)
     {
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'removeExternalTaskLink', $task_id);
+        $link = $this->taskExternalLinkModel->getById($link_id);
+
+        if (empty($link) || (int) $link['task_id'] !== (int) $task_id) {
+            return false;
+        }
+
         return $this->taskExternalLinkModel->remove($link_id);
     }
 }

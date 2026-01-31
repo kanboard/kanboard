@@ -73,18 +73,27 @@ class TaskProcedure extends BaseProcedure
 
     public function moveTaskPosition($project_id, $task_id, $column_id, $position, $swimlane_id)
     {
+        TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'moveTaskPosition', $task_id);
+        $taskProjectId = $this->taskFinderModel->getProjectId($task_id);
+
+        if ($taskProjectId !== (int) $project_id) {
+            return false;
+        }
+
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'moveTaskPosition', $project_id);
         return $this->taskPositionModel->movePosition($project_id, $task_id, $column_id, $position, $swimlane_id, true, false);
     }
 
     public function moveTaskToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
     {
+        TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'moveTaskToProject', $task_id);
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'moveTaskToProject', $project_id);
         return $this->taskProjectMoveModel->moveToProject($task_id, $project_id, $swimlane_id, $column_id, $category_id, $owner_id);
     }
 
     public function duplicateTaskToProject($task_id, $project_id, $swimlane_id = null, $column_id = null, $category_id = null, $owner_id = null)
     {
+        TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'duplicateTaskToProject', $task_id);
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'duplicateTaskToProject', $project_id);
         return $this->taskProjectDuplicationModel->duplicateToProject($task_id, $project_id, $swimlane_id, $column_id, $category_id, $owner_id);
     }

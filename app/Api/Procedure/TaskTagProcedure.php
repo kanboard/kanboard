@@ -2,6 +2,7 @@
 
 namespace Kanboard\Api\Procedure;
 
+use Kanboard\Api\Authorization\ProjectAuthorization;
 use Kanboard\Api\Authorization\TaskAuthorization;
 
 /**
@@ -14,6 +15,7 @@ class TaskTagProcedure extends BaseProcedure
 {
     public function setTaskTags($project_id, $task_id, array $tags)
     {
+        ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'setTaskTags', $project_id);
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'setTaskTags', $task_id);
         return $this->taskTagModel->save($project_id, $task_id, $tags);
     }
