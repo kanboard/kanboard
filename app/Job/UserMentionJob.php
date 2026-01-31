@@ -59,7 +59,9 @@ class UserMentionJob extends BaseJob
         $users = array();
 
         if ($text !== null && preg_match_all('/@([^\s,!:?]+)/', $text, $matches)) {
-            array_walk($matches[1], function (&$username) { $username = rtrim($username, '.'); });
+            array_walk($matches[1], function (&$username) {
+                $username = rtrim($username, '.');
+            });
             $users = $this->db->table(UserModel::TABLE)
                 ->columns('id', 'username', 'name', 'email', 'language')
                 ->eq('notifications_enabled', 1)

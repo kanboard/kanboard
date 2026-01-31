@@ -28,8 +28,10 @@ class TaskCreationModelTest extends Base
         $taskCreationModel = new TaskCreationModel($this->container);
         $taskFinderModel = new TaskFinderModel($this->container);
 
-        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {});
-        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE, function () {});
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {
+        });
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE, function () {
+        });
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1)));
@@ -50,7 +52,8 @@ class TaskCreationModelTest extends Base
         $taskCreationModel = new TaskCreationModel($this->container);
         $finderModel = new TaskFinderModel($this->container);
 
-        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {});
+        $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE_UPDATE, function () {
+        });
         $this->container['dispatcher']->addListener(TaskModel::EVENT_CREATE, array($this, 'onCreate'));
 
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));

@@ -20,7 +20,8 @@ class CommentEventJobTest extends Base
 
     public function testWithMissingComment()
     {
-        $this->container['dispatcher']->addListener(CommentModel::EVENT_CREATE, function () {});
+        $this->container['dispatcher']->addListener(CommentModel::EVENT_CREATE, function () {
+        });
 
         $commentEventJob = new CommentEventJob($this->container);
         $commentEventJob->execute(42, CommentModel::EVENT_CREATE);
@@ -31,9 +32,12 @@ class CommentEventJobTest extends Base
 
     public function testTriggerEvents()
     {
-        $this->container['dispatcher']->addListener(CommentModel::EVENT_CREATE, function () {});
-        $this->container['dispatcher']->addListener(CommentModel::EVENT_UPDATE, function () {});
-        $this->container['dispatcher']->addListener(CommentModel::EVENT_DELETE, function () {});
+        $this->container['dispatcher']->addListener(CommentModel::EVENT_CREATE, function () {
+        });
+        $this->container['dispatcher']->addListener(CommentModel::EVENT_UPDATE, function () {
+        });
+        $this->container['dispatcher']->addListener(CommentModel::EVENT_DELETE, function () {
+        });
 
         $commentModel = new CommentModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);
