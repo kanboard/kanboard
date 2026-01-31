@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 /**
  * Project Creation Controller
  *
@@ -114,6 +116,10 @@ class ProjectCreationController extends BaseController
     private function duplicateNewProject(array $values)
     {
         $selection = array();
+
+        if (! $this->projectPermissionModel->isUserAllowed($values['src_project_id'], $this->userSession->getId())) {
+            throw new AccessForbiddenException();
+        }
 
         foreach ($this->projectDuplicationModel->getOptionalSelection() as $item) {
             if (isset($values[$item]) && $values[$item] == 1) {

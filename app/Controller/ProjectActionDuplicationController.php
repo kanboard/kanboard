@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 /**
  * Duplicate automatic action from another project
  *
@@ -26,6 +28,10 @@ class ProjectActionDuplicationController extends BaseController
     {
         $project = $this->getProject();
         $src_project_id = $this->request->getValue('src_project_id');
+
+        if (empty($src_project_id) || ! $this->projectPermissionModel->isUserAllowed($src_project_id, $this->userSession->getId())) {
+            throw new AccessForbiddenException();
+        }
 
         if ($this->actionModel->duplicate($src_project_id, $project['id'])) {
             $this->flash->success(t('Actions duplicated successfully.'));
