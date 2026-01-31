@@ -40,7 +40,9 @@ class SwimlaneProcedure extends BaseProcedure
 
     public function getSwimlane($swimlane_id)
     {
-        return $this->swimlaneModel->getById($swimlane_id);
+        $swimlane = $this->swimlaneModel->getById($swimlane_id);
+        ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getSwimlane', $swimlane['project_id']);
+        return $swimlane;
     }
 
     public function addSwimlane($project_id, $name, $description = '')

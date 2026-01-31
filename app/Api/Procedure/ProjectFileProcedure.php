@@ -16,7 +16,13 @@ class ProjectFileProcedure extends BaseProcedure
     public function getProjectFile($project_id, $file_id)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectFile', $project_id);
-        return $this->projectFileModel->getById($file_id);
+        $file = $this->projectFileModel->getById($file_id);
+
+        if (empty($file) || (int) $file['project_id'] !== (int) $project_id) {
+            return false;
+        }
+
+        return $file;
     }
 
     public function getAllProjectFiles($project_id)
@@ -32,7 +38,7 @@ class ProjectFileProcedure extends BaseProcedure
         try {
             $file = $this->projectFileModel->getById($file_id);
 
-            if (! empty($file)) {
+            if (! empty($file) && (int) $file['project_id'] === (int) $project_id) {
                 return base64_encode($this->objectStorage->get($file['path']));
             }
         } catch (ObjectStorageException $e) {
@@ -57,6 +63,12 @@ class ProjectFileProcedure extends BaseProcedure
     public function removeProjectFile($project_id, $file_id)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'removeProjectFile', $project_id);
+        $file = $this->projectFileModel->getById($file_id);
+
+        if (empty($file) || (int) $file['project_id'] !== (int) $project_id) {
+            return false;
+        }
+
         return $this->projectFileModel->remove($file_id);
     }
 
