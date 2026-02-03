@@ -27,7 +27,7 @@
         "ext-filter": "*",
         "ext-session": "*",
         "christian-riesen/otp": "1.4.3",
-        "pimple/pimple": "3.5.0",
+        "pimple/pimple": "3.6.1",
         "psr/log": "1.1.4",
         "symfony/console": "5.4.41",
         "symfony/event-dispatcher-contracts": "^2",
