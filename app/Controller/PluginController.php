@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Plugin\Directory;
 use Kanboard\Core\Plugin\Installer;
 use Kanboard\Core\Plugin\PluginInstallerException;
@@ -34,17 +35,23 @@ class PluginController extends BaseController
      */
     public function directory()
     {
-        $installedPlugins = array();
+        $installedPlugins = [];
+        $availablePlugins = [];
+        $isConfigured = Installer::isConfigured();
 
-        foreach ($this->pluginLoader->getPlugins() as $plugin) {
-            $installedPlugins[$plugin->getPluginName()] = $plugin->getPluginVersion();
+        if ($isConfigured) {
+            foreach ($this->pluginLoader->getPlugins() as $plugin) {
+                $installedPlugins[$plugin->getPluginName()] = $plugin->getPluginVersion();
+            }
+
+            $availablePlugins = Directory::getInstance($this->container)->getAvailablePlugins();
         }
 
         $this->response->html($this->helper->layout->plugin('plugin/directory', array(
             'installed_plugins' => $installedPlugins,
-            'available_plugins' => Directory::getInstance($this->container)->getAvailablePlugins(),
+            'available_plugins' => $availablePlugins,
             'title' => t('Plugin Directory'),
-            'is_configured' => Installer::isConfigured(),
+            'is_configured' => $isConfigured,
         )));
     }
 
@@ -55,6 +62,10 @@ class PluginController extends BaseController
      */
     public function install()
     {
+        if (! Installer::isConfigured()) {
+            throw new AccessForbiddenException();
+        }
+
         $this->checkCSRFParam();
         $pluginArchiveUrl = urldecode($this->request->getStringParam('archive_url'));
 
@@ -76,6 +87,10 @@ class PluginController extends BaseController
      */
     public function update()
     {
+        if (! Installer::isConfigured()) {
+            throw new AccessForbiddenException();
+        }
+
         $this->checkCSRFParam();
         $pluginArchiveUrl = urldecode($this->request->getStringParam('archive_url'));
 
@@ -95,6 +110,10 @@ class PluginController extends BaseController
      */
     public function confirm()
     {
+        if (! Installer::isConfigured()) {
+            throw new AccessForbiddenException();
+        }
+
         $pluginId = $this->request->getStringParam('pluginId');
         $plugins = array_merge(
             $this->pluginLoader->getPlugins(),
@@ -114,6 +133,10 @@ class PluginController extends BaseController
      */
     public function uninstall()
     {
+        if (! Installer::isConfigured()) {
+            throw new AccessForbiddenException();
+        }
+
         $this->checkCSRFParam();
         $pluginId = $this->request->getStringParam('pluginId');
 
