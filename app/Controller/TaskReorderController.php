@@ -8,6 +8,7 @@ class TaskReorderController extends BaseController
 {
     public function reorderColumn()
     {
+        $this->checkCSRFParam();
         $project = $this->getProject();
 
         if (! $this->helper->user->hasProjectAccess('TaskModificationController', 'update', $project['id'])) {

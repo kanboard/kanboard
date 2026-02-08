@@ -15,6 +15,11 @@ class TagProcedure extends BaseProcedure
 {
     public function getAllTags()
     {
+        if ($this->userSession->isLogged() && ! $this->userSession->isAdmin()) {
+            $project_ids = $this->projectPermissionModel->getActiveProjectIds($this->userSession->getId());
+            return $this->tagModel->getAllByProjectIds($project_ids);
+        }
+
         return $this->tagModel->getAll();
     }
 

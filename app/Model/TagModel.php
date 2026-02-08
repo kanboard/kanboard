@@ -43,6 +43,24 @@ class TagModel extends Base
     }
 
     /**
+     * Get all global tags and tags for the given project IDs
+     *
+     * @access public
+     * @param  array $project_ids
+     * @return array
+     */
+    public function getAllByProjectIds(array $project_ids)
+    {
+        return $this->db->table(self::TABLE)
+            ->beginOr()
+            ->eq('project_id', 0)
+            ->in('project_id', $project_ids)
+            ->closeOr()
+            ->asc('name')
+            ->findAll();
+    }
+
+    /**
      * Get assignable tags for a project
      *
      * @param  integer $project_id          Project Id
