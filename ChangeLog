@@ -1,3 +1,15 @@
+Version 1.2.50 (February 7, 2026)
+---------------------------------
+
+* test: bump phpunit version
+* fix: add missing authorization checks
+* fix: enforce plugin installer check in PluginController actions
+* fix: enable Parsedown safe mode for Markdown rendering
+* fix: add missing project authorization checks in controllers
+* fix: add CSRF protection for project role changes and enforce JSON content type
+* chore: use php-cs-fixer docker image in GitHub workflow instead of Composer
+* build(deps): bump pimple/pimple from 3.5.0 to 3.6.1
+
 Version 1.2.49 (January 6, 2026)
 --------------------------------
 
