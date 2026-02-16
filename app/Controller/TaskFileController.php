@@ -79,7 +79,7 @@ class TaskFileController extends BaseController
     {
         $this->checkCSRFParam();
         $task = $this->getTask();
-        $file = $this->taskFileModel->getById($this->request->getIntegerParam('file_id'));
+        $file = $this->getFile();
 
         if ($file['task_id'] == $task['id'] && $this->taskFileModel->remove($file['id'])) {
             $this->flash->success(t('File removed successfully.'));
@@ -98,7 +98,7 @@ class TaskFileController extends BaseController
     public function confirm()
     {
         $task = $this->getTask();
-        $file = $this->taskFileModel->getById($this->request->getIntegerParam('file_id'));
+        $file = $this->getFile();
 
         $this->response->html($this->template->render('task_file/remove', array(
             'task' => $task,
