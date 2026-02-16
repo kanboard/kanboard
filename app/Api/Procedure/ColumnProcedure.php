@@ -56,6 +56,11 @@ class ColumnProcedure extends BaseProcedure
     public function changeColumnPosition($project_id, $column_id, $position)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'changeColumnPosition', $project_id);
+
+        if ((int) $this->columnModel->getProjectId($column_id) !== (int) $project_id) {
+            return false;
+        }
+
         return $this->columnModel->changePosition($project_id, $column_id, $position);
     }
 }

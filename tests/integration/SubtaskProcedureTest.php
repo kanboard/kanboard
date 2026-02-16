@@ -50,4 +50,40 @@ class SubtaskProcedureTest extends BaseProcedureTest
         $subtasks = $this->app->getAllSubtasks($this->taskId);
         $this->assertCount(0, $subtasks);
     }
+
+    public function testUpdateSubtaskCannotModifySubtaskFromAnotherProjectWithForgedTaskId()
+    {
+        $projectIdA = $this->manager->createProject(array(
+            'name' => 'Project A',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $projectIdB = $this->manager->createProject(array(
+            'name' => 'Project B',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $this->assertNotFalse($projectIdA);
+        $this->assertNotFalse($projectIdB);
+        $this->assertTrue($this->manager->addProjectUser($projectIdA, $this->userUserId, 'project-member'));
+
+        $taskIdA = $this->manager->createTask('Task A', $projectIdA);
+        $taskIdB = $this->manager->createTask('Task B', $projectIdB);
+        $subtaskIdB = $this->manager->createSubtask($taskIdB, 'Project B subtask');
+
+        $this->assertNotFalse($taskIdA);
+        $this->assertNotFalse($taskIdB);
+        $this->assertNotFalse($subtaskIdB);
+
+        $this->assertFalse($this->user->execute('updateSubtask', array(
+            'id' => $subtaskIdB,
+            'task_id' => $taskIdA,
+            'title' => 'Hacked title',
+            'status' => 2,
+        )));
+
+        $subtask = $this->manager->getSubtask($subtaskIdB);
+        $this->assertEquals($taskIdB, $subtask['task_id']);
+        $this->assertEquals('Project B subtask', $subtask['title']);
+    }
 }

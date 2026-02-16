@@ -93,4 +93,77 @@ class SwimlaneProcedureTest extends BaseProcedureTest
 
         $this->assertTrue($this->app->changeSwimlanePosition($this->projectId, $swimlaneId1, 3));
     }
+
+    public function testUpdateSwimlaneCannotModifySwimlaneFromAnotherProjectWithForgedProjectId()
+    {
+        $projectIdA = $this->manager->createProject(array(
+            'name' => 'Project A',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $projectIdB = $this->manager->createProject(array(
+            'name' => 'Project B',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $this->assertNotFalse($projectIdA);
+        $this->assertNotFalse($projectIdB);
+        $this->assertTrue($this->manager->addProjectUser($projectIdA, $this->userUserId, 'project-manager'));
+
+        $swimlaneIdB = $this->manager->addSwimlane($projectIdB, 'Project B swimlane');
+        $this->assertNotFalse($swimlaneIdB);
+
+        $this->assertFalse($this->user->updateSwimlane($projectIdA, $swimlaneIdB, 'Hacked swimlane'));
+
+        $swimlane = $this->manager->getSwimlaneById($swimlaneIdB);
+        $this->assertEquals('Project B swimlane', $swimlane['name']);
+    }
+
+    public function testRemoveSwimlaneCannotRemoveSwimlaneFromAnotherProjectWithForgedProjectId()
+    {
+        $projectIdA = $this->manager->createProject(array(
+            'name' => 'Project A',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $projectIdB = $this->manager->createProject(array(
+            'name' => 'Project B',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $this->assertNotFalse($projectIdA);
+        $this->assertNotFalse($projectIdB);
+        $this->assertTrue($this->manager->addProjectUser($projectIdA, $this->userUserId, 'project-manager'));
+
+        $swimlaneIdB = $this->manager->addSwimlane($projectIdB, 'Project B swimlane');
+        $this->assertNotFalse($swimlaneIdB);
+
+        $this->assertFalse($this->user->removeSwimlane($projectIdA, $swimlaneIdB));
+        $this->assertNotEmpty($this->manager->getSwimlaneById($swimlaneIdB));
+    }
+
+    public function testChangeSwimlanePositionCannotModifySwimlaneFromAnotherProjectWithForgedProjectId()
+    {
+        $projectIdA = $this->manager->createProject(array(
+            'name' => 'Project A',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $projectIdB = $this->manager->createProject(array(
+            'name' => 'Project B',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $this->assertNotFalse($projectIdA);
+        $this->assertNotFalse($projectIdB);
+        $this->assertTrue($this->manager->addProjectUser($projectIdA, $this->userUserId, 'project-manager'));
+
+        $swimlaneIdB = $this->manager->addSwimlane($projectIdB, 'Project B swimlane');
+        $this->assertNotFalse($swimlaneIdB);
+
+        $this->assertFalse($this->user->changeSwimlanePosition($projectIdA, $swimlaneIdB, 1));
+
+        $swimlane = $this->manager->getSwimlaneById($swimlaneIdB);
+        $this->assertEquals($projectIdB, $swimlane['project_id']);
+    }
 }

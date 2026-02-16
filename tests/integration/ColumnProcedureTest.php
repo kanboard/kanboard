@@ -66,4 +66,29 @@ class ColumnProcedureTest extends BaseProcedureTest
         $this->assertEquals('New column', $this->columns[3]['title']);
         $this->assertEquals(4, $this->columns[3]['position']);
     }
+
+    public function testChangeColumnPositionCannotModifyColumnFromAnotherProjectWithForgedProjectId()
+    {
+        $projectIdA = $this->manager->createProject(array(
+            'name' => 'Project A',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $projectIdB = $this->manager->createProject(array(
+            'name' => 'Project B',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $this->assertNotFalse($projectIdA);
+        $this->assertNotFalse($projectIdB);
+        $this->assertTrue($this->manager->addProjectUser($projectIdA, $this->userUserId, 'project-manager'));
+
+        $columnIdB = $this->manager->addColumn($projectIdB, 'Project B column');
+        $this->assertNotFalse($columnIdB);
+
+        $this->assertFalse($this->user->changeColumnPosition($projectIdA, $columnIdB, 1));
+
+        $columnB = $this->manager->getColumn($columnIdB);
+        $this->assertEquals($projectIdB, $columnB['project_id']);
+    }
 }

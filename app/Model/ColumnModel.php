@@ -255,7 +255,7 @@ class ColumnModel extends Base
             $offset++;
         }
 
-        $results[] = $this->db->table(self::TABLE)->eq('id', $column_id)->update(array('position' => $position));
+        $results[] = $this->db->table(self::TABLE)->eq('id', $column_id)->eq('project_id', $project_id)->update(array('position' => $position));
 
         return !in_array(false, $results, true);
     }

@@ -55,6 +55,12 @@ class SwimlaneProcedure extends BaseProcedure
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateSwimlane', $project_id);
 
+        $swimlane = $this->swimlaneModel->getById($swimlane_id);
+
+        if (empty($swimlane) || (int) $swimlane['project_id'] !== (int) $project_id) {
+            return false;
+        }
+
         $values = array(
             'project_id' => $project_id,
             'id'         => $swimlane_id,
@@ -78,6 +84,13 @@ class SwimlaneProcedure extends BaseProcedure
     public function removeSwimlane($project_id, $swimlane_id)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'removeSwimlane', $project_id);
+
+        $swimlane = $this->swimlaneModel->getById($swimlane_id);
+
+        if (empty($swimlane) || (int) $swimlane['project_id'] !== (int) $project_id) {
+            return false;
+        }
+
         return $this->swimlaneModel->remove($project_id, $swimlane_id);
     }
 
@@ -96,6 +109,13 @@ class SwimlaneProcedure extends BaseProcedure
     public function changeSwimlanePosition($project_id, $swimlane_id, $position)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'changeSwimlanePosition', $project_id);
+
+        $swimlane = $this->swimlaneModel->getById($swimlane_id);
+
+        if (empty($swimlane) || (int) $swimlane['project_id'] !== (int) $project_id) {
+            return false;
+        }
+
         return $this->swimlaneModel->changePosition($project_id, $swimlane_id, $position);
     }
 }
