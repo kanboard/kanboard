@@ -77,6 +77,12 @@ class TaskLinkProcedure extends BaseProcedure
     {
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'updateTaskLink', $task_id);
 
+        $taskLink = $this->taskLinkModel->getById($task_link_id);
+
+        if (empty($taskLink) || (int) $taskLink['task_id'] !== (int) $task_id) {
+            return false;
+        }
+
         if ($this->userSession->isLogged()) {
             $opposite_task = $this->taskFinderModel->getById($opposite_task_id);
 

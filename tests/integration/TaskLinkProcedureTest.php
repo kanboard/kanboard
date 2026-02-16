@@ -65,4 +65,40 @@ class TaskLinkProcedureTest extends BaseProcedureTest
         $links = $this->app->getAllTaskLinks($this->taskId2);
         $this->assertCount(0, $links);
     }
+
+    public function testUpdateTaskLinkCannotModifyLinkFromAnotherProjectWithForgedTaskId()
+    {
+        $projectIdA = $this->manager->createProject(array(
+            'name' => 'Project A',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $projectIdB = $this->manager->createProject(array(
+            'name' => 'Project B',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $this->assertNotFalse($projectIdA);
+        $this->assertNotFalse($projectIdB);
+        $this->assertTrue($this->manager->addProjectUser($projectIdA, $this->userUserId, 'project-member'));
+
+        $taskIdA1 = $this->manager->createTask('Task A1', $projectIdA);
+        $taskIdA2 = $this->manager->createTask('Task A2', $projectIdA);
+        $taskIdB1 = $this->manager->createTask('Task B1', $projectIdB);
+        $taskIdB2 = $this->manager->createTask('Task B2', $projectIdB);
+        $taskLinkIdB = $this->manager->createTaskLink($taskIdB1, $taskIdB2, 1);
+
+        $this->assertNotFalse($taskIdA1);
+        $this->assertNotFalse($taskIdA2);
+        $this->assertNotFalse($taskIdB1);
+        $this->assertNotFalse($taskIdB2);
+        $this->assertNotFalse($taskLinkIdB);
+
+        $this->assertFalse($this->user->updateTaskLink($taskLinkIdB, $taskIdA1, $taskIdA2, 3));
+
+        $taskLink = $this->manager->getTaskLinkById($taskLinkIdB);
+        $this->assertEquals($taskIdB1, $taskLink['task_id']);
+        $this->assertEquals($taskIdB2, $taskLink['opposite_task_id']);
+        $this->assertEquals(1, $taskLink['link_id']);
+    }
 }

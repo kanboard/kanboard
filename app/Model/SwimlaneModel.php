@@ -345,7 +345,7 @@ class SwimlaneModel extends Base
             return false;
         }
 
-        if (! $this->db->table(self::TABLE)->eq('id', $swimlaneId)->remove()) {
+        if (! $this->db->table(self::TABLE)->eq('id', $swimlaneId)->eq('project_id', $projecId)->remove()) {
             $this->db->cancelTransaction();
             return false;
         }
@@ -421,7 +421,7 @@ class SwimlaneModel extends Base
             $offset++;
         }
 
-        $results[] = $this->db->table(self::TABLE)->eq('id', $swimlaneId)->update(array('position' => $position));
+        $results[] = $this->db->table(self::TABLE)->eq('id', $swimlaneId)->eq('project_id', $projectId)->update(array('position' => $position));
 
         return !in_array(false, $results, true);
     }
