@@ -4,7 +4,9 @@ use PicoDb\UrlParser;
 
 require_once __DIR__.'/../../../vendor/autoload.php';
 
-class UrlParserTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class UrlParserTest extends TestCase
 {
     public function testParseUrl()
     {

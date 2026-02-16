@@ -217,15 +217,31 @@ class Database
         }
 
         // Avoid potential SQL injection
-        if (preg_match('/^[a-z0-9_]+$/', $value) === 0) {
+        if (! $this->isValidIdentifier($value)) {
             throw new SQLException('Invalid identifier: '.$value);
         }
 
         if (! empty($table)) {
+            if (! $this->isValidIdentifier($table)) {
+                throw new SQLException('Invalid identifier: '.$table);
+            }
+
             return $this->driver->escape($table).'.'.$this->driver->escape($value);
         }
 
         return $this->driver->escape($value);
+    }
+
+    /**
+     * Validate identifier content
+     *
+     * @access public
+     * @param  string   $value
+     * @return boolean
+     */
+    public function isValidIdentifier($value)
+    {
+        return preg_match('/^[a-z0-9_]+$/', $value) === 1;
     }
 
     /**

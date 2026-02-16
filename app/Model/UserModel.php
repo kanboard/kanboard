@@ -6,6 +6,7 @@ use PicoDb\Database;
 use Kanboard\Core\Base;
 use Kanboard\Core\Security\Token;
 use Kanboard\Core\Security\Role;
+use InvalidArgumentException;
 
 /**
  * User model
@@ -115,17 +116,21 @@ class UserModel extends Base
      * Get a specific user by the Google id
      *
      * @access public
-     * @param  string  $column
-     * @param  string  $id
+     * @param  string  $externalIdColumn
+     * @param  string  $externalId
      * @return array|boolean
      */
-    public function getByExternalId($column, $id)
+    public function getByExternalId($externalIdColumn, $externalId)
     {
-        if (empty($id)) {
+        if (empty($externalId)) {
             return false;
         }
 
-        return $this->db->table(self::TABLE)->eq($column, $id)->findOne();
+        if (! $this->db->isValidIdentifier($externalIdColumn)) {
+            throw new InvalidArgumentException('Invalid external id column name');
+        }
+
+        return $this->db->table(self::TABLE)->eq($externalIdColumn, $externalId)->findOne();
     }
 
     /**
@@ -405,8 +410,21 @@ class UserModel extends Base
                     ->save(array('token' => ''));
     }
 
+    /**
+     * Get or create user id by using an external id (Google, GitHub, etc.)
+     *
+     * @param  string    $username            Username
+     * @param  string    $name                Full name
+     * @param  string    $externalIdColumn    Column name for the external id (e.g. google_id, github_id, etc.)
+     * @param  string    $externalId          External id (e.g. Google id, GitHub id, etc.)
+     * @return integer                        User id
+     */
     public function getOrCreateExternalUserId($username, $name, $externalIdColumn, $externalId)
     {
+        if (! $this->db->isValidIdentifier($externalIdColumn)) {
+            throw new InvalidArgumentException('Invalid external id column name');
+        }
+
         $userId = $this->db->table(self::TABLE)->eq($externalIdColumn, $externalId)->findOneColumn('id');
 
         if (empty($userId)) {

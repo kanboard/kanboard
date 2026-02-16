@@ -238,11 +238,10 @@ class Mssql extends Base
      * Get database version
      *
      * @access public
-     * @return array
+     * @return string
      */
     public function getDatabaseVersion()
     {
         return $this->getConnection()->query('SELECT @@VERSION;')->fetchColumn();
     }
-
 }

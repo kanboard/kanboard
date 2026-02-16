@@ -255,7 +255,7 @@ abstract class Base
      * Get database version
      *
      * @access public
-     * @return array
+     * @return string
      */
     public function getDatabaseVersion()
     {

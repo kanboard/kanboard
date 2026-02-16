@@ -2,14 +2,16 @@
 
 require_once __DIR__.'/../../../vendor/autoload.php';
 
-class MysqlLobTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class MysqlLobTest extends TestCase
 {
     /**
      * @var PicoDb\Database
      */
     private $db;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = new PicoDb\Database(array('driver' => 'mysql', 'hostname' => 'localhost', 'username' => 'root', 'password' => '', 'database' => 'picodb'));
         $this->db->getConnection()->exec('DROP TABLE IF EXISTS large_objects');

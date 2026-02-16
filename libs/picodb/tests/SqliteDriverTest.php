@@ -3,15 +3,16 @@
 require_once __DIR__.'/../../../vendor/autoload.php';
 
 use PicoDb\Driver\Sqlite;
+use PHPUnit\Framework\TestCase;
 
-class SqliteDriverTest extends PHPUnit_Framework_TestCase
+class SqliteDriverTest extends TestCase
 {
     /**
      * @var PicoDb\Driver\Sqlite
      */
     private $driver;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->driver = new Sqlite(array('filename' => ':memory:'));
     }

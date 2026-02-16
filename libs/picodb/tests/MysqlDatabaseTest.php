@@ -3,15 +3,16 @@
 require_once __DIR__.'/../../../vendor/autoload.php';
 
 use PicoDb\Database;
+use PHPUnit\Framework\TestCase;
 
-class MysqlDatabaseTest extends PHPUnit_Framework_TestCase
+class MysqlDatabaseTest extends TestCase
 {
     /**
      * @var PicoDb\Database
      */
     private $db;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = new Database(array('driver' => 'mysql', 'hostname' => 'localhost', 'username' => 'root', 'password' => '', 'database' => 'picodb'));
         $this->db->getConnection()->exec('CREATE DATABASE IF NOT EXISTS `picodb`');
@@ -23,6 +24,7 @@ class MysqlDatabaseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals('`a`', $this->db->escapeIdentifier('a'));
         $this->assertEquals('a.b', $this->db->escapeIdentifier('a.b'));
+        $this->assertEquals('tasks.*', $this->db->escapeIdentifier('tasks.*'));
         $this->assertEquals('`c`.`a`', $this->db->escapeIdentifier('a', 'c'));
         $this->assertEquals('a.b', $this->db->escapeIdentifier('a.b', 'c'));
         $this->assertEquals('SELECT COUNT(*) FROM test', $this->db->escapeIdentifier('SELECT COUNT(*) FROM test'));
