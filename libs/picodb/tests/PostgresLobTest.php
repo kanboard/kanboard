@@ -2,16 +2,17 @@
 
 require_once __DIR__.'/../../../vendor/autoload.php';
 
+use PHPUnit\Framework\TestCase;
 use PicoDb\Database;
 
-class PostgresLobTest extends PHPUnit_Framework_TestCase
+class PostgresLobTest extends TestCase
 {
     /**
      * @var PicoDb\Database
      */
     private $db;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = new Database(array('driver' => 'postgres', 'hostname' => 'localhost', 'username' => 'postgres', 'password' => 'postgres', 'database' => 'picodb'));
         $this->db->getConnection()->exec('DROP TABLE IF EXISTS large_objects');

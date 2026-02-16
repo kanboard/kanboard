@@ -4,15 +4,16 @@ require_once __DIR__.'/../../../vendor/autoload.php';
 
 use PicoDb\Database;
 use PicoDb\Table;
+use PHPUnit\Framework\TestCase;
 
-class MysqlTableTest extends PHPUnit_Framework_TestCase
+class MysqlTableTest extends TestCase
 {
     /**
      * @var PicoDb\Database
      */
     private $db;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = new Database(array('driver' => 'mysql', 'hostname' => 'localhost', 'username' => 'root', 'password' => '', 'database' => 'picodb'));
         $this->db->getConnection()->exec('CREATE DATABASE IF NOT EXISTS `picodb`');

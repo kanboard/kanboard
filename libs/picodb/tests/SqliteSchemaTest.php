@@ -3,14 +3,16 @@
 require_once __DIR__.'/../../../vendor/autoload.php';
 require_once __DIR__.'/SchemaFixture.php';
 
-class SqliteSchemaTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class SqliteSchemaTest extends TestCase
 {
     /**
      * @var PicoDb\Database
      */
     private $db;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = new PicoDb\Database(array('driver' => 'sqlite', 'filename' => ':memory:'));
     }

@@ -46,6 +46,22 @@ class UserModelTest extends Base
         $this->assertEmpty($userModel->getByExternalId('google_id', ''));
     }
 
+    public function testGetByExternalIdWithInvalidColumn()
+    {
+        $this->expectException('InvalidArgumentException');
+
+        $userModel = new UserModel($this->container);
+        $userModel->getByExternalId('google_id;DROP TABLE users', '1234');
+    }
+
+    public function testGetOrCreateExternalUserIdWithInvalidColumn()
+    {
+        $this->expectException('InvalidArgumentException');
+
+        $userModel = new UserModel($this->container);
+        $userModel->getOrCreateExternalUserId('user1', 'User 1', 'google_id;DROP TABLE users', '1234');
+    }
+
     public function testGetByToken()
     {
         $userModel = new UserModel($this->container);

@@ -3,14 +3,16 @@
 require_once __DIR__.'/../../../vendor/autoload.php';
 require_once __DIR__.'/SchemaFixture.php';
 
-class PostgresSchemaTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class PostgresSchemaTest extends TestCase
 {
     /**
      * @var PicoDb\Database
      */
     private $db;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = new PicoDb\Database(array('driver' => 'postgres', 'hostname' => 'localhost', 'username' => 'postgres', 'password' => 'postgres', 'database' => 'picodb'));
         $this->db->getConnection()->exec('DROP TABLE IF EXISTS test1');

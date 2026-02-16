@@ -3,15 +3,16 @@
 require_once __DIR__.'/../../../vendor/autoload.php';
 
 use PicoDb\Database;
+use PHPUnit\Framework\TestCase;
 
-class SqliteLobTest extends PHPUnit_Framework_TestCase
+class SqliteLobTest extends TestCase
 {
     /**
      * @var PicoDb\Database
      */
     private $db;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = new Database(array('driver' => 'sqlite', 'filename' => ':memory:'));
         $this->db->getConnection()->exec('DROP TABLE IF EXISTS large_objects');

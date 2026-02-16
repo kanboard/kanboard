@@ -4,16 +4,18 @@ require_once __DIR__.'/../../../vendor/autoload.php';
 
 use PicoDb\Database;
 
-class PostgresDatabaseTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class PostgresDatabaseTest extends TestCase
 {
     /**
      * @var PicoDb\Database
      */
     private $db;
 
-    public function setUp()
+    public function setUp(): void
     {
-        $this->db = new Database(array('driver' => 'postgres', 'hostname' => 'localhost', 'username' => 'postgres', 'password' => '', 'database' => 'picodb'));
+        $this->db = new Database(array('driver' => 'postgres', 'hostname' => 'localhost', 'username' => 'postgres', 'password' => 'postgres', 'database' => 'picodb'));
         $this->db->getConnection()->exec('DROP TABLE IF EXISTS foobar');
         $this->db->getConnection()->exec('DROP TABLE IF EXISTS schema_version');
     }
@@ -22,6 +24,7 @@ class PostgresDatabaseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals('"a"', $this->db->escapeIdentifier('a'));
         $this->assertEquals('a.b', $this->db->escapeIdentifier('a.b'));
+        $this->assertEquals('tasks.*', $this->db->escapeIdentifier('tasks.*'));
         $this->assertEquals('"c"."a"', $this->db->escapeIdentifier('a', 'c'));
         $this->assertEquals('a.b', $this->db->escapeIdentifier('a.b', 'c'));
         $this->assertEquals('SELECT COUNT(*) FROM test', $this->db->escapeIdentifier('SELECT COUNT(*) FROM test'));
@@ -42,11 +45,9 @@ class PostgresDatabaseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('a', $this->db->execute('SELECT something FROM foobar WHERE something=?', array('a'))->fetchColumn());
     }
 
-    /**
-     * @expectedException PicoDb\SQLException
-     */
     public function testBadSQLQuery()
     {
+        $this->expectException('PicoDb\SQLException');
         $this->db->execute('INSERT INTO foobar');
     }
 
@@ -78,11 +79,9 @@ class PostgresDatabaseTest extends PHPUnit_Framework_TestCase
         }));
     }
 
-    /**
-     * @expectedException PicoDb\SQLException
-     */
     public function testThatTransactionThrowExceptionWhenRollbacked()
     {
+        $this->expectException('PicoDb\SQLException');
         $this->assertFalse($this->db->transaction(function (Database $db) {
             $db->getConnection()->exec('CREATE TABL');
         }));

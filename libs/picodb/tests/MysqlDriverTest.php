@@ -3,15 +3,16 @@
 require_once __DIR__.'/../../../vendor/autoload.php';
 
 use PicoDb\Driver\Mysql;
+use PHPUnit\Framework\TestCase;
 
-class MysqlDriverTest extends PHPUnit_Framework_TestCase
+class MysqlDriverTest extends TestCase
 {
     /**
      * @var PicoDb\Driver\Mysql
      */
     private $driver;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->driver = new Mysql(array('hostname' => 'localhost', 'username' => 'root', 'password' => '', 'database' => 'picodb'));
         $this->driver->getConnection()->exec('CREATE DATABASE IF NOT EXISTS `picodb`');
@@ -19,11 +20,9 @@ class MysqlDriverTest extends PHPUnit_Framework_TestCase
         $this->driver->getConnection()->exec('DROP TABLE IF EXISTS schema_version');
     }
 
-    /**
-     * @expectedException LogicException
-     */
     public function testMissingRequiredParameter()
     {
+        $this->expectException('LogicException');
         new Mysql(array());
     }
 

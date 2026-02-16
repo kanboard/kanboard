@@ -2,16 +2,17 @@
 
 require_once __DIR__.'/../../../vendor/autoload.php';
 
+use PHPUnit\Framework\TestCase;
 use PicoDb\Database;
 
-class SqliteDatabaseTest extends PHPUnit_Framework_TestCase
+class SqliteDatabaseTest extends TestCase
 {
     /**
      * @var PicoDb\Database
      */
     private $db;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = new Database(array('driver' => 'sqlite', 'filename' => ':memory:'));
     }
@@ -20,6 +21,7 @@ class SqliteDatabaseTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals('"a"', $this->db->escapeIdentifier('a'));
         $this->assertEquals('a.b', $this->db->escapeIdentifier('a.b'));
+        $this->assertEquals('tasks.*', $this->db->escapeIdentifier('tasks.*'));
         $this->assertEquals('"c"."a"', $this->db->escapeIdentifier('a', 'c'));
         $this->assertEquals('a.b', $this->db->escapeIdentifier('a.b', 'c'));
         $this->assertEquals('SELECT COUNT(*) FROM test', $this->db->escapeIdentifier('SELECT COUNT(*) FROM test'));
@@ -32,6 +34,12 @@ class SqliteDatabaseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('"a"', 'd.b'), $this->db->escapeIdentifierList(array('a', 'd.b')));
     }
 
+    public function testEscapeIdentifierWithInvalidTableName()
+    {
+        $this->expectException('PicoDb\SQLException');
+        $this->db->escapeIdentifier('id', 'users;DROP_TABLE');
+    }
+
     public function testThatPreparedStatementWorks()
     {
         $this->db->getConnection()->exec('CREATE TABLE foobar (id INTEGER PRIMARY KEY, something TEXT)');
@@ -40,11 +48,9 @@ class SqliteDatabaseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('a', $this->db->execute('SELECT something FROM foobar WHERE something=?', array('a'))->fetchColumn());
     }
 
-    /**
-     * @expectedException PicoDb\SQLException
-     */
     public function testBadSQLQuery()
     {
+        $this->expectException('PicoDb\SQLException');
         $this->db->execute('INSERT INTO foobar');
     }
 
@@ -76,11 +82,9 @@ class SqliteDatabaseTest extends PHPUnit_Framework_TestCase
         }));
     }
 
-    /**
-     * @expectedException PicoDb\SQLException
-     */
     public function testThatTransactionThrowExceptionWhenRollbacked()
     {
+        $this->expectException('PicoDb\SQLException');
         $this->assertFalse($this->db->transaction(function (Database $db) {
             $db->getConnection()->exec('CREATE TABL');
         }));
@@ -110,11 +114,9 @@ class SqliteDatabaseTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($instance1 === $instance2);
     }
 
-    /**
-     * @expectedException LogicException
-     */
     public function testGetMissingInstance()
     {
+        $this->expectException('LogicException');
         Database::getInstance('notfound');
     }
 }

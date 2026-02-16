@@ -4,14 +4,16 @@ require_once __DIR__.'/../../../vendor/autoload.php';
 require_once __DIR__.'/SchemaFixture.php';
 require_once __DIR__.'/AlternativeSchemaFixture.php';
 
-class MysqlSchemaTest extends PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class MysqlSchemaTest extends TestCase
 {
     /**
      * @var PicoDb\Database
      */
     private $db;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->db = new PicoDb\Database(array('driver' => 'mysql', 'hostname' => 'localhost', 'username' => 'root', 'password' => '', 'database' => 'picodb'));
         $this->db->getConnection()->exec('DROP TABLE IF EXISTS test1');
