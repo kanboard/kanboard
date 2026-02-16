@@ -60,7 +60,7 @@ class ProjectFileController extends BaseController
     {
         $this->checkCSRFParam();
         $project = $this->getProject();
-        $file = $this->projectFileModel->getById($this->request->getIntegerParam('file_id'));
+        $file = $this->getFile();
 
         if ($this->projectFileModel->remove($file['id'])) {
             $this->flash->success(t('File removed successfully.'));
@@ -79,7 +79,7 @@ class ProjectFileController extends BaseController
     public function confirm()
     {
         $project = $this->getProject();
-        $file = $this->projectFileModel->getById($this->request->getIntegerParam('file_id'));
+        $file = $this->getFile();
 
         $this->response->html($this->template->render('project_file/remove', array(
             'project' => $project,
