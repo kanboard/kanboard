@@ -57,7 +57,15 @@ class UserInviteController extends BaseController
     {
         $invite = $this->getInvite();
 
-        $values = $this->request->getValues();
+        $input = $this->request->getValues();
+        $values = array();
+
+        foreach (['username', 'name', 'email', 'password', 'confirmation', 'timezone', 'language', 'notifications_enabled'] as $field) {
+            if (array_key_exists($field, $input)) {
+                $values[$field] = $input[$field];
+            }
+        }
+
         list($valid, $errors) = $this->userValidator->validateCreation($values);
 
         if ($valid) {
