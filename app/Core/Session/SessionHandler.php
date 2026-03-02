@@ -55,7 +55,25 @@ class SessionHandler implements SessionHandlerInterface
 
         // Note: Returning false display an error message and write() is never called
         // preventing new sessions to be created when calling session_start()
-        return $result ?: '';
+        if (empty($result)) {
+            return '';
+        }
+
+        // Sanitize session data to prevent object deserialization attacks (CWE-502).
+        // Using allowed_classes: false converts any serialized objects to harmless
+        // __PHP_Incomplete_Class instances, preventing exploitation via gadget chains.
+        $sanitized = @unserialize($result, ['allowed_classes' => false]);
+
+        // unserialize() returns false both on failure AND when the data legitimately
+        // represents boolean false (serialized as 'b:0;'). Check the raw string to
+        // distinguish a real deserialization error from a valid false value.
+        if ($sanitized === false && $result !== 'b:0;') {
+            // Data could not be unserialized (e.g. legacy format after handler change);
+            // discard it so a fresh session is created.
+            return '';
+        }
+
+        return serialize($sanitized);
     }
 
     #[\ReturnTypeWillChange]

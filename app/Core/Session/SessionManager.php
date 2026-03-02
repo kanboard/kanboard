@@ -95,6 +95,10 @@ class SessionManager extends Base
             true
         );
 
+        // Use php_serialize handler so session data is a single serialize() call,
+        // which allows safe sanitization in SessionHandler::read() (CWE-502 mitigation).
+        ini_set('session.serialize_handler', 'php_serialize');
+
         // Avoid session id in the URL
         ini_set('session.use_only_cookies', '1');
         ini_set('session.use_trans_sid', '0');
