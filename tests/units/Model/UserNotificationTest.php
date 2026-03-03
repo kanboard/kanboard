@@ -17,8 +17,20 @@ use Kanboard\Model\UserNotificationModel;
 use Kanboard\Model\UserNotificationFilterModel;
 use Kanboard\Core\Security\Role;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class UserNotificationTest extends Base
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->container['userNotificationTypeModel'] = $this
+            ->getMockBuilder('\Kanboard\Model\UserNotificationTypeModel')
+            ->setConstructorArgs(array($this->container))
+            ->onlyMethods(array('getType', 'getSelectedTypes'))
+            ->getMock();
+    }
+
     public function testEnableDisableNotification()
     {
         $u = new UserModel($this->container);
@@ -193,29 +205,32 @@ class UserNotificationTest extends Base
             'notification_types' => array('web' => 1, 'email' => 1),
         ));
 
-        $notifier = $this
-            ->getMockBuilder('Stdclass')
-            ->setMethods(array('notifyUser'))
-            ->getMock();
+        $notifier = new class {
+            public $calls = 0;
 
-        $notifier
-            ->expects($this->exactly(2))
-            ->method('notifyUser');
+            public function notifyUser()
+            {
+                $this->calls++;
+            }
+        };
 
         $this->container['userNotificationTypeModel']
             ->expects($this->once())
             ->method('getSelectedTypes')
-            ->will($this->returnValue(array('email', 'web')));
+            ->willReturn(array('email', 'web'));
 
         $this->container['userNotificationTypeModel']
             ->expects($this->exactly(2))
             ->method('getType')
-            ->withConsecutive(
-                ['email'],
-                ['web'],
-            )
-            ->willReturn($notifier);
+            ->willReturnCallback(function ($type) use ($notifier) {
+                static $calls = 0;
+                $calls++;
+                $expected = $calls === 1 ? 'email' : 'web';
+                $this->assertEquals($expected, $type);
+                return $notifier;
+            });
 
         $userNotificationModel->sendNotifications(TaskModel::EVENT_CREATE, array('task' => $taskFinderModel->getDetails(1)));
+        $this->assertEquals(2, $notifier->calls);
     }
 }

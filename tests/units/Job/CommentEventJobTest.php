@@ -8,6 +8,7 @@ use Kanboard\Model\CommentModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class CommentEventJobTest extends Base
 {
     public function testJobParams()
@@ -63,7 +64,7 @@ class CommentEventJobTest extends Base
         $this->container['queueManager'] = $this
             ->getMockBuilder('\Kanboard\Core\Queue\QueueManager')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'push',
             ))
             ->getMock();
@@ -71,20 +72,19 @@ class CommentEventJobTest extends Base
         $this->container['userMentionJob'] = $this
             ->getMockBuilder('\Kanboard\Job\UserMentionJob')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'withParams',
             ))
             ->getMock();
 
         $this->container['queueManager']
-            ->expects($this->any())
             ->method('push');
 
         $this->container['userMentionJob']
             ->expects($this->once())
             ->method('withParams')
             ->with($comment, CommentModel::EVENT_USER_MENTION, $this->anything())
-            ->will($this->returnValue($this->container['userMentionJob']));
+            ->willReturn($this->container['userMentionJob']);
 
         $commentModel = new CommentModel($this->container);
         $taskCreationModel = new TaskCreationModel($this->container);

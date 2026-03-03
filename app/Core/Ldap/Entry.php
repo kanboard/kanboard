@@ -40,6 +40,10 @@ class Entry
     {
         $attributes = array();
 
+        if ($attribute === null) {
+            return $attributes;
+        }
+
         if (! isset($this->entry[$attribute]['count'])) {
             return $attributes;
         }
@@ -61,6 +65,10 @@ class Entry
      */
     public function getFirstValue($attribute, $default = '')
     {
+        if ($attribute === null) {
+            return $default;
+        }
+
         return isset($this->entry[$attribute][0]) ? $this->entry[$attribute][0] : $default;
     }
 

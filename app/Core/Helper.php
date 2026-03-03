@@ -75,6 +75,18 @@ class Helper
     }
 
     /**
+     * Allow overriding helpers through magic setter
+     *
+     * @access public
+     * @param  string $helper
+     * @param  mixed  $instance
+     */
+    public function __set($helper, $instance)
+    {
+        $this->helpers[$helper] = $instance;
+    }
+
+    /**
      * Expose helpers with method
      *
      * @access public

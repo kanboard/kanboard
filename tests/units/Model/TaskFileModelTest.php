@@ -7,8 +7,20 @@ use Kanboard\Model\TaskFileModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\ProjectModel;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class TaskFileModelTest extends Base
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->container['objectStorage'] = $this
+            ->getMockBuilder('\Kanboard\Core\ObjectStorage\FileStorage')
+            ->setConstructorArgs([sys_get_temp_dir()])
+            ->onlyMethods(array('put', 'moveFile', 'remove', 'moveUploadedFile'))
+            ->getMock();
+    }
+
     public function testCreation()
     {
         $projectModel = new ProjectModel($this->container);
@@ -143,7 +155,7 @@ class TaskFileModelTest extends Base
         $fileModel = $this
             ->getMockBuilder('\Kanboard\Model\TaskFileModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('generateThumbnailFromFile'))
+            ->onlyMethods(array('generateThumbnailFromFile'))
             ->getMock();
 
         $projectModel = new ProjectModel($this->container);
@@ -178,10 +190,12 @@ class TaskFileModelTest extends Base
         $this->container['objectStorage']
             ->expects($this->exactly(2))
             ->method('moveUploadedFile')
-            ->withConsecutive(
-                ['/tmp/phpYzdqkD'],
-                ['/tmp/phpeEwEWG'],
-            );
+            ->willReturnCallback(function ($path) {
+                static $calls = 0;
+                $calls++;
+                $expected = $calls === 1 ? '/tmp/phpYzdqkD' : '/tmp/phpeEwEWG';
+                $this->assertEquals($expected, $path);
+            });
 
         $this->assertTrue($fileModel->uploadFiles(1, $files));
 
@@ -272,7 +286,7 @@ class TaskFileModelTest extends Base
         $fileModel = $this
             ->getMockBuilder('\Kanboard\Model\TaskFileModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('generateThumbnailFromFile'))
+            ->onlyMethods(array('generateThumbnailFromFile'))
             ->getMock();
 
         $projectModel = new ProjectModel($this->container);
@@ -306,7 +320,7 @@ class TaskFileModelTest extends Base
         $fileModel = $this
             ->getMockBuilder('\Kanboard\Model\TaskFileModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('generateThumbnailFromFile'))
+            ->onlyMethods(array('generateThumbnailFromFile'))
             ->getMock();
 
         $projectModel = new ProjectModel($this->container);
@@ -330,7 +344,7 @@ class TaskFileModelTest extends Base
         $fileModel = $this
             ->getMockBuilder('\Kanboard\Model\TaskFileModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('generateThumbnailFromData'))
+            ->onlyMethods(array('generateThumbnailFromData'))
             ->getMock();
 
         $projectModel = new ProjectModel($this->container);
@@ -412,10 +426,12 @@ class TaskFileModelTest extends Base
         $this->container['objectStorage']
             ->expects($this->exactly(2))
             ->method('remove')
-            ->withConsecutive(
-                ['tmp/image.gif'],
-                ['thumbnails'.DIRECTORY_SEPARATOR.'tmp/image.gif'],
-            );
+            ->willReturnCallback(function ($path) {
+                static $calls = 0;
+                $calls++;
+                $expected = $calls === 1 ? 'tmp/image.gif' : 'thumbnails'.DIRECTORY_SEPARATOR.'tmp/image.gif';
+                $this->assertEquals($expected, $path);
+            });
 
         $this->assertTrue($fileModel->remove(1));
     }

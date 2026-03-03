@@ -13,6 +13,17 @@ use Kanboard\Action\TaskEmailNoActivity;
 
 class TaskEmailNoActivityTest extends Base
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->container['emailClient'] = $this
+            ->getMockBuilder('\Kanboard\Core\Mail\Client')
+            ->setConstructorArgs(array($this->container))
+            ->onlyMethods(array('send'))
+            ->getMock();
+    }
+
     public function testSendEmail()
     {
         $userModel = new UserModel($this->container);

@@ -7,6 +7,7 @@ use Kanboard\Auth\ReverseProxyAuth;
 use Kanboard\Core\Security\Role;
 use Kanboard\Model\UserModel;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class ReverseProxyAuthTest extends Base
 {
     protected function setUp(): void
@@ -16,7 +17,7 @@ class ReverseProxyAuthTest extends Base
         $this->container['request'] = $this
             ->getMockBuilder('\Kanboard\Core\Http\Request')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('getRemoteUser'))
+            ->onlyMethods(array('getRemoteUser'))
             ->getMock();
     }
 
@@ -31,7 +32,7 @@ class ReverseProxyAuthTest extends Base
         $this->container['request']
             ->expects($this->once())
             ->method('getRemoteUser')
-            ->will($this->returnValue('admin'));
+            ->willReturn('admin');
 
         $provider = new ReverseProxyAuth($this->container);
         $this->assertTrue($provider->authenticate());
@@ -42,7 +43,7 @@ class ReverseProxyAuthTest extends Base
         $this->container['request']
             ->expects($this->once())
             ->method('getRemoteUser')
-            ->will($this->returnValue(''));
+            ->willReturn('');
 
         $provider = new ReverseProxyAuth($this->container);
         $this->assertFalse($provider->authenticate());
@@ -53,7 +54,7 @@ class ReverseProxyAuthTest extends Base
         $this->container['request']
             ->expects($this->once())
             ->method('getRemoteUser')
-            ->will($this->returnValue('admin'));
+            ->willReturn('admin');
 
         $_SESSION['user'] = array(
             'username' => 'admin'
@@ -68,7 +69,7 @@ class ReverseProxyAuthTest extends Base
         $this->container['request']
             ->expects($this->once())
             ->method('getRemoteUser')
-            ->will($this->returnValue('foobar'));
+            ->willReturn('foobar');
 
         $_SESSION['user'] = array(
             'username' => 'admin'
@@ -83,7 +84,7 @@ class ReverseProxyAuthTest extends Base
         $this->container['request']
             ->expects($this->once())
             ->method('getRemoteUser')
-            ->will($this->returnValue('someone'));
+            ->willReturn('someone');
 
         $provider = new ReverseProxyAuth($this->container);
         $this->assertTrue($provider->authenticate());
@@ -97,7 +98,7 @@ class ReverseProxyAuthTest extends Base
         $this->container['request']
             ->expects($this->once())
             ->method('getRemoteUser')
-            ->will($this->returnValue('someone'));
+            ->willReturn('someone');
 
         $provider = new ReverseProxyAuth($this->container);
         $userModel = new UserModel($this->container);

@@ -10,6 +10,17 @@ use Kanboard\Subscriber\NotificationSubscriber;
 
 class WebhookNotificationTest extends Base
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->container['httpClient'] = $this
+            ->getMockBuilder('\Kanboard\Core\Http\Client')
+            ->setConstructorArgs(array($this->container))
+            ->onlyMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync'))
+            ->getMock();
+    }
+
     public function testTaskCreation()
     {
         $configModel = new ConfigModel($this->container);

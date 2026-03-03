@@ -11,8 +11,20 @@ use Kanboard\Model\ProjectModel;
 use Kanboard\Model\UserModel;
 use Kanboard\Action\TaskEmail;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class TaskEmailTest extends Base
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->container['emailClient'] = $this
+            ->getMockBuilder('\Kanboard\Core\Mail\Client')
+            ->setConstructorArgs(array($this->container))
+            ->onlyMethods(array('send'))
+            ->getMock();
+    }
+
     public function testSuccess()
     {
         $userModel = new UserModel($this->container);

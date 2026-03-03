@@ -5,6 +5,7 @@ namespace KanboardTests\units\Core\ExternalTask;
 use KanboardTests\units\Base;
 use Kanboard\Core\ExternalTask\ExternalTaskManager;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class ExternalTaskManagerTest extends Base
 {
     public function testProviderNotFound()
@@ -18,7 +19,7 @@ class ExternalTaskManagerTest extends Base
     public function testRegister()
     {
         $provider = $this->getMockBuilder('Kanboard\Core\ExternalTask\ExternalTaskProviderInterface')->getMock();
-        $provider->expects($this->any())->method('getName')->willReturn('MyProvider');
+        $provider->method('getName')->willReturn('MyProvider');
 
         $manager = new ExternalTaskManager();
         $manager->register($provider);
@@ -29,10 +30,10 @@ class ExternalTaskManagerTest extends Base
     public function testGetList()
     {
         $provider1 = $this->getMockBuilder('Kanboard\Core\ExternalTask\ExternalTaskProviderInterface')->getMock();
-        $provider1->expects($this->any())->method('getName')->willReturn('MyProvider1');
+        $provider1->method('getName')->willReturn('MyProvider1');
 
         $provider2 = $this->getMockBuilder('Kanboard\Core\ExternalTask\ExternalTaskProviderInterface')->getMock();
-        $provider2->expects($this->any())->method('getName')->willReturn('MyProvider2');
+        $provider2->method('getName')->willReturn('MyProvider2');
 
         $manager = new ExternalTaskManager();
         $manager->register($provider1);

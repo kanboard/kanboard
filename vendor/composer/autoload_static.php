@@ -20,7 +20,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
     );
 
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'S' =>
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Php73\\' => 23,
@@ -37,165 +37,165 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
             'SimpleValidator\\' => 16,
             'SimpleQueue\\' => 12,
         ),
-        'P' => 
+        'P' =>
         array (
             'Psr\\Log\\' => 8,
             'Psr\\EventDispatcher\\' => 20,
             'Psr\\Container\\' => 14,
         ),
-        'M' => 
+        'M' =>
         array (
             'MatthiasMullie\\PathConverter\\' => 29,
             'MatthiasMullie\\Minify\\' => 22,
         ),
-        'K' => 
+        'K' =>
         array (
             'Kanboard\\' => 9,
             'KanboardTests\\' => 14,
         ),
-        'G' => 
+        'G' =>
         array (
             'Gregwar\\Captcha\\' => 16,
         ),
-        'E' => 
+        'E' =>
         array (
             'Eluceo\\iCal\\' => 12,
         ),
-        'B' => 
+        'B' =>
         array (
             'Base32\\' => 7,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Php80\\' => 
+        'Symfony\\Polyfill\\Php80\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
         ),
-        'Symfony\\Polyfill\\Php73\\' => 
+        'Symfony\\Polyfill\\Php73\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Symfony\\Polyfill\\Mbstring\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
+        'Symfony\\Polyfill\\Intl\\Normalizer\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
         ),
-        'Symfony\\Polyfill\\Intl\\Grapheme\\' => 
+        'Symfony\\Polyfill\\Intl\\Grapheme\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
         ),
-        'Symfony\\Polyfill\\Ctype\\' => 
+        'Symfony\\Polyfill\\Ctype\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Symfony\\Contracts\\Service\\' => 
+        'Symfony\\Contracts\\Service\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
         ),
-        'Symfony\\Contracts\\EventDispatcher\\' => 
+        'Symfony\\Contracts\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher-contracts',
         ),
-        'Symfony\\Component\\String\\' => 
+        'Symfony\\Component\\String\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
         ),
-        'Symfony\\Component\\Finder\\' => 
+        'Symfony\\Component\\Finder\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
         ),
-        'Symfony\\Component\\EventDispatcher\\' => 
+        'Symfony\\Component\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/../..' . '/libs/event-dispatcher',
         ),
-        'Symfony\\Component\\Console\\' => 
+        'Symfony\\Component\\Console\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
-        'SimpleValidator\\' => 
+        'SimpleValidator\\' =>
         array (
             0 => __DIR__ . '/../..' . '/libs/SimpleValidator',
         ),
-        'SimpleQueue\\' => 
+        'SimpleQueue\\' =>
         array (
             0 => __DIR__ . '/../..' . '/libs/SimpleQueue',
         ),
-        'Psr\\Log\\' => 
+        'Psr\\Log\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
-        'Psr\\EventDispatcher\\' => 
+        'Psr\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/event-dispatcher/src',
         ),
-        'Psr\\Container\\' => 
+        'Psr\\Container\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'MatthiasMullie\\PathConverter\\' => 
+        'MatthiasMullie\\PathConverter\\' =>
         array (
             0 => __DIR__ . '/../..' . '/libs/path-converter/src',
         ),
-        'MatthiasMullie\\Minify\\' => 
+        'MatthiasMullie\\Minify\\' =>
         array (
             0 => __DIR__ . '/../..' . '/libs/minify/src',
         ),
-        'Kanboard\\' => 
+        'Kanboard\\' =>
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
-        'KanboardTests\\' => 
+        'KanboardTests\\' =>
         array (
             0 => __DIR__ . '/../..' . '/tests',
         ),
-        'Gregwar\\Captcha\\' => 
+        'Gregwar\\Captcha\\' =>
         array (
             0 => __DIR__ . '/../..' . '/libs/Captcha',
         ),
-        'Eluceo\\iCal\\' => 
+        'Eluceo\\iCal\\' =>
         array (
             0 => __DIR__ . '/../..' . '/libs/ical',
         ),
-        'Base32\\' => 
+        'Base32\\' =>
         array (
             0 => __DIR__ . '/..' . '/christian-riesen/base32/src',
         ),
     );
 
     public static $prefixesPsr0 = array (
-        'P' => 
+        'P' =>
         array (
-            'Pimple' => 
+            'Pimple' =>
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
             ),
-            'PicoDb' => 
+            'PicoDb' =>
             array (
                 0 => __DIR__ . '/../..' . '/libs/picodb/lib',
             ),
-            'Parsedown' => 
+            'Parsedown' =>
             array (
                 0 => __DIR__ . '/../..' . '/libs/erusev/parsedown',
             ),
-            'PHPQRCode' => 
+            'PHPQRCode' =>
             array (
                 0 => __DIR__ . '/../..' . '/libs/phpqrcode/lib',
             ),
         ),
-        'O' => 
+        'O' =>
         array (
-            'Otp' => 
+            'Otp' =>
             array (
                 0 => __DIR__ . '/..' . '/christian-riesen/otp/src',
             ),
         ),
-        'J' => 
+        'J' =>
         array (
-            'JsonRPC' => 
+            'JsonRPC' =>
             array (
                 0 => __DIR__ . '/../..' . '/libs/jsonrpc/src',
             ),

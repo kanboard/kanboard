@@ -17,6 +17,10 @@ jobs:
           - "7.4"
           - "8.0"
           - "8.1"
+          - "8.2"
+          - "8.3"
+          - "8.4"
+          - "8.5"
         dependencies:
           - "psr/container:^1.1"
           - "psr/container:^2.0"
@@ -44,4 +48,4 @@ jobs:
           composer update --prefer-dist --no-progress
 
       - name: Run PHPUnit tests
-        run: vendor/bin/simple-phpunit --verbose
+        run: vendor/bin/phpunit
