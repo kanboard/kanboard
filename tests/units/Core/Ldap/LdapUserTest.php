@@ -9,6 +9,7 @@ use Kanboard\Core\Ldap\Entries;
 use Kanboard\Core\Security\Role;
 use Kanboard\Group\LdapGroupProvider;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class LdapUserTest extends Base
 {
     private $query;
@@ -20,9 +21,13 @@ class LdapUserTest extends Base
     {
         parent::setUp();
 
+        if (! function_exists('ldap_connect') || ! function_exists('ldap_escape')) {
+            $this->markTestSkipped('The PHP LDAP extension is required');
+        }
+
         $this->client = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\Client')
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'getConnection',
             ))
             ->getMock();
@@ -30,7 +35,7 @@ class LdapUserTest extends Base
         $this->query = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\Query')
             ->setConstructorArgs(array($this->client))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'execute',
                 'hasResult',
                 'getEntries',
@@ -40,7 +45,7 @@ class LdapUserTest extends Base
         $this->group = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\Group')
             ->setConstructorArgs(array(new Query($this->client)))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'find',
             ))
             ->getMock();
@@ -48,7 +53,7 @@ class LdapUserTest extends Base
         $this->user = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\User')
             ->setConstructorArgs(array($this->query, $this->group))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'getAttributeUsername',
                 'getAttributeEmail',
                 'getAttributeName',
@@ -89,9 +94,8 @@ class LdapUserTest extends Base
         ));
 
         $this->client
-            ->expects($this->any())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         $this->query
             ->expects($this->once())
@@ -104,32 +108,28 @@ class LdapUserTest extends Base
         $this->query
             ->expects($this->once())
             ->method('hasResult')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->query
             ->expects($this->once())
             ->method('getEntries')
-            ->will($this->returnValue($entries));
+            ->willReturn($entries);
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeUsername')
-            ->will($this->returnValue('samaccountname'));
+            ->willReturn('samaccountname');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeName')
-            ->will($this->returnValue('displayname'));
+            ->willReturn('displayname');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeEmail')
-            ->will($this->returnValue('mail'));
+            ->willReturn('mail');
 
         $this->user
-            ->expects($this->any())
             ->method('getBaseDn')
-            ->will($this->returnValue('ou=People,dc=kanboard,dc=local'));
+            ->willReturn('ou=People,dc=kanboard,dc=local');
 
         $user = $this->user->find('(uid=my_ldap_user)');
         $this->assertInstanceOf('Kanboard\User\LdapUserProvider', $user);
@@ -174,9 +174,8 @@ class LdapUserTest extends Base
         ));
 
         $this->client
-            ->expects($this->any())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         $this->query
             ->expects($this->once())
@@ -189,22 +188,20 @@ class LdapUserTest extends Base
         $this->query
             ->expects($this->once())
             ->method('hasResult')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->query
             ->expects($this->once())
             ->method('getEntries')
-            ->will($this->returnValue($entries));
+            ->willReturn($entries);
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributePhoto')
-            ->will($this->returnValue('jpegPhoto'));
+            ->willReturn('jpegPhoto');
 
         $this->user
-            ->expects($this->any())
             ->method('getBaseDn')
-            ->will($this->returnValue('ou=People,dc=kanboard,dc=local'));
+            ->willReturn('ou=People,dc=kanboard,dc=local');
 
         $user = $this->user->find('(uid=my_ldap_user)');
         $this->assertInstanceOf('Kanboard\User\LdapUserProvider', $user);
@@ -245,9 +242,8 @@ class LdapUserTest extends Base
         ));
 
         $this->client
-            ->expects($this->any())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         $this->query
             ->expects($this->once())
@@ -260,42 +256,36 @@ class LdapUserTest extends Base
         $this->query
             ->expects($this->once())
             ->method('hasResult')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->query
             ->expects($this->once())
             ->method('getEntries')
-            ->will($this->returnValue($entries));
+            ->willReturn($entries);
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeUsername')
-            ->will($this->returnValue('samaccountname'));
+            ->willReturn('samaccountname');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeName')
-            ->will($this->returnValue('displayname'));
+            ->willReturn('displayname');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeEmail')
-            ->will($this->returnValue('mail'));
+            ->willReturn('mail');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeGroup')
-            ->will($this->returnValue('memberof'));
+            ->willReturn('memberof');
 
         $this->user
-            ->expects($this->any())
             ->method('getGroupAdminDn')
-            ->will($this->returnValue('CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local'));
+            ->willReturn('CN=Kanboard-Admins,CN=Users,DC=kanboard,DC=local');
 
         $this->user
-            ->expects($this->any())
             ->method('getBaseDn')
-            ->will($this->returnValue('ou=People,dc=kanboard,dc=local'));
+            ->willReturn('ou=People,dc=kanboard,dc=local');
 
         $user = $this->user->find('(uid=my_ldap_user)');
         $this->assertInstanceOf('Kanboard\User\LdapUserProvider', $user);
@@ -348,9 +338,8 @@ class LdapUserTest extends Base
         ));
 
         $this->client
-            ->expects($this->any())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         $this->query
             ->expects($this->once())
@@ -363,42 +352,36 @@ class LdapUserTest extends Base
         $this->query
             ->expects($this->once())
             ->method('hasResult')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->query
             ->expects($this->once())
             ->method('getEntries')
-            ->will($this->returnValue($entries));
+            ->willReturn($entries);
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeUsername')
-            ->will($this->returnValue('samaccountname'));
+            ->willReturn('samaccountname');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeName')
-            ->will($this->returnValue('displayname'));
+            ->willReturn('displayname');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeEmail')
-            ->will($this->returnValue('mail'));
+            ->willReturn('mail');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeGroup')
-            ->will($this->returnValue('memberof'));
+            ->willReturn('memberof');
 
         $this->user
-            ->expects($this->any())
             ->method('getGroupManagerDn')
-            ->will($this->returnValue('CN=Kanboard-Managers,CN=Users,DC=kanboard,DC=local'));
+            ->willReturn('CN=Kanboard-Managers,CN=Users,DC=kanboard,DC=local');
 
         $this->user
-            ->expects($this->any())
             ->method('getBaseDn')
-            ->will($this->returnValue('ou=People,dc=kanboard,dc=local'));
+            ->willReturn('ou=People,dc=kanboard,dc=local');
 
         $user = $this->user->find('(uid=my_ldap_user)');
         $this->assertInstanceOf('Kanboard\User\LdapUserProvider', $user);
@@ -414,9 +397,8 @@ class LdapUserTest extends Base
     public function testGetUserNotFound()
     {
         $this->client
-            ->expects($this->any())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         $this->query
             ->expects($this->once())
@@ -429,31 +411,27 @@ class LdapUserTest extends Base
         $this->query
             ->expects($this->once())
             ->method('hasResult')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $this->query
             ->expects($this->never())
             ->method('getEntries');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeUsername')
-            ->will($this->returnValue('samaccountname'));
+            ->willReturn('samaccountname');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeName')
-            ->will($this->returnValue('displayname'));
+            ->willReturn('displayname');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeEmail')
-            ->will($this->returnValue('mail'));
+            ->willReturn('mail');
 
         $this->user
-            ->expects($this->any())
             ->method('getBaseDn')
-            ->will($this->returnValue('ou=People,dc=kanboard,dc=local'));
+            ->willReturn('ou=People,dc=kanboard,dc=local');
 
         $user = $this->user->find('(uid=my_ldap_user)');
         $this->assertEquals(null, $user);
@@ -490,9 +468,8 @@ class LdapUserTest extends Base
         );
 
         $this->client
-            ->expects($this->any())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         $this->query
             ->expects($this->once())
@@ -505,53 +482,46 @@ class LdapUserTest extends Base
         $this->query
             ->expects($this->once())
             ->method('hasResult')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->query
             ->expects($this->once())
             ->method('getEntries')
-            ->will($this->returnValue($entries));
+            ->willReturn($entries);
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeUsername')
-            ->will($this->returnValue('uid'));
+            ->willReturn('uid');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeName')
-            ->will($this->returnValue('cn'));
+            ->willReturn('cn');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeEmail')
-            ->will($this->returnValue('mail'));
+            ->willReturn('mail');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeGroup')
-            ->will($this->returnValue(''));
+            ->willReturn('');
 
         $this->user
-            ->expects($this->any())
             ->method('getGroupUserFilter')
-            ->will($this->returnValue('(&(objectClass=posixGroup)(memberUid=%s))'));
+            ->willReturn('(&(objectClass=posixGroup)(memberUid=%s))');
 
         $this->user
-            ->expects($this->any())
             ->method('getGroupAdminDn')
-            ->will($this->returnValue('cn=Kanboard Admins,ou=Groups,dc=kanboard,dc=local'));
+            ->willReturn('cn=Kanboard Admins,ou=Groups,dc=kanboard,dc=local');
 
         $this->user
-            ->expects($this->any())
             ->method('getBaseDn')
-            ->will($this->returnValue('OU=Users,DC=kanboard,DC=local'));
+            ->willReturn('OU=Users,DC=kanboard,DC=local');
 
         $this->group
             ->expects($this->once())
             ->method('find')
             ->with('(&(objectClass=posixGroup)(memberUid=my_ldap_user))')
-            ->will($this->returnValue($groups));
+            ->willReturn($groups);
 
         $user = $this->user->find('(uid=my_ldap_user)');
         $this->assertInstanceOf('Kanboard\User\LdapUserProvider', $user);
@@ -596,9 +566,8 @@ class LdapUserTest extends Base
         );
 
         $this->client
-            ->expects($this->any())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         $this->query
             ->expects($this->once())
@@ -611,53 +580,46 @@ class LdapUserTest extends Base
         $this->query
             ->expects($this->once())
             ->method('hasResult')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->query
             ->expects($this->once())
             ->method('getEntries')
-            ->will($this->returnValue($entries));
+            ->willReturn($entries);
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeUsername')
-            ->will($this->returnValue('uid'));
+            ->willReturn('uid');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeName')
-            ->will($this->returnValue('cn'));
+            ->willReturn('cn');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeEmail')
-            ->will($this->returnValue('mail'));
+            ->willReturn('mail');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeGroup')
-            ->will($this->returnValue(''));
+            ->willReturn('');
 
         $this->user
-            ->expects($this->any())
             ->method('getGroupUserFilter')
-            ->will($this->returnValue('(&(objectClass=posixGroup)(memberUid=%s))'));
+            ->willReturn('(&(objectClass=posixGroup)(memberUid=%s))');
 
         $this->user
-            ->expects($this->any())
             ->method('getGroupManagerDn')
-            ->will($this->returnValue('cn=Kanboard Managers,ou=Groups,dc=kanboard,dc=local'));
+            ->willReturn('cn=Kanboard Managers,ou=Groups,dc=kanboard,dc=local');
 
         $this->user
-            ->expects($this->any())
             ->method('getBaseDn')
-            ->will($this->returnValue('OU=Users,DC=kanboard,DC=local'));
+            ->willReturn('OU=Users,DC=kanboard,DC=local');
 
         $this->group
             ->expects($this->once())
             ->method('find')
             ->with('(&(objectClass=posixGroup)(memberUid=my_ldap_user))')
-            ->will($this->returnValue($groups));
+            ->willReturn($groups);
 
         $user = $this->user->find('(uid=my_ldap_user)');
         $this->assertInstanceOf('Kanboard\User\LdapUserProvider', $user);
@@ -707,9 +669,8 @@ class LdapUserTest extends Base
         );
 
         $this->client
-            ->expects($this->any())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         $this->query
             ->expects($this->once())
@@ -722,53 +683,46 @@ class LdapUserTest extends Base
         $this->query
             ->expects($this->once())
             ->method('hasResult')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->query
             ->expects($this->once())
             ->method('getEntries')
-            ->will($this->returnValue($entries));
+            ->willReturn($entries);
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeUsername')
-            ->will($this->returnValue('uid'));
+            ->willReturn('uid');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeName')
-            ->will($this->returnValue('cn'));
+            ->willReturn('cn');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeEmail')
-            ->will($this->returnValue('mail'));
+            ->willReturn('mail');
 
         $this->user
-            ->expects($this->any())
             ->method('getAttributeGroup')
-            ->will($this->returnValue(''));
+            ->willReturn('');
 
         $this->user
-            ->expects($this->any())
             ->method('getGroupUserFilter')
-            ->will($this->returnValue('(&(objectClass=posixGroup)(memberUid=%s))'));
+            ->willReturn('(&(objectClass=posixGroup)(memberUid=%s))');
 
         $this->user
-            ->expects($this->any())
             ->method('getGroupManagerDn')
-            ->will($this->returnValue('cn=Kanboard Managers,ou=Groups,dc=kanboard,dc=local'));
+            ->willReturn('cn=Kanboard Managers,ou=Groups,dc=kanboard,dc=local');
 
         $this->user
-            ->expects($this->any())
             ->method('getBaseDn')
-            ->will($this->returnValue('OU=Users,DC=kanboard,DC=local'));
+            ->willReturn('OU=Users,DC=kanboard,DC=local');
 
         $this->group
             ->expects($this->once())
             ->method('find')
             ->with('(&(objectClass=posixGroup)(memberUid=my_ldap_user))')
-            ->will($this->returnValue($groups));
+            ->willReturn($groups);
 
         $user = $this->user->find('(uid=my_ldap_user)');
         $this->assertInstanceOf('Kanboard\User\LdapUserProvider', $user);
@@ -830,9 +784,8 @@ class LdapUserTest extends Base
     public function testHasGroupUserFilterWithEmptyString()
     {
         $this->user
-            ->expects($this->any())
             ->method('getGroupUserFilter')
-            ->will($this->returnValue(''));
+            ->willReturn('');
 
         $this->assertFalse($this->user->hasGroupUserFilter());
     }
@@ -840,9 +793,8 @@ class LdapUserTest extends Base
     public function testHasGroupUserFilterWithNull()
     {
         $this->user
-            ->expects($this->any())
             ->method('getGroupUserFilter')
-            ->will($this->returnValue(null));
+            ->willReturn(null);
 
         $this->assertFalse($this->user->hasGroupUserFilter());
     }
@@ -850,9 +802,8 @@ class LdapUserTest extends Base
     public function testHasGroupUserFilterWithValue()
     {
         $this->user
-            ->expects($this->any())
             ->method('getGroupUserFilter')
-            ->will($this->returnValue('foobar'));
+            ->willReturn('foobar');
 
         $this->assertTrue($this->user->hasGroupUserFilter());
     }
@@ -860,14 +811,12 @@ class LdapUserTest extends Base
     public function testHasGroupsConfigured()
     {
         $this->user
-            ->expects($this->any())
             ->method('getGroupAdminDn')
-            ->will($this->returnValue('something'));
+            ->willReturn('something');
 
         $this->user
-            ->expects($this->any())
             ->method('getGroupManagerDn')
-            ->will($this->returnValue('something'));
+            ->willReturn('something');
 
         $this->assertTrue($this->user->hasGroupsConfigured());
     }
@@ -875,14 +824,12 @@ class LdapUserTest extends Base
     public function testHasGroupAdminDnConfigured()
     {
         $this->user
-            ->expects($this->any())
             ->method('getGroupAdminDn')
-            ->will($this->returnValue('something'));
+            ->willReturn('something');
 
         $this->user
-            ->expects($this->any())
             ->method('getGroupManagerDn')
-            ->will($this->returnValue(''));
+            ->willReturn('');
 
         $this->assertTrue($this->user->hasGroupsConfigured());
     }
@@ -890,14 +837,12 @@ class LdapUserTest extends Base
     public function testHasGroupManagerDnConfigured()
     {
         $this->user
-            ->expects($this->any())
             ->method('getGroupAdminDn')
-            ->will($this->returnValue(''));
+            ->willReturn('');
 
         $this->user
-            ->expects($this->any())
             ->method('getGroupManagerDn')
-            ->will($this->returnValue('something'));
+            ->willReturn('something');
 
         $this->assertTrue($this->user->hasGroupsConfigured());
     }
@@ -905,14 +850,12 @@ class LdapUserTest extends Base
     public function testHasGroupsNotConfigured()
     {
         $this->user
-            ->expects($this->any())
             ->method('getGroupAdminDn')
-            ->will($this->returnValue(''));
+            ->willReturn('');
 
         $this->user
-            ->expects($this->any())
             ->method('getGroupManagerDn')
-            ->will($this->returnValue(''));
+            ->willReturn('');
 
         $this->assertFalse($this->user->hasGroupsConfigured());
     }

@@ -40,24 +40,21 @@ class MemoryCacheTest extends Base
     {
         $c = new MemoryCache;
 
-        $class = $this
-            ->getMockBuilder('stdClass')
-            ->setMethods(array('doSomething'))
-            ->getMock();
+        $class = new class {
+            public $calls = 0;
 
-        $class
-            ->expects($this->once())
-            ->method('doSomething')
-            ->with(
-                $this->equalTo(1),
-                $this->equalTo(2)
-            )
-            ->will($this->returnValue(3));
+            public function doSomething($a, $b)
+            {
+                $this->calls++;
+                return $a + $b;
+            }
+        };
 
         // First call will store the computed value
         $this->assertEquals(3, $c->proxy($class, 'doSomething', 1, 2));
 
         // Second call get directly the cached value
         $this->assertEquals(3, $c->proxy($class, 'doSomething', 1, 2));
+        $this->assertEquals(1, $class->calls);
     }
 }

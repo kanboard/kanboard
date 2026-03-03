@@ -6,6 +6,7 @@ use KanboardTests\units\Base;
 use Kanboard\Middleware\ProjectAuthorizationMiddleware;
 use stdClass;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class ProjectAuthorizationMiddlewareTest extends Base
 {
     /**
@@ -23,19 +24,19 @@ class ProjectAuthorizationMiddlewareTest extends Base
         $this->container['helper']->user = $this
             ->getMockBuilder('Kanboard\Helper\UserHelper')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('hasProjectAccess'))
+            ->onlyMethods(array('hasProjectAccess'))
             ->getMock();
 
         $this->container['request'] = $this
             ->getMockBuilder('Kanboard\Core\Http\Request')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('getIntegerParam'))
+            ->onlyMethods(array('getIntegerParam'))
             ->getMock();
 
         $this->nextMiddleware = $this
             ->getMockBuilder('Kanboard\Middleware\ProjectAuthorizationMiddleware')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('execute'))
+            ->onlyMethods(array('execute'))
             ->getMock();
 
         $this->middleware = new ProjectAuthorizationMiddleware($this->container);
@@ -45,14 +46,13 @@ class ProjectAuthorizationMiddlewareTest extends Base
     public function testWithAccessDenied()
     {
         $this->container['request']
-            ->expects($this->any())
             ->method('getIntegerParam')
-            ->will($this->returnValue(123));
+            ->willReturn(123);
 
         $this->container['helper']->user
             ->expects($this->once())
             ->method('hasProjectAccess')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $this->nextMiddleware
             ->expects($this->never())
@@ -65,14 +65,13 @@ class ProjectAuthorizationMiddlewareTest extends Base
     public function testWithAccessGranted()
     {
         $this->container['request']
-            ->expects($this->any())
             ->method('getIntegerParam')
-            ->will($this->returnValue(123));
+            ->willReturn(123);
 
         $this->container['helper']->user
             ->expects($this->once())
             ->method('hasProjectAccess')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->nextMiddleware
             ->expects($this->once())

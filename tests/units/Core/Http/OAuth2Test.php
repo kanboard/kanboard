@@ -5,8 +5,20 @@ namespace KanboardTests\units\Core\Http;
 use KanboardTests\units\Base;
 use Kanboard\Core\Http\OAuth2;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class OAuth2Test extends Base
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->container['httpClient'] = $this
+            ->getMockBuilder('\Kanboard\Core\Http\Client')
+            ->setConstructorArgs(array($this->container))
+            ->onlyMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync'))
+            ->getMock();
+    }
+
     public function testAuthUrl()
     {
         $oauth = new OAuth2($this->container);
@@ -49,7 +61,7 @@ class OAuth2Test extends Base
             ->expects($this->once())
             ->method('postForm')
             ->with('E', $params, array('Accept: application/json'))
-            ->will($this->returnValue($response));
+            ->willReturn($response);
 
         $oauth->createService('A', 'B', 'C', 'D', 'E', array('f', 'g'));
         $oauth->getAccessToken('something');

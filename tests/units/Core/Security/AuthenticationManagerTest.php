@@ -9,6 +9,7 @@ use Kanboard\Auth\DatabaseAuth;
 use Kanboard\Auth\TotpAuth;
 use Kanboard\Auth\ReverseProxyAuth;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class AuthenticationManagerTest extends Base
 {
     public function testRegister()

@@ -42,7 +42,8 @@ abstract class Base extends TestCase
     {
         date_default_timezone_set('UTC');
         $_SESSION = array();
-        $test = get_class($this)."::".$this->getName();
+        $testName = method_exists($this, 'name') ? $this->name() : $this->getName();
+        $test = get_class($this)."::".$testName;
 
         if (DB_DRIVER === 'mysql') {
             $pdo = new PDO('mysql:host='.DB_HOSTNAME, DB_USERNAME, DB_PASSWORD);
@@ -107,34 +108,18 @@ abstract class Base extends TestCase
         $this->container['db']->getStatementHandler()->withLogging();
         $this->container['cli'] = new Application('Kanboard', 'test');
 
-        $this->container['externalLinkManager'] = $this
-            ->getMockBuilder('Kanboard\Core\ExternalLink\ExternalLinkManager')
-            ->setConstructorArgs(array($this->container))
-            ->getMock();
+        $this->container['externalLinkManager'] = $this->createStub('Kanboard\Core\ExternalLink\ExternalLinkManager');
 
-        $this->container['httpClient'] = $this
-            ->getMockBuilder('\Kanboard\Core\Http\Client')
-            ->setConstructorArgs(array($this->container))
-            ->onlyMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync'))
-            ->getMock();
+        $this->container['httpClient'] = $this->createStub('\Kanboard\Core\Http\Client');
 
-        $this->container['emailClient'] = $this
-            ->getMockBuilder('\Kanboard\Core\Mail\Client')
-            ->setConstructorArgs(array($this->container))
-            ->onlyMethods(array('send'))
-            ->getMock();
+        $this->container['emailClient'] = $this->createStub('\Kanboard\Core\Mail\Client');
+        $this->container['emailClient']
+            ->method('getAvailableTransports')
+            ->willReturn(array('mail' => 'mail', 'smtp' => 'smtp'));
 
-        $this->container['userNotificationTypeModel'] = $this
-            ->getMockBuilder('\Kanboard\Model\UserNotificationTypeModel')
-            ->setConstructorArgs(array($this->container))
-            ->onlyMethods(array('getType', 'getSelectedTypes'))
-            ->getMock();
+        $this->container['userNotificationTypeModel'] = new \Kanboard\Model\UserNotificationTypeModel($this->container);
 
-        $this->container['objectStorage'] = $this
-            ->getMockBuilder('\Kanboard\Core\ObjectStorage\FileStorage')
-            ->setConstructorArgs([sys_get_temp_dir()])
-            ->onlyMethods(array('put', 'moveFile', 'remove', 'moveUploadedFile'))
-            ->getMock();
+        $this->container['objectStorage'] = $this->createStub('\Kanboard\Core\ObjectStorage\FileStorage');
 
         $this->container->register(new ActionProvider);
 
@@ -151,7 +136,8 @@ abstract class Base extends TestCase
 
     protected function tearDown(): void
     {
-        $test = get_class($this)."::".$this->getName();
+        $testName = method_exists($this, 'name') ? $this->name() : $this->getName();
+        $test = get_class($this)."::".$testName;
         foreach ($this->container['db']->getLogMessages() as $msg) {
             $this->container['logger']->debug('SQL: '.$msg);
         }

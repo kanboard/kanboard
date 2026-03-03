@@ -19,6 +19,18 @@ namespace KanboardTests\units\Core\Ldap;
 use Kanboard\Core\Ldap\Query;
 use KanboardTests\units\Base;
 
+class QueryFunctionsProxy
+{
+    public function ldap_search($link_identifier, $base_dn, $filter, array $attributes)
+    {
+    }
+
+    public function ldap_get_entries($link_identifier, $result_identifier)
+    {
+    }
+}
+
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class QueryTest extends Base
 {
     public static $functions;
@@ -28,9 +40,13 @@ class QueryTest extends Base
     {
         parent::setup();
 
+        if (! function_exists('ldap_connect') || ! function_exists('ldap_escape')) {
+            $this->markTestSkipped('The PHP LDAP extension is required');
+        }
+
         self::$functions = $this
-            ->getMockBuilder('stdClass')
-            ->setMethods(array(
+            ->getMockBuilder(QueryFunctionsProxy::class)
+            ->onlyMethods(array(
                 'ldap_search',
                 'ldap_get_entries',
             ))
@@ -38,7 +54,7 @@ class QueryTest extends Base
 
         $this->client = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\Client')
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'getConnection',
             ))
             ->getMock();
@@ -72,9 +88,8 @@ class QueryTest extends Base
         );
 
         $this->client
-            ->expects($this->any())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         self::$functions
             ->expects($this->once())
@@ -85,7 +100,7 @@ class QueryTest extends Base
                 $this->equalTo('uid=my_user'),
                 $this->equalTo(array('displayname'))
             )
-            ->will($this->returnValue('search_resource'));
+            ->willReturn('search_resource');
 
         self::$functions
             ->expects($this->once())
@@ -94,7 +109,7 @@ class QueryTest extends Base
                 $this->equalTo('my_ldap_resource'),
                 $this->equalTo('search_resource')
             )
-            ->will($this->returnValue($entries));
+            ->willReturn($entries);
 
         $query = new Query($this->client);
         $query->execute('ou=People,dc=kanboard,dc=local', 'uid=my_user', array('displayname'));
@@ -111,9 +126,8 @@ class QueryTest extends Base
     public function testExecuteQueryNotFound()
     {
         $this->client
-            ->expects($this->any())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         self::$functions
             ->expects($this->once())
@@ -124,7 +138,7 @@ class QueryTest extends Base
                 $this->equalTo('uid=my_user'),
                 $this->equalTo(array('displayname'))
             )
-            ->will($this->returnValue('search_resource'));
+            ->willReturn('search_resource');
 
         self::$functions
             ->expects($this->once())
@@ -133,7 +147,7 @@ class QueryTest extends Base
                 $this->equalTo('my_ldap_resource'),
                 $this->equalTo('search_resource')
             )
-            ->will($this->returnValue(array()));
+            ->willReturn(array());
 
         $query = new Query($this->client);
         $query->execute('ou=People,dc=kanboard,dc=local', 'uid=my_user', array('displayname'));
@@ -145,7 +159,7 @@ class QueryTest extends Base
         $this->client
             ->expects($this->once())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         self::$functions
             ->expects($this->once())
@@ -156,7 +170,7 @@ class QueryTest extends Base
                 $this->equalTo('uid=my_user'),
                 $this->equalTo(array('displayname'))
             )
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $query = new Query($this->client);
         $query->execute('ou=People,dc=kanboard,dc=local', 'uid=my_user', array('displayname'));

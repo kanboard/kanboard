@@ -23,13 +23,13 @@ class ApplicationAuthorizationMiddlewareTest extends Base
         $this->container['helper']->user = $this
             ->getMockBuilder('Kanboard\Helper\UserHelper')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('hasAccess'))
+            ->onlyMethods(array('hasAccess'))
             ->getMock();
 
         $this->nextMiddleware = $this
             ->getMockBuilder('Kanboard\Middleware\ApplicationAuthorizationMiddleware')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('execute'))
+            ->onlyMethods(array('execute'))
             ->getMock();
 
         $this->middleware = new ApplicationAuthorizationMiddleware($this->container);
@@ -41,7 +41,7 @@ class ApplicationAuthorizationMiddlewareTest extends Base
         $this->container['helper']->user
             ->expects($this->once())
             ->method('hasAccess')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $this->nextMiddleware
             ->expects($this->never())
@@ -56,7 +56,7 @@ class ApplicationAuthorizationMiddlewareTest extends Base
         $this->container['helper']->user
             ->expects($this->once())
             ->method('hasAccess')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->nextMiddleware
             ->expects($this->once())

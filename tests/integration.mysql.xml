@@ -1,7 +1,8 @@
-<phpunit stopOnError="true" stopOnFailure="true" colors="true">
+<phpunit bootstrap="../vendor/autoload.php" stopOnError="true" stopOnFailure="true" colors="true">
     <testsuites>
         <testsuite name="Kanboard">
             <directory>integration</directory>
+            <exclude>integration/BaseProcedureTest.php</exclude>
         </testsuite>
     </testsuites>
     <php>

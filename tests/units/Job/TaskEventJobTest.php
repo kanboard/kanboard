@@ -13,6 +13,7 @@ use Kanboard\Model\TaskPositionModel;
 use Kanboard\Model\TaskProjectMoveModel;
 use Kanboard\Model\TaskStatusModel;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class TaskEventJobTest extends Base
 {
     public function testJobParams()
@@ -205,7 +206,7 @@ class TaskEventJobTest extends Base
         $this->container['queueManager'] = $this
             ->getMockBuilder('\Kanboard\Core\Queue\QueueManager')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'push',
             ))
             ->getMock();
@@ -213,20 +214,19 @@ class TaskEventJobTest extends Base
         $this->container['userMentionJob'] = $this
             ->getMockBuilder('\Kanboard\Job\UserMentionJob')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'withParams',
             ))
             ->getMock();
 
         $this->container['queueManager']
-            ->expects($this->any())
             ->method('push');
 
         $this->container['userMentionJob']
             ->expects($this->once())
             ->method('withParams')
             ->with($description, TaskModel::EVENT_USER_MENTION, $this->anything())
-            ->will($this->returnValue($this->container['userMentionJob']));
+            ->willReturn($this->container['userMentionJob']);
 
         $taskCreationModel = new TaskCreationModel($this->container);
         $projectModel = new ProjectModel($this->container);

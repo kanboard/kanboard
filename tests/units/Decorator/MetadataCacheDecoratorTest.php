@@ -5,6 +5,7 @@ namespace KanboardTests\units\Decorator;
 use KanboardTests\units\Base;
 use Kanboard\Decorator\MetadataCacheDecorator;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class MetadataCacheDecoratorTest extends Base
 {
     protected $cachePrefix = 'cache_prefix';
@@ -31,7 +32,7 @@ class MetadataCacheDecoratorTest extends Base
 
         $this->cacheMock = $this
             ->getMockBuilder('\Kanboard\Core\Cache\MemoryCache')
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'set',
                 'get',
             ))
@@ -40,7 +41,7 @@ class MetadataCacheDecoratorTest extends Base
         $this->metadataModelMock = $this
             ->getMockBuilder('\Kanboard\Model\UserMetadataModel')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'getAll',
                 'save',
             ))
@@ -80,7 +81,7 @@ class MetadataCacheDecoratorTest extends Base
             ->expects($this->once())
             ->method('get')
             ->with($this->cachePrefix.$this->entityId)
-            ->will($this->returnValue(array('key' => 'foobar')))
+            ->willReturn(array('key' => 'foobar'))
         ;
 
         $this->assertEquals('foobar', $this->metadataCacheDecorator->get('key', 'default'));
@@ -92,7 +93,7 @@ class MetadataCacheDecoratorTest extends Base
             ->expects($this->once())
             ->method('get')
             ->with($this->cachePrefix.$this->entityId)
-            ->will($this->returnValue(array('key1' => 'foobar')))
+            ->willReturn(array('key1' => 'foobar'))
         ;
 
         $this->assertEquals('default', $this->metadataCacheDecorator->get('key', 'default'));
@@ -104,7 +105,7 @@ class MetadataCacheDecoratorTest extends Base
             ->expects($this->once())
             ->method('get')
             ->with($this->cachePrefix.$this->entityId)
-            ->will($this->returnValue(null))
+            ->willReturn(null)
         ;
 
         $this->cacheMock
@@ -120,7 +121,7 @@ class MetadataCacheDecoratorTest extends Base
             ->expects($this->once())
             ->method('getAll')
             ->with($this->entityId)
-            ->will($this->returnValue(array('key' => 'something')))
+            ->willReturn(array('key' => 'something'))
         ;
 
         $this->assertEquals('something', $this->metadataCacheDecorator->get('key', 'default'));

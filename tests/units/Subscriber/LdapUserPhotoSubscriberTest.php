@@ -10,8 +10,20 @@ use Kanboard\Subscriber\LdapUserPhotoSubscriber;
 use Kanboard\User\DatabaseUserProvider;
 use Kanboard\User\LdapUserProvider;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class LdapUserPhotoSubscriberTest extends Base
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->container['objectStorage'] = $this
+            ->getMockBuilder('\Kanboard\Core\ObjectStorage\FileStorage')
+            ->setConstructorArgs([sys_get_temp_dir()])
+            ->onlyMethods(array('put', 'moveFile', 'remove', 'moveUploadedFile'))
+            ->getMock();
+    }
+
     public function testWhenTheProviderIsNotLdap()
     {
         $userProvider = new DatabaseUserProvider(array());

@@ -15,6 +15,14 @@ use Kanboard\Core\Http\RememberMeCookie;
 use Kanboard\Core\Http\Request;
 use KanboardTests\units\Base;
 
+class RememberMeFunctionsProxy
+{
+    public function setcookie($name, $value = "", $expire = 0, $path = "", $domain = "", $secure = false, $httponly = false)
+    {
+    }
+}
+
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class RememberMeCookieTest extends Base
 {
     public static $functions;
@@ -24,8 +32,8 @@ class RememberMeCookieTest extends Base
         parent::setup();
 
         self::$functions = $this
-            ->getMockBuilder('stdClass')
-            ->setMethods(array(
+            ->getMockBuilder(RememberMeFunctionsProxy::class)
+            ->onlyMethods(array(
                 'setcookie',
             ))
             ->getMock();
@@ -74,7 +82,7 @@ class RememberMeCookieTest extends Base
                 false,
                 true
             )
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $cookie = new RememberMeCookie($this->container);
         $this->assertTrue($cookie->write('myToken', 'mySequence', 1234));
@@ -106,7 +114,7 @@ class RememberMeCookieTest extends Base
                 false,
                 true
             )
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $cookie = new RememberMeCookie($this->container);
         $this->assertTrue($cookie->remove());

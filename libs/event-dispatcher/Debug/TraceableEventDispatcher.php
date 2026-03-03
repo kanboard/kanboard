@@ -296,7 +296,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface, ResetInterfa
             $this->wrappedListeners[$eventName][] = $wrappedListener;
             $this->dispatcher->removeListener($eventName, $listener);
             $this->dispatcher->addListener($eventName, $wrappedListener, $priority);
-            $this->callStack->attach($wrappedListener, [$eventName, $this->currentRequestHash]);
+            $this->callStack->offsetSet($wrappedListener, [$eventName, $this->currentRequestHash]);
         }
     }
 

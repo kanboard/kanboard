@@ -5,8 +5,20 @@ namespace KanboardTests\units\Core\Plugin;
 use KanboardTests\units\Base;
 use Kanboard\Core\Plugin\Directory;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class DirectoryTest extends Base
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->container['httpClient'] = $this
+            ->getMockBuilder('\Kanboard\Core\Http\Client')
+            ->setConstructorArgs(array($this->container))
+            ->onlyMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync'))
+            ->getMock();
+    }
+
     public function testIsCompatible()
     {
         $pluginDirectory = new Directory($this->container);
@@ -39,7 +51,7 @@ class DirectoryTest extends Base
             ->expects($this->once())
             ->method('getJson')
             ->with('api_url')
-            ->will($this->returnValue($plugins));
+            ->willReturn($plugins);
 
         $pluginDirectory = new Directory($this->container);
         $availablePlugins = $pluginDirectory->getAvailablePlugins('api_url');

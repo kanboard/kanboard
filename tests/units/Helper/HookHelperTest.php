@@ -5,6 +5,7 @@ namespace KanboardTests\units\Helper;
 use KanboardTests\units\Base;
 use Kanboard\Helper\HookHelper;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class HookHelperTest extends Base
 {
     public function testAttachCallable()
@@ -12,7 +13,7 @@ class HookHelperTest extends Base
         $this->container['template'] = $this
             ->getMockBuilder('\Kanboard\Core\Template')
             ->setConstructorArgs(array($this->container['helper']))
-            ->setMethods(array('render'))
+            ->onlyMethods(array('render'))
             ->getMock();
 
         $this->container['template']
@@ -22,7 +23,7 @@ class HookHelperTest extends Base
                 $this->equalTo('tpl1'),
                 $this->equalTo(array('k0' => 'v0', 'k1' => 'v1'))
             )
-            ->will($this->returnValue('tpl1_content'));
+            ->willReturn('tpl1_content');
 
         $hookHelper = new HookHelper($this->container);
         $hookHelper->attachCallable('test', 'tpl1', function () {
@@ -39,7 +40,7 @@ class HookHelperTest extends Base
         $this->container['template'] = $this
             ->getMockBuilder('\Kanboard\Core\Template')
             ->setConstructorArgs(array($this->container['helper']))
-            ->setMethods(array('render'))
+            ->onlyMethods(array('render'))
             ->getMock();
 
         $this->container['template']
@@ -49,7 +50,7 @@ class HookHelperTest extends Base
                 $this->equalTo('tpl1'),
                 $this->equalTo(array('k0' => 'v0'))
             )
-            ->will($this->returnValue('tpl1_content'));
+            ->willReturn('tpl1_content');
 
         $hookHelper = new HookHelper($this->container);
         $hookHelper->attachCallable('test', 'tpl1', function () {
@@ -63,7 +64,7 @@ class HookHelperTest extends Base
         $this->container['template'] = $this
             ->getMockBuilder('\Kanboard\Core\Template')
             ->setConstructorArgs(array($this->container['helper']))
-            ->setMethods(array('render'))
+            ->onlyMethods(array('render'))
             ->getMock();
 
         $this->container['template']
@@ -73,7 +74,7 @@ class HookHelperTest extends Base
                 $this->equalTo('tpl1'),
                 $this->equalTo(array('k0' => 'v0', 'k1' => 'v1'))
             )
-            ->will($this->returnValue('tpl1_content'));
+            ->willReturn('tpl1_content');
 
         $hookHelper = new HookHelper($this->container);
         $hookHelper->attach('test', 'tpl1', array('k1' => 'v1'));
@@ -85,11 +86,10 @@ class HookHelperTest extends Base
         $this->container['template'] = $this
             ->getMockBuilder('\Kanboard\Core\Template')
             ->setConstructorArgs(array($this->container['helper']))
-            ->setMethods(array('render'))
+            ->onlyMethods(array('render'))
             ->getMock();
 
         $this->container['template']
-            ->expects($this->any())
             ->method('render')
             ->willReturnMap([
                 ['tpl1', array(), 'tpl1_content'],
@@ -107,7 +107,7 @@ class HookHelperTest extends Base
         $this->container['helper']->asset = $this
             ->getMockBuilder('\Kanboard\Helper\AssetHelper')
             ->setConstructorArgs(array($this->container))
-            ->setMethods(array('css', 'js'))
+            ->onlyMethods(array('css', 'js'))
             ->getMock();
 
         $this->container['helper']
@@ -117,7 +117,7 @@ class HookHelperTest extends Base
             ->with(
                 $this->equalTo('skin.css')
             )
-            ->will($this->returnValue('<link rel="stylesheet" href="skin.css"></link>'));
+            ->willReturn('<link rel="stylesheet" href="skin.css"></link>');
 
         $this->container['helper']
             ->asset
@@ -126,7 +126,7 @@ class HookHelperTest extends Base
             ->with(
                 $this->equalTo('skin.js')
             )
-            ->will($this->returnValue('<script src="skin.js"></script>'));
+            ->willReturn('<script src="skin.js"></script>');
 
         $hookHelper = new HookHelper($this->container);
         $hookHelper->attach('test1', 'skin.css');

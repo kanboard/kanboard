@@ -6,6 +6,7 @@ use KanboardTests\units\Base;
 use Kanboard\Core\Ldap\Group;
 use Kanboard\Core\Ldap\Entries;
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class LdapGroupTest extends Base
 {
     private $query;
@@ -16,9 +17,13 @@ class LdapGroupTest extends Base
     {
         parent::setUp();
 
+        if (! function_exists('ldap_connect') || ! function_exists('ldap_escape')) {
+            $this->markTestSkipped('The PHP LDAP extension is required');
+        }
+
         $this->client = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\Client')
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'getConnection',
             ))
             ->getMock();
@@ -26,7 +31,7 @@ class LdapGroupTest extends Base
         $this->query = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\Query')
             ->setConstructorArgs(array($this->client))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'execute',
                 'hasResult',
                 'getEntries',
@@ -36,7 +41,7 @@ class LdapGroupTest extends Base
         $this->group = $this
             ->getMockBuilder('\Kanboard\Core\Ldap\Group')
             ->setConstructorArgs(array($this->query))
-            ->setMethods(array(
+            ->onlyMethods(array(
                 'getAttributeName',
                 'getBaseDn',
             ))
@@ -68,9 +73,8 @@ class LdapGroupTest extends Base
         ));
 
         $this->client
-            ->expects($this->any())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         $this->query
             ->expects($this->once())
@@ -83,22 +87,20 @@ class LdapGroupTest extends Base
         $this->query
             ->expects($this->once())
             ->method('hasResult')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $this->query
             ->expects($this->once())
             ->method('getEntries')
-            ->will($this->returnValue($entries));
+            ->willReturn($entries);
 
         $this->group
-            ->expects($this->any())
             ->method('getAttributeName')
-            ->will($this->returnValue('cn'));
+            ->willReturn('cn');
 
         $this->group
-            ->expects($this->any())
             ->method('getBaseDn')
-            ->will($this->returnValue('CN=Users,DC=kanboard,DC=local'));
+            ->willReturn('CN=Users,DC=kanboard,DC=local');
 
         $groups = $this->group->find('(&(objectClass=group)(sAMAccountName=Kanboard*))');
         $this->assertCount(2, $groups);
@@ -115,9 +117,8 @@ class LdapGroupTest extends Base
         $entries = new Entries(array());
 
         $this->client
-            ->expects($this->any())
             ->method('getConnection')
-            ->will($this->returnValue('my_ldap_resource'));
+            ->willReturn('my_ldap_resource');
 
         $this->query
             ->expects($this->once())
@@ -130,21 +131,19 @@ class LdapGroupTest extends Base
         $this->query
             ->expects($this->once())
             ->method('hasResult')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $this->query
             ->expects($this->never())
             ->method('getEntries');
 
         $this->group
-            ->expects($this->any())
             ->method('getAttributeName')
-            ->will($this->returnValue('cn'));
+            ->willReturn('cn');
 
         $this->group
-            ->expects($this->any())
             ->method('getBaseDn')
-            ->will($this->returnValue('CN=Users,DC=kanboard,DC=local'));
+            ->willReturn('CN=Users,DC=kanboard,DC=local');
 
         $groups = $this->group->find('(&(objectClass=group)(sAMAccountName=Kanboard*))');
         $this->assertCount(0, $groups);

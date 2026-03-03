@@ -1,4 +1,4 @@
-<phpunit stopOnError="false" stopOnFailure="false" colors="true">
+<phpunit bootstrap="../vendor/autoload.php" stopOnError="false" stopOnFailure="false" colors="true">
     <testsuites>
         <testsuite name="Kanboard">
             <directory>units</directory>
