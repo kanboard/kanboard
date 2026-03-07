@@ -7,6 +7,26 @@ use Kanboard\Core\Http\Client;
 
 class ClientTest extends Base
 {
+    public function testGetCanDisableRedirects()
+    {
+        $client = $this
+            ->getMockBuilder('\Kanboard\Core\Http\Client')
+            ->setConstructorArgs(array($this->container))
+            ->onlyMethods(array('doRequest'))
+            ->getMock();
+
+        $client
+            ->expects($this->once())
+            ->method('doRequest')
+            ->with('GET', 'https://example.org', '', array('X-Test: 1'), true, false)
+            ->willReturn('response-body');
+
+        $this->assertSame(
+            'response-body',
+            $client->get('https://example.org', array('X-Test: 1'), true, false)
+        );
+    }
+
     public function testIsPrivateIpAddressWithPrivateIPv4()
     {
         $client = new Client($this->container);
