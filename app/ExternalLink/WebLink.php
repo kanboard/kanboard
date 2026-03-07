@@ -25,7 +25,8 @@ class WebLink extends BaseLink implements ExternalLinkInterface
             return $this->url;
         }
 
-        $html = $this->httpClient->get($this->url);
+        // Do not follow redirects to prevent SSRF bypasses through redirect chains.
+        $html = $this->httpClient->get($this->url, [], false, false);
 
         if (preg_match('/<title>(.*)<\/title>/siU', $html, $matches)) {
             return trim($matches[1]);

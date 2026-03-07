@@ -32,7 +32,7 @@ class WebLinkTest extends Base
         $this->container['httpClient']
             ->expects($this->once())
             ->method('get')
-            ->with($url)
+            ->with($url, array(), false, false)
             ->willReturn($html);
 
         $this->assertEquals($title, $webLink->getTitle());
@@ -50,7 +50,7 @@ class WebLinkTest extends Base
         $this->container['httpClient']
             ->expects($this->once())
             ->method('get')
-            ->with($url)
+            ->with($url, array(), false, false)
             ->willReturn($html);
 
         $this->assertEquals('kanboard.org/something', $webLink->getTitle());
