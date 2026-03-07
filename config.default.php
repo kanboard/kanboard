@@ -295,3 +295,6 @@ define('TRUSTED_PROXY_NETWORKS', '');
 
 // Allow private network access when fetching metadata for external links
 define('EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS', false);
+
+// Allow private network access for webhook notifications
+define('WEBHOOK_ALLOW_PRIVATE_NETWORKS', false);

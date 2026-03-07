@@ -3,7 +3,7 @@
         'name' => 'kanboard/kanboard',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'd865b9297a3216523c4fe442d4314d14962bb239',
+        'reference' => '9bfb6d14d374d78ecbedf814db3fb54876a4cedb',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'kanboard/kanboard' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd865b9297a3216523c4fe442d4314d14962bb239',
+            'reference' => '9bfb6d14d374d78ecbedf814db3fb54876a4cedb',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -188,3 +188,6 @@ defined('TRUSTED_PROXY_NETWORKS') or define('TRUSTED_PROXY_NETWORKS', getenv('TR
 
 // Allow private network access when fetching metadata for external links
 defined('EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS') or define('EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS', getenv('EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS') ? strtolower(getenv('EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS')) === 'true' : false);
+
+// Allow private network access for webhook notifications
+defined('WEBHOOK_ALLOW_PRIVATE_NETWORKS') or define('WEBHOOK_ALLOW_PRIVATE_NETWORKS', getenv('WEBHOOK_ALLOW_PRIVATE_NETWORKS') ? strtolower(getenv('WEBHOOK_ALLOW_PRIVATE_NETWORKS')) === 'true' : false);
