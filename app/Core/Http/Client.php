@@ -59,16 +59,18 @@ class Client extends Base
      * @param  array      $data
      * @param  string[]   $headers
      * @param  bool       $raiseForErrors
+     * @param  bool       $followRedirects
      * @return string
      */
-    public function postJson($url, array $data, array $headers = [], $raiseForErrors = false)
+    public function postJson($url, array $data, array $headers = [], $raiseForErrors = false, $followRedirects = true)
     {
         return $this->doRequest(
             'POST',
             $url,
             json_encode($data),
             array_merge(['Content-type: application/json'], $headers),
-            $raiseForErrors
+            $raiseForErrors,
+            $followRedirects
         );
     }
 
@@ -147,7 +149,6 @@ class Client extends Base
      */
     public function doRequest($method, $url, $content, array $headers, $raiseForErrors = false, $followRedirects = true)
     {
-        $followRedirects = strtoupper($method) === 'GET' ? $followRedirects : true;
         $requestBody = '';
 
         if (! empty($url)) {
