@@ -1,3 +1,23 @@
+Version 1.2.51 (March 7, 2026)
+------------------------------
+
+* test: upgrade to phpunit 12
+* fix(css): Fix accessibility issue of insufficient text to background contrast
+* fix: validate user external ID column
+* fix: restrict invite signup input to expected fields only
+* fix: prevent unsafe deserialization in database session handler (CWE-502)
+* fix: check file attachment ownership before deletion
+* fix: add permission checks in API procedures
+* fix: add followRedirects parameter to HTTP client methods to prevent SSRF bypasses
+* feat: add SSRF protection for webhook notifications
+* build(deps): bump pimple/pimple from 3.6.1 to 3.6.2
+* build(deps): bump docker/setup-qemu-action from 3 to 4
+* build(deps): bump docker/setup-buildx-action from 3 to 4
+* build(deps): bump docker/metadata-action from 5 to 6
+* build(deps): bump docker/login-action from 3 to 4
+* build(deps): bump docker/build-push-action from 6 to 7
+* build(deps): bump actions/upload-artifact from 6 to 7
+
 Version 1.2.50 (February 7, 2026)
 ---------------------------------
 
