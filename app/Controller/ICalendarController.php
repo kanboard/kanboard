@@ -101,6 +101,9 @@ class ICalendarController extends BaseController
 
     protected function getConditionForTasksWithStartAndDueDate($start_time, $end_time, $start_column, $end_column)
     {
+        $start_time = (int) $start_time;
+        $end_time = (int) $end_time;
+
         $start_column = $this->db->escapeIdentifier($start_column);
         $end_column = $this->db->escapeIdentifier($end_column);
 
