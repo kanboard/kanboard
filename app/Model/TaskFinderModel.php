@@ -62,7 +62,7 @@ class TaskFinderModel extends Base
         return $this->getExtendedQuery()
                     ->beginOr()
                     ->eq(TaskModel::TABLE.'.owner_id', $user_id)
-                    ->addCondition(TaskModel::TABLE.".id IN (SELECT task_id FROM ".SubtaskModel::TABLE." WHERE ".SubtaskModel::TABLE.".user_id='$user_id')")
+                    ->inSubquery(TaskModel::TABLE.'.id', $this->db->table(SubtaskModel::TABLE)->columns('task_id')->eq('user_id', $user_id))
                     ->closeOr()
                     ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
                     ->eq(ProjectModel::TABLE.'.is_active', ProjectModel::ACTIVE)
