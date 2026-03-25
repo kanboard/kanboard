@@ -77,7 +77,7 @@ class AuthenticationMiddleware extends Base implements MiddlewareInterface
      */
     private function isAppAuthenticated($username, $password)
     {
-        return $username === 'jsonrpc' && $password === $this->getApiToken();
+        return $username === 'jsonrpc' && hash_equals($this->getApiToken(), $password);
     }
 
     /**
