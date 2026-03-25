@@ -67,8 +67,10 @@ class UserModelTest extends Base
         $userModel = new UserModel($this->container);
         $this->assertNotFalse($userModel->create(array('username' => 'user1', 'token' => 'random')));
         $this->assertNotFalse($userModel->create(array('username' => 'user2', 'token' => '')));
+        $this->assertNotFalse($userModel->create(array('username' => 'user3', 'token' => 'disabled-token', 'is_active' => 0)));
 
         $this->assertNotEmpty($userModel->getByToken('random'));
+        $this->assertEmpty($userModel->getByToken('disabled-token'));
         $this->assertEmpty($userModel->getByToken(''));
     }
 
@@ -383,19 +385,24 @@ class UserModelTest extends Base
     {
         $userModel = new UserModel($this->container);
         $this->assertEquals(2, $userModel->create(array('username' => 'toto')));
+        $this->assertTrue($userModel->enablePublicAccess(2));
 
         $this->assertTrue($userModel->isActive(2));
         $user = $userModel->getById(2);
         $this->assertEquals(1, $user['is_active']);
+        $this->assertNotEmpty($user['token']);
+        $this->assertNotEmpty($userModel->getByToken($user['token']));
 
         $this->assertTrue($userModel->disable(2));
         $user = $userModel->getById(2);
         $this->assertEquals(0, $user['is_active']);
+        $this->assertEmpty($user['token']);
         $this->assertFalse($userModel->isActive(2));
 
         $this->assertTrue($userModel->enable(2));
         $user = $userModel->getById(2);
         $this->assertEquals(1, $user['is_active']);
+        $this->assertEmpty($user['token']);
         $this->assertTrue($userModel->isActive(2));
     }
 
