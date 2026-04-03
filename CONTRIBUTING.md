@@ -128,10 +128,6 @@ Before submitting a pull request, please:
 
 Refer to [Kanboard's coding standards](https://docs.kanboard.org/v1/dev/coding_standards/) for more details.
 
-## Security
-
-Follow [Kanboard's security guidelines](SECURITY.md) when reporting or fixing security issues.
-
 ## Resources
 
 - **Official Website**: <https://kanboard.org/>
