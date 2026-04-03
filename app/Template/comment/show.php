@@ -2,11 +2,17 @@
 
 use Kanboard\Core\Security\Role;
 
-if ($this->user->getRole() === Role::APP_MANAGER && $comment['visibility'] === Role::APP_ADMIN) {
+$userRole = $this->user->getRole();
+
+if ($userRole === '' && $comment['visibility'] !== Role::APP_USER) {
     return;
 }
 
-if ($this->user->getRole() === Role::APP_USER && $comment['visibility'] !== Role::APP_USER) {
+if ($userRole === Role::APP_MANAGER && $comment['visibility'] === Role::APP_ADMIN) {
+    return;
+}
+
+if ($userRole === Role::APP_USER && $comment['visibility'] !== Role::APP_USER) {
     return;
 }
 

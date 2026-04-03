@@ -147,6 +147,7 @@ class CommentModel extends Base
      */
     public function create(array $values)
     {
+        $values = $this->clampVisibility($values);
         $values['date_creation'] = time();
         $values['date_modification'] = time();
         $comment_id = $this->db->table(self::TABLE)->persist($values);
@@ -177,6 +178,33 @@ class CommentModel extends Base
         }
 
         return $result;
+    }
+
+    /**
+     * Clamp the visibility field so it never exceeds the current user's role
+     *
+     * @access protected
+     * @param  array $values
+     * @return array
+     */
+    protected function clampVisibility(array $values)
+    {
+        if (! $this->userSession->isLogged()) {
+            return $values;
+        }
+
+        $visibility = isset($values['visibility']) ? $values['visibility'] : Role::APP_USER;
+        $userRole = $this->userSession->getRole();
+
+        if ($userRole === Role::APP_MANAGER && $visibility === Role::APP_ADMIN) {
+            $values['visibility'] = Role::APP_MANAGER;
+        }
+
+        if ($userRole === Role::APP_USER && $visibility !== Role::APP_USER) {
+            $values['visibility'] = Role::APP_USER;
+        }
+
+        return $values;
     }
 
     /**

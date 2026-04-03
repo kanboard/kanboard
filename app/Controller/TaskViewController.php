@@ -4,6 +4,7 @@ namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Controller\PageNotFoundException;
+use Kanboard\Core\Security\Role;
 use Kanboard\Model\UserMetadataModel;
 
 /**
@@ -39,7 +40,9 @@ class TaskViewController extends BaseController
 
         $this->response->html($this->helper->layout->app('task/public', array(
             'project' => $project,
-            'comments' => $this->commentModel->getAll($task['id']),
+            'comments' => array_filter($this->commentModel->getAll($task['id']), function ($comment) {
+                return $comment['visibility'] === Role::APP_USER;
+            }),
             'subtasks' => $this->subtaskModel->getAll($task['id']),
             'links' => $this->taskLinkModel->getAllGroupedByLabel($task['id']),
             'task' => $task,
