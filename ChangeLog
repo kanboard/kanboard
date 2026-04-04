@@ -1,3 +1,12 @@
+Version 1.2.52 (April 4, 2026)
+------------------------------
+
+* fix: revoke public tokens for inactive users
+* fix: use timing-safe comparison for token validation
+* fix: validate task ownership before applying property changes
+* fix: enforce visibility controls for public and unprivileged access
+* fix: use parameterized queries in task finder and iCal
+
 Version 1.2.51 (March 7, 2026)
 ------------------------------
 
