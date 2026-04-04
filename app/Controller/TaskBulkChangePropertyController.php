@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 class TaskBulkChangePropertyController extends BaseController
 {
     public function show(array $values = [], array $errors = [])
@@ -29,6 +31,10 @@ class TaskBulkChangePropertyController extends BaseController
         $taskIDs = explode(',', $values['task_ids']);
 
         foreach ($taskIDs as $taskID) {
+            if ($this->taskFinderModel->getProjectId($taskID) != $project['id']) {
+                throw new AccessForbiddenException();
+            }
+
             $changes = [];
 
             if (isset($values['change_color']) && $values['change_color'] == 1) {
