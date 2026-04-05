@@ -74,6 +74,68 @@
         KB.trigger('modal.afterRender');
     }
 
+    /**
+     * Auto-dismiss the inline flash notification rendered by comment_list/show.php.
+     *
+     * After a comment is added, edited, or removed the server returns the comment
+     * list HTML which may contain a <div id="kb-inline-flash"> element. This
+     * function fades it out after 3 seconds so the modal is left showing only the
+     * clean comment list.
+     *
+     * The CSS transition is applied inline so no stylesheet change is needed.
+     */
+    function dismissInlineFlash() {
+        var flash = document.getElementById('kb-inline-flash');
+        if (!flash) {
+            return;
+        }
+
+        setTimeout(function () {
+            flash.style.transition  = 'opacity 0.5s ease';
+            flash.style.opacity     = '0';
+
+            setTimeout(function () {
+                if (flash.parentNode) {
+                    flash.parentNode.removeChild(flash);
+                }
+            }, 500); // remove from DOM after the 0.5s fade completes
+        }, 3000);   // start fading 3 seconds after the notification appears
+    }
+
+    /**
+     * Silently refresh the board behind the open modal.
+     *
+     * Uses the exact same mechanism as BoardPolling.check():
+     * $.ajax with data-check-url on #board, routed through
+     * BoardDragAndDrop.refresh(data) on HTTP 200.
+     *
+     * timestamp=0 ensures the server always returns fresh board HTML
+     * (comment operations do not update the project-level modification
+     * timestamp that BoardAjaxController::check() compares against).
+     */
+    function refreshBoardSilently() {
+        if (!document.getElementById('board')) {
+            return;
+        }
+
+        var checkUrl = $('#board').data('check-url');
+        if (!checkUrl) {
+            return;
+        }
+
+        checkUrl = checkUrl.replace(/([?&]timestamp=)\d+/, '$10');
+
+        $.ajax({
+            cache: false,
+            url: checkUrl,
+            success: function (data) {
+                if (data) {
+                    _KB.get('BoardDragAndDrop').refresh(data);
+                }
+            }
+        });
+    }
+
     function replace(html) {
         var contentElement = KB.find('#modal-content');
 
@@ -85,6 +147,12 @@
             );
 
             afterRendering();
+
+            // Show then auto-fade the inline operation notification.
+            dismissInlineFlash();
+
+            // Silently refresh the board task card (comment count / icon).
+            refreshBoardSilently();
         }
     }
 
