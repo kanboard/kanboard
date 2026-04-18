@@ -132,6 +132,10 @@ class TaskDuplicationController extends BaseController
         if (! empty($projects_list)) {
             $dst_project_id = $this->request->getIntegerParam('dst_project_id', key($projects_list));
 
+            if (! isset($projects_list[$dst_project_id])) {
+                $dst_project_id = key($projects_list);
+            }
+
             $swimlanes_list = $this->swimlaneModel->getList($dst_project_id, false, true);
             $columns_list = $this->columnModel->getList($dst_project_id);
             $categories_list = $this->categoryModel->getList($dst_project_id);
