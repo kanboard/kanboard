@@ -22,12 +22,22 @@ class SubtaskTimeTrackingProcedure extends BaseProcedure
     public function setSubtaskStartTime($subtask_id, $user_id)
     {
         SubtaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'setSubtaskStartTime', $subtask_id);
+
+        if ($this->userSession->isLogged() && $user_id != $this->userSession->getId()) {
+            return false;
+        }
+
         return $this->subtaskTimeTrackingModel->logStartTime($subtask_id, $user_id);
     }
 
     public function setSubtaskEndTime($subtask_id, $user_id)
     {
         SubtaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'setSubtaskEndTime', $subtask_id);
+
+        if ($this->userSession->isLogged() && $user_id != $this->userSession->getId()) {
+            return false;
+        }
+
         return $this->subtaskTimeTrackingModel->logEndTime($subtask_id, $user_id);
     }
 
