@@ -31,6 +31,7 @@ use Kanboard\Filter\TaskMovedDateRangeFilter;
 use Kanboard\Filter\TaskPriorityFilter;
 use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Filter\TaskReferenceFilter;
+use Kanboard\Filter\TaskSearchFilter;
 use Kanboard\Filter\TaskScoreFilter;
 use Kanboard\Filter\TaskStatusFilter;
 use Kanboard\Filter\TaskSubtaskAssigneeFilter;
@@ -220,7 +221,12 @@ class FilterProvider implements ServiceProviderInterface
                     TaskTagFilter::getInstance()
                     ->setDatabase($c['db'])
                 )
-                ->withFilter(new TaskTitleFilter(), true)
+                ->withFilter(
+                    TaskSearchFilter::getInstance()
+                    ->setDatabase($c['db']),
+                    $c['configModel']->get('task_search_all_fields', 0) == 1
+                )
+                ->withFilter(new TaskTitleFilter(), $c['configModel']->get('task_search_all_fields', 0) != 1)
             ;
 
             return $builder;
