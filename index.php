@@ -10,3 +10,4 @@ try {
 } catch (Exception $e) {
     echo htmlspecialchars('Internal Error: '.$e->getMessage(), ENT_QUOTES, 'UTF-8', false);
 }
+# test
