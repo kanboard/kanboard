@@ -29,7 +29,6 @@
 
     <fieldset>
         <?= $this->form->checkbox('notifications_enabled', t('Enable notifications by default for all new users'), 1, isset($values['notifications_enabled']) && $values['notifications_enabled'] == 1) ?>
-        <?= $this->form->checkbox('task_search_all_fields', t('Search task title, description, and comments by default'), 1, isset($values['task_search_all_fields']) && $values['task_search_all_fields'] == 1) ?>
     </fieldset>
 
     <fieldset>

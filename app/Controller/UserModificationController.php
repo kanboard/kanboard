@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Model\UserMetadataModel;
+
 /**
  * Class UserModificationController
  *
@@ -26,6 +28,7 @@ class UserModificationController extends BaseController
         if (empty($values)) {
             $values = $user;
             unset($values['password']);
+            $values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS] = $this->userMetadataModel->get($user['id'], UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS, 0);
         }
 
         return $this->response->html($this->helper->layout->user('user_modification/show', array(
@@ -46,6 +49,9 @@ class UserModificationController extends BaseController
     {
         $user = $this->getUser();
         $values = $this->request->getValues();
+        $values += array(
+            UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS => 0,
+        );
 
         if (! $this->userSession->isAdmin()) {
             $values = array(
@@ -57,13 +63,16 @@ class UserModificationController extends BaseController
                 'timezone' => isset($values['timezone']) ? $values['timezone'] : '',
                 'language' => isset($values['language']) ? $values['language'] : '',
                 'filter' => isset($values['filter']) ? $values['filter'] : '',
+                UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS => isset($values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS]) ? $values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS] : 0,
             );
         }
 
         list($valid, $errors) = $this->userValidator->validateModification($values);
 
         if ($valid) {
-            if ($this->userModel->update($values)) {
+            if ($this->userModel->update($values) && $this->userMetadataModel->save($user['id'], array(
+                UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS => $values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS],
+            ))) {
                 $this->flash->success(t('User updated successfully.'));
                 $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])), true);
                 return;

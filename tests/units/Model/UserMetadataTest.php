@@ -36,4 +36,17 @@ class UserMetadataTest extends Base
 
         $this->assertEquals(array('key2' => 'value2'), $m->getAll(2));
     }
+
+    public function testSaveTaskSearchAllFieldsPreference()
+    {
+        $m = new UserMetadataModel($this->container);
+
+        $this->assertEquals(0, $m->get(1, UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS, 0));
+
+        $this->assertTrue($m->save(1, array(UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS => '1')));
+        $this->assertEquals(1, $m->get(1, UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS, 0));
+
+        $this->assertTrue($m->save(1, array(UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS => '0')));
+        $this->assertEquals(0, $m->get(1, UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS, 0));
+    }
 }

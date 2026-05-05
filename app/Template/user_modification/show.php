@@ -30,6 +30,8 @@
 
         <?= $this->form->label(t('Filter'), 'filter') ?>
         <?= $this->form->text('filter', $values, $errors, array($this->user->hasAccess('UserModificationController', 'show/edit_filter') ? '' : 'readonly')) ?>
+
+        <?= $this->form->checkbox('task.search.all.fields', t('Search task title, description, and comments by default'), 1, isset($values['task.search.all.fields']) && $values['task.search.all.fields'] == 1) ?>
     </fieldset>
 
     <?php if ($this->user->isAdmin()): ?>

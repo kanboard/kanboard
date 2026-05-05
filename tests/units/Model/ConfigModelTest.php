@@ -78,7 +78,6 @@ class ConfigModelTest extends Base
         $this->assertEquals(0, $configModel->getOption('integration_gravatar'));
         $this->assertEquals(1, $configModel->getOption('cfd_include_closed_tasks'));
         $this->assertEquals(1, $configModel->getOption('password_reset'));
-        $this->assertEquals(0, $configModel->getOption('task_search_all_fields', 0));
 
         $this->assertEquals(1, $configModel->getOption('subtask_time_tracking'));
         $this->assertEquals(0, $configModel->getOption('subtask_restriction'));
@@ -99,17 +98,6 @@ class ConfigModelTest extends Base
         $this->assertEquals('', $configModel->getOption('board_columns'));
         $this->assertEquals('test', $configModel->getOption('board_columns', 'test'));
         $this->assertEquals(0, $configModel->getOption('board_columns', 0));
-    }
-
-    public function testSaveTaskSearchAllFields()
-    {
-        $configModel = new ConfigModel($this->container);
-
-        $this->assertTrue($configModel->save(array('task_search_all_fields' => '1')));
-        $this->assertEquals(1, $configModel->getOption('task_search_all_fields'));
-
-        $this->assertTrue($configModel->save(array('task_search_all_fields' => '0')));
-        $this->assertEquals(0, $configModel->getOption('task_search_all_fields'));
     }
 
     public function testGetWithCaching()
