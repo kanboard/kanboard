@@ -49,9 +49,8 @@ class UserModificationController extends BaseController
     {
         $user = $this->getUser();
         $values = $this->request->getValues();
-        $values += array(
-            UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS => 0,
-        );
+        $taskSearchAllFields = isset($values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS]) ? $values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS] : 0;
+        unset($values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS]);
 
         if (! $this->userSession->isAdmin()) {
             $values = array(
@@ -63,7 +62,6 @@ class UserModificationController extends BaseController
                 'timezone' => isset($values['timezone']) ? $values['timezone'] : '',
                 'language' => isset($values['language']) ? $values['language'] : '',
                 'filter' => isset($values['filter']) ? $values['filter'] : '',
-                UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS => isset($values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS]) ? $values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS] : 0,
             );
         }
 
@@ -71,7 +69,7 @@ class UserModificationController extends BaseController
 
         if ($valid) {
             if ($this->userModel->update($values) && $this->userMetadataModel->save($user['id'], array(
-                UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS => $values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS],
+                UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS => $taskSearchAllFields,
             ))) {
                 $this->flash->success(t('User updated successfully.'));
                 $this->response->redirect($this->helper->url->to('UserViewController', 'show', array('user_id' => $user['id'])), true);
@@ -81,6 +79,7 @@ class UserModificationController extends BaseController
             }
         }
 
+        $values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS] = $taskSearchAllFields;
         $this->show($values, $errors);
     }
 }
