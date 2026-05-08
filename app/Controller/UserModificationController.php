@@ -49,8 +49,10 @@ class UserModificationController extends BaseController
     {
         $user = $this->getUser();
         $values = $this->request->getValues();
-        $taskSearchAllFields = isset($values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS]) ? $values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS] : 0;
+        $taskSearchAllFieldsFormKey = str_replace('.', '_', UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS);
+        $taskSearchAllFields = isset($values[$taskSearchAllFieldsFormKey]) ? $values[$taskSearchAllFieldsFormKey] : 0;
         unset($values[UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS]);
+        unset($values[$taskSearchAllFieldsFormKey]);
 
         if (! $this->userSession->isAdmin()) {
             $values = array(

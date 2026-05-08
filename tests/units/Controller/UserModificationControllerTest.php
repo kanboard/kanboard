@@ -30,7 +30,7 @@ class UserModificationControllerTest extends Base
                 'timezone' => 'UTC',
                 'language' => 'en_US',
                 'filter' => 'status:open',
-                UserMetadataModel::KEY_TASK_SEARCH_ALL_FIELDS => '1',
+                'task_search_all_fields' => '1',
             ),
             array(),
             array()
