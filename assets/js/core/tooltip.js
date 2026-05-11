@@ -61,10 +61,11 @@ KB.on('dom.ready', function() {
         containerElement.addEventListener("mouseenter", mouseOnTooltip, false);
         containerElement.mouseOnTooltip = false;
 
-        var elementRect = element.getBoundingClientRect();
-        var top = elementRect.top + window.scrollY + elementRect.height;
-        containerElement.style.top = top - 20 + "px";
+        // Elements don't have height until rendered by DOM, so add as hidden so it doesn't flicker
+        containerElement.style.visibility = false;
+        document.body.appendChild(containerElement);
 
+        var elementRect = element.getBoundingClientRect();
         if (elementRect.left > (window.innerWidth - 600)) {
             var right = window.innerWidth - elementRect.right - window.scrollX;
             containerElement.style.right = right - 25 + "px";
@@ -73,7 +74,23 @@ KB.on('dom.ready', function() {
             containerElement.style.left = left - 25 + "px";
         }
 
-        document.body.appendChild(containerElement);
+        // Now we can determine the actual height and open upward if needed
+        var containerRect = containerElement.getBoundingClientRect();
+        var top = elementRect.top + window.scrollY;
+
+        // if the calculated `top` value (relative to entire page height)
+        //      + the popup container's height
+        //      - the viewport's page top (which accounts for scroll position)
+        // is greater than the viewport height, we should open upward
+        if (top + containerRect.height - window.scrollY > window.innerHeight) {
+            top -= containerRect.height;
+            containerElement.style.top = top + 20 + "px";
+        } else {
+            containerElement.style.top = top - 20 + "px";
+        }
+
+        // And, finally, show it:
+        containerElement.style.visibility = true;
 
         document.body.onclick = function(event) {
             if (! containerElement.contains(event.target)) {
