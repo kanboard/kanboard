@@ -62,7 +62,7 @@ KB.on('dom.ready', function() {
         containerElement.mouseOnTooltip = false;
 
         // Elements don't have height until rendered by DOM, so add as hidden so it doesn't flicker
-        containerElement.style.visibility = false;
+        containerElement.style.visibility = "hidden";
         document.body.appendChild(containerElement);
 
         var elementRect = element.getBoundingClientRect();
@@ -90,7 +90,7 @@ KB.on('dom.ready', function() {
         }
 
         // And, finally, show it:
-        containerElement.style.visibility = true;
+        containerElement.style.visibility = "visible";
 
         document.body.onclick = function(event) {
             if (! containerElement.contains(event.target)) {
