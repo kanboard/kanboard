@@ -62,6 +62,7 @@ class AuthValidator extends BaseValidator
         if ($this->userLockingModel->isLocked($values['username'])) {
             $result = false;
             $errors['login'] = t('Your account is locked for %d minutes', BRUTEFORCE_LOCKDOWN_DURATION);
+            $this->logger->error('Kanboard: Failed login from: ' . $_SERVER['REMOTE_ADDR'] . ' username: ' . $values['username']);
             $this->logger->error('Account locked: '.$values['username']);
         }
 
@@ -83,6 +84,7 @@ class AuthValidator extends BaseValidator
         if (! $this->authenticationManager->passwordAuthentication($values['username'], $values['password'])) {
             $result = false;
             $errors['login'] = t('Bad username or password');
+            $this->logger->error('Kanboard: Failed login from: ' . $_SERVER['REMOTE_ADDR'] . ' username: ' . $values['username']);
         }
 
         return array($result, $errors);
