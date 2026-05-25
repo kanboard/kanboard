@@ -24,8 +24,6 @@ class ProjectViewController extends BaseController
             'project' => $project,
             'columns' => $columns,
             'title'   => $project['name'],
-            'values'  => $project,
-            'errors'  => array(),
         )));
     }
 
