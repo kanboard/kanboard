@@ -102,6 +102,7 @@ class UserInviteController extends BaseController
             }
 
             if ($this->configModel->get('notifications_enabled', 0) == 1) {
+                $this->userNotificationModel->enableNotification($user_id);
                 $this->userNotificationTypeModel->saveSelectedTypes($user_id, [MailNotification::TYPE, WebNotification::TYPE]);
             } elseif (! empty($values['notifications_enabled'])) {
                 $this->userNotificationTypeModel->saveSelectedTypes($user_id, [MailNotification::TYPE]);

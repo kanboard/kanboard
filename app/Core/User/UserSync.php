@@ -74,6 +74,7 @@ class UserSync extends Base
         }
 
         if ($this->configModel->get('notifications_enabled', 0) == 1) {
+            $this->userNotificationModel->enableNotification($userId);
             $this->userNotificationTypeModel->saveSelectedTypes($userId, [MailNotification::TYPE, WebNotification::TYPE]);
         }
 
