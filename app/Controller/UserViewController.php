@@ -128,7 +128,7 @@ class UserViewController extends BaseController
     {
         $this->checkCSRFParam();
         $user = $this->getUser();
-        $this->rememberMeSessionModel->remove($this->request->getIntegerParam('id'));
+        $this->rememberMeSessionModel->remove($this->request->getIntegerParam('id'), $user['id']);
 
         if ($this->request->isAjax()) {
             $this->sessions();

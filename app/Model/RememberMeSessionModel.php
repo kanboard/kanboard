@@ -104,13 +104,15 @@ class RememberMeSessionModel extends Base
      *
      * @access public
      * @param  integer  $session_id   Session id
+     * @param  integer  $user_id      User id
      * @return mixed
      */
-    public function remove($session_id)
+    public function remove($session_id, $user_id)
     {
         return $this->db
             ->table(self::TABLE)
             ->eq('id', $session_id)
+            ->eq('user_id', $user_id)
             ->remove();
     }
 

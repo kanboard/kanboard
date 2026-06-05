@@ -79,7 +79,7 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
             $session = $this->rememberMeSessionModel->find($credentials['token'], $credentials['sequence']);
 
             if (! empty($session)) {
-                $this->rememberMeSessionModel->remove($session['id']);
+                $this->rememberMeSessionModel->remove($session['id'], $session['user_id']);
             }
 
             $this->rememberMeCookie->remove();
