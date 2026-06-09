@@ -25,7 +25,7 @@
                     <?php endif ?>
                 </td>
                 <td>
-                    <?= $link['project_name'] ?>
+                    <?= $this->text->e($link['project_name']) ?>
                 </td>
             </tr>
         <?php endforeach ?>
