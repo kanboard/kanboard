@@ -1,4 +1,4 @@
-FROM alpine:3.23
+FROM alpine:3.24
 
 LABEL org.opencontainers.image.source="https://github.com/kanboard/kanboard" \
     org.opencontainers.image.title="Kanboard" \
