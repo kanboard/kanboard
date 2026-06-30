@@ -31,7 +31,7 @@ class TextHelperTest extends Base
         $this->assertEquals('<p>Test</p>', $textHelper->markdown('Test'));
 
         $this->assertEquals(
-            '<a href="?controller=TaskViewController&amp;action=show&amp;task_id=123">#123</a>',
+            '<p><a href="?controller=TaskViewController&amp;action=show&amp;task_id=123">#123</a></p>',
             $textHelper->markdown('#123')
         );
 
@@ -67,6 +67,11 @@ class TextHelperTest extends Base
             $textHelper->markdown(
                 '[item #123 is here](http://localhost)'
             )
+        );
+
+        $this->assertEquals(
+            '<p><a href="?controller=TaskViewController&amp;action=show&amp;task_id=123">#123</a> extra text not consumed</p>',
+            $textHelper->markdown('#123 extra text not consumed')
         );
     }
 

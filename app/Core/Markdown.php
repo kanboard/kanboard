@@ -49,19 +49,8 @@ class Markdown extends Parsedown
 
     protected function blockCustomHeader($Line)
     {
-        if (preg_match('!#(\d+)!i', $Line['text'], $matches)) {
-            $link = $this->buildTaskLink($matches[1]);
-
-            if (! empty($link)) {
-                return [
-                    'extent' => strlen($matches[0]),
-                    'element' => [
-                        'name' => 'a',
-                        'text' => $matches[0],
-                        'attributes' => ['href' => $link],
-                    ],
-                ];
-            }
+        if (preg_match('!^#\d+!i', $Line['text'])) {
+            return null;
         }
 
         return $this->blockHeader($Line);
