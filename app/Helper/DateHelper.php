@@ -109,7 +109,7 @@ class DateHelper extends Base
         if ($diff < 900) {
             return t('<15m');
         }
-        if ($diff < 1200) {
+        if ($diff < 1800) {
             return t('<30m');
         } elseif ($diff < 3600) {
             return t('<1h');
