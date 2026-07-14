@@ -30,6 +30,10 @@ class BoardAjaxController extends BaseController
 
         $values = $this->request->getJson();
 
+        if ($this->taskFinderModel->getProjectId($values['task_id']) !== $project_id) {
+            throw new AccessForbiddenException(e("You don't have the permission to move this task"));
+        }
+
         if (! $this->helper->projectRole->canMoveTask($project_id, $values['src_column_id'], $values['dst_column_id'])) {
             throw new AccessForbiddenException(e("You don't have the permission to move this task"));
         }
