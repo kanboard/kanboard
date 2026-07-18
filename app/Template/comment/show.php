@@ -69,7 +69,7 @@ if ($userRole === Role::APP_USER && $comment['visibility'] !== Role::APP_USER) {
             <?= $this->text->markdown($comment['comment'], isset($is_public) && $is_public) ?>
         </div>
         <template id="comment-reply-content-<?= $comment['id'] ?>">
-            <textarea><?= $this->text->reply($comment['name'] ?: $comment['username'], $comment['comment']) ?></textarea>
+            <textarea><?= $this->text->e($this->text->reply($comment['name'] ?: $comment['username'], $comment['comment'])) ?></textarea>
         </template>
     </div>
 </div>

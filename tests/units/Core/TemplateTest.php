@@ -3,6 +3,7 @@
 namespace KanboardTests\units\Core;
 
 use KanboardTests\units\Base;
+use Kanboard\Core\Security\Role;
 use Kanboard\Core\Template;
 
 class TemplateTest extends Base
@@ -44,6 +45,41 @@ class TemplateTest extends Base
         $this->assertStringEndsWith(
             implode(DIRECTORY_SEPARATOR, array('app', 'Core', '..', 'Template', 'd.php')),
             $template->getTemplateFile('d')
+        );
+    }
+
+    public function testCommentReplyEscapesTemplateClosingTags()
+    {
+        $_SESSION['user'] = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+        );
+
+        $html = $this->container['template']->render('comment/show', array(
+            'comment' => array(
+                'id' => 1,
+                'user_id' => 1,
+                'username' => 'alice',
+                'name' => 'Alice',
+                'email' => '',
+                'avatar_path' => '',
+                'date_creation' => 0,
+                'date_modification' => 0,
+                'visibility' => Role::APP_USER,
+                'comment' => '</textarea></template><base href="http://127.0.0.1:8899/">',
+            ),
+            'task' => array('id' => 1),
+            'editable' => false,
+            'hide_actions' => true,
+        ));
+
+        $this->assertStringNotContainsString(
+            '<base href="http://127.0.0.1:8899/">',
+            $html
+        );
+        $this->assertStringContainsString(
+            '&lt;/textarea&gt;&lt;/template&gt;&lt;base href=&quot;http://127.0.0.1:8899/&quot;&gt;',
+            $html
         );
     }
 }
