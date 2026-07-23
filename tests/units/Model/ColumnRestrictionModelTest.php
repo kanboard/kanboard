@@ -29,8 +29,27 @@ class ColumnRestrictionModelTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $projectRoleModel->create(1, 'my-custom-role'));
         $this->assertEquals(1, $projectRoleRestrictionModel->create(1, 1, 2, ColumnRestrictionModel::RULE_ALLOW_TASK_OPEN_CLOSE));
-        $this->assertTrue($projectRoleRestrictionModel->remove(1));
-        $this->assertFalse($projectRoleRestrictionModel->remove(1));
+        $this->assertTrue($projectRoleRestrictionModel->remove(1, 1));
+        $this->assertFalse($projectRoleRestrictionModel->remove(1, 1));
+    }
+
+    public function testRemoveFromAnotherProject()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $projectRoleModel = new ProjectRoleModel($this->container);
+        $columnRestrictionModel = new ColumnRestrictionModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project A')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project B')));
+        $this->assertEquals(1, $projectRoleModel->create(1, 'my-custom-role'));
+        $this->assertEquals(1, $columnRestrictionModel->create(1, 1, 2, ColumnRestrictionModel::RULE_ALLOW_TASK_CREATION));
+
+        // A manager of project 2 must not be able to remove a restriction owned by project 1
+        $this->assertFalse($columnRestrictionModel->remove(2, 1));
+        $this->assertNotEmpty($columnRestrictionModel->getById(1, 1));
+
+        // The legitimate project can still remove it
+        $this->assertTrue($columnRestrictionModel->remove(1, 1));
     }
 
     public function testGetById()

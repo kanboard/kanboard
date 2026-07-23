@@ -116,12 +116,16 @@ class ColumnMoveRestrictionModel extends Base
     /**
      * Remove a permission
      *
+     * @param  int $project_id
      * @param  int $restriction_id
      * @return bool
      */
-    public function remove($restriction_id)
+    public function remove($project_id, $restriction_id)
     {
-        return $this->db->table(self::TABLE)->eq('restriction_id', $restriction_id)->remove();
+        return $this->db->table(self::TABLE)
+            ->eq('project_id', $project_id)
+            ->eq('restriction_id', $restriction_id)
+            ->remove();
     }
 
     /**

@@ -126,12 +126,16 @@ class ProjectRoleRestrictionModel extends Base
     /**
      * Remove a restriction
      *
+     * @param  integer $project_id
      * @param  integer $restriction_id
      * @return bool
      */
-    public function remove($restriction_id)
+    public function remove($project_id, $restriction_id)
     {
-        return $this->db->table(self::TABLE)->eq('restriction_id', $restriction_id)->remove();
+        return $this->db->table(self::TABLE)
+            ->eq('project_id', $project_id)
+            ->eq('restriction_id', $restriction_id)
+            ->remove();
     }
 
     /**

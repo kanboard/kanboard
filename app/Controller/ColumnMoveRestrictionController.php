@@ -92,7 +92,7 @@ class ColumnMoveRestrictionController extends BaseController
         $this->checkCSRFParam();
         $restriction_id = $this->request->getIntegerParam('restriction_id');
 
-        if ($this->columnMoveRestrictionModel->remove($restriction_id)) {
+        if ($this->columnMoveRestrictionModel->remove($project['id'], $restriction_id)) {
             $this->flash->success(t('Column restriction removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this restriction.'));

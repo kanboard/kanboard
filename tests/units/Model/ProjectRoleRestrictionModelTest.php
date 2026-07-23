@@ -29,8 +29,27 @@ class ProjectRoleRestrictionModelTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $projectRoleModel->create(1, 'my-custom-role'));
         $this->assertEquals(1, $projectRoleRestrictionModel->create(1, 1, ProjectRoleRestrictionModel::RULE_TASK_CREATION));
-        $this->assertTrue($projectRoleRestrictionModel->remove(1));
-        $this->assertFalse($projectRoleRestrictionModel->remove(1));
+        $this->assertTrue($projectRoleRestrictionModel->remove(1, 1));
+        $this->assertFalse($projectRoleRestrictionModel->remove(1, 1));
+    }
+
+    public function testRemoveFromAnotherProject()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $projectRoleModel = new ProjectRoleModel($this->container);
+        $projectRoleRestrictionModel = new ProjectRoleRestrictionModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project A')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project B')));
+        $this->assertEquals(1, $projectRoleModel->create(1, 'my-custom-role'));
+        $this->assertEquals(1, $projectRoleRestrictionModel->create(1, 1, ProjectRoleRestrictionModel::RULE_TASK_CREATION));
+
+        // A manager of project 2 must not be able to remove a restriction owned by project 1
+        $this->assertFalse($projectRoleRestrictionModel->remove(2, 1));
+        $this->assertNotEmpty($projectRoleRestrictionModel->getById(1, 1));
+
+        // The legitimate project can still remove it
+        $this->assertTrue($projectRoleRestrictionModel->remove(1, 1));
     }
 
     public function testGetById()
