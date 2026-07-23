@@ -30,7 +30,26 @@ class ColumnMoveRestrictionModelTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
         $this->assertEquals(1, $projectRoleModel->create(1, 'Custom Role'));
         $this->assertEquals(1, $columnMoveRestrictionModel->create(1, 1, 2, 3));
-        $this->assertTrue($columnMoveRestrictionModel->remove(1));
+        $this->assertTrue($columnMoveRestrictionModel->remove(1, 1));
+    }
+
+    public function testRemoveFromAnotherProject()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $projectRoleModel = new ProjectRoleModel($this->container);
+        $columnMoveRestrictionModel = new ColumnMoveRestrictionModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project A')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project B')));
+        $this->assertEquals(1, $projectRoleModel->create(1, 'Custom Role'));
+        $this->assertEquals(1, $columnMoveRestrictionModel->create(1, 1, 2, 3));
+
+        // A manager of project 2 must not be able to remove a restriction owned by project 1
+        $this->assertFalse($columnMoveRestrictionModel->remove(2, 1));
+        $this->assertNotEmpty($columnMoveRestrictionModel->getById(1, 1));
+
+        // The legitimate project can still remove it
+        $this->assertTrue($columnMoveRestrictionModel->remove(1, 1));
     }
 
     public function testGetById()

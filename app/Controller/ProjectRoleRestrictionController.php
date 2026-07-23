@@ -85,7 +85,7 @@ class ProjectRoleRestrictionController extends BaseController
         $this->checkCSRFParam();
         $restriction_id = $this->request->getIntegerParam('restriction_id');
 
-        if ($this->projectRoleRestrictionModel->remove($restriction_id)) {
+        if ($this->projectRoleRestrictionModel->remove($project['id'], $restriction_id)) {
             $this->flash->success(t('Project restriction removed successfully.'));
         } else {
             $this->flash->failure(t('Unable to remove this restriction.'));
