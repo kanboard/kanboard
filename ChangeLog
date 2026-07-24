@@ -1,3 +1,31 @@
+Version 1.2.53 (July 24, 2026)
+------------------------------
+
+* fix(user): scope remember me session removal to its owner
+* fix(task): validate dst_project_id in task duplication form
+* fix(security): scope restriction removal to authorized project
+* fix(security): escape comment reply text in template textarea
+* fix(search): save task search preference as metadata
+* fix(search): persist task search preference from form
+* fix(markdown): stop consuming text after a "#id" task link at line start
+* fix(locale): Update incorrect character in zh_TW locale
+* fix(date): correct age helper "<30m" threshold to 30 minutes
+* fix(board): verify task belongs to project before moving
+* fix(board): escape project name in task links tooltip
+* fix: validate user_id in subtask time tracking write methods
+* fix: Updated Project View to suppress warnings related to hook call
+* fix: escape notification title in web notification template
+* fix: CSS visibilty value was incorrect
+* fix: Adjusted tooltip max height and position
+* feat(search): scope all-field search preference per user
+* feat(search): add configurable all-field task search
+* ci(dependabot): group updates and reduce check frequency
+* ci: pin GitHub Actions to commit SHA
+* ci: add workflow to close stale pull requests
+* chore(assets): upgrade select2 to 4.0.13
+* chore(tests): bump phpunit to 12.5.23 and remove stray parsedown composer.json
+* chore(deps): update GitHub Actions dependencies
+
 Version 1.2.52 (April 4, 2026)
 ------------------------------
 
