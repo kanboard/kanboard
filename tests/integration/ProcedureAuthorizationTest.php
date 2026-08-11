@@ -87,7 +87,8 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
 
         $this->assertNotFalse($projectId);
 
-        $actionId = $this->manager->createAction($projectId, 'task.move.column', '\Kanboard\Action\TaskCloseColumn', array('column_id' => 1));
+        $columns = $this->manager->getColumns($projectId);
+        $actionId = $this->manager->createAction($projectId, 'task.move.column', '\Kanboard\Action\TaskCloseColumn', array('column_id' => $columns[0]['id']));
         $this->assertNotFalse($actionId);
 
         $this->expectException('JsonRPC\Exception\AccessDeniedException');
@@ -103,7 +104,8 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
 
         $this->assertNotFalse($projectId);
 
-        $actionId = $this->manager->createAction($projectId, 'task.move.column', '\Kanboard\Action\TaskCloseColumn', array('column_id' => 1));
+        $columns = $this->manager->getColumns($projectId);
+        $actionId = $this->manager->createAction($projectId, 'task.move.column', '\Kanboard\Action\TaskCloseColumn', array('column_id' => $columns[0]['id']));
         $this->assertNotFalse($actionId);
 
         $this->assertTrue($this->manager->addProjectUser($projectId, $this->userUserId, 'project-member'));
@@ -121,7 +123,8 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
 
         $this->assertNotFalse($projectId);
 
-        $actionId = $this->manager->createAction($projectId, 'task.move.column', '\Kanboard\Action\TaskCloseColumn', array('column_id' => 1));
+        $columns = $this->manager->getColumns($projectId);
+        $actionId = $this->manager->createAction($projectId, 'task.move.column', '\Kanboard\Action\TaskCloseColumn', array('column_id' => $columns[0]['id']));
         $this->assertNotFalse($actionId);
 
         $this->assertTrue($this->manager->addProjectUser($projectId, $this->userUserId, 'project-manager'));
