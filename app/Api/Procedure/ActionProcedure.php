@@ -2,6 +2,7 @@
 
 namespace Kanboard\Api\Procedure;
 
+use JsonRPC\Exception\AccessDeniedException;
 use Kanboard\Api\Authorization\ActionAuthorization;
 use Kanboard\Api\Authorization\ProjectAuthorization;
 
@@ -84,6 +85,11 @@ class ActionProcedure extends BaseProcedure
             if (! isset($required_params[$param])) {
                 return false;
             }
+        }
+
+        // Check that the parameters belong to the project and that the user can access the destination project
+        if (! $this->actionValidator->validateParameters($project_id, $this->userSession->getId(), $params)) {
+            throw new AccessDeniedException('Action Parameters Not Allowed');
         }
 
         return $this->actionModel->create($values);

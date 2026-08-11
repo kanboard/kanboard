@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 /**
  * Action Creation Controller
  *
@@ -108,10 +110,17 @@ class ActionCreationController extends BaseController
      * @access private
      * @param  array     $project   Project properties
      * @param  array     $values    Form values
+     * @throws AccessForbiddenException
      */
     private function doCreation(array $project, array $values)
     {
         $values['project_id'] = $project['id'];
+        $params = isset($values['params']) && is_array($values['params']) ? $values['params'] : array();
+
+        if (! $this->actionValidator->validateParameters($project['id'], $this->userSession->getId(), $params)) {
+            throw new AccessForbiddenException();
+        }
+
         list($valid, ) = $this->actionValidator->validateCreation($values);
 
         if ($valid) {

@@ -40,7 +40,10 @@ class ActionProcedureTest extends BaseProcedureTest
 
     public function assertCreateAction()
     {
-        $actionId = $this->app->createAction($this->projectId, 'task.move.column', '\Kanboard\Action\TaskCloseColumn', array('column_id' => 1));
+        $columns = $this->app->getColumns($this->projectId);
+        $this->assertNotEmpty($columns);
+
+        $actionId = $this->app->createAction($this->projectId, 'task.move.column', '\Kanboard\Action\TaskCloseColumn', array('column_id' => $columns[0]['id']));
         $this->assertNotFalse($actionId);
         $this->assertTrue($actionId > 0);
     }
@@ -60,7 +63,8 @@ class ActionProcedureTest extends BaseProcedureTest
 
     public function assertRemoveAction()
     {
-        $actionId = $this->app->createAction($this->projectId, 'task.move.column', '\Kanboard\Action\TaskCloseColumn', array('column_id' => 1));
+        $columns = $this->app->getColumns($this->projectId);
+        $actionId = $this->app->createAction($this->projectId, 'task.move.column', '\Kanboard\Action\TaskCloseColumn', array('column_id' => $columns[0]['id']));
         $this->assertTrue($this->app->removeAction($actionId));
     }
 }
