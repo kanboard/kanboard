@@ -4,10 +4,10 @@
         <?php if ($board_view): ?>
         <li>
             <span class="filter-display-mode" <?= $this->board->isCollapsed($project['id']) ? '' : 'style="display: none;"' ?>>
-                <?= $this->url->icon('expand', t('Expand tasks'), 'BoardAjaxController', 'expand', array('project_id' => $project['id']), false, 'board-display-mode', t('Keyboard shortcut: "%s"', 's')) ?>
+                <?= $this->url->icon('expand', t('Expand tasks'), 'BoardAjaxController', 'expand', array('project_id' => $project['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken()), false, 'board-display-mode', t('Keyboard shortcut: "%s"', 's')) ?>
             </span>
             <span class="filter-display-mode" <?= $this->board->isCollapsed($project['id']) ? 'style="display: none;"' : '' ?>>
-                <?= $this->url->icon('compress', t('Collapse tasks'), 'BoardAjaxController', 'collapse', array('project_id' => $project['id']), false, 'board-display-mode', t('Keyboard shortcut: "%s"', 's')) ?>
+                <?= $this->url->icon('compress', t('Collapse tasks'), 'BoardAjaxController', 'collapse', array('project_id' => $project['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken()), false, 'board-display-mode', t('Keyboard shortcut: "%s"', 's')) ?>
             </span>
         </li>
         <li>

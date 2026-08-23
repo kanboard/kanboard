@@ -42,6 +42,7 @@ class CommentListController extends BaseController
 
     public function toggleSorting()
     {
+        $this->checkReusableGETCSRFParam();
         $this->helper->comment->toggleSorting();
         $this->show();
     }

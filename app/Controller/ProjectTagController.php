@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 /**
  * Class ProjectTagController
  *
@@ -145,18 +147,22 @@ class ProjectTagController extends BaseController
      */
     public function makeGlobalTag()
     {
-        if ($this->userSession->isAdmin()) {
-            $project = $this->getProject();
-            $tag = $this->getProjectTag($project);
-            
-            if ($this->tagModel->update($tag['id'], $tag['name'], $tag['color_id'], 0)) {
-                $this->flash->success(t('Tag updated successfully.'));
-            } else {
-                $this->flash->failure(t('Unable to update this tag.'));
-            }
+        $this->checkCSRFParam();
 
-            $this->response->redirect($this->helper->url->to('ProjectTagController', 'index', array('project_id' => $project['id'])));
+        if (! $this->userSession->isAdmin()) {
+            throw new AccessForbiddenException();
         }
+
+        $project = $this->getProject();
+        $tag = $this->getProjectTag($project);
+
+        if ($this->tagModel->update($tag['id'], $tag['name'], $tag['color_id'], 0)) {
+            $this->flash->success(t('Tag updated successfully.'));
+        } else {
+            $this->flash->failure(t('Unable to update this tag.'));
+        }
+
+        $this->response->redirect($this->helper->url->to('ProjectTagController', 'index', array('project_id' => $project['id'])));
     }
     
     /**
