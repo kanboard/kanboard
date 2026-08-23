@@ -3,7 +3,7 @@
     <?php if (!isset($is_public) || !$is_public): ?>
         <ul>
             <li>
-                <?= $this->url->icon('sort', t('Change sorting'), 'CommentListController', 'toggleSorting', array('task_id' => $task['id']), false, 'js-modal-replace') ?>
+                <?= $this->url->icon('sort', t('Change sorting'), 'CommentListController', 'toggleSorting', array('task_id' => $task['id'], 'csrf_token' => $this->app->getToken()->getReusableCSRFToken()), false, 'js-modal-replace') ?>
             </li>
             <?php if ($editable): ?>
                 <li>
