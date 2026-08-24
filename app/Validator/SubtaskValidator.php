@@ -27,12 +27,7 @@ class SubtaskValidator extends BaseValidator
             new Validators\Required('title', t('The title is required')),
         );
 
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
+        return $this->executeRules($values, array_merge($rules, $this->commonValidationRules()));
     }
 
     /**
@@ -50,12 +45,7 @@ class SubtaskValidator extends BaseValidator
             new Validators\Required('title', t('The title is required')),
         );
 
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
+        return $this->executeRules($values, array_merge($rules, $this->commonValidationRules()));
     }
 
     /**
@@ -72,12 +62,7 @@ class SubtaskValidator extends BaseValidator
             new Validators\Required('task_id', t('The task id is required')),
         );
 
-        $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
-
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
+        return $this->executeRules($values, array_merge($rules, $this->commonValidationRules()));
     }
 
     /**
@@ -97,5 +82,56 @@ class SubtaskValidator extends BaseValidator
             new Validators\Numeric('time_estimated', t('The time must be a numeric value')),
             new Validators\Numeric('time_spent', t('The time must be a numeric value')),
         );
+    }
+
+    /**
+     * Execute the validation rules and check the assignee
+     *
+     * @access private
+     * @param  array   $values           Form values
+     * @param  array   $rules            List of validation rules
+     * @return array   $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    private function executeRules(array $values, array $rules)
+    {
+        $v = new Validator($values, $rules);
+        $result = $v->execute();
+
+        // The values are checked only when they have the expected type
+        if ($result && ! $this->isValidAssignee($values)) {
+            $v->addError('user_id', t('This user is not allowed to be assigned to this task'));
+            $result = false;
+        }
+
+        return array($result, $v->getErrors());
+    }
+
+    /**
+     * Check that the assignee is a member of the project that owns the task
+     *
+     * The assignee cannot be checked with a validation rule because the list of
+     * allowed users depends on the task. The form <select> is the only place
+     * where the choices are restricted, and the API passes the value straight
+     * to the model, so a subtask could be assigned to somebody outside of the
+     * project. Those subtasks show up in the dashboard of the assignee with the
+     * content of a task they are not allowed to read.
+     *
+     * @access private
+     * @param  array $values Form values
+     * @return boolean
+     */
+    private function isValidAssignee(array $values)
+    {
+        if (empty($values['user_id'])) {
+            return true;
+        }
+
+        if (empty($values['task_id'])) {
+            return false;
+        }
+
+        $project_id = $this->taskFinderModel->getProjectId($values['task_id']);
+
+        return $project_id > 0 && $this->projectPermissionModel->isAssignable($project_id, $values['user_id']);
     }
 }
