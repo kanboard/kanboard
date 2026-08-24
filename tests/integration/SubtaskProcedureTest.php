@@ -86,4 +86,42 @@ class SubtaskProcedureTest extends BaseProcedureTest
         $this->assertEquals($taskIdB, $subtask['task_id']);
         $this->assertEquals('Project B subtask', $subtask['title']);
     }
+
+    public function testSubtaskCannotBeAssignedToSomebodyOutsideOfTheProject()
+    {
+        $projectId = $this->manager->createProject(array(
+            'name' => 'Project with a subtask assignee',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $this->assertNotFalse($projectId);
+        $this->assertTrue($this->manager->addProjectUser($projectId, $this->userUserId, 'project-member'));
+
+        $taskId = $this->manager->createTask('Task', $projectId);
+        $this->assertNotFalse($taskId);
+
+        // The administrator is not a member of the project
+        $this->assertFalse($this->user->execute('createSubtask', array(
+            'task_id' => $taskId,
+            'title' => 'subtask',
+            'user_id' => $this->adminUserId,
+        )));
+
+        $subtaskId = $this->user->execute('createSubtask', array(
+            'task_id' => $taskId,
+            'title' => 'subtask',
+            'user_id' => $this->userUserId,
+        ));
+
+        $this->assertNotFalse($subtaskId);
+
+        $this->assertFalse($this->user->execute('updateSubtask', array(
+            'id' => $subtaskId,
+            'task_id' => $taskId,
+            'user_id' => $this->adminUserId,
+        )));
+
+        $subtask = $this->manager->getSubtask($subtaskId);
+        $this->assertEquals($this->userUserId, $subtask['user_id']);
+    }
 }
