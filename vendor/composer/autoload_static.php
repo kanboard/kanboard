@@ -341,6 +341,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'KanboardTests\\units\\Controller\\ActionCreationControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/ActionCreationControllerTest.php',
         'KanboardTests\\units\\Controller\\CustomFilterControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/CustomFilterControllerTest.php',
         'KanboardTests\\units\\Controller\\UserModificationControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/UserModificationControllerTest.php',
+        'KanboardTests\\units\\Controller\\WebNotificationControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/WebNotificationControllerTest.php',
         'KanboardTests\\units\\Core\\Action\\ActionManagerTest' => __DIR__ . '/../..' . '/tests/units/Core/Action/ActionManagerTest.php',
         'KanboardTests\\units\\Core\\Cache\\MemoryCacheTest' => __DIR__ . '/../..' . '/tests/units/Core/Cache/MemoryCacheTest.php',
         'KanboardTests\\units\\Core\\CsvTest' => __DIR__ . '/../..' . '/tests/units/Core/CsvTest.php',

@@ -144,6 +144,7 @@ return array(
     'KanboardTests\\units\\Controller\\ActionCreationControllerTest' => $baseDir . '/tests/units/Controller/ActionCreationControllerTest.php',
     'KanboardTests\\units\\Controller\\CustomFilterControllerTest' => $baseDir . '/tests/units/Controller/CustomFilterControllerTest.php',
     'KanboardTests\\units\\Controller\\UserModificationControllerTest' => $baseDir . '/tests/units/Controller/UserModificationControllerTest.php',
+    'KanboardTests\\units\\Controller\\WebNotificationControllerTest' => $baseDir . '/tests/units/Controller/WebNotificationControllerTest.php',
     'KanboardTests\\units\\Core\\Action\\ActionManagerTest' => $baseDir . '/tests/units/Core/Action/ActionManagerTest.php',
     'KanboardTests\\units\\Core\\Cache\\MemoryCacheTest' => $baseDir . '/tests/units/Core/Cache/MemoryCacheTest.php',
     'KanboardTests\\units\\Core\\CsvTest' => $baseDir . '/tests/units/Core/CsvTest.php',

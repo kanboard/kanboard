@@ -62,12 +62,16 @@ class WebNotificationController extends BaseController
         $user_id = $this->getUserId();
         $notification_id = $this->request->getIntegerParam('notification_id');
 
-        $notification = $this->userUnreadNotificationModel->getById($notification_id);
-        $this->userUnreadNotificationModel->markAsRead($user_id, $notification_id);
+        $notification = $this->userUnreadNotificationModel->getByIdAndUser($notification_id, $user_id);
 
         if (empty($notification)) {
             $this->show();
-        } elseif ($this->helper->text->contains($notification['event_name'], 'comment')) {
+            return;
+        }
+
+        $this->userUnreadNotificationModel->markAsRead($user_id, $notification_id);
+
+        if ($this->helper->text->contains($notification['event_name'], 'comment')) {
             $this->response->redirect($this->helper->url->to(
                 'TaskViewController',
                 'show',
