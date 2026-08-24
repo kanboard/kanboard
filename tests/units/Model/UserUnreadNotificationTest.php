@@ -89,7 +89,7 @@ class UserUnreadNotificationTest extends Base
         $this->assertTrue(is_array($notifications[0]['event_data']));
     }
 
-    public function testGetOne()
+    public function testGetOneByUser()
     {
         $wn = new UserUnreadNotificationModel($this->container);
         $p = new ProjectModel($this->container);
@@ -100,11 +100,10 @@ class UserUnreadNotificationTest extends Base
         $this->assertEquals(1, $tc->create(array('title' => 'test', 'project_id' => 1)));
 
         $wn->create(1, TaskModel::EVENT_CREATE, array('task' => $tf->getDetails(1)));
-        $wn->create(1, TaskModel::EVENT_CREATE, array('task' => $tf->getDetails(1)));
 
-        $this->assertEmpty($wn->getAll(2));
+        $this->assertEmpty($wn->getByIdAndUser(1, 2));
 
-        $notification = $wn->getById(1);
+        $notification = $wn->getByIdAndUser(1, 1);
         $this->assertArrayHasKey('title', $notification);
         $this->assertTrue(is_array($notification['event_data']));
     }

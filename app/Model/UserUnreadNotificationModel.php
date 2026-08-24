@@ -38,14 +38,18 @@ class UserUnreadNotificationModel extends Base
     }
 
     /**
-     * Get one notification
+     * Get one notification for a user
      *
      * @param  integer $notification_id
+     * @param  integer $user_id
      * @return array|null
      */
-    public function getById($notification_id)
+    public function getByIdAndUser($notification_id, $user_id)
     {
-        $notification = $this->db->table(self::TABLE)->eq('id', $notification_id)->findOne();
+        $notification = $this->db->table(self::TABLE)
+            ->eq('id', $notification_id)
+            ->eq('user_id', $user_id)
+            ->findOne();
 
         if (! empty($notification)) {
             $this->unserialize($notification);
