@@ -142,6 +142,7 @@ return array(
     'KanboardTests\\units\\Auth\\TotpAuthTest' => $baseDir . '/tests/units/Auth/TotpAuthTest.php',
     'KanboardTests\\units\\Base' => $baseDir . '/tests/units/Base.php',
     'KanboardTests\\units\\Controller\\ActionCreationControllerTest' => $baseDir . '/tests/units/Controller/ActionCreationControllerTest.php',
+    'KanboardTests\\units\\Controller\\CustomFilterControllerTest' => $baseDir . '/tests/units/Controller/CustomFilterControllerTest.php',
     'KanboardTests\\units\\Controller\\UserModificationControllerTest' => $baseDir . '/tests/units/Controller/UserModificationControllerTest.php',
     'KanboardTests\\units\\Core\\Action\\ActionManagerTest' => $baseDir . '/tests/units/Core/Action/ActionManagerTest.php',
     'KanboardTests\\units\\Core\\Cache\\MemoryCacheTest' => $baseDir . '/tests/units/Core/Cache/MemoryCacheTest.php',

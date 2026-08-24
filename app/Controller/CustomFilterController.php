@@ -62,6 +62,10 @@ class CustomFilterController extends BaseController
         $values['project_id'] = $project['id'];
         $values['user_id'] = $this->userSession->getId();
 
+        if (! $this->canShareFilter($project)) {
+            $values['is_shared'] = 0;
+        }
+
         list($valid, $errors) = $this->customFilterValidator->validateCreation($values);
 
         if ($valid) {
@@ -128,7 +132,7 @@ class CustomFilterController extends BaseController
     public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $filter = $this->customFilterModel->getById($this->request->getIntegerParam('filter_id'));
+        $filter = $this->getCustomFilter($project);
 
         $this->checkPermission($project, $filter);
 
@@ -149,16 +153,19 @@ class CustomFilterController extends BaseController
     public function update()
     {
         $project = $this->getProject();
-        $filter = $this->customFilterModel->getById($this->request->getIntegerParam('filter_id'));
+        $filter = $this->getCustomFilter($project);
 
         $this->checkPermission($project, $filter);
 
         $values = $this->request->getValues();
         $values['id'] = $filter['id'];
-        $values['project_id'] = $project['id'];
+        $values['project_id'] = $filter['project_id'];
+        $values['user_id'] = $filter['user_id'];
 
-        if (! isset($values['is_shared'])) {
-            $values += array('is_shared' => 0);
+        if (! $this->canShareFilter($project)) {
+            $values['is_shared'] = empty($filter['is_shared']) ? 0 : 1;
+        } elseif (! isset($values['is_shared'])) {
+            $values['is_shared'] = 0;
         }
 
         if (! isset($values['append'])) {
@@ -178,6 +185,11 @@ class CustomFilterController extends BaseController
         }
 
         $this->edit($values, $errors);
+    }
+
+    private function canShareFilter(array $project)
+    {
+        return $this->helper->user->hasProjectAccess('ProjectEditController', 'show', $project['id']);
     }
 
     private function checkPermission(array $project, array $filter)
