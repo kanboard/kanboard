@@ -20,6 +20,7 @@ class UserProcedureTest extends BaseProcedureTest
         $user = $this->app->getUser($this->userId);
         $this->assertNotNull($user);
         $this->assertEquals($this->username, $user['username']);
+        $this->assertNoPrivateColumns($user);
     }
 
     public function assertGetUserByName()
@@ -27,6 +28,7 @@ class UserProcedureTest extends BaseProcedureTest
         $user = $this->app->getUserByName($this->username);
         $this->assertNotNull($user);
         $this->assertEquals($this->username, $user['username']);
+        $this->assertNoPrivateColumns($user);
     }
 
     public function assertGetAllUsers()
@@ -34,6 +36,10 @@ class UserProcedureTest extends BaseProcedureTest
         $users = $this->app->getAllUsers();
         $this->assertIsArray($users);
         $this->assertNotEmpty($users);
+
+        foreach ($users as $user) {
+            $this->assertNoPrivateColumns($user);
+        }
     }
 
     public function assertEnableDisableUser()

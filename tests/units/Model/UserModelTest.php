@@ -13,6 +13,22 @@ use Kanboard\Core\Security\Role;
 
 class UserModelTest extends Base
 {
+    public function testRemovePrivateColumns()
+    {
+        $userModel = new UserModel($this->container);
+        $this->assertNotFalse($userModel->create(array('username' => 'user1', 'password' => '123456')));
+
+        $user = $userModel->getById(2);
+        $this->assertArrayHasKey('password', $user);
+
+        $user = $userModel->removePrivateColumns($user);
+        $this->assertEquals('user1', $user['username']);
+        $this->assertArrayNotHasKey('password', $user);
+        $this->assertArrayNotHasKey('twofactor_secret', $user);
+        $this->assertArrayNotHasKey('api_access_token', $user);
+        $this->assertArrayNotHasKey('token', $user);
+    }
+
     public function testGetByEmail()
     {
         $userModel = new UserModel($this->container);

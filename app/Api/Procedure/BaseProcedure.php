@@ -32,6 +32,16 @@ abstract class BaseProcedure extends Base
         return $values;
     }
 
+    protected function filterUser($user)
+    {
+        return is_array($user) ? $this->userModel->removePrivateColumns($user) : $user;
+    }
+
+    protected function filterUsers($users)
+    {
+        return is_array($users) ? array_map(array($this, 'filterUser'), $users) : $users;
+    }
+
     protected function getClassName()
     {
         $reflection = new ReflectionClass(get_called_class());

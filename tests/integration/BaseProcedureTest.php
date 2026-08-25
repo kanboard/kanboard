@@ -38,6 +38,13 @@ abstract class BaseProcedureTest extends TestCase
         $this->setUpStandardUser();
     }
 
+    public function assertNoPrivateColumns(array $user)
+    {
+        foreach (array('password', 'twofactor_secret', 'api_access_token', 'token') as $column) {
+            $this->assertArrayNotHasKey($column, $user);
+        }
+    }
+
     public function setUpAppClient()
     {
         $this->app = new Client(API_URL);
