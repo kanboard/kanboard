@@ -30,6 +30,29 @@ class UserModel extends Base
      */
     const EVERYBODY_ID = -1;
 
+    /**
+     * Columns that must never be exposed outside of the application
+     *
+     * @var string[]
+     */
+    const PRIVATE_COLUMNS = array('password', 'twofactor_secret', 'api_access_token', 'token');
+
+    /**
+     * Remove sensitive columns from a user row
+     *
+     * @access public
+     * @param  array $user
+     * @return array
+     */
+    public function removePrivateColumns(array $user)
+    {
+        foreach (self::PRIVATE_COLUMNS as $column) {
+            unset($user[$column]);
+        }
+
+        return $user;
+    }
+
     public function isValidSession($userID, $sessionRole)
     {
         return $this->db->table(self::TABLE)

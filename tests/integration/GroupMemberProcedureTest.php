@@ -29,6 +29,7 @@ class GroupMemberProcedureTest extends BaseProcedureTest
         $members = $this->app->getGroupMembers($this->groupId1);
         $this->assertCount(1, $members);
         $this->assertEquals($this->username, $members[0]['username']);
+        $this->assertNoPrivateColumns($members[0]);
     }
 
     public function assertIsGroupMember()

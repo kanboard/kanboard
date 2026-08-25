@@ -20,17 +20,17 @@ class UserProcedure extends BaseProcedure
 {
     public function getUser($user_id)
     {
-        return $this->userModel->getById($user_id);
+        return $this->filterUser($this->userModel->getById($user_id));
     }
 
     public function getUserByName($username)
     {
-        return $this->userModel->getByUsername($username);
+        return $this->filterUser($this->userModel->getByUsername($username));
     }
 
     public function getAllUsers()
     {
-        return $this->userModel->getAll();
+        return $this->filterUsers($this->userModel->getAll());
     }
 
     public function removeUser($user_id)

@@ -17,7 +17,7 @@ class GroupMemberProcedure extends BaseProcedure
 
     public function getGroupMembers($group_id)
     {
-        return $this->groupMemberModel->getMembers($group_id);
+        return $this->filterUsers($this->groupMemberModel->getMembers($group_id));
     }
 
     public function addGroupMember($group_id, $user_id)
