@@ -174,6 +174,7 @@ class Csv
             }
 
             foreach ($rows as $row) {
+                $row = array_map(array($this, 'neutralizeFormula'), $row);
                 fputcsv($fp, $row, $this->delimiter, $this->enclosure, '\\');
             }
 
@@ -181,6 +182,22 @@ class Csv
         }
 
         return $this;
+    }
+
+    /**
+     * Prevent spreadsheet applications from interpreting a CSV cell as a formula
+     *
+     * @access private
+     * @param  mixed $value
+     * @return mixed
+     */
+    private function neutralizeFormula($value)
+    {
+        if (is_string($value) && $value !== '' && ! is_numeric($value) && strpbrk($value[0], "=+-@\t\r\n") !== false) {
+            return "'".$value;
+        }
+
+        return $value;
     }
 
     /**
