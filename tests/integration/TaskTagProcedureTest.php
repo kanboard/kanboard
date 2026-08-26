@@ -51,4 +51,29 @@ class TaskTagProcedureTest extends BaseProcedureTest
         $tags = $this->app->getTaskTags($this->taskId);
         $this->assertEquals(array('tag C'), array_values($tags));
     }
+
+    public function testSetTaskTagsCannotModifyTaskFromAnotherProjectWithForgedProjectId()
+    {
+        $projectIdA = $this->manager->createProject(array(
+            'name' => 'Project A',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $projectIdB = $this->manager->createProject(array(
+            'name' => 'Project B',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $this->assertNotFalse($projectIdA);
+        $this->assertNotFalse($projectIdB);
+        $this->assertTrue($this->manager->addProjectUser($projectIdA, $this->userUserId, 'project-member'));
+        $this->assertTrue($this->manager->addProjectUser($projectIdB, $this->userUserId, 'project-member'));
+
+        $taskIdB = $this->manager->createTask(array('title' => 'Project B task', 'project_id' => $projectIdB));
+        $this->assertNotFalse($taskIdB);
+
+        $this->assertFalse($this->user->setTaskTags($projectIdA, $taskIdB, array('injected-tag')));
+        $this->assertEmpty((array) $this->manager->getTaskTags($taskIdB));
+        $this->assertEmpty($this->manager->getTagsByProject($projectIdA));
+    }
 }

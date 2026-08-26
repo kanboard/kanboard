@@ -17,6 +17,11 @@ class TaskTagProcedure extends BaseProcedure
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'setTaskTags', $project_id);
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'setTaskTags', $task_id);
+
+        if ($this->taskFinderModel->getProjectId($task_id) !== (int) $project_id) {
+            return false;
+        }
+
         return $this->taskTagModel->save($project_id, $task_id, $tags);
     }
 
