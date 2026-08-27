@@ -111,7 +111,17 @@ abstract class BaseController extends Base
             throw new PageNotFoundException();
         }
 
-        if (isset($file['project_id']) && $file['project_id'] != $project_id) {
+        if ($model === 'taskFileModel') {
+            // The table task_has_files has no project_id column, the owner project comes from the task
+            $file['project_id'] = $this->taskFileModel->getProjectId($file['id']);
+
+            // Task files are also linked from URLs that do not carry any project_id
+            if ($project_id == 0) {
+                $project_id = $file['project_id'];
+            }
+        }
+
+        if (empty($file['project_id']) || $file['project_id'] != $project_id) {
             throw new PageNotFoundException();
         }
 
