@@ -16,13 +16,23 @@ class UserSession extends Base
     /**
      * Refresh current session if necessary
      *
+     * The credentials fingerprint is preserved: an ordinary refresh must never revalidate
+     * a session opened before the password changed. Only the session that changed the
+     * password gets the new fingerprint.
+     *
      * @access public
      * @param integer $user_id
+     * @param boolean $renewCredentialsFingerprint
      */
-    public function refresh($user_id)
+    public function refresh($user_id, $renewCredentialsFingerprint = false)
     {
         if ($this->getId() == $user_id) {
+            $fingerprint = $this->getCredentialsFingerprint();
             $this->initialize($this->userModel->getById($user_id));
+
+            if (! $renewCredentialsFingerprint) {
+                session_merge('user', array('credentials_fingerprint' => $fingerprint));
+            }
         }
     }
 
@@ -34,6 +44,9 @@ class UserSession extends Base
      */
     public function initialize(array $user)
     {
+        // Keep a fingerprint of the password to invalidate the session when the credentials change
+        $fingerprint = hash('sha256', isset($user['password']) ? $user['password'] : '');
+
         foreach (array('password', 'is_admin', 'is_project_admin', 'twofactor_secret') as $column) {
             if (isset($user[$column])) {
                 unset($user[$column]);
@@ -41,6 +54,7 @@ class UserSession extends Base
         }
 
         $user['id'] = (int) $user['id'];
+        $user['credentials_fingerprint'] = $fingerprint;
         $user['is_ldap_user'] = isset($user['is_ldap_user']) ? (bool) $user['is_ldap_user'] : false;
         $user['twofactor_activated'] = isset($user['twofactor_activated']) ? (bool) $user['twofactor_activated'] : false;
 
@@ -51,6 +65,21 @@ class UserSession extends Base
 
         session_set('user', $user);
         session_set('postAuthenticationValidated', false);
+    }
+
+    /**
+     * Get the credentials fingerprint stored in the session
+     *
+     * Returns an empty string for sessions created before this value was stored,
+     * which never matches a real fingerprint and forces a new authentication.
+     *
+     * @access public
+     * @return string
+     */
+    public function getCredentialsFingerprint()
+    {
+        $user = session_get('user');
+        return isset($user['credentials_fingerprint']) ? $user['credentials_fingerprint'] : '';
     }
 
     /**

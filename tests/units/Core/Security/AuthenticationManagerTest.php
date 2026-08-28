@@ -6,6 +6,7 @@ use KanboardTests\units\Base;
 use Kanboard\Core\Http\Request;
 use Kanboard\Core\Security\AuthenticationManager;
 use Kanboard\Auth\DatabaseAuth;
+use Kanboard\Model\UserModel;
 use Kanboard\Auth\TotpAuth;
 use Kanboard\Auth\ReverseProxyAuth;
 
@@ -58,7 +59,8 @@ class AuthenticationManagerTest extends Base
         $authManager = new AuthenticationManager($this->container);
         $authManager->register(new DatabaseAuth($this->container));
 
-        $_SESSION['user'] = array('id' => 1, 'username' => 'test', 'role' => 'app-admin');
+        $userModel = new UserModel($this->container);
+        $this->container['userSession']->initialize($userModel->getById(1));
 
         $this->assertTrue($this->container['userSession']->isLogged());
         $this->assertTrue($authManager->checkCurrentSession());

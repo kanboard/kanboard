@@ -117,6 +117,21 @@ class RememberMeSessionModel extends Base
     }
 
     /**
+     * Remove all sessions for a given user
+     *
+     * @access public
+     * @param  integer  $user_id  User id
+     * @return bool
+     */
+    public function removeAll($user_id)
+    {
+        return $this->db
+            ->table(self::TABLE)
+            ->eq('user_id', $user_id)
+            ->remove();
+    }
+
+    /**
      * Remove old sessions for a given user
      *
      * @access public

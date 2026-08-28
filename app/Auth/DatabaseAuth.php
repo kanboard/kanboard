@@ -84,7 +84,11 @@ class DatabaseAuth extends Base implements PasswordAuthenticationProviderInterfa
      */
     public function isValidSession()
     {
-        return $this->userModel->isValidSession($this->userSession->getId(), $this->userSession->getRole());
+        return $this->userModel->isValidSession(
+            $this->userSession->getId(),
+            $this->userSession->getRole(),
+            $this->userSession->getCredentialsFingerprint()
+        );
     }
 
     /**
