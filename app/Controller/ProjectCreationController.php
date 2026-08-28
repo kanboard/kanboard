@@ -42,6 +42,8 @@ class ProjectCreationController extends BaseController
      */
     public function createPrivate(array $values = array(), array $errors = array())
     {
+        $this->checkPrivateProjectCreationAllowed();
+
         $values['is_private'] = 1;
         $this->create($values, $errors);
     }
@@ -54,6 +56,18 @@ class ProjectCreationController extends BaseController
     public function save()
     {
         $values = $this->request->getValues();
+        $values['is_private'] = empty($values['is_private']) ? 0 : 1;
+
+        if (! empty($values['src_project_id'])) {
+            $this->checkSourceProjectAccessAllowed($values['src_project_id']);
+        }
+
+        if ($this->isDestinationProjectPrivate($values)) {
+            $this->checkPrivateProjectCreationAllowed();
+        } else {
+            $this->checkTeamProjectCreationAllowed();
+        }
+
         list($valid, $errors) = $this->projectValidator->validateCreation($values);
 
         if ($valid) {
@@ -68,6 +82,69 @@ class ProjectCreationController extends BaseController
         }
 
         return $this->create($values, $errors);
+    }
+
+    /**
+     * Get the visibility of the project that is going to be created
+     *
+     * Duplicated projects inherit the visibility of the source project when
+     * the form does not ask for a personal project.
+     *
+     * @access private
+     * @param  array $values
+     * @return boolean
+     */
+    private function isDestinationProjectPrivate(array $values)
+    {
+        if (! empty($values['is_private'])) {
+            return true;
+        }
+
+        if (! empty($values['src_project_id'])) {
+            return $this->projectModel->isPrivate($values['src_project_id']);
+        }
+
+        return false;
+    }
+
+    /**
+     * Check that the user has access to the project used as a template
+     *
+     * @access private
+     * @param  integer $projectId
+     * @throws AccessForbiddenException
+     */
+    private function checkSourceProjectAccessAllowed($projectId)
+    {
+        if (! $this->projectPermissionModel->isUserAllowed($projectId, $this->userSession->getId())) {
+            throw new AccessForbiddenException();
+        }
+    }
+
+    /**
+     * Check that the user is allowed to create team projects
+     *
+     * @access private
+     * @throws AccessForbiddenException
+     */
+    private function checkTeamProjectCreationAllowed()
+    {
+        if (! $this->helper->user->hasAccess('ProjectCreationController', 'create')) {
+            throw new AccessForbiddenException();
+        }
+    }
+
+    /**
+     * Check that personal projects are enabled
+     *
+     * @access private
+     * @throws AccessForbiddenException
+     */
+    private function checkPrivateProjectCreationAllowed()
+    {
+        if ($this->configModel->get('disable_private_project', 0) == 1) {
+            throw new AccessForbiddenException();
+        }
     }
 
     /**
@@ -116,10 +193,6 @@ class ProjectCreationController extends BaseController
     private function duplicateNewProject(array $values)
     {
         $selection = array();
-
-        if (! $this->projectPermissionModel->isUserAllowed($values['src_project_id'], $this->userSession->getId())) {
-            throw new AccessForbiddenException();
-        }
 
         foreach ($this->projectDuplicationModel->getOptionalSelection() as $item) {
             if (isset($values[$item]) && $values[$item] == 1) {
