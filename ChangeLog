@@ -1,3 +1,21 @@
+Version 1.2.54 (August 28, 2026)
+--------------------------------
+
+* fix(user): invalidate existing sessions when the password changes
+* fix(project): check permissions in the project creation handler
+* fix(file): check the project of the task when fetching a task file
+* fix(api): check task and project binding in setTaskTags
+* fix(csv): escape exported values starting with a special character
+* fix(api): return only public user columns
+* fix(subtask): reject assignees outside of the project
+* fix(notification): scope unread notification lookup to its owner
+* fix: scope custom filter changes to their project and owner
+* fix: validate request tokens for tag, board, and comment actions
+* fix(docker): only execute PHP front controllers in nginx
+* fix(security): validate automatic action parameters
+* build(deps): bump docker/setup-buildx-action in the github-actions group
+* build(deps): bump the github-actions group with 2 updates
+
 Version 1.2.53 (July 24, 2026)
 ------------------------------
 
