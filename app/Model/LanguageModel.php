@@ -63,6 +63,7 @@ class LanguageModel extends Base
             'vi_VN',
             'fa_IR',
             'ar_SY',
+            'az_AZ',
         );
     }
 
@@ -131,6 +132,7 @@ class LanguageModel extends Base
             'vi_VN' => 'Tiếng Việt',
             'fa_IR' => 'فارسی',
             'ar_SY' => 'عربي',
+            'az_AZ' => 'Azərbaycanca',
         );
 
         if ($prepend) {
@@ -189,6 +191,7 @@ class LanguageModel extends Base
             'mk_MK' => 'mk',
             'my_MY' => 'my',
             'ar_SY' => 'ar',
+            'az_AZ' => 'az',
         );
 
         $lang = $this->getCurrentLanguage();
