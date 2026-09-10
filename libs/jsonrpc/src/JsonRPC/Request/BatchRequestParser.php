@@ -2,6 +2,9 @@
 
 namespace JsonRPC\Request;
 
+use JsonRPC\Exception\AccessDeniedException;
+use JsonRPC\Response\ResponseBuilder;
+
 /**
  * Class BatchRequestParser
  *
@@ -21,12 +24,21 @@ class BatchRequestParser extends RequestParser
         $responses = array();
 
         foreach ($this->payload as $payload) {
-            $responses[] = RequestParser::create()
-                ->withPayload($payload)
-                ->withProcedureHandler($this->procedureHandler)
-                ->withMiddlewareHandler($this->middlewareHandler)
-                ->withLocalException($this->localExceptions)
-                ->parse();
+            try {
+                $responses[] = RequestParser::create()
+                    ->withPayload($payload)
+                    ->withProcedureHandler($this->procedureHandler)
+                    ->withMiddlewareHandler($this->middlewareHandler)
+                    ->withLocalException($this->localExceptions)
+                    ->parse();
+            } catch (AccessDeniedException $e) {
+                //Bad credentials still fail the whole call, but a forbidden
+                //resource concerns only the request that asked for it
+                $responses[] = ResponseBuilder::create()
+                    ->withId(isset($payload['id']) ? $payload['id'] : null)
+                    ->withException($e)
+                    ->build();
+            }
         }
 
         $responses = array_filter($responses);
