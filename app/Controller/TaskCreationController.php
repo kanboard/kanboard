@@ -105,13 +105,35 @@ class TaskCreationController extends BaseController
         $project = $this->getProject();
         $values = $this->request->getValues();
 
-        if (isset($values['project_ids'])) {
-            foreach ($values['project_ids'] as $project_id) {
-                if (! $this->projectPermissionModel->isUserAllowed($project_id, $this->userSession->getId())) {
-                    throw new AccessForbiddenException();
-                }
-                $this->taskProjectDuplicationModel->duplicateToProject($values['task_id'], $project_id);
+        if (empty($values['task_id']) || empty($values['project_ids']) || !is_array($values['project_ids'])) {
+            $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);
+            return;
+        }
+
+        $sourceTaskId = (int) $values['task_id'];
+        $sourceTask = $this->taskFinderModel->getById($sourceTaskId);
+
+        if (empty($sourceTask)) {
+            throw new PageNotFoundException();
+        }
+
+        if ((int) $sourceTask['project_id'] !== (int) $project['id']) {
+            throw new AccessForbiddenException();
+        }
+
+        if (! $this->helper->user->hasProjectAccess('TaskCreationController', 'duplicateProjects', $sourceTask['project_id'])) {
+            throw new AccessForbiddenException();
+        }
+
+        foreach ($values['project_ids'] as $project_id) {
+            $project_id = (int) $project_id;
+            if ($project_id <= 0) {
+                continue;
             }
+            if (! $this->projectPermissionModel->isUserAllowed($project_id, $this->userSession->getId())) {
+                throw new AccessForbiddenException();
+            }
+            $this->taskProjectDuplicationModel->duplicateToProject($sourceTaskId, $project_id);
         }
 
         $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);
