@@ -5,10 +5,23 @@ namespace KanboardTests\units\Core\User;
 use KanboardTests\units\Base;
 use Kanboard\Core\Security\Role;
 use Kanboard\Core\User\UserSync;
+use Kanboard\Model\ConfigModel;
 use Kanboard\User\LdapUserProvider;
 
 class UserSyncTest extends Base
 {
+    public function testSynchronizeNewUserEnablesNotifications()
+    {
+        $configModel = new ConfigModel($this->container);
+        $configModel->save(array('notifications_enabled' => 1));
+
+        $user = new LdapUserProvider('ldapId', 'bob', 'Bob', '', Role::APP_MANAGER, array());
+        $userSync = new UserSync($this->container);
+        $result = $userSync->synchronize($user);
+
+        $this->assertEquals(1, $result['notifications_enabled']);
+    }
+
     public function testSynchronizeNewUser()
     {
         $user = new LdapUserProvider('ldapId', 'bob', 'Bob', '', Role::APP_MANAGER, array());
