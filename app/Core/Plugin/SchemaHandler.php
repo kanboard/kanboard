@@ -3,6 +3,7 @@
 namespace Kanboard\Core\Plugin;
 
 use PDOException;
+use PicoDb\SQLException;
 use RuntimeException;
 
 /**
@@ -26,11 +27,73 @@ class SchemaHandler extends \Kanboard\Core\Base
      * @static
      * @access public
      * @param  string $pluginName
+     * @param  string $driver
+     */
+    public static function getSchemaFilename($pluginName, $driver = DB_DRIVER)
+    {
+        $filename = self::findSchemaFilename($pluginName, $driver);
+
+        if ($filename !== null) {
+            return $filename;
+        }
+
+        return self::buildSchemaFilename($pluginName, ucfirst(strtolower($driver)));
+    }
+
+    /**
+     * Get existing schema filename for the given driver
+     *
+     * @static
+     * @access public
+     * @param  string $pluginName
+     * @param  string $driver
+     * @return string|null
+     */
+    public static function findSchemaFilename($pluginName, $driver = DB_DRIVER)
+    {
+        foreach (self::getSchemaDriverNames($driver) as $schemaDriver) {
+            $filename = self::buildSchemaFilename($pluginName, $schemaDriver);
+
+            if (file_exists($filename)) {
+                return $filename;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Get candidate schema driver names for a database driver
+     *
+     * @static
+     * @access public
+     * @param  string $driver
+     * @return string[]
+     */
+    public static function getSchemaDriverNames($driver = DB_DRIVER)
+    {
+        $driver = strtolower($driver);
+        $schemaDrivers = array(ucfirst($driver));
+
+        if (in_array($driver, array('dblib', 'mssql', 'odbc'), true)) {
+            $schemaDrivers[] = 'Mssql';
+        }
+
+        return array_values(array_unique($schemaDrivers));
+    }
+
+    /**
+     * Build schema filename
+     *
+     * @static
+     * @access private
+     * @param  string $pluginName
+     * @param  string $schemaDriver
      * @return string
      */
-    public static function getSchemaFilename($pluginName)
+    private static function buildSchemaFilename($pluginName, $schemaDriver)
     {
-        return PLUGINS_DIR.'/'.$pluginName.'/Schema/'.ucfirst(DB_DRIVER).'.php';
+        return PLUGINS_DIR.'/'.$pluginName.'/Schema/'.$schemaDriver.'.php';
     }
 
     /**
@@ -39,11 +102,12 @@ class SchemaHandler extends \Kanboard\Core\Base
      * @static
      * @access public
      * @param  string $pluginName
+     * @param  string $driver
      * @return boolean
      */
-    public static function hasSchema($pluginName)
+    public static function hasSchema($pluginName, $driver = DB_DRIVER)
     {
-        return file_exists(self::getSchemaFilename($pluginName));
+        return self::findSchemaFilename($pluginName, $driver) !== null;
     }
 
     /**
@@ -100,7 +164,11 @@ class SchemaHandler extends \Kanboard\Core\Base
      */
     public function getSchemaVersion($plugin)
     {
-        return (int) $this->db->table(self::TABLE_SCHEMA)->eq('plugin', strtolower($plugin))->findOneColumn('version');
+        try {
+            return (int) $this->db->table(self::TABLE_SCHEMA)->eq('plugin', strtolower($plugin))->findOneColumn('version');
+        } catch (SQLException|PDOException $e) {
+            throw new RuntimeException('Unable to read plugin schema version for "'.$plugin.'". Run database migrations before loading plugins: ./cli db:migrate => '.$e->getMessage());
+        }
     }
 
     /**
