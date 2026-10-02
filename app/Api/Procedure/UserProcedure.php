@@ -122,6 +122,7 @@ class UserProcedure extends BaseProcedure
 
             if ($user_id !== false && $this->configModel->get('notifications_enabled', 0) == 1) {
                 $this->userNotificationTypeModel->saveSelectedTypes($user_id, [MailNotification::TYPE, WebNotification::TYPE]);
+                $this->userNotificationModel->enableNotification($user_id);
             }
 
             return $user_id;
