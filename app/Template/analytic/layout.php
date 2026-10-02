@@ -1,6 +1,6 @@
 <?php if ($is_ajax): ?>
     <div class="page-header">
-        <h2><?= $title ?></h2>
+        <h2><?= $this->text->e($title) ?></h2>
     </div>
 <?php else: ?>
     <?= $this->projectHeader->render($project, 'TaskListController', 'show') ?>
