@@ -27,6 +27,7 @@ class FileHelper extends Base
             case 'png':
             case 'gif':
             case 'svg':
+            case 'webp':
                 return 'fa-file-image-o';
             case 'xls':
             case 'xlsx':
@@ -91,6 +92,8 @@ class FileHelper extends Base
                 return 'image/png';
             case 'gif':
                 return 'image/gif';
+            case 'webp':
+                return 'image/webp';
             default:
                 return 'image/jpeg';
         }
