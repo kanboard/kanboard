@@ -31,7 +31,7 @@ class ICalendarController extends BaseController
         $startRange = strtotime('-2 months');
         $endRange = strtotime('+6 months');
 
-        $startColumn = $this->configModel->get('calendar_user_tasks', 'date_started');
+        $startColumn = $this->getStartColumn('calendar_user_tasks');
 
         $calendar = new iCalendar('Kanboard');
         $calendar->setName($user['name'] ?: $user['username']);
@@ -71,7 +71,7 @@ class ICalendarController extends BaseController
         $startRange = strtotime('-2 months');
         $endRange = strtotime('+6 months');
 
-        $startColumn = $this->configModel->get('calendar_project_tasks', 'date_started');
+        $startColumn = $this->getStartColumn('calendar_project_tasks');
 
         $calendar = new iCalendar('Kanboard');
         $calendar->setName($project['name']);
@@ -97,6 +97,12 @@ class ICalendarController extends BaseController
             ->addTasksWithDueDateOnly($queryDueDateOnly)
             ->addTasksWithStartAndDueDate($queryStartAndDueDate, $startColumn, 'date_due')
             ->format());
+    }
+
+    protected function getStartColumn($option)
+    {
+        $column = $this->configModel->get($option, 'date_started');
+        return in_array($column, array('date_creation', 'date_started'), true) ? $column : 'date_started';
     }
 
     protected function getConditionForTasksWithStartAndDueDate($start_time, $end_time, $start_column, $end_column)
