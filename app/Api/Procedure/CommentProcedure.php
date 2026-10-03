@@ -17,7 +17,7 @@ class CommentProcedure extends BaseProcedure
     public function getComment($comment_id)
     {
         CommentAuthorization::getInstance($this->container)->check($this->getClassName(), 'getComment', $comment_id);
-        return $this->commentModel->getById($comment_id);
+        return $this->filterComment($this->commentModel->getById($comment_id));
     }
 
     public function getAllComments($task_id)
@@ -39,7 +39,7 @@ class CommentProcedure extends BaseProcedure
             $filteredComments[] = $comment;
         }
 
-        return $filteredComments;
+        return $this->filterComments($filteredComments);
     }
 
     public function removeComment($comment_id)

@@ -97,13 +97,13 @@ class ProjectProcedure extends BaseProcedure
                 ->check($this->getClassName(), 'getProjectActivities', $project_id);
         }
 
-        return $this->helper->projectActivity->getProjectsEvents($project_ids);
+        return $this->filterEvents($this->helper->projectActivity->getProjectsEvents($project_ids));
     }
 
     public function getProjectActivity($project_id)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectActivity', $project_id);
-        return $this->helper->projectActivity->getProjectEvents($project_id);
+        return $this->filterEvents($this->helper->projectActivity->getProjectEvents($project_id));
     }
 
     public function createProject($name, $description = null, $owner_id = 0, $identifier = null, $start_date = null, $end_date = null, $priority_default = null, $priority_start = null, $priority_end = null, $email = null)
