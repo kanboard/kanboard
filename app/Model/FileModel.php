@@ -247,6 +247,7 @@ abstract class FileModel extends Base
             case 'jpg':
             case 'png':
             case 'gif':
+            case 'webp':
                 return true;
         }
 

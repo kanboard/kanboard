@@ -80,6 +80,18 @@ class SessionManager extends Base
     }
 
     /**
+     * Get the session cookie path, without the trailing slash
+     *
+     * @access public
+     * @return string
+     */
+    public function getCookiePath()
+    {
+        $path = rtrim((string) $this->helper->url->dir(), '/');
+        return $path === '' ? '/' : $path;
+    }
+
+    /**
      * Define session settings
      *
      * @access private
@@ -89,7 +101,7 @@ class SessionManager extends Base
         // Session cookie: HttpOnly and secure flags
         session_set_cookie_params(
             SESSION_DURATION,
-            $this->helper->url->dir() ?: '/',
+            $this->getCookiePath(),
             null,
             $this->request->isHTTPS(),
             true
