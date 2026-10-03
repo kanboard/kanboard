@@ -91,7 +91,7 @@ class CurrencyController extends BaseController
      */
     public function update()
     {
-        $values = $this->request->getValues();
+        $values = array_intersect_key($this->request->getValues(), array('application_currency' => ''));
 
         if ($this->configModel->save($values)) {
             $this->flash->success(t('Settings saved successfully.'));
