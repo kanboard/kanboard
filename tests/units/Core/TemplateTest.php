@@ -3,6 +3,7 @@
 namespace KanboardTests\units\Core;
 
 use KanboardTests\units\Base;
+use Kanboard\Core\Http\Request;
 use Kanboard\Core\Security\Role;
 use Kanboard\Core\Template;
 
@@ -79,6 +80,28 @@ class TemplateTest extends Base
         );
         $this->assertStringContainsString(
             '&lt;/textarea&gt;&lt;/template&gt;&lt;base href=&quot;http://127.0.0.1:8899/&quot;&gt;',
+            $html
+        );
+    }
+
+    public function testAnalyticAjaxLayoutEscapesProjectNameInTitle()
+    {
+        $this->container['request'] = new Request($this->container, array(
+            'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest',
+        ));
+
+        $html = $this->container['helper']->layout->analytic('analytic/task_distribution', array(
+            'project' => array('id' => 1, 'name' => '<img src=x onerror=alert(document.domain)>'),
+            'metrics' => array(),
+            'title' => 'Task distribution',
+        ));
+
+        $this->assertStringNotContainsString(
+            '<img src=x onerror=alert(document.domain)>',
+            $html
+        );
+        $this->assertStringContainsString(
+            '<h2>&lt;img src=x onerror=alert(document.domain)&gt; &gt; Task distribution</h2>',
             $html
         );
     }

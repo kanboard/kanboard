@@ -71,6 +71,7 @@ class TagValidator extends BaseValidator
             new Validators\Required('project_id', t('Field required')),
             new Validators\Required('name', t('Field required')),
             new Validators\MaxLength('name', t('The maximum length is %d characters', 191), 191),
+            new Validators\InArray('color_id', array_merge(array(''), array_keys($this->colorModel->getList())), t('Color invalid')),
         );
     }
 }

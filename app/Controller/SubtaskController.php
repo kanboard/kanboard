@@ -207,16 +207,33 @@ class SubtaskController extends BaseController
      *
      * @access public
      */
+
+
+
     public function movePosition()
     {
         $task = $this->getTask();
         $values = $this->request->getJson();
 
-        if (! empty($values) && $this->helper->user->hasProjectAccess('SubtaskController', 'movePosition', $task['project_id'])) {
-            $result = $this->subtaskPositionModel->changePosition($task['id'], $values['subtask_id'], $values['position']);
-            $this->response->json(array('result' => $result));
-        } else {
+        if (empty($values) || empty($values['subtask_id']) || ! isset($values['position'])) {
             throw new AccessForbiddenException();
         }
+
+        if (! $this->helper->user->hasProjectAccess('SubtaskController', 'movePosition', $task['project_id'])) {
+            throw new AccessForbiddenException();
+        }
+
+        $subtask = $this->subtaskModel->getById((int) $values['subtask_id']);
+
+        if (empty($subtask)) {
+            throw new PageNotFoundException();
+        }
+
+        if ((int) $subtask['task_id'] !== (int) $task['id']) {
+            throw new AccessForbiddenException();
+        }
+
+        $result = $this->subtaskPositionModel->changePosition($task['id'], (int) $values['subtask_id'], (int) $values['position']);
+        $this->response->json(array('result' => $result));
     }
 }
