@@ -1,6 +1,7 @@
 Version 1.2.54 (August 28, 2026)
 --------------------------------
 
+* fix: resolve plugin schemas through SQL Server driver aliases and report missing core migrations clearly
 * fix(user): invalidate existing sessions when the password changes
 * fix(project): check permissions in the project creation handler
 * fix(file): check the project of the task when fetching a task file
