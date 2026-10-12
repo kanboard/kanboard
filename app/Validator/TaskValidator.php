@@ -40,6 +40,7 @@ class TaskValidator extends BaseValidator
             new Validators\Integer('recurrence_trigger', t('This value must be an integer')),
             new Validators\Integer('recurrence_status', t('This value must be an integer')),
             new Validators\Integer('priority', t('This value must be an integer')),
+            new Validators\InArray('color_id', array_merge(array(''), array_keys($this->colorModel->getList())), t('Color invalid')),
             new Validators\MaxLength('title', t('The maximum length is %d characters', 65535), 65535),
             new Validators\MaxLength('reference', t('The maximum length is %d characters', 191), 191),
             new Validators\Date('date_due', t('Invalid date'), $this->dateParser->getParserFormats()),

@@ -1,6 +1,6 @@
 <?php if (! empty($task['category_id'])): ?>
 <div class="task-board-category-container task-board-category-container-color">
-    <span class="task-board-category category-<?= $this->text->e($task['category_name']) ?> <?= $task['category_color_id'] ? "color-{$task['category_color_id']}" : '' ?>">
+    <span class="task-board-category category-<?= $this->text->e($task['category_name']) ?> <?= $task['category_color_id'] ? 'color-'.$this->text->e($task['category_color_id']) : '' ?>">
         <?php if ($not_editable): ?>
             <?= $this->text->e($task['category_name']) ?>
         <?php else: ?>
@@ -25,7 +25,7 @@
     <div class="task-tags">
         <ul>
         <?php foreach ($task['tags'] as $tag): ?>
-            <li class="task-tag <?= $tag['color_id'] ? "color-{$tag['color_id']}" : '' ?>"><?= $this->text->e($tag['name']) ?></li>
+            <li class="task-tag <?= $tag['color_id'] ? 'color-'.$this->text->e($tag['color_id']) : '' ?>"><?= $this->text->e($tag['name']) ?></li>
         <?php endforeach ?>
         </ul>
     </div>

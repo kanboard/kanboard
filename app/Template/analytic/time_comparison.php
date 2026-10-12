@@ -35,7 +35,7 @@
             </tr>
             <?php foreach ($paginator->getCollection() as $task): ?>
             <tr>
-                <td class="task-table color-<?= $task['color_id'] ?>">
+                <td class="task-table color-<?= $this->text->e($task['color_id']) ?>">
                     <?= $this->url->link('#'.$this->text->e($task['id']), 'TaskViewController', 'show', array('task_id' => $task['id']), false, '', t('View this task')) ?>
                 </td>
                 <td>

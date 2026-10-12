@@ -3,7 +3,7 @@
 
     <?= $this->hook->render('template:task:details:top', array('task' => $task)) ?>
 
-    <div class="task-summary-container color-<?= $task['color_id'] ?>">
+    <div class="task-summary-container color-<?= $this->text->e($task['color_id']) ?>">
         <div class="task-summary-columns">
             <div class="task-summary-column">
                 <ul class="no-bullet">
@@ -156,7 +156,7 @@
             <div class="task-tags">
                 <ul>
                     <?php foreach ($tags as $tag): ?>
-                        <li class="task-tag <?= $tag['color_id'] ? "color-{$tag['color_id']}" : '' ?>"><?= $this->text->e($tag['name']) ?></li>
+                        <li class="task-tag <?= $tag['color_id'] ? 'color-'.$this->text->e($tag['color_id']) : '' ?>"><?= $this->text->e($tag['name']) ?></li>
                     <?php endforeach ?>
                 </ul>
             </div>

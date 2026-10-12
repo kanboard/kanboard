@@ -38,8 +38,8 @@
                 </td>
                 <td>
                     <?php if ($tag['color_id']): ?>
-                    <div class="color-picker-square color-<?= $tag['color_id'] ?>"></div>
-                    <?= $this->text->e($colors[$tag['color_id']]) ?>
+                    <div class="color-picker-square color-<?= $this->text->e($tag['color_id']) ?>"></div>
+                    <?= $this->text->e($colors[$tag['color_id']] ?? '') ?>
                     <?php endif ?>
                 </td>
             </tr>
