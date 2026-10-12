@@ -401,6 +401,12 @@ class Client extends Base
             return false;
         }
 
+        // IPv4-mapped IPv6 address (::ffff:a.b.c.d), check the IPv4 part
+        $address = inet_pton($ip);
+        if (strlen($address) === 16 && substr($address, 0, 12) === str_repeat("\0", 10)."\xff\xff") {
+            $ip = inet_ntop(substr($address, 12));
+        }
+
         return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false;
     }
 
@@ -423,26 +429,37 @@ class Client extends Base
             return false;
         }
 
-        $host = trim($parsedUrl['host']);
+        $host = rtrim(trim($parsedUrl['host'], " \t\n\r\0\x0B[]"), '.');
         if ($host === '') {
             return false;
         }
 
-        $ipv4Address = gethostbyname($host);
-        if ($this->isPrivateIpAddress($ipv4Address)) {
-            return true;
+        if (filter_var($host, FILTER_VALIDATE_IP) !== false) {
+            return $this->isPrivateIpAddress($host);
         }
+
+        $addresses = gethostbynamel($host) ?: [];
 
         if (function_exists('dns_get_record')) {
             $dnsRecords = @dns_get_record($host, DNS_AAAA);
             if (is_array($dnsRecords)) {
                 foreach ($dnsRecords as $record) {
                     if (isset($record['type']) && $record['type'] === 'AAAA' && isset($record['ipv6'])) {
-                        if ($this->isPrivateIpAddress($record['ipv6'])) {
-                            return true;
-                        }
+                        $addresses[] = $record['ipv6'];
                     }
                 }
+            }
+        }
+
+        // Refuse hosts we cannot resolve: the HTTP client may still connect to them,
+        // for example cURL reads "0x7f000001" as 127.0.0.1.
+        if (empty($addresses)) {
+            return true;
+        }
+
+        foreach ($addresses as $address) {
+            if ($this->isPrivateIpAddress($address)) {
+                return true;
             }
         }
 
