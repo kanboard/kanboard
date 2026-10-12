@@ -231,7 +231,7 @@ class AuthenticationProvider implements ServiceProviderInterface
         $acl->add('TaskProcedure', array('openTask', 'closeTask', 'removeTask', 'moveTaskPosition', 'moveTaskToProject', 'duplicateTaskToProject', 'createTask', 'updateTask'), Role::PROJECT_MEMBER);
         $acl->add('TaskTagProcedure', array('setTaskTags'), Role::PROJECT_MEMBER);
         $acl->add('TagProcedure', array('createTag', 'updateTag', 'removeTag'), Role::PROJECT_MEMBER);
-        $acl->add('ProjectMetaDataProcedure', array('saveProjectMetadata', 'removeProjectMetadata'), Role::PROJECT_MEMBER);
+        $acl->add('ProjectMetaDataProcedure', array('saveProjectMetadata', 'removeProjectMetadata'), Role::PROJECT_MANAGER);
         $acl->add('TaskMetadataProcedure', array('saveTaskMetadata', 'removeTaskMetadata'), Role::PROJECT_MEMBER);
 
         return $acl;

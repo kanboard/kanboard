@@ -78,6 +78,48 @@ class ProcedureAuthorizationTest extends BaseProcedureTest
         $this->assertNotNull($this->user->getProjectById($projectId));
     }
 
+    public function testProjectMetadataAuthorizationForbiddenBecauseNotProjectManager()
+    {
+        $projectId = $this->manager->createProject(array(
+            'name' => 'Test Project',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $this->assertNotFalse($projectId);
+        $this->assertTrue($this->manager->addProjectUser($projectId, $this->userUserId, 'project-member'));
+
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
+        $this->user->saveProjectMetadata($projectId, array('key' => 'value'));
+    }
+
+    public function testProjectMetadataRemovalAuthorizationForbiddenBecauseNotProjectManager()
+    {
+        $projectId = $this->manager->createProject(array(
+            'name' => 'Test Project',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $this->assertNotFalse($projectId);
+        $this->assertTrue($this->manager->saveProjectMetadata($projectId, array('key' => 'value')));
+        $this->assertTrue($this->manager->addProjectUser($projectId, $this->userUserId, 'project-member'));
+
+        $this->expectException('JsonRPC\Exception\AccessDeniedException');
+        $this->user->removeProjectMetadata($projectId, 'key');
+    }
+
+    public function testProjectMetadataAuthorizationGranted()
+    {
+        $projectId = $this->manager->createProject(array(
+            'name' => 'Test Project',
+            'owner_id' => $this->managerUserId,
+        ));
+
+        $this->assertNotFalse($projectId);
+        $this->assertTrue($this->manager->addProjectUser($projectId, $this->userUserId, 'project-manager'));
+        $this->assertTrue($this->user->saveProjectMetadata($projectId, array('key' => 'value')));
+        $this->assertTrue($this->user->removeProjectMetadata($projectId, 'key'));
+    }
+
     public function testActionAuthorizationForbidden()
     {
         $projectId = $this->manager->createProject(array(
