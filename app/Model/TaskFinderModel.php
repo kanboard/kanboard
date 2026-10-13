@@ -320,10 +320,8 @@ class TaskFinderModel extends Base
             ->left(UserModel::TABLE, 'uc', 'id', TaskModel::TABLE, 'creator_id')
             ->columns(
                 TaskModel::TABLE.'.*',
-                'ua.email AS assignee_email',
                 'ua.name AS assignee_name',
                 'ua.username AS assignee_username',
-                'uc.email AS creator_email',
                 'uc.name AS creator_name',
                 'uc.username AS creator_username'
             );
