@@ -7,6 +7,9 @@ on:
       - 'v*.*.*'
   pull_request:
     branches: [ main ]
+permissions:
+  contents: read
+
 jobs:
   test-image-build:
     if: github.event.pull_request
