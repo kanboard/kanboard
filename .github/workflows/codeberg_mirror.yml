@@ -5,6 +5,9 @@ on:
     branches: [ main ]
   delete:
   workflow_dispatch:
+permissions:
+  contents: read
+
 
 jobs:
   mirror:
