@@ -15,6 +15,7 @@
 data/*
 plugins/*
 tests
+e2e
 ChangeLog
 composer.json
 custom-hooks
