@@ -44,7 +44,7 @@ class TaskFileProcedure extends BaseProcedure
         return '';
     }
 
-    public function createTaskFile($project_id, $task_id, $filename, $blob)
+    public function createTaskFile($project_id, $task_id, $filename, $blob, $creator_id = 0)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'createTaskFile', $project_id);
 
@@ -59,8 +59,12 @@ class TaskFileProcedure extends BaseProcedure
 
         TaskAuthorization::getInstance($this->container)->check($this->getClassName(), 'createTaskFile', $task_id);
 
+        if ($creator_id !== 0 && ! $this->projectPermissionModel->isAssignable($project_id, $creator_id)) {
+            return false;
+        }
+
         try {
-            return $this->taskFileModel->uploadContent($task_id, $filename, $blob);
+            return $this->taskFileModel->uploadContent($task_id, $filename, $blob, true, $creator_id);
         } catch (ObjectStorageException $e) {
             $this->logger->error(__METHOD__.': '.$e->getMessage());
             return false;

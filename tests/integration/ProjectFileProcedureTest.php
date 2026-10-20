@@ -24,6 +24,18 @@ class ProjectFileProcedureTest extends BaseProcedureTest
         $this->assertNotFalse($this->fileId);
     }
 
+    public function testCreateProjectFileWithCreator()
+    {
+        $this->assertCreateTeamProject();
+        $this->assertTrue($this->app->addProjectUser($this->projectId, $this->userUserId, 'project-member'));
+
+        $fileId = $this->app->createProjectFile($this->projectId, 'My file.txt', base64_encode('plain text file'), $this->userUserId);
+        $this->assertNotFalse($fileId);
+        $this->assertEquals($this->userUserId, $this->app->getProjectFile($this->projectId, $fileId)['user_id']);
+
+        $this->assertFalse($this->app->createProjectFile($this->projectId, 'My file.txt', base64_encode('plain text file'), $this->adminUserId));
+    }
+
     public function assertGetProjectFile()
     {
         $file = $this->app->getProjectFile($this->projectId, $this->fileId);

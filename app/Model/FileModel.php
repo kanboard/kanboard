@@ -158,9 +158,10 @@ abstract class FileModel extends Base
      * @param  string  $name           Filename
      * @param  string  $path           Path on the disk
      * @param  integer $size           File size
+     * @param  integer $creator_id     Explicit uploader id
      * @return bool|integer
      */
-    public function create($foreign_key_id, $name, $path, $size)
+    public function create($foreign_key_id, $name, $path, $size, $creator_id = 0)
     {
         $values = array(
             $this->getForeignKey() => $foreign_key_id,
@@ -168,7 +169,7 @@ abstract class FileModel extends Base
             'path' => $path,
             'is_image' => $this->isImage($name) ? 1 : 0,
             'size' => $size,
-            'user_id' => $this->userSession->getId() ?: 0,
+            'user_id' => $creator_id ?: ($this->userSession->getId() ?: 0),
             'date' => time(),
         );
 
@@ -350,9 +351,10 @@ abstract class FileModel extends Base
      * @param  string  $originalFilename
      * @param  string  $data
      * @param  bool    $isEncoded
+     * @param  integer $creator_id
      * @return bool|int
      */
-    public function uploadContent($id, $originalFilename, $data, $isEncoded = true)
+    public function uploadContent($id, $originalFilename, $data, $isEncoded = true, $creator_id = 0)
     {
         try {
             if ($isEncoded) {
@@ -375,7 +377,8 @@ abstract class FileModel extends Base
                 $id,
                 $originalFilename,
                 $destinationFilename,
-                strlen($data)
+                strlen($data),
+                $creator_id
             );
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
