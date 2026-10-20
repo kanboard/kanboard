@@ -427,6 +427,12 @@ class Request extends Base
     /**
      * Get the real user IP address considering trusted proxy headers and networks
      *
+     * Proxy headers are used only when the immediate peer is a trusted proxy.
+     * A single header value is taken as-is, because the proxy overwrote it.
+     * A comma-separated list is read from the right: trusted proxy hops are
+     * skipped, and the first remaining address is the client. The leftmost
+     * value is client-controlled and must not be used.
+     *
      * @access public
      * @param  array   $trustedProxyHeaders  List of trusted proxy headers (default: TRUSTED_PROXY_HEADERS constant)
      * @param  array   $trustedProxyNetworks List of trusted proxy networks (default: TRUSTED_PROXY_NETWORKS constant)
@@ -435,21 +441,59 @@ class Request extends Base
     public function getIpAddress(array $trustedProxyHeaders = [], array $trustedProxyNetworks = [])
     {
         $trustedProxyHeaders = array_filter(array_map('trim', $trustedProxyHeaders ?: explode(',', TRUSTED_PROXY_HEADERS)));
-        $useProxyHeaders = ! empty($trustedProxyHeaders) && $this->isTrustedProxy($trustedProxyNetworks);
-        $keys = $useProxyHeaders ? $trustedProxyHeaders : [];
+        if (empty($trustedProxyHeaders) || ! $this->isTrustedProxy($trustedProxyNetworks)) {
+            return $this->getClientIpAddress();
+        }
 
-        foreach ($keys as $key) {
-            if ($this->getServerVariable($key) !== '') {
-                foreach (explode(',', $this->server[$key]) as $ipAddress) {
-                    $ipAddress = trim($ipAddress);
-                    if (filter_var($ipAddress, FILTER_VALIDATE_IP)) {
-                        return $ipAddress;
-                    }
-                }
+        $trustedProxyNetworks = array_filter(array_map('trim', $trustedProxyNetworks ?: explode(',', TRUSTED_PROXY_NETWORKS)));
+
+        foreach ($trustedProxyHeaders as $key) {
+            $header = $this->getServerVariable($key);
+            if ($header === '') {
+                continue;
+            }
+
+            $ipAddress = $this->resolveForwardedClientIp($header, $trustedProxyNetworks);
+            if ($ipAddress !== '') {
+                return $ipAddress;
             }
         }
 
         return $this->getClientIpAddress();
+    }
+
+    /**
+     * Resolve the client IP from one trusted proxy header
+     *
+     * @access protected
+     * @param  string $header
+     * @param  array  $trustedProxyNetworks
+     * @return string
+     */
+    protected function resolveForwardedClientIp($header, array $trustedProxyNetworks)
+    {
+        $addresses = array_map('trim', explode(',', $header));
+
+        // A proxy-owned header such as X-Real-IP is a single value. Trust it
+        // even when it is the proxy itself, so a later forwarded list cannot
+        // replace an address the proxy explicitly set.
+        if (count($addresses) === 1) {
+            return filter_var($addresses[0], FILTER_VALIDATE_IP) ? $addresses[0] : '';
+        }
+
+        for ($i = count($addresses) - 1; $i >= 0; $i--) {
+            $ipAddress = $addresses[$i];
+            if (! filter_var($ipAddress, FILTER_VALIDATE_IP)) {
+                continue;
+            }
+            if ($this->isIpInNetworks($ipAddress, $trustedProxyNetworks)) {
+                continue;
+            }
+
+            return $ipAddress;
+        }
+
+        return '';
     }
 
     /**

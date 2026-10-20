@@ -252,7 +252,7 @@ class RequestTest extends Base
         $this->assertEquals('203.0.113.10', $request->getIpAddress());
     }
 
-    public function testGetIpAddressUsesTrustedProxyHeaderWhenValid()
+    public function testGetIpAddressUsesRightmostUntrustedForwardedAddress()
     {
         $server = [
             'REMOTE_ADDR' => '203.0.113.5',
@@ -261,8 +261,94 @@ class RequestTest extends Base
         $request = new Request($this->container, $server);
 
         $this->assertEquals(
-            '198.51.100.42',
+            '198.51.100.52',
             $request->getIpAddress(['HTTP_X_FORWARDED_FOR'], ['203.0.113.0/24'])
+        );
+    }
+
+    public function testGetIpAddressIgnoresClientSuppliedLeftmostForwardedAddress()
+    {
+        $server = [
+            'REMOTE_ADDR' => '172.17.0.1',
+            'HTTP_X_FORWARDED_FOR' => '203.0.113.77, 198.51.100.10',
+        ];
+        $request = new Request($this->container, $server);
+
+        $this->assertEquals(
+            '198.51.100.10',
+            $request->getIpAddress(['HTTP_X_FORWARDED_FOR'], ['172.16.0.0/12'])
+        );
+    }
+
+    public function testGetIpAddressSkipsTrustedProxyHopsInForwardedList()
+    {
+        $server = [
+            'REMOTE_ADDR' => '10.0.0.2',
+            'HTTP_X_FORWARDED_FOR' => '203.0.113.77, 198.51.100.10, 10.0.0.1',
+        ];
+        $request = new Request($this->container, $server);
+
+        $this->assertEquals(
+            '198.51.100.10',
+            $request->getIpAddress(['HTTP_X_FORWARDED_FOR'], ['10.0.0.0/8'])
+        );
+    }
+
+    public function testGetIpAddressTrustsSingleValueProxyHeaderOverForwardedList()
+    {
+        $server = [
+            'REMOTE_ADDR' => '10.0.0.2',
+            'HTTP_X_REAL_IP' => '198.51.100.10',
+            'HTTP_X_FORWARDED_FOR' => '203.0.113.77, 198.51.100.99',
+        ];
+        $request = new Request($this->container, $server);
+
+        $this->assertEquals(
+            '198.51.100.10',
+            $request->getIpAddress(['HTTP_X_REAL_IP', 'HTTP_X_FORWARDED_FOR'], ['10.0.0.0/8'])
+        );
+    }
+
+    public function testGetIpAddressKeepsProxySetSingleValueWhenItMatchesTheProxy()
+    {
+        $server = [
+            'REMOTE_ADDR' => '10.0.0.2',
+            'HTTP_X_REAL_IP' => '10.0.0.2',
+            'HTTP_X_FORWARDED_FOR' => '203.0.113.77, 10.0.0.2',
+        ];
+        $request = new Request($this->container, $server);
+
+        $this->assertEquals(
+            '10.0.0.2',
+            $request->getIpAddress(['HTTP_X_REAL_IP', 'HTTP_X_FORWARDED_FOR'], ['10.0.0.0/8'])
+        );
+    }
+
+    public function testGetIpAddressFallsBackWhenForwardedListContainsOnlyTrustedHops()
+    {
+        $server = [
+            'REMOTE_ADDR' => '10.0.0.2',
+            'HTTP_X_FORWARDED_FOR' => '10.0.0.1, 10.0.0.3',
+        ];
+        $request = new Request($this->container, $server);
+
+        $this->assertEquals(
+            '10.0.0.2',
+            $request->getIpAddress(['HTTP_X_FORWARDED_FOR'], ['10.0.0.0/8'])
+        );
+    }
+
+    public function testGetIpAddressSkipsTrustedIpv6ProxyHop()
+    {
+        $server = [
+            'REMOTE_ADDR' => '2001:db8:1::1',
+            'HTTP_X_FORWARDED_FOR' => '2001:db8::9, 2001:db8::abcd, 2001:db8:1::2',
+        ];
+        $request = new Request($this->container, $server);
+
+        $this->assertEquals(
+            '2001:db8::abcd',
+            $request->getIpAddress(['HTTP_X_FORWARDED_FOR'], ['2001:db8:1::/48'])
         );
     }
 
