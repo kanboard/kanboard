@@ -48,12 +48,16 @@ class ProjectFileProcedure extends BaseProcedure
         return '';
     }
 
-    public function createProjectFile($project_id, $filename, $blob)
+    public function createProjectFile($project_id, $filename, $blob, $creator_id = 0)
     {
         ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'createProjectFile', $project_id);
 
+        if ($creator_id !== 0 && ! $this->projectPermissionModel->isAssignable($project_id, $creator_id)) {
+            return false;
+        }
+
         try {
-            return $this->projectFileModel->uploadContent($project_id, $filename, $blob);
+            return $this->projectFileModel->uploadContent($project_id, $filename, $blob, true, $creator_id);
         } catch (ObjectStorageException $e) {
             $this->logger->error(__METHOD__.': '.$e->getMessage());
             return false;
