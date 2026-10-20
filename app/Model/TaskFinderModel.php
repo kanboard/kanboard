@@ -263,6 +263,10 @@ class TaskFinderModel extends Base
      */
     private function getActiveProjectIdsByUser($user_id)
     {
+        if ($user_id == 0) {
+            return null;
+        }
+
         if ($this->db->table(UserModel::TABLE)->eq('id', $user_id)->eq('role', Role::APP_ADMIN)->exists()) {
             return null;
         }
