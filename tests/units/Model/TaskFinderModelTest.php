@@ -3,11 +3,14 @@
 namespace KanboardTests\units\Model;
 
 use KanboardTests\units\Base;
+use Kanboard\Core\Security\Role;
 use Kanboard\Model\ColumnModel;
 use Kanboard\Model\CommentModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectUserRoleModel;
+use Kanboard\Model\SubtaskModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\UserMetadataModel;
 use Kanboard\Model\UserModel;
@@ -168,6 +171,43 @@ class TaskFinderModelTest extends Base
         $this->assertEquals('', $tasks[0]['assignee_name']);
 
         $this->assertEquals('Task #2', $tasks[1]['title']);
+    }
+
+    public function testUserTaskQueriesExcludeTasksFromRevokedProjects()
+    {
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
+        $subtaskModel = new SubtaskModel($this->container);
+        $userModel = new UserModel($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user 2')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
+        $this->assertTrue($projectUserRoleModel->addUser(1, 2, Role::PROJECT_MEMBER));
+        $this->assertEquals(1, $taskCreationModel->create(array(
+            'title' => 'Assigned task',
+            'project_id' => 1,
+            'owner_id' => 2,
+            'date_due' => strtotime('-1 day'),
+        )));
+        $this->assertEquals(2, $taskCreationModel->create(array(
+            'title' => 'Subtask assignment',
+            'project_id' => 1,
+        )));
+        $this->assertEquals(1, $subtaskModel->create(array(
+            'task_id' => 2,
+            'title' => 'Assigned subtask',
+            'user_id' => 2,
+        )));
+
+        $this->assertCount(2, $taskFinderModel->getUserQuery(2)->findAll());
+        $this->assertCount(1, $taskFinderModel->getOverdueTasksByUser(2));
+
+        $this->assertTrue($projectUserRoleModel->removeUser(1, 2));
+
+        $this->assertEmpty($taskFinderModel->getUserQuery(2)->findAll());
+        $this->assertEmpty($taskFinderModel->getOverdueTasksByUser(2));
     }
 
     public function testCountByProject()
