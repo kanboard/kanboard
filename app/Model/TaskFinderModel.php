@@ -3,6 +3,7 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Base;
+use Kanboard\Core\Security\Role;
 
 /**
  * Task Finder model
@@ -59,14 +60,22 @@ class TaskFinderModel extends Base
      */
     public function getUserQuery($user_id)
     {
-        return $this->getExtendedQuery()
-                    ->beginOr()
-                    ->eq(TaskModel::TABLE.'.owner_id', $user_id)
-                    ->inSubquery(TaskModel::TABLE.'.id', $this->db->table(SubtaskModel::TABLE)->columns('task_id')->eq('user_id', $user_id))
-                    ->closeOr()
-                    ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
-                    ->eq(ProjectModel::TABLE.'.is_active', ProjectModel::ACTIVE)
-                    ->eq(ColumnModel::TABLE.'.hide_in_dashboard', 0);
+        $query = $this->getExtendedQuery()
+                      ->beginOr()
+                      ->eq(TaskModel::TABLE.'.owner_id', $user_id)
+                      ->inSubquery(TaskModel::TABLE.'.id', $this->db->table(SubtaskModel::TABLE)->columns('task_id')->eq('user_id', $user_id))
+                      ->closeOr()
+                      ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
+                      ->eq(ProjectModel::TABLE.'.is_active', ProjectModel::ACTIVE)
+                      ->eq(ColumnModel::TABLE.'.hide_in_dashboard', 0);
+
+        $projectIds = $this->getActiveProjectIdsByUser($user_id);
+
+        if ($projectIds !== null) {
+            $query->in(TaskModel::TABLE.'.project_id', $projectIds);
+        }
+
+        return $query;
     }
 
     /**
@@ -234,7 +243,33 @@ class TaskFinderModel extends Base
     */
     public function getOverdueTasksByUser($user_id)
     {
-        return $this->getOverdueTasksQuery()->eq(TaskModel::TABLE.'.owner_id', $user_id)->findAll();
+        $query = $this->getOverdueTasksQuery()
+            ->eq(TaskModel::TABLE.'.owner_id', $user_id);
+
+        $projectIds = $this->getActiveProjectIdsByUser($user_id);
+
+        if ($projectIds !== null) {
+            $query->in(TaskModel::TABLE.'.project_id', $projectIds);
+        }
+
+        return $query->findAll();
+    }
+
+    /**
+     * Get active project ids the user is allowed to access
+     *
+     * @param  integer $user_id
+     * @return array|null
+     */
+    private function getActiveProjectIdsByUser($user_id)
+    {
+        if ($this->db->table(UserModel::TABLE)->eq('id', $user_id)->eq('role', Role::APP_ADMIN)->exists()) {
+            return null;
+        }
+
+        $projectIds = $this->projectPermissionModel->getActiveProjectIds($user_id);
+
+        return empty($projectIds) ? array(-1) : $projectIds;
     }
 
     /**
