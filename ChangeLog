@@ -1,3 +1,27 @@
+Version 1.2.55 (October 20, 2026)
+---------------------------------
+
+* fix(session): scope the session cookie to the directory without a trailing slash
+* fix(security): validate and escape color IDs
+* fix(security): select client IP from the rightmost untrusted hop
+* fix(security): restrict dashboard tasks to authorized projects
+* fix(security): project authorization bypass
+* fix(security): preserve unscoped dashboard pagination
+* fix(security): escape the project name in the analytic modal title
+* fix(ldap): enable notifications for auto-created LDAP users
+* fix(ical): only accept known columns as the calendar start date
+* fix(api): return a full batch response when one request is forbidden
+* fix(api): require manager role for project metadata writes
+* feat(locale): polish Swedish interface strings
+* feat(locale): add Azerbaijani translation
+* feat(api): support attachment creator IDs
+* feat: add WebP image upload support
+* ci: stop persisting the checkout token, no job pushes with git
+* ci: declare a read-only job token on the mirror, docker and linter workflows
+* build(deps): bump the github-actions group with 3 updates
+* build(deps): bump docker/setup-qemu-action in the github-actions group
+* build(deps): bump actions/upload-artifact
+
 Version 1.2.54 (August 28, 2026)
 --------------------------------
 
