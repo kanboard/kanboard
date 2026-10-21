@@ -1,2 +1,2 @@
 #!/bin/execlineb -P
-php-fpm84 -F
+php-fpm85 -F

@@ -15,13 +15,13 @@ EXPOSE 80 443
 ARG VERSION
 
 RUN apk --no-cache --update add \
-    tzdata openssl unzip nginx bash ca-certificates s6 curl ssmtp mailx php84 php84-phar php84-curl \
-    php84-fpm php84-json php84-zlib php84-xml php84-dom php84-ctype php84-opcache php84-zip php84-iconv \
-    php84-pdo php84-pdo_mysql php84-pdo_sqlite php84-pdo_pgsql php84-mbstring php84-session php84-bcmath \
-    php84-gd php84-openssl php84-sockets php84-posix php84-ldap php84-simplexml php84-xmlwriter && \
+    tzdata openssl unzip nginx bash ca-certificates s6 curl ssmtp mailx php85 php85-phar php85-curl \
+    php85-fpm php85-json php85-zlib php85-xml php85-dom php85-ctype php85-zip php85-iconv \
+    php85-pdo php85-pdo_mysql php85-pdo_sqlite php85-pdo_pgsql php85-mbstring php85-session php85-bcmath \
+    php85-gd php85-openssl php85-sockets php85-posix php85-ldap php85-simplexml php85-xmlwriter && \
     rm -rf /var/www/localhost && \
-    rm -f /etc/php84/php-fpm.d/www.conf && \
-    ln -sf /usr/bin/php84 /usr/bin/php
+    rm -f /etc/php85/php-fpm.d/www.conf && \
+    ln -sf /usr/bin/php85 /usr/bin/php
 
 ADD . /var/www/app
 ADD docker/ /
