@@ -1,1 +1,1 @@
-0 8 * * * cd /var/www/app && php84 ./cli cronjob >/dev/null 2>&1
+0 8 * * * cd /var/www/app && php85 ./cli cronjob >/dev/null 2>&1
