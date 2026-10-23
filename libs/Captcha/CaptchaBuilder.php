@@ -699,7 +699,6 @@ class CaptchaBuilder implements CaptchaBuilderInterface
         // check image type
         $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
         $imageType = finfo_file($finfo, $backgroundImage);
-        finfo_close($finfo);
 
         if (!in_array($imageType, $this->allowedBackgroundImageTypes)) {
             throw new Exception('Invalid background image type! Allowed types are: ' . join(', ', $this->allowedBackgroundImageTypes));

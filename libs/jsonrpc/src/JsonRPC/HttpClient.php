@@ -289,7 +289,6 @@ class HttpClient
                 curl_setopt($ch, CURLOPT_CAINFO, $this->sslLocalCert);
             }
             $response = curl_exec($ch);
-            curl_close($ch);
             if ($response !== false) {
                 $response = json_decode($response, true);
             } else {

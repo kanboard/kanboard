@@ -83,19 +83,19 @@ class Mysql extends Base
     {
         $charset = empty($settings['charset']) ? 'utf8' : $settings['charset'];
         $options = array(
-            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET sql_mode = STRICT_ALL_TABLES, NAMES ' . $charset,
+            $this->mysqlAttribute('Pdo\\Mysql::ATTR_INIT_COMMAND', 'PDO::MYSQL_ATTR_INIT_COMMAND') => 'SET sql_mode = STRICT_ALL_TABLES, NAMES ' . $charset,
         );
 
         if (! empty($settings['ssl_key'])) {
-            $options[PDO::MYSQL_ATTR_SSL_KEY] = $settings['ssl_key'];
+            $options[$this->mysqlAttribute('Pdo\\Mysql::ATTR_SSL_KEY', 'PDO::MYSQL_ATTR_SSL_KEY')] = $settings['ssl_key'];
         }
 
         if (! empty($settings['ssl_cert'])) {
-            $options[PDO::MYSQL_ATTR_SSL_CERT] = $settings['ssl_cert'];
+            $options[$this->mysqlAttribute('Pdo\\Mysql::ATTR_SSL_CERT', 'PDO::MYSQL_ATTR_SSL_CERT')] = $settings['ssl_cert'];
         }
 
         if (! empty($settings['ssl_ca'])) {
-            $options[PDO::MYSQL_ATTR_SSL_CA] = $settings['ssl_ca'];
+            $options[$this->mysqlAttribute('Pdo\\Mysql::ATTR_SSL_CA', 'PDO::MYSQL_ATTR_SSL_CA')] = $settings['ssl_ca'];
         }
 
         if (! empty($settings['persistent'])) {
@@ -107,7 +107,7 @@ class Mysql extends Base
         }
 
         if (isset($settings['verify_server_cert'])) {
-            $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = $settings['verify_server_cert'];
+            $options[$this->mysqlAttribute('Pdo\\Mysql::ATTR_SSL_VERIFY_SERVER_CERT', 'PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT')] = $settings['verify_server_cert'];
         }
 
         if (! empty($settings['case'])) {
@@ -115,6 +115,21 @@ class Mysql extends Base
         }
 
         return $options;
+    }
+
+    /**
+     * Return a MySQL PDO attribute name compatible with PHP 8.1 and newer.
+     *
+     * The Pdo\\Mysql driver class was introduced in PHP 8.4.0; PHP 8.5
+     * deprecates the corresponding constants on PDO.
+     *
+     * @param string $modern
+     * @param string $legacy
+     * @return int
+     */
+    protected function mysqlAttribute($modern, $legacy)
+    {
+        return defined($modern) ? constant($modern) : constant($legacy);
     }
 
     /**
