@@ -59,4 +59,38 @@ class TaskSearchFilterTest extends Base
         $this->assertCount(1, $tasks);
         $this->assertEquals(2, $tasks[0]['id']);
     }
+
+    public function testMatchIsCaseInsensitiveForUnicode()
+    {
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreation->create(array('title' => 'Änderung Config', 'project_id' => 1)));
+        $this->assertEquals(2, $taskCreation->create(array('title' => 'Привет мир', 'project_id' => 1)));
+        $this->assertEquals(3, $taskCreation->create(array('title' => 'Other task', 'project_id' => 1)));
+
+        $this->assertSame(array(1), $this->search('änderung'));
+        $this->assertSame(array(1), $this->search('ÄNDERUNG'));
+        $this->assertSame(array(1), $this->search('config'));
+        $this->assertSame(array(2), $this->search('привет'));
+        $this->assertSame(array(2), $this->search('МИР'));
+    }
+
+    private function search($value)
+    {
+        $taskFinder = new TaskFinderModel($this->container);
+        $query = $taskFinder->getExtendedQuery();
+
+        $filter = new TaskSearchFilter();
+        $filter->setDatabase($this->container['db']);
+        $filter->withQuery($query);
+        $filter->withValue($value);
+        $filter->apply();
+
+        $taskIds = array_column($query->findAll(), 'id');
+        sort($taskIds);
+
+        return array_map('intval', $taskIds);
+    }
 }
