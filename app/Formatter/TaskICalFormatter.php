@@ -133,7 +133,7 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
         if (! empty($task['owner_id'])) {
             $attendees = new Attendees;
             $attendees->add(
-                'MAILTO:'.($task['assignee_email'] ?: $task['assignee_username'].'@kanboard.local'),
+                'MAILTO:'.$task['assignee_username'].'@kanboard.local',
                 array('CN' => $task['assignee_name'] ?: $task['assignee_username'])
             );
             $vEvent->setAttendees($attendees);
@@ -141,7 +141,7 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
 
         if (! empty($task['creator_id'])) {
             $vEvent->setOrganizer(new Organizer(
-                'MAILTO:' . $task['creator_email'] ?: $task['creator_username'].'@kanboard.local',
+                'MAILTO:'.$task['creator_username'].'@kanboard.local',
                 array('CN' => $task['creator_name'] ?: $task['creator_username'])
             ));
         }
