@@ -42,6 +42,36 @@ abstract class BaseProcedure extends Base
         return is_array($users) ? array_map(array($this, 'filterUser'), $users) : $users;
     }
 
+    protected function filterComment($comment)
+    {
+        if (is_array($comment)) {
+            unset($comment['email']);
+        }
+
+        return $comment;
+    }
+
+    protected function filterComments($comments)
+    {
+        return is_array($comments) ? array_map(array($this, 'filterComment'), $comments) : $comments;
+    }
+
+    protected function filterEvent(array $event)
+    {
+        unset($event['email']);
+
+        if (isset($event['comment'])) {
+            $event['comment'] = $this->filterComment($event['comment']);
+        }
+
+        return $event;
+    }
+
+    protected function filterEvents(array $events)
+    {
+        return array_map(array($this, 'filterEvent'), $events);
+    }
+
     protected function getClassName()
     {
         $reflection = new ReflectionClass(get_called_class());
