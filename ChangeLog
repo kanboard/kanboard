@@ -1,3 +1,16 @@
+Version 1.2.57 (October 30, 2026)
+---------------------------------
+
+* fix(sqlite): make LIKE case-insensitive for non-ASCII characters
+* fix(docker): disable PHP session upload progress
+* fix(docker): correct PHP 8.5 and PHP-FPM configuration issues
+* fix(bulk): check access to opposite task when adding internal links
+* fix(api): hide inaccessible projects from lookup procedures
+* fix: remove PHP 8.5 deprecation warnings
+* feat(user): allow searching users by exact email address
+* chore(deps): remove vendored event-dispatcher composer.json
+* build(deps): bump the github-actions group with 2 updates
+
 Version 1.2.56 (October 21, 2026)
 ---------------------------------
 
