@@ -20,6 +20,9 @@
                             <a href="<?= $this->url->href('TaskBulkMoveColumnController', 'show', ['project_id' => $project['id']]) ?>" data-list-item-action="modal"><?= t('Move selected tasks to another column or swimlane') ?></a>
                         </li>
                         <li>
+                            <a href="<?= $this->url->href('TaskBulkMoveProjectController', 'show', ['project_id' => $project['id']]) ?>" data-list-item-action="modal"><?= t('Move selected tasks to another project') ?></a>
+                        </li>
+                        <li>
                             <a href="<?= $this->url->href('TaskBulkChangePropertyController', 'show', ['project_id' => $project['id']]) ?>" data-list-item-action="modal"><?= t('Edit tasks in bulk') ?></a>
                         </li>
                     </ul>
