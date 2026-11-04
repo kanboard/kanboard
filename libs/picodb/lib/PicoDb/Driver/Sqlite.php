@@ -22,6 +22,14 @@ class Sqlite extends Base
     protected $requiredAttributes = array('filename');
 
     /**
+     * Compiled regular expressions for the LIKE function
+     *
+     * @access private
+     * @var array
+     */
+    private $likeRegexCache = array();
+
+    /**
      * Create a new PDO connection
      *
      * @access public
@@ -34,7 +42,9 @@ class Sqlite extends Base
         // Set a default timeout of 30 seconds to reduce "database is locked" errors.
         $options[PDO::ATTR_TIMEOUT] = (! empty($settings['timeout'])) ? $settings['timeout'] : 30;
 
-        $this->pdo = new PDO('sqlite:'.$settings['filename'], null, null, $options);
+        // The Pdo\Sqlite driver class was introduced in PHP 8.4.0.
+        $dsn = 'sqlite:'.$settings['filename'];
+        $this->pdo = class_exists('Pdo\\Sqlite') ? new \Pdo\Sqlite($dsn, null, null, $options) : new PDO($dsn, null, null, $options);
 
         // Enabling WAL mode by default should also reduce the "database is locked" errors.
         // Official docs: https://sqlite.org/wal.html
@@ -45,6 +55,82 @@ class Sqlite extends Base
         }
 
         $this->enableForeignKeys();
+        $this->registerFunctions();
+    }
+
+    /**
+     * Register custom SQL functions
+     *
+     * The built-in LIKE operator of Sqlite is case-insensitive only for ASCII characters.
+     *
+     * @access protected
+     */
+    protected function registerFunctions()
+    {
+        // PHP 8.5 deprecates PDO::sqliteCreateFunction() in favor of Pdo\Sqlite::createFunction().
+        $method = method_exists($this->pdo, 'createFunction') ? 'createFunction' : 'sqliteCreateFunction';
+        $callback = array($this, 'like');
+
+        $this->pdo->$method('like', $callback, 2);
+        $this->pdo->$method('like', $callback, 3);
+    }
+
+    /**
+     * Unicode case-insensitive implementation of the LIKE operator
+     *
+     * @access public
+     * @param  string|null  $pattern
+     * @param  string|null  $value
+     * @param  string|null  $escape
+     * @return integer|null
+     */
+    public function like($pattern, $value, $escape = null)
+    {
+        if ($pattern === null || $value === null) {
+            return null;
+        }
+
+        $key = $escape."\0".$pattern;
+
+        if (! isset($this->likeRegexCache[$key])) {
+            if (count($this->likeRegexCache) > 100) {
+                $this->likeRegexCache = array();
+            }
+
+            $this->likeRegexCache[$key] = $this->buildLikeRegex((string) $pattern, $escape === null ? null : (string) $escape);
+        }
+
+        return preg_match($this->likeRegexCache[$key], (string) $value) === 1 ? 1 : 0;
+    }
+
+    /**
+     * Convert a LIKE pattern to a regular expression
+     *
+     * @access private
+     * @param  string       $pattern
+     * @param  string|null  $escape
+     * @return string
+     */
+    private function buildLikeRegex($pattern, $escape)
+    {
+        $chars = preg_split('//u', $pattern, -1, PREG_SPLIT_NO_EMPTY) ?: array();
+        $regex = '';
+
+        for ($i = 0, $length = count($chars); $i < $length; $i++) {
+            $char = $chars[$i];
+
+            if ($char === $escape && $i + 1 < $length) {
+                $regex .= preg_quote($chars[++$i], '/');
+            } elseif ($char === '%') {
+                $regex .= '.*';
+            } elseif ($char === '_') {
+                $regex .= '.';
+            } else {
+                $regex .= preg_quote($char, '/');
+            }
+        }
+
+        return '/^'.$regex.'$/uis';
     }
 
     /**

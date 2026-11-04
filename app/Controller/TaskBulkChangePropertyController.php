@@ -30,6 +30,14 @@ class TaskBulkChangePropertyController extends BaseController
         $values = $this->request->getValues();
         $taskIDs = explode(',', $values['task_ids']);
 
+        if (isset($values['change_internallink']) && $values['change_internallink'] == 1) {
+            $opposite_task = $this->taskFinderModel->getById($values['opposite_task_id']);
+
+            if (empty($opposite_task) || ! $this->projectPermissionModel->isUserAllowed($opposite_task['project_id'], $this->userSession->getId())) {
+                throw new AccessForbiddenException();
+            }
+        }
+
         foreach ($taskIDs as $taskID) {
             if ($this->taskFinderModel->getProjectId($taskID) != $project['id']) {
                 throw new AccessForbiddenException();

@@ -2,6 +2,7 @@
 
 namespace Kanboard\Api\Procedure;
 
+use JsonRPC\Exception\AccessDeniedException;
 use Kanboard\Api\Authorization\ProjectAuthorization;
 
 /**
@@ -22,37 +23,19 @@ class ProjectProcedure extends BaseProcedure
     public function getProjectByName($name)
     {
         $project = $this->projectModel->getByName($name);
-
-        if (empty($project)) {
-            return false;
-        }
-
-        ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectByName', $project['id']);
-        return $this->projectApiFormatter->withProject($project)->format();
+        return $this->formatProjectIfAllowed('getProjectByName', $project);
     }
 
     public function getProjectByIdentifier($identifier)
     {
         $project = $this->projectModel->getByIdentifier($identifier);
-
-        if (empty($project)) {
-            return false;
-        }
-
-        ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectByIdentifier', $project['id']);
-        return $this->projectApiFormatter->withProject($project)->format();
+        return $this->formatProjectIfAllowed('getProjectByIdentifier', $project);
     }
 
     public function getProjectByEmail($email)
     {
         $project = $this->projectModel->getByEmail($email);
-
-        if (empty($project)) {
-            return false;
-        }
-
-        ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), 'getProjectByEmail', $project['id']);
-        return $this->projectApiFormatter->withProject($project)->format();
+        return $this->formatProjectIfAllowed('getProjectByEmail', $project);
     }
 
     public function getAllProjects()
@@ -148,5 +131,23 @@ class ProjectProcedure extends BaseProcedure
 
         list($valid, ) = $this->projectValidator->validateModification($values);
         return $valid && $this->projectModel->update($values);
+    }
+
+    /**
+     * Return false for both missing and forbidden projects to avoid leaking project existence
+     */
+    protected function formatProjectIfAllowed($method, $project)
+    {
+        if (empty($project)) {
+            return false;
+        }
+
+        try {
+            ProjectAuthorization::getInstance($this->container)->check($this->getClassName(), $method, $project['id']);
+        } catch (AccessDeniedException $e) {
+            return false;
+        }
+
+        return $this->projectApiFormatter->withProject($project)->format();
     }
 }
