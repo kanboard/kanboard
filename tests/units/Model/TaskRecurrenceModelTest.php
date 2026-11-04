@@ -78,6 +78,60 @@ class TaskRecurrenceModelTest extends Base
         $this->assertEqualsWithDelta(1494449776, $values['date_due'], 1, '');
     }
 
+    public function testMonthlyRecurrencePreservesEndOfMonthAndClampsMissingDays()
+    {
+        $model = new TaskRecurrenceModel($this->container);
+        $cases = array(
+            array('2023-01-31 14:35:42', 1, '2023-02-28 14:35:42'),
+            array('2024-01-31 14:35:42', 1, '2024-02-29 14:35:42'),
+            array('2024-02-29 14:35:42', 1, '2024-03-31 14:35:42'),
+            array('2023-02-28 14:35:42', 12, '2024-02-29 14:35:42'),
+            array('2024-03-31 14:35:42', -1, '2024-02-29 14:35:42'),
+            array('2024-02-29 14:35:42', -2, '2023-12-31 14:35:42'),
+            array('2023-01-30 14:35:42', 1, '2023-02-28 14:35:42'),
+            array('2024-03-30 14:35:42', -1, '2024-02-29 14:35:42'),
+            array('2024-01-30 14:35:42', 2, '2024-03-30 14:35:42'),
+            array('2024-02-29 14:35:42', 0, '2024-02-29 14:35:42'),
+        );
+
+        foreach ($cases as list($source, $factor, $expected)) {
+            $values = array(
+                'date_due' => strtotime($source),
+                'recurrence_factor' => $factor,
+                'recurrence_basedate' => TaskModel::RECURRING_BASEDATE_DUEDATE,
+                'recurrence_timeframe' => TaskModel::RECURRING_TIMEFRAME_MONTHS,
+            );
+            $model->calculateRecurringTaskDueDate($values);
+            $this->assertEquals(strtotime($expected), $values['date_due'], $source.' / '.$factor);
+        }
+    }
+
+    public function testMonthlyRecurrenceUsesTriggerDateAsBase()
+    {
+        $model = new TaskRecurrenceModel($this->container);
+        $values = array(
+            'date_due' => strtotime('2000-01-01 00:00:00'),
+            'recurrence_factor' => 1,
+            'recurrence_basedate' => TaskModel::RECURRING_BASEDATE_TRIGGERDATE,
+            'recurrence_timeframe' => TaskModel::RECURRING_TIMEFRAME_MONTHS,
+        );
+        $before = time();
+        $model->calculateRecurringTaskDueDate($values);
+        $after = time();
+
+        $possible = array();
+        for ($timestamp = $before; $timestamp <= $after; $timestamp++) {
+            $source = new \DateTime('@'.$timestamp);
+            $day = (int) $source->format('j');
+            $isLastDay = $day === (int) $source->format('t');
+            $source->modify('first day of next month');
+            $targetDay = $isLastDay ? (int) $source->format('t') : min($day, (int) $source->format('t'));
+            $source->setDate((int) $source->format('Y'), (int) $source->format('n'), $targetDay);
+            $possible[] = $source->getTimestamp();
+        }
+        $this->assertContains($values['date_due'], $possible);
+    }
+
     public function testDuplicateRecurringTask()
     {
         $taskRecurrenceModel = new TaskRecurrenceModel($this->container);

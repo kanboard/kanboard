@@ -151,7 +151,18 @@ class TaskRecurrenceModel extends TaskDuplicationModel
             $date_due = new DateTime();
             $date_due->setTimestamp($values['date_due']);
 
+            if ($values['recurrence_timeframe'] == TaskModel::RECURRING_TIMEFRAME_MONTHS) {
+                $day = (int) $date_due->format('j');
+                $is_last_day = $day == (int) $date_due->format('t');
+                $date_due->setDate((int) $date_due->format('Y'), (int) $date_due->format('n'), 1);
+            }
+
             $subtract ? $date_due->sub(new DateInterval($interval)) : $date_due->add(new DateInterval($interval));
+
+            if ($values['recurrence_timeframe'] == TaskModel::RECURRING_TIMEFRAME_MONTHS) {
+                $last_day = (int) $date_due->format('t');
+                $date_due->setDate((int) $date_due->format('Y'), (int) $date_due->format('n'), $is_last_day ? $last_day : min($day, $last_day));
+            }
 
             $values['date_due'] = $date_due->getTimestamp();
         }
