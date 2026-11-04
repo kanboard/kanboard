@@ -38,6 +38,15 @@ class SqliteDriverTest extends TestCase
         $this->assertEquals('', $this->driver->getOperator('FOO'));
     }
 
+    public function testLike()
+    {
+        $this->assertSame(1, $this->driver->like('änderung%', 'Änderung Config'));
+        $this->assertSame(1, $this->driver->like('%ПРИВЕТ%', 'Привет мир'));
+        $this->assertSame(0, $this->driver->like('a.c', 'abc'));
+        $this->assertSame(1, $this->driver->like('50!%', '50%', '!'));
+        $this->assertNull($this->driver->like('x', null));
+    }
+
     public function testSchemaVersion()
     {
         $this->assertEquals(0, $this->driver->getSchemaVersion());
