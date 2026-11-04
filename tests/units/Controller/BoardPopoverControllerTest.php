@@ -49,7 +49,7 @@ class BoardPopoverControllerTest extends Base
         $html = '';
         $response = $this->getMockBuilder(Response::class)->setConstructorArgs(array($this->container))
             ->onlyMethods(array('html', 'redirect'))->getMock();
-        $response->method('html')->willReturnCallback(function ($body) use (&$html) { $html = $body; });
+        $response->expects($this->once())->method('html')->willReturnCallback(function ($body) use (&$html) { $html = $body; });
         $this->container['response'] = $response;
         (new BoardPopoverController($this->container))->confirmCloseColumnTasks();
         return $html;
@@ -75,6 +75,21 @@ class BoardPopoverControllerTest extends Base
         $this->createBoard();
         $html = $this->confirmation('status:open needle');
         $this->assertStringContainsString('1 task(s) in the column', $html);
+    }
+
+    public function testConfirmationPreservesLiteralPercentEscapesInFilter()
+    {
+        $this->createBoard();
+        $html = $this->confirmation('status:open percent%20test');
+        $dom = new DOMDocument();
+        @$dom->loadHTML($html);
+        foreach ($dom->getElementsByTagName('input') as $input) {
+            if ($input->getAttribute('name') === 'search') {
+                $this->assertSame('status:open percent%20test', $input->getAttribute('value'));
+                return;
+            }
+        }
+        $this->fail('The filter must be included in the confirmation form');
     }
 
     public function testFilteredConfirmationClosesOnlyMatchingTasksInSelectedCell()

@@ -23,7 +23,7 @@ class BoardPopoverController extends BaseController
         $project = $this->getProject();
         $column_id = $this->request->getIntegerParam('column_id');
         $swimlane_id = $this->request->getIntegerParam('swimlane_id');
-        $search = rawurldecode($this->userSession->getFilters($project['id']));
+        $search = $this->userSession->getFilters($project['id']);
         $filtered = trim($search) !== '' && trim($search) !== 'status:open';
 
         $this->response->html($this->template->render('board_popover/close_all_tasks_column', array(
