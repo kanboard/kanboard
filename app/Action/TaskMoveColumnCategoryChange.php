@@ -87,6 +87,7 @@ class TaskMoveColumnCategoryChange extends Base
             $this->getParam('dest_column_id'),
             $data['task']['position'],
             $data['task']['swimlane_id'],
+            false,
             false
         );
     }
