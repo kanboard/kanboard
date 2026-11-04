@@ -68,10 +68,10 @@ class TaskBulkMoveProjectController extends BaseController
         $project = $this->getProject();
         $values = $this->request->getValues();
 
-        $taskIDs = isset($values['task_ids']) && is_string($values['task_ids'])
-            ? array_filter(array_unique(explode(',', $values['task_ids'])), 'is_numeric')
+        $taskIDs = isset($values['task_ids']) && is_scalar($values['task_ids'])
+            ? array_filter(array_unique(explode(',', (string) $values['task_ids'])), 'is_numeric')
             : array();
-        $dst_project_id = isset($values['project_id']) && is_string($values['project_id']) ? (int) $values['project_id'] : 0;
+        $dst_project_id = isset($values['project_id']) && is_scalar($values['project_id']) ? (int) $values['project_id'] : 0;
 
         $projects_list = $this->projectUserRoleModel->getActiveProjectsByUser($this->userSession->getId());
         unset($projects_list[$project['id']]);
@@ -121,7 +121,7 @@ class TaskBulkMoveProjectController extends BaseController
      */
     private function getIntOrNull(array $values, $field)
     {
-        $value = isset($values[$field]) && is_string($values[$field]) ? trim($values[$field]) : '';
+        $value = isset($values[$field]) && is_scalar($values[$field]) ? trim((string) $values[$field]) : '';
 
         if ($value === '') {
             return null;
