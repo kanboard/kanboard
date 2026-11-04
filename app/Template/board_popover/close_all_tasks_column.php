@@ -5,6 +5,7 @@
     <?= $this->form->csrf() ?>
     <?= $this->form->hidden('column_id', $values) ?>
     <?= $this->form->hidden('swimlane_id', $values) ?>
+    <?= $this->form->hidden('search', $values) ?>
 
     <p class="alert"><?= t('%d task(s) in the column "%s" and the swimlane "%s" will be closed.', $nb_tasks, $column, $swimlane) ?></p>
 
