@@ -20,12 +20,15 @@
         <?php else: ?>
             <?= $this->asset->css('assets/css/light.min.css') ?>
         <?php endif ?>
+        <?= $this->asset->css('assets/css/font.css') ?>
+        <?= $this->asset->css('assets/css/dashboard-header.css') ?>
         <?= $this->asset->css('assets/css/print.min.css', true, 'print') ?>
         <?= $this->asset->customCss() ?>
 
         <?php if (! isset($not_editable)): ?>
             <?= $this->asset->js('assets/js/vendor.min.js') ?>
             <?= $this->asset->js('assets/js/app.min.js') ?>
+            <?= $this->asset->js('assets/js/dashboard-project-row.js') ?>
         <?php endif ?>
 
         <?= $this->hook->asset('css', 'template:layout:css') ?>

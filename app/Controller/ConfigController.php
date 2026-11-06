@@ -81,6 +81,14 @@ class ConfigController extends BaseController
      */
     public function application(array $values = [], array $errors = [])
     {
+        if (empty($values)) {
+            $values = $this->configModel->getAll();
+        }
+
+        if (! isset($values['dashboard_max_projects'])) {
+            $values['dashboard_max_projects'] = DASHBOARD_MAX_PROJECTS;
+        }
+
         $this->response->html($this->helper->layout->config('config/application', array(
             'mail_transports' => $this->emailClient->getAvailableTransports(),
             'languages' => $this->languageModel->getLanguages(),

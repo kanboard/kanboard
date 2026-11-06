@@ -6,6 +6,14 @@
 .project
 /.settings/
 .idea
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
 .vscode
 /nbproject/
 .DS_Store
