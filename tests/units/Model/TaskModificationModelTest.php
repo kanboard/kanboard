@@ -3,6 +3,7 @@
 namespace KanboardTests\units\Model;
 
 use KanboardTests\units\Base;
+use Kanboard\Model\CategoryModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskModificationModel;
@@ -132,7 +133,10 @@ class TaskModificationModelTest extends Base
         $taskModificationModel = new TaskModificationModel($this->container);
         $taskFinderModel = new TaskFinderModel($this->container);
 
+        $categoryModel = new CategoryModel($this->container);
+
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
+        $this->assertEquals(1, $categoryModel->create(array('project_id' => 1, 'name' => 'Category #1')));
         $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1)));
 
         $task = $taskFinderModel->getById(1);
@@ -319,5 +323,34 @@ class TaskModificationModelTest extends Base
         $this->assertTrue($taskModificationModel->update(array('id' => 2, 'tags' => array(''))));
         $tags = $taskTagModel->getList(2);
         $this->assertEquals(array(), $tags);
+    }
+
+    public function testRejectReferencesFromAnotherProject()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskModificationModel = new TaskModificationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project #2')));
+        $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #2', 'project_id' => 2)));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1)));
+
+        $this->assertFalse($taskModificationModel->update(array('id' => 1, 'title' => 'changed', 'category_id' => 1)));
+        $this->assertFalse($taskModificationModel->update(array('id' => 1, 'title' => 'changed', 'column_id' => 5)));
+        $this->assertFalse($taskModificationModel->update(array('id' => 1, 'title' => 'changed', 'swimlane_id' => 2)));
+        $this->assertFalse($taskModificationModel->update(array('id' => 1, 'title' => 'changed', 'project_id' => 2)));
+        $this->assertFalse($taskModificationModel->update(array('id' => 999, 'title' => 'changed')));
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertEquals('test', $task['title']);
+        $this->assertEquals(1, $task['project_id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(1, $task['swimlane_id']);
+        $this->assertEquals(0, $task['category_id']);
+
+        $this->assertTrue($taskModificationModel->update(array('id' => 1, 'title' => 'changed', 'project_id' => 1)));
     }
 }

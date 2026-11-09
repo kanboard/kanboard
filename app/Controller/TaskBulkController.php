@@ -46,6 +46,7 @@ class TaskBulkController extends BaseController
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
+        $values['project_id'] = $project['id'];
         list($valid, $errors) = $this->taskValidator->validateBulkCreation($values);
 
         if (! $valid) {

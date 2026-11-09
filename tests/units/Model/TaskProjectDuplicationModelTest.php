@@ -188,7 +188,7 @@ class TaskProjectDuplicationModelTest extends Base
         $this->assertEquals(4, $swimlaneModel->create(1, 'Swimlane #2'));
 
         // We create a task
-        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 2)));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 3)));
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $taskProjectDuplicationModel->duplicateToProject(1, 2));
@@ -222,7 +222,7 @@ class TaskProjectDuplicationModelTest extends Base
         $this->assertEquals(5, $swimlaneModel->create(2, 'Swimlane #2'));
 
         // We create a task
-        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 2)));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'test', 'project_id' => 1, 'column_id' => 2, 'swimlane_id' => 1)));
 
         // We duplicate our task to the 2nd project
         $this->assertEquals(2, $taskProjectDuplicationModel->duplicateToProject(1, 2, 3));

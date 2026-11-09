@@ -14,9 +14,13 @@ class TaskPositionModel extends Base
 {
     public function moveBottom($project_id, $task_id, $swimlane_id, $column_id)
     {
-        $this->db->startTransaction();
-
         $task = $this->taskFinderModel->getById($task_id);
+
+        if (! $this->isValidMove($project_id, $task, $column_id, $swimlane_id)) {
+            return false;
+        }
+
+        $this->db->startTransaction();
 
         $result = $this->db->table(TaskModel::TABLE)
             ->eq('project_id', $project_id)
@@ -71,8 +75,16 @@ class TaskPositionModel extends Base
 
         $task = $this->taskFinderModel->getById($task_id);
 
+        if (empty($task)) {
+            return false;
+        }
+
         if ($swimlane_id == 0) {
             $swimlane_id = $task['swimlane_id'];
+        }
+
+        if (! $this->isValidMove($project_id, $task, $column_id, $swimlane_id)) {
+            return false;
         }
 
         if ($onlyOpen && $task['is_active'] == TaskModel::STATUS_CLOSED) {
@@ -94,6 +106,28 @@ class TaskPositionModel extends Base
         }
 
         return $result;
+    }
+
+    /**
+     * Return true if the task, column and swimlane belong to the project
+     *
+     * @access private
+     * @param  integer    $project_id
+     * @param  array|null $task
+     * @param  integer    $column_id
+     * @param  integer    $swimlane_id
+     * @return boolean
+     */
+    private function isValidMove($project_id, $task, $column_id, $swimlane_id)
+    {
+        if (empty($task) || empty($column_id) || empty($swimlane_id) || (int) $task['project_id'] !== (int) $project_id) {
+            return false;
+        }
+
+        return $this->taskModel->hasValidProjectReferences($project_id, array(
+            'column_id' => $column_id,
+            'swimlane_id' => $swimlane_id,
+        ));
     }
 
     /**

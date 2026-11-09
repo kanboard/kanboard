@@ -95,11 +95,11 @@ class TaskImport extends Base
         $values['time_spent'] = (float) $row['time_spent'];
 
         if (! empty($row['assignee'])) {
-            $values['owner_id'] = $this->userModel->getIdByUsername($row['assignee']);
+            $values['owner_id'] = $this->getAssignableUserId($row['assignee']);
         }
 
         if (! empty($row['creator'])) {
-            $values['creator_id'] = $this->userModel->getIdByUsername($row['creator']);
+            $values['creator_id'] = $this->getAssignableUserId($row['creator']);
         }
 
         if (! empty($row['color'])) {
@@ -132,6 +132,23 @@ class TaskImport extends Base
         );
 
         return $values;
+    }
+
+    /**
+     * Get the user id from a username, only if the user can be assigned to tasks of the project
+     *
+     * @param  string $username
+     * @return integer
+     */
+    protected function getAssignableUserId($username)
+    {
+        $userId = (int) $this->userModel->getIdByUsername($username);
+
+        if ($userId > 0 && $this->projectPermissionModel->isAssignable($this->projectId, $userId)) {
+            return $userId;
+        }
+
+        return 0;
     }
 
     protected function validateCreation(array $values)

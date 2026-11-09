@@ -24,6 +24,18 @@ class TaskModificationModel extends Base
     {
         $task = $this->taskFinderModel->getById($values['id']);
 
+        if (empty($task)) {
+            return false;
+        }
+
+        if (isset($values['project_id']) && (int) $values['project_id'] !== (int) $task['project_id']) {
+            return false;
+        }
+
+        if (! $this->taskModel->hasValidProjectReferences($task['project_id'], $values)) {
+            return false;
+        }
+
         if (isset($values['tags_only_add_new']) && $values['tags_only_add_new'] == 1) {
             $this->updateTags($values, $task, false);
         } else {

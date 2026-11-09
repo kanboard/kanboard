@@ -100,6 +100,35 @@ class TaskModel extends Base
     }
 
     /**
+     * Return true if the column, swimlane and category of the values belong to the project
+     *
+     * Missing or empty references are ignored.
+     *
+     * @access public
+     * @param  integer $project_id
+     * @param  array   $values
+     * @return boolean
+     */
+    public function hasValidProjectReferences($project_id, array $values)
+    {
+        $project_id = (int) $project_id;
+
+        if (! empty($values['column_id']) && (int) $this->columnModel->getProjectId($values['column_id']) !== $project_id) {
+            return false;
+        }
+
+        if (! empty($values['swimlane_id']) && $this->swimlaneModel->getProjectId($values['swimlane_id']) !== $project_id) {
+            return false;
+        }
+
+        if (! empty($values['category_id']) && (int) $this->categoryModel->getProjectId($values['category_id']) !== $project_id) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Get a the task id from a text
      *
      * Example: "Fix bug #1234" will return 1234

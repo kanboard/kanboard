@@ -626,4 +626,37 @@ class TaskPositionModelTest extends Base
         $this->assertEquals(1, $event_data['project_id']);
         $this->assertEquals(2, $event_data['swimlane_id']);
     }
+
+    public function testMoveRejectsReferencesFromAnotherProject()
+    {
+        $taskPositionModel = new TaskPositionModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project #2')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task #1', 'project_id' => 1)));
+        $this->assertEquals(2, $taskCreationModel->create(array('title' => 'Task #2', 'project_id' => 2)));
+
+        $this->assertFalse($taskPositionModel->movePosition(1, 1, 5, 1));
+        $this->assertFalse($taskPositionModel->movePosition(1, 1, 2, 1, 2));
+        $this->assertFalse($taskPositionModel->movePosition(1, 2, 2, 1, 1));
+        $this->assertFalse($taskPositionModel->movePosition(1, 999, 2, 1, 1));
+        $this->assertFalse($taskPositionModel->moveBottom(1, 1, 1, 5));
+        $this->assertFalse($taskPositionModel->moveBottom(1, 1, 2, 2));
+        $this->assertFalse($taskPositionModel->moveBottom(1, 2, 1, 2));
+
+        $task = $taskFinderModel->getById(1);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(1, $task['swimlane_id']);
+
+        $task = $taskFinderModel->getById(2);
+        $this->assertEquals(2, $task['project_id']);
+        $this->assertEquals(5, $task['column_id']);
+        $this->assertEquals(2, $task['swimlane_id']);
+
+        $this->assertTrue($taskPositionModel->movePosition(1, 1, 2, 1, 1));
+        $this->assertTrue($taskPositionModel->moveBottom(1, 1, 1, 3));
+    }
 }

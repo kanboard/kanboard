@@ -39,12 +39,15 @@ class TaskProjectMoveModelTest extends Base
         $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
         $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));
 
+        $categoryModel = new CategoryModel($this->container);
+        $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #1', 'project_id' => 1)));
+
         // We create a task
         $this->assertEquals(1, $taskCreationModel->create(array(
             'title' => 'test',
             'project_id' => 1,
             'owner_id' => 1,
-            'category_id' => 10,
+            'category_id' => 1,
             'position' => 333,
             'priority' => 1,
         )));
