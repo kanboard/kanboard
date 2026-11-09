@@ -46,6 +46,18 @@ class SwimlaneModel extends Base
     }
 
     /**
+     * Get the projectId by the swimlane id
+     *
+     * @access public
+     * @param  integer   $swimlaneId
+     * @return integer
+     */
+    public function getProjectId($swimlaneId)
+    {
+        return (int) $this->db->table(self::TABLE)->eq('id', $swimlaneId)->findOneColumn('project_id');
+    }
+
+    /**
      * Get the swimlane name by the id
      *
      * @access public

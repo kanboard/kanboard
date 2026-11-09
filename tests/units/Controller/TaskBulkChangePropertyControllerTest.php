@@ -7,6 +7,7 @@ use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Http\Request;
 use Kanboard\Core\Http\Response;
 use Kanboard\Core\Security\Role;
+use Kanboard\Model\CategoryModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectUserRoleModel;
 use Kanboard\Model\TaskCreationModel;
@@ -77,6 +78,81 @@ class TaskBulkChangePropertyControllerTest extends Base
 
         $this->expectException(AccessForbiddenException::class);
         $controller->save();
+    }
+
+    public function testChangeAssigneeToUserWithoutProjectAccess()
+    {
+        $this->createProjects();
+        $userModel = new UserModel($this->container);
+        $this->assertEquals(3, $userModel->create(array('username' => 'outsider')));
+
+        $this->buildRequest(array(
+            'task_ids'        => '1',
+            'change_assignee' => 1,
+            'owner_id'        => 3,
+            'change_color'    => 1,
+            'color_id'        => 'red',
+        ));
+
+        $controller = new TaskBulkChangePropertyController($this->container);
+
+        try {
+            $controller->save();
+            $this->fail('AccessForbiddenException was not thrown');
+        } catch (AccessForbiddenException $e) {
+        }
+
+        $task = $this->container['taskFinderModel']->getById(1);
+        $this->assertEquals(0, $task['owner_id']);
+        $this->assertNotEquals('red', $task['color_id']);
+    }
+
+    public function testChangeCategoryFromAnotherProject()
+    {
+        $this->createProjects();
+        $categoryModel = new CategoryModel($this->container);
+        $this->assertEquals(1, $categoryModel->create(array('project_id' => 2, 'name' => 'Category B')));
+
+        $this->buildRequest(array(
+            'task_ids'        => '1',
+            'change_category' => 1,
+            'category_id'     => 1,
+        ));
+
+        $controller = new TaskBulkChangePropertyController($this->container);
+
+        try {
+            $controller->save();
+            $this->fail('AccessForbiddenException was not thrown');
+        } catch (AccessForbiddenException $e) {
+        }
+
+        $task = $this->container['taskFinderModel']->getById(1);
+        $this->assertEquals(0, $task['category_id']);
+    }
+
+    public function testChangeAssigneeAndCategory()
+    {
+        $this->createProjects();
+        $categoryModel = new CategoryModel($this->container);
+        $this->assertEquals(1, $categoryModel->create(array('project_id' => 1, 'name' => 'Category A')));
+
+        $this->buildRequest(array(
+            'task_ids'        => '1,2',
+            'change_assignee' => 1,
+            'owner_id'        => 2,
+            'change_category' => 1,
+            'category_id'     => 1,
+        ), 'redirect');
+
+        $controller = new TaskBulkChangePropertyController($this->container);
+        $controller->save();
+
+        foreach (array(1, 2) as $taskId) {
+            $task = $this->container['taskFinderModel']->getById($taskId);
+            $this->assertEquals(2, $task['owner_id']);
+            $this->assertEquals(1, $task['category_id']);
+        }
     }
 
     private function buildRequest(array $values, $responseMethod = null)

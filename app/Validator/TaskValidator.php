@@ -65,6 +65,22 @@ class TaskValidator extends BaseValidator
     }
 
     /**
+     * Validate that the assignee can be assigned to tasks of the project
+     *
+     * @access public
+     * @param  array    $values           Form values
+     * @return array    $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validateAssignee(array $values)
+    {
+        if (! empty($values['owner_id']) && (empty($values['project_id']) || ! $this->projectPermissionModel->isAssignable($values['project_id'], $values['owner_id']))) {
+            return array(false, array('owner_id' => array(t('This user cannot be assigned to tasks of this project'))));
+        }
+
+        return array(true, array());
+    }
+
+    /**
      * Validate task creation
      *
      * @access public
@@ -84,6 +100,10 @@ class TaskValidator extends BaseValidator
 
         if ($result) {
             list($result, $errors) = $this->validateStartAndDueDate($values);
+        }
+
+        if ($result) {
+            list($result, $errors) = $this->validateAssignee($values);
         }
 
         return array($result, $errors);
@@ -107,11 +127,14 @@ class TaskValidator extends BaseValidator
         );
 
         $v = new Validator($values, array_merge($rules, $this->commonValidationRules()));
+        $result = $v->execute();
+        $errors = $v->getErrors();
 
-        return array(
-            $v->execute(),
-            $v->getErrors()
-        );
+        if ($result) {
+            list($result, $errors) = $this->validateAssignee($values);
+        }
+
+        return array($result, $errors);
     }
 
     /**

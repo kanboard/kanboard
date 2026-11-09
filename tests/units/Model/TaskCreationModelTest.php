@@ -3,6 +3,7 @@
 namespace KanboardTests\units\Model;
 
 use KanboardTests\units\Base;
+use Kanboard\Model\CategoryModel;
 use Kanboard\Model\ConfigModel;
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\TaskCreationModel;
@@ -130,7 +131,10 @@ class TaskCreationModelTest extends Base
         $taskCreationModel = new TaskCreationModel($this->container);
         $taskFinderModel = new TaskFinderModel($this->container);
 
+        $categoryModel = new CategoryModel($this->container);
+
         $this->assertEquals(1, $projectModel->create(array('name' => 'test')));
+        $this->assertEquals(1, $categoryModel->create(array('project_id' => 1, 'name' => 'Category #1')));
         $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'category_id' => 1)));
 
         $task = $taskFinderModel->getById(1);
@@ -427,5 +431,24 @@ class TaskCreationModelTest extends Base
         $task = $taskFinderModel->getById(1);
         $this->assertNotEmpty($task);
         $this->assertEquals('2050-01-10 12:30', date('Y-m-d H:i', $task['date_due']));
+    }
+
+    public function testRejectReferencesFromAnotherProject()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $categoryModel = new CategoryModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project #2')));
+        $this->assertEquals(1, $categoryModel->create(array('name' => 'Category #2', 'project_id' => 2)));
+
+        $this->assertSame(0, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 5)));
+        $this->assertSame(0, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'swimlane_id' => 2)));
+        $this->assertSame(0, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'category_id' => 1)));
+        $this->assertSame(0, $taskFinderModel->countByProjectId(1));
+
+        $this->assertSame(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test', 'column_id' => 2, 'swimlane_id' => 1)));
     }
 }

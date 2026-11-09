@@ -14,6 +14,29 @@ use Kanboard\Core\ExternalTask\ExternalTaskException;
  */
 class TaskModificationController extends BaseController
 {
+    /**
+     * Task fields that cannot be submitted with the modification form
+     *
+     * Moving and closing tasks have dedicated actions with their own permission checks.
+     *
+     * @var string[]
+     */
+    const PROTECTED_FIELDS = array(
+        'column_id',
+        'swimlane_id',
+        'position',
+        'is_active',
+        'creator_id',
+        'date_creation',
+        'date_completed',
+        'date_modification',
+        'date_moved',
+        'recurrence_parent',
+        'recurrence_child',
+        'external_provider',
+        'external_uri',
+    );
+
     public function assignToMe()
     {
         $this->checkReusableGETCSRFParam();
@@ -139,10 +162,15 @@ class TaskModificationController extends BaseController
     {
         $task = $this->getTask();
         $values = $this->request->getValues();
+        $this->helper->model->removeFields($values, self::PROTECTED_FIELDS);
         $values['id'] = $task['id'];
         $values['project_id'] = $task['project_id'];
 
         list($valid, $errors) = $this->taskValidator->validateModification($values);
+
+        if ($valid && isset($values['owner_id']) && $values['owner_id'] != $task['owner_id']) {
+            list($valid, $errors) = $this->taskValidator->validateAssignee($values);
+        }
 
         if ($valid && $this->updateTask($task, $values, $errors)) {
             $this->flash->success(t('Task updated successfully.'));

@@ -14,6 +14,26 @@ use Kanboard\Core\Controller\PageNotFoundException;
 class TaskCreationController extends BaseController
 {
     /**
+     * Task fields that cannot be submitted with the creation form
+     *
+     * @var string[]
+     */
+    const PROTECTED_FIELDS = array(
+        'id',
+        'creator_id',
+        'is_active',
+        'position',
+        'date_creation',
+        'date_completed',
+        'date_modification',
+        'date_moved',
+        'recurrence_parent',
+        'recurrence_child',
+        'external_provider',
+        'external_uri',
+    );
+
+    /**
      * Display a form to create a new task
      *
      * @access public
@@ -52,6 +72,7 @@ class TaskCreationController extends BaseController
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
+        $this->helper->model->removeFields($values, self::PROTECTED_FIELDS);
         $values['project_id'] = $project['id'];
         $files = $this->request->getFileInfo('files');
 

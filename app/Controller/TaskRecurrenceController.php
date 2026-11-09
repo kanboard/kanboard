@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 /**
  * Task Recurrence controller
  *
@@ -22,6 +24,10 @@ class TaskRecurrenceController extends BaseController
     public function edit(array $values = array(), array $errors = array())
     {
         $task = $this->getTask();
+
+        if (! $this->helper->projectRole->canUpdateTask($task)) {
+            throw new AccessForbiddenException(t('You are not allowed to update tasks assigned to someone else.'));
+        }
 
         if (empty($values)) {
             $values = $task;
@@ -46,7 +52,18 @@ class TaskRecurrenceController extends BaseController
     public function update()
     {
         $task = $this->getTask();
-        $values = $this->request->getValues();
+
+        if (! $this->helper->projectRole->canUpdateTask($task)) {
+            throw new AccessForbiddenException(t('You are not allowed to update tasks assigned to someone else.'));
+        }
+
+        $values = array_intersect_key($this->request->getValues(), array_flip(array(
+            'recurrence_status',
+            'recurrence_trigger',
+            'recurrence_factor',
+            'recurrence_timeframe',
+            'recurrence_basedate',
+        )));
         $values['id'] = $task['id'];
 
         list($valid, $errors) = $this->taskValidator->validateEditRecurrence($values);

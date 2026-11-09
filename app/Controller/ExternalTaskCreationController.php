@@ -80,6 +80,8 @@ class ExternalTaskCreationController extends BaseController
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
+        $this->helper->model->removeFields($values, array_diff(TaskCreationController::PROTECTED_FIELDS, array('external_provider', 'external_uri')));
+        $values['project_id'] = $project['id'];
 
         list($valid, $errors) = $this->taskValidator->validateCreation($values);
 
@@ -90,6 +92,13 @@ class ExternalTaskCreationController extends BaseController
             $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);
         } else {
             $taskId = $this->taskCreationModel->create($values);
+
+            if ($taskId === 0) {
+                $this->flash->failure(t('Unable to create this task.'));
+                $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])), true);
+                return;
+            }
+
             $this->flash->success(t('Task created successfully.'));
             $this->response->redirect($this->helper->url->to('TaskViewController', 'show', array('task_id' => $taskId)), true);
         }

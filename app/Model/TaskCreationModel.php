@@ -30,6 +30,11 @@ class TaskCreationModel extends Base
         }
 
         $this->prepare($values);
+
+        if (! $this->taskModel->hasValidProjectReferences($values['project_id'], $values)) {
+            return 0;
+        }
+
         $task_id = $this->db->table(TaskModel::TABLE)->persist($values);
 
         if ($task_id !== false) {

@@ -30,6 +30,18 @@ class TaskBulkChangePropertyController extends BaseController
         $values = $this->request->getValues();
         $taskIDs = explode(',', $values['task_ids']);
 
+        if (isset($values['change_assignee']) && $values['change_assignee'] == 1) {
+            list($valid, ) = $this->taskValidator->validateAssignee(array('project_id' => $project['id'], 'owner_id' => isset($values['owner_id']) ? $values['owner_id'] : 0));
+
+            if (! $valid) {
+                throw new AccessForbiddenException(t('This user cannot be assigned to tasks of this project'));
+            }
+        }
+
+        if (isset($values['change_category']) && $values['change_category'] == 1 && ! $this->taskModel->hasValidProjectReferences($project['id'], array('category_id' => isset($values['category_id']) ? $values['category_id'] : 0))) {
+            throw new AccessForbiddenException();
+        }
+
         if (isset($values['change_internallink']) && $values['change_internallink'] == 1) {
             $opposite_task = $this->taskFinderModel->getById($values['opposite_task_id']);
 

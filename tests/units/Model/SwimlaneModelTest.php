@@ -364,4 +364,17 @@ class SwimlaneModelTest extends Base
         $this->assertEquals(1, $swimlanes['inactive'][0]['nb_open_tasks']);
         $this->assertEquals(0, $swimlanes['inactive'][0]['nb_closed_tasks']);
     }
+
+    public function testGetProjectId()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $swimlaneModel = new SwimlaneModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Project #1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Project #2')));
+
+        $this->assertSame(1, $swimlaneModel->getProjectId(1));
+        $this->assertSame(2, $swimlaneModel->getProjectId(2));
+        $this->assertSame(0, $swimlaneModel->getProjectId(999));
+    }
 }
