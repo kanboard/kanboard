@@ -369,6 +369,25 @@ class TaskFinderModel extends Base
     }
 
     /**
+     * Get iCal query restricted to the projects a user can access
+     *
+     * @access public
+     * @param  integer $user_id
+     * @return \PicoDb\Table
+     */
+    public function getUserICalQuery($user_id)
+    {
+        $query = $this->getICalQuery();
+        $projectIds = $this->getActiveProjectIdsByUser($user_id);
+
+        if ($projectIds !== null) {
+            $query->in(TaskModel::TABLE.'.project_id', $projectIds);
+        }
+
+        return $query;
+    }
+
+    /**
      * Count all tasks for a given project and status
      *
      * @access public
