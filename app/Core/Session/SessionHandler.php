@@ -85,6 +85,18 @@ class SessionHandler implements SessionHandlerInterface
             $lifetime = time() + (ini_get('session.gc_maxlifetime') ?: 1440);
         }
 
+        if (DB_DRIVER === 'sqlite') {
+            // On SQLite, use `INSERT ... ON CONFLICT` to better handle concurrent requests that are each
+            // saving their sessions at the same time.
+            $this->db->execute(
+                'INSERT INTO '.self::TABLE.' (id, expire_at, data) VALUES (?, ?, ?)'
+                .' ON CONFLICT(id) DO UPDATE SET expire_at = excluded.expire_at, data = excluded.data',
+                [$sessionID, $lifetime, $data]
+            );
+
+            return true;
+        }
+
         $this->db->startTransaction();
 
         if ($this->db->table(self::TABLE)->eq('id', $sessionID)->exists()) {
