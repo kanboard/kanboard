@@ -27,13 +27,8 @@ class ProjectActivityEventFormatter extends BaseFormatter implements FormatterIn
             $event += $eventData;
             unset($event['data']);
 
-            if (isset($event['comment'])) {
-                if ($this->userSession->getRole() === Role::APP_USER && $event['comment']['visibility'] !== Role::APP_USER) {
-                    continue;
-                }
-                if ($this->userSession->getRole() === Role::APP_MANAGER && $event['comment']['visibility'] === Role::APP_ADMIN) {
-                    continue;
-                }
+            if (isset($event['comment']) && ! $this->isCommentVisible($event['comment'])) {
+                continue;
             }
 
             $event['author'] = $event['author_name'] ?: $event['author_username'];
@@ -43,6 +38,35 @@ class ProjectActivityEventFormatter extends BaseFormatter implements FormatterIn
         }
 
         return $res;
+    }
+
+    /**
+     * Check that the current user is allowed to see the given comment
+     *
+     * Comments are filtered by visibility, so a role that is not explicitly
+     * known to be privileged enough must never see a restricted comment.
+     *
+     * @access protected
+     * @param  array  $comment
+     * @return boolean
+     */
+    protected function isCommentVisible(array $comment)
+    {
+        $visibility = isset($comment['visibility']) ? $comment['visibility'] : Role::APP_USER;
+
+        if ($visibility === Role::APP_USER) {
+            return true;
+        }
+
+        $role = $this->userSession->getRole();
+
+        if ($role === Role::APP_ADMIN) {
+            return true;
+        }
+
+        // Project roles (and token-authenticated/public requests, which have no
+        // application role) are not allowed to read comments restricted to managers.
+        return $role === Role::APP_MANAGER && $visibility !== Role::APP_ADMIN;
     }
 
     /**
