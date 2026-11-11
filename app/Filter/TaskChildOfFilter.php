@@ -22,6 +22,11 @@ use PicoDb\Table;
  */
 class TaskChildOfFilter extends BaseFilter implements FilterInterface
 {
+    /**
+     * Label of the default "is a child of" link
+     *
+     * @var string
+     */
     const CHILD_OF_LABEL = 'is a child of';
 
     /**
