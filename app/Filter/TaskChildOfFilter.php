@@ -12,13 +12,12 @@ use PicoDb\Table;
 /**
  * Filter tasks that are children of a given task
  *
- * Usage: childof:123 or childof:"task title"
+ * Usage: childof:123, childof:#123 or childof:"task title"
  *
  * A task A is considered a child of task B when task_has_links contains
  * a row (task_id=A, opposite_task_id=B, link_id=<"is a child of">).
  *
  * @package filter
- * @author  simon
  */
 class TaskChildOfFilter extends BaseFilter implements FilterInterface
 {
@@ -69,7 +68,7 @@ class TaskChildOfFilter extends BaseFilter implements FilterInterface
      */
     public function apply()
     {
-        $this->query->inSubquery(TaskModel::TABLE.'.id', $this->getSubQuery());
+        $this->query->inSubquery(TaskModel::TABLE.'.id', $this->getChildrenSubQuery());
         return $this;
     }
 
@@ -79,41 +78,29 @@ class TaskChildOfFilter extends BaseFilter implements FilterInterface
      * @access protected
      * @return Table
      */
-    protected function getSubQuery()
+    protected function getChildrenSubQuery()
     {
         return $this->db->table(TaskLinkModel::TABLE)
             ->columns(TaskLinkModel::TABLE.'.task_id')
             ->join(LinkModel::TABLE, 'id', 'link_id', TaskLinkModel::TABLE)
-            ->ilike(LinkModel::TABLE.'.label', self::CHILD_OF_LABEL)
-            ->in(TaskLinkModel::TABLE.'.opposite_task_id', $this->resolveParentIds());
+            ->eq(LinkModel::TABLE.'.label', self::CHILD_OF_LABEL)
+            ->inSubquery(TaskLinkModel::TABLE.'.opposite_task_id', $this->getParentsSubQuery());
     }
 
     /**
-     * Resolve the search value to parent task ids
+     * Get subquery returning the ids of the parent task(s) matching the search value
      *
-     * Numeric values are treated as task ids, anything else as a task title
-     * (case-insensitive partial match, like the title filter). Returns
-     * array(0) when nothing matches so the filter yields no results.
+     * Reuses TaskTitleFilter so the accepted syntax matches the search box
+     * (#123, 123, "title"). Kept as a subquery instead of an IN (...) list
+     * so broad values cannot exceed the database placeholder limit.
      *
-     * @access private
-     * @return array
+     * @access protected
+     * @return Table
      */
-    private function resolveParentIds()
+    protected function getParentsSubQuery()
     {
-        $value = trim($this->value);
-
-        if ($value === '') {
-            return array(0);
-        }
-
-        if (ctype_digit($value)) {
-            return array((int) $value);
-        }
-
-        $ids = $this->db->table(TaskModel::TABLE)
-            ->ilike(TaskModel::TABLE.'.title', '%'.$value.'%')
-            ->findAllByColumn('id');
-
-        return ! empty($ids) ? $ids : array(0);
+        $query = $this->db->table(TaskModel::TABLE)->columns(TaskModel::TABLE.'.id');
+        TaskTitleFilter::getInstance($this->value)->withQuery($query)->apply();
+        return $query;
     }
 }

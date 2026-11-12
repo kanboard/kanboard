@@ -9,6 +9,7 @@ use Kanboard\Model\TaskLinkModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\UserModel;
 
 class TaskChildOfFilterTest extends Base
 {
@@ -80,5 +81,42 @@ class TaskChildOfFilterTest extends Base
     {
         $this->createTasksWithChildren();
         $this->assertEquals(array(), $this->applyFilter('no such task'));
+    }
+
+    public function testChildOfIgnoresRelatesToLink()
+    {
+        $this->createTasksWithChildren();
+
+        $linkModel = new LinkModel($this->container);
+        $taskLinkModel = new TaskLinkModel($this->container);
+        $relatesToLink = $linkModel->getByLabel('relates to');
+        $this->assertNotEmpty($relatesToLink);
+
+        $this->assertNotFalse($taskLinkModel->create(4, 1, $relatesToLink['id']));
+
+        $this->assertEquals(array(2, 3), $this->applyFilter('1'));
+    }
+
+    public function testChildOfDoesNotReturnParentInOppositeDirection()
+    {
+        $this->createTasksWithChildren();
+
+        $linkModel = new LinkModel($this->container);
+        $taskLinkModel = new TaskLinkModel($this->container);
+        $childOfLink = $linkModel->getByLabel('is a child of');
+        $this->assertNotFalse($taskLinkModel->create(4, 2, $childOfLink['id']));
+
+        $this->assertEquals(array(4), $this->applyFilter('#2'));
+    }
+
+    public function testChildOfThroughTaskLexer()
+    {
+        $this->createTasksWithChildren();
+        $this->container['userSession']->initialize($this->container['userModel']->getById(1));
+
+        $taskIds = array_column($this->container['taskLexer']->build('childof:1')->toArray(), 'id');
+        sort($taskIds);
+
+        $this->assertSame(array(2, 3), $taskIds);
     }
 }
