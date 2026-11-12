@@ -20,7 +20,7 @@
     <div class="table-list">
         <?= $this->render('project_list/header', array('paginator' => $project_paginator)) ?>
         <?php foreach ($project_paginator->getCollection() as $project): ?>
-            <div class="table-list-row table-border-left">
+            <div class="table-list-row table-border-left js-dashboard-project-row" role="link" tabindex="0" style="cursor: pointer" data-href="<?= $this->url->href('ProjectOverviewController', 'show', array('project_id' => $project['id'])) ?>">
                 <div>
                     <?php if ($this->user->hasProjectAccess('ProjectViewController', 'show', $project['id'])): ?>
                         <?= $this->render('project/dropdown', array('project' => $project)) ?>
@@ -31,7 +31,7 @@
                     <?= $this->hook->render('template:dashboard:project:before-title', array('project' => $project)) ?>
 
                     <span class="table-list-title <?= $project['is_active'] == 0 ? 'status-closed' : '' ?>">
-                        <?= $this->url->link($this->text->e($project['name']), 'BoardViewController', 'show', array('project_id' => $project['id'])) ?>
+                        <?= $this->url->link($this->text->e($project['name']), 'ProjectOverviewController', 'show', array('project_id' => $project['id'])) ?>
                     </span>
 
                     <?php if ($project['is_private']): ?>

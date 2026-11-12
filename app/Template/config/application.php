@@ -28,6 +28,11 @@
     </fieldset>
 
     <fieldset>
+        <?= $this->form->label(t('Maximum number of projects displayed on the dashboard'), 'dashboard_max_projects') ?>
+        <?= $this->form->number('dashboard_max_projects', $values, $errors, array('min="1"')) ?>
+    </fieldset>
+
+    <fieldset>
         <?= $this->form->checkbox('notifications_enabled', t('Enable notifications by default for all new users'), 1, isset($values['notifications_enabled']) && $values['notifications_enabled'] == 1) ?>
     </fieldset>
 

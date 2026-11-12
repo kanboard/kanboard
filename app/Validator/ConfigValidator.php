@@ -27,6 +27,8 @@ class ConfigValidator extends BaseValidator
             new Validators\Integer('board_highlight_period', t('This value must be an integer')),
             new Validators\Integer('board_public_refresh_interval', t('This value must be an integer')),
             new Validators\Integer('board_private_refresh_interval', t('This value must be an integer')),
+            new Validators\Integer('dashboard_max_projects', t('This value must be an integer')),
+            new Validators\GreaterThanOrEqual('dashboard_max_projects', t('This value must be greater or equal to %d', 1), 1),
             new Validators\GreaterThanOrEqual('board_highlight_period', t('This value must be greater or equal to %d', 0), 0),
             new Validators\GreaterThanOrEqual('board_public_refresh_interval', t('This value must be greater or equal to %d', 0), 0),
             new Validators\GreaterThanOrEqual('board_private_refresh_interval', t('This value must be greater or equal to %d', 0), 0),
