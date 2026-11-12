@@ -18,7 +18,6 @@ class TaskMailController extends BaseController
             'values'  => $values,
             'errors'  => $errors,
             'task'    => $task,
-            'project' => $this->projectModel->getById($task['project_id']),
             'members' => $this->projectPermissionModel->getMembersWithEmail($task['project_id']),
         )));
     }
