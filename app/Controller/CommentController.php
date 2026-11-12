@@ -30,8 +30,7 @@ class CommentController extends BaseController
         $this->response->html($this->helper->layout->task('comment/create', array(
             'values' => $values,
             'errors' => $errors,
-            'task' => $task,
-            'project' => $this->projectModel->getById($task['project_id']),
+            'task' => $task
         )));
     }
 

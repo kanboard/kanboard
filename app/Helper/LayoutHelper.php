@@ -69,6 +69,10 @@ class LayoutHelper extends Base
      */
     public function task($template, array $params)
     {
+        if (empty($params['project']) && ! empty($params['task']['project_id'])) {
+            $params['project'] = $this->projectModel->getById($params['task']['project_id']);
+        }
+
         $params['page_title'] = $params['task']['project_name'].', #'.$params['task']['id'].' - '.$params['task']['title'];
         $params['title'] = $params['task']['project_name'];
         return $this->subLayout('task/layout', 'task/sidebar', $template, $params);
