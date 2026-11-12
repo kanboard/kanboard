@@ -26,7 +26,12 @@ class FeedController extends BaseController
             throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
-        $events = $this->helper->projectActivity->getProjectsEvents($this->projectPermissionModel->getActiveProjectIds($user['id']));
+        // The feed is rendered outside of the visitor's session: use the role of the feed owner.
+        $events = $this->helper->projectActivity->getProjectsEvents(
+            $this->projectPermissionModel->getActiveProjectIds($user['id']),
+            50,
+            $user['role']
+        );
 
         $this->response->xml($this->template->render('feed/user', [
             'user' => $user,

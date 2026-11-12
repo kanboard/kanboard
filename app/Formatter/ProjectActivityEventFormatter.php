@@ -8,6 +8,48 @@ use Kanboard\Core\Security\Role;
 class ProjectActivityEventFormatter extends BaseFormatter implements FormatterInterface
 {
     /**
+     * Application role used to filter restricted comments
+     *
+     * @access private
+     * @var string|null
+     */
+    private $role;
+
+    /**
+     * Set the role used to decide which comments are visible
+     *
+     * The activity stream is not always displayed in the context of the
+     * current session (API token, public RSS feed), so the caller must be
+     * able to state whose permissions apply.
+     *
+     * @access public
+     * @param  string|null $role
+     * @return $this
+     */
+    public function withRole($role)
+    {
+        $this->role = $role;
+        return $this;
+    }
+
+    /**
+     * Get the role used to filter comments
+     *
+     * Defaults to the role of the current session when not set explicitly.
+     *
+     * @access private
+     * @return string
+     */
+    private function getAccessRole()
+    {
+        if ($this->role !== null) {
+            return (string) $this->role;
+        }
+
+        return (string) $this->userSession->getRole();
+    }
+
+    /**
      * Apply formatter
      *
      * @access public
@@ -17,6 +59,7 @@ class ProjectActivityEventFormatter extends BaseFormatter implements FormatterIn
     {
         $events = $this->query->findAll();
         $res = array();
+        $role = $this->getAccessRole();
 
         foreach ($events as &$event) {
             $eventData = $this->unserializeEvent($event['data']);
@@ -27,7 +70,7 @@ class ProjectActivityEventFormatter extends BaseFormatter implements FormatterIn
             $event += $eventData;
             unset($event['data']);
 
-            if (isset($event['comment']) && ! $this->isCommentVisible($event['comment'])) {
+            if (isset($event['comment']) && ! $this->isCommentVisible($event['comment'], $role)) {
                 continue;
             }
 
@@ -41,32 +84,37 @@ class ProjectActivityEventFormatter extends BaseFormatter implements FormatterIn
     }
 
     /**
-     * Check that the current user is allowed to see the given comment
+     * Check that the given role is allowed to see a comment
      *
-     * Comments are filtered by visibility, so a role that is not explicitly
-     * known to be privileged enough must never see a restricted comment.
+     * Only known visibility values are accepted: anything unexpected is
+     * treated as restricted so that a new value never leaks by default.
      *
      * @access protected
      * @param  array  $comment
+     * @param  string $role
      * @return boolean
      */
-    protected function isCommentVisible(array $comment)
+    protected function isCommentVisible(array $comment, $role)
     {
-        $visibility = isset($comment['visibility']) ? $comment['visibility'] : Role::APP_USER;
+        if (! isset($comment['visibility'])) {
+            return false;
+        }
+
+        $visibility = $comment['visibility'];
+
+        if (! is_string($visibility) || ! in_array($visibility, array(Role::APP_USER, Role::APP_MANAGER, Role::APP_ADMIN), true)) {
+            return false;
+        }
 
         if ($visibility === Role::APP_USER) {
             return true;
         }
 
-        $role = $this->userSession->getRole();
-
         if ($role === Role::APP_ADMIN) {
             return true;
         }
 
-        // Project roles (and token-authenticated/public requests, which have no
-        // application role) are not allowed to read comments restricted to managers.
-        return $role === Role::APP_MANAGER && $visibility !== Role::APP_ADMIN;
+        return $role === Role::APP_MANAGER && $visibility === Role::APP_MANAGER;
     }
 
     /**
