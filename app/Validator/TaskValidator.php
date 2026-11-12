@@ -50,6 +50,58 @@ class TaskValidator extends BaseValidator
         );
     }
 
+    /**
+     * Validate that the column, swimlane, category and owner referenced by
+     * the values belong to the task's project
+     *
+     * @access public
+     * @param  array    $values           Form values (project_id is resolved from the task when absent)
+     * @return array    $valid, $errors   [0] = Success or not, [1] = List of errors
+     */
+    public function validateProjectConsistency(array $values)
+    {
+        $errors = array();
+        $project_id = isset($values['project_id']) ? $values['project_id'] : 0;
+
+        if (empty($project_id) && ! empty($values['id'])) {
+            $project_id = $this->taskFinderModel->getProjectId($values['id']);
+        }
+
+        if (empty($project_id)) {
+            return array(true, $errors);
+        }
+
+        if (! empty($values['column_id'])) {
+            $columnProjectId = $this->columnModel->getProjectId($values['column_id']);
+
+            if (! empty($columnProjectId) && $columnProjectId != $project_id) {
+                $errors['column_id'] = array(t('This column does not belong to this project'));
+            }
+        }
+
+        if (! empty($values['swimlane_id'])) {
+            $swimlane = $this->swimlaneModel->getById($values['swimlane_id']);
+
+            if (! empty($swimlane) && $swimlane['project_id'] != $project_id) {
+                $errors['swimlane_id'] = array(t('This swimlane does not belong to this project'));
+            }
+        }
+
+        if (! empty($values['category_id'])) {
+            $categoryProjectId = $this->categoryModel->getProjectId($values['category_id']);
+
+            if (! empty($categoryProjectId) && $categoryProjectId != $project_id) {
+                $errors['category_id'] = array(t('This category does not belong to this project'));
+            }
+        }
+
+        if (! empty($values['owner_id']) && ! $this->projectPermissionModel->isAssignable($project_id, $values['owner_id'])) {
+            $errors['owner_id'] = array(t('This user is not a member of this project'));
+        }
+
+        return array(empty($errors), $errors);
+    }
+
     public function validateStartAndDueDate(array $values)
     {
         if (!empty($values['date_started']) && !empty($values['date_due'])) {
@@ -84,6 +136,10 @@ class TaskValidator extends BaseValidator
 
         if ($result) {
             list($result, $errors) = $this->validateStartAndDueDate($values);
+        }
+
+        if ($result) {
+            list($result, $errors) = $this->validateProjectConsistency($values);
         }
 
         return array($result, $errors);
@@ -158,6 +214,10 @@ class TaskValidator extends BaseValidator
             list($result, $errors) = $this->validateStartAndDueDate($values);
         }
 
+        if ($result) {
+            list($result, $errors) = $this->validateProjectConsistency($values);
+        }
+
         return array($result, $errors);
     }
 
@@ -180,6 +240,10 @@ class TaskValidator extends BaseValidator
 
         if ($result) {
             list($result, $errors) = $this->validateStartAndDueDate($values);
+        }
+
+        if ($result) {
+            list($result, $errors) = $this->validateProjectConsistency($values);
         }
 
         return array($result, $errors);
