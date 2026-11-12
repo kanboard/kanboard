@@ -39,7 +39,7 @@ class WebhookNotification extends Base implements NotificationInterface
         $token = $this->configModel->get('webhook_token');
 
         if (! empty($url)) {
-            if (! WEBHOOK_ALLOW_PRIVATE_NETWORKS && $this->httpClient->isPrivateURL($url)) {
+            if (! WEBHOOK_ALLOW_PRIVATE_NETWORKS && $this->httpClient->checkUrl($url) === false) {
                 $this->logger->info('Blocked webhook request to private network URL: '.$url);
                 return;
             }
