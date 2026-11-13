@@ -2,12 +2,10 @@
 
 namespace Kanboard\Formatter;
 
-use DateTime;
-use Eluceo\iCal\Component\Calendar;
-use Eluceo\iCal\Component\Event;
-use Eluceo\iCal\Property\Event\Attendees;
-use Eluceo\iCal\Property\Event\Organizer;
+use DateTimeImmutable;
 use Kanboard\Core\Filter\FormatterInterface;
+use Kanboard\Core\ICalendar\Calendar;
+use Kanboard\Core\ICalendar\Event;
 use PicoDb\Table;
 
 /**
@@ -22,9 +20,9 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
      * Calendar object
      *
      * @access protected
-     * @var \Eluceo\iCal\Component\Calendar
+     * @var Calendar
      */
-    protected $vCalendar;
+    protected $calendar;
 
     /**
      * Get Ical events
@@ -34,19 +32,19 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
      */
     public function format()
     {
-        return $this->vCalendar->render();
+        return $this->calendar->render();
     }
 
     /**
      * Set calendar object
      *
      * @access public
-     * @param \Eluceo\iCal\Component\Calendar $vCalendar
+     * @param  Calendar $calendar
      * @return $this
      */
-    public function setCalendar(Calendar $vCalendar)
+    public function setCalendar(Calendar $calendar)
     {
-        $this->vCalendar = $vCalendar;
+        $this->calendar = $calendar;
         return $this;
     }
 
@@ -62,17 +60,11 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
     public function addTasksWithStartAndDueDate(Table $query, $startColumn, $endColumn)
     {
         foreach ($query->findAll() as $task) {
-            $start = new DateTime;
-            $start->setTimestamp($task[$startColumn]);
+            $event = $this->getTaskIcalEvent($task, 'task-#'.$task['id'].'-'.$startColumn.'-'.$endColumn)
+                ->setStart($this->toDateTime($task[$startColumn]))
+                ->setEnd($this->toDateTime($task[$endColumn] ?: time()));
 
-            $end = new DateTime;
-            $end->setTimestamp($task[$endColumn] ?: time());
-
-            $vEvent = $this->getTaskIcalEvent($task, 'task-#'.$task['id'].'-'.$startColumn.'-'.$endColumn);
-            $vEvent->setDtStart($start);
-            $vEvent->setDtEnd($end);
-
-            $this->vCalendar->addComponent($vEvent);
+            $this->calendar->addEvent($event);
         }
 
         return $this;
@@ -88,18 +80,14 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
     public function addTasksWithDueDateOnly(Table $query)
     {
         foreach ($query->findAll() as $task) {
-            $date = new DateTime;
-            $date->setTimestamp($task['date_due']);
+            $date = $this->toDateTime($task['date_due']);
 
-            $vEvent = $this->getTaskIcalEvent($task, 'task-#'.$task['id'].'-date_due');
-            $vEvent->setDtStart($date);
-            $vEvent->setDtEnd($date);
+            $event = $this->getTaskIcalEvent($task, 'task-#'.$task['id'].'-date_due')
+                ->setStart($date)
+                ->setEnd($date)
+                ->setAllDay($date->format('Hi') === '0000');
 
-            if ($date->format('Hi') === '0000') {
-                $vEvent->setNoTime(true);
-            }
-
-            $this->vCalendar->addComponent($vEvent);
+            $this->calendar->addEvent($event);
         }
 
         return $this;
@@ -115,37 +103,40 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
      */
     protected function getTaskIcalEvent(array &$task, $uid)
     {
-        $dateCreation = new DateTime;
-        $dateCreation->setTimestamp($task['date_creation']);
-
-        $dateModif = new DateTime;
-        $dateModif->setTimestamp($task['date_modification']);
-
-        $vEvent = new Event($uid);
-        $vEvent->setCreated($dateCreation);
-        $vEvent->setModified($dateModif);
-        $vEvent->setUseTimezone(true);
-        $vEvent->setSummary(t('#%d', $task['id']).' '.$task['title']);
-        $vEvent->setDescription($task['description']);
-        $vEvent->setDescriptionHTML($this->helper->text->markdown($task['description']));
-        $vEvent->setUrl($this->helper->url->base().$this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])));
+        $event = (new Event($uid))
+            ->setCreated($this->toDateTime($task['date_creation']))
+            ->setModified($this->toDateTime($task['date_modification']))
+            ->setSummary(t('#%d', $task['id']).' '.$task['title'])
+            ->setDescription((string) $task['description'])
+            ->setDescriptionHtml($this->helper->text->markdown($task['description']))
+            ->setUrl($this->helper->url->base().$this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])));
 
         if (! empty($task['owner_id'])) {
-            $attendees = new Attendees;
-            $attendees->add(
-                'MAILTO:'.($task['assignee_email'] ?: $task['assignee_username'].'@kanboard.local'),
-                array('CN' => $task['assignee_name'] ?: $task['assignee_username'])
+            $event->addAttendee(
+                (string) ($task['assignee_email'] ?: $task['assignee_username'].'@kanboard.local'),
+                (string) ($task['assignee_name'] ?: $task['assignee_username'])
             );
-            $vEvent->setAttendees($attendees);
         }
 
         if (! empty($task['creator_id'])) {
-            $vEvent->setOrganizer(new Organizer(
-                'MAILTO:' . $task['creator_email'] ?: $task['creator_username'].'@kanboard.local',
-                array('CN' => $task['creator_name'] ?: $task['creator_username'])
-            ));
+            $event->setOrganizer(
+                (string) ($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'),
+                (string) ($task['creator_name'] ?: $task['creator_username'])
+            );
         }
 
-        return $vEvent;
+        return $event;
+    }
+
+    /**
+     * Convert a timestamp to a date in the current timezone
+     *
+     * @access private
+     * @param  int|string $timestamp
+     * @return DateTimeImmutable
+     */
+    private function toDateTime($timestamp)
+    {
+        return (new DateTimeImmutable())->setTimestamp((int) $timestamp);
     }
 }

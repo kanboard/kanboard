@@ -48,6 +48,24 @@ class ICalendarControllerTest extends Base
         $this->assertStringContainsString('task-#1-date_creation-date_due', $this->calendar);
     }
 
+    public function testProjectCalendarFallsBackToUsernameAddresses()
+    {
+        $this->createFixtures();
+        $this->assertEquals(3, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Created by admin',
+            'owner_id' => 2,
+            'creator_id' => 1,
+            'date_due' => strtotime('+1 day'),
+        )));
+        $project = $this->container['projectModel']->getById(1);
+
+        $this->renderCalendar(array('token' => $project['token']))->project();
+
+        $this->assertStringContainsString("ATTENDEE;CN=user1:MAILTO:user1@kanboard.local\r\n", $this->calendar);
+        $this->assertStringContainsString("ORGANIZER;CN=admin:MAILTO:admin@kanboard.local\r\n", $this->calendar);
+    }
+
     public function testUserCalendarExcludesTasksFromRevokedProjects()
     {
         $this->createFixtures();

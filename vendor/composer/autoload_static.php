@@ -44,10 +44,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
             'Kanboard\\' => 9,
             'KanboardTests\\' => 14,
         ),
-        'E' =>
-        array (
-            'Eluceo\\iCal\\' => 12,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -115,10 +111,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         array (
             0 => __DIR__ . '/../..' . '/tests',
         ),
-        'Eluceo\\iCal\\' =>
-        array (
-            0 => __DIR__ . '/../..' . '/libs/ical',
-        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -148,29 +140,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Eluceo\\iCal\\Component' => __DIR__ . '/../..' . '/libs/ical/Component.php',
-        'Eluceo\\iCal\\Component\\Alarm' => __DIR__ . '/../..' . '/libs/ical/Component/Alarm.php',
-        'Eluceo\\iCal\\Component\\Calendar' => __DIR__ . '/../..' . '/libs/ical/Component/Calendar.php',
-        'Eluceo\\iCal\\Component\\Event' => __DIR__ . '/../..' . '/libs/ical/Component/Event.php',
-        'Eluceo\\iCal\\Component\\Timezone' => __DIR__ . '/../..' . '/libs/ical/Component/Timezone.php',
-        'Eluceo\\iCal\\Component\\TimezoneRule' => __DIR__ . '/../..' . '/libs/ical/Component/TimezoneRule.php',
-        'Eluceo\\iCal\\ParameterBag' => __DIR__ . '/../..' . '/libs/ical/ParameterBag.php',
-        'Eluceo\\iCal\\Property' => __DIR__ . '/../..' . '/libs/ical/Property.php',
-        'Eluceo\\iCal\\PropertyBag' => __DIR__ . '/../..' . '/libs/ical/PropertyBag.php',
-        'Eluceo\\iCal\\Property\\ArrayValue' => __DIR__ . '/../..' . '/libs/ical/Property/ArrayValue.php',
-        'Eluceo\\iCal\\Property\\DateTimeProperty' => __DIR__ . '/../..' . '/libs/ical/Property/DateTimeProperty.php',
-        'Eluceo\\iCal\\Property\\DateTimesProperty' => __DIR__ . '/../..' . '/libs/ical/Property/DateTimesProperty.php',
-        'Eluceo\\iCal\\Property\\Event\\Attachment' => __DIR__ . '/../..' . '/libs/ical/Property/Event/Attachment.php',
-        'Eluceo\\iCal\\Property\\Event\\Attendees' => __DIR__ . '/../..' . '/libs/ical/Property/Event/Attendees.php',
-        'Eluceo\\iCal\\Property\\Event\\Geo' => __DIR__ . '/../..' . '/libs/ical/Property/Event/Geo.php',
-        'Eluceo\\iCal\\Property\\Event\\Organizer' => __DIR__ . '/../..' . '/libs/ical/Property/Event/Organizer.php',
-        'Eluceo\\iCal\\Property\\Event\\RecurrenceId' => __DIR__ . '/../..' . '/libs/ical/Property/Event/RecurrenceId.php',
-        'Eluceo\\iCal\\Property\\Event\\RecurrenceRule' => __DIR__ . '/../..' . '/libs/ical/Property/Event/RecurrenceRule.php',
-        'Eluceo\\iCal\\Property\\RawStringValue' => __DIR__ . '/../..' . '/libs/ical/Property/RawStringValue.php',
-        'Eluceo\\iCal\\Property\\StringValue' => __DIR__ . '/../..' . '/libs/ical/Property/StringValue.php',
-        'Eluceo\\iCal\\Property\\ValueInterface' => __DIR__ . '/../..' . '/libs/ical/Property/ValueInterface.php',
-        'Eluceo\\iCal\\Util\\ComponentUtil' => __DIR__ . '/../..' . '/libs/ical/Util/ComponentUtil.php',
-        'Eluceo\\iCal\\Util\\DateUtil' => __DIR__ . '/../..' . '/libs/ical/Util/DateUtil.php',
         'JsonRPC\\Client' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Client.php',
         'JsonRPC\\Exception\\AccessDeniedException' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Exception/AccessDeniedException.php',
         'JsonRPC\\Exception\\AuthenticationFailureException' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Exception/AuthenticationFailureException.php',
@@ -308,6 +277,8 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'KanboardTests\\units\\Core\\Http\\RequestTest' => __DIR__ . '/../..' . '/tests/units/Core/Http/RequestTest.php',
         'KanboardTests\\units\\Core\\Http\\RouteTest' => __DIR__ . '/../..' . '/tests/units/Core/Http/RouteTest.php',
         'KanboardTests\\units\\Core\\Http\\RouterTest' => __DIR__ . '/../..' . '/tests/units/Core/Http/RouterTest.php',
+        'KanboardTests\\units\\Core\\ICalendar\\CalendarTest' => __DIR__ . '/../..' . '/tests/units/Core/ICalendar/CalendarTest.php',
+        'KanboardTests\\units\\Core\\ICalendar\\ContentLineTest' => __DIR__ . '/../..' . '/tests/units/Core/ICalendar/ContentLineTest.php',
         'KanboardTests\\units\\Core\\Ldap\\ClientTest' => __DIR__ . '/../..' . '/tests/units/Core/Ldap/ClientTest.php',
         'KanboardTests\\units\\Core\\Ldap\\EntriesTest' => __DIR__ . '/../..' . '/tests/units/Core/Ldap/EntriesTest.php',
         'KanboardTests\\units\\Core\\Ldap\\EntryTest' => __DIR__ . '/../..' . '/tests/units/Core/Ldap/EntryTest.php',
@@ -319,6 +290,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'KanboardTests\\units\\Core\\Plugin\\HookTest' => __DIR__ . '/../..' . '/tests/units/Core/Plugin/HookTest.php',
         'KanboardTests\\units\\Core\\Plugin\\SchemaHandlerTest' => __DIR__ . '/../..' . '/tests/units/Core/Plugin/SchemaHandlerTest.php',
         'KanboardTests\\units\\Core\\Plugin\\VersionTest' => __DIR__ . '/../..' . '/tests/units/Core/Plugin/VersionTest.php',
+        'KanboardTests\\units\\Core\\QrCodeTest' => __DIR__ . '/../..' . '/tests/units/Core/QrCodeTest.php',
         'KanboardTests\\units\\Core\\Security\\AccessMapTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/AccessMapTest.php',
         'KanboardTests\\units\\Core\\Security\\AuthenticationManagerTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/AuthenticationManagerTest.php',
         'KanboardTests\\units\\Core\\Security\\AuthorizationTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/AuthorizationTest.php',
@@ -764,6 +736,9 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Kanboard\\Core\\Http\\Response' => __DIR__ . '/../..' . '/app/Core/Http/Response.php',
         'Kanboard\\Core\\Http\\Route' => __DIR__ . '/../..' . '/app/Core/Http/Route.php',
         'Kanboard\\Core\\Http\\Router' => __DIR__ . '/../..' . '/app/Core/Http/Router.php',
+        'Kanboard\\Core\\ICalendar\\Calendar' => __DIR__ . '/../..' . '/app/Core/ICalendar/Calendar.php',
+        'Kanboard\\Core\\ICalendar\\ContentLine' => __DIR__ . '/../..' . '/app/Core/ICalendar/ContentLine.php',
+        'Kanboard\\Core\\ICalendar\\Event' => __DIR__ . '/../..' . '/app/Core/ICalendar/Event.php',
         'Kanboard\\Core\\Ldap\\Client' => __DIR__ . '/../..' . '/app/Core/Ldap/Client.php',
         'Kanboard\\Core\\Ldap\\ClientException' => __DIR__ . '/../..' . '/app/Core/Ldap/ClientException.php',
         'Kanboard\\Core\\Ldap\\ConnectionException' => __DIR__ . '/../..' . '/app/Core/Ldap/ConnectionException.php',
