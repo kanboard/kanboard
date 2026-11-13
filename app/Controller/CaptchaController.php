@@ -2,7 +2,7 @@
 
 namespace Kanboard\Controller;
 
-use Gregwar\Captcha\CaptchaBuilder;
+use Kanboard\Core\Security\Captcha;
 
 /**
  * Captcha Controller
@@ -19,11 +19,14 @@ class CaptchaController extends BaseController
      */
     public function image()
     {
-        $this->response->withContentType('image/jpeg')->send();
+        $captcha = new Captcha;
+        $phrase = $captcha->generatePhrase();
+        session_set('captcha', $phrase);
 
-        $builder = new CaptchaBuilder;
-        $builder->build();
-        session_set('captcha', $builder->getPhrase());
-        $builder->output();
+        $this->response
+            ->withContentType('image/jpeg')
+            ->withoutCache()
+            ->withBody($captcha->render($phrase))
+            ->send();
     }
 }

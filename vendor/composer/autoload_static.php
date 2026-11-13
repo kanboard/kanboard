@@ -8,8 +8,8 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
@@ -31,7 +31,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
             'Symfony\\Contracts\\Service\\' => 26,
             'Symfony\\Contracts\\EventDispatcher\\' => 34,
             'Symfony\\Component\\String\\' => 25,
-            'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\Console\\' => 26,
             'SimpleValidator\\' => 16,
@@ -52,10 +51,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         array (
             'Kanboard\\' => 9,
             'KanboardTests\\' => 14,
-        ),
-        'G' =>
-        array (
-            'Gregwar\\Captcha\\' => 16,
         ),
         'E' =>
         array (
@@ -100,10 +95,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
         ),
-        'Symfony\\Component\\Finder\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/symfony/finder',
-        ),
         'Symfony\\Component\\EventDispatcher\\' =>
         array (
             0 => __DIR__ . '/../..' . '/libs/event-dispatcher',
@@ -147,10 +138,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'KanboardTests\\' =>
         array (
             0 => __DIR__ . '/../..' . '/tests',
-        ),
-        'Gregwar\\Captcha\\' =>
-        array (
-            0 => __DIR__ . '/../..' . '/libs/Captcha',
         ),
         'Eluceo\\iCal\\' =>
         array (
@@ -213,11 +200,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Eluceo\\iCal\\Property\\ValueInterface' => __DIR__ . '/../..' . '/libs/ical/Property/ValueInterface.php',
         'Eluceo\\iCal\\Util\\ComponentUtil' => __DIR__ . '/../..' . '/libs/ical/Util/ComponentUtil.php',
         'Eluceo\\iCal\\Util\\DateUtil' => __DIR__ . '/../..' . '/libs/ical/Util/DateUtil.php',
-        'Gregwar\\Captcha\\CaptchaBuilder' => __DIR__ . '/../..' . '/libs/Captcha/CaptchaBuilder.php',
-        'Gregwar\\Captcha\\CaptchaBuilderInterface' => __DIR__ . '/../..' . '/libs/Captcha/CaptchaBuilderInterface.php',
-        'Gregwar\\Captcha\\ImageFileHandler' => __DIR__ . '/../..' . '/libs/Captcha/ImageFileHandler.php',
-        'Gregwar\\Captcha\\PhraseBuilder' => __DIR__ . '/../..' . '/libs/Captcha/PhraseBuilder.php',
-        'Gregwar\\Captcha\\PhraseBuilderInterface' => __DIR__ . '/../..' . '/libs/Captcha/PhraseBuilderInterface.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'JsonRPC\\Client' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Client.php',
         'JsonRPC\\Exception\\AccessDeniedException' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Exception/AccessDeniedException.php',
@@ -370,6 +352,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'KanboardTests\\units\\Core\\Security\\AccessMapTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/AccessMapTest.php',
         'KanboardTests\\units\\Core\\Security\\AuthenticationManagerTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/AuthenticationManagerTest.php',
         'KanboardTests\\units\\Core\\Security\\AuthorizationTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/AuthorizationTest.php',
+        'KanboardTests\\units\\Core\\Security\\CaptchaTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/CaptchaTest.php',
         'KanboardTests\\units\\Core\\Security\\RoleTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/RoleTest.php',
         'KanboardTests\\units\\Core\\Security\\TokenTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/TokenTest.php',
         'KanboardTests\\units\\Core\\Security\\TotpTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/TotpTest.php',
@@ -851,6 +834,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Kanboard\\Core\\Security\\AuthenticationManager' => __DIR__ . '/../..' . '/app/Core/Security/AuthenticationManager.php',
         'Kanboard\\Core\\Security\\AuthenticationProviderInterface' => __DIR__ . '/../..' . '/app/Core/Security/AuthenticationProviderInterface.php',
         'Kanboard\\Core\\Security\\Authorization' => __DIR__ . '/../..' . '/app/Core/Security/Authorization.php',
+        'Kanboard\\Core\\Security\\Captcha' => __DIR__ . '/../..' . '/app/Core/Security/Captcha.php',
         'Kanboard\\Core\\Security\\OAuthAuthenticationProviderInterface' => __DIR__ . '/../..' . '/app/Core/Security/OAuthAuthenticationProviderInterface.php',
         'Kanboard\\Core\\Security\\OptionalAuthenticationProviderInterface' => __DIR__ . '/../..' . '/app/Core/Security/OptionalAuthenticationProviderInterface.php',
         'Kanboard\\Core\\Security\\PasswordAuthenticationProviderInterface' => __DIR__ . '/../..' . '/app/Core/Security/PasswordAuthenticationProviderInterface.php',
@@ -1417,29 +1401,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Symfony\\Component\\EventDispatcher\\GenericEvent' => __DIR__ . '/../..' . '/libs/event-dispatcher/GenericEvent.php',
         'Symfony\\Component\\EventDispatcher\\ImmutableEventDispatcher' => __DIR__ . '/../..' . '/libs/event-dispatcher/ImmutableEventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\LegacyEventDispatcherProxy' => __DIR__ . '/../..' . '/libs/event-dispatcher/LegacyEventDispatcherProxy.php',
-        'Symfony\\Component\\Finder\\Comparator\\Comparator' => __DIR__ . '/..' . '/symfony/finder/Comparator/Comparator.php',
-        'Symfony\\Component\\Finder\\Comparator\\DateComparator' => __DIR__ . '/..' . '/symfony/finder/Comparator/DateComparator.php',
-        'Symfony\\Component\\Finder\\Comparator\\NumberComparator' => __DIR__ . '/..' . '/symfony/finder/Comparator/NumberComparator.php',
-        'Symfony\\Component\\Finder\\Exception\\AccessDeniedException' => __DIR__ . '/..' . '/symfony/finder/Exception/AccessDeniedException.php',
-        'Symfony\\Component\\Finder\\Exception\\DirectoryNotFoundException' => __DIR__ . '/..' . '/symfony/finder/Exception/DirectoryNotFoundException.php',
-        'Symfony\\Component\\Finder\\Finder' => __DIR__ . '/..' . '/symfony/finder/Finder.php',
-        'Symfony\\Component\\Finder\\Gitignore' => __DIR__ . '/..' . '/symfony/finder/Gitignore.php',
-        'Symfony\\Component\\Finder\\Glob' => __DIR__ . '/..' . '/symfony/finder/Glob.php',
-        'Symfony\\Component\\Finder\\Iterator\\CustomFilterIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/CustomFilterIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\DateRangeFilterIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/DateRangeFilterIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\DepthRangeFilterIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/DepthRangeFilterIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\ExcludeDirectoryFilterIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/ExcludeDirectoryFilterIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\FileTypeFilterIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/FileTypeFilterIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\FilecontentFilterIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/FilecontentFilterIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\FilenameFilterIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/FilenameFilterIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\LazyIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/LazyIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\MultiplePcreFilterIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/MultiplePcreFilterIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\PathFilterIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/PathFilterIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\RecursiveDirectoryIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/RecursiveDirectoryIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\SizeRangeFilterIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/SizeRangeFilterIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\SortableIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/SortableIterator.php',
-        'Symfony\\Component\\Finder\\Iterator\\VcsIgnoredFilterIterator' => __DIR__ . '/..' . '/symfony/finder/Iterator/VcsIgnoredFilterIterator.php',
-        'Symfony\\Component\\Finder\\SplFileInfo' => __DIR__ . '/..' . '/symfony/finder/SplFileInfo.php',
         'Symfony\\Component\\String\\AbstractString' => __DIR__ . '/..' . '/symfony/string/AbstractString.php',
         'Symfony\\Component\\String\\AbstractUnicodeString' => __DIR__ . '/..' . '/symfony/string/AbstractUnicodeString.php',
         'Symfony\\Component\\String\\ByteString' => __DIR__ . '/..' . '/symfony/string/ByteString.php',

@@ -30,7 +30,6 @@
         "psr/log": "1.1.4",
         "symfony/console": "5.4.41",
         "symfony/event-dispatcher-contracts": "^2",
-        "symfony/finder": "5.4.45",
         "symfony/service-contracts": "2.5.4",
         "symfony/string": "^5.1",
         "symfony/deprecation-contracts": "2.5.4"
@@ -44,7 +43,6 @@
             "KanboardTests\\": "tests/",
             "MatthiasMullie\\Minify\\": "libs/minify/src/",
             "MatthiasMullie\\PathConverter\\": "libs/path-converter/src/",
-            "Gregwar\\Captcha\\": "libs/Captcha",
             "Eluceo\\iCal\\": "libs/ical",
             "SimpleQueue\\": "libs/SimpleQueue",
             "SimpleValidator\\": "libs/SimpleValidator",

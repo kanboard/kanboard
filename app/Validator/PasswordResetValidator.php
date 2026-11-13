@@ -4,7 +4,7 @@ namespace Kanboard\Validator;
 
 use SimpleValidator\Validator;
 use SimpleValidator\Validators;
-use Gregwar\Captcha\CaptchaBuilder;
+use Kanboard\Core\Security\Captcha;
 
 /**
  * Password Reset Validator
@@ -78,9 +78,8 @@ class PasswordResetValidator extends BaseValidator
         if (! session_exists('captcha')) {
             $result = false;
         } else {
-            $builder = new CaptchaBuilder;
-            $builder->setPhrase(session_get('captcha'));
-            $result = $builder->testPhrase(isset($values['captcha']) ? $values['captcha'] : '');
+            $input = $values['captcha'] ?? '';
+            $result = is_string($input) && (new Captcha)->comparePhrases((string) session_get('captcha'), $input);
 
             if (! $result) {
                 $errors['captcha'] = array(t('Invalid captcha'));
