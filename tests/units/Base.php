@@ -23,9 +23,6 @@ use PDO;
 use PHPUnit\Framework\TestCase;
 use Pimple\Container;
 use Symfony\Component\Console\Application;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
-use Symfony\Component\Stopwatch\Stopwatch;
 use Kanboard\Core\Session\FlashMessage;
 use Kanboard\ServiceProvider\ActionProvider;
 
@@ -34,7 +31,7 @@ abstract class Base extends TestCase
     protected $container;
 
     /**
-     * @var EventDispatcher
+     * @var RecordingEventDispatcher
      */
     protected $dispatcher;
 
@@ -98,10 +95,7 @@ abstract class Base extends TestCase
         $this->container->register(new LoggingProvider());
         $this->container->register(new ExternalTaskProvider());
 
-        $this->container['dispatcher'] = new TraceableEventDispatcher(
-            new EventDispatcher,
-            new Stopwatch
-        );
+        $this->container['dispatcher'] = new RecordingEventDispatcher();
 
         $this->dispatcher = $this->container['dispatcher'];
 
