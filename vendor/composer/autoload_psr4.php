@@ -15,7 +15,6 @@ return array(
     'Symfony\\Contracts\\Service\\' => array($vendorDir . '/symfony/service-contracts'),
     'Symfony\\Contracts\\EventDispatcher\\' => array($vendorDir . '/symfony/event-dispatcher-contracts'),
     'Symfony\\Component\\String\\' => array($vendorDir . '/symfony/string'),
-    'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
     'Symfony\\Component\\EventDispatcher\\' => array($baseDir . '/libs/event-dispatcher'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'SimpleValidator\\' => array($baseDir . '/libs/SimpleValidator'),
@@ -27,6 +26,5 @@ return array(
     'MatthiasMullie\\Minify\\' => array($baseDir . '/libs/minify/src'),
     'Kanboard\\' => array($baseDir . '/app'),
     'KanboardTests\\' => array($baseDir . '/tests'),
-    'Gregwar\\Captcha\\' => array($baseDir . '/libs/Captcha'),
     'Eluceo\\iCal\\' => array($baseDir . '/libs/ical'),
 );
