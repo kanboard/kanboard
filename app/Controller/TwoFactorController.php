@@ -3,7 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
-use PHPQRCode;
+use Kanboard\Core\QrCode;
 
 /**
  * Two Factor Auth controller
@@ -225,7 +225,11 @@ class TwoFactorController extends UserViewController
             $url = $provider->getKeyUrl($user['email'] ?: $user['username']);
 
             if (! empty($url)) {
-                PHPQRCode\QRcode::png($url, false, 'L', 6, 0);
+                $this->response
+                    ->withContentType('image/svg+xml')
+                    ->withoutCache()
+                    ->withBody((new QrCode)->renderSvg($url))
+                    ->send();
             }
         }
     }

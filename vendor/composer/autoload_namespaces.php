@@ -9,6 +9,5 @@ return array(
     'Pimple' => array($vendorDir . '/pimple/pimple/src'),
     'PicoDb' => array($baseDir . '/libs/picodb/lib'),
     'Parsedown' => array($baseDir . '/libs/erusev/parsedown'),
-    'PHPQRCode' => array($baseDir . '/libs/phpqrcode/lib'),
     'JsonRPC' => array($baseDir . '/libs/jsonrpc/src'),
 );

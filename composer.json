@@ -56,7 +56,6 @@
         },
         "psr-0": {
             "JsonRPC": "libs/jsonrpc/src",
-            "PHPQRCode": "libs/phpqrcode/lib",
             "PicoDb": "libs/picodb/lib",
             "Parsedown": "libs/erusev/parsedown/"
         },
