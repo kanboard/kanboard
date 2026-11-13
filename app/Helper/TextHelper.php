@@ -112,6 +112,8 @@ class TextHelper extends Base
      */
     public function in($id, array $listing, $default_value = '?')
     {
+        $id = $id ?? '';
+
         if (isset($listing[$id])) {
             return $this->helper->text->e($listing[$id]);
         }
