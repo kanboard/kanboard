@@ -37,7 +37,6 @@ class TotpAuthTest extends Base
     {
         $provider = new TotpAuth($this->container);
 
-        $this->assertEmpty($provider->getQrCodeUrl('me'));
         $this->assertEmpty($provider->getKeyUrl('me'));
 
         $provider->setSecret('mySecret');

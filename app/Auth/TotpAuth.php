@@ -2,11 +2,9 @@
 
 namespace Kanboard\Auth;
 
-use Otp\Otp;
-use Otp\GoogleAuthenticator;
-use Base32\Base32;
 use Kanboard\Core\Base;
 use Kanboard\Core\Security\PostAuthenticationProviderInterface;
+use Kanboard\Core\Security\Totp;
 
 /**
  * TOTP Authentication Provider
@@ -51,8 +49,7 @@ class TotpAuth extends Base implements PostAuthenticationProviderInterface
      */
     public function authenticate()
     {
-        $otp = new Otp;
-        return $otp->checkTotp(Base32::decode($this->secret), $this->code);
+        return (new Totp)->verify($this->secret, (string) $this->code);
     }
 
     /**
@@ -84,7 +81,7 @@ class TotpAuth extends Base implements PostAuthenticationProviderInterface
      */
     public function generateSecret()
     {
-        $this->secret = GoogleAuthenticator::generateRandom();
+        $this->secret = (new Totp)->generateSecret();
         return $this->secret;
     }
 
@@ -111,23 +108,6 @@ class TotpAuth extends Base implements PostAuthenticationProviderInterface
     }
 
     /**
-     * Get QR code url
-     *
-     * @access public
-     * @param  string $label
-     * @return string
-     */
-    public function getQrCodeUrl($label)
-    {
-        if (empty($this->secret)) {
-            return '';
-        }
-
-        $options = array('issuer' => TOTP_ISSUER);
-        return GoogleAuthenticator::getQrCodeUrl('totp', $label, $this->secret, null, $options);
-    }
-
-    /**
      * Get key url (empty if no url can be provided)
      *
      * @access public
@@ -140,7 +120,6 @@ class TotpAuth extends Base implements PostAuthenticationProviderInterface
             return '';
         }
 
-        $options = array('issuer' => TOTP_ISSUER);
-        return GoogleAuthenticator::getKeyUri('totp', $label, $this->secret, null, $options);
+        return (new Totp)->getKeyUri($label, $this->secret, TOTP_ISSUER);
     }
 }

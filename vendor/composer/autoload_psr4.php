@@ -29,5 +29,4 @@ return array(
     'KanboardTests\\' => array($baseDir . '/tests'),
     'Gregwar\\Captcha\\' => array($baseDir . '/libs/Captcha'),
     'Eluceo\\iCal\\' => array($baseDir . '/libs/ical'),
-    'Base32\\' => array($vendorDir . '/christian-riesen/base32/src'),
 );

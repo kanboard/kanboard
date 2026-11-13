@@ -61,10 +61,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         array (
             'Eluceo\\iCal\\' => 12,
         ),
-        'B' =>
-        array (
-            'Base32\\' => 7,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -160,10 +156,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         array (
             0 => __DIR__ . '/../..' . '/libs/ical',
         ),
-        'Base32\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/christian-riesen/base32/src',
-        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -186,13 +178,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
                 0 => __DIR__ . '/../..' . '/libs/phpqrcode/lib',
             ),
         ),
-        'O' =>
-        array (
-            'Otp' =>
-            array (
-                0 => __DIR__ . '/..' . '/christian-riesen/otp/src',
-            ),
-        ),
         'J' =>
         array (
             'JsonRPC' =>
@@ -204,8 +189,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
 
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
-        'Base32\\Base32' => __DIR__ . '/..' . '/christian-riesen/base32/src/Base32.php',
-        'Base32\\Base32Hex' => __DIR__ . '/..' . '/christian-riesen/base32/src/Base32Hex.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Eluceo\\iCal\\Component' => __DIR__ . '/../..' . '/libs/ical/Component.php',
         'Eluceo\\iCal\\Component\\Alarm' => __DIR__ . '/../..' . '/libs/ical/Component/Alarm.php',
@@ -333,14 +316,26 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'KanboardTests\\units\\Analytic\\EstimatedTimeComparisonAnalyticTest' => __DIR__ . '/../..' . '/tests/units/Analytic/EstimatedTimeComparisonAnalyticTest.php',
         'KanboardTests\\units\\Analytic\\TaskDistributionAnalyticTest' => __DIR__ . '/../..' . '/tests/units/Analytic/TaskDistributionAnalyticTest.php',
         'KanboardTests\\units\\Analytic\\UserDistributionAnalyticTest' => __DIR__ . '/../..' . '/tests/units/Analytic/UserDistributionAnalyticTest.php',
+        'KanboardTests\\units\\Api\\BatchRequestTest' => __DIR__ . '/../..' . '/tests/units/Api/BatchRequestTest.php',
         'KanboardTests\\units\\Auth\\ApiAccessTokenAuthTest' => __DIR__ . '/../..' . '/tests/units/Auth/ApiAccessTokenAuthTest.php',
         'KanboardTests\\units\\Auth\\DatabaseAuthTest' => __DIR__ . '/../..' . '/tests/units/Auth/DatabaseAuthTest.php',
         'KanboardTests\\units\\Auth\\ReverseProxyAuthTest' => __DIR__ . '/../..' . '/tests/units/Auth/ReverseProxyAuthTest.php',
         'KanboardTests\\units\\Auth\\TotpAuthTest' => __DIR__ . '/../..' . '/tests/units/Auth/TotpAuthTest.php',
         'KanboardTests\\units\\Base' => __DIR__ . '/../..' . '/tests/units/Base.php',
         'KanboardTests\\units\\Controller\\ActionCreationControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/ActionCreationControllerTest.php',
+        'KanboardTests\\units\\Controller\\BoardAjaxControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/BoardAjaxControllerTest.php',
+        'KanboardTests\\units\\Controller\\CurrencyControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/CurrencyControllerTest.php',
         'KanboardTests\\units\\Controller\\CustomFilterControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/CustomFilterControllerTest.php',
+        'KanboardTests\\units\\Controller\\ExternalTaskCreationControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/ExternalTaskCreationControllerTest.php',
+        'KanboardTests\\units\\Controller\\FileViewerControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/FileViewerControllerTest.php',
+        'KanboardTests\\units\\Controller\\ICalendarControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/ICalendarControllerTest.php',
+        'KanboardTests\\units\\Controller\\ProjectCreationControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/ProjectCreationControllerTest.php',
         'KanboardTests\\units\\Controller\\SubtaskControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/SubtaskControllerTest.php',
+        'KanboardTests\\units\\Controller\\TaskBulkChangePropertyControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/TaskBulkChangePropertyControllerTest.php',
+        'KanboardTests\\units\\Controller\\TaskBulkMoveColumnControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/TaskBulkMoveColumnControllerTest.php',
+        'KanboardTests\\units\\Controller\\TaskCreationControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/TaskCreationControllerTest.php',
+        'KanboardTests\\units\\Controller\\TaskModificationControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/TaskModificationControllerTest.php',
+        'KanboardTests\\units\\Controller\\TaskRecurrenceControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/TaskRecurrenceControllerTest.php',
         'KanboardTests\\units\\Controller\\UserModificationControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/UserModificationControllerTest.php',
         'KanboardTests\\units\\Controller\\WebNotificationControllerTest' => __DIR__ . '/../..' . '/tests/units/Controller/WebNotificationControllerTest.php',
         'KanboardTests\\units\\Core\\Action\\ActionManagerTest' => __DIR__ . '/../..' . '/tests/units/Core/Action/ActionManagerTest.php',
@@ -377,7 +372,11 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'KanboardTests\\units\\Core\\Security\\AuthorizationTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/AuthorizationTest.php',
         'KanboardTests\\units\\Core\\Security\\RoleTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/RoleTest.php',
         'KanboardTests\\units\\Core\\Security\\TokenTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/TokenTest.php',
+        'KanboardTests\\units\\Core\\Security\\TotpTest' => __DIR__ . '/../..' . '/tests/units/Core/Security/TotpTest.php',
         'KanboardTests\\units\\Core\\Session\\FlashMessageTest' => __DIR__ . '/../..' . '/tests/units/Core/Session/FlashMessageTest.php',
+        'KanboardTests\\units\\Core\\Session\\SessionHandlerTest' => __DIR__ . '/../..' . '/tests/units/Core/Session/SessionHandlerTest.php',
+        'KanboardTests\\units\\Core\\Session\\SessionManagerTest' => __DIR__ . '/../..' . '/tests/units/Core/Session/SessionManagerTest.php',
+        'KanboardTests\\units\\Core\\SqliteLikeTest' => __DIR__ . '/../..' . '/tests/units/Core/SqliteLikeTest.php',
         'KanboardTests\\units\\Core\\TemplateTest' => __DIR__ . '/../..' . '/tests/units/Core/TemplateTest.php',
         'KanboardTests\\units\\Core\\TranslatorTest' => __DIR__ . '/../..' . '/tests/units/Core/TranslatorTest.php',
         'KanboardTests\\units\\Core\\User\\GroupSyncTest' => __DIR__ . '/../..' . '/tests/units/Core/User/GroupSyncTest.php',
@@ -421,6 +420,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'KanboardTests\\units\\Filter\\TaskStatusFilterTest' => __DIR__ . '/../..' . '/tests/units/Filter/TaskStatusFilterTest.php',
         'KanboardTests\\units\\Filter\\TaskSubtaskAssigneeFilterTest' => __DIR__ . '/../..' . '/tests/units/Filter/TaskSubtaskAssigneeFilterTest.php',
         'KanboardTests\\units\\Filter\\TaskTagFilterTest' => __DIR__ . '/../..' . '/tests/units/Filter/TaskTagFilterTest.php',
+        'KanboardTests\\units\\Filter\\UserNameFilterTest' => __DIR__ . '/../..' . '/tests/units/Filter/UserNameFilterTest.php',
         'KanboardTests\\units\\Formatter\\BoardFormatterTest' => __DIR__ . '/../..' . '/tests/units/Formatter/BoardFormatterTest.php',
         'KanboardTests\\units\\Formatter\\TaskAutoCompleteFormatterTest' => __DIR__ . '/../..' . '/tests/units/Formatter/TaskAutoCompleteFormatterTest.php',
         'KanboardTests\\units\\Formatter\\TaskListFormatterTest' => __DIR__ . '/../..' . '/tests/units/Formatter/TaskListFormatterTest.php',
@@ -440,6 +440,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'KanboardTests\\units\\Helper\\TextHelperTest' => __DIR__ . '/../..' . '/tests/units/Helper/TextHelperTest.php',
         'KanboardTests\\units\\Helper\\UrlHelperTest' => __DIR__ . '/../..' . '/tests/units/Helper/UrlHelperTest.php',
         'KanboardTests\\units\\Helper\\UserHelperTest' => __DIR__ . '/../..' . '/tests/units/Helper/UserHelperTest.php',
+        'KanboardTests\\units\\Import\\TaskImportTest' => __DIR__ . '/../..' . '/tests/units/Import/TaskImportTest.php',
         'KanboardTests\\units\\Job\\CommentEventJobTest' => __DIR__ . '/../..' . '/tests/units/Job/CommentEventJobTest.php',
         'KanboardTests\\units\\Job\\ProjectFileEventJobTest' => __DIR__ . '/../..' . '/tests/units/Job/ProjectFileEventJobTest.php',
         'KanboardTests\\units\\Job\\ProjectMetricJobTest' => __DIR__ . '/../..' . '/tests/units/Job/ProjectMetricJobTest.php',
@@ -485,6 +486,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'KanboardTests\\units\\Model\\ProjectRoleRestrictionModelTest' => __DIR__ . '/../..' . '/tests/units/Model/ProjectRoleRestrictionModelTest.php',
         'KanboardTests\\units\\Model\\ProjectTaskPriorityModelTest' => __DIR__ . '/../..' . '/tests/units/Model/ProjectTaskPriorityModelTest.php',
         'KanboardTests\\units\\Model\\ProjectUserRoleTest' => __DIR__ . '/../..' . '/tests/units/Model/ProjectUserRoleTest.php',
+        'KanboardTests\\units\\Model\\RememberMeSessionModelTest' => __DIR__ . '/../..' . '/tests/units/Model/RememberMeSessionModelTest.php',
         'KanboardTests\\units\\Model\\SubtaskModelTest' => __DIR__ . '/../..' . '/tests/units/Model/SubtaskModelTest.php',
         'KanboardTests\\units\\Model\\SubtaskPositionModelTest' => __DIR__ . '/../..' . '/tests/units/Model/SubtaskPositionModelTest.php',
         'KanboardTests\\units\\Model\\SubtaskStatusModelTest' => __DIR__ . '/../..' . '/tests/units/Model/SubtaskStatusModelTest.php',
@@ -530,6 +532,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'KanboardTests\\units\\User\\Avatar\\LetterAvatarProviderTest' => __DIR__ . '/../..' . '/tests/units/User/Avatar/LetterAvatarProviderTest.php',
         'KanboardTests\\units\\User\\DatabaseUserProviderTest' => __DIR__ . '/../..' . '/tests/units/User/DatabaseUserProviderTest.php',
         'KanboardTests\\units\\Validator\\ActionValidatorTest' => __DIR__ . '/../..' . '/tests/units/Validator/ActionValidatorTest.php',
+        'KanboardTests\\units\\Validator\\ColorValidatorTest' => __DIR__ . '/../..' . '/tests/units/Validator/ColorValidatorTest.php',
         'KanboardTests\\units\\Validator\\CommentValidatorTest' => __DIR__ . '/../..' . '/tests/units/Validator/CommentValidatorTest.php',
         'KanboardTests\\units\\Validator\\ConfigValidatorTest' => __DIR__ . '/../..' . '/tests/units/Validator/ConfigValidatorTest.php',
         'KanboardTests\\units\\Validator\\CurrencyValidatorTest' => __DIR__ . '/../..' . '/tests/units/Validator/CurrencyValidatorTest.php',
@@ -856,6 +859,7 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Kanboard\\Core\\Security\\Role' => __DIR__ . '/../..' . '/app/Core/Security/Role.php',
         'Kanboard\\Core\\Security\\SessionCheckProviderInterface' => __DIR__ . '/../..' . '/app/Core/Security/SessionCheckProviderInterface.php',
         'Kanboard\\Core\\Security\\Token' => __DIR__ . '/../..' . '/app/Core/Security/Token.php',
+        'Kanboard\\Core\\Security\\Totp' => __DIR__ . '/../..' . '/app/Core/Security/Totp.php',
         'Kanboard\\Core\\Session\\FlashMessage' => __DIR__ . '/../..' . '/app/Core/Session/FlashMessage.php',
         'Kanboard\\Core\\Session\\SessionHandler' => __DIR__ . '/../..' . '/app/Core/Session/SessionHandler.php',
         'Kanboard\\Core\\Session\\SessionManager' => __DIR__ . '/../..' . '/app/Core/Session/SessionManager.php',
@@ -1190,9 +1194,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'MatthiasMullie\\PathConverter\\ConverterInterface' => __DIR__ . '/../..' . '/libs/path-converter/src/ConverterInterface.php',
         'MatthiasMullie\\PathConverter\\NoConverter' => __DIR__ . '/../..' . '/libs/path-converter/src/NoConverter.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
-        'Otp\\GoogleAuthenticator' => __DIR__ . '/..' . '/christian-riesen/otp/src/Otp/GoogleAuthenticator.php',
-        'Otp\\Otp' => __DIR__ . '/..' . '/christian-riesen/otp/src/Otp/Otp.php',
-        'Otp\\OtpInterface' => __DIR__ . '/..' . '/christian-riesen/otp/src/Otp/OtpInterface.php',
         'PHPQRCode' => __DIR__ . '/../..' . '/libs/phpqrcode/lib/PHPQRCode.php',
         'PHPQRCode\\Autoloader' => __DIR__ . '/../..' . '/libs/phpqrcode/lib/PHPQRCode/Autoloader.php',
         'PHPQRCode\\Constants' => __DIR__ . '/../..' . '/libs/phpqrcode/lib/PHPQRCode/Constants.php',
