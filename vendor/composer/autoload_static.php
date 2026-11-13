@@ -8,12 +8,8 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-        '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '8a67f3044590529ed0a5e02f9cc9c90b' => __DIR__ . '/../..' . '/app/functions.php',
         'dda285bdc738399c7167126cf41c82cb' => __DIR__ . '/../..' . '/libs/swiftmailer/swift_required.php',
@@ -22,12 +18,8 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
     public static $prefixLengthsPsr4 = array (
         'S' =>
         array (
-            'Symfony\\Polyfill\\Php80\\' => 23,
-            'Symfony\\Polyfill\\Php73\\' => 23,
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
             'Symfony\\Polyfill\\Intl\\Grapheme\\' => 31,
-            'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\Service\\' => 26,
             'Symfony\\Contracts\\EventDispatcher\\' => 34,
             'Symfony\\Component\\String\\' => 25,
@@ -59,18 +51,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Php80\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
-        ),
-        'Symfony\\Polyfill\\Php73\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php73',
-        ),
-        'Symfony\\Polyfill\\Mbstring\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
         'Symfony\\Polyfill\\Intl\\Normalizer\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
@@ -78,10 +58,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Symfony\\Polyfill\\Intl\\Grapheme\\' =>
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
-        ),
-        'Symfony\\Polyfill\\Ctype\\' =>
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
         'Symfony\\Contracts\\Service\\' =>
         array (
@@ -175,7 +151,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
     );
 
     public static $classMap = array (
-        'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Eluceo\\iCal\\Component' => __DIR__ . '/../..' . '/libs/ical/Component.php',
         'Eluceo\\iCal\\Component\\Alarm' => __DIR__ . '/../..' . '/libs/ical/Component/Alarm.php',
@@ -200,7 +175,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Eluceo\\iCal\\Property\\ValueInterface' => __DIR__ . '/../..' . '/libs/ical/Property/ValueInterface.php',
         'Eluceo\\iCal\\Util\\ComponentUtil' => __DIR__ . '/../..' . '/libs/ical/Util/ComponentUtil.php',
         'Eluceo\\iCal\\Util\\DateUtil' => __DIR__ . '/../..' . '/libs/ical/Util/DateUtil.php',
-        'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'JsonRPC\\Client' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Client.php',
         'JsonRPC\\Exception\\AccessDeniedException' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Exception/AccessDeniedException.php',
         'JsonRPC\\Exception\\AuthenticationFailureException' => __DIR__ . '/../..' . '/libs/jsonrpc/src/JsonRPC/Exception/AuthenticationFailureException.php',
@@ -1198,7 +1172,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'PHPQRCode\\QRstr' => __DIR__ . '/../..' . '/libs/phpqrcode/lib/PHPQRCode/QRstr.php',
         'PHPQRCode\\QRtools' => __DIR__ . '/../..' . '/libs/phpqrcode/lib/PHPQRCode/QRtools.php',
         'Parsedown' => __DIR__ . '/../..' . '/libs/erusev/parsedown/Parsedown.php',
-        'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'PicoDb\\Builder\\BaseBuilder' => __DIR__ . '/../..' . '/libs/picodb/lib/PicoDb/Builder/BaseBuilder.php',
         'PicoDb\\Builder\\ConditionBuilder' => __DIR__ . '/../..' . '/libs/picodb/lib/PicoDb/Builder/ConditionBuilder.php',
         'PicoDb\\Builder\\InsertBuilder' => __DIR__ . '/../..' . '/libs/picodb/lib/PicoDb/Builder/InsertBuilder.php',
@@ -1284,7 +1257,6 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'SimpleValidator\\Validators\\Timezone' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Timezone.php',
         'SimpleValidator\\Validators\\URL' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/URL.php',
         'SimpleValidator\\Validators\\Unique' => __DIR__ . '/../..' . '/libs/SimpleValidator/Validators/Unique.php',
-        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Attribute\\AsCommand' => __DIR__ . '/..' . '/symfony/console/Attribute/AsCommand.php',
         'Symfony\\Component\\Console\\CI\\GithubActionReporter' => __DIR__ . '/..' . '/symfony/console/CI/GithubActionReporter.php',
@@ -1426,15 +1398,8 @@ class ComposerStaticInit80f59a55e693f3d5493bcaaa968d1851
         'Symfony\\Contracts\\Service\\ServiceSubscriberTrait' => __DIR__ . '/..' . '/symfony/service-contracts/ServiceSubscriberTrait.php',
         'Symfony\\Contracts\\Service\\Test\\ServiceLocatorTest' => __DIR__ . '/..' . '/symfony/service-contracts/Test/ServiceLocatorTest.php',
         'Symfony\\Contracts\\Service\\Test\\ServiceLocatorTestCase' => __DIR__ . '/..' . '/symfony/service-contracts/Test/ServiceLocatorTestCase.php',
-        'Symfony\\Polyfill\\Ctype\\Ctype' => __DIR__ . '/..' . '/symfony/polyfill-ctype/Ctype.php',
         'Symfony\\Polyfill\\Intl\\Grapheme\\Grapheme' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/Grapheme.php',
         'Symfony\\Polyfill\\Intl\\Normalizer\\Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Normalizer.php',
-        'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
-        'Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/..' . '/symfony/polyfill-php73/Php73.php',
-        'Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/..' . '/symfony/polyfill-php80/Php80.php',
-        'Symfony\\Polyfill\\Php80\\PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/PhpToken.php',
-        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

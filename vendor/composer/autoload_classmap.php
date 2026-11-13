@@ -6,7 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Eluceo\\iCal\\Component' => $baseDir . '/libs/ical/Component.php',
     'Eluceo\\iCal\\Component\\Alarm' => $baseDir . '/libs/ical/Component/Alarm.php',
@@ -31,7 +30,6 @@ return array(
     'Eluceo\\iCal\\Property\\ValueInterface' => $baseDir . '/libs/ical/Property/ValueInterface.php',
     'Eluceo\\iCal\\Util\\ComponentUtil' => $baseDir . '/libs/ical/Util/ComponentUtil.php',
     'Eluceo\\iCal\\Util\\DateUtil' => $baseDir . '/libs/ical/Util/DateUtil.php',
-    'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     'JsonRPC\\Client' => $baseDir . '/libs/jsonrpc/src/JsonRPC/Client.php',
     'JsonRPC\\Exception\\AccessDeniedException' => $baseDir . '/libs/jsonrpc/src/JsonRPC/Exception/AccessDeniedException.php',
     'JsonRPC\\Exception\\AuthenticationFailureException' => $baseDir . '/libs/jsonrpc/src/JsonRPC/Exception/AuthenticationFailureException.php',
@@ -1029,7 +1027,6 @@ return array(
     'PHPQRCode\\QRstr' => $baseDir . '/libs/phpqrcode/lib/PHPQRCode/QRstr.php',
     'PHPQRCode\\QRtools' => $baseDir . '/libs/phpqrcode/lib/PHPQRCode/QRtools.php',
     'Parsedown' => $baseDir . '/libs/erusev/parsedown/Parsedown.php',
-    'PhpToken' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
     'PicoDb\\Builder\\BaseBuilder' => $baseDir . '/libs/picodb/lib/PicoDb/Builder/BaseBuilder.php',
     'PicoDb\\Builder\\ConditionBuilder' => $baseDir . '/libs/picodb/lib/PicoDb/Builder/ConditionBuilder.php',
     'PicoDb\\Builder\\InsertBuilder' => $baseDir . '/libs/picodb/lib/PicoDb/Builder/InsertBuilder.php',
@@ -1115,7 +1112,6 @@ return array(
     'SimpleValidator\\Validators\\Timezone' => $baseDir . '/libs/SimpleValidator/Validators/Timezone.php',
     'SimpleValidator\\Validators\\URL' => $baseDir . '/libs/SimpleValidator/Validators/URL.php',
     'SimpleValidator\\Validators\\Unique' => $baseDir . '/libs/SimpleValidator/Validators/Unique.php',
-    'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
     'Symfony\\Component\\Console\\Application' => $vendorDir . '/symfony/console/Application.php',
     'Symfony\\Component\\Console\\Attribute\\AsCommand' => $vendorDir . '/symfony/console/Attribute/AsCommand.php',
     'Symfony\\Component\\Console\\CI\\GithubActionReporter' => $vendorDir . '/symfony/console/CI/GithubActionReporter.php',
@@ -1257,13 +1253,6 @@ return array(
     'Symfony\\Contracts\\Service\\ServiceSubscriberTrait' => $vendorDir . '/symfony/service-contracts/ServiceSubscriberTrait.php',
     'Symfony\\Contracts\\Service\\Test\\ServiceLocatorTest' => $vendorDir . '/symfony/service-contracts/Test/ServiceLocatorTest.php',
     'Symfony\\Contracts\\Service\\Test\\ServiceLocatorTestCase' => $vendorDir . '/symfony/service-contracts/Test/ServiceLocatorTestCase.php',
-    'Symfony\\Polyfill\\Ctype\\Ctype' => $vendorDir . '/symfony/polyfill-ctype/Ctype.php',
     'Symfony\\Polyfill\\Intl\\Grapheme\\Grapheme' => $vendorDir . '/symfony/polyfill-intl-grapheme/Grapheme.php',
     'Symfony\\Polyfill\\Intl\\Normalizer\\Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Normalizer.php',
-    'Symfony\\Polyfill\\Mbstring\\Mbstring' => $vendorDir . '/symfony/polyfill-mbstring/Mbstring.php',
-    'Symfony\\Polyfill\\Php73\\Php73' => $vendorDir . '/symfony/polyfill-php73/Php73.php',
-    'Symfony\\Polyfill\\Php80\\Php80' => $vendorDir . '/symfony/polyfill-php80/Php80.php',
-    'Symfony\\Polyfill\\Php80\\PhpToken' => $vendorDir . '/symfony/polyfill-php80/PhpToken.php',
-    'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-    'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
 );
