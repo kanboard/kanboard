@@ -34,6 +34,12 @@
         "symfony/string": "^5.1",
         "symfony/deprecation-contracts": "2.5.4"
     },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-mbstring": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php80": "*"
+    },
     "autoload": {
         "classmap": [
             "app/"
@@ -60,7 +66,6 @@
         ]
     },
     "require-dev": {
-        "doctrine/instantiator": "2.0.0",
         "symfony/stopwatch": "^7.4",
         "phpunit/phpunit": "^12.0"
     }
