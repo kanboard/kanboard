@@ -164,6 +164,8 @@ class TextHelperTest extends Base
         $textHelper = new TextHelper($this->container);
         $this->assertEquals('?', $textHelper->in('a', array('b' => 'c')));
         $this->assertEquals('c', $textHelper->in('b', array('b' => 'c')));
+        $this->assertEquals('Default', $textHelper->in(null, array('' => 'Default')));
+        $this->assertEquals('?', $textHelper->in(null, array('b' => 'c')));
     }
 
     public function testFormatReply()
