@@ -22,5 +22,4 @@ return array(
     'MatthiasMullie\\Minify\\' => array($baseDir . '/libs/minify/src'),
     'Kanboard\\' => array($baseDir . '/app'),
     'KanboardTests\\' => array($baseDir . '/tests'),
-    'Eluceo\\iCal\\' => array($baseDir . '/libs/ical'),
 );

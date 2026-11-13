@@ -4,12 +4,12 @@ namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Filter\QueryBuilder;
+use Kanboard\Core\ICalendar\Calendar;
 use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Filter\TaskDueDateRangeFilter;
 use Kanboard\Filter\TaskProjectFilter;
 use Kanboard\Filter\TaskStatusFilter;
 use Kanboard\Model\TaskModel;
-use Eluceo\iCal\Component\Calendar as iCalendar;
 
 /**
  * iCalendar Controller
@@ -33,10 +33,8 @@ class ICalendarController extends BaseController
 
         $startColumn = $this->getStartColumn('calendar_user_tasks');
 
-        $calendar = new iCalendar('Kanboard');
-        $calendar->setName($user['name'] ?: $user['username']);
-        $calendar->setDescription($user['name'] ?: $user['username']);
-        $calendar->setPublishedTTL('PT1H');
+        $name = $user['name'] ?: $user['username'];
+        $calendar = new Calendar('Kanboard', $name, $name, 'PT1H');
 
         $queryDueDateOnly = QueryBuilder::create()
             ->withQuery($this->taskFinderModel->getUserICalQuery($user['id']))
@@ -73,10 +71,7 @@ class ICalendarController extends BaseController
 
         $startColumn = $this->getStartColumn('calendar_project_tasks');
 
-        $calendar = new iCalendar('Kanboard');
-        $calendar->setName($project['name']);
-        $calendar->setDescription($project['name']);
-        $calendar->setPublishedTTL('PT1H');
+        $calendar = new Calendar('Kanboard', $project['name'], $project['name'], 'PT1H');
 
         $queryDueDateOnly = QueryBuilder::create()
             ->withQuery($this->taskFinderModel->getICalQuery())

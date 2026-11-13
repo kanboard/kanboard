@@ -49,7 +49,6 @@
             "KanboardTests\\": "tests/",
             "MatthiasMullie\\Minify\\": "libs/minify/src/",
             "MatthiasMullie\\PathConverter\\": "libs/path-converter/src/",
-            "Eluceo\\iCal\\": "libs/ical",
             "SimpleQueue\\": "libs/SimpleQueue",
             "SimpleValidator\\": "libs/SimpleValidator",
             "Symfony\\Component\\EventDispatcher\\": "libs/event-dispatcher"
