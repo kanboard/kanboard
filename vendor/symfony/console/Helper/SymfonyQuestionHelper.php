@@ -26,7 +26,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class SymfonyQuestionHelper extends QuestionHelper
 {
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function writePrompt(OutputInterface $output, Question $question)
     {
@@ -34,17 +34,17 @@ class SymfonyQuestionHelper extends QuestionHelper
         $default = $question->getDefault();
 
         if ($question->isMultiline()) {
-            $text .= sprintf(' (press %s to continue)', $this->getEofShortcut());
+            $text .= \sprintf(' (press %s to continue)', $this->getEofShortcut($output));
         }
 
         switch (true) {
             case null === $default:
-                $text = sprintf(' <info>%s</info>:', $text);
+                $text = \sprintf(' <info>%s</info>:', $text);
 
                 break;
 
             case $question instanceof ConfirmationQuestion:
-                $text = sprintf(' <info>%s (yes/no)</info> [<comment>%s</comment>]:', $text, $default ? 'yes' : 'no');
+                $text = \sprintf(' <info>%s (yes/no)</info> [<comment>%s</comment>]:', $text, $default ? 'yes' : 'no');
 
                 break;
 
@@ -56,18 +56,18 @@ class SymfonyQuestionHelper extends QuestionHelper
                     $default[$key] = $choices[trim($value)];
                 }
 
-                $text = sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, OutputFormatter::escape(implode(', ', $default)));
+                $text = \sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, OutputFormatter::escapeTrailingBackslash(implode(', ', $default)));
 
                 break;
 
             case $question instanceof ChoiceQuestion:
                 $choices = $question->getChoices();
-                $text = sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, OutputFormatter::escape($choices[$default] ?? $default));
+                $text = \sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, OutputFormatter::escapeTrailingBackslash($choices[$default] ?? $default));
 
                 break;
 
             default:
-                $text = sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, OutputFormatter::escape($default));
+                $text = \sprintf(' <info>%s</info> [<comment>%s</comment>]:', $text, OutputFormatter::escape($default));
         }
 
         $output->writeln($text);
@@ -84,7 +84,7 @@ class SymfonyQuestionHelper extends QuestionHelper
     }
 
     /**
-     * {@inheritdoc}
+     * @return void
      */
     protected function writeError(OutputInterface $output, \Exception $error)
     {
@@ -98,9 +98,9 @@ class SymfonyQuestionHelper extends QuestionHelper
         parent::writeError($output, $error);
     }
 
-    private function getEofShortcut(): string
+    private function getEofShortcut(OutputInterface $output): string
     {
-        if ('Windows' === \PHP_OS_FAMILY) {
+        if ('\\' === \DIRECTORY_SEPARATOR && !$output->isDecorated()) {
             return '<comment>Ctrl+Z</comment> then <comment>Enter</comment>';
         }
 

@@ -18,7 +18,7 @@ namespace Symfony\Component\Console\Question;
  */
 class ConfirmationQuestion extends Question
 {
-    private $trueAnswerRegex;
+    private string $trueAnswerRegex;
 
     /**
      * @param string $question        The question to ask to the user
@@ -41,7 +41,7 @@ class ConfirmationQuestion extends Question
         $default = $this->getDefault();
         $regex = $this->trueAnswerRegex;
 
-        return function ($answer) use ($default, $regex) {
+        return static function ($answer) use ($default, $regex) {
             if (\is_bool($answer)) {
                 return $answer;
             }

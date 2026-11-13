@@ -58,11 +58,10 @@ class Syslog extends Base
      * Logs with an arbitrary level.
      *
      * @param  mixed   $level
-     * @param  string  $message
+     * @param  string|\Stringable $message
      * @param  array   $context
-     * @return null
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, string|\Stringable $message, array $context = array()): void
     {
         $syslogPriority = $this->getSyslogPriority($level);
         $syslogMessage = $this->interpolate($message, $context);

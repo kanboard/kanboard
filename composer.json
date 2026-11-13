@@ -27,12 +27,12 @@
         "ext-filter": "*",
         "ext-session": "*",
         "pimple/pimple": "3.6.2",
-        "psr/log": "1.1.4",
-        "symfony/console": "5.4.41",
-        "symfony/event-dispatcher-contracts": "^2",
-        "symfony/service-contracts": "2.5.4",
-        "symfony/string": "^5.1",
-        "symfony/deprecation-contracts": "2.5.4"
+        "psr/log": "3.0.2",
+        "symfony/console": "6.4.50",
+        "symfony/event-dispatcher-contracts": "^3",
+        "symfony/service-contracts": "3.8.1",
+        "symfony/string": "^6.4",
+        "symfony/deprecation-contracts": "3.8.1"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",

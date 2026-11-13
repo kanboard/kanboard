@@ -54,9 +54,8 @@ class Logger extends AbstractLogger implements LoggerAwareInterface
      * Sets a logger instance on the object
      *
      * @param  LoggerInterface $logger
-     * @return null
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->loggers[] = $logger;
     }
@@ -65,11 +64,10 @@ class Logger extends AbstractLogger implements LoggerAwareInterface
      * Proxy method to the real loggers
      *
      * @param  mixed   $level
-     * @param  string  $message
+     * @param  string|\Stringable $message
      * @param  array   $context
-     * @return null
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, string|\Stringable $message, array $context = array()): void
     {
         foreach ($this->loggers as $logger) {
             if ($this->getLevelPriority($level) >= $this->getLevelPriority($logger->getLevel())) {

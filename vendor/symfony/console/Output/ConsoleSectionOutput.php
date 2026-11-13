@@ -21,10 +21,11 @@ use Symfony\Component\Console\Terminal;
  */
 class ConsoleSectionOutput extends StreamOutput
 {
-    private $content = [];
-    private $lines = 0;
-    private $sections;
-    private $terminal;
+    private array $content = [];
+    private int $lines = 0;
+    private array $sections;
+    private Terminal $terminal;
+    private int $maxHeight = 0;
 
     /**
      * @param resource               $stream
@@ -39,9 +40,29 @@ class ConsoleSectionOutput extends StreamOutput
     }
 
     /**
+     * Defines a maximum number of lines for this section.
+     *
+     * When more lines are added, the section will automatically scroll to the
+     * end (i.e. remove the first lines to comply with the max height).
+     */
+    public function setMaxHeight(int $maxHeight): void
+    {
+        // when changing max height, clear output of current section and redraw again with the new height
+        $previousMaxHeight = $this->maxHeight;
+        $this->maxHeight = $maxHeight;
+        $existingContent = $this->popStreamContentUntilCurrentSection($previousMaxHeight ? min($previousMaxHeight, $this->lines) : $this->lines);
+
+        $visibleContent = $this->getVisibleContent();
+        parent::doWrite($visibleContent, '' !== $visibleContent && !str_ends_with($visibleContent, \PHP_EOL));
+        parent::doWrite($existingContent, false);
+    }
+
+    /**
      * Clears previous output for this section.
      *
      * @param int $lines Number of lines to clear. If null, then the entire output of this section is cleared
+     *
+     * @return void
      */
     public function clear(?int $lines = null)
     {
@@ -50,26 +71,66 @@ class ConsoleSectionOutput extends StreamOutput
         }
 
         if ($lines) {
-            array_splice($this->content, -($lines * 2)); // Multiply lines by 2 to cater for each new line added between content
+            $width = $this->terminal->getWidth();
+            foreach (array_splice($this->content, -$lines) as $line) {
+                $lines += $this->getDisplayHeight($line, $width) - 1;
+            }
         } else {
             $lines = $this->lines;
             $this->content = [];
         }
 
-        $this->lines -= $lines;
+        $previousLines = $this->lines;
 
-        parent::doWrite($this->popStreamContentUntilCurrentSection($lines), false);
+        // callers may ask to clear more lines than this section tracks (e.g. ProgressBar
+        // counts "\n"-separated lines while addContent() splits on PHP_EOL), so keep the
+        // counter from going negative, which would break the max-height bookkeeping
+        $this->lines = max(0, $this->lines - $lines);
+
+        if ($this->maxHeight && $previousLines > $this->maxHeight) {
+            // the section was scrolled: redraw it to show the lines that are visible again
+            $erasedContent = $this->popStreamContentUntilCurrentSection($this->maxHeight);
+            parent::doWrite($this->getVisibleContent(), false);
+            parent::doWrite($erasedContent, false);
+
+            return;
+        }
+
+        parent::doWrite($this->popStreamContentUntilCurrentSection($this->maxHeight ? min($this->maxHeight, $lines) : $lines), false);
     }
 
     /**
      * Overwrites the previous output with a new message.
      *
-     * @param array|string $message
+     * @return void
      */
-    public function overwrite($message)
+    public function overwrite(string|iterable $message)
     {
-        $this->clear();
-        $this->writeln($message);
+        if (!$this->content || !$this->isDecorated()) {
+            $this->writeln($message);
+
+            return;
+        }
+
+        // Replace own content and write everything in a single cursor-up + erase
+        // pass, to avoid the flicker (and the line-eating artifacts on some
+        // terminals) caused by calling clear() then writeln() back-to-back.
+        $linesCleared = $this->lines;
+        $this->content = [];
+        $this->lines = 0;
+
+        if (!is_iterable($message)) {
+            $message = [$message];
+        }
+
+        foreach ($message as $line) {
+            $this->addContent($this->getFormatter()->format($line) ?? '', true);
+        }
+
+        $erasedContent = $this->popStreamContentUntilCurrentSection($this->maxHeight ? min($this->maxHeight, $linesCleared) : $linesCleared);
+
+        parent::doWrite($this->getVisibleContent(), false);
+        parent::doWrite($erasedContent, false);
     }
 
     public function getContent(): string
@@ -77,34 +138,115 @@ class ConsoleSectionOutput extends StreamOutput
         return implode('', $this->content);
     }
 
-    /**
-     * @internal
-     */
-    public function addContent(string $input)
+    public function getVisibleContent(): string
     {
-        foreach (explode(\PHP_EOL, $input) as $lineContent) {
-            $this->lines += ceil($this->getDisplayLength($lineContent) / $this->terminal->getWidth()) ?: 1;
-            $this->content[] = $lineContent;
-            $this->content[] = \PHP_EOL;
+        if (0 === $this->maxHeight) {
+            return $this->getContent();
         }
+
+        return implode('', \array_slice($this->content, -$this->maxHeight));
     }
 
     /**
-     * {@inheritdoc}
+     * @internal
+     */
+    public function addContent(string $input, bool $newline = true): int
+    {
+        $width = $this->terminal->getWidth();
+        $lines = explode(\PHP_EOL, $input);
+        $linesAdded = 0;
+        $count = \count($lines) - 1;
+        foreach ($lines as $i => $lineContent) {
+            // re-add the line break (that has been removed in the above `explode()` for
+            // - every line that is not the last line
+            // - if $newline is required, also add it to the last line
+            if ($i < $count || $newline) {
+                $lineContent .= \PHP_EOL;
+            }
+
+            // skip line if there is no text (or newline for that matter)
+            if ('' === $lineContent) {
+                continue;
+            }
+
+            // For the first line, check if the previous line (last entry of `$this->content`)
+            // needs to be continued (i.e. does not end with a line break).
+            if (0 === $i
+                && (false !== $lastLine = end($this->content))
+                && !str_ends_with($lastLine, \PHP_EOL)
+            ) {
+                // deduct the line count of the previous line
+                $this->lines -= $this->getDisplayHeight($lastLine, $width);
+                // concatenate previous and new line
+                $lineContent = $lastLine.$lineContent;
+                // replace last entry of `$this->content` with the new expanded line
+                array_splice($this->content, -1, 1, $lineContent);
+            } else {
+                // otherwise just add the new content
+                $this->content[] = $lineContent;
+            }
+
+            $linesAdded += $this->getDisplayHeight($lineContent, $width);
+        }
+
+        $this->lines += $linesAdded;
+
+        return $linesAdded;
+    }
+
+    /**
+     * @internal
+     */
+    public function addNewLineOfInputSubmit(): void
+    {
+        $this->content[] = \PHP_EOL;
+        ++$this->lines;
+    }
+
+    /**
+     * @return void
      */
     protected function doWrite(string $message, bool $newline)
     {
+        // Simulate newline behavior for consistent output formatting, avoiding extra logic
+        if (!$newline && str_ends_with($message, \PHP_EOL)) {
+            $message = substr($message, 0, -\strlen(\PHP_EOL));
+            $newline = true;
+        }
+
         if (!$this->isDecorated()) {
             parent::doWrite($message, $newline);
 
             return;
         }
 
-        $erasedContent = $this->popStreamContentUntilCurrentSection();
+        if ('' === $message && !$newline) {
+            return;
+        }
 
-        $this->addContent($message);
+        // Check if the previous line (last entry of `$this->content`) needs to be continued
+        // (i.e. does not end with a line break). In which case, it needs to be erased first.
+        $deleteLastLine = ($lastLine = end($this->content) ?: '') && !str_ends_with($lastLine, \PHP_EOL);
+        $linesToClear = $deleteLastLine ? $this->getDisplayHeight($lastLine, $this->terminal->getWidth()) : 0;
+        $previousLines = $this->lines;
 
-        parent::doWrite($message, true);
+        $this->addContent($message, $newline);
+
+        if ($this->maxHeight > 0 && $this->lines > $this->maxHeight) {
+            // on overflow, clear the lines displayed so far and redraw the section (to remove the first lines)
+            $erasedContent = $this->popStreamContentUntilCurrentSection(min($this->maxHeight, $previousLines));
+            $visibleContent = $this->getVisibleContent();
+            parent::doWrite($visibleContent, !str_ends_with($visibleContent, \PHP_EOL));
+            parent::doWrite($erasedContent, false);
+
+            return;
+        }
+
+        $erasedContent = $this->popStreamContentUntilCurrentSection($linesToClear);
+
+        // if the last line was removed, re-print its content together with the new content.
+        // otherwise, just print the new content.
+        parent::doWrite($deleteLastLine ? $lastLine.$message : $message, true);
         parent::doWrite($erasedContent, false);
     }
 
@@ -122,13 +264,18 @@ class ConsoleSectionOutput extends StreamOutput
                 break;
             }
 
-            $numberOfLinesToClear += $section->lines;
-            $erasedContent[] = $section->getContent();
+            $numberOfLinesToClear += $section->maxHeight ? min($section->lines, $section->maxHeight) : $section->lines;
+            if ('' !== $sectionContent = $section->getVisibleContent()) {
+                if (!str_ends_with($sectionContent, \PHP_EOL)) {
+                    $sectionContent .= \PHP_EOL;
+                }
+                $erasedContent[] = $sectionContent;
+            }
         }
 
         if ($numberOfLinesToClear > 0) {
             // move cursor up n lines
-            parent::doWrite(sprintf("\x1b[%dA", $numberOfLinesToClear), false);
+            parent::doWrite(\sprintf("\x1b[%dA", $numberOfLinesToClear), false);
             // erase to end of screen
             parent::doWrite("\x1b[0J", false);
         }
@@ -136,8 +283,45 @@ class ConsoleSectionOutput extends StreamOutput
         return implode('', array_reverse($erasedContent));
     }
 
-    private function getDisplayLength(string $text): int
+    private function getDisplayHeight(string $line, int $width): int
     {
-        return Helper::width(Helper::removeDecoration($this->getFormatter(), str_replace("\t", '        ', $text)));
+        if ($width <= 0) {
+            return 1;
+        }
+
+        // the line break must not count as a column, or a line as wide as the terminal would count as two
+        if (str_ends_with($line, \PHP_EOL)) {
+            $line = substr($line, 0, -\strlen(\PHP_EOL));
+        }
+
+        // formatting the line again would remove literal tags, so only the ANSI sequences are removed
+        $line = preg_replace(['/\e\[[^m]*m/', '/\e]8;[^;]*;[^\e]*\e\\\\/'], '', $line);
+        $lineWidth = Helper::width(str_replace("\t", '        ', $line));
+
+        if ($lineWidth <= $width || !preg_match('/[\t\x80-\xFF]/', $line) || !preg_match('//u', $line)) {
+            return (int) ceil($lineWidth / $width) ?: 1;
+        }
+
+        // a wide character that does not fit at the end of a row is moved to the next one
+        $rows = 1;
+        $column = 0;
+        $offset = 0;
+        $widths = [];
+        while (false !== $char = grapheme_extract($line, 1, \GRAPHEME_EXTR_COUNT, $offset, $offset)) {
+            if ("\t" === $char) {
+                // a tab moves the cursor to the next multiple of 8 columns, but never past the last column
+                $column = min($column - $column % 8 + 8, $width - 1);
+                continue;
+            }
+
+            $charWidth = $widths[$char] ??= Helper::width($char);
+            if ($column + $charWidth > $width) {
+                ++$rows;
+                $column = 0;
+            }
+            $column += $charWidth;
+        }
+
+        return $rows;
     }
 }

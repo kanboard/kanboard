@@ -20,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class GithubActionReporter
 {
-    private $output;
+    private OutputInterface $output;
 
     /**
      * @see https://github.com/actions/toolkit/blob/5e5e1b7aacba68a53836a34db4a288c3c1c1585b/packages/core/src/command.ts#L80-L85
@@ -89,11 +89,11 @@ class GithubActionReporter
 
         if (!$file) {
             // No file provided, output the message solely:
-            $this->output->writeln(sprintf('::%s::%s', $type, $message));
+            $this->output->writeln(\sprintf('::%s::%s', $type, $message));
 
             return;
         }
 
-        $this->output->writeln(sprintf('::%s file=%s,line=%s,col=%s::%s', $type, strtr($file, self::ESCAPED_PROPERTIES), strtr($line ?? 1, self::ESCAPED_PROPERTIES), strtr($col ?? 0, self::ESCAPED_PROPERTIES), $message));
+        $this->output->writeln(\sprintf('::%s file=%s,line=%s,col=%s::%s', $type, strtr($file, self::ESCAPED_PROPERTIES), strtr($line ?? 1, self::ESCAPED_PROPERTIES), strtr($col ?? 0, self::ESCAPED_PROPERTIES), $message));
     }
 }

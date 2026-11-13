@@ -11,12 +11,17 @@
 
 namespace Symfony\Component\Console\Command;
 
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Completion\CompletionInput;
 use Symfony\Component\Console\Completion\CompletionSuggestions;
 use Symfony\Component\Console\Completion\Output\BashCompletionOutput;
 use Symfony\Component\Console\Completion\Output\CompletionOutputInterface;
+use Symfony\Component\Console\Completion\Output\FishCompletionOutput;
+use Symfony\Component\Console\Completion\Output\ZshCompletionOutput;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
 use Symfony\Component\Console\Exception\ExceptionInterface;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -26,14 +31,26 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Wouter de Jong <wouter@wouterj.nl>
  */
+#[AsCommand(name: '|_complete', description: 'Internal command to provide shell completion suggestions')]
 final class CompleteCommand extends Command
 {
+    public const COMPLETION_API_VERSION = '1';
+
+    /**
+     * @deprecated since Symfony 6.1
+     */
     protected static $defaultName = '|_complete';
+
+    /**
+     * @deprecated since Symfony 6.1
+     */
     protected static $defaultDescription = 'Internal command to provide shell completion suggestions';
 
-    private $completionOutputs;
+    private array $completionOutputs;
 
-    private $isDebug = false;
+    private ?InputDefinition $fullDefinition = null;
+
+    private bool $isDebug = false;
 
     /**
      * @param array<string, class-string<CompletionOutputInterface>> $completionOutputs A list of additional completion outputs, with shell name as key and FQCN as value
@@ -41,9 +58,60 @@ final class CompleteCommand extends Command
     public function __construct(array $completionOutputs = [])
     {
         // must be set before the parent constructor, as the property value is used in configure()
-        $this->completionOutputs = $completionOutputs + ['bash' => BashCompletionOutput::class];
+        $this->completionOutputs = $completionOutputs + [
+            'bash' => BashCompletionOutput::class,
+            'fish' => FishCompletionOutput::class,
+            'zsh' => ZshCompletionOutput::class,
+        ];
 
         parent::__construct();
+    }
+
+    public function setApplication(?Application $application = null): void
+    {
+        $this->fullDefinition = null;
+
+        parent::setApplication(...\func_get_args());
+    }
+
+    public function setDefinition(array|InputDefinition $definition): static
+    {
+        $this->fullDefinition = null;
+
+        return parent::setDefinition($definition);
+    }
+
+    /**
+     * @internal
+     */
+    public function mergeApplicationDefinition(bool $mergeArgs = true): void
+    {
+        if (!$application = $this->getApplication()) {
+            return;
+        }
+
+        $definition = $this->getNativeDefinition();
+        $this->fullDefinition = new InputDefinition();
+        $this->fullDefinition->setOptions($definition->getOptions());
+
+        foreach ($application->getDefinition()->getOptions() as $option) {
+            // the completion scripts rely on the options of this command, they win over the conflicting application ones
+            if ($definition->hasOption($option->getName()) || array_filter(explode('|', $option->getShortcut() ?? ''), $definition->hasShortcut(...))) {
+                continue;
+            }
+
+            $this->fullDefinition->addOption($option);
+        }
+
+        if ($mergeArgs) {
+            $this->fullDefinition->setArguments($application->getDefinition()->getArguments());
+        }
+        $this->fullDefinition->addArguments($definition->getArguments());
+    }
+
+    public function getDefinition(): InputDefinition
+    {
+        return $this->fullDefinition ?? parent::getDefinition();
     }
 
     protected function configure(): void
@@ -52,28 +120,29 @@ final class CompleteCommand extends Command
             ->addOption('shell', 's', InputOption::VALUE_REQUIRED, 'The shell type ("'.implode('", "', array_keys($this->completionOutputs)).'")')
             ->addOption('input', 'i', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'An array of input tokens (e.g. COMP_WORDS or argv)')
             ->addOption('current', 'c', InputOption::VALUE_REQUIRED, 'The index of the "input" array that the cursor is in (e.g. COMP_CWORD)')
-            ->addOption('symfony', 'S', InputOption::VALUE_REQUIRED, 'The version of the completion script')
+            ->addOption('api-version', 'a', InputOption::VALUE_REQUIRED, 'The API version of the completion script')
+            ->addOption('symfony', 'S', InputOption::VALUE_REQUIRED, 'deprecated')
         ;
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        $this->isDebug = filter_var(getenv('SYMFONY_COMPLETION_DEBUG'), \FILTER_VALIDATE_BOOLEAN);
+        $this->isDebug = filter_var(getenv('SYMFONY_COMPLETION_DEBUG'), \FILTER_VALIDATE_BOOL);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            // uncomment when a bugfix or BC break has been introduced in the shell completion scripts
-            // $version = $input->getOption('symfony');
-            // if ($version && version_compare($version, 'x.y', '>=')) {
-            //    $message = sprintf('Completion script version is not supported ("%s" given, ">=x.y" required).', $version);
-            //    $this->log($message);
+            // "symfony" must be kept for compat with the shell scripts generated by Symfony Console 5.4 - 6.1
+            $version = $input->getOption('symfony') ? '1' : $input->getOption('api-version');
+            if ($version && version_compare($version, self::COMPLETION_API_VERSION, '<')) {
+                $message = \sprintf('Completion script version is not supported ("%s" given, ">=%s" required).', $version, self::COMPLETION_API_VERSION);
+                $this->log($message);
 
-            //    $output->writeln($message.' Install the Symfony completion script again by using the "completion" command.');
+                $output->writeln($message.' Install the Symfony completion script again by using the "completion" command.');
 
-            //    return 126;
-            // }
+                return 126;
+            }
 
             $shell = $input->getOption('shell');
             if (!$shell) {
@@ -81,7 +150,7 @@ final class CompleteCommand extends Command
             }
 
             if (!$completionOutput = $this->completionOutputs[$shell] ?? false) {
-                throw new \RuntimeException(sprintf('Shell completion is not supported for your shell: "%s" (supported: "%s").', $shell, implode('", "', array_keys($this->completionOutputs))));
+                throw new \RuntimeException(\sprintf('Shell completion is not supported for your shell: "%s" (supported: "%s").', $shell, implode('", "', array_keys($this->completionOutputs))));
             }
 
             $completionInput = $this->createCompletionInput($input);
@@ -97,31 +166,37 @@ final class CompleteCommand extends Command
                 '<info>Messages:</>',
             ]);
 
-            $command = $this->findCommand($completionInput, $output);
+            if ($command = $this->findCommand($completionInput, $output)) {
+                $command->mergeApplicationDefinition();
+                $completionInput->bind($command->getDefinition());
+            }
+
             if (null === $command) {
                 $this->log('  No command found, completing using the Application class.');
 
                 $this->getApplication()->complete($completionInput, $suggestions);
             } elseif (
                 $completionInput->mustSuggestArgumentValuesFor('command')
-                && $command->getName() !== $completionInput->getCompletionValue()
-                && !\in_array($completionInput->getCompletionValue(), $command->getAliases(), true)
             ) {
-                $this->log('  No command found, completing using the Application class.');
+                $this->log('  Command found, completing command name.');
 
                 // expand shortcut names ("cache:cl<TAB>") into their full name ("cache:clear")
-                $suggestions->suggestValues(array_filter(array_merge([$command->getName()], $command->getAliases())));
+                $commandNames = array_filter(array_merge([$command->getName()], $command->getAliases()));
+                foreach ($commandNames as $name) {
+                    if (str_starts_with($name, $completionInput->getCompletionValue())) {
+                        $commandNames = [$name];
+                        break;
+                    }
+                }
+                $suggestions->suggestValues($commandNames);
             } else {
-                $command->mergeApplicationDefinition();
-                $completionInput->bind($command->getDefinition());
-
                 if (CompletionInput::TYPE_OPTION_NAME === $completionInput->getCompletionType()) {
-                    $this->log('  Completing option names for the <comment>'.\get_class($command instanceof LazyCommand ? $command->getCommand() : $command).'</> command.');
+                    $this->log('  Completing option names for the <comment>'.($command instanceof LazyCommand ? $command->getCommand() : $command)::class.'</> command.');
 
                     $suggestions->suggestOptions($command->getDefinition()->getOptions());
                 } else {
                     $this->log([
-                        '  Completing using the <comment>'.\get_class($command instanceof LazyCommand ? $command->getCommand() : $command).'</> class.',
+                        '  Completing using the <comment>'.($command instanceof LazyCommand ? $command->getCommand() : $command)::class.'</> class.',
                         '  Completing <comment>'.$completionInput->getCompletionType().'</> for <comment>'.$completionInput->getCompletionName().'</>',
                     ]);
                     if (null !== $compval = $completionInput->getCompletionValue()) {
@@ -137,7 +212,7 @@ final class CompleteCommand extends Command
 
             $this->log('<info>Suggestions:</>');
             if ($options = $suggestions->getOptionSuggestions()) {
-                $this->log('  --'.implode(' --', array_map(function ($o) { return $o->getName(); }, $options)));
+                $this->log('  --'.implode(' --', array_map(static fn ($o) => $o->getName(), $options)));
             } elseif ($values = $suggestions->getValueSuggestions()) {
                 $this->log('  '.implode(' ', $values));
             } else {
@@ -172,7 +247,7 @@ final class CompleteCommand extends Command
 
         try {
             $completionInput->bind($this->getApplication()->getDefinition());
-        } catch (ExceptionInterface $e) {
+        } catch (ExceptionInterface) {
         }
 
         return $completionInput;
@@ -187,7 +262,7 @@ final class CompleteCommand extends Command
             }
 
             return $this->getApplication()->find($inputName);
-        } catch (CommandNotFoundException $e) {
+        } catch (CommandNotFoundException) {
         }
 
         return null;
