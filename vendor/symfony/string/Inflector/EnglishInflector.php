@@ -25,8 +25,21 @@ final class EnglishInflector implements InflectorInterface
         // Fourth entry: Whether the suffix may succeed a consonant
         // Fifth entry: singular suffix, normal
 
+        // insignias (insigne), insignia (insigne)
+        ['saingisni', 9, true, true, 'insigne'],
+        ['aingisni', 8, true, true, 'insigne'],
+
+        // passersby (passerby)
+        ['ybsressap', 9, true, true, 'passerby'],
+
+        // nodes (node)
+        ['sedon', 5, true, true, 'node'],
+
         // bacteria (bacterium)
         ['airetcab', 8, true, true, 'bacterium'],
+
+        // issues (issue)
+        ['seussi', 6, true, true, 'issue'],
 
         // corpora (corpus)
         ['aroproc', 7, true, true, 'corpus'],
@@ -36,6 +49,9 @@ final class EnglishInflector implements InflectorInterface
 
         // curricula (curriculum)
         ['alucirruc', 9, true, true, 'curriculum'],
+
+        // quora (quorum)
+        ['arouq', 5, true, true, 'quorum'],
 
         // genera (genus)
         ['areneg', 6, true, true, 'genus'],
@@ -136,8 +152,17 @@ final class EnglishInflector implements InflectorInterface
         // drives (drive)
         ['sevird', 6, false, true, 'drive'],
 
-        // lives (life), wives (wife)
-        ['sevi', 4, false, true, 'ife'],
+        // knives (knife), jackknives (jackknife)
+        ['sevink', 6, true, true, 'knife'],
+
+        // wives (wife), midwives (midwife)
+        ['seviw', 5, true, true, 'wife'],
+
+        // lives (life)
+        ['sevil', 5, false, true, 'life'],
+
+        // archives (archive), explosives (explosive), hives (hive), olives (olive)
+        ['sevi', 4, true, true, 'ive'],
 
         // moves (move)
         ['sevom', 5, true, true, 'move'],
@@ -162,6 +187,12 @@ final class EnglishInflector implements InflectorInterface
 
         // edges (edge)
         ['segd', 4, true, true, 'dge'],
+
+        // outages (outage) - specific fix to avoid 'outag'
+        ['segatuo', 7, true, true, 'outage'],
+
+        // traces (trace), faces (face), places (place), pieces (piece)
+        ['sec', 3, true, true, 'ce'],
 
         // roses (rose), garages (garage), cassettes (cassette),
         // waltzes (waltz), heroes (hero), bushes (bush), arches (arch),
@@ -192,6 +223,15 @@ final class EnglishInflector implements InflectorInterface
         // Third entry: Whether the suffix may succeed a vowel
         // Fourth entry: Whether the suffix may succeed a consonant
         // Fifth entry: plural suffix, normal
+
+        // passerby (passersby)
+        ['ybressap', 8, true, true, 'passersby'],
+
+        // insigne (insignia, insignias)
+        ['engisni', 7, true, true, ['insignia', 'insignias']],
+
+        // nodes (node)
+        ['edon', 4, true, true, 'nodes'],
 
         // axes (axis)
         ['sixa', 4, false, false, 'axes'],
@@ -268,6 +308,9 @@ final class EnglishInflector implements InflectorInterface
         // albums (album)
         ['mubla', 5, true, true, 'albums'],
 
+        // quorums (quorum)
+        ['murouq', 6, true, true, ['quora', 'quorums']],
+
         // bacteria (bacterium), curricula (curriculum), media (medium), memoranda (memorandum), phenomena (phenomenon), strata (stratum)
         ['mu', 2, true, true, 'a'],
 
@@ -326,6 +369,9 @@ final class EnglishInflector implements InflectorInterface
 
         // conspectuses (conspectus), prospectuses (prospectus)
         ['sutcep', 6, true, true, 'pectuses'],
+
+        // nexuses (nexus)
+        ['suxen', 5, false, false, 'nexuses'],
 
         // fungi (fungus), alumni (alumnus), syllabi (syllabus), radii (radius)
         ['su', 2, true, true, 'i'],

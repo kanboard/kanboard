@@ -28,7 +28,7 @@ class ApplicationTester
 {
     use TesterTrait;
 
-    private $application;
+    private Application $application;
 
     public function __construct(Application $application)
     {
@@ -47,9 +47,9 @@ class ApplicationTester
      *
      * @return int The command exit code
      */
-    public function run(array $input, array $options = [])
+    public function run(array $input, array $options = []): int
     {
-        $prevShellVerbosity = getenv('SHELL_VERBOSITY');
+        $prevShellVerbosity = [getenv('SHELL_VERBOSITY'), $_ENV['SHELL_VERBOSITY'] ?? false, $_SERVER['SHELL_VERBOSITY'] ?? false];
 
         try {
             $this->input = new ArrayInput($input);
@@ -63,22 +63,35 @@ class ApplicationTester
 
             $this->initOutput($options);
 
+            // Temporarily clear SHELL_VERBOSITY to prevent Application::configureIO
+            // from overriding the interactive and verbosity settings set above
+            if (\function_exists('putenv')) {
+                @putenv('SHELL_VERBOSITY');
+            }
+            unset($_ENV['SHELL_VERBOSITY'], $_SERVER['SHELL_VERBOSITY']);
+
             return $this->statusCode = $this->application->run($this->input, $this->output);
         } finally {
             // SHELL_VERBOSITY is set by Application::configureIO so we need to unset/reset it
             // to its previous value to avoid one test's verbosity to spread to the following tests
-            if (false === $prevShellVerbosity) {
+            if (false === $prevShellVerbosity[0]) {
                 if (\function_exists('putenv')) {
                     @putenv('SHELL_VERBOSITY');
                 }
-                unset($_ENV['SHELL_VERBOSITY']);
-                unset($_SERVER['SHELL_VERBOSITY']);
             } else {
                 if (\function_exists('putenv')) {
-                    @putenv('SHELL_VERBOSITY='.$prevShellVerbosity);
+                    @putenv('SHELL_VERBOSITY='.$prevShellVerbosity[0]);
                 }
-                $_ENV['SHELL_VERBOSITY'] = $prevShellVerbosity;
-                $_SERVER['SHELL_VERBOSITY'] = $prevShellVerbosity;
+            }
+            if (false === $prevShellVerbosity[1]) {
+                unset($_ENV['SHELL_VERBOSITY']);
+            } else {
+                $_ENV['SHELL_VERBOSITY'] = $prevShellVerbosity[1];
+            }
+            if (false === $prevShellVerbosity[2]) {
+                unset($_SERVER['SHELL_VERBOSITY']);
+            } else {
+                $_SERVER['SHELL_VERBOSITY'] = $prevShellVerbosity[2];
             }
         }
     }

@@ -28,6 +28,7 @@ use Symfony\Component\Console\Exception\RuntimeException;
 abstract class Input implements InputInterface, StreamableInputInterface
 {
     protected $definition;
+    /** @var resource */
     protected $stream;
     protected $options = [];
     protected $arguments = [];
@@ -44,7 +45,7 @@ abstract class Input implements InputInterface, StreamableInputInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return void
      */
     public function bind(InputDefinition $definition)
     {
@@ -57,94 +58,76 @@ abstract class Input implements InputInterface, StreamableInputInterface
 
     /**
      * Processes command line arguments.
+     *
+     * @return void
      */
     abstract protected function parse();
 
     /**
-     * {@inheritdoc}
+     * @return void
      */
     public function validate()
     {
         $definition = $this->definition;
         $givenArguments = $this->arguments;
 
-        $missingArguments = array_filter(array_keys($definition->getArguments()), function ($argument) use ($definition, $givenArguments) {
-            return !\array_key_exists($argument, $givenArguments) && $definition->getArgument($argument)->isRequired();
-        });
+        $missingArguments = array_filter(array_keys($definition->getArguments()), static fn ($argument) => !\array_key_exists($argument, $givenArguments) && $definition->getArgument($argument)->isRequired());
 
-        if (\count($missingArguments) > 0) {
-            throw new RuntimeException(sprintf('Not enough arguments (missing: "%s").', implode(', ', $missingArguments)));
+        if ($missingArguments) {
+            throw new RuntimeException(\sprintf('Not enough arguments (missing: "%s").', implode(', ', $missingArguments)));
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function isInteractive()
+    public function isInteractive(): bool
     {
         return $this->interactive;
     }
 
     /**
-     * {@inheritdoc}
+     * @return void
      */
     public function setInteractive(bool $interactive)
     {
         $this->interactive = $interactive;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getArguments()
+    public function getArguments(): array
     {
         return array_merge($this->definition->getArgumentDefaults(), $this->arguments);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getArgument(string $name)
+    public function getArgument(string $name): mixed
     {
         if (!$this->definition->hasArgument($name)) {
-            throw new InvalidArgumentException(sprintf('The "%s" argument does not exist.', $name));
+            throw new InvalidArgumentException(\sprintf('The "%s" argument does not exist.', $name));
         }
 
         return $this->arguments[$name] ?? $this->definition->getArgument($name)->getDefault();
     }
 
     /**
-     * {@inheritdoc}
+     * @return void
      */
-    public function setArgument(string $name, $value)
+    public function setArgument(string $name, mixed $value)
     {
         if (!$this->definition->hasArgument($name)) {
-            throw new InvalidArgumentException(sprintf('The "%s" argument does not exist.', $name));
+            throw new InvalidArgumentException(\sprintf('The "%s" argument does not exist.', $name));
         }
 
         $this->arguments[$name] = $value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasArgument(string $name)
+    public function hasArgument(string $name): bool
     {
         return $this->definition->hasArgument($name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOptions()
+    public function getOptions(): array
     {
         return array_merge($this->definition->getOptionDefaults(), $this->options);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getOption(string $name)
+    public function getOption(string $name): mixed
     {
         if ($this->definition->hasNegation($name)) {
             if (null === $value = $this->getOption($this->definition->negationToName($name))) {
@@ -155,48 +138,45 @@ abstract class Input implements InputInterface, StreamableInputInterface
         }
 
         if (!$this->definition->hasOption($name)) {
-            throw new InvalidArgumentException(sprintf('The "%s" option does not exist.', $name));
+            throw new InvalidArgumentException(\sprintf('The "%s" option does not exist.', $name));
         }
 
         return \array_key_exists($name, $this->options) ? $this->options[$name] : $this->definition->getOption($name)->getDefault();
     }
 
     /**
-     * {@inheritdoc}
+     * @return void
      */
-    public function setOption(string $name, $value)
+    public function setOption(string $name, mixed $value)
     {
         if ($this->definition->hasNegation($name)) {
             $this->options[$this->definition->negationToName($name)] = !$value;
 
             return;
         } elseif (!$this->definition->hasOption($name)) {
-            throw new InvalidArgumentException(sprintf('The "%s" option does not exist.', $name));
+            throw new InvalidArgumentException(\sprintf('The "%s" option does not exist.', $name));
         }
 
         $this->options[$name] = $value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function hasOption(string $name)
+    public function hasOption(string $name): bool
     {
         return $this->definition->hasOption($name) || $this->definition->hasNegation($name);
     }
 
     /**
      * Escapes a token through escapeshellarg if it contains unsafe chars.
-     *
-     * @return string
      */
-    public function escapeToken(string $token)
+    public function escapeToken(string $token): string
     {
         return preg_match('{^[\w-]+$}', $token) ? $token : escapeshellarg($token);
     }
 
     /**
-     * {@inheritdoc}
+     * @param resource $stream
+     *
+     * @return void
      */
     public function setStream($stream)
     {
@@ -204,7 +184,7 @@ abstract class Input implements InputInterface, StreamableInputInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return resource
      */
     public function getStream()
     {

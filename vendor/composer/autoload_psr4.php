@@ -15,7 +15,7 @@ return array(
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'SimpleValidator\\' => array($baseDir . '/libs/SimpleValidator'),
     'SimpleQueue\\' => array($baseDir . '/libs/SimpleQueue'),
-    'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
     'Psr\\EventDispatcher\\' => array($vendorDir . '/psr/event-dispatcher/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'MatthiasMullie\\PathConverter\\' => array($baseDir . '/libs/path-converter/src'),
