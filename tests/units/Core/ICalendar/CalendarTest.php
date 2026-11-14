@@ -44,8 +44,6 @@ class CalendarTest extends TestCase
                     ->setDescription("line1\r\nline2")
                     ->setDescriptionHtml('<p>line1<br>line2</p>')
                     ->setUrl('http://localhost/?controller=TaskViewController&action=show&task_id=1')
-                    ->addAttendee('john@example.org', 'Doe, John')
-                    ->setOrganizer('admin@kanboard.local', 'admin')
             )
             ->addEvent(
                 (new Event('task-#2-date_due'))
@@ -72,12 +70,10 @@ class CalendarTest extends TestCase
             'DTEND:20261115T070000Z',
             'URL:http://localhost/?controller=TaskViewController&action=show&task_id=1',
             'SUMMARY:#1 Fix "quotes"\\; commas\\, too',
-            'ATTENDEE;CN="Doe, John":MAILTO:john@example.org',
             'CLASS:PUBLIC',
             'DESCRIPTION:line1\\nline2',
             'X-ALT-DESC;FMTTYPE=text/html:<p>line1<br>line2</p>',
-            'ORGANIZER;CN=admin:MAILTO:admin@kanboard.local',
-            'DTSTAMP:20261113T185055Z',
+            'DTSTAMP:20261101T090000Z',
             'CREATED:20261101T090000Z',
             'LAST-MODIFIED:20261101T090000Z',
             'END:VEVENT',
@@ -90,7 +86,7 @@ class CalendarTest extends TestCase
             'SUMMARY:#2 All day',
             'CLASS:PUBLIC',
             'X-MICROSOFT-CDO-ALLDAYEVENT:TRUE',
-            'DTSTAMP:20261113T185055Z',
+            'DTSTAMP:20261101T090000Z',
             'CREATED:20261101T090000Z',
             'LAST-MODIFIED:20261101T090000Z',
             'END:VEVENT',
@@ -113,8 +109,6 @@ class CalendarTest extends TestCase
                     ->setDescription("line1\nline2")
                     ->setDescriptionHtml('<p>line1<br>line2</p>')
                     ->setUrl('http://localhost/?controller=TaskViewController&action=show&task_id=3')
-                    ->addAttendee('john@example.org', 'Doe, John')
-                    ->setOrganizer('admin@kanboard.local', 'admin')
             );
 
         $expected = [
@@ -126,12 +120,10 @@ class CalendarTest extends TestCase
             'STATUS:NEEDS-ACTION',
             'URL:http://localhost/?controller=TaskViewController&action=show&task_id=3',
             'SUMMARY:#3 No dates\\; yet',
-            'ATTENDEE;CN="Doe, John":MAILTO:john@example.org',
             'CLASS:PUBLIC',
             'DESCRIPTION:line1\\nline2',
             'X-ALT-DESC;FMTTYPE=text/html:<p>line1<br>line2</p>',
-            'ORGANIZER;CN=admin:MAILTO:admin@kanboard.local',
-            'DTSTAMP:20261113T185055Z',
+            'DTSTAMP:20261101T090000Z',
             'CREATED:20261101T090000Z',
             'LAST-MODIFIED:20261101T090000Z',
             'END:VTODO',
@@ -181,15 +173,28 @@ class CalendarTest extends TestCase
     public function testEventWithoutOptionalProperties()
     {
         $calendar = (new Calendar('Kanboard'))
-            ->addEvent((new Event('uid'))->setStart($this->stamp)->addAttendee('a@b.c'));
+            ->addEvent((new Event('uid'))->setStart($this->stamp));
 
         $output = $calendar->render($this->stamp);
 
-        $this->assertStringContainsString("\r\nATTENDEE:MAILTO:a@b.c\r\n", $output);
         $this->assertStringNotContainsString('DTEND', $output);
         $this->assertStringNotContainsString('ORGANIZER', $output);
         $this->assertStringNotContainsString('DESCRIPTION', $output);
         $this->assertStringNotContainsString('CREATED', $output);
+        $this->assertStringContainsString("\r\nDTSTAMP:20261113T185055Z\r\n", $output);
+    }
+
+    public function testStampIsTheModificationDate()
+    {
+        $modified = new DateTimeImmutable('2026-11-02 10:00:00', $this->timezone);
+
+        $output = (new Calendar('Kanboard'))
+            ->addEvent((new Event('uid'))->setStart($this->stamp)->setModified($modified))
+            ->addTodo((new Todo('todo'))->setModified($modified))
+            ->render($this->stamp);
+
+        $this->assertSame(2, substr_count($output, "\r\nDTSTAMP:20261102T090000Z\r\n"));
+        $this->assertStringNotContainsString('DTSTAMP:20261113T185055Z', $output);
     }
 
     public function testTimedEventHasNoEndWhenItDoesNotEndAfterItsStart()

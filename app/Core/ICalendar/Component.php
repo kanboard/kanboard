@@ -20,12 +20,6 @@ abstract class Component
     private string $descriptionHtml = '';
     private string $url = '';
 
-    /** @var list<array{email: string, name: string}> */
-    private array $attendees = [];
-
-    /** @var array{email: string, name: string}|null */
-    private ?array $organizer = null;
-
     public function __construct(private readonly string $uid)
     {
     }
@@ -66,20 +60,11 @@ abstract class Component
         return $this;
     }
 
-    public function addAttendee(string $email, string $name = ''): static
-    {
-        $this->attendees[] = ['email' => $email, 'name' => $name];
-        return $this;
-    }
-
-    public function setOrganizer(string $email, string $name = ''): static
-    {
-        $this->organizer = ['email' => $email, 'name' => $name];
-        return $this;
-    }
-
     /**
      * Get unfolded content lines
+     *
+     * Without METHOD, the DTSTAMP is the last revision of the component (RFC 5545 section 3.8.7.2),
+     * the given stamp is only used when the modification date is unknown.
      *
      * @return list<string>
      */
@@ -101,10 +86,6 @@ abstract class Component
             $lines[] = ContentLine::build('SUMMARY', ContentLine::text($this->summary));
         }
 
-        foreach ($this->attendees as $attendee) {
-            $lines[] = $this->addressLine('ATTENDEE', $attendee);
-        }
-
         $lines[] = 'CLASS:PUBLIC';
 
         if ($this->description !== '') {
@@ -115,13 +96,9 @@ abstract class Component
             $lines[] = ContentLine::build('X-ALT-DESC', ContentLine::text($this->descriptionHtml), ['FMTTYPE' => 'text/html']);
         }
 
-        if ($this->organizer !== null) {
-            $lines[] = $this->addressLine('ORGANIZER', $this->organizer);
-        }
-
         array_push($lines, ...$this->trailingLines());
 
-        $lines[] = ContentLine::build('DTSTAMP', ContentLine::utc($stamp));
+        $lines[] = ContentLine::build('DTSTAMP', ContentLine::utc($this->modified ?? $stamp));
 
         if ($this->created !== null) {
             $lines[] = ContentLine::build('CREATED', ContentLine::utc($this->created));
@@ -159,14 +136,5 @@ abstract class Component
     protected function trailingLines(): array
     {
         return [];
-    }
-
-    /**
-     * @param array{email: string, name: string} $address
-     */
-    private function addressLine(string $name, array $address): string
-    {
-        $params = $address['name'] !== '' ? ['CN' => $address['name']] : [];
-        return ContentLine::build($name, ContentLine::uri('MAILTO:'.$address['email']), $params);
     }
 }
