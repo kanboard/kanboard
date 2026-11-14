@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-24.04
     services:
       postgres:
-        image: postgres:9.4
+        image: postgres:9.4@sha256:42a7a6a647a602efa9592edd1f56359800d079b93fa52c5d92244c58ac4a2ab9
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -88,7 +88,7 @@ jobs:
     runs-on: ubuntu-24.04
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:5.7@sha256:4bc6bc963e6d8443453676cae56536f4b8156d78bae03c0145cbe47c2aad73bb
         env:
           MYSQL_ROOT_PASSWORD: "kanboard"
           MYSQL_DATABASE: "kanboard"

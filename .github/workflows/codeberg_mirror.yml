@@ -23,7 +23,7 @@ jobs:
           CODEBERG_USERNAME: ${{ secrets.CODEBERG_USERNAME }}
           CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
         run: |
-          git remote add codeberg https://${{ secrets.CODEBERG_USERNAME }}:${{ secrets.CODEBERG_TOKEN }}@codeberg.org/kanboard/kanboard.git
+          git remote add codeberg "https://${CODEBERG_USERNAME}:${CODEBERG_TOKEN}@codeberg.org/kanboard/kanboard.git"
           git push --force --prune codeberg \
             "refs/heads/*:refs/heads/*" \
             "refs/tags/*:refs/tags/*"
