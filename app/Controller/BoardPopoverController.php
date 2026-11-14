@@ -21,15 +21,15 @@ class BoardPopoverController extends BaseController
     public function confirmCloseColumnTasks()
     {
         $project = $this->getProject();
-        $column_id = $this->request->getIntegerParam('column_id');
-        $swimlane_id = $this->request->getIntegerParam('swimlane_id');
+        $column = $this->getColumn($project);
+        $swimlane = $this->getSwimlane($project);
 
         $this->response->html($this->template->render('board_popover/close_all_tasks_column', array(
             'project' => $project,
-            'nb_tasks' => $this->taskFinderModel->countByColumnAndSwimlaneId($project['id'], $column_id, $swimlane_id),
-            'column' => $this->columnModel->getColumnTitleById($column_id),
-            'swimlane' => $this->swimlaneModel->getNameById($swimlane_id),
-            'values' => array('column_id' => $column_id, 'swimlane_id' => $swimlane_id),
+            'nb_tasks' => $this->taskFinderModel->countByColumnAndSwimlaneId($project['id'], $column['id'], $swimlane['id']),
+            'column' => $column['title'],
+            'swimlane' => $swimlane['name'],
+            'values' => array('column_id' => $column['id'], 'swimlane_id' => $swimlane['id']),
         )));
     }
 
