@@ -93,6 +93,19 @@ class TaskStatusModel extends Base
         $this->closeMultipleTasks($task_ids);
     }
 
+    /** Get open tasks matching a board search within the selected cell. */
+    public function getOpenTaskIdsBySwimlaneAndColumn($project_id, $swimlane_id, $column_id, $search)
+    {
+        $tasks = $this->taskLexer->build($search)->getQuery()
+            ->eq(TaskModel::TABLE.'.project_id', $project_id)
+            ->eq(TaskModel::TABLE.'.swimlane_id', $swimlane_id)
+            ->eq(TaskModel::TABLE.'.column_id', $column_id)
+            ->eq(TaskModel::TABLE.'.is_active', TaskModel::STATUS_OPEN)
+            ->findAll();
+
+        return array_values(array_unique(array_column($tasks, 'id')));
+    }
+
     /**
      * Common method to change the status of task
      *

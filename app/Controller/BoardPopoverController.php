@@ -23,13 +23,17 @@ class BoardPopoverController extends BaseController
         $project = $this->getProject();
         $column_id = $this->request->getIntegerParam('column_id');
         $swimlane_id = $this->request->getIntegerParam('swimlane_id');
+        $search = $this->userSession->getFilters($project['id']);
+        $filtered = trim($search) !== '' && trim($search) !== 'status:open';
 
         $this->response->html($this->template->render('board_popover/close_all_tasks_column', array(
             'project' => $project,
-            'nb_tasks' => $this->taskFinderModel->countByColumnAndSwimlaneId($project['id'], $column_id, $swimlane_id),
+            'nb_tasks' => $filtered
+                ? count($this->taskStatusModel->getOpenTaskIdsBySwimlaneAndColumn($project['id'], $swimlane_id, $column_id, $search))
+                : $this->taskFinderModel->countByColumnAndSwimlaneId($project['id'], $column_id, $swimlane_id),
             'column' => $this->columnModel->getColumnTitleById($column_id),
             'swimlane' => $this->swimlaneModel->getNameById($swimlane_id),
-            'values' => array('column_id' => $column_id, 'swimlane_id' => $swimlane_id),
+            'values' => array('column_id' => $column_id, 'swimlane_id' => $swimlane_id, 'search' => $search),
         )));
     }
 
@@ -67,7 +71,13 @@ class BoardPopoverController extends BaseController
             throw new AccessForbiddenException();
         }
 
-        $this->taskStatusModel->closeTasksBySwimlaneAndColumn($swimlane_id, $column_id);
+        $search = isset($values['search']) && is_string($values['search']) ? $values['search'] : '';
+        if (trim($search) !== '' && trim($search) !== 'status:open') {
+            $task_ids = $this->taskStatusModel->getOpenTaskIdsBySwimlaneAndColumn($project['id'], $swimlane_id, $column_id, $search);
+            $this->taskStatusModel->closeMultipleTasks($task_ids);
+        } else {
+            $this->taskStatusModel->closeTasksBySwimlaneAndColumn($swimlane_id, $column_id);
+        }
         $this->flash->success(t('All tasks of the column "%s" and the swimlane "%s" have been closed successfully.', $this->columnModel->getColumnTitleById($column_id), $this->swimlaneModel->getNameById($swimlane_id)));
         $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])));
     }
