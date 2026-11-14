@@ -38,13 +38,21 @@ class TaskViewController extends BaseController
             throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
+        $links = $this->taskLinkModel->getAllGroupedByLabel($task['id']);
+
+        foreach ($links as $label => $grouped_links) {
+            $links[$label] = array_values(array_filter($grouped_links, function ($link) use ($task) {
+                return $link['project_id'] == $task['project_id'];
+            }));
+        }
+
         $this->response->html($this->helper->layout->app('task/public', array(
             'project' => $project,
             'comments' => array_filter($this->commentModel->getAll($task['id']), function ($comment) {
                 return $comment['visibility'] === Role::APP_USER;
             }),
             'subtasks' => $this->subtaskModel->getAll($task['id']),
-            'links' => $this->taskLinkModel->getAllGroupedByLabel($task['id']),
+            'links' => array_filter($links),
             'task' => $task,
             'columns_list' => $this->columnModel->getList($task['project_id']),
             'colors_list' => $this->colorModel->getList(),
