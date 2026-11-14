@@ -84,7 +84,7 @@ class SubtaskTimerMoveTaskColumn extends Base
             'user_id' => $data['task']['creator_id'],
             'task_id' => $data['task']['id'],
             'status' => SubtaskModel::STATUS_INPROGRESS,
-        ));
+        ), false);
 
         if ($subtaskID !== false) {
             return $this->subtaskTimeTrackingModel->toggleTimer($subtaskID, $data['task']['creator_id'], SubtaskModel::STATUS_INPROGRESS);

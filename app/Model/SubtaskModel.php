@@ -207,16 +207,20 @@ class SubtaskModel extends Base
      * Create a new subtask
      *
      * @access public
-     * @param  array    $values    Form values
+     * @param  array    $values                   Form values
+     * @param  bool     $updateTaskTimeTracking   Update parent task time tracking
      * @return bool|integer
      */
-    public function create(array $values)
+    public function create(array $values, $updateTaskTimeTracking = true)
     {
         $this->prepareCreation($values);
         $subtaskId = $this->db->table(self::TABLE)->persist($values);
 
         if ($subtaskId !== false) {
-            $this->subtaskTimeTrackingModel->updateTaskTimeTracking($values['task_id']);
+            if ($updateTaskTimeTracking) {
+                $this->subtaskTimeTrackingModel->updateTaskTimeTracking($values['task_id']);
+            }
+
             $this->queueManager->push($this->subtaskEventJob->withParams(
                 $subtaskId,
                 array(self::EVENT_CREATE_UPDATE, self::EVENT_CREATE)
