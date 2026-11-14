@@ -110,7 +110,7 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
 
         foreach ($query->findAll() as $task) {
             $start = $this->toDateTime($task[$startColumn]);
-            $event = $this->getTaskIcalEvent($task, 'task-#'.$task['id'].'-'.$startColumn.'-'.$endColumn)
+            $event = $this->getTaskIcalEvent($task, $this->getUid($task, $startColumn.'-'.$endColumn))
                 ->setStart($start);
 
             if (! empty($task[$endColumn])) {
@@ -141,7 +141,7 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
         foreach ($query->findAll() as $task) {
             $date = $this->toDateTime($task['date_due']);
 
-            $event = $this->getTaskIcalEvent($task, 'task-#'.$task['id'].'-date_due')
+            $event = $this->getTaskIcalEvent($task, $this->getUid($task, 'date_due'))
                 ->setStart($date)
                 ->setEnd($date)
                 ->setAllDay($this->isDateOnly($date));
@@ -162,7 +162,7 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
     public function addTasksWithoutDates(Table $query)
     {
         foreach ($query->findAll() as $task) {
-            $this->calendar->addTodo($this->getTaskIcalTodo($task, 'task-#'.$task['id'].'-todo'));
+            $this->calendar->addTodo($this->getTaskIcalTodo($task, $this->getUid($task, 'todo')));
         }
 
         return $this;
@@ -214,6 +214,20 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
             ->setUrl($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id']), '', true));
 
         return $component;
+    }
+
+    /**
+     * Get a unique identifier for a task component, the host of the application URL makes it global
+     *
+     * @access protected
+     * @param  array  $task
+     * @param  string $type
+     * @return string
+     */
+    protected function getUid(array $task, $type)
+    {
+        $host = parse_url($this->helper->url->base(), PHP_URL_HOST) ?: 'localhost';
+        return 'task-#'.$task['id'].'-'.$type.'@'.$host;
     }
 
     /**

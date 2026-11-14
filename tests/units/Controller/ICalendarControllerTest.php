@@ -137,7 +137,7 @@ class ICalendarControllerTest extends Base
         $this->renderCalendar(array('token' => $project['token'], 'todo' => '1'))->project();
 
         $this->assertSame(1, substr_count($this->calendar, 'BEGIN:VTODO'));
-        $this->assertStringContainsString("BEGIN:VTODO\r\nUID:task-#3-todo\r\nSTATUS:NEEDS-ACTION\r\n", $this->calendar);
+        $this->assertStringContainsString("BEGIN:VTODO\r\nUID:task-#3-todo@localhost\r\nSTATUS:NEEDS-ACTION\r\n", $this->calendar);
         $this->assertStringContainsString("SUMMARY:#3 Undated task\r\n", $this->calendar);
         $this->assertStringNotContainsString('ATTENDEE', $this->calendar);
         $this->assertStringNotContainsString('ORGANIZER', $this->calendar);
@@ -429,12 +429,103 @@ class ICalendarControllerTest extends Base
         $this->assertStringContainsString('<a href="http://localhost/?controller=TaskViewController&amp\;action=readonly&amp\;token='.$project['token'].'&amp\;task_id=1">#1</a>', $event);
     }
 
+    public function testAdminUserCalendarExcludesTasksFromClosedProjects()
+    {
+        $this->createFixtures();
+        $this->assertTrue($this->container['userModel']->enablePublicAccess(1));
+        $this->assertEquals(3, $this->createTask(1, 'Admin task', 1));
+        $admin = $this->container['userModel']->getById(1);
+
+        $this->renderCalendar(array('token' => $admin['token']))->user();
+        $this->assertStringContainsString('Admin task', $this->calendar);
+        $this->assertStringContainsString('Private task', $this->calendar);
+        $this->assertSame(2, substr_count($this->calendar, 'BEGIN:VEVENT'));
+
+        $this->assertTrue($this->container['projectModel']->disable(1));
+
+        $this->renderCalendar(array('token' => $admin['token']))->user();
+        $this->assertStringNotContainsString('Admin task', $this->calendar);
+        $this->assertStringContainsString('Private task', $this->calendar);
+        $this->assertSame(1, substr_count($this->calendar, 'BEGIN:VEVENT'));
+    }
+
+    public function testProjectCalendarExcludesTasksWithoutDueDateStartedBeforeTheTimeRange()
+    {
+        $this->createFixtures();
+        $this->assertEquals(3, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Started long ago',
+            'date_started' => strtotime('-3 months'),
+        )));
+        $this->assertEquals(4, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Started long ago with due date',
+            'date_started' => strtotime('-3 months'),
+            'date_due' => strtotime('+1 week'),
+        )));
+        $this->assertEquals(5, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Started recently',
+            'date_started' => strtotime('-1 month'),
+        )));
+        $project = $this->container['projectModel']->getById(1);
+
+        $this->renderCalendar(array('token' => $project['token']))->project();
+
+        $this->assertStringNotContainsString('task-#3-', $this->calendar);
+        $this->assertStringContainsString('task-#4-date_started-date_due', $this->calendar);
+        $this->assertStringContainsString('task-#5-date_started-date_due', $this->calendar);
+        $this->assertSame(3, substr_count($this->calendar, 'BEGIN:VEVENT'));
+    }
+
+    public function testProjectCalendarExcludesOldTasksWithoutDueDateWhenCreationDateIsTheStartDate()
+    {
+        $this->container['configModel']->save(array('calendar_project_tasks' => 'date_creation'));
+        $this->createFixtures();
+        $this->assertEquals(3, $this->createTaskWithoutDates(1, 'Old backlog task', 2));
+        $this->assertEquals(4, $this->createTaskWithoutDates(1, 'Recent backlog task', 2));
+        $this->container['db']->table('tasks')->eq('id', 3)->update(array('date_creation' => strtotime('-1 year')));
+        $project = $this->container['projectModel']->getById(1);
+
+        $this->renderCalendar(array('token' => $project['token'], 'todo' => '1'))->project();
+
+        $this->assertStringNotContainsString('Old backlog task', $this->calendar);
+        $this->assertStringContainsString('task-#4-date_creation-date_due', $this->calendar);
+    }
+
+    public function testCalendarUidsContainTheApplicationHost()
+    {
+        $this->container['configModel']->save(array('application_url' => 'https://example.org/kanboard/'));
+        $this->createFixtures();
+        $this->assertEquals(3, $this->createTaskWithoutDates(1, 'Undated task', 2));
+        $project = $this->container['projectModel']->getById(1);
+
+        $this->renderCalendar(array('token' => $project['token'], 'todo' => '1'))->project();
+
+        $this->assertStringContainsString("\r\nUID:task-#1-date_started-date_due@example.org\r\n", $this->calendar);
+        $this->assertStringContainsString("\r\nUID:task-#3-todo@example.org\r\n", $this->calendar);
+    }
+
+    public function testCalendarStampIsTheTaskModificationDate()
+    {
+        $this->createFixtures();
+        $modified = strtotime('-10 days');
+        $this->container['db']->table('tasks')->eq('id', 1)->update(array('date_modification' => $modified));
+        $project = $this->container['projectModel']->getById(1);
+
+        $this->renderCalendar(array('token' => $project['token']))->project();
+
+        $event = $this->getComponent('task-#1-date_started-date_due');
+        $this->assertStringContainsString("\r\nDTSTAMP:".gmdate('Ymd\THis\Z', $modified)."\r\n", $event);
+        $this->assertStringContainsString("\r\nLAST-MODIFIED:".gmdate('Ymd\THis\Z', $modified)."\r\n", $event);
+    }
+
     /**
      * Get the unfolded lines of a component
      */
     private function getComponent($uid)
     {
-        $pattern = '/BEGIN:(VEVENT|VTODO)\r\nUID:'.preg_quote($uid, '/').'\r\n.*?END:\1\r\n/s';
+        $pattern = '/BEGIN:(VEVENT|VTODO)\r\nUID:'.preg_quote($uid, '/').'@[^\r]+\r\n.*?END:\1\r\n/s';
         $this->assertSame(1, preg_match($pattern, $this->calendar, $matches), 'Component not found: '.$uid);
 
         return str_replace("\r\n ", '', $matches[0]);
