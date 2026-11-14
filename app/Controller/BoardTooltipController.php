@@ -105,8 +105,8 @@ class BoardTooltipController extends BaseController
      */
     public function swimlane()
     {
-        $this->getProject();
-        $swimlane = $this->swimlaneModel->getById($this->request->getIntegerParam('swimlane_id'));
+        $project = $this->getProject();
+        $swimlane = $this->getSwimlane($project);
         $this->response->html($this->template->render('board/tooltip_description', array('task' => $swimlane)));
     }
 }
