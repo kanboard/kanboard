@@ -110,6 +110,9 @@ class AuthValidator extends BaseValidator
                 if (! $result) {
                     $errors['login'] = t('Bad username or password');
                 }
+
+                // Invalidate captcha to avoid reuse.
+                session_remove('captcha');
             }
         }
 
