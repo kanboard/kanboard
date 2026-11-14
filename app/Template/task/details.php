@@ -104,7 +104,7 @@
                     <?php if ($task['time_spent']): ?>
                     <li>
                         <strong><?= t('Time spent:') ?></strong>
-                        <span><?= t('%s hours', $task['time_spent']) ?></span>
+                        <span><?= $this->dt->durationHours($task['time_spent']) ?></span>
                     </li>
                     <?php endif ?>
 
