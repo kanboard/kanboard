@@ -45,6 +45,17 @@ class ClientTest extends Base
         $this->assertTrue($client->isPrivateIpAddress('fd12:3456:789a:1::1'));
     }
 
+    public function testIsPrivateIpAddressWithIPv4MappedIPv6()
+    {
+        $client = new Client($this->container);
+
+        $this->assertTrue($client->isPrivateIpAddress('::ffff:127.0.0.1'));
+        $this->assertTrue($client->isPrivateIpAddress('::ffff:7f00:1'));
+        $this->assertTrue($client->isPrivateIpAddress('::ffff:169.254.169.254'));
+        $this->assertTrue($client->isPrivateIpAddress('::ffff:10.0.0.1'));
+        $this->assertFalse($client->isPrivateIpAddress('::ffff:8.8.8.8'));
+    }
+
     public function testIsPrivateIpAddressWithPublicAndInvalidValues()
     {
         $client = new Client($this->container);
@@ -62,6 +73,36 @@ class ClientTest extends Base
         $this->assertTrue($client->isPrivateURL('http://localhost'));
         $this->assertTrue($client->isPrivateURL('http://127.0.0.1/path'));
         $this->assertTrue($client->isPrivateURL('http://10.0.0.15/api'));
+    }
+
+    public function testIsPrivateUrlWithBracketedIPv6Literals()
+    {
+        $client = new Client($this->container);
+
+        $this->assertTrue($client->isPrivateURL('http://[::1]/'));
+        $this->assertTrue($client->isPrivateURL('http://[::ffff:127.0.0.1]:9099/'));
+        $this->assertTrue($client->isPrivateURL('http://[0:0:0:0:0:ffff:127.0.0.1]/'));
+        $this->assertTrue($client->isPrivateURL('http://[::ffff:169.254.169.254]/'));
+        $this->assertTrue($client->isPrivateURL('http://[fd00::1]/'));
+        $this->assertFalse($client->isPrivateURL('http://[2607:f8b0:4005:805::200e]/'));
+    }
+
+    public function testIsPrivateUrlWithOtherIPv4Notations()
+    {
+        $client = new Client($this->container);
+
+        $this->assertTrue($client->isPrivateURL('http://2130706433:9000/'));
+        $this->assertTrue($client->isPrivateURL('http://0x7f000001/'));
+        $this->assertTrue($client->isPrivateURL('http://0177.0.0.1/'));
+        $this->assertTrue($client->isPrivateURL('http://2852039166/'));
+        $this->assertTrue($client->isPrivateURL('http://127.0.0.1./'));
+    }
+
+    public function testIsPrivateUrlWithUnresolvableHost()
+    {
+        $client = new Client($this->container);
+
+        $this->assertTrue($client->isPrivateURL('http://kanboard.invalid/'));
     }
 
     public function testIsPrivateUrlWithPublicAddresses()
