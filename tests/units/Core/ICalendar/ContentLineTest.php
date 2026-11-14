@@ -86,7 +86,6 @@ class ContentLineTest extends TestCase
         $date = new DateTimeImmutable('2026-03-29 01:30:00', new DateTimeZone('Europe/Paris'));
 
         $this->assertSame('20260329T003000Z', ContentLine::utc($date));
-        $this->assertSame('20260329T013000', ContentLine::local($date));
         $this->assertSame('20260329', ContentLine::date($date));
     }
 }

@@ -45,7 +45,7 @@ final class ContentLine
     }
 
     /**
-     * Encode a URI or CAL-ADDRESS value, which are not escaped
+     * Encode a URI value, which is not escaped
      */
     public static function uri(string $value): string
     {
@@ -89,11 +89,6 @@ final class ContentLine
         return DateTimeImmutable::createFromInterface($date)
             ->setTimezone(new DateTimeZone('UTC'))
             ->format('Ymd\THis\Z');
-    }
-
-    public static function local(DateTimeInterface $date): string
-    {
-        return $date->format('Ymd\THis');
     }
 
     public static function date(DateTimeInterface $date): string

@@ -170,6 +170,12 @@ class ICalendarController extends BaseController
         return in_array($column, array('date_creation', 'date_started'), true) ? $column : 'date_started';
     }
 
+    /**
+     * Keep the tasks that start in the time range, or that start before and end in or after it
+     *
+     * A task without end date that starts before the range is left out, otherwise every
+     * open task would be in the feed when the creation date is the start date.
+     */
     protected function getConditionForTasksWithStartAndDueDate($start_time, $end_time, $start_column, $end_column)
     {
         $start_time = (int) $start_time;
@@ -181,7 +187,6 @@ class ICalendarController extends BaseController
         $conditions = array(
             "($start_column >= '$start_time' AND $start_column <= '$end_time')",
             "($start_column <= '$start_time' AND $end_column >= '$start_time')",
-            "($start_column <= '$start_time' AND ($end_column = '0' OR $end_column IS NULL))",
         );
 
         return $start_column.' IS NOT NULL AND '.$start_column.' > 0 AND ('.implode(' OR ', $conditions).')';

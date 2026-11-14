@@ -355,21 +355,11 @@ class TaskFinderModel extends Base
     public function getICalQuery()
     {
         return $this->db->table(TaskModel::TABLE)
-            ->left(UserModel::TABLE, 'ua', 'id', TaskModel::TABLE, 'owner_id')
-            ->left(UserModel::TABLE, 'uc', 'id', TaskModel::TABLE, 'creator_id')
-            ->columns(
-                TaskModel::TABLE.'.*',
-                'ua.email AS assignee_email',
-                'ua.name AS assignee_name',
-                'ua.username AS assignee_username',
-                'uc.email AS creator_email',
-                'uc.name AS creator_name',
-                'uc.username AS creator_username'
-            );
+            ->columns(TaskModel::TABLE.'.*');
     }
 
     /**
-     * Get iCal query restricted to the projects a user can access
+     * Get iCal query restricted to the active projects a user can access
      *
      * @access public
      * @param  integer $user_id
@@ -380,7 +370,12 @@ class TaskFinderModel extends Base
         $query = $this->getICalQuery();
         $projectIds = $this->getActiveProjectIdsByUser($user_id);
 
-        if ($projectIds !== null) {
+        if ($projectIds === null) {
+            $query->inSubquery(
+                TaskModel::TABLE.'.project_id',
+                $this->db->table(ProjectModel::TABLE)->columns('id')->eq('is_active', ProjectModel::ACTIVE)
+            );
+        } else {
             $query->in(TaskModel::TABLE.'.project_id', $projectIds);
         }
 
