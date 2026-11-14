@@ -28,7 +28,7 @@ class MeProcedure extends BaseProcedure
     public function getMyActivityStream()
     {
         $project_ids = $this->projectPermissionModel->getActiveProjectIds($this->userSession->getId());
-        return $this->helper->projectActivity->getProjectsEvents($project_ids, 100);
+        return $this->helper->projectActivity->getProjectsEvents($project_ids, 100, $this->getActivityRole());
     }
 
     public function createMyPrivateProject($name, $description = null)
