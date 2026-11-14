@@ -11,6 +11,7 @@ use Kanboard\Filter\ProjectActivityTaskStatusFilter;
 use Kanboard\Filter\ProjectActivityTaskTitleFilter;
 use Kanboard\Filter\TaskAssigneeFilter;
 use Kanboard\Filter\TaskCategoryFilter;
+use Kanboard\Filter\TaskChildOfFilter;
 use Kanboard\Filter\TaskColorFilter;
 use Kanboard\Filter\TaskColumnFilter;
 use Kanboard\Filter\TaskCommentFilter;
@@ -191,6 +192,10 @@ class FilterProvider implements ServiceProviderInterface
                 ->withFilter(new TaskIdFilter())
                 ->withFilter(
                     TaskLinkFilter::getInstance()
+                    ->setDatabase($c['db'])
+                )
+                ->withFilter(
+                    TaskChildOfFilter::getInstance()
                     ->setDatabase($c['db'])
                 )
                 ->withFilter(
