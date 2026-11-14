@@ -44,8 +44,13 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
 
         $userAgent = $this->request->getUserAgent();
         $ipAddress = $this->request->getIpAddress();
+        $isRememberMe = $event->getAuthType() === 'RememberMe';
 
-        $this->userLockingModel->resetFailedLogin($this->userSession->getUsername());
+        // With two factor authentication, the counter is reset only when the code is validated
+        if ($isRememberMe || ! $this->userSession->hasPostAuthentication()) {
+            $this->userLockingModel->resetFailedLogin($this->userSession->getUsername());
+        }
+
         $this->captchaModel->resetFailedLogin($ipAddress);
 
         $this->lastLoginModel->create(
@@ -55,7 +60,7 @@ class AuthSubscriber extends BaseSubscriber implements EventSubscriberInterface
             $userAgent
         );
 
-        if ($event->getAuthType() === 'RememberMe') {
+        if ($isRememberMe) {
             $this->userSession->setPostAuthenticationAsValidated();
         }
 
