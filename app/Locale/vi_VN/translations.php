@@ -1469,4 +1469,5 @@ return [
     'Enable notifications by default for all new users' => 'Kích hoạt thông báo theo mặc định cho tất cả người dùng mới',
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Gán công việc cho người tạo nó đối với các cột cụ thể nếu chưa đặt người phụ trách thủ công',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Gán công việc cho người dùng đang đăng nhập khi chuyển cột sang cột được chỉ định nếu chưa có người dùng được gán',
+    'iCal feed with undated tasks' => 'nguồn cấp dữ liệu iCal kèm nhiệm vụ không có ngày',
 ];

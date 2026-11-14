@@ -208,7 +208,9 @@ class RouteProvider implements ServiceProviderInterface
 
             // Ical routes
             $container['route']->addRoute('ical/project/:token', 'ICalendarController', 'project');
+            $container['route']->addRoute('ical/project/:token/todo/:todo', 'ICalendarController', 'project');
             $container['route']->addRoute('ical/user/:token', 'ICalendarController', 'user');
+            $container['route']->addRoute('ical/user/:token/todo/:todo', 'ICalendarController', 'user');
 
             // Users
             $container['route']->addRoute('users', 'UserListController', 'show');

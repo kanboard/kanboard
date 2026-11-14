@@ -1469,4 +1469,5 @@ return [
     'Enable notifications by default for all new users' => 'Ενεργοποίηση ειδοποιήσεων από προεπιλογή για όλους τους νέους χρήστες',
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Ανάθεση της εργασίας στον δημιουργό της για συγκεκριμένες στήλες, αν δεν έχει οριστεί υπεύθυνος χειροκίνητα',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Ανάθεση μιας εργασίας στον συνδεδεμένο χρήστη κατά την αλλαγή στήλης προς την καθορισμένη στήλη, αν δεν έχει ανατεθεί χρήστης',
+    'iCal feed with undated tasks' => 'Ροή iCal με εργασίες χωρίς ημερομηνία',
 ];

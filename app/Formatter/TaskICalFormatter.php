@@ -5,7 +5,9 @@ namespace Kanboard\Formatter;
 use DateTimeImmutable;
 use Kanboard\Core\Filter\FormatterInterface;
 use Kanboard\Core\ICalendar\Calendar;
+use Kanboard\Core\ICalendar\Component;
 use Kanboard\Core\ICalendar\Event;
+use Kanboard\Core\ICalendar\Todo;
 use PicoDb\Table;
 
 /**
@@ -94,6 +96,22 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
     }
 
     /**
+     * Transform results to iCal to-dos
+     *
+     * @access public
+     * @param  Table $query
+     * @return $this
+     */
+    public function addTasksWithoutDates(Table $query)
+    {
+        foreach ($query->findAll() as $task) {
+            $this->calendar->addTodo($this->getTaskIcalTodo($task, 'task-#'.$task['id'].'-todo'));
+        }
+
+        return $this;
+    }
+
+    /**
      * Get common events for task iCal events
      *
      * @access protected
@@ -103,7 +121,34 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
      */
     protected function getTaskIcalEvent(array &$task, $uid)
     {
-        $event = (new Event($uid))
+        return $this->setTaskProperties(new Event($uid), $task);
+    }
+
+    /**
+     * Get iCal to-do for a task
+     *
+     * @access protected
+     * @param  array   $task
+     * @param  string  $uid
+     * @return Todo
+     */
+    protected function getTaskIcalTodo(array &$task, $uid)
+    {
+        return $this->setTaskProperties(new Todo($uid), $task);
+    }
+
+    /**
+     * Set the properties shared by all task components
+     *
+     * @access private
+     * @template T of Component
+     * @param  T     $component
+     * @param  array $task
+     * @return T
+     */
+    private function setTaskProperties(Component $component, array $task)
+    {
+        $component
             ->setCreated($this->toDateTime($task['date_creation']))
             ->setModified($this->toDateTime($task['date_modification']))
             ->setSummary(t('#%d', $task['id']).' '.$task['title'])
@@ -112,20 +157,20 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
             ->setUrl($this->helper->url->base().$this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])));
 
         if (! empty($task['owner_id'])) {
-            $event->addAttendee(
+            $component->addAttendee(
                 (string) ($task['assignee_email'] ?: $task['assignee_username'].'@kanboard.local'),
                 (string) ($task['assignee_name'] ?: $task['assignee_username'])
             );
         }
 
         if (! empty($task['creator_id'])) {
-            $event->setOrganizer(
+            $component->setOrganizer(
                 (string) ($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'),
                 (string) ($task['creator_name'] ?: $task['creator_username'])
             );
         }
 
-        return $event;
+        return $component;
     }
 
     /**

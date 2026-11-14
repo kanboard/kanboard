@@ -1469,4 +1469,5 @@ return [
     'Enable notifications by default for all new users' => '新規ユーザーに対して、デフォルトで通知を有効にする',
     'Assign the task to its creator for specific columns if no assignee is set manually' => '担当者が手動で設定されていない場合、指定したカラムではタスクを作成者に割り当てる',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => '担当者がいない場合、カラム変更で指定のカラムに移動したときにタスクをログインユーザーに割り当てる',
+    'iCal feed with undated tasks' => '日付なしのタスクを含む iCal 配信',
 ];

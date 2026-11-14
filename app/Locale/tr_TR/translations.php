@@ -1469,4 +1469,5 @@ return [
     'Enable notifications by default for all new users' => 'Tüm yeni kullanıcılar için bildirimleri varsayılan olarak etkinleştir',
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Sorumlu elle ayarlanmadıysa, belirli sütunlar için görevi oluşturan kişiye ata',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Hiç kullanıcı atanmadıysa, sütun değişikliğinde görev belirtilen sütuna taşındığında görevi oturum açmış kullanıcıya ata',
+    'iCal feed with undated tasks' => 'Tarihsiz görevleri içeren iCal akışı',
 ];

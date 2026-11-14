@@ -1469,4 +1469,5 @@ return [
     'Enable notifications by default for all new users' => 'Értesítések alapértelmezett engedélyezése minden új felhasználó számára',
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'A feladat hozzárendelése a létrehozójához meghatározott oszlopokban, ha nincs kézzel beállított felelős',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'A feladat hozzárendelése a bejelentkezett felhasználóhoz oszlopváltáskor a megadott oszlopba, ha nincs hozzárendelt felhasználó',
+    'iCal feed with undated tasks' => 'iCal hírforrás dátum nélküli feladatokkal',
 ];

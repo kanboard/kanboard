@@ -1469,4 +1469,5 @@ return [
     'Enable notifications by default for all new users' => '모든 신규 사용자에 대해 기본적으로 알림 활성화',
     'Assign the task to its creator for specific columns if no assignee is set manually' => '담당자가 수동으로 지정되지 않은 경우, 지정한 컬럼에서는 작업을 생성자에게 할당',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => '사용자가 할당되지 않은 경우, 컬럼 변경으로 지정된 컬럼으로 이동할 때 작업을 로그인한 사용자에게 할당',
+    'iCal feed with undated tasks' => '날짜 없는 할일을 포함한 iCal 피드',
 ];
