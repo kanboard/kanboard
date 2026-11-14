@@ -2,6 +2,7 @@
 
 namespace Kanboard\Controller;
 
+use DateTimeZone;
 use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Filter\QueryBuilder;
 use Kanboard\Core\ICalendar\Calendar;
@@ -53,6 +54,7 @@ class ICalendarController extends BaseController
 
         $formatter = $this->taskICalFormatter
             ->setCalendar($calendar)
+            ->setTimezone($this->getTimezone($user['timezone']))
             ->addTasksWithDueDateOnly($queryDueDateOnly)
             ->addTasksWithStartAndDueDate($queryStartAndDueDate, $startColumn, 'date_due');
 
@@ -101,6 +103,8 @@ class ICalendarController extends BaseController
 
         $formatter = $this->taskICalFormatter
             ->setCalendar($calendar)
+            ->setTimezone($this->getTimezone())
+            ->withPublicLinks()
             ->addTasksWithDueDateOnly($queryDueDateOnly)
             ->addTasksWithStartAndDueDate($queryStartAndDueDate, $startColumn, 'date_due');
 
@@ -140,6 +144,24 @@ class ICalendarController extends BaseController
         }
 
         return $query;
+    }
+
+    /**
+     * Get the timezone of a feed: the one of its owner, or the application timezone
+     *
+     * The current timezone depends on who downloads the feed, a calendar client has no session.
+     */
+    protected function getTimezone($userTimezone = '')
+    {
+        $timezones = DateTimeZone::listIdentifiers(DateTimeZone::ALL_WITH_BC);
+
+        foreach (array($userTimezone, $this->configModel->get('application_timezone', 'UTC')) as $timezone) {
+            if (in_array($timezone, $timezones, true)) {
+                return new DateTimeZone($timezone);
+            }
+        }
+
+        return new DateTimeZone('UTC');
     }
 
     protected function getStartColumn($option)

@@ -3,6 +3,7 @@
 namespace Kanboard\Formatter;
 
 use DateTimeImmutable;
+use DateTimeZone;
 use Kanboard\Core\Filter\FormatterInterface;
 use Kanboard\Core\ICalendar\Calendar;
 use Kanboard\Core\ICalendar\Component;
@@ -25,6 +26,22 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
      * @var Calendar
      */
     protected $calendar;
+
+    /**
+     * Timezone of the dates, the current timezone by default
+     *
+     * @access protected
+     * @var DateTimeZone|null
+     */
+    protected $timezone = null;
+
+    /**
+     * Render the task descriptions for readers without account
+     *
+     * @access protected
+     * @var bool
+     */
+    protected $isPublicLink = false;
 
     /**
      * Get Ical events
@@ -51,6 +68,34 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
     }
 
     /**
+     * Set the timezone used to tell if a date has a time
+     *
+     * A feed is fetched without session, the current timezone is not the one of its owner.
+     *
+     * @access public
+     * @param  DateTimeZone $timezone
+     * @return $this
+     */
+    public function setTimezone(DateTimeZone $timezone)
+    {
+        $this->timezone = $timezone;
+        return $this;
+    }
+
+    /**
+     * Render the task descriptions like the public task view: no user mentions, links with the project token
+     *
+     * @access public
+     * @param  bool $isPublicLink
+     * @return $this
+     */
+    public function withPublicLinks($isPublicLink = true)
+    {
+        $this->isPublicLink = $isPublicLink;
+        return $this;
+    }
+
+    /**
      * Transform results to iCal events
      *
      * @access public
@@ -61,10 +106,22 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
      */
     public function addTasksWithStartAndDueDate(Table $query, $startColumn, $endColumn)
     {
+        $now = $this->toDateTime(time());
+
         foreach ($query->findAll() as $task) {
+            $start = $this->toDateTime($task[$startColumn]);
             $event = $this->getTaskIcalEvent($task, 'task-#'.$task['id'].'-'.$startColumn.'-'.$endColumn)
-                ->setStart($this->toDateTime($task[$startColumn]))
-                ->setEnd($this->toDateTime($task[$endColumn] ?: time()));
+                ->setStart($start);
+
+            if (! empty($task[$endColumn])) {
+                $end = $this->toDateTime($task[$endColumn]);
+                $event->setEnd($end)->setAllDay($this->isDateOnly($start) && $this->isDateOnly($end));
+            } elseif ($start < $now) {
+                // A started task without due date is still running
+                $event->setEnd($now);
+            } else {
+                $event->setAllDay($this->isDateOnly($start));
+            }
 
             $this->calendar->addEvent($event);
         }
@@ -87,7 +144,7 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
             $event = $this->getTaskIcalEvent($task, 'task-#'.$task['id'].'-date_due')
                 ->setStart($date)
                 ->setEnd($date)
-                ->setAllDay($date->format('Hi') === '0000');
+                ->setAllDay($this->isDateOnly($date));
 
             $this->calendar->addEvent($event);
         }
@@ -153,14 +210,14 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
             ->setModified($this->toDateTime($task['date_modification']))
             ->setSummary(t('#%d', $task['id']).' '.$task['title'])
             ->setDescription((string) $task['description'])
-            ->setDescriptionHtml($this->helper->text->markdown($task['description']))
-            ->setUrl($this->helper->url->base().$this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])));
+            ->setDescriptionHtml($this->helper->text->markdown($task['description'], $this->isPublicLink))
+            ->setUrl($this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id']), '', true));
 
         return $component;
     }
 
     /**
-     * Convert a timestamp to a date in the current timezone
+     * Convert a timestamp to a date in the timezone of the feed
      *
      * @access private
      * @param  int|string $timestamp
@@ -168,6 +225,18 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
      */
     private function toDateTime($timestamp)
     {
-        return (new DateTimeImmutable())->setTimestamp((int) $timestamp);
+        return (new DateTimeImmutable('now', $this->timezone))->setTimestamp((int) $timestamp);
+    }
+
+    /**
+     * A date at midnight has no time, like the due dates shown on the board
+     *
+     * @access private
+     * @param  DateTimeImmutable $date
+     * @return bool
+     */
+    private function isDateOnly(DateTimeImmutable $date)
+    {
+        return $date->format('Hi') === '0000';
     }
 }
