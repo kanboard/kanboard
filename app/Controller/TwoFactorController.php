@@ -4,6 +4,8 @@ namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\QrCode;
+use Kanboard\Core\Security\AuthenticationManager;
+use Kanboard\Event\AuthFailureEvent;
 
 /**
  * Two Factor Auth controller
@@ -146,14 +148,32 @@ class TwoFactorController extends UserViewController
         $user = $this->getUser();
         $this->checkCurrentUser($user);
 
+        if ($this->userLockingModel->isLocked($user['username'])) {
+            $this->flash->failure(t('Your account is locked for %d minutes', BRUTEFORCE_LOCKDOWN_DURATION));
+            $this->response->redirect($this->helper->url->to('TwoFactorController', 'code'));
+            return;
+        }
+
         $values = $this->request->getValues();
+        $code = isset($values['code']) && is_string($values['code']) ? $values['code'] : '';
+        $isValid = false;
 
-        $provider = $this->authenticationManager->getPostAuthenticationProvider();
-        $provider->setCode(empty($values['code']) ? '' : $values['code']);
-        $provider->setSecret($user['twofactor_secret']);
+        // There is nothing to verify without a code, or when the CSRF token is invalid
+        if ($code !== '') {
+            $provider = $this->authenticationManager->getPostAuthenticationProvider();
+            $provider->setCode($code);
+            $provider->setSecret($user['twofactor_secret']);
+            $isValid = $provider->authenticate();
 
-        if ($provider->authenticate()) {
+            if (! $isValid) {
+                $this->dispatcher->dispatch(new AuthFailureEvent($user['username']), AuthenticationManager::EVENT_FAILURE);
+            }
+        }
+
+        if ($isValid) {
             $this->userSession->setPostAuthenticationAsValidated();
+            $this->userLockingModel->resetFailedLogin($user['username']);
+            $this->captchaModel->resetFailedLogin($this->request->getIpAddress());
             $this->flash->success(t('The two factor authentication code is valid.'));
 
             if (REMEMBER_ME_AUTH && session_is_true('hasRememberMe')) {
