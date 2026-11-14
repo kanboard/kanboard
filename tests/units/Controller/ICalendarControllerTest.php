@@ -48,6 +48,24 @@ class ICalendarControllerTest extends Base
         $this->assertStringContainsString('task-#1-date_creation-date_due', $this->calendar);
     }
 
+    public function testProjectCalendarDoesNotDuplicateDueDateTasksWhenCreationDateIsConfigured()
+    {
+        $this->container['configModel']->save(array('calendar_project_tasks' => 'date_creation'));
+        $this->createFixtures();
+        $this->assertEquals(3, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Due only',
+            'date_due' => strtotime('+1 day'),
+        )));
+        $project = $this->container['projectModel']->getById(1);
+
+        $this->renderCalendar(array('token' => $project['token']))->project();
+
+        $this->assertSame(2, substr_count($this->calendar, 'BEGIN:VEVENT'));
+        $this->assertStringContainsString('task-#3-date_creation-date_due', $this->calendar);
+        $this->assertStringNotContainsString('task-#3-date_due', $this->calendar);
+    }
+
     public function testProjectCalendarFallsBackToUsernameAddresses()
     {
         $this->createFixtures();

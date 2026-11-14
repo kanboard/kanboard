@@ -9,8 +9,8 @@ use LogicException;
 /**
  * iCalendar VEVENT component
  *
- * Timed events are written in local time with the TZID of their start date,
- * all-day events are written as dates with an exclusive end date.
+ * Timed events are written in UTC, and all-day events are written as dates
+ * with an exclusive end date.
  *
  * @package core
  * @author  Frederic Guillot
@@ -74,6 +74,6 @@ final class Event extends Component
             return ContentLine::build($name, ContentLine::date($date), ['VALUE' => 'DATE']);
         }
 
-        return ContentLine::build($name, ContentLine::local($date), ['TZID' => $date->getTimezone()->getName()]);
+        return ContentLine::build($name, ContentLine::utc($date));
     }
 }
