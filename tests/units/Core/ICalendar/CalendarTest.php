@@ -192,6 +192,50 @@ class CalendarTest extends TestCase
         $this->assertStringNotContainsString('CREATED', $output);
     }
 
+    public function testTimedEventHasNoEndWhenItDoesNotEndAfterItsStart()
+    {
+        $start = new DateTimeImmutable('2026-11-14 10:00:00', $this->timezone);
+
+        foreach ([$start, $start->modify('-2 days')] as $end) {
+            $output = (new Calendar('Kanboard'))
+                ->addEvent((new Event('uid'))->setStart($start)->setEnd($end))
+                ->render($this->stamp);
+
+            $this->assertStringContainsString("DTSTART:20261114T090000Z\r\n", $output);
+            $this->assertStringNotContainsString('DTEND', $output);
+        }
+
+        $output = (new Calendar('Kanboard'))
+            ->addEvent((new Event('uid'))->setStart($start)->setEnd($start->modify('+1 second')))
+            ->render($this->stamp);
+
+        $this->assertStringContainsString("DTEND:20261114T090001Z\r\n", $output);
+    }
+
+    public function testAllDayEventHasNoEndWhenItEndsBeforeItsStart()
+    {
+        $start = new DateTimeImmutable('2026-11-20 00:00:00', $this->timezone);
+
+        $output = (new Calendar('Kanboard'))
+            ->addEvent((new Event('uid'))->setStart($start)->setEnd($start->modify('-1 day'))->setAllDay())
+            ->render($this->stamp);
+
+        $this->assertStringContainsString("DTSTART;VALUE=DATE:20261120\r\n", $output);
+        $this->assertStringNotContainsString('DTEND', $output);
+    }
+
+    public function testAllDayEventEndIsInclusive()
+    {
+        $start = new DateTimeImmutable('2026-11-20 00:00:00', $this->timezone);
+
+        $output = (new Calendar('Kanboard'))
+            ->addEvent((new Event('uid'))->setStart($start)->setEnd($start->modify('+3 days'))->setAllDay())
+            ->render($this->stamp);
+
+        $this->assertStringContainsString("DTSTART;VALUE=DATE:20261120\r\n", $output);
+        $this->assertStringContainsString("DTEND;VALUE=DATE:20261124\r\n", $output);
+    }
+
     public function testEventRequiresStartDate()
     {
         $this->expectException(LogicException::class);

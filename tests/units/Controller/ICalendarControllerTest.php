@@ -2,6 +2,8 @@
 
 namespace KanboardTests\units\Controller;
 
+use DateTimeImmutable;
+use DateTimeZone;
 use Kanboard\Controller\ICalendarController;
 use Kanboard\Core\Http\Request;
 use Kanboard\Core\Http\Response;
@@ -208,6 +210,236 @@ class ICalendarControllerTest extends Base
         $this->assertStringNotContainsString('VTODO', $this->calendar);
     }
 
+    public function testProjectCalendarDoesNotEndEventsBeforeTheirStart()
+    {
+        $this->createFixtures();
+        $futureStart = strtotime('+3 days');
+        $this->assertEquals(3, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Starts later',
+            'date_started' => $futureStart,
+        )));
+        $this->assertEquals(4, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Started after the due date',
+            'date_due' => strtotime('-2 days'),
+        )));
+        $this->assertTrue($this->container['taskModificationModel']->update(array('id' => 4, 'date_started' => time())));
+        $project = $this->container['projectModel']->getById(1);
+
+        $this->renderCalendar(array('token' => $project['token']))->project();
+
+        $event = $this->getComponent('task-#3-date_started-date_due');
+        $this->assertStringContainsString('DTSTART:'.gmdate('Ymd\THis\Z', $futureStart)."\r\n", $event);
+        $this->assertStringNotContainsString('DTEND', $event);
+
+        $event = $this->getComponent('task-#4-date_started-date_due');
+        $this->assertStringContainsString('DTSTART:', $event);
+        $this->assertStringNotContainsString('DTEND', $event);
+
+        $event = $this->getComponent('task-#1-date_started-date_due');
+        $this->assertStringContainsString('DTSTART:', $event);
+        $this->assertStringContainsString('DTEND:', $event);
+    }
+
+    public function testProjectCalendarEndsStartedTasksWithoutDueDateNow()
+    {
+        $this->createFixtures();
+        $start = strtotime('-3 days');
+        $this->assertEquals(3, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Started only',
+            'date_started' => $start,
+        )));
+        $project = $this->container['projectModel']->getById(1);
+
+        $before = time();
+        $this->renderCalendar(array('token' => $project['token']))->project();
+
+        $event = $this->getComponent('task-#3-date_started-date_due');
+        $this->assertStringContainsString('DTSTART:'.gmdate('Ymd\THis\Z', $start)."\r\n", $event);
+        $this->assertSame(1, preg_match('/^DTEND:(\d{8}T\d{6}Z)\r$/m', $event, $matches));
+        $this->assertGreaterThanOrEqual(gmdate('Ymd\THis\Z', $before), $matches[1]);
+    }
+
+    public function testProjectCalendarHasNoEndForDueDateWithTime()
+    {
+        $this->createFixtures();
+        $due = strtotime('tomorrow 14:30');
+        $this->assertEquals(3, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Due with time',
+            'date_due' => $due,
+        )));
+        $project = $this->container['projectModel']->getById(1);
+
+        $this->renderCalendar(array('token' => $project['token']))->project();
+
+        $event = $this->getComponent('task-#3-date_due');
+        $this->assertStringContainsString('DTSTART:'.gmdate('Ymd\T', $due)."143000Z\r\n", $event);
+        $this->assertStringNotContainsString('DTEND', $event);
+    }
+
+    public function testProjectCalendarWritesStartAndDueDatesWithoutTimeAsAllDayEvent()
+    {
+        $this->createFixtures();
+        $day = strtotime('tomorrow');
+        $this->assertEquals(3, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Same day',
+            'date_started' => $day,
+            'date_due' => $day,
+        )));
+        $this->assertEquals(4, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Several days',
+            'date_started' => $day,
+            'date_due' => strtotime('tomorrow +3 days'),
+        )));
+        $this->assertEquals(5, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Starts later without time',
+            'date_started' => $day,
+        )));
+        $project = $this->container['projectModel']->getById(1);
+
+        $this->renderCalendar(array('token' => $project['token']))->project();
+
+        $event = $this->getComponent('task-#3-date_started-date_due');
+        $this->assertStringContainsString('DTSTART;VALUE=DATE:'.date('Ymd', $day)."\r\n", $event);
+        $this->assertStringContainsString('DTEND;VALUE=DATE:'.date('Ymd', strtotime('tomorrow +1 day'))."\r\n", $event);
+
+        $event = $this->getComponent('task-#4-date_started-date_due');
+        $this->assertStringContainsString('DTSTART;VALUE=DATE:'.date('Ymd', $day)."\r\n", $event);
+        $this->assertStringContainsString('DTEND;VALUE=DATE:'.date('Ymd', strtotime('tomorrow +4 days'))."\r\n", $event);
+
+        $event = $this->getComponent('task-#5-date_started-date_due');
+        $this->assertStringContainsString('DTSTART;VALUE=DATE:'.date('Ymd', $day)."\r\n", $event);
+        $this->assertStringNotContainsString('DTEND', $event);
+    }
+
+    public function testUserCalendarUsesTheUserTimezone()
+    {
+        $this->createFixtures();
+        $this->assertTrue($this->container['userModel']->update(array('id' => 2, 'timezone' => 'Asia/Tokyo')));
+        $due = new DateTimeImmutable('tomorrow', new DateTimeZone('Asia/Tokyo'));
+        $this->assertEquals(3, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Due date without time',
+            'owner_id' => 2,
+            'date_due' => $due->getTimestamp(),
+        )));
+        $user = $this->container['userModel']->getById(2);
+
+        // A calendar client has no session: the current timezone is the application one
+        $this->renderCalendar(array('token' => $user['token']))->user();
+
+        $event = $this->getComponent('task-#3-date_due');
+        $this->assertStringContainsString('DTSTART;VALUE=DATE:'.$due->format('Ymd')."\r\n", $event);
+        $this->assertStringContainsString('DTEND;VALUE=DATE:'.$due->modify('+1 day')->format('Ymd')."\r\n", $event);
+    }
+
+    public function testUserCalendarFallsBackToTheApplicationTimezone()
+    {
+        $this->container['configModel']->save(array('application_timezone' => 'America/New_York'));
+        $this->createFixtures();
+        $this->assertTrue($this->container['userModel']->update(array('id' => 2, 'timezone' => 'Not/AZone')));
+        $due = new DateTimeImmutable('tomorrow', new DateTimeZone('America/New_York'));
+        $this->assertEquals(3, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Due date without time',
+            'owner_id' => 2,
+            'date_due' => $due->getTimestamp(),
+        )));
+        $user = $this->container['userModel']->getById(2);
+
+        $this->renderCalendar(array('token' => $user['token']))->user();
+        $this->assertStringContainsString('DTSTART;VALUE=DATE:'.$due->format('Ymd')."\r\n", $this->getComponent('task-#3-date_due'));
+
+        $this->assertTrue($this->container['userModel']->update(array('id' => 2, 'timezone' => '')));
+
+        $this->renderCalendar(array('token' => $user['token']))->user();
+        $this->assertStringContainsString('DTSTART;VALUE=DATE:'.$due->format('Ymd')."\r\n", $this->getComponent('task-#3-date_due'));
+    }
+
+    public function testProjectCalendarDoesNotDependOnTheCurrentTimezone()
+    {
+        $this->container['configModel']->save(array('application_timezone' => 'Europe/Paris'));
+        $this->createFixtures();
+        $due = new DateTimeImmutable('tomorrow', new DateTimeZone('Europe/Paris'));
+        $this->assertEquals(3, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'Due date without time',
+            'date_due' => $due->getTimestamp(),
+        )));
+        $project = $this->container['projectModel']->getById(1);
+
+        foreach (array('UTC', 'Asia/Tokyo', 'America/Los_Angeles') as $currentTimezone) {
+            // The timezone of the session when the feed is opened by a logged user
+            date_default_timezone_set($currentTimezone);
+
+            $this->renderCalendar(array('token' => $project['token']))->project();
+
+            $event = $this->getComponent('task-#3-date_due');
+            $this->assertStringContainsString('DTSTART;VALUE=DATE:'.$due->format('Ymd')."\r\n", $event, $currentTimezone);
+            $this->assertStringContainsString('DTEND;VALUE=DATE:'.$due->modify('+1 day')->format('Ymd')."\r\n", $event, $currentTimezone);
+        }
+
+        date_default_timezone_set('UTC');
+    }
+
+    public function testCalendarsLinkToTheTaskWithTheApplicationUrl()
+    {
+        $this->container['configModel']->save(array('application_url' => 'https://example.org/kanboard/'));
+        $this->createFixtures();
+        $project = $this->container['projectModel']->getById(1);
+        $user = $this->container['userModel']->getById(2);
+        $server = array('PHP_SELF' => '/kanboard/index.php');
+        $url = "URL:https://example.org/kanboard/?controller=TaskViewController&action=show&task_id=1\r\n";
+
+        $this->renderCalendar(array('token' => $project['token']), $server)->project();
+        $this->assertStringContainsString($url, $this->getComponent('task-#1-date_started-date_due'));
+
+        $this->renderCalendar(array('token' => $user['token']), $server)->user();
+        $this->assertStringContainsString($url, $this->getComponent('task-#1-date_started-date_due'));
+    }
+
+    public function testProjectCalendarRendersDescriptionsLikeThePublicTaskView()
+    {
+        $this->createFixtures();
+        $this->assertTrue($this->container['userModel']->update(array('id' => 2, 'name' => 'John Doe')));
+        $this->assertEquals(3, $this->container['taskCreationModel']->create(array(
+            'project_id' => 1,
+            'title' => 'With description',
+            'description' => 'See #1 and ask @user1',
+            'date_due' => strtotime('+1 day'),
+        )));
+        $project = $this->container['projectModel']->getById(1);
+
+        $this->renderCalendar(array('token' => $project['token']))->project();
+
+        $event = $this->getComponent('task-#3-date_due');
+        $this->assertStringContainsString("DESCRIPTION:See #1 and ask @user1\r\n", $event);
+        $this->assertStringContainsString('X-ALT-DESC;FMTTYPE=text/html:', $event);
+        $this->assertStringContainsString('ask @user1</p>', $event);
+        $this->assertStringNotContainsString('John Doe', $event);
+        $this->assertStringNotContainsString('UserViewController', $event);
+        $this->assertStringNotContainsString('user_id', $event);
+        $this->assertStringNotContainsString('href="/', $event);
+        $this->assertStringContainsString('<a href="http://localhost/?controller=TaskViewController&amp\;action=readonly&amp\;token='.$project['token'].'&amp\;task_id=1">#1</a>', $event);
+    }
+
+    /**
+     * Get the unfolded lines of a component
+     */
+    private function getComponent($uid)
+    {
+        $pattern = '/BEGIN:(VEVENT|VTODO)\r\nUID:'.preg_quote($uid, '/').'\r\n.*?END:\1\r\n/s';
+        $this->assertSame(1, preg_match($pattern, $this->calendar, $matches), 'Component not found: '.$uid);
+
+        return str_replace("\r\n ", '', $matches[0]);
+    }
+
     private function createFixtures()
     {
         $this->assertEquals(2, $this->container['userModel']->create(array('username' => 'user1')));
@@ -242,9 +474,9 @@ class ICalendarControllerTest extends Base
         ));
     }
 
-    private function renderCalendar(array $params)
+    private function renderCalendar(array $params, array $server = array())
     {
-        $this->container['request'] = new Request($this->container, array('REQUEST_METHOD' => 'GET'), $params);
+        $this->container['request'] = new Request($this->container, array('REQUEST_METHOD' => 'GET') + $server, $params);
 
         $this->container['response'] = $this->getMockBuilder(Response::class)
             ->setConstructorArgs(array($this->container))
