@@ -14,8 +14,8 @@ use DateTimeZone;
  */
 final class Calendar
 {
-    /** @var list<Event> */
-    private array $events = [];
+    /** @var list<Component> */
+    private array $components = [];
 
     public function __construct(
         private readonly string $productId,
@@ -27,7 +27,13 @@ final class Calendar
 
     public function addEvent(Event $event): static
     {
-        $this->events[] = $event;
+        $this->components[] = $event;
+        return $this;
+    }
+
+    public function addTodo(Todo $todo): static
+    {
+        $this->components[] = $todo;
         return $this;
     }
 
@@ -53,8 +59,8 @@ final class Calendar
             $lines[] = ContentLine::build('X-PUBLISHED-TTL', ContentLine::text($this->publishedTtl));
         }
 
-        foreach ($this->events as $event) {
-            array_push($lines, ...$event->toLines($stamp));
+        foreach ($this->components as $component) {
+            array_push($lines, ...$component->toLines($stamp));
         }
 
         $lines[] = 'END:VCALENDAR';

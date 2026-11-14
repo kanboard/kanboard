@@ -1469,4 +1469,5 @@ return [
     'Enable notifications by default for all new users' => 'Включить уведомления по умолчанию для всех новых пользователей',
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Назначать задачу её создателю для определённых колонок, если исполнитель не задан вручную',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Назначать задачу текущему пользователю при перемещении в указанную колонку, если никто не назначен',
+    'iCal feed with undated tasks' => 'iCal данные с задачами без даты',
 ];

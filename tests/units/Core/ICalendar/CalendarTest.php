@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use DateTimeZone;
 use Kanboard\Core\ICalendar\Calendar;
 use Kanboard\Core\ICalendar\Event;
+use Kanboard\Core\ICalendar\Todo;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 
@@ -97,6 +98,69 @@ class CalendarTest extends TestCase
         ];
 
         $this->assertSame(implode("\r\n", $expected)."\r\n", $calendar->render($this->stamp));
+    }
+
+    public function testRenderTodo()
+    {
+        $created = new DateTimeImmutable('2026-11-01 10:00:00', $this->timezone);
+
+        $calendar = (new Calendar('Kanboard'))
+            ->addTodo(
+                (new Todo('task-#3-todo'))
+                    ->setCreated($created)
+                    ->setModified($created)
+                    ->setSummary('#3 No dates; yet')
+                    ->setDescription("line1\nline2")
+                    ->setDescriptionHtml('<p>line1<br>line2</p>')
+                    ->setUrl('http://localhost/?controller=TaskViewController&action=show&task_id=3')
+                    ->addAttendee('john@example.org', 'Doe, John')
+                    ->setOrganizer('admin@kanboard.local', 'admin')
+            );
+
+        $expected = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:Kanboard',
+            'BEGIN:VTODO',
+            'UID:task-#3-todo',
+            'STATUS:NEEDS-ACTION',
+            'URL:http://localhost/?controller=TaskViewController&action=show&task_id=3',
+            'SUMMARY:#3 No dates\\; yet',
+            'ATTENDEE;CN="Doe, John":MAILTO:john@example.org',
+            'CLASS:PUBLIC',
+            'DESCRIPTION:line1\\nline2',
+            'X-ALT-DESC;FMTTYPE=text/html:<p>line1<br>line2</p>',
+            'ORGANIZER;CN=admin:MAILTO:admin@kanboard.local',
+            'DTSTAMP:20261113T185055Z',
+            'CREATED:20261101T090000Z',
+            'LAST-MODIFIED:20261101T090000Z',
+            'END:VTODO',
+            'END:VCALENDAR',
+        ];
+
+        $this->assertSame(implode("\r\n", $expected)."\r\n", $calendar->render($this->stamp));
+    }
+
+    public function testTodoWithoutOptionalProperties()
+    {
+        $output = (new Calendar('Kanboard'))->addTodo(new Todo('uid'))->render($this->stamp);
+
+        $this->assertStringContainsString(
+            "BEGIN:VTODO\r\nUID:uid\r\nSTATUS:NEEDS-ACTION\r\nCLASS:PUBLIC\r\nDTSTAMP:20261113T185055Z\r\nEND:VTODO\r\n",
+            $output
+        );
+    }
+
+    public function testEventsAndTodosAreRenderedInInsertionOrder()
+    {
+        $output = (new Calendar('Kanboard'))
+            ->addTodo(new Todo('first'))
+            ->addEvent((new Event('second'))->setStart($this->stamp))
+            ->render($this->stamp);
+
+        $this->assertLessThan(strpos($output, 'BEGIN:VEVENT'), strpos($output, 'BEGIN:VTODO'));
+        $this->assertSame(1, substr_count($output, 'BEGIN:VEVENT'));
+        $this->assertSame(1, substr_count($output, 'BEGIN:VTODO'));
     }
 
     public function testLongLinesAreFolded()

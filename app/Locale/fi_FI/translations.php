@@ -1469,4 +1469,5 @@ return [
     'Enable notifications by default for all new users' => 'Ota ilmoitukset käyttöön oletuksena kaikille uusille käyttäjille',
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Määritä tehtävä sen luojalle tietyissä sarakkeissa, jos vastuuhenkilöä ei ole asetettu manuaalisesti',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Määritä tehtävä kirjautuneelle käyttäjälle siirrettäessä määritettyyn sarakkeeseen, jos käyttäjää ei ole määritetty',
+    'iCal feed with undated tasks' => 'iCal-syöte päivämäärättömillä tehtävillä',
 ];

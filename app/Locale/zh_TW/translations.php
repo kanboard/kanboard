@@ -1469,4 +1469,5 @@ return [
     'Enable notifications by default for all new users' => '預設啟用所有新使用者的通知',
     'Assign the task to its creator for specific columns if no assignee is set manually' => '若未手動指定負責人，則在指定欄位中將任務指派給建立者',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => '若未指派使用者，則在變更欄位移動到指定欄位時將任務指派給已登入使用者',
+    'iCal feed with undated tasks' => '日曆訂閱（含無日期任務）',
 ];

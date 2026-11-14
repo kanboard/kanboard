@@ -1469,4 +1469,5 @@ return [
     'Enable notifications by default for all new users' => 'Activează notificările implicit pentru toți utilizatorii noi',
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Atribuie sarcina creatorului ei pentru coloane specifice dacă nu este setat manual niciun responsabil',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Atribuie sarcina utilizatorului autentificat la schimbarea coloanei către coloana specificată dacă nu este atribuit niciun utilizator',
+    'iCal feed with undated tasks' => 'Flux iCal cu sarcini fără dată',
 ];

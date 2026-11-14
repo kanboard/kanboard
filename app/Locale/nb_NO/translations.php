@@ -1469,4 +1469,5 @@ return [
     'Enable notifications by default for all new users' => 'Aktiver varslinger som standard for alle nye brukere',
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Tilordne oppgaven til dens oppretter for bestemte kolonner hvis ingen ansvarlig er satt manuelt',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Tilordne en oppgave til innlogget bruker ved kolonneendring til angitt kolonne hvis ingen bruker er tilordnet',
+    'iCal feed with undated tasks' => 'iCal strøm med oppgaver uten dato',
 ];

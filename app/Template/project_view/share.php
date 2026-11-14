@@ -10,6 +10,7 @@
             <li><strong><?= $this->url->icon('share-alt', t('Public link'), 'BoardViewController', 'readonly', array('token' => $project['token']), false, '', '', true) ?></strong></li>
             <li><strong><?= $this->url->icon('rss-square', t('RSS feed'), 'FeedController', 'project', array('token' => $project['token']), false, '', '', true) ?></strong></li>
             <li><strong><?= $this->url->icon('calendar', t('iCal feed'), 'ICalendarController', 'project', array('token' => $project['token']), false, '', '', true) ?></strong></li>
+            <li><strong><?= $this->url->icon('calendar', t('iCal feed with undated tasks'), 'ICalendarController', 'project', array('token' => $project['token'], 'todo' => 1), false, '', '', true) ?></strong></li>
         </ul>
     </div>
 

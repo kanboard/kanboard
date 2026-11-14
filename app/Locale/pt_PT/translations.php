@@ -1469,4 +1469,5 @@ return [
     'Enable notifications by default for all new users' => 'Ativar notificações por padrão para todos os novos usuários',
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Atribuir a tarefa ao seu criador para colunas específicas se nenhum responsável for definido manualmente',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Atribuir a tarefa ao utilizador com sessão iniciada ao mudar de coluna para a coluna especificada se nenhum utilizador estiver atribuído',
+    'iCal feed with undated tasks' => 'Subscrição iCal com tarefas sem data',
 ];
