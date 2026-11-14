@@ -66,9 +66,11 @@ class ICalendarControllerTest extends Base
         $this->assertStringNotContainsString('task-#3-date_due', $this->calendar);
     }
 
-    public function testProjectCalendarFallsBackToUsernameAddresses()
+    public function testProjectAndUserCalendarsDoNotExposeUserEmailAddresses()
     {
         $this->createFixtures();
+        $this->assertTrue($this->container['userModel']->update(array('id' => 1, 'email' => 'admin@example.org')));
+        $this->assertTrue($this->container['userModel']->update(array('id' => 2, 'email' => 'user1@example.org')));
         $this->assertEquals(3, $this->container['taskCreationModel']->create(array(
             'project_id' => 1,
             'title' => 'Created by admin',
@@ -77,11 +79,21 @@ class ICalendarControllerTest extends Base
             'date_due' => strtotime('+1 day'),
         )));
         $project = $this->container['projectModel']->getById(1);
+        $user = $this->container['userModel']->getById(2);
 
         $this->renderCalendar(array('token' => $project['token']))->project();
 
-        $this->assertStringContainsString("ATTENDEE;CN=user1:MAILTO:user1@kanboard.local\r\n", $this->calendar);
-        $this->assertStringContainsString("ORGANIZER;CN=admin:MAILTO:admin@kanboard.local\r\n", $this->calendar);
+        $this->assertStringNotContainsString('ATTENDEE', $this->calendar);
+        $this->assertStringNotContainsString('ORGANIZER', $this->calendar);
+        $this->assertStringNotContainsString('admin@example.org', $this->calendar);
+        $this->assertStringNotContainsString('user1@example.org', $this->calendar);
+
+        $this->renderCalendar(array('token' => $user['token']))->user();
+
+        $this->assertStringNotContainsString('ATTENDEE', $this->calendar);
+        $this->assertStringNotContainsString('ORGANIZER', $this->calendar);
+        $this->assertStringNotContainsString('admin@example.org', $this->calendar);
+        $this->assertStringNotContainsString('user1@example.org', $this->calendar);
     }
 
     public function testUserCalendarExcludesTasksFromRevokedProjects()
@@ -125,7 +137,8 @@ class ICalendarControllerTest extends Base
         $this->assertSame(1, substr_count($this->calendar, 'BEGIN:VTODO'));
         $this->assertStringContainsString("BEGIN:VTODO\r\nUID:task-#3-todo\r\nSTATUS:NEEDS-ACTION\r\n", $this->calendar);
         $this->assertStringContainsString("SUMMARY:#3 Undated task\r\n", $this->calendar);
-        $this->assertStringContainsString("ATTENDEE;CN=user1:MAILTO:user1@kanboard.local\r\n", $this->calendar);
+        $this->assertStringNotContainsString('ATTENDEE', $this->calendar);
+        $this->assertStringNotContainsString('ORGANIZER', $this->calendar);
         $this->assertStringNotContainsString('Private undated task', $this->calendar);
         $this->assertStringNotContainsString('Closed undated task', $this->calendar);
 

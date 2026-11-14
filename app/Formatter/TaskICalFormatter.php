@@ -156,20 +156,6 @@ class TaskICalFormatter extends BaseFormatter implements FormatterInterface
             ->setDescriptionHtml($this->helper->text->markdown($task['description']))
             ->setUrl($this->helper->url->base().$this->helper->url->to('TaskViewController', 'show', array('task_id' => $task['id'])));
 
-        if (! empty($task['owner_id'])) {
-            $component->addAttendee(
-                (string) ($task['assignee_email'] ?: $task['assignee_username'].'@kanboard.local'),
-                (string) ($task['assignee_name'] ?: $task['assignee_username'])
-            );
-        }
-
-        if (! empty($task['creator_id'])) {
-            $component->setOrganizer(
-                (string) ($task['creator_email'] ?: $task['creator_username'].'@kanboard.local'),
-                (string) ($task['creator_name'] ?: $task['creator_username'])
-            );
-        }
-
         return $component;
     }
 
