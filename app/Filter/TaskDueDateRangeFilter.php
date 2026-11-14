@@ -13,6 +13,19 @@ use Kanboard\Model\TaskModel;
  */
 class TaskDueDateRangeFilter extends BaseFilter implements FilterInterface
 {
+    private $startColumn;
+
+    public function __construct($value = null, $startColumn = 'date_started')
+    {
+        parent::__construct($value);
+
+        if (! in_array($startColumn, array('date_creation', 'date_started'), true)) {
+            throw new \InvalidArgumentException('Invalid start date column');
+        }
+
+        $this->startColumn = $startColumn;
+    }
+
     /**
      * Get search attribute
      *
@@ -33,8 +46,8 @@ class TaskDueDateRangeFilter extends BaseFilter implements FilterInterface
     public function apply()
     {
         $this->query->beginOr();
-        $this->query->isNull(TaskModel::TABLE.'.date_started');
-        $this->query->eq(TaskModel::TABLE.'.date_started', 0);
+        $this->query->isNull(TaskModel::TABLE.'.'.$this->startColumn);
+        $this->query->eq(TaskModel::TABLE.'.'.$this->startColumn, 0);
         $this->query->closeOr();
 
         $this->query->gte(TaskModel::TABLE.'.date_due', is_numeric($this->value[0]) ? $this->value[0] : strtotime($this->value[0]));

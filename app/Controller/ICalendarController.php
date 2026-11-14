@@ -40,7 +40,7 @@ class ICalendarController extends BaseController
         $queryDueDateOnly = QueryBuilder::create()
             ->withQuery($this->taskFinderModel->getUserICalQuery($user['id']))
             ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
-            ->withFilter(new TaskDueDateRangeFilter(array($startRange, $endRange)))
+            ->withFilter(new TaskDueDateRangeFilter(array($startRange, $endRange), $startColumn))
             ->withFilter(new TaskAssigneeFilter($user['id']))
             ->getQuery();
 
@@ -89,7 +89,7 @@ class ICalendarController extends BaseController
             ->withQuery($this->taskFinderModel->getICalQuery())
             ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
             ->withFilter(new TaskProjectFilter($project['id']))
-            ->withFilter(new TaskDueDateRangeFilter(array($startRange, $endRange)))
+            ->withFilter(new TaskDueDateRangeFilter(array($startRange, $endRange), $startColumn))
             ->getQuery();
 
         $queryStartAndDueDate = QueryBuilder::create()
