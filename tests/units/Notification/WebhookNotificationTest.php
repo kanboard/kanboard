@@ -3,10 +3,12 @@
 namespace KanboardTests\units\Notification;
 
 use KanboardTests\units\Base;
+use Kanboard\Core\Http\Client;
 use Kanboard\Model\ConfigModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Subscriber\NotificationSubscriber;
+use Psr\Log\LoggerInterface;
 
 class WebhookNotificationTest extends Base
 {
@@ -17,8 +19,22 @@ class WebhookNotificationTest extends Base
         $this->container['httpClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Http\Client')
             ->setConstructorArgs(array($this->container))
-            ->onlyMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync', 'isPrivateURL'))
+            ->onlyMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync', 'withPrivateNetworksBlocked'))
             ->getMock();
+
+        $this->container['blockedHttpClient'] = $this
+            ->getMockBuilder('\Kanboard\Core\Http\Client')
+            ->setConstructorArgs(array($this->container))
+            ->onlyMethods(array('postJson'))
+            ->getMock();
+
+        $this->container['httpClient']
+            ->method('withPrivateNetworksBlocked')
+            ->willReturn($this->container['blockedHttpClient']);
+
+        $this->container['httpClient']
+            ->expects($this->never())
+            ->method('postJson');
     }
 
     public function testTaskCreation()
@@ -30,12 +46,7 @@ class WebhookNotificationTest extends Base
 
         $configModel->save(array('webhook_url' => 'http://localhost/?task-creation'));
 
-        $this->container['httpClient']
-            ->expects($this->once())
-            ->method('isPrivateURL')
-            ->willReturn(false);
-
-        $this->container['httpClient']
+        $this->container['blockedHttpClient']
             ->expects($this->once())
             ->method('postJson')
             ->with($this->stringContains('http://localhost/?task-creation&token='), $this->anything());
@@ -52,17 +63,23 @@ class WebhookNotificationTest extends Base
         $taskCreationModel = new TaskCreationModel($this->container);
         $this->container['dispatcher']->addSubscriber(new NotificationSubscriber($this->container));
 
-        $configModel->save(array('webhook_url' => 'http://192.168.1.1/webhook'));
-
-        $this->container['httpClient']
-            ->expects($this->once())
-            ->method('isPrivateURL')
-            ->with('http://192.168.1.1/webhook')
-            ->willReturn(true);
-
-        $this->container['httpClient']
+        $this->container['blockedHttpClient']
             ->expects($this->never())
             ->method('postJson');
+
+        $this->container['httpClient'] = new Client($this->container);
+
+        $this->container['logger'] = $this->createMock(LoggerInterface::class);
+        $this->container['logger']
+            ->expects($this->once())
+            ->method('info')
+            ->with($this->stringStartsWith('HttpClient: blocked request to private network (http://[::ffff:169.254.169.254]/latest/meta-data/?token='));
+
+        $this->container['logger']
+            ->expects($this->never())
+            ->method('error');
+
+        $configModel->save(array('webhook_url' => 'http://[::ffff:169.254.169.254]/latest/meta-data/'));
 
         $projectId = $projectModel->create(array('name' => 'test'));
         $this->assertNotFalse($projectId);
@@ -78,12 +95,7 @@ class WebhookNotificationTest extends Base
 
         $configModel->save(array('webhook_url' => 'https://example.com/webhook'));
 
-        $this->container['httpClient']
-            ->expects($this->once())
-            ->method('isPrivateURL')
-            ->willReturn(false);
-
-        $this->container['httpClient']
+        $this->container['blockedHttpClient']
             ->expects($this->once())
             ->method('postJson')
             ->with(

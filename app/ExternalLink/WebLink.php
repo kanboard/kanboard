@@ -20,13 +20,10 @@ class WebLink extends BaseLink implements ExternalLinkInterface
      */
     public function getTitle()
     {
-        if (! EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS && $this->httpClient->isPrivateURL($this->url)) {
-            $this->logger->info('Blocked attempt to fetch URL from private network: '.$this->url);
-            return $this->url;
-        }
+        $httpClient = EXTERNAL_LINK_ALLOW_PRIVATE_NETWORKS ? $this->httpClient : $this->httpClient->withPrivateNetworksBlocked();
 
         // Do not follow redirects to prevent SSRF bypasses through redirect chains.
-        $html = $this->httpClient->get($this->url, [], false, false);
+        $html = $httpClient->get($this->url, [], false, false);
 
         if (preg_match('/<title>(.*)<\/title>/siU', $html, $matches)) {
             return trim($matches[1]);
