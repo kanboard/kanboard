@@ -60,6 +60,38 @@ abstract class BaseController extends Base
     }
 
     /**
+     * Return true if the user can create a task in the destination of a task copy or move
+     *
+     * The column is resolved like the duplication models do, so the column restrictions
+     * of the column where the task will land are applied.
+     *
+     * @access protected
+     * @param  integer $project_id Destination project id
+     * @param  integer $column_id  Requested column id
+     * @return bool
+     */
+    protected function canCreateTaskInDestination($project_id, $column_id)
+    {
+        $column_id = $this->taskDuplicationModel->getDestinationColumnId($project_id, $column_id);
+        return $this->helper->projectRole->canCreateTaskInColumn($project_id, $column_id);
+    }
+
+    /**
+     * Check that the user can create a task in the destination of a task copy or move
+     *
+     * @access protected
+     * @param  integer $project_id Destination project id
+     * @param  integer $column_id  Requested column id
+     * @throws AccessForbiddenException
+     */
+    protected function checkDestinationTaskCreation($project_id, $column_id)
+    {
+        if (! $this->canCreateTaskInDestination($project_id, $column_id)) {
+            throw new AccessForbiddenException();
+        }
+    }
+
+    /**
      * Common method to get a task for task views
      *
      * @access protected

@@ -2,8 +2,6 @@
 
 namespace Kanboard\Controller;
 
-use Kanboard\Core\Controller\AccessForbiddenException;
-
 /**
  * Task Duplication controller
  *
@@ -53,9 +51,7 @@ class TaskDuplicationController extends BaseController
             list($valid, ) = $this->taskValidator->validateProjectModification($values);
 
             if ($valid) {
-                if (! $this->projectPermissionModel->isUserAllowed($values['project_id'], $this->userSession->getId())) {
-                    throw new AccessForbiddenException();
-                }
+                $this->checkDestinationTaskCreation($values['project_id'], $values['column_id'] ?? $task['column_id']);
 
                 if ($this->taskProjectMoveModel->moveToProject(
                     $task['id'],
@@ -90,9 +86,7 @@ class TaskDuplicationController extends BaseController
             list($valid, ) = $this->taskValidator->validateProjectModification($values);
 
             if ($valid) {
-                if (! $this->projectPermissionModel->isUserAllowed($values['project_id'], $this->userSession->getId())) {
-                    throw new AccessForbiddenException();
-                }
+                $this->checkDestinationTaskCreation($values['project_id'], $values['column_id'] ?? $task['column_id']);
 
                 $task_id = $this->taskProjectDuplicationModel->duplicateToProject(
                     $task['id'],
@@ -129,6 +123,11 @@ class TaskDuplicationController extends BaseController
 
         unset($projects_list[$task['project_id']]);
 
+        // Offer only the projects and columns that move() and copy() accept
+        $projects_list = array_filter($projects_list, function ($project_id) {
+            return $this->hasColumnForTaskCreation($project_id);
+        }, ARRAY_FILTER_USE_KEY);
+
         if (! empty($projects_list)) {
             $dst_project_id = $this->request->getIntegerParam('dst_project_id', key($projects_list));
 
@@ -137,7 +136,7 @@ class TaskDuplicationController extends BaseController
             }
 
             $swimlanes_list = $this->swimlaneModel->getList($dst_project_id, false, true);
-            $columns_list = $this->columnModel->getList($dst_project_id);
+            $columns_list = $this->getColumnsForTaskCreation($dst_project_id);
             $categories_list = $this->categoryModel->getList($dst_project_id);
             $users_list = $this->projectUserRoleModel->getAssignableUsersList($dst_project_id);
 
@@ -159,5 +158,37 @@ class TaskDuplicationController extends BaseController
             'categories_list' => $categories_list,
             'users_list' => $users_list,
         )));
+    }
+
+    /**
+     * Get the columns of the project where the user can create a task
+     *
+     * @access private
+     * @param  integer $project_id
+     * @return array
+     */
+    private function getColumnsForTaskCreation($project_id)
+    {
+        return array_filter($this->columnModel->getList($project_id), function ($column_id) use ($project_id) {
+            return $this->canCreateTaskInDestination($project_id, $column_id);
+        }, ARRAY_FILTER_USE_KEY);
+    }
+
+    /**
+     * Return true if the user can create a task in at least one column of the project
+     *
+     * @access private
+     * @param  integer $project_id
+     * @return bool
+     */
+    private function hasColumnForTaskCreation($project_id)
+    {
+        foreach (array_keys($this->columnModel->getList($project_id)) as $column_id) {
+            if ($this->canCreateTaskInDestination($project_id, $column_id)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
