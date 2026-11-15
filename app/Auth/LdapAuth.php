@@ -60,6 +60,13 @@ class LdapAuth extends Base implements PasswordAuthenticationProviderInterface
      */
     public function authenticate()
     {
+        // A bind with a DN and an empty password is an unauthenticated bind (RFC 4513 section 5.1.2).
+        // Some servers, such as Active Directory, accept it as an anonymous bind and report success.
+        if ((string) $this->password === '') {
+            $this->logger->info('Reject LDAP authentication with an empty password for '.$this->username);
+            return false;
+        }
+
         try {
 
             $client = LdapClient::connect($this->getLdapUsername(), $this->getLdapPassword());
