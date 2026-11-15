@@ -3,9 +3,11 @@
 namespace KanboardTests\units\Controller;
 
 use Kanboard\Controller\TaskCreationController;
+use Kanboard\Core\Controller\AccessForbiddenException;
 use Kanboard\Core\Http\Request;
 use Kanboard\Core\Http\Response;
 use Kanboard\Core\Security\Role;
+use Kanboard\Core\Template;
 use Kanboard\Model\ProjectModel;
 use Kanboard\Model\ProjectUserRoleModel;
 use Kanboard\Model\TaskCreationModel;
@@ -71,6 +73,66 @@ class TaskCreationControllerTest extends Base
 
         $task = $this->container['taskFinderModel']->getById(2);
         $this->assertEquals(2, $task['owner_id']);
+    }
+
+    public function testDuplicateProjectsToProjectsWhereUserIsMember()
+    {
+        $this->createProjects();
+        $this->assertTrue($this->container['projectUserRoleModel']->addUser(2, 2, Role::PROJECT_MEMBER));
+        $this->buildRequest(array('task_id' => 1, 'project_ids' => array(2)), 'redirect');
+
+        $controller = new TaskCreationController($this->container);
+        $controller->duplicateProjects();
+
+        $this->assertEquals(1, $this->container['taskFinderModel']->countByProjectId(2));
+    }
+
+    public function testDuplicateProjectsWithProjectWhereUserIsViewer()
+    {
+        $this->createProjects();
+        $this->assertEquals(3, $this->container['projectModel']->create(array('name' => 'Project C')));
+        $this->assertTrue($this->container['projectUserRoleModel']->addUser(2, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($this->container['projectUserRoleModel']->addUser(3, 2, Role::PROJECT_VIEWER));
+        $this->buildRequest(array('task_id' => 1, 'project_ids' => array(2, 3)), 'none');
+
+        $controller = new TaskCreationController($this->container);
+
+        try {
+            $controller->duplicateProjects();
+            $this->fail('A project viewer must not be able to duplicate a task into the project');
+        } catch (AccessForbiddenException $e) {
+            // The allowed destination must not receive a copy either
+            $this->assertEquals(0, $this->container['taskFinderModel']->countByProjectId(2));
+            $this->assertEquals(0, $this->container['taskFinderModel']->countByProjectId(3));
+        }
+    }
+
+    public function testDuplicateProjectsListExcludesProjectsWhereUserIsViewer()
+    {
+        $this->createProjects();
+        $this->assertEquals(3, $this->container['projectModel']->create(array('name' => 'Project C')));
+        $this->assertTrue($this->container['projectUserRoleModel']->addUser(2, 2, Role::PROJECT_MEMBER));
+        $this->assertTrue($this->container['projectUserRoleModel']->addUser(3, 2, Role::PROJECT_VIEWER));
+        $this->buildRequest(array(
+            'title' => 'New task',
+            'column_id' => 1,
+            'swimlane_id' => 1,
+            'duplicate_multiple_projects' => 1,
+        ), 'html');
+
+        $params = new \ArrayObject();
+        $this->container['template'] = $this->createStub(Template::class);
+        $this->container['template']
+            ->method('render')
+            ->willReturnCallback(function ($template, array $templateParams = array()) use ($params) {
+                $params[$template] = $templateParams;
+                return '';
+            });
+
+        $controller = new TaskCreationController($this->container);
+        $controller->save();
+
+        $this->assertSame(array(2 => 'Project B'), $params['task_creation/duplicate_projects']['projects_list']);
     }
 
     private function buildRequest(array $values, $responseMethod)

@@ -146,14 +146,16 @@ class TaskCreationController extends BaseController
             throw new AccessForbiddenException();
         }
 
-        foreach ($values['project_ids'] as $project_id) {
-            $project_id = (int) $project_id;
-            if ($project_id <= 0) {
-                continue;
-            }
-            if (! $this->projectPermissionModel->isUserAllowed($project_id, $this->userSession->getId())) {
-                throw new AccessForbiddenException();
-            }
+        $project_ids = array_filter(array_map('intval', $values['project_ids']), function ($project_id) {
+            return $project_id > 0;
+        });
+
+        // Check every destination before duplicating, so a forbidden project does not leave partial copies
+        foreach ($project_ids as $project_id) {
+            $this->checkDestinationTaskCreation($project_id, $sourceTask['column_id']);
+        }
+
+        foreach ($project_ids as $project_id) {
             $this->taskProjectDuplicationModel->duplicateToProject($sourceTaskId, $project_id);
         }
 
@@ -219,6 +221,11 @@ class TaskCreationController extends BaseController
         $task = $this->taskFinderModel->getById($task_id);
         $projects = $this->projectUserRoleModel->getActiveProjectsByUser($this->userSession->getId());
         unset($projects[$project['id']]);
+
+        // Offer only the projects that duplicateProjects() accepts for this task
+        $projects = array_filter($projects, function ($project_id) use ($task) {
+            return $this->canCreateTaskInDestination($project_id, $task['column_id']);
+        }, ARRAY_FILTER_USE_KEY);
 
         $this->response->html($this->template->render('task_creation/duplicate_projects', array(
             'project' => $project,
