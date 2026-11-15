@@ -19,11 +19,12 @@ class HttpAsyncJob extends BaseJob
      * @param string $content
      * @param array  $headers
      * @param bool   $raiseForErrors
+     * @param bool   $blockPrivateNetworks
      * @return $this
      */
-    public function withParams($method, $url, $content, array $headers, $raiseForErrors = false)
+    public function withParams($method, $url, $content, array $headers, $raiseForErrors = false, $blockPrivateNetworks = false)
     {
-        $this->jobParams = array($method, $url, $content, $headers, $raiseForErrors);
+        $this->jobParams = array($method, $url, $content, $headers, $raiseForErrors, $blockPrivateNetworks);
         return $this;
     }
 
@@ -36,9 +37,11 @@ class HttpAsyncJob extends BaseJob
      * @param string $content
      * @param array  $headers
      * @param bool   $raiseForErrors
+     * @param bool   $blockPrivateNetworks
      */
-    public function execute($method, $url, $content, array $headers, $raiseForErrors = false)
+    public function execute($method, $url, $content, array $headers, $raiseForErrors = false, $blockPrivateNetworks = false)
     {
-        $this->httpClient->doRequest($method, $url, $content, $headers, $raiseForErrors);
+        $httpClient = $blockPrivateNetworks ? $this->httpClient->withPrivateNetworksBlocked() : $this->httpClient;
+        $httpClient->doRequest($method, $url, $content, $headers, $raiseForErrors);
     }
 }

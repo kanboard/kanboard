@@ -3,6 +3,7 @@
 namespace KanboardTests\units\ExternalLink;
 
 use KanboardTests\units\Base;
+use Kanboard\Core\Http\Client;
 use Kanboard\ExternalLink\WebLink;
 use Psr\Log\NullLogger;
 
@@ -15,8 +16,22 @@ class WebLinkTest extends Base
         $this->container['httpClient'] = $this
             ->getMockBuilder('\Kanboard\Core\Http\Client')
             ->setConstructorArgs(array($this->container))
-            ->onlyMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync'))
+            ->onlyMethods(array('get', 'getJson', 'postJson', 'postJsonAsync', 'postForm', 'postFormAsync', 'withPrivateNetworksBlocked'))
             ->getMock();
+
+        $this->container['blockedHttpClient'] = $this
+            ->getMockBuilder('\Kanboard\Core\Http\Client')
+            ->setConstructorArgs(array($this->container))
+            ->onlyMethods(array('get'))
+            ->getMock();
+
+        $this->container['httpClient']
+            ->method('withPrivateNetworksBlocked')
+            ->willReturn($this->container['blockedHttpClient']);
+
+        $this->container['httpClient']
+            ->expects($this->never())
+            ->method('get');
     }
 
     public function testGetTitleFromHtml()
@@ -29,7 +44,7 @@ class WebLinkTest extends Base
         $webLink->setUrl($url);
         $this->assertEquals($url, $webLink->getUrl());
 
-        $this->container['httpClient']
+        $this->container['blockedHttpClient']
             ->expects($this->once())
             ->method('get')
             ->with($url, array(), false, false)
@@ -47,7 +62,7 @@ class WebLinkTest extends Base
         $webLink->setUrl($url);
         $this->assertEquals($url, $webLink->getUrl());
 
-        $this->container['httpClient']
+        $this->container['blockedHttpClient']
             ->expects($this->once())
             ->method('get')
             ->with($url, array(), false, false)
@@ -58,17 +73,19 @@ class WebLinkTest extends Base
 
     public function testGetTitleFromPrivateNetworkUrl()
     {
-        $url = 'http://192.168.0.1/test';
-        $this->container['logger'] = new NullLogger();
-
-        $webLink = new WebLink($this->container);
-        $webLink->setUrl($url);
-        $this->assertEquals($url, $webLink->getUrl());
-
-        $this->container['httpClient']
+        $this->container['blockedHttpClient']
             ->expects($this->never())
             ->method('get');
 
-        $this->assertEquals($url, $webLink->getTitle());
+        $this->container['logger'] = new NullLogger();
+        $this->container['httpClient'] = new Client($this->container);
+
+        foreach (array('http://192.168.0.1/test', 'http://[::ffff:127.0.0.1]:9/test', 'http://0x7f000001:9/test') as $url) {
+            $webLink = new WebLink($this->container);
+            $webLink->setUrl($url);
+
+            $components = parse_url($url);
+            $this->assertEquals($components['host'].$components['path'], $webLink->getTitle());
+        }
     }
 }
