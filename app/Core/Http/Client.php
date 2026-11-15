@@ -14,6 +14,14 @@ use Kanboard\Job\HttpAsyncJob;
 class Client extends Base
 {
     /**
+     * Address validated for the URL passed to checkUrl()
+     *
+     * @access private
+     * @var array|null
+     */
+    private $pinnedAddresses = null;
+
+    /**
      * HTTP client user agent
      *
      * @var string
@@ -263,6 +271,12 @@ class Client extends Base
             curl_setopt($curlSession, CURLOPT_SSL_VERIFYPEER, false);
         }
 
+        if (! HTTP_PROXY_HOSTNAME) {
+            foreach ($this->getResolveOptions($url) as $resolveOption) {
+                curl_setopt($curlSession, CURLOPT_RESOLVE, $resolveOption);
+            }
+        }
+
         if (HTTP_PROXY_HOSTNAME) {
             curl_setopt($curlSession, CURLOPT_PROXY, HTTP_PROXY_HOSTNAME);
             curl_setopt($curlSession, CURLOPT_PROXYPORT, HTTP_PROXY_PORT);
@@ -319,6 +333,30 @@ class Client extends Base
      * @param  bool       $followRedirects
      * @return array
      */
+    private function getResolveOptions($url)
+    {
+        if (empty($this->pinnedAddresses)) {
+            return array();
+        }
+
+        $components = parse_url($url);
+
+        if (empty($components['host'])) {
+            return array();
+        }
+
+        $host = trim($components['host'], '[]');
+        $port = isset($components['port']) ? (int) $components['port'] : (isset($components['scheme']) && strtolower($components['scheme']) === 'https' ? 443 : 80);
+        $entries = array();
+
+        foreach ($this->pinnedAddresses as $address) {
+            $formatted = strpos($address, ':') !== false ? '['.$address.']' : $address;
+            $entries[] = $host.':'.$port.':'.$formatted;
+        }
+
+        return array($entries);
+    }
+
     private function getContext($method, $content, array $headers, $raiseForErrors = false, $followRedirects = true)
     {
         $default_headers = [
@@ -398,7 +436,159 @@ class Client extends Base
             return false;
         }
 
-        return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false;
+        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {
+            return true;
+        }
+
+        // Carrier-grade NAT (100.64.0.0/10) is not covered by the PHP flags
+        return $this->isInCidr($ip, '100.64.0.0/10');
+    }
+
+    /**
+     * Check if an IPv4 address belongs to a CIDR range
+     *
+     * @access private
+     * @param  string  $ip
+     * @param  string  $cidr
+     * @return boolean
+     */
+    private function isInCidr($ip, $cidr)
+    {
+        list($subnet, $mask) = explode('/', $cidr);
+
+        $ipLong = ip2long($ip);
+        $subnetLong = ip2long($subnet);
+
+        if ($ipLong === false || $subnetLong === false) {
+            return false;
+        }
+
+        $maskLong = -1 << (32 - (int) $mask);
+
+        return ($ipLong & $maskLong) === ($subnetLong & $maskLong);
+    }
+
+    /**
+     * Parse an IPv4 address written in one of the numeric forms accepted by
+     * inet_aton() and by curl (hexadecimal, octal, decimal, 1 to 4 parts)
+     *
+     * @access private
+     * @param  string      $host
+     * @return string|bool Normalized dotted address, or false when not numeric
+     */
+    private function parseNumericIpv4($host)
+    {
+        $parts = explode('.', $host);
+
+        if (count($parts) > 4) {
+            return false;
+        }
+
+        $values = array();
+
+        foreach ($parts as $part) {
+            if ($part === '') {
+                return false;
+            }
+
+            if (preg_match('/^0[xX]([0-9a-fA-F]+)$/', $part, $match)) {
+                $values[] = hexdec($match[1]);
+            } elseif (preg_match('/^0[0-7]+$/', $part)) {
+                $values[] = octdec($part);
+            } elseif (preg_match('/^[0-9]+$/', $part)) {
+                $values[] = (int) $part;
+            } else {
+                return false;
+            }
+        }
+
+        $last = array_pop($values);
+
+        // The last part fills all the remaining bytes
+        if ($last >= (1 << (8 * (4 - count($values))))) {
+            return false;
+        }
+
+        $ip = 0;
+
+        foreach ($values as $index => $value) {
+            if ($value > 255) {
+                return false;
+            }
+
+            $ip |= $value << (8 * (3 - $index));
+        }
+
+        return long2ip($ip | $last);
+    }
+
+    /**
+     * Get the addresses a host resolves to
+     *
+     * Returns null when the host is a valid IP literal, an empty array when it
+     * cannot be resolved, and the resolved addresses otherwise.
+     *
+     * @access private
+     * @param  string     $host
+     * @return array|null
+     */
+    private function resolveHost($host)
+    {
+        $host = trim($host, '[]');
+
+        if (filter_var($host, FILTER_VALIDATE_IP) !== false) {
+            return array($host);
+        }
+
+        $numeric = $this->parseNumericIpv4($host);
+
+        if ($numeric !== false) {
+            return array($numeric);
+        }
+
+        $addresses = gethostbynamel($host);
+
+        if ($addresses === false) {
+            $addresses = array();
+        }
+
+        if (function_exists('dns_get_record')) {
+            $records = @dns_get_record($host, DNS_AAAA);
+
+            if (is_array($records)) {
+                foreach ($records as $record) {
+                    if (isset($record['type']) && $record['type'] === 'AAAA' && isset($record['ipv6'])) {
+                        $addresses[] = $record['ipv6'];
+                    }
+                }
+            }
+        }
+
+        return array_values(array_unique($addresses));
+    }
+
+    /**
+     * Resolve a URL and remember its address so the request reuses it
+     *
+     * Pins the validated address for the next request to this URL, which
+     * prevents a short TTL record from pointing to another address when the
+     * HTTP client resolves the host a second time.
+     *
+     * @access public
+     * @param  string      $url
+     * @return string|bool false when the URL must not be fetched
+     */
+    public function checkUrl($url)
+    {
+        $this->pinnedAddresses = null;
+
+        if ($this->isPrivateURL($url)) {
+            return false;
+        }
+
+        $this->pinnedAddresses = $this->resolveHost(trim((string) parse_url($url, PHP_URL_HOST), '[]'));
+
+        return $url;
     }
 
     /**
@@ -421,25 +611,23 @@ class Client extends Base
         }
 
         $host = trim($parsedUrl['host']);
+
         if ($host === '') {
             return false;
         }
 
-        $ipv4Address = gethostbyname($host);
-        if ($this->isPrivateIpAddress($ipv4Address)) {
-            return true;
+        $addresses = $this->resolveHost($host);
+
+        // A host that cannot be resolved locally is not evidence of a private
+        // target: proxy only setups have no DNS. It is rejected later by the
+        // HTTP client itself when the connection cannot be established.
+        if (empty($addresses)) {
+            return false;
         }
 
-        if (function_exists('dns_get_record')) {
-            $dnsRecords = @dns_get_record($host, DNS_AAAA);
-            if (is_array($dnsRecords)) {
-                foreach ($dnsRecords as $record) {
-                    if (isset($record['type']) && $record['type'] === 'AAAA' && isset($record['ipv6'])) {
-                        if ($this->isPrivateIpAddress($record['ipv6'])) {
-                            return true;
-                        }
-                    }
-                }
+        foreach ($addresses as $address) {
+            if ($this->isPrivateIpAddress($address)) {
+                return true;
             }
         }
 
