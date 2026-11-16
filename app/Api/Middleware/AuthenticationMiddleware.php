@@ -5,7 +5,7 @@ namespace Kanboard\Api\Middleware;
 use JsonRPC\Exception\AccessDeniedException;
 use JsonRPC\Exception\AuthenticationFailureException;
 use JsonRPC\MiddlewareInterface;
-use Kanboard\Auth\ApiAccessTokenAuth;
+use Kanboard\Api\Auth\ApiAccessTokenAuth;
 use Kanboard\Core\Base;
 use Symfony\Contracts\EventDispatcher\Event;
 

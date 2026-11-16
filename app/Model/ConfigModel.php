@@ -117,6 +117,10 @@ class ConfigModel extends SettingModel
             $values['application_url'] = $values['application_url'].'/';
         }
 
+        if (isset($values['dashboard_max_projects']) && is_numeric($values['dashboard_max_projects']) && (int) $values['dashboard_max_projects'] === (int) DASHBOARD_MAX_PROJECTS) {
+            $values['dashboard_max_projects'] = '';
+        }
+
         return $values;
     }
 }

@@ -3,7 +3,7 @@
 namespace KanboardTests\units\Auth;
 
 use KanboardTests\units\Base;
-use Kanboard\Auth\TotpAuth;
+use Kanboard\Api\Auth\TotpAuth;
 
 class TotpAuthTest extends Base
 {

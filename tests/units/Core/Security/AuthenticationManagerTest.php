@@ -5,10 +5,10 @@ namespace KanboardTests\units\Core\Security;
 use KanboardTests\units\Base;
 use Kanboard\Core\Http\Request;
 use Kanboard\Core\Security\AuthenticationManager;
-use Kanboard\Auth\DatabaseAuth;
+use Kanboard\Api\Auth\DatabaseAuth;
 use Kanboard\Model\UserModel;
-use Kanboard\Auth\TotpAuth;
-use Kanboard\Auth\ReverseProxyAuth;
+use Kanboard\Api\Auth\TotpAuth;
+use Kanboard\Api\Auth\ReverseProxyAuth;
 
 #[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class AuthenticationManagerTest extends Base

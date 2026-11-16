@@ -3,7 +3,7 @@
 namespace KanboardTests\units\Auth;
 
 use KanboardTests\units\Base;
-use Kanboard\Auth\ApiAccessTokenAuth;
+use Kanboard\Api\Auth\ApiAccessTokenAuth;
 use Kanboard\Model\UserModel;
 
 class ApiAccessTokenAuthTest extends Base

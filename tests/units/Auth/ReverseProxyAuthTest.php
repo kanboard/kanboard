@@ -3,7 +3,7 @@
 namespace KanboardTests\units\Auth;
 
 use KanboardTests\units\Base;
-use Kanboard\Auth\ReverseProxyAuth;
+use Kanboard\Api\Auth\ReverseProxyAuth;
 use Kanboard\Core\Security\Role;
 use Kanboard\Model\UserModel;
 

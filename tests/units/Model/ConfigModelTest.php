@@ -100,6 +100,16 @@ class ConfigModelTest extends Base
         $this->assertEquals(0, $configModel->getOption('board_columns', 0));
     }
 
+    public function testDashboardMaxProjectsConfiguredDefaultIsNotSavedAsOverride()
+    {
+        $configModel = new ConfigModel($this->container);
+
+        $this->assertTrue($configModel->save(array('dashboard_max_projects' => DASHBOARD_MAX_PROJECTS)));
+        $this->assertSame('', $configModel->getOption('dashboard_max_projects'));
+        $this->assertEquals(DASHBOARD_MAX_PROJECTS, $configModel->get('dashboard_max_projects', DASHBOARD_MAX_PROJECTS));
+        $this->assertEquals(DASHBOARD_MAX_PROJECTS + 1, $configModel->get('dashboard_max_projects', DASHBOARD_MAX_PROJECTS + 1));
+    }
+
     public function testGetWithCaching()
     {
         $configModel = new ConfigModel($this->container);

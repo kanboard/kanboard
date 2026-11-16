@@ -20,22 +20,18 @@
         <?php else: ?>
             <?= $this->asset->css('assets/css/light.min.css') ?>
         <?php endif ?>
-        <?= $this->asset->css('assets/css/font.css') ?>
-        <?= $this->asset->css('assets/css/dashboard-header.css') ?>
         <?= $this->asset->css('assets/css/print.min.css', true, 'print') ?>
         <?= $this->asset->customCss() ?>
 
         <?php if (! isset($not_editable)): ?>
             <?= $this->asset->js('assets/js/vendor.min.js') ?>
             <?= $this->asset->js('assets/js/app.min.js') ?>
-            <?= $this->asset->js('assets/js/dashboard-project-row.js') ?>
         <?php endif ?>
 
         <?= $this->hook->asset('css', 'template:layout:css') ?>
         <?= $this->hook->asset('js', 'template:layout:js') ?>
 
         <link rel="icon" href="<?= $this->url->dir() ?>assets/img/adaptive-favicon.svg" type="image/svg+xml">
-        <link rel="icon" type="image/png" href="<?= $this->url->dir() ?>assets/img/favicon.png">
         <link rel="apple-touch-icon" href="<?= $this->url->dir() ?>assets/img/touch-icon-iphone.png">
         <link rel="apple-touch-icon" sizes="72x72" href="<?= $this->url->dir() ?>assets/img/touch-icon-ipad.png">
         <link rel="apple-touch-icon" sizes="114x114" href="<?= $this->url->dir() ?>assets/img/touch-icon-iphone-retina.png">

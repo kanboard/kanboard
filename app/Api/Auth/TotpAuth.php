@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Auth;
+namespace Kanboard\Api\Auth;
 
 use Otp\Otp;
 use Otp\GoogleAuthenticator;
@@ -11,7 +11,7 @@ use Kanboard\Core\Security\PostAuthenticationProviderInterface;
 /**
  * TOTP Authentication Provider
  *
- * @package  Kanboard\Auth
+ * @package  Kanboard\Api\Auth
  * @author   Frederic Guillot
  */
 class TotpAuth extends Base implements PostAuthenticationProviderInterface

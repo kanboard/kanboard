@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Auth;
+namespace Kanboard\Api\Auth;
 
 use Kanboard\Core\Base;
 use Kanboard\Core\Security\OptionalAuthenticationProviderInterface;
@@ -11,7 +11,7 @@ use Kanboard\User\ReverseProxyUserProvider;
 /**
  * Reverse-Proxy Authentication Provider
  *
- * @package  Kanboard\Auth
+ * @package  Kanboard\Api\Auth
  * @author   Frederic Guillot
  */
 class ReverseProxyAuth extends Base implements PreAuthenticationProviderInterface, SessionCheckProviderInterface, OptionalAuthenticationProviderInterface

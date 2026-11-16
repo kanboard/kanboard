@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Auth;
+namespace Kanboard\Api\Auth;
 
 use Kanboard\Core\Base;
 use Kanboard\Core\Security\PreAuthenticationProviderInterface;
@@ -9,7 +9,7 @@ use Kanboard\User\DatabaseUserProvider;
 /**
  * RememberMe Cookie Authentication Provider
  *
- * @package  Kanboard\Auth
+ * @package  Kanboard\Api\Auth
  * @author   Frederic Guillot
  */
 class RememberMeAuth extends Base implements PreAuthenticationProviderInterface

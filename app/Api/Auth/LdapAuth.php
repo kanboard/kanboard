@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Auth;
+namespace Kanboard\Api\Auth;
 
 use LogicException;
 use Kanboard\Core\Base;
@@ -12,7 +12,7 @@ use Kanboard\Core\Security\PasswordAuthenticationProviderInterface;
 /**
  * LDAP Authentication Provider
  *
- * @package  Kanboard\Auth
+ * @package  Kanboard\Api\Auth
  * @author   Frederic Guillot
  */
 class LdapAuth extends Base implements PasswordAuthenticationProviderInterface

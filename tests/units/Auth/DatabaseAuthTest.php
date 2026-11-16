@@ -3,7 +3,7 @@
 namespace KanboardTests\units\Auth;
 
 use KanboardTests\units\Base;
-use Kanboard\Auth\DatabaseAuth;
+use Kanboard\Api\Auth\DatabaseAuth;
 use Kanboard\Core\User\UserSession;
 use Kanboard\Model\UserModel;
 

@@ -38,8 +38,7 @@ class AssetHelper extends Base
     {
         $dir = dirname(__DIR__, 2);
         $filepath = $dir.'/'.$filename;
-        $version = $is_file && is_file($filepath) ? '?'.filemtime($filepath) : '';
-        return '<link rel="stylesheet" href="'.$this->helper->url->dir().$filename.$version.'" media="'.$media.'">';
+        return '<link rel="stylesheet" href="'.$this->helper->url->dir().$filename.($is_file ? '?'.filemtime($filepath) : '').'" media="'.$media.'">';
     }
 
     /**

@@ -8,12 +8,12 @@ use Kanboard\Core\Security\AuthenticationManager;
 use Kanboard\Core\Security\AccessMap;
 use Kanboard\Core\Security\Authorization;
 use Kanboard\Core\Security\Role;
-use Kanboard\Auth\ApiAccessTokenAuth;
-use Kanboard\Auth\RememberMeAuth;
-use Kanboard\Auth\DatabaseAuth;
-use Kanboard\Auth\LdapAuth;
-use Kanboard\Auth\TotpAuth;
-use Kanboard\Auth\ReverseProxyAuth;
+use Kanboard\Api\Auth\ApiAccessTokenAuth;
+use Kanboard\Api\Auth\RememberMeAuth;
+use Kanboard\Api\Auth\DatabaseAuth;
+use Kanboard\Api\Auth\LdapAuth;
+use Kanboard\Api\Auth\TotpAuth;
+use Kanboard\Api\Auth\ReverseProxyAuth;
 
 /**
  * Authentication Provider

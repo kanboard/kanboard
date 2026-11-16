@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Auth;
+namespace Kanboard\Api\Auth;
 
 use Kanboard\Core\Base;
 use Kanboard\Core\Security\PasswordAuthenticationProviderInterface;
@@ -10,7 +10,7 @@ use Kanboard\User\DatabaseUserProvider;
 /**
  * API Access Token Authentication Provider
  *
- * @package  Kanboard\Auth
+ * @package  Kanboard\Api\Auth
  * @author   Frederic Guillot
  */
 class ApiAccessTokenAuth extends Base implements PasswordAuthenticationProviderInterface
