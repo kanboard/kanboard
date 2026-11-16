@@ -3,6 +3,7 @@
 namespace Kanboard\Model;
 
 use Kanboard\Core\Base;
+use Kanboard\Core\Security\Role;
 use Kanboard\Core\Translator;
 
 /**
@@ -41,6 +42,10 @@ class UserNotificationModel extends Base
      */
     public function sendUserNotification(array $user, $event_name, array $event_data)
     {
+        if (isset($event_data['comment']) && ! $this->canSeeComment($user, $event_data['comment'])) {
+            return;
+        }
+
         $loadedLocales = Translator::$locales;
         Translator::unload();
 
@@ -57,6 +62,29 @@ class UserNotificationModel extends Base
 
         // Restore locales
         Translator::$locales = $loadedLocales;
+    }
+
+    /**
+     * Return true if the application role of the user allows to see the comment
+     *
+     * @access private
+     * @param  array $user
+     * @param  array $comment
+     * @return bool
+     */
+    private function canSeeComment(array $user, array $comment)
+    {
+        $visibility = isset($comment['visibility']) ? $comment['visibility'] : Role::APP_USER;
+        $role = isset($user['role']) ? $user['role'] : '';
+
+        switch ($visibility) {
+            case Role::APP_USER:
+                return true;
+            case Role::APP_MANAGER:
+                return $role === Role::APP_MANAGER || $role === Role::APP_ADMIN;
+            default:
+                return $role === Role::APP_ADMIN;
+        }
     }
 
     /**
@@ -158,7 +186,7 @@ class UserNotificationModel extends Base
     {
         return $this->db
             ->table(ProjectUserRoleModel::TABLE)
-            ->columns(UserModel::TABLE.'.id', UserModel::TABLE.'.username', UserModel::TABLE.'.name', UserModel::TABLE.'.email', UserModel::TABLE.'.language', UserModel::TABLE.'.notifications_filter')
+            ->columns(UserModel::TABLE.'.id', UserModel::TABLE.'.username', UserModel::TABLE.'.name', UserModel::TABLE.'.email', UserModel::TABLE.'.language', UserModel::TABLE.'.notifications_filter', UserModel::TABLE.'.role')
             ->join(UserModel::TABLE, 'id', 'user_id')
             ->eq(ProjectUserRoleModel::TABLE.'.project_id', $project_id)
             ->eq(UserModel::TABLE.'.notifications_enabled', '1')
@@ -171,7 +199,7 @@ class UserNotificationModel extends Base
     {
         return $this->db
             ->table(ProjectGroupRoleModel::TABLE)
-            ->columns(UserModel::TABLE.'.id', UserModel::TABLE.'.username', UserModel::TABLE.'.name', UserModel::TABLE.'.email', UserModel::TABLE.'.language', UserModel::TABLE.'.notifications_filter')
+            ->columns(UserModel::TABLE.'.id', UserModel::TABLE.'.username', UserModel::TABLE.'.name', UserModel::TABLE.'.email', UserModel::TABLE.'.language', UserModel::TABLE.'.notifications_filter', UserModel::TABLE.'.role')
             ->join(GroupMemberModel::TABLE, 'group_id', 'group_id', ProjectGroupRoleModel::TABLE)
             ->join(UserModel::TABLE, 'id', 'user_id', GroupMemberModel::TABLE)
             ->eq(ProjectGroupRoleModel::TABLE.'.project_id', $project_id)

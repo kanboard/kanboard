@@ -63,7 +63,7 @@ class UserMentionJob extends BaseJob
                 $username = rtrim($username, '.');
             });
             $users = $this->db->table(UserModel::TABLE)
-                ->columns('id', 'username', 'name', 'email', 'language')
+                ->columns('id', 'username', 'name', 'email', 'language', 'role')
                 ->eq('notifications_enabled', 1)
                 ->neq('id', $this->userSession->getId())
                 ->in('username', array_unique($matches[1]))

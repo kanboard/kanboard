@@ -106,6 +106,6 @@ class UserMentionJobTest extends Base
     public function onUserMention($event)
     {
         $this->assertInstanceOf('Kanboard\Event\GenericEvent', $event);
-        $this->assertEquals(array('id' => '3', 'username' => 'user2', 'name' => 'User 2', 'email' => null, 'language' => null), $event['mention']);
+        $this->assertEquals(array('id' => '3', 'username' => 'user2', 'name' => 'User 2', 'email' => null, 'language' => null, 'role' => Role::APP_USER), $event['mention']);
     }
 }
