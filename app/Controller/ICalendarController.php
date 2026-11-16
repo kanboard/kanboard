@@ -39,14 +39,14 @@ class ICalendarController extends BaseController
         $calendar->setPublishedTTL('PT1H');
 
         $queryDueDateOnly = QueryBuilder::create()
-            ->withQuery($this->taskFinderModel->getICalQuery())
+            ->withQuery($this->taskFinderModel->getUserICalQuery($user['id']))
             ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
             ->withFilter(new TaskDueDateRangeFilter(array($startRange, $endRange)))
             ->withFilter(new TaskAssigneeFilter($user['id']))
             ->getQuery();
 
         $queryStartAndDueDate = QueryBuilder::create()
-            ->withQuery($this->taskFinderModel->getICalQuery())
+            ->withQuery($this->taskFinderModel->getUserICalQuery($user['id']))
             ->withFilter(new TaskStatusFilter(TaskModel::STATUS_OPEN))
             ->withFilter(new TaskAssigneeFilter($user['id']))
             ->getQuery()

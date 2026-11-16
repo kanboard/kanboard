@@ -5,6 +5,7 @@ namespace KanboardTests\units\Controller;
 use Kanboard\Controller\ICalendarController;
 use Kanboard\Core\Http\Request;
 use Kanboard\Core\Http\Response;
+use Kanboard\Core\Security\Role;
 use KanboardTests\units\Base;
 
 class ICalendarControllerTest extends Base
@@ -47,6 +48,20 @@ class ICalendarControllerTest extends Base
         $this->assertStringContainsString('task-#1-date_creation-date_due', $this->calendar);
     }
 
+    public function testUserCalendarExcludesTasksFromRevokedProjects()
+    {
+        $this->createFixtures();
+        $user = $this->container['userModel']->getById(2);
+
+        $this->renderCalendar(array('token' => $user['token']))->user();
+        $this->assertStringContainsString('Public task', $this->calendar);
+
+        $this->assertTrue($this->container['projectUserRoleModel']->removeUser(1, 2));
+
+        $this->renderCalendar(array('token' => $user['token']))->user();
+        $this->assertStringNotContainsString('Public task', $this->calendar);
+    }
+
     private function createFixtures()
     {
         $this->assertEquals(2, $this->container['userModel']->create(array('username' => 'user1')));
@@ -55,6 +70,7 @@ class ICalendarControllerTest extends Base
         $this->assertEquals(1, $this->container['projectModel']->create(array('name' => 'Public project')));
         $this->assertTrue($this->container['projectModel']->enablePublicAccess(1));
         $this->assertEquals(2, $this->container['projectModel']->create(array('name' => 'Private project')));
+        $this->assertTrue($this->container['projectUserRoleModel']->addUser(1, 2, Role::PROJECT_MEMBER));
 
         $this->assertEquals(1, $this->createTask(1, 'Public task', 2));
         $this->assertEquals(2, $this->createTask(2, 'Private task', 1));
