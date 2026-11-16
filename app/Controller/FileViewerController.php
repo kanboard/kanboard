@@ -80,11 +80,15 @@ class FileViewerController extends BaseController
             $params['task_id'] = $file['task_id'];
         }
 
+        $content = in_array($type, array('markdown', 'text', 'office'), true) ? $this->getFileContent($file) : '';
+        $officePreview = $type === 'office' ? $this->helper->officePreview->render($content, $file['name']) : array();
+
         $this->response->html($this->template->render('file_viewer/show', array(
             'file' => $file,
             'params' => $params,
             'type' => $type,
-            'content' => $this->getFileContent($file),
+            'content' => $content,
+            'officePreview' => $officePreview,
         )));
     }
 

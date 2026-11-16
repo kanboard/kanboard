@@ -26,6 +26,7 @@
         "ext-ctype": "*",
         "ext-filter": "*",
         "ext-session": "*",
+        "ext-zip": "*",
         "christian-riesen/otp": "1.4.3",
         "pimple/pimple": "3.6.2",
         "psr/log": "1.1.4",

@@ -114,6 +114,10 @@ class FileHelper extends Base
                 return 'markdown';
             case 'txt':
                 return 'text';
+            case 'docx':
+            case 'xlsx':
+            case 'pptx':
+                return 'office';
         }
 
         return null;
@@ -131,6 +135,12 @@ class FileHelper extends Base
         switch (get_file_extension($filename)) {
             case 'pdf':
                 return 'application/pdf';
+            case 'docx':
+                return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+            case 'xlsx':
+                return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+            case 'pptx':
+                return 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
             case 'mp3':
             case 'ogg':
             case 'flac':

@@ -32,6 +32,9 @@ class FileHelperTest extends Base
         $this->assertEquals('text', $helper->getPreviewType('test.txt'));
         $this->assertEquals('markdown', $helper->getPreviewType('test.markdown'));
         $this->assertEquals('markdown', $helper->getPreviewType('test.md'));
+        $this->assertEquals('office', $helper->getPreviewType('test.docx'));
+        $this->assertEquals('office', $helper->getPreviewType('test.xlsx'));
+        $this->assertEquals('office', $helper->getPreviewType('test.pptx'));
         $this->assertEquals(null, $helper->getPreviewType('test.doc'));
     }
 
@@ -39,6 +42,9 @@ class FileHelperTest extends Base
     {
         $fileHelper = new FileHelper($this->container);
         $this->assertSame('application/pdf', $fileHelper->getBrowserViewType('SomeFile.PDF'));
+        $this->assertSame('application/vnd.openxmlformats-officedocument.wordprocessingml.document', $fileHelper->getBrowserViewType('SomeFile.DOCX'));
+        $this->assertSame('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', $fileHelper->getBrowserViewType('SomeFile.XLSX'));
+        $this->assertSame('application/vnd.openxmlformats-officedocument.presentationml.presentation', $fileHelper->getBrowserViewType('SomeFile.PPTX'));
         $this->assertSame(null, $fileHelper->getBrowserViewType('SomeFile.doc'));
     }
 }
