@@ -49,9 +49,10 @@ class ProjectActivityHelper extends Base
      * @access public
      * @param  integer  $project_id
      * @param  int      $limit
+     * @param  string   $role         Application role used to filter comments, the current user role by default
      * @return array
      */
-    public function getProjectEvents($project_id, $limit = 50)
+    public function getProjectEvents($project_id, $limit = 50, $role = null)
     {
         $queryBuilder = $this->projectActivityQuery
             ->withFilter(new ProjectActivityProjectIdFilter($project_id));
@@ -61,7 +62,7 @@ class ProjectActivityHelper extends Base
             ->limit($limit)
         ;
 
-        return $queryBuilder->format($this->projectActivityEventFormatter);
+        return $queryBuilder->format($this->projectActivityEventFormatter->withRole($role));
     }
 
     /**
@@ -70,9 +71,10 @@ class ProjectActivityHelper extends Base
      * @access public
      * @param  int[]    $project_ids
      * @param  int      $limit
+     * @param  string   $role         Application role used to filter comments, the current user role by default
      * @return array
      */
-    public function getProjectsEvents(array $project_ids, $limit = 50)
+    public function getProjectsEvents(array $project_ids, $limit = 50, $role = null)
     {
         $queryBuilder = $this->projectActivityQuery
             ->withFilter(new ProjectActivityProjectIdsFilter($project_ids));
@@ -82,7 +84,7 @@ class ProjectActivityHelper extends Base
             ->limit($limit)
         ;
 
-        return $queryBuilder->format($this->projectActivityEventFormatter);
+        return $queryBuilder->format($this->projectActivityEventFormatter->withRole($role));
     }
 
     /**

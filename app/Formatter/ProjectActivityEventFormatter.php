@@ -8,6 +8,27 @@ use Kanboard\Core\Security\Role;
 class ProjectActivityEventFormatter extends BaseFormatter implements FormatterInterface
 {
     /**
+     * Application role used to filter comments, the role of the current user when null
+     *
+     * @access protected
+     * @var string|null
+     */
+    protected $role = null;
+
+    /**
+     * Set the application role used to filter comments
+     *
+     * @access public
+     * @param  string|null $role
+     * @return $this
+     */
+    public function withRole($role)
+    {
+        $this->role = $role;
+        return $this;
+    }
+
+    /**
      * Apply formatter
      *
      * @access public
@@ -27,13 +48,8 @@ class ProjectActivityEventFormatter extends BaseFormatter implements FormatterIn
             $event += $eventData;
             unset($event['data']);
 
-            if (isset($event['comment'])) {
-                if ($this->userSession->getRole() === Role::APP_USER && $event['comment']['visibility'] !== Role::APP_USER) {
-                    continue;
-                }
-                if ($this->userSession->getRole() === Role::APP_MANAGER && $event['comment']['visibility'] === Role::APP_ADMIN) {
-                    continue;
-                }
+            if (isset($event['comment']) && ! $this->canSeeComment($event['comment'])) {
+                continue;
             }
 
             $event['author'] = $event['author_name'] ?: $event['author_username'];
@@ -43,6 +59,30 @@ class ProjectActivityEventFormatter extends BaseFormatter implements FormatterIn
         }
 
         return $res;
+    }
+
+    /**
+     * Return true if the application role allows to see the comment
+     *
+     * Without a role and a logged-in user, only comments visible to standard users are shown.
+     *
+     * @access protected
+     * @param  array $comment
+     * @return bool
+     */
+    protected function canSeeComment(array $comment)
+    {
+        $visibility = isset($comment['visibility']) ? $comment['visibility'] : Role::APP_USER;
+        $role = $this->role !== null ? $this->role : $this->userSession->getRole();
+
+        switch ($visibility) {
+            case Role::APP_USER:
+                return true;
+            case Role::APP_MANAGER:
+                return $role === Role::APP_MANAGER || $role === Role::APP_ADMIN;
+            default:
+                return $role === Role::APP_ADMIN;
+        }
     }
 
     /**
