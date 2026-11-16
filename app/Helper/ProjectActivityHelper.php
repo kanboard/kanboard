@@ -26,6 +26,7 @@ class ProjectActivityHelper extends Base
     public function searchEvents($search)
     {
         $projects = $this->projectUserRoleModel->getActiveProjectsByUser($this->userSession->getId());
+        $role = $this->userSession->getRole();
         $events = array();
 
         if ($search !== '') {
@@ -37,7 +38,7 @@ class ProjectActivityHelper extends Base
                 ->limit(500)
             ;
 
-            $events = $queryBuilder->format($this->projectActivityEventFormatter);
+            $events = $queryBuilder->format($this->projectActivityEventFormatter->withRole($role));
         }
 
         return $events;
@@ -47,11 +48,12 @@ class ProjectActivityHelper extends Base
      * Get project activity events
      *
      * @access public
-     * @param  integer  $project_id
-     * @param  int      $limit
+     * @param  integer     $project_id
+     * @param  int         $limit
+     * @param  string|null $role
      * @return array
      */
-    public function getProjectEvents($project_id, $limit = 50)
+    public function getProjectEvents($project_id, $limit = 50, $role = null)
     {
         $queryBuilder = $this->projectActivityQuery
             ->withFilter(new ProjectActivityProjectIdFilter($project_id));
@@ -61,18 +63,19 @@ class ProjectActivityHelper extends Base
             ->limit($limit)
         ;
 
-        return $queryBuilder->format($this->projectActivityEventFormatter);
+        return $queryBuilder->format($this->projectActivityEventFormatter->withRole($role));
     }
 
     /**
      * Get projects activity events
      *
      * @access public
-     * @param  int[]    $project_ids
-     * @param  int      $limit
+     * @param  int[]       $project_ids
+     * @param  int         $limit
+     * @param  string|null $role
      * @return array
      */
-    public function getProjectsEvents(array $project_ids, $limit = 50)
+    public function getProjectsEvents(array $project_ids, $limit = 50, $role = null)
     {
         $queryBuilder = $this->projectActivityQuery
             ->withFilter(new ProjectActivityProjectIdsFilter($project_ids));
@@ -82,7 +85,7 @@ class ProjectActivityHelper extends Base
             ->limit($limit)
         ;
 
-        return $queryBuilder->format($this->projectActivityEventFormatter);
+        return $queryBuilder->format($this->projectActivityEventFormatter->withRole($role));
     }
 
     /**
@@ -99,6 +102,6 @@ class ProjectActivityHelper extends Base
 
         $queryBuilder->getQuery()->desc(ProjectActivityModel::TABLE.'.id');
 
-        return $queryBuilder->format($this->projectActivityEventFormatter);
+        return $queryBuilder->format($this->projectActivityEventFormatter->withRole($role));
     }
 }
