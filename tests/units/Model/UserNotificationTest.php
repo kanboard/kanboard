@@ -3,6 +3,8 @@
 namespace KanboardTests\units\Model;
 
 use KanboardTests\units\Base;
+use Kanboard\Job\UserMentionJob;
+use Kanboard\Model\CommentModel;
 use Kanboard\Model\TaskFinderModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\UserModel;
@@ -232,5 +234,105 @@ class UserNotificationTest extends Base
 
         $userNotificationModel->sendNotifications(TaskModel::EVENT_CREATE, array('task' => $taskFinderModel->getDetails(1)));
         $this->assertEquals(2, $notifier->calls);
+    }
+
+    public function testSendNotificationsWithCommentVisibility()
+    {
+        $userModel = new UserModel($this->container);
+        $groupModel = new GroupModel($this->container);
+        $groupMemberModel = new GroupMemberModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
+        $projectGroupRoleModel = new ProjectGroupRoleModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskFinderModel = new TaskFinderModel($this->container);
+        $userNotificationModel = new UserNotificationModel($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'manager', 'role' => Role::APP_MANAGER)));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user', 'role' => Role::APP_USER)));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'P1')));
+        $this->assertEquals(1, $taskCreationModel->create(array('title' => 'Task', 'project_id' => 1)));
+
+        // The manager is a project member through a group, the others are direct members
+        $this->assertTrue($projectUserRoleModel->addUser(1, 1, Role::PROJECT_MANAGER));
+        $this->assertTrue($projectUserRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
+        $this->assertEquals(1, $groupModel->create('G1'));
+        $this->assertTrue($groupMemberModel->addUser(1, 2));
+        $this->assertTrue($projectGroupRoleModel->addGroup(1, 1, Role::PROJECT_MEMBER));
+
+        foreach (array(1, 2, 3) as $userId) {
+            $userNotificationModel->saveSettings($userId, array(
+                'notifications_enabled' => 1,
+                'notifications_filter' => UserNotificationFilterModel::FILTER_NONE,
+                'notification_types' => array('email' => 1),
+            ));
+        }
+
+        $notifier = $this->mockNotifier();
+        $task = $taskFinderModel->getDetails(1);
+
+        $expected = array(
+            Role::APP_USER => array(1, 2, 3),
+            Role::APP_MANAGER => array(1, 2),
+            Role::APP_ADMIN => array(1),
+        );
+
+        foreach ($expected as $visibility => $userIds) {
+            $notifier->userIds = array();
+            $userNotificationModel->sendNotifications(CommentModel::EVENT_CREATE, array(
+                'task' => $task,
+                'comment' => array('id' => 1, 'comment' => 'Restricted', 'visibility' => $visibility),
+            ));
+
+            sort($notifier->userIds);
+            $this->assertSame($userIds, $notifier->userIds, $visibility);
+        }
+    }
+
+    public function testSendUserNotificationWithRestrictedComment()
+    {
+        $userModel = new UserModel($this->container);
+        $userNotificationModel = new UserNotificationModel($this->container);
+        $userMentionJob = new UserMentionJob($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'manager', 'role' => Role::APP_MANAGER, 'notifications_enabled' => 1)));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user', 'role' => Role::APP_USER, 'notifications_enabled' => 1)));
+
+        $notifier = $this->mockNotifier();
+        $eventData = array(
+            'task' => array('id' => 1, 'project_id' => 1),
+            'comment' => array('id' => 1, 'comment' => '@manager @user', 'visibility' => Role::APP_MANAGER),
+        );
+
+        foreach ($userMentionJob->getMentionedUsers('@manager @user') as $user) {
+            $userNotificationModel->sendUserNotification($user, CommentModel::EVENT_USER_MENTION, $eventData);
+        }
+
+        $userWithoutRole = array('id' => 4, 'username' => 'unknown');
+        $userNotificationModel->sendUserNotification($userWithoutRole, CommentModel::EVENT_USER_MENTION, $eventData);
+
+        $this->assertSame(array(2), $notifier->userIds);
+    }
+
+    private function mockNotifier()
+    {
+        $notifier = new class {
+            public $userIds = array();
+
+            public function notifyUser(array $user, $eventName, array $eventData)
+            {
+                $this->userIds[] = (int) $user['id'];
+            }
+        };
+
+        $this->container['userNotificationTypeModel']
+            ->method('getSelectedTypes')
+            ->willReturn(array('email'));
+
+        $this->container['userNotificationTypeModel']
+            ->method('getType')
+            ->willReturn($notifier);
+
+        return $notifier;
     }
 }
