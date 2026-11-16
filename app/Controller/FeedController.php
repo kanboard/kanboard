@@ -3,6 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\Controller\AccessForbiddenException;
+use Kanboard\Core\Security\Role;
 
 /**
  * Atom/RSS Feed controller
@@ -26,7 +27,7 @@ class FeedController extends BaseController
             throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
-        $events = $this->helper->projectActivity->getProjectsEvents($this->projectPermissionModel->getActiveProjectIds($user['id']));
+        $events = $this->helper->projectActivity->getProjectsEvents($this->projectPermissionModel->getActiveProjectIds($user['id']), 50, Role::APP_USER);
 
         $this->response->xml($this->template->render('feed/user', [
             'user' => $user,
@@ -48,7 +49,7 @@ class FeedController extends BaseController
             throw AccessForbiddenException::getInstance()->withoutLayout();
         }
 
-        $events = $this->helper->projectActivity->getProjectEvents($project['id']);
+        $events = $this->helper->projectActivity->getProjectEvents($project['id'], 50, Role::APP_USER);
 
         $this->response->xml($this->template->render('feed/project', [
             'project' => $project,
