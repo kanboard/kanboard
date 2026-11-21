@@ -1,3 +1,39 @@
+Version 1.2.58 (November 20, 2026)
+----------------------------------
+
+* refactor(otp): replace christian-riesen/otp with built-in TOTP
+* refactor(ical): replace eluceo/ical with built-in iCalendar writer
+* refactor(captcha): replace gregwar/captcha with built-in implementation
+* refactor(2fa): replace phpqrcode with built-in QR code encoder
+* fix(user): prevent project member disclosure in mention suggestions
+* fix(task): validate project references and assignees
+* fix(task): require task creation access for copy and move destinations
+* fix(task): prevent cross-project link disclosure in public views
+* fix(task): format time spent to two decimal places
+* fix(subtask): preserve task estimate for automatic subtasks
+* fix(session): write SQLite sessions with insert ... on conflict
+* fix(notification): prevent restricted comment disclosure
+* fix(ldap): reject empty passwords to prevent unauthenticated binds
+* fix(ical): write valid event dates and task links
+* fix(ical): prevent duplicate tasks and emit UTC dates
+* fix(ical): omit email addresses from task feeds
+* fix(ical): limit feed scope and use compliant UIDs and stamps
+* fix(ical): exclude tasks from revoked projects in the user feed
+* fix(http): pin outbound requests to validated public addresses
+* fix(helper): load the project in LayoutHelper::task() when the caller omits it
+* fix(feed): prevent restricted comment disclosure
+* fix(controller): pass the project to the task layout of comment and mail forms
+* fix(captcha): invalidate login challenges after validation
+* fix(board): prevent cross-project board data disclosure
+* fix(2fa): enforce brute-force protection for verification codes
+* fix: avoid PHP 8.5 deprecation warnings
+* feat(ical): add opt-in VTODO for tasks without dates
+* chore(deps): remove symfony/stopwatch
+* chore(deps): drop dead Symfony polyfills and doctrine/instantiator
+* chore(deps): bump symfony to 6.4 and psr/log to 3
+* chore(ci): harden GitHub Actions dependencies
+* build(deps): bump docker/login-action
+
 Version 1.2.57 (October 30, 2026)
 ---------------------------------
 
