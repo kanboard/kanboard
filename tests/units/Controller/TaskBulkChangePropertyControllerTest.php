@@ -9,6 +9,8 @@ use Kanboard\Core\Http\Response;
 use Kanboard\Core\Security\Role;
 use Kanboard\Model\CategoryModel;
 use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectRoleModel;
+use Kanboard\Model\ProjectRoleRestrictionModel;
 use Kanboard\Model\ProjectUserRoleModel;
 use Kanboard\Model\TaskCreationModel;
 use Kanboard\Model\TaskLinkModel;
@@ -17,6 +19,108 @@ use KanboardTests\units\Base;
 
 class TaskBulkChangePropertyControllerTest extends Base
 {
+    public function testChangeAssigneeWithAssigneeRestriction()
+    {
+        $this->createProjectWithCustomRole(ProjectRoleRestrictionModel::RULE_TASK_CHANGE_ASSIGNEE);
+        $this->buildRequest(array(
+            'task_ids'        => '2',
+            'change_assignee' => 1,
+            'owner_id'        => 3,
+        ));
+
+        try {
+            (new TaskBulkChangePropertyController($this->container))->save();
+            $this->fail('A custom role without assignee change permission must not be able to change the assignee');
+        } catch (AccessForbiddenException $e) {
+            $this->assertEquals(2, $this->container['taskFinderModel']->getById(2)['owner_id']);
+        }
+    }
+
+    public function testKeepSameAssigneeWithAssigneeRestriction()
+    {
+        $this->createProjectWithCustomRole(ProjectRoleRestrictionModel::RULE_TASK_CHANGE_ASSIGNEE);
+        $this->buildRequest(array(
+            'task_ids'        => '2',
+            'change_assignee' => 1,
+            'owner_id'        => 2,
+            'change_color'    => 1,
+            'color_id'        => 'red',
+        ), 'redirect');
+
+        (new TaskBulkChangePropertyController($this->container))->save();
+
+        $task = $this->container['taskFinderModel']->getById(2);
+        $this->assertEquals(2, $task['owner_id']);
+        $this->assertEquals('red', $task['color_id']);
+    }
+
+    public function testUpdateTaskAssignedToSomeoneElseWithUpdateRestriction()
+    {
+        $this->createProjectWithCustomRole(ProjectRoleRestrictionModel::RULE_TASK_UPDATE_ASSIGNED);
+        $this->buildRequest(array(
+            'task_ids'        => '1',
+            'change_priority' => 1,
+            'priority'        => 3,
+        ));
+
+        try {
+            (new TaskBulkChangePropertyController($this->container))->save();
+            $this->fail('A custom role limited to assigned tasks must not be able to update tasks assigned to someone else');
+        } catch (AccessForbiddenException $e) {
+            $this->assertEquals(0, $this->container['taskFinderModel']->getById(1)['priority']);
+        }
+    }
+
+    public function testUpdateOwnTaskWithUpdateRestriction()
+    {
+        $this->createProjectWithCustomRole(ProjectRoleRestrictionModel::RULE_TASK_UPDATE_ASSIGNED);
+        $this->buildRequest(array(
+            'task_ids'        => '2',
+            'change_priority' => 1,
+            'priority'        => 3,
+        ), 'redirect');
+
+        (new TaskBulkChangePropertyController($this->container))->save();
+
+        $this->assertEquals(3, $this->container['taskFinderModel']->getById(2)['priority']);
+    }
+
+    public function testNoPartialUpdateWhenOneTaskIsForbidden()
+    {
+        $this->createProjectWithCustomRole(ProjectRoleRestrictionModel::RULE_TASK_UPDATE_ASSIGNED);
+        $this->buildRequest(array(
+            'task_ids'     => '2,1',
+            'change_color' => 1,
+            'color_id'     => 'red',
+        ));
+
+        try {
+            (new TaskBulkChangePropertyController($this->container))->save();
+            $this->fail('AccessForbiddenException was not thrown');
+        } catch (AccessForbiddenException $e) {
+            $this->assertNotEquals('red', $this->container['taskFinderModel']->getById(2)['color_id']);
+            $this->assertNotEquals('red', $this->container['taskFinderModel']->getById(1)['color_id']);
+        }
+    }
+
+    public function testNoPartialUpdateWhenOneTaskBelongsToAnotherProject()
+    {
+        $this->createProjects();
+        $this->buildRequest(array(
+            'task_ids'     => '1,3',
+            'change_color' => 1,
+            'color_id'     => 'red',
+        ));
+
+        try {
+            (new TaskBulkChangePropertyController($this->container))->save();
+            $this->fail('AccessForbiddenException was not thrown');
+        } catch (AccessForbiddenException $e) {
+            $this->assertNotEquals('red', $this->container['taskFinderModel']->getById(1)['color_id']);
+            $this->assertNotEquals('red', $this->container['taskFinderModel']->getById(3)['color_id']);
+        }
+    }
+
     public function testAddInternalLinkToTaskInSameProject()
     {
         $this->createProjects();
@@ -174,6 +278,31 @@ class TaskBulkChangePropertyControllerTest extends Base
         $this->container['response']
             ->expects($responseMethod === 'redirect' ? $this->once() : $this->never())
             ->method('redirect');
+    }
+
+    private function createProjectWithCustomRole($rule)
+    {
+        $userModel = new UserModel($this->container);
+        $this->assertEquals(2, $userModel->create(array('username' => 'restricted')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'other')));
+
+        $this->assertEquals(1, (new ProjectModel($this->container))->create(array('name' => 'Project A')));
+        $this->assertEquals(1, (new ProjectRoleModel($this->container))->create(1, 'Custom Role'));
+        $this->assertEquals(1, (new ProjectRoleRestrictionModel($this->container))->create(1, 1, $rule));
+
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
+        $this->assertTrue($projectUserRoleModel->addUser(1, 2, 'Custom Role'));
+        $this->assertTrue($projectUserRoleModel->addUser(1, 3, Role::PROJECT_MEMBER));
+
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'Assigned to other', 'owner_id' => 3)));
+        $this->assertEquals(2, $taskCreationModel->create(array('project_id' => 1, 'title' => 'Assigned to me', 'owner_id' => 2)));
+
+        $_SESSION['user'] = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+            'username' => 'restricted',
+        );
     }
 
     private function createProjects()
