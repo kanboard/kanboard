@@ -97,9 +97,7 @@ class UserProcedure extends BaseProcedure
 
         try {
 
-            $ldap = LdapClient::connect();
-            $ldap->setLogger($this->logger);
-            $user = LdapUser::getUser($ldap, $username);
+            $user = $this->getLdapUser($username);
 
             if ($user === null) {
                 $this->logger->info('User not found in LDAP server');
@@ -120,6 +118,10 @@ class UserProcedure extends BaseProcedure
 
             $user_id = $this->userModel->create($values);
 
+            if ($user_id !== false && LDAP_GROUP_SYNC) {
+                $this->groupSync->synchronize($user_id, $user->getExternalGroupIds());
+            }
+
             if ($user_id !== false && $this->configModel->get('notifications_enabled', 0) == 1) {
                 $this->userNotificationTypeModel->saveSelectedTypes($user_id, [MailNotification::TYPE, WebNotification::TYPE]);
                 $this->userNotificationModel->enableNotification($user_id);
@@ -130,6 +132,20 @@ class UserProcedure extends BaseProcedure
             $this->logger->error($e->getMessage());
             return false;
         }
+    }
+
+    /**
+     * Fetch a user from the LDAP server
+     *
+     * @access protected
+     * @param  string $username
+     * @return \Kanboard\User\LdapUserProvider|null
+     */
+    protected function getLdapUser($username)
+    {
+        $ldap = LdapClient::connect();
+        $ldap->setLogger($this->logger);
+        return LdapUser::getUser($ldap, $username);
     }
 
     public function updateUser($id, $username = null, $name = null, $email = null, $role = null)
