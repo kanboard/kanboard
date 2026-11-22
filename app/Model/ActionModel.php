@@ -163,6 +163,8 @@ class ActionModel extends Base
     /**
      * Copy actions from a project to another one (skip actions that cannot resolve parameters)
      *
+     * Actions targeting a project where the logged user cannot create tasks are skipped as well.
+     *
      * @author Antonio Rabelo
      * @param  integer    $src_project_id      Source project id
      * @param  integer    $dst_project_id      Destination project id
@@ -173,6 +175,11 @@ class ActionModel extends Base
         $actions = $this->actionModel->getAllByProject($src_project_id);
 
         foreach ($actions as $action) {
+            if (! $this->actionValidator->validateDestinationProjects($this->userSession->getId(), $action['params'])) {
+                $this->logger->error('Action::duplicate => skip action '.$action['action_name'].' '.$action['id'].' (destination project not allowed)');
+                continue;
+            }
+
             $this->db->startTransaction();
 
             $values = array(

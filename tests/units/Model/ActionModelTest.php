@@ -338,6 +338,48 @@ class ActionModelTest extends Base
         $this->assertEquals(array('column_id' => 5, 'project_id' => 3), $actions[0]['params']);
     }
 
+    public function testDuplicateSkipsActionsWithDestinationProjectWhereUserCannotCreateTasks()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
+        $userModel = new UserModel($this->container);
+        $actionModel = new ActionModel($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'test1')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'test2')));
+        $this->assertEquals(3, $projectModel->create(array('name' => 'test3')));
+        $this->assertEquals(4, $projectModel->create(array('name' => 'test4')));
+
+        $this->assertTrue($projectUserRoleModel->addUser(1, 2, Role::PROJECT_VIEWER));
+        $this->assertTrue($projectUserRoleModel->addUser(2, 2, Role::PROJECT_MANAGER));
+        $this->assertTrue($projectUserRoleModel->addUser(3, 2, Role::PROJECT_VIEWER));
+        $this->assertTrue($projectUserRoleModel->addUser(4, 2, Role::PROJECT_MEMBER));
+
+        $this->assertEquals(1, $actionModel->create(array(
+            'project_id' => 1,
+            'event_name' => TaskModel::EVENT_CLOSE,
+            'action_name' => '\Kanboard\Action\TaskMoveAnotherProject',
+            'params' => array('column_id' => 1, 'project_id' => 3),
+        )));
+
+        $this->assertEquals(2, $actionModel->create(array(
+            'project_id' => 1,
+            'event_name' => TaskModel::EVENT_CLOSE,
+            'action_name' => '\Kanboard\Action\TaskDuplicateAnotherProject',
+            'params' => array('column_id' => 1, 'project_id' => 4),
+        )));
+
+        $this->container['userSession']->initialize($userModel->getById(2));
+
+        $this->assertTrue($actionModel->duplicate(1, 2));
+
+        $actions = $actionModel->getAllByProject(2);
+        $this->assertCount(1, $actions);
+        $this->assertEquals('\Kanboard\Action\TaskDuplicateAnotherProject', $actions[0]['action_name']);
+        $this->assertEquals(array('column_id' => 5, 'project_id' => 4), $actions[0]['params']);
+    }
+
     public function testDuplicateWithProjectParameterIdenticalToDestination()
     {
         $projectModel = new ProjectModel($this->container);

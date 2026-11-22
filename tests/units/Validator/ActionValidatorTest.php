@@ -5,7 +5,10 @@ namespace KanboardTests\units\Validator;
 use KanboardTests\units\Base;
 use Kanboard\Core\Security\Role;
 use Kanboard\Model\CategoryModel;
+use Kanboard\Model\ColumnRestrictionModel;
 use Kanboard\Model\ProjectModel;
+use Kanboard\Model\ProjectRoleModel;
+use Kanboard\Model\ProjectRoleRestrictionModel;
 use Kanboard\Model\ProjectUserRoleModel;
 use Kanboard\Model\SwimlaneModel;
 use Kanboard\Model\TaskModel;
@@ -109,6 +112,59 @@ class ActionValidatorTest extends Base
         $this->assertTrue($actionValidator->validateParameters(1, 1, array('project_id' => 3)));
     }
 
+    public function testValidateParametersWithDestinationProjectAsMember()
+    {
+        $actionValidator = new ActionValidator($this->container);
+        $this->createDestinationProject(Role::PROJECT_MEMBER);
+
+        $this->assertTrue($actionValidator->validateParameters(1, 2, array('column_id' => 1, 'project_id' => 2)));
+    }
+
+    public function testValidateParametersWithDestinationProjectAsViewer()
+    {
+        $actionValidator = new ActionValidator($this->container);
+        $this->createDestinationProject(Role::PROJECT_VIEWER);
+
+        $this->assertFalse($actionValidator->validateParameters(1, 2, array('column_id' => 1, 'project_id' => 2)));
+        $this->assertFalse($actionValidator->validateDestinationProjects(2, array('project_id' => 2)));
+    }
+
+    public function testValidateParametersWithDestinationProjectWithTaskCreationRestriction()
+    {
+        $actionValidator = new ActionValidator($this->container);
+        $this->createDestinationProject('Custom Role');
+
+        $projectRoleRestrictionModel = new ProjectRoleRestrictionModel($this->container);
+        $this->assertEquals(1, $projectRoleRestrictionModel->create(2, 1, ProjectRoleRestrictionModel::RULE_TASK_CREATION));
+
+        $this->assertFalse($actionValidator->validateParameters(1, 2, array('column_id' => 1, 'project_id' => 2)));
+    }
+
+    public function testValidateParametersWithDestinationProjectWithFirstColumnRestriction()
+    {
+        $actionValidator = new ActionValidator($this->container);
+        $this->createDestinationProject('Custom Role');
+
+        // Column 5 is the first column of the destination, where duplicated tasks land
+        $columnRestrictionModel = new ColumnRestrictionModel($this->container);
+        $this->assertEquals(1, $columnRestrictionModel->create(2, 1, 5, ColumnRestrictionModel::RULE_BLOCK_TASK_CREATION));
+
+        $this->assertFalse($actionValidator->validateParameters(1, 2, array('column_id' => 2, 'project_id' => 2)));
+    }
+
+    public function testValidateParametersWithDestinationProjectWithMatchedColumnRestriction()
+    {
+        $actionValidator = new ActionValidator($this->container);
+        $this->createDestinationProject('Custom Role');
+
+        // Column 6 is "Ready" in the destination, where moved tasks from "Ready" (column 2) land
+        $columnRestrictionModel = new ColumnRestrictionModel($this->container);
+        $this->assertEquals(1, $columnRestrictionModel->create(2, 1, 6, ColumnRestrictionModel::RULE_BLOCK_TASK_CREATION));
+
+        $this->assertFalse($actionValidator->validateParameters(1, 2, array('column_id' => 2, 'project_id' => 2)));
+        $this->assertTrue($actionValidator->validateParameters(1, 2, array('column_id' => 1, 'project_id' => 2)));
+    }
+
     public function testValidateParametersWithoutUserSession()
     {
         $actionValidator = new ActionValidator($this->container);
@@ -147,5 +203,30 @@ class ActionValidatorTest extends Base
         $this->assertTrue($projectUserRoleModel->addUser(2, 1, Role::PROJECT_MANAGER));
         $this->assertTrue($projectUserRoleModel->addUser(2, 2, Role::PROJECT_MEMBER));
         $this->assertTrue($projectUserRoleModel->addUser(3, 3, Role::PROJECT_MANAGER));
+    }
+
+    private function createDestinationProject($destinationRole)
+    {
+        $projectModel = new ProjectModel($this->container);
+        $projectRoleModel = new ProjectRoleModel($this->container);
+        $projectUserRoleModel = new ProjectUserRoleModel($this->container);
+        $userModel = new UserModel($this->container);
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user')));
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Source')));
+        $this->assertEquals(2, $projectModel->create(array('name' => 'Destination')));
+        $this->assertTrue($projectUserRoleModel->addUser(1, 2, Role::PROJECT_MANAGER));
+
+        if ($destinationRole === 'Custom Role') {
+            $this->assertEquals(1, $projectRoleModel->create(2, 'Custom Role'));
+        }
+
+        $this->assertTrue($projectUserRoleModel->addUser(2, 2, $destinationRole));
+
+        $_SESSION['user'] = array(
+            'id' => 2,
+            'role' => Role::APP_USER,
+            'username' => 'user',
+        );
     }
 }
