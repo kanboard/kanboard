@@ -2,6 +2,8 @@
 
 namespace Kanboard\Controller;
 
+use Kanboard\Core\Controller\AccessForbiddenException;
+
 /**
  * Task Status controller
  *
@@ -38,10 +40,15 @@ class TaskStatusController extends BaseController
      * @param  string $template
      * @param  string $success_message
      * @param  string $failure_message
+     * @throws AccessForbiddenException
      */
     private function changeStatus($method, $template, $success_message, $failure_message)
     {
         $task = $this->getTask();
+
+        if (! $this->helper->projectRole->canChangeTaskStatusInColumn($task['project_id'], $task['column_id'])) {
+            throw new AccessForbiddenException();
+        }
 
         if ($this->request->getStringParam('confirmation') === 'yes') {
             $this->checkCSRFParam();

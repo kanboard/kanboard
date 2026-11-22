@@ -23,6 +23,7 @@ class BoardPopoverController extends BaseController
         $project = $this->getProject();
         $column = $this->getColumn($project);
         $swimlane = $this->getSwimlane($project);
+        $this->checkStatusChangeAllowed($project['id'], $column['id']);
 
         $this->response->html($this->template->render('board_popover/close_all_tasks_column', array(
             'project' => $project,
@@ -67,8 +68,25 @@ class BoardPopoverController extends BaseController
             throw new AccessForbiddenException();
         }
 
+        $this->checkStatusChangeAllowed($project['id'], $column_id);
+
         $this->taskStatusModel->closeTasksBySwimlaneAndColumn($swimlane_id, $column_id);
         $this->flash->success(t('All tasks of the column "%s" and the swimlane "%s" have been closed successfully.', $this->columnModel->getColumnTitleById($column_id), $this->swimlaneModel->getNameById($swimlane_id)));
         $this->response->redirect($this->helper->url->to('BoardViewController', 'show', array('project_id' => $project['id'])));
+    }
+
+    /**
+     * Check that the project role of the user allows closing tasks in the column
+     *
+     * @access private
+     * @param  integer $projectId
+     * @param  integer $columnId
+     * @throws AccessForbiddenException
+     */
+    private function checkStatusChangeAllowed($projectId, $columnId)
+    {
+        if (! $this->helper->projectRole->canChangeTaskStatusInColumn($projectId, $columnId)) {
+            throw new AccessForbiddenException();
+        }
     }
 }

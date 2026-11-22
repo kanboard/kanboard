@@ -50,11 +50,29 @@ class TaskBulkChangePropertyController extends BaseController
             }
         }
 
+        // Check every task before changing anything to avoid partial updates
+        $tasks = [];
+
         foreach ($taskIDs as $taskID) {
-            if ($this->taskFinderModel->getProjectId($taskID) != $project['id']) {
+            $task = $this->taskFinderModel->getById($taskID);
+
+            if (empty($task) || (int) $task['project_id'] !== (int) $project['id']) {
                 throw new AccessForbiddenException();
             }
 
+            if (! $this->helper->projectRole->canUpdateTask($task)) {
+                throw new AccessForbiddenException(t('You are not allowed to update tasks assigned to someone else.'));
+            }
+
+            if (isset($values['change_assignee']) && $values['change_assignee'] == 1 && ($values['owner_id'] ?? 0) != $task['owner_id'] && ! $this->helper->projectRole->canChangeAssignee($task)) {
+                throw new AccessForbiddenException(t('You are not allowed to change the assignee.'));
+            }
+
+            $tasks[] = $task;
+        }
+
+        foreach ($tasks as $task) {
+            $taskID = $task['id'];
             $changes = [];
 
             if (isset($values['change_color']) && $values['change_color'] == 1) {
