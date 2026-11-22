@@ -3,6 +3,8 @@ Kanboard
 
 Kanboard is project management software that focuses on the Kanban methodology.
 
+[![Deploy to Railyard](https://app.railyard.run/deploy/badge)](https://app.railyard.run/deploy?repo=https://github.com/kanboard/kanboard)
+
 **This application is in maintenance mode**. What does it mean?
 
 Citing [Wikipedia](https://en.wikipedia.org/wiki/Maintenance_mode):
