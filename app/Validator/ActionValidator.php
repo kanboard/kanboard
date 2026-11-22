@@ -43,8 +43,8 @@ class ActionValidator extends BaseValidator
      * only place where the choices are restricted. Automatic actions are also
      * executed from an event listener where no ACL is applied, so every
      * reference must be constrained here: resources have to belong to the
-     * project that owns the action and destination projects have to be
-     * accessible by the user creating the action.
+     * project that owns the action and the user creating the action must be
+     * allowed to create tasks in the destination projects.
      *
      * @access public
      * @param  integer $project_id  Project that owns the action
@@ -55,7 +55,29 @@ class ActionValidator extends BaseValidator
     public function validateParameters($project_id, $user_id, array $params)
     {
         foreach ($params as $name => $value) {
-            if (! is_scalar($value) || ! $this->isValidParameter($project_id, $user_id, $name, $value)) {
+            if (! is_scalar($value) || ! $this->isValidParameter($project_id, $name, $value)) {
+                return false;
+            }
+        }
+
+        return $this->validateDestinationProjects($user_id, $params);
+    }
+
+    /**
+     * Validate the destination projects of action parameters
+     *
+     * Also used when actions are copied from another project, where the
+     * other parameters are resolved against the new project.
+     *
+     * @access public
+     * @param  integer $user_id     User that creates the action
+     * @param  array   $params      Action parameters
+     * @return boolean
+     */
+    public function validateDestinationProjects($user_id, array $params)
+    {
+        foreach ($params as $name => $value) {
+            if (strpos($name, 'project_id') !== false && ! $this->canCreateTaskInDestination((int) $value, $user_id, $params)) {
                 return false;
             }
         }
@@ -72,15 +94,14 @@ class ActionValidator extends BaseValidator
      *
      * @access private
      * @param  integer $project_id
-     * @param  integer $user_id
      * @param  string  $name
      * @param  mixed   $value
      * @return boolean
      */
-    private function isValidParameter($project_id, $user_id, $name, $value)
+    private function isValidParameter($project_id, $name, $value)
     {
         if (strpos($name, 'project_id') !== false) {
-            return $this->isValidId($value) && $this->isProjectAccessible($value, $user_id);
+            return $this->isValidId($value);
         }
 
         $allowed_values = $this->getProjectValues($project_id, $name);
@@ -133,20 +154,42 @@ class ActionValidator extends BaseValidator
     }
 
     /**
-     * Check that the destination project is accessible by the user
+     * Check that the user can create a task in the destination project
+     *
+     * Tasks land in the first column (TaskDuplicateAnotherProject) or in the
+     * column matching the title of the trigger column (TaskMoveAnotherProject),
+     * so both columns are checked. The task creation checks apply to the
+     * logged user, which is the user creating the action.
      *
      * @access private
-     * @param  integer $project_id
-     * @param  integer $user_id
+     * @param  integer $project_id  Destination project id
+     * @param  integer $user_id     User that creates the action
+     * @param  array   $params      Action parameters
      * @return boolean
      */
-    private function isProjectAccessible($project_id, $user_id)
+    private function canCreateTaskInDestination($project_id, $user_id, array $params)
     {
         // There is no user session when the API is used with the application credentials
         if (! $this->userSession->isLogged()) {
             return true;
         }
 
-        return $this->projectPermissionModel->isUserAllowed($project_id, $user_id);
+        if (! $this->projectPermissionModel->isUserAllowed($project_id, $user_id)) {
+            return false;
+        }
+
+        $column_ids = array($this->columnModel->getFirstColumnId($project_id));
+
+        if (isset($params['column_id'])) {
+            $column_ids[] = $this->taskDuplicationModel->getDestinationColumnId($project_id, $params['column_id']);
+        }
+
+        foreach (array_unique($column_ids) as $column_id) {
+            if (! $this->helper->projectRole->canCreateTaskInColumn($project_id, $column_id)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

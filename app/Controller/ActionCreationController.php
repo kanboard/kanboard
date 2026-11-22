@@ -77,6 +77,11 @@ class ActionCreationController extends BaseController
         $projects_list = $this->projectUserRoleModel->getActiveProjectsByUser($this->userSession->getId());
         unset($projects_list[$project['id']]);
 
+        // Offer only the destination projects that save() accepts
+        $projects_list = array_filter($projects_list, function ($project_id) {
+            return $this->actionValidator->validateDestinationProjects($this->userSession->getId(), array('project_id' => $project_id));
+        }, ARRAY_FILTER_USE_KEY);
+
         $this->response->html($this->template->render('action_creation/params', array(
             'values' => $values,
             'action_params' => $action_params,
