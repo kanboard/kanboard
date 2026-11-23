@@ -86,11 +86,11 @@ class SessionHandler implements SessionHandlerInterface
         }
 
         if (DB_DRIVER === 'sqlite') {
-            // On SQLite, use `INSERT ... ON CONFLICT` to better handle concurrent requests that are each
-            // saving their sessions at the same time.
+            // On SQLite, use a single `INSERT OR REPLACE` statement to better handle concurrent requests that
+            // are each saving their sessions at the same time. Unlike `INSERT ... ON CONFLICT DO UPDATE`,
+            // which requires SQLite 3.24, this syntax is supported by all SQLite 3 versions.
             $this->db->execute(
-                'INSERT INTO '.self::TABLE.' (id, expire_at, data) VALUES (?, ?, ?)'
-                .' ON CONFLICT(id) DO UPDATE SET expire_at = excluded.expire_at, data = excluded.data',
+                'INSERT OR REPLACE INTO '.self::TABLE.' (id, expire_at, data) VALUES (?, ?, ?)',
                 [$sessionID, $lifetime, $data]
             );
 
