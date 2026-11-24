@@ -66,6 +66,34 @@ class TaskTagModelTest extends Base
         $this->assertEquals(1, $tags[3]['project_id']);
     }
 
+    public function testSaveWithDifferentLetterCase()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskTagModel = new TaskTagModel($this->container);
+        $tagModel = new TagModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+
+        $this->assertTrue($taskTagModel->save(1, 1, array('Bind', 'Other')));
+        $this->assertEquals(array(1 => 'Bind', 2 => 'Other'), $taskTagModel->getList(1));
+
+        $this->assertTrue($taskTagModel->save(1, 1, array('bind', 'OTHER')));
+        $this->assertEquals(array(1 => 'Bind', 2 => 'Other'), $taskTagModel->getList(1));
+
+        $this->assertTrue($taskTagModel->save(1, 1, array('BIND')));
+        $this->assertEquals(array(1 => 'Bind'), $taskTagModel->getList(1));
+
+        $this->assertTrue($taskTagModel->save(1, 1, array('Bind', 'bind', 'New', 'new')));
+        $this->assertEquals(array(1 => 'Bind', 3 => 'New'), $taskTagModel->getList(1));
+
+        $this->assertTrue($taskTagModel->save(1, 1, array('other', 'OTHER'), false));
+        $this->assertEquals(array(1 => 'Bind', 2 => 'Other', 3 => 'New'), $taskTagModel->getList(1));
+
+        $this->assertCount(3, $tagModel->getAll());
+    }
+
     public function testGetTagsForTasks()
     {
         $projectModel = new ProjectModel($this->container);

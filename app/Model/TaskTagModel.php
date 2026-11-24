@@ -101,13 +101,17 @@ class TaskTagModel extends Base
     {
         $task_tags = $this->getList($task_id);
         $tags = array_filter($tags);
+        $tag_ids = $this->associateTags($project_id, $task_id, $task_tags, $tags);
+
+        if ($tag_ids === false) {
+            return false;
+        }
 
         if ($remove_other_tags) {
-            return $this->associateTags($project_id, $task_id, $task_tags, $tags) &&
-                   $this->dissociateTags($task_id, $task_tags, $tags);
-        } else {
-            return $this->associateTags($project_id, $task_id, $task_tags, $tags);
+            return $this->dissociateTags($task_id, $task_tags, $tag_ids);
         }
+
+        return true;
     }
 
     /**
@@ -150,19 +154,27 @@ class TaskTagModel extends Base
      * @param  integer  $task_id
      * @param  array    $task_tags
      * @param  string[] $tags
-     * @return bool
+     * @return array|false Resolved tag IDs as keys, or false on failure
      */
     protected function associateTags($project_id, $task_id, $task_tags, $tags)
     {
+        $tag_ids = array();
+
         foreach ($tags as $tag) {
             $tag_id = $this->tagModel->findOrCreateTag($project_id, $tag);
 
-            if (! isset($task_tags[$tag_id]) && ! $this->associateTag($task_id, $tag_id)) {
+            if (empty($tag_id)) {
                 return false;
             }
+
+            if (! isset($task_tags[$tag_id]) && ! isset($tag_ids[$tag_id]) && ! $this->associateTag($task_id, $tag_id)) {
+                return false;
+            }
+
+            $tag_ids[$tag_id] = true;
         }
 
-        return true;
+        return $tag_ids;
     }
 
     /**
@@ -171,13 +183,13 @@ class TaskTagModel extends Base
      * @access protected
      * @param  integer  $task_id
      * @param  array    $task_tags
-     * @param  string[] $tags
+     * @param  array    $tag_ids   Tag IDs to keep, as keys
      * @return bool
      */
-    protected function dissociateTags($task_id, $task_tags, $tags)
+    protected function dissociateTags($task_id, $task_tags, $tag_ids)
     {
         foreach ($task_tags as $tag_id => $tag) {
-            if (! in_array($tag, $tags)) {
+            if (! isset($tag_ids[$tag_id])) {
                 if (! $this->dissociateTag($task_id, $tag_id)) {
                     return false;
                 }
