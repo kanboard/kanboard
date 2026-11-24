@@ -229,10 +229,11 @@ class ConditionBuilder
      * @access public
      * @param  string   $column
      * @param  mixed    $value
+     * @param  string   $escape  Optional escape character for the wildcards of the pattern
      */
-    public function like($column, $value)
+    public function like($column, $value, $escape = null)
     {
-        $this->addCondition($this->db->escapeIdentifier($column).' '.$this->db->getDriver()->getOperator('LIKE').' ?');
+        $this->addCondition($this->db->escapeIdentifier($column).' '.$this->db->getDriver()->getOperator('LIKE').' ?'.$this->buildEscapeClause($escape));
         $this->values[] = $value;
     }
 
@@ -242,11 +243,34 @@ class ConditionBuilder
      * @access public
      * @param  string   $column
      * @param  mixed    $value
+     * @param  string   $escape  Optional escape character for the wildcards of the pattern
      */
-    public function ilike($column, $value)
+    public function ilike($column, $value, $escape = null)
     {
-        $this->addCondition($this->db->escapeIdentifier($column).' '.$this->db->getDriver()->getOperator('ILIKE').' ?');
+        $this->addCondition($this->db->escapeIdentifier($column).' '.$this->db->getDriver()->getOperator('ILIKE').' ?'.$this->buildEscapeClause($escape));
         $this->values[] = $value;
+    }
+
+    /**
+     * Build the ESCAPE clause of a LIKE condition
+     *
+     * The escape character is written as a literal: some drivers do not accept a placeholder here.
+     *
+     * @access protected
+     * @param  string|null $escape
+     * @return string
+     */
+    protected function buildEscapeClause($escape)
+    {
+        if ($escape === null) {
+            return '';
+        }
+
+        if (strlen($escape) !== 1 || $escape === '\\' || $escape === "'") {
+            throw new \InvalidArgumentException('The LIKE escape character must be a single character other than a backslash or a quote');
+        }
+
+        return " ESCAPE '".$escape."'";
     }
 
     /**

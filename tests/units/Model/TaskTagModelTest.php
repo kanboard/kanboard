@@ -94,6 +94,22 @@ class TaskTagModelTest extends Base
         $this->assertCount(3, $tagModel->getAll());
     }
 
+    public function testSaveWithLikeWildcards()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $taskCreationModel = new TaskCreationModel($this->container);
+        $taskTagModel = new TaskTagModel($this->container);
+        $tagModel = new TagModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreationModel->create(array('project_id' => 1, 'title' => 'test')));
+        $this->assertEquals(1, $tagModel->create(1, 'abc'));
+
+        $this->assertTrue($taskTagModel->save(1, 1, array('a_c', '%')));
+        $this->assertEquals(array(2 => 'a_c', 3 => '%'), $taskTagModel->getList(1));
+        $this->assertCount(3, $tagModel->getAll());
+    }
+
     public function testGetTagsForTasks()
     {
         $projectModel = new ProjectModel($this->container);

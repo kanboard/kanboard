@@ -86,6 +86,44 @@ class TagModelTest extends Base
         $this->assertEquals(3, $tagModel->getIdByName(1, 'TaG 3'));
     }
 
+    public function testGetIdByNameWithLikeWildcards()
+    {
+        $tagModel = new TagModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $tagModel->create(1, 'abc'));
+        $this->assertEquals(2, $tagModel->create(1, 'Release 2026'));
+
+        $this->assertFalse($tagModel->getIdByName(1, 'a_c'));
+        $this->assertFalse($tagModel->getIdByName(1, '%'));
+        $this->assertFalse($tagModel->getIdByName(1, 'Release%'));
+
+        $this->assertEquals(3, $tagModel->create(1, 'a_c'));
+        $this->assertEquals(4, $tagModel->create(1, '50%'));
+        $this->assertEquals(5, $tagModel->create(1, 'wow!'));
+
+        $this->assertEquals(1, $tagModel->getIdByName(1, 'ABC'));
+        $this->assertEquals(3, $tagModel->getIdByName(1, 'A_C'));
+        $this->assertEquals(4, $tagModel->getIdByName(1, '50%'));
+        $this->assertEquals(5, $tagModel->getIdByName(1, 'WOW!'));
+        $this->assertFalse($tagModel->getIdByName(1, 'wow'));
+    }
+
+    public function testExistsWithLikeWildcards()
+    {
+        $tagModel = new TagModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $tagModel->create(1, 'abc'));
+
+        $this->assertFalse($tagModel->exists(1, 'a_c'));
+        $this->assertFalse($tagModel->exists(1, '%'));
+        $this->assertTrue($tagModel->exists(1, 'ABC'));
+        $this->assertFalse($tagModel->exists(1, 'abc', 1));
+    }
+
     public function testFindOrCreateTag()
     {
         $tagModel = new TagModel($this->container);

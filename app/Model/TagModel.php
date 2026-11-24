@@ -20,6 +20,13 @@ class TagModel extends Base
     const TABLE = 'tags';
 
     /**
+     * Escape character used to match tag names literally with LIKE
+     *
+     * @var string
+     */
+    const LIKE_ESCAPE_CHAR = '!';
+
+    /**
      * Get all tags
      *
      * @access public
@@ -115,9 +122,27 @@ class TagModel extends Base
             ->eq('project_id', 0)
             ->eq('project_id', $project_id)
             ->closeOr()
-            ->ilike('name', $tag)
+            ->ilike('name', $this->escapeLikePattern($tag), self::LIKE_ESCAPE_CHAR)
             ->asc('project_id')
             ->findOneColumn('id');
+    }
+
+    /**
+     * Escape the LIKE wildcards of a tag name, tags are matched by name and not by pattern
+     *
+     * @access protected
+     * @param  string $tag
+     * @return string
+     */
+    protected function escapeLikePattern($tag)
+    {
+        $escape = self::LIKE_ESCAPE_CHAR;
+
+        return strtr((string) $tag, array(
+            $escape => $escape.$escape,
+            '%' => $escape.'%',
+            '_' => $escape.'_',
+        ));
     }
 
     /**
@@ -138,7 +163,7 @@ class TagModel extends Base
             ->eq('project_id', 0)
             ->eq('project_id', $project_id)
             ->closeOr()
-            ->ilike('name', $tag)
+            ->ilike('name', $this->escapeLikePattern($tag), self::LIKE_ESCAPE_CHAR)
             ->asc('project_id')
             ->exists();
     }
