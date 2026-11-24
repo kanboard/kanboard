@@ -108,6 +108,10 @@ class TagModelTest extends Base
         $this->assertEquals(4, $tagModel->getIdByName(1, '50%'));
         $this->assertEquals(5, $tagModel->getIdByName(1, 'WOW!'));
         $this->assertFalse($tagModel->getIdByName(1, 'wow'));
+
+        $this->assertEquals(6, $tagModel->create(1, '[b]'));
+        $this->assertEquals(6, $tagModel->getIdByName(1, '[B]'));
+        $this->assertFalse($tagModel->getIdByName(1, 'b'));
     }
 
     public function testExistsWithLikeWildcards()

@@ -130,6 +130,8 @@ class TagModel extends Base
     /**
      * Escape the LIKE wildcards of a tag name, tags are matched by name and not by pattern
      *
+     * The opening bracket starts a character range with SQL Server.
+     *
      * @access protected
      * @param  string $tag
      * @return string
@@ -142,6 +144,7 @@ class TagModel extends Base
             $escape => $escape.$escape,
             '%' => $escape.'%',
             '_' => $escape.'_',
+            '[' => $escape.'[',
         ));
     }
 
