@@ -58,13 +58,20 @@ class AuthenticationMiddleware extends Base implements MiddlewareInterface
             return false;
         }
 
-        if ($this->userModel->has2FA($username)) {
-            $this->logger->info('This API user ('.$username.') as 2FA enabled: only API keys are authorized');
+        $has2FA = $this->userModel->has2FA($username);
+
+        if ($has2FA) {
             $this->authenticationManager->reset();
             $this->authenticationManager->register(new ApiAccessTokenAuth($this->container));
         }
 
-        return $this->authenticationManager->passwordAuthentication($username, $password);
+        $authenticated = $this->authenticationManager->passwordAuthentication($username, $password);
+
+        if (! $authenticated && $has2FA) {
+            $this->logger->info('API user ('.$username.') has 2FA enabled: only personal API access tokens are authorized');
+        }
+
+        return $authenticated;
     }
 
     /**
