@@ -148,6 +148,8 @@ class ProjectUserRoleModel extends Base
     /**
      * Get list of users that can be assigned to a task (only Manager and Member)
      *
+     * The user role takes precedence over group roles, as in getUserRole().
+     *
      * @access public
      * @param  integer $project_id
      * @return array
@@ -162,7 +164,12 @@ class ProjectUserRoleModel extends Base
             ->neq(self::TABLE.'.role', Role::PROJECT_VIEWER)
             ->findAll();
 
-        $groupMembers = $this->projectGroupRoleModel->getAssignableUsers($project_id);
+        $directUserIds = array_flip($this->db->table(self::TABLE)->eq('project_id', $project_id)->findAllByColumn('user_id'));
+
+        $groupMembers = array_filter($this->projectGroupRoleModel->getAssignableUsers($project_id), function (array $user) use ($directUserIds) {
+            return ! isset($directUserIds[$user['id']]);
+        });
+
         $members = array_merge($userMembers, $groupMembers);
 
         return $this->userModel->prepareList($members);
