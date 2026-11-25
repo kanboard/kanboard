@@ -202,6 +202,16 @@ class Database
     }
 
     /**
+     * Open the PDO connection again after closeConnection()
+     *
+     * @access public
+     */
+    public function openConnection()
+    {
+        $this->driver->openConnection();
+    }
+
+    /**
      * Escape an identifier (column, table name...)
      *
      * @access public

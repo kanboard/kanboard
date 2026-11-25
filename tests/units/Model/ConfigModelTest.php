@@ -123,4 +123,21 @@ class ConfigModelTest extends Base
         $this->assertTrue($configModel->save(array('application_stylesheet' => $string)));
         $this->assertSame($string, $configModel->getOption('application_stylesheet'));
     }
+
+    public function testUploadDatabaseRejectsFileThatIsNotSqlite()
+    {
+        $configModel = new ConfigModel($this->container);
+        $file = tempnam(sys_get_temp_dir(), 'kb');
+
+        foreach (array('not a database', gzencode('not a database'), "\x1f\x8b corrupted gzip") as $content) {
+            file_put_contents($file, $content);
+            $this->assertFalse($configModel->uploadDatabase($file));
+        }
+
+        unlink($file);
+
+        // The current database connection is left untouched
+        $this->assertTrue($configModel->save(array('application_language' => 'fr_FR')));
+        $this->assertSame('fr_FR', $configModel->getOption('application_language'));
+    }
 }
