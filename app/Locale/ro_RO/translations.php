@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Atribuie sarcina creatorului ei pentru coloane specifice dacă nu este setat manual niciun responsabil',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Atribuie sarcina utilizatorului autentificat la schimbarea coloanei către coloana specificată dacă nu este atribuit niciun utilizator',
     'iCal feed with undated tasks' => 'Flux iCal cu sarcini fără dată',
+    'This user is not allowed to be assigned to this task' => 'Nu este permisă atribuirea acestei sarcini acestui utilizator',
+    'This user cannot be assigned to tasks of this project' => 'Acest utilizator nu poate fi atribuit sarcinilor din acest proiect',
+    'Search task title, description, and comments by default' => 'Caută implicit în titlul, descrierea și comentariile sarcinii',
 ];

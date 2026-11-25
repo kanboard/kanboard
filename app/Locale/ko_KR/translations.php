@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => '담당자가 수동으로 지정되지 않은 경우, 지정한 컬럼에서는 작업을 생성자에게 할당',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => '사용자가 할당되지 않은 경우, 컬럼 변경으로 지정된 컬럼으로 이동할 때 작업을 로그인한 사용자에게 할당',
     'iCal feed with undated tasks' => '날짜 없는 할일을 포함한 iCal 피드',
+    'This user is not allowed to be assigned to this task' => '이 사용자를 이 할일에 할당하는 것은 허용되지 않습니다',
+    'This user cannot be assigned to tasks of this project' => '이 사용자는 이 프로젝트의 할일에 할당될 수 없습니다',
+    'Search task title, description, and comments by default' => '기본적으로 할일 제목, 설명, 댓글에서 검색',
 ];

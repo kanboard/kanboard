@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Assigner la tâche à son créateur pour des colonnes spécifiques si aucun responsable n\'est défini manuellement',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Assigner une tâche à l\'utilisateur connecté lors du changement de colonne vers la colonne spécifiée si aucun utilisateur n\'est assigné',
     'iCal feed with undated tasks' => 'Abonnement iCal avec les tâches sans date',
+    'This user is not allowed to be assigned to this task' => 'Cet utilisateur n\'est pas autorisé à être assigné à cette tâche',
+    'This user cannot be assigned to tasks of this project' => 'Cet utilisateur ne peut pas être assigné aux tâches de ce projet',
+    'Search task title, description, and comments by default' => 'Rechercher par défaut dans le titre, la description et les commentaires des tâches',
 ];

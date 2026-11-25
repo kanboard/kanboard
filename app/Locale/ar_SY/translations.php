@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'إسناد المهمة إلى منشئها لأعمدة محددة إذا لم يتم تعيين مكلّف يدويًا',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'إسناد المهمة إلى المستخدم المسجّل عند تغيير العمود إلى العمود المحدد إذا لم يكن هناك مستخدم معيّن',
     'iCal feed with undated tasks' => 'خلاصة iCal مع المهام بدون تاريخ',
+    'This user is not allowed to be assigned to this task' => 'لا يُسمح بإسناد هذه المهمة إلى هذا المستخدم',
+    'This user cannot be assigned to tasks of this project' => 'لا يمكن إسناد مهام هذا المشروع إلى هذا المستخدم',
+    'Search task title, description, and comments by default' => 'البحث افتراضيًا في عنوان المهمة ووصفها وتعليقاتها',
 ];

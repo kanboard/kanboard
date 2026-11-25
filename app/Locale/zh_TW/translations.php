@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => '若未手動指定負責人，則在指定欄位中將任務指派給建立者',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => '若未指派使用者，則在變更欄位移動到指定欄位時將任務指派給已登入使用者',
     'iCal feed with undated tasks' => '日曆訂閱（含無日期任務）',
+    'This user is not allowed to be assigned to this task' => '不允許將此任務指派給該使用者',
+    'This user cannot be assigned to tasks of this project' => '無法將此專案的任務指派給該使用者',
+    'Search task title, description, and comments by default' => '預設搜尋任務標題、描述和評論',
 ];

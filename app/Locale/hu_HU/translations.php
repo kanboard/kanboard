@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'A feladat hozzárendelése a létrehozójához meghatározott oszlopokban, ha nincs kézzel beállított felelős',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'A feladat hozzárendelése a bejelentkezett felhasználóhoz oszlopváltáskor a megadott oszlopba, ha nincs hozzárendelt felhasználó',
     'iCal feed with undated tasks' => 'iCal hírforrás dátum nélküli feladatokkal',
+    'This user is not allowed to be assigned to this task' => 'Ez a felhasználó nem rendelhető hozzá ehhez a feladathoz',
+    'This user cannot be assigned to tasks of this project' => 'Ez a felhasználó nem rendelhető hozzá ennek a projektnek a feladataihoz',
+    'Search task title, description, and comments by default' => 'Alapértelmezés szerint keresés a feladat címében, leírásában és hozzászólásaiban',
 ];

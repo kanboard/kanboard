@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Gán công việc cho người tạo nó đối với các cột cụ thể nếu chưa đặt người phụ trách thủ công',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Gán công việc cho người dùng đang đăng nhập khi chuyển cột sang cột được chỉ định nếu chưa có người dùng được gán',
     'iCal feed with undated tasks' => 'nguồn cấp dữ liệu iCal kèm nhiệm vụ không có ngày',
+    'This user is not allowed to be assigned to this task' => 'Không được phép chỉ định nhiệm vụ này cho người dùng này',
+    'This user cannot be assigned to tasks of this project' => 'Không thể chỉ định nhiệm vụ của dự án này cho người dùng này',
+    'Search task title, description, and comments by default' => 'Mặc định tìm kiếm trong tiêu đề, mô tả và bình luận của nhiệm vụ',
 ];

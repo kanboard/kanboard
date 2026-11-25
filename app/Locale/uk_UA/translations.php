@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Призначати завдання його автору для визначених колонок, якщо виконавець не встановлений вручну',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Призначати завдання поточному користувачу під час переміщення в указану колонку, якщо нікого не призначено',
     'iCal feed with undated tasks' => 'Стрічка iCal із задачами без дати',
+    'This user is not allowed to be assigned to this task' => 'Цього користувача не дозволено призначати виконавцем цієї задачі',
+    'This user cannot be assigned to tasks of this project' => 'Цього користувача не можна призначати виконавцем задач цього проєкту',
+    'Search task title, description, and comments by default' => 'За замовчуванням шукати в заголовку, описі та коментарях задачі',
 ];

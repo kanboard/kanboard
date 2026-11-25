@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Ανάθεση της εργασίας στον δημιουργό της για συγκεκριμένες στήλες, αν δεν έχει οριστεί υπεύθυνος χειροκίνητα',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Ανάθεση μιας εργασίας στον συνδεδεμένο χρήστη κατά την αλλαγή στήλης προς την καθορισμένη στήλη, αν δεν έχει ανατεθεί χρήστης',
     'iCal feed with undated tasks' => 'Ροή iCal με εργασίες χωρίς ημερομηνία',
+    'This user is not allowed to be assigned to this task' => 'Δεν επιτρέπεται η ανάθεση αυτής της εργασίας σε αυτόν τον χρήστη',
+    'This user cannot be assigned to tasks of this project' => 'Δεν είναι δυνατή η ανάθεση εργασιών αυτού του έργου σε αυτόν τον χρήστη',
+    'Search task title, description, and comments by default' => 'Αναζήτηση από προεπιλογή στον τίτλο, την περιγραφή και τα σχόλια της εργασίας',
 ];
