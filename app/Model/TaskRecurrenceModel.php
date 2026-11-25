@@ -137,23 +137,37 @@ class TaskRecurrenceModel extends TaskDuplicationModel
             $factor = abs($values['recurrence_factor']);
             $subtract = $values['recurrence_factor'] < 0;
 
-            switch ($values['recurrence_timeframe']) {
-                case TaskModel::RECURRING_TIMEFRAME_MONTHS:
-                    $interval = 'P' . $factor . 'M';
-                    break;
-                case TaskModel::RECURRING_TIMEFRAME_YEARS:
-                    $interval = 'P' . $factor . 'Y';
-                    break;
-                default:
-                    $interval = 'P' . $factor . 'D';
-            }
-
             $date_due = new DateTime();
             $date_due->setTimestamp($values['date_due']);
 
-            $subtract ? $date_due->sub(new DateInterval($interval)) : $date_due->add(new DateInterval($interval));
+            switch ($values['recurrence_timeframe']) {
+                case TaskModel::RECURRING_TIMEFRAME_MONTHS:
+                    $this->shiftMonths($date_due, $subtract ? -$factor : $factor);
+                    break;
+                case TaskModel::RECURRING_TIMEFRAME_YEARS:
+                    $this->shiftMonths($date_due, $subtract ? -$factor * 12 : $factor * 12);
+                    break;
+                default:
+                    $interval = new DateInterval('P' . $factor . 'D');
+                    $subtract ? $date_due->sub($interval) : $date_due->add($interval);
+            }
 
             $values['date_due'] = $date_due->getTimestamp();
         }
+    }
+
+    /**
+     * Shift a date by a number of months, keeping the day within the target month
+     *
+     * @access private
+     * @param  DateTime $date
+     * @param  integer  $months
+     */
+    private function shiftMonths(DateTime $date, $months)
+    {
+        $day = (int) $date->format('j');
+        $date->modify('first day of this month');
+        $date->modify(sprintf('%+d months', $months));
+        $date->setDate((int) $date->format('Y'), (int) $date->format('n'), min($day, (int) $date->format('t')));
     }
 }
