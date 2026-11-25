@@ -35,7 +35,10 @@
         "symfony/finder": "5.4.45",
         "symfony/service-contracts": "2.5.4",
         "symfony/string": "^5.1",
-        "symfony/deprecation-contracts": "2.5.4"
+        "symfony/deprecation-contracts": "2.5.4",
+        "maennchen/zipstream-php": "^2.1",
+        "phpoffice/phpword": "~1.4.0",
+        "phpoffice/phpspreadsheet": "~3.10.9"
     },
     "autoload": {
         "classmap": [

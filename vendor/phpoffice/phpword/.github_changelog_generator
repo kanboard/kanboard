@@ -1,0 +1,8 @@
+user=PHPOffice
+project=PHPWord
+
+since-tag=0.18.1
+future-release=0.18.2
+
+issues=false
+pulls=true

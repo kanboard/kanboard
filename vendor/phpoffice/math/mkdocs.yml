@@ -1,0 +1,66 @@
+site_name: Math
+site_url: https://phpoffice.github.io/Math
+repo_url: https://github.com/PHPOffice/Math
+repo_name: PHPOffice/Math
+edit_uri: edit/master/docs/
+
+## Theme
+theme:
+  name: material
+  palette:
+    primary: grey
+  features:
+    - search.highlight
+    - search.suggest
+
+## Plugins
+plugins:
+  - search
+
+## Config
+extra:
+  generator: false
+extra_javascript:
+  - assets/mathjax.js
+  - https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?version=3.111.0&features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+markdown_extensions:
+  ## Syntax highlighting
+  - pymdownx.highlight
+  - pymdownx.superfences
+  ## Support for Math
+  - pymdownx.arithmatex:
+      generic: true
+  ## Support for emojis
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  ## Support for call-outs
+  - admonition
+  - pymdownx.details
+use_directory_urls: false
+
+## Navigation
+nav:
+  - Introduction: 'index.md'
+  - Install: 'install.md'
+  - Usage:
+    - Elements: 
+      - Fraction: 'usage/elements/fraction.md'
+      - Identifier: 'usage/elements/identifier.md'
+      - Numeric: 'usage/elements/numeric.md'
+      - Operator: 'usage/elements/operator.md'
+      - Row: 'usage/elements/row.md'
+      - Semantics: 'usage/elements/semantics.md'
+      - Superscript: 'usage/elements/superscript.md'
+    - Readers: 'usage/readers.md'
+    - Writers: 'usage/writers.md'
+  - Credits: 'credits.md'
+  - Releases:
+      - '0.3.0 (WIP)': 'changes/0.3.0.md'
+      - '0.2.0': 'changes/0.2.0.md'
+      - '0.1.0': 'changes/0.1.0.md'
+  - Developers:
+    - 'Coveralls': 'https://coveralls.io/github/PHPOffice/Math'
+    - 'Code Coverage': 'coverage/index.html'
+    - 'PHPDoc': 'docs/index.html'

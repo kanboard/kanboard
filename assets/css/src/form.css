@@ -246,3 +246,23 @@ ul.form-errors li {
 .reset-password a {
     color: var(--color-light);
 }
+
+.project-edit-form,
+.project-edit-form fieldset,
+.project-edit-form .js-text-editor,
+.project-edit-form .text-editor,
+.project-edit-form .text-editor-write-mode {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.project-edit-form fieldset {
+    min-width: 0;
+}
+
+#modal-box .project-edit-form .text-editor textarea {
+    box-sizing: border-box;
+    display: block;
+    width: 100% !important;
+    max-width: 100%;
+}

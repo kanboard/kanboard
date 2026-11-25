@@ -7,7 +7,7 @@
         <h2><?= t('Edit project') ?></h2>
     </div>
 <?php endif ?>
-<form method="post" action="<?= $this->url->href('ProjectEditController', 'update', array('project_id' => $project['id'], 'redirect' => 'edit')) ?>" autocomplete="off">
+<form class="project-edit-form" method="post" action="<?= $this->url->href('ProjectEditController', 'update', array('project_id' => $project['id'], 'redirect' => 'edit')) ?>" autocomplete="off">
     <?= $this->form->csrf() ?>
 
     <fieldset>

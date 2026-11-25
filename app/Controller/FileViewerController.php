@@ -3,6 +3,7 @@
 namespace Kanboard\Controller;
 
 use Kanboard\Core\ObjectStorage\ObjectStorageException;
+use Kanboard\Helper\ServerOfficePreviewHelper;
 
 /**
  * File Viewer Controller
@@ -13,25 +14,19 @@ use Kanboard\Core\ObjectStorage\ObjectStorageException;
 class FileViewerController extends BaseController
 {
     /**
-     * Get file content from object storage
+     * Get text content from object storage
      *
-     * @access protected
-     * @param  array $file
+     * @param array $file
      * @return string
      */
     protected function getFileContent(array $file)
     {
-        $content = '';
-
         try {
-            if ($file['is_image'] == 0) {
-                $content = $this->objectStorage->get($file['path']);
-            }
+            return $this->objectStorage->get($file['path']);
         } catch (ObjectStorageException $e) {
             $this->logger->error($e->getMessage());
+            return '';
         }
-
-        return $content;
     }
 
     /**
@@ -80,8 +75,22 @@ class FileViewerController extends BaseController
             $params['task_id'] = $file['task_id'];
         }
 
-        $content = in_array($type, array('markdown', 'text', 'office'), true) ? $this->getFileContent($file) : '';
-        $officePreview = $type === 'office' ? $this->helper->officePreview->render($content, $file['name']) : array();
+        $content = in_array($type, array('markdown', 'text'), true) ? $this->getFileContent($file) : '';
+        $officePreview = array();
+        $officePreviewError = '';
+
+        if ($type === 'office') {
+            try {
+                if (isset($file['size']) && (int) $file['size'] > ServerOfficePreviewHelper::MAX_FILE_SIZE) {
+                    throw new \RuntimeException('Office preview file exceeds the maximum size.');
+                }
+
+                $officePreview = $this->helper->officePreview->render($this->getFileContent($file), $file['name']);
+            } catch (\Exception $e) {
+                $this->logger->error('Office preview failed: '.$e->getMessage());
+                $officePreviewError = t('Unable to preview this file.');
+            }
+        }
 
         $this->response->html($this->template->render('file_viewer/show', array(
             'file' => $file,
@@ -89,6 +98,7 @@ class FileViewerController extends BaseController
             'type' => $type,
             'content' => $content,
             'officePreview' => $officePreview,
+            'officePreviewError' => $officePreviewError,
         )));
     }
 

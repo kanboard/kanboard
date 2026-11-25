@@ -17,7 +17,6 @@ use Pimple\Container;
  * @property \Kanboard\Helper\CommentHelper           $comment
  * @property \Kanboard\Helper\DateHelper              $dt
  * @property \Kanboard\Helper\FileHelper              $file
- * @property \Kanboard\Helper\OfficePreviewHelper      $officePreview
  * @property \Kanboard\Helper\FormHelper              $form
  * @property \Kanboard\Helper\HookHelper              $hook
  * @property \Kanboard\Helper\ModalHelper             $modal
@@ -32,6 +31,7 @@ use Pimple\Container;
  * @property \Kanboard\Helper\ProjectHeaderHelper     $projectHeader
  * @property \Kanboard\Helper\ProjectActivityHelper   $projectActivity
  * @property \Kanboard\Helper\MailHelper              $mail
+ * @property \Kanboard\Helper\ServerOfficePreviewHelper $officePreview
  */
 class Helper
 {

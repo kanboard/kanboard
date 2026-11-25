@@ -66,6 +66,12 @@ class ModalHelper extends Base
         return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-medium btn');
     }
 
+    public function largeButton($icon, $label, $controller, $action, array $params = array())
+    {
+        $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-large" aria-hidden="true"></i>'.$label;
+        return $this->helper->url->link($html, $controller, $action, $params, false, 'js-modal-large btn');
+    }
+
     public function mediumIcon($icon, $label, $controller, $action, array $params = array())
     {
         $html = '<i class="fa fa-'.$icon.' fa-fw js-modal-medium" aria-hidden="true"></i>';

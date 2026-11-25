@@ -1,0 +1,51 @@
+name: Deploy
+
+on:
+  push:
+    branches: 
+      - master
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      ### MkDocs
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - name: Install Python Dependencies
+        run: pip install mkdocs-material autolink-references-mkdocs-plugin
+      - name: Build documentation
+        run: mkdocs build --site-dir public
+      ### PHPUnit
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: dom, xml
+          coverage: xdebug
+      - name: Create directory public/coverage
+        run: mkdir ./public/coverage
+      - name: Install PHP Dependencies
+        run: composer install --ansi --prefer-dist --no-interaction --no-progress
+      - name: Build Coverage Report
+        run: XDEBUG_MODE=coverage ./vendor/bin/phpunit -c ./ --coverage-text --coverage-html ./public/coverage
+        ### PHPDoc
+      - name: Create directory public/docs
+        run: mkdir ./public/docs
+      - name: Install PhpDocumentor
+        run: wget https://phpdoc.org/phpDocumentor.phar && chmod +x phpDocumentor.phar
+      - name: Build Documentation
+        run: ./phpDocumentor.phar run -d ./src -t ./public/docs
+
+      ### Deploy
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

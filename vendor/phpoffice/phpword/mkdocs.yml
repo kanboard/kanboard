@@ -1,0 +1,121 @@
+site_name: PHPWord
+site_url: https://phpoffice.github.io/PHPWord
+repo_url: https://github.com/PHPOffice/PHPWord
+repo_name: PHPOffice/PHPWord
+edit_uri: edit/develop/docs/
+
+## Theme
+theme:
+  name: material
+  palette:
+    primary: indigo
+  features:
+    - search.highlight
+    - search.suggest
+
+## Plugins
+plugins:
+  - search
+  - autolink_references:
+      autolinks:
+        - reference_prefix: GP-
+          target_url: https://github.com/<num>
+        - reference_prefix: GH-
+          target_url: https://github.com/PHPOffice/PHPWord/issues/<num>
+        - reference_prefix: CP-
+          target_url: https://archive.codeplex.com/?p=phpword&<num>
+
+## Config
+extra:
+  generator: false
+markdown_extensions:
+  ## Syntax highlighting
+  - pymdownx.highlight
+  - pymdownx.superfences
+  ## Support for emojis
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  ## Support for call-outs
+  - admonition
+  - pymdownx.details
+use_directory_urls: false
+
+## Navigation
+nav:
+  - Introduction: 'index.md'
+  - Install: 'install.md'
+  - Usage:
+    - Introduction: 'usage/introduction.md'
+    - Containers: 'usage/containers.md'
+    - Elements: 
+      - Introduction: 'usage/elements/index.md'
+      - Chart: 'usage/elements/chart.md'
+      - Checkbox: 'usage/elements/checkbox.md'
+      - Comment: 'usage/elements/comment.md'
+      - Field: 'usage/elements/field.md'
+      - Footnote & Endnote: 'usage/elements/note.md'
+      - Formula: 'usage/elements/formula.md'
+      - Image: 'usage/elements/image.md'
+      - Line: 'usage/elements/line.md'
+      - Link: 'usage/elements/link.md'
+      - List: 'usage/elements/list.md'
+      - OLE Object: 'usage/elements/oleobject.md'
+      - Page Break: 'usage/elements/pagebreak.md'
+      - Preserve Text: 'usage/elements/preservetext.md'
+      - Ruby: 'usage/elements/ruby.md'
+      - Text: 'usage/elements/text.md'
+      - TextBox: 'usage/elements/textbox.md'
+      - Text Break: 'usage/elements/textbreak.md'
+      - Table: 'usage/elements/table.md'
+      - Table of contents: 'usage/elements/toc.md'
+      - Title: 'usage/elements/title.md'
+      - Track Changes: 'usage/elements/trackchanges.md'
+      - Watermark: 'usage/elements/watermark.md'
+    - Styles: 
+      - Chart: 'usage/styles/chart.md'
+      - Font: 'usage/styles/font.md'
+      - Image: 'usage/styles/image.md'
+      - Numbering Level: 'usage/styles/numberinglevel.md'
+      - Paragraph: 'usage/styles/paragraph.md'
+      - Section: 'usage/styles/section.md'
+      - Table: 'usage/styles/table.md'
+    - Template Processing: 'usage/template.md'
+    - Readers: 'usage/readers.md'
+    - Writers: 'usage/writers.md'
+  - FAQ: 'faq.md'
+  - How to: 'howto.md'
+  - Credits: 'credits.md'
+  - Releases:
+    - '1.x':
+      - '1.5.0 (WIP)': 'changes/1.x/1.5.0.md'
+      - '1.4.0': 'changes/1.x/1.4.0.md'
+      - '1.3.0': 'changes/1.x/1.3.0.md'
+      - '1.2.0': 'changes/1.x/1.2.0.md'
+      - '1.1.0': 'changes/1.x/1.1.0.md'
+      - '1.0.0': 'changes/1.x/1.0.0.md'
+    - '0.x':
+      - '0.18.3': 'changes/0.x/0.18.3.md'
+      - '0.18.2': 'changes/0.x/0.18.2.md'
+      - '0.18.1': 'changes/0.x/0.18.1.md'
+      - '0.18.0': 'changes/0.x/0.18.0.md'
+      - '0.17.0': 'changes/0.x/0.17.0.md'
+      - '0.16.0': 'changes/0.x/0.16.0.md'
+      - '0.15.0': 'changes/0.x/0.15.0.md'
+      - '0.14.0': 'changes/0.x/0.14.0.md'
+      - '0.13.0': 'changes/0.x/0.13.0.md'
+      - '0.12.1': 'changes/0.x/0.12.1.md'
+      - '0.12.0': 'changes/0.x/0.12.0.md'
+      - '0.11.1': 'changes/0.x/0.11.1.md'
+      - '0.11.0': 'changes/0.x/0.11.0.md'
+      - '0.10.1': 'changes/0.x/0.10.1.md'
+      - '0.10.0': 'changes/0.x/0.10.0.md'
+      - '0.9.1': 'changes/0.x/0.9.1.md'
+      - '0.9.0': 'changes/0.x/0.9.0.md'
+      - '0.8.1': 'changes/0.x/0.8.1.md'
+      - '0.8.0': 'changes/0.x/0.8.0.md'
+      - '0.7.0': 'changes/0.x/0.7.0.md'
+  - Developers:
+    - 'Coveralls': 'https://coveralls.io/github/PHPOffice/PHPWord'
+    - 'Code Coverage': 'coverage/index.html'
+    - 'PHPDoc': 'docs/index.html'

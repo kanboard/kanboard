@@ -1,0 +1,44 @@
+includes:
+    - phpstan-baseline.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+parameters:
+    level: 7
+    paths:
+        - src/
+        - tests/
+    excludePaths:
+        - */pclzip.lib.php
+        - src/PhpWord/Shared/OLERead.php
+        - src/PhpWord/Reader/MsDoc.php
+        - src/PhpWord/Writer/PDF/MPDF.php
+    bootstrapFiles:
+        - tests/bootstrap.php
+    ## <=PHP7.4
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        -
+            identifier: missingType.iterableValue
+        
+        ## <=PHP7.4
+        -
+            message: '#Parameter \#1 \$argument of class ReflectionClass constructor expects class-string<T of object>\|T of object, string given.#'
+            path: src/PhpWord/Element/AbstractContainer.php
+        -
+            message: '#Parameter \#1 \$function of function call_user_func expects callable\(\): mixed, string given.#'
+            path: src/PhpWord/Element/Image.php
+        -
+            message: '#Parameter \#1 \$argument of class ReflectionClass constructor expects class-string<T of object>\|T of object, string given.#'
+            path: src/PhpWord/IOFactory.php
+        -
+            message: '#Parameter \#1 \$function of function forward_static_call_array expects callable\(\): mixed, array{.+, string} given.#'
+            path: src/PhpWord/PhpWord.php
+        -
+            message: '#Parameter \#1 \$function of function call_user_func_array expects callable\(\): mixed, array{\$this\(PhpOffice\\PhpWord\\Shared\\ZipArchive\)\|PclZip\|ZipArchive, mixed} given.#'
+            path: src/PhpWord/Shared/ZipArchive.php
+        -
+            message: '#Parameter \#1 \$function of function call_user_func_array expects callable\(\): mixed, array{PhpOffice\\PhpWord\\Writer\\PDF\\AbstractRenderer, string} given.#'
+            path: src/PhpWord/Writer/PDF.php
+        - 
+            message: '#Parameter \#1 \$argument of class ReflectionClass constructor expects class-string<object>\|object, class-string\|false given.#'
+            path: tests/PhpWordTests/Style/AbstractStyleTest.php

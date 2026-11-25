@@ -1,0 +1,33 @@
+{
+    "name": "phpoffice/math",
+    "description": "Math - Manipulate Math Formula",
+    "keywords": ["PHP","mathml", "officemathml"],
+    "homepage": "https://phpoffice.github.io/Math/",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PhpOffice\\Math\\": "src/Math/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\PhpOffice\\Math\\": "tests/Math/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Progi1984",
+            "homepage": "https://lefevre.dev"
+        }
+    ],
+    "require": {
+        "php": "^7.1|^8.0",
+        "ext-dom": "*",
+        "ext-xml": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0 || ^9.0",
+        "phpstan/phpstan": "^0.12.88 || ^1.0.0"
+    }
+}

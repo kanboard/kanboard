@@ -1,0 +1,12 @@
+parameters:
+  level: 7
+  bootstrapFiles:
+    - vendor/autoload.php
+  paths:
+    - src
+    - tests
+  reportUnmatchedIgnoredErrors: false
+  ignoreErrors:
+
+  ## Remove after remove ArrayObject
+  treatPhpDocTypesAsCertain: false

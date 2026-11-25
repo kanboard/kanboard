@@ -1,0 +1,4 @@
+parameters:
+    ignoreErrors:
+      # 0.1 has not autoload-dev
+        - '#\[BC\] REMOVED: Class Tests\\PhpOffice\\Math\\.+ has been deleted#'

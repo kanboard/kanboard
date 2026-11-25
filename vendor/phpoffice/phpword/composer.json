@@ -1,0 +1,144 @@
+{
+    "name": "phpoffice/phpword",
+    "description": "PHPWord - A pure PHP library for reading and writing word processing documents (OOXML, ODF, RTF, HTML, PDF)",
+    "keywords": [
+        "PHP", "PHPOffice", "office", "PHPWord", "word", "template", "template processor", "reader", "writer",
+        "docx", "OOXML", "OpenXML", "Office Open XML", "ISO IEC 29500", "WordprocessingML",
+        "RTF", "Rich Text Format", "doc", "odt", "ODF", "OpenDocument", "PDF", "HTML"
+    ],
+    "homepage": "https://phpoffice.github.io/PHPWord/",
+    "type": "library",
+    "license": "LGPL-3.0-only",
+    "authors": [
+        {
+            "name": "Mark Baker"
+        },
+        {
+            "name": "Gabriel Bull",
+            "email": "me@gabrielbull.com",
+            "homepage": "http://gabrielbull.com/"
+        },
+        {
+            "name": "Franck Lefevre",
+            "homepage": "https://rootslabs.net/blog/"
+        },
+        {
+            "name": "Ivan Lanin",
+            "homepage": "http://ivan.lanin.org"
+        },
+        {
+            "name": "Roman Syroeshko",
+            "homepage": "http://ru.linkedin.com/pub/roman-syroeshko/34/a53/994/"
+        },
+        {
+            "name": "Antoine de Troostembergh"
+        }
+    ],
+    "scripts": {
+        "test": [
+            "@php vendor/bin/phpunit --color=always"
+        ],
+        "test-no-coverage": [
+            "@php vendor/bin/phpunit --color=always --no-coverage"
+        ],
+        "check": [
+            "@php vendor/bin/php-cs-fixer fix --ansi --dry-run --diff",
+            "@php vendor/bin/phpmd src/,tests/ text ./phpmd.xml.dist --exclude pclzip.lib.php",
+            "@test-no-coverage",
+            "@php vendor/bin/phpstan analyse --ansi"
+        ],
+        "fix": [
+            "@php vendor/bin/php-cs-fixer fix --ansi"
+        ], 
+        "samples": [
+            "php samples/Sample_01_SimpleText.php",
+            "php samples/Sample_02_TabStops.php",
+            "php samples/Sample_03_Sections.php",
+            "php samples/Sample_04_Textrun.php",
+            "php samples/Sample_05_Multicolumn.php",
+            "php samples/Sample_06_Footnote.php",
+            "php samples/Sample_07_TemplateCloneRow.php",
+            "php samples/Sample_08_ParagraphPagination.php",
+            "php samples/Sample_09_Tables.php",
+            "php samples/Sample_10_EastAsianFontStyle.php",
+            "php samples/Sample_11_ReadWord97.php",
+            "php samples/Sample_11_ReadWord2007.php",
+            "php samples/Sample_12_HeaderFooter.php",
+            "php samples/Sample_13_Images.php",
+            "php samples/Sample_14_ListItem.php",
+            "php samples/Sample_15_Link.php",
+            "php samples/Sample_16_Object.php",
+            "php samples/Sample_17_TitleTOC.php",
+            "php samples/Sample_18_Watermark.php",
+            "php samples/Sample_19_TextBreak.php",
+            "php samples/Sample_20_BGColor.php",
+            "php samples/Sample_21_TableRowRules.php",
+            "php samples/Sample_22_CheckBox.php",
+            "php samples/Sample_23_TemplateBlock.php",
+            "php samples/Sample_24_ReadODText.php",
+            "php samples/Sample_25_TextBox.php",
+            "php samples/Sample_26_Html.php",
+            "php samples/Sample_27_Field.php",
+            "php samples/Sample_28_ReadRTF.php",
+            "php samples/Sample_29_Line.php",
+            "php samples/Sample_30_ReadHTML.php",
+            "php samples/Sample_31_Shape.php",
+            "php samples/Sample_32_Chart.php",
+            "php samples/Sample_33_FormField.php",
+            "php samples/Sample_34_SDT.php",
+            "php samples/Sample_35_InternalLink.php",
+            "php samples/Sample_36_RTL.php",
+            "php samples/Sample_37_Comments.php",
+            "php samples/Sample_38_Protection.php",
+            "php samples/Sample_39_TrackChanges.php",
+            "php samples/Sample_40_TemplateSetComplexValue.php",
+            "php samples/Sample_41_TemplateSetChart.php",
+            "php samples/Sample_42_TemplateSetCheckbox.php",
+            "php samples/Sample_43_RTLDefault.php",
+            "php samples/Sample_44_ExtractVariablesFromReaderWord2007.php",
+            "php samples/Sample_45_Autoloader.php"
+        ]
+    },
+    "scripts-descriptions": {
+        "test": "Runs all unit tests",
+        "test-no-coverage": "Runs all unit tests, without code coverage",
+        "check": "Runs PHP CheckStyle and PHP Mess detector",
+        "fix": "Fixes issues found by PHP-CS"
+    },
+    "require": {
+        "php": "^7.1|^8.0",
+        "ext-dom": "*",
+        "ext-gd": "*",  
+        "ext-zip": "*",
+        "ext-json": "*",
+        "ext-xml": "*",
+        "phpoffice/math": "^0.3"
+    },
+    "require-dev": {
+        "ext-libxml": "*",
+        "dompdf/dompdf": "^2.0 || ^3.0",
+        "friendsofphp/php-cs-fixer": "^3.3",
+        "mpdf/mpdf": "^7.0 || ^8.0",
+        "phpmd/phpmd": "^2.13",
+        "phpstan/phpstan": "^0.12.88 || ^1.0.0",
+        "phpstan/phpstan-phpunit": "^1.0 || ^2.0",
+        "phpunit/phpunit": ">=7.0",
+        "symfony/process": "^4.4 || ^5.0",
+        "tecnickcom/tcpdf": "^6.5"
+    },
+    "suggest": {
+        "ext-xmlwriter": "Allows writing OOXML and ODF",
+        "ext-xsl": "Allows applying XSL style sheet to headers, to main document part, and to footers of an OOXML template",
+        "dompdf/dompdf": "Allows writing PDF"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpOffice\\PhpWord\\": "src/PhpWord"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PhpOffice\\PhpWordTests\\": "tests/PhpWordTests"
+        }
+    }
+}

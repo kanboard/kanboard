@@ -11,11 +11,17 @@
     <?php elseif ($type === 'text'): ?>
         <pre><?= $this->text->e($content) ?></pre>
     <?php elseif ($type === 'office'): ?>
-        <?php if ($officePreview['type'] === 'document'): ?>
+        <?php if ($officePreviewError !== ''): ?>
+            <p class="alert alert-error"><?= $this->text->e($officePreviewError) ?></p>
+        <?php elseif ($officePreview['type'] === 'document'): ?>
             <article class="markdown office-document">
+                <p><?= t('Text-only preview; document formatting and images are not rendered.') ?></p>
                 <?php foreach ($officePreview['paragraphs'] as $paragraph): ?>
                     <p><?= $this->text->e($paragraph) ?></p>
                 <?php endforeach ?>
+                <?php if ($officePreview['truncated']): ?>
+                    <p><?= t('The preview was truncated because the document is too long.') ?></p>
+                <?php endif ?>
             </article>
         <?php elseif ($officePreview['type'] === 'spreadsheet'): ?>
             <?php foreach ($officePreview['sheets'] as $sheet): ?>
@@ -29,7 +35,13 @@
                         </tr>
                     <?php endforeach ?>
                 </table>
+                <?php if ($sheet['truncated']): ?>
+                    <p><?= t('The preview was truncated to the first 500 rows and 30 columns.') ?></p>
+                <?php endif ?>
             <?php endforeach ?>
+            <?php if ($officePreview['truncated']): ?>
+                <p><?= t('Only the first 10 worksheets are shown.') ?></p>
+            <?php endif ?>
         <?php elseif ($officePreview['type'] === 'presentation'): ?>
             <?php foreach ($officePreview['slides'] as $slide): ?>
                 <section class="panel">
@@ -39,6 +51,9 @@
                     <?php endforeach ?>
                 </section>
             <?php endforeach ?>
+            <?php if ($officePreview['truncated']): ?>
+                <p><?= t('The preview was truncated to the first 500 slides.') ?></p>
+            <?php endif ?>
         <?php endif ?>
     <?php endif ?>
 </div>
