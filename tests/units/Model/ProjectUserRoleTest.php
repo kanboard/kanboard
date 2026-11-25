@@ -190,6 +190,46 @@ class ProjectUserRoleTest extends Base
         $this->assertEquals('User4', $users[5]);
     }
 
+    public function testGetAssignableUsersGivesPrecedenceToUserRoleOverGroupRole()
+    {
+        $projectModel = new ProjectModel($this->container);
+        $userModel = new UserModel($this->container);
+        $groupModel = new GroupModel($this->container);
+        $userRoleModel = new ProjectUserRoleModel($this->container);
+        $groupRoleModel = new ProjectGroupRoleModel($this->container);
+        $groupMemberModel = new GroupMemberModel($this->container);
+        $projectPermissionModel = new ProjectPermissionModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+
+        $this->assertEquals(2, $userModel->create(array('username' => 'user1', 'name' => 'User1')));
+        $this->assertEquals(3, $userModel->create(array('username' => 'user2', 'name' => 'User2')));
+        $this->assertEquals(4, $userModel->create(array('username' => 'user3', 'name' => 'User3')));
+
+        $this->assertEquals(1, $groupModel->create('Members'));
+        $this->assertEquals(2, $groupModel->create('Viewers'));
+        $this->assertTrue($groupRoleModel->addGroup(1, 1, Role::PROJECT_MEMBER));
+        $this->assertTrue($groupRoleModel->addGroup(1, 2, Role::PROJECT_VIEWER));
+
+        // Project viewer in a member group
+        $this->assertTrue($userRoleModel->addUser(1, 2, Role::PROJECT_VIEWER));
+        $this->assertTrue($groupMemberModel->addUser(1, 2));
+
+        // Project manager in a viewer group
+        $this->assertTrue($userRoleModel->addUser(1, 3, Role::PROJECT_MANAGER));
+        $this->assertTrue($groupMemberModel->addUser(2, 3));
+
+        // Group membership only
+        $this->assertTrue($groupMemberModel->addUser(1, 4));
+
+        $users = $userRoleModel->getAssignableUsers(1);
+        $this->assertSame(array(3 => 'User2', 4 => 'User3'), $users);
+
+        foreach (array(1, 2, 3, 4) as $userId) {
+            $this->assertSame(isset($users[$userId]), $projectPermissionModel->isAssignable(1, $userId), 'user_id='.$userId);
+        }
+    }
+
     public function testGetAssignableUsersList()
     {
         $projectModel = new ProjectModel($this->container);
