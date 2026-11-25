@@ -49,7 +49,7 @@ class ConfigModel extends SettingModel
     }
 
     /**
-     * Replace database file with uploaded one
+     * Replace database file with uploaded one (Gzip compressed or not)
      *
      * @access public
      * @param  string $file
@@ -57,8 +57,22 @@ class ConfigModel extends SettingModel
      */
     public function uploadDatabase($file)
     {
+        $data = file_get_contents($file);
+
+        if ($data !== false && str_starts_with($data, "\x1f\x8b")) {
+            $data = @gzdecode($data);
+        }
+
+        // Never overwrite the current database with something that is not a Sqlite database
+        if ($data === false || ! str_starts_with($data, "SQLite format 3\0")) {
+            return false;
+        }
+
         $this->db->closeConnection();
-        return file_put_contents(DB_FILENAME, gzdecode(file_get_contents($file))) !== false;
+        $result = file_put_contents(DB_FILENAME, $data) === strlen($data);
+        $this->db->openConnection();
+
+        return $result;
     }
 
     /**

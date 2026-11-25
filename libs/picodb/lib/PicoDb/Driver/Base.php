@@ -23,6 +23,14 @@ abstract class Base
     protected $requiredAttributes = array();
 
     /**
+     * Connection settings
+     *
+     * @access protected
+     * @var array
+     */
+    protected $settings = array();
+
+    /**
      * PDO connection
      *
      * @access protected
@@ -153,11 +161,22 @@ abstract class Base
             }
         }
 
-        $this->createConnection($settings);
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->settings = $settings;
+        $this->openConnection();
         $this->useFetch = false;
         $this->useOffsetRows = false;
         $this->useTop = false;
+    }
+
+    /**
+     * Open the PDO connection, e.g. after closeConnection()
+     *
+     * @access public
+     */
+    public function openConnection()
+    {
+        $this->createConnection($this->settings);
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     /**
