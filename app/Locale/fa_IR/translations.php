@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'اگر مسئول به‌صورت دستی تعیین نشده باشد، برای ستون‌های مشخص، کار را به ایجادکنندهٔ آن واگذار کن',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'اگر کاربری تعیین نشده باشد، هنگام تغییر ستون به ستون مشخص‌شده، کار را به کاربر واردشده اختصاص بده',
     'iCal feed with undated tasks' => 'خوراک iCal با کارهای بدون تاریخ',
+    'This user is not allowed to be assigned to this task' => 'محول کردن این کار به این کاربر مجاز نیست',
+    'This user cannot be assigned to tasks of this project' => 'کارهای این پروژه را نمی‌توان به این کاربر محول کرد',
+    'Search task title, description, and comments by default' => 'به‌طور پیش‌فرض در عنوان، شرح و نظرات کار جستجو شود',
 ];

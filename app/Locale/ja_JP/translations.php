@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => '担当者が手動で設定されていない場合、指定したカラムではタスクを作成者に割り当てる',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => '担当者がいない場合、カラム変更で指定のカラムに移動したときにタスクをログインユーザーに割り当てる',
     'iCal feed with undated tasks' => '日付なしのタスクを含む iCal 配信',
+    'This user is not allowed to be assigned to this task' => 'このユーザーをこのタスクの担当者にすることは許可されていません',
+    'This user cannot be assigned to tasks of this project' => 'このユーザーをこのプロジェクトのタスクの担当者にすることはできません',
+    'Search task title, description, and comments by default' => 'デフォルトでタスクのタイトル、説明、コメントを検索する',
 ];

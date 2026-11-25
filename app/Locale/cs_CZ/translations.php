@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Přiřadit úkol jeho tvůrci pro vybrané sloupce, pokud není ručně nastaven řešitel',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Přiřadit úkol přihlášenému uživateli při přesunu do zadaného sloupce, pokud není přiřazen žádný uživatel',
     'iCal feed with undated tasks' => 'iCal feed s úkoly bez data',
+    'This user is not allowed to be assigned to this task' => 'Tento uživatel nesmí být přiřazen k tomuto úkolu',
+    'This user cannot be assigned to tasks of this project' => 'Tohoto uživatele nelze přiřadit k úkolům tohoto projektu',
+    'Search task title, description, and comments by default' => 'Ve výchozím nastavení vyhledávat v názvu, popisu a komentářích úkolu',
 ];

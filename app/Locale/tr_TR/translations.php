@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Sorumlu elle ayarlanmadıysa, belirli sütunlar için görevi oluşturan kişiye ata',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Hiç kullanıcı atanmadıysa, sütun değişikliğinde görev belirtilen sütuna taşındığında görevi oturum açmış kullanıcıya ata',
     'iCal feed with undated tasks' => 'Tarihsiz görevleri içeren iCal akışı',
+    'This user is not allowed to be assigned to this task' => 'Bu kullanıcının bu göreve atanmasına izin verilmiyor',
+    'This user cannot be assigned to tasks of this project' => 'Bu kullanıcı bu projenin görevlerine atanamaz',
+    'Search task title, description, and comments by default' => 'Varsayılan olarak görev başlığında, açıklamasında ve yorumlarında ara',
 ];

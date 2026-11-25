@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Määritä tehtävä sen luojalle tietyissä sarakkeissa, jos vastuuhenkilöä ei ole asetettu manuaalisesti',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Määritä tehtävä kirjautuneelle käyttäjälle siirrettäessä määritettyyn sarakkeeseen, jos käyttäjää ei ole määritetty',
     'iCal feed with undated tasks' => 'iCal-syöte päivämäärättömillä tehtävillä',
+    'This user is not allowed to be assigned to this task' => 'Tätä käyttäjää ei saa määrittää tähän tehtävään',
+    'This user cannot be assigned to tasks of this project' => 'Tätä käyttäjää ei voi määrittää tämän projektin tehtäviin',
+    'Search task title, description, and comments by default' => 'Etsi oletuksena tehtävän nimestä, kuvauksesta ja kommenteista',
 ];

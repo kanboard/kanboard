@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Dodijeli zadatak njegovom kreatoru za određene stupce ako izvršitelj nije ručno postavljen',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Dodijeli zadatak prijavljenom korisniku pri promjeni stupca na zadani stupac ako nitko nije dodijeljen',
     'iCal feed with undated tasks' => 'iCal kanal sa zadacima bez datuma',
+    'This user is not allowed to be assigned to this task' => 'Ovaj korisnik ne smije biti dodijeljen ovom zadatku',
+    'This user cannot be assigned to tasks of this project' => 'Ovaj korisnik ne može biti dodijeljen zadacima ovog projekta',
+    'Search task title, description, and comments by default' => 'Prema zadanim postavkama pretraži naslov, opis i komentare zadatka',
 ];

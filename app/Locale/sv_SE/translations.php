@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Tilldela uppgiften till dess skapare för specifika kolumner om ingen ansvarig är satt manuellt',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Tilldela en uppgift till den inloggade användaren vid kolumnbyte till angiven kolumn om ingen användare är tilldelad',
     'iCal feed with undated tasks' => 'iCal-flöde med uppgifter utan datum',
+    'This user is not allowed to be assigned to this task' => 'Den här användaren får inte tilldelas den här uppgiften',
+    'This user cannot be assigned to tasks of this project' => 'Den här användaren kan inte tilldelas uppgifter i det här projektet',
+    'Search task title, description, and comments by default' => 'Sök som standard i uppgiftens titel, beskrivning och kommentarer',
 ];

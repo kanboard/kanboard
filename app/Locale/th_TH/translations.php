@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'กำหนดงานให้ผู้สร้างสำหรับคอลัมน์ที่ระบุ หากไม่มีผู้รับมอบหมายที่ตั้งค่าเอง',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'กำหนดงานให้ผู้ใช้ที่ล็อกอินเมื่อย้ายคอลัมน์ไปยังคอลัมน์ที่ระบุ หากยังไม่มีผู้ใช้ที่ถูกกำหนด',
     'iCal feed with undated tasks' => 'ฟีด iCal พร้อมงานที่ไม่มีวันที่',
+    'This user is not allowed to be assigned to this task' => 'ผู้ใช้นี้ไม่ได้รับอนุญาตให้ได้รับมอบหมายงานนี้',
+    'This user cannot be assigned to tasks of this project' => 'ไม่สามารถมอบหมายงานของโปรเจคนี้ให้ผู้ใช้นี้ได้',
+    'Search task title, description, and comments by default' => 'ค้นหาในหัวเรื่อง คำอธิบาย และความคิดเห็นของงานตามค่าเริ่มต้น',
 ];

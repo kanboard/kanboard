@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Tetapkan tugasan kepada penciptanya untuk lajur tertentu jika tiada penerima tugasan ditetapkan secara manual',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Tetapkan tugasan kepada pengguna yang log masuk apabila lajur berubah ke lajur yang ditetapkan jika tiada pengguna ditetapkan',
     'iCal feed with undated tasks' => 'iCal feed dengan tugasan tanpa tarikh',
+    'This user is not allowed to be assigned to this task' => 'Pengguna ini tidak dibenarkan untuk ditetapkan kepada tugasan ini',
+    'This user cannot be assigned to tasks of this project' => 'Pengguna ini tidak boleh ditetapkan kepada tugasan projek ini',
+    'Search task title, description, and comments by default' => 'Cari judul, deskripsi dan komentar tugasan secara lalai',
 ];

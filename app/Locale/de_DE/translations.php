@@ -1470,4 +1470,7 @@ return [
     'Assign the task to its creator for specific columns if no assignee is set manually' => 'Aufgabe dem Ersteller zuweisen, wenn sie in einer ausgewählten Spalte ohne Bearbeiter ist.',
     'Assign a task to the logged user on column change to specified column if no user is assigned' => 'Aufgabe dem angemeldeten Nutzer bei Spaltenänderung zuweisen, wenn eine Aufgabe in die ausgewählte Spalte verschoben wird.',
     'iCal feed with undated tasks' => 'iCal Feed mit Aufgaben ohne Datum',
+    'This user is not allowed to be assigned to this task' => 'Dieser Benutzer darf dieser Aufgabe nicht zugewiesen werden',
+    'This user cannot be assigned to tasks of this project' => 'Dieser Benutzer kann keinen Aufgaben dieses Projekts zugewiesen werden',
+    'Search task title, description, and comments by default' => 'Standardmäßig in Titel, Beschreibung und Kommentaren der Aufgaben suchen',
 ];
