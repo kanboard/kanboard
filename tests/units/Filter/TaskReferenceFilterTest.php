@@ -64,6 +64,39 @@ class TaskReferenceFilterTest extends Base
         $this->assertCount(1, $query->findAll());
     }
 
+    public function testWithSqlWildcardsMatchedLiterally()
+    {
+        $taskFinder = new TaskFinderModel($this->container);
+        $taskCreation = new TaskCreationModel($this->container);
+        $projectModel = new ProjectModel($this->container);
+
+        $this->assertEquals(1, $projectModel->create(array('name' => 'Test')));
+        $this->assertEquals(1, $taskCreation->create(array('title' => 'A', 'project_id' => 1, 'reference' => 'INV_1')));
+        $this->assertEquals(2, $taskCreation->create(array('title' => 'B', 'project_id' => 1, 'reference' => 'INV-1')));
+        $this->assertEquals(3, $taskCreation->create(array('title' => 'C', 'project_id' => 1, 'reference' => '50%')));
+        $this->assertEquals(4, $taskCreation->create(array('title' => 'D', 'project_id' => 1, 'reference' => '[x]!')));
+
+        $this->assertEquals(array('INV_1'), $this->findReferences($taskFinder, 'INV_1'));
+        $this->assertEquals(array('INV-1'), $this->findReferences($taskFinder, 'inv-1'));
+        $this->assertEquals(array('50%'), $this->findReferences($taskFinder, '50%'));
+        $this->assertEquals(array('[x]!'), $this->findReferences($taskFinder, '[X]!'));
+        $this->assertEquals(array(), $this->findReferences($taskFinder, '%'));
+        $this->assertEquals(array('INV_1', 'INV-1'), $this->findReferences($taskFinder, 'INV*'));
+        $this->assertEquals(array('INV_1'), $this->findReferences($taskFinder, 'INV_*'));
+    }
+
+    private function findReferences(TaskFinderModel $taskFinder, $value)
+    {
+        $query = $taskFinder->getExtendedQuery();
+
+        $filter = new TaskReferenceFilter();
+        $filter->withQuery($query);
+        $filter->withValue($value);
+        $filter->apply();
+
+        return $query->asc(\Kanboard\Model\TaskModel::TABLE.'.id')->findAllByColumn(\Kanboard\Model\TaskModel::TABLE.'.reference');
+    }
+
     public function testWithNone()
     {
         $taskFinder = new TaskFinderModel($this->container);

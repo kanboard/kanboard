@@ -14,6 +14,13 @@ use Kanboard\Model\TaskModel;
 class TaskReferenceFilter extends BaseFilter implements FilterInterface
 {
     /**
+     * Escape character used to match the reference literally with LIKE
+     *
+     * @var string
+     */
+    const LIKE_ESCAPE_CHAR = '!';
+
+    /**
      * Get search attribute
      *
      * @access public
@@ -40,12 +47,28 @@ class TaskReferenceFilter extends BaseFilter implements FilterInterface
             return $this;
         }
 
-        if (strpos($this->value, '*') >= 0) {
-            $this->query->ilike(TaskModel::TABLE.'.reference', str_replace('*', '%', $this->value));
-            return $this;
-        }
-
-        $this->query->eq(TaskModel::TABLE.'.reference', $this->value);
+        $this->query->ilike(TaskModel::TABLE.'.reference', $this->getPattern(), self::LIKE_ESCAPE_CHAR);
         return $this;
+    }
+
+    /**
+     * Convert the search value to a LIKE pattern where only "*" is a wildcard
+     *
+     * The SQL wildcards "%" and "_" are matched literally, as well as "[" which starts a character range with SQL Server.
+     *
+     * @access protected
+     * @return string
+     */
+    protected function getPattern()
+    {
+        $escape = self::LIKE_ESCAPE_CHAR;
+
+        return strtr((string) $this->value, array(
+            $escape => $escape.$escape,
+            '%' => $escape.'%',
+            '_' => $escape.'_',
+            '[' => $escape.'[',
+            '*' => '%',
+        ));
     }
 }
