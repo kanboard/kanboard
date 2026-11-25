@@ -155,7 +155,7 @@ class UserNotificationFilterModel extends Base
      */
     public function filterAssignee(array $user, array $event_data)
     {
-        return $user['notifications_filter'] == self::FILTER_ASSIGNEE && $event_data['task']['owner_id'] == $user['id'];
+        return $user['notifications_filter'] == self::FILTER_ASSIGNEE && $this->isAssignee($user, $event_data);
     }
 
     /**
@@ -182,7 +182,21 @@ class UserNotificationFilterModel extends Base
     public function filterBoth(array $user, array $event_data)
     {
         return $user['notifications_filter'] == self::FILTER_BOTH &&
-               ($event_data['task']['creator_id'] == $user['id'] || $event_data['task']['owner_id'] == $user['id']);
+               ($event_data['task']['creator_id'] == $user['id'] || $this->isAssignee($user, $event_data));
+    }
+
+    /**
+     * Return true if the user is the task assignee or the assignee of the subtask concerned by the event
+     *
+     * @access private
+     * @param  array  $user
+     * @param  array  $event_data
+     * @return boolean
+     */
+    private function isAssignee(array $user, array $event_data)
+    {
+        return $event_data['task']['owner_id'] == $user['id'] ||
+               (isset($event_data['subtask']['user_id']) && $event_data['subtask']['user_id'] == $user['id']);
     }
 
     /**
