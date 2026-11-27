@@ -1,6 +1,8 @@
 Kanboard
 ========
 
+[![Plumber Score](https://score.getplumber.io/github.com/kanboard/kanboard.svg)](https://score.getplumber.io/github.com/kanboard/kanboard)
+
 Kanboard is project management software that focuses on the Kanban methodology.
 
 **This application is in maintenance mode**. What does it mean?
