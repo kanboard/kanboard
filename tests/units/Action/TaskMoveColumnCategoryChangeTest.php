@@ -13,6 +13,44 @@ use Kanboard\Action\TaskMoveColumnCategoryChange;
 
 class TaskMoveColumnCategoryChangeTest extends Base
 {
+    public function testCategoryUpdateMovesOpenAndClosedTasksThroughEvents()
+    {
+        $this->assertEquals(1, $this->container['projectModel']->create(array('name' => 'test')));
+        $this->assertEquals(1, $this->container['categoryModel']->create(array('name' => 'target', 'project_id' => 1)));
+        $this->assertEquals(2, $this->container['categoryModel']->create(array('name' => 'other', 'project_id' => 1)));
+        $this->assertEquals(1, $this->container['actionModel']->create(array(
+            'project_id' => 1,
+            'event_name' => TaskModel::EVENT_UPDATE,
+            'action_name' => '\\Kanboard\\Action\\TaskMoveColumnCategoryChange',
+            'params' => array('category_id' => 1, 'dest_column_id' => 2),
+        )));
+        $this->container['actionManager']->attachEvents();
+
+        $this->assertEquals(1, $this->container['taskCreationModel']->create(array('project_id' => 1, 'title' => 'closed')));
+        $this->assertEquals(2, $this->container['taskCreationModel']->create(array('project_id' => 1, 'title' => 'open')));
+        $this->assertEquals(3, $this->container['taskCreationModel']->create(array('project_id' => 1, 'title' => 'other category')));
+        $this->assertTrue($this->container['taskStatusModel']->close(1));
+        $closed = $this->container['taskFinderModel']->getById(1);
+
+        $this->assertTrue($this->container['taskModificationModel']->update(array('id' => 1, 'category_id' => 1)));
+        $this->assertTrue($this->container['taskModificationModel']->update(array('id' => 2, 'category_id' => 1)));
+        $this->assertTrue($this->container['taskModificationModel']->update(array('id' => 3, 'category_id' => 2)));
+
+        $task = $this->container['taskFinderModel']->getById(1);
+        $this->assertEquals(1, $task['category_id']);
+        $this->assertEquals(2, $task['column_id']);
+        $this->assertEquals(TaskModel::STATUS_CLOSED, $task['is_active']);
+        $this->assertEquals($closed['date_completed'], $task['date_completed']);
+        $task = $this->container['taskFinderModel']->getById(2);
+        $this->assertEquals(1, $task['category_id']);
+        $this->assertEquals(2, $task['column_id']);
+        $this->assertEquals(TaskModel::STATUS_OPEN, $task['is_active']);
+        $task = $this->container['taskFinderModel']->getById(3);
+        $this->assertEquals(2, $task['category_id']);
+        $this->assertEquals(1, $task['column_id']);
+        $this->assertEquals(TaskModel::STATUS_OPEN, $task['is_active']);
+    }
+
     public function testSuccess()
     {
         $projectModel = new ProjectModel($this->container);
